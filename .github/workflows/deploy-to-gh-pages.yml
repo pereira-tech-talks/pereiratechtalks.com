@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18']
+        node: ['16']
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: 18.x
+        node-version: 16.x
     - name: Step 1 - 🛠️ Build application bundle
       run: |
         npm install
