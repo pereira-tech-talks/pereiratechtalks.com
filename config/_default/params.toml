@@ -1,0 +1,62 @@
+## Homepage
+title = "Hinode"
+titleSeparator = "-"
+titleAddition = "Clean Blog Theme"
+description = "Hinode is a clean blog theme for your Hugo site based on Bootstrap 5."
+
+## Open Graph
+images = ["logo.png"]
+ogLocale = "en_US"
+domainTLD = "hinode-demo.markdumay.org"
+
+## Twitter Cards
+# twitterSite = "@gethinode"
+# twitterCreator = "@markdumay"
+
+## JSON-LD
+schemaType = "Organization"
+schemaName = "Hinode"
+schemaAuthor = "Mark Dumay"
+schemaAuthorTwitter = "https://twitter.com/markdumay"
+schemaAuthorLinkedIn = "https://www.linkedin.com/in/markdumay/"
+schemaAuthorGitHub = "https://github.com/markdumay"
+schemaLocale = "en-US"
+schemaLogo = "logo512x512.png"
+schemaLogoWidth = 512
+schemaLogoHeight = 512
+schemaImage = "logo1280x640.png"
+schemaImageWidth = 1280
+schemaImageHeight = 640
+# schemaTwitter = "https://twitter.com/gethinode"
+# schemaLinkedIn = ""
+schemaGitHub = "https://github.com/markdumay/hugo-theme-hinode"
+schemaSection = "blog"
+
+
+[favicon]
+    logo = "img/favicon.png"
+    sizes = [16, 32, 48]
+
+[search]
+    enabled = true
+
+[toc]
+    enabled = true
+
+[style]
+    themeColor = "#D43900" #00b0f0
+    themeOpacity = "10"
+
+[main]
+    featurePhoto = "img/sunrise.jpg" # source: https://unsplash.com/photos/ZX6BPboJrYk
+    logo = "/logo_embedded.svg"
+
+
+[comments]
+    enabled = false
+    repo = "" # Replace with your repository.
+    #issueTerm = "pathname" # pathname, url, title, og:title
+    #label = "comment"
+    # By default, light and dark mode correspond to github-light and github-dark, respectively.
+    # Optional values: github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark.
+    #theme = "" 
