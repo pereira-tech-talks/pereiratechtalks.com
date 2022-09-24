@@ -25,6 +25,9 @@ jobs:
         pwd
         ls -la 
         ls -la node_modules/.bin/
+        cd ~
+        pwd
+        ls -la 
         npm run build
     - name: Step 3 - 📄 Deploy to GitHub Pages
       uses: s0/git-publish-subdir-action@develop
