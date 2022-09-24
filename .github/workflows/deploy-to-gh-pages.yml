@@ -15,9 +15,9 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18.x
-        cache: 'npm'
     - name: Step 1 - 🧪 Run linter
       run: |
+        npm install
         npm ci --ignore-scripts
         npm run lint
     - name: Step 2 - 🛠️ Build application bundle
