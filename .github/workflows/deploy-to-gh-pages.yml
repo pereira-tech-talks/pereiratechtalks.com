@@ -28,6 +28,7 @@ jobs:
         cd ~
         pwd
         ls -la 
+        find . -type d -name "hugo" 
         npm run build
     - name: Step 3 - 📄 Deploy to GitHub Pages
       uses: s0/git-publish-subdir-action@develop
