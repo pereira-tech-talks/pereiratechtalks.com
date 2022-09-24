@@ -22,8 +22,9 @@ jobs:
         npm run lint
     - name: Step 2 - 🛠️ Build application bundle
       run: |
+        pwd
+        ls -la 
         ls -la node_modules/.bin/
-        ls -la node_modules/.bin/hugo
         npm run build
     - name: Step 3 - 📄 Deploy to GitHub Pages
       uses: s0/git-publish-subdir-action@develop
