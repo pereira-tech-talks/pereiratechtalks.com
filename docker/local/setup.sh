@@ -4,7 +4,7 @@
 . ./../utils.sh
 
 # Create envs vars if don't exist
-ENV_FILES=(".env" "uEmojiParser/.env" "../../.env")
+ENV_FILES=(".env" "pereiratechtalks/.env" "../../.env")
 utils.check_envs_files "${ENV_FILES[@]}"
 
 # Load environment vars, to use from console, run follow command:
