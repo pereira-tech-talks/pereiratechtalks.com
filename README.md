@@ -1,163 +1,313 @@
-# Hugo Theme Hinode
+# 🚀 AstroWind
 
-<!-- Tagline -->
-<p align="center">
-    <b>A clean blog theme for your Hugo site based on Bootstrap 5</b>
-    <br />
-</p>
+<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right"
+     alt="AstroWind Lighthouse Score" width="100" height="358">
 
-<!-- Badges -->
-<p align="center">
-    <a href="https://app.netlify.com/sites/hinode-demo/deploys" alt="Netlify Status">
-        <img src="https://img.shields.io/netlify/151e88a3-d161-4045-856d-778fea43fc2f" />
-    </a>
-    <a href="https://stats.uptimerobot.com/xyGVYhLJmV" alt="UptimeRobot Status">
-        <img src="https://img.shields.io/uptimerobot/status/m791334689-73d9dfc82030f4f955b2d6bb" />
-    </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/commits/main" alt="Last commit">
-        <img src="https://img.shields.io/github/last-commit/markdumay/hugo-theme-hinode.svg" />
-    </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/issues" alt="Issues">
-        <img src="https://img.shields.io/github/issues/markdumay/hugo-theme-hinode.svg" />
-    </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/pulls" alt="Pulls">
-        <img src="https://img.shields.io/github/issues-pr-raw/markdumay/hugo-theme-hinode.svg" />
-    </a>
-    <a href="https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/markdumay/hugo-theme-hinode" />
-    </a>
-</p>
+🌟 _Most *starred* & *forked* Astro theme in 2022 & 2023_. 🌟
 
-<!-- Table of Contents -->
-<p align="center">
-  <a href="#about">About</a> •
-  <a href="#prerequisites">Prerequisites</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#configuration">Configuration</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#donate">Donate</a> •
-  <a href="#license">License</a>
-</p>
+**AstroWind** is a free and open-source template to make your website using **[Astro 4.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/)**. Ready to start a new project and designed taking into account web best practices.
 
-## About
+- ✅ **Production-ready** scores in **PageSpeed Insights** reports.
+- ✅ Integration with **Tailwind CSS** supporting **Dark mode** and **_RTL_**.
+- ✅ **Fast and SEO friendly blog** with automatic **RSS feed**, **MDX** support, **Categories & Tags**, **Social Share**, ...
+- ✅ **Image Optimization** (using new **Astro Assets** and **Unpic** for Universal image CDN).
+- ✅ Generation of **project sitemap** based on your routes.
+- ✅ **Open Graph tags** for social media sharing.
+- ✅ **Analytics** built-in Google Analytics, and Splitbee integration.
 
-![Logo](https://raw.githubusercontent.com/markdumay/hugo-theme-hinode/main/static/logo.png)
+<br>
 
-- [Online Demo][demo]
-- [PageSpeed Insights][pagespeed]
-- [Mozilla Observatory][observatory]
+<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/screenshot-astrowind-1.png" alt="AstroWind Theme Screenshot">
 
-Hinode is a clean blog theme for [Hugo][hugo], an open-source static site generator. Based on the [Bootstrap 5][bootstrap] framework, the rendered site is fast, secure, and responsive. Hinode uses [FlexSearch][flexsearch] to enable full text search across your site. Finally, the theme uses [Node Package Manager][npm] to automate the build process and to keep track of dependencies.
+[![onWidget](https://custom-icon-badges.demolab.com/badge/made%20by%20-onWidget-556bf2?style=flat-square&logo=onwidget&logoColor=white&labelColor=101827)](https://onwidget.com)
+[![License](https://img.shields.io/github/license/onwidget/astrowind?style=flat-square&color=dddddd&labelColor=000000)](https://github.com/onwidget/astrowind/blob/main/LICENSE.md)
+[![Maintained](https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat-square)](https://github.com/onwidget)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/onwidget/astrowind#contributing)
+[![Known Vulnerabilities](https://snyk.io/test/github/onwidget/astrowind/badge.svg?style=flat-square)](https://snyk.io/test/github/onwidget/astrowind)
+[![Stars](https://img.shields.io/github/stars/onwidget/astrowind.svg?style=social&label=stars&maxAge=86400&color=ff69b4)](https://github.com/onwidget/astrowind)
+[![Forks](https://img.shields.io/github/forks/onwidget/astrowind.svg?style=social&label=forks&maxAge=86400&color=ff69b4)](https://github.com/onwidget/astrowind)
 
-Additional features include:
+<br>
 
-- Comments
-- Social links
-- Blog pagination
-- Code highlighting
-- Color customization
-- i18n support
+<details open>
+<summary>Table of Contents</summary>
 
-<!-- TODO: add tutorial deep-link 
-Detailed background information is available on the author's [personal blog][blog].
--->
+- [Demo](#demo)
+- [Upcoming: AstroWind 2.0 – We Need Your Vision!](#-upcoming-astrowind-20--we-need-your-vision)
+- [Getting started](#getting-started)
+  - [Project structure](#project-structure)
+  - [Commands](#commands)
+  - [Configuration](#configuration)
+  - [Deploy](#deploy)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Related Projects](#related-projects)
+- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
-## Prerequisites
+</details>
 
-Hinode requires Git, Node.js and npm for local development and testing. Download the Git binary from the [official website][git_download]. Next, download and install [Node.js][nodejs] (it includes npm) for your platform.
+<br>
 
-## Installation
+## Demo
 
-Start a new Hinode project in three steps:
+📌 [https://astrowind.vercel.app/](https://astrowind.vercel.app/)
 
-### 1. Create a new site
+<br>
 
-Hinode is available as a [child theme][repository_child], and a [main theme][repository]. The child theme uses [npm][npm] to link to the latest available version of the Hinode theme. As such, it is less applicable if you plan to customize a lot. Vice versa, the main theme allows for heavy customization, but is not synchronized with the latest available Hinode theme automatically.
+## 🔔 Upcoming: AstroWind 2.0 – We Need Your Vision!
 
-Not quite sure? Use the Hinode child theme.
+We're embarking on an exciting journey with **AstroWind 2.0**, and we want you to be a part of it! We're currently taking the first steps in developing this new version and your insights are invaluable. Join the discussion and share your feedback, ideas, and suggestions to help shape the future of **AstroWind**. Let's make **AstroWind 2.0** even better, together!
 
-#### Hinode child theme
+[Share Your Feedback in Our Discussion!](https://github.com/onwidget/astrowind/discussions/392)
 
-```bash
-git clone https://github.com/markdumay/hugo-theme-hinode-child.git my-hinode-site && cd my-hinode-site
+<br>
+
+## Getting started
+
+**AstroWind** tries to give you quick access to creating a website using [Astro 4.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/). It's a free theme which focuses on simplicity, good practices and high performance.
+
+Very little vanilla javascript is used only to provide basic functionality so that each developer decides which framework (React, Vue, Svelte, Solid JS...) to use and how to approach their goals.
+
+In this version the template supports all the options in the `output` configuration, `static`, `hybrid` and `server`, but the blog only works with `prerender = true`. We are working on the next version and aim to make it fully compatible with SSR.
+
+### Project structure
+
+Inside **AstroWind** template, you'll see the following folders and files:
+
+```
+/
+├── public/
+│   ├── _headers
+│   └── robots.txt
+├── src/
+│   ├── assets/
+│   │   ├── favicons/
+│   │   ├── images/
+│   │   └── styles/
+│   │       └── tailwind.css
+│   ├── components/
+│   │   ├── blog/
+│   │   ├── common/
+│   │   ├── ui/
+│   │   ├── widgets/
+│   │   │   ├── Header.astro
+│   │   │   └── ...
+│   │   ├── CustomStyles.astro
+│   │   ├── Favicons.astro
+│   │   └── Logo.astro
+│   ├── content/
+│   │   ├── post/
+│   │   │   ├── post-slug-1.md
+│   │   │   ├── post-slug-2.mdx
+│   │   │   └── ...
+│   │   └-- config.ts
+│   ├── layouts/
+│   │   ├── Layout.astro
+│   │   ├── MarkdownLayout.astro
+│   │   └── PageLayout.astro
+│   ├── pages/
+│   │   ├── [...blog]/
+│   │   │   ├── [category]/
+│   │   │   ├── [tag]/
+│   │   │   ├── [...page].astro
+│   │   │   └── index.astro
+│   │   ├── index.astro
+│   │   ├── 404.astro
+│   │   ├-- rss.xml.ts
+│   │   └── ...
+│   ├── utils/
+│   ├── config.yaml
+│   └── navigation.js
+├── package.json
+├── astro.config.mjs
+└── ...
 ```
 
-#### Hinode main theme
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-```bash
-git clone https://github.com/markdumay/hugo-theme-hinode.git my-hinode-site && cd my-hinode-site
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory if they do not require any transformation or in the `assets/` directory if they are imported directly.
+
+[![Edit AstroWind on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://githubbox.com/onwidget/astrowind/tree/main) [![Open in Gitpod](https://svgshare.com/i/xdi.svg)](https://gitpod.io/?on=gitpod#https://github.com/onwidget/astrowind) [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/onwidget/astrowind)
+
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file `README.md`. Update `src/config.yaml` and contents. Have fun!
+
+<br>
+
+### Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command               | Action                                             |
+| :-------------------- | :------------------------------------------------- |
+| `npm install`         | Installs dependencies                              |
+| `npm run dev`         | Starts local dev server at `localhost:3000`        |
+| `npm run build`       | Build your production site to `./dist/`            |
+| `npm run preview`     | Preview your build locally, before deploying       |
+| `npm run format`      | Format codes with Prettier                         |
+| `npm run lint:eslint` | Run Eslint                                         |
+| `npm run astro ...`   | Run CLI commands like `astro add`, `astro preview` |
+
+<br>
+
+### Configuration
+
+Basic configuration file: `./src/config.yaml`
+
+```yaml
+site:
+  name: 'Example'
+  site: 'https://example.com'
+  base: '/' # Change this if you need to deploy to Github Pages, for example
+  trailingSlash: false # Generate permalinks with or without "/" at the end
+
+  googleSiteVerificationId: false # Or some value,
+
+# Default SEO metadata
+metadata:
+  title:
+    default: 'Example'
+    template: '%s — Example'
+  description: 'This is the default meta description of Example website'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: 'Example'
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@twitter_user'
+    site: '@twitter_user'
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true # If the blog will be enabled
+    postsPerPage: 6 # Number of posts per page
+
+    post:
+      isEnabled: true
+      permalink: '/blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
+      robots:
+        index: true
+
+    category:
+      isEnabled: true
+      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
+      robots:
+        index: true
+
+    tag:
+      isEnabled: true
+      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: true # If a widget with related posts is to be displayed below each post
+    relatedPostsCount: 4 # Number of related posts to display
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+
+ui:
+  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+
+  tokens:
+    default:
+      fonts:
+        sans: InterVariable
+        serif: InterVariable
+        heading: InterVariable
+      colors:
+        default: rgb(16 16 16)
+        heading: rgb(0 0 0)
+        muted: rgb(16 16 16 / 66%)
+        bgPage: rgb(255 255 255)
+        primary: rgb(1 97 239)
+        secondary: rgb(1 84 207)
+        accent: rgb(109 40 217)
+    dark:
+      fonts: {}
+      colors:
+        default: rgb(229 236 246)
+        heading: rgb(247, 248, 248)
+        muted: rgb(229 236 246 / 66%)
+        bgPage: rgb(3 6 32)
+        primary: rgb(1 97 239)
+        secondary: rgb(1 84 207)
+        accent: rgb(109 40 217)
 ```
 
-### 2. Install dependencies
+<br>
 
-```bash
-npm install
+### Deploy
+
+#### Deploy to production (manual)
+
+You can create an optimized production build with:
+
+```shell
+npm run build
 ```
 
-### 3. Start development server
+Now, your website is ready to be deployed. All generated files are located at
+`dist` folder, which you can deploy the folder to any hosting service you
+prefer.
 
-```bash
-npm run start
-```
+#### Deploy to Netlify
 
-## Configuration
+Clone this repository on own GitHub account and deploy to Netlify:
 
-The main site configuration is available in `./config/_default`. Some remarks:
+[![Netlify Deploy button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/onwidget/astrowind)
 
-- **Menu items** - `menus/menus.en.toml` contains language-specific items for the navigation bar and social media links for the home page's footer.
-- **Content** - Ensure the `mainSections` in `config.toml` is synchronized with the `content` folder, default values are `["blog", "projects"]`.
-- **Theme color** - Update `themeColor` and `themeOpacity` within the `[style]` section of `params.toml` to update the site's primary color and opacity. You can use the [WCAG Color Contrast Checker][contrast_checker] to validate the contrast ratio of your color to improve accessibility.
-- **Comments** - Comments are powered by [utterances][utterances], a lightweight comments widget built on GitHub issues. Update the `repo`  of the `[comments]` section of `params.toml`.
-- **Security headings** - The local development server uses the header configuration as provided by `server.toml`. Similar settings are defined in the `netlify.toml` file provided in the repository's root when deploying to [Netlify][netlify].
+#### Deploy to Vercel
+
+Clone this repository on own GitHub account and deploy to Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonwidget%2Fastrowind)
+
+<br>
+
+## Frequently Asked Questions
+
+- Why?
+-
+-
+
+<br>
+
+## Related projects
+
+- [TailNext](https://tailnext.vercel.app/) - Free template using Next.js 14 and Tailwind CSS with the new App Router.
+- [Qwind](https://qwind.pages.dev/) - Free template to make your website using Qwik + Tailwind CSS.
 
 ## Contributing
 
-1. Clone the repository and create a new branch
+If you have any idea, suggestions or find any bugs, feel free to open a discussion, an issue or create a pull request.
+That would be very useful for all of us and we would be happy to listen and take action.
 
-    ```console
-    git checkout https://github.com/markdumay/hugo-theme-hinode.git -b name_for_new_branch
-    ```
+## Acknowledgements
 
-2. Make and test the changes
-3. Submit a Pull Request with a comprehensive description of the changes
-
-## Credits
-
-The Hinode theme is inspired by the following themes:
-
-- [Blist][blist] - a clean and fast blog theme for your Hugo site using Tailwind CSS.
-- [Doks][doks] - a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.
-
-## Donate
-
-<a href="https://www.buymeacoffee.com/markdumay" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/lato-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;"></a>
+Initially created by [onWidget](https://onwidget.com) and maintained by a community of [contributors](https://github.com/onwidget/astrowind/graphs/contributors).
 
 ## License
 
-The `hugo-theme-hinode` and `hugo-theme-hinode-child` codebase is released under the [MIT license][license]. The documentation (including the "README") is licensed under the Creative Commons ([CC BY-NC 4.0)][cc-by-nc-4.0] license.
-
-<!-- MARKDOWN PUBLIC LINKS -->
-[blist]: https://github.com/apvarun/blist-hugo-theme
-[bootstrap]: https://getbootstrap.com
-[cc-by-nc-4.0]: https://creativecommons.org/licenses/by-nc/4.0/
-[contrast_checker]: https://accessibleweb.com/color-contrast-checker/
-[doks]: https://github.com/h-enk/doks
-[flexsearch]: https://github.com/nextapps-de/flexsearch
-[git_download]: https://git-scm.com
-[hugo]: https://gohugo.io
-[netlify]: https://www.netlify.com
-[nodejs]: https://nodejs.org
-[npm]: https://www.npmjs.com
-[observatory]: https://observatory.mozilla.org/analyze/hinode-demo.markdumay.org
-[pagespeed]: https://pagespeed.web.dev/report?url=https%3A%2F%2Fhinode-demo.markdumay.org%2F
-[utterances]: https://utteranc.es
-
-<!-- MARKDOWN MAINTAINED LINKS -->
-<!-- TODO: add blog link
-[blog]: https://markdumay.com
--->
-[blog]: https://github.com/markdumay
-[demo]: https://hinode-demo.markdumay.org/
-[license]: https://github.com/markdumay/hugo-theme-hinode/blob/main/LICENSE
-[repository]: https://github.com/markdumay/hugo-theme-hinode.git
-[repository_child]: https://github.com/markdumay/hugo-theme-hinode-child.git
+**AstroWind** is licensed under the MIT license — see the [LICENSE](./LICENSE.md) file for details.

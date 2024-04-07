@@ -1,2 +1,0 @@
-{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-{{ block "main" . }}{{ end }}

@@ -1,0 +1,29 @@
+{
+  "name": "Universal Emoji Parser",
+  "dockerComposeFile": "../docker/local/docker-compose.yaml",
+  "service": "uemojiparser",
+  "workspaceFolder": "/app",
+  "runServices": ["uemojiparser"],
+  "customizations": {
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "swyphcosmo.spellchecker",
+        "streetsidesoftware.code-spell-checker",
+        "donjayamanne.githistory",
+        "vscode-icons-team.vscode-icons",
+        "shardulm94.trailing-spaces",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-tslint-plugin",
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "bradlc.vscode-tailwindcss",
+        "astro-build.astro-vscode"
+      ]
+    }
+  }
+}

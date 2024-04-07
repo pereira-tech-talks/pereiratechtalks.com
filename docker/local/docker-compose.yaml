@@ -1,0 +1,18 @@
+version: '3.2'
+
+services:
+  pereiratechtalks: &pereiratechtalks
+    user: '${UID}'
+    build:
+      context: .
+      dockerfile: ./pereiratechtalks/Dockerfile
+    working_dir: /app
+    volumes:
+      - ../..:/app
+    env_file:
+      - pereiratechtalks/.env
+    command:
+      - /bin/sh
+      - -c
+      - |
+        sleep infinity

@@ -1,3 +1,4 @@
-assets/js/index.js
-assets/js/vendor
+dist
 node_modules
+.github
+types.generated.d.ts
