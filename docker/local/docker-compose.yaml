@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.8'
 
 services:
   pereiratechtalks: &pereiratechtalks
@@ -9,6 +9,8 @@ services:
     working_dir: /app
     volumes:
       - ../..:/app
+    ports:
+      - '4321:4321'
     env_file:
       - pereiratechtalks/.env
     command:

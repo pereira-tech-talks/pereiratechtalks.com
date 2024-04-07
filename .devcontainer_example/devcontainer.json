@@ -1,9 +1,9 @@
 {
-  "name": "Universal Emoji Parser",
+  "name": "Pereira Tech Talks - Astro",
   "dockerComposeFile": "../docker/local/docker-compose.yaml",
-  "service": "uemojiparser",
+  "service": "pereiratechtalks",
   "workspaceFolder": "/app",
-  "runServices": ["uemojiparser"],
+  "runServices": ["pereiratechtalks"],
   "customizations": {
     "settings": {
       "terminal.integrated.shell.linux": "/bin/bash"
@@ -22,7 +22,8 @@
         "dbaeumer.vscode-eslint",
         "EditorConfig.EditorConfig",
         "bradlc.vscode-tailwindcss",
-        "astro-build.astro-vscode"
+        "astro-build.astro-vscode",
+        "unifiedjs.vscode-mdx"
       ]
     }
   }

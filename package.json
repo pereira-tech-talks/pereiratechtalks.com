@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier -w .",
-    "lint:eslint": "eslint . --ext .js,.ts,.astro"
+    "lint:eslint": "eslint . --ext .js,.ts,.astro",
+    "ncu:check": "ncu",
+    "ncu:upgrade": "ncu -u"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.5",

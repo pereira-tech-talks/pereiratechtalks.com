@@ -26,7 +26,11 @@ const whenExternalScripts = (items = []) =>
 
 export default defineConfig({
   output: 'static',
-
+  telemetry: false,
+  server: {
+    port: 4321,
+    host: true
+  },
   integrations: [
     tailwind({
       applyBaseStyles: false,
