@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   pereiratechtalks: &pereiratechtalks
-    user: '${UID}'
     build:
       context: .
       dockerfile: ./pereiratechtalks/Dockerfile
@@ -10,7 +9,8 @@ services:
     volumes:
       - ../..:/app
     ports:
-      - '4321:4321'
+      - '4333:4321'
+      - '8999:8969'
     env_file:
       - pereiratechtalks/.env
     command:

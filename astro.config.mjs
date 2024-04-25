@@ -9,7 +9,9 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
-
+import svelte from "@astrojs/svelte";
+import sentry from "@sentry/astro";
+// import spotlightjs from "@spotlightjs/astro";
 import astrowind from './src/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter.mjs';
@@ -75,6 +77,17 @@ export default defineConfig({
     }),
 
     astrowind(),
+    svelte(),
+    sentry(
+      process.env.SENTRY_DSN? {
+        dsn: process.env.SENTRY_DSN,
+        sourceMapsUploadOptions: {
+          project: process.env.SENTRY_PROJECT,
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+        },
+      }: {}
+    ),
+    // spotlightjs()
   ],
 
   image: {

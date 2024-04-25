@@ -1,10 +1,5 @@
 ---
-
-const {
-  videoId,
-  title = ""
-} = Astro.props;
-
+const { videoId, title = '' } = Astro.props;
 ---
 
 <lite-youtube videoid={videoId} playlabel={title}></lite-youtube>
@@ -100,8 +95,8 @@ const {
 
 <script>
   /* eslint-disable */
-// @ts-nocheck 
-  
+  // @ts-nocheck
+
   /**
    * A lightweight youtube embed. Still should feel the same to the user, just MUCH faster to initialize and paint.
    *
@@ -237,7 +232,7 @@ const {
         videoId: this.videoId,
         playerVars: paramsObj,
         events: {
-          onReady: (event: { target: { playVideo: () => void; }; }) => {
+          onReady: (event: { target: { playVideo: () => void } }) => {
             event.target.playVideo();
           },
         },

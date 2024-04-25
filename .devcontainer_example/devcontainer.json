@@ -23,7 +23,9 @@
         "EditorConfig.EditorConfig",
         "bradlc.vscode-tailwindcss",
         "astro-build.astro-vscode",
-        "unifiedjs.vscode-mdx"
+        "unifiedjs.vscode-mdx",
+        "svelte.svelte-vscode",
+        "cipchk.cssrem"
       ]
     }
   }
