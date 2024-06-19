@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
-import { BackgroundImage } from 'astro-imagetools/components';
+// import { BackgroundImage } from 'astro-imagetools/components';
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -25,7 +25,6 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  
   <Hero>
     <Fragment slot="title" class="text-center">
       <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto" />
