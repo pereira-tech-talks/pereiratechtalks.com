@@ -11,8 +11,6 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import Image from '~/components/common/Image.astro';
-const PereiraTechTalksLogo = '~/assets/images/logos/PerTechTalksLargeWhite.png';
 
 const metadata = {
   title:
@@ -28,19 +26,16 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/onwidget/astrowind',
+        text: 'Telegram',
+        href: 'http://bit.ly/telegram-pertechtalks',
         target: '_blank',
-        icon: 'tabler:download',
+        icon: 'tabler:brand-telegram',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: 'Leer más', href: '/about' },
     ]}
     image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
     <Fragment slot="title" class="text-center">
-      <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto" />
-      <br />
-
       Conéctate, Innova y Crece con Nosotros.
     </Fragment>
 
