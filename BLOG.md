@@ -1,7 +1,7 @@
 ## How to create a post on the blog
 
 1. Fork this repository
-2. Clone in your local 
+2. Clone in your local
 3. Create a new branch using this convention `post/<post-name>`
 4. On the new branch, create in `src/content/post/<entry-name>.mdx` your `mdx` entry, following this format:
 
