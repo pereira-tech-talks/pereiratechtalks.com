@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
+// import { BackgroundImage } from 'astro-imagetools/components';
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -11,6 +12,8 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+const PereiraTechTalksLogo = '~/assets/images/logos/PerTechTalksLargeWhite.png';
 
 const metadata = {
   title:
@@ -22,28 +25,20 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Telegram',
-        href: 'http://bit.ly/telegram-pertechtalks',
-        target: '_blank',
-        icon: 'tabler:brand-telegram',
-      },
-      { text: 'Leer más', href: '/about' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
+  <Hero>
     <Fragment slot="title" class="text-center">
-      Conéctate, Innova y Crece con Nosotros.
+      <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto" />
     </Fragment>
 
     <Fragment slot="subtitle">
-      Únete a nuestra vibrante comunidad de tecnología, donde desarrolladores e investigadores comparten su pasión por
-      descubrir y explorar las últimas tendencias en desarrollo e innovación tecnológica.....
+      Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos
+      temas de desarrollo e innovación tecnológica.
     </Fragment>
   </Hero>
+
+  <!-- HighlightedPosts Widget ******* -->
+
+  <BlogLatestPosts title="" information="" />
 
   <!-- Note Widget ******************* -->
 
@@ -306,16 +301,6 @@ const metadata = {
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
 
   <!-- FAQs Widget ******************* -->
 

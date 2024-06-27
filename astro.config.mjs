@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 
 import { defineConfig, squooshImageService } from 'astro/config';
 
+import { astroImageTools } from 'astro-imagetools';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -32,9 +33,10 @@ export default defineConfig({
   telemetry: false,
   server: {
     port: 4321,
-    host: true
+    host: true,
   },
   integrations: [
+    astroImageTools,
     tailwind({
       applyBaseStyles: false,
     }),
@@ -79,13 +81,15 @@ export default defineConfig({
     astrowind(),
     svelte(),
     sentry(
-      process.env.SENTRY_DSN? {
-        dsn: process.env.SENTRY_DSN,
-        sourceMapsUploadOptions: {
-          project: process.env.SENTRY_PROJECT,
-          authToken: process.env.SENTRY_AUTH_TOKEN,
-        },
-      }: {}
+      process.env.SENTRY_DSN
+        ? {
+            dsn: process.env.SENTRY_DSN,
+            sourceMapsUploadOptions: {
+              project: process.env.SENTRY_PROJECT,
+              authToken: process.env.SENTRY_AUTH_TOKEN,
+            },
+          }
+        : {}
     ),
     // spotlightjs()
   ],
