@@ -12,7 +12,6 @@ import icon from 'astro-icon';
 import compress from 'astro-compress';
 import svelte from "@astrojs/svelte";
 import sentry from "@sentry/astro";
-// import spotlightjs from "@spotlightjs/astro";
 import astrowind from './src/integration';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter.mjs';
