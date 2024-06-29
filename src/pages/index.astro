@@ -12,7 +12,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Image from '~/components/common/Image.astro';
-const PereiraTechTalksLogo = '~/assets/images/logos/PerTechTalksLargeWhite.png';
+const PereiraTechTalksLogo = '~/assets/images/logos/per-tech-talks.png';
 
 const metadata = {
   title:
@@ -24,7 +24,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero>
+  <Hero background="index-background">
     <Fragment slot="title" class="text-center">
       <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto" />
     </Fragment>
