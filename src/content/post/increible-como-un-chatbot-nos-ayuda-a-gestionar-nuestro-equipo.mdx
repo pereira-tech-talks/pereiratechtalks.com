@@ -1,0 +1,111 @@
+---
+publishDate: 2018-02-01T00:00:00Z
+author: Sergio Alexander
+title: “Increíble como un chatbot nos ayuda a gestionar nuestro equipo”
+excerpt: “Increíble como un chatbot nos ayuda a gestionar nuestro equipo”
+image: ~/assets/images/posts/banners/chatbots-dailybot.jpeg
+category: Javascript
+tags:
+  - Javascript
+  - PereiraJs
+  - Chatbots
+
+metadata:
+  canonical: https://pereiratechtalks.com/increible-como-un-chatbot-nos-ayuda-a-gestionar-nuestro-equipo/
+---
+
+Hoy en día hay muchísimas herramientas de productividad y gestión de tareas para usar con tu equipo, es fácil caer en la trampa de usar demasiadas y repetir trabajo. A veces puedes terminar utilizando algunas que realmente no te aportan tanto valor.
+
+Aunque este post es escrito basado en la experiencia de un equipo de tecnología y producto remoto, seguro encontrarás similitudes con tu situación, sin importar tu disciplina, al final todos tenemos que trabajar en equipo tarde o temprano.
+
+Trabajamos desde hace más de 2 años de forma remota, algunas veces nos reunimos a trabajar juntos, pero podríamos decir que el 99% del tiempo, todo el equipo o gran parte de este está operando de forma remota, y además en diferentes zonas horarias.
+
+A lo largo de este tiempo nos hemos encontrado con diferentes retos, como es normal. Siempre buscamos entender qué herramientas usar, y más importante, cómo usar cada una de las herramientas.
+
+> “Por muy útil que sea una herramienta, si no la usas adecuadamente, haces que pierda valor para el equipo”
+
+Uno de los retos que hemos visto mientras crece nuestro equipo e incrementa la cantidad de mensajes que se intercambian en plataformas de mensajería y las demás herramientas, es que cada vez tenemos que estar más atentos a no perder un mensaje importante, y tenemos que estar mirando esto en diferentes sitios.
+
+Con un equipo de tamaño considerable, no es tan sencillo saber quién está trabajando en qué o qué problemas puede estar enfrentando cada uno.
+
+Si lo quieres investigar tienes que ir y leer historial de conversaciones del día, o consultar herramientas de gestión de tareas, y sin embargo, puede ser que alguien haya olvidado actualizar una herramienta o no haya comunicado un problema.
+
+Enterarte a tiempo cuando alguien tiene un problema puede hacer ahorrar tiempo no solo a la persona que lo enfrenta, sino también al equipo. Además, comunicar el problema y solución, puede ayudar a que alguien sepa como enfrentar la situación a futuro, o a quién preguntar para recibir ayuda.
+
+Lo que puede parecer sencillo de resolver en un equipo “in-situ”, puede ser mucho más difícil de implementar en una disciplina remota.
+
+De igual forma, en un equipo físico (no remoto) que no tiene prácticas de escribir/registrar logs, muchas cosas se pueden quedar sin documentar, y se pierde cierta información valiosa.
+
+## La comunicación bien gestionada puede hacernos muy productivos
+
+Hemos experimentado e introducido pequeños cambios, prácticas y rituales diarios para generar impacto positivo en la forma como nos comunicamos.
+
+Hemos visto impacto positivo, por ejemplo, cuando hemos hecho ajustes a nuestra rutina donde los primeros 5 minutos del día son dedicados a pensar qué se hará, documentarlo y verificar con el equipo que es el camino correcto.
+
+O por ejemplo, cuando un miembro del equipo tiene un problema que no le permite avanzar, esa persona se esfuerza a dedicar por lo menos una hora (cronometrada) para investigar el problema y ver si encuentra caminos para la solución. Si supera ese tiempo debe comunicar al equipo que tiene un bloqueo para recibir apoyo. Esto nos permite ser ágiles para resolver problemas, pero al mismo tiempo evitar el ruido innecesario de reportar un problema sin haberlo inspeccionado lo suficiente.
+
+> La comunicación es clave. Y por eso, con el tiempo hemos invertido más en probar técnicas, procesos y rituales diarios de equipo y personales.
+
+## Las herramientas que usamos y nos permiten trabajar en remoto
+
+Nuestra herramienta de comunicación principal es Slack. Y nos apoyamos en email cuando la comunicación requiere un refuerzo por importancia o porque hay actores externos envueltos. Para video llamadas usamos Zoom.
+
+Además de Slack, todos nuestros proyectos, experimentos y startups las gestionamos apoyados en Trello, en uno o varios tableros de Trello. Tenemos un sistema muy basado en Kanban — pero esto puede ser otro post.
+
+Nos apoyamos en un cloud propio de ficheros, donde todo el equipo tiene sincronizado los ficheros de un repositorio central — similar a Dropbox; y también usamos G-Suite para documentos, spreadsheets y presentaciones. También otros repositorios distribuidos basados en Git para operar como equipo. Todo lo tenemos en internet.
+
+## Pero, ¿cómo resolver los problemas más rápidamente? ¿cómo convertirnos en un equipo más efectivo?
+
+Había un eslabón faltante, debido a aquellos rituales y disciplinas diarias habíamos llegado al punto de adoptar un formato de Daily Follow-up — como los daily stand-ups de Scrum.
+
+Esta información la ponemos cada día, cada uno, en un canal de Slack. Tenía que ser aquí porque queríamos que quedase registro, y que fuese asíncrono (por las diferentes zonas horarias, flexibilidad horaria del equipo, etc). Sin embargo no nos gustaba visualmente como se presentaba, ni la forma como podíamos explotar esta información allí.
+
+Siendo este el caso, nos decidimos a crear un bot para Slack, que nos permitiese recoger esta información diariamente de cada uno del equipo, y que la presentase en un canal, toda agrupada. Nuestro caso de uso básico.
+
+A partir de ese momento, la información fluía mejor, y nos sentíamos muy cómodos con la práctica adoptada. Todos comprometidos en pensar al inicio del día:
+
+* ¿Qué hice ayer?
+* ¿Qué voy a hacer hoy?
+* ¿Qué bloqueos o problemas tengo?
+
+Estas preguntas permiten analizar progreso personal y de equipo. Además, como equipo podemos reaccionar todos a apoyar a aquella persona que reporta un bloqueo/problema. Los líderes del equipo han empezado a tener más visibilidad, pueden dar feedback a los ingenieros sobre el plan del día con el objetivo de optimizar el uso del tiempo. Y lo mejor de todo: nos centramos sobretodo en leer bloqueos/problemas y convertirnos en unas criaturas de resolver problemas :)
+
+> “Increíble como un chatbot nos ayuda a gestionar el equipo”
+
+Todo esto estaba muy bien. El bot estaba funcionando y hemos optimizado la comunicación interna.
+
+Pero algo faltaba, dado que la información seguía siendo difícil de consultar/analizar, sobre todo cuando queríamos ver información del pasado.
+
+## Las retrospectivas, un arma de aprendizaje
+
+Tenemos una práctica de analizar el progreso, el delivery de cada uno y del equipo a lo largo de un periodo de tiempo, los resultados y métricas los productos que hemos cambiado, etcétera.
+
+Es una labor muy importante que muchos equipos ágiles suelen hacer. Y quienes lo han hecho seguro han pasado por momentos de no recordar o olvidar mencionar alguno de los puntos importantes de los días pasados.
+
+Nosotros hacemos una corta retrospectiva todos los viernes en la tarde, y extraer la información de Slack no era cómodo. Como guión para la retrospectiva, centrarnos en los problemas que hubo a lo largo de la semana era importante.
+
+Por esta razón integramos una web y un timeline para fácilmente iterar por los diferentes reportes diarios que había recogido el bot, y pudiendo filtrar incluso actividades por “problemas”, etc.
+
+La herramienta de repente se ha convertido en una muy importante de nuestro stack. Aquí nace Dailybot, chatbot y asistente para ti y tu equipo.
+
+## ¿Por qué usar Dailybot?
+
+Dailybot facilita que adoptes la práctica de seguimientos diarios en tu equipo, para que mejores la comunicación y el equipo sea más efectivo a la hora de identificar y resolver problemas.
+
+Dailybot puede operar con equipos en diferentes zonas horarias y cada usuario puede configurar el bot para que sepa en qué momento inicia normalmente su sesiones de trabajo y así Dailybot pregunte en esa franja horaria.
+
+El bot habla tanto español como inglés y se ha construido con el objetivo de no ser “ruidoso” — Dailybot no hará ruido innecesario en los canales de Slack, y las preguntas a cada miembro las hace de forma privada.
+
+El dashboard permite consultar reportes diarios y ver y buscar el histórico. Además también puedes ver la información en forma de “feed de actividad” con filtros por usuarios y por preguntas.
+
+Dailybot está mejorando continuamente, dado que se ha convertido en un producto invertido por RockaLabs. La misión: mejorar la productividad tuya y de tu equipo.
+
+Recientemente hemos añadido una funcionalidad de métricas de estado motivacional del equipo, donde puedes configurar a Dailybot para que haga preguntas semanales (con respuesta anónima) para entender el estado de motivación de cada persona del equipo, y enseñe estas gráficas/métricas a los directores del equipo.
+
+Puedes empezar a usar Dailybot ahora e instalarlo en Slack con un simple click:
+
+https://dailybot.co
+
+### Sobre RockaLabs.
+
+[RockaLabs](https://rocka.co) es un Tech Venture Builder que apoya a fundadores en la construcción de sus empresas y productos digitales. RockaLabs opera equipos remotos para desarrollar tecnología en las etapas iniciales del negocio. Tiene además un modelo de inversión como co-building partner.
