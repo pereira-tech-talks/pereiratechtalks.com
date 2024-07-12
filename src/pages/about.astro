@@ -1,0 +1,30 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'About us',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Quienes somos"
+    image={{
+      src: '~/assets/images/pereiratechtalks-team.jpg',
+      alt: 'Caos Image',
+    }}
+  >
+    <Fragment slot="subtitle">
+      <br />
+      Somos una comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos
+      temas desarrollo e innovación tecnológica. Aquí encontraras charlas de todo tipo como desarrollo web, desarrollo móvil,
+      desarrollo multiplataforma, administración de servidores (devops), robótica, diseño, emprendimiento, investigación
+      y mucho más. Nuestra motivación es crear una red de contactos con intereses afines y poner a Pereira en el radar tecnológico
+      de Colombia ayudando a dar visibilidad al talento local. ¿Eres de Pereira o estas cerca y te interesa darnos una charla?
+      Contáctanos en <a href="https://goo.gl/forms/QgkaE6qXjFB9FTDP2" target="_blank" rel="noopener noreferrer">este link!</a> queremos conocerte a tí y a más personas como nosotros con ganas de compartir.
+    </Fragment>
+  </Hero>
+</Layout>
