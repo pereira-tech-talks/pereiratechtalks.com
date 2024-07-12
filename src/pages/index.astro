@@ -4,7 +4,9 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Image from '~/components/common/Image.astro';
-const PereiraTechTalksLogo = '~/assets/images/logos/PerTechTalksLargeWhite.png';
+
+const PereiraTechTalksLogo = '~/assets/images/logos/per-tech-talks.png';
+const PereiraTechTalksLogoDark = '~/assets/images/logos/per-tech-talks-dark.svg';
 
 const metadata = {
   title:
@@ -16,9 +18,10 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero>
+  <Hero background="index-background dark:index-background-dark">
     <Fragment slot="title" class="text-center">
-      <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto" />
+      <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={400} class="mx-auto hidden dark:block" />
+      <Image src={PereiraTechTalksLogoDark} alt="Pereira Tech Talks" width={400} class="mx-auto dark:hidden" />
     </Fragment>
 
     <Fragment slot="subtitle">
