@@ -70,7 +70,7 @@ jobs:
       - name: Cache pip
         uses: actions/cache@v4
         with:
-          path: /cache/pip
+          path: website/_astro
           key: ptt-website-${{ hashFiles('website/package.json') }}
           restore-keys: |
             ptt-website-
@@ -78,4 +78,4 @@ jobs:
       - name: Build static files
         run: |
           cd website
-          ls -la
+          yarn build
