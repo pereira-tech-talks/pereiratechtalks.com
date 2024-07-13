@@ -58,7 +58,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.12.1'
-          cache: 'yarn'
       - name: Install node dependencies
         run: |
           cd website
