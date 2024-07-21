@@ -1,4 +1,4 @@
-FROM node:20.12.1-buster-slim
+FROM node:20.15.1-bullseye
 LABEL maintainer="xergioalex@gmail.com"
 
 RUN apt-get update -y && \
