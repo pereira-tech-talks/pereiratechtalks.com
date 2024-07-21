@@ -31,7 +31,7 @@
 }
 
 .tag {
-  @apply bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded-full mr-2;
+  @apply text-gray-400 text-sm px-1 py-1 mr-2 uppercase;
 }
 
 /* Blog Card Horizontal */
