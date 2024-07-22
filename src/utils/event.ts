@@ -1,25 +1,31 @@
-import { getCollection } from 'astro:content';
+/**
+ * Fetch events from Meetup
+ * @param status - upcoming, past
+ * @returns an array of events
+ */
+export const fetchEventsMeetup = async (status: string) => {
+  const payload = {
+    page: 1,
+    status: [status],
+    group_urlname: 'pereira-tech-talks',
+    'photo-host': 'secure',
+    fields: 'featured_photo',
+    desc: 'true',
+  };
+  const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
+  const response = await fetch(`${meetUpURL}?${new URLSearchParams(payload).toString()}`);
+  const data = await response.json();
 
-const load = async function () {
-  const events = await getCollection('event');
-
-  return events;
+  return data;
 };
 
-let _events;
-
-export const fetchEvents = async () => {
-  if (!_events) {
-    _events = await load();
-  }
-
-  return _events;
-};
-
-export const getEventByName = async (name: string) => {
-  const events = await fetchEvents();
-  const eventFiltered = events.find((event) => event.slug === name);
-  const eventData = eventFiltered?.data ?? {};
+/**
+ * Get the most recent event
+ * @returns the most recent event
+ */
+export const getMostRecentEvent = async () => {
+  const events = await fetchEventsMeetup('upcoming');
+  const eventData = events ? events[0] : {};
 
   return eventData;
 };
