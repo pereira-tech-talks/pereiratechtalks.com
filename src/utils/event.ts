@@ -3,9 +3,9 @@
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string) => {
+export const fetchEventsMeetup = async (status: string, page: number = 1) => {
   const payload = {
-    page: 1,
+    page: page,
     status: [status],
     group_urlname: 'pereira-tech-talks',
     'photo-host': 'secure',

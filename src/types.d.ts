@@ -44,6 +44,31 @@ export interface Post {
   readingTime?: number;
 }
 
+export interface Event {
+  id: number;
+  name: string;
+  local_date: string;
+  local_time: string;
+  venue: {
+    name: string;
+    city: string;
+    state: string;
+  };
+  yes_rsvp_count: number;
+  link: string;
+  featured_photo: {
+    photo_link: string;
+  };
+  description: string;
+  name: string;
+  group: {
+    name: string;
+  };
+  publishDate: Date;
+  author: string;
+  time: Date;
+}
+
 export interface MetaData {
   title?: string;
   ignoreTitleTemplate?: boolean;

@@ -1,0 +1,20 @@
+---
+import Item from '~/components/events/ListItem.astro';
+import type { Event } from '~/types';
+
+export interface Props {
+  events: Array<Event>;
+}
+
+const { events } = Astro.props;
+---
+
+<ul>
+  {
+    events.map((event) => (
+      <li class="mb-12 md:mb-20">
+        <Item event={event} />
+      </li>
+    ))
+  }
+</ul>
