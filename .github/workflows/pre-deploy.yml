@@ -67,7 +67,7 @@ jobs:
           node --version
           npm --version
           yarn --version
-      - name: Cache pip
+      - name: Cache
         uses: actions/cache@v4
         with:
           path: website/dist/_astro
@@ -75,7 +75,7 @@ jobs:
           restore-keys: |
             ptt-website-
           save-always: true
-      # - name: Build static files
-      #   run: |
-      #     cd website
-      #     yarn build
+      - name: Build static files
+        run: |
+          cd website
+          yarn build
