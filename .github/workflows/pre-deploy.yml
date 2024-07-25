@@ -67,10 +67,10 @@ jobs:
           node --version
           npm --version
           yarn --version
-      - name: Cache
+      - name: Cache for Astro
         uses: actions/cache@v4
         with:
-          path: website/dist/_astro
+          path: website/node_modules/.astro/
           key: ptt-website-${{ hashFiles('website/package.json') }}
           restore-keys: |
             ptt-website-
