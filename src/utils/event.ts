@@ -25,7 +25,7 @@ export const fetchEventsMeetup = async (status: string) => {
  */
 export const getMostRecentEvent = async () => {
   const events = await fetchEventsMeetup('upcoming');
-  const eventData = events ? events[0] : {};
+  const eventData = events.length ? events[0] : {};
 
   return eventData;
 };
