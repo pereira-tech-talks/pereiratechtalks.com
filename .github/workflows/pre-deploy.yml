@@ -67,7 +67,7 @@ jobs:
           node --version
           npm --version
           yarn --version
-      - name: Cache pip
+      - name: Cache for Astro
         uses: actions/cache@v4
         with:
           path: website/node_modules/.astro/
