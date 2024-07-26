@@ -12,9 +12,15 @@ export const fetchEventsMeetup = async (status: string, page: number = 1) => {
     fields: 'featured_photo',
     desc: 'true',
   };
+
   const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
   const response = await fetch(`${meetUpURL}?${new URLSearchParams(payload).toString()}`);
   const data = await response.json();
+
+  if ('errors' in data) {
+    console.error(data.errors);
+    return [];
+  }
 
   return data;
 };
