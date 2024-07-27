@@ -18,7 +18,8 @@ interface Links {
 }
 interface ImageInterface {
   imgHref : string,
-  imgAlt : string
+  imgAlt : string,
+  imgWidth : string
 }
 
 export interface Props {
@@ -47,8 +48,8 @@ const {
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2 justify-between flex items-stretch">
           {
-            extraLogos.map(({ imgHref, imgAlt }) => (
-              <Image src={imgHref} alt={imgAlt} width={150} class="m-2 self-center font-bold"  />
+            extraLogos.map(({ imgHref, imgAlt, imgWidth }) => (
+              <Image src={imgHref} alt={imgAlt} width={imgWidth || 150} class="m-2 self-center font-bold"  />
             ))
           }
         </div>

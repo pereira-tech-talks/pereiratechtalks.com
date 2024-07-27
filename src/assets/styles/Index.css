@@ -7,3 +7,9 @@
   background: rgb(20,204,106);
   background: linear-gradient(210deg, rgba(20,204,106,1) 0%, rgba(6,185,153,1) 62%, rgba(14,39,108,1) 100%);
 }
+
+.shadow-large {
+  --tw-shadow: 10px 15px;
+  --tw-shadow-colored: 0px 10px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}

@@ -1,10 +1,10 @@
-import { getBlogPermalink, getAsset } from './utils/permalinks';
+import { getAsset } from './utils/permalinks';
 
 export const headerData = {
   links: [
     {
       text: 'Inicio',
-      href: '/pereiratechday',
+      href: '/pereira-tech-day',
     },
     {
       text: 'Comunidad',
@@ -18,16 +18,19 @@ export const footerData = {
         {
             imgHref : '~/assets/images/logos/per-tech-talks-dark.svg',
             imgAlt: 'pereira-tech-talks-logo',
+            imgWidth : 200
          
           },
         {
             imgHref : '~/assets/images/logos/logo-Joint-alta.png',
             imgAlt: 'joint-developer-logo',
+            imgWidth : 100
          
           },
         {
-            imgHref : '~/assets/images/logos/per-tech-talks-dark.svg',
+            imgHref : '~/assets/images/logos/logo-python-pereira.svg',
             imgAlt: 'python-pereira-logo',
+            imgWidth : 100
          
           },
     ],

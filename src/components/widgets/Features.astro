@@ -2,6 +2,8 @@
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import ItemGrid from '~/components/ui/ItemGrid.astro';
 import Headline from '~/components/ui/Headline.astro';
+import Button from '~/components/ui/Button.astro';
+
 import type { Features as Props } from '~/types';
 
 const {
@@ -33,4 +35,8 @@ const {
       ...((classes?.items as {}) ?? {}),
     }}
   />
+  <div class="flex justify-center">
+
+    <Button target="http://google.com" text="Inscribirse" class="self-center m-4" /> 
+  </div>
 </WidgetWrapper>
