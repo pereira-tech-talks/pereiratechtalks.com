@@ -1,0 +1,29 @@
+---
+import Brands from '~/components/widgets/Brands.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import LandingLayout from '~/layouts/LandingLayout.astro';
+
+const collaborators = [
+  {
+    image: 'src/assets/images/people/carolina-gomez-trejos.jpg',
+    name: 'Carolina Gómez Trejos',
+    socialLink: 'https://www.linkedin.com/in/carolinagomezt/',
+  },
+  {
+    image: 'src/assets/images/people/jose-felipe-duarte.png',
+    name: 'Jose Felipe Duarte',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
+  },
+  {
+    image: 'src/assets/images/people/stiven-cardona-monsalve.jpeg',
+    name: 'Stiven Cardona Monsalve',
+    socialLink: 'https://www.linkedin.com/in/stiven-cardona-monsalve',
+  },
+];
+---
+
+<LandingLayout>
+  <Brands title="Speakers" />
+  <Brands title="Our partners" tagline="gold" />
+  <Collaborators collaborators={collaborators} />
+</LandingLayout>

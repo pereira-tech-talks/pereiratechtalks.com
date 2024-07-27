@@ -88,6 +88,12 @@ export interface Image {
   alt?: string;
 }
 
+export interface Collaborator {
+  image: string;
+  name: string;
+  socialLink?: string;
+}
+
 export interface Video {
   src: string;
   type?: string;
@@ -236,6 +242,11 @@ export interface Testimonials extends Omit<Headline, 'classes'>, Widget {
 export interface Brands extends Omit<Headline, 'classes'>, Widget {
   icons?: Array<string>;
   images?: Array<Image>;
+}
+
+export interface Collaborators extends Omit<Headline, 'classes'>, Widget {
+  icons?: Array<string>;
+  collaborators?: Array<Collaborator>;
 }
 
 export interface Features extends Omit<Headline, 'classes'>, Widget {
