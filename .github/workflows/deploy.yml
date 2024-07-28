@@ -39,10 +39,10 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: Step 4 - ⚙️ Install Dependencies
         run: npm install
-      - name: Step 5 - Verify the existence of 'main_ghpages' branch
+      - name: Step 5 - Verify the existence of 'main__ghpages' branch
         run: |
-          git checkout -b main_ghpages
-          git pull origin main_ghpages
+          git checkout -b main__ghpages
+          git pull origin main__ghpages
       - name: Step 6 - Build static files
         run: |
           npm run build:ghpages
@@ -50,8 +50,8 @@ jobs:
         run: |
           git add .
           git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
-      - name: Step 8 - Push changes to main_ghpages
+      - name: Step 8 - Push changes to main__ghpages
         run: |
-          git push origin main_ghpages
+          git push origin main__ghpages
         env:
           GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
