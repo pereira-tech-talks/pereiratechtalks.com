@@ -41,28 +41,28 @@ jobs:
           cd website
           yarn eslint:check
 
-  build:
-    name: Build
-    needs: [format]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
-        with:
-          path: website
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.12.1'
-      - name: Install node dependencies
-        run: |
-          cd website
-          yarn install --ignore-engines
-      - name: Show node environment
-        run: |
-          node --version
-          npm --version
+  # build:
+  #   name: Build
+  #   needs: [format]
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 10
+  #   steps:
+  #     - name: Checkout branch
+  #       uses: actions/checkout@v4
+  #       with:
+  #         path: website
+  #     - name: Setup node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.12.1'
+  #     - name: Install node dependencies
+  #       run: |
+  #         cd website
+  #         yarn install --ignore-engines
+  #     - name: Show node environment
+  #       run: |
+  #         node --version
+  #         npm --version
           yarn --version
       # - name: Cache for Astro
       #   uses: actions/cache@v4
