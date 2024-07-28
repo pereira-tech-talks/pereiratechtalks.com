@@ -12,6 +12,10 @@ import Pricing from '~/components/widgets/Pricing.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
+import '@fontsource/roboto';
+import '@fontsource/bebas-neue';
+import '~/assets/styles/pereira-tech-day.css';
+
 const metadata = {
   title:
     'Pereira Tech Talks — Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos temas de desarrollo e innovación tecnológica.',
@@ -78,6 +82,9 @@ const partnerships = [
         description: 'Publicidad de la empresa en el evento.',
       },
       {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+      },
+      {
         description: 'Stand en el evento.',
       },
     ],
@@ -103,6 +110,10 @@ const partnerships = [
       },
       {
         description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
         icon: 'tabler:x',
       },
       {
@@ -134,6 +145,10 @@ const partnerships = [
       },
       {
         description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
         icon: 'tabler:x',
       },
       {
@@ -235,7 +250,7 @@ const faqsList = [
         <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
       </div>
     </Fragment>
-    <Fragment slot="title"> Pereira Tech Day </Fragment>
+    <Fragment slot="title"> Pereira•Tech•Day </Fragment>
     <Fragment slot="subtitle">
       Un día de Tecnología, Python, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>
