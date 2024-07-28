@@ -6,6 +6,7 @@ import type { CallToAction } from '~/types';
 import '~/assets/styles/Index.css';
 export interface Props {
   id?: string;
+  logo?: string;
   title?: string;
   subtitle?: string;
   tagline?: string;
@@ -17,6 +18,7 @@ export interface Props {
 
 const {
   id,
+  logo = await Astro.slots.render('logo'),
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
   tagline,
@@ -34,6 +36,14 @@ const {
       <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
       <div class="py-12 md:py-20">
         <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+          {
+            logo && (
+              <p
+                class="text-base dark:text-blue-200 font-bold uppercase"
+                set:html={logo}
+              />
+            )
+          }
           {
             tagline && (
               <p

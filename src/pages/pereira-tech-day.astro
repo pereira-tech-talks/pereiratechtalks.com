@@ -6,6 +6,9 @@ import Content from '~/components/widgets/Content.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
 import LandingLayout from '~/layouts/LandingLayout.astro';
 import { getPermalink } from '~/utils/permalinks';
+import Image from '~/components/common/Image.astro';
+const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
+const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
 const collaborators = [
   {
@@ -134,14 +137,19 @@ const faqsList = [
 <LandingLayout>
   <Hero
     id="hero"
-    title="Sarah Johnson"
-    tagline="Personal Web Demo"
-    actions={[{ variant: 'primary', text: 'Hire me', href: getPermalink('/contact#form') }]}
+    tagline="Septiembre 21, 2024."
   >
+    <Fragment slot="logo">
+      <div class="text-center mb-8">
+        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto hidden dark:block" />
+        <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
+      </div>
+    </Fragment>
+    <Fragment slot="title">
+      Pereira Tech Day
+    </Fragment>
     <Fragment slot="subtitle">
-      I'm a Graphic Designer passionate about crafting visual stories. <br /> With 5 years of experience and a degree from
-      New York University's School of Design. I infuse vitality into brands and designs, transforming concepts into captivating
-      realities.
+      Un día de Tecnología, Python, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>
   </Hero>
 
