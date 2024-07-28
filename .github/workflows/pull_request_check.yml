@@ -30,8 +30,8 @@ jobs:
           fetch-depth: 2
       - name: Step 1 - ⚙️ Setup GitHub Config
         run: |
-          git config user.name "🤖 DailyBot"
-          git config user.email "ops@dailybot.com"
+          git config user.name "🤖 Pereira Tech Talks"
+          git config user.email "pereiratechtalks@gmail.com"
           gh auth login --with-token <<< "${{ secrets.AUTOMATION_GITHUB_TOKEN }}"
 
       - name: Step 2 - 🧪 Check pr size label

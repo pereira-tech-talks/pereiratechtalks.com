@@ -5,7 +5,7 @@ if [[ -f "git_logs_output.txt" ]]; then
 fi
 
 while read text_line; do
-  if [[ "$text_line" =~ "[🤖 DailyBot] New release to v" ]]; then
+  if [[ "$text_line" =~ "[🤖 Pereira Tech Talks] New release to v" ]]; then
     break
   fi
   if [[ ! "$text_line" =~ "Merge branch 'main'" ]] && [[ ! "$text_line" =~ "Merge pull request" ]]; then
