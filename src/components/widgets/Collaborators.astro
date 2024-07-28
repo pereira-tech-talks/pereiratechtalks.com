@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import type { Collaborators as Props } from '~/types';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Image from '~/components/common/Image.astro';
 const {
   title = 'Collaborators',
   subtitle = '',
@@ -26,7 +27,7 @@ const {
           (collaborator) =>
             collaborator && (
               <div class="flex flex-col justify-center items-center col-span-1 my-2 lg:my-4 py-1 px-3">
-                <img src={collaborator.image} alt={collaborator.name || ''} class="max-h-40 max-w-40  rounded-full" />
+                <Image src={collaborator.image} alt={collaborator.name || ''} class="max-h-40 max-w-40  rounded-full" />
                 <a
                   class="text-muted dark:text-gray-400  text-md p-2.5 inline-flex items-center"
                   href={collaborator.socialLink}
