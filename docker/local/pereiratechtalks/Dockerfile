@@ -1,5 +1,5 @@
-FROM node:20.12.1-buster-slim
-LABEL maintainer="xergioalex@gmail.com"
+FROM node:20.16.0-bullseye
+LABEL maintainer="pereiratechtalks@gmail.com"
 
 RUN apt-get update -y && \
     apt-get install less git -y && \
