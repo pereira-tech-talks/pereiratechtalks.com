@@ -1,0 +1,416 @@
+---
+import Brands from '~/components/widgets/Brands.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import EventsLayout from '~/layouts/EventsLayout.astro';
+import Image from '~/components/common/Image.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
+const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
+
+import '@fontsource/roboto';
+import '@fontsource/bebas-neue';
+import '~/assets/styles/pereira-tech-day.css';
+
+const metadata = {
+  title:
+    'Pereira Tech Talks — Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos temas de desarrollo e innovación tecnológica.',
+  ignoreTitleTemplate: true,
+};
+
+const collaborators = [
+  {
+    image: 'src/assets/images/people/carolina-gomez-trejos.jpg',
+    name: 'Carolina Gómez Trejos',
+    socialLink: 'https://www.linkedin.com/in/carolinagomezt/',
+  },
+  {
+    image: 'src/assets/images/people/jose-felipe-duarte.png',
+    name: 'Jose Felipe Duarte',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
+  },
+  {
+    image: 'src/assets/images/people/stiven-cardona-monsalve.jpeg',
+    name: 'Stiven Cardona Monsalve',
+    socialLink: 'https://www.linkedin.com/in/stiven-cardona-monsalve',
+  },
+  {
+    image: 'src/assets/images/people/sergio-florez.png',
+    name: 'Sergio Alexander Florez',
+    socialLink: 'https://www.linkedin.com/in/xergioalex/',
+  },
+  {
+    image: 'src/assets/images/people/alejo-rendon.jpg',
+    name: 'Alejandro E. Rendon',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
+  },
+  {
+    image: 'src/assets/images/people/angelica-aguirre.png',
+    name: 'Angelica Aguirre',
+    socialLink: 'https://www.linkedin.com/in/angelica-aguirre-castro-50abb5110/',
+  },
+  {
+    image: 'src/assets/images/people/melisa-escobar.png',
+    name: 'Melisa Escobar Gutierrez',
+    socialLink: 'https://www.linkedin.com/in/angelica-aguirre-castro-50abb5110/',
+  },
+];
+
+const partnerships = [
+  {
+    title: 'Oro',
+    hasRibbon: true,
+    ribbonTitle: 'Recomendado',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+      },
+      {
+        description: 'Lightning talk de 5 minutos.',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+      },
+      {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+      },
+      {
+        description: 'Stand en el evento.',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
+  },
+  {
+    title: 'Plata',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+      },
+      {
+        description: 'Lightning talk de 3 minutos.',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Stand en el evento.',
+        icon: 'tabler:x',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
+  },
+  {
+    title: 'Bronce',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Lightning talk de 3 minutos.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Stand en el evento.',
+        icon: 'tabler:x',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
+  },
+];
+
+const faqsList = [
+  {
+    title: '¿Cómo puedo registrarme?',
+    description:
+      'Debes estar atento de las redes sociales del evento y a nuestra página web, ten presente que solo se tenemos 200 cupos, así que debes estar muy pendiente para reservar y no quedarte por fuera de este gran evento.',
+  },
+  {
+    title: '¿El evento es gratuito?',
+    description: 'Si, el evento es totalmente gratuito.',
+  },
+  {
+    title: '¿Cuantos dias dura el evento?',
+    description: 'Si, el evento es totalmente gratuito.',
+  },
+  {
+    title: ' ¿Si no soy de la UTP puedo asistir?',
+    description: 'Si puedes asistir, este es un evento abierto a todo público interesado en aprender más sobre Python.',
+  },
+  {
+    title: '¿Cómo puede mi organización convertirse en patrocinador del evento?',
+    description:
+      'Escribenos a python.pereira@gmail.com indicando que estás interesado en patrocinarnos, los planes de patrocinio se encuentran en la sección Planes de nuestra página web, pero estamos abiertos a oir nuevas propuestas.',
+  },
+  {
+    title: '¿Qué temas se hablarán en el PyDay?',
+    description: 'Tendremos un día de Python, Data Science, Machine Learning, infraestructura y más!',
+  },
+  {
+    title: '¿El evento cuenta con alimentación garantizada?',
+    description:
+      'Gracias a la gestión del equipo organizador contaremos con patrocinadores que permitiran que este evento cuente con refrigerios en la mañana y en la tarde, además de una estación de café durante todo el día.',
+  },
+  {
+    title: 'Solo quiero/puedo asistir durante unas horas. ¿Es posible hacerlo sin registrarse?',
+    description:
+      'No, contamos con cupos limitados y esperamos que estos los ocupen las personas que puedan asistir durante toda la jornada.',
+  },
+  {
+    title: '¿Recibiré un certificado de asistencia?',
+    description: 'Si, este será enviado vía correo electrónico días después del evento.',
+  },
+  {
+    title: '¿Necesito llevar mi computador?',
+    description: 'No es necesario, aunque si quieres tomar apuntes lo puedes traer.',
+  },
+  {
+    title: '¿El sitio es seguro?',
+    description:
+      'Si, pero debes estar pendiente de tus objetos personales debido a que los organizadores no se hacen responsables por pérdidas o hurtos durante el evento.',
+  },
+  {
+    title: 'Código de Conducta',
+    description: `
+      PyDay Pereira es una conferencia libre y para todos sin importar género, orientación sexual, habilidades físicas, apariencia física, raza, religión o postura política. No se tolerarán los abuso a este principio por parte de ningún participante de la conferencia.
+
+      Todas las comunicaciones deben estar enfocadas a una audiencia profesional incluyendo personas con diferentes currículos y experiencias. El lenguaje sexual no es apropiado para ningún evento organizado bajo nuestras normas, incluyendo las charlas.
+
+      La organización del evento recomienda encarecidamente:
+
+      Tener un trato amable con los demás miembros.
+      Mantener el respeto hacia los demás participantes.
+      Comportarse profesionalmente.
+      Recordar que cualquier conducta de acoso, sexismo, racismo o división política o de cualquier instancia, no es apropiada para la participación dentro de la conferencia.
+      No asistir a la conferencia bajo influencia de bebidas alcohólicas o estupefacientes.
+
+      La organización de PyDay se reserva el derecho de expulsar a cualquier participante, sin importar el tipo, que no cumpla con cualquiera de estas normas bajo discreción del comité organizador.
+
+      Gracias por acogerse a estos términos y bienvenido a PyDay Pereira. Este es un evento amistoso de todos para todos.
+
+      Si usted ha sido acosado, se da cuenta de que alguien más está siendo acosado, está violando los términos descritos aquí o tiene algún problema, por favor contacte nuestros organizadores.
+
+      Nuestro equipo en la conferencia también estará disponible para colaborar y contactar la seguridad local ó asistirlo, para garantizar su seguridad. Nosotros valoramos su presencia en nuestros eventos.
+
+      En caso de alguna violación a los términos de este código de conducta por parte de los organizadores por favor contactar el organizador principal de la conferencia, Carolina Gómez Trejos(carolina9511@gmail.com)
+    `,
+  },
+];
+---
+
+<EventsLayout metadata={metadata}>
+  <Hero id="hero" tagline="Septiembre 21, 2024.">
+    <Fragment slot="logo">
+      <div class="text-center mb-8">
+        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto hidden dark:block" />
+        <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
+      </div>
+    </Fragment>
+    <Fragment slot="title"> Pereira•Tech•Day </Fragment>
+    <Fragment slot="subtitle">
+      Un día de Tecnología, Python, Data Science, Machine Learning, Infraestructura y más!
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about"
+    columns={3}
+    items={[
+      {
+        icon: 'tabler:brand-dribbble',
+        callToAction: {
+          target: '_blank',
+          text: 'Dribbble',
+          href: '#',
+        },
+      },
+      {
+        icon: 'tabler:brand-behance',
+        callToAction: {
+          target: '_blank',
+          text: 'Behance',
+          href: '#',
+        },
+      },
+      {
+        icon: 'tabler:brand-pinterest',
+        callToAction: {
+          target: '_blank',
+          text: 'Pinterest',
+          href: '#',
+        },
+      },
+    ]}
+    image={{
+      src: 'src/assets/images/pereira-tech-day/about.jpg',
+      alt: 'Colorful Image',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sobre Pereira Tech Day</h2>
+      <p>
+        PyDay Pereira es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de uno
+        de los lenguajes de programación con más crecimiento del momento: Python.
+      </p>
+      <br />
+      <p>
+        En este evento podrás asistir a charlas que tratan sobre herramientas, librerías, buenas prácticas y otros
+        detalles relacionados con el lenguaje y su comunidad.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Steps
+    id="resume"
+    title="Agenda"
+    items={[
+      {
+        title:
+          'Graphic Designer <br /> <span class="font-normal">ABC Design Studio, New York, NY</span> <br /> <span class="text-sm font-normal">2021 - Present</span>',
+        description: `Collaborate with clients to understand design requirements and objectives. <br /> Develop branding solutions, including logos, color palettes, and brand guidelines. <br /> Design marketing materials such as brochures, posters, and digital assets. <br /> Create visually appealing user interfaces for websites and applications.`,
+        icon: 'tabler:briefcase',
+      },
+      {
+        title:
+          'Junior Graphic Designer <br /> <span class="font-normal">XYZ Creative Agency, Los Angeles, CA</span> <br /> <span class="text-sm font-normal">2018 - 2021</span>',
+        description: `Assisted senior designers in creating design concepts and visual assets. <br /> Contributed to the development of brand identities and marketing collateral. <br /> Collaborated with the marketing team to ensure consistent design across campaigns. <br /> Gained hands-on experience in various design software and tools.`,
+        icon: 'tabler:briefcase',
+      },
+    ]}
+    classes={{ container: 'max-w-3xl' }}
+  />
+
+  <Brands id="speakers" title="Speakers" />
+  <Brands
+    title="Partnerships & Collaborations"
+    subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
+    icons={[]}
+    images={[
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/05/26/09/37/paypal-784404_1280.png',
+        alt: 'Paypal',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/48/visa-6850402_1280.png',
+        alt: 'Visa',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/10/01/10/29/ebay-189064_1280.png',
+        alt: 'Ebay',
+      },
+
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/13/17/45/icon-720944_1280.png',
+        alt: 'Youtube',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/02/12/09/07/microsoft-80658_1280.png',
+        alt: 'Microsoft',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png',
+        alt: 'Node JS',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2015/10/31/12/54/google-1015751_1280.png',
+        alt: 'Google',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2021/12/06/13/45/meta-6850393_1280.png',
+        alt: 'Meta',
+      },
+      {
+        src: 'https://cdn.pixabay.com/photo/2013/01/29/22/53/yahoo-76684_1280.png',
+        alt: 'Yahoo',
+      },
+    ]}
+  />
+  <Pricing title="Partnership" prices={partnerships} />
+
+  <Collaborators id="collaborators" collaborators={collaborators} />
+
+  <FAQs
+    id="faqs"
+    title="Preguntas Frecuentes (FAQ)"
+    subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
+    columns={1}
+    items={faqsList}
+  />
+
+  <ContactUs
+    id="inscription-form"
+    title="Inscribirse"
+    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+    description="Our support team typically responds within 24 business hours."
+  />
+</EventsLayout>
