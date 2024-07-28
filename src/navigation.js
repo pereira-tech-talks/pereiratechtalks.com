@@ -12,7 +12,7 @@ export const headerData = {
     },
     {
       text: 'Meetups',
-      href: 'https://www.meetup.com/es-ES/Pereira-Tech-Talks',
+      href: '/meetups',
     },
     {
       text: 'Blog',

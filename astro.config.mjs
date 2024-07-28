@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,21 +11,37 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
-import svelte from "@astrojs/svelte";
-import sentry from "@sentry/astro";
+import svelte from '@astrojs/svelte';
+import sentry from '@sentry/astro';
 import astrowind from './src/integration';
+import { getMostRecentEvent } from './src/utils/event';
 
-import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin, lazyImagesRehypePlugin } from './src/utils/frontmatter.mjs';
+import {
+  readingTimeRemarkPlugin,
+  responsiveTablesRehypePlugin,
+  lazyImagesRehypePlugin,
+} from './src/utils/frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const hasExternalScripts = false;
+
+async function fetchEventData() {
+  let newEventData = null;
+  const dataPath = './src/data';
+
+  if (!newEventData) {
+    newEventData = await getMostRecentEvent();
+  }
+  if (!fs.existsSync(dataPath)) {
+    fs.mkdirSync(dataPath, { recursive: true });
+  }
+
+  fs.writeFileSync(`${dataPath}/announcementData.json`, JSON.stringify(newEventData));
+}
+
 const whenExternalScripts = (items = []) =>
-  hasExternalScripts
-    ? Array.isArray(items)
-      ? items.map((item) => item())
-      : [items()]
-    : [];
+  hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
   site: 'https://v2.pereiratechtalks.com',
@@ -108,5 +125,13 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    plugins: [
+      {
+        name: 'fetch-recent-event',
+        buildStart: async () => {
+          await fetchEventData();
+        },
+      },
+    ],
   },
 });
