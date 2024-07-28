@@ -8,6 +8,7 @@ import EventsLayout from '~/layouts/EventsLayout.astro';
 import Image from '~/components/common/Image.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
 import Steps from '~/components/widgets/Steps.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
@@ -52,6 +53,98 @@ const collaborators = [
     image: 'src/assets/images/people/melisa-escobar.png',
     name: 'Melisa Escobar Gutierrez',
     socialLink: 'https://www.linkedin.com/in/angelica-aguirre-castro-50abb5110/',
+  },
+];
+
+const partnerships = [
+  {
+    title: 'Oro',
+    hasRibbon: true,
+    ribbonTitle: 'Recomendado',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+      },
+      {
+        description: 'Lightning talk de 5 minutos.',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+      },
+      {
+        description: 'Stand en el evento.',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
+  },
+  {
+    title: 'Plata',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+      },
+      {
+        description: 'Lightning talk de 3 minutos.',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Stand en el evento.',
+        icon: 'tabler:x',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
+  },
+  {
+    title: 'Bronce',
+    items: [
+      {
+        description: 'Logo en el sitio web del evento.',
+      },
+      {
+        description: 'Agradecimiento post evento en redes sociales.',
+      },
+      {
+        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Lightning talk de 3 minutos.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Publicidad de la empresa en el evento.',
+        icon: 'tabler:x',
+      },
+      {
+        description: 'Stand en el evento.',
+        icon: 'tabler:x',
+      },
+    ],
+    callToAction: {
+      text: 'Contactar',
+      href: '#',
+    },
   },
 ];
 
@@ -223,14 +316,6 @@ const faqsList = [
     classes={{ container: 'max-w-3xl' }}
   />
 
-  <FAQs
-    id="faqs"
-    title="Preguntas Frecuentes (FAQ)"
-    subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
-    columns={1}
-    items={faqsList}
-  />
-
   <Brands id="speakers" title="Speakers" />
   <Brands
     title="Partnerships & Collaborations"
@@ -276,8 +361,17 @@ const faqsList = [
       },
     ]}
   />
+  <Pricing title="Partnership" prices={partnerships} />
 
   <Collaborators id="collaborators" collaborators={collaborators} />
+
+  <FAQs
+    id="faqs"
+    title="Preguntas Frecuentes (FAQ)"
+    subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
+    columns={1}
+    items={faqsList}
+  />
 
   <ContactUs
     id="inscription-form"
