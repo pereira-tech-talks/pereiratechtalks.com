@@ -12,6 +12,10 @@ import Pricing from '~/components/widgets/Pricing.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
+import '@fontsource/roboto';
+import '@fontsource/bebas-neue';
+import '~/assets/styles/pereira-tech-day.css';
+
 const metadata = {
   title:
     'Pereira Tech Talks — Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos temas de desarrollo e innovación tecnológica.',
@@ -246,7 +250,7 @@ const faqsList = [
         <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
       </div>
     </Fragment>
-    <Fragment slot="title"> Pereira Tech Day </Fragment>
+    <Fragment slot="title"> Pereira•Tech•Day </Fragment>
     <Fragment slot="subtitle">
       Un día de Tecnología, Python, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>
