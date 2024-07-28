@@ -16,13 +16,17 @@ const { metadata } = Astro.props;
 
 <Layout metadata={metadata}>
   <slot name="header">
-    <Header {...headerData} isSticky actions={[
-      {
-        text: 'Incribirse',
-        href: 'https://google.com',
-      },
-    ]}
-     position="right"/>
+    <Header
+      {...headerData}
+      isSticky
+      actions={[
+        {
+          text: 'Incribirse',
+          href: 'https://google.com',
+        },
+      ]}
+      position="right"
+    />
   </slot>
   <main>
     <slot />
