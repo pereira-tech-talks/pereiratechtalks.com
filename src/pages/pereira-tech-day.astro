@@ -4,11 +4,16 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
-import LandingLayout from '~/layouts/LandingLayout.astro';
-import { getPermalink } from '~/utils/permalinks';
+import EventsLayout from '~/layouts/EventsLayout.astro';
 import Image from '~/components/common/Image.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
+
+const metadata = {
+  title:
+    'Pereira Tech Talks — Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos temas de desarrollo e innovación tecnológica.',
+  ignoreTitleTemplate: true,
+};
 
 const collaborators = [
   {
@@ -134,7 +139,7 @@ const faqsList = [
 
 
 
-<LandingLayout>
+<EventsLayout metadata={metadata}>
   <Hero
     id="hero"
     tagline="Septiembre 21, 2024."
@@ -209,12 +214,13 @@ const faqsList = [
   </Content>
 
   <FAQs
+    id="faqs"
     title="Preguntas Frecuentes (FAQ)"
     subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
     columns={1}
     items={faqsList}
   />
-  <Brands title="Speakers" />
-  <Brands title="Our partners" tagline="gold" />
-  <Collaborators collaborators={collaborators} />
-</LandingLayout>
+  <Brands id="speakers" title="Speakers" />
+  <Brands id="partners" title="Our partners" tagline="gold" />
+  <Collaborators id="collaborators" collaborators={collaborators} />
+</EventsLayout>

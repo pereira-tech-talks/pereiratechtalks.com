@@ -49,6 +49,15 @@ export const headerData = {
   ],
 };
 
+export const eventsHeaderData = {
+  links: [
+    {
+      text: 'Meetups',
+      href: '/meetups',
+    }
+  ],
+};
+
 export const footerData = {
   socialLinks: [
     {
