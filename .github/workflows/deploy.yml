@@ -1,38 +1,50 @@
-name: Deploy to GitHub Pages
+name: Deploy changes into GitHub Pages
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches: [main]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
-  workflow_dispatch:
-
-# Allow this job to clone the repo and create a page deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
-        with:
-          node-version: '20.12.1'
-          package-manager: yarn
-
   deploy:
-    needs: build
+    name: 'Deploy'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    strategy:
+      matrix:
+        node: ['20']
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Step 1 - ⚙️ Setup GitHub Config
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Step 2 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Pereira Tech Talks"
+          git config user.email "pereiratechtalks@gmail.com"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - name: Step 3 - 📁 Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Step 4 - ⚙️ Install Dependencies
+        run: npm install
+      - name: Step 5 - Verify the existence of 'main_ghpages' branch
+        run: |
+          git checkout -b main_ghpages
+          git pull origin main_ghpages
+      - name: Step 6 - Push changes to main_ghpages
+        run: |
+          git push origin main_ghpages
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
