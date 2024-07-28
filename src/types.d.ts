@@ -178,7 +178,7 @@ export interface Testimonial {
   testimonial?: string;
   name?: string;
   job?: string;
-  image?: string | unknown;
+  image?: string;
 }
 
 export interface Input {
@@ -306,3 +306,14 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface Collaborator {
+  image: string;
+  name: string;
+  socialLink?: string;
+}
+
+export interface Collaborators extends Omit<Headline, 'classes'>, Widget {
+  icons?: Array<string>;
+  collaborators?: Array<Collaborator>;
+}

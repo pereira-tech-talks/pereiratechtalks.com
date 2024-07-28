@@ -1,0 +1,106 @@
+---
+import Layout from '~/layouts/PereiraTechDayLayout.astro';
+
+import Image from '~/components/common/Image.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const PereiraTechDayLogo = '~/assets/images/logos/logo-ptd-color';
+const PereiraTechDayLogoDark = '~/assets/images/logos/logo-ptd-blanco.svg';
+
+const PereiraTechDaySlogan = '~/assets/images/logos/slogan-ptd-color';
+const PereiraTechDaySloganDark = '~/assets/images/logos/slogan-ptd-blanco.svg';
+
+const metadata = {
+  title:
+    'Pereira Tech Day — El evento de tecnología mas esperado en pereira.',
+  ignoreTitleTemplate: true,
+};
+
+const collaborators = [
+  {
+    image: 'src/assets/images/people/carolina-gomez-trejos.jpg',
+    name: 'Carolina Gómez Trejos',
+    socialLink: 'https://www.linkedin.com/in/carolinagomezt/',
+  },
+  {
+    image: 'src/assets/images/people/jose-felipe-duarte.png',
+    name: 'Jose Felipe Duarte',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
+  },
+  {
+    image: '~/assets/images/people/stiven-cardona-monsalve.jpeg',
+    name: 'Stiven Cardona Monsalve',
+    socialLink: 'https://www.linkedin.com/in/stiven-cardona-monsalve',
+  },
+];
+
+const ponencias = [
+  {
+    title : "Lorem ipsum dolor sit amet",
+    name : "Lorem ipsum",
+    image : "~/assets/images/pereiratechtalks-team.jpg",
+    job : "Software Engineer"
+  },
+  {
+    title : "Lorem ipsum dolor sit amet",
+    name : "Lorem ipsum",
+    image : "~/assets/images/pereiratechtalks-team.jpg",
+    job : "Software Engineer"
+  },
+  {
+    title : "Lorem ipsum dolor sit amet",
+    name : "Lorem ipsum",
+    image : "~/assets/images/pereiratechtalks-team.jpg",
+    job : "Software Engineer"
+  },
+  {
+    title : "Lorem ipsum dolor sit amet",
+    name : "Lorem ipsum",
+    image : "~/assets/images/pereiratechtalks-team.jpg",
+    job : "Software Engineer"
+  },
+]
+
+const sponsorImages = [
+  {src : "~/assets/images/logos/logo-python-pereira.svg", alt : "logo"},
+  {src : "~/assets/images/logos/logo-python-pereira.svg", alt : "logo"},
+  {src : "~/assets/images/logos/logo-python-pereira.svg", alt : "logo"},
+]
+
+const eventsInformation = [
+{title : "1", description : "2"}, {title : "1", description : "2"}, {title : "1", description : "2"},{title : "1", description : "2"}
+]
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero background="index-background-ptd">
+    <Fragment slot="title" class="text-center">
+      <Image src={PereiraTechDayLogo} alt="Pereira Tech Day Logo" width={200} class="mx-auto hidden dark:block" />
+      <Image src={PereiraTechDaySlogan} alt="Pereira Tech Day Slogan" width={200} class="mx-auto hidden dark:block" />
+      <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Day Logo Dark Theme" width={200} class="mx-auto mb-5 dark:hidden" />
+      <Image src={PereiraTechDaySloganDark} alt="Pereira Tech Day Slogan Dark Theme" width={200} class="mx-auto  dark:hidden" />
+    </Fragment>
+  </Hero>
+
+  <!-- HighlightedPosts Widget ******* -->
+   <div class="divide-y divide-slate-400/25">
+    <!-- <div class="relative flex items-center gap-4 pt-12 animate-marqueeLeft whitespace-nowrap">
+        {sponsors.map()}
+    </div> -->
+    <div class="bg-sky-700/80 ">
+      <Brands title="Nuestros Sponsor" images={sponsorImages} />
+    </div>
+    <Features title='Lo que debes saber.' items={eventsInformation}/>
+    <div class="bg-teal-500">
+      <Testimonials title="Nuestras charlas" testimonials={ponencias}/>
+    </div>
+     <Collaborators title="Organizado por" collaborators={collaborators} />
+    </div>
+</Layout>
