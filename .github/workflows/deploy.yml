@@ -43,7 +43,14 @@ jobs:
         run: |
           git checkout -b main_ghpages
           git pull origin main_ghpages
-      - name: Step 6 - Push changes to main_ghpages
+      - name: Step 6 - Build static files
+        run: |
+          npm run build:ghpages
+      - name: Step 7 - Commit build changes
+        run: |
+          git add .
+          git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
+      - name: Step 8 - Push changes to main_ghpages
         run: |
           git push origin main_ghpages
         env:
