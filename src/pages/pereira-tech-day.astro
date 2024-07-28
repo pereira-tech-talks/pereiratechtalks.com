@@ -1,8 +1,11 @@
 ---
 import Brands from '~/components/widgets/Brands.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
 import LandingLayout from '~/layouts/LandingLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 const collaborators = [
   {
@@ -129,8 +132,73 @@ const faqsList = [
 
 
 <LandingLayout>
-  <Brands title="Speakers" />
-  <Brands title="Our partners" tagline="gold" />
+  <Hero
+    id="hero"
+    title="Sarah Johnson"
+    tagline="Personal Web Demo"
+    actions={[{ variant: 'primary', text: 'Hire me', href: getPermalink('/contact#form') }]}
+  >
+    <Fragment slot="subtitle">
+      I'm a Graphic Designer passionate about crafting visual stories. <br /> With 5 years of experience and a degree from
+      New York University's School of Design. I infuse vitality into brands and designs, transforming concepts into captivating
+      realities.
+    </Fragment>
+  </Hero>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    id="about"
+    columns={3}
+    items={[
+      {
+        icon: 'tabler:brand-dribbble',
+        callToAction: {
+          target: '_blank',
+          text: 'Dribbble',
+          href: '#',
+        },
+      },
+      {
+        icon: 'tabler:brand-behance',
+        callToAction: {
+          target: '_blank',
+          text: 'Behance',
+          href: '#',
+        },
+      },
+      {
+        icon: 'tabler:brand-pinterest',
+        callToAction: {
+          target: '_blank',
+          text: 'Pinterest',
+          href: '#',
+        },
+      },
+    ]}
+    image={{
+      src: 'src/assets/images/pereira-tech-day/about.jpg',
+      alt: 'Colorful Image',
+      loading: 'eager',
+    }}
+  >
+    <Fragment slot="content">
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Sobre Pereira Tech Day
+      </h2>
+      <p>
+        PyDay Pereira es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de uno de los lenguajes de programación con más crecimiento del momento: Python.
+      </p>
+      <br />
+      <p>
+        En este evento podrás asistir a charlas que tratan sobre herramientas, librerías, buenas prácticas y otros detalles relacionados con el lenguaje y su comunidad.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
 
   <FAQs
     title="Preguntas Frecuentes (FAQ)"
@@ -138,5 +206,7 @@ const faqsList = [
     columns={1}
     items={faqsList}
   />
+  <Brands title="Speakers" />
+  <Brands title="Our partners" tagline="gold" />
   <Collaborators collaborators={collaborators} />
 </LandingLayout>
