@@ -54,7 +54,7 @@ export const eventsHeaderData = {
     {
       text: 'Meetups',
       href: '/meetups',
-    }
+    },
   ],
 };
 

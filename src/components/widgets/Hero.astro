@@ -36,14 +36,7 @@ const {
       <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
       <div class="py-12 md:py-20">
         <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
-          {
-            logo && (
-              <p
-                class="text-base dark:text-blue-200 font-bold uppercase"
-                set:html={logo}
-              />
-            )
-          }
+          {logo && <p class="text-base dark:text-blue-200 font-bold uppercase" set:html={logo} />}
           {
             tagline && (
               <p
