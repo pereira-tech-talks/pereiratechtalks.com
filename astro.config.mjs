@@ -45,6 +45,7 @@ const whenExternalScripts = (items = []) =>
 
 export default defineConfig({
   site: 'https://v2.pereiratechtalks.com',
+  base: '/docs',
   output: 'static',
   telemetry: false,
   server: {
