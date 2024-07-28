@@ -63,8 +63,7 @@ const faqsList = [
   },
   {
     title: '¿El evento es gratuito?',
-    description:
-      "Si, el evento es totalmente gratuito.",
+    description: 'Si, el evento es totalmente gratuito.',
   },
   {
     title: '¿Cuantos dias dura el evento?',
@@ -72,8 +71,7 @@ const faqsList = [
   },
   {
     title: ' ¿Si no soy de la UTP puedo asistir?',
-    description:
-      'Si puedes asistir, este es un evento abierto a todo público interesado en aprender más sobre Python.',
+    description: 'Si puedes asistir, este es un evento abierto a todo público interesado en aprender más sobre Python.',
   },
   {
     title: '¿Cómo puede mi organización convertirse en patrocinador del evento?',
@@ -82,8 +80,7 @@ const faqsList = [
   },
   {
     title: '¿Qué temas se hablarán en el PyDay?',
-    description:
-      'Tendremos un día de Python, Data Science, Machine Learning, infraestructura y más!',
+    description: 'Tendremos un día de Python, Data Science, Machine Learning, infraestructura y más!',
   },
   {
     title: '¿El evento cuenta con alimentación garantizada?',
@@ -97,13 +94,11 @@ const faqsList = [
   },
   {
     title: '¿Recibiré un certificado de asistencia?',
-    description:
-      'Si, este será enviado vía correo electrónico días después del evento.',
+    description: 'Si, este será enviado vía correo electrónico días después del evento.',
   },
   {
     title: '¿Necesito llevar mi computador?',
-    description:
-      'No es necesario, aunque si quieres tomar apuntes lo puedes traer.',
+    description: 'No es necesario, aunque si quieres tomar apuntes lo puedes traer.',
   },
   {
     title: '¿El sitio es seguro?',
@@ -136,25 +131,18 @@ const faqsList = [
       En caso de alguna violación a los términos de este código de conducta por parte de los organizadores por favor contactar el organizador principal de la conferencia, Carolina Gómez Trejos(carolina9511@gmail.com)
     `,
   },
-]
+];
 ---
 
-
-
 <EventsLayout metadata={metadata}>
-  <Hero
-    id="hero"
-    tagline="Septiembre 21, 2024."
-  >
+  <Hero id="hero" tagline="Septiembre 21, 2024.">
     <Fragment slot="logo">
       <div class="text-center mb-8">
         <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto hidden dark:block" />
         <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
       </div>
     </Fragment>
-    <Fragment slot="title">
-      Pereira Tech Day
-    </Fragment>
+    <Fragment slot="title"> Pereira Tech Day </Fragment>
     <Fragment slot="subtitle">
       Un día de Tecnología, Python, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>
@@ -198,15 +186,15 @@ const faqsList = [
     }}
   >
     <Fragment slot="content">
-      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        Sobre Pereira Tech Day
-      </h2>
+      <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sobre Pereira Tech Day</h2>
       <p>
-        PyDay Pereira es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de uno de los lenguajes de programación con más crecimiento del momento: Python.
+        PyDay Pereira es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de uno
+        de los lenguajes de programación con más crecimiento del momento: Python.
       </p>
       <br />
       <p>
-        En este evento podrás asistir a charlas que tratan sobre herramientas, librerías, buenas prácticas y otros detalles relacionados con el lenguaje y su comunidad.
+        En este evento podrás asistir a charlas que tratan sobre herramientas, librerías, buenas prácticas y otros
+        detalles relacionados con el lenguaje y su comunidad.
       </p>
     </Fragment>
 
@@ -292,7 +280,7 @@ const faqsList = [
   <Collaborators id="collaborators" collaborators={collaborators} />
 
   <ContactUs
-    id="form"
+    id="inscription-form"
     title="Inscribirse"
     subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
     inputs={[
