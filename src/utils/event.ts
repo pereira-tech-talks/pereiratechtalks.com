@@ -3,18 +3,24 @@
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string) => {
+export const fetchEventsMeetup = async (status: string, page: number = 1) => {
   const payload = {
-    page: 1,
+    page: page,
     status: [status],
     group_urlname: 'pereira-tech-talks',
     'photo-host': 'secure',
     fields: 'featured_photo',
     desc: 'true',
   };
+
   const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
   const response = await fetch(`${meetUpURL}?${new URLSearchParams(payload).toString()}`);
   const data = await response.json();
+
+  if ('errors' in data) {
+    console.error(data.errors);
+    return [];
+  }
 
   return data;
 };

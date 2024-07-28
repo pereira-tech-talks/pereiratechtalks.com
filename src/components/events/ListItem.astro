@@ -1,0 +1,79 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+
+import type { Event } from '~/types';
+
+import { getFormattedDate } from '~/utils/utils';
+
+export interface Props {
+  event: Event;
+}
+
+const { event } = Astro.props;
+const image = event?.featured_photo?.photo_link;
+const link = event?.link;
+---
+
+<article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
+  {
+    image && (
+      <a class="relative block group" href={link ?? 'javascript:void(0)'}>
+        <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+          {image && (
+            <Image
+              src={image}
+              class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              width={900}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={event.name}
+              aspectRatio="16:9"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </div>
+      </a>
+    )
+  }
+  <div class="mt-2">
+    <header>
+      <div class="mb-1">
+        <span class="text-sm">
+          <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+          <time datetime={String(event.time)} class="inline-block">{getFormattedDate(event.time)}</time>
+          {
+            event.venue?.name && (
+              <>
+                {' '}
+                · <Icon name="tabler:location" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+                <span>{event.venue.name}</span>
+              </>
+            )
+          }
+          {
+            event.group?.name && (
+              <>
+                {' '}
+                · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
+                <span>{event.group.name}</span>
+              </>
+            )
+          }
+        </span>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300">
+        {
+          link ? (
+            <a class="hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200" href={link}>
+              {event.name}
+            </a>
+          ) : (
+            event.name
+          )
+        }
+      </h2>
+    </header>
+  </div>
+</article>

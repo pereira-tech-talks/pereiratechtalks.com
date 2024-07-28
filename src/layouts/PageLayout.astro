@@ -7,17 +7,17 @@ import Announcement from '~/components/widgets/Announcement.astro';
 import { headerData, footerData } from '~/navigation';
 
 import type { MetaData } from '~/types';
-
 export interface Props {
   metadata?: MetaData;
 }
 
 const { metadata } = Astro.props;
+import newEventData from '../data/announcementData.json';
 ---
 
 <Layout metadata={metadata}>
   <slot name="announcement">
-    <Announcement />
+    <Announcement event={newEventData} />
   </slot>
   <slot name="header">
     <Header {...headerData} isSticky showRssFeed showToggleTheme />
