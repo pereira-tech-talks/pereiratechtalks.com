@@ -46,7 +46,7 @@ const whenExternalScripts = (items = []) =>
 export default defineConfig({
   site: 'https://v2.pereiratechtalks.com',
   output: 'static',
-  base: '/docs',
+  base: '/',
   telemetry: false,
   server: {
     port: 4321,
