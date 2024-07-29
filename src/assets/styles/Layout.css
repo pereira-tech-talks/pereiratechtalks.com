@@ -1,0 +1,22 @@
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Fira Mono', monospace !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover,
+.aw-link-active {
+  text-decoration: underline !important;
+  text-underline-offset: 5px;
+}
