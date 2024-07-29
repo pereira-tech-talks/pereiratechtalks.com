@@ -39,11 +39,7 @@ jobs:
       - name: Step 5 - Verify the existence of 'ghpages' branch
         run: |
           git fetch origin
-          if git ls-remote --exit-code --heads origin ghpages; then
-            git checkout ghpages
-          else
-            git checkout -b ghpages
-          fi
+          git checkout -b ghpages
           git pull origin ghpages --rebase || true
       - name: Step 7 - Remove previous build
         run: |
