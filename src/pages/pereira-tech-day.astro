@@ -10,7 +10,6 @@ import ContactUs from '~/components/widgets/Contact.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
-const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
 import '@fontsource/roboto';
 import '@fontsource/bebas-neue';
@@ -243,11 +242,10 @@ const faqsList = [
 ---
 
 <EventsLayout metadata={metadata}>
-  <Hero id="hero" tagline="Septiembre 21, 2024.">
+  <Hero id="hero" tagline="Septiembre 21, 2024." background="background-intro-light dark:background-intro-dark">
     <Fragment slot="logo">
       <div class="text-center mb-8">
-        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto hidden dark:block" />
-        <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
+        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto" />
       </div>
     </Fragment>
     <Fragment slot="title"> Pereira•Tech•Day </Fragment>
@@ -261,6 +259,7 @@ const faqsList = [
   <Content
     id="about"
     columns={3}
+    bg=""
     items={[
       {
         icon: 'tabler:brand-dribbble',
@@ -378,7 +377,7 @@ const faqsList = [
   />
   <Pricing title="Partnership" prices={partnerships} />
 
-  <Collaborators id="collaborators" collaborators={collaborators} />
+  <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
 
   <FAQs
     id="faqs"
