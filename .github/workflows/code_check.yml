@@ -64,7 +64,7 @@ jobs:
       - name: Step 2 - 🧪🧪 Run prettier
         run: npm run prettier:check
 
-  tests:
+  validate_tests:
     needs: validate_linters_and_code_format
     name: 'Run tests'
     runs-on: ubuntu-latest
@@ -88,9 +88,9 @@ jobs:
       - name: Step 1 - 🧪 Run tests
         run: npm run test
 
-  build:
-    needs: validate_build
-    name: 'Run buiild'
+  validate_build:
+    needs: validate_tests
+    name: 'Run build'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
