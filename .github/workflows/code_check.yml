@@ -64,7 +64,7 @@ jobs:
       - name: Step 2 - 🧪🧪 Run prettier
         run: npm run prettier:check
 
-  tests:
+  validate_tests:
     needs: validate_linters_and_code_format
     name: 'Run tests'
     runs-on: ubuntu-latest
@@ -87,3 +87,27 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Step 1 - 🧪 Run tests
         run: npm run test
+
+  # validate_build:
+  #   needs: validate_tests
+  #   name: 'Run build'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.16.0'
+  #     - name: Step 0 - 📁 Cache node modules
+  #       id: cache-npm
+  #       uses: actions/cache@v4
+  #       env:
+  #         cache-name: cache-node-modules
+  #       with:
+  #         path: |
+  #           ~/.npm
+  #           node_modules
+  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-build-${{ env.cache-name }}-
+  #     - name: Step 1 - 🧪 Build project
+  #       run: npm run build

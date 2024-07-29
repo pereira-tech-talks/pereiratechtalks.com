@@ -21,7 +21,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20.16.0'
-      - name: Step 3 - 📁 Cache node modules
+      - name: Step 3 - Verify the existence of 'ghpages' branch
+        run: |
+          git fetch origin
+          git checkout -b ghpages
+          git pull origin ghpages --rebase || true
+      - name: Step 4 - Remove previous build
+        run: |
+          rm -rf docs
+      - name: Step 5 - 📁 Cache node modules
         id: cache-npm
         uses: actions/cache@v4
         env:
@@ -34,24 +42,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Step 4 - ⚙️ Install Dependencies
+        name: Step 6 - ⚙️ Install Dependencies
         run: npm install
-      - name: Step 5 - Verify the existence of 'ghpages' branch
-        run: |
-          git fetch origin
-          git checkout -b ghpages
-          git pull origin ghpages --rebase || true
-      - name: Step 7 - Remove previous build
-        run: |
-          rm -rf docs
-      - name: Step 8 - Build static files
+      - name: Step 7 - Build static files
         run: |
           npm run build:ghpages
-      - name: Step 9 - Commit build changes
+      - name: Step 8 - Commit build changes
         run: |
           git add .
           git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
-      - name: Step 10 - Push changes to ghpages
+      - name: Step 9 - Push changes to ghpages
         run: |
           git push origin ghpages
         env:
