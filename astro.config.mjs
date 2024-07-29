@@ -47,7 +47,7 @@ export default defineConfig({
   site: 'https://v2.pereiratechtalks.com',
   output: 'static',
   build: {
-    assets: 'assets'
+    assets: 'assets',
   },
   base: '/',
   telemetry: false,

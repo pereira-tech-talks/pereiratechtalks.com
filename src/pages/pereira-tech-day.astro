@@ -10,7 +10,6 @@ import ContactUs from '~/components/widgets/Contact.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
-const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
 import '@fontsource/bebas-neue';
 import '~/assets/styles/pereira-tech-day.css';
@@ -242,11 +241,10 @@ const faqsList = [
 ---
 
 <EventsLayout metadata={metadata}>
-  <Hero id="hero" tagline="Septiembre 21, 2024.">
+  <Hero id="hero" tagline="Septiembre 21, 2024." background="background-intro-light dark:background-intro-dark">
     <Fragment slot="logo">
       <div class="text-center mb-8">
-        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto hidden dark:block" />
-        <Image src={PereiraTechDayLogoDark} alt="Pereira Tech Talks" width={120} class="mx-auto dark:hidden" />
+        <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto" />
       </div>
     </Fragment>
     <Fragment slot="title"> Pereira•Tech•Day </Fragment>
@@ -260,6 +258,7 @@ const faqsList = [
   <Content
     id="about"
     columns={3}
+    bg=""
     items={[
       {
         icon: 'tabler:brand-dribbble',
@@ -295,8 +294,8 @@ const faqsList = [
     <Fragment slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sobre Pereira Tech Day</h2>
       <p>
-        PyDay Pereira es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de uno
-        de los lenguajes de programación con más crecimiento del momento: Python.
+        Pereira Tech Day es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de
+        uno de los lenguajes de programación con más crecimiento del momento: Python.
       </p>
       <br />
       <p>
@@ -377,7 +376,7 @@ const faqsList = [
   />
   <Pricing title="Partnership" prices={partnerships} />
 
-  <Collaborators id="collaborators" collaborators={collaborators} />
+  <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
 
   <FAQs
     id="faqs"

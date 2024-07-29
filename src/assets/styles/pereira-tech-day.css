@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 h1,
 h2,
 h3,
@@ -15,4 +23,14 @@ h6 {
 
 .event-subtitle {
   font-family: 'Roboto', sans-serif;
+}
+
+@layer utilities {
+  .background-intro-light {
+    background: linear-gradient(180deg, rgba(69, 90, 100, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  .background-intro-dark {
+    background: linear-gradient(180deg, rgba(69, 90, 100, 1) 0%, rgb(3, 6, 32, 1) 100%);
+  }
 }
