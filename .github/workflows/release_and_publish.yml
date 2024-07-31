@@ -1,0 +1,339 @@
+name: Release and Publish
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_pr_size_label:
+    if: github.event.pull_request.merged == true
+    name: 'Check PR Size Label'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Check pr size label
+        id: check_pr_size_label_step
+        env:
+          ENV_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
+          SIZE_LABELS: >-
+            "Size - XS","Size - S","Size - M","Size - L","Size - XL","Size - XXL"
+        run: |
+          IFS=',' read -ra SIZE_LABELS_ARR <<< "$SIZE_LABELS"
+          # Remove the quotes from SIZE_LABELS_ARR
+          SIZE_LABELS_ARR=("${SIZE_LABELS_ARR[@]//\"}")
+
+          # Get PR Labels
+          FOUND_LABELS_JSON=$(echo "$ENV_LABELS" | jq -r '.[] | .name')
+
+          readarray -t FOUND_LABELS <<<"$FOUND_LABELS_JSON"
+
+          echo "FOUND LABELS:"
+          printf '%s\n' "${FOUND_LABELS[@]}"
+
+          # Check if any of the labels in FOUND_LABELS is in SIZE_LABELS_ARR
+          SIZE_LABEL_FOUND=''
+          for found_label in "${FOUND_LABELS[@]}"; do
+            for size_label in "${SIZE_LABELS_ARR[@]}"; do
+              if [[ "$found_label" == "$size_label" ]]; then
+                SIZE_LABEL_FOUND=$found_label
+                echo "Label 'SIZE_LABEL_FOUND' found in SIZE_LABELS"
+              fi
+            done
+          done
+
+          SIZE_LABEL_FOUND_EMOJI="❓"
+          if [ "$SIZE_LABEL_FOUND" == "Size - XS" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟢"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - S" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟢"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - M" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟡"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - L" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🟠"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - XL" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🔴"
+          elif [ "$SIZE_LABEL_FOUND" == "Size - XXL" ]; then
+            SIZE_LABEL_FOUND_EMOJI="🔴"
+          fi
+          SIZE_LABEL_FOUND_RESULT="$SIZE_LABEL_FOUND_EMOJI $SIZE_LABEL_FOUND"
+          echo "size_label_found=$SIZE_LABEL_FOUND_RESULT" >> $GITHUB_OUTPUT
+
+    outputs:
+      size_label_found: ${{ steps.check_pr_size_label_step.outputs.size_label_found }}
+
+  notify_on_channel_start:
+    needs: check_pr_size_label
+    if: github.event.pull_request.merged == true
+    name: 'Notify on channel - Start'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Step 1 - 🔔 Send notification on channel
+        env:
+          SIZE_LABEL_FOUND: ${{ needs.check_pr_size_label.outputs.size_label_found }}
+        run: |
+          NOTIFICATION_MESSAGE="> *WorkFlow: <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|$GITHUB_WORKFLOW>*"$'\n'
+          NOTIFICATION_MESSAGE+="> *Repository:* <https://github.com/$GITHUB_REPOSITORY|$GITHUB_REPOSITORY>"$'\n'
+          NOTIFICATION_MESSAGE+="> *User Actor:* $GITHUB_ACTOR"$'\n\n'
+          NOTIFICATION_MESSAGE+="> *Pull request:* <https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }}|#${{github.event.pull_request.number}}>"$'\n'
+          PR_TITLE='${{ github.event.pull_request.title }}'
+          PR_BODY='${{ github.event.pull_request.body }}'
+          PR_BODY=$(echo $PR_BODY | sed 's/\r/\n/g')
+          NOTIFICATION_MESSAGE+="> *Pull request size label:* $SIZE_LABEL_FOUND"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request title:*"$'\n'
+          NOTIFICATION_MESSAGE+="> \`\`\`🚩 $PR_TITLE\`\`\`"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request body content:*"$'\n'
+          NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
+          NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
+          JSON_DATA=$(jq -n \
+            --arg text "$NOTIFICATION_MESSAGE" \
+            --arg chat_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
+            --arg message_thread_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
+            '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
+          curl --location 'https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage' \
+            --header 'Content-Type: application/json' \
+            --data "$JSON_DATA"
+
+  build_and_deploy:
+    needs: notify_on_channel_start
+    name: 'Build application bundle'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - ⚙️ Setup Actions
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '30'
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - name: Step 2 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Pereira Tech Talks"
+          git config user.email "pereiratechtalks@gmail.com"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+      - name: Step 3 - Verify the existence of 'ghpages' branch
+        run: |
+          git fetch origin
+          git checkout -b ghpages
+          git pull origin ghpages --rebase || true
+      - name: Step 4 - Remove previous build
+        run: |
+          rm -rf docs
+      - name: Step 5 - 📁 Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Step 6 - ⚙️ Install Dependencies
+        run: npm install
+      - name: Step 7 - Build static files
+        run: |
+          npm run build:ghpages
+          if [ ! -d "docs" ]; then
+            echo "⚠️ Error: dist folder does not exist."
+            exit 1
+          fi
+      - name: Step 8 - Commit build changes
+        run: |
+          git add .
+          git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
+      - name: Step 9 - Push changes to ghpages
+        run: |
+          git push origin ghpages
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+
+  release_and_publish:
+    needs: build_and_deploy
+    name: 'Release and Publish'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '30'
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+          registry-url: https://registry.npmjs.org/
+      - name: Step 0 - 📁 Cache node modules
+        uses: actions/cache@v4
+        id: cache-npm
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            dist
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Step 1 - 📁 Cache build dist
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-build-dist
+        with:
+          path: dist
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - name: Step 2 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Pereira Tech Talks"
+          git config user.email "pereiratechtalks@gmail.com"
+      - name: Step 3 - 📄 Set GitHub release content "BODY" env var
+        run: |
+          bash .github/scripts/get_github_release_log.sh
+          if [[ ! -f git_logs_output.txt ]]; then
+            echo "⚠️ No description found for release body content."
+            exit 1
+          fi
+      - name: Step 4 -🔄 Prepare release
+        run: |
+          npm run release
+          git push --follow-tags origin main
+      - name: Step 5 - 🏷️ Set GitHub release "TAG" env vars
+        run: |
+          GITHUB_RELEASE_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+          if [[ -z $GITHUB_RELEASE_TAG ]]; then
+            echo "⚠️ No release tag found."
+            exit 1
+          fi
+          echo "::set-env name=GITHUB_RELEASE_TAG::$GITHUB_RELEASE_TAG"
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      - name: Step 6 - 🚀 Publish GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          name: Release ${{ env.GITHUB_RELEASE_TAG }}
+          tag: ${{ env.GITHUB_RELEASE_TAG }}
+          bodyFile: git_logs_output.txt
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - name: Step 7 - 🚀🚀 Publish npm package
+        id: publish_npm_package
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "⚠️ Error: dist folder does not exist."
+            exit 1
+          fi
+          npm publish
+          # Set npm version as output for next steps
+          echo "package_version=$(npm pkg get version)" >> $GITHUB_OUTPUT
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Step 8 - 🗑️ Deleting source branch
+        run: |
+          PR_MERGED=$(jq --raw-output .pull_request.merged "$GITHUB_EVENT_PATH")
+          if [ "$PR_MERGED" = "true" ]; then
+            git push origin --delete "${{ github.event.pull_request.head.ref }}"
+          fi
+
+    outputs:
+      package_version: ${{ steps.publish_npm_package.outputs.package_version }}
+
+  cleanup_caches:
+    needs: release_and_publish
+    name: 'Cleanup caches'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - 🗑️ Trigger cleanup caches workflow
+        run: |
+          curl --location "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
+            --header "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+            --header "Content-Type: application/json" \
+            --data '{
+                "event_type": "cleanup_caches",
+                "client_payload": {}
+            }'
+
+  notify_on_channel_end:
+    needs:
+      [
+        check_pr_size_label,
+        build_and_deploy,
+        release_and_publish,
+        cleanup_caches,
+      ]
+    name: 'Notify on channel - End'
+    if: always() && github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Step 1 - 🔔 Send notification on channel
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+          SIZE_LABEL_FOUND: ${{ needs.check_pr_size_label.outputs.size_label_found }}
+        run: |
+          NOTIFICATION_MESSAGE="> *WorkFlow: <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|$GITHUB_WORKFLOW>*"$'\n'
+          NOTIFICATION_MESSAGE+="> *Repository:* <https://github.com/$GITHUB_REPOSITORY|$GITHUB_REPOSITORY>"$'\n'
+          NOTIFICATION_MESSAGE+="> *User Actor:* $GITHUB_ACTOR"$'\n'
+          PACKAGE_VERSION=$(echo "${NEEDS_JSON}" | jq -r ".release_and_publish.outputs.package_version")
+          if [ ! -z "$PACKAGE_VERSION" ]; then
+            NOTIFICATION_MESSAGE+="> *New Version:* $PACKAGE_VERSION"$'\n'
+          fi
+          NOTIFICATION_MESSAGE+=""$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request:* <https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }}|#${{github.event.pull_request.number}}>"$'\n'
+          PR_TITLE='${{ github.event.pull_request.title }}'
+          PR_BODY='${{ github.event.pull_request.body }}'
+          PR_BODY=$(echo $PR_BODY | sed 's/\r/\n/g')
+          NOTIFICATION_MESSAGE+="> *Pull request size label:* $SIZE_LABEL_FOUND"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request title:*"$'\n'
+          NOTIFICATION_MESSAGE+="> \`\`\`🚩 $PR_TITLE\`\`\`"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request body content:*"$'\n'
+          NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
+          NOTIFICATION_MESSAGE+="> *Jobs:*"$'\n'
+          INDEX=1
+          NEEDS_ORDER=("check_pr_size_label""build_and_deploy" "release_and_publish" "cleanup_caches")
+          DEPLOYMENT_SUCCESS="true"
+
+          for key in "${NEEDS_ORDER[@]}"; do
+            RESULT=$(echo "${NEEDS_JSON}" | jq -r ".${key}.result")
+            if [ "$RESULT" == "success" ]; then
+              EMOJI="✅"
+            elif [ "$RESULT" == "failure" ]; then
+              DEPLOYMENT_SUCCESS="false"
+              EMOJI="❌"
+            elif [ "$RESULT" == "skipped" ]; then
+              DEPLOYMENT_SUCCESS="false"
+              EMOJI="⏩"
+            else
+              DEPLOYMENT_SUCCESS="false"
+              EMOJI="❓"
+            fi
+            NOTIFICATION_MESSAGE+="> • *Job $INDEX:* $key $EMOJI"$'\n'
+            INDEX=$((INDEX+1))
+          done
+
+          if [ "$DEPLOYMENT_SUCCESS" == "true" ]; then
+            NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🚀 DEPLOYMENT SUCCESS*"$'\n\n'"$NOTIFICATION_MESSAGE"
+          else
+            NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - ${{ vars.USERS_TO_NOTIFY }} ⚠️ DEPLOYMENT FAILED*"$'\n\n'"$NOTIFICATION_MESSAGE"
+          fi
+
+          JSON_DATA=$(jq -n \
+            --arg text "$NOTIFICATION_MESSAGE" \
+            --arg chat_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
+            --arg message_thread_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
+            '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
+          curl --location 'https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage' \
+            --header 'Content-Type: application/json' \
+            --data "$JSON_DATA"
