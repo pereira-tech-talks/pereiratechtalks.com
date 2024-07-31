@@ -95,10 +95,10 @@ jobs:
           NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
-            --arg chat_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
-            --arg message_thread_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
+            --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
+            --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
-          curl --location 'https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage' \
+          curl --location "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
             --header 'Content-Type: application/json' \
             --data "$JSON_DATA"
 
@@ -325,9 +325,9 @@ jobs:
 
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
-            --arg chat_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
-            --arg message_thread_id "${{ vars.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
+            --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
+            --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
-          curl --location 'https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage' \
+          curl --location "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
             --header 'Content-Type: application/json' \
             --data "$JSON_DATA"
