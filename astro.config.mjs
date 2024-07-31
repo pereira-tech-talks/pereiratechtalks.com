@@ -114,6 +114,10 @@ export default defineConfig({
     // spotlightjs()
   ],
 
+  redirects: {
+    '/pereira-tech-day/codigo-conducta': '/codigo-conducta',
+  },
+
   image: {
     service: squooshImageService(),
   },
