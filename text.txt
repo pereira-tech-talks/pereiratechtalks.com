@@ -1,0 +1,1 @@
+Este es un *mensaje* de _prueba_ con [enlaces](https://ejemplo.com) y otros caracteres especiales (como estos): !@#$%^&*
