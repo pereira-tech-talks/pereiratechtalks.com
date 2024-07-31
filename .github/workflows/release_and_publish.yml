@@ -99,7 +99,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
@@ -152,7 +152,7 @@ jobs:
         run: |
           npm run build:ghpages
           if [ ! -d "docs" ]; then
-            echo "⚠️ Error: dist folder does not exist."
+            echo "⚠️ Error: docs folder does not exist."
             exit 1
           fi
       - name: Step 8 - Commit build changes
@@ -164,6 +164,9 @@ jobs:
           git push origin ghpages
         env:
           GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - name: Step 10 - Checkout 'main' branch
+        run: |
+          git checkout main
 
   release_and_publish:
     needs: build_and_deploy
@@ -232,19 +235,7 @@ jobs:
           tag: ${{ env.GITHUB_RELEASE_TAG }}
           bodyFile: git_logs_output.txt
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-      - name: Step 7 - 🚀🚀 Publish npm package
-        id: publish_npm_package
-        run: |
-          if [ ! -d "dist" ]; then
-            echo "⚠️ Error: dist folder does not exist."
-            exit 1
-          fi
-          npm publish
-          # Set npm version as output for next steps
-          echo "package_version=$(npm pkg get version)" >> $GITHUB_OUTPUT
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Step 8 - 🗑️ Deleting source branch
+      - name: Step 7 - 🗑️ Deleting source branch
         run: |
           PR_MERGED=$(jq --raw-output .pull_request.merged "$GITHUB_EVENT_PATH")
           if [ "$PR_MERGED" = "true" ]; then
@@ -335,7 +326,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
