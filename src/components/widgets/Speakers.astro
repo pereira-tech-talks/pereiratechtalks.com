@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+
+import type { Speakers as Props } from '~/types';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Image from '~/components/common/Image.astro';
+const {
+  title = '',
+  subtitle = '',
+  tagline = '',
+  speakers = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="grid grid-flow-row sm:grid-cols-3 grid-cols-1 gap-x-6 sm:gap-x-8">
+    {
+      speakers &&
+        speakers.map(
+          (speaker) =>
+            speaker && (
+              <div class="flex flex-col justify-center items-center col-span-1 my-2 lg:my-4 py-1 px-3">
+                <Image src={speaker.image} alt={speaker.name || ''} class="max-h-40 max-w-40 rounded-full" />
+                <span class="text-muted mt-1 dark:text-gray-400 text-md">{speaker.name}</span>
+                <div class="p-2.5 inline-flex items-center">
+                  {speaker.socialLinks &&
+                    speaker.socialLinks.map((socialLink) => (
+                      <a href={socialLink.href}>{<Icon name={socialLink.icon} class="w-7 h-7 mr-1" />}</a>
+                    ))}
+                </div>
+              </div>
+            )
+        )
+    }
+  </div>
+</WidgetWrapper>
