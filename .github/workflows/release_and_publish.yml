@@ -99,7 +99,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
@@ -335,7 +335,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
