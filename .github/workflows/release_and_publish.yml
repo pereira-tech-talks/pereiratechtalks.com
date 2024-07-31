@@ -93,7 +93,7 @@ jobs:
           NOTIFICATION_MESSAGE+="> *Pull request body content:*"$'\n'
           NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
           NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[#_\.|-]/\\\\&/g')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
@@ -321,7 +321,7 @@ jobs:
           else
             NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - ${{ vars.USERS_TO_NOTIFY }} ⚠️ DEPLOYMENT FAILED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           fi
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[#_\.|-]/\\\\&/g')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
