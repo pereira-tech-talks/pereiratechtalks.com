@@ -94,6 +94,7 @@ jobs:
           NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
           NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/#/\\\\#/g; s/_/\\\\_/g; s/\./\\\\./g;')
+          echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
             --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
@@ -321,6 +322,7 @@ jobs:
             NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - ${{ vars.USERS_TO_NOTIFY }} ⚠️ DEPLOYMENT FAILED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           fi
           NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/#/\\\\#/g; s/_/\\\\_/g; s/\./\\\\./g;')
+          echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
             --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
