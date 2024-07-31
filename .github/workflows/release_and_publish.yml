@@ -93,7 +93,7 @@ jobs:
           NOTIFICATION_MESSAGE+="> *Pull request body content:*"$'\n'
           NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
           NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g' | sed 's/#/\\\\#/g')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
@@ -101,11 +101,12 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: "$text",
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
             }')
+          echo $JSON_DATA
           curl --location "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
             --header 'Content-Type: application/json' \
             --data "$JSON_DATA"
@@ -321,7 +322,7 @@ jobs:
           else
             NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - ${{ vars.USERS_TO_NOTIFY }} ⚠️ DEPLOYMENT FAILED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           fi
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g' | sed 's/#/\\\\#/g')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[>()#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
@@ -329,7 +330,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: $text,
+              text: "$text",
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
