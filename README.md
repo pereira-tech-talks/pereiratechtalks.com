@@ -1,313 +1,108 @@
 # 🚀 Pereira Tech Talks.
 
-<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right"
-     alt="AstroWind Lighthouse Score" width="100" height="358">
+Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología.
 
-🌟 _Most *starred* & *forked* Astro theme in 2022 & 2023_. 🌟
+![Pereira Tech Talks Banner](readme-banner.png)
 
-**AstroWind** is a free and open-source template to make your website using **[Astro 4.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/)**. Ready to start a new project and designed taking into account web best practices.
+## 🌟 Acerca del Proyecto
 
-- ✅ **Production-ready** scores in **PageSpeed Insights** reports.
-- ✅ Integration with **Tailwind CSS** supporting **Dark mode** and **_RTL_**.
-- ✅ **Fast and SEO friendly blog** with automatic **RSS feed**, **MDX** support, **Categories & Tags**, **Social Share**, ...
-- ✅ **Image Optimization** (using new **Astro Assets** and **Unpic** for Universal image CDN).
-- ✅ Generation of **project sitemap** based on your routes.
-- ✅ **Open Graph tags** for social media sharing.
-- ✅ **Analytics** built-in Google Analytics, and Splitbee integration.
+Pereira Tech Talks es una iniciativa que busca fomentar el intercambio de ideas y experiencias en el mundo de la tecnología. Nuestra plataforma web es el punto de encuentro para nuestra comunidad, donde compartimos eventos, recursos y contenido valioso.
 
-<br>
+## 🤝 Cómo Contribuir
 
-<img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/screenshot-astrowind-1.png" alt="AstroWind Theme Screenshot">
+¡Nos encanta recibir contribuciones de la comunidad! Si quieres aportar, aquí tienes algunas formas de hacerlo:
 
-[![onWidget](https://custom-icon-badges.demolab.com/badge/made%20by%20-onWidget-556bf2?style=flat-square&logo=onwidget&logoColor=white&labelColor=101827)](https://onwidget.com)
-[![License](https://img.shields.io/github/license/onwidget/astrowind?style=flat-square&color=dddddd&labelColor=000000)](https://github.com/onwidget/astrowind/blob/main/LICENSE.md)
-[![Maintained](https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat-square)](https://github.com/onwidget)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/onwidget/astrowind#contributing)
-[![Known Vulnerabilities](https://snyk.io/test/github/onwidget/astrowind/badge.svg?style=flat-square)](https://snyk.io/test/github/onwidget/astrowind)
-[![Stars](https://img.shields.io/github/stars/onwidget/astrowind.svg?style=social&label=stars&maxAge=86400&color=ff69b4)](https://github.com/onwidget/astrowind)
-[![Forks](https://img.shields.io/github/forks/onwidget/astrowind.svg?style=social&label=forks&maxAge=86400&color=ff69b4)](https://github.com/onwidget/astrowind)
+1. **Reportar bugs**: Si encuentras algún error, por favor crea un issue detallando el problema.
+2. **Sugerir mejoras**: Tienes ideas para mejorar el sitio? Compártelas a través de los issues.
+3. **Enviar pull requests**: ¿Quieres agregar una nueva funcionalidad o corregir algo? ¡Genial! Sigue estos pasos:
+   - Haz fork del repositorio
+   - Crea una nueva rama (`git checkout -b feature__amazing_feature`)
+   - Haz commit de tus cambios (`git commit -m 'Add some Amazing Feature'`)
+   - Push a la rama (`git push origin feature__amazing_feature`)
+   - Abre un Pull Request
 
-<br>
+## 🛠 Configuración del Proyecto
 
-<details open>
-<summary>Table of Contents</summary>
+Puedes ejecutar el proyecto localmente de dos formas:
 
-- [Demo](#demo)
-- [Upcoming: AstroWind 2.0 – We Need Your Vision!](#-upcoming-astrowind-20--we-need-your-vision)
-- [Getting started](#getting-started)
-  - [Project structure](#project-structure)
-  - [Commands](#commands)
-  - [Configuration](#configuration)
-  - [Deploy](#deploy)
-- [Frequently Asked Questions](#frequently-asked-questions)
-- [Related Projects](#related-projects)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
-- [License](#license)
+### 1. Usando VSCode containers
 
-</details>
+#### Pre requisitos
 
-<br>
+- Instalar Docker: [Link](https://docs.docker.com/engine/install/)
+- Instalar Visual Studio Code: [Link](https://code.visualstudio.com/download)
+- Instalar "Dev Containers" plugin en Visual Studio Code: [Link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- Crear una carpeta ".devcontainer". Crearla como una copia de la carpeta ".devcontainer_example".
+- Una vez dentro de VSCode, podemos encontrar la opción para abrir en container todo el repositorio, usando el plugin "Dev Containers".
 
-## Demo
-
-📌 [https://astrowind.vercel.app/](https://astrowind.vercel.app/)
-
-<br>
-
-## 🔔 Upcoming: AstroWind 2.0 – We Need Your Vision!
-
-We're embarking on an exciting journey with **AstroWind 2.0**, and we want you to be a part of it! We're currently taking the first steps in developing this new version and your insights are invaluable. Join the discussion and share your feedback, ideas, and suggestions to help shape the future of **AstroWind**. Let's make **AstroWind 2.0** even better, together!
-
-[Share Your Feedback in Our Discussion!](https://github.com/onwidget/astrowind/discussions/392)
-
-<br>
-
-## Getting started
-
-**AstroWind** tries to give you quick access to creating a website using [Astro 4.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/). It's a free theme which focuses on simplicity, good practices and high performance.
-
-Very little vanilla javascript is used only to provide basic functionality so that each developer decides which framework (React, Vue, Svelte, Solid JS...) to use and how to approach their goals.
-
-In this version the template supports all the options in the `output` configuration, `static`, `hybrid` and `server`, but the blog only works with `prerender = true`. We are working on the next version and aim to make it fully compatible with SSR.
-
-### Project structure
-
-Inside **AstroWind** template, you'll see the following folders and files:
+- Finalmente una vez abierto el proyecto dentro del contenedor, podemos ir a la terminal e instalar dependencias y levantar el proyecto:
 
 ```
-/
-├── public/
-│   ├── _headers
-│   └── robots.txt
-├── src/
-│   ├── assets/
-│   │   ├── favicons/
-│   │   ├── images/
-│   │   └── styles/
-│   │       └── tailwind.css
-│   ├── components/
-│   │   ├── blog/
-│   │   ├── common/
-│   │   ├── ui/
-│   │   ├── widgets/
-│   │   │   ├── Header.astro
-│   │   │   └── ...
-│   │   ├── CustomStyles.astro
-│   │   ├── Favicons.astro
-│   │   └── Logo.astro
-│   ├── content/
-│   │   ├── post/
-│   │   │   ├── post-slug-1.md
-│   │   │   ├── post-slug-2.mdx
-│   │   │   └── ...
-│   │   └-- config.ts
-│   ├── layouts/
-│   │   ├── Layout.astro
-│   │   ├── MarkdownLayout.astro
-│   │   └── PageLayout.astro
-│   ├── pages/
-│   │   ├── [...blog]/
-│   │   │   ├── [category]/
-│   │   │   ├── [tag]/
-│   │   │   ├── [...page].astro
-│   │   │   └── index.astro
-│   │   ├── index.astro
-│   │   ├── 404.astro
-│   │   ├-- rss.xml.ts
-│   │   └── ...
-│   ├── utils/
-│   ├── config.yaml
-│   └── navigation.js
-├── package.json
-├── astro.config.mjs
-└── ...
+npm install
+npm run dev
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 2. Instalando nodejs y npm localmente
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Instalar NodeJs: [Link](https://nodejs.org)
+- Instalar npm: [Link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-Any static assets, like images, can be placed in the `public/` directory if they do not require any transformation or in the `assets/` directory if they are imported directly.
+- Navegar al folder del proyecto en una terminal y ejecutar:
 
-[![Edit AstroWind on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://githubbox.com/onwidget/astrowind/tree/main) [![Open in Gitpod](https://svgshare.com/i/xdi.svg)](https://gitpod.io/?on=gitpod#https://github.com/onwidget/astrowind) [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/onwidget/astrowind)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file `README.md`. Update `src/config.yaml` and contents. Have fun!
-
-<br>
-
-### Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command               | Action                                             |
-| :-------------------- | :------------------------------------------------- |
-| `npm install`         | Installs dependencies                              |
-| `npm run dev`         | Starts local dev server at `localhost:3000`        |
-| `npm run build`       | Build your production site to `./dist/`            |
-| `npm run preview`     | Preview your build locally, before deploying       |
-| `npm run format`      | Format codes with Prettier                         |
-| `npm run lint:eslint` | Run Eslint                                         |
-| `npm run astro ...`   | Run CLI commands like `astro add`, `astro preview` |
-
-<br>
-
-### Configuration
-
-Basic configuration file: `./src/config.yaml`
-
-```yaml
-site:
-  name: 'Example'
-  site: 'https://example.com'
-  base: '/' # Change this if you need to deploy to Github Pages, for example
-  trailingSlash: false # Generate permalinks with or without "/" at the end
-
-  googleSiteVerificationId: false # Or some value,
-
-# Default SEO metadata
-metadata:
-  title:
-    default: 'Example'
-    template: '%s — Example'
-  description: 'This is the default meta description of Example website'
-  robots:
-    index: true
-    follow: true
-  openGraph:
-    site_name: 'Example'
-    images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
-    type: website
-  twitter:
-    handle: '@twitter_user'
-    site: '@twitter_user'
-    cardType: summary_large_image
-
-i18n:
-  language: en
-  textDirection: ltr
-
-apps:
-  blog:
-    isEnabled: true # If the blog will be enabled
-    postsPerPage: 6 # Number of posts per page
-
-    post:
-      isEnabled: true
-      permalink: '/blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
-      robots:
-        index: true
-
-    list:
-      isEnabled: true
-      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
-      robots:
-        index: true
-
-    category:
-      isEnabled: true
-      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
-      robots:
-        index: true
-
-    tag:
-      isEnabled: true
-      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
-      robots:
-        index: false
-
-    isRelatedPostsEnabled: true # If a widget with related posts is to be displayed below each post
-    relatedPostsCount: 4 # Number of related posts to display
-
-analytics:
-  vendors:
-    googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
-
-ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
-
-  tokens:
-    default:
-      fonts:
-        sans: InterVariable
-        serif: InterVariable
-        heading: InterVariable
-      colors:
-        default: rgb(16 16 16)
-        heading: rgb(0 0 0)
-        muted: rgb(16 16 16 / 66%)
-        bgPage: rgb(255 255 255)
-        primary: rgb(1 97 239)
-        secondary: rgb(1 84 207)
-        accent: rgb(109 40 217)
-    dark:
-      fonts: {}
-      colors:
-        default: rgb(229 236 246)
-        heading: rgb(247, 248, 248)
-        muted: rgb(229 236 246 / 66%)
-        bgPage: rgb(3 6 32)
-        primary: rgb(1 97 239)
-        secondary: rgb(1 84 207)
-        accent: rgb(109 40 217)
+```
+npm install
+npm run dev
 ```
 
-<br>
+## Comandos para testing y mantenibilidad
 
-### Deploy
+A continuación encontrarás algunos comandos importantes a la hora de contribuir al proyecto, que debes ejecutar antes de subir nuevos cambios al proyecto:
 
-#### Deploy to production (manual)
+Verificar linters:
 
-You can create an optimized production build with:
-
-```shell
-npm run build
+```
+npm run eslint:fix
 ```
 
-Now, your website is ready to be deployed. All generated files are located at
-`dist` folder, which you can deploy the folder to any hosting service you
-prefer.
+Verificar formato de código:
 
-#### Deploy to Netlify
+```
+npm run prettier:fix
+```
 
-Clone this repository on own GitHub account and deploy to Netlify:
+Validar pruebas:
 
-[![Netlify Deploy button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/onwidget/astrowind)
+```
+npm run test
+```
 
-#### Deploy to Vercel
+## 📜 Lineamientos de Contribución
 
-Clone this repository on own GitHub account and deploy to Vercel:
+Para mantener la calidad y consistencia del proyecto, te pedimos que sigas estos lineamientos:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonwidget%2Fastrowind)
+1. Sigue las convenciones de código existentes en el proyecto.
+2. Asegúrate de que tu código esté bien documentado.
+3. Escribe pruebas para las nuevas funcionalidades cuando sea posible.
+4. Mantén tus pull requests enfocados en una sola funcionalidad o corrección.
 
-<br>
+## 📝 Licencia
 
-## Frequently Asked Questions
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-- Why?
--
--
+## 📞 Contacto
 
-<br>
+Si tienes preguntas o sugerencias, no dudes en unirte a nuestra comunidad en telegram y seguirnos en nuestras diferentes redes sociales:
 
-## Related projects
+- [Comunidad en Telegram](https://t.me/PerTechTalks)
+- [Comunidad en Whatsapp](https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U)
+- [Website](https://www.pereiratechtalks.com/)
+- [X - @PerTechTalks](https://x.com/pertechtalks)
+- [Instagram](https://www.instagram.com/pertechtalks)
+- [Facebook](https://www.facebook.com/PerTechTalks)
+- [LinkedIn](https://www.linkedin.com/company/35508463/)
+- [Linktr](https://linktr.ee/pertechtalks)
+- Email: pereiratechtalks@gmail.com
 
-- [TailNext](https://tailnext.vercel.app/) - Free template using Next.js 14 and Tailwind CSS with the new App Router.
-- [Qwind](https://qwind.pages.dev/) - Free template to make your website using Qwik + Tailwind CSS.
+---
 
-## Contributing
-
-If you have any idea, suggestions or find any bugs, feel free to open a discussion, an issue or create a pull request.
-That would be very useful for all of us and we would be happy to listen and take action.
-
-## Acknowledgements
-
-Initially created by [onWidget](https://onwidget.com) and maintained by a community of [contributors](https://github.com/onwidget/astrowind/graphs/contributors).
-
-## License
-
-**Pereira Tech Talks** is licensed under the MIT license — see the [LICENSE](./LICENSE.md) file for details.
+¡Gracias por ser parte de Pereira Tech Talks! Juntos estamos construyendo una comunidad tecnológica más fuerte y colaborativa.

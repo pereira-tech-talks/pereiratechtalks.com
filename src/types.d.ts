@@ -119,6 +119,17 @@ export interface Collaborator {
   socialLink?: string;
 }
 
+export interface Speaker {
+  image: string;
+  name: string;
+  socialLinks?: Array<SocialIconLink>;
+}
+
+export interface SocialIconLink {
+  icon: string;
+  href: string;
+}
+
 export interface Video {
   src: string;
   type?: string;
@@ -272,6 +283,11 @@ export interface Brands extends Omit<Headline, 'classes'>, Widget {
 export interface Collaborators extends Omit<Headline, 'classes'>, Widget {
   icons?: Array<string>;
   collaborators?: Array<Collaborator>;
+}
+
+export interface Speakers extends Omit<Headline, 'classes'>, Widget {
+  icons?: Array<string>;
+  speakers?: Array<Speaker>;
 }
 
 export interface Features extends Omit<Headline, 'classes'>, Widget {
