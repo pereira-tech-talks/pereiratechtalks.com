@@ -2,6 +2,8 @@
 
 Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología.
 
+![Pereira Tech Talks Banner](readme-banner.png)
+
 ## 🌟 Acerca del Proyecto
 
 Pereira Tech Talks es una iniciativa que busca fomentar el intercambio de ideas y experiencias en el mundo de la tecnología. Nuestra plataforma web es el punto de encuentro para nuestra comunidad, donde compartimos eventos, recursos y contenido valioso.
