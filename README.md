@@ -2,7 +2,7 @@
 
 Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología.
 
-![Pereira Tech Talks Banner](readme_banner.png)
+![Pereira Tech Talks Banner](readme-banner.png)
 
 ## 🌟 Acerca del Proyecto
 
