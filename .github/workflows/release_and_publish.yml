@@ -99,7 +99,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
+              text: ($text | gsub("([_*\\[\\]()~`>#+=|{}.!-])"; "\\$1") | gsub("https:\\\/\\\/"; "https://")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
@@ -235,12 +235,12 @@ jobs:
           tag: ${{ env.GITHUB_RELEASE_TAG }}
           bodyFile: git_logs_output.txt
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-      - name: Step 7 - 🗑️ Deleting source branch
-        run: |
-          PR_MERGED=$(jq --raw-output .pull_request.merged "$GITHUB_EVENT_PATH")
-          if [ "$PR_MERGED" = "true" ]; then
-            git push origin --delete "${{ github.event.pull_request.head.ref }}"
-          fi
+      # - name: Step 7 - 🗑️ Deleting source branch
+      #   run: |
+      #     PR_MERGED=$(jq --raw-output .pull_request.merged "$GITHUB_EVENT_PATH")
+      #     if [ "$PR_MERGED" = "true" ]; then
+      #       git push origin --delete "${{ github.event.pull_request.head.ref }}"
+      #     fi
 
     outputs:
       package_version: ${{ steps.publish_npm_package.outputs.package_version }}
@@ -326,7 +326,7 @@ jobs:
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
             '{
               chat_id: $chat_id | tonumber,
-              text: ($text | gsub("([_*\\[\\]()~`>#+\\-=|{}.!])"; "\\\\1")),
+              text: ($text | gsub("([_*\\[\\]()~`>#+=|{}.!-])"; "\\$1") | gsub("https:\\\/\\\/"; "https://")),
               message_thread_id: $message_thread_id | tonumber,
               parse_mode: "MarkdownV2",
               disable_web_page_preview: true
