@@ -4,21 +4,21 @@ site:
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId: null
 
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Pereira Tech Talks
+    template: '%s — Pereira Tech Talks'
+  description: "Pereira Tech Talks es una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología en Pereira, Colombia. Únete a nosotros para eventos, charlas y networking en el mundo tech."
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Pereira Tech Talks
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/index-bg.jpg'
         width: 1200
         height: 628
     type: website
@@ -66,7 +66,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: "G-S5VJG0FMEE"
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

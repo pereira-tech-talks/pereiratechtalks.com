@@ -115,6 +115,12 @@ jobs:
     needs: notify_on_channel_start
     name: 'Build application bundle'
     runs-on: ubuntu-latest
+    environment: live
+    env:
+      # Sentry
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
     steps:
       - name: Step 1 - ⚙️ Setup Actions
         uses: actions/checkout@v4
