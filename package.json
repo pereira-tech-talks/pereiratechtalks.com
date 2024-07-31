@@ -17,7 +17,8 @@
     "prettier:check": "prettier --c --ignore-path .gitignore '**/*.{astro,svelte,css,html,js,ts,md,yaml,yml}' '!package.json' '!**/devcontainer.json'",
     "prettier:fix": "prettier --write --ignore-path .gitignore '**/*.{astro,svelte,css,html,js,ts,md,yaml,yml}' '!package.json' '!**/devcontainer.json'",
     "ncu:check": "ncu",
-    "ncu:upgrade": "ncu -u"
+    "ncu:upgrade": "ncu -u",
+    "release": "npm version patch -m \"[🤖 DailyBot] New release to v%s launched 🚀\""
   },
   "dependencies": {
     "@astrojs/rss": "4.0.7",
