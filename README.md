@@ -34,11 +34,11 @@ Puedes ejecutar el proyecto localmente de dos formas:
 - Una vez dentro de VSCode, podemos encontrar la opción para abrir en container todo el repositorio, usando el plugin "Dev Containers".
 
 - Finalmente una vez abierto el proyecto dentro del contenedor, podemos ir a la terminal e instalar dependencias y levantar el proyecto:
+
 ```
 npm install
 npm run dev
 ```
-
 
 ### 2. Instalando nodejs y npm localmente
 
@@ -46,6 +46,7 @@ npm run dev
 - Instalar npm: [Link](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 - Navegar al folder del proyecto en una terminal y ejecutar:
+
 ```
 npm install
 npm run dev
@@ -56,26 +57,28 @@ npm run dev
 A continuación encontrarás algunos comandos importantes a la hora de contribuir al proyecto, que debes ejecutar antes de subir nuevos cambios al proyecto:
 
 Verificar linters:
+
 ```
 npm run eslint:fix
 ```
 
 Verificar formato de código:
+
 ```
 npm run prettier:fix
 ```
 
 Validar pruebas:
+
 ```
 npm run test
 ```
-
 
 ## 📜 Lineamientos de Contribución
 
 Para mantener la calidad y consistencia del proyecto, te pedimos que sigas estos lineamientos:
 
-1. Sigue las convenciones de  código existentes en el proyecto.
+1. Sigue las convenciones de código existentes en el proyecto.
 2. Asegúrate de que tu código esté bien documentado.
 3. Escribe pruebas para las nuevas funcionalidades cuando sea posible.
 4. Mantén tus pull requests enfocados en una sola funcionalidad o corrección.
