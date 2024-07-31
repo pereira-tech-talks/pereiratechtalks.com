@@ -11,7 +11,7 @@ metadata:
   title:
     default: Pereira Tech Talks
     template: '%s — Pereira Tech Talks'
-  description: "Pereira Tech Talks es una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología en Pereira, Colombia. Únete a nosotros para eventos, charlas y networking en el mundo tech."
+  description: 'Pereira Tech Talks es una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología en Pereira, Colombia. Únete a nosotros para eventos, charlas y networking en el mundo tech.'
   robots:
     index: true
     follow: true
@@ -66,7 +66,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: "G-S5VJG0FMEE"
+      id: 'G-S5VJG0FMEE'
 
 ui:
   theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
