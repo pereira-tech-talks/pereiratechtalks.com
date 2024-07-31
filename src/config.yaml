@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Pereira Tech Talks
+  site: 'https://www.pereiratechtalks.com'
   base: '/'
   trailingSlash: false
 
