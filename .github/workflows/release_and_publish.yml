@@ -80,10 +80,10 @@ jobs:
         env:
           SIZE_LABEL_FOUND: ${{ needs.check_pr_size_label.outputs.size_label_found }}
         run: |
-          NOTIFICATION_MESSAGE="> *WorkFlow: <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|$GITHUB_WORKFLOW>*"$'\n'
-          NOTIFICATION_MESSAGE+="> *Repository:* <https://github.com/$GITHUB_REPOSITORY|$GITHUB_REPOSITORY>"$'\n'
+          NOTIFICATION_MESSAGE="> *WorkFlow: [$GITHUB_WORKFLOW](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)*"$'\n'
+          NOTIFICATION_MESSAGE+="> *Repository:* [$GITHUB_REPOSITORY](https://github.com/$GITHUB_REPOSITORY)"$'\n'
           NOTIFICATION_MESSAGE+="> *User Actor:* $GITHUB_ACTOR"$'\n\n'
-          NOTIFICATION_MESSAGE+="> *Pull request:* <https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }}|#${{github.event.pull_request.number}}>"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request:* [#${{github.event.pull_request.number}}](https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }})"$'\n'
           PR_TITLE='${{ github.event.pull_request.title }}'
           PR_BODY='${{ github.event.pull_request.body }}'
           PR_BODY=$(echo $PR_BODY | sed 's/\r/\n/g')
@@ -93,7 +93,7 @@ jobs:
           NOTIFICATION_MESSAGE+="> *Pull request body content:*"$'\n'
           NOTIFICATION_MESSAGE+="> \`\`\`$(echo $PR_BODY | sed 's/⬆️/\n⬆️/g')\`\`\`"$'\n\n'
           NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - 🏁 DEPLOYMENT STARTED*"$'\n\n'"$NOTIFICATION_MESSAGE"
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/#/\\\\#/g; s/_/\\\\_/g; s/\./\\\\./g;')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
@@ -276,15 +276,15 @@ jobs:
           NEEDS_JSON: ${{ toJSON(needs) }}
           SIZE_LABEL_FOUND: ${{ needs.check_pr_size_label.outputs.size_label_found }}
         run: |
-          NOTIFICATION_MESSAGE="> *WorkFlow: <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|$GITHUB_WORKFLOW>*"$'\n'
-          NOTIFICATION_MESSAGE+="> *Repository:* <https://github.com/$GITHUB_REPOSITORY|$GITHUB_REPOSITORY>"$'\n'
+          NOTIFICATION_MESSAGE="> *WorkFlow: [$GITHUB_WORKFLOW](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)*"$'\n'
+          NOTIFICATION_MESSAGE+="> *Repository:* [$GITHUB_REPOSITORY]https://github.com/$GITHUB_REPOSITORY)"$'\n'
           NOTIFICATION_MESSAGE+="> *User Actor:* $GITHUB_ACTOR"$'\n'
           PACKAGE_VERSION=$(echo "${NEEDS_JSON}" | jq -r ".release_and_publish.outputs.package_version")
           if [ ! -z "$PACKAGE_VERSION" ]; then
             NOTIFICATION_MESSAGE+="> *New Version:* $PACKAGE_VERSION"$'\n'
           fi
           NOTIFICATION_MESSAGE+=""$'\n'
-          NOTIFICATION_MESSAGE+="> *Pull request:* <https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }}|#${{github.event.pull_request.number}}>"$'\n'
+          NOTIFICATION_MESSAGE+="> *Pull request:* [#${{github.event.pull_request.number}}](https://github.com/$GITHUB_REPOSITORY/pull/${{ github.event.pull_request.number }})"$'\n'
           PR_TITLE='${{ github.event.pull_request.title }}'
           PR_BODY='${{ github.event.pull_request.body }}'
           PR_BODY=$(echo $PR_BODY | sed 's/\r/\n/g')
@@ -321,7 +321,7 @@ jobs:
           else
             NOTIFICATION_MESSAGE="*👉 #$GITHUB_RUN_NUMBER ($GITHUB_REF_NAME) - ${{ vars.USERS_TO_NOTIFY }} ⚠️ DEPLOYMENT FAILED*"$'\n\n'"$NOTIFICATION_MESSAGE"
           fi
-          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/#/\\\\#/g; s/_/\\\\_/g; s/\./\\\\./g;')
+          NOTIFICATION_MESSAGE=$(echo $NOTIFICATION_MESSAGE | sed 's/[#_\.|-]/\\\\&/g')
           echo $NOTIFICATION_MESSAGE
           JSON_DATA=$(jq -n \
             --arg text "$NOTIFICATION_MESSAGE" \
