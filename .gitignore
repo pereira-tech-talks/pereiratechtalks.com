@@ -27,3 +27,4 @@ pnpm-lock.yaml
 .env
 .devcontainer
 src/data/*
+notification_release_script.sh
