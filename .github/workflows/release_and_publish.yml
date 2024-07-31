@@ -264,13 +264,7 @@ jobs:
             }'
 
   notify_on_channel_end:
-    needs:
-      [
-        check_pr_size_label,
-        build_and_deploy,
-        release_and_publish,
-        cleanup_caches,
-      ]
+    needs: [check_pr_size_label, build_and_deploy, release_and_publish, cleanup_caches]
     name: 'Notify on channel - End'
     if: always() && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
