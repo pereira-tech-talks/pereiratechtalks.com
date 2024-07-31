@@ -97,7 +97,13 @@ jobs:
             --arg text "$NOTIFICATION_MESSAGE" \
             --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
-            '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
+            '{
+              chat_id: $chat_id | tonumber,
+              text: $text,
+              message_thread_id: $message_thread_id | tonumber,
+              parse_mode: "MarkdownV2",
+              disable_web_page_preview: true
+            }')
           curl --location "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
             --header 'Content-Type: application/json' \
             --data "$JSON_DATA"
@@ -327,7 +333,13 @@ jobs:
             --arg text "$NOTIFICATION_MESSAGE" \
             --arg chat_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_CHANNEL_ID }}" \
             --arg message_thread_id "${{ secrets.PERTECHTALKS_DEPLOY_NOTIFICATION_THREAD_ID }}" \
-            '{chat_id: $chat_id | tonumber, text: $text, message_thread_id: $message_thread_id | tonumber}')
+            '{
+              chat_id: $chat_id | tonumber,
+              text: $text,
+              message_thread_id: $message_thread_id | tonumber,
+              parse_mode: "MarkdownV2",
+              disable_web_page_preview: true
+            }')
           curl --location "https://api.telegram.org/bot${{secrets.TELEGRAM_BOT_TOKEN}}/sendMessage" \
             --header 'Content-Type: application/json' \
             --data "$JSON_DATA"
