@@ -15,12 +15,12 @@ metadata:
   robots:
     index: true
     follow: true
-  openGraph:
-    site_name: Pereira Tech Talks
-    images:
-      - url: '~/assets/images/index-bg-copy.jpg'
-        width: 1200
-        height: 628
+    # openGraph:
+    #   site_name: Pereira Tech Talks
+    #   images:
+    #     - url: '~/assets/images/index-bg-copy.jpg'
+    #       width: 1200
+    #       height: 628
     type: website
   twitter:
     handle: '@onwidget'
