@@ -1,4 +1,4 @@
 .index-background {
-  background-image: url(../images/index-bg.jpg);
+  background-image: url(~/assets/images/index-bg.jpg);
   background-size: cover;
 }
