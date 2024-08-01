@@ -1,5 +1,10 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import { getHomePermalink } from '~/utils/permalinks';
+
+const PereiraTechTalksLogo = '~/assets/images/logos/per-tech-talks.png';
+const PereiraTechTalksLogoDark = '~/assets/images/logos/per-tech-talks-dark.svg';
 
 interface Link {
   text?: string;
@@ -21,12 +26,59 @@ export interface Props {
   theme?: string;
 }
 
-const { socialLinks = [], footNote = '', theme = 'light' } = Astro.props;
+const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 ---
 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300">
+    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
+      <div class="col-span-12 lg:col-span-4">
+        <div class="mb-2">
+          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>
+            <Image src={PereiraTechTalksLogo} alt="Pereira Tech Talks" width={200} class="mx-auto hidden dark:block" />
+            <Image src={PereiraTechTalksLogoDark} alt="Pereira Tech Talks" width={200} class="mx-auto dark:hidden" />
+          </a>
+        </div>
+        <div class="text-sm text-muted flex gap-1">
+          {
+            secondaryLinks.map(({ text, href }, index) => (
+              <>
+                {index !== 0 ? ' · ' : ''}
+                <a
+                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
+                  href={href}
+                  set:html={text}
+                />
+              </>
+            ))
+          }
+        </div>
+      </div>
+      {
+        links.map(({ title, links }) => (
+          <div class="col-span-6 md:col-span-3 lg:col-span-2">
+            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
+            {links && Array.isArray(links) && links.length > 0 && (
+              <ul class="text-sm">
+                {links.map(({ text, href, ariaLabel }) => (
+                  <li class="mb-2">
+                    <a
+                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      href={href}
+                      aria-label={ariaLabel}
+                      target="_blank"
+                    >
+                      <Fragment set:html={text} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
     <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
       {
         socialLinks?.length ? (
