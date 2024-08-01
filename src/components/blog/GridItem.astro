@@ -16,7 +16,7 @@ const { post } = Astro.props;
 const image = await findImage(post.image);
 ---
 
-<article class="mb-6 transition">
+<article class="mb-6 transition max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8">
   <div
     class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900"
   >
