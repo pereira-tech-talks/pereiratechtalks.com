@@ -69,7 +69,7 @@ analytics:
       id: 'G-S5VJG0FMEE'
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'dark'
 
   tokens:
     default:

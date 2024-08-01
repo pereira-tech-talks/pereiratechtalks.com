@@ -1,4 +1,4 @@
-import { getBlogPermalink, getAsset } from './utils/permalinks';
+import { getBlogPermalink, getAsset, getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -89,9 +89,28 @@ export const footerData = {
     },
   ],
   footNote: `
-    <span class="w-5 h-5 md:w-6 md:h-6 md:-mt-0.5 bg-cover mr-1.5 rtl:mr-0 rtl:ml-1.5 float-left rtl:float-right rounded-sm"></span>
-    Made with ♥️  by <a href="https://github.com/orgs/pereira-tech-talks/people" target="_blank" rel="noopener noreferrer"><b>Pereira Tech Talks</b></a> Team · All rights reserved.
+    Based on <a href="https://github.com/onwidget/astrowind" target="_blank" rel="noopener noreferrer"><b>AstroWind</b></a> · Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer"><b>GitHub</b></a> · Made with ♥️  by <a href="https://github.com/orgs/pereira-tech-talks/people" target="_blank" rel="noopener noreferrer"><b>Pereira Tech Talks</b></a> Team · All rights reserved.
   `,
-  links: [],
-  secondaryLinks: [],
+  links: [
+    {
+      title: 'Comunidad',
+      links: [
+        { text: 'PereiraJS', href: 'https://pereira.js.org/' },
+        { text: 'JointDev', href: 'https://jointdevweb.firebaseapp.com/' },
+        { text: 'Manizales Tech Talks', href: 'https://www.meetup.com/es/manizalestechtalks/' },
+        { text: 'Quindio Tech', href: 'https://www.meetup.com/es-ES/quindio-tech/' },
+      ],
+    },
+    {
+      title: 'Apoya',
+      links: [
+        { text: 'DailyBot', href: 'https://www.dailybot.com/' },
+        {
+          text: 'ASE UTP',
+          href: 'https://egresados.utp.edu.co/',
+        },
+      ],
+    },
+  ],
+  secondaryLinks: [{ text: 'Código de Conducta', href: getPermalink('/codigo-conducta') }],
 };
