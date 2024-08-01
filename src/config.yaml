@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: Pereira Tech Talks
     images:
-      - url: '~/assets/images/index-bg.jpg'
+      - url: '~/assets/images/index-bg-copy.jpg'
         width: 1200
         height: 628
     type: website
