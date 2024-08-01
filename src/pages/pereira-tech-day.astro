@@ -14,6 +14,7 @@ const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 
 import '@fontsource/bebas-neue';
 import '~/assets/styles/pereira-tech-day.css';
+import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title:
@@ -299,27 +300,7 @@ const faqsList = [
   {
     title: 'Código de Conducta',
     description: `
-      PyDay Pereira es una conferencia libre y para todos sin importar género, orientación sexual, habilidades físicas, apariencia física, raza, religión o postura política. No se tolerarán los abuso a este principio por parte de ningún participante de la conferencia.
-
-      Todas las comunicaciones deben estar enfocadas a una audiencia profesional incluyendo personas con diferentes currículos y experiencias. El lenguaje sexual no es apropiado para ningún evento organizado bajo nuestras normas, incluyendo las charlas.
-
-      La organización del evento recomienda encarecidamente:
-
-      Tener un trato amable con los demás miembros.
-      Mantener el respeto hacia los demás participantes.
-      Comportarse profesionalmente.
-      Recordar que cualquier conducta de acoso, sexismo, racismo o división política o de cualquier instancia, no es apropiada para la participación dentro de la conferencia.
-      No asistir a la conferencia bajo influencia de bebidas alcohólicas o estupefacientes.
-
-      La organización de PyDay se reserva el derecho de expulsar a cualquier participante, sin importar el tipo, que no cumpla con cualquiera de estas normas bajo discreción del comité organizador.
-
-      Gracias por acogerse a estos términos y bienvenido a PyDay Pereira. Este es un evento amistoso de todos para todos.
-
-      Si usted ha sido acosado, se da cuenta de que alguien más está siendo acosado, está violando los términos descritos aquí o tiene algún problema, por favor contacte nuestros organizadores.
-
-      Nuestro equipo en la conferencia también estará disponible para colaborar y contactar la seguridad local ó asistirlo, para garantizar su seguridad. Nosotros valoramos su presencia en nuestros eventos.
-
-      En caso de alguna violación a los términos de este código de conducta por parte de los organizadores por favor contactar el organizador principal de la conferencia, Carolina Gómez Trejos(carolina9511@gmail.com)
+      Con el fin de crear un ambiente sensible y abierto para todos, la organización de <b>Pereira Tech Day</b> está comprometida a establecer un <a href="${getPermalink('/pereira-tech-day/codigo-conducta')}"><i>Código de Conducta</i></a> para la comunidad.
     `,
   },
 ];
