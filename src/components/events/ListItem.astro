@@ -2,17 +2,18 @@
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 
-import type { Event } from '~/types';
+import type { Post } from '~/types';
 
 import { getFormattedDate } from '~/utils/utils';
 
 export interface Props {
-  event: Event;
+  event: Post;
 }
 
 const { event } = Astro.props;
-const image = event?.featured_photo?.photo_link;
-const link = event?.link;
+
+const image = event?.image;
+const link = event?.permalink;
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
@@ -27,7 +28,7 @@ const link = event?.link;
               widths={[400, 900]}
               width={900}
               sizes="(max-width: 900px) 400px, 900px"
-              alt={event.name}
+              alt={event.title}
               aspectRatio="16:9"
               loading="lazy"
               decoding="async"
@@ -42,22 +43,22 @@ const link = event?.link;
       <div class="mb-1">
         <span class="text-sm">
           <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(event.time)} class="inline-block">{getFormattedDate(event.time)}</time>
+          <time datetime={String(event.publishDate)} class="inline-block">{getFormattedDate(event.publishDate)}</time>
           {
-            event.venue?.name && (
+            event.venue && (
               <>
                 {' '}
                 · <Icon name="tabler:location" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-                <span>{event.venue.name}</span>
+                <span>{event.venue}</span>
               </>
             )
           }
           {
-            event.group?.name && (
+            event.author && (
               <>
                 {' '}
                 · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
-                <span>{event.group.name}</span>
+                <span>{event.author}</span>
               </>
             )
           }
@@ -67,10 +68,10 @@ const link = event?.link;
         {
           link ? (
             <a class="hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200" href={link}>
-              {event.name}
+              {event.title}
             </a>
           ) : (
-            event.name
+            event.title
           )
         }
       </h2>

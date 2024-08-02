@@ -27,6 +27,7 @@ export const fetchEventsMeetup = async (status: string, page: number = 1) => {
 
   data.map((event) => {
     const name = event?.name || '';
+    const venue = event?.venue?.name || '';
     const description = event?.description || '';
     const eventId = stringToSlug(`${event.id} - ${name}`);
 
@@ -47,17 +48,20 @@ export const fetchEventsMeetup = async (status: string, page: number = 1) => {
       }
 
       const imagePath = path.join(downloadFolder, imageFilename);
-      downloadImage(image, imagePath);
-
       imageStoragePath = `${imageBasePath}/${imageFilename}`;
+
+      if (!fs.existsSync(imageStoragePath)) {
+        downloadImage(image, imagePath);
+      }
     }
 
     const dataMapped = {
       publishDate,
-      title: `'${title}'`,
+      title,
       image: imageStoragePath,
       eventId,
       name,
+      venue,
       description,
     };
 
@@ -89,8 +93,9 @@ async function downloadImage(url, filePath) {
 const eventTemplate = `---
 publishDate: $publishDate
 author: Meetup.com
-title: $title
+title: '$title'
 image: '$image'
+venue: '$venue'
 category: Eventos
 tags:
   - Meetup.com

@@ -1,9 +1,9 @@
 ---
 import Item from '~/components/events/ListItem.astro';
-import type { Event } from '~/types';
+import type { Post } from '~/types';
 
 export interface Props {
-  events: Array<Event>;
+  events: Array<Post>;
 }
 
 const { events } = Astro.props;
