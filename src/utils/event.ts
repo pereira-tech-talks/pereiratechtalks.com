@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 /**
  * Fetch events from Meetup
  * @param status - upcoming, past
@@ -22,7 +25,92 @@ export const fetchEventsMeetup = async (status: string, page: number = 1) => {
     return [];
   }
 
+  data.map((event) => {
+    const name = event?.name || '';
+    const description = event?.description || '';
+    const eventId = stringToSlug(`${event.id} - ${name}`);
+
+    let eventTemplateWithId = eventTemplate;
+    const publishDate = new Date(event.time).toISOString();
+    const title = name;
+    const image = event?.featured_photo?.highres_link;
+    const imageBasePath = '~/assets/images/posts/banners';
+    let imageStoragePath = '';
+
+    if (image) {
+      const imageFilename = path.basename(image);
+      const downloadFolder = 'src/assets/images/posts/banners';
+
+      // Ensure the folder exists, if not, create it
+      if (!fs.existsSync(downloadFolder)) {
+        fs.mkdirSync(downloadFolder);
+      }
+
+      const imagePath = path.join(downloadFolder, imageFilename);
+      downloadImage(image, imagePath);
+
+      imageStoragePath = `${imageBasePath}/${imageFilename}`;
+    }
+
+    const dataMapped = {
+      publishDate,
+      title: `'${title}'`,
+      image: imageStoragePath,
+      eventId,
+      name,
+      description,
+    };
+
+    Object.keys(dataMapped).forEach((key) => {
+      eventTemplateWithId = eventTemplateWithId.replace(`$${key}`, dataMapped[key]);
+    });
+
+    fs.writeFileSync(`src/content/post/${eventId}.mdx`, eventTemplateWithId);
+  });
+
   return data;
+};
+
+async function downloadImage(url, filePath) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    fs.writeFileSync(filePath, buffer);
+    console.log(`Image downloaded and saved to ${filePath}`);
+  } catch (error) {
+    console.error('Error downloading image:', error.message);
+  }
+}
+
+const eventTemplate = `---
+publishDate: $publishDate
+author: Meetup.com
+title: $title
+image: '$image'
+category: Eventos
+tags:
+  - Meetup.com
+metadata:
+  canonical: https://pereiratechtalks.com/$eventId
+---
+
+
+$description
+`;
+
+const stringToSlug = (str) => {
+  return str
+    .toLowerCase() // Convert to lower case
+    .trim() // Trim leading/trailing whitespace
+    .replace(/[^a-z0-9 -]/g, '') // Remove invalid characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
+    .slice(0, 30) // Limit to 30 characters
+    .replace(/-+$/, ''); // Remove trailing hyphen if any
 };
 
 /**

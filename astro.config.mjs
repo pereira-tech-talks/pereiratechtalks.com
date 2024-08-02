@@ -14,7 +14,7 @@ import compress from 'astro-compress';
 import svelte from '@astrojs/svelte';
 import sentry from '@sentry/astro';
 import astrowind from './src/integration';
-import { getMostRecentEvent } from './src/utils/event';
+import { fetchEventsMeetup, getMostRecentEvent } from './src/utils/event';
 
 import {
   readingTimeRemarkPlugin,
@@ -140,6 +140,12 @@ export default defineConfig({
           await fetchEventData();
         },
       },
+      {
+        name: 'fetch-all-events',
+        buildStart: async () => {
+          await fetchEventsMeetup('past', 5);
+        },
+      }
     ],
   },
 });
