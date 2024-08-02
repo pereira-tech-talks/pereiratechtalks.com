@@ -44,7 +44,7 @@ const whenExternalScripts = (items = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  site: 'https://v2.pereiratechtalks.com',
+  site: 'https://www.pereiratechtalks.com',
   output: 'static',
   build: {
     assets: 'assets',
