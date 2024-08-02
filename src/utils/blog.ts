@@ -155,13 +155,14 @@ export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post
   }, []);
 };
 
-export const findPostsByCategory = async (categories: Array<string>) => {
+export const findPostsByCategory = async (categories: Array<string>, counter: number = 5) => {
   if (!Array.isArray(categories)) return [];
 
   const posts = await fetchPosts();
+  const filteredPosts = posts.slice(0, counter);
 
   return categories.reduce(function (r: Array<Post>, category: string) {
-    posts.some((post: Post) => {
+    filteredPosts.map((post: Post) => {
       return category === post.category && r.push(post);
     });
     return r;

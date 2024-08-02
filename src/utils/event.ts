@@ -50,7 +50,7 @@ export const fetchEventsMeetup = async (status: string, page: number = 1) => {
       const imagePath = path.join(downloadFolder, imageFilename);
       imageStoragePath = `${imageBasePath}/${imageFilename}`;
 
-      if (!fs.existsSync(imageStoragePath)) {
+      if (!fs.existsSync(imagePath)) {
         downloadImage(image, imagePath);
       }
     }

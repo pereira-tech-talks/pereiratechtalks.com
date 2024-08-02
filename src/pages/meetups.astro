@@ -14,7 +14,7 @@ const metadata = {
   },
 };
 
-const allEvents = await findPostsByCategory(['eventos']);
+const allEvents = await findPostsByCategory(['eventos'], 5);
 
 console.log(allEvents, allEvents.length);
 ---
