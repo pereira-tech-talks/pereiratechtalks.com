@@ -3,8 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import EventList from '~/components/events/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Button from '~/components/ui/Button.astro';
-
-import { fetchEventsMeetup } from '~/utils/event';
+import { findPostsByCategory } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -15,7 +14,9 @@ const metadata = {
   },
 };
 
-const allEvents = await fetchEventsMeetup('past', 10);
+const allEvents = await findPostsByCategory(['eventos'], 5);
+
+console.log(allEvents, allEvents.length);
 ---
 
 <Layout metadata={metadata}>

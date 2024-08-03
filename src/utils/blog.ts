@@ -53,6 +53,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     tags: rawTags = [],
     category: rawCategory,
     author,
+    venue,
     draft = false,
     metadata = {},
   } = data;
@@ -74,6 +75,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     title: title,
     excerpt: excerpt,
     image: image,
+    venue: venue,
 
     category: category,
     tags: tags,
@@ -148,6 +150,20 @@ export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post
   return slugs.reduce(function (r: Array<Post>, slug: string) {
     posts.some(function (post: Post) {
       return slug === post.slug && r.push(post);
+    });
+    return r;
+  }, []);
+};
+
+export const findPostsByCategory = async (categories: Array<string>, counter: number = 5) => {
+  if (!Array.isArray(categories)) return [];
+
+  const posts = await fetchPosts();
+  const filteredPosts = posts.slice(0, counter);
+
+  return categories.reduce(function (r: Array<Post>, category: string) {
+    filteredPosts.map((post: Post) => {
+      return category === post.category && r.push(post);
     });
     return r;
   }, []);

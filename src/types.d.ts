@@ -42,6 +42,9 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+
+  /**  */
+  venue?: string;
 }
 
 export interface Event {
