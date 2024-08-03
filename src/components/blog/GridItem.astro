@@ -16,9 +16,10 @@ const { post } = Astro.props;
 const image = await findImage(post.image);
 ---
 
-<article class="transition max-w-7xl grid gap-6 md:gap-8 mb-auto">
+<article class="transition max-w-7xl grid gap-6 md:gap-8 mb-auto h-full">
   <div
-    class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29] bg-white dark:bg-slate-900"
+    class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29]
+    bg-white dark:bg-slate-900 flex flex-col justify-between"
   >
     <a href={getPermalink(post.permalink, 'post')} class="block">
       {
@@ -27,13 +28,14 @@ const image = await findImage(post.image);
             src={image || 'https://via.placeholder.com/400'}
             alt="Article Image"
             src={image}
-            class="w-full md:h-full rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+            class="w-full md:h-fit rounded shadow-lg bg-gray-400 dark:bg-slate-700"
             widths={[400, 900]}
             width={400}
+            height={275}
             sizes="(max-width: 900px) 400px, 900px"
             alt={post.title}
             aspectRatio="16:9"
-            layout="cover"
+            layout="responsive"
             loading="lazy"
             decoding="async"
           />
