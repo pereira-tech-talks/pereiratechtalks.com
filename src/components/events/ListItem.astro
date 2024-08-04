@@ -1,8 +1,10 @@
 ---
+import { APP_BLOG } from 'astrowind:config';
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 
 import type { Post } from '~/types';
+import { getPermalink } from '~/utils/permalinks';
 
 import { getFormattedDate } from '~/utils/utils';
 
@@ -13,13 +15,14 @@ export interface Props {
 const { event } = Astro.props;
 
 const image = event?.image;
-const link = event?.permalink;
+
+const link = APP_BLOG?.post?.isEnabled ? getPermalink(event.permalink, 'post') : '';
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
   {
     image && (
-      <a class="relative block group" href={link ?? 'javascript:void(0)'}>
+      <a class="relative block group" href={link}>
         <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
           {image && (
             <Image
