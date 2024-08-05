@@ -78,6 +78,7 @@ export interface AnalyticsConfig {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type
 export interface UIConfig {}
 
 const DEFAULT_SITE_NAME = 'Website';
