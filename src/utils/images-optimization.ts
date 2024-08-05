@@ -6,6 +6,7 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Layout = 'fixed' | 'constrained' | 'fullWidth' | 'cover' | 'responsive' | 'contained';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type
 export interface AttributesProps extends HTMLAttributes<'img'> {}
 
 export interface ImageProps extends Omit<HTMLAttributes<'img'>, 'src'> {
