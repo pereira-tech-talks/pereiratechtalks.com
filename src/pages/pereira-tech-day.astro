@@ -354,33 +354,40 @@ const faqsList = [
     <Fragment slot="content">
       <h2 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Sobre Pereira Tech Day</h2>
       <p>
-        Pereira Tech Day es un evento gratuito y apasionante de un día de duración, este busca ayudar en la difusión de
-        uno de los lenguajes de programación con más crecimiento del momento: Python.
+        <b>Pereira Tech Day</b> es un evento organizado en conjunto por las comunidades de <a
+          href="https://pereira.js.org/"><i>PereiraJs</i></a
+        >,
+        <a href="https://pypereira.co"><i>Python Pereira</i></a>, <a href="https://pereiratechtalks.com"
+          ><i>Pereira Tech Talks</i></a
+        > y <a href="https://jointdevweb.firebaseapp.com/"><i>Joint Developer</i></a>. Unimos fuerzas para crear un
+        evento diverso y enriquecedor, con charlas que abarcan diferentes aspectos de la tecnología.
       </p>
       <br />
       <p>
-        En este evento podrás asistir a charlas que tratan sobre herramientas, librerías, buenas prácticas y otros
-        detalles relacionados con el lenguaje y su comunidad.
+        En <b>Pereira Tech Day</b>, nuestro objetivo es compartir con la comunidad temas relacionados al mundo
+        tecnológico, enfocados en inspirar y motivar a las personas. Las charlas de este año no solo cubrirán temas
+        tecnológicos, sino también trayectorias profesionales, desarrollo comunitario y motivación, buscando incentivar
+        a los asistentes a seguir explorando, investigando y adentrándose en el maravilloso mundo de la tecnología.
       </p>
+
+      <Fragment slot="bg">
+        <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      </Fragment>
     </Fragment>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
+    <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
+
+    <Speakers id="speakers" title="Speakers" speakers={speakers} />
+    <Pricing title="Partnership" prices={partnerships} />
+
+    <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
+
+    <FAQs
+      id="faqs"
+      title="Preguntas Frecuentes (FAQ)"
+      subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
+      columns={1}
+      items={faqsList}
+    />
   </Content>
-
-  <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
-
-  <Speakers id="speakers" title="Speakers" speakers={speakers} />
-  <Pricing title="Partnership" prices={partnerships} />
-
-  <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
-
-  <FAQs
-    id="faqs"
-    title="Preguntas Frecuentes (FAQ)"
-    subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
-    columns={1}
-    items={faqsList}
-  />
 </EventsLayout>
