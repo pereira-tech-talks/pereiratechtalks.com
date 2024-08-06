@@ -174,7 +174,7 @@ const partnerships = [
     ],
     callToAction: {
       text: 'Contactar',
-      href: '#',
+      href: 'mailto:pereiratechtalks@gmail.com',
     },
   },
   {
@@ -207,7 +207,7 @@ const partnerships = [
     ],
     callToAction: {
       text: 'Contactar',
-      href: '#',
+      href: 'mailto:pereiratechtalks@gmail.com',
     },
   },
   {
@@ -242,7 +242,7 @@ const partnerships = [
     ],
     callToAction: {
       text: 'Contactar',
-      href: '#',
+      href: 'mailto:pereiratechtalks@gmail.com',
     },
   },
 ];
@@ -374,20 +374,20 @@ const faqsList = [
         <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
       </Fragment>
     </Fragment>
-
-    <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
-
-    <Speakers id="speakers" title="Speakers" speakers={speakers} />
-    <Pricing title="Partnership" prices={partnerships} />
-
-    <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
-
-    <FAQs
-      id="faqs"
-      title="Preguntas Frecuentes (FAQ)"
-      subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
-      columns={1}
-      items={faqsList}
-    />
   </Content>
+
+  <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
+
+  <Speakers id="speakers" title="Speakers" speakers={speakers} />
+  <Pricing title="Partnership" prices={partnerships} />
+
+  <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
+
+  <FAQs
+    id="faqs"
+    title="Preguntas Frecuentes (FAQ)"
+    subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
+    columns={1}
+    items={faqsList}
+  />
 </EventsLayout>
