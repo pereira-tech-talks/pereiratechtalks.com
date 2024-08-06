@@ -95,8 +95,9 @@ export const footerData = {
     {
       title: 'Comunidad',
       links: [
-        { text: 'PereiraJS', href: 'https://pereira.js.org/' },
         { text: 'JointDev', href: 'https://jointdevweb.firebaseapp.com/' },
+        { text: 'PereiraJS', href: 'https://pereira.js.org/' },
+        { text: 'Python Pereira', href: 'https://pypereira.co' },
         { text: 'Manizales Tech Talks', href: 'https://www.meetup.com/es/manizalestechtalks/' },
         { text: 'Quindio Tech', href: 'https://www.meetup.com/es-ES/quindio-tech/' },
       ],
