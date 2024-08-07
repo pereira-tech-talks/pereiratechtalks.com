@@ -308,7 +308,18 @@ const faqsList = [
 ---
 
 <EventsLayout metadata={metadata}>
-  <Hero id="hero" tagline="Septiembre 21, 2024." background="background-intro-light dark:background-intro-dark">
+  <Hero
+    id="hero"
+    tagline="Septiembre 21, 2024."
+    background="background-intro-light dark:background-intro-dark"
+    actions={[
+      {
+        variant: 'secondary',
+        text: 'Inscribirse',
+        href: 'https://docs.google.com/forms/d/e/1FAIpQLSePyRbPPeBb2GozlgGaB0jf_LzG5S-iAZlQbPcLlV1xkOlt-g/viewform',
+      },
+    ]}
+  >
     <Fragment slot="logo">
       <div class="text-center mb-8">
         <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto" />
