@@ -3,7 +3,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Image from '~/components/common/Image.astro';
 import Steps from '~/components/widgets/Steps.astro';
-// import Brands from '~/components/widgets/Brands.astro';
+import Brands from '~/components/widgets/Brands.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import Content from '~/components/widgets/Content.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
@@ -305,6 +305,18 @@ const faqsList = [
     `,
   },
 ];
+
+const sponsors = {
+  gold: [
+    {
+      src: 'ase-utp.png',
+      alt: 'ASE UTP',
+      url: 'https://egresados.utp.edu.co/',
+    },
+  ],
+  silver: [],
+  bronze: [],
+};
 ---
 
 <EventsLayout metadata={metadata}>
@@ -341,19 +353,19 @@ const faqsList = [
       {
         icon: 'tabler:chart-bubble',
         callToAction: {
-          text: 'AI',
+          text: 'Inteligencia Artificial',
         },
       },
       {
         icon: 'tabler:code',
         callToAction: {
-          text: 'Coding',
+          text: 'Desarrollo de software',
         },
       },
       {
         icon: 'tabler:shield-lock',
         callToAction: {
-          text: 'Security',
+          text: 'Ciber Seguridad',
         },
       },
     ]}
@@ -389,10 +401,9 @@ const faqsList = [
   </Content>
 
   <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
-
-  <Speakers id="speakers" title="Speakers" speakers={speakers} />
-  <Pricing title="Partnership" prices={partnerships} />
-
+  <Speakers id="speakers" title="Ponentes" speakers={speakers} />
+  <Pricing title="Planes de patrocinio" prices={partnerships} />
+  <Brands id="sponsors" title="Patrocinadores" images={sponsors} />
   <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
 
   <FAQs

@@ -14,23 +14,34 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const logoSize = {
+  gold: 'max-h-60 max-w-60',
+  silver: 'max-h-40 max-w-40',
+  bronze: 'max-h-32 max-w-32',
+};
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
-  <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
-    {icons && icons.map((icon) => <Icon name={icon} class="py-3 lg:py-5 w-12 h-auto mx-auto sm:mx-0 text-gray-500" />)}
-    {
-      images &&
-        images.map(
-          (image) =>
-            image.src && (
-              <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md dark:bg-gray-200">
-                <img src={image.src} alt={image.alt || ''} class="max-h-12" />
-              </div>
-            )
-        )
-    }
-  </div>
+  {
+    Object.entries(images).map(([type, group]) => (
+      <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
+        {icons &&
+          icons.map((icon) => <Icon name={icon} class="py-3 lg:py-5 w-12 h-auto mx-auto sm:mx-0 text-gray-500" />)}
+        {group &&
+          group.map(
+            (item) =>
+              item.src && (
+                <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md dark:bg-gray-200 w-500">
+                  <a href={item.url} target="_blank">
+                    <img src={`/src/assets/images/sponsors/${item.src}`} alt={item.alt || ''} class={logoSize[type]} />
+                  </a>
+                </div>
+              )
+          )}
+      </div>
+    ))
+  }
 </WidgetWrapper>
