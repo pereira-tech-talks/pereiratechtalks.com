@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
 import type { Brands as Props } from '~/types';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
@@ -16,9 +17,9 @@ const {
 } = Astro.props;
 
 const logoSize = {
-  gold: 'max-h-60 max-w-60',
-  silver: 'max-h-40 max-w-40',
-  bronze: 'max-h-32 max-w-32',
+  gold: 250,
+  silver: 200,
+  bronze: 100,
 };
 ---
 
@@ -36,7 +37,12 @@ const logoSize = {
               item.src && (
                 <div class="flex justify-center col-span-1 my-2 lg:my-4 py-1 px-3 rounded-md dark:bg-gray-200 w-500">
                   <a href={item.url} target="_blank">
-                    <img src={`/src/assets/images/sponsors/${item.src}`} alt={item.alt || ''} class={logoSize[type]} />
+                    <Image
+                      src={`~/assets/images/pereira-tech-day/sponsors/${item.src}`}
+                      alt={item.alt || ''}
+                      loading="lazy"
+                      width={logoSize[type || 'gold']}
+                    />
                   </a>
                 </div>
               )
