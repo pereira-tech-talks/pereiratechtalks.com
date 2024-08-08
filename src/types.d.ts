@@ -113,6 +113,7 @@ export interface MetaDataTwitter {
 
 export interface Image {
   src: string;
+  url?: string;
   alt?: string;
 }
 
@@ -126,6 +127,10 @@ export interface Speaker {
   image: string;
   name: string;
   socialLinks?: Array<SocialIconLink>;
+}
+
+export interface Brand {
+  [key: string]: Array<Image>;
 }
 
 export interface SocialIconLink {
@@ -280,7 +285,7 @@ export interface Testimonials extends Omit<Headline, 'classes'>, Widget {
 
 export interface Brands extends Omit<Headline, 'classes'>, Widget {
   icons?: Array<string>;
-  images?: Array<Image>;
+  brands?: Brand;
 }
 
 export interface Collaborators extends Omit<Headline, 'classes'>, Widget {
