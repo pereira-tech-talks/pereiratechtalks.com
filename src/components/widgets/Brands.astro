@@ -9,7 +9,7 @@ const {
   subtitle = '',
   tagline = '',
   icons = [],
-  images = [],
+  brands = [],
   id,
   isDark = false,
   classes = {},
@@ -27,7 +27,7 @@ const logoSize = {
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
   {
-    Object.entries(images).map(([type, group]) => (
+    Object.entries(brands).map(([type, group]) => (
       <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
         {icons &&
           icons.map((icon) => <Icon name={icon} class="py-3 lg:py-5 w-12 h-auto mx-auto sm:mx-0 text-gray-500" />)}
