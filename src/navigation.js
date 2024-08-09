@@ -47,6 +47,7 @@ export const headerData = {
       ],
     },
   ],
+  actions: [{ text: 'PEREIRA TECH DAY', href: '/pereira-tech-day' }],
 };
 
 export const eventsHeaderData = {
@@ -57,7 +58,7 @@ export const eventsHeaderData = {
     },
     {
       text: 'Lightning Talks',
-      href: '/lightning-talks',
+      href: '/pereira-tech-day/lightning-talks',
     },
   ],
 };
