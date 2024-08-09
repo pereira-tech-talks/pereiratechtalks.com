@@ -55,6 +55,10 @@ export const eventsHeaderData = {
       text: 'Meetups',
       href: '/meetups',
     },
+    {
+      text: 'Lightning Talks',
+      href: '/lightning-talks',
+    },
   ],
 };
 
