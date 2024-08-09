@@ -14,7 +14,7 @@ Pereira Tech Talks es una iniciativa que busca fomentar el intercambio de ideas 
 
 1. **Reportar bugs**: Si encuentras algún error, por favor crea un issue detallando el problema.
 2. **Sugerir mejoras**: Tienes ideas para mejorar el sitio? Compártelas a través de los issues.
-3. **Enviar pull requests**: ¿Quieres agregar una nueva funcionalidad o corregir algo? ¡Genial! Sigue estos pasos:
+3. **Crear pull requests**: ¿Quieres agregar una nueva funcionalidad o corregir algo? ¡Genial! Sigue estos pasos:
    - Haz fork del repositorio
    - Crea una nueva rama (`git checkout -b feature__amazing_feature`)
    - Haz commit de tus cambios (`git commit -m 'Add some Amazing Feature'`)
