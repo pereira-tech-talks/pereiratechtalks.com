@@ -204,6 +204,7 @@ export interface Testimonial {
   name?: string;
   job?: string;
   image?: string | unknown;
+  socialLinks?: Array<SocialIconLink>;
 }
 
 export interface Input {
