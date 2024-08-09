@@ -1,4 +1,5 @@
 ---
+import type { Testimonial } from '~/types';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Image from '~/components/common/Image.astro';
@@ -7,7 +8,8 @@ import Brands from '~/components/widgets/Brands.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import Content from '~/components/widgets/Content.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
-import Speakers from '~/components/widgets/Speakers.astro';
+// import Speakers from '~/components/widgets/Speakers.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
 // import ContactUs from '~/components/widgets/Contact.astro';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
@@ -113,10 +115,16 @@ const collaborators = [
   },
 ];
 
-const speakers = [
+const speakers: Array<Testimonial> = [
   {
-    image: '~/assets/images/people/vanessa-aristizabal.jpg',
+    testimonial:
+      'Ingeniera de Sistemas con experiencia como Web developer. Google Developer Expert en Angular y tecnologias Web. Github Star. Creadora de contenido. Apasionada por la tecnología, los Libros, el código (especialmente JS), el diseño y la ilustración.',
     name: 'Vanessa Aristizabal',
+    job: 'Frontend Developer',
+    image: {
+      src: '~/assets/images/people/vanessa-aristizabal.jpg',
+      alt: 'Vanessa Aristizabal',
+    },
     socialLinks: [
       {
         href: 'https://www.linkedin.com/in/vanessa-marely-aristizabal-angel/',
@@ -133,11 +141,33 @@ const speakers = [
     ],
   },
   {
-    image: '~/assets/images/people/karolina-landino.jpeg',
+    testimonial:
+      'Karo es Product Manager, ingeniera en robótica, maker y joyera. Lidera PyLadies Bogotá y Colombia. Hace parte de Python Colombia y es co-organizadora de la conferencia PyConCo. Tiene más de 10 años de experiencia creando hardware y software para diversas industrias. Ama trabajar en pro de crear oportunidades y espacios para el crecimiento personal y profesional de las personas.',
     name: 'Karolina Ladino',
+    job: 'Product Manager',
+    image: {
+      src: '~/assets/images/people/karolina-landino.jpeg',
+      alt: 'Karolina Ladino',
+    },
     socialLinks: [
       {
         href: 'https://www.linkedin.com/in/karobotco/',
+        icon: 'tabler:brand-linkedin',
+      },
+    ],
+  },
+  {
+    testimonial:
+      'El Doctor Jaramillo es Ingeniero Electrónico de la Pontificia Universidad Javeriana, Maestría en Instrumentación Física de la Universidad Tecnológica de Pereira, Doctorado en Purdue University, West Lafayette, Indiana, Estados Unidos. El Doctor Jaramillo ha sido profesor y director del Grupo de Investigación Sirius de la Universidad Tecnológica de Pereira y es el Director Cientifico del Laboratory for Research in Complex Systems en California, Estados Unidos.',
+    name: 'Jose Alfredo Jaramillo',
+    job: 'Investigador y Docente UTP',
+    image: {
+      src: '~/assets/images/people/jose-alfredo-jaramillo.jpg',
+      alt: 'Jose Alfredo Jaramillo Villegeas',
+    },
+    socialLinks: [
+      {
+        href: 'https://www.linkedin.com/in/josejaramillov/',
         icon: 'tabler:brand-linkedin',
       },
     ],
@@ -406,7 +436,8 @@ const sponsors = {
   </Content>
 
   <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
-  <Speakers id="speakers" title="Ponentes" speakers={speakers} />
+  <Testimonials id="speakers" title="Ponentes" testimonials={speakers} />
+  <!-- <Speakers id="speakers" title="Ponentes" speakers={speakers} /> -->
   <Pricing title="Planes de patrocinio" prices={partnerships} />
   <Brands id="sponsors" title="Patrocinadores" brands={sponsors} />
   <Collaborators title="Colaboradores" id="collaborators" collaborators={collaborators} />
