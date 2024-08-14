@@ -31,7 +31,7 @@
     "@fontsource/fira-mono": "^5.0.13",
     "@fontsource/roboto": "^5.0.14",
     "@sentry/astro": "8.23.0",
-    "@spotlightjs/astro": "2.1.5",
+    "@spotlightjs/astro": "2.1.6",
     "astro": "4.13.1",
     "astro-icon": "1.1.0",
     "astro-imagetools": "^0.9.0",
