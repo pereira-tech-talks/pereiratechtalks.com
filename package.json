@@ -30,7 +30,7 @@
     "@fontsource/bebas-neue": "^5.0.20",
     "@fontsource/fira-mono": "^5.0.13",
     "@fontsource/roboto": "^5.0.14",
-    "@sentry/astro": "8.23.0",
+    "@sentry/astro": "8.25.0",
     "@spotlightjs/astro": "2.1.5",
     "astro": "4.13.1",
     "astro-icon": "1.1.0",
