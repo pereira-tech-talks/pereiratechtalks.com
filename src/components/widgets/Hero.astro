@@ -9,6 +9,7 @@ export interface Props {
   logo?: string;
   title?: string;
   subtitle?: string;
+  location?: string;
   tagline?: string;
   content?: string;
   actions?: string | CallToAction[];
@@ -22,6 +23,7 @@ const {
   logo = await Astro.slots.render('logo'),
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
+  location = await Astro.slots.render('location'),
   tagline,
   content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
@@ -50,11 +52,12 @@ const {
           {
             title && (
               <h1
-                class="event-title text-4xl md:text-5xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200"
+                class="event-title text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading dark:text-gray-200"
                 set:html={title}
               />
             )
           }
+          {location && <p class="event-location mb-6" set:html={location} />}
           <div class="max-w-3xl mx-auto">
             {subtitle && <p class="event-subtitle text-xl text-muted mb-6 dark:text-slate-300" set:html={subtitle} />}
             {
