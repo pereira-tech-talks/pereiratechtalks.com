@@ -1,5 +1,6 @@
 ---
 import type { Testimonial } from '~/types';
+import { Icon } from 'astro-icon/components';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Image from '~/components/common/Image.astro';
@@ -387,6 +388,13 @@ const sponsors = {
       </div>
     </Fragment>
     <Fragment slot="title"> Pereira•Tech•Day </Fragment>
+    <Fragment slot="location">
+      <a
+        href="https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
+        class="font-bold text-red-400 text-lg uppercase"
+        target="_blank"><Icon name="tabler:map-pin" class="w-5 h-5 inline" /> UTP: Auditorio Jorge Roa Martínez</a
+      >
+    </Fragment>
     <Fragment slot="subtitle">
       Un día de Tecnología, Desarrollo de software, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>
