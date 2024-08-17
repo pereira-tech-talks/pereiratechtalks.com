@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - 'main'
-      - 'test-fork-workflow'
     types:
       - opened
       - reopened
@@ -42,7 +41,6 @@ jobs:
           ENV_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
         run: |
           IFS=',' read -ra SIZE_LABELS_ARR <<< "$SIZE_LABELS"
-          # Remove the quotes from SIZE_LABELS_ARR
           SIZE_LABELS_ARR=("${SIZE_LABELS_ARR[@]//\"}")
 
           # Get PR Labels
@@ -107,7 +105,7 @@ jobs:
             CURRENT_SIZE_ENCODED=$(jq -rn --arg str "$CURRENT_SIZE" '$str|@uri')
             curl \
               -X DELETE \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/$CURRENT_SIZE_ENCODED
           fi
@@ -115,7 +113,7 @@ jobs:
           echo "Adding new size label..."
           curl \
             -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
             -d "{\"labels\": [\"${SIZE}\"]}"
@@ -129,7 +127,7 @@ jobs:
             echo "Adding warning comment..."
             curl \
               -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
               -d "{\"body\": \"$WARNING_MESSAGE\"}"
