@@ -10,13 +10,10 @@ on:
       - synchronize
       - edited
 
-env:
-  SIZE_LABELS: >-
-    "Size - XS","Size - S","Size - M","Size - L","Size - XL","Size - XXL"
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+permissions:
+  contents: read
+  pull-requests: write  # Para aprobar el PR
+  issues: write  # Para comentar en el PR
 
 jobs:
   pull_request_content_and_size_check:
@@ -35,7 +32,7 @@ jobs:
           git config user.email "pereiratechtalks@gmail.com"
           gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Step 2 - 🧪 Check pr size label
+      - name: Step 2 - 🧪 Check PR size label
         id: check_pr_size_label_step
         env:
           ENV_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
@@ -43,15 +40,11 @@ jobs:
           IFS=',' read -ra SIZE_LABELS_ARR <<< "$SIZE_LABELS"
           # Remove the quotes from SIZE_LABELS_ARR
           SIZE_LABELS_ARR=("${SIZE_LABELS_ARR[@]//\"}")
-
           # Get PR Labels
           FOUND_LABELS_JSON=$(echo "$ENV_LABELS" | jq -r '.[] | .name')
-
           readarray -t FOUND_LABELS <<<"$FOUND_LABELS_JSON"
-
           echo "FOUND LABELS:"
           printf '%s\n' "${FOUND_LABELS[@]}"
-
           # Check if any of the labels in FOUND_LABELS is in SIZE_LABELS_ARR
           for found_label in "${FOUND_LABELS[@]}"; do
             for size_label in "${SIZE_LABELS_ARR[@]}"; do
@@ -61,39 +54,51 @@ jobs:
               fi
             done
           done
-      - name: Step 3 - 🧪🧪 Calculate PR Size and Label
+
+      - name: Step 3 - Check if PR is from a fork
+        id: check_fork
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.full_name }}" != "${{ github.repository }}" ]; then
+            echo "This PR is from a forked repository."
+            echo "is_fork=true" >> $GITHUB_ENV
+          else
+            echo "This PR is from the base repository."
+            echo "is_fork=false" >> $GITHUB_ENV
+          fi
+
+      - name: Step 4 - 🧪🧪 Calculate PR Size and Label
+        if: env.is_fork == 'false' || github.event.pull_request.merged == true
         run: |
           CURRENT_SIZE="${{ steps.check_pr_size_label_step.outputs.size_label_found }}"
           PR_BASE_REF=${{ github.event.pull_request.base.ref }}
           PR_HEAD_REF=${{ github.event.pull_request.head.ref }}
 
-          # Verificar si la rama base existe en el repositorio remoto
-          if ! git ls-remote --exit-code --heads origin $PR_BASE_REF; then
-            echo "Advertencia: La rama base '$PR_BASE_REF' no existe en el repositorio remoto. Continuando sin compararla."
-            exit 0
+          # Fetch base branch
+          if git ls-remote --exit-code --heads origin $PR_BASE_REF; then
+            git fetch origin $PR_BASE_REF
+          else
+            echo "Branch $PR_BASE_REF does not exist on remote."
+            exit 1
           fi
-
-          # Verificar si la rama de cabecera existe en el repositorio remoto
-          if ! git ls-remote --exit-code --heads origin $PR_HEAD_REF; then
-            echo "Advertencia: La rama de cabecera '$PR_HEAD_REF' no existe en el repositorio remoto. Continuando sin compararla."
-            exit 0
+          
+          # Fetch head branch
+          if git ls-remote --exit-code --heads origin $PR_HEAD_REF; then
+            git fetch origin $PR_HEAD_REF
+          else
+            echo "Branch $PR_HEAD_REF does not exist on remote."
+            exit 1
           fi
-
-          # Intentar hacer fetch de las ramas si existen
-          git fetch origin $PR_BASE_REF
-          git fetch origin $PR_HEAD_REF
-
+          
           CHANGES_STATS=$(git diff --shortstat origin/$PR_BASE_REF..origin/$PR_HEAD_REF)
           echo $CHANGES_STATS
           LINES_CHANGED=$(echo $CHANGES_STATS | awk '{print $4+$6}')
           echo "Lines changed: $LINES_CHANGED"
-
+          
           if [ -z "$LINES_CHANGED" ]; then
             echo "No lines changed or diff failed."
             exit 1
           fi
-
-          # Continuar con el cálculo del tamaño
+          
           if [ $LINES_CHANGED -le 50 ]; then
             SIZE="Size - XS"
           elif [ $LINES_CHANGED -le 100 ]; then
@@ -107,10 +112,10 @@ jobs:
           else
             SIZE="Size - XXL"
           fi
-
+          
           echo "Current Size: '$CURRENT_SIZE'"
           echo "New Size: '$SIZE'"
-
+          
           if [ "$SIZE" == "$CURRENT_SIZE" ]; then
             echo "No size change detected."
             exit 0
@@ -121,19 +126,19 @@ jobs:
             CURRENT_SIZE_ENCODED=$(jq -rn --arg str "$CURRENT_SIZE" '$str|@uri')
             curl \
               -X DELETE \
-              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/$CURRENT_SIZE_ENCODED
           fi
-
+          
           echo "Adding new size label..."
           curl \
             -X POST \
-            -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
             -d "{\"labels\": [\"${SIZE}\"]}"
-
+          
           if [ "$SIZE" == "Size - L" ] || [ "$SIZE" == "Size - XL" ] || [ "$SIZE" == "Size - XXL" ]; then
             WARNING_MESSAGE="⚠️ WARNING: This PR is large.\n"
             if [ "$SIZE" == "Size - XL" ] || [ "$SIZE" == "Size - XXL" ]; then
@@ -143,13 +148,13 @@ jobs:
             echo "Adding warning comment..."
             curl \
               -X POST \
-              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
               -d "{\"body\": \"$WARNING_MESSAGE\"}"
+          fi
 
-
-      - name: Step 4 - 🧪🧪🧪 Check "TITLE" length
+      - name: Step 5 - 🧪🧪🧪 Check "TITLE" length
         run: |
           MIN_TITLE_LENGTH=10
           PR_TITLE="${{ github.event.pull_request.title }}"
@@ -159,12 +164,12 @@ jobs:
             exit 1
           fi
 
-      - name: Step 5 - 🧪🧪🧪🧪 Check "BODY" length
+      - name: Step 6 - 🧪🧪🧪🧪 Check "BODY" length
         run: |
           MIN_BODY_LENGTH=30
           PR_BODY='${{ github.event.pull_request.body }}'
           BODY_LENGTH=$(echo -n "$PR_BODY" | wc -c)
-          if [ "$BODY_LENGTH" -lt "$MIN_BODY_LENGTH" ]; then
+          if [ "$BODY_LENGTH" -lt "$MIN_BODY_LENGTH"; then
             echo "Pull request body is too short. It must have at least $MIN_BODY_LENGTH characters."
             exit 1
           fi
