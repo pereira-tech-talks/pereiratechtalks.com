@@ -9,6 +9,11 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  contents: read
+  pull-requests: write  # Para aprobar el PR si es necesario
+  issues: write  # Para comentar en el PR
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -87,27 +92,3 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Step 1 - 🧪 Run tests
         run: npm run test
-
-  # validate_build:
-  #   needs: validate_tests
-  #   name: 'Run build'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20.16.0'
-  #     - name: Step 0 - 📁 Cache node modules
-  #       id: cache-npm
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-node-modules
-  #       with:
-  #         path: |
-  #           ~/.npm
-  #           node_modules
-  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-build-${{ env.cache-name }}-
-  #     - name: Step 1 - 🧪 Build project
-  #       run: npm run build
