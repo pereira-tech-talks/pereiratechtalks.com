@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'test-fork-workflow'
     types:
       - opened
       - reopened
@@ -139,7 +140,7 @@ jobs:
           PR_TITLE="${{ github.event.pull_request.title }}"
           TITLE_LENGTH=$(echo -n "$PR_TITLE" | wc -c)
           if [ "$TITLE_LENGTH" -lt "$MIN_TITLE_LENGTH" ]; then
-            echo "Pull request title is too short. It must have at least $MIN_TITLE_LENGTH characters."
+            echo "Pull request title is too short. It must have at least $MIN_TITLE_LENGTH caracteres."
             exit 1
           fi
 
