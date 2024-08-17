@@ -1,5 +1,6 @@
 ---
 import type { Testimonial } from '~/types';
+import { Icon } from 'astro-icon/components';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Image from '~/components/common/Image.astro';
@@ -116,7 +117,7 @@ const collaborators = [
 const speakers: Array<Testimonial> = [
   {
     testimonial:
-      'Ingeniera de Sistemas con experiencia como Web developer. Google Developer Expert en Angular y tecnologias Web. Github Star. Creadora de contenido. Apasionada por la tecnología, los Libros, el código (especialmente JS), el diseño y la ilustración.',
+      'Vanessa es Ingeniera de Sistemas con experiencia como desarrolladora web. Es Google Developer Expert en Angular y tecnologías web, y GitHub Star, reconocida por sus contribuciones a la comunidad. Como creadora de contenido, comparte su pasión por la tecnología, los libros, el diseño, la ilustración y, especialmente, el código, con un enfoque en JavaScript. Vanessa se dedica a fomentar el crecimiento personal y profesional a través de la tecnología',
     name: 'Vanessa Aristizabal',
     job: 'Frontend Developer',
     image: {
@@ -387,6 +388,13 @@ const sponsors = {
       </div>
     </Fragment>
     <Fragment slot="title"> Pereira•Tech•Day </Fragment>
+    <Fragment slot="location">
+      <a
+        href="https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
+        class="font-bold text-red-400 text-lg uppercase"
+        target="_blank"><Icon name="tabler:map-pin" class="w-5 h-5 inline" /> UTP: Auditorio Jorge Roa Martínez</a
+      >
+    </Fragment>
     <Fragment slot="subtitle">
       Un día de Tecnología, Desarrollo de software, Data Science, Machine Learning, Infraestructura y más!
     </Fragment>

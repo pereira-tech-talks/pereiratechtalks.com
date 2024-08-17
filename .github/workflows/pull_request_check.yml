@@ -26,13 +26,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 2
+
       - name: Step 1 - ⚙️ Setup GitHub Config
         run: |
           git config user.name "🤖 Pereira Tech Talks"
           git config user.email "pereiratechtalks@gmail.com"
-          gh auth login --with-token <<< "${{ secrets.AUTOMATION_GITHUB_TOKEN }}"
+          gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Step 2 - 🧪 Check pr size label
         id: check_pr_size_label_step
@@ -105,7 +106,7 @@ jobs:
             CURRENT_SIZE_ENCODED=$(jq -rn --arg str "$CURRENT_SIZE" '$str|@uri')
             curl \
               -X DELETE \
-              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/$CURRENT_SIZE_ENCODED
           fi
@@ -113,7 +114,7 @@ jobs:
           echo "Adding new size label..."
           curl \
             -X POST \
-            -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels \
             -d "{\"labels\": [\"${SIZE}\"]}"
@@ -127,7 +128,7 @@ jobs:
             echo "Adding warning comment..."
             curl \
               -X POST \
-              -H "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
               -d "{\"body\": \"$WARNING_MESSAGE\"}"
