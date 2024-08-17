@@ -3,8 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { defineConfig, squooshImageService } from 'astro/config';
-
-// import { astroImageTools } from 'astro-imagetools';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -56,7 +54,6 @@ export default defineConfig({
     host: true,
   },
   integrations: [
-    // astroImageTools,
     tailwind({
       applyBaseStyles: false,
     }),
