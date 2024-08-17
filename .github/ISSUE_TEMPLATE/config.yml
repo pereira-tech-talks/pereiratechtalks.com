@@ -1,0 +1,19 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: "Reporte de Bugs"
+    url: "/issues/new?template=bug_report.md"
+    about: "Reporta un error o problema técnico."
+  - name: "Solicitud de Característica o Idea"
+    url: "/issues/new?template=feature_or_idea.md"
+    about: "Propón una nueva característica o idea para el proyecto."
+  - name: "Pregunta o Duda"
+    url: "/issues/new?template=question.md"
+    about: "Haz una pregunta o solicita ayuda."
+  - name: "Mejora de Documentación o Necesidad"
+    url: "/issues/new?template=documentation_or_need.md"
+    about: "Sugerencias para mejorar la documentación o necesidades adicionales."
+  - name: "Otros"
+    url: "/issues/new?template=other.md"
+    about: "Para issues que no encajan en las otras categorías."
+---
