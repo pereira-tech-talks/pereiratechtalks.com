@@ -8,7 +8,16 @@ export const headerData = {
     },
     {
       text: 'Comunidad',
-      href: '/about',
+      links: [
+        {
+          text: 'Quiénes somos',
+          href: '/about',
+        },
+        {
+          text: 'Contribución',
+          href: '/contributing',
+        },
+      ],
     },
     {
       text: 'Meetups',
