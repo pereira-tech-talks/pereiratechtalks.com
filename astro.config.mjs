@@ -132,17 +132,18 @@ export default defineConfig({
     },
     plugins: [
       {
+        name: 'fetch-all-events',
+        buildStart: async () => {
+          await fetchEventsMeetup('upcoming', 5);
+          await fetchEventsMeetup('past', 5);
+        },
+      },
+      {
         name: 'fetch-recent-event',
         buildStart: async () => {
           await fetchEventData();
         },
       },
-      {
-        name: 'fetch-all-events',
-        buildStart: async () => {
-          await fetchEventsMeetup('past', 5);
-        },
-      }
     ],
   },
 });
