@@ -6,14 +6,14 @@ import path from 'path';
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string, page: number = 1) => {
+export const fetchEventsMeetup = async (status: string, page: number = 1, order: string = 'desc') => {
   const payload = {
     page: page,
     status: [status],
     group_urlname: 'pereira-tech-talks',
     'photo-host': 'secure',
     fields: 'featured_photo',
-    desc: 'true',
+    desc: order === 'desc' ? 'true' : 'false',
   };
 
   const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
@@ -123,7 +123,7 @@ const stringToSlug = (str) => {
  * @returns the most recent event
  */
 export const getMostRecentEvent = async () => {
-  const events = await fetchEventsMeetup('upcoming');
+  const events = await fetchEventsMeetup('upcoming', 5, 'asc');
   const eventData = events.length ? events[0] : {};
 
   return eventData;
