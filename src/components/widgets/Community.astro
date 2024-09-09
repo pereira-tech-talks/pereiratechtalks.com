@@ -1,0 +1,40 @@
+---
+import type { Communities as Props } from '~/types';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Image from '~/components/common/Image.astro';
+const {
+  title = '',
+  subtitle = '',
+  tagline = '',
+  communities = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''} lg:pb-0`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="flex flex-wrap justify-center">
+    {
+      communities &&
+        communities.map(
+          (community) =>
+            community && (
+              <div class="flex flex-col flex-wrap items-center sm:w-[12rem] w-full my-2 lg:my-4 py-1 px-3">
+                <a
+                  class="text-muted dark:text-gray-400  text-md p-2.5 items-center text-center"
+                  target="_blank"
+                  href={community.socialLink}
+                >
+                  <Image src={community.image} alt={community.name || ''} class="max-h-40 max-w-40 mb-2" />
+                </a>
+              </div>
+            )
+        )
+    }
+  </div>
+</WidgetWrapper>

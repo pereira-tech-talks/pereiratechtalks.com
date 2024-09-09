@@ -1,6 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 import type { Collaborators as Props } from '~/types';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
@@ -18,21 +16,25 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  {title && subtitle && tagline && <Headline title={title} subtitle={subtitle} tagline={tagline} />}
 
-  <div class="grid grid-flow-row md:grid-cols-4 sm:grid-cols-3 grid-cols-1 gap-x-6 sm:gap-x-8">
+  <div class="flex flex-wrap justify-center">
     {
       collaborators &&
         collaborators.map(
           (collaborator) =>
             collaborator && (
-              <div class="flex flex-col justify-center items-center col-span-1 my-2 lg:my-4 py-1 px-3">
-                <Image src={collaborator.image} alt={collaborator.name || ''} class="max-h-40 max-w-40  rounded-full" />
+              <div class="flex flex-col flex-wrap items-center sm:w-[10rem] w-full my-2 lg:my-4 py-1 px-3">
                 <a
-                  class="text-muted dark:text-gray-400  text-md p-2.5 inline-flex items-center"
+                  class="text-muted dark:text-gray-400  text-md p-2.5 items-center text-center"
+                  target="_blank"
                   href={collaborator.socialLink}
                 >
-                  {<Icon name="tabler:brand-linkedin" class="w-7 h-7 mr-1" />}
+                  <Image
+                    src={collaborator.image}
+                    alt={collaborator.name || ''}
+                    class="max-h-40 max-w-40 mb-2 rounded-full"
+                  />
                   <Fragment set:html={collaborator.name} />
                 </a>
               </div>
