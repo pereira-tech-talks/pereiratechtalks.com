@@ -123,6 +123,12 @@ export interface Collaborator {
   socialLink?: string;
 }
 
+export interface Community {
+  image: string;
+  name: string;
+  socialLink?: string;
+}
+
 export interface Speaker {
   image: string;
   name: string;
@@ -292,6 +298,10 @@ export interface Brands extends Omit<Headline, 'classes'>, Widget {
 export interface Collaborators extends Omit<Headline, 'classes'>, Widget {
   icons?: Array<string>;
   collaborators?: Array<Collaborator>;
+}
+
+export interface Communities extends Omit<Headline, 'classes'>, Widget {
+  communities?: Array<Community>;
 }
 
 export interface Speakers extends Omit<Headline, 'classes'>, Widget {
