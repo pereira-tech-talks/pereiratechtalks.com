@@ -190,6 +190,10 @@ export interface Item {
   classes?: Record<string, string>;
   callToAction?: CallToAction;
   image?: Image;
+  footerImage?: object;
+  footerSubtitle?: string;
+  footerDescription?: string;
+  footerSocialLinks?: Array<SocialIconLink>;
 }
 
 export interface Price {
@@ -320,6 +324,8 @@ export interface Features extends Omit<Headline, 'classes'>, Widget {
   isReversed?: boolean;
   isBeforeContent?: boolean;
   isAfterContent?: boolean;
+  footerImage?: object;
+  footerName?: string;
 }
 
 export interface Faqs extends Omit<Headline, 'classes'>, Widget {
