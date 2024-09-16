@@ -3,6 +3,7 @@ import type { ItemGrid as Props } from '~/types';
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 import Button from './Button.astro';
+import Image from '~/components/common/Image.astro';
 
 const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
 
@@ -32,22 +33,67 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
-        <div class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)}>
-          {(icon || defaultIcon) && (
-            <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
-          )}
-          <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
-          {description && (
-            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
-          )}
-          {callToAction && (
-            <div class="mt-2">
-              <Button {...callToAction} />
-            </div>
-          )}
-        </div>
-      ))}
+      {items.map(
+        ({
+          title,
+          description,
+          icon,
+          callToAction,
+          classes: itemClasses = {},
+          footerImage,
+          footerSubtitle,
+          footerDescription,
+          footerSocialLinks,
+        }) => (
+          <div class={twMerge('relative flex flex-col', panelClass, itemClasses?.panel)}>
+            {(icon || defaultIcon) && (
+              <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
+            )}
+            <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
+            {description && (
+              <p
+                class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
+                set:html={description}
+              />
+            )}
+            {/* Author section */}
+            {(footerImage || footerSubtitle) && (
+              <div class="mt-4 flex items-center space-x-2">
+                {footerImage && (
+                  <div class="h-20 w-20 rounded-full border border-slate-200 dark:border-slate-600">
+                    {typeof footerImage === 'string' ? (
+                      <Fragment set:html={footerImage} />
+                    ) : (
+                      <Image
+                        class="h-10 w-10 rounded-full border border-slate-200 dark:border-slate-600 min-w-full min-h-full"
+                        widths={[400, 768]}
+                        {...(footerImage as any)}
+                      />
+                    )}
+                  </div>
+                )}
+                {/* <span class="text-sm font-medium">{footerSubtitle}</span>
+                 */}
+                <div class="grow ml-3 rtl:ml-0 rtl:mr-3">
+                  {footerSubtitle && <p class="text-base font-semibold">{footerSubtitle}</p>}
+                  {footerDescription && <p class="text-xs text-muted">{footerDescription}</p>}
+                  <div class="pt-1 inline-flex">
+                    {footerSocialLinks &&
+                      footerSocialLinks.map((socialLink) => (
+                        <a href={socialLink.href}>{<Icon name={socialLink.icon} class="w-7 h-7 mr-1" />}</a>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            )}
+            {callToAction && (
+              <div class="mt-2">
+                <Button {...callToAction} />
+              </div>
+            )}
+          </div>
+        )
+      )}
     </div>
   )
 }

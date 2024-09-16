@@ -11,6 +11,8 @@ const {
   items = [],
   columns = 3,
   defaultIcon,
+  footerImage = await Astro.slots.render('footerImage'),
+  footerName = await Astro.slots.render('footerName'),
 
   id,
   isDark = false,
@@ -34,5 +36,7 @@ const {
       icon: 'w-12 h-12 mb-6 text-primary',
       ...((classes?.items as {}) ?? {}),
     }}
+    footerImage={footerImage}
+    footerName={footerName}
   />
 </WidgetWrapper>
