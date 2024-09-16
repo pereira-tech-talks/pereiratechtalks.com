@@ -17,6 +17,7 @@ import '@fontsource/bebas-neue';
 import '~/assets/styles/pereira-tech-day.css';
 import { getPermalink } from '~/utils/permalinks';
 import Community from '~/components/widgets/Community.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
   title:
@@ -501,7 +502,103 @@ const sponsors = {
 
   <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
   <Testimonials id="speakers" title="Ponentes" testimonials={speakers} />
-  <!-- <Speakers id="speakers" title="Ponentes" speakers={speakers} /> -->
+  <Features2
+    title="Lightning Talks"
+    tagline="Charlas cortas"
+    columns={3}
+    items={[
+      {
+        title: 'Tu primera charla',
+        footerSubtitle: 'Jonathan Alvarez',
+        footerDescription: 'Tech Lead / Sr. Software Engineer en Litentry',
+        footerImage: {
+          src: '~/assets/images/people/jonathan-alvarez.jpeg',
+          alt: 'Jonathan Alvarez',
+        },
+        footerSocialLinks: [
+          {
+            href: 'http://github.com/jonalvarezz',
+            icon: 'tabler:brand-github',
+          },
+        ],
+      },
+      {
+        title: 'Serleverless en lo cotidiano',
+        footerSubtitle: 'Juan Pablo Franco Sanchez',
+        footerDescription: 'UTP',
+        footerImage: {
+          src: '~/assets/images/people/juan-franco.jpg',
+          alt: 'Juan Pablo Franco Sanchez',
+        },
+        footerSocialLinks: [
+          {
+            href: 'https://github.com/juanpfrancoS',
+            icon: 'tabler:brand-github',
+          },
+        ],
+      },
+      {
+        title:
+          '¿En qué momento dejamos de entender qué sucede dentro del Machine Learning? Una intuición sobre arquitecturas y estilos del ML moderno',
+        footerSubtitle: 'Sebastian Franco Gomez',
+        footerDescription: 'ML Engineer en Expert Intelligence',
+        footerImage: {
+          src: '~/assets/images/people/sebastian-franco.jpeg',
+          alt: 'Sebastian Franco Gomez',
+        },
+        footerSocialLinks: [
+          {
+            href: 'https://github.com/thefrancho',
+            icon: 'tabler:brand-github',
+          },
+        ],
+      },
+      {
+        title: 'De 100 Modelos Django a una API GraphQL Completa en 1 Minuto',
+        footerSubtitle: 'Juan José Guzmán Cardona',
+        footerImage: {
+          src: '~/assets/images/people/juan-cardona.png',
+          alt: 'Juan José Guzmán Cardona',
+        },
+        footerSocialLinks: [
+          {
+            href: 'https://github.com/juanjcardona13',
+            icon: 'tabler:brand-github',
+          },
+        ],
+      },
+      {
+        title: 'Buena comunicación: La clave detrás del éxito en el trabajo en equipo',
+        footerSubtitle: 'Abdenago Lopez Hernandez',
+        footerDescription: 'QA en Blossom',
+        footerImage: {
+          src: '~/assets/images/people/abdenago-lopez.jpg',
+          alt: 'Abdenago Lopez Hernandez',
+        },
+        footerSocialLinks: [
+          {
+            href: 'https://www.linkedin.com/in/alopezhe-800141221',
+            icon: 'tabler:brand-linkedin',
+          },
+        ],
+      },
+      {
+        title: '5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos',
+        footerSubtitle: 'Sary Libreros',
+        footerDescription: 'Lider de Comunidad en AWS Women Colombia',
+        footerImage: {
+          src: '~/assets/images/people/sary-libreros.jpg',
+          alt: 'Sary Libreros',
+        },
+        footerSocialLinks: [
+          {
+            href: 'https://bento.me/sarylibreros',
+            icon: 'tabler:info-circle',
+          },
+        ],
+      },
+    ]}
+  />
   <Pricing title="Planes de patrocinio" prices={partnerships} />
   <Brands id="sponsors" title="Patrocinadores" brands={sponsors} />
   <Community id="community" title="Organiza" communities={communities} />
