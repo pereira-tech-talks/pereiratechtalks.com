@@ -39,13 +39,15 @@ const schedule = [
     icon: 'tabler:heart-handshake',
   },
   {
-    title: 'Charla I <br /> <span class="font-normal">8:26 AM - 9:16 AM</span>',
+    title:
+      '¿Cuántos árboles cuesta tu deploy? Preguntas incómodas para devs conscientes <br /> <span class="font-normal">8:26 AM - 9:16 AM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/karobotco/" target="_blank" class="text-primary-500"><i>Karolina Ladino</i></a>.',
     icon: 'tabler:message',
   },
   {
-    title: 'Charla II <br /> <span class="font-normal">9:16 AM - 10:06 AM</span>',
+    title:
+      'El camino estrecho , “ganar” en contra de la probabilidad <br /> <span class="font-normal">9:16 AM - 10:06 AM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/c%C3%A9sar-camacho-92bb5a21a/" target="_blank" class="text-primary-500"><i>Cesar Camacho</i></a>.',
     icon: 'tabler:message',
@@ -59,13 +61,15 @@ const schedule = [
     icon: 'tabler:heart-handshake',
   },
   {
-    title: 'Charla III <br /> <span class="font-normal">11:14 AM - 12:04 PM</span>',
+    title:
+      'Construyendo el Futuro: Desarrollo de Aplicaciones Web Impulsado por Inteligencia Artificial <br /> <span class="font-normal">11:14 AM - 12:04 PM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/vanessa-marely-aristizabal-angel/" target="_blank" class="text-primary-500"><i>Vanessa Aristizabal</i></a>.',
     icon: 'tabler:message',
   },
   {
-    title: 'Charla IV <br /> <span class="font-normal">12:04 PM - 12:54 PM</span>',
+    title:
+      'El Futuro de la Inteligencia Artificial, o tal vez el No Futuro <br /> <span class="font-normal">12:04 PM - 12:54 PM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/josejaramillov/" target="_blank" class="text-primary-500"><i>Jose Jaramillo</i></a>.',
     icon: 'tabler:message',
@@ -415,6 +419,99 @@ const sponsors = {
   ],
   bronze: [],
 };
+
+const lightningTalks = [
+  {
+    title: 'Tu primera charla',
+    footerSubtitle: 'Jonathan Alvarez',
+    footerDescription: 'Tech Lead / Sr. Software Engineer en Litentry',
+    footerImage: {
+      src: '~/assets/images/people/jonathan-alvarez.jpeg',
+      alt: 'Jonathan Alvarez',
+    },
+    footerSocialLinks: [
+      {
+        href: 'http://github.com/jonalvarezz',
+        icon: 'tabler:brand-github',
+      },
+    ],
+  },
+  {
+    title: 'Serleverless en lo cotidiano',
+    footerSubtitle: 'Juan Pablo Franco Sanchez',
+    footerDescription: 'UTP',
+    footerImage: {
+      src: '~/assets/images/people/juan-franco.jpg',
+      alt: 'Juan Pablo Franco Sanchez',
+    },
+    footerSocialLinks: [
+      {
+        href: 'https://github.com/juanpfrancoS',
+        icon: 'tabler:brand-github',
+      },
+    ],
+  },
+  {
+    title:
+      '¿En qué momento dejamos de entender qué sucede dentro del Machine Learning? Una intuición sobre arquitecturas y estilos del ML moderno',
+    footerSubtitle: 'Sebastian Franco Gomez',
+    footerDescription: 'ML Engineer en Expert Intelligence',
+    footerImage: {
+      src: '~/assets/images/people/sebastian-franco.jpeg',
+      alt: 'Sebastian Franco Gomez',
+    },
+    footerSocialLinks: [
+      {
+        href: 'https://github.com/thefrancho',
+        icon: 'tabler:brand-github',
+      },
+    ],
+  },
+  {
+    title: 'De 100 Modelos Django a una API GraphQL Completa en 1 Minuto',
+    footerSubtitle: 'Juan José Guzmán Cardona',
+    footerImage: {
+      src: '~/assets/images/people/juan-cardona.png',
+      alt: 'Juan José Guzmán Cardona',
+    },
+    footerSocialLinks: [
+      {
+        href: 'https://github.com/juanjcardona13',
+        icon: 'tabler:brand-github',
+      },
+    ],
+  },
+  {
+    title: 'Buena comunicación: La clave detrás del éxito en el trabajo en equipo',
+    footerSubtitle: 'Abdenago Lopez Hernandez',
+    footerDescription: 'QA en Blossom',
+    footerImage: {
+      src: '~/assets/images/people/abdenago-lopez.jpg',
+      alt: 'Abdenago Lopez Hernandez',
+    },
+    footerSocialLinks: [
+      {
+        href: 'https://www.linkedin.com/in/alopezhe-800141221',
+        icon: 'tabler:brand-linkedin',
+      },
+    ],
+  },
+  {
+    title: '5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos',
+    footerSubtitle: 'Sary Libreros',
+    footerDescription: 'Lider de Comunidad en AWS Women Colombia',
+    footerImage: {
+      src: '~/assets/images/people/sary-libreros.jpg',
+      alt: 'Sary Libreros',
+    },
+    footerSocialLinks: [
+      {
+        href: 'https://bento.me/sarylibreros',
+        icon: 'tabler:info-circle',
+      },
+    ],
+  },
+];
 ---
 
 <EventsLayout metadata={metadata}>
@@ -507,103 +604,7 @@ const sponsors = {
 
   <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
   <Testimonials id="speakers" title="Ponentes" testimonials={speakers} />
-  <Features2
-    title="Lightning Talks"
-    tagline="Charlas cortas"
-    columns={3}
-    items={[
-      {
-        title: 'Tu primera charla',
-        footerSubtitle: 'Jonathan Alvarez',
-        footerDescription: 'Tech Lead / Sr. Software Engineer en Litentry',
-        footerImage: {
-          src: '~/assets/images/people/jonathan-alvarez.jpeg',
-          alt: 'Jonathan Alvarez',
-        },
-        footerSocialLinks: [
-          {
-            href: 'http://github.com/jonalvarezz',
-            icon: 'tabler:brand-github',
-          },
-        ],
-      },
-      {
-        title: 'Serleverless en lo cotidiano',
-        footerSubtitle: 'Juan Pablo Franco Sanchez',
-        footerDescription: 'UTP',
-        footerImage: {
-          src: '~/assets/images/people/juan-franco.jpg',
-          alt: 'Juan Pablo Franco Sanchez',
-        },
-        footerSocialLinks: [
-          {
-            href: 'https://github.com/juanpfrancoS',
-            icon: 'tabler:brand-github',
-          },
-        ],
-      },
-      {
-        title:
-          '¿En qué momento dejamos de entender qué sucede dentro del Machine Learning? Una intuición sobre arquitecturas y estilos del ML moderno',
-        footerSubtitle: 'Sebastian Franco Gomez',
-        footerDescription: 'ML Engineer en Expert Intelligence',
-        footerImage: {
-          src: '~/assets/images/people/sebastian-franco.jpeg',
-          alt: 'Sebastian Franco Gomez',
-        },
-        footerSocialLinks: [
-          {
-            href: 'https://github.com/thefrancho',
-            icon: 'tabler:brand-github',
-          },
-        ],
-      },
-      {
-        title: 'De 100 Modelos Django a una API GraphQL Completa en 1 Minuto',
-        footerSubtitle: 'Juan José Guzmán Cardona',
-        footerImage: {
-          src: '~/assets/images/people/juan-cardona.png',
-          alt: 'Juan José Guzmán Cardona',
-        },
-        footerSocialLinks: [
-          {
-            href: 'https://github.com/juanjcardona13',
-            icon: 'tabler:brand-github',
-          },
-        ],
-      },
-      {
-        title: 'Buena comunicación: La clave detrás del éxito en el trabajo en equipo',
-        footerSubtitle: 'Abdenago Lopez Hernandez',
-        footerDescription: 'QA en Blossom',
-        footerImage: {
-          src: '~/assets/images/people/abdenago-lopez.jpg',
-          alt: 'Abdenago Lopez Hernandez',
-        },
-        footerSocialLinks: [
-          {
-            href: 'https://www.linkedin.com/in/alopezhe-800141221',
-            icon: 'tabler:brand-linkedin',
-          },
-        ],
-      },
-      {
-        title: '5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos',
-        footerSubtitle: 'Sary Libreros',
-        footerDescription: 'Lider de Comunidad en AWS Women Colombia',
-        footerImage: {
-          src: '~/assets/images/people/sary-libreros.jpg',
-          alt: 'Sary Libreros',
-        },
-        footerSocialLinks: [
-          {
-            href: 'https://bento.me/sarylibreros',
-            icon: 'tabler:info-circle',
-          },
-        ],
-      },
-    ]}
-  />
+  <Features2 title="Lightning Talks" tagline="Charlas cortas" columns={3} items={lightningTalks} />
   <Pricing title="Planes de patrocinio" prices={partnerships} />
   <Brands id="sponsors" title="Patrocinadores" brands={sponsors} />
   <Community id="community" title="Organiza" communities={communities} />
