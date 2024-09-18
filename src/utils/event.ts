@@ -27,6 +27,7 @@ export const fetchEventsMeetup = async (status: string, page: number = 1, order:
 
   data.map((event) => {
     const name = event?.name || '';
+    const url = event?.link || '';
     const venue = event?.venue?.name || '';
     const description = event?.description || '';
     const eventId = stringToSlug(`${event.id} - ${name}`);
@@ -63,6 +64,7 @@ export const fetchEventsMeetup = async (status: string, page: number = 1, order:
       name,
       venue,
       description,
+      url,
     };
 
     Object.keys(dataMapped).forEach((key) => {
@@ -103,6 +105,7 @@ metadata:
   canonical: https://pereiratechtalks.com/$eventId
 ---
 
+> Publicación original en [Meetup.com]($url)
 
 $description
 `;
