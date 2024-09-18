@@ -12,7 +12,7 @@ import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 export const prerender = true;
 
 export const getStaticPaths = (async ({ paginate }) => {
-  return await getStaticPathsBlogList({ paginate });
+  return await getStaticPathsBlogList({ paginate }, ['meetup-com']);
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

@@ -107,8 +107,9 @@ const getRandomizedPosts = (array: Post[], num: number) => {
 const load = async function (): Promise<Array<Post>> {
   const posts = await getCollection('post');
   const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
+  const allPosts = await Promise.all(normalizedPosts);
 
-  const results = (await Promise.all(normalizedPosts))
+  const results = allPosts
     .sort((a, b) => b.publishDate.valueOf() - a.publishDate.valueOf())
     .filter((post) => !post.draft);
 
@@ -133,12 +134,14 @@ export const blogTagRobots = APP_BLOG.tag.robots;
 export const blogPostsPerPage = APP_BLOG?.postsPerPage;
 
 /** */
-export const fetchPosts = async (): Promise<Array<Post>> => {
+export const fetchPosts = async (excludeTags: Array<string> = []): Promise<Array<Post>> => {
   if (!_posts) {
     _posts = await load();
   }
 
-  return _posts;
+  const filteredPosts = _posts.filter((post) => !excludeTags.some((tag) => (post?.tags || []).includes(tag)));
+
+  return filteredPosts;
 };
 
 /** */
@@ -185,16 +188,21 @@ export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> =
 
 /** */
 export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
-  const _count = count || 4;
+  const _count = count ?? 4;
   const posts = await fetchPosts();
 
   return posts ? posts.slice(0, _count) : [];
 };
 
 /** */
-export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
+export const getStaticPathsBlogList = async (
+  { paginate }: { paginate: PaginateFunction },
+  excludeTags: Array<string>
+) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
+  const allPosts = await fetchPosts(excludeTags);
+
+  return paginate(allPosts, {
     params: { blog: BLOG_BASE || undefined },
     pageSize: blogPostsPerPage,
   });
