@@ -52,7 +52,7 @@
     "@typescript-eslint/eslint-plugin": "8.1.0",
     "@typescript-eslint/parser": "8.1.0",
     "astro-compress": "2.3.1",
-    "eslint": "8.57.0",
+    "eslint": "9.10.0",
     "eslint-plugin-astro": "1.2.3",
     "eslint-plugin-jsx-a11y": "6.9.0",
     "js-yaml": "4.1.0",
