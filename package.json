@@ -32,7 +32,7 @@
     "@fontsource/roboto": "^5.0.14",
     "@sentry/astro": "8.26.0",
     "@spotlightjs/astro": "2.1.6",
-    "astro": "4.14.2",
+    "astro": "4.15.7",
     "astro-icon": "1.1.1",
     "limax": "4.1.0",
     "lodash.merge": "4.6.2",
