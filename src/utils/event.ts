@@ -6,10 +6,10 @@ import path from 'path';
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string, page: number = 1, order: string = 'desc') => {
+export const fetchEventsMeetup = async (status: string, page: string = '1', order: string = 'desc') => {
   const payload = {
     page: page,
-    status: [status],
+    status: status,
     group_urlname: 'pereira-tech-talks',
     'photo-host': 'secure',
     fields: 'featured_photo',

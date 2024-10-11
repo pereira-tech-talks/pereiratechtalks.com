@@ -16,7 +16,7 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  {title && subtitle && tagline && <Headline title={title} subtitle={subtitle} tagline={tagline} />}
+  {title || subtitle || (tagline && <Headline title={title} subtitle={subtitle} tagline={tagline} />)}
 
   <div class="flex flex-wrap justify-center">
     {

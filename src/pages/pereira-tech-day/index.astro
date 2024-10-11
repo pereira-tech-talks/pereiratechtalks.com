@@ -107,7 +107,7 @@ const communities = [
   },
 ];
 
-const collaborators = [
+const organizers = [
   {
     image: '~/assets/images/people/carolina-gomez-trejos.jpg',
     name: 'Carolina Gómez Trejos',
@@ -142,6 +142,44 @@ const collaborators = [
     image: '~/assets/images/people/melisa-escobar.png',
     name: 'Melisa Escobar Gutierrez',
     socialLink: 'https://www.linkedin.com/in/m3lissaeg/',
+  },
+];
+
+const collaborators = [
+  {
+    image: '~/assets/images/people/santiago-bernal.jpeg',
+    name: 'Santiago Bernal',
+    socialLink: 'https://www.linkedin.com/in/santiaguf',
+  },
+  {
+    image: '~/assets/images/people/eliana-osorio.jpeg',
+    name: 'Eliana Osorio',
+    socialLink: 'https://www.linkedin.com/in/monocuka/',
+  },
+  {
+    image: '~/assets/images/people/andres-rodriguez.JPG',
+    name: 'Andrés Rodríguez',
+    socialLink: 'https://www.linkedin.com/in/arodrigueze0215/',
+  },
+  {
+    image: '~/assets/images/people/katherine-lopez.jpeg',
+    name: 'Katherine López',
+    socialLink: '',
+  },
+  {
+    image: '~/assets/images/people/lizeth-franco.jpeg',
+    name: 'Lizeth Franco',
+    socialLink: 'https://www.linkedin.com/in/lizethvictoria/',
+  },
+  {
+    image: '~/assets/images/people/leiver-campeon.jpg',
+    name: 'Leiver Campeón',
+    socialLink: 'https://www.linkedin.com/in/leiverandres/',
+  },
+  {
+    image: '~/assets/images/people/cindy-jimenez.jpeg',
+    name: 'Cindy Jiménez',
+    socialLink: 'https://www.linkedin.com/in/cindy-jimenez-s/',
   },
 ];
 
@@ -608,7 +646,13 @@ const lightningTalks = [
   <Pricing title="Planes de patrocinio" prices={partnerships} />
   <Brands id="sponsors" title="Patrocinadores" brands={sponsors} />
   <Community id="community" title="Organiza" communities={communities} />
-  <Collaborators id="collaborators" collaborators={collaborators} />
+  <Collaborators id="organizers" collaborators={organizers} classes={{ container: 'lg:py-5' }} />
+  <Collaborators
+    id="collaborators"
+    tagline="Colaboradores"
+    collaborators={collaborators}
+    classes={{ container: 'lg:pt-5' }}
+  />
   <FAQs
     id="faqs"
     title="Preguntas Frecuentes (FAQ)"
