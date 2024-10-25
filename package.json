@@ -1,7 +1,7 @@
 {
   "name": "pereiratechtalks.com",
   "description": "Pereira Tech Talks - A community for developers and researchers.",
-  "version": "1.0.68",
+  "version": "1.0.69",
   "private": true,
   "scripts": {
     "dev": "astro dev",
