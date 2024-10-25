@@ -28,6 +28,6 @@ Is this change backward compatible with the most recently released version? Does
 - [ ] Yes (backward compatible)
 - [ ] No (breaking changes)
 
-## What's new?
+## What is new?
 
-- Describe what's new here.
+- Describe what is new here.
