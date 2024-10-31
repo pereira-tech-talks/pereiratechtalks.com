@@ -1,4 +1,4 @@
-# 🚀 Pereira Tech Talks
+# 🚀 Pereira Tech Talks.
 
 Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología.
 
