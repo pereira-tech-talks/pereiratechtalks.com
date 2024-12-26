@@ -67,6 +67,8 @@ analytics:
   vendors:
     googleAnalytics:
       id: 'G-GD38K1WJJ9'
+    googleTagManager:
+      id: 'G-GD38K1WJJ9'
 
 ui:
   theme: 'dark'
