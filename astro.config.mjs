@@ -38,8 +38,10 @@ async function fetchEventData() {
   fs.writeFileSync(`${dataPath}/announcementData.json`, JSON.stringify(newEventData));
 }
 
-const whenExternalScripts = (items = []) =>
-  hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
+const whenExternalScripts = (items = []) => {
+  const eachItem = Array.isArray(items) ? items.map((item) => item()) : [items()];
+  return hasExternalScripts ?  eachItem  : [];
+}
 
 export default defineConfig({
   site: 'https://www.pereiratechtalks.com',
