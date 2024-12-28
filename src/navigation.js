@@ -119,11 +119,12 @@ export const footerData = {
     {
       title: 'Apoya',
       links: [
-        { text: 'DailyBot', href: 'https://www.dailybot.com/' },
         {
           text: 'ASE UTP',
           href: 'https://egresados.utp.edu.co/',
         },
+        { text: 'DailyBot', href: 'https://www.dailybot.com/' },
+        { text: 'Social&Co', href: 'https://socialco.com.co/' },
       ],
     },
   ],
