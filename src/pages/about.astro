@@ -1,20 +1,53 @@
 ---
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
-
+import Collaborators from '~/components/widgets/Collaborators.astro';
 const metadata = {
   title: 'About us',
 };
+
+const team = [
+  {
+    image: '~/assets/images/people/team/melissa-escobar.png',
+    name: 'Melissa Escobar',
+    socialLink: 'https://www.linkedin.com/in/m3lissaeg',
+  },
+  {
+    image: '~/assets/images/people/team/hector-jimenez.jpg',
+    name: 'Hector F. Jimenez S.',
+    socialLink: 'https://www.linkedin.com/in/h3ct0rjs/',
+  },
+  {
+    image: '~/assets/images/people/team/mega-barto.jpeg',
+    name: 'Juan Alejandro Pérez Bermúdez',
+    socialLink: 'https://www.linkedin.com/in/mega-barto/',
+  },
+  {
+    image: '~/assets/images/people/team/santiago-bernal.jpeg',
+    name: 'Santiago Bernal',
+    socialLink: 'https://www.linkedin.com/in/santiaguf/',
+  },
+  {
+    image: '~/assets/images/people/team/jose-felipe-duarte.png',
+    name: 'Jose Felipe Duarte',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
+  },
+  {
+    image: '~/assets/images/people/team/luis-bazan.png',
+    name: 'Luis Bazan',
+    socialLink: 'https://www.linkedin.com/in/luisbernardobazan/',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="Quiénes somos"
+    title="Quiénes somos"
     image={{
       src: '~/assets/images/team/pereiratechtalks-team-2024.jpg',
-      alt: 'Caos Image',
+      alt: 'PTT team 2024',
     }}
   >
     <Fragment slot="subtitle">
@@ -29,4 +62,10 @@ const metadata = {
       > queremos conocerte a tí y a más personas como nosotros con ganas de compartir.
     </Fragment>
   </Hero>
+
+  {
+    team && (
+      <Collaborators id="collaborators" tagline="Equipo PTT" collaborators={team} classes={{ container: 'lg:pt-5' }} />
+    )
+  }
 </Layout>
