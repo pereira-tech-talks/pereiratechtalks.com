@@ -1,12 +1,16 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * Fetch events from Meetup
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string, page: string = '1', order: string = 'desc') => {
+export const fetchEventsMeetup = async (
+  status: string,
+  page: string = '1',
+  order: string = 'desc',
+) => {
   const payload = {
     page: page,
     status: status,
@@ -17,10 +21,12 @@ export const fetchEventsMeetup = async (status: string, page: string = '1', orde
   };
 
   const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
-  const response = await fetch(`${meetUpURL}?${new URLSearchParams(payload).toString()}`);
+  const response = await fetch(
+    `${meetUpURL}?${new URLSearchParams(payload).toString()}`,
+  );
   const data = await response.json();
 
-  if ('errors' in data) {
+  if ('errors' in data || data.message === 'Not Found') {
     console.error(data.errors);
     return [];
   }
@@ -67,9 +73,12 @@ export const fetchEventsMeetup = async (status: string, page: string = '1', orde
       url,
     };
 
-    Object.keys(dataMapped).forEach((key) => {
-      eventTemplateWithId = eventTemplateWithId.replace(`$${key}`, dataMapped[key]);
-    });
+    for (const key of Object.keys(dataMapped)) {
+      eventTemplateWithId = eventTemplateWithId.replace(
+        `$${key}`,
+        dataMapped[key],
+      );
+    }
 
     fs.writeFileSync(`src/content/post/${eventId}.mdx`, eventTemplateWithId);
   });

@@ -3,10 +3,10 @@ import { APP_BLOG } from 'astrowind:config';
 
 import Grid from '~/components/blog/Grid.astro';
 
-import { getBlogPermalink } from '~/utils/permalinks';
-import { findPostsByIds } from '~/utils/blog';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Widget } from '~/types';
+import { findPostsByIds } from '~/utils/blog';
+import { getBlogPermalink } from '~/utils/permalinks';
 
 export interface Props extends Widget {
   title?: string;

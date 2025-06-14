@@ -48,16 +48,10 @@ npm run dev
 
 A continuación encontrarás algunos comandos importantes a la hora de contribuir al proyecto, que debes ejecutar antes de subir nuevos cambios al proyecto:
 
-Verificar linters:
+Verificar linters y formato de código:
 
 ```
-npm run eslint:fix
-```
-
-Verificar formato de código:
-
-```
-npm run prettier:fix
+npm run biome:fix
 ```
 
 Validar pruebas:

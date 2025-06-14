@@ -1,4 +1,4 @@
-FROM node:20.16.0-bullseye
+FROM node:20.18.1-bookworm-slim
 LABEL maintainer="pereiratechtalks@gmail.com"
 
 RUN apt-get update -y && \

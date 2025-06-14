@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { getPermalink } from '~/utils/permalinks';
 import Button from '~/components/ui/Button.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 export interface Props {
   prevUrl?: string;
@@ -10,7 +10,12 @@ export interface Props {
   nextText?: string;
 }
 
-const { prevUrl, nextUrl, prevText = 'Post nuevos', nextText = 'Post antiguos' } = Astro.props;
+const {
+  prevUrl,
+  nextUrl,
+  prevText = 'Post nuevos',
+  nextText = 'Post antiguos',
+} = Astro.props;
 ---
 
 {

@@ -1,23 +1,23 @@
 ---
-import type { Testimonial } from '~/types';
 import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import Brands from '~/components/widgets/Brands.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Image from '~/components/common/Image.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Brands from '~/components/widgets/Brands.astro';
-import EventsLayout from '~/layouts/EventsLayout.astro';
-import Content from '~/components/widgets/Content.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
+import Steps from '~/components/widgets/Steps.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
-import Collaborators from '~/components/widgets/Collaborators.astro';
+import EventsLayout from '~/layouts/EventsLayout.astro';
+import type { Testimonial } from '~/types';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 
 import '@fontsource/bebas-neue';
 import '~/assets/styles/pereira-tech-day.css';
-import { getPermalink } from '~/utils/permalinks';
 import Community from '~/components/widgets/Community.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title:
@@ -31,11 +31,13 @@ const schedule = [
     icon: 'tabler:forms',
   },
   {
-    title: 'Bienvenida <br /> <span class="font-normal">8:00 AM - 8:15 AM</span>',
+    title:
+      'Bienvenida <br /> <span class="font-normal">8:00 AM - 8:15 AM</span>',
     icon: 'tabler:microphone-2',
   },
   {
-    title: 'Espacio patrocinadores <br /> <span class="font-normal">8:15 AM - 8:26 AM</span>',
+    title:
+      'Espacio patrocinadores <br /> <span class="font-normal">8:15 AM - 8:26 AM</span>',
     icon: 'tabler:heart-handshake',
   },
   {
@@ -53,11 +55,13 @@ const schedule = [
     icon: 'tabler:message',
   },
   {
-    title: 'Refrigerio <br /> <span class="font-normal">10:06 AM - 11:06 AM</span>',
+    title:
+      'Refrigerio <br /> <span class="font-normal">10:06 AM - 11:06 AM</span>',
     icon: 'tabler:coffee',
   },
   {
-    title: 'Espacio patrocinadores <br /> <span class="font-normal">11:06 AM - 11:14 AM</span>',
+    title:
+      'Espacio patrocinadores <br /> <span class="font-normal">11:06 AM - 11:14 AM</span>',
     icon: 'tabler:heart-handshake',
   },
   {
@@ -75,7 +79,8 @@ const schedule = [
     icon: 'tabler:message',
   },
   {
-    title: 'Lightning talks <br /> <span class="font-normal">12:54 PM - 01:24 PM</span>',
+    title:
+      'Lightning talks <br /> <span class="font-normal">12:54 PM - 01:24 PM</span>',
     icon: 'tabler:bulb',
   },
   {
@@ -136,7 +141,8 @@ const organizers = [
   {
     image: '~/assets/images/people/angelica-aguirre.png',
     name: 'Angelica Aguirre',
-    socialLink: 'https://www.linkedin.com/in/angelica-aguirre-castro-50abb5110/',
+    socialLink:
+      'https://www.linkedin.com/in/angelica-aguirre-castro-50abb5110/',
   },
   {
     image: '~/assets/images/people/melisa-escobar.png',
@@ -271,7 +277,8 @@ const partnerships = [
         description: 'Agradecimiento post evento en redes sociales.',
       },
       {
-        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+        description:
+          'Mencion en todas las comunicaciones oficiales del evento.',
       },
       {
         description: 'Lightning talk de 5 minutos.',
@@ -280,7 +287,8 @@ const partnerships = [
         description: 'Publicidad de la empresa en el evento.',
       },
       {
-        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+        description:
+          'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
       },
       {
         description: 'Stand en el evento.',
@@ -301,7 +309,8 @@ const partnerships = [
         description: 'Agradecimiento post evento en redes sociales.',
       },
       {
-        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+        description:
+          'Mencion en todas las comunicaciones oficiales del evento.',
       },
       {
         description: 'Lightning talk de 3 minutos.',
@@ -311,7 +320,8 @@ const partnerships = [
         icon: 'tabler:x',
       },
       {
-        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+        description:
+          'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
         icon: 'tabler:x',
       },
       {
@@ -334,7 +344,8 @@ const partnerships = [
         description: 'Agradecimiento post evento en redes sociales.',
       },
       {
-        description: 'Mencion en todas las comunicaciones oficiales del evento.',
+        description:
+          'Mencion en todas las comunicaciones oficiales del evento.',
         icon: 'tabler:x',
       },
       {
@@ -346,7 +357,8 @@ const partnerships = [
         icon: 'tabler:x',
       },
       {
-        description: 'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
+        description:
+          'Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.',
         icon: 'tabler:x',
       },
       {
@@ -381,13 +393,15 @@ const faqsList = [
       'Si puedes asistir, este es un evento abierto a todo público interesado en aprender más sobre estos temas.',
   },
   {
-    title: '¿Cómo puede mi organización convertirse en patrocinador del evento?',
+    title:
+      '¿Cómo puede mi organización convertirse en patrocinador del evento?',
     description:
       'Escribenos a pereiratechtalks@gmail.com indicando que estás interesado en patrocinarnos, los planes de patrocinio se encuentran en la sección Planes de nuestra página web, pero estamos abiertos a oir nuevas propuestas.',
   },
   {
     title: '¿Qué temas se hablarán en el Pereira Tech Day?',
-    description: 'Tendremos un día de Desarrollo de software, Data Science, Machine Learning, infraestructura y más!',
+    description:
+      'Tendremos un día de Desarrollo de software, Data Science, Machine Learning, infraestructura y más!',
   },
   {
     title: '¿El evento cuenta con alimentación garantizada?',
@@ -395,17 +409,20 @@ const faqsList = [
       'Gracias a la gestión del equipo organizador contaremos con patrocinadores que permitiran que este evento cuente con refrigerios en la mañana y en la tarde, además de una estación de café durante todo el día.',
   },
   {
-    title: 'Solo quiero/puedo asistir durante unas horas. ¿Es posible hacerlo sin registrarse?',
+    title:
+      'Solo quiero/puedo asistir durante unas horas. ¿Es posible hacerlo sin registrarse?',
     description:
       'No, contamos con cupos limitados y esperamos que estos los ocupen las personas que puedan asistir durante toda la jornada.',
   },
   {
     title: '¿Recibiré un certificado de asistencia?',
-    description: 'Si, este será enviado vía correo electrónico días después del evento.',
+    description:
+      'Si, este será enviado vía correo electrónico días después del evento.',
   },
   {
     title: '¿Necesito llevar mi computador?',
-    description: 'No es necesario, aunque si quieres tomar apuntes lo puedes traer.',
+    description:
+      'No es necesario, aunque si quieres tomar apuntes lo puedes traer.',
   },
   {
     title: '¿El sitio es seguro?',
@@ -520,7 +537,8 @@ const lightningTalks = [
     ],
   },
   {
-    title: 'Buena comunicación: La clave detrás del éxito en el trabajo en equipo',
+    title:
+      'Buena comunicación: La clave detrás del éxito en el trabajo en equipo',
     footerSubtitle: 'Abdenago Lopez Hernandez',
     footerDescription: 'QA en Blossom',
     footerImage: {
@@ -535,7 +553,8 @@ const lightningTalks = [
     ],
   },
   {
-    title: '5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos',
+    title:
+      '5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos',
     footerSubtitle: 'Sary Libreros',
     footerDescription: 'Lider de Comunidad en AWS Women Colombia',
     footerImage: {

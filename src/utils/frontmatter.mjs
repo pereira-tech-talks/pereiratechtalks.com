@@ -1,9 +1,10 @@
-import getReadingTime from 'reading-time';
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { toString } from 'mdast-util-to-string';
-import lazyLoadPlugin from 'rehype-plugin-image-native-lazy-loading'
+import getReadingTime from 'reading-time';
+import lazyLoadPlugin from 'rehype-plugin-image-native-lazy-loading';
 
 export function readingTimeRemarkPlugin() {
-  return function (tree, file) {
+  return (tree, file) => {
     const textOnPage = toString(tree);
     const readingTime = Math.ceil(getReadingTime(textOnPage).minutes);
 
@@ -12,7 +13,7 @@ export function readingTimeRemarkPlugin() {
 }
 
 export function responsiveTablesRehypePlugin() {
-  return function (tree) {
+  return (tree) => {
     if (!tree.children) return;
 
     for (let i = 0; i < tree.children.length; i++) {
@@ -36,4 +37,4 @@ export function responsiveTablesRehypePlugin() {
   };
 }
 
-export const lazyImagesRehypePlugin = lazyLoadPlugin
+export const lazyImagesRehypePlugin = lazyLoadPlugin;
