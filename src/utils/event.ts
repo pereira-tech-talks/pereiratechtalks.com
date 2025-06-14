@@ -1,5 +1,19 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+interface MeetupEvent {
+  id: string;
+  name: string;
+  link: string;
+  time: number;
+  venue?: {
+    name: string;
+  };
+  description: string;
+  featured_photo?: {
+    highres_link: string;
+  };
+}
 
 /**
  * Fetch events from Meetup
@@ -31,7 +45,7 @@ export const fetchEventsMeetup = async (
     return [];
   }
 
-  data.map((event) => {
+  data.map((event: MeetupEvent) => {
     const name = event?.name || '';
     const url = event?.link || '';
     const venue = event?.venue?.name || '';
@@ -86,7 +100,7 @@ export const fetchEventsMeetup = async (
   return data;
 };
 
-async function downloadImage(url, filePath) {
+async function downloadImage(url: string, filePath: string): Promise<void> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -119,7 +133,7 @@ metadata:
 $description
 `;
 
-const stringToSlug = (str) => {
+const stringToSlug = (str: string): string => {
   return str
     .toLowerCase() // Convert to lower case
     .trim() // Trim leading/trailing whitespace
@@ -135,7 +149,7 @@ const stringToSlug = (str) => {
  * @returns the most recent event
  */
 export const getMostRecentEvent = async () => {
-  const events = await fetchEventsMeetup('upcoming', 5, 'asc');
+  const events = await fetchEventsMeetup('upcoming', '5', 'asc');
   const eventData = events.length ? events[0] : {};
 
   return eventData;

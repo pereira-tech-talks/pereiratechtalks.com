@@ -59,7 +59,9 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
-      - name: Step 1 - 🧪 Run biome linter
+      - name: Step 1 - 🧪 Run astro check
+        run: npm run astro:check
+      - name: Step 2 - 🧪 Run biome linter
         run: npm run biome:check
 
   validate_tests:

@@ -10,6 +10,7 @@
     "build:ghpages": "astro build --outDir ./docs",
     "preview": "astro preview",
     "astro": "astro",
+    "astro:check": "astro check",
     "astro:telemetry:disable": "astro telemetry disable",
     "test": "echo 'Running tests...'",
     "biome:check": "biome check",
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "4.0.12",
+    "@astrojs/check": "0.9.4",
     "@astrojs/sitemap": "3.4.1",
     "@astrolib/analytics": "0.6.1",
     "@astrolib/seo": "1.0.0-beta.8",
