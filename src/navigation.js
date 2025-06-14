@@ -1,4 +1,4 @@
-import { getBlogPermalink, getAsset, getPermalink } from './utils/permalinks';
+import { getAsset, getBlogPermalink, getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
@@ -80,8 +80,18 @@ export const footerData = {
       href: 'https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U',
       target: '_blank',
     },
-    { ariaLabel: 'Telegram', icon: 'tabler:brand-telegram', href: 'https://t.me/PerTechTalks', target: '_blank' },
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: 'https://x.com/PerTechTalks', target: '_blank' },
+    {
+      ariaLabel: 'Telegram',
+      icon: 'tabler:brand-telegram',
+      href: 'https://t.me/PerTechTalks',
+      target: '_blank',
+    },
+    {
+      ariaLabel: 'X',
+      icon: 'tabler:brand-x',
+      href: 'https://x.com/PerTechTalks',
+      target: '_blank',
+    },
     {
       ariaLabel: 'Instagram',
       icon: 'tabler:brand-instagram',
@@ -112,8 +122,14 @@ export const footerData = {
         { text: 'JointDev', href: 'https://jointdevweb.firebaseapp.com/' },
         { text: 'PereiraJS', href: 'https://pereira.js.org/' },
         { text: 'Python Pereira', href: 'https://pypereira.co' },
-        { text: 'Manizales Tech Talks', href: 'https://www.meetup.com/es/manizalestechtalks/' },
-        { text: 'Quindio Tech', href: 'https://www.meetup.com/es-ES/quindio-tech/' },
+        {
+          text: 'Manizales Tech Talks',
+          href: 'https://www.meetup.com/es/manizalestechtalks/',
+        },
+        {
+          text: 'Quindio Tech',
+          href: 'https://www.meetup.com/es-ES/quindio-tech/',
+        },
       ],
     },
     {
@@ -128,5 +144,7 @@ export const footerData = {
       ],
     },
   ],
-  secondaryLinks: [{ text: 'Código de Conducta', href: getPermalink('/codigo-conducta') }],
+  secondaryLinks: [
+    { text: 'Código de Conducta', href: getPermalink('/codigo-conducta') },
+  ],
 };
