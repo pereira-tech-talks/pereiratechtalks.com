@@ -1,7 +1,7 @@
 ---
 import Image from '~/components/common/Image.astro';
-import type { CallToAction } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import type { CallToAction } from '~/types';
 
 export interface Props {
   title?: string;
@@ -9,7 +9,8 @@ export interface Props {
   tagline?: string;
   content?: string;
   actions?: string | CallToAction[];
-  image?: string | any; // TODO: find HTMLElementProps
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  image?: string | any;
 }
 
 const {

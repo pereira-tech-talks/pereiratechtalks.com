@@ -78,8 +78,8 @@ export interface AnalyticsConfig {
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-empty-object-type
-export interface UIConfig {}
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
+export type UIConfig = {};
 
 const DEFAULT_SITE_NAME = 'Website';
 

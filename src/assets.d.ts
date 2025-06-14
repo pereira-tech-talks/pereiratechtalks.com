@@ -1,11 +1,11 @@
 declare module '*.svg' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const content: any;
   export default content;
 }
 
 declare module '*.png' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const value: any;
   export = value;
 }

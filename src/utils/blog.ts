@@ -1,9 +1,16 @@
-import type { PaginateFunction } from 'astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import type { Post } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
-import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import type { PaginateFunction } from 'astro';
+import type { Post } from '~/types';
+import {
+  BLOG_BASE,
+  CATEGORY_BASE,
+  POST_PERMALINK_PATTERN,
+  TAG_BASE,
+  cleanSlug,
+  trimSlash,
+} from './permalinks';
 
 const generatePermalink = async ({
   id,
@@ -40,7 +47,9 @@ const generatePermalink = async ({
     .join('/');
 };
 
-const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> => {
+const getNormalizedPost = async (
+  post: CollectionEntry<'post'>,
+): Promise<Post> => {
   const { id, slug: rawSlug = '', data } = post;
   const { Content, remarkPluginFrontmatter } = await post.render();
 
@@ -104,9 +113,11 @@ const getRandomizedPosts = (array: Post[], num: number) => {
   return newArray;
 };
 
-const load = async function (): Promise<Array<Post>> {
+const load = async (): Promise<Array<Post>> => {
   const posts = await getCollection('post');
-  const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
+  const normalizedPosts = posts.map(
+    async (post) => await getNormalizedPost(post),
+  );
   const allPosts = await Promise.all(normalizedPosts);
 
   const results = allPosts
@@ -134,37 +145,44 @@ export const blogTagRobots = APP_BLOG.tag.robots;
 export const blogPostsPerPage = APP_BLOG?.postsPerPage;
 
 /** */
-export const fetchPosts = async (excludeTags: Array<string> = []): Promise<Array<Post>> => {
+export const fetchPosts = async (
+  excludeTags: Array<string> = [],
+): Promise<Array<Post>> => {
   if (!_posts) {
     _posts = await load();
   }
 
-  const filteredPosts = _posts.filter((post) => !excludeTags.some((tag) => (post?.tags || []).includes(tag)));
+  const filteredPosts = _posts.filter(
+    (post) => !excludeTags.some((tag) => (post?.tags || []).includes(tag)),
+  );
 
   return filteredPosts;
 };
 
 /** */
-export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post>> => {
+export const findPostsBySlugs = async (
+  slugs: Array<string>,
+): Promise<Array<Post>> => {
   if (!Array.isArray(slugs)) return [];
 
   const posts = await fetchPosts();
 
-  return slugs.reduce(function (r: Array<Post>, slug: string) {
-    posts.some(function (post: Post) {
-      return slug === post.slug && r.push(post);
-    });
+  return slugs.reduce((r: Array<Post>, slug: string) => {
+    posts.some((post: Post) => slug === post.slug && r.push(post));
     return r;
   }, []);
 };
 
-export const findPostsByCategory = async (categories: Array<string>, counter: number = 5) => {
+export const findPostsByCategory = async (
+  categories: Array<string>,
+  counter: number = 5,
+) => {
   if (!Array.isArray(categories)) return [];
 
   const posts = await fetchPosts();
   const filteredPosts = posts.slice(0, counter);
 
-  return categories.reduce(function (r: Array<Post>, category: string) {
+  return categories.reduce((r: Array<Post>, category: string) => {
     filteredPosts.map((post: Post) => {
       return category === post.category && r.push(post);
     });
@@ -173,21 +191,23 @@ export const findPostsByCategory = async (categories: Array<string>, counter: nu
 };
 
 /** */
-export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> => {
+export const findPostsByIds = async (
+  ids: Array<string>,
+): Promise<Array<Post>> => {
   if (!Array.isArray(ids)) return [];
 
   const posts = await fetchPosts();
 
-  return ids.reduce(function (r: Array<Post>, id: string) {
-    posts.some(function (post: Post) {
-      return id === post.id && r.push(post);
-    });
+  return ids.reduce((r: Array<Post>, id: string) => {
+    posts.some((post: Post) => id === post.id && r.push(post));
     return r;
   }, []);
 };
 
 /** */
-export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
+export const findLatestPosts = async ({
+  count,
+}: { count?: number }): Promise<Array<Post>> => {
   const _count = count ?? 4;
   const posts = await fetchPosts();
 
@@ -197,7 +217,7 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async (
   { paginate }: { paginate: PaginateFunction },
-  excludeTags: Array<string>
+  excludeTags: Array<string>,
 ) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
   const allPosts = await fetchPosts(excludeTags);
@@ -220,66 +240,90 @@ export const getStaticPathsBlogPost = async () => {
 };
 
 /** */
-export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
+export const getStaticPathsBlogCategory = async ({
+  paginate,
+}: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
 
   const posts = await fetchPosts();
   const categories = new Set<string>();
-  posts.forEach((post) => {
+  for (const post of posts) {
     if (typeof post.category === 'string') {
       categories.add(post.category.toLowerCase());
     }
-  });
+  }
 
   return Array.from(categories).flatMap((category) =>
     paginate(
-      posts.filter((post) => typeof post.category === 'string' && category === post.category.toLowerCase()),
+      posts.filter(
+        (post) =>
+          typeof post.category === 'string' &&
+          category === post.category.toLowerCase(),
+      ),
       {
         params: { category: category, blog: CATEGORY_BASE || undefined },
         pageSize: blogPostsPerPage,
         props: { category },
-      }
-    )
+      },
+    ),
   );
 };
 
 /** */
-export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
+export const getStaticPathsBlogTag = async ({
+  paginate,
+}: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
   const posts = await fetchPosts();
   const tags = new Set<string>();
-  posts.forEach((post) => {
+  for (const post of posts) {
     if (Array.isArray(post.tags)) {
       post.tags.map((tag) => tags.add(tag.toLowerCase()));
     }
-  });
+  }
 
   return Array.from(tags).flatMap((tag) =>
     paginate(
-      posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.toLowerCase() === tag)),
+      posts.filter(
+        (post) =>
+          Array.isArray(post.tags) &&
+          post.tags.find((elem) => elem.toLowerCase() === tag),
+      ),
       {
         params: { tag: tag, blog: TAG_BASE || undefined },
         pageSize: blogPostsPerPage,
         props: { tag },
-      }
-    )
+      },
+    ),
   );
 };
 
 /** */
-export function getRelatedPosts(allPosts: Post[], currentSlug: string, currentTags: string[]) {
+export function getRelatedPosts(
+  allPosts: Post[],
+  currentSlug: string,
+  currentTags: string[],
+) {
   if (!isBlogEnabled || !isRelatedPostsEnabled) return [];
 
   const relatedPosts = getRandomizedPosts(
-    allPosts.filter((post) => post.slug !== currentSlug && post.tags?.some((tag) => currentTags.includes(tag))),
-    APP_BLOG.relatedPostsCount
+    allPosts.filter(
+      (post) =>
+        post.slug !== currentSlug &&
+        post.tags?.some((tag) => currentTags.includes(tag)),
+    ),
+    APP_BLOG.relatedPostsCount,
   );
 
   if (relatedPosts.length < APP_BLOG.relatedPostsCount) {
     const morePosts = getRandomizedPosts(
-      allPosts.filter((post) => post.slug !== currentSlug && !post.tags?.some((tag) => currentTags.includes(tag))),
-      APP_BLOG.relatedPostsCount - relatedPosts.length
+      allPosts.filter(
+        (post) =>
+          post.slug !== currentSlug &&
+          !post.tags?.some((tag) => currentTags.includes(tag)),
+      ),
+      APP_BLOG.relatedPostsCount - relatedPosts.length,
     );
     relatedPosts.push(...morePosts);
   }

@@ -1,12 +1,13 @@
 import { getImage } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import type { OpenGraph } from '@astrolib/seo';
+import type { ImageMetadata } from 'astro';
 
-const load = async function () {
+const load = async () => {
   let images: Record<string, () => Promise<unknown>> | undefined = undefined;
   try {
-    images = import.meta.glob('~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    images = import.meta.glob(
+      '~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}',
+    );
   } catch (error) {
     // continue regardless of error
   }
@@ -23,7 +24,7 @@ export const fetchLocalImages = async () => {
 
 /** */
 export const findImage = async (
-  imagePath?: string | ImageMetadata | null
+  imagePath?: string | ImageMetadata | null,
 ): Promise<string | ImageMetadata | undefined | null> => {
   // Not string
   if (typeof imagePath !== 'string') {
@@ -31,7 +32,11 @@ export const findImage = async (
   }
 
   // Absolute paths
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://') || imagePath.startsWith('/')) {
+  if (
+    imagePath.startsWith('http://') ||
+    imagePath.startsWith('https://') ||
+    imagePath.startsWith('/')
+  ) {
     return imagePath;
   }
 
@@ -44,14 +49,14 @@ export const findImage = async (
   const key = imagePath.replace('~/', '/src/');
 
   return images && typeof images[key] === 'function'
-    ? ((await images[key]()) as { default: ImageMetadata })['default']
+    ? ((await images[key]()) as { default: ImageMetadata }).default
     : null;
 };
 
 /** */
 export const adaptOpenGraphImages = async (
   openGraph: OpenGraph = {},
-  astroSite: URL | undefined = new URL('')
+  astroSite: URL | undefined = new URL(''),
 ): Promise<OpenGraph> => {
   if (!openGraph?.images?.length) {
     return openGraph;
@@ -64,7 +69,9 @@ export const adaptOpenGraphImages = async (
   const adaptedImages = await Promise.all(
     images.map(async (image) => {
       if (image?.url) {
-        const resolvedImage = (await findImage(image.url)) as ImageMetadata | undefined;
+        const resolvedImage = (await findImage(image.url)) as
+          | ImageMetadata
+          | undefined;
         if (!resolvedImage) {
           return {
             url: '',
@@ -80,9 +87,18 @@ export const adaptOpenGraphImages = async (
 
         if (typeof _image === 'object') {
           return {
-            url: 'src' in _image && typeof _image.src === 'string' ? String(new URL(_image.src, astroSite)) : 'pepe',
-            width: 'width' in _image && typeof _image.width === 'number' ? _image.width : undefined,
-            height: 'height' in _image && typeof _image.height === 'number' ? _image.height : undefined,
+            url:
+              'src' in _image && typeof _image.src === 'string'
+                ? String(new URL(_image.src, astroSite))
+                : 'pepe',
+            width:
+              'width' in _image && typeof _image.width === 'number'
+                ? _image.width
+                : undefined,
+            height:
+              'height' in _image && typeof _image.height === 'number'
+                ? _image.height
+                : undefined,
           };
         }
         return {
@@ -93,7 +109,7 @@ export const adaptOpenGraphImages = async (
       return {
         url: '',
       };
-    })
+    }),
   );
 
   return { ...openGraph, ...(adaptedImages ? { images: adaptedImages } : {}) };

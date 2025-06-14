@@ -1,23 +1,23 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import { defineConfig, squooshImageService } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
-import icon from 'astro-icon';
-import compress from 'astro-compress';
+import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
+import tailwind from '@astrojs/tailwind';
 import sentry from '@sentry/astro';
+import compress from 'astro-compress';
+import icon from 'astro-icon';
+import { defineConfig, squooshImageService } from 'astro/config';
 import astrowind from './src/integration';
 import { fetchEventsMeetup, getMostRecentEvent } from './src/utils/event';
 
 import {
+  lazyImagesRehypePlugin,
   readingTimeRemarkPlugin,
   responsiveTablesRehypePlugin,
-  lazyImagesRehypePlugin,
 } from './src/utils/frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,13 +35,18 @@ async function fetchEventData() {
     fs.mkdirSync(dataPath, { recursive: true });
   }
 
-  fs.writeFileSync(`${dataPath}/announcementData.json`, JSON.stringify(newEventData));
+  fs.writeFileSync(
+    `${dataPath}/announcementData.json`,
+    JSON.stringify(newEventData),
+  );
 }
 
 const whenExternalScripts = (items = []) => {
-  const eachItem = Array.isArray(items) ? items.map((item) => item()) : [items()];
-  return hasExternalScripts ?  eachItem  : [];
-}
+  const eachItem = Array.isArray(items)
+    ? items.map((item) => item())
+    : [items()];
+  return hasExternalScripts ? eachItem : [];
+};
 
 export default defineConfig({
   site: 'https://www.pereiratechtalks.com',
@@ -81,7 +86,7 @@ export default defineConfig({
     ...whenExternalScripts(() =>
       partytown({
         config: { forward: ['dataLayer.push'] },
-      })
+      }),
     ),
 
     compress({
@@ -108,7 +113,7 @@ export default defineConfig({
               authToken: process.env.SENTRY_AUTH_TOKEN,
             },
           }
-        : {}
+        : {},
     ),
     // spotlightjs()
   ],
