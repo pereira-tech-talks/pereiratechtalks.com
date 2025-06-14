@@ -29,8 +29,6 @@
     "@fontsource/bebas-neue": "5.1.0",
     "@fontsource/fira-mono": "5.1.0",
     "@fontsource/roboto": "5.1.0",
-    "@sentry/astro": "8.45.0",
-    "@spotlightjs/astro": "2.3.0",
     "astro": "4.16.17",
     "astro-icon": "1.1.4",
     "limax": "4.1.0",
