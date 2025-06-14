@@ -7,7 +7,6 @@ import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
-import sentry from '@sentry/astro';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
 import { defineConfig, squooshImageService } from 'astro/config';
@@ -104,18 +103,6 @@ export default defineConfig({
 
     astrowind(),
     svelte(),
-    sentry(
-      process.env.SENTRY_DSN
-        ? {
-            dsn: process.env.SENTRY_DSN,
-            sourceMapsUploadOptions: {
-              project: process.env.SENTRY_PROJECT,
-              authToken: process.env.SENTRY_AUTH_TOKEN,
-            },
-          }
-        : {},
-    ),
-    // spotlightjs()
   ],
 
   redirects: {
