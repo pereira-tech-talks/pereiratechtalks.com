@@ -35,10 +35,6 @@ export const headerData = {
           href: 'https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U',
         },
         {
-          text: 'Telegram',
-          href: 'https://t.me/PerTechTalks',
-        },
-        {
           text: 'YouTube',
           href: 'https://www.youtube.com/@pereiratechtalks',
           target: '_blank',
