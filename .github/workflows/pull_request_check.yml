@@ -65,17 +65,12 @@ jobs:
       - name: Step 3 - 🧪🧪 Calculate PR Size and Label
         run: |
           CURRENT_SIZE="${{ steps.check_pr_size_label_step.outputs.size_label_found }}"
-          PR_BASE_REF=${{ github.event.pull_request.base.ref }}
-          PR_HEAD_REF=${{ github.event.pull_request.head.ref }}
-          git fetch origin $PR_BASE_REF
-          git fetch origin $PR_HEAD_REF
-          CHANGES_STATS=$(git diff --shortstat origin/$PR_BASE_REF..origin/$PR_HEAD_REF)
-          echo $CHANGES_STATS
-          LINES_CHANGED=$(echo $CHANGES_STATS | awk '{print $4+$6}')
+          echo ${{ github.event.pull_request.diff_url }}
+          LINES_CHANGED=$((${{ github.event.pull_request.deletions }} + ${{ github.event.pull_request.additions }}))
           echo "Lines changed: $LINES_CHANGED"
 
           if [ -z "$LINES_CHANGED" ]; then
-            echo "No lines changed or diff failed."
+            echo "No lines changed, or diff failed."
             exit 1
           fi
 

@@ -1,12 +1,30 @@
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+interface MeetupEvent {
+  id: string;
+  name: string;
+  link: string;
+  time: number;
+  venue?: {
+    name: string;
+  };
+  description: string;
+  featured_photo?: {
+    highres_link: string;
+  };
+}
 
 /**
  * Fetch events from Meetup
  * @param status - upcoming, past
  * @returns an array of events
  */
-export const fetchEventsMeetup = async (status: string, page: string = '1', order: string = 'desc') => {
+export const fetchEventsMeetup = async (
+  status: string,
+  page: string = '1',
+  order: string = 'desc',
+) => {
   const payload = {
     page: page,
     status: status,
@@ -17,15 +35,17 @@ export const fetchEventsMeetup = async (status: string, page: string = '1', orde
   };
 
   const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
-  const response = await fetch(`${meetUpURL}?${new URLSearchParams(payload).toString()}`);
+  const response = await fetch(
+    `${meetUpURL}?${new URLSearchParams(payload).toString()}`,
+  );
   const data = await response.json();
 
-  if ('errors' in data) {
+  if ('errors' in data || data.message === 'Not Found') {
     console.error(data.errors);
     return [];
   }
 
-  data.map((event) => {
+  data.map((event: MeetupEvent) => {
     const name = event?.name || '';
     const url = event?.link || '';
     const venue = event?.venue?.name || '';
@@ -67,9 +87,12 @@ export const fetchEventsMeetup = async (status: string, page: string = '1', orde
       url,
     };
 
-    Object.keys(dataMapped).forEach((key) => {
-      eventTemplateWithId = eventTemplateWithId.replace(`$${key}`, dataMapped[key]);
-    });
+    for (const key of Object.keys(dataMapped)) {
+      eventTemplateWithId = eventTemplateWithId.replace(
+        `$${key}`,
+        dataMapped[key],
+      );
+    }
 
     fs.writeFileSync(`src/content/post/${eventId}.mdx`, eventTemplateWithId);
   });
@@ -77,7 +100,7 @@ export const fetchEventsMeetup = async (status: string, page: string = '1', orde
   return data;
 };
 
-async function downloadImage(url, filePath) {
+async function downloadImage(url: string, filePath: string): Promise<void> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -110,7 +133,7 @@ metadata:
 $description
 `;
 
-const stringToSlug = (str) => {
+const stringToSlug = (str: string): string => {
   return str
     .toLowerCase() // Convert to lower case
     .trim() // Trim leading/trailing whitespace
@@ -126,7 +149,7 @@ const stringToSlug = (str) => {
  * @returns the most recent event
  */
 export const getMostRecentEvent = async () => {
-  const events = await fetchEventsMeetup('upcoming', 5, 'asc');
+  const events = await fetchEventsMeetup('upcoming', '5', 'asc');
   const eventData = events.length ? events[0] : {};
 
   return eventData;

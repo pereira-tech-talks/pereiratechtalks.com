@@ -1,6 +1,6 @@
 import slugify from 'limax';
 
-import { SITE, APP_BLOG } from 'astrowind:config';
+import { APP_BLOG, SITE } from 'astrowind:config';
 
 import { trim } from '~/utils/utils';
 
@@ -10,7 +10,7 @@ const createPath = (...params: string[]) => {
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
     .join('/');
-  return '/' + paths + (SITE.trailingSlash && paths ? '/' : '');
+  return `/${paths}${SITE.trailingSlash && paths ? '/' : ''}`;
 };
 
 const BASE_PATHNAME = SITE.base || '/';
@@ -25,15 +25,18 @@ export const BLOG_BASE = cleanSlug(APP_BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(APP_BLOG?.category?.pathname);
 export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
-export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
+export const POST_PERMALINK_PATTERN = trimSlash(
+  APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`,
+);
 
 /** */
 export const getCanonical = (path = ''): string | URL => {
   const url = String(new URL(path, SITE.site));
-  if (SITE.trailingSlash == false && path && url.endsWith('/')) {
+  if (SITE.trailingSlash === false && path && url.endsWith('/')) {
     return url.slice(0, -1);
-  } else if (SITE.trailingSlash == true && path && !url.endsWith('/')) {
-    return url + '/';
+  }
+  if (SITE.trailingSlash === true && path && !url.endsWith('/')) {
+    return `${url}/`;
   }
   return url;
 };
@@ -54,8 +57,6 @@ export const getPermalink = (slug = '', type = 'page'): string => {
     case 'post':
       permalink = createPath(trimSlash(slug));
       break;
-
-    case 'page':
     default:
       permalink = createPath(slug);
       break;
@@ -72,11 +73,11 @@ export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
 
 /** */
 export const getAsset = (path: string): string =>
-  '/' +
-  [BASE_PATHNAME, path]
+  `/${[BASE_PATHNAME, path]
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
-    .join('/');
+    .join('/')}`;
 
 /** */
-const definitivePermalink = (permalink: string): string => createPath(BASE_PATHNAME, permalink);
+const definitivePermalink = (permalink: string): string =>
+  createPath(BASE_PATHNAME, permalink);

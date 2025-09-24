@@ -1,10 +1,10 @@
 ---
 import { APP_BLOG } from 'astrowind:config';
 
-import { fetchPosts, getRelatedPosts } from '~/utils/blog';
-import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 import type { Post } from '~/types';
+import { fetchPosts, getRelatedPosts } from '~/utils/blog';
 import { getBlogPermalink } from '~/utils/permalinks';
+import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 
 export interface Props {
   post: Post;
@@ -12,7 +12,9 @@ export interface Props {
 
 const { post } = Astro.props;
 const fetchedPosts = await fetchPosts();
-const relatedPosts = post.tags ? getRelatedPosts(fetchedPosts, post.slug, post.tags) : [];
+const relatedPosts = post.tags
+  ? getRelatedPosts(fetchedPosts, post.slug, post.tags)
+  : [];
 ---
 
 {

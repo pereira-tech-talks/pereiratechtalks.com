@@ -16,7 +16,9 @@ const { event } = Astro.props;
 
 const image = event?.image;
 
-const link = APP_BLOG?.post?.isEnabled ? getPermalink(event.permalink, 'post') : '';
+const link = APP_BLOG?.post?.isEnabled
+  ? getPermalink(event.permalink, 'post')
+  : '';
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>

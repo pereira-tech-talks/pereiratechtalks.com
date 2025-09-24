@@ -11,7 +11,12 @@ export interface Props {
   isCategory?: boolean;
 }
 
-const { tags, class: className = 'text-sm', title = undefined, isCategory = false } = Astro.props;
+const {
+  tags,
+  class: className = 'text-sm',
+  title = undefined,
+  isCategory = false,
+} = Astro.props;
 ---
 
 {
