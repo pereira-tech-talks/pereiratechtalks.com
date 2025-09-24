@@ -9,7 +9,7 @@ const { event } = Astro.props;
     Object.keys(event).length > 0 && (
       <div class="dark text-muted text-sm bg-black dark:bg-transparent dark:border-b dark:border-slate-800 dark:text-slate-400 hidden sm:block overflow-hidden px-3 py-2 relative text-ellipsis whitespace-nowrap">
         <span class="dark:bg-slate-700 bg-white/40 dark:text-slate-300 font-semibold px-1 py-0.5 text-xs mr-0.5 rtl:mr-0 rtl:ml-0.5 inline-block">
-          NUEVO
+          IMPORTANTE
         </span>
         <a href={event?.link} class="text-muted hover:underline dark:text-slate-400 font-medium" target="_blank">
           [{event?.time && getFormattedDate(new Date(event.time))}] {event?.name}
