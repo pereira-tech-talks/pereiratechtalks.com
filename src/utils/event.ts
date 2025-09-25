@@ -31,7 +31,6 @@ export const fetchEventsMeetup = async (status: string, _page: string = '1', _or
  */
 export const getMostRecentEvent = async () => {
   const events = await fetchEventsMeetup('upcoming', '5', 'asc');
-  const events = await fetchEventsMeetup('upcoming', '5', 'asc');
   const eventData = events.length ? events[0] : {};
 
   return eventData;
