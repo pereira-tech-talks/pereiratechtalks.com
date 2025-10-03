@@ -1,147 +1,33 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-
-interface MeetupEvent {
-  id: string;
-  name: string;
-  link: string;
-  time: number;
-  venue?: {
-    name: string;
-  };
-  description: string;
-  featured_photo?: {
-    highres_link: string;
-  };
-}
+// Meetup functionality disabled - migrated to Luma
 
 /**
- * Fetch events from Meetup
+ * Fetch events from Meetup (DEPRECATED - Migrated to Luma)
  * @param status - upcoming, past
  * @returns an array of events
+ * @deprecated We have migrated from Meetup to Luma. Visit https://luma.com/pertechtalks for current events
  */
 export const fetchEventsMeetup = async (
   status: string,
-  page: string = '1',
-  order: string = 'desc',
+  _page: string = '1',
+  _order: string = 'desc',
 ) => {
-  const payload = {
-    page: page,
-    status: status,
-    group_urlname: 'pereira-tech-talks',
-    'photo-host': 'secure',
-    fields: 'featured_photo',
-    desc: order === 'desc' ? 'true' : 'false',
-  };
+  //console.warn('⚠️  Meetup API integration is deprecated. We have migrated to Luma: https://luma.com/pertechtalks');
 
-  const meetUpURL = 'https://api.meetup.com/pereira-tech-talks/events';
-  const response = await fetch(
-    `${meetUpURL}?${new URLSearchParams(payload).toString()}`,
-  );
-  const data = await response.json();
+  // Return mock data to prevent breaking the application
+  const mockEvents = [
+    {
+      id: 'luma-migration-notice',
+      name: 'Migración a Luma - Pereira Tech Talks',
+      link: 'https://luma.com/pertechtalks',
+      venue: { name: 'Eventos ahora en Luma' },
+      description:
+        'Hemos migrado nuestros eventos de Meetup a Luma. Visita https://luma.com/pertechtalks para ver todos nuestros próximos eventos y talleres.',
+      time: Date.now() + 7 * 24 * 60 * 60 * 1000, // 1 week from now
+      featured_photo: null,
+    },
+  ];
 
-  if ('errors' in data || data.message === 'Not Found') {
-    console.error(data.errors);
-    return [];
-  }
-
-  data.map((event: MeetupEvent) => {
-    const name = event?.name || '';
-    const url = event?.link || '';
-    const venue = event?.venue?.name || '';
-    const description = event?.description || '';
-    const eventId = stringToSlug(`${event.id} - ${name}`);
-
-    let eventTemplateWithId = eventTemplate;
-    const publishDate = new Date(event.time).toISOString();
-    const title = name;
-    const image = event?.featured_photo?.highres_link;
-    const imageBasePath = '~/assets/images/posts/banners';
-    let imageStoragePath = '';
-
-    if (image) {
-      const imageFilename = path.basename(image);
-      const downloadFolder = 'src/assets/images/posts/banners';
-
-      // Ensure the folder exists, if not, create it
-      if (!fs.existsSync(downloadFolder)) {
-        fs.mkdirSync(downloadFolder);
-      }
-
-      const imagePath = path.join(downloadFolder, imageFilename);
-      imageStoragePath = `${imageBasePath}/${imageFilename}`;
-
-      if (!fs.existsSync(imagePath)) {
-        downloadImage(image, imagePath);
-      }
-    }
-
-    const dataMapped = {
-      publishDate,
-      title,
-      image: imageStoragePath,
-      eventId,
-      name,
-      venue,
-      description,
-      url,
-    };
-
-    for (const key of Object.keys(dataMapped)) {
-      eventTemplateWithId = eventTemplateWithId.replace(
-        `$${key}`,
-        dataMapped[key],
-      );
-    }
-
-    fs.writeFileSync(`src/content/post/${eventId}.mdx`, eventTemplateWithId);
-  });
-
-  return data;
-};
-
-async function downloadImage(url: string, filePath: string): Promise<void> {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-    }
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    fs.writeFileSync(filePath, buffer);
-    console.log(`Image downloaded and saved to ${filePath}`);
-  } catch (error) {
-    console.error('Error downloading image:', error.message);
-  }
-}
-
-const eventTemplate = `---
-publishDate: $publishDate
-author: Meetup.com
-title: '$title'
-image: '$image'
-venue: '$venue'
-category: Eventos
-tags:
-  - Meetup.com
-metadata:
-  canonical: https://pereiratechtalks.com/$eventId
----
-
-> Publicación original en [Meetup.com]($url)
-
-$description
-`;
-
-const stringToSlug = (str: string): string => {
-  return str
-    .toLowerCase() // Convert to lower case
-    .trim() // Trim leading/trailing whitespace
-    .replace(/[^a-z0-9 -]/g, '') // Remove invalid characters
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
-    .slice(0, 30) // Limit to 30 characters
-    .replace(/-+$/, ''); // Remove trailing hyphen if any
+  return status === 'upcoming' ? mockEvents : [];
 };
 
 /**
