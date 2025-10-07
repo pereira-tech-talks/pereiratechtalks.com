@@ -29,14 +29,3 @@ export const fetchEventsMeetup = async (
 
   return status === 'upcoming' ? mockEvents : [];
 };
-
-/**
- * Get the most recent event
- * @returns the most recent event
- */
-export const getMostRecentEvent = async () => {
-  const events = await fetchEventsMeetup('upcoming', '5', 'asc');
-  const eventData = events.length ? events[0] : {};
-
-  return eventData;
-};
