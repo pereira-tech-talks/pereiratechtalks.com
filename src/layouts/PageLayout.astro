@@ -12,7 +12,16 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
-import newEventData from '../data/announcementData.json';
+const newEventData = {
+  id: 'luma-migration-notification',
+  name: 'Migración a Luma - Pereira Tech Talks',
+  link: 'https://luma.com/pertechtalks',
+  venue: { name: 'Eventos ahora en Luma' },
+  description:
+    'Hemos migrado nuestros eventos de Meetup a Luma. Visita https://luma.com/pertechtalks para ver todos nuestros próximos eventos y talleres.',
+  time: 1760418963319,
+  featured_photo: null,
+};
 ---
 
 <Layout metadata={metadata}>
