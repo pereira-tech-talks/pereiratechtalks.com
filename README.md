@@ -2,7 +2,7 @@
 
 Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología..
 
-![Pereira Tech Talks Banner](readme-banner.png)
+![Pereira Tech Talks Banner](assets/readme-banner.png)
 
 ## 🌟 Acerca del Proyecto.
 
@@ -28,8 +28,6 @@ Si tienes preguntas o sugerencias, no dudes en unirte a nuestra comunidad en tel
 - [Facebook](https://www.facebook.com/PerTechTalks)
 - [LinkedIn](https://www.linkedin.com/company/35508463/)
 - [Linktr](https://linktr.ee/pertechtalks)
-- Email: pereiratechtalks@gmail.com
-
----
+- [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 
 ¡Gracias por ser parte de Pereira Tech Talks! Juntos estamos construyendo una comunidad tecnológica más fuerte y colaborativa.
