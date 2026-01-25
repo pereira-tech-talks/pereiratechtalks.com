@@ -2,6 +2,9 @@
 dist/
 .output/
 
+# docs
+docs/
+
 # dependencies
 node_modules/
 
