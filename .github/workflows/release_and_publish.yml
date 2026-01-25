@@ -62,7 +62,7 @@ jobs:
         name: Step 6 - ⚙️ Install Dependencies
         run: npm install
       - name: Step 8 - 📄 Check if docs folder is empty
-        run: cat utils/event.ts
+        run: cat src/utils/event.ts
       - name: Step 7 - Build static files
         run: |
           npm run build:ghpages
