@@ -30,7 +30,7 @@ jobs:
           git config user.email "pereiratechtalks@gmail.com"
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.16.0'
+          node-version: '24.13.0'
       - name: Step 3 - 📁 Cache node modules
         id: cache-npm
         uses: actions/cache@v4
@@ -90,7 +90,7 @@ jobs:
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.16.0'
+          node-version: '24.13.0'
           registry-url: https://registry.npmjs.org/
       - name: Step 0 - 📁 Cache node modules
         uses: actions/cache@v4

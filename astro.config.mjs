@@ -32,7 +32,9 @@ const whenExternalScripts = (items = []) => {
 };
 
 // Log the build configuration
-console.log(`🎯 Astro Build Target: ${process.env.BUILD_TARGET || 'production'}`);
+console.log(
+  `🎯 Astro Build Target: ${process.env.BUILD_TARGET || 'production'}`,
+);
 console.log(`💻 CPU Count: ${CPU_COUNT}`);
 
 export default defineConfig({
