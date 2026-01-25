@@ -14,6 +14,12 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to checkout (defaults to main)'
+        required: false
+        default: 'main'
+        type: string
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -29,6 +35,7 @@ jobs:
       - name: Step 1 - ⚙️ Setup Actions
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.branch || 'main') || github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'main' }}
           fetch-depth: '30'
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - name: Step 2 - ⚙️ Setup GitHub Config
@@ -61,8 +68,6 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: Step 6 - ⚙️ Install Dependencies
         run: npm install
-      - name: Step 8 - 📄 Check if docs folder is empty
-        run: cat src/utils/event.ts
       - name: Step 7 - Build static files
         run: |
           npm run build:ghpages
@@ -90,6 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.branch || 'main') || github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'main' }}
           fetch-depth: '30'
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
