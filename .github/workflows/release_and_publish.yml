@@ -99,7 +99,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.branch || 'main') || github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'main' }}
+          ref: refs/heads/main
           fetch-depth: '30'
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
