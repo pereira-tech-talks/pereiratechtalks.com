@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { cpus } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,6 +20,7 @@ import {
 } from './src/utils/frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const CPU_COUNT = cpus().length;
 
 const hasExternalScripts = true;
 
@@ -29,10 +31,25 @@ const whenExternalScripts = (items = []) => {
   return hasExternalScripts ? eachItem : [];
 };
 
+// Log the build configuration
+console.log(
+  `🎯 Astro Build Target: ${process.env.BUILD_TARGET || 'production'}`,
+);
+console.log(`💻 CPU Count: ${CPU_COUNT}`);
+
 export default defineConfig({
   site: 'https://www.pereiratechtalks.com',
   output: 'static',
   build: {
+    concurrency: CPU_COUNT,
+    rollupOptions: {
+      // Maximum parallel file operations
+      maxParallelFileOps: CPU_COUNT * 2, // 2x CPU cores for I/O bound operations
+      output: {
+        // Fewer, larger chunks = less overhead
+        manualChunks: undefined,
+      },
+    },
     assets: 'assets',
   },
   base: '/',
@@ -106,5 +123,17 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    build: {
+      // Allow larger chunks for speed
+      chunkSizeWarningLimit: 10000,
+      // Fastest minifier
+      minify: 'esbuild',
+      // Utilize all cores
+      rollupOptions: {
+        maxParallelFileOps: CPU_COUNT * 3,
+      },
+    },
   },
+
+  compressHTML: false,
 });
