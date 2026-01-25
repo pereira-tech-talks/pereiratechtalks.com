@@ -5,10 +5,6 @@ on:
     branches:
       - main
     types:
-      - opened
-      - reopened
-      - synchronize
-      - edited
       - closed
   push:
     branches:
@@ -27,73 +23,73 @@ concurrency:
 
 jobs:
 
-  # build_and_deploy:
-  #   name: 'Build application bundle'
-  #   runs-on: ubuntu-latest
-  #   environment: live
-  #   steps:
-  #     - name: Step 1 - ⚙️ Setup Actions
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.branch || 'main') || github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'main' }}
-  #         fetch-depth: '30'
-  #         token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-  #     - name: Step 2 - ⚙️ Setup GitHub Config
-  #       run: |
-  #         git config user.name "🤖 Pereira Tech Talks"
-  #         git config user.email "pereiratechtalks@gmail.com"
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20.16.0'
-  #     - name: Step 3 - 📁 Cache node modules
-  #       id: cache-npm
-  #       uses: actions/cache@v4
-  #       env:
-  #         cache-name: cache-node-modules
-  #       with:
-  #         path: |
-  #           ~/.npm
-  #           node_modules
-  #         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-build-${{ env.cache-name }}-
-  #     - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-  #       name: Step 4 - ⚙️ Install Dependencies
-  #       run: npm install
-  #     - name: Step 5 - Build static files from source branch
-  #       run: |
-  #         npm run build:ghpages
-  #         if [ ! -d "docs" ]; then
-  #           echo "⚠️ Error: docs folder does not exist."
-  #           exit 1
-  #         fi
-  #     - name: Step 6 - Save built files temporarily
-  #       run: |
-  #         cp -r docs /tmp/docs_build
-  #     - name: Step 7 - Verify the existence of 'ghpages' branch and switch
-  #       run: |
-  #         git fetch origin
-  #         git checkout -b ghpages origin/ghpages 2>/dev/null || git checkout -b ghpages
-  #         git pull origin ghpages --rebase || true
-  #     - name: Step 8 - Remove previous build and copy new build
-  #       run: |
-  #         rm -rf docs
-  #         cp -r /tmp/docs_build docs
-  #     - name: Step 9 - Commit build changes
-  #       run: |
-  #         git add .
-  #         git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
-  #     - name: Step 10 - Push changes to ghpages
-  #       run: |
-  #         git push origin ghpages
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-  #     - name: Step 11 - Checkout 'main' branch
-  #       run: |
-  #         git checkout main
+  build_and_deploy:
+    name: 'Build application bundle'
+    runs-on: ubuntu-latest
+    environment: live
+    steps:
+      - name: Step 1 - ⚙️ Setup Actions
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.branch || 'main') || github.event_name == 'pull_request' && github.event.pull_request.head.ref || 'main' }}
+          fetch-depth: '30'
+          token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - name: Step 2 - ⚙️ Setup GitHub Config
+        run: |
+          git config user.name "🤖 Pereira Tech Talks"
+          git config user.email "pereiratechtalks@gmail.com"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+      - name: Step 3 - 📁 Cache node modules
+        id: cache-npm
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Step 4 - ⚙️ Install Dependencies
+        run: npm install
+      - name: Step 5 - Build static files from source branch
+        run: |
+          npm run build:ghpages
+          if [ ! -d "docs" ]; then
+            echo "⚠️ Error: docs folder does not exist."
+            exit 1
+          fi
+      - name: Step 6 - Save built files temporarily
+        run: |
+          cp -r docs /tmp/docs_build
+      - name: Step 7 - Verify the existence of 'ghpages' branch and switch
+        run: |
+          git fetch origin
+          git checkout -b ghpages origin/ghpages 2>/dev/null || git checkout -b ghpages
+          git pull origin ghpages --rebase || true
+      - name: Step 8 - Remove previous build and copy new build
+        run: |
+          rm -rf docs
+          cp -r /tmp/docs_build docs
+      - name: Step 9 - Commit build changes
+        run: |
+          git add .
+          git commit -m "Build: Update static files for GitHub Pages" || echo "No changes to commit"
+      - name: Step 10 - Push changes to ghpages
+        run: |
+          git push origin ghpages
+        env:
+          GITHUB_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
+      - name: Step 11 - Checkout 'main' branch
+        run: |
+          git checkout main
 
   release_and_publish:
-    # needs: build_and_deploy
+    needs: build_and_deploy
     name: 'Release and Publish'
     runs-on: ubuntu-latest
     steps:
