@@ -10,7 +10,7 @@ import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
 import compress from 'astro-compress';
 import icon from 'astro-icon';
-import { defineConfig, squooshImageService } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import astrowind from './src/integration';
 
 import {
@@ -106,10 +106,6 @@ export default defineConfig({
 
   redirects: {
     '/pereira-tech-day/codigo-conducta': '/codigo-conducta',
-  },
-
-  image: {
-    service: squooshImageService(),
   },
 
   markdown: {
