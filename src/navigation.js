@@ -77,12 +77,6 @@ export const footerData = {
       target: '_blank',
     },
     {
-      ariaLabel: 'Telegram',
-      icon: 'tabler:brand-telegram',
-      href: 'https://t.me/PerTechTalks',
-      target: '_blank',
-    },
-    {
       ariaLabel: 'X',
       icon: 'tabler:brand-x',
       href: 'https://x.com/PerTechTalks',
