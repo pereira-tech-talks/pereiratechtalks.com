@@ -1,94 +1,94 @@
 ---
-import Collaborators from "~/components/widgets/Collaborators.astro";
-import Hero from "~/components/widgets/Hero.astro";
-import Layout from "~/layouts/PageLayout.astro";
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
 const metadata = {
-  title: "About us",
+  title: 'About us',
 };
 
 const team = [
   {
-    image: "~/assets/images/people/team/melissa-escobar.jpeg",
-    name: "Melissa Escobar",
-    socialLink: "https://www.linkedin.com/in/m3lissaeg",
+    image: '~/assets/images/people/team/melissa-escobar.jpeg',
+    name: 'Melissa Escobar',
+    socialLink: 'https://www.linkedin.com/in/m3lissaeg',
   },
   {
-    image: "~/assets/images/people/team/hector-jimenez.jpg",
-    name: "Hector F. Jimenez S.",
-    socialLink: "https://www.linkedin.com/in/h3ct0rjs/",
+    image: '~/assets/images/people/team/hector-jimenez.jpg',
+    name: 'Hector F. Jimenez S.',
+    socialLink: 'https://www.linkedin.com/in/h3ct0rjs/',
   },
   {
-    image: "~/assets/images/people/team/mega-barto.jpeg",
-    name: "Juan Alejandro Pérez Bermúdez",
-    socialLink: "https://megabarto.rocks",
+    image: '~/assets/images/people/team/mega-barto.jpeg',
+    name: 'Juan Alejandro Pérez Bermúdez',
+    socialLink: 'https://megabarto.rocks',
   },
   {
-    image: "~/assets/images/people/team/santiago-bernal.jpeg",
-    name: "Santiago Bernal",
-    socialLink: "https://www.linkedin.com/in/santiaguf/",
+    image: '~/assets/images/people/team/santiago-bernal.jpeg',
+    name: 'Santiago Bernal',
+    socialLink: 'https://www.linkedin.com/in/santiaguf/',
   },
   {
-    image: "~/assets/images/people/team/jose-felipe-duarte.png",
-    name: "Jose Felipe Duarte",
-    socialLink: "https://www.linkedin.com/in/josefeldc/",
+    image: '~/assets/images/people/team/jose-felipe-duarte.png',
+    name: 'Jose Felipe Duarte',
+    socialLink: 'https://www.linkedin.com/in/josefeldc/',
   },
   {
-    image: "~/assets/images/people/team/andres-torres.jpeg",
-    name: "Andrés Torres",
-    socialLink: "https://www.linkedin.com/in/elfotografo007/",
+    image: '~/assets/images/people/team/andres-torres.jpeg',
+    name: 'Andrés Torres',
+    socialLink: 'https://www.linkedin.com/in/elfotografo007/',
   },
   {
-    image: "~/assets/images/people/team/eliana-osorio.jpeg",
-    name: "Eliana Osorio",
-    socialLink: "https://www.linkedin.com/in/monocuka/",
+    image: '~/assets/images/people/team/eliana-osorio.jpeg',
+    name: 'Eliana Osorio',
+    socialLink: 'https://www.linkedin.com/in/monocuka/',
   },
   {
-    image: "~/assets/images/people/team/alejandro-rendon.jpeg",
-    name: "Alejandro Rendón",
-    socialLink: "https://www.linkedin.com/in/arendondiosa/",
+    image: '~/assets/images/people/team/alejandro-rendon.jpeg',
+    name: 'Alejandro Rendón',
+    socialLink: 'https://www.linkedin.com/in/arendondiosa/',
   },
   {
-    image: "~/assets/images/people/team/stiven-cardona.jpeg",
-    name: "Stiven Cardona",
-    socialLink: "https://www.linkedin.com/in/stiven-cardona-monsalve/",
+    image: '~/assets/images/people/team/stiven-cardona.jpeg',
+    name: 'Stiven Cardona',
+    socialLink: 'https://www.linkedin.com/in/stiven-cardona-monsalve/',
   },
   {
-    image: "~/assets/images/people/team/sergio-florez.png",
-    name: "Sergio Florez",
-    socialLink: "https://www.xergioalex.com/",
+    image: '~/assets/images/people/team/sergio-florez.png',
+    name: 'Sergio Florez',
+    socialLink: 'https://www.xergioalex.com/',
   },
   {
-    name: "Sebastián Agudelo Morales",
-    image: "~/assets/images/people/team/sebastian-agudelo.jpg",
-    socialLink: "https://www.linkedin.com/in/sebastianamo/",
+    name: 'Sebastián Agudelo Morales',
+    image: '~/assets/images/people/team/sebastian-agudelo.jpg',
+    socialLink: 'https://www.linkedin.com/in/sebastianamo/',
   },
   {
-    name: "Sebastián Franco Gómez",
-    image: "~/assets/images/people/team/sebastian-franco.jpg",
-    socialLink: "https://www.linkedin.com/in/sebastian-franco-gomez/",
+    name: 'Sebastián Franco Gómez',
+    image: '~/assets/images/people/team/sebastian-franco.jpg',
+    socialLink: 'https://www.linkedin.com/in/sebastian-franco-gomez/',
   },
   {
-    name: "Sergio Estrella",
-    image: "~/assets/images/people/team/sergio-estrella.jpeg",
-    socialLink: "https://sergioestrella.com/",
+    name: 'Sergio Estrella',
+    image: '~/assets/images/people/team/sergio-estrella.jpeg',
+    socialLink: 'https://sergioestrella.com/',
   },
   {
-    name: "Katherine Lopez",
-    image: "~/assets/images/people/team/kathe-lopez.png",
-    socialLink: "https://www.linkedin.com/in/kathe-lopez",
+    name: 'Katherine Lopez',
+    image: '~/assets/images/people/team/kathe-lopez.png',
+    socialLink: 'https://www.linkedin.com/in/kathe-lopez',
   },
 ];
 
 const alumni = [
   {
-    image: "~/assets/images/people/team/andres-rodriguez.jpeg",
-    name: "Andrés Rodriguez",
-    socialLink: "https://www.linkedin.com/in/arodrigueze0215/",
+    image: '~/assets/images/people/team/andres-rodriguez.jpeg',
+    name: 'Andrés Rodriguez',
+    socialLink: 'https://www.linkedin.com/in/arodrigueze0215/',
   },
   {
-    image: "~/assets/images/people/team/julian-lamprea.jpeg",
-    name: "Julian Lamprea",
-    socialLink: "https://www.linkedin.com/in/jalamprea/",
+    image: '~/assets/images/people/team/julian-lamprea.jpeg',
+    name: 'Julian Lamprea',
+    socialLink: 'https://www.linkedin.com/in/jalamprea/',
   },
 ];
 ---
