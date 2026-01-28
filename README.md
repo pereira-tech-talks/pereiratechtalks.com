@@ -18,9 +18,8 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 ## 📞 Contacto
 
-Si tienes preguntas o sugerencias, no dudes en unirte a nuestra comunidad en telegram y seguirnos en nuestras diferentes redes sociales:
+Si tienes preguntas o sugerencias, no dudes en unirte a nuestra comunidad en Whatsapp y seguirnos en nuestras diferentes redes sociales:
 
-- [Comunidad en Telegram](https://t.me/PerTechTalks)
 - [Comunidad en Whatsapp](https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U)
 - [Website](https://www.pereiratechtalks.com/)
 - [X - @PerTechTalks](https://x.com/pertechtalks)
