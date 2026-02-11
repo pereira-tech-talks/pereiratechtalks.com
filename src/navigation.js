@@ -14,6 +14,10 @@ export const headerData = {
           href: '/about',
         },
         {
+          text: 'Escuela de Speakers',
+          href: '/speakers-school',
+        },
+        {
           text: 'Contribución',
           href: '/contributing',
         },
