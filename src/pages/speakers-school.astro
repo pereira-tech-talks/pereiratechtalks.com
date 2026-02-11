@@ -1,0 +1,30 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Escuela de Speakers - Pereira Tech Talks',
+  description:
+    'Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.',
+};
+
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    title="Escuela de Speakers"
+  >
+    <Fragment slot="subtitle">
+      <br />
+      ¿Quieres mejorar tus habilidades para hablar en público y compartir tus conocimientos en tecnología? En Pereira
+      Tech Talks encontrarás a un equipo de experimentados ponentes que te guiarán en tu camino para convertirte en un
+      speaker de alto impacto. Participa de nuestra escuela de speakers y aprende a comunicar tus ideas de manera
+      efectiva, cautivar a tu audiencia y dejar una impresión duradera. ¡No pierdas la oportunidad de crecer como
+      ponente y compartir tu pasión por la tecnología con el mundo!
+    </Fragment>
+  </Hero>
+
+  
+</Layout>
