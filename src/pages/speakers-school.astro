@@ -1,4 +1,5 @@
 ---
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -7,6 +8,7 @@ const metadata = {
   description:
     'Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.',
 };
+
 
 ---
 
@@ -26,5 +28,18 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    title="¿Te interesa participar?"
+    subtitle="Postula tu charla y nos contactaremos contigo para darte más detalles sobre la escuela de speakers"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Propón una Charla',
+        href: 'https://goo.gl/forms/QgkaE6qXjFB9FTDP2',
+        target: '_blank',
+      },
+    ]}
+  />
 </Layout>
