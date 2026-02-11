@@ -1,5 +1,7 @@
 ---
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import Features from '~/components/widgets/Features.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -9,7 +11,62 @@ const metadata = {
     'Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.',
 };
 
+const benefits = [
+  {
+    title: 'Comunicación Efectiva',
+    description:
+      'Aprende a estructurar tu mensaje y comunicar ideas complejas de forma clara y comprensible para todo tipo de audiencias.',
+    icon: 'tabler:message-circle',
+  },
+  {
+    title: 'Diseño de Presentaciones',
+    description:
+      'Crea slides atractivas y efectivas que complementen tu mensaje sin distraer a la audiencia.',
+    icon: 'tabler:presentation',
+  },
+  {
+    title: 'Manejo de Nervios',
+    description:
+      'Técnicas probadas para controlar la ansiedad y el nerviosismo antes y durante tu presentación.',
+    icon: 'tabler:heart',
+  },
+  {
+    title: 'Lenguaje Corporal',
+    description:
+      'Usa tu presencia física y gestos para reforzar tu mensaje y generar confianza en el escenario.',
+    icon: 'tabler:user',
+  },
+  {
+    title: 'Manejo de Q&A',
+    description:
+      'Aprende a responder preguntas difíciles con confianza y a mantener el control durante la sesión de preguntas.',
+    icon: 'tabler:help',
+  },
+];
 
+const mentors = [
+  {
+    name: 'Sergio Estrella',
+    image: '~/assets/images/people/team/sergio-estrella.jpeg',
+    socialLink: 'https://sergioestrella.com/',
+  },
+  {
+    image: '~/assets/images/people/team/sergio-florez.png',
+    name: 'Sergio Florez',
+    socialLink: 'https://www.xergioalex.com/',
+  },
+  {
+    image: '~/assets/images/people/team/eliana-osorio.jpeg',
+    name: 'Eliana Osorio',
+    socialLink: 'https://www.linkedin.com/in/monocuka/',
+  },
+  {
+    image: '~/assets/images/mentors/mayra.png',
+    name: 'Mayra Valentina Velásquez',
+    socialLink: 'https://www.linkedin.com/in/mayra-valentina-velasquez/',
+  },
+
+];
 ---
 
 <Layout metadata={metadata}>
@@ -27,6 +84,31 @@ const metadata = {
       ponente y compartir tu pasión por la tecnología con el mundo!
     </Fragment>
   </Hero>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="beneficios"
+    title="¿Qué aprenderás?"
+    subtitle="Desarrolla habilidades clave para convertirte en un speaker exitoso"
+    columns={2}
+    items={benefits}
+  />
+
+  <!-- Collaborators Widget ********** -->
+
+  {
+    mentors && (
+      <Collaborators
+        id="mentores"
+        tagline="Aprende de los Mejores"
+        title="Nuestros Mentores"
+        subtitle="Speakers experimentados de la comunidad que compartirán su conocimiento y experiencia contigo"
+        collaborators={mentors}
+        classes={{ container: 'lg:pt-5' }}
+      />
+    )
+  }
 
   <!-- CallToAction Widget *********** -->
 
