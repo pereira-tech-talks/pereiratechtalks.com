@@ -1,7 +1,7 @@
 ---
-import { POPUP } from 'astrowind:config';
 import fs from 'node:fs';
 import path from 'node:path';
+import { POPUP } from 'astrowind:config';
 
 const isEnabled = POPUP?.enabled || false;
 const startDate = POPUP?.startDate ? new Date(POPUP.startDate) : null;
@@ -12,7 +12,13 @@ const storageKey = POPUP?.storageKey || 'popup-dismissed';
 let content = POPUP?.content || '';
 if (POPUP?.contentFile && !content) {
   try {
-    const contentPath = path.join(process.cwd(), 'src', 'content', 'popup', POPUP.contentFile);
+    const contentPath = path.join(
+      process.cwd(),
+      'src',
+      'content',
+      'popup',
+      POPUP.contentFile,
+    );
     if (fs.existsSync(contentPath)) {
       content = fs.readFileSync(contentPath, 'utf-8');
     } else {
@@ -25,7 +31,8 @@ if (POPUP?.contentFile && !content) {
 
 // Verificar si el popup debe mostrarse según las fechas
 const now = new Date();
-const shouldShowByDate = (!startDate || now >= startDate) && (!endDate || now <= endDate);
+const shouldShowByDate =
+  (!startDate || now >= startDate) && (!endDate || now <= endDate);
 const shouldShow = isEnabled && shouldShowByDate && content;
 ---
 
