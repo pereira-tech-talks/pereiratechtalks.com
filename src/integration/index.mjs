@@ -28,7 +28,7 @@ const tasksIntegration = () => {
         const fileConfig = yaml.load(
           fs.readFileSync('src/config.yaml', 'utf8'),
         );
-        const { SITE, I18N, METADATA, APP_BLOG, UI, ANALYTICS } =
+        const { SITE, I18N, METADATA, APP_BLOG, UI, ANALYTICS, POPUP } =
           configBuilder(fileConfig);
 
         updateConfig({
@@ -55,6 +55,7 @@ const tasksIntegration = () => {
                     export const APP_BLOG = ${JSON.stringify(APP_BLOG)};
                     export const UI = ${JSON.stringify(UI)};
                     export const ANALYTICS = ${JSON.stringify(ANALYTICS)};
+                    export const POPUP = ${JSON.stringify(POPUP)};
                     `;
                   }
                 },

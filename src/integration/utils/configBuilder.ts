@@ -11,6 +11,7 @@ type Config = {
   };
   ui?: unknown;
   analytics?: unknown;
+  popup?: PopupConfig;
 };
 
 export interface SiteConfig {
@@ -76,6 +77,18 @@ export interface AnalyticsConfig {
       partytown?: boolean;
     };
   };
+}
+
+export interface PopupConfig {
+  enabled: boolean;
+  startDate?: string;
+  endDate?: string;
+  title: string;
+  content?: string;
+  contentFile?: string;
+  buttonText: string;
+  buttonLink?: string;
+  storageKey: string;
 }
 
 // biome-ignore lint/complexity/noBannedTypes: <explanation>
@@ -219,6 +232,22 @@ const getAnalytics = (config: Config) => {
   return merge({}, _default, config?.analytics ?? {}) as AnalyticsConfig;
 };
 
+const getPopup = (config: Config) => {
+  const _default = {
+    enabled: false,
+    startDate: undefined,
+    endDate: undefined,
+    title: '',
+    content: '',
+    contentFile: undefined,
+    buttonText: 'Cerrar',
+    buttonLink: undefined,
+    storageKey: 'popup-dismissed',
+  };
+
+  return merge({}, _default, config?.popup ?? {}) as PopupConfig;
+};
+
 export default (config: Config) => ({
   SITE: getSite(config),
   I18N: getI18N(config),
@@ -226,4 +255,5 @@ export default (config: Config) => ({
   APP_BLOG: getAppBlog(config),
   UI: getUI(config),
   ANALYTICS: getAnalytics(config),
+  POPUP: getPopup(config),
 });
