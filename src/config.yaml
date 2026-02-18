@@ -70,6 +70,15 @@ analytics:
     googleTagManager:
       id: 'G-GD38K1WJJ9'
 
+popup:
+  enabled: true
+  startDate: '2026-02-17T00:00:00'
+  endDate: '2026-02-25T21:00:00'
+  contentFile: 'meetup-febrero-2026.html'
+  buttonText: 'Más información'
+  buttonLink: '/meetups'
+  storageKey: 'popup-dismissed-2026-02'
+
 ui:
   theme: 'dark'
 

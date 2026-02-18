@@ -1,0 +1,206 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { POPUP } from 'astrowind:config';
+
+const isEnabled = POPUP?.enabled || false;
+const startDate = POPUP?.startDate ? new Date(POPUP.startDate) : null;
+const endDate = POPUP?.endDate ? new Date(POPUP.endDate) : null;
+const storageKey = POPUP?.storageKey || 'popup-dismissed';
+
+// Obtener el contenido: desde archivo o inline
+let content = POPUP?.content || '';
+if (POPUP?.contentFile && !content) {
+  try {
+    const contentPath = path.join(
+      process.cwd(),
+      'src',
+      'content',
+      'popup',
+      POPUP.contentFile,
+    );
+    if (fs.existsSync(contentPath)) {
+      content = fs.readFileSync(contentPath, 'utf-8');
+    } else {
+      console.warn(`⚠️ Popup content file not found: ${contentPath}`);
+    }
+  } catch (error) {
+    console.error('Error reading popup content file:', error);
+  }
+}
+
+// Verificar si el popup debe mostrarse según las fechas
+const now = new Date();
+const shouldShowByDate =
+  (!startDate || now >= startDate) && (!endDate || now <= endDate);
+const shouldShow = isEnabled && shouldShowByDate && content;
+---
+
+{
+  shouldShow && (
+    <>
+      <div
+        id="popup-overlay"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] opacity-0 pointer-events-none transition-all duration-300"
+        aria-hidden="true"
+      />
+      <div
+        id="popup-announcement"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999] w-[90vw] max-w-lg opacity-0 scale-95 pointer-events-none transition-all duration-300"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Anuncio"
+      >
+        <div class="bg-white dark:bg-slate-900 rounded-lg shadow-2xl p-6 md:p-8 relative border-2 border-primary">
+          {/* Botón de cerrar */}
+          <button
+            id="popup-close"
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors z-10"
+            aria-label="Cerrar popup"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Contenido del popup */}
+          <div>
+            <div class="text-gray-600 dark:text-gray-300 mb-6 prose dark:prose-invert max-w-none" set:html={content} />
+
+            {/* Botón de acción */}
+            <div class="flex justify-center">
+              <button class="popup-dismiss text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 px-4 py-3 font-medium transition-colors">
+                No mostrar de nuevo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script define:vars={{ storageKey }}>
+        // Mostrar el popup si no ha sido descartado previamente
+        function initPopup() {
+          const dismissed = localStorage.getItem(storageKey);
+
+          if (!dismissed) {
+            const overlay = document.getElementById('popup-overlay');
+            const popup = document.getElementById('popup-announcement');
+
+            if (overlay && popup) {
+              // Mostrar el popup después de un pequeño retraso
+              setTimeout(() => {
+                overlay.classList.remove('pointer-events-none', 'opacity-0');
+                overlay.classList.add('opacity-100');
+                popup.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+                popup.classList.add('opacity-100', 'scale-100');
+                document.body.style.overflow = 'hidden';
+              }, 1000);
+            }
+          }
+        }
+
+        // Función para cerrar el popup
+        function closePopup(savePreference = false, keepScrollLocked = false) {
+          const overlay = document.getElementById('popup-overlay');
+          const popup = document.getElementById('popup-announcement');
+
+          if (overlay && popup) {
+            overlay.classList.remove('opacity-100');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+            popup.classList.remove('opacity-100', 'scale-100');
+            popup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+            
+            if (!keepScrollLocked) {
+              document.body.style.overflow = '';
+            }
+
+            if (savePreference) {
+              localStorage.setItem(storageKey, 'true');
+            }
+          }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', initPopup);
+
+        // Cerrar al hacer clic en el botón de cerrar
+        const closeButton = document.getElementById('popup-close');
+        if (closeButton) {
+          closeButton.addEventListener('click', () => closePopup(false));
+        }
+
+        // Cerrar al hacer clic en el overlay
+        const overlay = document.getElementById('popup-overlay');
+        if (overlay) {
+          overlay.addEventListener('click', () => closePopup(false));
+        }
+
+        // Cerrar y guardar preferencia en los botones de dismiss
+        const dismissButtons = document.querySelectorAll('.popup-dismiss');
+        dismissButtons.forEach((button) => {
+          button.addEventListener('click', () => closePopup(true));
+        });
+
+        // Cerrar al hacer clic en botones de Luma u otros enlaces dentro del popup
+        const popup = document.getElementById('popup-announcement');
+        if (popup) {
+          popup.addEventListener('click', (e) => {
+            const target = e.target;
+            // Si se hace clic en un enlace con clase luma-checkout--button
+            if (target.matches('a.luma-checkout--button')) {
+              // Cerrar nuestro popup pero mantener el scroll bloqueado para el modal de Luma
+              closePopup(false, true);
+            } else if (target.matches('a[href^="http"]')) {
+              // Otros enlaces externos cierran normal
+              closePopup(false);
+            }
+          });
+        }
+
+        // Observar y bloquear scroll cuando el modal de Luma se abre
+        const observeLumaModal = () => {
+          const observer = new MutationObserver((mutations) => {
+            // Buscar el iframe o modal de Luma
+            const lumaModal = document.querySelector('iframe[src*="lu.ma"]');
+            const lumaContainer = document.querySelector('div[id*="luma"]');
+            
+            if (lumaModal || lumaContainer) {
+              // Modal de Luma está abierto, asegurar que el scroll esté bloqueado
+              document.body.style.overflow = 'hidden';
+            } else {
+              // Verificar si nuestro popup sigue abierto
+              const ourPopup = document.getElementById('popup-announcement');
+              const isOurPopupOpen = ourPopup && !ourPopup.classList.contains('pointer-events-none');
+              
+              if (!isOurPopupOpen) {
+                // Nuestro popup está cerrado y no hay modal de Luma, restaurar scroll
+                document.body.style.overflow = '';
+              }
+            }
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true
+          });
+        };
+
+        // Iniciar observador después de cargar
+        setTimeout(observeLumaModal, 1500);
+
+        // Cerrar con la tecla Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closePopup(false);
+          }
+        });
+      </script>
+    </>
+  )
+}
