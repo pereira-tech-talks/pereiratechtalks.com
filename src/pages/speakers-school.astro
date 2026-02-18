@@ -1,99 +1,183 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Collaborators from '~/components/widgets/Collaborators.astro';
-import Features from '~/components/widgets/Features.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from "~/components/widgets/CallToAction.astro";
+import Collaborators from "~/components/widgets/Collaborators.astro";
+import FAQs from "~/components/widgets/FAQs.astro";
+import Features from "~/components/widgets/Features.astro";
+import Hero from "~/components/widgets/Hero.astro";
+import Steps from "~/components/widgets/Steps.astro";
+import Layout from "~/layouts/PageLayout.astro";
 
 const metadata = {
-  title: 'Escuela de Speakers - Pereira Tech Talks',
+  title: "Escuela de Speakers - Pereira Tech Talks",
   description:
-    'Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.',
+    "Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.",
 };
 
-const benefits = [
+const methodology = [
   {
-    title: 'Comunicación Efectiva',
+    title: "Sesiones de 1 hora, con frecuencia quincenal, enfocadas en una habilidad específica",
     description:
-      'Aprende a estructurar tu mensaje y comunicar ideas complejas de forma clara y comprensible para todo tipo de audiencias.',
-    icon: 'tabler:message-circle',
+      "Cada sesión se dedica a fortalecer una habilidad clave del público speaking en un formato concentrado y efectivo.",
+    icon: "tabler:clock",
   },
   {
-    title: 'Diseño de Presentaciones',
+    title: "Presentaciones de 5 minutos aplicando la habilidad trabajada",
     description:
-      'Crea slides atractivas y efectivas que complementen tu mensaje sin distraer a la audiencia.',
-    icon: 'tabler:presentation',
+      "Los participantes practican directamente lo aprendido en cada sesión a través de presentaciones cortas sobre sus temas.",
+    icon: "tabler:presentation",
   },
   {
-    title: 'Manejo de Nervios',
+    title: "Retroalimentación de mentores y asistentes",
     description:
-      'Técnicas probadas para controlar la ansiedad y el nerviosismo antes y durante tu presentación.',
-    icon: 'tabler:heart',
+      "Al finalizar cada presentación, recibe feedback constructivo sobre fortalezas y oportunidades de mejora.",
+    icon: "tabler:message-circle",
   },
   {
-    title: 'Lenguaje Corporal',
+    title: "Grupos pequeños para retroalimentación de calidad",
     description:
-      'Usa tu presencia física y gestos para reforzar tu mensaje y generar confianza en el escenario.',
-    icon: 'tabler:user',
+      "Limitamos el número de participantes para garantizar que cada persona reciba atención personalizada y retroalimentación significativa.",
+    icon: "tabler:users",
+  },
+];
+
+const programItems = [
+  {
+    title: "Módulo 1: Lenguaje corporal y expresiones",
+    description:
+      "Técnicas para controlar el lenguaje corporal, expresiones faciales y el contacto visual para conectar con tu audiencia.",
+    icon: "tabler:number-1",
   },
   {
-    title: 'Manejo de Q&A',
+    title: "Módulo 2: Hilo narrativo y elocuencia",
     description:
-      'Aprende a responder preguntas difíciles con confianza y a mantener el control durante la sesión de preguntas.',
-    icon: 'tabler:help',
+      "Cómo estructurar tu charla con un hilo narrativo claro, usar anécdotas y ejemplos para hacer tu presentación más memorable.",
+    icon: "tabler:number-2",
+  },
+  {
+    title: "Módulo 3: Manejo de preguntas",
+    description:
+      "Estrategias para responder preguntas difíciles, manejar objeciones y mantener el control durante la sesión de preguntas.",
+    icon: "tabler:number-3",
+  },
+  {
+    title: "Módulo 4: Preparación y uso de apoyo audiovisual",
+    description:
+      "Cómo preparar tus slides de forma efectiva, usar ayudas visuales y practicar tu presentación para maximizar su impacto.",
+    icon: "tabler:number-4",
+  },
+];
+
+const faqs = [
+  {
+    title: "¿El programa tiene algún costo?",
+    description: "No, el programa es totalmente gratuito.",
+  },
+  {
+    title:
+      "¿Puedo participar para preparar una presentación para otro escenario?",
+    description:
+      "Sí. Ten en cuenta que las sesiones están diseñadas para el formato y estándar de PerTT.",
+  },
+  {
+    title:
+      "Si participo en el programa, ¿Tengo garantizado un espacio en PerTT?",
+    description:
+      "No. El programa busca facilitar tu preparación para PerTT, pero el cupo y la fecha dependen de la agenda y la disponibilidad.",
+  },
+  {
+    title: "¿Qué pasa si no puedo asistir a una de las sesiones?",
+    description:
+      "Avísanos con anticipación. Si no asistes sin avisar, tu cupo pasará a lista de espera. Puedes retomar en la siguiente sesión o en el próximo ciclo (según disponibilidad).",
+  },
+  {
+    title: "¿Hay cupos limitados?",
+    description:
+      "Sí. Para garantizar retroalimentación de calidad, cada sesión tiene cupos limitados. Recomendamos inscribirte con tiempo.",
+  },
+  {
+    title:
+      "¿Qué pasa si no estoy listo/a para presentar en PerTT al final del ciclo?",
+    description:
+      "Está bien. La recomendación puede ser repetir el ciclo, ajustar el enfoque o reforzar una habilidad específica. La prioridad es que cuando presentes, lo hagas con solidez.",
+  },
+  {
+    title: "¿Puedo cambiar de tema a mitad del ciclo?",
+    description:
+      "Sí, pero no es lo ideal. Cambiar de tema suele retrasar el progreso.",
   },
 ];
 
 const mentors = [
   {
-    name: 'Sergio Estrella',
-    image: '~/assets/images/people/team/sergio-estrella.jpeg',
-    socialLink: 'https://sergioestrella.com/',
+    name: "Sergio Estrella",
+    image: "~/assets/images/people/team/sergio-estrella.jpeg",
+    socialLink: "https://sergioestrella.com/",
   },
   {
-    image: '~/assets/images/people/team/sergio-florez.png',
-    name: 'Sergio Florez',
-    socialLink: 'https://www.xergioalex.com/',
+    image: "~/assets/images/people/team/sergio-florez.png",
+    name: "Sergio Florez",
+    socialLink: "https://www.xergioalex.com/",
   },
   {
-    image: '~/assets/images/people/team/eliana-osorio.jpeg',
-    name: 'Eliana Osorio',
-    socialLink: 'https://www.linkedin.com/in/monocuka/',
+    image: "~/assets/images/people/team/eliana-osorio.jpeg",
+    name: "Eliana Osorio",
+    socialLink: "https://www.linkedin.com/in/monocuka/",
   },
   {
-    image: '~/assets/images/mentors/mayra.png',
-    name: 'Mayra Valentina Velásquez',
-    socialLink: 'https://www.linkedin.com/in/mayra-valentina-velasquez/',
+    image: "~/assets/images/mentors/mayra.png",
+    name: "Mayra Valentina Velásquez",
+    socialLink: "https://www.linkedin.com/in/mayra-valentina-velasquez/",
   },
-
 ];
+
+
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero
+  <Hero 
     title="Escuela de Speakers"
+    classes={{
+      banner: "min-h-screen flex items-center",
+    }}
   >
     <Fragment slot="subtitle">
       <br />
-      ¿Quieres mejorar tus habilidades para hablar en público y compartir tus conocimientos en tecnología? En Pereira
-      Tech Talks encontrarás a un equipo de experimentados ponentes que te guiarán en tu camino para convertirte en un
-      speaker de alto impacto. Participa de nuestra escuela de speakers y aprende a comunicar tus ideas de manera
-      efectiva, cautivar a tu audiencia y dejar una impresión duradera. ¡No pierdas la oportunidad de crecer como
-      ponente y compartir tu pasión por la tecnología con el mundo!
+      La Escuela de Speakers es una iniciativa de la comunidad de Pereira Tech Talks
+      (PerTT) para fortalecer habilidades de comunicación en público: manejo de escenario,
+      lenguaje corporal y diseño de charlas, talleres, pitches y conferencias. Además,
+      funciona como un programa de preparación para quienes quieren presentar en PerTT.
     </Fragment>
   </Hero>
 
-  <!-- Features Widget *************** -->
+  <!-- Methodology Widget *************** -->
 
   <Features
-    id="beneficios"
-    title="¿Qué aprenderás?"
-    subtitle="Desarrolla habilidades clave para convertirte en un speaker exitoso"
+    id="metodologia"
+    title="Metodología"
+    subtitle="Un enfoque práctico y personalizado para desarrollar tus habilidades de speaking"
     columns={2}
-    items={benefits}
+    items={methodology}
   />
+
+  <!-- Steps Widget ****************** -->
+
+  <Steps
+    id="programa"
+    title="Nuestro Programa"
+    tagline="Paso a Paso"
+    isReversed={true}
+    items={programItems}
+    image={{
+      src: "~/assets/images/posts/content/d3-11.jpg",
+      alt: "Programa Speakers School",
+    }}
+  />
+
+  <!-- FAQs Widget ******************** -->
+
+  <FAQs id="preguntas-frecuentes" title="Preguntas Frecuentes" items={faqs} />
 
   <!-- Collaborators Widget ********** -->
 
@@ -101,11 +185,9 @@ const mentors = [
     mentors && (
       <Collaborators
         id="mentores"
-        tagline="Aprende de los Mejores"
-        title="Nuestros Mentores"
-        subtitle="Speakers experimentados de la comunidad que compartirán su conocimiento y experiencia contigo"
+        tagline="Nuestros Mentores"
         collaborators={mentors}
-        classes={{ container: 'lg:pt-5' }}
+        classes={{ container: "lg:pt-5" }}
       />
     )
   }
@@ -113,14 +195,14 @@ const mentors = [
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
-    title="¿Te interesa participar?"
-    subtitle="Postula tu charla y nos contactaremos contigo para darte más detalles sobre la escuela de speakers"
+    title="Únete a nuestra próxima cohorte"
+    subtitle="Contacta al equipo organizador para resolver dudas o postular tu tema."
     actions={[
       {
-        variant: 'primary',
-        text: 'Propón una Charla',
-        href: 'https://goo.gl/forms/QgkaE6qXjFB9FTDP2',
-        target: '_blank',
+        variant: "primary",
+        text: "Únete aquí",
+        href: "https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U", //TODO: Cambiar por grupo de whatsapp específico para speakers school
+        target: "_blank",
       },
     ]}
   />
