@@ -64,6 +64,15 @@ const postCollection = defineCollection({
   }),
 });
 
+const popupCollection = defineCollection({
+  schema: z.object({
+    title: z.string().optional(),
+    startDate: z.date().optional(),
+    endDate: z.date().optional(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  popup: popupCollection,
 };
