@@ -1,6 +1,5 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import { getCollection } from 'astro:content';
 import { POPUP } from 'astrowind:config';
 
 const isEnabled = POPUP?.enabled || false;
@@ -8,24 +7,23 @@ const startDate = POPUP?.startDate ? new Date(POPUP.startDate) : null;
 const endDate = POPUP?.endDate ? new Date(POPUP.endDate) : null;
 const storageKey = POPUP?.storageKey || 'popup-dismissed';
 
-// Obtener el contenido: desde archivo o inline
-let content = POPUP?.content || '';
-if (POPUP?.contentFile && !content) {
+// Obtener el contenido desde la colección de popups
+let PopupContent = null as any;
+
+if (POPUP?.contentFile) {
   try {
-    const contentPath = path.join(
-      process.cwd(),
-      'src',
-      'content',
-      'popup',
-      POPUP.contentFile,
-    );
-    if (fs.existsSync(contentPath)) {
-      content = fs.readFileSync(contentPath, 'utf-8');
+    const popupSlug = POPUP.contentFile.replace(/\.(html|mdx|md)$/, '');
+    const popups = await getCollection('popup');
+    const popupEntry = popups.find((p) => p.slug === popupSlug);
+    
+    if (popupEntry) {
+      const { Content } = await popupEntry.render();
+      PopupContent = Content;
     } else {
-      console.warn(`⚠️ Popup content file not found: ${contentPath}`);
+      console.warn(`⚠️ Popup content not found: ${popupSlug}`);
     }
   } catch (error) {
-    console.error('Error reading popup content file:', error);
+    console.error('Error loading popup content:', error);
   }
 }
 
@@ -33,7 +31,7 @@ if (POPUP?.contentFile && !content) {
 const now = new Date();
 const shouldShowByDate =
   (!startDate || now >= startDate) && (!endDate || now <= endDate);
-const shouldShow = isEnabled && shouldShowByDate && content;
+const shouldShow = isEnabled && shouldShowByDate && PopupContent;
 ---
 
 {
@@ -71,7 +69,9 @@ const shouldShow = isEnabled && shouldShowByDate && content;
 
           {/* Contenido del popup */}
           <div>
-            <div class="text-gray-600 dark:text-gray-300 mb-6 prose dark:prose-invert max-w-none" set:html={content} />
+            <div class="text-gray-600 dark:text-gray-300 mb-6 prose dark:prose-invert max-w-none">
+              <PopupContent />
+            </div>
 
             {/* Botón de acción */}
             <div class="flex justify-center">
