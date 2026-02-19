@@ -5,6 +5,7 @@ endDate: 2026-02-25T21:00:00
 ---
 
 import { Image } from 'astro:assets';
+import Button from '~/components/ui/Button.astro';
 import meetupImage from '~/assets/images/posts/content/xjga6v67.png';
 
 <div class="popup-content">
@@ -15,14 +16,14 @@ import meetupImage from '~/assets/images/posts/content/xjga6v67.png';
       alt="Meetup de febrero 2026"
       class="border-2 border-gray-800 dark:border-gray-300 rounded-lg max-w-full h-auto mb-6"
     />
-    <a
+    <Button
+      variant="primary"
       href="https://luma.com/event/evt-ASdcjeyhorTUQaY"
       class="luma-checkout--button"
       data-luma-action="checkout"
       data-luma-event-id="evt-ASdcjeyhorTUQaY"
-    >
-      Inscribirse al evento
-    </a>
+      text="Inscribirse al evento"
+    />
   </div>
 
   <script
