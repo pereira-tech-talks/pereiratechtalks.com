@@ -8,14 +8,19 @@ const endDate = POPUP?.endDate ? new Date(POPUP.endDate) : null;
 const storageKey = POPUP?.storageKey || 'popup-dismissed';
 
 // Obtener el contenido desde la colección de popups
-let PopupContent = null as any;
+type AstroComponent = (
+  result: unknown,
+  props: unknown,
+  slots: unknown,
+) => unknown;
+let PopupContent: AstroComponent | null = null;
 
 if (POPUP?.contentFile) {
   try {
     const popupSlug = POPUP.contentFile.replace(/\.(html|mdx|md)$/, '');
     const popups = await getCollection('popup');
     const popupEntry = popups.find((p) => p.slug === popupSlug);
-    
+
     if (popupEntry) {
       const { Content } = await popupEntry.render();
       PopupContent = Content;
@@ -70,7 +75,7 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
           {/* Contenido del popup */}
           <div>
             <div class="text-gray-600 dark:text-gray-300 mb-6 prose dark:prose-invert max-w-none">
-              <PopupContent />
+              {PopupContent && <PopupContent />}
             </div>
 
             {/* Botón de acción */}
