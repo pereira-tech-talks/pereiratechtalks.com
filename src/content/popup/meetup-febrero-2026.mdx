@@ -1,0 +1,33 @@
+---
+title: "Próximo Meetup - Febrero 2026"
+startDate: 2026-02-17T00:00:00
+endDate: 2026-02-25T21:00:00
+---
+
+import { Image } from 'astro:assets';
+import Button from '~/components/ui/Button.astro';
+import meetupImage from '~/assets/images/posts/content/xjga6v67.png';
+
+<div class="popup-content">
+  <div style="text-align: center">
+    <h2>¡Próximo Meetup!</h2>
+    <Image 
+      src={meetupImage} 
+      alt="Meetup de febrero 2026"
+      class="border-2 border-gray-800 dark:border-gray-300 rounded-lg max-w-full h-auto mb-6"
+    />
+    <Button
+      variant="primary"
+      href="https://luma.com/event/evt-ASdcjeyhorTUQaY"
+      class="luma-checkout--button"
+      data-luma-action="checkout"
+      data-luma-event-id="evt-ASdcjeyhorTUQaY"
+      text="Inscribirse al evento"
+    />
+  </div>
+
+  <script
+    id="luma-checkout"
+    src="https://embed.lu.ma/checkout-button.js"
+  ></script>
+</div>
