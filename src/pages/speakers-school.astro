@@ -1,137 +1,137 @@
 ---
-import CallToAction from "~/components/widgets/CallToAction.astro";
-import Collaborators from "~/components/widgets/Collaborators.astro";
-import FAQs from "~/components/widgets/FAQs.astro";
-import Features from "~/components/widgets/Features.astro";
-import Hero from "~/components/widgets/Hero.astro";
-import Steps from "~/components/widgets/Steps.astro";
-import Layout from "~/layouts/PageLayout.astro";
-import Image from "~/components/common/Image.astro";
+import Image from '~/components/common/Image.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Collaborators from '~/components/widgets/Collaborators.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Features from '~/components/widgets/Features.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Layout from '~/layouts/PageLayout.astro';
 
-const PereiraTechTalksLogo = "~/assets/images/logos/icon.webp";
-const PereiraTechTalksLogoDark = "~/assets/images/logos/icon-black.webp";
+const PereiraTechTalksLogo = '~/assets/images/logos/icon.webp';
+const PereiraTechTalksLogoDark = '~/assets/images/logos/icon-black.webp';
 
 const metadata = {
-  title: "Escuela de Speakers - Pereira Tech Talks",
+  title: 'Escuela de Speakers - Pereira Tech Talks',
   description:
-    "Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.",
+    'Mejora tus habilidades para hablar en público y compartir tus conocimientos en tecnología con la Escuela de Speakers de Pereira Tech Talks.',
 };
 
 const methodology = [
   {
     title:
-      "Sesiones de 1 hora, con frecuencia quincenal, enfocadas en una habilidad específica",
+      'Sesiones de 1 hora, con frecuencia quincenal, enfocadas en una habilidad específica',
     description:
-      "Cada sesión se dedica a fortalecer una habilidad clave del público speaking en un formato concentrado y efectivo.",
-    icon: "tabler:clock",
+      'Cada sesión se dedica a fortalecer una habilidad clave del público speaking en un formato concentrado y efectivo.',
+    icon: 'tabler:clock',
   },
   {
-    title: "Presentaciones de 5 minutos aplicando la habilidad trabajada",
+    title: 'Presentaciones de 5 minutos aplicando la habilidad trabajada',
     description:
-      "Los participantes practican directamente lo aprendido en cada sesión a través de presentaciones cortas sobre sus temas.",
-    icon: "tabler:presentation",
+      'Los participantes practican directamente lo aprendido en cada sesión a través de presentaciones cortas sobre sus temas.',
+    icon: 'tabler:presentation',
   },
   {
-    title: "Retroalimentación de mentores y asistentes",
+    title: 'Retroalimentación de mentores y asistentes',
     description:
-      "Al finalizar cada presentación, recibe feedback constructivo sobre fortalezas y oportunidades de mejora.",
-    icon: "tabler:message-circle",
+      'Al finalizar cada presentación, recibe feedback constructivo sobre fortalezas y oportunidades de mejora.',
+    icon: 'tabler:message-circle',
   },
   {
-    title: "Grupos pequeños para retroalimentación de calidad",
+    title: 'Grupos pequeños para retroalimentación de calidad',
     description:
-      "Limitamos el número de participantes para garantizar que cada persona reciba atención personalizada y retroalimentación significativa.",
-    icon: "tabler:users",
+      'Limitamos el número de participantes para garantizar que cada persona reciba atención personalizada y retroalimentación significativa.',
+    icon: 'tabler:users',
   },
 ];
 
 const programItems = [
   {
-    title: "Módulo 1: Lenguaje corporal y expresiones",
+    title: 'Módulo 1: Lenguaje corporal y expresiones',
     description:
-      "Técnicas para controlar el lenguaje corporal, expresiones faciales y el contacto visual para conectar con tu audiencia.",
-    icon: "tabler:number-1",
+      'Técnicas para controlar el lenguaje corporal, expresiones faciales y el contacto visual para conectar con tu audiencia.',
+    icon: 'tabler:number-1',
   },
   {
-    title: "Módulo 2: Hilo narrativo y elocuencia",
+    title: 'Módulo 2: Hilo narrativo y elocuencia',
     description:
-      "Cómo estructurar tu charla con un hilo narrativo claro, usar anécdotas y ejemplos para hacer tu presentación más memorable.",
-    icon: "tabler:number-2",
+      'Cómo estructurar tu charla con un hilo narrativo claro, usar anécdotas y ejemplos para hacer tu presentación más memorable.',
+    icon: 'tabler:number-2',
   },
   {
-    title: "Módulo 3: Manejo de preguntas",
+    title: 'Módulo 3: Manejo de preguntas',
     description:
-      "Estrategias para responder preguntas difíciles, manejar objeciones y mantener el control durante la sesión de preguntas.",
-    icon: "tabler:number-3",
+      'Estrategias para responder preguntas difíciles, manejar objeciones y mantener el control durante la sesión de preguntas.',
+    icon: 'tabler:number-3',
   },
   {
-    title: "Módulo 4: Preparación y uso de apoyo audiovisual",
+    title: 'Módulo 4: Preparación y uso de apoyo audiovisual',
     description:
-      "Cómo preparar tus slides de forma efectiva, usar ayudas visuales y practicar tu presentación para maximizar su impacto.",
-    icon: "tabler:number-4",
+      'Cómo preparar tus slides de forma efectiva, usar ayudas visuales y practicar tu presentación para maximizar su impacto.',
+    icon: 'tabler:number-4',
   },
 ];
 
 const faqs = [
   {
-    title: "¿El programa tiene algún costo?",
-    description: "No, el programa es totalmente gratuito.",
+    title: '¿El programa tiene algún costo?',
+    description: 'No, el programa es totalmente gratuito.',
   },
   {
     title:
-      "¿Puedo participar para preparar una presentación para otro escenario?",
+      '¿Puedo participar para preparar una presentación para otro escenario?',
     description:
-      "Sí. Ten en cuenta que las sesiones están diseñadas para el formato y estándar de PerTT.",
+      'Sí. Ten en cuenta que las sesiones están diseñadas para el formato y estándar de PerTT.',
   },
   {
     title:
-      "Si participo en el programa, ¿Tengo garantizado un espacio en PerTT?",
+      'Si participo en el programa, ¿Tengo garantizado un espacio en PerTT?',
     description:
-      "No. El programa busca facilitar tu preparación para PerTT, pero el cupo y la fecha dependen de la agenda y la disponibilidad.",
+      'No. El programa busca facilitar tu preparación para PerTT, pero el cupo y la fecha dependen de la agenda y la disponibilidad.',
   },
   {
-    title: "¿Qué pasa si no puedo asistir a una de las sesiones?",
+    title: '¿Qué pasa si no puedo asistir a una de las sesiones?',
     description:
-      "Avísanos con anticipación. Si no asistes sin avisar, tu cupo pasará a lista de espera. Puedes retomar en la siguiente sesión o en el próximo ciclo (según disponibilidad).",
+      'Avísanos con anticipación. Si no asistes sin avisar, tu cupo pasará a lista de espera. Puedes retomar en la siguiente sesión o en el próximo ciclo (según disponibilidad).',
   },
   {
-    title: "¿Hay cupos limitados?",
+    title: '¿Hay cupos limitados?',
     description:
-      "Sí. Para garantizar retroalimentación de calidad, cada sesión tiene cupos limitados. Recomendamos inscribirte con tiempo.",
+      'Sí. Para garantizar retroalimentación de calidad, cada sesión tiene cupos limitados. Recomendamos inscribirte con tiempo.',
   },
   {
     title:
-      "¿Qué pasa si no estoy listo/a para presentar en PerTT al final del ciclo?",
+      '¿Qué pasa si no estoy listo/a para presentar en PerTT al final del ciclo?',
     description:
-      "Está bien. La recomendación puede ser repetir el ciclo, ajustar el enfoque o reforzar una habilidad específica. La prioridad es que cuando presentes, lo hagas con solidez.",
+      'Está bien. La recomendación puede ser repetir el ciclo, ajustar el enfoque o reforzar una habilidad específica. La prioridad es que cuando presentes, lo hagas con solidez.',
   },
   {
-    title: "¿Puedo cambiar de tema a mitad del ciclo?",
+    title: '¿Puedo cambiar de tema a mitad del ciclo?',
     description:
-      "Sí, pero no es lo ideal. Cambiar de tema suele retrasar el progreso.",
+      'Sí, pero no es lo ideal. Cambiar de tema suele retrasar el progreso.',
   },
 ];
 
 const mentors = [
   {
-    name: "Sergio Estrella",
-    image: "~/assets/images/people/team/sergio-estrella.jpeg",
-    socialLink: "https://sergioestrella.com/",
+    name: 'Sergio Estrella',
+    image: '~/assets/images/people/team/sergio-estrella.jpeg',
+    socialLink: 'https://sergioestrella.com/',
   },
   {
-    image: "~/assets/images/people/team/sergio-florez.png",
-    name: "Sergio Florez",
-    socialLink: "https://www.xergioalex.com/",
+    image: '~/assets/images/people/team/sergio-florez.png',
+    name: 'Sergio Florez',
+    socialLink: 'https://www.xergioalex.com/',
   },
   {
-    image: "~/assets/images/people/team/eliana-osorio.jpeg",
-    name: "Eliana Osorio",
-    socialLink: "https://www.linkedin.com/in/monocuka/",
+    image: '~/assets/images/people/team/eliana-osorio.jpeg',
+    name: 'Eliana Osorio',
+    socialLink: 'https://www.linkedin.com/in/monocuka/',
   },
   {
-    image: "~/assets/images/mentors/mayra.png",
-    name: "Mayra Valentina Velásquez",
-    socialLink: "https://www.linkedin.com/in/mayra-valentina-velasquez/",
+    image: '~/assets/images/mentors/mayra.png',
+    name: 'Mayra Valentina Velásquez',
+    socialLink: 'https://www.linkedin.com/in/mayra-valentina-velasquez/',
   },
 ];
 ---
