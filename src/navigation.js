@@ -17,6 +17,10 @@ export const headerData = {
           text: 'Contribución',
           href: '/contributing',
         },
+        {
+          text: 'Escuela de Speakers',
+          href: '/speakers-school',
+        },
       ],
     },
     {
@@ -42,6 +46,11 @@ export const headerData = {
         {
           text: 'Instagram',
           href: 'https://www.instagram.com/pertechtalks/',
+          target: '_blank',
+        },
+        {
+          text: 'LinkedIn',
+          href: 'https://www.linkedin.com/company/35508463/',
           target: '_blank',
         },
         {
