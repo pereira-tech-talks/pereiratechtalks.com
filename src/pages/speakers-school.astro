@@ -6,6 +6,10 @@ import Features from "~/components/widgets/Features.astro";
 import Hero from "~/components/widgets/Hero.astro";
 import Steps from "~/components/widgets/Steps.astro";
 import Layout from "~/layouts/PageLayout.astro";
+import Image from "~/components/common/Image.astro";
+
+const PereiraTechTalksLogo = "~/assets/images/logos/icon.webp";
+const PereiraTechTalksLogoDark = "~/assets/images/logos/icon-black.webp";
 
 const metadata = {
   title: "Escuela de Speakers - Pereira Tech Talks",
@@ -15,7 +19,8 @@ const metadata = {
 
 const methodology = [
   {
-    title: "Sesiones de 1 hora, con frecuencia quincenal, enfocadas en una habilidad específica",
+    title:
+      "Sesiones de 1 hora, con frecuencia quincenal, enfocadas en una habilidad específica",
     description:
       "Cada sesión se dedica a fortalecer una habilidad clave del público speaking en un formato concentrado y efectivo.",
     icon: "tabler:clock",
@@ -129,25 +134,43 @@ const mentors = [
     socialLink: "https://www.linkedin.com/in/mayra-valentina-velasquez/",
   },
 ];
-
-
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
-  <Hero 
-    title="Escuela de Speakers"
-    classes={{
-      banner: "min-h-screen flex items-center",
-    }}
+  <Hero
+    background="speakers-school-background"
+    bannerBackground="speakers-school-background-light dark:speakers-school-background-dark"
   >
+    <Fragment slot="title" class="text-center">
+      <div class="my-4">
+        <Image
+          src={PereiraTechTalksLogo}
+          alt="Pereira Tech Talks"
+          width={150}
+          class="mx-auto hidden dark:block"
+        />
+        <Image
+          src={PereiraTechTalksLogoDark}
+          alt="Pereira Tech Talks"
+          width={150}
+          class="mx-auto dark:hidden"
+        />
+      </div>
+      <div
+        class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading"
+      >
+        Escuela de Speakers
+      </div>
+    </Fragment>
+
     <Fragment slot="subtitle">
-      <br />
-      La Escuela de Speakers es una iniciativa de la comunidad de Pereira Tech Talks
-      (PerTT) para fortalecer habilidades de comunicación en público: manejo de escenario,
-      lenguaje corporal y diseño de charlas, talleres, pitches y conferencias. Además,
-      funciona como un programa de preparación para quienes quieren presentar en PerTT.
+      La Escuela de Speakers es una iniciativa de la comunidad de Pereira Tech
+      Talks (PerTT) para fortalecer habilidades de comunicación en público: manejo
+      de escenario, lenguaje corporal y diseño de charlas, talleres, pitches y
+      conferencias. Además, funciona como un programa de preparación para quienes
+      quieren presentar en PerTT.
     </Fragment>
   </Hero>
 
