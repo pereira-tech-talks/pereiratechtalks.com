@@ -38,7 +38,7 @@ console.log(
 console.log(`💻 CPU Count: ${CPU_COUNT}`);
 
 export default defineConfig({
-  site: 'https://www.pereiratechtalks.com',
+  site: 'https://pereiratechtalks.org',
   output: 'static',
   build: {
     concurrency: CPU_COUNT,
