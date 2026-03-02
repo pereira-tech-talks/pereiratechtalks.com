@@ -1,6 +1,6 @@
 site:
   name: Pereira Tech Talks
-  site: 'https://www.pereiratechtalks.com'
+  site: 'https://www.pereiratechtalks.org'
   base: '/'
   trailingSlash: false
 

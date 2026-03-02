@@ -1,6 +1,6 @@
 # 🚀 Pereira Tech Talks
 
-Este es el repositorio web oficial de [pereiratechtalks.com](https://pereiratechtalks.com), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología..
+Este es el repositorio web oficial de [pereiratechtalks.org](https://pereiratechtalks.org), una comunidad vibrante de profesionales, desarrolladores e investigadores dedicados a compartir conocimiento sobre tecnología..
 
 ![Pereira Tech Talks Banner](readme-banner.png)
 
@@ -21,7 +21,7 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 Si tienes preguntas o sugerencias, no dudes en unirte a nuestra comunidad en Whatsapp y seguirnos en nuestras diferentes redes sociales:
 
 - [Comunidad en Whatsapp](https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U)
-- [Website](https://www.pereiratechtalks.com/)
+- [Website](https://www.pereiratechtalks.org/)
 - [X - @PerTechTalks](https://x.com/pertechtalks)
 - [Instagram](https://www.instagram.com/pertechtalks)
 - [Facebook](https://www.facebook.com/PerTechTalks)
