@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.pereiratechtalks.com/sitemap-index.xml
+Sitemap: https://www.pereiratechtalks.org/sitemap-index.xml
