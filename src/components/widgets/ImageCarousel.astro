@@ -55,14 +55,14 @@ const shuffledImages = shuffleArray(images);
           // Duplicar las imágenes 3 veces para el loop infinito
           [...shuffledImages, ...shuffledImages, ...shuffledImages].map((item, index) => (
             <div class="carousel-slide">
-              <div class="flex justify-center items-center p-4">
+              <div class="flex justify-center items-center p-2 sm:p-3 md:p-4">
                 <Image
                   src={item.image.src}
                   alt={item.image.alt}
                   loading="lazy"
                   width={600}
                   height={450}
-                  class="rounded-lg shadow-xl object-cover w-full h-80"
+                  class="rounded-lg shadow-xl object-cover w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80"
                 />
               </div>
             </div>
@@ -84,8 +84,20 @@ const shuffledImages = shuffleArray(images);
 
   .carousel-container {
     width: 100%;
-    padding: 2rem 0;
+    padding: 1rem 0;
     overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .carousel-container {
+      padding: 1.5rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-container {
+      padding: 2rem 0;
+    }
   }
 
   .carousel-track {
@@ -100,21 +112,43 @@ const shuffledImages = shuffleArray(images);
 
   .carousel-slide {
     flex: 0 0 auto;
-    width: 100vw;
-    max-width: 500px;
-    padding: 0 10px;
+    width: 85vw;
+    max-width: 350px;
+    padding: 0 8px;
+  }
+
+  @media (min-width: 480px) {
+    .carousel-slide {
+      width: 70vw;
+      max-width: 400px;
+    }
   }
 
   @media (min-width: 640px) {
     .carousel-slide {
-      width: 50vw;
-      max-width: 550px;
+      width: 55vw;
+      max-width: 450px;
+      padding: 0 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .carousel-slide {
+      width: 45vw;
+      max-width: 500px;
     }
   }
 
   @media (min-width: 1024px) {
     .carousel-slide {
       width: 33.333vw;
+      max-width: 550px;
+      padding: 0 12px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .carousel-slide {
       max-width: 600px;
     }
   }
@@ -133,9 +167,30 @@ const shuffledImages = shuffleArray(images);
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 250px;
+    width: 80px;
     z-index: 10;
     pointer-events: none;
+  }
+
+  @media (min-width: 640px) {
+    .fade-left,
+    .fade-right {
+      width: 150px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .fade-left,
+    .fade-right {
+      width: 200px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .fade-left,
+    .fade-right {
+      width: 250px;
+    }
   }
 
   .fade-left {
