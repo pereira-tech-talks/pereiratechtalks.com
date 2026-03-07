@@ -74,6 +74,15 @@ export const eventsHeaderData = {
       text: 'Lightning Talks',
       href: '/pereira-tech-day/lightning-talks',
     },
+    {
+      text: 'Ediciones Anteriores',
+      links: [
+        {
+          text: 'Pereira Tech Day 2024',
+          href: '/pereira-tech-day/2024',
+        },
+      ],
+    },
   ],
 };
 
