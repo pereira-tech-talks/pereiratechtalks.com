@@ -1,22 +1,23 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
-import Brands from '~/components/widgets/Brands.astro';
-import Collaborators from '~/components/widgets/Collaborators.astro';
-import Content from '~/components/widgets/Content.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
+//import Brands from '~/components/widgets/Brands.astro';
+//import Collaborators from '~/components/widgets/Collaborators.astro';
+//import Content from '~/components/widgets/Content.astro';
+import Countdown from '~/components/widgets/Countdown.astro';
+//import FAQs from '~/components/widgets/FAQs.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
+//import Pricing from '~/components/widgets/Pricing.astro';
+//import Steps from '~/components/widgets/Steps.astro';
+//import Testimonials from '~/components/widgets/Testimonials.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import type { Testimonial } from '~/types';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 
 import '@fontsource/bebas-neue';
 import '~/assets/styles/pereira-tech-day.css';
-import Community from '~/components/widgets/Community.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+//import Community from '~/components/widgets/Community.astro';
+//import Features2 from '~/components/widgets/Features2.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -574,15 +575,9 @@ const lightningTalks = [
 <EventsLayout metadata={metadata}>
   <Hero
     id="hero"
-    tagline="Septiembre 21, 2024."
+    tagline="Agosto 22, 2026."
     background="background-intro-light dark:background-intro-dark"
-    actions={[
-      {
-        variant: 'secondary',
-        text: 'Ver Streaming del evento',
-        href: 'https://www.youtube.com/watch?v=5BWnHA-vBvg',
-      },
-    ]}
+
   >
     <Fragment slot="logo">
       <div class="text-center mb-8">
@@ -597,12 +592,21 @@ const lightningTalks = [
         target="_blank"><Icon name="tabler:map-pin" class="w-5 h-5 inline" /> UTP: Auditorio Jorge Roa Martínez</a
       >
     </Fragment>
-    <Fragment slot="subtitle">
-      Un día de Tecnología, Desarrollo de software, Data Science, Machine Learning, Infraestructura y más!
+
+    <Fragment slot="content">
+      <div class="mt-12">
+        <Countdown
+          id="countdown"
+          targetDate="2026-08-22T07:00:00"
+          
+          numberColor="white"
+        />
+      </div>
     </Fragment>
+
   </Hero>
 
-  <!-- Content Widget **************** -->
+  <!-- Content Widget **************** 
 
   <Content
     id="about"
@@ -679,4 +683,5 @@ const lightningTalks = [
     columns={1}
     items={faqsList}
   />
+  -->
 </EventsLayout>
