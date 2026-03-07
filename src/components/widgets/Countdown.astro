@@ -8,6 +8,7 @@ export interface Props {
   targetDate: string; // ISO 8601 format: '2026-09-21T07:00:00'
   id?: string;
   classes?: Record<string, string>;
+  numberColor?: string;
 }
 
 const {
@@ -17,10 +18,11 @@ const {
   targetDate,
   id,
   classes = {},
+  numberColor = '',
 } = Astro.props;
 ---
 
-<div id={id} class={`countdown-wrapper ${classes?.container ?? ''}`}>
+<div id={id} class={`countdown-wrapper ${classes?.container ?? ''}`} style={numberColor ? `--countdown-color: ${numberColor};` : ''}>
   {(title || subtitle || tagline) && (
     <Headline title={title} subtitle={subtitle} tagline={tagline} classes={{ container: 'text-center' }} />
   )}
@@ -125,11 +127,11 @@ const {
     font-size: 3rem;
     font-weight: bold;
     line-height: 1;
-    color: var(--aw-color-primary);
+    color: var(--countdown-color, var(--aw-color-primary));
     font-family: 'Bebas Neue', cursive;
     min-width: 3.5rem;
     text-align: center;
-    background: linear-gradient(135deg, var(--aw-color-primary), var(--aw-color-secondary));
+    background: var(--countdown-color, linear-gradient(135deg, var(--aw-color-primary), var(--aw-color-secondary)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -166,7 +168,7 @@ const {
   .countdown-separator {
     font-size: 3rem;
     font-weight: bold;
-    color: var(--aw-color-primary);
+    color: var(--countdown-color, var(--aw-color-primary));
     margin: 0 0.25rem;
     align-self: flex-start;
     margin-top: 0.5rem;
@@ -189,7 +191,7 @@ const {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: var(--aw-color-primary);
+    color: var(--countdown-color, var(--aw-color-primary));
     padding: 2rem;
     animation: pulse 2s ease-in-out infinite;
   }
