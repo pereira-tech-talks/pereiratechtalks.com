@@ -31,8 +31,18 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
   autoplayDelay = 3000,
-  slidesPerView = 3,
 } = Astro.props;
+
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const shuffledImages = shuffleArray(images);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -43,7 +53,7 @@ const {
       <div class="carousel-track">
         {
           // Duplicar las imágenes 3 veces para el loop infinito
-          [...images, ...images, ...images].map((item, index) => (
+          [...shuffledImages, ...shuffledImages, ...shuffledImages].map((item, index) => (
             <div class="carousel-slide">
               <div class="flex justify-center items-center p-4">
                 <Image
@@ -80,7 +90,7 @@ const {
 
   .carousel-track {
     display: flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll 100s linear infinite;
     width: fit-content;
   }
 
@@ -131,7 +141,7 @@ const {
   .fade-left {
     left: 0;
     background: linear-gradient(to right, 
-      rgba(255, 255, 255, 1) 0%,
+      rgb(255, 255, 255) 0%,
       rgba(255, 255, 255, 0.98) 10%,
       rgba(255, 255, 255, 0.92) 20%,
       rgba(255, 255, 255, 0.82) 30%,
@@ -146,7 +156,7 @@ const {
   .fade-right {
     right: 0;
     background: linear-gradient(to left, 
-      rgba(255, 255, 255, 1) 0%,
+      rgb(255, 255, 255) 0%,
       rgba(255, 255, 255, 0.98) 10%,
       rgba(255, 255, 255, 0.92) 20%,
       rgba(255, 255, 255, 0.82) 30%,
@@ -160,29 +170,29 @@ const {
 
   :global(.dark) .fade-left {
     background: linear-gradient(to right, 
-      rgba(3, 7, 18, 1) 0%,
-      rgba(3, 7, 18, 0.98) 10%,
-      rgba(3, 7, 18, 0.92) 20%,
-      rgba(3, 7, 18, 0.82) 30%,
-      rgba(3, 7, 18, 0.65) 45%,
-      rgba(3, 7, 18, 0.45) 60%,
-      rgba(3, 7, 18, 0.25) 75%,
-      rgba(3, 7, 18, 0.1) 90%,
-      rgba(3, 7, 18, 0) 100%
+      rgb(3, 6, 32) 0%,
+      rgba(3, 6, 32, 0.98) 10%,
+      rgba(3, 6, 32, 0.92) 20%,
+      rgba(3, 6, 32, 0.82) 30%,
+      rgba(3, 6, 32, 0.65) 45%,
+      rgba(3, 6, 32, 0.45) 60%,
+      rgba(3, 6, 32, 0.25) 75%,
+      rgba(3, 6, 32, 0.1) 90%,
+      rgba(3, 6, 32, 0) 100%
     );
   }
 
   :global(.dark) .fade-right {
     background: linear-gradient(to left, 
-      rgba(3, 7, 18, 1) 0%,
-      rgba(3, 7, 18, 0.98) 10%,
-      rgba(3, 7, 18, 0.92) 20%,
-      rgba(3, 7, 18, 0.82) 30%,
-      rgba(3, 7, 18, 0.65) 45%,
-      rgba(3, 7, 18, 0.45) 60%,
-      rgba(3, 7, 18, 0.25) 75%,
-      rgba(3, 7, 18, 0.1) 90%,
-      rgba(3, 7, 18, 0) 100%
+      rgb(3, 6, 32) 0%,
+      rgba(3, 6, 32, 0.98) 10%,
+      rgba(3, 6, 32, 0.92) 20%,
+      rgba(3, 6, 32, 0.82) 30%,
+      rgba(3, 6, 32, 0.65) 45%,
+      rgba(3, 6, 32, 0.45) 60%,
+      rgba(3, 6, 32, 0.25) 75%,
+      rgba(3, 6, 32, 0.1) 90%,
+      rgba(3, 6, 32, 0) 100%
     );
   }
 </style>
