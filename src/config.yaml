@@ -72,12 +72,12 @@ analytics:
 
 popup:
   enabled: true
-  startDate: '2026-02-17T00:00:00'
-  endDate: '2026-02-25T21:00:00'
-  contentFile: 'meetup-febrero-2026.mdx'
+  startDate: '2026-03-07T00:00:00'
+  endDate: '2026-03-25T21:00:00'
+  contentFile: 'meetup-marzo-2026.mdx'
   buttonText: 'Más información'
   buttonLink: '/meetups'
-  storageKey: 'popup-dismissed-2026-02'
+  storageKey: 'popup-dismissed-2026-03'
 
 ui:
   theme: 'dark'
