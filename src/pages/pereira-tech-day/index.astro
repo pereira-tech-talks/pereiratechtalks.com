@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
 //import Brands from '~/components/widgets/Brands.astro';
 //import Collaborators from '~/components/widgets/Collaborators.astro';
 //import Content from '~/components/widgets/Content.astro';
@@ -28,64 +29,60 @@ const metadata = {
 
 const schedule = [
   {
-    title: 'Registro <br /> <span class="font-normal">7:00 AM - 8:00 AM</span>',
-    icon: 'tabler:forms',
-  },
-  {
     title:
       'Bienvenida <br /> <span class="font-normal">8:00 AM - 8:15 AM</span>',
     icon: 'tabler:microphone-2',
   },
   {
     title:
-      'Espacio patrocinadores <br /> <span class="font-normal">8:15 AM - 8:26 AM</span>',
+      'Espacio patrocinadores <br /> <span class="font-normal">8:15 AM - 8:23 AM</span>',
     icon: 'tabler:heart-handshake',
   },
   {
     title:
-      '¿Cuántos árboles cuesta tu deploy? Preguntas incómodas para devs conscientes <br /> <span class="font-normal">8:26 AM - 9:16 AM</span>',
+      '¿Cuántos árboles cuesta tu deploy? Preguntas incómodas para devs conscientes <br /> <span class="font-normal">8:23 AM - 9:08 AM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/karobotco/" target="_blank" class="text-primary-500"><i>Karolina Ladino</i></a>.',
     icon: 'tabler:message',
   },
   {
     title:
-      'El camino estrecho , “ganar” en contra de la probabilidad <br /> <span class="font-normal">9:16 AM - 10:06 AM</span>',
+      'El camino estrecho , "ganar" en contra de la probabilidad <br /> <span class="font-normal">9:08 AM - 9:53 AM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/c%C3%A9sar-camacho-92bb5a21a/" target="_blank" class="text-primary-500"><i>Cesar Camacho</i></a>.',
     icon: 'tabler:message',
   },
   {
     title:
-      'Refrigerio <br /> <span class="font-normal">10:06 AM - 11:06 AM</span>',
+      'Refrigerio <br /> <span class="font-normal">9:53 AM - 10:38 AM</span>',
     icon: 'tabler:coffee',
   },
   {
     title:
-      'Espacio patrocinadores <br /> <span class="font-normal">11:06 AM - 11:14 AM</span>',
+      'Espacio patrocinadores <br /> <span class="font-normal">10:38 AM - 10:45 AM</span>',
     icon: 'tabler:heart-handshake',
   },
   {
     title:
-      'Construyendo el Futuro: Desarrollo de Aplicaciones Web Impulsado por Inteligencia Artificial <br /> <span class="font-normal">11:14 AM - 12:04 PM</span>',
+      'Construyendo el Futuro: Desarrollo de Aplicaciones Web Impulsado por Inteligencia Artificial <br /> <span class="font-normal">10:45 AM - 11:30 AM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/vanessa-marely-aristizabal-angel/" target="_blank" class="text-primary-500"><i>Vanessa Aristizabal</i></a>.',
     icon: 'tabler:message',
   },
   {
     title:
-      'El Futuro de la Inteligencia Artificial, o tal vez el No Futuro <br /> <span class="font-normal">12:04 PM - 12:54 PM</span>',
+      'El Futuro de la Inteligencia Artificial, o tal vez el No Futuro <br /> <span class="font-normal">11:30 AM - 12:15 PM</span>',
     description:
       'Ponente Invitado <a href="https://www.linkedin.com/in/josejaramillov/" target="_blank" class="text-primary-500"><i>Jose Jaramillo</i></a>.',
     icon: 'tabler:message',
   },
   {
     title:
-      'Lightning talks <br /> <span class="font-normal">12:54 PM - 01:24 PM</span>',
+      'Lightning talks <br /> <span class="font-normal">12:15 PM - 12:45 PM</span>',
     icon: 'tabler:bulb',
   },
   {
-    title: 'Cierre <br /> <span class="font-normal">01:24 PM - 01:44 PM</span>',
+    title: 'Cierre <br /> <span class="font-normal">12:45 PM - 1:00 PM</span>',
     icon: 'tabler:confetti',
   },
 ];
@@ -386,7 +383,7 @@ const faqsList = [
   },
   {
     title: '¿Cuántos días dura el evento?',
-    description: 'El evento es un solo día, el sábado 21 de septiembre.',
+    description: 'El evento es un solo día, el viernes 22 de agosto.',
   },
   {
     title: ' ¿Si no soy de la UTP puedo asistir?',
@@ -577,7 +574,6 @@ const lightningTalks = [
     id="hero"
     tagline="Agosto 22, 2026."
     background="background-intro-light dark:background-intro-dark"
-
   >
     <Fragment slot="logo">
       <div class="text-center mb-8">
@@ -594,12 +590,22 @@ const lightningTalks = [
     </Fragment>
 
     <Fragment slot="content">
-      <div class="mt-12">
+      <div class="mt-4">
         <Countdown
           id="countdown"
-          targetDate="2026-08-22T07:00:00"
+          targetDate="2026-08-22T08:00:00"
           
           numberColor="white"
+        />
+      </div>
+      <div class="mt-4 flex justify-center">
+        <Button
+          variant="primary"
+          text="Guardar la fecha"
+          icon="tabler:calendar-plus"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pereira+Tech+Day+2026&dates=20260822T130000Z/20260822T180000Z&details=Evento+organizado+por+las+comunidades+tecnol%C3%B3gicas+de+Pereira&location=UTP:+Auditorio+Jorge+Roa+Mart%C3%ADnez"
+          target="_blank"
+          class="text-sm py-2.5 px-5 sm:text-base sm:py-3 sm:px-6"
         />
       </div>
     </Fragment>
