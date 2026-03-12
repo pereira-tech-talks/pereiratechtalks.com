@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
+import Form from '~/components/ui/Form.astro';
 //import Brands from '~/components/widgets/Brands.astro';
 //import Collaborators from '~/components/widgets/Collaborators.astro';
 //import Content from '~/components/widgets/Content.astro';
@@ -20,6 +21,8 @@ import '~/assets/styles/pereira-tech-day.css';
 //import Community from '~/components/widgets/Community.astro';
 //import Features2 from '~/components/widgets/Features2.astro';
 import { getPermalink } from '~/utils/permalinks';
+
+const googleSheetsUrl = import.meta.env.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL || '';
 
 const metadata = {
   title:
@@ -598,6 +601,7 @@ const lightningTalks = [
           numberColor="white"
         />
       </div>
+      <!-- 
       <div class="mt-4 flex justify-center">
         <Button
           variant="primary"
@@ -608,9 +612,104 @@ const lightningTalks = [
           class="text-sm py-2.5 px-5 sm:text-base sm:py-3 sm:px-6"
         />
       </div>
+      -->
+
+      <!-- Notification Form -->
+      <div class="mt-4 max-w-4xl mx-auto">
+        <p class="text-xl sm:text-1xl text-gray-300 mb-6 font-light italic text-center">
+          Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!
+        </p>
+        
+        <form 
+          id="pereira-tech-day-tickets-notification"
+          data-google-sheets-url={googleSheetsUrl}
+          class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
+        >
+          <input
+            type="email"
+            name="email"
+            id="notification-email"
+            placeholder="Ingresa tu correo electrónico"
+            required
+            class="flex-1 py-3 px-5 text-base rounded-lg border-2 border-white/20 bg-white/10 text-white placeholder-gray-300 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all"
+          />
+          <button
+            type="submit"
+            class="px-8 py-3 bg-cyan-400 hover:bg-cyan-500 text-slate-900 font-semibold rounded-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            Suscribirse
+          </button>
+        </form>
+      </div>
     </Fragment>
 
   </Hero>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('pereira-tech-day-tickets-notification');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const googleSheetsUrl = form.getAttribute('data-google-sheets-url');
+        if (!googleSheetsUrl) {
+          alert('Por favor configura la URL de Google Sheets');
+          return;
+        }
+        
+        const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement;
+        const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const originalText = button?.textContent || '';
+        
+        try {
+          if (button) {
+            button.disabled = true;
+            button.textContent = 'Enviando...';
+          }
+          
+          await fetch(googleSheetsUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: emailInput.value,
+              timestamp: new Date().toISOString(),
+            }),
+          });
+          
+          if (button) {
+            button.textContent = '✓ ¡Registrado!';
+            button.classList.remove('bg-cyan-400', 'hover:bg-cyan-500');
+            button.classList.add('bg-green-500');
+          }
+          emailInput.value = '';
+          
+          setTimeout(() => {
+            if (button) {
+              button.disabled = false;
+              button.textContent = originalText;
+              button.classList.remove('bg-green-500');
+              button.classList.add('bg-cyan-400', 'hover:bg-cyan-500');
+            }
+          }, 3000);
+          
+        } catch (error) {
+          console.error('Error:', error);
+          if (button) {
+            button.textContent = '✗ Error';
+            setTimeout(() => {
+              button.disabled = false;
+              button.textContent = originalText;
+            }, 3000);
+          }
+        }
+      });
+    });
+  </script>
 
   <!-- Content Widget **************** 
 
