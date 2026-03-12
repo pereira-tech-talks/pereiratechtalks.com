@@ -15,7 +15,7 @@ const {
 
 <form id={id} data-google-sheets-url={googleSheetsUrl}>
   {
-    showInputs && inputs &&
+    inputs &&
       inputs.map(
         ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
           name && (
@@ -76,7 +76,7 @@ const {
   }
 
   {
-    showButton && button && (
+    button && (
       <div class="mt-10 grid">
         <Button variant="primary" type="submit">
           {button}
