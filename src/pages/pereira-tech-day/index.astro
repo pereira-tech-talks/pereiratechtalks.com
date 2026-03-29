@@ -575,25 +575,30 @@ const lightningTalks = [
 <EventsLayout metadata={metadata}>
   <Hero
     id="hero"
-    tagline="Agosto 22, 2026."
+    tagline="<span class='ptd-tagline-pill'>Agosto 22, 2026</span>"
     background="background-intro-light dark:background-intro-dark"
+    classes={{
+      section: 'ptd-hero-shell',
+      banner: 'ptd-hero-banner',
+      content: 'ptd-hero-content',
+    }}
   >
     <Fragment slot="logo">
       <div class="text-center mb-8">
         <Image src={PereiraTechDayLogo} alt="Pereira Tech Talks" width={120} class="mx-auto" />
       </div>
     </Fragment>
-    <Fragment slot="title"> Pereira•Tech•Day </Fragment>
+    <Fragment slot="title"><span class="ptd-title-line">Pereira•Tech•Day</span></Fragment>
     <Fragment slot="location">
       <a
         href="https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
-        class="font-bold text-red-400 text-lg uppercase"
+        class="ptd-location-chip"
         target="_blank"><Icon name="tabler:map-pin" class="w-5 h-5 inline" /> UTP: Auditorio Jorge Roa Martínez</a
       >
     </Fragment>
 
     <Fragment slot="content">
-      <div class="mt-4">
+      <div class="ptd-countdown-block">
         <Countdown
           id="countdown"
           targetDate="2026-08-22T08:00:00"
@@ -615,15 +620,15 @@ const lightningTalks = [
       -->
 
       <!-- Notification Form -->
-      <div class="mt-4 max-w-4xl mx-auto">
-        <p class="text-xl sm:text-1xl text-gray-300 mb-6 font-light italic text-center">
+      <div class="ptd-notify-block mt-6 max-w-4xl mx-auto">
+        <p class="ptd-notify-copy">
           Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!
         </p>
         
         <form 
           id="pereira-tech-day-tickets-notification"
           data-google-sheets-url={googleSheetsUrl}
-          class="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
+          class="ptd-notify-form"
         >
           <input
             type="email"
@@ -631,11 +636,11 @@ const lightningTalks = [
             id="notification-email"
             placeholder="Ingresa tu correo electrónico"
             required
-            class="flex-1 py-3 px-5 text-base rounded-lg border-2 border-white/20 bg-white/10 text-white placeholder-gray-300 focus:border-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 transition-all"
+            class="ptd-notify-input"
           />
           <button
             type="submit"
-            class="px-8 py-3 bg-cyan-400 hover:bg-cyan-500 text-slate-900 font-semibold rounded-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            class="ptd-notify-button"
           >
             Suscribirse
           </button>
@@ -666,6 +671,8 @@ const lightningTalks = [
         try {
           if (button) {
             button.disabled = true;
+            button.classList.remove('is-error', 'is-success');
+            button.classList.add('is-loading');
             button.textContent = 'Enviando...';
           }
           
@@ -683,8 +690,8 @@ const lightningTalks = [
           
           if (button) {
             button.textContent = '✓ ¡Registrado!';
-            button.classList.remove('bg-cyan-400', 'hover:bg-cyan-500');
-            button.classList.add('bg-green-500');
+            button.classList.remove('is-loading');
+            button.classList.add('is-success');
           }
           emailInput.value = '';
           
@@ -692,8 +699,7 @@ const lightningTalks = [
             if (button) {
               button.disabled = false;
               button.textContent = originalText;
-              button.classList.remove('bg-green-500');
-              button.classList.add('bg-cyan-400', 'hover:bg-cyan-500');
+              button.classList.remove('is-success', 'is-loading');
             }
           }, 3000);
           
@@ -701,9 +707,12 @@ const lightningTalks = [
           console.error('Error:', error);
           if (button) {
             button.textContent = '✗ Error';
+            button.classList.remove('is-loading');
+            button.classList.add('is-error');
             setTimeout(() => {
               button.disabled = false;
               button.textContent = originalText;
+              button.classList.remove('is-error');
             }, 3000);
           }
         }
