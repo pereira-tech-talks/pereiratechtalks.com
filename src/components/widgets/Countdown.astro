@@ -98,27 +98,33 @@ const {
 </script>
 
 <style>
+  .countdown-wrapper {
+    position: relative;
+    max-width: 62rem;
+    margin-inline: auto;
+  }
+
   .countdown-container {
-    padding: 1rem 0.5rem 0.5rem;
+    padding: 1.1rem 0.45rem 0.45rem;
   }
 
   .countdown-grid {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.8rem;
     flex-wrap: nowrap;
   }
 
   @media (min-width: 640px) {
     .countdown-grid {
-      gap: 1.5rem;
+      gap: 1.15rem;
     }
   }
 
   @media (min-width: 1024px) {
     .countdown-grid {
-      gap: 2rem;
+      gap: 1.35rem;
     }
   }
 
@@ -126,82 +132,93 @@ const {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
+    min-width: 4.15rem;
+    padding: 0.8rem 0.65rem;
+    border-radius: 0.95rem;
+    border: 1px solid rgba(103, 232, 249, 0.2);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(2, 18, 29, 0.7) 100%);
+    box-shadow: 0 10px 26px rgba(2, 132, 199, 0.18), inset 0 0 0 1px rgba(34, 211, 238, 0.08);
+    backdrop-filter: blur(8px);
   }
 
   @media (min-width: 640px) {
     .countdown-item {
-      gap: 0.5rem;
+      min-width: 7rem;
+      padding: 1rem 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .countdown-item {
+      min-width: 8.2rem;
+      padding: 1.15rem 1.2rem;
     }
   }
 
   .countdown-value {
-    font-size: 2.5rem;
+    font-size: 2.35rem;
     font-weight: bold;
     line-height: 1;
     color: var(--countdown-color, var(--aw-color-primary));
     font-family: 'Bebas Neue', cursive;
     min-width: 2.75rem;
     text-align: center;
-    background: var(--countdown-color, linear-gradient(135deg, var(--aw-color-primary), var(--aw-color-secondary)));
+    letter-spacing: 0.02em;
+    background: var(--countdown-color, linear-gradient(135deg, #a5f3fc, #22d3ee));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 22px rgba(34, 211, 238, 0.35);
   }
 
   @media (min-width: 640px) {
     .countdown-value {
-      font-size: 3.5rem;
-      min-width: 4rem;
+      font-size: 3.35rem;
+      min-width: 4.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .countdown-value {
-      font-size: 5rem;
-      min-width: 5rem;
+      font-size: 4.4rem;
+      min-width: 5.3rem;
     }
   }
 
   .countdown-label {
-    font-size: 0.7rem;
+    font-size: 0.66rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
-    color: var(--aw-color-text-muted);
+    letter-spacing: 0.2em;
+    color: rgb(148 163 184 / 0.95);
+  }
+
+  @media (max-width: 639px) {
+    .countdown-value {
+      font-size: 1.95rem;
+      min-width: 2.35rem;
+    }
+
+    .countdown-label {
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+    }
   }
 
   @media (min-width: 640px) {
     .countdown-label {
-      font-size: 0.875rem;
+      font-size: 0.72rem;
     }
   }
 
   .countdown-separator {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: var(--countdown-color, var(--aw-color-primary));
-    margin: 0 0.15rem;
-    align-self: flex-start;
-    margin-top: 0.25rem;
-  }
-
-  @media (min-width: 640px) {
-    .countdown-separator {
-      font-size: 3.5rem;
-      margin: 0 0.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .countdown-separator {
-      font-size: 5rem;
-    }
+    display: none;
   }
 
   .countdown-message {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--countdown-color, var(--aw-color-primary));
     padding: 2rem;
@@ -210,7 +227,7 @@ const {
 
   @media (min-width: 640px) {
     .countdown-message {
-      font-size: 3rem;
+      font-size: 2.2rem;
     }
   }
 
