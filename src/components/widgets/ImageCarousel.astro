@@ -33,7 +33,9 @@ const {
   autoplayDelay = 3000,
 } = Astro.props;
 
-const shuffleArray = <T>(array: T[]): T[] => {
+type CarouselImage = Props['images'][number];
+
+const shuffleArray = (array: CarouselImage[]): CarouselImage[] => {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -53,7 +55,7 @@ const shuffledImages = shuffleArray(images);
       <div class="carousel-track">
         {
           // Duplicar las imágenes 3 veces para el loop infinito
-          [...shuffledImages, ...shuffledImages, ...shuffledImages].map((item, index) => (
+          [...shuffledImages, ...shuffledImages, ...shuffledImages].map((item) => (
             <div class="carousel-slide">
               <div class="flex justify-center items-center p-2 sm:p-3 md:p-4">
                 <Image
