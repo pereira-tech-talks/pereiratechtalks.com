@@ -1,0 +1,255 @@
+---
+import Image from '~/components/common/Image.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  images: Array<{
+    image: {
+      src: string;
+      alt: string;
+    };
+  }>;
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  bg?: string;
+  autoplayDelay?: number;
+  slidesPerView?: number;
+}
+
+const {
+  title = '',
+  subtitle = '',
+  tagline = '',
+  images = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+  autoplayDelay = 3000,
+} = Astro.props;
+
+type CarouselImage = Props['images'][number];
+
+const shuffleArray = (array: CarouselImage[]): CarouselImage[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+const shuffledImages = shuffleArray(images);
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  <div class="carousel-wrapper">
+    <div class="carousel-container">
+      <div class="carousel-track">
+        {
+          // Duplicar las imágenes 3 veces para el loop infinito
+          [...shuffledImages, ...shuffledImages, ...shuffledImages].map((item) => (
+            <div class="carousel-slide">
+              <div class="flex justify-center items-center p-2 sm:p-3 md:p-4">
+                <Image
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  loading="lazy"
+                  width={600}
+                  height={450}
+                  class="rounded-lg shadow-xl object-cover w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div class="fade-left"></div>
+    <div class="fade-right"></div>
+  </div>
+</WidgetWrapper>
+
+<style define:vars={{ slideDuration: `${autoplayDelay}ms` }}>
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-container {
+    width: 100%;
+    padding: 1rem 0;
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .carousel-container {
+      padding: 1.5rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-container {
+      padding: 2rem 0;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    animation: scroll 100s linear infinite;
+    width: fit-content;
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .carousel-slide {
+    flex: 0 0 auto;
+    width: 85vw;
+    max-width: 350px;
+    padding: 0 8px;
+  }
+
+  @media (min-width: 480px) {
+    .carousel-slide {
+      width: 70vw;
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .carousel-slide {
+      width: 55vw;
+      max-width: 450px;
+      padding: 0 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .carousel-slide {
+      width: 45vw;
+      max-width: 500px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-slide {
+      width: 33.333vw;
+      max-width: 550px;
+      padding: 0 12px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .carousel-slide {
+      max-width: 600px;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+
+  .fade-left,
+  .fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  @media (min-width: 640px) {
+    .fade-left,
+    .fade-right {
+      width: 150px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .fade-left,
+    .fade-right {
+      width: 200px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .fade-left,
+    .fade-right {
+      width: 250px;
+    }
+  }
+
+  .fade-left {
+    left: 0;
+    background: linear-gradient(to right, 
+      rgb(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0.98) 10%,
+      rgba(255, 255, 255, 0.92) 20%,
+      rgba(255, 255, 255, 0.82) 30%,
+      rgba(255, 255, 255, 0.65) 45%,
+      rgba(255, 255, 255, 0.45) 60%,
+      rgba(255, 255, 255, 0.25) 75%,
+      rgba(255, 255, 255, 0.1) 90%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .fade-right {
+    right: 0;
+    background: linear-gradient(to left, 
+      rgb(255, 255, 255) 0%,
+      rgba(255, 255, 255, 0.98) 10%,
+      rgba(255, 255, 255, 0.92) 20%,
+      rgba(255, 255, 255, 0.82) 30%,
+      rgba(255, 255, 255, 0.65) 45%,
+      rgba(255, 255, 255, 0.45) 60%,
+      rgba(255, 255, 255, 0.25) 75%,
+      rgba(255, 255, 255, 0.1) 90%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  :global(.dark) .fade-left {
+    background: linear-gradient(to right, 
+      rgb(3, 6, 32) 0%,
+      rgba(3, 6, 32, 0.98) 10%,
+      rgba(3, 6, 32, 0.92) 20%,
+      rgba(3, 6, 32, 0.82) 30%,
+      rgba(3, 6, 32, 0.65) 45%,
+      rgba(3, 6, 32, 0.45) 60%,
+      rgba(3, 6, 32, 0.25) 75%,
+      rgba(3, 6, 32, 0.1) 90%,
+      rgba(3, 6, 32, 0) 100%
+    );
+  }
+
+  :global(.dark) .fade-right {
+    background: linear-gradient(to left, 
+      rgb(3, 6, 32) 0%,
+      rgba(3, 6, 32, 0.98) 10%,
+      rgba(3, 6, 32, 0.92) 20%,
+      rgba(3, 6, 32, 0.82) 30%,
+      rgba(3, 6, 32, 0.65) 45%,
+      rgba(3, 6, 32, 0.45) 60%,
+      rgba(3, 6, 32, 0.25) 75%,
+      rgba(3, 6, 32, 0.1) 90%,
+      rgba(3, 6, 32, 0) 100%
+    );
+  }
+</style>
