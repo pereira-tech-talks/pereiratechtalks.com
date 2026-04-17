@@ -3,8 +3,6 @@ import { getCollection } from 'astro:content';
 import { POPUP } from 'astrowind:config';
 
 const isEnabled = POPUP?.enabled || false;
-const startDate = POPUP?.startDate ? new Date(POPUP.startDate) : null;
-const endDate = POPUP?.endDate ? new Date(POPUP.endDate) : null;
 const storageKey = POPUP?.storageKey || 'popup-dismissed';
 
 // Obtener el contenido desde la colección de popups
@@ -14,6 +12,8 @@ type AstroComponent = (
   slots: unknown,
 ) => unknown;
 let PopupContent: AstroComponent | null = null;
+let popupStartDate: Date | null = null;
+let popupEndDate: Date | null = null;
 
 if (POPUP?.contentFile) {
   try {
@@ -24,6 +24,8 @@ if (POPUP?.contentFile) {
     if (popupEntry) {
       const { Content } = await popupEntry.render();
       PopupContent = Content;
+      popupStartDate = popupEntry.data.startDate ?? null;
+      popupEndDate = popupEntry.data.endDate ?? null;
     } else {
       console.warn(`⚠️ Popup content not found: ${popupSlug}`);
     }
@@ -31,6 +33,10 @@ if (POPUP?.contentFile) {
     console.error('Error loading popup content:', error);
   }
 }
+
+// Las fechas del MDX son la fuente principal; YAML queda como fallback.
+const startDate = popupStartDate ?? (POPUP?.startDate ? new Date(POPUP.startDate) : null);
+const endDate = popupEndDate ?? (POPUP?.endDate ? new Date(POPUP.endDate) : null);
 
 // Verificar si el popup debe mostrarse según las fechas
 const now = new Date();

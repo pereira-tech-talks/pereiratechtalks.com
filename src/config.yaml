@@ -72,8 +72,6 @@ analytics:
 
 popup:
   enabled: true
-  startDate: '2026-04-17T00:00:00'
-  endDate: '2026-04-29T21:00:00'
   contentFile: 'meetup-abril-2026.mdx'
   buttonText: 'Más información'
   buttonLink: '/meetups'
