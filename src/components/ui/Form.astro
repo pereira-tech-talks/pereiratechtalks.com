@@ -121,7 +121,7 @@ const {
             button.textContent = 'Enviando...';
           }
           
-          const response = await fetch(googleSheetsUrl, {
+          await fetch(googleSheetsUrl, {
             method: 'POST',
             mode: 'no-cors',
             headers: {
