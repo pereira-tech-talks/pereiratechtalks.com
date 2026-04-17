@@ -17,6 +17,8 @@ jobs:
     name: 'Build application bundle'
     runs-on: ubuntu-latest
     environment: live
+    env:
+      PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL: ${{ secrets.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL }}
     steps:
       - name: Step 1 - ⚙️ Setup Actions
         uses: actions/checkout@v4
@@ -82,6 +84,8 @@ jobs:
     needs: build_and_deploy
     name: 'Release and Publish'
     runs-on: ubuntu-latest
+    env:
+      PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL: ${{ secrets.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
