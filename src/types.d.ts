@@ -268,6 +268,8 @@ export interface Form {
   disclaimer?: Disclaimer;
   button?: string;
   description?: string;
+  id?: string;
+  googleSheetsUrl?: string;
 }
 
 // WIDGETS
