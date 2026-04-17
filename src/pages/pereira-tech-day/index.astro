@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
-import Button from '~/components/ui/Button.astro';
-import Form from '~/components/ui/Form.astro';
+//import Button from '~/components/ui/Button.astro';
+//import Form from '~/components/ui/Form.astro';
 //import Brands from '~/components/widgets/Brands.astro';
 //import Collaborators from '~/components/widgets/Collaborators.astro';
 //import Content from '~/components/widgets/Content.astro';
@@ -13,14 +13,14 @@ import Hero from '~/components/widgets/Hero.astro';
 //import Steps from '~/components/widgets/Steps.astro';
 //import Testimonials from '~/components/widgets/Testimonials.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
-import type { Testimonial } from '~/types';
+// import type { Testimonial } from '~/types';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
 
-import '@fontsource/bebas-neue';
+import '@fontsource/bebas-neue/400.css';
 import '~/assets/styles/pereira-tech-day.css';
 //import Community from '~/components/widgets/Community.astro';
 //import Features2 from '~/components/widgets/Features2.astro';
-import { getPermalink } from '~/utils/permalinks';
+//import { getPermalink } from '~/utils/permalinks';
 
 const googleSheetsUrl =
   import.meta.env.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL || '';
@@ -30,7 +30,7 @@ const metadata = {
     'Pereira Tech Talks — Comunidad de desarrolladores e investigadores inquietos y apasionados por compartir y aprender sobre diversos temas de desarrollo e innovación tecnológica.',
   ignoreTitleTemplate: true,
 };
-
+/*
 const schedule = [
   {
     title:
@@ -571,6 +571,7 @@ const lightningTalks = [
     ],
   },
 ];
+*/
 ---
 
 <EventsLayout metadata={metadata}>
