@@ -96,7 +96,7 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
         </div>
       </div>
 
-      <script define:vars={{ storageKey }}>
+      <script is:inline define:vars={{ storageKey }}>
         // Mostrar el popup si no ha sido descartado previamente
         function initPopup() {
           const dismissed = localStorage.getItem(storageKey);
@@ -178,7 +178,7 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
 
         // Observar y bloquear scroll cuando el modal de Luma se abre
         const observeLumaModal = () => {
-          const observer = new MutationObserver((mutations) => {
+          const observer = new MutationObserver(() => {
             // Buscar el iframe o modal de Luma
             const lumaModal = document.querySelector('iframe[src*="lu.ma"]');
             const lumaContainer = document.querySelector('div[id*="luma"]');

@@ -67,12 +67,17 @@ export const headerData = {
 export const eventsHeaderData = {
   links: [
     {
-      text: 'Meetups',
-      href: '/meetups',
+      text: 'Pereira Tech Day',
+      href: '/pereira-tech-day',
     },
     {
-      text: 'Lightning Talks',
-      href: '/pereira-tech-day/lightning-talks',
+      text: 'Ediciones Anteriores',
+      links: [
+        {
+          text: 'Pereira Tech Day 2024',
+          href: '/pereira-tech-day/2024',
+        },
+      ],
     },
   ],
 };
