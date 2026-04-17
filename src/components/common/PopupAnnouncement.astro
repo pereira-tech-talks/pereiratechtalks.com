@@ -35,8 +35,10 @@ if (POPUP?.contentFile) {
 }
 
 // Las fechas del MDX son la fuente principal; YAML queda como fallback.
-const startDate = popupStartDate ?? (POPUP?.startDate ? new Date(POPUP.startDate) : null);
-const endDate = popupEndDate ?? (POPUP?.endDate ? new Date(POPUP.endDate) : null);
+const startDate =
+  popupStartDate ?? (POPUP?.startDate ? new Date(POPUP.startDate) : null);
+const endDate =
+  popupEndDate ?? (POPUP?.endDate ? new Date(POPUP.endDate) : null);
 
 // Verificar si el popup debe mostrarse según las fechas
 const now = new Date();
