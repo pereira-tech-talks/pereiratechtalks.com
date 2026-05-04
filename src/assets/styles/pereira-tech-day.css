@@ -12,7 +12,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 h1,
@@ -21,17 +21,17 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bebas Neue", sans-serif !important;
+  font-family: "Bebas Neue", "Arial Black", sans-serif !important;
   letter-spacing: 3px !important;
 }
 
 .event-title {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: "Bebas Neue", "Arial Black", sans-serif;
   letter-spacing: 8px;
 }
 
 .event-subtitle {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .ptd-hero-shell {
