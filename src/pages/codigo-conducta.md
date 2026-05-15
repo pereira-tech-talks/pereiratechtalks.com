@@ -5,7 +5,7 @@ layout: '~/layouts/MarkdownLayout.astro'
 
 > Código de Conducta para la Comunidad de Tecnología Pereira Tech Talks
 
-_Última actualización_: Agosto 8, 2024
+_Última actualización_: 15 de mayo, 2026
 
 ## 1. Propósito
 
@@ -31,13 +31,25 @@ Si ves a alguien que está haciendo un esfuerzo adicional y significativo para a
 - Abstente de adoptar una conducta y un lenguaje degradantes, discriminatorios, abusivos o acosadores.
 - Sé consciente de tu entorno y de tus compañeros participantes. Alerta a los líderes de la comunidad si notas una situación peligrosa, ves a alguien en apuros o detectas violaciones de este Código de Conducta, incluso si parecen intrascendentes.
 
-## 4. Comportamiento inaceptable
+## 4. Enfoque temático y respeto del espacio comunitario
+
+**Pereira Tech Talks** es una comunidad enfocada en tecnología, innovación, aprendizaje, colaboración y crecimiento profesional.
+
+Con el fin de mantener un ambiente inclusivo y cómodo para todas las personas asistentes, las charlas, intervenciones y espacios de participación deben evitar discusiones o mensajes ajenos al propósito del evento, especialmente aquellos relacionados con política partidista, conflictos geopolíticos, religión, ideologías o temas sociales altamente polarizantes.
+
+Todas las personas son libres de tener y expresar sus opiniones en espacios personales. Sin embargo, dentro de las actividades de la comunidad, se espera que speakers, asistentes, patrocinadores y organizadores mantengan el enfoque en temas técnicos, profesionales y comunitarios.
+
+No se permitirán discursos agresivos, provocadores o confrontacionales que puedan generar incomodidad, división o ataques hacia otras personas o grupos.
+
+Los organizadores podrán intervenir, moderar o detener cualquier participación que considere inapropiada o contraria al propósito de la comunidad.
+
+## 5. Comportamiento inaceptable
 
 Comportamientos inaceptables incluyen: intimidación, acoso, abuso, discriminación, comunicación despectiva o degradante, o acciones por cualquier participante en nuestra comunidad, ya sea en internet, en todos los eventos relacionados y en las comunicaciones uno a uno que se realizan en el contexto de los negocios de la comunidad. Es posible que los lugares para eventos comunitarios sean de uso compartido con los miembros del público; por favor, sé respetuoso con todos aquellos que los frecuentan.
 
 El acoso incluye: comentarios nocivos o perjudiciales, verbales o escritos, relacionados con el género, la orientación sexual, raza, religión, o discapacidad; uso inadecuado de desnudos y/o imágenes sexuales en espacios públicos (incluyendo las diapositivas de presentación); intimidación deliberada, acecho o seguimiento; fotografías o grabaciones acosadoras; interrupción sostenida de charlas y otros eventos; contacto físico inapropiado y atención sexual no deseada.
 
-## 5. Consecuencias del comportamiento inaceptable
+## 6. Consecuencias del comportamiento inaceptable
 
 El comportamiento inaceptable de cualquier miembro de la comunidad, incluidos patrocinadores y aquellos con poder de decisión, no será tolerado.
 
@@ -45,13 +57,13 @@ Se espera que las personas a quienes se les solicite que detengan su comportamie
 
 Si un miembro de la comunidad participa en una conducta inaceptable, los organizadores comunitarios pueden tomar cualquier acción que consideren apropiada, hasta e incluyendo una prohibición temporal o expulsión permanente de la comunidad, sin previo aviso (y sin derecho a reembolso en el caso de un evento de pago).
 
-## 6. Si usted es testigo o es objeto de comportamiento inaceptable
+## 7. Si usted es testigo o es objeto de comportamiento inaceptable
 
 Si eres víctima o testigo de una conducta inaceptable, o tienes cualquier inquietud, por favor comunícate con un organizador del meetup lo antes posible.
 
 Adicionalmente, los organizadores comunitarios están disponibles para ayudar a miembros de la comunidad a contactar a la policía local o interceder para que las víctimas de comportamiento inaceptable se sientan seguras. En el contexto de los eventos en persona, los organizadores también pueden intentar conseguir escoltas si un miembro de la comunidad lo siente necesario.
 
-## 7. Políticas de moderación
+## 8. Políticas de moderación
 
 Estas son las políticas para mantener los estándares de conducta en nuestra comunidad en los canales de chat, meetups asociados, conferencias, grupos de estudio y eventos virtuales.
 
@@ -70,7 +82,7 @@ De la misma forma, si alguien está en desacuerdo con algo que dijiste o hiciste
 
 Todo el mundo busca armonía y todos estamos aquí, ante todo, porque queremos hablar de tecnologías que nos gustan. Por lo general, la gente está dispuesta a asumir buenas intenciones y perdonar, siempre y cuando ganes su confianza y actúes de forma honrada.
 
-## 8. Alcance
+## 9. Alcance
 
 Este Código de Conducta se aplica tanto dentro de los espacios de un proyecto como en espacios públicos cuando un individuo representa al proyecto o su comunidad. Ejemplos de representación del proyecto o comunidad incluyen el uso de una dirección de correo electrónico oficial del proyecto, publicaciones a través de una cuenta oficial de redes sociales, o actuar como un representante designado en un evento en línea o sin conexión. La representación de un proyecto puede ser clarificada más específicamente por los líderes del proyecto.
 
@@ -78,7 +90,7 @@ Este Código de Conducta también se aplica a todos los eventos organizados por 
 
 Esperamos que todos los participantes de la comunidad (contribuyentes, pagados o de otro modo; patrocinadores; y otros invitados) se atengan a este Código de Conducta en todos los espacios virtuales y presenciales, así como en todas las comunicaciones de uno a uno pertinentes a los negocios de la comunidad.
 
-## 9. Responsabilidad Ambiental
+## 10. Responsabilidad Ambiental
 
 Como comunidad comprometida con el bienestar del planeta, reconocemos nuestra responsabilidad hacia el medio ambiente. Nos esforzamos por minimizar nuestro impacto ambiental y promover prácticas sostenibles. Nos comprometemos a:
 
@@ -90,14 +102,14 @@ Como comunidad comprometida con el bienestar del planeta, reconocemos nuestra re
 
 Creemos que cada pequeña acción cuenta y nos esforzamos por hacer una diferencia positiva para el medio ambiente en cada una de nuestras actividades.
 
-## 10. Contacto
+## 11. Contacto
 
 - [Correo electrónico](mailto:pereiratechtalks@gmail.com)
 - [Meetup.com](https://www.meetup.com/es-ES/Pereira-Tech-Talks/)
 - [Facebook](https://www.facebook.com/PerTechTalks)
 - [Instagram](https://www.instagram.com/pertechtalks/)
 
-## 11. Licencia y atribución
+## 12. Licencia y atribución
 
 Este Código de Conducta se distribuye bajo una licencia [Creative Commons – ShareAlike (BY-SA)](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 
