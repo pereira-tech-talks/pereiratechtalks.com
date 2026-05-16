@@ -32,6 +32,8 @@ export interface Props {
   showToggleTheme?: boolean;
   showRssFeed?: boolean;
   position?: string;
+  /** View transition persist id; use a unique value per navbar variant (e.g. main vs Pereira Tech Day). */
+  persistId?: string | false;
 }
 
 const {
@@ -44,13 +46,17 @@ const {
   showToggleTheme = false,
   showRssFeed = false,
   position = 'center',
+  persistId = 'site-header',
 } = Astro.props;
+
+const persistProps =
+  persistId === false ? {} : { 'transition:persist': persistId };
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
 <header
-  transition:persist="site-header"
+  {...persistProps}
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
     'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity,box-shadow] duration-300 ease-in-out',
