@@ -1,0 +1,12 @@
+<script>
+  const runPageEnter = () => {
+    const main = document.querySelector('main.page-content');
+    if (!main) return;
+    main.classList.remove('is-entering');
+    void main.offsetWidth;
+    main.classList.add('is-entering');
+  };
+
+  runPageEnter();
+  document.addEventListener('astro:page-load', runPageEnter);
+</script>

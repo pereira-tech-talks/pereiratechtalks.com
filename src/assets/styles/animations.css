@@ -1,0 +1,195 @@
+/* View Transitions — cross-page navigation */
+::view-transition-old(root) {
+  animation: page-fade-out 350ms ease both;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in 350ms ease both;
+}
+
+@keyframes page-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* First paint / fallback when View Transitions API is limited */
+main.page-content.is-entering {
+  animation: page-fade-in 350ms ease both;
+}
+
+/* Header nav */
+.nav-link {
+  @apply transition-colors duration-200 ease-out;
+}
+
+/* Desktop dropdown */
+@media (min-width: 768px) {
+  .dropdown .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.98);
+    pointer-events: none;
+    transform-origin: top center;
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0.22s;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .dropdown .dropdown-trigger-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .dropdown:hover .dropdown-trigger-icon,
+  .dropdown:focus-within .dropdown-trigger-icon {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu li {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .dropdown:hover .dropdown-menu li,
+  .dropdown:focus-within .dropdown-menu li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .dropdown:hover .dropdown-menu li:nth-child(1),
+  .dropdown:focus-within .dropdown-menu li:nth-child(1) {
+    transition-delay: 0.03s;
+  }
+
+  .dropdown:hover .dropdown-menu li:nth-child(2),
+  .dropdown:focus-within .dropdown-menu li:nth-child(2) {
+    transition-delay: 0.06s;
+  }
+
+  .dropdown:hover .dropdown-menu li:nth-child(3),
+  .dropdown:focus-within .dropdown-menu li:nth-child(3) {
+    transition-delay: 0.09s;
+  }
+
+  .dropdown:hover .dropdown-menu li:nth-child(4),
+  .dropdown:focus-within .dropdown-menu li:nth-child(4) {
+    transition-delay: 0.12s;
+  }
+
+  .dropdown:hover .dropdown-menu li:nth-child(5),
+  .dropdown:focus-within .dropdown-menu li:nth-child(5) {
+    transition-delay: 0.15s;
+  }
+}
+
+/* Mobile menu */
+@media (max-width: 767px) {
+  #header.expanded nav:not(.hidden) {
+    animation: nav-panel-in 0.3s ease both;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li {
+    animation: menu-item-in 0.32s ease both;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(1) {
+    animation-delay: 0.04s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(2) {
+    animation-delay: 0.07s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(4) {
+    animation-delay: 0.13s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(5) {
+    animation-delay: 0.16s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(6) {
+    animation-delay: 0.19s;
+  }
+
+  #header.expanded nav:not(.hidden) > ul > li:nth-child(7) {
+    animation-delay: 0.22s;
+  }
+}
+
+@keyframes nav-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+  }
+
+  .dropdown .dropdown-menu,
+  .dropdown .dropdown-menu li,
+  .dropdown .dropdown-trigger-icon,
+  #header.expanded nav:not(.hidden),
+  #header.expanded nav:not(.hidden) > ul > li,
+  main.page-content.is-entering {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}

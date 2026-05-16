@@ -1,4 +1,6 @@
 ---
+import { mainContentTransition } from '~/utils/viewTransitions';
+
 import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
 import Layout from '~/layouts/Layout.astro';
@@ -23,7 +25,7 @@ const { metadata } = Astro.props;
       isSticky
     />
   </slot>
-  <main>
+  <main transition:animate={mainContentTransition} transition:name="main-content" class="page-content">
     <slot />
   </main>
   <slot name="footer">

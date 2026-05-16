@@ -1,6 +1,7 @@
 ---
 import '~/assets/styles/tailwind.css';
 import '~/assets/styles/Layout.css';
+import '~/assets/styles/animations.css';
 
 import { I18N } from 'astrowind:config';
 
@@ -16,8 +17,9 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import '@fontsource/roboto';
 import '@fontsource/fira-mono';
 
-// Uncomment line below to activate View Transitions
-// import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
+
+import PageTransitions from '~/components/common/PageTransitions.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -40,13 +42,13 @@ const { language, textDirection } = I18N;
     <SiteVerification />
     <Analytics />
 
-    <!-- Uncomment line below to activate View Transitions -->
-    <!-- <ViewTransitions fallback="swap" /> -->
+    <ClientRouter />
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">
     <slot />
 
+    <PageTransitions />
     <BasicScripts />
 
     <style is:global>
