@@ -7,6 +7,8 @@ import { findPostsByCategory } from '~/utils/blog';
 
 export const prerender = true;
 
+const EVENTS_BATCH_SIZE = 5;
+
 const metadata = {
   title: 'Eventos',
   openGraph: {
@@ -14,7 +16,8 @@ const metadata = {
   },
 };
 
-const allEvents = await findPostsByCategory(['eventos'], 5);
+const allEvents = await findPostsByCategory(['eventos']);
+const showLoadMore = allEvents.length > EVENTS_BATCH_SIZE;
 ---
 
 <Layout metadata={metadata}>
@@ -24,17 +27,43 @@ const allEvents = await findPostsByCategory(['eventos'], 5);
     >
       Eventos
     </Headline>
-    <EventList events={allEvents} />
+    <EventList events={allEvents} id="events-list" hiddenFromIndex={EVENTS_BATCH_SIZE} />
 
-    <div class="flex justify-center">
-      <Button
-        href="https://luma.com/pertechtalks/events"
-        target="_blank"
-        variant="secondary"
-        class="mt-8"
-      >
-        Ver todos los eventos
+    <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 mt-8">
+      {
+        showLoadMore && (
+          <Button type="button" variant="secondary" id="load-more-events-btn">
+            Ver más eventos
+          </Button>
+        )
+      }
+      <Button href="https://luma.com/pertechtalks/events" target="_blank" variant="secondary">
+        Ver eventos en Luma
       </Button>
     </div>
   </section>
 </Layout>
+
+{
+  showLoadMore && (
+    <script define:vars={{ batchSize: EVENTS_BATCH_SIZE }}>
+      const btn = document.getElementById('load-more-events-btn');
+      const items = document.querySelectorAll('#events-list [data-event-item]');
+      let visibleCount = batchSize;
+
+      btn?.addEventListener('click', () => {
+        visibleCount += batchSize;
+
+        items.forEach((item, index) => {
+          if (index < visibleCount) {
+            item.classList.remove('hidden');
+          }
+        });
+
+        if (visibleCount >= items.length) {
+          btn.remove();
+        }
+      });
+    </script>
+  )
+}

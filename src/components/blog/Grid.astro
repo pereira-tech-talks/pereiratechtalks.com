@@ -4,11 +4,40 @@ import type { Post } from '~/types';
 
 export interface Props {
   posts: Array<Post>;
+  centered?: boolean;
+  /** Number of columns on large screens (default: 3). */
+  columns?: 2 | 3 | 4;
+  /** Let each card use its natural height instead of stretching to the row. */
+  variableHeight?: boolean;
 }
 
-const { posts } = Astro.props;
+const { posts, centered = false, columns = 3, variableHeight = false } = Astro.props;
+
+const gridColumnClasses: Record<2 | 3 | 4, string> = {
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+};
 ---
 
-<div class="grid gap-6 row-gap-5 md:grid-cols-2 lg:grid-cols-3 -mb-6">
-  {posts.map((post) => <Item post={post} />)}
-</div>
+{
+  centered ? (
+    <div class="flex flex-wrap justify-center gap-6 row-gap-5 -mb-6">
+      {posts.map((post) => (
+        <Item post={post} centered />
+      ))}
+    </div>
+  ) : (
+    <div
+      class:list={[
+        'grid gap-6 row-gap-5 grid-cols-1 -mb-6',
+        gridColumnClasses[columns],
+        { 'items-start': variableHeight },
+      ]}
+    >
+      {posts.map((post) => (
+        <Item post={post} variableHeight={variableHeight} />
+      ))}
+    </div>
+  )
+}

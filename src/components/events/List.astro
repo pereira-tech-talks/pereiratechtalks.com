@@ -4,15 +4,24 @@ import type { Post } from '~/types';
 
 export interface Props {
   events: Array<Post>;
+  /** Items at this index and above are hidden until revealed (load more). */
+  hiddenFromIndex?: number;
+  id?: string;
 }
 
-const { events } = Astro.props;
+const { events, hiddenFromIndex, id } = Astro.props;
 ---
 
-<ul>
+<ul id={id}>
   {
-    events.map((event) => (
-      <li class="mb-12 md:mb-20">
+    events.map((event, index) => (
+      <li
+        class:list={[
+          'mb-12 md:mb-20',
+          { hidden: hiddenFromIndex !== undefined && index >= hiddenFromIndex },
+        ]}
+        data-event-item
+      >
         <Item event={event} />
       </li>
     ))

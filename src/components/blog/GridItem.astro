@@ -10,18 +10,28 @@ import '~/assets/styles/blog/BlogCard.css';
 
 export interface Props {
   post: Post;
+  centered?: boolean;
+  variableHeight?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, centered = false, variableHeight = false } = Astro.props;
 const image = await findImage(post.image);
 const postUrl = getPermalink(post.permalink, 'post');
 const preview = post.preview;
 ---
 
-<article class="transition max-w-7xl grid gap-6 md:gap-8 mb-auto h-full">
+<article
+  class:list={[
+    'transition mb-auto',
+    !variableHeight && 'h-full',
+    centered ? 'w-full max-w-sm' : 'max-w-7xl grid gap-6 md:gap-8',
+  ]}
+>
   <div
-    class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29]
-    bg-zinc-50 dark:bg-slate-900 flex flex-col justify-between"
+    class:list={[
+      'blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29] bg-zinc-50 dark:bg-slate-900',
+      variableHeight ? 'flex flex-col' : 'flex flex-col justify-between',
+    ]}
   >
     <div>
       {
@@ -45,7 +55,7 @@ const preview = post.preview;
           </a>
         ) : null
       }
-      <div class="p-6 flex flex-col flex-grow">
+      <div class:list={['p-6 flex flex-col', !variableHeight && 'flex-grow']}>
         <div class="flex flex-wrap mb-2">
           {post.tags && post.tags.map((tag) => <code class="tag">{tag}</code>)}
         </div>
@@ -59,7 +69,13 @@ const preview = post.preview;
             <p class="text-muted dark:text-slate-400 mb-3 text-base leading-relaxed line-clamp-3 whitespace-pre-line">{preview}</p>
           )
         }
-        <a href={postUrl} class="text-primary dark:text-blue-400 font-medium hover:underline mt-auto">
+        <a
+          href={postUrl}
+          class:list={[
+            'text-primary dark:text-blue-400 font-medium hover:underline',
+            !variableHeight && 'mt-auto',
+          ]}
+        >
           Seguir leyendo
         </a>
       </div>
