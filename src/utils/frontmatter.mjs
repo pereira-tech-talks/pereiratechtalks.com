@@ -17,7 +17,10 @@ export function readingTimeRemarkPlugin() {
     const readingTime = Math.ceil(getReadingTime(textOnPage).minutes);
 
     file.data.astro.frontmatter.readingTime = readingTime;
-    file.data.astro.frontmatter.textPreview = truncatePlainText(textOnPage, 220);
+    file.data.astro.frontmatter.textPreview = truncatePlainText(
+      textOnPage,
+      220,
+    );
   };
 }
 
