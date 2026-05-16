@@ -19,8 +19,13 @@ import type { Testimonial } from "~/types";
 import { getPermalink } from "~/utils/permalinks";
 const PereiraTechDayLogo = "~/assets/images/logos/logo-pertechday.png";
 
-import "@fontsource/bebas-neue/400.css";
-import "~/assets/styles/pereira-tech-day.css";
+import '@fontsource/bebas-neue/400.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/700.css';
+import '~/assets/styles/pereira-tech-day.css';
+//import Community from '~/components/widgets/Community.astro';
+//import Features2 from '~/components/widgets/Features2.astro';
+//import { getPermalink } from '~/utils/permalinks';
 
 const googleSheetsUrl =
   import.meta.env.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL || "";

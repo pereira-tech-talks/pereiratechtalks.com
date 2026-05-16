@@ -73,6 +73,14 @@ const getNormalizedPost = async (
   const category = rawCategory ? cleanSlug(rawCategory) : undefined;
   const tags = rawTags.map((tag: string) => cleanSlug(tag));
 
+  const excerptTrimmed = excerpt?.trim();
+  const textPreview =
+    remarkPluginFrontmatter &&
+    typeof (remarkPluginFrontmatter as { textPreview?: string }).textPreview ===
+      'string'
+      ? (remarkPluginFrontmatter as { textPreview: string }).textPreview.trim()
+      : '';
+
   return {
     id: id,
     slug: slug,
@@ -83,6 +91,7 @@ const getNormalizedPost = async (
 
     title: title,
     excerpt: excerpt,
+    preview: excerptTrimmed || textPreview || undefined,
     image: image,
     venue: venue,
 

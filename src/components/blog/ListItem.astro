@@ -21,6 +21,8 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
 const link = APP_BLOG?.post?.isEnabled
   ? getPermalink(post.permalink, 'post')
   : '';
+
+const preview = post.preview;
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
@@ -86,7 +88,20 @@ const link = APP_BLOG?.post?.isEnabled
       </h2>
     </header>
 
-    {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
+    {
+      preview && (
+        <p class="flex-grow text-muted dark:text-slate-400 text-base leading-relaxed line-clamp-3">{preview}</p>
+      )
+    }
+    {
+      link && (
+        <p class="mt-3 mb-0">
+          <a class="text-primary dark:text-blue-400 font-medium hover:underline" href={link}>
+            Seguir leyendo
+          </a>
+        </p>
+      )
+    }
     <footer class="mt-5">
       <PostTags tags={post.tags} />
     </footer>

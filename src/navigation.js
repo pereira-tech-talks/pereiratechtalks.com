@@ -14,6 +14,10 @@ export const headerData = {
           href: '/about',
         },
         {
+          text: 'Código de Conducta',
+          href: getPermalink('/codigo-conducta'),
+        },
+        {
           text: 'Contribución',
           href: '/contributing',
         },
@@ -124,16 +128,10 @@ export const footerData = {
       title: 'Comunidad',
       links: [
         { text: 'JointDev', href: 'https://jointdevweb.firebaseapp.com/' },
+        { text: 'QaConf', href: 'https://qaconf.co/' },
+        { text: 'Backbone', href: 'https://backboneutp.com/' },
         { text: 'PereiraJS', href: 'https://pereira.js.org/' },
         { text: 'Python Pereira', href: 'https://pypereira.co' },
-        {
-          text: 'Manizales Tech Talks',
-          href: 'https://www.meetup.com/es/manizalestechtalks/',
-        },
-        {
-          text: 'Quindio Tech',
-          href: 'https://www.meetup.com/es-ES/quindio-tech/',
-        },
       ],
     },
     {
@@ -143,8 +141,13 @@ export const footerData = {
           text: 'ASE UTP',
           href: 'https://egresados.utp.edu.co/',
         },
+        {
+          text: 'U. Católica de Pereira',
+          href: 'https://www.ucp.edu.co/',
+        },
         { text: 'DailyBot', href: 'https://www.dailybot.com/' },
-        { text: 'Social&Co', href: 'https://socialco.com.co/' },
+        { text: 'Aumentada', href: 'https://aumentada.net/' },
+        { text: 'Vuetify', href: 'https://vuetifyjs.com/en/' },
       ],
     },
   ],
