@@ -16,21 +16,21 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const hasTwoPrices = prices.length === 2;
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div class="flex items-stretch justify-center">
-    <div class="grid grid-cols-3 gap-4 dark:text-white sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <div class={`${hasTwoPrices ? 'flex w-full flex-wrap justify-center gap-4' : 'grid w-full gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'} dark:text-white`}>
       {
         prices &&
           prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }, index) => (
             <div
-              class={`col-span-3 mx-auto flex w-full sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 ${
-                prices.length % 3 === 1 && index === prices.length - 1 ? 'lg:col-start-2 xl:col-start-2' : ''
-              }`}
+              class={`${hasTwoPrices ? 'flex w-full max-w-sm flex-none' : 'mx-auto flex w-full col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1'}`}
             >
-              <div class="relative rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-zinc-50 dark:bg-slate-900 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center">
+              <div class="relative w-full rounded-lg border border-gray-200 bg-zinc-50 px-6 py-8 text-center shadow backdrop-blur dark:border-gray-700 dark:bg-slate-900 flex flex-col justify-between">
                 {hasRibbon && ribbonTitle && (
                   <div class="absolute right-[-5px] 2xl:right-[-8px] rtl:right-auto rtl:left-[-8px] rtl:2xl:left-[-10px] top-[-5px] 2xl:top-[-10px] z-[1] h-[100px] w-[100px] overflow-hidden text-right">
                     <span class="absolute top-[19px] right-[-21px] rtl:right-auto rtl:left-[-21px] block w-full rotate-45 rtl:-rotate-45 bg-green-700 text-center text-[10px] font-bold uppercase leading-5 text-white shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-green-800 before:border-t-green-800 before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-green-800 after:border-t-green-800 after:content-['']">
