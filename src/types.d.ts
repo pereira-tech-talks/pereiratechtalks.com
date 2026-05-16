@@ -18,8 +18,10 @@ export interface Post {
 
   /**  */
   title: string;
-  /** Optional summary of post content. */
+  /** Optional summary of post content (frontmatter). */
   excerpt?: string;
+  /** Card/list preview: frontmatter excerpt if set, otherwise plain text from body. */
+  preview?: string;
   /**  */
   image?: ImageMetadata | string;
 

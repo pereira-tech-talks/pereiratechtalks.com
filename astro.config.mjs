@@ -63,7 +63,9 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     sitemap(),
-    mdx(),
+    mdx({
+      remarkPlugins: [readingTimeRemarkPlugin],
+    }),
     icon({
       include: {
         tabler: ['*'],
