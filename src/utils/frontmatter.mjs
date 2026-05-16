@@ -3,12 +3,56 @@ import { toString } from 'mdast-util-to-string';
 import getReadingTime from 'reading-time';
 import lazyLoadPlugin from 'rehype-plugin-image-native-lazy-loading';
 
+const BLOCK_NODE_TYPES = new Set([
+  'blockquote',
+  'heading',
+  'list',
+  'paragraph',
+  'table',
+]);
+
+/** Strip invisible Unicode (e.g. zero-width space in Meetup/Luma imports). */
+function stripInvisibleChars(text) {
+  return text.replace(/\u200B|\u200C|\u200D|\uFEFF/g, '');
+}
+
+/** Join block-level MDAST nodes with blank lines so card previews keep paragraph breaks. */
+function extractBlockPlainText(tree) {
+  const blocks = [];
+
+  const visit = (node) => {
+    if (!node) return;
+
+    if (BLOCK_NODE_TYPES.has(node.type)) {
+      const text = stripInvisibleChars(toString(node))
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (text) blocks.push(text);
+      return;
+    }
+
+    if (Array.isArray(node.children)) {
+      for (const child of node.children) visit(child);
+    }
+  };
+
+  visit(tree);
+  return blocks.join('\n');
+}
+
 /** Plain-text preview for cards (excerpt fallback). */
 function truncatePlainText(source, maxLen) {
-  const t = source.replace(/\s+/g, ' ').trim();
+  const t = stripInvisibleChars(source).trim();
   if (!t) return '';
   if (t.length <= maxLen) return t;
-  return `${t.slice(0, Math.max(0, maxLen - 1)).trimEnd()}…`;
+
+  let slice = t.slice(0, maxLen - 1);
+  const lastBreak = slice.lastIndexOf('\n');
+  if (lastBreak > maxLen * 0.45) {
+    slice = slice.slice(0, lastBreak);
+  }
+
+  return `${slice.trimEnd()}…`;
 }
 
 export function readingTimeRemarkPlugin() {
@@ -18,7 +62,7 @@ export function readingTimeRemarkPlugin() {
 
     file.data.astro.frontmatter.readingTime = readingTime;
     file.data.astro.frontmatter.textPreview = truncatePlainText(
-      textOnPage,
+      extractBlockPlainText(tree),
       220,
     );
   };

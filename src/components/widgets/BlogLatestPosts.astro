@@ -15,6 +15,8 @@ export interface Props extends Widget {
   linkUrl?: string | URL;
   information?: string;
   count?: number;
+  eventsLinkText?: string;
+  eventsLinkUrl?: string | URL;
 }
 
 const {
@@ -23,6 +25,8 @@ const {
   linkUrl = getBlogPermalink(),
   information = await Astro.slots.render('information'),
   count = 20,
+  eventsLinkText,
+  eventsLinkUrl = '/meetups',
 
   id,
   isDark = false,
@@ -55,7 +59,17 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
         {information && <p class="text-muted dark:text-slate-400 lg:text-sm lg:max-w-md" set:html={information} />}
       </div>
 
-      <Grid posts={posts} />
+      <Grid posts={posts} centered />
+
+      {
+        eventsLinkText && (
+          <div class="flex justify-center mt-12">
+            <Button href={eventsLinkUrl} variant="secondary">
+              {eventsLinkText}
+            </Button>
+          </div>
+        )
+      }
     </WidgetWrapper>
   ) : (
     <Fragment />
