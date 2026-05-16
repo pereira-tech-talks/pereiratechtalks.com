@@ -229,16 +229,16 @@ h6 {
 html:not(.dark) .ptd-hero-shell::before {
   background: radial-gradient(
     circle,
-    rgba(8, 145, 178, 0.2) 0%,
-    rgba(8, 145, 178, 0) 70%
+    rgba(6, 182, 212, 0.22) 0%,
+    rgba(6, 182, 212, 0) 70%
   );
 }
 
 html:not(.dark) .ptd-hero-shell::after {
   background: radial-gradient(
     circle,
-    rgba(6, 182, 212, 0.16) 0%,
-    rgba(6, 182, 212, 0) 72%
+    rgba(103, 232, 249, 0.18) 0%,
+    rgba(103, 232, 249, 0) 72%
   );
 }
 
@@ -254,17 +254,16 @@ html:not(.dark) .ptd-title-line {
 }
 
 html:not(.dark) .ptd-tagline-pill {
-  background: rgba(255, 255, 255, 0.7);
-  color: #0e7490;
-  border-color: rgba(8, 145, 178, 0.35);
-  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.08), 0 0 0 1px
-    rgba(8, 145, 178, 0.1) inset;
+  background: #ffffff;
+  color: #043748; /* darker teal for contrast */
+  border-color: rgba(6, 182, 212, 0.28);
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.06), 0 0 0 1px rgba(6, 182, 212, 0.08) inset;
 }
 
 html:not(.dark) .ptd-location-chip {
-  color: #0f172a;
-  background: rgba(255, 255, 255, 0.82);
-  border-color: rgba(8, 145, 178, 0.35);
+  color: #052a36;
+  background: #ffffff;
+  border-color: rgba(6, 182, 212, 0.28);
 }
 
 html:not(.dark) .ptd-location-chip:hover {
@@ -277,9 +276,9 @@ html:not(.dark) .ptd-notify-copy {
 }
 
 html:not(.dark) .ptd-notify-input {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(14, 116, 144, 0.22);
-  color: #0f172a;
+  background: #ffffff;
+  border-color: rgba(14, 116, 144, 0.28);
+  color: #08212a;
 }
 
 html:not(.dark) .ptd-notify-input::placeholder {
@@ -336,11 +335,9 @@ html:not(.dark) .ptd-notify-input:focus {
 }
 
 html:not(.dark) .ptd-section-shell {
-  border-color: rgba(8, 145, 178, 0.18);
-  /* Use transparent background so the root background shows through uniformly */
-  background: transparent;
-  box-shadow: 0 18px 40px rgba(8, 145, 178, 0.08), 0 1px 0
-    rgba(255, 255, 255, 0.5) inset;
+  border-color: rgba(6, 182, 212, 0.16);
+  background: #ffffff;
+  box-shadow: 0 18px 40px rgba(6, 182, 212, 0.05), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
 }
 
 html:not(.dark) .ptd-section-shell::before {
@@ -419,23 +416,7 @@ html:not(.dark) .ptd-section-shell :is(p, li) {
 }
 
 html:not(.dark) .ptd-page-root {
-  /* Mantener la misma estructura de capas que en modo oscuro (radiales + lineal)
-     pero usando tonos claros y transparencias suaves para modo claro. */
-  background: radial-gradient(
-      circle at 50% 0%,
-      rgba(34, 211, 238, 0.06) 0%,
-      rgba(34, 211, 238, 0) 40%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      rgba(103, 232, 249, 0.03) 0%,
-      rgba(103, 232, 249, 0) 42%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(245, 250, 252, 0.98) 0%,
-      rgba(236, 254, 255, 0.98) 100%
-    );
+  background: linear-gradient(180deg, #f3f6f9 0%, #e8fbff 100%);
 }
 
   /* When header requests transparency, let the hero/background show through

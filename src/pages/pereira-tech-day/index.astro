@@ -18,6 +18,7 @@ import EventsLayout from '~/layouts/EventsLayout.astro';
 import type { Testimonial } from '~/types';
 import { getPermalink } from '~/utils/permalinks';
 const PereiraTechDayLogo = '~/assets/images/logos/logo-pertechday.png';
+const PereiraTechDayLogoDark = '~/assets/images/logos/logo-pertechday-dark.png';
 
 import '@fontsource/bebas-neue/400.css';
 import '@fontsource/roboto/400.css';
@@ -574,10 +575,16 @@ const lightningTalks = [
       <Fragment slot="logo">
         <div class="text-center mb-8">
           <Image
-            src={PereiraTechDayLogo}
+            src={PereiraTechDayLogoDark}
             alt="Pereira Tech Talks"
             width={120}
-            class="mx-auto"
+            class="mx-auto block dark:hidden"
+          />
+          <Image
+            src={PereiraTechDayLogo}
+            alt="Pereira Tech Talks (white)"
+            width={120}
+            class="mx-auto hidden dark:block"
           />
         </div>
       </Fragment>
