@@ -3,8 +3,8 @@ const HIDE_DELAY_MS = 400;
 
 const cache = new Map<string, Awaited<ReturnType<typeof resolvePreview>>>();
 
-let hoverTimer: ReturnType<typeof setTimeout> | null = null;
-let hideTimer: ReturnType<typeof setTimeout> | null = null;
+let hoverTimer: number | null = null;
+let hideTimer: number | null = null;
 let activeAnchor: HTMLAnchorElement | null = null;
 let requestId = 0;
 let abortController: AbortController | null = null;
@@ -203,10 +203,8 @@ async function resolvePreview(url: string) {
   return data;
 }
 
-function shouldPreview(
-  anchor: HTMLAnchorElement | null,
-): anchor is HTMLAnchorElement {
-  if (!anchor?.href) return false;
+function shouldPreview(anchor: Element | null): anchor is HTMLAnchorElement {
+  if (!(anchor instanceof HTMLAnchorElement) || !anchor.href) return false;
   if (anchor.closest('[data-link-preview-root]')) return false;
   if (anchor.hasAttribute('data-no-link-preview')) return false;
 

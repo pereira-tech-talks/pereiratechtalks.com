@@ -1,7 +1,7 @@
 <script>
   const runPageEnter = () => {
     const main = document.querySelector('main.page-content');
-    if (!main) return;
+    if (!(main instanceof HTMLElement)) return;
     main.classList.remove('is-entering');
     void main.offsetWidth;
     main.classList.add('is-entering');

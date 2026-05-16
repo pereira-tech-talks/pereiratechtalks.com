@@ -46,7 +46,7 @@ const showLoadMore = allEvents.length > EVENTS_BATCH_SIZE;
 
 {
   showLoadMore && (
-    <script define:vars={{ batchSize: EVENTS_BATCH_SIZE }}>
+    <script is:inline define:vars={{ batchSize: EVENTS_BATCH_SIZE }}>
       const btn = document.getElementById('load-more-events-btn');
       const items = document.querySelectorAll('#events-list [data-event-item]');
       let visibleCount = batchSize;
