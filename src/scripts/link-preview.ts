@@ -20,12 +20,15 @@ function getPopupElements(popup: HTMLElement) {
     loadingEl: popup.querySelector<HTMLElement>('.link-preview__loading'),
     siteEl: popup.querySelector<HTMLElement>('.link-preview__site'),
     titleEl: popup.querySelector<HTMLElement>('.link-preview__title'),
-    descriptionEl: popup.querySelector<HTMLElement>('.link-preview__description'),
+    descriptionEl: popup.querySelector<HTMLElement>(
+      '.link-preview__description',
+    ),
   };
 }
 
 function resetPopup(popup: HTMLElement) {
-  const { media, imageEl, loadingEl, siteEl, titleEl, descriptionEl } = getPopupElements(popup);
+  const { media, imageEl, loadingEl, siteEl, titleEl, descriptionEl } =
+    getPopupElements(popup);
   if (!loadingEl || !siteEl || !titleEl || !descriptionEl) return;
 
   loadingEl.hidden = false;
@@ -76,8 +79,18 @@ function positionPopup(popup: HTMLElement, anchor: HTMLAnchorElement) {
   popup.style.left = `${Math.max(margin, left)}px`;
 }
 
-function fillPopup(popup: HTMLElement, data: { site?: string; title?: string; description?: string; image?: string; url?: string }) {
-  const { media, imageEl, loadingEl, siteEl, titleEl, descriptionEl } = getPopupElements(popup);
+function fillPopup(
+  popup: HTMLElement,
+  data: {
+    site?: string;
+    title?: string;
+    description?: string;
+    image?: string;
+    url?: string;
+  },
+) {
+  const { media, imageEl, loadingEl, siteEl, titleEl, descriptionEl } =
+    getPopupElements(popup);
   if (!loadingEl || !siteEl || !titleEl || !descriptionEl) return;
 
   loadingEl.hidden = true;
@@ -113,7 +126,9 @@ function parseHtmlPreview(html: string, url: string) {
     '';
   const description =
     doc.querySelector('meta[name="description"]')?.getAttribute('content') ||
-    doc.querySelector('meta[property="og:description"]')?.getAttribute('content') ||
+    doc
+      .querySelector('meta[property="og:description"]')
+      ?.getAttribute('content') ||
     '';
   let image =
     doc.querySelector('meta[property="og:image"]')?.getAttribute('content') ||
@@ -188,21 +203,31 @@ async function resolvePreview(url: string) {
   return data;
 }
 
-function shouldPreview(anchor: HTMLAnchorElement | null): anchor is HTMLAnchorElement {
+function shouldPreview(
+  anchor: HTMLAnchorElement | null,
+): anchor is HTMLAnchorElement {
   if (!anchor?.href) return false;
   if (anchor.closest('[data-link-preview-root]')) return false;
   if (anchor.hasAttribute('data-no-link-preview')) return false;
 
   const href = anchor.getAttribute('href') || '';
   if (!href || href === '#' || href.startsWith('#')) return false;
-  if (href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+  if (
+    href.startsWith('javascript:') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('tel:')
+  ) {
     return false;
   }
 
   try {
     const linkUrl = new URL(anchor.href);
     const current = new URL(window.location.href);
-    if (linkUrl.pathname === current.pathname && linkUrl.search === current.search && linkUrl.hash) {
+    if (
+      linkUrl.pathname === current.pathname &&
+      linkUrl.search === current.search &&
+      linkUrl.hash
+    ) {
       return false;
     }
   } catch {
@@ -291,7 +316,10 @@ export function initLinkPreview() {
   cancelPreview();
   hidePopup();
 
-  document.addEventListener('mouseover', onMouseOver, { capture: true, signal });
+  document.addEventListener('mouseover', onMouseOver, {
+    capture: true,
+    signal,
+  });
   document.addEventListener('mouseout', onMouseOut, { capture: true, signal });
 
   popup.addEventListener(

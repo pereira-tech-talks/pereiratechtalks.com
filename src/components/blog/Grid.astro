@@ -11,7 +11,12 @@ export interface Props {
   variableHeight?: boolean;
 }
 
-const { posts, centered = false, columns = 3, variableHeight = false } = Astro.props;
+const {
+  posts,
+  centered = false,
+  columns = 3,
+  variableHeight = false,
+} = Astro.props;
 
 const gridColumnClasses: Record<2 | 3 | 4, string> = {
   2: 'md:grid-cols-2',

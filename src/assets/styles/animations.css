@@ -48,10 +48,7 @@ main.page-content.is-entering {
     transform: translateY(-6px) scale(0.98);
     pointer-events: none;
     transform-origin: top center;
-    transition:
-      opacity 0.22s ease,
-      transform 0.22s ease,
-      visibility 0.22s;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
   }
 
   .dropdown:hover .dropdown-menu,
@@ -74,9 +71,7 @@ main.page-content.is-entering {
   .dropdown-menu li {
     opacity: 0;
     transform: translateY(-4px);
-    transition:
-      opacity 0.18s ease,
-      transform 0.18s ease;
+    transition: opacity 0.18s ease, transform 0.18s ease;
   }
 
   .dropdown:hover .dropdown-menu li,
@@ -256,4 +251,3 @@ main.page-content.is-entering {
     visibility: visible !important;
   }
 }
-

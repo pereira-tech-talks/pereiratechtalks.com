@@ -188,7 +188,9 @@ export const findPostsByCategory = async (
 ): Promise<Array<Post>> => {
   if (!Array.isArray(categories) || categories.length === 0) return [];
 
-  const normalizedCategories = categories.map((category) => cleanSlug(category));
+  const normalizedCategories = categories.map((category) =>
+    cleanSlug(category),
+  );
   const posts = await fetchPosts();
   const matched = posts.filter(
     (post) => post.category && normalizedCategories.includes(post.category),
