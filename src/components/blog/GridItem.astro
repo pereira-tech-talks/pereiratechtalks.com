@@ -14,41 +14,56 @@ export interface Props {
 
 const { post } = Astro.props;
 const image = await findImage(post.image);
+const postUrl = getPermalink(post.permalink, 'post');
+const preview = post.preview;
 ---
 
 <article class="transition max-w-7xl grid gap-6 md:gap-8 mb-auto h-full">
   <div
-    class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-[#ffffff29]
-    bg-white dark:bg-slate-900 flex flex-col justify-between"
+    class="blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29]
+    bg-zinc-50 dark:bg-slate-900 flex flex-col justify-between"
   >
-    <a href={getPermalink(post.permalink, 'post')} class="block">
+    <div>
       {
-        image && (
-          <Image
-            src={image || 'https://via.placeholder.com/400'}
-            alt="Article Image"
-            src={image}
-            class="w-full md:h-fit rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            width={400}
-            height={275}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post.title}
-            aspectRatio="16:9"
-            layout="responsive"
-            loading="lazy"
-            decoding="async"
-          />
-        )
+        image ? (
+          <a href={postUrl} class="block">
+            <Image
+              src={image || 'https://via.placeholder.com/400'}
+              alt="Article Image"
+              src={image}
+              class="w-full md:h-fit rounded shadow-lg bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              width={400}
+              height={275}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={post.title}
+              aspectRatio="16:9"
+              layout="responsive"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        ) : null
       }
-      <div class="p-6">
+      <div class="p-6 flex flex-col flex-grow">
         <div class="flex flex-wrap mb-2">
           {post.tags && post.tags.map((tag) => <code class="tag">{tag}</code>)}
         </div>
-        <h2 class="text-2xl font-bold mb-2">{post.title}</h2>
-        <p class="text-gray-400 mb-4 text-long line-clamp-3">{post.excerpt}</p>
+        <h2 class="text-2xl font-bold mb-2">
+          <a href={postUrl} class="hover:text-primary dark:hover:text-blue-400 transition ease-in duration-200">
+            {post.title}
+          </a>
+        </h2>
+        {
+          preview && (
+            <p class="text-muted dark:text-slate-400 mb-3 text-base leading-relaxed line-clamp-3">{preview}</p>
+          )
+        }
+        <a href={postUrl} class="text-primary dark:text-blue-400 font-medium hover:underline mt-auto">
+          Seguir leyendo
+        </a>
       </div>
-    </a>
+    </div>
     <div class="flex items-center justify-between p-6">
       <div class="flex items-center">
         <a href="#" class="tooltip">

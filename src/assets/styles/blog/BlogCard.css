@@ -1,7 +1,7 @@
 /* src/styles/BlogCard.css */
 .blog-card {
   @apply transition-transform duration-300;
-  @apply bg-white shadow-md rounded-lg overflow-hidden;
+  @apply bg-zinc-50 shadow-md rounded-lg overflow-hidden;
 }
 
 .blog-card:hover {
@@ -36,7 +36,7 @@
 
 /* Blog Card Horizontal */
 .blog-card-horizontal {
-  @apply transition-transform duration-300 bg-white shadow-md rounded-lg overflow-hidden flex;
+  @apply transition-transform duration-300 bg-zinc-50 shadow-md rounded-lg overflow-hidden flex;
 }
 
 .blog-card-horizontal:hover {

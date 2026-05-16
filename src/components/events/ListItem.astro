@@ -19,6 +19,8 @@ const image = event?.image;
 const link = APP_BLOG?.post?.isEnabled
   ? getPermalink(event.permalink, 'post')
   : '';
+
+const preview = event.preview;
 ---
 
 <article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
@@ -80,6 +82,20 @@ const link = APP_BLOG?.post?.isEnabled
           )
         }
       </h2>
+      {
+        preview && (
+          <p class="text-muted dark:text-slate-400 text-base leading-relaxed line-clamp-3 mb-3">{preview}</p>
+        )
+      }
+      {
+        link && (
+          <p class="mb-0">
+            <a class="text-primary dark:text-blue-400 font-medium hover:underline" href={link}>
+              Seguir leyendo
+            </a>
+          </p>
+        )
+      }
     </header>
   </div>
 </article>

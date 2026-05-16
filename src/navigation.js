@@ -14,6 +14,10 @@ export const headerData = {
           href: '/about',
         },
         {
+          text: 'Código de Conducta',
+          href: getPermalink('/codigo-conducta'),
+        },
+        {
           text: 'Contribución',
           href: '/contributing',
         },
