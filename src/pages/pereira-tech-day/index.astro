@@ -29,6 +29,18 @@ import "~/assets/styles/pereira-tech-day.css";
 
 const googleSheetsUrl =
   import.meta.env.PEREIRA_TECH_DAY_GOOGLE_SHEETS_API_URL || "";
+const whatsappNumber = (import.meta.env.PUBLIC_WHATSAPP_NUMBER || "").replace(
+  /\D/g,
+  "",
+);
+
+const createWhatsAppLink = (range: string) => {
+  const message = `Hola, deseo saber el proceso para el rango ${range} para Pereira Tech Day.`;
+
+  return whatsappNumber
+    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    : `https://wa.me/?text=${encodeURIComponent(message)}`;
+};
 
 const metadata = {
   title:
@@ -252,110 +264,56 @@ const speakers: Array<Testimonial> = [
 
 const partnerships = [
   {
-    title: "Bronce",
-    items: [
-      {
-        description: "Logo en el sitio web del evento.",
-      },
-      {
-        description: "Agradecimiento post evento en redes sociales.",
-      },
-      {
-        description:
-          "Mencion en todas las comunicaciones oficiales del evento.",
-        icon: "tabler:x",
-      },
-      {
-        description: "Lightning talk de 3 minutos.",
-        icon: "tabler:x",
-      },
-      {
-        description: "Publicidad de la empresa en el evento.",
-        icon: "tabler:x",
-      },
-      {
-        description:
-          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
-        icon: "tabler:x",
-      },
-      {
-        description: "Stand en el evento.",
-        icon: "tabler:x",
-      },
-    ],
-    callToAction: {
-      text: "Contactar",
-      href: "mailto:pereiratechtalks@gmail.com",
-    },
-  },
-  {
     title: "Plata",
-    hasRibbon: true,
-    ribbonTitle: "Recomendado",
+    subtitle: "Visibilidad y relacionamiento.",
+    price: "200",
+    period: "USD",
     items: [
-      {
-        description: "Logo en el sitio web del evento.",
-      },
-      {
-        description: "Agradecimiento post evento en redes sociales.",
-      },
-      {
-        description:
-          "Mencion en todas las comunicaciones oficiales del evento.",
-      },
-      {
-        description: "Lightning talk de 3 minutos.",
-      },
-      {
-        description: "Publicidad de la empresa en el evento.",
-        icon: "tabler:x",
-      },
-      {
-        description:
-          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
-        icon: "tabler:x",
-      },
-      {
-        description: "Stand en el evento.",
-        icon: "tabler:x",
-      },
+      { description: "Logo en web/brochure" },
+      { description: "Mención oficial" },
+      { description: "Agradecimiento en redes sociales" },
+      { description: "Logo en material impreso y virtual" },
     ],
     callToAction: {
       text: "Contactar",
-      href: "mailto:pereiratechtalks@gmail.com",
+      href: createWhatsAppLink("Plata"),
     },
   },
-
   {
     title: "Oro",
+    hasRibbon: true,
+    ribbonTitle: "Recomendado",
+    subtitle: "Acceso directo.",
+    price: "500",
+    period: "USD",
     items: [
-      {
-        description: "Logo en el sitio web del evento.",
-      },
-      {
-        description: "Agradecimiento post evento en redes sociales.",
-      },
-      {
-        description:
-          "Mencion en todas las comunicaciones oficiales del evento.",
-      },
-      {
-        description: "Lightning talk de 5 minutos.",
-      },
-      {
-        description: "Publicidad de la empresa en el evento.",
-      },
-      {
-        description:
-          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
-      },
-      {
-        description: "Stand en el evento.",
-      },
+      { description: "Lightning talk (3 min)" },
+      { description: "Base de datos (con autorización)" },
+      { description: "Publicación en redes" },
+      { description: "Invitación a networking" },
+      { description: "Logo en material impreso y virtual" },
     ],
     callToAction: {
       text: "Contactar",
-      href: "mailto:pereiratechtalks@gmail.com",
+      href: createWhatsAppLink("Oro"),
+    },
+  },
+  {
+    title: "Platino",
+    subtitle: "Alto impacto.",
+    price: "1000+",
+    period: "USD",
+    items: [
+      { description: "Lightning talk destacado (5 min)" },
+      { description: "Stand de marca (2x2m)" },
+      { description: "Activación de marca" },
+      { description: "Reel dedicado" },
+      { description: "Prioridad 2027" },
+      { description: "Logo en material impreso y virtual" },
+    ],
+    callToAction: {
+      text: "Contactar",
+      href: createWhatsAppLink("Platino"),
     },
   },
 ];
