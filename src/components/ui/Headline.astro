@@ -12,7 +12,8 @@ const {
 const {
   container: containerClass = 'max-w-3xl',
   title: titleClass = 'text-3xl md:text-4xl ',
-  subtitle: subtitleClass = 'text-xl',
+  subtitle:
+    subtitleClass = 'text-lg md:text-xl text-gray-600 dark:text-slate-300',
 } = classes;
 ---
 
@@ -29,7 +30,7 @@ const {
         />
       )}
 
-      {subtitle && <p class={twMerge('mt-4 text-muted', subtitleClass)} set:html={subtitle} />}
+      {subtitle && <p class={twMerge('mt-4', subtitleClass)} set:html={subtitle} />}
     </div>
   )
 }
