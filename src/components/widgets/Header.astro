@@ -32,6 +32,7 @@ export interface Props {
   showToggleTheme?: boolean;
   showRssFeed?: boolean;
   position?: string;
+  transparent?: boolean;
 }
 
 const {
@@ -41,6 +42,7 @@ const {
   isSticky = false,
   isDark = false,
   isFullWidth = false,
+  transparent = false,
   showToggleTheme = false,
   showRssFeed = false,
   position = 'center',
@@ -52,12 +54,14 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'top-0 z-40 flex-none mx-auto w-full transition-[opacity] ease-in-out',
+    { 'border-b border-gray-50/0': !transparent },
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
+  {...transparent ? { 'data-transparent': 'true' } : {}}
 >
-  <div class="absolute inset-0"></div>
+  <div class:list={[{ 'absolute inset-0': true }, { 'bg-transparent': transparent }]}></div>
   <div
     class:list={[
       'relative text-default 2xl:py-1 py-3 px-3 md:px-6 mx-auto w-full md:flex md:justify-between',
