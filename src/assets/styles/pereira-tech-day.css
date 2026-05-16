@@ -430,6 +430,15 @@ html:not(.dark) .ptd-page-root {
   box-shadow: none !important;
 }
 
+  /* When header requests transparency, let the hero/background show through
+     by removing the page-root background under the header. This targets the
+     common layout where <header> is followed by <main> containing .ptd-page-root */
+  #header[data-transparent="true"] + main .ptd-page-root,
+  #header[data-transparent="true"] + main .ptd-page-root::before {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
 /* Make hero and section backgrounds transparent in light mode so there's no visible cut */
 html:not(.dark) .ptd-hero-banner,
 html:not(.dark) .ptd-hero-background,
