@@ -243,17 +243,7 @@ html:not(.dark) .ptd-hero-shell::after {
 }
 
 html:not(.dark) .ptd-hero-banner {
-  background: radial-gradient(
-      120% 82% at 50% 38%,
-      rgba(34, 211, 238, 0.08) 0%,
-      rgba(34, 211, 238, 0) 62%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(87, 170, 209, 0.99) 0%,
-      rgb(183, 221, 237) 48%,
-      rgba(247, 252, 255, 1) 100%
-    );
+  background: transparent;
 }
 
 html:not(.dark) .ptd-title-line {
@@ -447,6 +437,15 @@ html:not(.dark) .ptd-page-root {
       rgba(236, 254, 255, 0.98) 100%
     );
 }
+
+  /* When header requests transparency, let the hero/background show through
+     by removing the page-root background under the header. This targets the
+     common layout where <header> is followed by <main> containing .ptd-page-root */
+  #header[data-transparent="true"] + main .ptd-page-root,
+  #header[data-transparent="true"] + main .ptd-page-root::before {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
 
 /* Make hero and section backgrounds transparent in light mode so there's no visible cut */
 html:not(.dark) .ptd-hero-banner,
