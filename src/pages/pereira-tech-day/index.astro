@@ -19,10 +19,10 @@ import type { Testimonial } from "~/types";
 import { getPermalink } from "~/utils/permalinks";
 const PereiraTechDayLogo = "~/assets/images/logos/logo-pertechday.png";
 
-import '@fontsource/bebas-neue/400.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/700.css';
-import '~/assets/styles/pereira-tech-day.css';
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/700.css";
+import "~/assets/styles/pereira-tech-day.css";
 //import Community from '~/components/widgets/Community.astro';
 //import Features2 from '~/components/widgets/Features2.astro';
 //import { getPermalink } from '~/utils/permalinks';
@@ -172,7 +172,7 @@ const collaborators = [
     image: "~/assets/images/people/lizeth-franco.jpeg",
     name: "Lizeth Franco",
     socialLink: "https://www.linkedin.com/in/lizethvictoria/",
-  }, 
+  },
 ];
 
 const speakers: Array<Testimonial> = [
@@ -252,75 +252,6 @@ const speakers: Array<Testimonial> = [
 
 const partnerships = [
   {
-    title: "Oro",
-    hasRibbon: true,
-    ribbonTitle: "Recomendado",
-    items: [
-      {
-        description: "Logo en el sitio web del evento.",
-      },
-      {
-        description: "Agradecimiento post evento en redes sociales.",
-      },
-      {
-        description:
-          "Mencion en todas las comunicaciones oficiales del evento.",
-      },
-      {
-        description: "Lightning talk de 5 minutos.",
-      },
-      {
-        description: "Publicidad de la empresa en el evento.",
-      },
-      {
-        description:
-          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
-      },
-      {
-        description: "Stand en el evento.",
-      },
-    ],
-    callToAction: {
-      text: "Contactar",
-      href: "mailto:pereiratechtalks@gmail.com",
-    },
-  },
-  {
-    title: "Plata",
-    items: [
-      {
-        description: "Logo en el sitio web del evento.",
-      },
-      {
-        description: "Agradecimiento post evento en redes sociales.",
-      },
-      {
-        description:
-          "Mencion en todas las comunicaciones oficiales del evento.",
-      },
-      {
-        description: "Lightning talk de 3 minutos.",
-      },
-      {
-        description: "Publicidad de la empresa en el evento.",
-        icon: "tabler:x",
-      },
-      {
-        description:
-          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
-        icon: "tabler:x",
-      },
-      {
-        description: "Stand en el evento.",
-        icon: "tabler:x",
-      },
-    ],
-    callToAction: {
-      text: "Contactar",
-      href: "mailto:pereiratechtalks@gmail.com",
-    },
-  },
-  {
     title: "Bronce",
     items: [
       {
@@ -350,6 +281,76 @@ const partnerships = [
       {
         description: "Stand en el evento.",
         icon: "tabler:x",
+      },
+    ],
+    callToAction: {
+      text: "Contactar",
+      href: "mailto:pereiratechtalks@gmail.com",
+    },
+  },
+  {
+    title: "Plata",
+    hasRibbon: true,
+    ribbonTitle: "Recomendado",
+    items: [
+      {
+        description: "Logo en el sitio web del evento.",
+      },
+      {
+        description: "Agradecimiento post evento en redes sociales.",
+      },
+      {
+        description:
+          "Mencion en todas las comunicaciones oficiales del evento.",
+      },
+      {
+        description: "Lightning talk de 3 minutos.",
+      },
+      {
+        description: "Publicidad de la empresa en el evento.",
+        icon: "tabler:x",
+      },
+      {
+        description:
+          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
+        icon: "tabler:x",
+      },
+      {
+        description: "Stand en el evento.",
+        icon: "tabler:x",
+      },
+    ],
+    callToAction: {
+      text: "Contactar",
+      href: "mailto:pereiratechtalks@gmail.com",
+    },
+  },
+
+  {
+    title: "Oro",
+    items: [
+      {
+        description: "Logo en el sitio web del evento.",
+      },
+      {
+        description: "Agradecimiento post evento en redes sociales.",
+      },
+      {
+        description:
+          "Mencion en todas las comunicaciones oficiales del evento.",
+      },
+      {
+        description: "Lightning talk de 5 minutos.",
+      },
+      {
+        description: "Publicidad de la empresa en el evento.",
+      },
+      {
+        description:
+          "Envio de lista de e-mails de los participantes que autorizaron compartir sus datos.",
+      },
+      {
+        description: "Stand en el evento.",
       },
     ],
     callToAction: {
