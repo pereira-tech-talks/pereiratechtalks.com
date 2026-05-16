@@ -1,4 +1,6 @@
 ---
+import { mainContentTransition } from '~/utils/viewTransitions';
+
 import Announcement from '~/components/widgets/Announcement.astro';
 import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
@@ -31,7 +33,7 @@ const newEventData = {
   <slot name="header">
     <Header {...headerData} isSticky showRssFeed showToggleTheme />
   </slot>
-  <main>
+  <main transition:animate={mainContentTransition} transition:name="main-content" class="page-content">
     <slot />
   </main>
   <slot name="footer">

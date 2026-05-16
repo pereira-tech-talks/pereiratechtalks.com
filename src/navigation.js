@@ -28,7 +28,7 @@ export const headerData = {
       ],
     },
     {
-      text: 'Meetups',
+      text: 'Eventos',
       href: '/meetups',
     },
     {

@@ -33,6 +33,8 @@ export interface Props {
   showRssFeed?: boolean;
   position?: string;
   transparent?: boolean;
+  /** View transition persist id; use a unique value per navbar variant (e.g. main vs Pereira Tech Day). */
+  persistId?: string | false;
 }
 
 const {
@@ -46,12 +48,17 @@ const {
   showToggleTheme = false,
   showRssFeed = false,
   position = 'center',
+  persistId = 'site-header',
 } = Astro.props;
+
+const persistProps =
+  persistId === false ? {} : { 'transition:persist': persistId };
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
 
 <header
+  {...persistProps}
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
     'top-0 z-40 flex-none mx-auto w-full transition-[opacity] ease-in-out',
@@ -90,16 +97,23 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             <li class={links?.length ? 'dropdown' : ''}>
               {links?.length ? (
                 <>
-                  <button class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center uppercase">
+                  <button
+                    type="button"
+                    class="nav-link hover:text-link dark:hover:text-white px-4 py-3 flex items-center uppercase"
+                    aria-haspopup="true"
+                  >
                     {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    <Icon
+                      name="tabler:chevron-down"
+                      class="dropdown-trigger-icon w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
+                    />
                   </button>
                   <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-zinc-100/90 md:min-w-[200px] drop-shadow-xl">
                     {links.map(({ text: text2, href: href2 }) => (
                       <li>
                         <a
                           class:list={[
-                            'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap uppercase',
+                            'nav-link first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap uppercase',
                             { 'aw-link-active': href2 === currentPath },
                           ]}
                           href={href2}
@@ -113,7 +127,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-centers uppercase',
+                    'nav-link hover:text-link dark:hover:text-white px-4 py-3 flex items-centers uppercase',
                     { 'aw-link-active': href === currentPath },
                   ]}
                   href={href}

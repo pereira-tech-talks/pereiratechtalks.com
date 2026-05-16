@@ -96,10 +96,6 @@
   padding: 0 5px;
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
 [astro-icon].icon-light > * {
   stroke-width: 1.2;
 }

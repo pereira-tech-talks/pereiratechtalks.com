@@ -25,6 +25,8 @@ const relatedPosts = post.tags
       linkText="Ver todas los Posts"
       linkUrl={getBlogPermalink()}
       postIds={relatedPosts.map((post) => post.id)}
+      columns={4}
+      variableHeight
     />
   ) : null
 }
