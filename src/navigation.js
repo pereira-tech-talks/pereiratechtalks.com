@@ -1,85 +1,85 @@
-import { getAsset, getBlogPermalink, getPermalink } from "./utils/permalinks";
+import { getAsset, getBlogPermalink, getPermalink } from './utils/permalinks';
 
 export const headerData = {
   links: [
     {
-      text: "Inicio",
-      href: "/",
+      text: 'Inicio',
+      href: '/',
     },
     {
-      text: "Comunidad",
+      text: 'Comunidad',
       links: [
         {
-          text: "Quiénes somos",
-          href: "/about",
+          text: 'Quiénes somos',
+          href: '/about',
         },
         {
-          text: "Código de Conducta",
-          href: getPermalink("/codigo-conducta"),
+          text: 'Código de Conducta',
+          href: getPermalink('/codigo-conducta'),
         },
         {
-          text: "Contribución",
-          href: "/contributing",
+          text: 'Contribución',
+          href: '/contributing',
         },
         {
-          text: "Escuela de Speakers",
-          href: "/speakers-school",
+          text: 'Escuela de Speakers',
+          href: '/speakers-school',
         },
       ],
     },
     {
-      text: "Meetups",
-      href: "/meetups",
+      text: 'Meetups',
+      href: '/meetups',
     },
     {
-      text: "Blog",
+      text: 'Blog',
       href: getBlogPermalink(),
     },
     {
-      text: "Contacto",
+      text: 'Contacto',
       links: [
         {
-          text: "WhatsApp",
-          href: "https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U",
+          text: 'WhatsApp',
+          href: 'https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U',
         },
         {
-          text: "YouTube",
-          href: "https://www.youtube.com/@pereiratechtalks",
-          target: "_blank",
+          text: 'YouTube',
+          href: 'https://www.youtube.com/@pereiratechtalks',
+          target: '_blank',
         },
         {
-          text: "Instagram",
-          href: "https://www.instagram.com/pertechtalks/",
-          target: "_blank",
+          text: 'Instagram',
+          href: 'https://www.instagram.com/pertechtalks/',
+          target: '_blank',
         },
         {
-          text: "LinkedIn",
-          href: "https://www.linkedin.com/company/35508463/",
-          target: "_blank",
+          text: 'LinkedIn',
+          href: 'https://www.linkedin.com/company/35508463/',
+          target: '_blank',
         },
         {
-          text: "X (Twitter)",
-          href: "https://x.com/PerTechTalks",
-          target: "_blank",
+          text: 'X (Twitter)',
+          href: 'https://x.com/PerTechTalks',
+          target: '_blank',
         },
       ],
     },
   ],
-  actions: [{ text: "PEREIRA TECH DAY", href: "/pereira-tech-day" }],
+  actions: [{ text: 'PEREIRA TECH DAY', href: '/pereira-tech-day' }],
 };
 
 export const eventsHeaderData = {
   links: [
     {
-      text: "Pereira Tech Day",
-      href: "/pereira-tech-day",
+      text: 'Pereira Tech Day',
+      href: '/pereira-tech-day',
     },
     {
-      text: "Ediciones Anteriores",
+      text: 'Ediciones Anteriores',
       links: [
         {
-          text: "Pereira Tech Day 2024",
-          href: "/pereira-tech-day/2024",
+          text: 'Pereira Tech Day 2024',
+          href: '/pereira-tech-day/2024',
         },
       ],
     },
@@ -89,35 +89,35 @@ export const eventsHeaderData = {
 export const footerData = {
   socialLinks: [
     {
-      ariaLabel: "WhatsApp",
-      icon: "tabler:brand-whatsapp",
-      href: "https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U",
-      target: "_blank",
+      ariaLabel: 'WhatsApp',
+      icon: 'tabler:brand-whatsapp',
+      href: 'https://chat.whatsapp.com/EzYAadvUWyVBHt3m1FU77U',
+      target: '_blank',
     },
     {
-      ariaLabel: "X",
-      icon: "tabler:brand-x",
-      href: "https://x.com/PerTechTalks",
-      target: "_blank",
+      ariaLabel: 'X',
+      icon: 'tabler:brand-x',
+      href: 'https://x.com/PerTechTalks',
+      target: '_blank',
     },
     {
-      ariaLabel: "Instagram",
-      icon: "tabler:brand-instagram",
-      href: "https://www.instagram.com/pertechtalks/",
-      target: "_blank",
+      ariaLabel: 'Instagram',
+      icon: 'tabler:brand-instagram',
+      href: 'https://www.instagram.com/pertechtalks/',
+      target: '_blank',
     },
     {
-      ariaLabel: "Youtube",
-      icon: "tabler:brand-youtube",
-      href: "https://www.youtube.com/@pereiratechtalks",
-      target: "_blank",
+      ariaLabel: 'Youtube',
+      icon: 'tabler:brand-youtube',
+      href: 'https://www.youtube.com/@pereiratechtalks',
+      target: '_blank',
     },
-    { ariaLabel: "RSS", icon: "tabler:rss", href: getAsset("/rss.xml") },
+    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
     {
-      ariaLabel: "Github",
-      icon: "tabler:brand-github",
-      href: "https://github.com/pereira-tech-talks/",
-      target: "_blank",
+      ariaLabel: 'Github',
+      icon: 'tabler:brand-github',
+      href: 'https://github.com/pereira-tech-talks/',
+      target: '_blank',
     },
   ],
   footNote: `
@@ -125,33 +125,33 @@ export const footerData = {
   `,
   links: [
     {
-      title: "Comunidad",
+      title: 'Comunidad',
       links: [
-        { text: "JointDev", href: "https://jointdevweb.firebaseapp.com/" },
-        { text: "QaConf", href: "https://qaconf.co/" },
-        { text: "Backbone", href: "https://backboneutp.com/" },
-        { text: "PereiraJS", href: "https://pereira.js.org/" },
-        { text: "Python Pereira", href: "https://pypereira.co" },
+        { text: 'JointDev', href: 'https://jointdevweb.firebaseapp.com/' },
+        { text: 'QaConf', href: 'https://qaconf.co/' },
+        { text: 'Backbone', href: 'https://backboneutp.com/' },
+        { text: 'PereiraJS', href: 'https://pereira.js.org/' },
+        { text: 'Python Pereira', href: 'https://pypereira.co' },
       ],
     },
     {
-      title: "Apoya",
+      title: 'Apoya',
       links: [
         {
-          text: "ASE UTP",
-          href: "https://egresados.utp.edu.co/",
+          text: 'ASE UTP',
+          href: 'https://egresados.utp.edu.co/',
         },
         {
-          text: "U. Católica de Pereira",
-          href: "https://www.ucp.edu.co/",
+          text: 'U. Católica de Pereira',
+          href: 'https://www.ucp.edu.co/',
         },
-        { text: "DailyBot", href: "https://www.dailybot.com/" },
-        { text: "Aumentada", href: "https://aumentada.net/" },
-        { text: "Vuetify", href: "https://vuetifyjs.com/en/" },
+        { text: 'DailyBot', href: 'https://www.dailybot.com/' },
+        { text: 'Aumentada', href: 'https://aumentada.net/' },
+        { text: 'Vuetify', href: 'https://vuetifyjs.com/en/' },
       ],
     },
   ],
   secondaryLinks: [
-    { text: "Código de Conducta", href: getPermalink("/codigo-conducta") },
+    { text: 'Código de Conducta', href: getPermalink('/codigo-conducta') },
   ],
 };
