@@ -105,7 +105,7 @@ Creemos que cada pequeña acción cuenta y nos esforzamos por hacer una diferenc
 ## 11. Contacto
 
 - [Correo electrónico](mailto:pereiratechtalks@gmail.com)
-- [Meetup.com](https://www.meetup.com/es-ES/Pereira-Tech-Talks/)
+- [Luma.com](https://luma.com/pertechtalks)
 - [Facebook](https://www.facebook.com/PerTechTalks)
 - [Instagram](https://www.instagram.com/pertechtalks/)
 
