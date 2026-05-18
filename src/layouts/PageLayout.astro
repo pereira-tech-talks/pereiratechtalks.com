@@ -7,6 +7,7 @@ import Header from '~/components/widgets/Header.astro';
 import Layout from '~/layouts/Layout.astro';
 
 import { footerData, headerData } from '~/navigation';
+import { getPermalink } from '~/utils/permalinks';
 
 import type { MetaData } from '~/types';
 export interface Props {
@@ -15,14 +16,10 @@ export interface Props {
 
 const { metadata } = Astro.props;
 const newEventData = {
-  id: 'luma-migration-notification',
-  name: 'Migración a Luma - Pereira Tech Talks',
-  link: 'https://luma.com/pertechtalks',
-  venue: { name: 'Eventos ahora en Luma' },
-  description:
-    'Hemos migrado nuestros eventos de Meetup a Luma. Visita https://luma.com/pertechtalks para ver todos nuestros próximos eventos y talleres.',
-  time: 1760418963319,
-  featured_photo: null,
+  id: '8uige1ke',
+  name: 'IA como motor de crecimiento',
+  link: getPermalink('8uige1ke-ia-como-motor-de-crecimiento', 'post'),
+  time: new Date('2026-05-27T23:30:00.000Z').getTime(),
 };
 ---
 

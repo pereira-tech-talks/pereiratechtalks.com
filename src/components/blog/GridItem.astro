@@ -3,7 +3,9 @@ import type { Post } from '~/types';
 
 import Image from '~/components/common/Image.astro';
 import LumaCheckoutButton from '~/components/events/LumaCheckoutButton.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
 
+import { isUpcomingEvent } from '~/utils/events';
 import { findImage } from '~/utils/images';
 import { parseLumaEventUrl } from '~/utils/luma';
 import { getPermalink } from '~/utils/permalinks';
@@ -21,6 +23,8 @@ const image = await findImage(post.image);
 const postUrl = getPermalink(post.permalink, 'post');
 const preview = post.preview;
 const lumaEventUrl = post.lumaEventUrl;
+const isEvent = post.category === 'eventos';
+const isUpcoming = isEvent && isUpcomingEvent(post.publishDate);
 ---
 
 <article
@@ -32,14 +36,15 @@ const lumaEventUrl = post.lumaEventUrl;
 >
   <div
     class:list={[
-      'blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29] bg-zinc-50 dark:bg-slate-900',
+      'blog-card relative overflow-hidden dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29] bg-zinc-50 dark:bg-slate-900',
       variableHeight ? 'flex flex-col' : 'flex flex-col justify-between',
     ]}
   >
+    {isUpcoming && <UpcomingEventRibbon />}
     <div>
       {
         image ? (
-          <a href={postUrl} class="block">
+          <a href={postUrl} class="relative block">
             <Image
               src={image || 'https://via.placeholder.com/400'}
               alt="Article Image"
