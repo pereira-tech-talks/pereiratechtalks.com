@@ -11,7 +11,11 @@ export interface Props {
   showCheckoutButton?: boolean;
 }
 
-const { lumaEventUrl, class: className = '', showCheckoutButton = true } = Astro.props;
+const {
+  lumaEventUrl,
+  class: className = '',
+  showCheckoutButton = true,
+} = Astro.props;
 const { viewUrl, eventId } = parseLumaEventUrl(lumaEventUrl);
 
 const iconLinkClass =
