@@ -4,7 +4,10 @@ import { Icon } from 'astro-icon/components';
 import PostTags from '~/components/blog/Tags.astro';
 import Image from '~/components/common/Image.astro';
 import SocialShare from '~/components/common/SocialShare.astro';
+import LumaEventActions from '~/components/events/LumaEventActions.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
 
+import { isUpcomingEvent } from '~/utils/events';
 import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
@@ -17,6 +20,10 @@ export interface Props {
 
 const { post, url } = Astro.props;
 const { Content } = post;
+
+const lumaEventUrl = post.lumaEventUrl;
+const isUpcoming =
+  post.category === 'eventos' && isUpcomingEvent(post.publishDate);
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
@@ -56,11 +63,12 @@ const { Content } = post;
         </p>
       </div>
 
-      <h1
-        class="px-4 sm:px-6 max-w-3xl mx-auto text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading"
-      >
-        {post.title}
-      </h1>
+      <div class="px-4 sm:px-6 max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading min-w-0">
+          {post.title}
+        </h1>
+        {lumaEventUrl && <LumaEventActions lumaEventUrl={lumaEventUrl} class="self-center sm:self-start" />}
+      </div>
       <p
         class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"
       >
@@ -69,17 +77,20 @@ const { Content } = post;
 
       {
         post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
-            width={900}
-            height={506}
-            loading="eager"
-            decoding="async"
-          />
+          <div class="relative max-w-full lg:max-w-[900px] mx-auto mb-6 overflow-hidden sm:rounded-md">
+            {isUpcoming && <UpcomingEventRibbon />}
+            <Image
+              src={post.image}
+              class="max-w-full bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={post?.excerpt || ''}
+              width={900}
+              height={506}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         ) : (
           <div class="max-w-3xl mx-auto px-4 sm:px-6">
             <div class="border-t dark:border-slate-700" />

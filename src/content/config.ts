@@ -55,6 +55,15 @@ const postCollection = defineCollection({
     excerpt: z.string().optional(),
     image: z.string().optional(),
     venue: z.string().optional(),
+    lumaEventUrl: z
+      .string()
+      .url()
+      .optional()
+      .nullable()
+      .transform((value) => {
+        const trimmed = value?.trim();
+        return trimmed ? trimmed : undefined;
+      }),
 
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),

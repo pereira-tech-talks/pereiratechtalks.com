@@ -2,8 +2,12 @@
 import type { Post } from '~/types';
 
 import Image from '~/components/common/Image.astro';
+import LumaCheckoutButton from '~/components/events/LumaCheckoutButton.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
 
+import { isUpcomingEvent } from '~/utils/events';
 import { findImage } from '~/utils/images';
+import { parseLumaEventUrl } from '~/utils/luma';
 import { getPermalink } from '~/utils/permalinks';
 
 import '~/assets/styles/blog/BlogCard.css';
@@ -18,6 +22,9 @@ const { post, centered = false, variableHeight = false } = Astro.props;
 const image = await findImage(post.image);
 const postUrl = getPermalink(post.permalink, 'post');
 const preview = post.preview;
+const lumaEventUrl = post.lumaEventUrl;
+const isEvent = post.category === 'eventos';
+const isUpcoming = isEvent && isUpcomingEvent(post.publishDate);
 ---
 
 <article
@@ -29,14 +36,15 @@ const preview = post.preview;
 >
   <div
     class:list={[
-      'blog-card dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29] bg-zinc-50 dark:bg-slate-900',
+      'blog-card relative overflow-hidden dark:shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur border border-zinc-200/70 dark:border-[#ffffff29] bg-zinc-50 dark:bg-slate-900',
       variableHeight ? 'flex flex-col' : 'flex flex-col justify-between',
     ]}
   >
+    {isUpcoming && <UpcomingEventRibbon />}
     <div>
       {
         image ? (
-          <a href={postUrl} class="block">
+          <a href={postUrl} class="relative block">
             <Image
               src={image || 'https://via.placeholder.com/400'}
               alt="Article Image"
@@ -59,11 +67,22 @@ const preview = post.preview;
         <div class="flex flex-wrap mb-2">
           {post.tags && post.tags.map((tag) => <code class="tag">{tag}</code>)}
         </div>
-        <h2 class="text-2xl font-bold mb-2">
-          <a href={postUrl} class="hover:text-primary dark:hover:text-blue-400 transition ease-in duration-200">
-            {post.title}
-          </a>
-        </h2>
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <h2 class="text-2xl font-bold min-w-0 flex-1">
+            <a href={postUrl} class="hover:text-primary dark:hover:text-blue-400 transition ease-in duration-200">
+              {post.title}
+            </a>
+          </h2>
+          {
+            lumaEventUrl && (
+              <LumaCheckoutButton
+                eventId={parseLumaEventUrl(lumaEventUrl).eventId}
+                variant="icon"
+                class="shrink-0"
+              />
+            )
+          }
+        </div>
         {
           preview && (
             <p class="text-muted dark:text-slate-400 mb-3 text-base leading-relaxed line-clamp-3 whitespace-pre-line">{preview}</p>

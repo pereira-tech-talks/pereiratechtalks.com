@@ -47,6 +47,9 @@ export interface Post {
 
   /**  */
   venue?: string;
+
+  /** Luma event page URL (e.g. https://luma.com/q087gp2d). */
+  lumaEventUrl?: string;
 }
 
 export interface Event {
