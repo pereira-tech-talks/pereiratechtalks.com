@@ -1,0 +1,18 @@
+---
+export interface Props {
+  label?: string;
+}
+
+const { label = 'Próximo' } = Astro.props;
+---
+
+<div
+  class="pointer-events-none absolute left-[-5px] top-[-5px] z-[2] h-[100px] w-[100px] overflow-hidden"
+  aria-hidden="true"
+>
+  <span
+    class="absolute left-[-21px] top-[19px] block w-full -rotate-45 bg-primary text-center text-[10px] font-bold uppercase leading-5 text-white shadow-[0_3px_10px_-5px_rgba(0,0,0,0.3)] before:absolute before:left-0 before:top-full before:z-[-1] before:border-[3px] before:border-r-transparent before:border-b-transparent before:border-l-secondary before:border-t-secondary before:content-[''] after:absolute after:right-0 after:top-full after:z-[-1] after:border-[3px] after:border-l-transparent after:border-b-transparent after:border-r-secondary after:border-t-secondary after:content-['']"
+  >
+    {label}
+  </span>
+</div>
