@@ -9,11 +9,8 @@ import Community from '~/components/widgets/Community.astro';
 import Content from '~/components/widgets/Content.astro';
 import Countdown from '~/components/widgets/Countdown.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import type { Testimonial } from '~/types';
 import { getPermalink } from '~/utils/permalinks';
@@ -558,6 +555,11 @@ const lightningTalks = [
     ],
   },
 ];
+
+// Reserved for commented sections below (Agenda, Ponentes, Lightning Talks).
+void schedule;
+void speakers;
+void lightningTalks;
 ---
 
 <EventsLayout metadata={metadata}>

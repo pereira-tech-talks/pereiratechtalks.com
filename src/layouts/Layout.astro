@@ -20,6 +20,7 @@ import '@fontsource/fira-mono';
 import { ClientRouter } from 'astro:transitions';
 
 import LinkPreview from '~/components/common/LinkPreview.astro';
+import LumaCheckout from '~/components/common/LumaCheckout.astro';
 import PageTransitions from '~/components/common/PageTransitions.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
@@ -51,6 +52,7 @@ const { language, textDirection } = I18N;
 
     <PageTransitions />
     <LinkPreview />
+    <LumaCheckout />
     <BasicScripts />
 
     <style is:global>

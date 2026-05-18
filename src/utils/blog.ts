@@ -63,6 +63,7 @@ const getNormalizedPost = async (
     category: rawCategory,
     author,
     venue,
+    lumaEventUrl,
     draft = false,
     metadata = {},
   } = data;
@@ -94,6 +95,7 @@ const getNormalizedPost = async (
     preview: excerptTrimmed || textPreview || undefined,
     image: image,
     venue: venue,
+    lumaEventUrl: lumaEventUrl,
 
     category: category,
     tags: tags,

@@ -141,6 +141,10 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', initPopup);
+        document.addEventListener('astro:page-load', () => {
+          initPopup();
+          window.__scheduleLumaCheckout?.();
+        });
 
         // Cerrar al hacer clic en el botón de cerrar
         const closeButton = document.getElementById('popup-close');
@@ -165,8 +169,8 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
         if (popup) {
           popup.addEventListener('click', (e) => {
             const target = e.target;
-            // Si se hace clic en un enlace con clase luma-checkout--button
-            if (target.matches('a.luma-checkout--button')) {
+            // Si se hace clic en un botón de inscripción Luma
+            if (target.matches('a[data-luma-action="checkout"]')) {
               // Cerrar nuestro popup pero mantener el scroll bloqueado para el modal de Luma
               closePopup(false, true);
             } else if (target.matches('a[href^="http"]')) {

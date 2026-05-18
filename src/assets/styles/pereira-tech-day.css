@@ -257,7 +257,8 @@ html:not(.dark) .ptd-tagline-pill {
   background: #ffffff;
   color: #043748; /* darker teal for contrast */
   border-color: rgba(6, 182, 212, 0.28);
-  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.06), 0 0 0 1px rgba(6, 182, 212, 0.08) inset;
+  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.06), 0 0 0 1px
+    rgba(6, 182, 212, 0.08) inset;
 }
 
 html:not(.dark) .ptd-location-chip {
@@ -337,7 +338,8 @@ html:not(.dark) .ptd-notify-input:focus {
 html:not(.dark) .ptd-section-shell {
   border-color: rgba(6, 182, 212, 0.16);
   background: #ffffff;
-  box-shadow: 0 18px 40px rgba(6, 182, 212, 0.05), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  box-shadow: 0 18px 40px rgba(6, 182, 212, 0.05), 0 1px 0
+    rgba(255, 255, 255, 0.6) inset;
 }
 
 html:not(.dark) .ptd-section-shell::before {
@@ -419,14 +421,14 @@ html:not(.dark) .ptd-page-root {
   background: linear-gradient(180deg, #f3f6f9 0%, #e8fbff 100%);
 }
 
-  /* When header requests transparency, let the hero/background show through
+/* When header requests transparency, let the hero/background show through
      by removing the page-root background under the header. This targets the
      common layout where <header> is followed by <main> containing .ptd-page-root */
-  #header[data-transparent="true"] + main .ptd-page-root,
-  #header[data-transparent="true"] + main .ptd-page-root::before {
-    background: transparent !important;
-    box-shadow: none !important;
-  }
+#header[data-transparent="true"] + main .ptd-page-root,
+#header[data-transparent="true"] + main .ptd-page-root::before {
+  background: transparent !important;
+  box-shadow: none !important;
+}
 
 /* Make hero and section backgrounds transparent in light mode so there's no visible cut */
 html:not(.dark) .ptd-hero-banner,
