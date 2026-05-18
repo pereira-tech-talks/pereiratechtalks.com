@@ -5,7 +5,9 @@ import PostTags from '~/components/blog/Tags.astro';
 import Image from '~/components/common/Image.astro';
 import SocialShare from '~/components/common/SocialShare.astro';
 import LumaEventActions from '~/components/events/LumaEventActions.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
 
+import { isUpcomingEvent } from '~/utils/events';
 import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
@@ -20,6 +22,8 @@ const { post, url } = Astro.props;
 const { Content } = post;
 
 const lumaEventUrl = post.lumaEventUrl;
+const isUpcoming =
+  post.category === 'eventos' && isUpcomingEvent(post.publishDate);
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
@@ -73,17 +77,20 @@ const lumaEventUrl = post.lumaEventUrl;
 
       {
         post.image ? (
-          <Image
-            src={post.image}
-            class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
-            widths={[400, 900]}
-            sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
-            width={900}
-            height={506}
-            loading="eager"
-            decoding="async"
-          />
+          <div class="relative max-w-full lg:max-w-[900px] mx-auto mb-6 overflow-hidden sm:rounded-md">
+            {isUpcoming && <UpcomingEventRibbon />}
+            <Image
+              src={post.image}
+              class="max-w-full bg-gray-400 dark:bg-slate-700"
+              widths={[400, 900]}
+              sizes="(max-width: 900px) 400px, 900px"
+              alt={post?.excerpt || ''}
+              width={900}
+              height={506}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         ) : (
           <div class="max-w-3xl mx-auto px-4 sm:px-6">
             <div class="border-t dark:border-slate-700" />

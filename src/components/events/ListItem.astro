@@ -3,8 +3,10 @@ import { APP_BLOG } from 'astrowind:config';
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 import LumaEventActions from '~/components/events/LumaEventActions.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
 
 import type { Post } from '~/types';
+import { isUpcomingEvent } from '~/utils/events';
 import { getPermalink } from '~/utils/permalinks';
 
 import { getFormattedDate } from '~/utils/utils';
@@ -24,13 +26,16 @@ const link = APP_BLOG?.post?.isEnabled
 const preview = event.preview;
 
 const lumaEventUrl = event.lumaEventUrl;
+const isUpcoming = isUpcomingEvent(event.publishDate);
 ---
 
-<article class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
+<article class={`relative max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 ${image ? 'md:grid-cols-2' : ''}`}>
+  {isUpcoming && !image && <UpcomingEventRibbon />}
   {
     image && (
       <a class="relative block group" href={link}>
         <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+          {isUpcoming && <UpcomingEventRibbon />}
           {image && (
             <Image
               src={image}
