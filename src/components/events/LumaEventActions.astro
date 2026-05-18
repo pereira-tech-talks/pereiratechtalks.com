@@ -8,9 +8,10 @@ import { parseLumaEventUrl } from '~/utils/luma';
 export interface Props {
   lumaEventUrl: string;
   class?: string;
+  showCheckoutButton?: boolean;
 }
 
-const { lumaEventUrl, class: className = '' } = Astro.props;
+const { lumaEventUrl, class: className = '', showCheckoutButton = true } = Astro.props;
 const { viewUrl, eventId } = parseLumaEventUrl(lumaEventUrl);
 
 const iconLinkClass =
@@ -34,5 +35,5 @@ const tooltipClass =
     <span role="tooltip" class={tooltipClass}>Ver evento en Luma</span>
   </span>
 
-  <LumaCheckoutButton eventId={eventId} variant="icon" />
+  {showCheckoutButton && <LumaCheckoutButton eventId={eventId} variant="icon" />}
 </div>
