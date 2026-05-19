@@ -2453,3 +2453,53 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   line-height: 1.55;
   color: color-mix(in srgb, var(--ptd-title) 86%, transparent);
 }
+
+/* Fondos responsive (sin deformar) */
+@media (max-width: 1200px) {
+  .ptd-page-root #hero.ptd-intro::before,
+  .ptd-page-root .ptd-about::before,
+  .ptd-page-root .ptd-community::before,
+  .ptd-page-root .ptd-team::before,
+  .ptd-page-root .ptd-faq::before,
+  .ptd-page-root .ptd-sponsors::before,
+  .ptd-page-root .ptd-join::before,
+  .ptd-page-root .ptd-pricing__backdrop {
+    background-size: 125% auto;
+  }
+}
+
+@media (max-width: 992px) {
+  .ptd-page-root #hero.ptd-intro::before {
+    background-size: 150% auto;
+    background-position: center top;
+  }
+
+  .ptd-page-root .ptd-about::before,
+  .ptd-page-root .ptd-community::before,
+  .ptd-page-root .ptd-team::before,
+  .ptd-page-root .ptd-faq::before,
+  .ptd-page-root .ptd-sponsors::before,
+  .ptd-page-root .ptd-join::before,
+  .ptd-page-root .ptd-pricing__backdrop {
+    background-size: 145% auto;
+    background-position: center top;
+  }
+}
+
+@media (max-width: 640px) {
+  .ptd-page-root #hero.ptd-intro::before {
+    background-size: 210% auto;
+    background-position: center top;
+  }
+
+  .ptd-page-root .ptd-about::before,
+  .ptd-page-root .ptd-community::before,
+  .ptd-page-root .ptd-team::before,
+  .ptd-page-root .ptd-faq::before,
+  .ptd-page-root .ptd-sponsors::before,
+  .ptd-page-root .ptd-join::before,
+  .ptd-page-root .ptd-pricing__backdrop {
+    background-size: 185% auto;
+    background-position: center top;
+  }
+}
