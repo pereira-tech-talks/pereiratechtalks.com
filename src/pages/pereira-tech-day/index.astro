@@ -3,17 +3,14 @@ import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 //import Button from '~/components/ui/Button.astro';
 //import Form from '~/components/ui/Form.astro';
-import Brands from '~/components/widgets/Brands.astro';
+import PtdSponsors from '~/components/events/PtdSponsors.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
 import Community from '~/components/widgets/Community.astro';
 import Content from '~/components/widgets/Content.astro';
 import Countdown from '~/components/widgets/Countdown.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
+import PtdJoinSection from '~/components/events/PtdJoinSection.astro';
+import PtdPricing from '~/components/events/PtdPricing.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import type { Testimonial } from '~/types';
 import { getPermalink } from '~/utils/permalinks';
@@ -39,6 +36,18 @@ const pricingBgMeta = await findImage(
 );
 const pricingSectionBg = pricingBgMeta
   ? await getImage({ src: pricingBgMeta, width: 2560, format: 'webp' })
+  : null;
+const joinSectionMeta = await findImage(
+  '~/assets/images/pereira-tech-day/join-section-illustration.png',
+);
+const joinSectionBg = joinSectionMeta
+  ? await getImage({ src: joinSectionMeta, width: 1400, format: 'webp' })
+  : null;
+const sponsorsBgMeta = await findImage(
+  '~/assets/images/pereira-tech-day/sponsors-section-bg.png',
+);
+const sponsorsSectionBg = sponsorsBgMeta
+  ? await getImage({ src: sponsorsBgMeta, width: 2560, format: 'webp' })
   : null;
 
 import '@fontsource/bebas-neue/400.css';
@@ -170,24 +179,19 @@ const organizers = [
     socialLink: 'https://www.linkedin.com/in/santiaguf',
   },
   {
-    image: '~/assets/images/people/mega-barto.jpeg',
-    name: 'Juan Alejandro Pérez Bermúdez',
-    socialLink: 'https://www.linkedin.com/in/mega-barto/',
-  },
-  {
     image: '~/assets/images/people/eliana-osorio.jpeg',
     name: 'Eliana Osorio',
     socialLink: 'https://www.linkedin.com/in/monocuka/',
   },
   {
+    image: '~/assets/images/people/mega-barto.jpeg',
+    name: 'Juan Alejandro Pérez Bermúdez',
+    socialLink: 'https://www.linkedin.com/in/mega-barto/',
+  },
+  {
     image: '~/assets/images/people/sergio-florez.png',
     name: 'Sergio Alexander Florez',
     socialLink: 'https://www.linkedin.com/in/xergioalex/',
-  },
-  {
-    image: '~/assets/images/people/alejo-rendon.jpg',
-    name: 'Alejandro E. Rendon',
-    socialLink: 'https://www.linkedin.com/in/arendondiosa/',
   },
   {
     image: '~/assets/images/people/melisa-escobar.png',
@@ -367,7 +371,6 @@ const extraPartnerships = [
       href: createWhatsAppLink('Apoyo Personalizado'),
     },
   },
-  {},
   {
     title: 'Alianza Abierta y Vaki',
     subtitle: 'Apoyo Comunitario.',
@@ -671,7 +674,7 @@ void lightningTalks;
                 id="countdown"
                 targetDate="2026-08-22T08:00:00-05:00"
                 endDate="2026-08-22T14:00:00-05:00"
-                numberColor="#003D4C"
+                numberColor="#3A7F7C"
               />
             </div>
 
@@ -849,11 +852,10 @@ void lightningTalks;
         extraPlans={extraPartnerships}
         backgroundSrc={pricingSectionBg?.src}
       />
-      <Brands
-        id="sponsors"
-        subtitle="Empresas que han confiado en nosotros"
+      <PtdSponsors
+        logoMaskSrc={pttLogoMask?.src}
+        backgroundSrc={sponsorsSectionBg?.src}
         brands={sponsors}
-        classes={{ container: "ptd-section-spacer" }}
       />
       <Community
         id="community"
@@ -879,6 +881,10 @@ void lightningTalks;
         columns={2}
         items={faqsList}
         classes={{ container: "ptd-section-spacer" }}
+      />
+      <PtdJoinSection
+        logoMaskSrc={pttLogoMask?.src}
+        backgroundSrc={joinSectionBg?.src}
       />
     </div>
   </div>
