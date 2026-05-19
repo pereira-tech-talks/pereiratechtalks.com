@@ -1,6 +1,4 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 export interface Props {
   id?: string;
   logoMaskSrc?: string;
@@ -9,13 +7,7 @@ export interface Props {
   eventDateLabel?: string;
 }
 
-const {
-  id = 'join',
-  logoMaskSrc,
-  backgroundSrc,
-  siteUrl = 'https://pereiratechtalks.org/',
-  eventDateLabel = 'Nos vemos el 22 de agosto.',
-} = Astro.props;
+const { id = 'join', backgroundSrc } = Astro.props;
 ---
 
 <section

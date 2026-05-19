@@ -1,17 +1,17 @@
 ---
+import { getImage } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
+import PtdJoinSection from '~/components/events/PtdJoinSection.astro';
+import PtdPricing from '~/components/events/PtdPricing.astro';
 //import Button from '~/components/ui/Button.astro';
 //import Form from '~/components/ui/Form.astro';
 import PtdSponsors from '~/components/events/PtdSponsors.astro';
 import Countdown from '~/components/widgets/Countdown.astro';
-import PtdJoinSection from '~/components/events/PtdJoinSection.astro';
-import PtdPricing from '~/components/events/PtdPricing.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
 import type { Testimonial } from '~/types';
-import { getPermalink } from '~/utils/permalinks';
 import { findImage } from '~/utils/images';
-import { getImage } from 'astro:assets';
+import { getPermalink } from '~/utils/permalinks';
 
 const pttLogoMeta = await findImage('~/assets/images/logos/ptt.png');
 const pttLogoMask = pttLogoMeta
@@ -238,7 +238,9 @@ const collaborators = [
   },
 ];
 
-const organizersSorted = organizers.sort((a, b) => a.name.localeCompare(b.name));
+const organizersSorted = organizers.sort((a, b) =>
+  a.name.localeCompare(b.name),
+);
 const collaboratorsSorted = collaborators.sort((a, b) =>
   a.name.localeCompare(b.name),
 );

@@ -26,7 +26,7 @@ const hasTwoPrices = prices.length === 2;
     <div class={`${hasTwoPrices ? 'flex w-full flex-wrap justify-center gap-4' : 'grid w-full gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'} dark:text-white`}>
       {
         prices &&
-          prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }, index) => {
+          prices.map(({ title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle }) => {
             const isPlaceholder = !title && !subtitle && !price && !period && !(items && items.length) && !callToAction;
 
             return (

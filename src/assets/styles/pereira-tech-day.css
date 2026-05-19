@@ -160,8 +160,7 @@ body:has(.ptd-page-root) main.page-content {
   pointer-events: none;
   border-radius: 0;
   filter: none;
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to right,
       var(--ptd-cream) 0%,
       var(--ptd-cream) 34%,
@@ -354,11 +353,7 @@ body:has(.ptd-page-root) main.page-content {
   margin-bottom: 1.75rem;
   padding: 2px;
   border-radius: 0.85rem;
-  background: linear-gradient(
-    90deg,
-    var(--ptd-coral) 0%,
-    var(--ptd-cyan) 100%
-  );
+  background: linear-gradient(90deg, var(--ptd-coral) 0%, var(--ptd-cyan) 100%);
 }
 
 .ptd-page-root .ptd-intro__stat-inner {
@@ -386,8 +381,7 @@ body:has(.ptd-page-root) main.page-content {
 
 @media (max-width: 1023px) {
   .ptd-page-root #hero.ptd-intro::after {
-    background:
-      linear-gradient(
+    background: linear-gradient(
         to right,
         var(--ptd-cream) 0%,
         var(--ptd-cream) 16%,
@@ -530,8 +524,8 @@ body:has(.ptd-page-root) main.page-content {
   border: 1px solid color-mix(in srgb, var(--ptd-cyan) 32%, transparent);
   background: #ffffff;
   color: var(--ptd-blue-dark);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--ptd-cyan) 8%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--ptd-cyan) 10%, transparent) inset;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--ptd-cyan) 8%, transparent), 0
+    0 0 1px color-mix(in srgb, var(--ptd-cyan) 10%, transparent) inset;
 }
 
 .ptd-page-root .ptd-tagline-pill::before {
@@ -672,8 +666,8 @@ body:has(.ptd-page-root) main.page-content {
   border: 1px solid color-mix(in srgb, var(--ptd-cyan) 18%, transparent);
   border-radius: 1.75rem;
   background: #ffffff;
-  box-shadow: 0 18px 40px color-mix(in srgb, var(--ptd-cyan) 6%, transparent),
-    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--ptd-cyan) 6%, transparent), 0
+    1px 0 rgba(255, 255, 255, 0.6) inset;
 }
 
 .ptd-page-root .ptd-section-shell::before {
@@ -713,8 +707,9 @@ body:has(.ptd-page-root) main.page-content {
     #ffffff 0%,
     color-mix(in srgb, var(--ptd-beige) 65%, white) 100%
   );
-  box-shadow: 0 10px 26px color-mix(in srgb, var(--ptd-blue-dark) 12%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--ptd-cyan) 12%, transparent);
+  box-shadow: 0 10px 26px
+    color-mix(in srgb, var(--ptd-blue-dark) 12%, transparent), inset 0 0 0 1px
+    color-mix(in srgb, var(--ptd-cyan) 12%, transparent);
 }
 
 .ptd-page-root .countdown-item::before {
@@ -737,8 +732,8 @@ body:has(.ptd-page-root) main.page-content {
 .ptd-page-root .countdown-item:hover {
   border-color: color-mix(in srgb, var(--ptd-cyan) 65%, transparent);
   box-shadow: 0 14px 32px color-mix(in srgb, var(--ptd-teal) 28%, transparent),
-    inset 0 0 0 1px color-mix(in srgb, var(--ptd-cyan) 40%, transparent),
-    0 0 20px color-mix(in srgb, var(--ptd-cyan) 30%, transparent);
+    inset 0 0 0 1px color-mix(in srgb, var(--ptd-cyan) 40%, transparent), 0 0
+    20px color-mix(in srgb, var(--ptd-cyan) 30%, transparent);
 }
 
 .ptd-page-root .countdown-value {
@@ -1037,8 +1032,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   aspect-ratio: 1024 / 576;
   pointer-events: none;
   background-color: var(--ptd-cream);
-  background-image:
-    linear-gradient(
+  background-image: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 92%, transparent) 10%,
@@ -1051,8 +1045,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
       color-mix(in srgb, var(--ptd-cream) 72%, transparent) 10%,
       color-mix(in srgb, var(--ptd-cream) 42%, transparent) 15%,
       transparent 22%
-    ),
-    var(--ptd-pricing-bg);
+    ), var(--ptd-pricing-bg);
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center top;
@@ -1116,7 +1109,8 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
 .ptd-page-root .ptd-pricing-card--featured {
   background: linear-gradient(180deg, #fffaf8 0%, #fef7f3 100%);
   border: 2px solid var(--ptd-subtitle);
-  box-shadow: 0 16px 40px color-mix(in srgb, var(--ptd-subtitle) 14%, transparent);
+  box-shadow: 0 16px 40px
+    color-mix(in srgb, var(--ptd-subtitle) 14%, transparent);
 }
 
 .ptd-page-root .ptd-pricing-card__icon {
@@ -1354,8 +1348,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 94%, transparent) 6%,
@@ -1797,8 +1790,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   z-index: 0;
   pointer-events: none;
   filter: blur(1px);
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 98%, transparent) 8%,
@@ -1832,8 +1824,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   border-radius: clamp(1.15rem, 2.3vw, 1.75rem);
   border: 1px solid color-mix(in srgb, var(--ptd-title) 9%, #ffffff 91%);
   background: color-mix(in srgb, #ffffff 94%, var(--ptd-cream) 6%);
-  box-shadow:
-    0 24px 54px color-mix(in srgb, var(--ptd-title) 10%, transparent),
+  box-shadow: 0 24px 54px color-mix(in srgb, var(--ptd-title) 10%, transparent),
     0 1px 0 color-mix(in srgb, #ffffff 80%, transparent) inset;
   overflow: hidden;
 }
@@ -1961,8 +1952,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 98%, transparent) 8%,
@@ -2086,17 +2076,15 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
     color-mix(in srgb, #ffffff 88%, transparent) 56%,
     transparent 72%
   );
-  box-shadow:
-    0 0 36px color-mix(in srgb, #ffffff 95%, transparent),
-    0 14px 30px color-mix(in srgb, var(--ptd-title) 8%, transparent);
+  box-shadow: 0 0 36px color-mix(in srgb, #ffffff 95%, transparent), 0 14px 30px
+    color-mix(in srgb, var(--ptd-title) 8%, transparent);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ptd-page-root .ptd-community__card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 0 44px color-mix(in srgb, #ffffff 100%, transparent),
-    0 18px 34px color-mix(in srgb, var(--ptd-title) 11%, transparent);
+  box-shadow: 0 0 44px color-mix(in srgb, #ffffff 100%, transparent), 0 18px
+    34px color-mix(in srgb, var(--ptd-title) 11%, transparent);
 }
 
 .ptd-page-root .ptd-community__logo {
@@ -2178,8 +2166,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
@@ -2211,8 +2198,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   border-radius: 1.25rem;
   border: 1px solid color-mix(in srgb, var(--ptd-title) 10%, #ffffff 90%);
   background: color-mix(in srgb, #ffffff 88%, transparent);
-  box-shadow:
-    0 12px 28px color-mix(in srgb, var(--ptd-title) 8%, transparent),
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--ptd-title) 8%, transparent),
     0 1px 0 color-mix(in srgb, #ffffff 78%, transparent) inset;
   padding: clamp(1.15rem, 3.2vw, 1.8rem);
 }
@@ -2283,9 +2269,8 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid color-mix(in srgb, var(--ptd-title) 18%, #ffffff 82%);
-  box-shadow:
-    0 0 28px color-mix(in srgb, #ffffff 95%, transparent),
-    0 10px 20px color-mix(in srgb, var(--ptd-title) 12%, transparent);
+  box-shadow: 0 0 28px color-mix(in srgb, #ffffff 95%, transparent), 0 10px 20px
+    color-mix(in srgb, var(--ptd-title) 12%, transparent);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -2299,9 +2284,8 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
 
 .ptd-page-root .ptd-team__card:hover .ptd-team__photo {
   transform: translateY(-2px);
-  box-shadow:
-    0 0 34px color-mix(in srgb, #ffffff 100%, transparent),
-    0 14px 24px color-mix(in srgb, var(--ptd-title) 14%, transparent);
+  box-shadow: 0 0 34px color-mix(in srgb, #ffffff 100%, transparent), 0 14px
+    24px color-mix(in srgb, var(--ptd-title) 14%, transparent);
 }
 
 .ptd-page-root .ptd-team__name {
@@ -2342,8 +2326,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
+  background: linear-gradient(
       to bottom,
       var(--ptd-cream) 0%,
       color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
@@ -2411,8 +2394,7 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--ptd-title) 10%, #ffffff 90%);
   background: color-mix(in srgb, #ffffff 90%, transparent);
-  box-shadow:
-    0 10px 24px color-mix(in srgb, var(--ptd-title) 7%, transparent),
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--ptd-title) 7%, transparent),
     0 1px 0 color-mix(in srgb, #ffffff 80%, transparent) inset;
 }
 
