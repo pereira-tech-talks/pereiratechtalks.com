@@ -2,7 +2,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Image from '~/components/common/Image.astro';
-import PopupAnnouncement from '~/components/common/PopupAnnouncement.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Hero from '~/components/widgets/Hero.astro';
 
@@ -37,7 +36,5 @@ const metadata = {
 
   <BlogLatestPosts title="" information="" eventsLinkText="Ver todos los eventos" eventsLinkUrl="/meetups" />
 
-  <!-- Popup Announcement ************* -->
-
-  <PopupAnnouncement />
+  <!-- Popup Announcement moved to base layout -->
 </Layout>
