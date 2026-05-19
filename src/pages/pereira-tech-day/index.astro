@@ -4,9 +4,7 @@ import Image from '~/components/common/Image.astro';
 //import Button from '~/components/ui/Button.astro';
 //import Form from '~/components/ui/Form.astro';
 import PtdSponsors from '~/components/events/PtdSponsors.astro';
-import Collaborators from '~/components/widgets/Collaborators.astro';
 import Countdown from '~/components/widgets/Countdown.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import PtdJoinSection from '~/components/events/PtdJoinSection.astro';
 import PtdPricing from '~/components/events/PtdPricing.astro';
 import EventsLayout from '~/layouts/EventsLayout.astro';
@@ -68,6 +66,18 @@ const communitySectionBgMeta = await findImage(
 );
 const communitySectionBg = communitySectionBgMeta
   ? await getImage({ src: communitySectionBgMeta, width: 2560, format: 'webp' })
+  : null;
+const teamSectionBgMeta = await findImage(
+  '~/assets/images/pereira-tech-day/team-section-bg-2026.png',
+);
+const teamSectionBg = teamSectionBgMeta
+  ? await getImage({ src: teamSectionBgMeta, width: 2560, format: 'webp' })
+  : null;
+const faqsSectionBgMeta = await findImage(
+  '~/assets/images/pereira-tech-day/faqs-section-bg-2026.png',
+);
+const faqsSectionBg = faqsSectionBgMeta
+  ? await getImage({ src: faqsSectionBgMeta, width: 2560, format: 'webp' })
   : null;
 
 import '@fontsource/bebas-neue/400.css';
@@ -227,6 +237,11 @@ const collaborators = [
     socialLink: 'https://www.linkedin.com/in/lizethvictoria/',
   },
 ];
+
+const organizersSorted = organizers.sort((a, b) => a.name.localeCompare(b.name));
+const collaboratorsSorted = collaborators.sort((a, b) =>
+  a.name.localeCompare(b.name),
+);
 
 const speakers: Array<Testimonial> = [
   {
@@ -933,25 +948,117 @@ void lightningTalks;
           </div>
         </div>
       </section>
-      <Collaborators
+      <section
         id="organizers"
-        collaborators={organizers}
-        classes={{ container: "ptd-section-spacer" }}
-      />
-      <Collaborators
-        id="collaborators"
-        tagline="Colaboradores"
-        collaborators={collaborators}
-        classes={{ container: "ptd-section-spacer" }}
-      />
-      <FAQs
+        class="ptd-team ptd-section-spacer not-prose"
+        style={
+          teamSectionBg
+            ? `--ptd-team-bg: url('${teamSectionBg.src}')`
+            : undefined
+        }
+      >
+        <div class="ptd-team__inner">
+          <div class="ptd-team__block">
+            <header class="ptd-team__header">
+              <h2 class="ptd-team__title">Organizadores</h2>
+              <p class="ptd-team__subtitle">
+                Quienes lideran y hacen posible Pereira Tech Day.
+              </p>
+            </header>
+
+            <ul class="ptd-team__grid" aria-label="Equipo organizador">
+              {organizersSorted.map(
+                (person) =>
+                  person && (
+                    <li class="ptd-team__item">
+                      <a
+                        class="ptd-team__card"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={person.socialLink || undefined}
+                        aria-label={`Visitar perfil de ${person.name}`}
+                      >
+                        <Image
+                          src={person.image}
+                          alt={person.name || ''}
+                          class="ptd-team__photo"
+                        />
+                        <span class="ptd-team__name">{person.name}</span>
+                      </a>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+
+          <div class="ptd-team__block" id="collaborators">
+            <header class="ptd-team__header">
+              <h3 class="ptd-team__title">Colaboradores</h3>
+              <p class="ptd-team__subtitle">
+                Personas y aliados que fortalecen la ejecución del evento.
+              </p>
+            </header>
+
+            <ul class="ptd-team__grid" aria-label="Equipo colaborador">
+              {collaboratorsSorted.map(
+                (person) =>
+                  person && (
+                    <li class="ptd-team__item">
+                      <a
+                        class="ptd-team__card"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={person.socialLink || undefined}
+                        aria-label={`Visitar perfil de ${person.name}`}
+                      >
+                        <Image
+                          src={person.image}
+                          alt={person.name || ''}
+                          class="ptd-team__photo"
+                        />
+                        <span class="ptd-team__name">{person.name}</span>
+                      </a>
+                    </li>
+                  )
+              )}
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section
         id="faqs"
-        title="Preguntas Frecuentes (FAQ)"
-        subtitle="Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo."
-        columns={2}
-        items={faqsList}
-        classes={{ container: "ptd-section-spacer" }}
-      />
+        class="ptd-faq ptd-section-spacer not-prose"
+        style={
+          faqsSectionBg
+            ? `--ptd-faq-bg: url('${faqsSectionBg.src}')`
+            : undefined
+        }
+      >
+        <div class="ptd-faq__inner">
+          <header class="ptd-faq__header">
+            <h2 class="ptd-faq__title">Preguntas Frecuentes (FAQ)</h2>
+            <p class="ptd-faq__subtitle">
+              Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo.
+            </p>
+          </header>
+
+          <ul class="ptd-faq__grid" aria-label="Preguntas frecuentes">
+            {faqsList.map((item) => (
+              <li class="ptd-faq__item">
+                <div class="ptd-faq__item-body">
+                  <Icon name="tabler:chevron-right" class="ptd-faq__item-icon" />
+                  <div class="ptd-faq__copy">
+                    {item.title && <h3 class="ptd-faq__item-title">{item.title}</h3>}
+                    {item.description && (
+                      <p class="ptd-faq__item-description" set:html={item.description} />
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
       <PtdJoinSection
         logoMaskSrc={pttLogoMask?.src}
         backgroundSrc={joinSectionBg?.src}

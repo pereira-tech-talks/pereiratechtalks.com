@@ -1938,6 +1938,10 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   background: var(--ptd-cream);
 }
 
+.ptd-page-root .ptd-community.ptd-section-spacer {
+  padding-bottom: 0.6rem !important;
+}
+
 .ptd-page-root .ptd-community::before {
   content: "";
   position: absolute;
@@ -2141,4 +2145,311 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   font-style: italic;
   font-weight: 500;
   color: color-mix(in srgb, var(--ptd-title) 88%, transparent);
+}
+
+/* Organizadores y colaboradores — estilo brochure */
+.ptd-page-root .ptd-team {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ptd-cream);
+}
+
+.ptd-page-root .ptd-team.ptd-section-spacer {
+  padding-top: 0.6rem !important;
+}
+
+.ptd-page-root .ptd-team::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--ptd-cream);
+  background-image: var(--ptd-team-bg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center top;
+}
+
+.ptd-page-root .ptd-team::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--ptd-cream) 0%,
+      color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
+      color-mix(in srgb, var(--ptd-cream) 78%, transparent) 16%,
+      color-mix(in srgb, var(--ptd-cream) 42%, transparent) 24%,
+      transparent 35%
+    ),
+    linear-gradient(
+      to top,
+      var(--ptd-cream) 0%,
+      color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
+      color-mix(in srgb, var(--ptd-cream) 78%, transparent) 16%,
+      color-mix(in srgb, var(--ptd-cream) 42%, transparent) 24%,
+      transparent 35%
+    );
+}
+
+.ptd-page-root .ptd-team__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 74rem);
+  margin-inline: auto;
+  padding: clamp(2.25rem, 7vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.ptd-page-root .ptd-team__block {
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--ptd-title) 10%, #ffffff 90%);
+  background: color-mix(in srgb, #ffffff 88%, transparent);
+  box-shadow:
+    0 12px 28px color-mix(in srgb, var(--ptd-title) 8%, transparent),
+    0 1px 0 color-mix(in srgb, #ffffff 78%, transparent) inset;
+  padding: clamp(1.15rem, 3.2vw, 1.8rem);
+}
+
+.ptd-page-root .ptd-team__header {
+  margin-bottom: 1rem;
+}
+
+.ptd-page-root .ptd-team__title {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em !important;
+  color: #3a7f7c;
+}
+
+.ptd-page-root .ptd-team__subtitle {
+  margin: 0.45rem 0 0;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--ptd-title) 80%, transparent);
+}
+
+.ptd-page-root .ptd-team__grid {
+  --ptd-team-gap: clamp(0.9rem, 2.8vw, 1.25rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ptd-team-gap);
+}
+
+.ptd-page-root .ptd-team__item {
+  display: flex;
+  justify-content: center;
+  flex: 0 1 calc((100% - var(--ptd-team-gap)) / 2);
+}
+
+@media (min-width: 700px) {
+  .ptd-page-root .ptd-team__item {
+    flex: 0 1 calc((100% - (var(--ptd-team-gap) * 2)) / 3);
+  }
+}
+
+@media (min-width: 1100px) {
+  .ptd-page-root .ptd-team__item {
+    flex: 0 1 calc((100% - (var(--ptd-team-gap) * 4)) / 5);
+  }
+}
+
+.ptd-page-root .ptd-team__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 9rem);
+  text-decoration: none;
+  color: inherit;
+}
+
+.ptd-page-root .ptd-team__photo {
+  --ptd-team-photo-size: clamp(4.25rem, 10vw, 5.35rem);
+  width: var(--ptd-team-photo-size);
+  height: var(--ptd-team-photo-size);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid color-mix(in srgb, var(--ptd-title) 18%, #ffffff 82%);
+  box-shadow:
+    0 0 28px color-mix(in srgb, #ffffff 95%, transparent),
+    0 10px 20px color-mix(in srgb, var(--ptd-title) 12%, transparent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ptd-page-root .ptd-team__card img.ptd-team__photo {
+  width: var(--ptd-team-photo-size) !important;
+  height: var(--ptd-team-photo-size) !important;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover !important;
+}
+
+.ptd-page-root .ptd-team__card:hover .ptd-team__photo {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 34px color-mix(in srgb, #ffffff 100%, transparent),
+    0 14px 24px color-mix(in srgb, var(--ptd-title) 14%, transparent);
+}
+
+.ptd-page-root .ptd-team__name {
+  margin-top: 0.55rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--ptd-title) 88%, transparent);
+  text-wrap: balance;
+}
+
+/* FAQ — estilo brochure */
+.ptd-page-root .ptd-faq {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ptd-cream);
+}
+
+.ptd-page-root .ptd-faq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--ptd-cream);
+  background-image: var(--ptd-faq-bg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center top;
+}
+
+.ptd-page-root .ptd-faq::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--ptd-cream) 0%,
+      color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
+      color-mix(in srgb, var(--ptd-cream) 78%, transparent) 16%,
+      color-mix(in srgb, var(--ptd-cream) 42%, transparent) 24%,
+      transparent 35%
+    ),
+    linear-gradient(
+      to top,
+      var(--ptd-cream) 0%,
+      color-mix(in srgb, var(--ptd-cream) 98%, transparent) 9%,
+      color-mix(in srgb, var(--ptd-cream) 78%, transparent) 16%,
+      color-mix(in srgb, var(--ptd-cream) 42%, transparent) 24%,
+      transparent 35%
+    );
+}
+
+.ptd-page-root .ptd-faq__inner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 74rem);
+  margin-inline: auto;
+  padding: clamp(2.25rem, 7vw, 4rem) clamp(1rem, 4vw, 2.5rem);
+}
+
+.ptd-page-root .ptd-faq__header {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.ptd-page-root .ptd-faq__title {
+  margin: 0;
+  font-size: clamp(2rem, 5.5vw, 3.15rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.01em !important;
+  color: #3a7f7c;
+}
+
+.ptd-page-root .ptd-faq__subtitle {
+  margin: 0.5rem 0 0;
+  max-width: 44rem;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ptd-title) 82%, transparent);
+}
+
+.ptd-page-root .ptd-faq__grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.9rem, 2.8vw, 1.25rem);
+}
+
+@media (min-width: 900px) {
+  .ptd-page-root .ptd-faq__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.ptd-page-root .ptd-faq__item {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--ptd-title) 10%, #ffffff 90%);
+  background: color-mix(in srgb, #ffffff 90%, transparent);
+  box-shadow:
+    0 10px 24px color-mix(in srgb, var(--ptd-title) 7%, transparent),
+    0 1px 0 color-mix(in srgb, #ffffff 80%, transparent) inset;
+}
+
+.ptd-page-root .ptd-faq__item-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: clamp(0.95rem, 2.2vw, 1.2rem);
+}
+
+.ptd-page-root .ptd-faq__item-icon {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  color: var(--ptd-subtitle);
+}
+
+.ptd-page-root .ptd-faq__copy {
+  min-width: 0;
+}
+
+.ptd-page-root .ptd-faq__item-title {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(1rem, 2.1vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--ptd-title);
+}
+
+.ptd-page-root .ptd-faq__item-description {
+  margin: 0.55rem 0 0;
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.92rem, 1.9vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ptd-title) 86%, transparent);
 }
