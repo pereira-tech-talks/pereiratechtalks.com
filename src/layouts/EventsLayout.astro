@@ -6,6 +6,7 @@ import Header from '~/components/widgets/Header.astro';
 import Layout from '~/layouts/Layout.astro';
 
 import { eventsHeaderData, footerData } from '~/navigation';
+import { isPereiraTechDayPath } from '~/utils/colorMode';
 
 import type { MetaData } from '~/types';
 export interface Props {
@@ -13,6 +14,9 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+const showThemeToggle = !isPereiraTechDayPath(Astro.url.pathname);
+// Tema: solo /pereira-tech-day fuerza light (paleta propia) sin alterar localStorage.theme.
+// El resto del sitio respeta la preferencia del usuario (ver utils/colorMode.ts).
 //TODO: Agregar actions de inscribirse
 ---
 
@@ -21,7 +25,7 @@ const { metadata } = Astro.props;
     <Header
       {...eventsHeaderData}
       persistId="pereira-tech-day-header"
-      showToggleTheme
+      showToggleTheme={showThemeToggle}
       position="right"
       isSticky
       transparent

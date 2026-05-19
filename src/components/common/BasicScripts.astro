@@ -1,23 +1,35 @@
 ---
 import { UI } from 'astrowind:config';
+import { PEREIRA_TECH_DAY_PATH } from '~/utils/colorMode';
 ---
 
-<script is:inline define:vars={{ defaultTheme: UI.theme }}>
+<script is:inline define:vars={{ defaultTheme: UI.theme, ptdPath: PEREIRA_TECH_DAY_PATH }}>
   if (window.basic_script) {
     return;
   }
 
   window.basic_script = true;
 
+  function isPereiraTechDayView() {
+    const path = location.pathname.replace(/\/$/, '') || '/';
+    return path === ptdPath;
+  }
+
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      document.documentElement.removeAttribute('data-ptd-theme');
     } else {
       document.documentElement.classList.remove('dark');
+      if (isPereiraTechDayView()) {
+        document.documentElement.setAttribute('data-ptd-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-ptd-theme');
+      }
     }
   }
 
-  const initTheme = function () {
+  const applyUserTheme = function () {
     if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
       applyTheme(defaultTheme.replace(':only', ''));
     } else if (
@@ -29,7 +41,28 @@ import { UI } from 'astrowind:config';
       applyTheme('light');
     }
   };
+
+  const initTheme = function () {
+    if (isPereiraTechDayView()) {
+      applyTheme('light');
+      return;
+    }
+    applyUserTheme();
+  };
   initTheme();
+
+  document.addEventListener('astro:before-swap', (event) => {
+    const fromPath = (event.from?.pathname || location.pathname).replace(/\/$/, '') || '/';
+    const toPath = (event.to?.pathname || location.pathname).replace(/\/$/, '') || '/';
+    const leavingPtd = fromPath === ptdPath;
+    const enteringPtd = toPath === ptdPath;
+
+    if (enteringPtd) {
+      applyTheme('light');
+    } else if (leavingPtd) {
+      applyUserTheme();
+    }
+  });
 
   function attachEvent(selector, event, fn) {
     const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
@@ -65,7 +98,7 @@ import { UI } from 'astrowind:config';
     });
 
     attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
-      if (defaultTheme.endsWith(':only')) {
+      if (defaultTheme.endsWith(':only') || isPereiraTechDayView()) {
         return;
       }
       document.documentElement.classList.toggle('dark');
