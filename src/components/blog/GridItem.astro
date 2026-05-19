@@ -73,15 +73,13 @@ const isUpcoming = isEvent && isUpcomingEvent(post.publishDate);
               {post.title}
             </a>
           </h2>
-          {
-            lumaEventUrl && (
-              <LumaCheckoutButton
-                eventId={parseLumaEventUrl(lumaEventUrl).eventId}
-                variant="icon"
-                class="shrink-0"
-              />
-            )
-          }
+          {isUpcoming && lumaEventUrl && (
+            <LumaCheckoutButton
+              eventId={parseLumaEventUrl(lumaEventUrl).eventId}
+              variant="icon"
+              class="no-tooltip shrink-0"
+            />
+          )}
         </div>
         {
           preview && (

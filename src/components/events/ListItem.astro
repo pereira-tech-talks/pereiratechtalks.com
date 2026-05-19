@@ -92,7 +92,11 @@ const isUpcoming = isUpcomingEvent(event.publishDate);
           }
         </h2>
         {lumaEventUrl && (
-          <LumaEventActions lumaEventUrl={lumaEventUrl} class="self-center sm:self-start" />
+          <LumaEventActions
+            lumaEventUrl={lumaEventUrl}
+            showCheckoutButton={isUpcoming}
+            class="self-center sm:self-start"
+          />
         )}
       </div>
       {

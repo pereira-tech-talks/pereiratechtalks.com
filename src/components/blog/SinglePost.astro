@@ -67,7 +67,15 @@ const isUpcoming =
         <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading min-w-0">
           {post.title}
         </h1>
-        {lumaEventUrl && <LumaEventActions lumaEventUrl={lumaEventUrl} class="self-center sm:self-start" />}
+        {
+          lumaEventUrl && (
+            <LumaEventActions
+              lumaEventUrl={lumaEventUrl}
+              class="self-center sm:self-start"
+              showCheckoutButton={isUpcoming}
+            />
+          )
+        }
       </div>
       <p
         class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted dark:text-slate-400 text-justify"

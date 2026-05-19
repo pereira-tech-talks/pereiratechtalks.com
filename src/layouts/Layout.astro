@@ -22,6 +22,7 @@ import { ClientRouter } from 'astro:transitions';
 import LinkPreview from '~/components/common/LinkPreview.astro';
 import LumaCheckout from '~/components/common/LumaCheckout.astro';
 import PageTransitions from '~/components/common/PageTransitions.astro';
+import PopupAnnouncement from '~/components/common/PopupAnnouncement.astro';
 
 import type { MetaData as MetaDataType } from '~/types';
 
@@ -49,6 +50,8 @@ const { language, textDirection } = I18N;
 
   <body class="antialiased text-default bg-page tracking-tight">
     <slot />
+
+    <PopupAnnouncement />
 
     <PageTransitions />
     <LinkPreview />
