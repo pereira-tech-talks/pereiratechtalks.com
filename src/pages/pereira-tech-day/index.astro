@@ -5,8 +5,6 @@ import Image from '~/components/common/Image.astro';
 //import Form from '~/components/ui/Form.astro';
 import PtdSponsors from '~/components/events/PtdSponsors.astro';
 import Collaborators from '~/components/widgets/Collaborators.astro';
-import Community from '~/components/widgets/Community.astro';
-import Content from '~/components/widgets/Content.astro';
 import Countdown from '~/components/widgets/Countdown.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import PtdJoinSection from '~/components/events/PtdJoinSection.astro';
@@ -48,6 +46,28 @@ const sponsorsBgMeta = await findImage(
 );
 const sponsorsSectionBg = sponsorsBgMeta
   ? await getImage({ src: sponsorsBgMeta, width: 2560, format: 'webp' })
+  : null;
+const aboutSectionBgMeta = await findImage(
+  '~/assets/images/pereira-tech-day/about-section-bg-2026.png',
+);
+const aboutSectionBg = aboutSectionBgMeta
+  ? await getImage({ src: aboutSectionBgMeta, width: 2560, format: 'webp' })
+  : null;
+const aboutSectionStyleMediaMeta = await findImage(
+  '~/assets/images/pereira-tech-day/event-2024.png',
+);
+const aboutSectionStyleMedia = aboutSectionStyleMediaMeta
+  ? await getImage({
+      src: aboutSectionStyleMediaMeta,
+      width: 1280,
+      format: 'webp',
+    })
+  : null;
+const communitySectionBgMeta = await findImage(
+  '~/assets/images/pereira-tech-day/community-section-bg-2026.png',
+);
+const communitySectionBg = communitySectionBgMeta
+  ? await getImage({ src: communitySectionBgMeta, width: 2560, format: 'webp' })
   : null;
 
 import '@fontsource/bebas-neue/400.css';
@@ -159,11 +179,6 @@ const communities = [
     image: '~/assets/images/pereira-tech-day/community/ptt.png',
     name: 'Pereira Tech Talks',
     socialLink: 'https://pereiratechtalks.org/',
-  },
-  {
-    image: '~/assets/images/pereira-tech-day/community/qaconf.png',
-    name: 'QA Conf',
-    socialLink: 'https://qaconf.co',
   },
   {
     image: '~/assets/images/pereira-tech-day/community/qaconf.png',
@@ -782,67 +797,66 @@ void lightningTalks;
     </script>
 
     <div class="ptd-page-surface">
-      <Content
+      <section
         id="about"
-        columns={3}
-        bg=""
-        classes={{ container: "ptd-section-spacer" }}
-        items={[
-          {
-            icon: "tabler:chart-bubble",
-            callToAction: {
-              text: "Inteligencia Artificial",
-            },
-          },
-          {
-            icon: "tabler:code",
-            callToAction: {
-              text: "Desarrollo de software",
-            },
-          },
-          {
-            icon: "tabler:shield-lock",
-            callToAction: {
-              text: "Ciber Seguridad",
-            },
-          },
-        ]}
-        image={{
-          src: "~/assets/images/pereira-tech-day/about.jpg",
-          alt: "Colorful Image",
-          loading: "eager",
-        }}
+        class="ptd-about ptd-section-spacer not-prose"
+        style={
+          aboutSectionBg
+            ? `--ptd-about-bg: url('${aboutSectionBg.src}')`
+            : undefined
+        }
       >
-        <Fragment slot="content">
-          <h2
-            class="text-2xl font-bold tracking-tight text-[#1F3F59] sm:text-3xl mb-2"
-          >
-            Sobre Pereira Tech Day
-          </h2>
-          <p>
-            <b>Pereira Tech Day</b> es un evento organizado en conjunto por las comunidades
-            de <a href="https://pereira.js.org/"><i>PereiraJs</i></a>,
-            <a href="https://pypereira.co"><i>Python Pereira</i></a>, <a
-              href="https://pereiratechtalks.org"><i>Pereira Tech Talks</i></a
-            > y <a href="https://jointdevweb.firebaseapp.com/"
-              ><i>Joint Developer</i></a
-            >. Unimos fuerzas para crear un evento diverso y enriquecedor, con
-            charlas que abarcan diferentes aspectos de la tecnología.
-          </p>
-          <br />
-          <p>
-            En <b>Pereira Tech Day</b>, nuestro objetivo es compartir con la
-            comunidad temas relacionados al mundo tecnológico, enfocados en
-            inspirar y motivar a las personas. Las charlas de este año no solo
-            cubrirán temas tecnológicos, sino también trayectorias
-            profesionales, desarrollo comunitario y motivación, buscando
-            incentivar a los asistentes a seguir explorando, investigando y
-            adentrándose en el maravilloso mundo de la tecnología.
-          </p>
-
-          <Fragment slot="bg"> </Fragment>
-        </Fragment>
-      </Content>
+        <div class="ptd-about__inner">
+          <article class="ptd-about__card">
+            <div class="ptd-about__copy">
+              <h2 class="ptd-about__title">Sobre Pereira Tech Day</h2>
+              <p>
+                <b>Pereira Tech Day</b> es un evento organizado en conjunto por las comunidades
+                de <a href="https://pereira.js.org/"><i>PereiraJs</i></a>,
+                <a href="https://pypereira.co"><i>Python Pereira</i></a>, <a
+                  href="https://pereiratechtalks.org"><i>Pereira Tech Talks</i></a
+                > y <a href="https://jointdevweb.firebaseapp.com/"
+                  ><i>Joint Developer</i></a
+                >. Unimos fuerzas para crear un evento diverso y enriquecedor, con
+                charlas que abarcan diferentes aspectos de la tecnología.
+              </p>
+              <p>
+                En <b>Pereira Tech Day</b>, nuestro objetivo es compartir con la
+                comunidad temas relacionados al mundo tecnológico, enfocados en
+                inspirar y motivar a las personas. Las charlas de este año no solo
+                cubrirán temas tecnológicos, sino también trayectorias
+                profesionales, desarrollo comunitario y motivación, buscando
+                incentivar a los asistentes a seguir explorando, investigando y
+                adentrándose en el maravilloso mundo de la tecnología.
+              </p>
+              <ul class="ptd-about__topics" aria-label="Temas principales">
+                <li>
+                  <Icon name="tabler:chart-bubble" class="ptd-about__topic-icon" />
+                  <span>Inteligencia Artificial</span>
+                </li>
+                <li>
+                  <Icon name="tabler:code" class="ptd-about__topic-icon" />
+                  <span>Desarrollo de software</span>
+                </li>
+                <li>
+                  <Icon name="tabler:shield-lock" class="ptd-about__topic-icon" />
+                  <span>Ciber Seguridad</span>
+                </li>
+              </ul>
+            </div>
+            <div aria-hidden="true" class="ptd-about__media">
+              <Image
+                src={aboutSectionStyleMedia?.src || '~/assets/images/pereira-tech-day/event-2024.png'}
+                alt="Colorful Image"
+                loading="eager"
+                width={1280}
+                height={960}
+                class="ptd-about__image"
+              />
+            </div>
+          </article>
+        </div>
+      </section>
 
       <!-- <Steps id="schedule" title="Agenda" items={schedule} classes={{ container: 'max-w-3xl' }} />
     <Testimonials id="speakers" title="Ponentes" testimonials={speakers} />
@@ -857,12 +871,68 @@ void lightningTalks;
         backgroundSrc={sponsorsSectionBg?.src}
         brands={sponsors}
       />
-      <Community
+      <section
         id="community"
-        title="Organiza"
-        communities={communities}
-        classes={{ container: "ptd-section-spacer" }}
-      />
+        class="ptd-community ptd-section-spacer not-prose"
+        style={
+          communitySectionBg
+            ? `--ptd-community-bg: url('${communitySectionBg.src}')`
+            : undefined
+        }
+      >
+        <div class="ptd-community__inner">
+          <header class="ptd-community__header">
+            <div
+              class="ptd-community__brand-logo"
+              role="img"
+              aria-label="Pereira Tech Talks"
+              style={
+                pttLogoMask
+                  ? `--ptd-logo-mask: url('${pttLogoMask.src}')`
+                  : undefined
+              }
+            />
+            <div class="ptd-community__heading-copy">
+              <h2 class="ptd-community__title">Organiza</h2>
+              <p class="ptd-community__subtitle">
+                Junto a estas comunidades fortalecemos el ecosistema tech de Pereira y la región.
+              </p>
+            </div>
+          </header>
+
+          <ul class="ptd-community__grid" aria-label="Comunidades organizadoras">
+            {communities.map(
+              (community) =>
+                community && (
+                  <li class="ptd-community__item">
+                    <a
+                      class="ptd-community__card"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={community.socialLink}
+                      aria-label={`Visitar ${community.name}`}
+                    >
+                      <Image
+                        src={community.image}
+                        alt={community.name || ''}
+                        class="ptd-community__logo"
+                      />
+                    </a>
+                  </li>
+                )
+            )}
+          </ul>
+
+          <div class="ptd-community__footer-pill" aria-hidden="true">
+            <span class="ptd-community__footer-dot ptd-community__footer-dot--coral" />
+            <span class="ptd-community__footer-dot ptd-community__footer-dot--teal" />
+            <span class="ptd-community__footer-dot ptd-community__footer-dot--navy" />
+            <p class="ptd-community__footer-text">
+              Una red de comunidades que conecta talento, aprendizaje y colaboración.
+            </p>
+          </div>
+        </div>
+      </section>
       <Collaborators
         id="organizers"
         collaborators={organizers}
