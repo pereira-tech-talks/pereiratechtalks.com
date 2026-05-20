@@ -11,6 +11,7 @@ export interface Props {
   variant?: 'button' | 'icon';
   showCheckoutButton?: boolean;
   showTooltip?: boolean;
+  showTicketIcon?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   variant = 'button',
   showCheckoutButton = true,
   showTooltip = true,
+  showTicketIcon = false,
 } = Astro.props;
 const href = getLumaCheckoutHref(eventId);
 const shouldShowTooltip = showTooltip && !className.includes('no-tooltip');
@@ -56,6 +58,7 @@ const shouldShowTooltip = showTooltip && !className.includes('no-tooltip');
             data-luma-action="checkout"
             data-luma-event-id={eventId}
           >
+            {showTicketIcon && <Icon name="tabler:ticket" class="mr-2 h-5 w-5" aria-hidden="true" />}
             {label}
           </a>
         )

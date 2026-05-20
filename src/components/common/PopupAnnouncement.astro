@@ -42,9 +42,11 @@ const endDate =
 
 // Verificar si el popup debe mostrarse según las fechas
 const now = new Date();
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isHomePage = currentPath === '/';
 const shouldShowByDate =
   (!startDate || now >= startDate) && (!endDate || now <= endDate);
-const shouldShow = isEnabled && shouldShowByDate && PopupContent;
+const shouldShow = isEnabled && isHomePage && shouldShowByDate && PopupContent;
 ---
 
 {
@@ -57,16 +59,16 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
       />
       <div
         id="popup-announcement"
-        class="fixed inset-0 z-[9999] flex items-start justify-center p-4 pt-20 md:items-center md:p-6 opacity-0 pointer-events-none transition-all duration-300"
+        class="fixed inset-0 z-[9999] flex items-start justify-center p-4 pt-20 md:items-center md:p-6 opacity-0 scale-95 pointer-events-none transition-all duration-300"
         role="dialog"
         aria-modal="true"
         aria-label="Anuncio"
       >
-        <div class="w-full max-w-lg max-h-[calc(100vh-5rem)] overflow-y-auto bg-zinc-50 dark:bg-slate-900 rounded-lg shadow-2xl p-6 md:p-8 relative border-2 border-primary">
+        <div class="relative w-full max-w-[920px]">
           {/* Botón de cerrar */}
           <button
             id="popup-close"
-            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors z-10"
+            class="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80"
             aria-label="Cerrar popup"
           >
             <svg
@@ -80,41 +82,28 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
             </svg>
           </button>
 
-          {/* Contenido del popup */}
-          <div>
-            <div class="text-gray-600 dark:text-gray-300 mb-6 prose dark:prose-invert max-w-none">
-              {PopupContent && <PopupContent />}
-            </div>
-
-            {/* Botón de acción */}
-            <div class="flex justify-center">
-              <button class="popup-dismiss text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 px-4 py-3 font-medium transition-colors">
-                No mostrar de nuevo
-              </button>
-            </div>
+          <div class="max-h-[calc(100vh-5rem)] overflow-y-auto">
+            {PopupContent && <PopupContent />}
           </div>
         </div>
       </div>
 
       <script is:inline define:vars={{ storageKey }}>
-        // Mostrar el popup si no ha sido descartado previamente
+        // Mostrar el popup
         function initPopup() {
           const dismissed = localStorage.getItem(storageKey);
+          const overlay = document.getElementById('popup-overlay');
+          const popup = document.getElementById('popup-announcement');
 
-          if (!dismissed) {
-            const overlay = document.getElementById('popup-overlay');
-            const popup = document.getElementById('popup-announcement');
-
-            if (overlay && popup) {
-              // Mostrar el popup después de un pequeño retraso
-              setTimeout(() => {
-                overlay.classList.remove('pointer-events-none', 'opacity-0');
-                overlay.classList.add('opacity-100');
-                popup.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
-                popup.classList.add('opacity-100', 'scale-100');
-                document.body.style.overflow = 'hidden';
-              }, 1000);
-            }
+          if (!dismissed && overlay && popup) {
+            // Mostrar el popup después de un pequeño retraso
+            setTimeout(() => {
+              overlay.classList.remove('pointer-events-none', 'opacity-0');
+              overlay.classList.add('opacity-100');
+              popup.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+              popup.classList.add('opacity-100', 'scale-100');
+              document.body.style.overflow = 'hidden';
+            }, 1000);
           }
         }
 
@@ -146,7 +135,7 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
             const closeBtn = e.target.closest && e.target.closest('#popup-close');
             if (closeBtn) {
               e.preventDefault();
-              closePopup(false);
+              closePopup();
               return;
             }
 
@@ -180,7 +169,7 @@ const shouldShow = isEnabled && shouldShowByDate && PopupContent;
           // Close with Escape
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-              closePopup(false);
+              closePopup();
             }
           });
         }
