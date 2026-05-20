@@ -6,6 +6,7 @@ export interface Props {
   subtitle?: string;
   tagline?: string;
   targetDate: string; // ISO 8601 format: '2026-09-21T07:00:00'
+  endDate?: string; // optional ISO 8601 end date
   id?: string;
   classes?: Record<string, string>;
   numberColor?: string;
@@ -16,6 +17,7 @@ const {
   subtitle = '',
   tagline = '',
   targetDate,
+  endDate = '',
   id,
   classes = {},
   numberColor = '',
@@ -53,12 +55,12 @@ const {
       ¡El evento ha comenzado! 🎉
     </div>
   </div>
-</div>
 
-<script is:inline define:vars={{ targetDate }}>
+  <script is:inline define:vars={{ targetDate, endDate }}>
   let tickCounter = 0;
   const randomGlitchInterval = () => Math.floor(Math.random() * 5) + 1;
   let nextGlitchTick = randomGlitchInterval();
+  let interval = null;
 
   const triggerRandomCardGlitch = () => {
     const items = Array.from(document.querySelectorAll('.countdown-item'));
@@ -90,7 +92,7 @@ const {
   function updateCountdown() {
     const now = new Date().getTime();
     const target = new Date(targetDate).getTime();
-    const distance = target - now;
+    const endTarget = endDate ? new Date(endDate).getTime() : null;
 
     const daysElement = document.getElementById('days');
     const hoursElement = document.getElementById('hours');
@@ -108,26 +110,53 @@ const {
       element.setAttribute('data-text', nextValue);
     };
 
-    if (distance < 0) {
-      if (gridElement) gridElement.classList.add('hidden');
-      if (messageElement) messageElement.classList.remove('hidden');
+    // Before start: show countdown
+    if (now < target) {
+      if (gridElement) gridElement.classList.remove('hidden');
+      if (messageElement) messageElement.classList.add('hidden');
+
+      const distance = target - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      setValueWithGlitch(daysElement, String(days).padStart(2, '0'));
+      setValueWithGlitch(hoursElement, String(hours).padStart(2, '0'));
+      setValueWithGlitch(minutesElement, String(minutes).padStart(2, '0'));
+      setValueWithGlitch(secondsElement, String(seconds).padStart(2, '0'));
+
+      tickCounter += 1;
+      if (tickCounter >= nextGlitchTick) {
+        triggerRandomCardGlitch();
+        nextGlitchTick = tickCounter + randomGlitchInterval();
+      }
+
       return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // After end: show finished message
+    if (endTarget && now >= endTarget) {
+      if (gridElement) gridElement.classList.add('hidden');
+      if (messageElement) {
+        messageElement.textContent = 'El evento ha finalizado. Nos vemos en la próxima edición.';
+        messageElement.classList.remove('hidden');
+      }
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+      return;
+    }
 
-    setValueWithGlitch(daysElement, String(days).padStart(2, '0'));
-    setValueWithGlitch(hoursElement, String(hours).padStart(2, '0'));
-    setValueWithGlitch(minutesElement, String(minutes).padStart(2, '0'));
-    setValueWithGlitch(secondsElement, String(seconds).padStart(2, '0'));
-
-    tickCounter += 1;
-    if (tickCounter >= nextGlitchTick) {
-      triggerRandomCardGlitch();
-      nextGlitchTick = tickCounter + randomGlitchInterval();
+    // Between start and end (event in progress)
+    if (now >= target) {
+      if (gridElement) gridElement.classList.add('hidden');
+      if (messageElement) {
+        messageElement.textContent = 'Evento en curso';
+        messageElement.classList.remove('hidden');
+      }
+      return;
     }
   }
 
@@ -135,15 +164,15 @@ const {
   updateCountdown();
 
   // Actualizar cada segundo
-  const interval = setInterval(updateCountdown, 1000);
+  interval = setInterval(updateCountdown, 1000);
 
   // Limpiar el intervalo cuando la página se descarga
   window.addEventListener('beforeunload', () => {
     clearInterval(interval);
   });
-</script>
+  </script>
 
-<style>
+  <style>
   .countdown-wrapper {
     position: relative;
     max-width: 62rem;
@@ -492,3 +521,5 @@ const {
     display: none;
   }
 </style>
+
+  </div>

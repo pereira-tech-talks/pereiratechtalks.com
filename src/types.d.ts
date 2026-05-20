@@ -191,6 +191,7 @@ export interface Stat {
 export interface Item {
   title?: string;
   description?: string;
+  subtitle?: string;
   icon?: string;
   classes?: Record<string, string>;
   callToAction?: CallToAction;

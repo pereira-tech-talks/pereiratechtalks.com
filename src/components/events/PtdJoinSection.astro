@@ -1,0 +1,34 @@
+---
+export interface Props {
+  id?: string;
+  logoMaskSrc?: string;
+  backgroundSrc?: string;
+  siteUrl?: string;
+  eventDateLabel?: string;
+}
+
+const { id = 'join', backgroundSrc } = Astro.props;
+---
+
+<section
+  class="ptd-join ptd-section-spacer"
+  {id}
+  style={
+    backgroundSrc ? `--ptd-join-bg: url('${backgroundSrc}')` : undefined
+  }
+>
+  <div class="ptd-join__inner">
+    <div class="ptd-join__content">
+      <h2 class="ptd-join__title">
+        <span class="ptd-join__title-line">Únete al futuro tech</span>
+        <span class="ptd-join__title-line ptd-join__title-line--accent">
+          de la región.
+        </span>
+      </h2>
+
+      <p class="ptd-join__lead">
+        Sé parte del <strong>crecimiento</strong> del ecosistema.
+      </p>
+    </div>
+  </div>
+</section>
