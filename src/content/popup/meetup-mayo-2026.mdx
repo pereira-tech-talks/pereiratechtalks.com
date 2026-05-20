@@ -5,25 +5,55 @@ endDate: 2026-05-27T21:00:00
 lumanEventId: evt-kSpA0PvGDF2Cuif
 ---
 
-import { Image } from "astro:assets";
-import Button from "~/components/ui/Button.astro";
-import meetupImage from "~/assets/images/posts/content/8uige1ke.png";
+import { Image } from 'astro:assets';
+import LumaCheckoutButton from '~/components/events/LumaCheckoutButton.astro';
+import UpcomingEventRibbon from '~/components/events/UpcomingEventRibbon.astro';
+import meetupImage from '~/assets/images/posts/content/8uige1ke.png';
 
-<div class="popup-content">
-  <div style="text-align: center">
-    <h2>¡Próximo Meetup!</h2>
-    <Image 
-      src={meetupImage} 
-      alt="Meetup de mayo 2026"
-      class="border-2 border-gray-800 dark:border-gray-300 rounded-lg max-w-full h-auto mb-6"
-    />
-    <Button
-      variant="primary"
-      href="https://luma.com/event/evt-kSpA0PvGDF2Cuif"
-      data-luma-action="checkout"
-      data-luma-event-id="evt-kSpA0PvGDF2Cuif"
-      text="Inscribirse al evento"
-    />
-  </div>
+<div class="popup-content not-prose">
+  <article class="relative overflow-hidden rounded-xl border border-zinc-200/70 bg-zinc-50 shadow-md dark:border-[#ffffff29] dark:bg-slate-900 lg:grid lg:grid-cols-[500px_minmax(0,1fr)]">
+    <div class="relative lg:h-[500px] lg:w-[500px]">
+      <UpcomingEventRibbon />
+      <Image
+        src={meetupImage}
+        alt="Meetup de mayo 2026"
+        class="h-auto w-full bg-gray-400 dark:bg-slate-700 lg:h-full lg:w-full lg:object-cover"
+      />
+    </div>
 
+    <div class="space-y-4 p-5 md:p-6 lg:flex lg:h-[500px] lg:flex-col lg:justify-center lg:overflow-y-auto">
+      <header class="space-y-3">
+        <p class="text-xs font-medium uppercase tracking-[0.16em] text-muted dark:text-slate-500">Luma.com</p>
+        <h2 class="text-2xl font-bold leading-tight font-heading tracking-tight text-default dark:text-slate-200 sm:text-3xl">
+          IA como motor de crecimiento
+        </h2>
+        <p class="text-base leading-relaxed text-muted dark:text-slate-400">
+          Meetup sobre AI Engineering, IA como infraestructura y cómo escalar sistemas de IA en entornos
+          empresariales.
+        </p>
+      </header>
+
+      <div class="flex items-center justify-between pt-1">
+        <a
+          href="/8uige1ke-ia-como-motor-de-crecimiento"
+          class="text-primary dark:text-blue-400 font-medium transition-colors hover:underline"
+        >
+          Seguir leyendo
+        </a>
+        <span class="text-sm uppercase tracking-wide text-muted dark:text-slate-500">2 min read</span>
+      </div>
+
+      <div class="flex flex-col items-center gap-2 pt-2">
+        <LumaCheckoutButton
+          eventId="evt-kSpA0PvGDF2Cuif"
+          label="Inscribirme al meetup"
+          class="w-full sm:w-auto"
+          showTicketIcon={true}
+        />
+        <button class="popup-dismiss text-xs text-muted underline underline-offset-2 transition-colors hover:text-default dark:hover:text-slate-200">
+          No ver mas este evento
+        </button>
+      </div>
+    </div>
+  </article>
 </div>
