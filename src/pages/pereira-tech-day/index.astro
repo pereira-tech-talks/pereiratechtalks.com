@@ -17,6 +17,9 @@ const pttLogoMeta = await findImage('~/assets/images/logos/ptt.png');
 const pttLogoMask = pttLogoMeta
   ? await getImage({ src: pttLogoMeta, width: 271, format: 'png' })
   : null;
+const introLogoMeta = await findImage(
+  '~/assets/images/pereira-tech-day/logo.png',
+);
 const heroIllustrationMeta = await findImage(
   '~/assets/images/pereira-tech-day/hero-illustration-2026.png',
 );
@@ -646,16 +649,17 @@ void lightningTalks;
             <p class="ptd-intro__eyebrow">Agosto 22, 2026 — 08:00 AM</p>
 
             <div class="ptd-intro__headline">
-              <div
-                class="ptd-intro__brand-logo"
-                role="img"
-                aria-label="Pereira Tech Talks"
-                style={
-                  pttLogoMask
-                    ? `--ptd-logo-mask: url('${pttLogoMask.src}')`
-                    : undefined
-                }
-              />
+              {
+                introLogoMeta && (
+                  <img
+                    src={typeof introLogoMeta === 'string' ? introLogoMeta : introLogoMeta.src}
+                    alt="Pereira Tech Talks"
+                    class="ptd-intro__brand-logo-image"
+                    loading="eager"
+                    decoding="async"
+                  />
+                )
+              }
 
               <h1 class="ptd-intro__title">
                 <span class="ptd-intro__title-tech">Pereira Tech</span>
@@ -740,6 +744,26 @@ void lightningTalks;
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        const syncIntroLogoHeight = () => {
+          const headline = document.querySelector(
+            ".ptd-intro__headline",
+          ) as HTMLElement | null;
+          const title = headline?.querySelector(
+            ".ptd-intro__title",
+          ) as HTMLElement | null;
+
+          if (!headline || !title) return;
+
+          const titleHeight = title.getBoundingClientRect().height;
+          if (titleHeight > 0) {
+            headline.style.setProperty("--ptd-intro-title-height", `${titleHeight}px`);
+          }
+        };
+
+        syncIntroLogoHeight();
+        window.addEventListener("resize", syncIntroLogoHeight);
+        document.addEventListener("astro:page-load", syncIntroLogoHeight);
+
         const form = document.getElementById(
           "pereira-tech-day-tickets-notification",
         );

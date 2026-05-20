@@ -58,6 +58,63 @@ body:has(.ptd-page-root) main.page-content {
   --aw-color-bg-page: var(--ptd-cream);
 }
 
+/* Navbar theme for /pereira-tech-day */
+body:has(.ptd-page-root) #header .nav-link,
+body:has(.ptd-page-root) #header nav,
+body:has(.ptd-page-root) #header [data-aw-toggle-menu],
+body:has(.ptd-page-root) #header [data-aw-toggle-menu] svg {
+  color: #b66844 !important;
+}
+
+body:has(.ptd-page-root) #header .nav-link:hover,
+body:has(.ptd-page-root) #header .aw-link-active {
+  color: #b66844 !important;
+}
+
+body:has(.ptd-page-root) #header a[href="/"] img,
+body:has(.ptd-page-root) #header a[href="/"] span img {
+  filter: brightness(0) saturate(100%) invert(24%) sepia(32%) saturate(851%)
+    hue-rotate(165deg) brightness(97%) contrast(90%);
+}
+
+body:has(.ptd-page-root) #header.scroll > div:first-child,
+body:has(.ptd-page-root) #header.scroll.dark > div:first-child,
+body:has(.ptd-page-root) .dark #header.scroll > div:first-child {
+  background: rgb(254 247 243 / 0.82) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: none !important;
+  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
+}
+
+/* Responsive menu keeps same blur/background when expanded */
+body:has(.ptd-page-root) #header.expanded nav {
+  background: rgb(254 247 243 / 0.82) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Footer palette on /pereira-tech-day */
+body:has(.ptd-page-root) footer a.inline-block.font-bold img {
+  filter: brightness(0) saturate(100%) invert(24%) sepia(32%) saturate(851%)
+    hue-rotate(165deg) brightness(97%) contrast(90%);
+}
+
+body:has(.ptd-page-root) footer .grid .font-medium.mb-2 {
+  color: #1f3f59 !important;
+}
+
+body:has(.ptd-page-root) footer :is(.text-sm, .text-muted),
+body:has(.ptd-page-root) footer a:not(.inline-block.font-bold) {
+  color: #b66844 !important;
+}
+
+body:has(.ptd-page-root) footer ul a > [astro-icon],
+body:has(.ptd-page-root) footer ul a > svg,
+body:has(.ptd-page-root) footer ul a > .icon {
+  color: #4fc3f7 !important;
+}
+
 #header[data-transparent="true"] + main .ptd-page-root {
   background: var(--ptd-cream) !important;
   box-shadow: none !important;
@@ -235,26 +292,23 @@ body:has(.ptd-page-root) main.page-content {
 
 .ptd-page-root .ptd-intro__headline {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.85rem 1.1rem;
   width: 100%;
   margin-bottom: 0.85rem;
+  --ptd-intro-title-height: clamp(3.6rem, 9vw, 6rem);
 }
 
-.ptd-page-root .ptd-intro__brand-logo {
+.ptd-page-root .ptd-intro__brand-logo-image {
   flex-shrink: 0;
   display: block;
-  height: clamp(5.25rem, 16vw, 7.25rem);
-  width: calc(clamp(5.25rem, 16vw, 7.25rem) * 271 / 443);
-  background-color: var(--ptd-blue-dark);
-  -webkit-mask-image: var(--ptd-logo-mask);
-  mask-image: var(--ptd-logo-mask);
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+  width: auto;
+  height: auto;
+  max-height: 125px;
+  object-fit: contain;
+  object-position: left top;
+  filter: brightness(0) saturate(100%) invert(66%) sepia(68%) saturate(1269%)
+    hue-rotate(309deg) brightness(95%) contrast(98%);
 }
 
 .ptd-page-root .ptd-intro__eyebrow {
@@ -2094,6 +2148,14 @@ html.dark body:has(#hero.background-intro-light) main.page-content,
   max-height: clamp(4.5rem, 10vw, 6rem);
   margin-inline: auto;
   object-fit: contain;
+}
+
+/* Community: force PTT logo to black */
+.ptd-page-root
+  .ptd-community__card[aria-label="Visitar Pereira Tech Talks"]
+  .ptd-community__logo {
+  filter: brightness(0) saturate(100%);
+  max-height: clamp(3.9rem, 8.8vw, 5.2rem);
 }
 
 .ptd-page-root .ptd-community__footer-pill {
