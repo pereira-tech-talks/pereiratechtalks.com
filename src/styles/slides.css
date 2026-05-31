@@ -4,22 +4,34 @@
  * Loaded ONLY by src/layouts/SlideLayout.astro to keep Reveal.js styles isolated
  * from the rest of the site. Drives both the deck chrome (toolbar, back link)
  * and Reveal.js theme variables in light + dark mode using PTT brand tokens.
+ *
+ * Brand mapping: every chrome-and-deck color derives from the PTT global
+ * @theme tokens declared in src/styles/global.css (--color-ptt-*). Per-edition
+ * Pereira Tech Day kits override --color-ptt-primary/-accent inside
+ * [data-edition-theme="{year}"] and the slides system inherits those overrides
+ * automatically through the var() chain — no hard-coded brand HEX should ever
+ * appear in this file.
  */
 
 /* ---------- 1. Token system ---------- */
 
 :root {
-  /* Chrome — aligned with site brand palette (docs/BRAND_GUIDE.md) */
-  --slide-bg: #ffffff;
-  --slide-surface: #f1f5f9;
-  --slide-text: #0f1124;
-  --slide-text-muted: #637996;
-  --slide-accent: #d81540;
-  --slide-border: rgba(15, 17, 36, 0.1);
+  /* Chrome — derived from PTT @theme (light defaults) */
+  --slide-bg: var(--color-ptt-bg-elevated, #ffffff);
+  --slide-surface: var(--color-ptt-primary-soft, #e1f2f1);
+  --slide-text: var(--color-ptt-text, #0f2a2c);
+  --slide-text-muted: var(--color-ptt-text-muted, #6e8589);
+  --slide-accent: var(--color-ptt-primary, #1f6f73);
+  --slide-accent-strong: var(--color-ptt-primary-strong, #155054);
+  --slide-border: var(--color-ptt-border, #e2e8e8);
   --slide-toolbar-bg: rgba(255, 255, 255, 0.78);
   --slide-toolbar-fg: rgba(0, 0, 0, 0.55);
   --slide-toolbar-fg-hover: rgba(0, 0, 0, 0.9);
   --slide-toolbar-border: rgba(0, 0, 0, 0.1);
+  /* Back-link is fixed-dark across both modes (it sits over arbitrary slide
+     backgrounds). Uses PTT dark canvas #08191a + a slightly lighter hover. */
+  --slide-backlink-bg: #08191a;
+  --slide-backlink-bg-hover: #0f2a2c;
 
   /* Reveal.js variable overrides — drive Reveal directly via its public API */
   --r-background-color: var(--slide-bg);
@@ -46,8 +58,8 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   --r-link-color: var(--slide-accent);
-  --r-link-color-dark: #b01235;
-  --r-link-color-hover: #e8456a;
+  --r-link-color-dark: var(--slide-accent-strong);
+  --r-link-color-hover: var(--slide-accent-strong);
   --r-selection-background-color: var(--slide-accent);
   --r-selection-color: #ffffff;
   --r-overlay-element-bg-color: 0, 0, 0;
@@ -57,13 +69,14 @@
 }
 
 .dark {
-  /* Chrome — dark mode brand palette */
-  --slide-bg: #0f1124;
-  --slide-surface: #152e45;
-  --slide-text: #f3f4f6;
-  --slide-text-muted: #9bb0c9;
-  --slide-accent: #cd3553;
-  --slide-border: rgba(255, 255, 255, 0.12);
+  /* Chrome — dark mode brand palette (derived from PTT @theme dark) */
+  --slide-bg: var(--color-ptt-bg, #08191a);
+  --slide-surface: var(--color-ptt-bg-elevated, #0f2a2c);
+  --slide-text: var(--color-ptt-text, #e8f0ef);
+  --slide-text-muted: var(--color-ptt-text-muted, #8fa3a6);
+  /* --slide-accent and --slide-accent-strong inherit from :root and
+     auto-flip because --color-ptt-primary flips in .dark in global.css */
+  --slide-border: var(--color-ptt-border, #1e3d40);
   --slide-toolbar-bg: rgba(0, 0, 0, 0.65);
   --slide-toolbar-fg: rgba(255, 255, 255, 0.65);
   --slide-toolbar-fg-hover: rgba(255, 255, 255, 0.95);
@@ -74,8 +87,8 @@
   --r-main-color: var(--slide-text);
   --r-heading-color: var(--slide-text);
   --r-link-color: var(--slide-accent);
-  --r-link-color-dark: var(--slide-accent);
-  --r-link-color-hover: #e8456a;
+  --r-link-color-dark: var(--slide-accent-strong);
+  --r-link-color-hover: var(--slide-accent-strong);
   --r-selection-background-color: var(--slide-accent);
   --r-selection-color: #ffffff;
   --r-overlay-element-bg-color: 255, 255, 255;
@@ -350,7 +363,7 @@ body.reveal-theme-dark {
   gap: 2px;
   padding: 6px 10px;
   border-radius: 10px;
-  background: #0f1124;
+  background: var(--slide-backlink-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -372,7 +385,7 @@ body.reveal-theme-dark {
 .slide-back-link:hover,
 .slide-back-link:focus-visible {
   color: rgba(255, 255, 255, 0.95);
-  background: #161836;
+  background: var(--slide-backlink-bg-hover);
 }
 
 .slide-back-link:focus-visible {

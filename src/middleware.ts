@@ -24,6 +24,17 @@
  *
  * Do NOT debug Astro routing, file-system caches, or `[...slug]` vs `[slug]`
  * before checking this allowlist first.
+ *
+ * v3.0.0 transition note:
+ *   The legacy xergioalex personal-page slugs (`cv`, `dailybot`, `entrepreneur`,
+ *   `foodie`, `hobbies`, `portfolio`, `tech-talks`, `trading`) are intentionally
+ *   removed from the allowlist below. The page wrappers themselves still exist
+ *   on disk and are emitted by `astro build` (middleware doesn't gatekeep build
+ *   output), but dev/preview requests for them rewrite to /404 — exactly what
+ *   we want while waiting for Task 16 to delete the wrappers and Tasks 7–8 to
+ *   land the v3 PTT homepage and verticals. New PTT top-level routes
+ *   (`/meetups`, `/pereira-tech-days`, `/talks`, etc.) will be added back to
+ *   the allowlist by Tasks 7–8 when their pages are introduced.
  */
 import { defineMiddleware } from 'astro:middleware';
 
@@ -32,15 +43,7 @@ const KNOWN_ROOT_PATHS = new Set([
   'about',
   'blog',
   'contact',
-  'cv',
-  'dailybot',
-  'entrepreneur',
-  'foodie',
-  'hobbies',
-  'portfolio',
   'slides',
-  'tech-talks',
-  'trading',
   'api',
   'es',
   'internal',
@@ -55,15 +58,7 @@ const KNOWN_ES_PATHS = new Set([
   'about',
   'blog',
   'contact',
-  'cv',
-  'dailybot',
-  'entrepreneur',
-  'foodie',
-  'hobbies',
-  'portfolio',
   'slides',
-  'tech-talks',
-  'trading',
   'rss.xml',
 ]);
 
