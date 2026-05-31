@@ -1,0 +1,37 @@
+---
+import BlogContainer from '@/components/blog/BlogContainer.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+import type { BlogPostsResultType } from '@/lib/types';
+
+interface Props {
+  lang: Language;
+  blogPostsResult: BlogPostsResultType;
+}
+
+const { lang, blogPostsResult } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const { currentPage, totalPages } = blogPostsResult;
+const prevPage =
+  currentPage > 1
+    ? new URL(`${prefix}/blog/page/${currentPage - 1}/`, Astro.site).href
+    : undefined;
+const nextPage =
+  currentPage < totalPages
+    ? new URL(`${prefix}/blog/page/${currentPage + 1}/`, Astro.site).href
+    : undefined;
+---
+
+<MainLayout
+  lang={lang}
+  title={t.blogTitle}
+  description={t.blogDescription}
+  prevPage={prevPage}
+  nextPage={nextPage}
+>
+  <BlogContainer blogPostsResult={blogPostsResult} lang={lang} />
+</MainLayout>

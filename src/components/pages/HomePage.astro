@@ -1,0 +1,132 @@
+---
+import BlogPreviewSection from '@/components/home/BlogPreviewSection.astro';
+import ContactSection from '@/components/home/ContactSection.astro';
+import DailyBotPostsSection from '@/components/home/DailyBotPostsSection.astro';
+import HeroSection from '@/components/home/HeroSection/HeroSection.astro';
+import { HomeSectionContentAlignmentEType } from '@/components/home/HomeSection/enum';
+import HomeSection from '@/components/home/HomeSection/HomeSection.astro';
+import PortfolioPostsSection from '@/components/home/PortfolioPostsSection.astro';
+import TechTalksPostsSection from '@/components/home/TechTalksPostsSection.astro';
+import TradingPostsSection from '@/components/home/TradingPostsSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+---
+
+<MainLayout
+  lang={lang}
+  title={t.siteTitleFull}
+  description={t.siteDescription}
+  keywords={lang === 'en'
+    ? ['XergioAleX personal website', 'Sergio Florez portfolio', 'CTO DailyBot', 'Y Combinator founder', 'full stack developer blog', 'tech talks speaker Colombia']
+    : ['sitio web personal XergioAleX', 'portafolio Sergio Florez', 'CTO DailyBot', 'fundador Y Combinator', 'blog desarrollador full stack', 'conferencista tecnología Colombia']}
+>
+  <HeroSection
+    name="Sergio Florez"
+    tagline={t.hero.tagline}
+    description={t.hero.description}
+    typewriterWords={t.hero.typewriterWords}
+  />
+
+  <!-- About Section -->
+  <HomeSection
+    title={t.homeSections.about.title}
+    description={t.homeSections.about.description}
+    ctaText={t.homeSections.about.cta}
+    ctaLink={`${prefix}/about`}
+    cta2Text={t.homeSections.about.cta2}
+    cta2Link={`${prefix}/cv`}
+    image="/images/profile.png"
+    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+  />
+
+  <!-- DailyBot Section -->
+  <HomeSection
+    title={t.homeSections.dailybot.title}
+    subtitle={t.homeSections.dailybot.subtitle}
+    description={t.homeSections.dailybot.description}
+    ctaText={t.homeSections.dailybot.cta}
+    ctaLink={`${prefix}/dailybot#timeline`}
+    image="/images/dailybotyc.png"
+    contentAlignment={HomeSectionContentAlignmentEType.LEFT}
+    variant="alt"
+    grouped
+  />
+
+  <!-- DailyBot Posts Section -->
+  <DailyBotPostsSection lang={lang} grouped surface="alt" />
+
+  <!-- Portfolio / Builder Section (What I Built) -->
+  <HomeSection
+    title={t.homeSections.makerHome.title}
+    subtitle={t.homeSections.makerHome.subtitle}
+    description={t.homeSections.makerHome.description}
+    ctaText={t.homeSections.makerHome.cta}
+    ctaLink={`${prefix}/portfolio`}
+    image="/images/ia.png"
+    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+    grouped
+  />
+
+  <!-- Portfolio Projects Posts Section -->
+  <PortfolioPostsSection lang={lang} grouped />
+
+  <!-- Community & Speaking Section -->
+  <HomeSection
+    title={t.homeSections.community.title}
+    subtitle={t.homeSections.community.subtitle}
+    description={t.homeSections.community.description}
+    ctaText={t.homeSections.community.cta}
+    ctaLink={`${prefix}/tech-talks#timeline`}
+    image="/images/techtalks.png"
+    contentAlignment={HomeSectionContentAlignmentEType.LEFT}
+    variant="alt"
+    grouped
+  />
+
+  <!-- Tech Talks Posts Section -->
+  <TechTalksPostsSection lang={lang} grouped surface="alt" />
+
+  <!-- Trading Section -->
+  <HomeSection
+    title={t.homeSections.trading.title}
+    subtitle={t.homeSections.trading.subtitle}
+    description={t.homeSections.trading.description}
+    ctaText={t.homeSections.trading.cta}
+    ctaLink={`${prefix}/trading#timeline`}
+    image="/images/trading.png"
+    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+    grouped
+  />
+
+  <!-- Trading Journal Posts Section -->
+  <TradingPostsSection lang={lang} grouped />
+
+  <!-- Beyond Code Section (Hobbies) -->
+  <HomeSection
+    title={t.homeSections.beyondCode.title}
+    subtitle={t.homeSections.beyondCode.subtitle}
+    description={t.homeSections.beyondCode.description}
+    ctaText={t.homeSections.beyondCode.cta}
+    ctaLink={`${prefix}/hobbies`}
+    image="/images/bicycle.png"
+    contentAlignment={HomeSectionContentAlignmentEType.LEFT}
+    variant="alt"
+    grouped
+  />
+
+  <!-- Blog Preview Section -->
+  <BlogPreviewSection lang={lang} grouped surface="alt" />
+
+  <!-- Contact Section -->
+  <ContactSection lang={lang} />
+</MainLayout>

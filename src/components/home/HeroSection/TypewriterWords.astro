@@ -1,0 +1,177 @@
+---
+/**
+ * CSS-only typewriter effect with character-by-character reveal.
+ * Each word is independently centered via a hidden sizer span.
+ * Uses max-width + overflow:hidden + CSS steps() for typing simulation.
+ * Cursor (border-right) blinks during hold, stays solid during type/erase.
+ * Zero JavaScript — avoids critical request chain.
+ * Respects prefers-reduced-motion: shows first word only.
+ */
+export interface Props {
+  words: string[];
+  /** When "inline", inherits text color for embedding in blog/content. Default "hero" uses white text. */
+  variant?: 'hero' | 'inline';
+}
+
+const { words, variant = 'hero' } = Astro.props;
+const n = words?.length ?? 1;
+const cycleDuration = n * 4;
+const cursorColor = 'rgb(96 165 250)';
+
+function fmt(num: number): string {
+  return num.toFixed(2);
+}
+
+function generateWordAnimation(word: string, index: number): string {
+  const chars = word.length;
+  const slotPct = 100 / n;
+  const start = index * slotPct;
+  const typeEnd = start + slotPct * 0.38;
+  const holdEnd = start + slotPct * 0.68;
+  const eraseEnd = start + slotPct * 0.92;
+  const slotEnd = (index + 1) * slotPct;
+  const maxW = `${chars + 1}ch`;
+
+  const holdDur = holdEnd - typeEnd;
+  const b1off = typeEnd + holdDur * 0.3;
+  const b1on = typeEnd + holdDur * 0.45;
+  const b2off = typeEnd + holdDur * 0.62;
+  const b2on = typeEnd + holdDur * 0.8;
+
+  return `
+[data-tw="${index}"] > .tw-text {
+  animation: tw-${index} ${cycleDuration}s infinite;
+}
+@keyframes tw-${index} {
+  0%, ${fmt(start)}% {
+    max-width: 0;
+    border-right-color: transparent;
+  }
+  ${fmt(start + 0.1)}% {
+    max-width: 0;
+    border-right-color: ${cursorColor};
+    animation-timing-function: steps(${chars}, end);
+  }
+  ${fmt(typeEnd)}% {
+    max-width: ${maxW};
+    border-right-color: ${cursorColor};
+  }
+  ${fmt(b1off)}% { max-width: ${maxW}; border-right-color: transparent; }
+  ${fmt(b1on)}% { max-width: ${maxW}; border-right-color: ${cursorColor}; }
+  ${fmt(b2off)}% { max-width: ${maxW}; border-right-color: transparent; }
+  ${fmt(b2on)}% { max-width: ${maxW}; border-right-color: ${cursorColor}; }
+  ${fmt(holdEnd)}% {
+    max-width: ${maxW};
+    border-right-color: ${cursorColor};
+    animation-timing-function: steps(${chars}, end);
+  }
+  ${fmt(eraseEnd)}% {
+    max-width: 0;
+    border-right-color: ${cursorColor};
+  }
+  ${fmt(eraseEnd + 0.1)}% {
+    max-width: 0;
+    border-right-color: transparent;
+  }
+  ${fmt(slotEnd)}%, 100% {
+    max-width: 0;
+    border-right-color: transparent;
+  }
+}`;
+}
+
+const dynamicCSS =
+  words?.map((w, i) => generateWordAnimation(w, i)).join('\n') ?? '';
+---
+
+<div class={`tw-container ${variant === 'inline' ? 'tw-inline' : ''}`} role="marquee" aria-live="polite">
+  {words?.map((word, i) => (
+    <span class="tw-word" data-tw={String(i)}>
+      <span class="tw-sizer" aria-hidden="true">{word}</span>
+      <span class="tw-text">{word}</span>
+    </span>
+  ))}
+</div>
+
+<style is:inline set:html={dynamicCSS}></style>
+
+<style>
+  .tw-container {
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    min-height: 1.5em;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+  }
+  .tw-container.tw-inline {
+    color: inherit;
+    text-shadow: none;
+    font-size: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .tw-container {
+      font-size: 1.125rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .tw-container {
+      font-size: 1.5rem;
+    }
+  }
+  @media (max-height: 760px) {
+    .tw-container {
+      font-size: 0.875rem;
+    }
+  }
+
+  .tw-word {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* Hidden duplicate keeps .tw-word at full text width for stable centering */
+  .tw-sizer {
+    visibility: hidden;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  /* Visible text with typewriter reveal */
+  .tw-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0;
+    border-right: 2px solid transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tw-text {
+      animation: none !important;
+    }
+    .tw-word:not([data-tw='0']) {
+      display: none;
+    }
+    .tw-word[data-tw='0'] {
+      position: relative;
+      left: auto;
+      transform: none;
+    }
+    .tw-word[data-tw='0'] > .tw-text {
+      max-width: none;
+      border-right: none;
+      position: relative;
+    }
+    .tw-word[data-tw='0'] > .tw-sizer {
+      display: none;
+    }
+  }
+</style>

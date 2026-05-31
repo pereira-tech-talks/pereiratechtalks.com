@@ -1,0 +1,84 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "pereiratechtalks.org public API",
+    "version": "1.0.0",
+    "description": "Read-only JSON endpoints exposed by pereiratechtalks.org for agent discovery. Pereira Tech Talks v3.0.0 is a static community website; the API surface covers blog posts, series, meetups, events, Pereira Tech Days, speakers, talks, sponsors, contributors, and channels metadata, plus the language-sharded search index."
+  },
+  "servers": [
+    { "url": "https://pereiratechtalks.org", "description": "Production" }
+  ],
+  "paths": {
+    "/api/posts.json": {
+      "get": {
+        "summary": "Combined search index (all languages)",
+        "description": "Returns the full blog search index across all languages — slug, title, description, pubDate, URL, language tag.",
+        "responses": {
+          "200": {
+            "description": "Search index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "slug": { "type": "string" },
+                      "title": { "type": "string" },
+                      "description": { "type": "string" },
+                      "pubDate": { "type": "string", "format": "date-time" },
+                      "url": { "type": "string", "format": "uri" },
+                      "lang": { "type": "string", "enum": ["en", "es"] },
+                      "tags": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts-en.json": {
+      "get": {
+        "summary": "English blog post index",
+        "description": "Returns only English blog posts for on-site search clients that filter by language.",
+        "responses": {
+          "200": { "description": "English posts", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+        }
+      }
+    },
+    "/api/posts-es.json": {
+      "get": {
+        "summary": "Spanish blog post index",
+        "description": "Returns only Spanish blog posts for on-site search clients that filter by language.",
+        "responses": {
+          "200": { "description": "Spanish posts", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+        }
+      }
+    },
+    "/api/series/{lang}": {
+      "get": {
+        "summary": "Blog series listing",
+        "parameters": [
+          { "name": "lang", "in": "path", "required": true, "schema": { "type": "string", "enum": ["en", "es"] } }
+        ],
+        "responses": {
+          "200": { "description": "Series list", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+        }
+      }
+    },
+    "/api/timeline/{lang}": {
+      "get": {
+        "summary": "Blog post timeline",
+        "parameters": [
+          { "name": "lang", "in": "path", "required": true, "schema": { "type": "string", "enum": ["en", "es"] } }
+        ],
+        "responses": {
+          "200": { "description": "Timeline entries", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+        }
+      }
+    }
+  },
+  "components": {}
+}

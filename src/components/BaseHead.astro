@@ -1,0 +1,219 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.css';
+import JsonLd from '@/components/JsonLd.astro';
+import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
+import {
+  DEFAULT_LANGUAGE,
+  getAlternateUrls,
+  getOGLocale,
+  getSupportedLanguages,
+  getUrlPrefix,
+  type Language,
+} from '@/lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  lang?: string;
+  keywords?: string[];
+  prevPage?: string;
+  nextPage?: string;
+  ogType?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title,
+  description,
+  image = '/images/og-default.png',
+  lang = 'en',
+  keywords,
+  prevPage,
+  nextPage,
+  ogType = 'website',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+} = Astro.props;
+const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
+const imageExtension = image.split('.').pop()?.toLowerCase();
+const imageMimeType =
+  imageExtension === 'png'
+    ? 'image/png'
+    : imageExtension === 'jpg' || imageExtension === 'jpeg'
+      ? 'image/jpeg'
+      : imageExtension === 'webp'
+        ? 'image/webp'
+        : undefined;
+
+// Compute hreflang URLs for multilingual SEO
+const alternateUrls = getAlternateUrls(Astro.url.pathname).map((alt) => ({
+  ...alt,
+  href: new URL(alt.url, Astro.site).href,
+}));
+const defaultHref =
+  alternateUrls.find((a) => a.lang === DEFAULT_LANGUAGE)?.href ??
+  canonicalURL.href;
+const currentLocale = getOGLocale(lang as Language);
+const alternateLocales = getSupportedLanguages()
+  .filter((l) => l !== lang)
+  .map((l) => getOGLocale(l));
+const langPrefix = getUrlPrefix(lang as Language);
+const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+	rel="alternate"
+	type="application/rss+xml"
+	title={SITE_TITLE}
+	href={rssHref}
+/>
+<meta name="generator" content={Astro.generator} />
+
+<!-- Font preloads -->
+<link
+	rel="preload"
+	href="/fonts/atkinson-regular.woff"
+	as="font"
+	type="font/woff"
+	crossorigin
+/>
+<link
+	rel="preload"
+	href="/fonts/atkinson-bold.woff"
+	as="font"
+	type="font/woff"
+	crossorigin
+/>
+
+<!-- Header logo preload (prevents alt text flash on navigation) -->
+<link rel="preload" href="/images/logo_small_version_white.svg" as="image" type="image/svg+xml" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Hreflang for multilingual SEO -->
+{alternateUrls.map((alt) => (
+  <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={defaultHref} />
+
+<!-- Search engine verification -->
+{ANALYTICS.verification.bing && (
+  <meta name="msvalidate.01" content={ANALYTICS.verification.bing} />
+)}
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords && keywords.length > 0 ? keywords.join(', ') : "Pereira Tech Talks, Pereira, Risaralda, Colombia, tech community, comunidad tecnología, meetups, software engineering, AI, web development, Pereira Tech Day, Speaker School, La Biblioteca del Mañana"} />
+<meta name="author" content="Pereira Tech Talks" />
+
+<!-- Theme color for browser chrome -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0f1124" media="(prefers-color-scheme: dark)" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImageUrl} />
+<meta property="og:image:secure_url" content={absoluteImageUrl} />
+{imageMimeType && <meta property="og:image:type" content={imageMimeType} />}
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content={currentLocale} />
+{alternateLocales.map((locale) => (
+  <meta property="og:locale:alternate" content={locale} />
+))}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL.href} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={absoluteImageUrl} />
+<meta property="twitter:image:alt" content={title} />
+<meta name="twitter:site" content="@pereiratechtalks" />
+<meta name="twitter:creator" content="@pereiratechtalks" />
+
+<!-- Pagination SEO -->
+{prevPage && <link rel="prev" href={prevPage} />}
+{nextPage && <link rel="next" href={nextPage} />}
+
+<!-- JSON-LD: WebSite -->
+<JsonLd
+  data={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_TITLE,
+    url: Astro.site?.href,
+    inLanguage: ['en', 'es'],
+    description: SITE_DESCRIPTION,
+  }}
+/>
+
+<!-- JSON-LD: Organization (Pereira Tech Talks) -->
+<JsonLd
+  data={{
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Pereira Tech Talks',
+    alternateName: 'PTT',
+    url: Astro.site?.href,
+    logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
+    description:
+      'Bilingual tech community of Pereira, Risaralda, Colombia. Monthly meetups, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, and the AI Channel.',
+    foundingLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Pereira',
+        addressRegion: 'Risaralda',
+        addressCountry: 'CO',
+      },
+    },
+    knowsLanguage: ['es', 'en'],
+    knowsAbout: [
+      'Software Engineering',
+      'Artificial Intelligence',
+      'Web Development',
+      'DevOps',
+      'Public Speaking',
+      'Tech Community Building',
+    ],
+    sameAs: [
+      'https://github.com/pereiratechtalks',
+      'https://www.linkedin.com/company/pereira-tech-talks/',
+      'https://x.com/pereiratechtalks',
+      'https://www.instagram.com/pereiratechtalks',
+    ],
+  }}
+/>
+
+<!-- Analytics: Umami (cookieless, privacy-first) -->
+{ANALYTICS.umami.websiteId && (
+  <script
+    is:inline
+    defer
+    src={ANALYTICS.umami.scriptUrl}
+    data-website-id={ANALYTICS.umami.websiteId}
+  />
+)}

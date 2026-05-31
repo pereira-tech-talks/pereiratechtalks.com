@@ -1,0 +1,175 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const radiusValues = [
+  {
+    name: 'rounded',
+    value: '0.25rem / 4px',
+    usage: 'Inline badges, code blocks',
+  },
+  {
+    name: 'rounded-lg',
+    value: '0.5rem / 8px',
+    usage: 'Buttons, inputs, small cards',
+  },
+  {
+    name: 'rounded-xl',
+    value: '0.75rem / 12px',
+    usage: 'Medium cards, panels',
+  },
+  {
+    name: 'rounded-2xl',
+    value: '1rem / 16px',
+    usage: 'Cards, section containers',
+  },
+  {
+    name: 'rounded-3xl',
+    value: '1.5rem / 24px',
+    usage: 'Hero cards, welcome sections',
+  },
+  {
+    name: 'rounded-full',
+    value: '9999px',
+    usage: 'Pills, badges, avatar circles',
+  },
+];
+
+const componentMapping = [
+  {
+    component: 'Cards (standard)',
+    radius: 'rounded-2xl',
+    example: 'Blog cards, link cards, stat cards',
+  },
+  {
+    component: 'Welcome/hero cards',
+    radius: 'rounded-3xl',
+    example: 'Gradient welcome sections',
+  },
+  {
+    component: 'Buttons',
+    radius: 'rounded-lg',
+    example: 'Standard buttons, form submit',
+  },
+  {
+    component: 'Navigation pills',
+    radius: 'rounded-full',
+    example: 'Mobile nav pills, tags',
+  },
+  {
+    component: 'Badges/chips',
+    radius: 'rounded-full',
+    example: 'Status badges, tag badges',
+  },
+  {
+    component: 'Code blocks',
+    radius: 'rounded',
+    example: 'Inline code snippets',
+  },
+  {
+    component: 'Input fields',
+    radius: 'rounded-lg',
+    example: 'Text inputs, textareas, selects',
+  },
+  {
+    component: 'Section panels',
+    radius: 'rounded-2xl',
+    example: 'Sitemap sections, guide cards',
+  },
+];
+---
+
+<ShowcaseLayout title="Border Radius" description="Radius values and component mapping" section="radius">
+
+  <!-- Visual Examples -->
+  <section class="mb-12" data-component="radius-scale">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Radius Scale</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      {radiusValues.map((r) => (
+        <div class="text-center">
+          <div class:list={['w-full aspect-square border-2 border-secondary/40 bg-secondary/10 dark:bg-secondary/20 mb-2', r.name]} />
+          <code class="text-xs font-medium">{r.name}</code>
+          <div class="text-xs text-gray-600 dark:text-gray-300 mt-0.5">{r.value}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Component Mapping -->
+  <section class="mb-12" data-component="component-mapping">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Component Mapping</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Which radius to use for which component type:
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Component</th>
+              <th class="text-left py-3 px-4 font-semibold">Radius</th>
+              <th class="text-left py-3 px-4 font-semibold">Examples</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {componentMapping.map((m) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{m.component}</td>
+                <td class="py-3 px-4"><code class="text-xs">{m.radius}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{m.example}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Examples -->
+  <section class="mb-12" data-component="live-examples">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Live Examples</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+        <div class="font-semibold mb-1">Standard Card</div>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Uses <code class="text-xs">rounded-2xl</code></p>
+      </div>
+      <div class="rounded-3xl border border-gray-200 dark:border-gray-700 p-5 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900">
+        <div class="font-semibold mb-1">Welcome Card</div>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Uses <code class="text-xs">rounded-3xl</code> with gradient</p>
+      </div>
+      <div>
+        <button type="button" class="rounded-lg bg-main text-white px-4 py-2 text-sm font-medium">
+          Button (rounded-lg)
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <span class="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1 text-xs font-medium">Pill tag</span>
+        <span class="rounded-full bg-secondary/10 text-secondary px-3 py-1 text-xs font-medium">Active pill</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Token</th>
+            <th class="py-2 pr-4 font-semibold">Value</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {radiusValues.map((r) => (
+            <tr>
+              <td class="py-2 pr-4"><code class="text-xs">{r.name}</code></td>
+              <td class="py-2 pr-4 text-gray-600 dark:text-gray-300">{r.value}</td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{r.usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

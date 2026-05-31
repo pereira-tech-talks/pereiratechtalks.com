@@ -1,15 +1,11 @@
-/// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-/// <reference types="vite/client" />
-/// <reference types="../integration/types.d.ts" />
 
-declare module '@fontsource/*';
+interface ImportMetaEnv {
+  readonly BASE_URL: string;
+  /** Injected at build time: 'true' on Cloudflare Pages preview branches */
+  readonly PREVIEW_FEATURES?: string;
+}
 
-interface Window {
-  luma?: {
-    initCheckout: () => void;
-  };
-  __lumaCheckoutListeners?: boolean;
-  __scheduleLumaCheckout?: () => void;
-  __openLumaCheckoutModal?: (eventId: string, button: HTMLElement) => void;
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }

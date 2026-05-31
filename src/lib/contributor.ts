@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Contributor = CollectionEntry<'contributors'>;
 export type ContributorRole = Contributor['data']['roles'][number];
@@ -21,14 +21,14 @@ export const getActiveContributors = async (): Promise<Contributor[]> => {
 };
 
 export const getContributorsByRole = async (
-  role: ContributorRole,
+  role: ContributorRole
 ): Promise<Contributor[]> => {
   const all = await getActiveContributors();
   return all.filter((c) => c.data.roles.includes(role));
 };
 
 export const getContributorBySlug = async (
-  slug: string,
+  slug: string
 ): Promise<Contributor | undefined> => {
   const all = await getContributors();
   return all.find((c) => c.id === slug);
@@ -39,6 +39,6 @@ export const getOrganizers = async (): Promise<Contributor[]> => {
   return all.filter(
     (c) =>
       c.data.roles.includes('organizer') ||
-      c.data.roles.includes('founding-organizer'),
+      c.data.roles.includes('founding-organizer')
   );
 };

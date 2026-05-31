@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+
+import SeriesInfiniteScroll from '@/components/blog/SeriesInfiniteScroll.svelte';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getSeriesTimelineIndex, getSubtopicAccentMap } from '@/lib/blog';
+import { BLOG_PAGE_SIZE } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const allSeries = await getCollection('series');
+const series = allSeries.find((s) => s.id === slug);
+if (!series) {
+  return Astro.redirect(`${prefix}/blog/`);
+}
+
+const allTags = await getCollection('tags');
+const topicTagNames = allTags
+  .filter(
+    (tag) => tag.data.tier === 'secondary' || tag.data.tier === 'subtopic'
+  )
+  .map((tag) => tag.data.name);
+const subtopicTagNames = allTags
+  .filter((tag) => tag.data.tier === 'subtopic')
+  .map((tag) => tag.data.name);
+const subtopicAccentByName = await getSubtopicAccentMap();
+
+const allPosts = await getSeriesTimelineIndex(slug, lang);
+const initialPosts = allPosts.slice(0, BLOG_PAGE_SIZE);
+const totalCount = allPosts.length;
+const seriesApiEndpoint = `/api/series/${lang}/${slug}.json`;
+
+const localizedTitle = t.seriesNames[slug] || series.data.title;
+const localizedDescription =
+  t.seriesDescriptions[slug] || series.data.description || '';
+
+const firstPostHero = allPosts[0]?.heroImage || undefined;
+const seriesHeroImage =
+  (lang === 'es' && series.data.heroImageEs) ||
+  series.data.heroImage ||
+  firstPostHero;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<MainLayout
+  lang={lang}
+  title={`${localizedTitle} — ${t.seriesPage.title}`}
+  description={localizedDescription || t.seriesPage.emptyState}
+  image={seriesHeroImage}
+  keywords={series.data.keywords}
+  ogType="article"
+>
+  <section class="py-10 sm:py-12 lg:py-16">
+    <!-- Breadcrumb navigation -->
+    <nav class="max-w-7xl mx-auto px-4 md:px-8 mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
+      <a href={`${prefix}/blog/`} class="font-semibold text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">{t.nav.blog}</a>
+      <span class="font-semibold text-gray-600 dark:text-gray-300 select-none" aria-hidden="true">/</span>
+      <a href={`${prefix}/blog/series/`} class="font-semibold text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">{t.seriesPage.breadcrumb}</a>
+      <span class="font-semibold text-gray-600 dark:text-gray-300 select-none" aria-hidden="true">/</span>
+      <span class="truncate font-normal text-gray-600 dark:text-gray-300" aria-current="page">{localizedTitle}</span>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <SeriesInfiniteScroll
+        client:visible
+        {initialPosts}
+        {totalCount}
+        apiEndpoint={seriesApiEndpoint}
+        {lang}
+        seriesTitle={localizedTitle}
+        seriesDescription={localizedDescription}
+        seriesHeroImage={seriesHeroImage}
+        pageSize={BLOG_PAGE_SIZE}
+        emptyStateMessage={t.seriesPage.emptyState}
+        {topicTagNames}
+        {subtopicTagNames}
+        {subtopicAccentByName}
+        shareUrl={canonicalURL.href}
+      />
+    </div>
+
+    <!-- Back to series listing -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-8 flex gap-4">
+      <a
+        href={`${prefix}/blog/series/`}
+        class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        {t.seriesPage.backToSeries}
+      </a>
+      <a
+        href={`${prefix}/blog/`}
+        class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        {t.seriesPage.backToBlog}
+      </a>
+    </div>
+  </section>
+</MainLayout>

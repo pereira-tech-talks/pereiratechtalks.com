@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Channel = CollectionEntry<'channels'>;
 
@@ -16,7 +16,7 @@ export const getPrimaryChannels = async (): Promise<Channel[]> => {
 };
 
 export const getChannelsByPlatform = async (
-  platform: Channel['data']['platform'],
+  platform: Channel['data']['platform']
 ): Promise<Channel[]> => {
   const all = await getChannels();
   return all.filter((c) => c.data.platform === platform);

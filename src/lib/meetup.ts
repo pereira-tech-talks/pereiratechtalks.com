@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import type { Language } from '@/lib/i18n';
 
 export type Meetup = CollectionEntry<'meetups'>;
@@ -20,15 +20,20 @@ const matchesLang = (entry: Meetup, lang: Language): boolean => {
 
 export const getMeetups = async (lang: Language): Promise<Meetup[]> => {
   const all = await getCollection('meetups');
-  return all.filter(filterDrafts).filter((e) => matchesLang(e, lang)).sort(sortByDateDesc);
+  return all
+    .filter(filterDrafts)
+    .filter((e) => matchesLang(e, lang))
+    .sort(sortByDateDesc);
 };
 
 export const getMeetupBySlug = async (
   slug: string,
-  lang: Language,
+  lang: Language
 ): Promise<Meetup | undefined> => {
   const entries = await getMeetups(lang);
-  return entries.find((e) => e.id === `${lang}/${slug}` || e.id.endsWith(`/${slug}`));
+  return entries.find(
+    (e) => e.id === `${lang}/${slug}` || e.id.endsWith(`/${slug}`)
+  );
 };
 
 export const getUpcomingMeetups = async (lang: Language): Promise<Meetup[]> => {
@@ -45,7 +50,7 @@ export const getPastMeetups = async (lang: Language): Promise<Meetup[]> => {
 
 export const getMeetupsByVertical = async (
   verticalSlug: string,
-  lang: Language,
+  lang: Language
 ): Promise<Meetup[]> => {
   const all = await getMeetups(lang);
   return all.filter((e) => e.data.verticals.includes(verticalSlug));
@@ -53,7 +58,7 @@ export const getMeetupsByVertical = async (
 
 export const getMeetupsByYear = async (
   year: number,
-  lang: Language,
+  lang: Language
 ): Promise<Meetup[]> => {
   const all = await getMeetups(lang);
   return all.filter((e) => e.data.date.getFullYear() === year);

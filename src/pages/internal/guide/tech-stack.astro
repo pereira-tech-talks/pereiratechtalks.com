@@ -1,0 +1,217 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const coreTech = [
+  {
+    name: 'Astro',
+    version: '6.1.9',
+    description: 'Static site generator with islands architecture',
+    role: 'Framework',
+  },
+  {
+    name: 'Svelte',
+    version: '5.55.5',
+    description: 'Interactive components with client directives',
+    role: 'UI Library',
+  },
+  {
+    name: 'TypeScript',
+    version: '5.9.3',
+    description: 'Type-safe development across the project',
+    role: 'Language',
+  },
+  {
+    name: 'Tailwind CSS',
+    version: '4.2.4',
+    description: 'Utility-first styling with dark mode support',
+    role: 'Styling',
+  },
+  {
+    name: 'Biome',
+    version: '2.4.13',
+    description: 'Fast linter and formatter (replaces ESLint + Prettier)',
+    role: 'Tooling',
+  },
+  {
+    name: 'MDX',
+    version: '5.0.4',
+    description: 'Enhanced Markdown with component support for blog posts',
+    role: 'Content',
+  },
+];
+
+const patterns = [
+  {
+    name: 'Astro Component Pattern',
+    description:
+      '.astro files run at build time. Server-side rendering with scoped styles. Zero JS by default.',
+    example: '<section class="py-12"><h2>{title}</h2></section>',
+  },
+  {
+    name: 'Svelte Integration',
+    description:
+      'Svelte components for interactivity. Use client:load for immediate, client:visible for lazy, client:idle for non-critical.',
+    example: '<Header client:load lang={lang} />',
+  },
+  {
+    name: 'Content Collections',
+    description:
+      'Blog posts and tags use Astro Content Collections with Zod schemas. Glob-based loading from src/content/.',
+    example: "const posts = await getCollection('blog');",
+  },
+  {
+    name: 'Page Wrapper Pattern',
+    description:
+      '3-line thin wrappers in src/pages/ that import *Page.astro components. MainLayout lives inside page components, not wrappers.',
+    example: '<AboutPage lang="en" />',
+  },
+  {
+    name: 'i18n Pattern',
+    description:
+      'Language-specific routes with lang prop. EN pages at root, ES pages in /es/. getTranslations(lang) for all UI strings.',
+    example: "const t = getTranslations('en');",
+  },
+];
+
+const keyLibraries = [
+  {
+    name: '@astrojs/mdx',
+    version: '5.0.4',
+    purpose: 'MDX support for blog posts',
+  },
+  { name: '@astrojs/sitemap', version: '3.7.0', purpose: 'Sitemap generation' },
+  { name: '@astrojs/rss', version: '4.0.15', purpose: 'RSS feed generation' },
+  { name: '@astrojs/svelte', version: '7.2.5', purpose: 'Svelte integration' },
+  { name: 'reveal.js', version: '6.0.1', purpose: 'Presentation deck engine' },
+  { name: 'fuse.js', version: '7.1.0', purpose: 'Client-side fuzzy search' },
+  { name: 'sharp', version: '0.34.x', purpose: 'Image optimization pipeline' },
+];
+---
+
+<InternalLayout title="Tech Stack" description="Core technologies, versions, and architecture patterns" section="guide" subsection="tech-stack">
+
+  <!-- Core Technologies -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Core Technologies</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {coreTech.map((tech) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{tech.name}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{tech.version}</span>
+          </div>
+          <div class="text-xs text-gray-600 dark:text-gray-300 mb-1 font-medium">{tech.role}</div>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{tech.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Architecture Patterns -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Architecture Patterns</h2>
+    <div class="space-y-4">
+      {patterns.map((p) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 class="font-semibold mb-1">{p.name}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{p.description}</p>
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
+            <code class="text-xs">{p.example}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Key Libraries -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Libraries</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Package</th>
+              <th class="text-left py-3 px-4 font-semibold">Version</th>
+              <th class="text-left py-3 px-4 font-semibold">Purpose</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {keyLibraries.map((lib) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{lib.name}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{lib.version}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{lib.purpose}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Development Tools -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Development Tools</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+        <h3 class="font-semibold mb-1">Linting & Formatting</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Biome handles both linting and formatting in a single tool.</p>
+        <code class="text-xs">npm run biome:check</code>
+      </div>
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+        <h3 class="font-semibold mb-1">Type Checking</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Astro's built-in TypeScript checker for .astro and .ts files.</p>
+        <code class="text-xs">npm run astro:check</code>
+      </div>
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+        <h3 class="font-semibold mb-1">Image Optimization</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Drop images in _staging/, run optimize script to resize and compress.</p>
+        <code class="text-xs">npm run images:optimize</code>
+      </div>
+      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+        <h3 class="font-semibold mb-1">Testing</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">Vitest for unit tests. Test files follow *.test.ts naming convention.</p>
+        <code class="text-xs">npm run test</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hydration Directives -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Hydration Directives</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Choose the lightest directive that meets requirements. Performance priority: <code class="text-xs">client:visible</code> &gt; <code class="text-xs">client:idle</code> &gt; <code class="text-xs">client:load</code>.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Directive</th>
+              <th class="text-left py-3 px-4 font-semibold">When</th>
+              <th class="text-left py-3 px-4 font-semibold">Use Case</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            <tr>
+              <td class="py-3 px-4"><code class="text-xs">client:load</code></td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Immediately on page load</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Header, search, theme toggle</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><code class="text-xs">client:idle</code></td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">After page is idle</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Non-critical interactive features</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4"><code class="text-xs">client:visible</code></td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">When scrolled into viewport</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Below-fold components, blog grid</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</InternalLayout>

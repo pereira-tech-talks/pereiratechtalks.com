@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+import AuthorCard from '@/components/blog/AuthorCard.astro';
+import ShareButtons from '@/components/blog/ShareButtons.astro';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  authorSlug: string;
+  lang: Language;
+  title: string;
+  url: string;
+}
+
+const { authorSlug, lang, title, url } = Astro.props;
+const t = getTranslations(lang);
+
+let author:
+  | {
+      name: string;
+      avatar: string;
+      role: { en: string; es: string };
+      bio: { en: string; es: string };
+      social?: {
+        x?: string;
+        linkedin?: string;
+        github?: string;
+        instagram?: string;
+        website?: string;
+      };
+    }
+  | undefined;
+
+if (authorSlug) {
+  const authors = await getCollection('authors');
+  const match = authors.find((a) => a.data.slug === authorSlug);
+  if (match) {
+    author = match.data;
+  }
+}
+---
+
+<section class="mx-auto max-w-4xl space-y-8" aria-label={t.blogEngagement.aboutAuthor}>
+  {author && <AuthorCard author={author} lang={lang} />}
+  <ShareButtons lang={lang} title={title} url={url} />
+</section>

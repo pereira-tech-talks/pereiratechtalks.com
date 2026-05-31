@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  variant?: 'primary' | 'secondary' | 'neutral';
+}
+
+const { label, variant = 'neutral' } = Astro.props;
+
+const variantClasses: Record<string, string> = {
+  primary: 'bg-main text-white hover:bg-main/80',
+  secondary: 'bg-secondary/10 text-secondary hover:bg-secondary/20',
+  neutral:
+    'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+};
+---
+
+<span class={`inline-block px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${variantClasses[variant]}`}>
+  {label}
+</span>

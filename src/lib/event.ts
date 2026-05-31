@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Event = CollectionEntry<'events'>;
 
@@ -18,7 +18,9 @@ export const getEvents = async (): Promise<Event[]> => {
   return all.filter(filterDrafts).sort(sortByDateAsc);
 };
 
-export const getEventBySlug = async (slug: string): Promise<Event | undefined> => {
+export const getEventBySlug = async (
+  slug: string
+): Promise<Event | undefined> => {
   const all = await getEvents();
   return all.find((e) => e.id === slug);
 };
@@ -35,7 +37,9 @@ export const getPastEvents = async (): Promise<Event[]> => {
   return all.filter((e) => e.data.date.getTime() < now).sort(sortByDateDesc);
 };
 
-export const getEventsByType = async (type: Event['data']['type']): Promise<Event[]> => {
+export const getEventsByType = async (
+  type: Event['data']['type']
+): Promise<Event[]> => {
   const all = await getEvents();
   return all.filter((e) => e.data.type === type);
 };

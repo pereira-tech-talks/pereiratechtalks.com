@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  ctaText?: string;
+  ctaLink?: string;
+  cta2Text?: string;
+  cta2Link?: string;
+}
+
+const { title, subtitle, description, ctaText, ctaLink, cta2Text, cta2Link } =
+  Astro.props;
+---
+
+<h2
+  class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight"
+  set:html={title}
+/>
+<h3 class="text-xl sm:text-2xl text-gray-700 dark:text-gray-300 mb-6" set:html={subtitle} />
+<p class="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-10" set:html={description} />
+{
+  (ctaText || cta2Text) && (
+    <div class="flex gap-4 justify-center lg:justify-start">
+      {ctaText && (
+        <a
+          href={ctaLink}
+          class="inline-block border-b-2 border-secondary text-gray-900 dark:text-white font-bold text-base sm:text-lg md:text-xl hover:text-secondary transition"
+          set:html={ctaText}
+        />
+      )}
+      {cta2Text && (
+        <a
+          href={cta2Link}
+          class="inline-block border-b-2 border-secondary text-gray-900 dark:text-white font-bold text-base sm:text-lg md:text-xl hover:text-secondary transition"
+          set:html={cta2Text}
+        />
+      )}
+    </div>
+  )
+}

@@ -1,0 +1,187 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const spacingTokens = [
+  {
+    name: 'p-1 / gap-1',
+    value: '0.25rem / 4px',
+    usage: 'Tight spacing, pill gaps',
+  },
+  {
+    name: 'p-2 / gap-2',
+    value: '0.5rem / 8px',
+    usage: 'Icon padding, small gaps',
+  },
+  {
+    name: 'p-3 / gap-3',
+    value: '0.75rem / 12px',
+    usage: 'Badge padding, stat card gaps',
+  },
+  {
+    name: 'p-4 / gap-4',
+    value: '1rem / 16px',
+    usage: 'Card padding, grid gaps',
+  },
+  {
+    name: 'p-5 / gap-5',
+    value: '1.25rem / 20px',
+    usage: 'Section card padding, larger grids',
+  },
+  {
+    name: 'p-6 / gap-6',
+    value: '1.5rem / 24px',
+    usage: 'Large card padding, section gaps',
+  },
+  { name: 'p-8', value: '2rem / 32px', usage: 'Hero sections, welcome cards' },
+  { name: 'p-12', value: '3rem / 48px', usage: 'Major section separation' },
+];
+
+const sectionSpacing = [
+  { pattern: 'mb-6', value: '1.5rem', usage: 'Between heading and content' },
+  {
+    pattern: 'mb-8 sm:mb-10',
+    value: '2rem → 2.5rem',
+    usage: 'Page header bottom margin',
+  },
+  { pattern: 'mb-12', value: '3rem', usage: 'Between major sections' },
+  {
+    pattern: 'py-6 sm:py-8',
+    value: '1.5rem → 2rem',
+    usage: 'Content area vertical padding',
+  },
+  {
+    pattern: 'mt-12 pt-6',
+    value: '3rem + 1.5rem',
+    usage: 'Footer separator area',
+  },
+];
+
+const containers = [
+  {
+    name: 'max-w-5xl',
+    value: '64rem / 1024px',
+    usage: 'Content pages (internal hub, blog posts)',
+  },
+  {
+    name: 'max-w-7xl',
+    value: '80rem / 1280px',
+    usage: 'Main site container (.main-container)',
+  },
+  {
+    name: 'px-4 sm:px-6 lg:px-8',
+    value: '1rem → 1.5rem → 2rem',
+    usage: 'Responsive horizontal padding',
+  },
+];
+---
+
+<ShowcaseLayout title="Spacing" description="Spacing tokens, section gaps, and container widths" section="spacing">
+
+  <!-- Spacing Scale -->
+  <section class="mb-12" data-component="spacing-scale">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Spacing Scale</h2>
+    <div class="space-y-3">
+      {spacingTokens.map((s) => (
+        <div class="flex items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+          <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded shrink-0 w-28">{s.name}</code>
+          <div class="flex items-center gap-2 flex-1">
+            <div class="bg-secondary/20 dark:bg-secondary/30 rounded" style={`width: ${s.value.split(' / ')[0]}; height: 1.5rem;`} />
+            <span class="text-xs text-gray-600 dark:text-gray-300">{s.value}</span>
+          </div>
+          <span class="text-xs text-gray-600 dark:text-gray-300 hidden sm:inline">{s.usage}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Section Spacing -->
+  <section class="mb-12" data-component="section-spacing">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Section Spacing Patterns</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Pattern</th>
+              <th class="text-left py-3 px-4 font-semibold">Value</th>
+              <th class="text-left py-3 px-4 font-semibold">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {sectionSpacing.map((s) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs">{s.pattern}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{s.value}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{s.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Containers -->
+  <section class="mb-12" data-component="containers">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Container Widths</h2>
+    <div class="space-y-4">
+      {containers.map((c) => (
+        <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline gap-4 mb-2">
+            <code class="text-sm font-medium">{c.name}</code>
+            <span class="text-xs text-gray-600 dark:text-gray-300">{c.value}</span>
+          </div>
+          <p class="text-xs text-gray-600 dark:text-gray-300">{c.usage}</p>
+          <div class="mt-3 bg-secondary/10 dark:bg-secondary/20 rounded h-4 border border-secondary/30" style={`max-width: ${c.value.split(' / ')[0].split(' → ')[0]}`} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12">
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;!-- Page content container --&gt;
+&lt;div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"&gt;
+  &lt;div class="mb-8 sm:mb-10"&gt;
+    &lt;h1&gt;Page Title&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;section class="mb-12"&gt;...&lt;/section&gt;
+  &lt;section class="mb-12"&gt;...&lt;/section&gt;
+&lt;/div&gt;
+
+&lt;!-- Card grid with gaps --&gt;
+&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+  ...
+&lt;/div&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Token</th>
+            <th class="py-2 pr-4 font-semibold">Value</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {spacingTokens.map((s) => (
+            <tr>
+              <td class="py-2 pr-4"><code class="text-xs">{s.name}</code></td>
+              <td class="py-2 pr-4 text-gray-600 dark:text-gray-300">{s.value}</td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{s.usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

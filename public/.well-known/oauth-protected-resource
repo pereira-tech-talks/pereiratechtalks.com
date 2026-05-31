@@ -1,0 +1,7 @@
+{
+  "_comment": "pereiratechtalks.org is a static community website with no OAuth-protected resources today. This document is published for agent-readiness compliance per RFC 9728. The authorization_servers entry self-references the site's own OAuth authorization-server metadata (also a stub).",
+  "resource": "https://pereiratechtalks.org",
+  "authorization_servers": ["https://pereiratechtalks.org"],
+  "scopes_supported": [],
+  "bearer_methods_supported": []
+}

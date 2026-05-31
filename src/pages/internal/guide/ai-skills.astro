@@ -1,0 +1,428 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const overview = [
+  {
+    concept: 'Skills',
+    description:
+      'Reusable procedures invoked via slash commands. Each skill has a SKILL.md file with step-by-step instructions. Skills are stateless and composable.',
+    icon: 'Procedure',
+  },
+  {
+    concept: 'Agents',
+    description:
+      'Specialized workers with specific roles (reviewer, architect, etc.). Agents follow broader guidelines and can invoke skills. Agents are role-based.',
+    icon: 'Worker',
+  },
+];
+
+const tiers = [
+  {
+    tier: 'Tier 1 — Light',
+    model: 'haiku',
+    description:
+      'Fast, focused tasks. Single-file edits, quick fixes, simple lookups. Low cost, high speed.',
+    examples: 'quick-fix, fix-lint, type-fix, doc-edit',
+  },
+  {
+    tier: 'Tier 2 — Standard',
+    model: 'sonnet',
+    description:
+      'Multi-file tasks requiring context. Content creation, refactoring, testing. Balanced cost/quality.',
+    examples: 'add-blog-post, write-tests, refactor-safe, translate-sync',
+  },
+  {
+    tier: 'Tier 3 — Heavy',
+    model: 'opus',
+    description:
+      'Complex analysis and architectural tasks. Security audits, PR reviews, architecture decisions. Highest quality.',
+    examples: 'pr-review-lite, security-check, audit-post, audit-series',
+  },
+];
+
+const skills = [
+  {
+    name: 'quick-fix',
+    tier: 1,
+    command: '#quick-fix',
+    description: 'Fix small bugs in 1-3 files following existing patterns',
+  },
+  {
+    name: 'fix-lint',
+    tier: 1,
+    command: '#fix-lint',
+    description: 'Fix Biome linting/formatting errors with auto-fix',
+  },
+  {
+    name: 'type-fix',
+    tier: 1,
+    command: '#type-fix',
+    description: 'Fix TypeScript type errors (explicit types, no any)',
+  },
+  {
+    name: 'doc-edit',
+    tier: 1,
+    command: '#doc-edit',
+    description: 'Update documentation files, README, inline docs',
+  },
+  {
+    name: 'update-styles',
+    tier: 1,
+    command: '#update-styles',
+    description: 'Update Tailwind styles with dark mode support',
+  },
+  {
+    name: 'optimize-image',
+    tier: 1,
+    command: '#optimize-image',
+    description: 'Convert and optimize images to WebP',
+  },
+  {
+    name: 'add-blog-post',
+    tier: 2,
+    command: '#add-blog-post',
+    description: 'Create blog posts (mandatory for new posts)',
+  },
+  {
+    name: 'add-slide-deck',
+    tier: 2,
+    command: '#add-slide-deck',
+    description: 'Create slide decks (mandatory for new decks)',
+  },
+  {
+    name: 'add-component',
+    tier: 2,
+    command: '#add-component',
+    description: 'Create new Astro or Svelte components',
+  },
+  {
+    name: 'add-page',
+    tier: 2,
+    command: '#add-page',
+    description: 'Create new pages with correct routing and layout',
+  },
+  {
+    name: 'add-timeline-page',
+    tier: 2,
+    command: '#add-timeline-page',
+    description: 'Add a tag-filtered infinite-scroll timeline page',
+  },
+  {
+    name: 'write-tests',
+    tier: 2,
+    command: '#write-tests',
+    description: 'Add or expand unit/integration tests',
+  },
+  {
+    name: 'refactor-safe',
+    tier: 2,
+    command: '#refactor-safe',
+    description: 'Safe refactor in bounded scope (1-10 files)',
+  },
+  {
+    name: 'translate-sync',
+    tier: 2,
+    command: '#translate-sync',
+    description: 'Synchronize content between EN and ES',
+  },
+  {
+    name: 'promote-post',
+    tier: 2,
+    command: '#promote-post',
+    description: 'Generate social media content for blog posts',
+  },
+  {
+    name: 'git-commit-push',
+    tier: 2,
+    command: '#git-commit-push',
+    description: 'Commit staged changes and push to remote',
+  },
+  {
+    name: 'pr-review-lite',
+    tier: 3,
+    command: '#pr-review-lite',
+    description: 'Quick PR checklist review for style and bugs',
+  },
+  {
+    name: 'security-check',
+    tier: 3,
+    command: '#security-check',
+    description: 'Security checklist for secrets, input, logging',
+  },
+  {
+    name: 'audit-post',
+    tier: 3,
+    command: '#audit-post',
+    description: 'Comprehensive pre-publication blog post audit',
+  },
+  {
+    name: 'audit-series',
+    tier: 3,
+    command: '#audit-series',
+    description: 'Pre-publication audit for entire blog series',
+  },
+];
+
+const agents = [
+  {
+    name: 'reviewer',
+    tier: 3,
+    scope:
+      'Code review specialist focused on quality, maintainability, and best practices',
+  },
+  {
+    name: 'executor',
+    tier: 2,
+    scope: 'Plan execution specialist that follows defined plans strictly',
+  },
+  {
+    name: 'architect',
+    tier: 3,
+    scope:
+      'Planning-only architect for system design and architecture decisions',
+  },
+  {
+    name: 'security-auditor',
+    tier: 3,
+    scope: 'Security-focused reviewer for static sites, API routes, secrets',
+  },
+  {
+    name: 'i18n-guardian',
+    tier: 2,
+    scope:
+      'Translation quality specialist and multilingual consistency enforcer',
+  },
+  {
+    name: 'content-writer',
+    tier: 2,
+    scope: 'Expert multilingual content writer for blog posts and articles',
+  },
+];
+
+const mandatoryPolicies = [
+  {
+    skill: '/add-blog-post',
+    policy:
+      'All new blog posts MUST use this skill. Do not create blog post files manually. The skill handles frontmatter, i18n sync, image setup, and validation.',
+    severity: 'Mandatory',
+  },
+  {
+    skill: '/add-slide-deck',
+    policy:
+      'All new slide decks MUST use this skill. Do not create slide deck files manually. The skill handles type selection, frontmatter, i18n sync, and asset setup.',
+    severity: 'Mandatory',
+  },
+];
+
+const invocations = [
+  {
+    agent: 'Claude Code',
+    prefix: '/',
+    example: '/add-blog-post',
+    notes: 'Native slash command support',
+  },
+  {
+    agent: 'Cursor AI',
+    prefix: '#',
+    example: '#add-blog-post',
+    notes: 'Cursor intercepts / for system commands',
+  },
+  {
+    agent: 'OpenAI Codex',
+    prefix: '#',
+    example: '#add-blog-post',
+    notes: 'Codex intercepts / for system commands',
+  },
+  {
+    agent: 'Gemini / Others',
+    prefix: '#',
+    example: '#add-blog-post',
+    notes: 'Use # or write command name in plain text',
+  },
+];
+
+const keyFiles = [
+  {
+    path: '.claude/skills/*',
+    description: 'Skill procedure files (SKILL.md in each folder)',
+  },
+  { path: '.claude/agents/*', description: 'Agent configuration files' },
+  {
+    path: '.claude/docs/COMMANDS_REFERENCE.md',
+    description: 'All slash commands with procedure file links',
+  },
+  {
+    path: '.claude/docs/skills_agents_catalog.md',
+    description: 'Full catalog of skills and agents with tiers',
+  },
+];
+---
+
+<InternalLayout title="AI Skills & Agents" description="AI-powered development tools and workflows" section="guide" subsection="ai-skills">
+
+  <!-- Overview -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Overview</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {overview.map((o) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{o.concept}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{o.icon}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{o.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tier System -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Tier System</h2>
+    <div class="space-y-4">
+      {tiers.map((t) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{t.tier}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{t.model}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{t.description}</p>
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
+            <code class="text-xs">{t.examples}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Skills Catalog -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Skills Catalog</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Skill</th>
+              <th class="text-left py-3 px-4 font-semibold">Tier</th>
+              <th class="text-left py-3 px-4 font-semibold">Command</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {skills.map((s) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{s.name}</code></td>
+                <td class="py-3 px-4">
+                  <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${s.tier === 1 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : s.tier === 2 ? 'bg-secondary/10 text-secondary' : 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'}`}>{s.tier}</span>
+                </td>
+                <td class="py-3 px-4"><code class="text-xs">{s.command}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{s.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agents Catalog -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Agents Catalog</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Agent</th>
+              <th class="text-left py-3 px-4 font-semibold">Tier</th>
+              <th class="text-left py-3 px-4 font-semibold">Scope</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {agents.map((a) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{a.name}</code></td>
+                <td class="py-3 px-4">
+                  <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${a.tier === 2 ? 'bg-secondary/10 text-secondary' : 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'}`}>{a.tier}</span>
+                </td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{a.scope}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mandatory Policies -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Mandatory Policies</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {mandatoryPolicies.map((m) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{m.skill}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 font-medium">{m.severity}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{m.policy}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Invocation -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Invocation</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Agent</th>
+              <th class="text-left py-3 px-4 font-semibold">Prefix</th>
+              <th class="text-left py-3 px-4 font-semibold">Example</th>
+              <th class="text-left py-3 px-4 font-semibold">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {invocations.map((i) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{i.agent}</td>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{i.prefix}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{i.example}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{i.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Files -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Files</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Path</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {keyFiles.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.path}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</InternalLayout>

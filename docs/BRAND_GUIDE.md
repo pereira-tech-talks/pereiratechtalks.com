@@ -302,7 +302,7 @@ Muted:         #6E8589 light · #8FA3A6 dark → text-ptt-muted (large text only
 
 ### Checklist for new UI work
 
-- [ ] Uses `--ptt-*` tokens (no raw HEX, no `bg-secondary` / `bg-main` xergioalex remnants).
+- [ ] Uses `--ptt-*` tokens (no raw HEX, no legacy `bg-secondary` / `bg-main` aliases from earlier site versions).
 - [ ] Light + dark mode tested.
 - [ ] Body text contrast ≥ 4.5:1 (use `text-ptt`, `text-ptt-secondary`, NOT `text-gray-400/500`).
 - [ ] Images have explicit `width` and `height`.

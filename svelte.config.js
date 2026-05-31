@@ -1,7 +1,5 @@
-(async () => {
-  const { vitePreprocess } = await import('@astrojs/svelte');
+import { vitePreprocess } from '@astrojs/svelte';
 
-  module.exports = {
-    preprocess: vitePreprocess(),
-  };
-})();
+export default {
+  preprocess: vitePreprocess(),
+};

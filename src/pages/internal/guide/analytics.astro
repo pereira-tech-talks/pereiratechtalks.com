@@ -1,0 +1,365 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const dashboards = [
+  {
+    name: 'Cloudflare Web Analytics',
+    url: 'dash.cloudflare.com → Pages → Project → Web Analytics',
+    login: 'Cloudflare account',
+    measures: 'Traffic, Core Web Vitals (LCP, INP, CLS), referrers, countries',
+    scriptSize: '~1KB (edge-injected)',
+    cookies: 'None',
+  },
+  {
+    name: 'Umami Analytics',
+    url: 'cloud.umami.is',
+    login: 'Umami account',
+    measures: 'Page views, sessions, top pages, referrers, UTM, custom events',
+    scriptSize: '~2KB',
+    cookies: 'None',
+  },
+  {
+    name: 'Google Search Console',
+    url: 'search.google.com/search-console',
+    login: 'Google account',
+    measures: 'Search queries, impressions, CTR, position, indexation',
+    scriptSize: 'None (DNS TXT verification)',
+    cookies: 'None',
+  },
+  {
+    name: 'Bing Webmaster Tools',
+    url: 'bing.com/webmasters',
+    login: 'Microsoft account',
+    measures: 'Search queries, AI Performance (Copilot citations)',
+    scriptSize: 'None (meta tag)',
+    cookies: 'None',
+  },
+  {
+    name: 'Lighthouse CI',
+    url: 'GitHub PR checks (automatic)',
+    login: 'GitHub account',
+    measures: 'Performance, Accessibility, Best Practices, SEO scores',
+    scriptSize: 'None (CI only)',
+    cookies: 'None',
+  },
+];
+
+const weeklyTasks = [
+  {
+    tool: 'Umami',
+    action: 'Check Markdown requests',
+    question:
+      'How many agents are consuming content via .md endpoints or Accept: text/markdown?',
+  },
+  {
+    tool: 'Umami',
+    action: 'Check Top Pages',
+    question: 'Which blog posts are getting the most traction?',
+  },
+  {
+    tool: 'Umami',
+    action: 'Check Referrers',
+    question: 'Where is traffic coming from? (social, search, direct)',
+  },
+  {
+    tool: 'Umami',
+    action: 'Review event dashboard',
+    question: 'Are key CTA and outbound clicks being tracked?',
+  },
+  {
+    tool: 'Cloudflare',
+    action: 'Core Web Vitals snapshot',
+    question: 'Any real-user performance regressions this week?',
+  },
+];
+
+const monthlyTasks = [
+  {
+    tool: 'Google Search Console',
+    action: 'Performance report',
+    question: 'Which search queries are growing or declining?',
+  },
+  {
+    tool: 'Google Search Console',
+    action: 'Coverage report',
+    question: 'Are all blog posts indexed? Any crawl errors?',
+  },
+  {
+    tool: 'Bing Webmaster',
+    action: 'AI Performance report',
+    question: 'Is content being cited in Microsoft Copilot?',
+  },
+  {
+    tool: 'Cloudflare',
+    action: 'Core Web Vitals trends',
+    question: 'Are any pages slow for real users?',
+  },
+  {
+    tool: 'Umami',
+    action: 'Month-over-month comparison',
+    question: 'Is traffic growing? Which content drives growth?',
+  },
+];
+
+const keyMetrics = [
+  {
+    metric: 'Markdown Requests',
+    good: 'Growing trend (agents consuming content)',
+    bad: 'Zero (no agent adoption)',
+    tool: 'Umami (markdown_request event)',
+  },
+  {
+    metric: 'Page Views',
+    good: 'Growing trend',
+    bad: 'Declining without changes',
+    tool: 'Umami + Cloudflare',
+  },
+  {
+    metric: 'Unique Visitors',
+    good: 'Growing trend',
+    bad: 'Declining',
+    tool: 'Umami + Cloudflare',
+  },
+  {
+    metric: 'Bounce Rate',
+    good: '<60% for blog posts',
+    bad: '>80%',
+    tool: 'Umami',
+  },
+  {
+    metric: 'CTR (Search)',
+    good: '>3% for target queries',
+    bad: '<1%',
+    tool: 'Google Search Console',
+  },
+  {
+    metric: 'LCP',
+    good: '<2.5s',
+    bad: '>4.0s',
+    tool: 'Cloudflare Web Analytics',
+  },
+  {
+    metric: 'CLS',
+    good: '<0.1',
+    bad: '>0.25',
+    tool: 'Cloudflare Web Analytics',
+  },
+  {
+    metric: 'INP',
+    good: '<200ms',
+    bad: '>500ms',
+    tool: 'Cloudflare Web Analytics',
+  },
+];
+
+const envVars = [
+  {
+    name: 'PUBLIC_UMAMI_WEBSITE_ID',
+    tool: 'Umami',
+    where: 'Umami Cloud dashboard',
+  },
+  {
+    name: 'PUBLIC_BING_SITE_VERIFICATION',
+    tool: 'Bing',
+    where: 'Bing Webmaster > Verification',
+  },
+];
+---
+
+<InternalLayout title="Analytics Monitoring Guide" description="Dashboard access, monitoring routines, and key metrics for the analytics stack" section="guide" subsection="analytics">
+
+  <!-- Analytics Stack Overview -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Analytics Stack</h2>
+    <p class="text-gray-600 dark:text-gray-300 mb-6">
+      All tools are free, privacy-first, and performance-preserving. Total script overhead stays minimal.
+    </p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left py-2 px-3 font-semibold">Tool</th>
+            <th class="text-left py-2 px-3 font-semibold">What It Measures</th>
+            <th class="text-left py-2 px-3 font-semibold">Script</th>
+            <th class="text-left py-2 px-3 font-semibold">Cookies</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dashboards.map((d) => (
+            <tr class="border-b border-gray-100 dark:border-gray-800">
+              <td class="py-2 px-3 font-medium">{d.name}</td>
+              <td class="py-2 px-3 text-gray-600 dark:text-gray-300">{d.measures}</td>
+              <td class="py-2 px-3"><code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">{d.scriptSize}</code></td>
+              <td class="py-2 px-3">{d.cookies}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Dashboard Quick Access -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Dashboard Quick Access</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {dashboards.map((d) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 class="font-semibold mb-1">{d.name}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{d.url}</p>
+          <span class="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-2 py-0.5 rounded-full">
+            {d.login}
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Weekly Review -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Weekly Review (~5 min)</h2>
+    <div class="space-y-3">
+      {weeklyTasks.map((task) => (
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+          <span class="shrink-0 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-2 py-0.5 rounded-full mt-0.5">
+            {task.tool}
+          </span>
+          <div>
+            <p class="font-medium text-sm">{task.action}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{task.question}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Monthly Review -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Monthly Review (~10 min)</h2>
+    <div class="space-y-3">
+      {monthlyTasks.map((task) => (
+        <div class="flex items-start gap-3 p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+          <span class="shrink-0 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 px-2 py-0.5 rounded-full mt-0.5">
+            {task.tool}
+          </span>
+          <div>
+            <p class="font-medium text-sm">{task.action}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300">{task.question}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Key Metrics -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Metrics to Watch</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left py-2 px-3 font-semibold">Metric</th>
+            <th class="text-left py-2 px-3 font-semibold">Good</th>
+            <th class="text-left py-2 px-3 font-semibold">Needs Attention</th>
+            <th class="text-left py-2 px-3 font-semibold">Tool</th>
+          </tr>
+        </thead>
+        <tbody>
+          {keyMetrics.map((m) => (
+            <tr class="border-b border-gray-100 dark:border-gray-800">
+              <td class="py-2 px-3 font-medium">{m.metric}</td>
+              <td class="py-2 px-3 text-green-700 dark:text-green-400">{m.good}</td>
+              <td class="py-2 px-3 text-red-700 dark:text-red-400">{m.bad}</td>
+              <td class="py-2 px-3 text-gray-600 dark:text-gray-300">{m.tool}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Content Performance Analysis -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Content Performance Analysis</h2>
+    <div class="space-y-6">
+      <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h3 class="font-semibold mb-2">Identifying Best-Performing Posts</h3>
+        <ol class="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+          <li>Check <strong>Umami Top Pages</strong> for highest pageview posts</li>
+          <li>Cross-reference with <strong>GSC queries</strong> to see which search terms drive traffic</li>
+          <li>Check <strong>Umami engagement proxies</strong> (time on page + bounce rate) for post quality signals</li>
+        </ol>
+      </div>
+      <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h3 class="font-semibold mb-2">Identifying Underperforming Posts</h3>
+        <ol class="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+          <li>Check <strong>GSC Performance</strong> for posts with high impressions but low CTR (&lt;1%)</li>
+          <li>Check <strong>Umami bounce rate</strong> and engagement events for weak content patterns</li>
+          <li>Review <strong>Cloudflare Core Web Vitals</strong> for UX issues caused by slow pages</li>
+        </ol>
+      </div>
+      <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h3 class="font-semibold mb-2">Improving Content Based on Data</h3>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+          <li><strong>Low CTR in GSC?</strong> Rewrite the title and meta description to be more compelling</li>
+          <li><strong>Low scroll depth?</strong> Improve the intro, add visual breaks, shorten paragraphs</li>
+          <li><strong>High bounce rate?</strong> Add internal links and related posts to keep readers on-site</li>
+          <li><strong>Good traffic but no engagement?</strong> Add calls-to-action and interactive elements</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Environment Variables -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Environment Variables</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Set these in Cloudflare Pages dashboard (Settings &gt; Environment Variables) for production.
+      All are optional — if not set, the corresponding scripts simply don't load.
+    </p>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Google Search Console is verified via DNS TXT (Domain property), so there is no GSC env variable.
+    </p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left py-2 px-3 font-semibold">Variable</th>
+            <th class="text-left py-2 px-3 font-semibold">Tool</th>
+            <th class="text-left py-2 px-3 font-semibold">Where to Get It</th>
+          </tr>
+        </thead>
+        <tbody>
+          {envVars.map((v) => (
+            <tr class="border-b border-gray-100 dark:border-gray-800">
+              <td class="py-2 px-3"><code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">{v.name}</code></td>
+              <td class="py-2 px-3">{v.tool}</td>
+              <td class="py-2 px-3 text-gray-600 dark:text-gray-300">{v.where}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Automatic Monitoring -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Automatic Monitoring</h2>
+    <div class="p-4 rounded-xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20">
+      <h3 class="font-semibold mb-2">Lighthouse CI (runs on every PR)</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+        Automatically checks Performance, Accessibility, Best Practices, and SEO scores on every pull request.
+        No action needed — it runs via GitHub Actions.
+      </p>
+      <div class="text-sm">
+        <p class="font-medium mb-1">Budgets:</p>
+        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+          <li>Performance: &gt;= 95</li>
+          <li>Accessibility: = 100</li>
+          <li>Best Practices: &gt;= 95</li>
+          <li>SEO: &gt;= 95</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</InternalLayout>

@@ -1,0 +1,11 @@
+{
+  "_comment": "pereiratechtalks.org has no protected APIs today. This document is published for agent-readiness compliance per RFC 8414 / OIDC Discovery 1.0. Endpoints are reserved paths; they do not currently accept real OAuth flows.",
+  "issuer": "https://pereiratechtalks.org",
+  "authorization_endpoint": "https://pereiratechtalks.org/oauth/authorize",
+  "token_endpoint": "https://pereiratechtalks.org/oauth/token",
+  "jwks_uri": "https://pereiratechtalks.org/.well-known/jwks.json",
+  "grant_types_supported": ["authorization_code"],
+  "response_types_supported": ["code"],
+  "scopes_supported": [],
+  "token_endpoint_auth_methods_supported": ["none"]
+}

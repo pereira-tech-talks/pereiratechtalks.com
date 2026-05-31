@@ -1,0 +1,26 @@
+---
+/**
+ * Inline demo of the CSS-only Typewriter for the Lighthouse article.
+ * Shows the animation in action with a caption explaining it's pure CSS.
+ */
+import TypewriterWords from '@/components/home/HeroSection/TypewriterWords.astro';
+
+export interface Props {
+  caption?: string;
+}
+
+const {
+  caption = "What you see is 100% CSS — zero JavaScript. The same animation that runs in the site's hero.",
+} = Astro.props;
+
+const words = ['Developer', 'Builder', 'Creator', 'Maker', 'Explorer'];
+---
+
+<div class="my-8 rounded-xl border border-gray-200 bg-gray-50 px-6 py-8 dark:border-gray-700 dark:bg-gray-800/50">
+  <div class="text-gray-900 dark:text-white">
+    <TypewriterWords words={words} variant="inline" />
+  </div>
+  <p class="mt-4 text-center text-sm text-gray-600 dark:text-gray-300">
+    {caption}
+  </p>
+</div>

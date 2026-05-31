@@ -1,0 +1,257 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const principles = [
+  {
+    title: 'Performance First',
+    description:
+      'Static over dynamic, lightest hydration directive, minimal JavaScript. Prefer CSS-only solutions.',
+  },
+  {
+    title: 'Accessibility (WCAG AA)',
+    description:
+      '4.5:1 contrast ratio for text, semantic HTML, keyboard navigable, Lighthouse 100 target.',
+  },
+  {
+    title: 'English Code Only',
+    description:
+      'All code, comments, documentation, and commits must be in English. Content is multilingual (en/es).',
+  },
+  {
+    title: 'Page Wrapper Pattern',
+    description:
+      'Thin 3-line wrappers in src/pages/, all logic in src/components/pages/*Page.astro.',
+  },
+  {
+    title: 'Biome Only',
+    description:
+      'Use Biome for linting and formatting. Never use ESLint or Prettier in this project.',
+  },
+  {
+    title: 'Content Collections',
+    description:
+      'Structured content with Zod schemas. Blog posts, slides, tags, series, and pages use Astro Content Collections.',
+  },
+];
+
+const commands = [
+  { cmd: 'npm run dev', desc: 'Start dev server (localhost:8888)' },
+  { cmd: 'npm run build', desc: 'Production build with type check' },
+  { cmd: 'npm run biome:check', desc: 'Check linting and formatting' },
+  { cmd: 'npm run biome:fix', desc: 'Auto-fix lint/format issues' },
+  { cmd: 'npm run astro:check', desc: 'TypeScript type checking' },
+  { cmd: 'npm run images:optimize', desc: 'Process staged images' },
+  {
+    cmd: 'npm run images:webp',
+    desc: 'Generate WebP variants (skips if up to date)',
+  },
+];
+
+const guidePages = [
+  {
+    title: 'Tech Stack',
+    href: '/internal/guide/tech-stack',
+    description:
+      'Core technologies, versions, architecture patterns, and key libraries.',
+  },
+  {
+    title: 'File Structure',
+    href: '/internal/guide/file-structure',
+    description:
+      'Repository layout, key directories, important files, and naming conventions.',
+  },
+  {
+    title: 'Performance & PageSpeed',
+    href: '/internal/guide/performance',
+    description:
+      'PageSpeed optimizations, WebP image pipeline, and deployment flow.',
+  },
+  {
+    title: 'Slide System',
+    href: '/internal/guide/slides',
+    description:
+      'Reveal.js presentation decks — layouts, theming, chrome UI, and CSS helpers.',
+  },
+  {
+    title: 'Content Collections',
+    href: '/internal/guide/content-collections',
+    description:
+      'Schemas and structure for blog, slides, tags, series, and pages.',
+  },
+  {
+    title: 'Blog System',
+    href: '/internal/guide/blog',
+    description:
+      'Blog authoring workflow, frontmatter, hero layouts, tags, and writing rules.',
+  },
+  {
+    title: 'Internationalization',
+    href: '/internal/guide/i18n',
+    description:
+      'Multilingual content system — routing, translations, Spanish rules.',
+  },
+  {
+    title: 'SEO & AEO',
+    href: '/internal/guide/seo',
+    description:
+      'Meta tags, JSON-LD, Markdown twins for AI agents, sitemap, and keywords.',
+  },
+  {
+    title: 'AI Skills & Agents',
+    href: '/internal/guide/ai-skills',
+    description:
+      'AI-powered development tools — skills catalog, agents, mandatory policies.',
+  },
+];
+---
+
+<InternalLayout
+  title="Staff Guide"
+  description="Development documentation and key procedures"
+  section="guide"
+>
+  <!-- About This Repository -->
+  <section class="mb-12">
+    <div
+      class="rounded-3xl border border-gray-200 dark:border-gray-700 p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900"
+    >
+      <h2 class="text-xl md:text-2xl font-bold mb-3">About This Repository</h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-4">
+        <strong>Pereira Tech Talks</strong> v3.0.0 — bilingual website and content
+        platform for the technology community of Pereira, Colombia.
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div
+          class="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3 text-center"
+        >
+          <div class="text-sm font-bold">Astro 6</div>
+          <div class="text-xs text-gray-600 dark:text-gray-300">
+            Static Site Gen
+          </div>
+        </div>
+        <div
+          class="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3 text-center"
+        >
+          <div class="text-sm font-bold">Svelte 5</div>
+          <div class="text-xs text-gray-600 dark:text-gray-300">
+            Interactive UI
+          </div>
+        </div>
+        <div
+          class="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3 text-center"
+        >
+          <div class="text-sm font-bold">Tailwind 4</div>
+          <div class="text-xs text-gray-600 dark:text-gray-300">Styling</div>
+        </div>
+        <div
+          class="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3 text-center"
+        >
+          <div class="text-sm font-bold">TypeScript</div>
+          <div class="text-xs text-gray-600 dark:text-gray-300">
+            Type Safety
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >Cloudflare Pages</span
+        >
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >Multilingual (en/es)</span
+        >
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >Dark Mode</span
+        >
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >RSS Feed</span
+        >
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >Reveal.js Slides</span
+        >
+        <span
+          class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary font-medium"
+          >AI Skills & Agents</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Principles -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Principles</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        principles.map((p) => (
+          <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+            <h3 class="font-semibold mb-1">{p.title}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              {p.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Quick Commands -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Quick Commands</h2>
+    <div
+      class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr
+              class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+            >
+              <th class="text-left py-3 px-4 font-semibold">Command</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {
+              commands.map((c) => (
+                <tr>
+                  <td class="py-3 px-4">
+                    <code class="text-xs font-medium">{c.cmd}</code>
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {c.desc}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guide Pages -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Guide Pages</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        guidePages.map((page) => (
+          <a
+            href={page.href}
+            class="group block rounded-2xl border border-gray-200 dark:border-gray-700 p-5 transition-all hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-md"
+          >
+            <h3 class="text-lg font-semibold mb-1 group-hover:text-secondary transition-colors">
+              {page.title}
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              {page.description}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</InternalLayout>

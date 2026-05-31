@@ -1,39 +1,95 @@
 ---
 import InternalLayout from '@/layouts/InternalLayout.astro';
 
-interface Row { token: string; value: string; usage: string; }
+interface Row {
+  token: string;
+  value: string;
+  usage: string;
+}
 
 const spacing: Row[] = [
   { token: 'space-0', value: '0', usage: 'Reset · flush layouts' },
   { token: 'space-1', value: '0.25rem (4px)', usage: 'Hairline gaps' },
-  { token: 'space-2', value: '0.5rem (8px)', usage: 'Tight gaps · icon padding' },
+  {
+    token: 'space-2',
+    value: '0.5rem (8px)',
+    usage: 'Tight gaps · icon padding',
+  },
   { token: 'space-3', value: '0.75rem (12px)', usage: 'Small gaps · pills' },
   { token: 'space-4', value: '1rem (16px)', usage: 'Default gap unit' },
-  { token: 'space-6', value: '1.5rem (24px)', usage: 'Card inner padding · section gaps' },
-  { token: 'space-8', value: '2rem (32px)', usage: 'Card outer · section spacing' },
-  { token: 'space-12', value: '3rem (48px)', usage: 'Block padding · large gaps' },
-  { token: 'space-16', value: '4rem (64px)', usage: 'Section block · page spacing' },
+  {
+    token: 'space-6',
+    value: '1.5rem (24px)',
+    usage: 'Card inner padding · section gaps',
+  },
+  {
+    token: 'space-8',
+    value: '2rem (32px)',
+    usage: 'Card outer · section spacing',
+  },
+  {
+    token: 'space-12',
+    value: '3rem (48px)',
+    usage: 'Block padding · large gaps',
+  },
+  {
+    token: 'space-16',
+    value: '4rem (64px)',
+    usage: 'Section block · page spacing',
+  },
   { token: 'space-20', value: '5rem (80px)', usage: 'Large section block' },
   { token: 'space-24', value: '6rem (96px)', usage: 'Hero · page top/bottom' },
-  { token: 'space-32', value: '8rem (128px)', usage: 'Hero margin · landing pages' },
+  {
+    token: 'space-32',
+    value: '8rem (128px)',
+    usage: 'Hero margin · landing pages',
+  },
 ];
 
 const radius: Row[] = [
   { token: 'radius-none', value: '0', usage: 'Pure block · admin tables' },
   { token: 'radius-sm', value: '0.25rem', usage: 'Inputs · small chips' },
   { token: 'radius-md', value: '0.5rem', usage: 'Buttons · default cards' },
-  { token: 'radius-lg', value: '0.75rem', usage: 'Hero cards · feature blocks' },
+  {
+    token: 'radius-lg',
+    value: '0.75rem',
+    usage: 'Hero cards · feature blocks',
+  },
   { token: 'radius-xl', value: '1rem', usage: 'Modals · drawers' },
   { token: 'radius-2xl', value: '1.5rem', usage: 'Large hero panels' },
-  { token: 'radius-full', value: '9999px', usage: 'Avatars · pills · status dots' },
+  {
+    token: 'radius-full',
+    value: '9999px',
+    usage: 'Avatars · pills · status dots',
+  },
 ];
 
 const motion: Row[] = [
-  { token: 'duration-fast', value: '120ms', usage: 'Hover · pill toggle · icon tint' },
-  { token: 'duration-base', value: '200ms', usage: 'Default UI transitions · button press' },
-  { token: 'duration-slow', value: '320ms', usage: 'Modal open · drawer · page transition' },
-  { token: 'ease-out', value: 'cubic-bezier(0, 0, 0.2, 1)', usage: 'Default easing for entry/state changes' },
-  { token: 'ease-in-out', value: 'cubic-bezier(0.4, 0, 0.2, 1)', usage: 'Reversible / scrubbing motion' },
+  {
+    token: 'duration-fast',
+    value: '120ms',
+    usage: 'Hover · pill toggle · icon tint',
+  },
+  {
+    token: 'duration-base',
+    value: '200ms',
+    usage: 'Default UI transitions · button press',
+  },
+  {
+    token: 'duration-slow',
+    value: '320ms',
+    usage: 'Modal open · drawer · page transition',
+  },
+  {
+    token: 'ease-out',
+    value: 'cubic-bezier(0, 0, 0.2, 1)',
+    usage: 'Default easing for entry/state changes',
+  },
+  {
+    token: 'ease-in-out',
+    value: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    usage: 'Reversible / scrubbing motion',
+  },
 ];
 ---
 

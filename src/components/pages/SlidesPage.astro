@@ -1,0 +1,85 @@
+---
+import JsonLd from '@/components/JsonLd.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import ScrollToTimeline from '@/components/pages/ScrollToTimeline.svelte';
+import SlidesTimelineInfiniteScroll from '@/components/slides/SlidesTimelineInfiniteScroll.svelte';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { BLOG_PAGE_SIZE } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getSlidesTimelineIndex } from '@/lib/slides';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const allDecks = await getSlidesTimelineIndex(lang);
+const initialDecks = allDecks.slice(0, BLOG_PAGE_SIZE);
+const totalCount = allDecks.length;
+const timelineApiEndpoint = `/api/slides-timeline/${lang}.json`;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t.slidesPage.title,
+      item: `${siteUrl}${prefix}/slides`,
+    },
+  ],
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={t.slidesPage.title}
+  description={t.slidesPage.description}
+  keywords={lang === 'en'
+    ? ['slides', 'presentation decks', 'tech talks slides', 'Reveal.js presentations', 'developer slides', 'conference talks']
+    : ['diapositivas', 'presentaciones técnicas', 'slides de charlas tech', 'presentaciones Reveal.js', 'slides para desarrolladores', 'charlas de conferencias']}
+>
+  <Fragment slot="head">
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <PageHero
+    title={t.slidesPage.title}
+    subtitle={t.slidesPage.subtitle}
+    description={t.slidesPage.heroDescription}
+    image="/images/slides.png"
+    imageAlt={lang === 'es' ? 'Sergio Alexander dando una charla técnica con un robot' : 'Sergio Alexander giving a technical talk with a robot demo'}
+  />
+
+  <section id="timeline" class="py-12 md:py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div class="main-container">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+        {t.slidesPage.timelineTitle}
+      </h2>
+      <SlidesTimelineInfiniteScroll
+        client:visible
+        {initialDecks}
+        {totalCount}
+        apiEndpoint={timelineApiEndpoint}
+        {lang}
+        pageSize={BLOG_PAGE_SIZE}
+        pageName="slides"
+        emptyStateMessage={t.slidesPage.emptyState}
+      />
+    </div>
+  </section>
+
+  <ScrollToTimeline client:load lang={lang} targetLabel={t.slidesPage.timelineTitle} />
+</MainLayout>

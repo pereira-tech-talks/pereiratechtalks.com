@@ -1,0 +1,137 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BlogHeroImage from '@/components/blog/BlogHeroImage.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import {
+  getPostSlug,
+  getSubtopicAccentMap,
+  groupPostTags,
+  isDraftPost,
+  isScheduledPost,
+} from '@/lib/blog';
+import { getLocalizedUrl, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  lang: Language;
+}
+
+const { posts, lang } = Astro.props;
+const t = getTranslations(lang);
+const blogPrefix = getLocalizedUrl('/blog', lang);
+const subtopicAccentByName = await getSubtopicAccentMap();
+
+// Pre-compute grouped tags + dev/preview visibility flags for each post
+// (build-time only). Badges only surface on dev and preview branches —
+// prod builds filter draft/scheduled upstream via isPostVisibleInProduction.
+const postsWithGroupedTags = await Promise.all(
+  posts.map(async (post) => {
+    const { primaryTags, secondaryTags, subtopicTags } = await groupPostTags(
+      post.data.tags || []
+    );
+    return {
+      post,
+      primaryTags,
+      secondaryTags,
+      subtopicTags,
+      isScheduled: isScheduledPost(post),
+      isDraft: isDraftPost(post),
+    };
+  })
+);
+---
+
+{
+  posts.length > 0 && (
+    <aside class="mt-16 border-t border-gray-200 pt-10 dark:border-gray-700">
+      <div class="mb-6">
+        <h2 class="mb-2 text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+          {t.relatedArticles}
+        </h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          {t.relatedArticlesDescription}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {postsWithGroupedTags.map(({ post, primaryTags, secondaryTags, subtopicTags, isScheduled, isDraft }) => {
+          const postSlug = getPostSlug(post.id);
+          const href = `${blogPrefix}/${postSlug}/`;
+          return (
+            <article class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+              {post.data.heroImage ? (
+                <a href={href} class="block">
+                  <BlogHeroImage
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    width={400}
+                    height={160}
+                    class="h-40 w-full object-cover"
+                  />
+                </a>
+              ) : (
+                <a
+                  href={href}
+                  class="flex h-40 items-center justify-center bg-gray-100 text-sm text-gray-600 dark:bg-gray-900 dark:text-gray-300"
+                >
+                  {post.data.title}
+                </a>
+              )}
+              <div class="p-4">
+                <h3 class="mb-2 line-clamp-2 text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
+                  <a href={href} class="transition-colors hover:text-blue-600 dark:hover:text-blue-400">
+                    {post.data.title}
+                  </a>
+                </h3>
+                <p class="mb-3 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
+                  {post.data.description}
+                </p>
+                <div class="mb-3 flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+                  <FormattedDate date={post.data.pubDate} lang={lang} />
+                  {isScheduled && (
+                    <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+                      {t.scheduledBadge}
+                    </span>
+                  )}
+                  {isDraft && (
+                    <span class="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-[11px] font-medium text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
+                      {t.draftBadge}
+                    </span>
+                  )}
+                </div>
+                {(primaryTags.length > 0 || secondaryTags.length > 0 || subtopicTags.length > 0) && (
+                  <div class="flex flex-wrap gap-1">
+                    {primaryTags.slice(0, 3).map((tag) => (
+                      <a
+                        href={`${blogPrefix}/tag/${tag}/`}
+                        class="rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+                      >
+                        #{t.tagNames[tag] || tag}
+                      </a>
+                    ))}
+                    {secondaryTags.slice(0, 2).map((topic) => (
+                      <a
+                        href={`${blogPrefix}/tag/${topic}/`}
+                        class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+                      >
+                        {t.tagNames[topic] || topic}
+                      </a>
+                    ))}
+                    {subtopicTags.slice(0, 2).map((sub) => (
+                      <a
+                        href={`${blogPrefix}/tag/${sub}/`}
+                        class="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs text-gray-700 border border-dashed border-gray-300 transition-colors hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100"
+                      >
+                        <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </aside>
+  )
+}

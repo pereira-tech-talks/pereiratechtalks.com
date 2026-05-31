@@ -1,0 +1,133 @@
+---
+title: 'Interactive Web Components with MDX'
+description: 'Demonstrating the power of MDX for creating interactive blog content with embedded components'
+pubDate: '2025-01-05'
+heroImage: '/images/blog/shared/blog-placeholder-4.webp'
+heroLayout: 'banner'
+tags: ['tech', 'demo']
+keywords: ['MDX interactive blog', 'MDX components tutorial', 'Astro MDX setup', 'interactive markdown content', 'embed components in markdown']
+---
+
+MDX lets you write JSX directly in your Markdown files. This means you can import components, use variables, and create interactive content — all within a blog post.
+
+## Why MDX?
+
+Traditional Markdown is great for static content, but sometimes you need more. MDX bridges the gap between Markdown's simplicity and the full power of component frameworks:
+
+- **Reusable components** embedded directly in content
+- **Dynamic data** rendered at build time
+- **Interactive elements** that enhance the reading experience
+- **Type-safe content** with full IDE support
+
+## Embedding Components
+
+One of MDX's strengths is the ability to embed components directly in your writing. This is especially useful for technical documentation where you want to show interactive examples alongside explanations.
+
+export const Callout = ({ type = 'info', children }) => (
+  <div style={{
+    padding: '1rem 1.5rem',
+    borderRadius: '0.5rem',
+    marginBottom: '1.5rem',
+    backgroundColor: type === 'warning' ? '#fef3c7' : type === 'error' ? '#fee2e2' : '#dbeafe',
+    borderLeft: `4px solid ${type === 'warning' ? '#f59e0b' : type === 'error' ? '#ef8888' : '#3b82f6'}`,
+    color: '#1e293b'
+  }}>
+    <strong>{type === 'warning' ? 'Warning' : type === 'error' ? 'Error' : 'Info'}:</strong> {children}
+  </div>
+);
+
+<Callout type="info">
+  This callout component is defined and rendered directly within the MDX file. No separate component file needed!
+</Callout>
+
+<Callout type="warning">
+  MDX components are rendered at build time in Astro's static output mode. For client-side interactivity, you'll need to use framework components with client directives.
+</Callout>
+
+## Using Variables and Expressions
+
+MDX supports JavaScript expressions inline. You can compute values and render them directly:
+
+export const stats = {
+  languages: 12,
+  frameworks: 8,
+  tools: 25,
+  year: new Date().getFullYear()
+};
+
+Here are some stats for {stats.year}:
+
+- **Languages supported:** {stats.languages}
+- **Framework integrations:** {stats.frameworks}
+- **Developer tools:** {stats.tools}
+- **Total ecosystem size:** {stats.languages + stats.frameworks + stats.tools} technologies
+
+## Dynamic Tables
+
+export const features = [
+  { name: 'Static Rendering', astro: true, next: true, gatsby: true },
+  { name: 'Island Architecture', astro: true, next: false, gatsby: false },
+  { name: 'Zero JS by Default', astro: true, next: false, gatsby: false },
+  { name: 'MDX Support', astro: true, next: true, gatsby: true },
+  { name: 'Content Collections', astro: true, next: false, gatsby: true },
+];
+
+### Framework Feature Comparison
+
+| Feature | Astro | Next.js | Gatsby |
+|---------|:-----:|:-------:|:------:|
+{features.map(f => `| ${f.name} | ${f.astro ? '✅' : '❌'} | ${f.next ? '✅' : '❌'} | ${f.gatsby ? '✅' : '❌'} |`).join('\n')}
+
+## Code with Context
+
+MDX makes it natural to interleave explanations with code. Here's a step-by-step API route:
+
+**Step 1:** Define the route handler
+
+```typescript
+import type { APIRoute } from 'astro';
+
+export const GET: APIRoute = async ({ params, request }) => {
+  const { id } = params;
+  // Fetch data based on the route parameter
+  const data = await fetchItem(id);
+
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+```
+
+**Step 2:** Add error handling
+
+```typescript
+export const GET: APIRoute = async ({ params }) => {
+  try {
+    const data = await fetchItem(params.id);
+    if (!data) {
+      return new Response('Not Found', { status: 404 });
+    }
+    return new Response(JSON.stringify(data), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response('Internal Server Error', { status: 500 });
+  }
+};
+```
+
+<Callout type="info">
+  MDX is particularly powerful for tutorials and technical guides where you need to mix explanation with interactive examples. The entire blog post you're reading right now is written in MDX!
+</Callout>
+
+## When to Use MDX
+
+MDX is excellent for:
+
+1. **Technical tutorials** that benefit from interactive examples
+2. **Documentation** with reusable component patterns
+3. **Data-driven content** where values change over time
+4. **Posts with custom layouts** that go beyond standard Markdown
+
+For simple blog posts with mostly text and images, standard Markdown (`.md`) is perfectly fine and has less overhead. Choose the right tool for the content.

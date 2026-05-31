@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "link-headers",
+      "type": "skill-md",
+      "description": "Advertise machine-readable resources via HTTP Link response headers per RFC 8288 and RFC 9727.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/link-headers/SKILL.md",
+      "digest": "sha256:90e89e75a88634a1f009813095fe5cf89d771c483dec3da074a108a998493d92"
+    },
+    {
+      "name": "content-signals",
+      "type": "skill-md",
+      "description": "Declare AI content usage preferences (ai-train, search, ai-input) in robots.txt.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/content-signals/SKILL.md",
+      "digest": "sha256:810108b0171c9c16ead091d5d7e9b5d0c72086b5dc6ef2b4e84fece01d72a91e"
+    },
+    {
+      "name": "api-catalog",
+      "type": "skill-md",
+      "description": "Publish an API catalog at /.well-known/api-catalog per RFC 9727, using the linkset+json format.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/api-catalog/SKILL.md",
+      "digest": "sha256:1d702680dd6b8de8362b9dab02ba355016a8daac65b18749a462b7774699db42"
+    },
+    {
+      "name": "oauth-discovery",
+      "type": "skill-md",
+      "description": "Publish OAuth 2.0 or OIDC discovery metadata so agents can discover authentication endpoints.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/oauth-discovery/SKILL.md",
+      "digest": "sha256:d24afc965b01da8c491d9618d9c7b141e3b11a2f83338c3a1c702052326cbdd1"
+    },
+    {
+      "name": "oauth-protected-resource",
+      "type": "skill-md",
+      "description": "Publish OAuth 2.0 protected resource metadata per RFC 9728 so agents know which authorization servers govern this resource.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/oauth-protected-resource/SKILL.md",
+      "digest": "sha256:6898ebeeb90247ab9ec0ccce5f493af7c366135901790eaca6298ab3941b3192"
+    },
+    {
+      "name": "mcp-server-card",
+      "type": "skill-md",
+      "description": "Publish an MCP server card at /.well-known/mcp/server-card.json so agents can discover this site as an MCP-compatible surface.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/mcp-server-card/SKILL.md",
+      "digest": "sha256:9a1af2376a9741bc29f97ff40120a7f115c1618188d40f2c9674b729485bd0d8"
+    },
+    {
+      "name": "agent-skills",
+      "type": "skill-md",
+      "description": "Publish an agent skills discovery index at /.well-known/agent-skills/index.json per the Cloudflare Agent Skills Discovery RFC v0.2.0.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/agent-skills/SKILL.md",
+      "digest": "sha256:2cdda60ea052eb8af4ae8a4d96dc0d173151d5386ee724a4e98f93ed21adbae5"
+    },
+    {
+      "name": "webmcp",
+      "type": "skill-md",
+      "description": "Expose site tools to in-browser AI agents via the WebMCP navigator.modelContext.registerTool() API.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/webmcp/SKILL.md",
+      "digest": "sha256:7084ef104e2cdac6a92a29622170c3c894628fbf6406597f86bf4349fa87732b"
+    }
+  ]
+}

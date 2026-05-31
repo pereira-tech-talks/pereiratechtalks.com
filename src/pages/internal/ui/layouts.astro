@@ -1,0 +1,232 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const breakpoints = [
+  { name: 'sm', value: '640px', usage: 'Small tablets, large phones' },
+  { name: 'md', value: '768px', usage: 'Tablets, small laptops' },
+  { name: 'lg', value: '1024px', usage: 'Laptops, desktops' },
+  { name: 'xl', value: '1280px', usage: 'Large desktops' },
+  { name: '2xl', value: '1536px', usage: 'Extra large screens' },
+];
+
+const containers = [
+  {
+    name: 'max-w-5xl',
+    value: '64rem / 1024px',
+    usage: 'Content pages (internal hub, blog posts)',
+  },
+  {
+    name: 'max-w-7xl',
+    value: '80rem / 1280px',
+    usage: 'Main site container (.main-container)',
+  },
+];
+
+const gridPatterns = [
+  {
+    name: '2-Column',
+    classes: 'grid grid-cols-1 sm:grid-cols-2 gap-4',
+    usage: 'Blog cards, feature pairs',
+  },
+  {
+    name: '3-Column',
+    classes: 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4',
+    usage: 'Card grids, sections',
+  },
+  {
+    name: '4-Column',
+    classes: 'grid grid-cols-2 sm:grid-cols-4 gap-4',
+    usage: 'Stats, quick items',
+  },
+];
+---
+
+<ShowcaseLayout title="Layouts" description="Container widths, grid patterns, breakpoints" section="layouts">
+
+  <!-- Page Layout -->
+  <section class="mb-12" data-component="page-layout">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Page Layout Structure</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      The standard page structure uses a full-height flex column:
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="bg-main text-white p-3 text-sm text-center font-medium">Header (fixed)</div>
+      <div class="bg-secondary/10 p-2 text-center text-xs">
+        <code class="text-xs">flex flex-col min-h-screen</code>
+      </div>
+      <div class="p-6 border-t border-b border-gray-200 dark:border-gray-700">
+        <div class="border-2 border-dashed border-secondary/30 rounded-lg p-4 text-center">
+          <div class="text-sm font-medium mb-1">Main Content</div>
+          <code class="text-xs text-gray-600 dark:text-gray-300">flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8</code>
+        </div>
+      </div>
+      <div class="bg-gray-100 dark:bg-gray-800 p-3 text-sm text-center text-gray-600 dark:text-gray-300">Footer</div>
+    </div>
+  </section>
+
+  <!-- Container Widths -->
+  <section class="mb-12" data-component="containers">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Container Widths</h2>
+    <div class="space-y-4">
+      {containers.map((c) => (
+        <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline gap-4 mb-2">
+            <code class="text-sm font-medium">{c.name}</code>
+            <span class="text-xs text-gray-600 dark:text-gray-300">{c.value}</span>
+          </div>
+          <p class="text-xs text-gray-600 dark:text-gray-300">{c.usage}</p>
+          <div class="mt-3 bg-secondary/10 dark:bg-secondary/20 rounded h-4 border border-secondary/30" style={`max-width: ${c.value.split(' / ')[0]}`} />
+        </div>
+      ))}
+      <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+        <div class="flex items-baseline gap-4 mb-2">
+          <code class="text-sm font-medium">Responsive Padding</code>
+          <span class="text-xs text-gray-600 dark:text-gray-300">1rem &rarr; 1.5rem &rarr; 2rem</span>
+        </div>
+        <code class="text-xs text-gray-600 dark:text-gray-300">px-4 sm:px-6 lg:px-8</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid Patterns -->
+  <section class="mb-12" data-component="grid-patterns">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Grid Patterns</h2>
+    <div class="space-y-8">
+      {gridPatterns.map((g) => (
+        <div>
+          <div class="flex items-baseline gap-3 mb-2">
+            <span class="text-sm font-medium">{g.name}</span>
+            <code class="text-xs text-gray-600 dark:text-gray-300">{g.classes}</code>
+          </div>
+          <div class={g.classes}>
+            {Array.from({ length: g.name === '4-Column' ? 4 : g.name === '3-Column' ? 3 : 2 }).map((_, i) => (
+              <div class="rounded-lg bg-secondary/10 dark:bg-secondary/20 border border-secondary/30 p-4 text-center text-sm text-gray-600 dark:text-gray-300">
+                Cell {i + 1}
+              </div>
+            ))}
+          </div>
+          <p class="mt-1 text-xs text-gray-600 dark:text-gray-300">{g.usage}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Breakpoints -->
+  <section class="mb-12" data-component="breakpoints">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Responsive Breakpoints</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Prefix</th>
+              <th class="text-left py-3 px-4 font-semibold">Min Width</th>
+              <th class="text-left py-3 px-4 font-semibold">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            <tr>
+              <td class="py-3 px-4"><code class="text-xs">(none)</code></td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">0px</td>
+              <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Mobile-first base styles</td>
+            </tr>
+            {breakpoints.map((bp) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs">{bp.name}:</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{bp.value}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{bp.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Spacing -->
+  <section class="mb-12" data-component="section-spacing">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Section Spacing</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Visual representation of vertical spacing between page sections:
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 space-y-0">
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-center text-sm">
+        <code class="text-xs">mb-8 sm:mb-10</code> — Page header
+      </div>
+      <div class="h-8 sm:h-10 border-l-2 border-dashed border-secondary/40 ml-6" />
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-center text-sm">
+        <code class="text-xs">mb-12</code> — Section 1
+      </div>
+      <div class="h-12 border-l-2 border-dashed border-secondary/40 ml-6" />
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-center text-sm">
+        <code class="text-xs">mb-12</code> — Section 2
+      </div>
+      <div class="h-12 border-l-2 border-dashed border-secondary/40 ml-6" />
+      <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 text-center text-sm">
+        <code class="text-xs">mt-12 pt-6</code> — Footer separator
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12">
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;!-- Standard page layout --&gt;
+&lt;div class="flex flex-col min-h-screen"&gt;
+  &lt;Header /&gt;
+  &lt;main class="flex-1"&gt;
+    &lt;div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"&gt;
+      &lt;div class="mb-8 sm:mb-10"&gt;
+        &lt;h1&gt;Page Title&lt;/h1&gt;
+      &lt;/div&gt;
+      &lt;section class="mb-12"&gt;...&lt;/section&gt;
+      &lt;section class="mb-12"&gt;...&lt;/section&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;Footer /&gt;
+&lt;/div&gt;
+
+&lt;!-- 3-column responsive grid --&gt;
+&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+  &lt;div&gt;...&lt;/div&gt;
+  &lt;div&gt;...&lt;/div&gt;
+  &lt;div&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Pattern</th>
+            <th class="py-2 pr-4 font-semibold">Classes</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {gridPatterns.map((g) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{g.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{g.classes}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{g.usage}</td>
+            </tr>
+          ))}
+          {containers.map((c) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{c.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{c.value}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{c.usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

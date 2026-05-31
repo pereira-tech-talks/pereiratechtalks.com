@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type PereiraTechDay = CollectionEntry<'pereiraTechDays'>;
 
@@ -16,24 +16,30 @@ export const getEditions = async (): Promise<PereiraTechDay[]> => {
 };
 
 export const getEditionByYear = async (
-  year: number,
+  year: number
 ): Promise<PereiraTechDay | undefined> => {
   const all = await getEditions();
   return all.find((e) => e.data.year === year);
 };
 
-export const getLatestEdition = async (): Promise<PereiraTechDay | undefined> => {
+export const getLatestEdition = async (): Promise<
+  PereiraTechDay | undefined
+> => {
   const all = await getEditions();
   return all[0];
 };
 
-export const getUpcomingEdition = async (): Promise<PereiraTechDay | undefined> => {
+export const getUpcomingEdition = async (): Promise<
+  PereiraTechDay | undefined
+> => {
   const now = Date.now();
   const all = await getEditions();
   return all.find((e) => {
     const d = e.data.date;
     const t = d instanceof Date ? d.getTime() : d.start.getTime();
-    return t >= now && e.data.status !== 'cancelled' && e.data.status !== 'completed';
+    return (
+      t >= now && e.data.status !== 'cancelled' && e.data.status !== 'completed'
+    );
   });
 };
 

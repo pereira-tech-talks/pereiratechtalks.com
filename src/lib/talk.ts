@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Talk = CollectionEntry<'talks'>;
 
@@ -13,22 +13,26 @@ export const getTalks = async (): Promise<Talk[]> => {
   return all.sort(sortByDateDesc);
 };
 
-export const getTalkBySlug = async (slug: string): Promise<Talk | undefined> => {
+export const getTalkBySlug = async (
+  slug: string
+): Promise<Talk | undefined> => {
   const all = await getTalks();
   return all.find((t) => t.id === slug);
 };
 
-export const getTalksBySpeaker = async (speakerSlug: string): Promise<Talk[]> => {
+export const getTalksBySpeaker = async (
+  speakerSlug: string
+): Promise<Talk[]> => {
   const all = await getTalks();
   return all.filter((t) => t.data.speakers.includes(speakerSlug));
 };
 
 export const getTalksByEvent = async (
   collection: 'meetups' | 'events' | 'pereiraTechDays',
-  slug: string,
+  slug: string
 ): Promise<Talk[]> => {
   const all = await getTalks();
   return all.filter(
-    (t) => t.data.event?.collection === collection && t.data.event.slug === slug,
+    (t) => t.data.event?.collection === collection && t.data.event.slug === slug
   );
 };

@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Vertical = CollectionEntry<'verticals'>;
 
@@ -15,7 +15,9 @@ export const getActiveVerticals = async (): Promise<Vertical[]> => {
   return all.filter((v) => v.data.status === 'active');
 };
 
-export const getVerticalBySlug = async (slug: string): Promise<Vertical | undefined> => {
+export const getVerticalBySlug = async (
+  slug: string
+): Promise<Vertical | undefined> => {
   const all = await getVerticals();
   return all.find((v) => v.id === slug);
 };

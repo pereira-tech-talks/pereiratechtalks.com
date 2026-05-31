@@ -1,7 +1,10 @@
 ---
 import InternalLayout from '@/layouts/InternalLayout.astro';
 
-interface KitToken { name: string; value: string; }
+interface KitToken {
+  name: string;
+  value: string;
+}
 const ptd2024Light: KitToken[] = [
   { name: 'paletteLight.primary', value: '#1F3F59' },
   { name: 'paletteLight.accent', value: '#F06D6D' },
@@ -12,7 +15,10 @@ const ptd2024Light: KitToken[] = [
   { name: 'paletteLight.border', value: '#E8E2D9' },
 ];
 const ptd2024Typography: KitToken[] = [
-  { name: 'typography.headingFamily', value: '"Bebas Neue", "Arial Black", sans-serif' },
+  {
+    name: 'typography.headingFamily',
+    value: '"Bebas Neue", "Arial Black", sans-serif',
+  },
   { name: 'typography.headingTransform', value: 'uppercase' },
   { name: 'typography.headingTracking', value: '0.18em' },
   { name: 'fontSources[0]', value: '@fontsource/bebas-neue (npm)' },

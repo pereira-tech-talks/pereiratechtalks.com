@@ -30,22 +30,22 @@
  */
 @theme {
   /* PTT global palette — light mode (defaults) */
-  --color-ptt-primary:        #1F6F73;
+  --color-ptt-primary: #1f6f73;
   --color-ptt-primary-strong: #155054;
-  --color-ptt-primary-soft:   #E1F2F1;
-  --color-ptt-accent:         #E8A33D;
-  --color-ptt-accent-strong:  #B87C1F;
-  --color-ptt-bg:             #FAFBFB;
-  --color-ptt-bg-elevated:    #FFFFFF;
-  --color-ptt-border:         #E2E8E8;
-  --color-ptt-border-strong:  #C9D4D5;
-  --color-ptt-text:           #0F2A2C;
-  --color-ptt-text-secondary: #4A6164;
-  --color-ptt-text-muted:     #6E8589;
-  --color-ptt-success:        #2E8757;
-  --color-ptt-warning:        #C68417;
-  --color-ptt-danger:         #B83A3A;
-  --color-ptt-info:           #1F6F73;
+  --color-ptt-primary-soft: #e1f2f1;
+  --color-ptt-accent: #e8a33d;
+  --color-ptt-accent-strong: #b87c1f;
+  --color-ptt-bg: #fafbfb;
+  --color-ptt-bg-elevated: #ffffff;
+  --color-ptt-border: #e2e8e8;
+  --color-ptt-border-strong: #c9d4d5;
+  --color-ptt-text: #0f2a2c;
+  --color-ptt-text-secondary: #4a6164;
+  --color-ptt-text-muted: #6e8589;
+  --color-ptt-success: #2e8757;
+  --color-ptt-warning: #c68417;
+  --color-ptt-danger: #b83a3a;
+  --color-ptt-info: #1f6f73;
 
   /*
    * Legacy aliases kept for transitional compatibility with components
@@ -55,34 +55,34 @@
    * NEW components MUST use --color-ptt-* tokens (or the bg-ptt-*,
    * text-ptt-*, border-ptt-* utility classes Tailwind 4 generates).
    */
-  --color-main:               #08191A; /* legacy → PTT dark canvas */
-  --color-secondary:          #1F6F73; /* legacy → PTT primary */
-  --color-gray-50:            #f1f5f9;
+  --color-main: #08191a; /* legacy → PTT dark canvas */
+  --color-secondary: #1f6f73; /* legacy → PTT primary */
+  --color-gray-50: #f1f5f9;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* PTT global palette — dark mode override */
 .dark {
-  --color-ptt-primary:        #3FA8AD;
-  --color-ptt-primary-strong: #5BBFC4;
-  --color-ptt-primary-soft:   #0F2A2C;
-  --color-ptt-accent:         #F4B95C;
-  --color-ptt-accent-strong:  #FFD27A;
-  --color-ptt-bg:             #08191A;
-  --color-ptt-bg-elevated:    #0F2A2C;
-  --color-ptt-border:         #1E3D40;
-  --color-ptt-border-strong:  #2A5256;
-  --color-ptt-text:           #E8F0EF;
-  --color-ptt-text-secondary: #B5C7C9;
-  --color-ptt-text-muted:     #8FA3A6;
-  --color-ptt-success:        #4FB07F;
-  --color-ptt-warning:        #E2A848;
-  --color-ptt-danger:         #E0635F;
-  --color-ptt-info:           #3FA8AD;
+  --color-ptt-primary: #3fa8ad;
+  --color-ptt-primary-strong: #5bbfc4;
+  --color-ptt-primary-soft: #0f2a2c;
+  --color-ptt-accent: #f4b95c;
+  --color-ptt-accent-strong: #ffd27a;
+  --color-ptt-bg: #08191a;
+  --color-ptt-bg-elevated: #0f2a2c;
+  --color-ptt-border: #1e3d40;
+  --color-ptt-border-strong: #2a5256;
+  --color-ptt-text: #e8f0ef;
+  --color-ptt-text-secondary: #b5c7c9;
+  --color-ptt-text-muted: #8fa3a6;
+  --color-ptt-success: #4fb07f;
+  --color-ptt-warning: #e2a848;
+  --color-ptt-danger: #e0635f;
+  --color-ptt-info: #3fa8ad;
 
   /* Legacy aliases — softer petroleum on dark to reduce visual intensity */
-  --color-secondary:          #3FA8AD;
+  --color-secondary: #3fa8ad;
 }
 
 @layer components {

@@ -1,0 +1,51 @@
+---
+import HighlightCard from '@/components/pages/HighlightCard.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<MainLayout
+  lang={lang}
+  title={t.hobbiesPage.title}
+  description={t.hobbiesPage.description}
+  keywords={lang === 'en'
+    ? ['XergioAleX hobbies', 'software engineer life beyond code', 'cycling developer', 'tech professional interests', 'work life balance engineer', 'developer personal interests']
+    : ['hobbies XergioAleX', 'vida ingeniero de software más allá del código', 'ciclismo desarrollador', 'intereses profesional tecnología', 'equilibrio vida trabajo ingeniero', 'intereses personales desarrollador']}
+>
+  <PageHero
+    title={t.hobbiesPage.title}
+    subtitle={t.hobbiesPage.subtitle}
+    description={t.hobbiesPage.heroDescription}
+    image="/images/bicycle.png"
+  />
+
+  <PageSection title={t.hobbiesPage.philosophyTitle} description={t.hobbiesPage.philosophyText} />
+
+  <PageSection title="" background="gray">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {t.hobbiesPage.activities.map((activity) => (
+        <HighlightCard title={activity.title} description={activity.description} icon={activity.icon} />
+      ))}
+    </div>
+  </PageSection>
+
+  <PageSection title={t.hobbiesPage.gamingTitle} description={t.hobbiesPage.gamingText} />
+
+  <PageSection
+    title={t.hobbiesPage.readingSciFiTitle}
+    description={t.hobbiesPage.readingSciFiText}
+    background="gray"
+  />
+
+  <PageSection title={t.hobbiesPage.balanceTitle} description={t.hobbiesPage.balanceText} />
+</MainLayout>

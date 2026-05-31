@@ -1,0 +1,106 @@
+---
+import type { Language } from '@/lib/translations';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section
+  id="contacto"
+  class="py-16 bg-gradient-to-b from-secondary/5 via-transparent to-transparent dark:from-secondary/10 dark:via-transparent dark:to-transparent transition-colors duration-300"
+>
+  <div
+    class="max-w-3xl mx-auto px-4 text-center rounded-2xl border border-gray-200/80 dark:border-gray-700/80 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm py-12 shadow-sm"
+  >
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+    >
+      {t.contactSection.title}
+    </h2>
+    <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto">
+      {t.contactSection.description}
+    </p>
+
+    <!-- Social links -->
+    <div class="flex justify-center gap-8 mb-10">
+      <a
+        href="https://github.com/xergioalex"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+      >
+        <img
+          src="/icons/github_white.svg"
+          alt=""
+          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+        />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/xergioalex/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+        class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+      >
+        <img
+          src="/icons/linkedin_white.svg"
+          alt=""
+          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+        />
+      </a>
+      <a
+        href="https://x.com/XergioAleX"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="X"
+        class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+      >
+        <img
+          src="/icons/x_white.svg"
+          alt=""
+          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+        />
+      </a>
+      <a
+        href="https://www.instagram.com/xergioalex"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+      >
+        <img
+          src="/icons/instagram_white.svg"
+          alt=""
+          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+        />
+      </a>
+    </div>
+
+    <!-- CTA to contact page -->
+    <a
+      href={t.contactSection.ctaLink}
+      class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-semibold rounded-full hover:bg-secondary/90 transition-colors shadow-lg hover:shadow-xl"
+    >
+      {t.contactSection.ctaText}
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+    </a>
+  </div>
+</section>

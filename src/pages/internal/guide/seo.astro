@@ -1,0 +1,372 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const metaTags = [
+  {
+    tag: 'title',
+    source: 'BaseHead.astro',
+    description:
+      'Page title with site name suffix. Format: "Page Title | Pereira Tech Talks"',
+  },
+  {
+    tag: 'meta description',
+    source: 'BaseHead.astro',
+    description:
+      'From page translations or blog frontmatter. Target: 130-160 characters.',
+  },
+  {
+    tag: 'og:title',
+    source: 'BaseHead.astro',
+    description: 'Open Graph title for social sharing (Facebook, LinkedIn)',
+  },
+  {
+    tag: 'og:description',
+    source: 'BaseHead.astro',
+    description: 'Open Graph description for social previews',
+  },
+  {
+    tag: 'og:image',
+    source: 'BaseHead.astro',
+    description:
+      'Social sharing image. Blog posts use heroImage; pages use default OG image.',
+  },
+  {
+    tag: 'og:type',
+    source: 'BaseHead.astro',
+    description: '"article" for blog posts, "website" for other pages',
+  },
+  {
+    tag: 'twitter:card',
+    source: 'BaseHead.astro',
+    description: 'summary_large_image for posts with hero, summary otherwise',
+  },
+  {
+    tag: 'twitter:title',
+    source: 'BaseHead.astro',
+    description: 'Twitter/X card title',
+  },
+  {
+    tag: 'twitter:description',
+    source: 'BaseHead.astro',
+    description: 'Twitter/X card description',
+  },
+];
+
+const jsonLdTypes = [
+  {
+    type: 'Article',
+    usedOn: 'Blog post pages',
+    description:
+      'Structured data for individual blog posts with author, datePublished, dateModified, image',
+    schema: 'schema.org/Article',
+  },
+  {
+    type: 'PresentationDigitalDocument',
+    usedOn: 'Slide deck pages',
+    description:
+      'Structured data for presentation decks with event, date, description',
+    schema: 'schema.org/PresentationDigitalDocument',
+  },
+  {
+    type: 'BreadcrumbList',
+    usedOn: 'All pages with breadcrumbs',
+    description: 'Navigation breadcrumb trail for search engines',
+    schema: 'schema.org/BreadcrumbList',
+  },
+  {
+    type: 'WebSite',
+    usedOn: 'Homepage',
+    description: 'Site-level structured data with name, URL, search action',
+    schema: 'schema.org/WebSite',
+  },
+];
+
+const markdownTwins = [
+  {
+    htmlPath: '/about',
+    mdPath: '/about.md',
+    contentPath: 'src/content/pages/{en,es}/about.md',
+  },
+  {
+    htmlPath: '/blog',
+    mdPath: '/blog.md',
+    contentPath: 'src/content/pages/{en,es}/blog.md',
+  },
+  {
+    htmlPath: '/blog/{slug}',
+    mdPath: '/blog/{slug}.md',
+    contentPath: 'Auto-generated from blog content',
+  },
+  {
+    htmlPath: '/tech-talks',
+    mdPath: '/tech-talks.md',
+    contentPath: 'src/content/pages/{en,es}/tech-talks.md',
+  },
+  {
+    htmlPath: '/tech-talks/{slug}',
+    mdPath: '/tech-talks/{slug}.md',
+    contentPath: 'Auto-generated from slide content',
+  },
+  {
+    htmlPath: '/projects',
+    mdPath: '/projects.md',
+    contentPath: 'src/content/pages/{en,es}/projects.md',
+  },
+];
+
+const sitemapRules = [
+  {
+    rule: 'Auto-generated',
+    description:
+      'Astro sitemap integration builds sitemap.xml at build time from all pages',
+  },
+  {
+    rule: 'Internal pages excluded',
+    description:
+      'Pages under /internal/ are filtered out via sitemap configuration',
+  },
+  {
+    rule: 'Demo posts excluded',
+    description: 'Posts in _demo/ folders are not included in the sitemap',
+  },
+  {
+    rule: 'Draft posts excluded',
+    description: 'Posts with draft: true are excluded from the sitemap',
+  },
+  {
+    rule: 'Both languages included',
+    description:
+      'EN and ES versions of every page appear in the sitemap with hreflang',
+  },
+];
+
+const canonicalRules = [
+  {
+    feature: 'Canonical URL',
+    description:
+      'Every page sets <link rel="canonical"> pointing to itself. Prevents duplicate content issues.',
+  },
+  {
+    feature: 'hreflang (EN)',
+    description:
+      '<link rel="alternate" hreflang="en" href="..."> points to the English version',
+  },
+  {
+    feature: 'hreflang (ES)',
+    description:
+      '<link rel="alternate" hreflang="es" href="..."> points to the Spanish version',
+  },
+  {
+    feature: 'x-default',
+    description:
+      '<link rel="alternate" hreflang="x-default" href="..."> points to English as the default',
+  },
+];
+
+const verificationRules = [
+  {
+    service: 'Google Search Console',
+    method: 'DNS TXT record only',
+    notes:
+      'Domain property verification. NO meta tags in HTML. Do NOT add PUBLIC_GOOGLE_SITE_VERIFICATION.',
+  },
+  {
+    service: 'Bing Webmaster Tools',
+    method: 'Optional env var',
+    notes:
+      'Meta tag via PUBLIC_BING_SITE_VERIFICATION env var. Only rendered if env var is set.',
+  },
+];
+
+const keywordsRules = [
+  {
+    rule: '5-8 keywords per post',
+    description:
+      'Each blog post frontmatter includes a keywords array with 5-8 targeted terms',
+  },
+  {
+    rule: 'Per-language keywords',
+    description:
+      'EN and ES posts have independently chosen keywords appropriate to each language',
+  },
+  {
+    rule: 'Frontmatter array',
+    description:
+      'keywords: ["astro", "static site", "blog", "web development", "performance"]',
+  },
+];
+---
+
+<InternalLayout title="SEO & AEO" description="Search engine and AI engine optimization" section="guide" subsection="seo">
+
+  <!-- Meta Tags -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Meta Tags</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      All meta tags are rendered by <code class="text-xs">BaseHead.astro</code> inside <code class="text-xs">MainLayout</code>. Blog posts and pages pass title, description, and image props.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Tag</th>
+              <th class="text-left py-3 px-4 font-semibold">Source</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {metaTags.map((m) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{m.tag}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{m.source}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{m.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- JSON-LD -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">JSON-LD Structured Data</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Used On</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+              <th class="text-left py-3 px-4 font-semibold">Schema</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {jsonLdTypes.map((j) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{j.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{j.usedOn}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{j.description}</td>
+                <td class="py-3 px-4"><code class="text-xs">{j.schema}</code></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Markdown Twins (AEO) -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Markdown Twins (AEO)</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Every HTML page has a <code class="text-xs">.md</code> counterpart for AI agents (Answer Engine Optimization). AI crawlers get clean Markdown instead of parsing HTML.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">HTML Path</th>
+              <th class="text-left py-3 px-4 font-semibold">Markdown Path</th>
+              <th class="text-left py-3 px-4 font-semibold">Content Source</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {markdownTwins.map((m) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{m.htmlPath}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{m.mdPath}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{m.contentPath}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mt-3">
+      Validate with <code class="text-xs">npm run md:check</code> (warnings) or <code class="text-xs">npm run md:check:strict</code> (errors for CI).
+    </p>
+  </section>
+
+  <!-- Sitemap -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Sitemap</h2>
+    <div class="space-y-4">
+      {sitemapRules.map((s) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 class="font-semibold mb-1">{s.rule}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Keywords -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Keywords</h2>
+    <div class="space-y-4">
+      {keywordsRules.map((k) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <h3 class="font-semibold mb-1">{k.rule}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{k.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Canonical URLs -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Canonical URLs & hreflang</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Feature</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {canonicalRules.map((c) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{c.feature}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{c.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verification -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Verification</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Service</th>
+              <th class="text-left py-3 px-4 font-semibold">Method</th>
+              <th class="text-left py-3 px-4 font-semibold">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {verificationRules.map((v) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{v.service}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{v.method}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{v.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</InternalLayout>

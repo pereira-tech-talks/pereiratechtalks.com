@@ -1,0 +1,66 @@
+---
+import HighlightCard from '@/components/pages/HighlightCard.astro';
+import PageHero from '@/components/pages/PageHero.astro';
+import PageSection from '@/components/pages/PageSection.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<MainLayout
+  lang={lang}
+  title={t.foodiePage.title}
+  description={t.foodiePage.description}
+  keywords={lang === 'en'
+    ? ['XergioAleX foodie', 'developer who loves cooking', 'tech professional food passion', 'Colombian food culture', 'software engineer culinary interests', 'food and technology']
+    : ['XergioAleX foodie', 'desarrollador amante de la cocina', 'profesional tecnología pasión gastronómica', 'cultura gastronómica colombiana', 'ingeniero de software intereses culinarios', 'comida y tecnología']}
+>
+  <PageHero
+    title={t.foodiePage.title}
+    subtitle={t.foodiePage.subtitle}
+    description={t.foodiePage.heroDescription}
+    image="/images/foddie.png"
+  />
+
+  <PageSection title={t.foodiePage.passionTitle} description={t.foodiePage.passionText} />
+
+  <PageSection title={t.foodiePage.contentTitle} description={t.foodiePage.contentText} background="gray" />
+
+  <PageSection title={t.foodiePage.cookingTitle} description={t.foodiePage.cookingText} />
+
+  <PageSection title="" background="gray">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {t.foodiePage.highlights.map((highlight) => (
+        <HighlightCard title={highlight.title} description={highlight.description} icon={highlight.icon} />
+      ))}
+    </div>
+  </PageSection>
+
+  <!-- CTA to Instagram -->
+  <section class="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div class="main-container text-center max-w-2xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+        {t.foodiePage.ctaTitle}
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 mb-8">
+        {t.foodiePage.ctaDescription}
+      </p>
+      <a
+        href="https://instagram.com/xergioalex"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-secondary text-white font-semibold rounded-full hover:bg-secondary/90 transition-colors shadow-lg hover:shadow-xl"
+      >
+        <img src="/icons/instagram_white.svg" alt="" width={24} height={24} class="w-6 h-6" />
+        {t.foodiePage.ctaText}
+      </a>
+    </div>
+  </section>
+</MainLayout>

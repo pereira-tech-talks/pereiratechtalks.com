@@ -1,0 +1,487 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const collections = [
+  {
+    name: 'blog',
+    path: 'src/content/blog/{en,es}/',
+    description:
+      'Blog posts in English and Spanish with full frontmatter schema',
+    fileCount: 'Per language',
+  },
+  {
+    name: 'slides',
+    path: 'src/content/slides/{en,es}/',
+    description: 'Presentation decks — native or external types',
+    fileCount: 'Per language',
+  },
+  {
+    name: 'tags',
+    path: 'src/content/tags/',
+    description:
+      'Tag definitions with tier (primary/secondary/subtopic) and display order',
+    fileCount: 'Shared',
+  },
+  {
+    name: 'series',
+    path: 'src/content/series/',
+    description: 'Blog series definitions with ordering and descriptions',
+    fileCount: 'Shared',
+  },
+  {
+    name: 'pages',
+    path: 'src/content/pages/{en,es}/',
+    description: 'Markdown twins for AI agents — mirrors every HTML page',
+    fileCount: 'Per language',
+  },
+];
+
+const blogFields = [
+  {
+    field: 'title',
+    type: 'string',
+    required: true,
+    description: 'Post title (translated per language)',
+  },
+  {
+    field: 'description',
+    type: 'string',
+    required: true,
+    description: 'Meta description, 130-160 characters',
+  },
+  {
+    field: 'pubDate',
+    type: 'date',
+    required: true,
+    description: 'Publication date (ISO format)',
+  },
+  {
+    field: 'updatedDate',
+    type: 'date',
+    required: false,
+    description: 'Last update date',
+  },
+  {
+    field: 'heroImage',
+    type: 'string',
+    required: false,
+    description: 'Path to hero image (relative to public/)',
+  },
+  {
+    field: 'heroLayout',
+    type: 'enum',
+    required: false,
+    description: 'banner | side-by-side | minimal | none (default: banner)',
+  },
+  {
+    field: 'tags',
+    type: 'string[]',
+    required: true,
+    description: 'Array of tag slugs (max 5 per post)',
+  },
+  {
+    field: 'keywords',
+    type: 'string[]',
+    required: false,
+    description: 'SEO keywords, 5-8 per language',
+  },
+  {
+    field: 'series',
+    type: 'string',
+    required: false,
+    description: 'Series slug (English only)',
+  },
+  {
+    field: 'seriesOrder',
+    type: 'number',
+    required: false,
+    description: 'Position within the series (1-based)',
+  },
+  {
+    field: 'draft',
+    type: 'boolean',
+    required: false,
+    description: 'If true, excluded from production build',
+  },
+];
+
+const slidesBaseFields = [
+  { field: 'title', type: 'string', required: true, description: 'Deck title' },
+  {
+    field: 'description',
+    type: 'string',
+    required: true,
+    description: 'Brief deck description',
+  },
+  {
+    field: 'pubDate',
+    type: 'date',
+    required: true,
+    description: 'Publication/presentation date',
+  },
+  {
+    field: 'type',
+    type: 'enum',
+    required: true,
+    description: 'native | external (discriminant)',
+  },
+  {
+    field: 'heroImage',
+    type: 'string',
+    required: false,
+    description: 'Cover image for the deck',
+  },
+  {
+    field: 'tags',
+    type: 'string[]',
+    required: true,
+    description: 'Array of tag slugs',
+  },
+  {
+    field: 'event',
+    type: 'string',
+    required: false,
+    description: 'Event or conference name',
+  },
+  {
+    field: 'draft',
+    type: 'boolean',
+    required: false,
+    description: 'If true, excluded from production',
+  },
+];
+
+const slidesTypeFields = [
+  {
+    type: 'native',
+    field: '(body)',
+    description: 'Markdown content with Reveal.js slide separators',
+  },
+  {
+    type: 'external',
+    field: 'externalUrl',
+    description: 'URL linking to the external slide deck',
+  },
+];
+
+const tagsFields = [
+  {
+    field: 'name',
+    type: 'string',
+    required: true,
+    description: 'Display name of the tag',
+  },
+  {
+    field: 'tier',
+    type: 'enum',
+    required: true,
+    description: 'primary | secondary | subtopic',
+  },
+  {
+    field: 'order',
+    type: 'number',
+    required: true,
+    description: 'Sort order within the tier',
+  },
+  {
+    field: 'description',
+    type: 'string',
+    required: false,
+    description: 'Brief tag description',
+  },
+];
+
+const seriesFields = [
+  {
+    field: 'name',
+    type: 'string',
+    required: true,
+    description: 'Internal reference name',
+  },
+  {
+    field: 'title',
+    type: 'string',
+    required: true,
+    description: 'Display title for the series',
+  },
+  {
+    field: 'description',
+    type: 'string',
+    required: true,
+    description: 'Series description',
+  },
+  {
+    field: 'order',
+    type: 'number',
+    required: true,
+    description: 'Global sort order among series',
+  },
+];
+
+const fileNaming = [
+  {
+    collection: 'blog',
+    pattern: 'YYYY-MM-DD_slug.md',
+    example: '2026-04-20_my-first-post.md',
+    notes: 'Date prefix stripped from URL; slug always in English',
+  },
+  {
+    collection: 'slides',
+    pattern: 'YYYY-MM-DD_slug.md',
+    example: '2026-04-25_demo-revealjs-features.md',
+    notes: 'Date prefix stripped from URL; slug always in English',
+  },
+  {
+    collection: 'tags',
+    pattern: 'slug.md',
+    example: 'javascript.md',
+    notes: 'Slug = filename without extension',
+  },
+  {
+    collection: 'series',
+    pattern: 'slug.md',
+    example: 'the-library-of-tomorrow.md',
+    notes: 'Slug always in English, even for Spanish series',
+  },
+];
+
+const keyFiles = [
+  {
+    path: 'src/content.config.ts',
+    description: 'All Zod schemas and collection definitions',
+  },
+  { path: 'src/content/blog/en/', description: 'English blog posts' },
+  { path: 'src/content/blog/es/', description: 'Spanish blog posts' },
+  { path: 'src/content/slides/en/', description: 'English slide decks' },
+  { path: 'src/content/slides/es/', description: 'Spanish slide decks' },
+  {
+    path: 'src/content/tags/',
+    description: 'Tag definitions (shared, no language split)',
+  },
+  {
+    path: 'src/content/series/',
+    description: 'Series definitions (shared, no language split)',
+  },
+];
+---
+
+<InternalLayout title="Content Collections" description="Schemas and structure for all content types" section="guide" subsection="content-collections">
+
+  <!-- Overview -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Overview</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      All content uses Astro Content Collections with Zod schemas defined in <code class="text-xs">src/content.config.ts</code>.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {collections.map((c) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{c.name}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{c.fileCount}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{c.description}</p>
+          <code class="text-xs">{c.path}</code>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Blog Schema -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Blog Schema</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Required</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {blogFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slides Schema -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Slides Schema</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Discriminated union on the <code class="text-xs">type</code> field. All types share base fields; each type adds its own.
+    </p>
+    <h3 class="font-semibold mb-3">Base Fields (all types)</h3>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Required</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {slidesBaseFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h3 class="font-semibold mb-3">Type-Specific Fields</h3>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {slidesTypeFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.type}</code></td>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tags Schema -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Tags Schema</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Required</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {tagsFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Series Schema -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Series Schema</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Field</th>
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Required</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {seriesFields.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- File Naming -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">File Naming</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Collection</th>
+              <th class="text-left py-3 px-4 font-semibold">Pattern</th>
+              <th class="text-left py-3 px-4 font-semibold">Example</th>
+              <th class="text-left py-3 px-4 font-semibold">Notes</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {fileNaming.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.collection}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.pattern}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.example}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Files -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Files</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Path</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {keyFiles.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.path}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</InternalLayout>

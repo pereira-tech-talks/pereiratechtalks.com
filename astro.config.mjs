@@ -1,137 +1,92 @@
-import fs from 'node:fs';
-import { cpus } from 'node:os';
-import path from 'node:path';
+import EventEmitter from 'node:events';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+EventEmitter.defaultMaxListeners = 20;
 import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
-import tailwind from '@astrojs/tailwind';
-import compress from 'astro-compress';
-import icon from 'astro-icon';
+import tailwindcss from '@tailwindcss/vite';
+// @ts-check
 import { defineConfig } from 'astro/config';
-import astrowind from './src/integration';
+import rehypeExternalLinks from 'rehype-external-links';
 
-import {
-  lazyImagesRehypePlugin,
-  readingTimeRemarkPlugin,
-  responsiveTablesRehypePlugin,
-} from './src/utils/frontmatter.mjs';
+import excludeInternal from './src/integrations/exclude-internal';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CPU_COUNT = cpus().length;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const hasExternalScripts = true;
-
-const whenExternalScripts = (items = []) => {
-  const eachItem = Array.isArray(items)
-    ? items.map((item) => item())
-    : [items()];
-  return hasExternalScripts ? eachItem : [];
-};
-
-// Log the build configuration
-console.log(
-  `🎯 Astro Build Target: ${process.env.BUILD_TARGET || 'production'}`,
-);
-console.log(`💻 CPU Count: ${CPU_COUNT}`);
-
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://pereiratechtalks.org',
-  output: 'static',
-  build: {
-    concurrency: CPU_COUNT,
-    rollupOptions: {
-      // Maximum parallel file operations
-      maxParallelFileOps: CPU_COUNT * 2, // 2x CPU cores for I/O bound operations
-      output: {
-        // Fewer, larger chunks = less overhead
-        manualChunks: undefined,
-      },
-    },
-    assets: 'assets',
+  experimental: {
+    rustCompiler: true,
   },
-  base: '/',
-  telemetry: false,
-  server: {
-    port: 4321,
-    host: true,
+  site: 'https://pereiratechtalks.org',
+  build: {
+    inlineStylesheets: 'always',
+  },
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: '_blank',
+          rel: ['noopener', 'noreferrer'],
+        },
+      ],
+    ],
   },
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
+    mdx(),
+    sitemap({
+      lastmod: new Date(),
+      filter: (page) =>
+        !page.includes('/internal/') && !page.endsWith('/internal'),
     }),
-    sitemap(),
-    mdx({
-      remarkPlugins: [readingTimeRemarkPlugin],
-    }),
-    icon({
-      include: {
-        tabler: ['*'],
-        'flat-color-icons': [
-          'template',
-          'gallery',
-          'approval',
-          'document',
-          'advertising',
-          'currency-exchange',
-          'voice-presentation',
-          'business-contact',
-          'database',
-        ],
-      },
-    }),
-
-    ...whenExternalScripts(() =>
-      partytown({
-        config: { forward: ['dataLayer.push'] },
-      }),
-    ),
-
-    compress({
-      CSS: true,
-      HTML: {
-        'html-minifier-terser': {
-          removeAttributeQuotes: false,
+    svelte(),
+    excludeInternal(),
+  ],
+  server: {
+    host: true,
+    port: 8888,
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
+            (warning.exporter?.includes('svelte/') || warning.exporter?.includes('@astrojs/internal-helpers'))) {
+            return;
+          }
+          defaultHandler(warning);
+        },
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/svelte/')) {
+              return 'svelte';
+            }
+          },
         },
       },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
-      Logger: 1,
-    }),
-
-    astrowind(),
-    svelte(),
-  ],
-
-  redirects: {
-    '/pereira-tech-day/codigo-conducta': '/codigo-conducta',
-  },
-
-  markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
-  },
-
-  vite: {
+    },
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '~': path.resolve(__dirname, './src'),
+        '@': resolve(__dirname, './src'),
       },
     },
-    build: {
-      // Allow larger chunks for speed
-      chunkSizeWarningLimit: 10000,
-      // Fastest minifier
-      minify: 'esbuild',
-      // Utilize all cores
-      rollupOptions: {
-        maxParallelFileOps: CPU_COUNT * 3,
+    optimizeDeps: {
+      force: false,
+      holdUntilCrawlEnd: false,
+    },
+    server: {
+      hmr: {
+        overlay: true,
+      },
+      port: 8888,
+      watch: {
+        ignored: ['**/.lighthouseci/**'],
       },
     },
   },
-
-  compressHTML: false,
 });

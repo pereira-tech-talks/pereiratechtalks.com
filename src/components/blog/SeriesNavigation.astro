@@ -1,0 +1,124 @@
+---
+import { getPostSlug } from '@/lib/blog';
+import { getLocalizedUrl, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+import type { SeriesInfo } from '@/lib/types';
+
+interface Props {
+  seriesInfo: SeriesInfo;
+  lang: Language;
+}
+
+const { seriesInfo, lang } = Astro.props;
+const t = getTranslations(lang);
+const blogPrefix = getLocalizedUrl('/blog', lang);
+
+const localizedTitle = t.seriesNames[seriesInfo.name] || seriesInfo.title;
+const localizedDescription =
+  t.seriesDescriptions[seriesInfo.name] || seriesInfo.description || '';
+
+const previousSlug = seriesInfo.previousPost
+  ? getPostSlug(seriesInfo.previousPost.id)
+  : null;
+const nextSlug = seriesInfo.nextPost
+  ? getPostSlug(seriesInfo.nextPost.id)
+  : null;
+---
+
+<nav
+  id="series-navigation"
+  aria-label={`${t.seriesPartOf}: ${localizedTitle}`}
+  class="mt-12 scroll-mt-24 rounded-xl border border-blue-200 bg-blue-50/50 p-6 dark:border-blue-800 dark:bg-blue-950/30"
+>
+  <div class="mb-4">
+    <p class="mb-1 text-sm font-medium text-blue-700 dark:text-blue-300">
+      {t.seriesPartOf}
+    </p>
+    <h2 class="text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
+      {localizedTitle}
+    </h2>
+    {localizedDescription && (
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+        {localizedDescription}
+      </p>
+    )}
+  </div>
+
+  <div class="mb-5">
+    <h3 class="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+      {t.seriesToC}
+    </h3>
+    <ol class="space-y-1">
+      {seriesInfo.posts.map((item, index) => {
+        const isCurrent = index === seriesInfo.currentIndex;
+        const slug = getPostSlug(item.post.id);
+        const href = `${blogPrefix}/${slug}/`;
+        return (
+          <li class="flex items-baseline gap-2 text-sm">
+            {isCurrent ? (
+              <span class="flex items-baseline gap-2 font-bold text-gray-900 dark:text-white" aria-current="page">
+                <span class="shrink-0 font-mono text-xs">
+                  {t.seriesChapter(item.seriesOrder)}
+                </span>
+                {item.post.data.title}
+              </span>
+            ) : (
+              <a
+                href={href}
+                class="flex items-baseline gap-2 text-blue-600 transition-colors hover:text-blue-800 hover:underline dark:text-blue-400 dark:hover:text-blue-200"
+                data-umami-event="series_nav"
+                data-umami-event-action="chapter"
+              >
+                <span class="shrink-0 font-mono text-xs no-underline">
+                  {t.seriesChapter(item.seriesOrder)}
+                </span>
+                {item.post.data.title}
+              </a>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+
+  <!-- Link to full series page -->
+  <div class="mb-4 text-center">
+    <a
+      href={`${blogPrefix}/series/${seriesInfo.name}/`}
+      class="inline-flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+      data-umami-event="series_nav"
+      data-umami-event-action="view_series"
+    >
+      {t.seriesPage.backToSeries} &rarr;
+    </a>
+  </div>
+
+  <div class="flex items-center justify-between gap-4 border-t border-blue-200 pt-4 dark:border-blue-800">
+    {previousSlug ? (
+      <a
+        href={`${blogPrefix}/${previousSlug}/`}
+        class="flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+        data-umami-event="series_nav"
+        data-umami-event-action="prev"
+      >
+        <span aria-hidden="true">&larr;</span>
+        {t.seriesPrevious}
+      </a>
+    ) : (
+      <span />
+    )}
+    {nextSlug ? (
+      <a
+        href={`${blogPrefix}/${nextSlug}/`}
+        class="flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+        data-umami-event="series_nav"
+        data-umami-event-action="next"
+      >
+        {t.seriesNext}
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    ) : (
+      <span />
+    )}
+  </div>
+</nav>

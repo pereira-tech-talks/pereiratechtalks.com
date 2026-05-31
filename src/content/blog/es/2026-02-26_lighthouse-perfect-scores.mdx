@@ -1,0 +1,210 @@
+---
+title: "El Camino al 100: Cómo Logré Puntajes Perfectos en Lighthouse en Todas las Categorías"
+description: "Cómo logré 100/100/100/100 en Google Lighthouse PageSpeed en Performance, Accesibilidad, Mejores Prácticas y SEO en móvil y escritorio."
+pubDate: "2026-02-26"
+heroImage: "/images/blog/posts/lighthouse-perfect-scores/hero.webp"
+heroLayout: "side-by-side"
+tags: ["tech", "web-development"]
+keywords: ["puntajes perfectos en Lighthouse", "Google Lighthouse 100 en todas las categorías", "rendimiento web Astro", "cómo mejorar Lighthouse Performance", "optimización Core Web Vitals", "Lighthouse PageSpeed 100 SEO y Accesibilidad", "rendimiento perfecto sitio Astro"]
+series: "building-xergioalex"
+seriesOrder: 3
+---
+
+Escribí sobre [cómo construí XergioAleX.com](/es/blog/building-xergioalex-website/) — la arquitectura, el stack tecnológico, el viaje de una landing de una sola página a una plataforma personal completa. Al final de ese post mencioné que uno de mis objetivos era alcanzar puntajes perfectos en Google Lighthouse: 100 en Performance, Accesibilidad, Mejores Prácticas y SEO.
+
+Lo prometido es deuda. Este post es la historia de cómo lo logré.
+
+La verdad es que Astro te da un inicio increíble. Por defecto, la mayoría de proyectos Astro salen con puntajes en los 90s en casi todas las categorías. El framework fue diseñado pensando en performance — genera HTML estático, envía cero JavaScript innecesario, y trae image optimization de cajón. Llegar a 90 es casi automático. Pero los últimos puntos para llegar al 100 — ahí es donde vive el verdadero trabajo. Esa brecha entre "excelente" y "perfecto" requiere atención a los detalles que a veces se sienten obsesivos, pero que en conjunto marcan una diferencia real.
+
+Permíteme contarte exactamente qué cambié y por qué.
+
+---
+
+## Accesibilidad — La Base (100/100)
+
+La accesibilidad fue lo más trabajoso. No es glamoroso — es revisar cada color, cada imagen, cada componente uno por uno. Pero importa porque usuarios reales leen esto, no solo los algoritmos de puntuación.
+
+### Contraste de color: el problema invisible
+
+El primer hallazgo que me sorprendió fue el contraste. Lighthouse señaló que varios textos no cumplían el ratio mínimo de 4.5:1 que exige el estándar WCAG AA.
+
+El culpable en casi todos los casos era el mismo: `text-gray-400`, `text-gray-500`, `dark:text-gray-400` y `dark:text-gray-500` — colores grises claros que se veían bien visualmente pero que en realidad no tienen suficiente contraste para ser legibles por personas con baja visión o en condiciones de luz difícil. Tocó revisar componentes del blog, secciones del home, el layout principal, páginas individuales y el timeline.
+
+La solución fue sistemática: reemplazar esos valores por `text-gray-600 dark:text-gray-300`. El `gray-600` (#4b5563) y el `gray-300` (#d1d5db) mantienen la estética gris y sutil que buscaba — no hay un cambio visual dramático — pero pasan WCAG AA sin problema. Es ese tipo de ajuste que una vez que lo ves documentado, no puedes dejar de notar en otros sitios.
+
+### ARIA semántico: el patrón del menú
+
+Los dropdowns del header del sitio usaban `role="menu"` — y resulta que eso está técnicamente mal para un caso de uso de navegación. El patrón `role="menu"` está diseñado para menús de aplicación (think: un menú Archivo/Editar/Ver en un editor de texto), no para listas de links de navegación.
+
+El patrón correcto para un menú de navegación con dropdown es **disclosure** — usando `aria-expanded` y `aria-controls` en el botón que abre el panel, sin `role="menu"`. Es un cambio que no afecta nada visualmente, pero le dice correctamente a los screen readers qué están manejando.
+
+Otros ajustes ARIA que hice en paralelo:
+- Las barras de progreso de skills recibieron `role="progressbar"` con atributos `aria-valuenow`, `aria-valuemin` y `aria-valuemax`
+- Imágenes puramente decorativas recibieron `aria-hidden="true"` para que los lectores de pantalla las ignoren
+
+### Skip-to-content y el landmark `<main>`
+
+Agregué un **skip-to-content link** al `MainLayout.astro` — ese enlace invisible que aparece solo cuando un usuario de teclado presiona Tab por primera vez, permitiéndole saltar directamente al contenido principal sin tener que navegar por toda la barra de navegación. Es una de esas funcionalidades que la mayoría de los usuarios nunca verá, pero para quienes dependen del teclado o un lector de pantalla, es la diferencia entre una experiencia usable y una frustrante.
+
+### Dimensiones explícitas en imágenes
+
+Cada `<img>` del sitio recibió atributos explícitos `width` y `height`. Esto es técnicamente un punto de performance también — previene el Cumulative Layout Shift (CLS) porque el navegador puede reservar el espacio antes de que la imagen cargue — pero Lighthouse también lo audita bajo accesibilidad porque tiene implicaciones para el layout en general.
+
+Esto significó revisar imagen por imagen en todos los componentes. Tedioso pero necesario.
+
+### Alt text de imágenes
+
+Una auditoría cuidadosa reveló varias imágenes con `alt` text faltante o demasiado genérico ("image", "photo", cosas así). Cada una recibió texto descriptivo apropiado, o `alt=""` en los casos donde la imagen es puramente decorativa.
+
+---
+
+## Performance — El 100 Más Difícil
+
+Si la accesibilidad fue la más laboriosa, performance fue la más creativa. Aquí el reto no es solo seguir un checklist — es entender qué está bloqueando el render y encontrar soluciones que no comprometan la experiencia.
+
+### La historia del Typewriter: el cambio más interesante
+
+<TypewriterDemo caption="Esto que ves es 100% CSS — cero JavaScript. La misma animación que está en el hero del sitio." />
+
+En el hero section del sitio había un componente Typewriter construido en Svelte (`client:idle`) que animaba palabras rotativas — "Developer", "Builder", "Creator", ese tipo de cosa. Se veía bien. Funcionaba bien. Y Lighthouse lo identificó como parte de la **cadena de peticiones críticas**, añadiendo 1,338ms de latencia al tiempo de carga inicial.
+
+El componente Svelte, por más `client:idle` que fuera, seguía siendo JavaScript que el navegador tenía que descargar, parsear y ejecutar. Y ese JavaScript estaba en el critical path del hero section.
+
+La solución que encontré fue la más satisfactoria técnicamente de todo el proyecto: **reemplazar el componente Svelte completamente con CSS puro**.
+
+El nuevo `TypewriterWords.astro` logra exactamente el mismo efecto — tipeo carácter por carácter, borrado, transición a la siguiente palabra — usando únicamente CSS:
+
+- Cada palabra usa `max-width` en unidades `ch`, animado con `steps(N, end)` donde `N` es el número de caracteres
+- El cursor es un `border-right` que sigue el borde del `max-width` — no hace falta un elemento separado
+- El centrado fue raro porque los largos de las palabras cambian. Tuve que usar un elemento oculto para medir la palabra más larga para que las otras no causaran reflow. CSS a veces es así.
+- El componente respeta `prefers-reduced-motion`
+
+El resultado: el chunk de JavaScript del Typewriter desapareció del bundle completamente. La latencia de la ruta crítica bajó de 1,338ms a 468ms — una reducción del 65%.
+
+Ese es el tipo de optimización que se siente bien no solo porque mejora los números, sino porque el código resultante es más simple, más robusto y más accesible.
+
+### Imágenes responsive con `srcset`
+
+Implementé variantes WebP en múltiples tamaños para que los dispositivos móviles descarguen exactamente el tamaño que necesitan y nada más. El ahorro en mobile es significativo cuando estás optimizando cada kilobyte.
+
+### Optimización SVG con SVGO
+
+Los SVG del sitio no estaban optimizados. Pasar todo por SVGO redujo el tamaño del logo del hero y del header de forma notable — menos bytes para descargar, misma calidad visual.
+
+Además, agregué un `<link rel="preload">` para el logo del header, que es el elemento visual más prominente en el above-the-fold y vale la pena prioritizar.
+
+### `font-display: swap` y CSS inline
+
+Para la fuente personalizada Atkinson Hyperlegible, configuré `font-display: swap` — así el texto se muestra inmediatamente usando la fuente de sistema mientras se carga la fuente personalizada, en lugar de quedar invisible durante la carga.
+
+También configuré `build.inlineStylesheets: 'always'` en Astro, que inline el CSS directamente en el HTML. En un sitio estático como este, el CSS es pequeño y la eliminación de la petición de red adicional tiene más impacto que cualquier penalización por tamaño del HTML.
+
+---
+
+## SEO — La Capa de Infraestructura (100/100)
+
+El SEO fue principalmente marcar casillas. Nada espectacular — solo cerrar brechas.
+
+### Datos estructurados: de 3 esquemas a 7
+
+El sitio ya tenía algunos schemas JSON-LD, pero eran básicos. Expandí la cobertura de 3 tipos de Schema.org a 7:
+
+- **WebSite** — Información base del sitio
+- **Person** — Mi perfil como autor/propietario
+- **Organization** — La presencia profesional
+- **BlogPosting** — En cada post del blog
+- **BreadcrumbList** — Navegación estructurada para buscadores
+- **CollectionPage** — En la página de listado del blog
+- **ContactPage** — En la página de contacto
+
+Los datos estructurados no mueven el puntaje de Lighthouse directamente, pero son parte de la auditoría SEO y tienen impacto real en cómo Google entiende y presenta el contenido en los resultados de búsqueda.
+
+### Página 404 personalizada
+
+El sitio no tenía página 404. Creé `NotFoundPage.astro` — bilingüe, con dark mode, siguiendo el mismo diseño del resto del sitio. Pequeño detalle que hace que la experiencia se sienta completa.
+
+### RSS por idioma: un bug que no sabía que tenía
+
+Al auditar el sitio español, descubrí que todas las páginas en español apuntaban al RSS feed en inglés. El `<link rel="alternate" type="application/rss+xml">` en el `<head>` no estaba siendo localizado. Fix sencillo pero importante — si alguien se suscribe al RSS desde la versión española del sitio, debería recibir los posts en español.
+
+### Optimización para crawlers de IA
+
+Una auditoría del `llms.txt` y `llms-full.txt` reveló que el contenido estaba triplicado y duplicado respectivamente — resultando en archivos inflados con información repetida. Los reescribí completamente. También agregué crawlers de IA adicionales a `robots.txt` que no estaban listados.
+
+### Web app manifest
+
+Generé un `site.webmanifest` completo con iconos PWA en múltiples tamaños, producidos programáticamente desde el favicon SVG. No convierte el sitio en una PWA funcional, pero completa la infraestructura que los navegadores modernos esperan y que Lighthouse audita.
+
+---
+
+## Mejores Prácticas — Los Detalles (100/100)
+
+Esta categoría fue la más rápida de resolver porque los problemas eran más aislados.
+
+### Auditoría de hidratación
+
+Revisé los componentes Svelte del sitio que estaban usando `client:load` — la directiva de hidratación más agresiva, que hidrata el componente inmediatamente al cargar la página. Para componentes que no necesitan ser interactivos de inmediato (un grid de posts, la sección de búsqueda, algunos elementos del home), cambié a `client:visible`, que hidrata solo cuando el componente entra al viewport.
+
+La regla que aplico ahora: `client:visible` o `client:idle` por defecto, `client:load` solo cuando la interactividad inmediata es crítica (como el header de navegación).
+
+### Lazy loading en imágenes de BlogCard
+
+Las tarjetas del blog ahora usan `loading="lazy"` en sus imágenes. Las imágenes fuera del viewport inicial no se descargan hasta que el usuario hace scroll hacia ellas. Para una página de listado con decenas de posts, el ahorro en la carga inicial es considerable.
+
+### Headers de cache en Cloudflare
+
+Configuré Cloudflare para servir assets hasheados (JS, CSS, imágenes) con `Cache-Control: public, max-age=31536000, immutable` — cache de un año completo, marcado como inmutable. Los assets hasheados nunca cambian en la misma URL, así que el browser puede cachearlos para siempre sin preocuparse por recibir versiones obsoletas.
+
+### Favicon fallback
+
+Agregué un `favicon.ico` tradicional para navegadores que no soportan SVG. Detalle pequeño, pero Lighthouse lo nota.
+
+---
+
+## Los Resultados
+
+<figure>
+<img src="/images/blog/posts/lighthouse-perfect-scores/pagespeed-mobile.webp" alt="PageSpeed Insights — Móvil: 100 en Performance, Accesibilidad, Mejores Prácticas y SEO. Core Web Vitals: FCP 0.9s, LCP 1.5s, TBT 0ms, CLS 0, Speed Index 0.9s" loading="lazy" />
+<figcaption>Resultados en móvil — el objetivo más difícil, con el throttling agresivo de Google. FCP 0.9s, LCP 1.5s, TBT cero, CLS cero.</figcaption>
+</figure>
+
+<figure>
+<img src="/images/blog/posts/lighthouse-perfect-scores/pagespeed-desktop.webp" alt="PageSpeed Insights — Escritorio: 100 en Performance, Accesibilidad, Mejores Prácticas y SEO. Core Web Vitals: FCP 0.3s, LCP 0.3s, TBT 0ms, CLS 0, Speed Index 0.5s" loading="lazy" />
+<figcaption>Resultados en escritorio — FCP 0.3s, LCP 0.3s, TBT 0ms. Los números que me hicieron dudar si algo estaba roto cuando los vi por primera vez.</figcaption>
+</figure>
+
+| Métrica | Móvil | Escritorio |
+|---------|-------|------------|
+| First Contentful Paint | 0.9s | 0.3s |
+| Largest Contentful Paint | 1.5s | 0.3s |
+| Total Blocking Time | 0 ms | 0 ms |
+| Cumulative Layout Shift | 0 | 0 |
+| Speed Index | 0.9s | 0.5s |
+
+TBT en cero, CLS en cero, LCP a 0.3 segundos en escritorio. Parte de mí sospecha que algo está mal — estos parecen los números de ejemplo en artículos sobre rendimiento ideal teórico.
+
+---
+
+## Lo que Realmente Aprendí
+
+El trabajo de accesibilidad fue lo más impactante. No porque moviera más el puntaje, sino porque ahora un usuario de teclado puede realmente usar el sitio. Los ratios de contraste WCAG no son teatro burocrático — el texto que apenas pasa duele en luz brillante, en monitores viejos, o para usuarios con problemas visuales. Ese trabajo importó más allá del número.
+
+El Typewriter en CSS puro fue el cambio técnicamente más satisfactorio. Hay algo genuinamente placentero en borrar un componente JavaScript por completo y reemplazarlo con unas pocas líneas de CSS que logran lo mismo. El navegador ya podía hacer esto — simplemente no se lo había pedido. La reducción del 65% en la latencia del camino crítico fue un bonus; la victoria real fue eliminar la dependencia de JavaScript.
+
+El performance no es un arreglo puntual. Cada nueva funcionalidad puede mover los números. La auditoría de hidratación no habría sido necesaria si desde el principio me hubiera preguntado "¿cuál es la hidratación más ligera que funciona aquí?" Ahora me hago esa pregunta primero. Te ahorras la reescritura.
+
+Todo el recorrido — desde el build inicial con Astro hasta la auditoría de accesibilidad y el Typewriter en CSS — está documentado en el [repositorio xergioalex.com](https://github.com/xergioalex/xergioalex.com). Si quieres ver los detalles de implementación de cualquiera de estos cambios, está todo ahí.
+
+A seguir construyendo.
+
+---
+
+## Recursos
+
+- [XergioAleX.com](https://xergioalex.com/) — El sitio en producción
+- [Repositorio GitHub](https://github.com/xergioalex/xergioalex.com) — Código fuente del sitio
+- [Google PageSpeed Insights](https://pagespeed.web.dev/) — La herramienta de auditoría
+- [WCAG 2.1 AA Guidelines](https://www.w3.org/TR/WCAG21/) — Estándar de accesibilidad web
+- [Astro Documentation](https://docs.astro.build/) — Framework base del sitio
+- [SVGO](https://svgo.dev/) — Optimizador de SVG
+- [Schema.org](https://schema.org/) — Vocabulario de datos estructurados

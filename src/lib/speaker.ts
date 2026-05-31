@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Speaker = CollectionEntry<'speakers'>;
 
@@ -10,12 +10,16 @@ export const getSpeakers = async (): Promise<Speaker[]> => {
   return all.sort(sortByName);
 };
 
-export const getSpeakerBySlug = async (slug: string): Promise<Speaker | undefined> => {
+export const getSpeakerBySlug = async (
+  slug: string
+): Promise<Speaker | undefined> => {
   const all = await getSpeakers();
   return all.find((s) => s.id === slug);
 };
 
-export const getSpeakersBySlugs = async (slugs: string[]): Promise<Speaker[]> => {
+export const getSpeakersBySlugs = async (
+  slugs: string[]
+): Promise<Speaker[]> => {
   const all = await getSpeakers();
   return slugs
     .map((slug) => all.find((s) => s.id === slug))

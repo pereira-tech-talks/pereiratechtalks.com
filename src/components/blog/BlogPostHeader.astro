@@ -1,0 +1,285 @@
+---
+import BlogHeroImage from '@/components/blog/BlogHeroImage.astro';
+import UpdatedDateBadge from '@/components/blog/UpdatedDateBadge.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import { getSubtopicAccentMap } from '@/lib/blog';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  title: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  heroLayout?: 'banner' | 'side-by-side' | 'minimal' | 'none';
+  tags?: string[];
+  topics?: string[];
+  subtopics?: string[];
+  lang: Language;
+  readingTimeMinutes: number;
+}
+
+const {
+  title,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroLayout = 'banner',
+  tags,
+  topics,
+  subtopics,
+  lang,
+  readingTimeMinutes,
+} = Astro.props;
+
+const t = getTranslations(lang);
+const langPrefix = getUrlPrefix(lang);
+const subtopicAccentByName = await getSubtopicAccentMap();
+---
+
+{/* Banner layout: Full-width image above title (landscape/wide images) */}
+{heroLayout === 'banner' && (
+  <div>
+    {heroImage && (
+      <div class="w-full overflow-hidden rounded-xl">
+        <BlogHeroImage
+          src={heroImage}
+          alt={title}
+          width={1020}
+          height={510}
+          class="block h-auto w-full rounded-xl object-cover shadow-(--box-shadow)"
+          loading="eager"
+        />
+      </div>
+    )}
+    <div class="mt-6 text-[rgb(var(--gray-dark))] dark:text-gray-100">
+      <div class="mb-6 border-b border-gray-200 py-4 text-center dark:border-gray-700">
+        <div class="mb-3 flex flex-wrap items-center justify-center gap-3 text-sm text-[rgb(var(--gray))]">
+          <FormattedDate date={pubDate} lang={lang} />
+          <span aria-hidden="true">•</span>
+          <span>{t.readingTime(readingTimeMinutes)}</span>
+          {updatedDate && <UpdatedDateBadge date={updatedDate} lang={lang} />}
+        </div>
+        <h1 class="m-0 mb-3 text-balance text-2xl sm:text-3xl md:text-4xl font-extrabold">{title}</h1>
+        {tags && tags.length > 0 && (
+          <div class="mb-2 flex flex-wrap justify-center gap-2">
+            {tags.map((tag) => (
+              <a
+                href={`${langPrefix}/blog/tag/${tag}/`}
+                class="rounded bg-blue-100 px-3 py-1 text-sm text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+              >
+                #{t.tagNames[tag] || tag}
+              </a>
+            ))}
+          </div>
+        )}
+        {topics && topics.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-1.5">
+            {topics.map((topic) => (
+              <a
+                href={`${langPrefix}/blog/tag/${topic}/`}
+                class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+              >
+                {t.tagNames[topic] || topic}
+              </a>
+            ))}
+          </div>
+        )}
+        {subtopics && subtopics.length > 0 && (
+          <div class="mt-1.5 flex flex-wrap justify-center gap-1.5">
+            {subtopics.map((sub) => (
+              <a
+                href={`${langPrefix}/blog/tag/${sub}/`}
+                class="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs text-gray-700 border border-dashed border-gray-300 transition-colors hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100"
+              >
+                <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+{/* Side-by-side layout: Title left, image right (square images) */}
+{heroLayout === 'side-by-side' && (
+  <div>
+    <div class="mb-6 grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+      <div class="text-[rgb(var(--gray-dark))] dark:text-gray-100">
+        <div class="mb-3 flex flex-wrap items-center gap-3 text-sm text-[rgb(var(--gray))]">
+          <FormattedDate date={pubDate} lang={lang} />
+          <span aria-hidden="true">•</span>
+          <span>{t.readingTime(readingTimeMinutes)}</span>
+          {updatedDate && <UpdatedDateBadge date={updatedDate} lang={lang} />}
+        </div>
+        <h1 class="m-0 mb-4 text-balance text-2xl sm:text-3xl md:text-4xl font-extrabold">{title}</h1>
+        {tags && tags.length > 0 && (
+          <div class="mb-2 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <a
+                href={`${langPrefix}/blog/tag/${tag}/`}
+                class="rounded bg-blue-100 px-3 py-1 text-sm text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+              >
+                #{t.tagNames[tag] || tag}
+              </a>
+            ))}
+          </div>
+        )}
+        {topics && topics.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {topics.map((topic) => (
+              <a
+                href={`${langPrefix}/blog/tag/${topic}/`}
+                class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+              >
+                {t.tagNames[topic] || topic}
+              </a>
+            ))}
+          </div>
+        )}
+        {subtopics && subtopics.length > 0 && (
+          <div class="mt-1.5 flex flex-wrap gap-1.5">
+            {subtopics.map((sub) => (
+              <a
+                href={`${langPrefix}/blog/tag/${sub}/`}
+                class="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs text-gray-700 border border-dashed border-gray-300 transition-colors hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100"
+              >
+                <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+      {heroImage && (
+        <div class="overflow-hidden rounded-xl">
+          <BlogHeroImage
+            src={heroImage}
+            alt={title}
+            width={600}
+            height={600}
+            class="block h-auto max-h-96 w-full rounded-xl object-cover shadow-(--box-shadow)"
+            loading="eager"
+          />
+        </div>
+      )}
+    </div>
+    <div class="mb-6 border-b border-gray-200 dark:border-gray-700" />
+  </div>
+)}
+
+{/* Minimal layout: Small thumbnail with text-focused design */}
+{heroLayout === 'minimal' && (
+  <div>
+    <div class="mb-6 border-b border-gray-200 pb-6 dark:border-gray-700">
+      <div class="flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
+        {heroImage && (
+          <BlogHeroImage
+            src={heroImage}
+            alt={title}
+            width={160}
+            height={160}
+            class="h-32 w-32 shrink-0 rounded-lg object-cover shadow-(--box-shadow) md:h-40 md:w-40"
+            loading="eager"
+          />
+        )}
+        <div class="text-[rgb(var(--gray-dark))] dark:text-gray-100">
+          <div class="mb-2 flex flex-wrap items-center gap-3 text-sm text-[rgb(var(--gray))]">
+            <FormattedDate date={pubDate} lang={lang} />
+            <span aria-hidden="true">•</span>
+            <span>{t.readingTime(readingTimeMinutes)}</span>
+            {updatedDate && <UpdatedDateBadge date={updatedDate} lang={lang} />}
+          </div>
+          <h1 class="m-0 mb-3 text-balance text-2xl sm:text-3xl md:text-4xl font-extrabold">{title}</h1>
+          {tags && tags.length > 0 && (
+            <div class="mb-2 flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <a
+                  href={`${langPrefix}/blog/tag/${tag}/`}
+                  class="rounded bg-blue-100 px-3 py-1 text-sm text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+                >
+                  #{t.tagNames[tag] || tag}
+                </a>
+              ))}
+            </div>
+          )}
+          {topics && topics.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {topics.map((topic) => (
+                <a
+                  href={`${langPrefix}/blog/tag/${topic}/`}
+                  class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+                >
+                  {t.tagNames[topic] || topic}
+                </a>
+              ))}
+            </div>
+          )}
+          {subtopics && subtopics.length > 0 && (
+            <div class="mt-1.5 flex flex-wrap gap-1.5">
+              {subtopics.map((sub) => (
+                <a
+                  href={`${langPrefix}/blog/tag/${sub}/`}
+                  class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+                >
+                  {t.tagNames[sub] || sub}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+{/* None layout: No hero image, just title and metadata */}
+{heroLayout === 'none' && (
+  <div class="text-[rgb(var(--gray-dark))] dark:text-gray-100">
+    <div class="mb-6 border-b border-gray-200 py-4 text-center dark:border-gray-700">
+      <div class="mb-3 flex flex-wrap items-center justify-center gap-3 text-sm text-[rgb(var(--gray))]">
+        <FormattedDate date={pubDate} lang={lang} />
+        <span aria-hidden="true">•</span>
+        <span>{t.readingTime(readingTimeMinutes)}</span>
+        {updatedDate && <UpdatedDateBadge date={updatedDate} lang={lang} />}
+      </div>
+      <h1 class="m-0 mb-3 text-balance text-2xl sm:text-3xl md:text-4xl font-extrabold">{title}</h1>
+      {tags && tags.length > 0 && (
+        <div class="mb-2 flex flex-wrap justify-center gap-2">
+          {tags.map((tag) => (
+            <a
+              href={`${langPrefix}/blog/tag/${tag}/`}
+              class="rounded bg-blue-100 px-3 py-1 text-sm text-blue-800 transition-colors hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+            >
+              #{t.tagNames[tag] || tag}
+            </a>
+          ))}
+        </div>
+      )}
+      {topics && topics.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-1.5">
+          {topics.map((topic) => (
+            <a
+              href={`${langPrefix}/blog/tag/${topic}/`}
+              class="rounded border border-gray-200 bg-white px-2 py-0.5 text-xs text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+            >
+              {t.tagNames[topic] || topic}
+            </a>
+          ))}
+        </div>
+      )}
+      {subtopics && subtopics.length > 0 && (
+        <div class="mt-1.5 flex flex-wrap justify-center gap-1.5">
+          {subtopics.map((sub) => (
+            <a
+              href={`${langPrefix}/blog/tag/${sub}/`}
+              class="inline-flex items-center rounded bg-gray-50 px-2 py-1 text-xs text-gray-700 border border-dashed border-gray-300 transition-colors hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100"
+            >
+              <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+)}

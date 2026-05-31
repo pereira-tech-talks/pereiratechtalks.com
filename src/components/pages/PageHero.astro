@@ -1,0 +1,75 @@
+---
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, subtitle, description, image, imageAlt = '' } = Astro.props;
+
+const isRaster = image ? /\.(png|jpe?g)$/i.test(image) : false;
+const webpSrc =
+  isRaster && image ? image.replace(/\.(png|jpe?g)$/i, '.webp') : null;
+const webpPath = webpSrc
+  ? resolve(process.cwd(), 'public', webpSrc.replace(/^\//, ''))
+  : null;
+const webpExists = webpPath ? existsSync(webpPath) : false;
+const useWebp = isRaster && webpSrc && webpExists;
+---
+
+<section class="relative overflow-hidden bg-main text-white">
+  <div class="absolute inset-0 opacity-10">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hero-grid)" />
+    </svg>
+  </div>
+  <div class="relative main-container py-20 md:py-28">
+    <div class={`flex flex-col ${image ? 'lg:flex-row lg:items-center lg:gap-12' : 'items-center text-center'}`}>
+      <div class={image ? 'lg:flex-1' : 'max-w-3xl'}>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4" set:html={title} />
+        {subtitle && (
+          <p class="text-base sm:text-lg md:text-xl text-gray-300 mb-6">{subtitle}</p>
+        )}
+        {description && (
+          <p class="text-base sm:text-lg text-gray-300 max-w-2xl" set:html={description} />
+        )}
+      </div>
+      {image && (
+        <div class="mt-8 lg:mt-0 lg:flex-shrink-0 flex justify-center">
+          {useWebp ? (
+            <picture>
+              <source srcset={webpSrc} type="image/webp" />
+              <img
+                src={image}
+                alt={imageAlt}
+                class="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl border-4 border-white/10"
+                width={320}
+                height={320}
+                loading="eager"
+              />
+            </picture>
+          ) : (
+            <img
+              src={image}
+              alt={imageAlt}
+              class="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 object-cover rounded-full shadow-2xl border-4 border-white/10"
+              width={320}
+              height={320}
+              loading="eager"
+            />
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

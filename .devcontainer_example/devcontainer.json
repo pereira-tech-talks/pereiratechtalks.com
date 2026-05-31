@@ -1,9 +1,10 @@
 {
-  "name": "Pereira Tech Talks - Astro",
+  "name": "PerTechTalks Website - Astro",
   "dockerComposeFile": "../docker/local/docker-compose.yaml",
-  "service": "pereiratechtalks",
+  "service": "pertechtalksvscode",
   "workspaceFolder": "/app",
-  "runServices": ["pereiratechtalks"],
+  "runServices": ["pertechtalksvscode"],
+  "remoteUser": "node",
   "customizations": {
     "settings": {
       "terminal.integrated.shell.linux": "/bin/bash"
@@ -12,19 +13,12 @@
       "extensions": [
         "eamodio.gitlens",
         "VisualStudioExptTeam.vscodeintellicode",
-        "swyphcosmo.spellchecker",
-        "streetsidesoftware.code-spell-checker",
-        "donjayamanne.githistory",
         "vscode-icons-team.vscode-icons",
-        "shardulm94.trailing-spaces",
-        "ms-vscode.vscode-typescript-tslint-plugin",
-        "EditorConfig.EditorConfig",
-        "bradlc.vscode-tailwindcss",
-        "astro-build.astro-vscode",
+        "biomejs.biome",
         "unifiedjs.vscode-mdx",
-        "svelte.svelte-vscode",
-        "cipchk.cssrem",
-        "biomejs.biome"
+        "astro-build.astro-vscode",
+        "bradlc.vscode-tailwindcss",
+        "svelte.svelte-vscode"
       ]
     }
   }

@@ -1,0 +1,13 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# AEO chapter 5: slug updated after publication to match the retitled
+# post ("What It Actually Takes to Score 100 on isitagentready.com").
+# Old URL `/blog/aeo-from-33-to-100/` → new URL below. Both languages
+# and the Markdown-for-Agents `.md` twins covered.
+/blog/aeo-from-33-to-100          /blog/aeo-score-100-on-isitagentready/          301
+/blog/aeo-from-33-to-100/         /blog/aeo-score-100-on-isitagentready/          301
+/blog/aeo-from-33-to-100.md       /blog/aeo-score-100-on-isitagentready.md        301
+/es/blog/aeo-from-33-to-100       /es/blog/aeo-score-100-on-isitagentready/       301
+/es/blog/aeo-from-33-to-100/      /es/blog/aeo-score-100-on-isitagentready/       301
+/es/blog/aeo-from-33-to-100.md    /es/blog/aeo-score-100-on-isitagentready.md     301

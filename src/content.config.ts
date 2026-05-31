@@ -15,10 +15,15 @@ const i18nString = z.union([
 ]);
 
 const i18nStringOptional = z
-  .union([z.string(), z.object({ en: z.string().optional(), es: z.string().optional() })])
+  .union([
+    z.string(),
+    z.object({ en: z.string().optional(), es: z.string().optional() }),
+  ])
   .optional();
 
-const heroLayout = z.enum(['banner', 'side-by-side', 'minimal', 'none']).default('banner');
+const heroLayout = z
+  .enum(['banner', 'side-by-side', 'minimal', 'none'])
+  .default('banner');
 
 const venue = z.object({
   name: z.string(),
@@ -33,14 +38,25 @@ const eventLocation = venue.extend({
   streamUrl: z.string().optional(),
 });
 
-const sponsorTier = z.enum(['diamond', 'gold', 'silver', 'bronze', 'community']);
+const sponsorTier = z.enum([
+  'diamond',
+  'gold',
+  'silver',
+  'bronze',
+  'community',
+]);
 
 const sponsorRef = z.object({
   slug: z.string(),
   tier: sponsorTier,
 });
 
-const eventStatus = z.enum(['announced', 'rsvp-open', 'completed', 'cancelled']);
+const eventStatus = z.enum([
+  'announced',
+  'rsvp-open',
+  'completed',
+  'cancelled',
+]);
 
 const hex = z
   .string()
@@ -95,8 +111,8 @@ const editionBrandKit = z
               })
               .refine(
                 (s) => Boolean(s.npmPackage || s.cssUrl || s.cdnUrl),
-                'fontSources entry must declare at least one of npmPackage, cssUrl, or cdnUrl',
-              ),
+                'fontSources entry must declare at least one of npmPackage, cssUrl, or cdnUrl'
+              )
           )
           .optional(),
       })
@@ -325,7 +341,7 @@ const events = defineCollection({
         z.object({
           collection: z.enum(['meetups', 'pereiraTechDays', 'talks']),
           slug: z.string(),
-        }),
+        })
       )
       .default([]),
     status: eventStatus.default('announced'),
@@ -374,7 +390,7 @@ const pereiraTechDays = defineCollection({
             'open-doors',
             'closing',
           ]),
-        }),
+        })
       )
       .default([]),
     keynotes: z.array(z.string()).default([]),
@@ -387,7 +403,7 @@ const pereiraTechDays = defineCollection({
           name: z.string(),
           logo: z.string(),
           url: z.string().optional(),
-        }),
+        })
       )
       .default([]),
     gallery: z
@@ -396,7 +412,7 @@ const pereiraTechDays = defineCollection({
           src: z.string(),
           alt: i18nStringOptional,
           caption: i18nStringOptional,
-        }),
+        })
       )
       .default([]),
     linkMeetupCom: z.string().optional(),
@@ -486,7 +502,9 @@ const talks = defineCollection({
     recording: z
       .object({
         url: z.string(),
-        provider: z.enum(['youtube', 'vimeo', 'twitch', 'other']).default('youtube'),
+        provider: z
+          .enum(['youtube', 'vimeo', 'twitch', 'other'])
+          .default('youtube'),
       })
       .optional(),
     tags: z.array(z.string()).default([]),
@@ -513,7 +531,7 @@ const sponsors = defineCollection({
         z.object({
           year: z.number().int(),
           tier: sponsorTier,
-        }),
+        })
       )
       .default([]),
     status: z.enum(['active', 'past']).default('active'),
@@ -570,7 +588,7 @@ const contributors = defineCollection({
           'press-lead',
           'conduct-team',
           'alumni',
-        ]),
+        ])
       )
       .min(1),
     primaryVertical: z.string().optional(),

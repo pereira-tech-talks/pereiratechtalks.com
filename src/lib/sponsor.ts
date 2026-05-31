@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export type Sponsor = CollectionEntry<'sponsors'>;
 
@@ -28,13 +28,15 @@ export const getActiveSponsors = async (): Promise<Sponsor[]> => {
 };
 
 export const getSponsorsByTier = async (
-  tier: Sponsor['data']['tier'],
+  tier: Sponsor['data']['tier']
 ): Promise<Sponsor[]> => {
   const all = await getSponsors();
   return all.filter((s) => s.data.tier === tier);
 };
 
-export const getSponsorsByEdition = async (year: number): Promise<Sponsor[]> => {
+export const getSponsorsByEdition = async (
+  year: number
+): Promise<Sponsor[]> => {
   const all = await getSponsors();
   return all
     .filter((s) => s.data.sponsoredEditions.some((e) => e.year === year))

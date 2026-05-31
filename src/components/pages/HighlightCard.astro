@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  link?: string;
+}
+
+const { title, description, icon, link } = Astro.props;
+
+const Tag = link ? 'a' : 'div';
+const linkProps = link ? { href: link } : {};
+---
+
+<Tag
+  {...linkProps}
+  class={`group block p-6 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 ${link ? 'cursor-pointer' : ''}`}
+>
+  {icon && (
+    <div class="text-3xl mb-4">{icon}</div>
+  )}
+  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-secondary transition-colors">
+    {title}
+  </h3>
+  <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+    {description}
+  </p>
+</Tag>

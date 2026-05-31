@@ -1,0 +1,106 @@
+---
+import { HomeSectionContentAlignmentEType } from './enum';
+import HomeSectionContent from './HomeSectionContent.astro';
+import HomeSectionImage from './HomeSectionImage.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  ctaText?: string;
+  ctaLink?: string;
+  cta2Text?: string;
+  cta2Link?: string;
+  image?: string;
+  contentAlignment?: HomeSectionContentAlignmentEType;
+  variant?: 'default' | 'alt';
+  grouped?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  ctaText,
+  ctaLink,
+  cta2Text,
+  cta2Link,
+  image,
+  contentAlignment = 'left',
+  variant = 'default',
+  grouped = false,
+} = Astro.props;
+
+// Validate required props
+if (!title || !description) {
+  throw new Error('HomeSection: title and description are required props');
+}
+---
+
+<style>
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .section-image {
+    order: 1;
+  }
+  .section-content {
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+  @media (min-width: 1024px) {
+    .main-container {
+      flex-direction: row;
+      gap: 4rem;
+    }
+
+    .section-content {
+      text-align: left;
+    }
+    .align-left .section-image {
+      order: 2;
+    }
+    .align-left .section-content {
+      order: 1;
+    }
+    .align-right .section-image {
+      order: 1;
+    }
+    .align-right .section-content {
+      order: 2;
+    }
+    .section-content {
+      width: auto;
+    }
+  }
+</style>
+
+<section
+  class={`${grouped ? 'pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8 lg:pb-10' : 'py-12 sm:py-16 lg:py-24'} transition-colors duration-300 ${variant === 'alt' ? 'bg-gray-50 dark:bg-gray-800' : 'bg-white dark:bg-gray-900'}`}
+>
+  <div
+    class={`main-container items-center lg:items-start ${contentAlignment === HomeSectionContentAlignmentEType.LEFT ? "align-left" : "align-right"}`}
+  >
+    {
+      image && (
+        <div class="section-image">
+          <HomeSectionImage image={image} />
+        </div>
+      )
+    }
+    <div class="section-content">
+      <HomeSectionContent
+        title={title}
+        subtitle={subtitle}
+        description={description}
+        ctaText={ctaText}
+        ctaLink={ctaLink}
+        cta2Text={cta2Text}
+        cta2Link={cta2Link}
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+
+import SeriesListingInfiniteScroll from '@/components/blog/SeriesListingInfiniteScroll.svelte';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getSeriesTimelineIndex } from '@/lib/blog';
+import { BLOG_PAGE_SIZE } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+import type { SeriesListingEntry } from '@/pages/api/series/[lang]/index.json';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const allSeries = await getCollection('series');
+
+const seriesWithMeta: SeriesListingEntry[] = (
+  await Promise.all(
+    allSeries.map(async (series) => {
+      const posts = await getSeriesTimelineIndex(series.id, lang);
+      if (posts.length === 0) return null;
+
+      const lastPostDate = posts.reduce((latest, post) => {
+        const d = post.pubDate;
+        return d > latest ? d : latest;
+      }, posts[0].pubDate);
+
+      return {
+        slug: series.id,
+        title: series.data.title,
+        description: series.data.description || '',
+        order: series.data.order,
+        postCount: posts.length,
+        heroImage:
+          (lang === 'es' && series.data.heroImageEs) ||
+          series.data.heroImage ||
+          null,
+        firstPostHero: posts[0]?.heroImage || null,
+        lastPostDate,
+      };
+    })
+  )
+).filter((s): s is SeriesListingEntry => s !== null);
+
+// Sort by most recent post date (newest first), fallback to order
+seriesWithMeta.sort((a, b) => {
+  const dateCompare =
+    new Date(b.lastPostDate).valueOf() - new Date(a.lastPostDate).valueOf();
+  if (dateCompare !== 0) return dateCompare;
+  return a.order - b.order;
+});
+
+const initialSeries = seriesWithMeta.slice(0, BLOG_PAGE_SIZE);
+const seriesApiEndpoint = `/api/series/${lang}/index.json`;
+---
+
+<MainLayout
+  lang={lang}
+  title={t.seriesListingPage.title}
+  description={t.seriesListingPage.description}
+  ogType="website"
+>
+  <section class="py-10 sm:py-12 lg:py-16">
+    <!-- Breadcrumb -->
+    <nav class="max-w-7xl mx-auto px-4 md:px-8 mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
+      <a href={`${prefix}/blog/`} class="font-semibold text-gray-600 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400">{t.nav.blog}</a>
+      <span class="font-semibold text-gray-600 dark:text-gray-300 select-none" aria-hidden="true">/</span>
+      <span class="truncate font-normal text-gray-600 dark:text-gray-300" aria-current="page">{t.seriesListingPage.heading}</span>
+    </nav>
+
+    <!-- Page header -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mb-10 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        {t.seriesListingPage.heading}
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        {t.seriesListingPage.description}
+      </p>
+    </div>
+
+    <SeriesListingInfiniteScroll
+      client:visible
+      {initialSeries}
+      totalCount={seriesWithMeta.length}
+      apiEndpoint={seriesApiEndpoint}
+      {lang}
+      pageSize={BLOG_PAGE_SIZE}
+    />
+
+    <!-- Back to blog -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-10">
+      <a
+        href={`${prefix}/blog/`}
+        class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        {t.seriesPage.backToBlog}
+      </a>
+    </div>
+  </section>
+</MainLayout>

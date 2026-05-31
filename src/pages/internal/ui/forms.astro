@@ -1,0 +1,206 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const inputStates = [
+  { name: 'Default', labelClasses: '', inputExtra: '', helperText: '' },
+  {
+    name: 'Focus',
+    labelClasses: '',
+    inputExtra: 'ring-2 ring-secondary/50 border-secondary',
+    helperText: '',
+  },
+  {
+    name: 'Error',
+    labelClasses: 'text-red-600 dark:text-red-400',
+    inputExtra: 'border-red-500 dark:border-red-400',
+    helperText: 'This field is required',
+  },
+  {
+    name: 'Disabled',
+    labelClasses: 'opacity-50',
+    inputExtra: 'opacity-50 cursor-not-allowed bg-gray-50 dark:bg-gray-900',
+    helperText: '',
+  },
+];
+
+const formElements = [
+  { name: 'Text Input', tag: 'input', usage: 'Single-line text entry' },
+  { name: 'Textarea', tag: 'textarea', usage: 'Multi-line text entry' },
+  { name: 'Select', tag: 'select', usage: 'Option selection' },
+];
+---
+
+<ShowcaseLayout title="Forms" description="Input types, states, and form layouts" section="forms">
+
+  <!-- Input Styles -->
+  <section class="mb-12" data-component="input-styles">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Input Base Style</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      All form inputs share these common classes from <code class="text-xs">ContactPage.astro</code>:
+    </p>
+    <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-4">
+      <code class="text-xs text-gray-600 dark:text-gray-300">w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors</code>
+    </div>
+    <div class="space-y-4 max-w-md">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Text Input</label>
+        <input type="text" placeholder="Type something..." class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Textarea</label>
+        <textarea rows="3" placeholder="Write more here..." class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select</label>
+        <select class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- States -->
+  <section class="mb-12" data-component="input-states">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Input States</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
+      {inputStates.map((state) => (
+        <div>
+          <label class:list={['block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2', state.labelClasses]}>
+            {state.name}
+          </label>
+          <input
+            type="text"
+            placeholder={state.name === 'Disabled' ? 'Not editable' : `${state.name} state`}
+            disabled={state.name === 'Disabled'}
+            class:list={['w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors', state.inputExtra]}
+          />
+          {state.helperText && (
+            <p class="mt-1 text-xs text-red-600 dark:text-red-400">{state.helperText}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Focus Styles -->
+  <section class="mb-12" data-component="focus-styles">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Focus Styles</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Global focus ring from <code class="text-xs">global.css</code> applies to all interactive elements:
+    </p>
+    <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <code class="text-xs text-gray-600 dark:text-gray-300">focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2</code>
+      <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
+        This is set globally in <code class="text-xs">global.css</code> and applies to buttons, links, inputs when focused via keyboard.
+      </p>
+    </div>
+  </section>
+
+  <!-- Label Pattern -->
+  <section class="mb-12" data-component="labels">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Label & Helper Text</h2>
+    <div class="max-w-md space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Label text
+        </label>
+        <input type="text" placeholder="Input with label" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors" />
+        <p class="mt-1 text-xs text-gray-600 dark:text-gray-300">Helper text below input for additional context.</p>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Required field <span class="text-red-600 dark:text-red-400">*</span>
+        </label>
+        <input type="text" placeholder="This field is required" class="w-full p-3 rounded-lg border border-red-500 dark:border-red-400 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors" />
+        <p class="mt-1 text-xs text-red-600 dark:text-red-400">This field is required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Layout -->
+  <section class="mb-12" data-component="form-layout">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Form Layout Pattern</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Two-column responsive grid from ContactPage:
+      <code class="text-xs">grid grid-cols-1 md:grid-cols-2 gap-6</code>
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-6 max-w-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+          <input type="text" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+          <input type="text" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors" />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+        <textarea rows="3" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-colors"></textarea>
+      </div>
+      <button type="button" class="px-8 py-3 bg-secondary text-white font-semibold rounded-full hover:bg-secondary/90 transition-colors shadow-lg hover:shadow-xl">
+        Send Message
+      </button>
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12">
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"&gt;
+  Label
+&lt;/label&gt;
+&lt;input
+  type="text"
+  class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600
+         bg-white dark:bg-gray-800 text-gray-900 dark:text-white
+         focus:outline-none focus:ring-2 focus:ring-secondary/50
+         focus:border-secondary transition-colors"
+/&gt;
+&lt;p class="mt-1 text-xs text-gray-600 dark:text-gray-300"&gt;
+  Helper text
+&lt;/p&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Element</th>
+            <th class="py-2 pr-4 font-semibold">Tag</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {formElements.map((el) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{el.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">&lt;{el.tag}&gt;</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{el.usage}</td>
+            </tr>
+          ))}
+          <tr>
+            <td class="py-2 pr-4 font-medium">Label</td>
+            <td class="py-2 pr-4"><code class="text-xs">&lt;label&gt;</code></td>
+            <td class="py-2 text-gray-600 dark:text-gray-300">text-sm font-medium text-gray-700 dark:text-gray-300</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-medium">Helper</td>
+            <td class="py-2 pr-4"><code class="text-xs">&lt;p&gt;</code></td>
+            <td class="py-2 text-gray-600 dark:text-gray-300">text-xs text-gray-600 dark:text-gray-300</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>
