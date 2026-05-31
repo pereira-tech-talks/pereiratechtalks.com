@@ -12,49 +12,6 @@ export interface PagePassion {
   link: string;
 }
 
-export interface Experience {
-  role: string;
-  company: string;
-  period: string;
-  description: string;
-  highlights: string[];
-}
-
-export interface Education {
-  degree: string;
-  institution: string;
-  period: string;
-  description: string;
-}
-
-export interface SkillCategory {
-  category: string;
-  skills: string[];
-}
-
-export interface LanguageSkill {
-  language: string;
-  level: string;
-}
-
-export interface Venture {
-  title: string;
-  description: string;
-  period: string;
-}
-
-export interface HighlightItem {
-  title: string;
-  description: string;
-  icon: string;
-}
-
-export interface Activity {
-  title: string;
-  description: string;
-  icon: string;
-}
-
 export interface SiteTranslations {
   // Site metadata
   siteTitle: string;
@@ -65,18 +22,9 @@ export interface SiteTranslations {
   nav: {
     home: string;
     blog: string;
-    work: string;
-    portfolio: string;
     about: string;
     contact: string;
-    aboutMe: string;
-    cv: string;
-    dailybot: string;
-    entrepreneur: string;
-    techTalks: string;
-    trading: string;
-    foodie: string;
-    hobbies: string;
+    slides: string;
   };
 
   // Footer
@@ -100,61 +48,7 @@ export interface SiteTranslations {
       cta: string;
       cta2: string;
     };
-    dailybot: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    techTalks: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    makerHome: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    portfolio: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    trading: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    foodie: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    hobbies: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    builder: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
     community: {
-      title: string;
-      subtitle: string;
-      description: string;
-      cta: string;
-    };
-    beyondCode: {
       title: string;
       subtitle: string;
       description: string;
@@ -162,18 +56,6 @@ export interface SiteTranslations {
     };
     latestArticles: string;
     viewAllPosts: string;
-    portfolioProjectsTitle: string;
-    portfolioProjectsViewAll: string;
-    portfolioProjectsEmpty: string;
-    techTalksPostsTitle: string;
-    techTalksPostsViewAll: string;
-    techTalksPostsEmpty: string;
-    dailybotPostsTitle: string;
-    dailybotPostsViewAll: string;
-    dailybotPostsEmpty: string;
-    tradingPostsTitle: string;
-    tradingPostsViewAll: string;
-    tradingPostsEmpty: string;
   };
 
   // Contact section (homepage)
@@ -204,163 +86,6 @@ export interface SiteTranslations {
     ctaDescription: string;
     ctaCv: string;
     ctaContact: string;
-  };
-
-  // CV page
-  cvPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    summaryTitle: string;
-    summaryText: string;
-    experienceTitle: string;
-    experiences: Experience[];
-    educationTitle: string;
-    educations: Education[];
-    skillsTitle: string;
-    skillsIntroText: string;
-    skillCategories: SkillCategory[];
-    languagesTitle: string;
-    languages: LanguageSkill[];
-    ctaTitle: string;
-    ctaDescription: string;
-    ctaText: string;
-  };
-
-  // DailyBot page
-  dailybotPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    storyTitle: string;
-    storyText: string;
-    ycTitle: string;
-    ycText: string;
-    roleTitle: string;
-    roleText: string;
-    featuresTitle: string;
-    features: HighlightItem[];
-    timelineTitle: string;
-    emptyState: string;
-    ctaText: string;
-    ctaLink: string;
-  };
-
-  // Entrepreneur page
-  entrepreneurPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    journeyTitle: string;
-    journeyText: string;
-    venturesTitle: string;
-    ventures: Venture[];
-    philosophyTitle: string;
-    philosophyText: string;
-    lessonsTitle: string;
-    lessons: string[];
-    timelineTitle: string;
-    emptyState: string;
-  };
-
-  // Tech Talks page
-  techTalksPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    communityTitle: string;
-    communityText: string;
-    communityCta: string;
-    communityImageAlt1: string;
-    communityImageAlt2: string;
-    topicsTitle: string;
-    topics: HighlightItem[];
-    philosophyTitle: string;
-    philosophyText: string;
-    decksTitle: string;
-    decksDescription: string;
-    ctaTitle: string;
-    ctaText: string;
-    timelineTitle: string;
-    emptyState: string;
-  };
-
-  // Portfolio page
-  portfolioPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    journeyTitle: string;
-    journeyText: string;
-    philosophyTitle: string;
-    philosophyText: string;
-    areasTitle: string;
-    areas: HighlightItem[];
-    currentTitle: string;
-    currentText: string;
-    ctaText: string;
-    ctaLink: string;
-    timelineTitle: string;
-    emptyState: string;
-  };
-
-  // Trading page
-  tradingPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    journeyTitle: string;
-    journeyText: string;
-    approachTitle: string;
-    approachText: string;
-    areasTitle: string;
-    areas: HighlightItem[];
-    philosophyTitle: string;
-    philosophyText: string;
-    ctaTitle: string;
-    ctaText: string;
-    timelineTitle: string;
-    emptyState: string;
-  };
-
-  // Foodie page
-  foodiePage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    passionTitle: string;
-    passionText: string;
-    contentTitle: string;
-    contentText: string;
-    cookingTitle: string;
-    cookingText: string;
-    highlights: HighlightItem[];
-    ctaTitle: string;
-    ctaDescription: string;
-    ctaText: string;
-  };
-
-  // Hobbies page
-  hobbiesPage: {
-    title: string;
-    subtitle: string;
-    description: string;
-    heroDescription: string;
-    philosophyTitle: string;
-    philosophyText: string;
-    activities: Activity[];
-    gamingTitle: string;
-    gamingText: string;
-    readingSciFiTitle: string;
-    readingSciFiText: string;
-    balanceTitle: string;
-    balanceText: string;
   };
 
   // Contact page
@@ -400,8 +125,6 @@ export interface SiteTranslations {
       projectCollaboration: string;
       startupCollaboration: string;
       techTalkInvitation: string;
-      tradingQuestion: string;
-      dailybotQuestion: string;
     };
   };
 

@@ -1,43 +1,43 @@
 ---
-title: "Contacto — XergioAleX"
-description: "Conectemos y construyamos algo juntos. Siempre abierto a nuevas oportunidades, colaboraciones y conversaciones."
-lastUpdated: 2026-03-09
+title: "Contacto — Pereira Tech Talks"
+description: "Escríbele a Pereira Tech Talks. Estamos abiertos a ponentes, patrocinadores, aliados y miembros de la comunidad que quieran participar, proponer ideas o colaborar."
+lastUpdated: 2026-05-30
 ---
 
-## Ponte en Contacto
+## Escríbenos
 
-Siempre abierto a nuevas oportunidades, colaboraciones y conversaciones. Ya sea para hablar de tecnología, una idea de proyecto, una oportunidad de charla o simplemente saludar.
-
----
-
-## Temas que Me Encanta Discutir
-
-- Tecnología e ingeniería de software
-- Charlas en eventos tecnológicos y conferencias
-- Oportunidades de colaboración y consultoría
-- Ideas de proyectos y construcción de startups
-- [DailyBot](https://dailybot.com) y productividad de equipos
-- Trading y mercados financieros
+Estamos siempre abiertas y abiertos a nuevas y nuevos ponentes, patrocinadores, aliados y miembros de la comunidad. Ya sea que tengas una charla por proponer, quieras patrocinar un meetup o solo decir hola — nos encantaría saber de ti.
 
 ---
 
-## Redes Sociales
+## Cómo participar
 
-- [GitHub: @xergioalex](https://github.com/xergioalex)
-- [LinkedIn: @xergioalex](https://www.linkedin.com/in/xergioalex/)
-- [X/Twitter: @XergioAleX](https://x.com/XergioAleX)
-- [Instagram: @xergioalex](https://www.instagram.com/xergioalex)
+- **Propón una charla** — Sé ponente en un meetup mensual, una sesión lightning o una próxima edición del Pereira Tech Day.
+- **Patrocina un evento** — Apoya un meetup, una conferencia o un programa (Escuela de Speakers, La Biblioteca del Mañana) y conecta con la comunidad tecnológica local.
+- **Sé aliado de la comunidad** — Co-organiza un evento, comparte espacios o construye una colaboración entre comunidades.
+- **Súmate a La Biblioteca del Mañana** — Regístrate en el club de lectura bilingüe y conecta la tecnología con la historia humana en sentido amplio.
+- **Escribe para el blog** — Comparte un artículo, una recapitulación de meetup o un tutorial con la comunidad.
+
+---
+
+## Conéctate con nosotros
+
+- Correo: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
+- LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
+- X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)
+- Instagram: [@pereiratechtalks](https://www.instagram.com/pereiratechtalks)
 
 ---
 
 ## Ubicación
 
-Ubicado en Colombia. Abierto a colaboración remota en todo el mundo.
+Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.
 
 ---
 
-## Más Sobre Mí
+## Más sobre la comunidad
 
-- [Sobre mí](/es/about)
-- [Ver mi CV](/es/cv)
-- [Portafolio](/es/portfolio)
+- [Sobre Pereira Tech Talks](/es/about)
+- [Lee el blog](/es/blog)
+- [Explora los slides](/es/slides)

@@ -22,57 +22,47 @@ const contactCtaHref = `${prefix}/contact?${new URLSearchParams({
 
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
-const personData = {
+const organizationData = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Sergio Alexander Florez Galeano',
-  alternateName: 'XergioAleX',
+  '@type': 'Organization',
+  name: 'Pereira Tech Talks',
+  alternateName: 'PTT',
   url: Astro.site?.href,
-  image: new URL('/images/profile.png', Astro.site).href,
+  logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
   description:
-    'CTO & Cofounder of DailyBot (Y Combinator S21). Computer Science Engineer, MSc in Data Science, with 14+ years building digital products.',
-  jobTitle: 'CTO & Cofounder at DailyBot',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'DailyBot',
-    url: 'https://dailybot.com',
+    'Bilingual technology community of builders, speakers, and learners shaping the future of technology from Pereira, Risaralda, Colombia to the world.',
+  foundingDate: '2014-02-27',
+  foundingLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Pereira',
+      addressRegion: 'Risaralda',
+      addressCountry: 'CO',
+    },
   },
-  alumniOf: [
-    {
-      '@type': 'Organization',
-      name: 'Y Combinator',
-      url: 'https://www.ycombinator.com',
-    },
-    {
-      '@type': 'CollegeOrUniversity',
-      name: 'Universidad Tecnológica de Pereira',
-    },
-  ],
+  knowsLanguage: ['es', 'en'],
   knowsAbout: [
     'Software Engineering',
     'Artificial Intelligence',
     'Web Development',
-    'Astro Framework',
-    'Svelte',
-    'TypeScript',
     'DevOps',
-    'Blockchain',
-    'Algorithmic Trading',
-    'Startup Building',
+    'Public Speaking',
+    'Tech Community Building',
   ],
   sameAs: [
-    'https://github.com/xergioalex',
-    'https://www.linkedin.com/in/xergioalex/',
-    'https://x.com/XergioAleX',
-    'https://www.instagram.com/xergioalex',
+    'https://github.com/pereiratechtalks',
+    'https://www.linkedin.com/company/pereira-tech-talks/',
+    'https://x.com/pereiratechtalks',
+    'https://www.instagram.com/pereiratechtalks',
   ],
 };
 
-const profilePageData = {
+const aboutPageData = {
   '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
+  '@type': 'AboutPage',
   mainEntity: { '@id': Astro.site?.href },
-  dateCreated: '2024-01-01',
+  dateCreated: '2014-02-27',
   dateModified: new Date().toISOString().split('T')[0],
 };
 
@@ -101,12 +91,12 @@ const breadcrumbSchema = {
   title={t.aboutPage.title}
   description={t.aboutPage.description}
   keywords={lang === 'en'
-    ? ['about XergioAleX', 'Sergio Florez biography', 'CTO cofounder DailyBot', 'software engineer Colombia', 'Y Combinator S21 founder', 'full stack developer experience']
-    : ['sobre XergioAleX', 'biografía Sergio Florez', 'CTO cofundador DailyBot', 'ingeniero de software Colombia', 'fundador Y Combinator S21', 'experiencia desarrollador full stack']}
+    ? ['about Pereira Tech Talks', 'PTT community', 'tech community Pereira', 'Risaralda tech ecosystem', 'bilingual tech community Colombia', 'Pereira Tech Day organizers']
+    : ['sobre Pereira Tech Talks', 'comunidad PTT', 'comunidad tecnología Pereira', 'ecosistema tecnología Risaralda', 'comunidad tecnología bilingüe Colombia', 'organizadores Pereira Tech Day']}
 >
   <Fragment slot="head">
-    <JsonLd data={personData} />
-    <JsonLd data={profilePageData} />
+    <JsonLd data={organizationData} />
+    <JsonLd data={aboutPageData} />
     <JsonLd data={breadcrumbSchema} />
   </Fragment>
 
@@ -150,7 +140,7 @@ const breadcrumbSchema = {
   >
     <div class="flex flex-wrap gap-4 mt-4">
       <a
-        href={`${prefix}/cv`}
+        href={`${prefix}/blog`}
         class="inline-flex items-center px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary/90 transition-colors duration-200"
       >
         {t.aboutPage.ctaCv}

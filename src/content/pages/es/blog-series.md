@@ -1,19 +1,19 @@
 ---
-title: "Series del Blog — XergioAleX"
-description: "Explora colecciones curadas de artículos organizados en series temáticas sobre ingeniería de software, trading y crecimiento personal."
-lastUpdated: 2026-03-09
+title: "Series del Blog — Pereira Tech Talks"
+description: "Colecciones curadas de artículos en varios capítulos de la comunidad Pereira Tech Talks — análisis profundos sobre tecnología, ingeniería de software y el oficio de construir."
+lastUpdated: 2026-05-30
 ---
 
-## Series del Blog
+## Artículos curados en varios capítulos
 
-Colecciones curadas de artículos organizados en series temáticas. Cada serie cubre un tema en profundidad a través de múltiples capítulos, diseñados para lectura secuencial y aprendizaje integral.
+Las series agrupan artículos relacionados en narrativas profundas de varios capítulos. Son ideales cuando un tema merece una exploración sostenida — de los fundamentos a la práctica avanzada — a través de varios autores y semanas.
 
-### Series Disponibles
+Durante la transición a Pereira Tech Talks v3.0.0, la colección de series se está reconstruyendo alrededor de los nuevos programas comunitarios (ediciones del Pereira Tech Day, verticales y canal de IA). Aquí aparecerán nuevas series a medida que la comunidad las publique.
 
-- [**Building XergioAleX.com**](/es/blog/series/building-xergioalex/) — La historia completa de la construcción de un sitio web personal moderno, desde decisiones de arquitectura hasta optimización de rendimiento, analítica y escalabilidad de contenido.
-- [**Trading Journey: From Futures to Algorithms**](/es/blog/series/trading-journey/) — Una serie de 3 partes sobre la evolución desde el trading discrecional temprano hasta el análisis estructurado con Market Profile y la ejecución algorítmica con MQL4.
-- [**AEO: De Invisible a Citado**](/es/blog/series/aeo-from-invisible-to-cited/) — De invisible a citado, construyendo un sitio web que los motores de respuesta de IA pueden encontrar, entender y referenciar.
+---
 
-### Cómo Funcionan las Series
+## Explora el blog
 
-Las series agrupan publicaciones de blog relacionadas en capítulos ordenados. Cada publicación en una serie está numerada y puede leerse secuencialmente para la mejor experiencia. Navega entre capítulos usando la navegación de serie al final de cada publicación, o explora la lista completa de capítulos en la página de cada serie.
+- [Todos los artículos](/es/blog)
+- [Catálogo de slides](/es/slides)
+- [Sobre Pereira Tech Talks](/es/about)

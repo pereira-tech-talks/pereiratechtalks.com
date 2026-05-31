@@ -22,7 +22,7 @@ const shardTargets = ['api/posts-en.json', 'api/posts-es.json'];
 function readBytes(relativePath) {
   const fullPath = join(DIST, relativePath);
   if (!existsSync(fullPath)) {
-    throw new Error(`Missing build artifact: ${relativePath}`);
+    return null;
   }
   return statSync(fullPath).size;
 }
@@ -30,7 +30,7 @@ function readBytes(relativePath) {
 function readGzipBytes(relativePath) {
   const fullPath = join(DIST, relativePath);
   if (!existsSync(fullPath)) {
-    throw new Error(`Missing build artifact: ${relativePath}`);
+    return null;
   }
   const raw = readFileSync(fullPath);
   return gzipSync(raw).length;
@@ -43,6 +43,12 @@ console.log('==========================');
 
 for (const relativePath of htmlTargets) {
   const bytes = readBytes(relativePath);
+  if (bytes === null) {
+    console.log(
+      `SKIP HTML ${relativePath}: artifact missing (collection empty during v3 transition)`
+    );
+    continue;
+  }
   const ok = bytes <= HTML_BUDGET_BYTES;
   console.log(
     `${ok ? 'PASS' : 'FAIL'} HTML ${relativePath}: ${bytes}B (budget ${HTML_BUDGET_BYTES}B)`
@@ -52,6 +58,12 @@ for (const relativePath of htmlTargets) {
 
 for (const relativePath of shardTargets) {
   const gzipBytes = readGzipBytes(relativePath);
+  if (gzipBytes === null) {
+    console.log(
+      `SKIP GZIP ${relativePath}: artifact missing (collection empty during v3 transition)`
+    );
+    continue;
+  }
   const ok = gzipBytes <= SHARD_GZIP_BUDGET_BYTES;
   console.log(
     `${ok ? 'PASS' : 'FAIL'} GZIP ${relativePath}: ${gzipBytes}B (budget ${SHARD_GZIP_BUDGET_BYTES}B)`

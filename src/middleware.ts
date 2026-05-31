@@ -26,15 +26,13 @@
  * before checking this allowlist first.
  *
  * v3.0.0 transition note:
- *   The legacy xergioalex personal-page slugs (`cv`, `dailybot`, `entrepreneur`,
- *   `foodie`, `hobbies`, `portfolio`, `tech-talks`, `trading`) are intentionally
- *   removed from the allowlist below. The page wrappers themselves still exist
- *   on disk and are emitted by `astro build` (middleware doesn't gatekeep build
- *   output), but dev/preview requests for them rewrite to /404 — exactly what
- *   we want while waiting for Task 16 to delete the wrappers and Tasks 7–8 to
- *   land the v3 PTT homepage and verticals. New PTT top-level routes
- *   (`/meetups`, `/pereira-tech-days`, `/talks`, etc.) will be added back to
- *   the allowlist by Tasks 7–8 when their pages are introduced.
+ *   The legacy personal-page slugs that previously shipped with the seed clone
+ *   (`cv`, `dailybot`, `entrepreneur`, `foodie`, `hobbies`, `portfolio`,
+ *   `tech-talks`, `trading`) have been deleted from `src/pages/` and their
+ *   page components removed from `src/components/pages/` as part of Task 16
+ *   (legacy content removal). New PTT top-level routes (`/meetups`,
+ *   `/pereira-tech-days`, `/talks`, etc.) will be added back to the allowlist
+ *   by Tasks 9–13 when their pages land.
  */
 import { defineMiddleware } from 'astro:middleware';
 

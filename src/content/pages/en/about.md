@@ -1,49 +1,48 @@
 ---
-title: "About Me — XergioAleX"
-description: "Learn more about my journey, passion for technology, and commitment to building great digital products and fostering innovation."
-lastUpdated: 2026-03-09
+title: "About Pereira Tech Talks"
+description: "Get to know Pereira Tech Talks — a bilingual technology community in Pereira, Risaralda, Colombia. Monthly meetups, the Pereira Tech Day annual conference, the Speaker School, and the La Biblioteca del Mañana reading club since 2014."
+lastUpdated: 2026-05-30
 ---
 
-## Engineer, Builder, Community Leader
+## A bilingual technology community from Pereira to the world
 
-I'm Sergio Florez, a Computer Science Engineer with a Master's degree in Data Science. Over the past 14+ years, I've been building digital products and leading engineering teams. Currently CTO and Co-founder of [DailyBot](https://dailybot.com), a [Y Combinator (S21)](https://www.ycombinator.com/companies/dailybot) company, and Co-founder of [Pereira Tech Talks](https://pereiratech.org), a tech community in Colombia.
+Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. We were born in 2014 as a small group of engineers and designers wanting a space to share what we were learning. A decade later, the community has grown into a multi-program organization that hosts monthly meetups, the annual **Pereira Tech Day** conference, the **Speaker School**, the **La Biblioteca del Mañana** reading club, and a dedicated AI channel — all with a bilingual EN/ES voice and an international outlook.
 
-I build technology that empowers teams. At DailyBot, I lead engineering for a collaboration platform where human teams and AI agents work together seamlessly. My focus is on product strategy, system architecture, and building reliable, scalable solutions.
-
-Before DailyBot, I spent years building digital products across different industries — from early-stage startups to production systems serving thousands of users. My interests span AI, 3D printing, IoT, physical computing, and open source. I believe in learning by building and sharing knowledge with others.
-
----
-
-## What Drives Me
-
-- **Building Digital Products** — From initial idea to millions of users, I love building technology that solves real problems. Over 113+ GitHub repositories, from open source tools to production systems. [See my portfolio](/portfolio)
-- **Community & Speaking** — Founded [Pereira Tech Talks](https://pereiratech.org), a tech community with 700+ members and 50+ events. 30+ speaking engagements at conferences about software engineering, AI, and innovation. [See my talks](/tech-talks)
-- **Continuous Learning** — Passionate about AI, web development, algorithmic trading, and pushing the boundaries of what's possible. Currently exploring GoLang and embodied AI.
+Our work is volunteer-run, sponsor-supported, and open. The website is the operational backbone: a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, designed to be just as readable for AI agents as it is for humans.
 
 ---
 
-## Quick Facts
+## What we do
 
-- Computer Science Engineer from Universidad Tecnologica de Pereira
-- MSc in Data Science
-- 14+ years in tech
-- CTO & Co-founder of [DailyBot](https://dailybot.com) ([Y Combinator S21](https://www.ycombinator.com/companies/dailybot))
-- Founded [Pereira Tech Talks](https://pereiratech.org) community (700+ members, 50+ events)
-- Open source contributor (113+ GitHub repositories)
-- Technology speaker at conferences (30+ talks)
-- Based in Colombia, open to remote collaboration worldwide
-- Avid gamer — Legend of Zelda and Hollow Knight fan
-- Science fiction reader — Isaac Asimov is a favorite author
-- Bilingual — Spanish (native) and English (professional)
-- Philosophy: build, ship, learn, repeat
+- **Monthly Meetups** — In-person and hybrid sessions every month — talks, workshops, and lightning rounds on the topics shaping the industry.
+- **Pereira Tech Day** — Our flagship annual conference — a full day of keynotes, workshops, and networking with international speakers and local partners.
+- **Speaker School** — A program to grow new technical speakers — from idea to stage — with mentorship, practice runs, and rehearsals.
+- **La Biblioteca del Mañana** — A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
+- **AI Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
+- **Bilingual Library** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech community alike.
 
 ---
 
-## Let's Connect
+## Quick facts
 
-- [View my CV](/cv)
+- Founded in Pereira, Risaralda, Colombia (2014)
+- Bilingual community: English and Spanish
+- 90+ monthly meetups since 2014
+- Multiple Pereira Tech Day editions hosted
+- Volunteer-run, sponsor-supported, free to attend
+- Fully AI-agent-readable content (AEO 100)
+- Philosophy: share what you learn, grow the local ecosystem
+
+---
+
+## Want to be part of it?
+
+Whether you want to speak, sponsor, partner, or just attend — there's a place for you.
+
+- [Read the blog](/blog)
+- [Browse slides](/slides)
 - [Get in touch](/contact)
-- [GitHub: @xergioalex](https://github.com/xergioalex)
-- [LinkedIn: @xergioalex](https://www.linkedin.com/in/xergioalex/)
-- [X/Twitter: @XergioAleX](https://x.com/XergioAleX)
-- [Instagram: @xergioalex](https://www.instagram.com/xergioalex)
+- GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
+- LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
+- X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)
+- Instagram: [@pereiratechtalks](https://www.instagram.com/pereiratechtalks)
