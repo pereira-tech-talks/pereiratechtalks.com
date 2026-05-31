@@ -1,0 +1,37 @@
+---
+title:
+  en: "NodeSchool Day Pereira 2018"
+  es: "NodeSchool Day Pereira 2018"
+description:
+  en: "Historical Pereira Tech Talks meetup (2018-06-23). Original program: NodeSchool Day Pereira 2018."
+  es: "Meetup histórico de Pereira Tech Talks (2018-06-23). Programa original: NodeSchool Day Pereira 2018."
+pubDate: 2018-06-23
+date: 2018-06-23
+venue:
+  name: "Pereira, Colombia"
+  city: "Pereira"
+  country: "Colombia"
+mode: in-person
+hero:
+  src: "/images/meetups/nodeschool-day-pereira-2018/hero.jpg"
+  alt:
+    en: "NodeSchool Day Pereira 2018"
+    es: "NodeSchool Day Pereira 2018"
+  layout: banner
+heroImage: "/images/meetups/nodeschool-day-pereira-2018/hero.jpg"
+verticals:
+  - monthly-meetups
+talks: []
+speakers: []
+sponsors: []
+status: completed
+draft: false
+---
+
+## NodeSchool Day Pereira 2018
+
+Meetup histórico de Pereira Tech Talks. Programa original: **NodeSchool Day Pereira 2018**.
+
+> **EN:** Historical Pereira Tech Talks meetup. Original program: **NodeSchool Day Pereira 2018**.
+
+Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
