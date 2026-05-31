@@ -1,0 +1,15 @@
+name: GitHub
+logo:
+  light: /images/sponsors/github-light.png
+  dark: /images/sponsors/github-dark.png
+  alt: GitHub logo
+url: "https://github.com/"
+description:
+  en: The home for software collaboration. Sponsor of Pereira Tech Day 2024 (gold tier).
+  es: El hogar de la colaboración en software. Patrocinador de Pereira Tech Day 2024 (oro).
+tier: gold
+sponsoredEditions:
+  - year: 2024
+    tier: gold
+status: active
+order: 1

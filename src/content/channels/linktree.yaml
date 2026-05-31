@@ -1,0 +1,11 @@
+name: Linktree — Pereira Tech Talks
+platform: linktree
+url: "https://linktr.ee/pertechtalks"
+description:
+  en: One link with all our active channels and current events.
+  es: Un único enlace con todos nuestros canales activos y eventos del momento.
+audience:
+  en: New community members looking for an entry point.
+  es: Personas nuevas en la comunidad que buscan un punto de entrada.
+isPrimary: false
+order: 2

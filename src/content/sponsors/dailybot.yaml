@@ -1,0 +1,15 @@
+name: DailyBot
+logo:
+  light: /images/sponsors/dailybot.png
+  dark: /images/sponsors/dailybot.png
+  alt: DailyBot logo
+url: "https://www.dailybot.com/"
+description:
+  en: AI assistants for high-performing teams. Sponsor of Pereira Tech Day 2024 (silver tier).
+  es: Asistentes de IA para equipos de alto desempeño. Patrocinador de Pereira Tech Day 2024 (plata).
+tier: silver
+sponsoredEditions:
+  - year: 2024
+    tier: silver
+status: active
+order: 4

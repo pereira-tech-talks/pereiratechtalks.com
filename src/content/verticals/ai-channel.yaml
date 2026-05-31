@@ -1,0 +1,21 @@
+title:
+  en: AI Channel
+  es: Canal de IA
+shortName:
+  en: AI
+  es: IA
+mission:
+  en: Track the practical use of AI engineering across the community.
+  es: Rastrear el uso práctico de AI engineering en toda la comunidad.
+description:
+  en: The AI Channel curates talks, demos, and threads about applied AI engineering — agents, RAG, evals, fine-tuning — with a strong bias toward what works in production.
+  es: El Canal de IA cura charlas, demos e hilos sobre AI engineering aplicado — agentes, RAG, evals, fine-tuning — con un fuerte sesgo hacia lo que funciona en producción.
+leaders:
+  - sergio-florez
+channels:
+  - linkedin
+schedule:
+  en: Quarterly AI deep-dive meetups, ongoing async threads.
+  es: Meetups de IA en profundidad cada trimestre y conversaciones asíncronas continuas.
+status: active
+order: 3

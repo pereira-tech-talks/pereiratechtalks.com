@@ -1,0 +1,40 @@
+year: 2026
+title:
+  en: Pereira Tech Day 2026
+  es: Pereira Tech Day 2026
+tagline:
+  en: The next chapter — registration opens soon.
+  es: The next chapter — registration opens soon.
+description:
+  en: A historical Pereira Tech Day edition (2026). Detailed program, photos, and speaker lineup are pending recovery from community archives.
+  es: Edición histórica de Pereira Tech Day (2026). El programa detallado, las fotos y la lista de ponentes están pendientes de recuperación desde los archivos de la comunidad.
+date: 2026-09-26
+venue:
+  name: Pereira, Colombia
+  city: Pereira
+  country: Colombia
+mode: in-person
+hero:
+  src: /images/pereira-tech-days/_placeholder/hero.png
+  alt:
+    en: Pereira Tech Day 2026 placeholder cover
+    es: Cubierta de Pereira Tech Day 2026
+  layout: banner
+brandKit:
+  paletteLight:
+    primary: "#1f6f73"
+    accent: "#e3a648"
+    bg: "#f4f9f9"
+    bgElevated: "#ffffff"
+    text: "#0f2a2c"
+    textMuted: "#6e8589"
+    border: "#e2e8e8"
+schedule: []
+keynotes: []
+lightningTalks: []
+sponsors: []
+organizers: []
+communities: []
+gallery: []
+status: announced
+draft: false

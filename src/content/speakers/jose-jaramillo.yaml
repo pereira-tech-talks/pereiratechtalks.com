@@ -1,0 +1,22 @@
+name: Jose Alfredo Jaramillo
+pronouns: he/him
+role:
+  en: Researcher · Scientific Director at LRC Systems
+  es: Investigador · Director Científico en LRC Systems
+bio:
+  en: "Dr. Jaramillo is an Electronic Engineer (Pontificia Universidad Javeriana), holds a Master's in Physics Instrumentation (UTP), and a PhD from Purdue University. He has been a professor and director of the Sirius research group at UTP and is the Scientific Director of the Laboratory for Research in Complex Systems in California, USA."
+  es: El Dr. Jaramillo es Ingeniero Electrónico de la Pontificia Universidad Javeriana, magíster en Instrumentación Física de la UTP y doctor por Purdue University. Fue profesor y director del Grupo de Investigación Sirius de la UTP y es el Director Científico del Laboratory for Research in Complex Systems en California, EE. UU.
+photo:
+  src: /images/speakers/jose-jaramillo.jpg
+  alt:
+    en: Portrait of Jose Alfredo Jaramillo
+    es: Retrato de Jose Alfredo Jaramillo
+social:
+  linkedin: "https://www.linkedin.com/in/josejaramillov/"
+talks: []
+location:
+  city: California
+  country: United States
+languages:
+  - es
+  - en

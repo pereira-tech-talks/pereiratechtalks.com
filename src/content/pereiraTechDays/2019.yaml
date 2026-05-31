@@ -1,0 +1,40 @@
+year: 2019
+title:
+  en: Pereira Tech Day 2019
+  es: Pereira Tech Day 2019
+tagline:
+  en: Saturday Tech Talks, IDaaS, Code Review, and Girls Day.
+  es: Saturday Tech Talks, IDaaS, Code Review, and Girls Day.
+description:
+  en: A historical Pereira Tech Day edition (2019). Detailed program, photos, and speaker lineup are pending recovery from community archives.
+  es: Edición histórica de Pereira Tech Day (2019). El programa detallado, las fotos y la lista de ponentes están pendientes de recuperación desde los archivos de la comunidad.
+date: 2019-12-01
+venue:
+  name: Pereira, Colombia
+  city: Pereira
+  country: Colombia
+mode: in-person
+hero:
+  src: /images/pereira-tech-days/_placeholder/hero.png
+  alt:
+    en: Pereira Tech Day 2019 placeholder cover
+    es: Cubierta de Pereira Tech Day 2019
+  layout: banner
+brandKit:
+  paletteLight:
+    primary: "#1f6f73"
+    accent: "#e3a648"
+    bg: "#f4f9f9"
+    bgElevated: "#ffffff"
+    text: "#0f2a2c"
+    textMuted: "#6e8589"
+    border: "#e2e8e8"
+schedule: []
+keynotes: []
+lightningTalks: []
+sponsors: []
+organizers: []
+communities: []
+gallery: []
+status: completed
+draft: false

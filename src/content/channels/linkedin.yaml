@@ -1,0 +1,11 @@
+name: LinkedIn — Pereira Tech Talks
+platform: linkedin
+url: "https://www.linkedin.com/company/pereira-tech-talks/"
+description:
+  en: Professional updates, event announcements, and speaker callouts.
+  es: Actualizaciones profesionales, anuncios de eventos y convocatorias para ponentes.
+audience:
+  en: Professionals tracking the local tech scene.
+  es: Profesionales que siguen la escena tecnológica local.
+isPrimary: false
+order: 4

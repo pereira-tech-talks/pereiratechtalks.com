@@ -1,0 +1,116 @@
+year: 2024
+title:
+  en: Pereira Tech Day 2024
+  es: Pereira Tech Day 2024
+tagline:
+  en: A day of technology, growth, and community in Pereira.
+  es: Un día de tecnología, crecimiento y comunidad en Pereira.
+description:
+  en: Pereira Tech Day 2024 brought together hundreds of builders, students, and community members at the Universidad Tecnológica de Pereira for a free full-day program of keynotes, lightning talks, and networking. Four keynotes covered frontend engineering, product management and Python community, applied research, and AI-driven entrepreneurship; the lightning talks gave first-time speakers a stage to share what they are building.
+  es: Pereira Tech Day 2024 reunió a cientos de personas constructoras, estudiantes y miembros de la comunidad en la Universidad Tecnológica de Pereira para una jornada gratuita de keynotes, lightning talks y networking. Cuatro keynotes cubrieron ingeniería frontend, product management y comunidad Python, investigación aplicada y emprendimiento con IA; las lightning talks dieron escenario a ponentes debutantes para compartir lo que están construyendo.
+date: 2024-09-21
+venue:
+  name: Auditorio Jorge Roa Martínez, Universidad Tecnológica de Pereira
+  city: Pereira
+  country: Colombia
+mode: in-person
+hero:
+  src: /images/pereira-tech-days/2024/hero.jpeg
+  alt:
+    en: Pereira Tech Day 2024 attendees gathered in the Auditorio Jorge Roa Martínez
+    es: Asistentes de Pereira Tech Day 2024 reunidos en el Auditorio Jorge Roa Martínez
+  layout: banner
+brandKit:
+  paletteLight:
+    primary: "#1f3f59"
+    accent: "#f06d6d"
+    bg: "#fef7f3"
+    bgElevated: "#ffffff"
+    text: "#1f3f59"
+    textMuted: "#b66844"
+    border: "#e8e2d9"
+  typography:
+    headingFamily: "Bebas Neue, \"Arial Black\", sans-serif"
+    headingTransform: uppercase
+    headingTracking: 0.18em
+    fontSources:
+      - family: Bebas Neue
+        npmPackage: "@fontsource/bebas-neue"
+schedule:
+  - time: "08:00"
+    type: open-doors
+  - time: "08:30"
+    type: keynote
+    title:
+      en: Opening keynote — Vanessa Aristizabal
+      es: Keynote de apertura — Vanessa Aristizabal
+  - time: "09:30"
+    type: panel
+    title:
+      en: Product, Python, and community
+      es: Producto, Python y comunidad
+  - time: "10:30"
+    type: break
+  - time: "11:00"
+    type: keynote
+    title:
+      en: Applied research keynote — Dr. Jose Jaramillo
+      es: Keynote de investigación aplicada — Dr. Jose Jaramillo
+  - time: "12:00"
+    type: keynote
+    title:
+      en: AI-driven entrepreneurship — César Camacho
+      es: Emprendimiento con IA — César Camacho
+  - time: "13:00"
+    type: lightning
+    title:
+      en: Lightning talks block
+      es: Bloque de lightning talks
+  - time: "14:00"
+    type: closing
+keynotes:
+  - vanessa-aristizabal
+  - karolina-ladino
+  - jose-jaramillo
+  - cesar-camacho
+lightningTalks:
+  - jonathan-alvarez
+  - sebastian-franco
+sponsors:
+  - slug: github
+    tier: gold
+  - slug: source-meridian
+    tier: gold
+  - slug: ase-utp
+    tier: gold
+  - slug: dailybot
+    tier: silver
+  - slug: gorilla-logic
+    tier: silver
+  - slug: made-for-germany
+    tier: community
+organizers:
+  - carolina-gomez-trejos
+  - jose-felipe-duarte
+  - stiven-cardona-monsalve
+  - sergio-florez
+  - alejandro-rendon
+  - angelica-aguirre
+  - melisa-escobar
+communities:
+  - name: Python Pereira
+    logo: /images/communities/pypereira.png
+    url: "https://pypereira.co/"
+  - name: JointDev
+    logo: /images/communities/jointdev.png
+    url: "https://jointdevweb.firebaseapp.com/"
+  - name: PereiraJS
+    logo: /images/communities/perjs.jpeg
+    url: "https://perjs.org/"
+  - name: Pereira Tech Talks
+    logo: /images/communities/ptt.png
+    url: "https://pereiratechtalks.org/"
+gallery: []
+linkMeetupCom: "https://www.meetup.com/pereira-tech-talks/events/302603058/"
+status: completed
+draft: false

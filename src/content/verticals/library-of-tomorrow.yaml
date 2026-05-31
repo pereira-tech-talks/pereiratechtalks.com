@@ -1,0 +1,21 @@
+title:
+  en: La Biblioteca del Mañana
+  es: La Biblioteca del Mañana
+shortName:
+  en: Library
+  es: Biblioteca
+mission:
+  en: A living archive of the talks, slides, and recordings the community has produced.
+  es: Un archivo vivo de las charlas, slides y grabaciones que la comunidad ha producido.
+description:
+  en: "La Biblioteca del Mañana indexes every talk, slide deck, and write-up the community has produced — bilingual, searchable, and citable. The goal: any newcomer can stand on the shoulders of every meetup that came before."
+  es: "La Biblioteca del Mañana indexa cada charla, slide y artículo que ha producido la comunidad — bilingüe, buscable y citable. El objetivo: que cualquier persona nueva pueda apoyarse en cada meetup que vino antes."
+leaders:
+  - sergio-florez
+channels:
+  - github
+schedule:
+  en: Updated continuously after every meetup.
+  es: Se actualiza continuamente después de cada meetup.
+status: active
+order: 2

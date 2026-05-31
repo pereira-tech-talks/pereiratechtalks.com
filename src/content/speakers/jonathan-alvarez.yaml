@@ -1,0 +1,21 @@
+name: Jonathan Alvarez
+pronouns: he/him
+role:
+  en: Tech Lead · Sr. Software Engineer at Litentry
+  es: Tech Lead · Sr. Software Engineer en Litentry
+bio:
+  en: Tech lead and senior software engineer focused on Web3 infrastructure. Lightning-talk presenter at Pereira Tech Day 2024 on the topic of giving your first talk.
+  es: Tech lead y senior software engineer enfocado en infraestructura Web3. Ponente lightning de Pereira Tech Day 2024 sobre dar tu primera charla.
+photo:
+  src: /images/speakers/jonathan-alvarez.jpeg
+  alt:
+    en: Portrait of Jonathan Alvarez
+    es: Retrato de Jonathan Alvarez
+social:
+  github: "http://github.com/jonalvarezz"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es
