@@ -1,0 +1,75 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+---
+
+<InternalLayout
+  title="Brand Book"
+  description="Pereira Tech Talks v3.0.0 brand & design system."
+  section="brand"
+>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">Internal · Brand</p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">PTT Brand Book</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        The single source of truth for the Pereira Tech Talks v3.0.0 visual
+        identity. This is a developer-facing companion to
+        <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">docs/BRAND_GUIDE.md</code>
+        and
+        <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800">analysis_results/BRAND_PALETTE.md</code>.
+      </p>
+    </header>
+
+    <section class="grid sm:grid-cols-2 gap-4">
+      <a href="/internal/brand/colors" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">01</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Colors</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Light + dark token tables with HEX, contrast, and usage rules.</p>
+      </a>
+      <a href="/internal/brand/typography" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">02</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Typography</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Type scale, line-heights, tracking. Default Inter Variable.</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Pending — see follow-ups</p>
+      </a>
+      <a href="/internal/brand/spacing-radius-motion" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">03</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Spacing · Radius · Motion</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">4-base scales, radius tokens, motion durations.</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Pending — see follow-ups</p>
+      </a>
+      <a href="/internal/brand/iconography" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">04</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Iconography</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Lucide pack, sizes, stroke widths, accessibility rules.</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Pending — see follow-ups</p>
+      </a>
+      <a href="/internal/brand/voice-and-tone" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">05</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Voice &amp; Tone</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">EN + ES voice with do/don't tables and orthography rules.</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Pending — see follow-ups</p>
+      </a>
+      <a href="/internal/brand/logo-usage" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">06</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Logo usage</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Variants, clear-space, downloads, do/don't.</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Pending — see follow-ups</p>
+      </a>
+      <a href="/internal/brand/per-edition-kits" class="block p-5 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition sm:col-span-2">
+        <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">07 · Critical</p>
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Per-edition brand kits (Pereira Tech Days)</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300">Typed contract, scoping rule, PTD 2024 reference kit, recipe to add new editions.</p>
+      </a>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Pending follow-ups</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Type scale, spacing, motion, iconography, voice-and-tone, and logo-usage sub-pages — built atomically off <code>BRAND_PALETTE.md</code> in a follow-up turn.</li>
+        <li>Run automated WCAG contrast verification once <code>pnpm</code> is available (deferred).</li>
+        <li>Spot-check the global primary against the actual logo files when <code>tmp/assets_brand/</code> is available.</li>
+      </ul>
+    </section>
+  </main>
+</InternalLayout>

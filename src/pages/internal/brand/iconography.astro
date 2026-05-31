@@ -1,0 +1,118 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+---
+
+<InternalLayout
+  title="Brand Book — Iconography"
+  description="PTT v3.0.0 icon pack, sizes, stroke widths, and accessibility rules."
+  section="brand"
+  subsection="iconography"
+>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        <a href="/internal/brand" class="hover:underline">Brand</a> / Iconography
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">Iconography</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        Pereira Tech Talks v3.0.0 standardizes on the
+        <a href="https://lucide.dev/" class="underline">Lucide</a> icon pack:
+        broad coverage, consistent geometric language, MIT licensed, easy to
+        tree-shake, and well-supported in Astro/Svelte islands.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Sizes</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Size</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Pixel</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Use</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tr><td class="px-4 py-3 font-mono text-xs">sm</td><td class="px-4 py-3 font-mono text-xs">16px</td><td class="px-4 py-3 text-gray-600 dark:text-gray-300">Inline meta · table cells · compact UI</td></tr>
+            <tr><td class="px-4 py-3 font-mono text-xs">md</td><td class="px-4 py-3 font-mono text-xs">20px</td><td class="px-4 py-3 text-gray-600 dark:text-gray-300">Buttons · inline links · headers</td></tr>
+            <tr><td class="px-4 py-3 font-mono text-xs">lg</td><td class="px-4 py-3 font-mono text-xs">24px</td><td class="px-4 py-3 text-gray-600 dark:text-gray-300">Default — most UI</td></tr>
+            <tr><td class="px-4 py-3 font-mono text-xs">xl</td><td class="px-4 py-3 font-mono text-xs">32px</td><td class="px-4 py-3 text-gray-600 dark:text-gray-300">Hero / feature panels · empty-state illustrations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Stroke width</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li><code>1.5</code> — default. Quiet, editorial.</li>
+        <li><code>2</code> — emphasis. Use sparingly (CTAs, alerts).</li>
+        <li>Never below <code>1.25</code> — poor legibility on dark mode.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Color</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Use <code>currentColor</code> by default — inherits the surrounding text token.</li>
+        <li>Decorative-only icons can use <code>--ptt-accent</code> if accompanied by visible text.</li>
+        <li>Never use <code>--ptt-accent</code> as the only visual signal of meaning (color alone fails accessibility).</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Accessibility</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Decorative icons next to visible text: <code>aria-hidden=&quot;true&quot;</code>.</li>
+        <li>Icon-only buttons / links: <code>aria-label</code> is mandatory and localized via <code>getTranslations(lang)</code>.</li>
+        <li>Status icons (success/warning/error) must include a screen-reader label, not just color.</li>
+        <li>Touch target minimum: <strong>44×44px</strong> (icon size + padding).</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Astro / Svelte usage</h2>
+      <pre class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4 overflow-x-auto text-xs text-gray-800 dark:text-gray-100"><code>{`---
+// Astro: import only the icons you use; tree-shaking strips the rest.
+import { Calendar, Mic, Users } from 'lucide-astro';
+---
+
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-ptt-primary text-white">
+  <Calendar size={20} aria-hidden="true" stroke-width={1.5} />
+  <span>Next meetup</span>
+</button>
+
+<a href="/cfs" aria-label="Apply as a speaker" class="p-2 rounded-md hover:bg-ptt-primary-soft">
+  <Mic size={20} aria-hidden="true" stroke-width={1.5} />
+</a>`}</code></pre>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Reserved icons (community lexicon)</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Pin one icon per concept site-wide so users build mental shortcuts:
+      </p>
+      <div class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700 dark:text-gray-200">
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Calendar</code> — events, meetups, dates</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Mic</code> — speakers, talks, CFS</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Users</code> — community, contributors</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>BookOpen</code> — La Biblioteca del Mañana</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>GraduationCap</code> — Speaker School</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Sparkles</code> — Pereira Tech Days</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Hash</code> — tags · channels</div>
+        <div class="rounded-md border border-gray-200 dark:border-gray-700 p-3"><code>Globe</code> — international, multi-language</div>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Don't</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Mix icon packs (no Heroicons, Material, or Phosphor — Lucide only).</li>
+        <li>Use emoji as functional icons in chrome (only allowed in user-generated content).</li>
+        <li>Apply drop shadows or gradients to icons.</li>
+        <li>Animate icons by default — opt-in only and respect <code>prefers-reduced-motion</code>.</li>
+      </ul>
+    </section>
+  </main>
+</InternalLayout>
