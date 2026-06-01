@@ -26,6 +26,8 @@ export const en: SiteTranslations = {
     sponsors: 'Sponsors',
     contributors: 'Team',
     verticals: 'Programs',
+    channels: 'Channels',
+    press: 'Press',
     community: 'Community',
   },
 

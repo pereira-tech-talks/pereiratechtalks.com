@@ -15,6 +15,8 @@ module.exports = {
         '/verticals/',
         '/call-for-speakers/',
         '/sponsor-us/',
+        '/channels/',
+        '/press/',
         '/es/',
       ],
       numberOfRuns: 3,

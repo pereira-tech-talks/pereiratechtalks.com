@@ -127,6 +127,8 @@ function closeAllDropdowns() {
             <a href="{prefix}/sponsors" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors' })}>{t.nav.sponsors}</a>
             <a href="{prefix}/talks" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'talks' })}>{t.nav.talks}</a>
             <a href="{prefix}/slides" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides' })}>{t.nav.slides}</a>
+            <a href="{prefix}/channels" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels' })}>{t.nav.channels}</a>
+            <a href="{prefix}/press" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press' })}>{t.nav.press}</a>
           </div>
         {/if}
       </div>

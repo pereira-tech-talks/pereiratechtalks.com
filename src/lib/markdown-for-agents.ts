@@ -54,6 +54,8 @@ const SITE_NAV_SECTIONS: NavSection[] = [
         label: { en: 'Sponsor us', es: 'Patrocínanos' },
         path: '/sponsor-us',
       },
+      { label: { en: 'Channels', es: 'Canales' }, path: '/channels' },
+      { label: { en: 'Press', es: 'Prensa' }, path: '/press' },
     ],
   },
   {

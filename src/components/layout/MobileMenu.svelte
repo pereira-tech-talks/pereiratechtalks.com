@@ -134,6 +134,8 @@ onDestroy(() => {
         <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
         <a href="{prefix}/talks" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'talks', source: 'mobile' })}>{t.nav.talks}</a>
         <a href="{prefix}/slides" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides', source: 'mobile' })}>{t.nav.slides}</a>
+        <a href="{prefix}/channels" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels', source: 'mobile' })}>{t.nav.channels}</a>
+        <a href="{prefix}/press" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press', source: 'mobile' })}>{t.nav.press}</a>
       </div>
     {/if}
 

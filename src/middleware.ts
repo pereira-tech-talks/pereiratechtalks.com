@@ -51,6 +51,8 @@ const KNOWN_ROOT_PATHS = new Set([
   'verticals',
   'call-for-speakers',
   'sponsor-us',
+  'channels',
+  'press',
   'api',
   'es',
   'internal',
@@ -75,6 +77,8 @@ const KNOWN_ES_PATHS = new Set([
   'verticals',
   'call-for-speakers',
   'sponsor-us',
+  'channels',
+  'press',
   'rss.xml',
 ]);
 

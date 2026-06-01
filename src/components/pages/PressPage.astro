@@ -1,0 +1,263 @@
+---
+/**
+ * PTT v3.0.0 press / media page (shared between EN and ES).
+ *
+ * Informational landing for journalists, podcasters, and media partners.
+ * Provides community quick facts, a logo download stub, a contact channel,
+ * and pointers to high-signal pages (about, sponsors, contributors).
+ */
+
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { type Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const t = {
+  title: lang === 'es' ? 'Prensa' : 'Press',
+  description:
+    lang === 'es'
+      ? 'Recursos para periodistas, podcasters y aliados de medios que quieren cubrir Pereira Tech Talks: hechos clave, descargas de marca y contacto directo.'
+      : 'Resources for journalists, podcasters, and media partners covering Pereira Tech Talks: key facts, brand downloads, and a direct contact.',
+  intro:
+    lang === 'es'
+      ? 'Somos una comunidad sin fines de lucro con sede en Pereira, Risaralda, Colombia. Activa desde 2014. Lo que sigue está pensado para que puedas hablar de nosotros con precisión.'
+      : 'We are a non-profit community headquartered in Pereira, Risaralda, Colombia. Active since 2014. The information below exists to help you talk about us accurately.',
+  factsTitle: lang === 'es' ? 'Hechos clave' : 'Key facts',
+  facts:
+    lang === 'es'
+      ? [
+          ['Fundación', 'Pereira, Risaralda, Colombia · 2014'],
+          [
+            'Naturaleza',
+            'Comunidad sin fines de lucro, organizada por voluntariado',
+          ],
+          ['Idiomas', 'Español e inglés (totalmente bilingüe)'],
+          [
+            'Programas',
+            'Meetups mensuales · Pereira Tech Day · Speaker School · La Biblioteca del Mañana · AI Channel',
+          ],
+          [
+            'Cifras',
+            '90+ meetups · 200+ charlas · 6.500+ asistencias · 7 ediciones de Pereira Tech Day',
+          ],
+          ['Modelo', 'Eventos gratuitos sostenidos por patrocinadores'],
+        ]
+      : [
+          ['Founded', 'Pereira, Risaralda, Colombia · 2014'],
+          ['Nature', 'Non-profit, volunteer-organized community'],
+          ['Languages', 'Spanish and English (fully bilingual)'],
+          [
+            'Programs',
+            'Monthly meetups · Pereira Tech Day · Speaker School · La Biblioteca del Mañana · AI Channel',
+          ],
+          [
+            'Numbers',
+            '90+ meetups · 200+ talks · 6,500+ attendees · 7 Pereira Tech Day editions',
+          ],
+          ['Model', 'Free events sustained by sponsorships'],
+        ],
+  boilerplateTitle:
+    lang === 'es'
+      ? 'Descripción breve (boilerplate)'
+      : 'Short description (boilerplate)',
+  boilerplate:
+    lang === 'es'
+      ? 'Pereira Tech Talks es una comunidad bilingüe de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y siete ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global a través de meetups mensuales, la Speaker School, La Biblioteca del Mañana y el AI Channel.'
+      : 'Pereira Tech Talks is a bilingual community of builders, speakers, and learners headquartered in Pereira, Risaralda, Colombia. Since 2014 we have hosted 90+ meetups and seven Pereira Tech Day editions, connecting local talent to the global tech ecosystem through monthly meetups, the Speaker School, La Biblioteca del Mañana, and the AI Channel.',
+  brandTitle: lang === 'es' ? 'Descargas de marca' : 'Brand downloads',
+  brand:
+    lang === 'es'
+      ? [
+          {
+            label: 'Logotipo principal (SVG)',
+            href: '/images/brand/pereira-tech-talks-logo.svg',
+            note: 'Vector — fondo claro/oscuro',
+          },
+          {
+            label: 'Avatar cuadrado (PNG, 512×512)',
+            href: '/icons/icon-512x512.png',
+            note: 'Útil para perfiles y portadas',
+          },
+          {
+            label: 'Apple touch icon (PNG, 180×180)',
+            href: '/icons/apple-touch-icon.png',
+            note: 'Para integraciones móviles',
+          },
+        ]
+      : [
+          {
+            label: 'Primary logotype (SVG)',
+            href: '/images/brand/pereira-tech-talks-logo.svg',
+            note: 'Vector — light/dark background',
+          },
+          {
+            label: 'Square avatar (PNG, 512×512)',
+            href: '/icons/icon-512x512.png',
+            note: 'For profile pictures and covers',
+          },
+          {
+            label: 'Apple touch icon (PNG, 180×180)',
+            href: '/icons/apple-touch-icon.png',
+            note: 'For mobile integrations',
+          },
+        ],
+  brandFootnote:
+    lang === 'es'
+      ? 'Si necesitas un activo adicional (logotipo monocromo, kit por edición, retratos de organizadores), escríbenos.'
+      : 'If you need an extra asset (monochrome logo, per-edition kit, organizer portraits), reach out.',
+  contactTitle: lang === 'es' ? 'Contacto de prensa' : 'Press contact',
+  contactIntro:
+    lang === 'es'
+      ? 'Para entrevistas, cubrimientos en sitio, fotografía o cualquier solicitud editorial:'
+      : 'For interviews, on-site coverage, photography, or any editorial request:',
+  contactCta:
+    lang === 'es' ? 'Escríbenos al formulario' : 'Reach out via the form',
+  contactEmail: 'hello@pereiratechtalks.org',
+  linksTitle: lang === 'es' ? 'Páginas útiles' : 'Useful pages',
+  links:
+    lang === 'es'
+      ? [
+          { label: 'Sobre la comunidad', href: '/es/about/' },
+          { label: 'Programas', href: '/es/verticals/' },
+          { label: 'Pereira Tech Days', href: '/es/pereira-tech-days/' },
+          { label: 'Patrocinadores', href: '/es/sponsors/' },
+          { label: 'Contribuyentes', href: '/es/contributors/' },
+        ]
+      : [
+          { label: 'About the community', href: '/about/' },
+          { label: 'Programs', href: '/verticals/' },
+          { label: 'Pereira Tech Days', href: '/pereira-tech-days/' },
+          { label: 'Sponsors', href: '/sponsors/' },
+          { label: 'Contributors', href: '/contributors/' },
+        ],
+};
+
+const contactHref =
+  lang === 'es' ? '/es/contact/?reason=press' : '/contact/?reason=press';
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: lang === 'es' ? '/es/' : '/',
+  },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <div class="bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+      <Eyebrow>{lang === 'es' ? 'Para medios' : 'For media'}</Eyebrow>
+      <h1
+        class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50"
+      >
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
+        {t.intro}
+      </p>
+    </div>
+  </div>
+
+  <Section title={t.factsTitle}>
+    <dl
+      class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-gray-700 dark:text-gray-200"
+    >
+      {
+        t.facts.map(([key, value]) => (
+          <div>
+            <dt class="text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+              {key}
+            </dt>
+            <dd class="mt-1 text-base">{value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section title={t.boilerplateTitle} surface="alt">
+    <blockquote
+      class="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6 text-lg italic text-gray-800 dark:text-gray-100"
+    >
+      {t.boilerplate}
+    </blockquote>
+  </Section>
+
+  <Section title={t.brandTitle}>
+    <ul class="grid gap-4 sm:grid-cols-3 list-none">
+      {
+        t.brand.map((asset) => (
+          <li class="flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-5">
+            <p class="text-sm font-semibold text-gray-900 dark:text-gray-50">
+              {asset.label}
+            </p>
+            <p class="mt-1 text-xs text-gray-600 dark:text-gray-300">{asset.note}</p>
+            <a
+              href={asset.href}
+              download
+              class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark hover:underline"
+            >
+              {lang === 'es' ? 'Descargar' : 'Download'}
+              <span aria-hidden="true">↓</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-4 text-sm italic text-gray-600 dark:text-gray-300">
+      {t.brandFootnote}
+    </p>
+  </Section>
+
+  <div class="bg-ptt-bg-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {t.contactTitle}
+      </h2>
+      <p class="mt-3 text-gray-200">{t.contactIntro}</p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href={contactHref}
+          class="inline-flex items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-gray-950 shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+        >
+          {t.contactCta}
+        </a>
+        <a
+          href={`mailto:${t.contactEmail}`}
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-base font-semibold text-white ring-1 ring-white/30 hover:bg-white/15"
+        >
+          {t.contactEmail}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Section title={t.linksTitle} surface="alt">
+    <ul class="grid gap-3 sm:grid-cols-2 list-none">
+      {
+        t.links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="block rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:ring-ptt-primary/40 dark:hover:ring-ptt-primary-dark/40"
+            >
+              <span class="text-ptt-primary dark:text-ptt-primary-dark">→</span>{' '}
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+</MainLayout>

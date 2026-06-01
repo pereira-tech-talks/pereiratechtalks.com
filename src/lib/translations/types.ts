@@ -32,6 +32,8 @@ export interface SiteTranslations {
     sponsors: string;
     contributors: string;
     verticals: string;
+    channels: string;
+    press: string;
     community: string;
   };
 
