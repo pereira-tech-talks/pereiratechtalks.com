@@ -39,10 +39,10 @@ const SITE_NAV_SECTIONS: NavSection[] = [
         path: '/pereira-tech-days',
       },
       { label: { en: 'Meetups', es: 'Meetups' }, path: '/meetups' },
-      { label: { en: 'Events', es: 'Eventos' }, path: '/events' },
+      { label: { en: 'Talks', es: 'Charlas' }, path: '/talks' },
       {
-        label: { en: 'Speaker School', es: 'Escuela de ponentes' },
-        path: '/speaker-school',
+        label: { en: 'Programs', es: 'Programas' },
+        path: '/verticals',
       },
       { label: { en: 'Speakers', es: 'Ponentes' }, path: '/speakers' },
       {
@@ -50,7 +50,10 @@ const SITE_NAV_SECTIONS: NavSection[] = [
         path: '/contributors',
       },
       { label: { en: 'Sponsors', es: 'Patrocinadores' }, path: '/sponsors' },
-      { label: { en: 'Channels', es: 'Canales' }, path: '/channels' },
+      {
+        label: { en: 'Sponsor us', es: 'Patrocínanos' },
+        path: '/sponsor-us',
+      },
     ],
   },
   {
@@ -341,6 +344,96 @@ export function serializeSeriesListingToMarkdown(
   lines.push(generateSiteNavigation(lang));
 
   return `${lines.join('\n')}\n`;
+}
+
+/**
+ * Generic serializer used by every PTT v3 collection markdown endpoint
+ * (meetups, speakers, talks, sponsors, contributors, verticals, PTDs).
+ *
+ * Produces a stable shape:
+ *   # title
+ *   > description
+ *   Language: ...
+ *   Canonical: ...
+ *   <metadata key: value>
+ *   ---
+ *   <body>
+ *   <sections>
+ *   <site navigation>
+ */
+export interface GenericMarkdownSection {
+  heading: string;
+  lines: string[];
+}
+
+export interface GenericMarkdownOptions {
+  title: string;
+  description?: string;
+  lang: string;
+  canonical: string;
+  metadata?: Array<[string, string]>;
+  body?: string;
+  sections?: GenericMarkdownSection[];
+}
+
+export function serializeGenericToMarkdown(
+  options: GenericMarkdownOptions
+): string {
+  const { title, description, lang, canonical, metadata, body, sections } =
+    options;
+  const lines: string[] = [];
+
+  lines.push(`# ${title}`);
+  lines.push('');
+  if (description) {
+    lines.push(`> ${description}`);
+    lines.push('');
+  }
+  lines.push(`Language: ${lang}`);
+  lines.push(`Canonical: ${canonical}`);
+  if (metadata) {
+    for (const [key, value] of metadata) {
+      if (value) lines.push(`${key}: ${value}`);
+    }
+  }
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+
+  if (body) {
+    lines.push(body.trim());
+    lines.push('');
+  }
+
+  if (sections) {
+    for (const section of sections) {
+      if (section.lines.length === 0) continue;
+      lines.push(`## ${section.heading}`);
+      lines.push('');
+      for (const line of section.lines) {
+        lines.push(line);
+      }
+      lines.push('');
+    }
+  }
+
+  lines.push(generateSiteNavigation(lang));
+  return `${lines.join('\n')}\n`;
+}
+
+/**
+ * Resolve a bilingual field (string | { en, es }) to a plain string in
+ * the requested language. Mirrors the runtime `tr()` helper in
+ * src/lib/i18n.ts so server-side .md.ts endpoints can serialize content
+ * without importing the runtime helper.
+ */
+export function resolveI18n(
+  value: string | { en?: string; es?: string } | undefined | null,
+  lang: string
+): string {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'string') return value;
+  return value[lang as 'en' | 'es'] ?? value.en ?? value.es ?? '';
 }
 
 /**
