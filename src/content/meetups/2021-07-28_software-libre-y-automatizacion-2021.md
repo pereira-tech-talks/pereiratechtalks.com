@@ -31,7 +31,7 @@ draft: false
 ## Software libre y Automatización
 
 ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀
-Esta vez tendremos un gran meetup con la mejor energia por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompañanos este Miércoles 28 de Julio a la charla.
+Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la charla.
 
 Charla: Software libre para una sociedad libre.
 Expositor: Steven Mejía
@@ -41,7 +41,7 @@ Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingenie
 
 ### Summary in English
 
-A 2021 Pereira Tech Talks meetup. ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energia por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompañanos este Miércoles 28 de Julio a la charla. Charla: Software libre para una…
+A 2021 Pereira Tech Talks meetup. ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la charla. Charla: Software libre para una…
 
 ---
 

@@ -30,7 +30,7 @@ draft: false
 
 ## Noche de DevOps - Introducción a Docker y Kubernetes
 
-📣 ¡Anunciamos nuestro gran meetup de cierre! Acompañanos a despedir el 2018 compartiendo con la comunidad y aprendiendo muchos sobre infraestructura y arquitecturas orientadas a microservicios.
+📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y arquitecturas orientadas a microservicios.
 
 🔎 Docker es una herramienta diseñada para beneficiar tanto a desarrolladores, testers, como administradores de sistemas, en relación a las máquinas, a los entornos en sí donde se ejecutan las aplicaciones software, los procesos de despliegue, etc, permitiendo desarrollar arquitecturas orientadas a microservicios enjaulando cada unidad de funcionalidad/sistema mediante contenedores.
 
