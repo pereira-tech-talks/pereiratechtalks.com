@@ -30,8 +30,28 @@ draft: false
 
 ## Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS**.
+Reanudamos actividades con una gran asistencia y dos charlas geniales sobre tecnologías Javascript:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Virtual Reality para la web con A-Frame && Point-free Javascript con RamdaJS**.
+Hoy en día, la web es la plataforma de distribución masiva más importante, es por esto que se pensó en llevar la experiencia de la Realidad Virtual hasta ella, haciendo que experiencias inmersivas 360 sean una realidad, accesible y al alcance de todos.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Realidad Virtual para la web con A-Frame** ([perfil](https://twitter.com/xergioalex))
+2. **Point-free Javascript con RamdaJS** ([perfil](https://twitter.com/alsug4))
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring Realidad Virtual para la web con A-Frame · Point-free Javascript con RamdaJS. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Realidad Virtual para la web con A-Frame**
+2. **Point-free Javascript con RamdaJS**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

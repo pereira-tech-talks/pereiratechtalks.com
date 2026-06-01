@@ -30,8 +30,19 @@ draft: false
 
 ## Noche de liderazgo y testing
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de liderazgo y testing**.
+Introducción a Load Testing y Observability con K6 y New Relic
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Leadership Night y testing**.
+Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad Tecnológica de Pereira y Platzi Master, mentor en ProTalento.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2022 Pereira Tech Talks meetup. Introducción a Load Testing y Observability con K6 y New Relic Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad Tecnológica de Pereira y Platzi Master, mentor en ProTalento.
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/285770133)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

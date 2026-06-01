@@ -30,8 +30,18 @@ draft: false
 
 ## Aprendiendo sobre JWT (JSON web Tokens)
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Aprendiendo sobre JWT (JSON web Tokens)**.
+En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados del programa de Ingeniería de Sistemas de la seccional y de otras universidades.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Learning sobre JWT (JSON web Tokens)**.
+En esta oportunidad [Carlos González](https://www.facebook.com/CarloS.GonzaleZ.E) nos hablo un poco sobre JSON web Tokens en NodeJs, el cual es un estándar abierto que define una forma compacta y segura de transmitir información entre distintos interesados como objetos JSON, usados comúnmente para hacer autenticación e intercambio de información a tráves de un canal inseguro.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados del programa de Ingeniería de Sistemas de la seccional y de otras universidades. En esta oportunidad [Carlos…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

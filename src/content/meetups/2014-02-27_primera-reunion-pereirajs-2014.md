@@ -30,8 +30,18 @@ draft: false
 
 ## Primera reunión PereiraJs
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Primera reunión PereiraJs**.
+Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **First meeting of PereiraJs**.
+Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel Pineda](https://twitter.com/pin3da) presentaron una charla titulada **[JavaScript Historia y aplicaciones](http://jhonber.github.io/slides)**.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2014 Pereira Tech Talks meetup. Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo. Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

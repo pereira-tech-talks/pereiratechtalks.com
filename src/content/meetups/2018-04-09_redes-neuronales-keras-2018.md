@@ -30,8 +30,18 @@ draft: false
 
 ## Introducción a las redes neuronales con Keras + Random Forest
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a las redes neuronales con Keras + Random Forest**.
+En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter.com/leiverandres), dos destacados estudiantes de la Universidad Tecnológica de Pereira en el campo de inteligencia artificial y machine learning.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a las redes neuronales con Keras + Random Forest**.
+**Más memorias del evento:**
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup. En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter.com/leiverandres), dos destacados estudiantes de…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

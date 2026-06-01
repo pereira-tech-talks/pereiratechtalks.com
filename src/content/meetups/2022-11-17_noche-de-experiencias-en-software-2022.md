@@ -30,8 +30,20 @@ draft: false
 
 ## Noche de Experiencias en la industria del Software
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de Experiencias en la industria del Software**. Sede: Catholic University of Pereira.
+Speaker: Andrés Rodriguez
+Charla: Conviértete en desarrollador web, estos son los beneficios.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Industry Experiences Night en la industria del Software**. Venue: Catholic University of Pereira.
+Esta es una charla más orientada a las personas que tienen curiosidad en la industria del software, aquellos y aquellas estudiantes de carreras afines a la tecnología que tienen incertidumbre sobre cual ruta podría ser la mejor opción para tomar. O incluso para los que ya son desarrolladores o desarrolladoras, y deseen comparar su situación actual con los beneficios que se ofrecen en el mercado. Hablaremos de: Salarios, perks, Rutas de aprendizajes, tendencias de tecnologías, y responder preguntas al respecto.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2022 Pereira Tech Talks meetup. Speaker: Andrés Rodriguez Charla: Conviértete en desarrollador web, estos son los beneficios. Esta es una charla más orientada a las personas que tienen curiosidad en la industria del software, aquellos y aquellas estudiantes de carreras afines a la tecnología que tienen…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/289498758)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

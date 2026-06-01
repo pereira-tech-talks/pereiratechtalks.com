@@ -22,8 +22,12 @@ heroImage: "/images/meetups/noche-de-ai-generativa-2025/hero.jpg"
 verticals:
   - monthly-meetups
   - ai-channel
-talks: []
-speakers: []
+talks:
+  - noche-de-ai-generativa-2025--1-generacion-procedural-en-videojuegos-creando-mundos-infinito
+  - noche-de-ai-generativa-2025--2-ia-y-biotecnologia-descubriendo-medicamentos-con-modelos-de-
+speakers:
+  - cristhian-andres-grajales-perez
+  - frederick-johan-castaneda-perez
 sponsors: []
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307304023/
 status: completed

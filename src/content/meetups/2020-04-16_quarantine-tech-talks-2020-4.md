@@ -30,8 +30,22 @@ draft: false
 
 ## Quarantine Tech Talks 💻 - Meetup 4
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Quarantine Tech Talks 💻 - Meetup 4**.
+Detalles
+===== LINK DE REGISTRO ========
+[https://quarantinetechtalks4.eventbrite.com](https://quarantinetechtalks4.eventbrite.com)
+Link Youtube: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.com/watch?v=9D_PGb03Ov0)
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Quarantine Tech Talks 💻 - Meetup 4**.
+Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2020 Pereira Tech Talks meetup. Detalles ===== LINK DE REGISTRO ======== [https://quarantinetechtalks4.eventbrite.com](https://quarantinetechtalks4.eventbrite.com) Link Youtube: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.com/watch?v=9D_PGb03Ov0) Las comunidades del eje cafetero se unen…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/270081031)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

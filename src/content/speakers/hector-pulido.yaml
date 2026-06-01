@@ -1,0 +1,18 @@
+name: "Héctor Pulido"
+role:
+  en: "AI Engineer at Besage.ai"
+  es: "AI Engineer en Besage.ai"
+bio:
+  en: "Héctor Pulido spoke at a Pereira Tech Talks meetup. Speaker bio pending — pull requests welcome."
+  es: "Héctor Pulido dio una charla en un meetup de Pereira Tech Talks. Bio del ponente pendiente — pull requests bienvenidos."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Héctor Pulido"
+    es: "Retrato de Héctor Pulido"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

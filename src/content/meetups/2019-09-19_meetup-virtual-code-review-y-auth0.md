@@ -30,8 +30,30 @@ draft: false
 
 ## MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0
 
-Meetup histórico de Pereira Tech Talks. Programa original: **MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0**.
+📣 No se pierdan estas poderosas charlas tech este jueves en la noche:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Virtual Meetup: Noche de Code Review y IDaaS at Scale en Auth0**.
+Esten atentos a este link para entrar a la charla virtual a las 6:30pm:
+👉👉👉 [https://pereiratechtalks.org/live/](https://pereiratechtalks.org/live/)
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Code Review, engineering practices** — Manuel Pineda ([perfil](https://twitter.com/pin3da_))
+2. **IDaaS at Scale, Cómo evolucionamos los sistemas en @auth0 los últimos 5 años** — Damián Schenkelman ([perfil](https://twitter.com/dschenkelman))
+
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup featuring Code Review, engineering practices · IDaaS at Scale, Cómo evolucionamos los sistemas en @auth0 los últimos 5 años. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Code Review, engineering practices** — Manuel Pineda
+2. **IDaaS at Scale, Cómo evolucionamos los sistemas en @auth0 los últimos 5 años** — Damián Schenkelman
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264973350)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

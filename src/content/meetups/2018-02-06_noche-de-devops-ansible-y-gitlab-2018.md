@@ -30,8 +30,29 @@ draft: false
 
 ## Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker**. Sede: Edificio de Postgrados UTP.
+Tenemos el gusto de invitarlos a nuestro primer Meetup del año, en esta ocasión tendremos una noche dedicada a las operaciones DevOps.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **DevOps Night: Intro a la automatización en Ansible && CI con GitLab y Docker**. Venue: Edificio de Postgrados UTP.
+Hoy en dia el numero de servidores que los sysadmin deben administrar crece a un ritmo muy alto, obligandolos a buscar nuevos métodos para desplegar, configurar y actualizar las máquinas de forma que estas tareas mecánicas y repetitivas se puedan hacer en el menor tiempo posible.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Introducción a la automatización en Ansible** — Manuel Pineda ([perfil](https://twitter.com/pin3da_))
+2. **Aprendiendo Integración continua (CI) con GitLab y Docker** — Carlos Gónzales ([perfil](http://caal-15.github.io/))
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring Introducción a la automatización en Ansible · Aprendiendo Integración continua (CI) con GitLab y Docker. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Introducción a la automatización en Ansible** — Manuel Pineda
+2. **Aprendiendo Integración continua (CI) con GitLab y Docker** — Carlos Gónzales
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247349603)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

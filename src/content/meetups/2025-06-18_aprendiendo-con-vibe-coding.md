@@ -22,8 +22,12 @@ heroImage: "/images/meetups/aprendiendo-con-vibe-coding/hero.jpg"
 verticals:
   - monthly-meetups
   - ai-channel
-talks: []
-speakers: []
+talks:
+  - aprendiendo-con-vibe-coding--1-aprendiendo-con-vibe-coding
+  - aprendiendo-con-vibe-coding--2-conectando-la-ia-con-el-mundo-real-potenciando-agentes-con-e
+speakers:
+  - jesus-david-mena-rivera
+  - jose-felipe-duarte
 sponsors: []
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307800000/
 status: completed

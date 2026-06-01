@@ -23,8 +23,19 @@ draft: false
 
 ## Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch**. Sede: Edificio de postgrados (UTP).
+Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch**. Venue: Edificio de postgrados (UTP).
+**Entendiendo y configurando servidores web NGINX  by [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes **Entendiendo y configurando servidores web NGINX by [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/245689908)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

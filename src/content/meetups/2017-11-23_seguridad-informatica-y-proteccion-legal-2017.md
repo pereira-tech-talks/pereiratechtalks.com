@@ -23,8 +23,19 @@ draft: false
 
 ## Como empezar en seguridad informática && Protección legal de la innovación
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Como empezar en seguridad informática && Protección legal de la innovación**. Sede: Edificio de postgrados (UTP).
+En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, con dos charlas muy interesantes:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Getting Started en seguridad informática && Protección legal de la innovación**. Venue: Edificio de postgrados (UTP).
+**Cómo empezar en seguridad informática  by [Santiago Bernal](https://twitter.com/santiaguf)**
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, con dos charlas muy interesantes: **Cómo empezar en seguridad informática by [Santiago Bernal](https://twitter.com/santiaguf)**
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/244859180)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

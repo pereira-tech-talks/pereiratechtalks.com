@@ -30,8 +30,20 @@ draft: false
 
 ## Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil**. Sede: Catholic University of Pereira.
+¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil**. Venue: Catholic University of Pereira.
+¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
+Ubicación y cómo encontrarnos: Nos reuniremos en la Universidad Católica de Pereira.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas. ¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302972719)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

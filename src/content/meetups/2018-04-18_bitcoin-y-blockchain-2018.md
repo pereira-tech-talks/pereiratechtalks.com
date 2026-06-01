@@ -30,8 +30,31 @@ draft: false
 
 ## Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.**. Sede: Universidad Tecnológica de Pereira.
+Tenemos el gusto de invitarlos a una gran noche dedicada a hablar sobre Bitcoin y su base tecnológica Blockchain, una de las tecnologías emergentes más populares y revolucionaria de los últimos años, con un invitado muy especial:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.**. Venue: Universidad Tecnológica de Pereira.
+Conferencista: Carlos Mesa
+Rol: Director general de la fundación Bitcoin Colombia
+Contacto: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Qué es el Bitcoin y cómo funciona, origen e historia**
+2. **Blockchain: La revolución industrial de internet más allá del Bitcoin**
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring Qué es el Bitcoin y cómo funciona, origen e historia · Blockchain: La revolución industrial de internet más allá del Bitcoin. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Qué es el Bitcoin y cómo funciona, origen e historia**
+2. **Blockchain: La revolución industrial de internet más allá del Bitcoin**
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

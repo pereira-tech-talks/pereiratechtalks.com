@@ -30,8 +30,29 @@ draft: false
 
 ## Noche de Serverless && Seguridad Informática
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de Serverless && Seguridad Informática**. Sede: Universidad Tecnológica de Pereira.
+📣 ¡Anunciamos nuestro primer meetup del año con dos fantásticas charlas de parte de nuestros organizadores!
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Serverless Night && Seguridad Informática**. Venue: Universidad Tecnológica de Pereira.
+🔎 Serverless es un tipo de arquitectura donde los servidores (físicos o en la nube) dejan de existir para el desarrollador y en cambio el código corre en “ambientes de ejecución” que administran proveedores como Amazon, Google, IBM, etc.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Aprendiendo Serverless con enfásis en IoT** — Sergio Florez ([perfil](https://twitter.com/xergioalex))
+2. **Seguridad Informática en instituciones del eje cafetero y OWASP** — Santiago Bernal ([perfil](https://twitter.com/santiaguf))
+
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup featuring Aprendiendo Serverless con enfásis en IoT · Seguridad Informática en instituciones del eje cafetero y OWASP. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Aprendiendo Serverless con enfásis en IoT** — Sergio Florez
+2. **Seguridad Informática en instituciones del eje cafetero y OWASP** — Santiago Bernal
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259446080)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

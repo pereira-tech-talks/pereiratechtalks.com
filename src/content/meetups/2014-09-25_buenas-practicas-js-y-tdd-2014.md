@@ -30,8 +30,29 @@ draft: false
 
 ## Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas**.
+Octavo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Best Practices en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices** ([perfil](https://twitter.com/jonalvarezz))
+1. ****TDD && BDD, Javascript y el buen sabor de las pruebas** — ** ([perfil](https://twitter.com/oagranada))
+
+---
+
+### Summary in English
+
+A 2014 Pereira Tech Talks meetup featuring **Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices · **TDD && BDD, Javascript y el buen sabor de las pruebas. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices**
+1. ****TDD && BDD, Javascript y el buen sabor de las pruebas** — **
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

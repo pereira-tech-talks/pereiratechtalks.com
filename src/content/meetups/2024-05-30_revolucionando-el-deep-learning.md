@@ -30,8 +30,20 @@ draft: false
 
 ## Revolucionando el Deep Learning: Potenciando modelos con datos limitados
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Revolucionando el Deep Learning: Potenciando modelos con datos limitados**. Sede: Catholic University of Pereira.
+¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Revolutionizing el Deep Learning: Potenciando modelos con datos limitados**. Venue: Catholic University of Pereira.
+**¿Qué necesitas traer?** Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender sobre las últimas tendencias en tecnología. ¡Nosotros nos encargamos del resto!
+**Ubicación y cómo encontrarnos:** Nos reuniremos en Universidad Católica de Pereira en la Sala de estudiantes. Un espacio ideal para la interacción y el aprendizaje.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial. **¿Qué necesitas traer?** Solo tus ganas de devorar…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

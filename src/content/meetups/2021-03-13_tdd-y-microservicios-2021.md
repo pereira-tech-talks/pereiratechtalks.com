@@ -30,8 +30,19 @@ draft: false
 
 ## TDD y Microservicios
 
-Meetup histórico de Pereira Tech Talks. Programa original: **TDD y Microservicios**.
+Tenemos Meetup!!!
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **TDD y Microservicios**.
+Para esta oportunidad Facundo García nos hablara sobre Test Driven Development (TDD) Pros y Contras de dos escuelas diferentes, Chicago vs London
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2021 Pereira Tech Talks meetup. Tenemos Meetup!!! Para esta oportunidad Facundo García nos hablara sobre Test Driven Development (TDD) Pros y Contras de dos escuelas diferentes, Chicago vs London
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/276757820)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

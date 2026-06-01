@@ -30,8 +30,18 @@ draft: false
 
 ## ¿Qué es el blockchain y cómo transformará radicalmente la economía?
 
-Meetup histórico de Pereira Tech Talks. Programa original: **¿Qué es el blockchain y cómo transformará radicalmente la economía?**.
+Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de [Sergio Alexander Florez](https://twitter.com/xergioalex), contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran revolución tecnológica que és, y cómo podemos crear aplicaciones que consuman servicios basados en Blockchain desde Javascript.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **What is Blockchain? y cómo transformará radicalmente la economía?**.
+Slides disponibles en: http://slides.com/xergioalex/what-is-blockchain#/
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de [Sergio Alexander Florez](https://twitter.com/xergioalex), contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -30,8 +30,41 @@ draft: false
 
 ## NodeSchool Day Pereira 2018
 
-Meetup histórico de Pereira Tech Talks. Programa original: **NodeSchool Day Pereira 2018**.
+El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y participación, contando con mentores expertos compartiendo su conocimiento y experiencia en talleres relacionados con Fundamentos de Javascript y redes Peer-to-Peer en NodeJS.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **NodeSchool Day Pereira 2018**.
+🏫 NodeSchool ([https://nodeschool.io](https://nodeschool.io)) es una comunidad mundial que hace eventos en más de 200 ciudades en el mundo, los eventos consisten en talleres presenciales que son gratis y abiertos a todo público.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **[**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
+2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
+3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
+ * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
+4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
+ *** ([perfil](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/))
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring [**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
+2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
+3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
+ * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
+4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
+ *. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **[**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
+2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
+3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
+ * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
+4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
+ ***
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

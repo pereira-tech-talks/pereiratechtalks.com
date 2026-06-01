@@ -30,8 +30,29 @@ draft: false
 
 ## Three JS && Introducción a React
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Three JS && Introducción a React**.
+Decimoctavo Meetup de PereiraJs con dos charlas sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Three.js && Introducción a React**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Three JS** — Gabriel Muñoz**
+2. ****Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/react-talk/** ([perfil](https://twitter.com/jonalvarezz))
+
+---
+
+### Summary in English
+
+A 2016 Pereira Tech Talks meetup featuring **Three JS · **Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/react-talk/. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Three JS** — Gabriel Muñoz**
+2. ****Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/react-talk/**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

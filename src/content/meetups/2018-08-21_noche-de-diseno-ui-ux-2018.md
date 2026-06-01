@@ -30,8 +30,35 @@ draft: false
 
 ## Noche de Diseño - Tendencias y buenas prácticas de UI/UX para desarrolladores
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de Diseño - Tendencias y buenas prácticas de UI/UX para desarrolladores**. Sede: Edificio 13 - Universidad Tecnológica de Pereira.
+📣 ¡Anunciamos nuestro gran meetup de Agosto!, con la participación de dos talentosos diseñadores que nos compartirán su visión y experiencia sobre el diseño e implementación de interfaces, además de cómo mejorar significativamente la experiencia de usuario.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Design Night - Tendencias y buenas prácticas de UI/UX para desarrolladores**. Venue: Edificio 13 - Universidad Tecnológica de Pereira.
+🔎 Para que un desarrollo de software sea exitoso se necesita de un buen código pero también es necesario que vaya acompañado de un buen diseño (UI) y experiencia de usuario (UX).
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Diseño para desarrolladores by Laura Aguirre
+🧙‍♀️ Diseñadora de producto (** ([perfil](https://twitter.com/lauraguirre011))
+2. **Tendencias de Diseño by Daniel Vásquez
+🧙‍♂️ Diseñador Visual / Ilustrador Digital (** ([perfil](https://www.instagram.com/koruproject/))
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring Diseño para desarrolladores by Laura Aguirre
+🧙‍♀️ Diseñadora de producto ( · Tendencias de Diseño by Daniel Vásquez
+🧙‍♂️ Diseñador Visual / Ilustrador Digital (. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Diseño para desarrolladores by Laura Aguirre
+🧙‍♀️ Diseñadora de producto (**
+2. **Tendencias de Diseño by Daniel Vásquez
+🧙‍♂️ Diseñador Visual / Ilustrador Digital (**
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/253647647)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

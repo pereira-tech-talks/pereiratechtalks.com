@@ -30,8 +30,29 @@ draft: false
 
 ## 5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails 
 
-Meetup histórico de Pereira Tech Talks. Programa original: **5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails **. Sede: Camellando H+W.
+📣 ¡Un emocionate Junio nos espera! Tendremos unas charlas buenísimas sobre bases de datos no relacionales y el framework de desarrollo ruby on rails:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails **. Venue: Camellando H+W.
+🔎 Las bases de datos NoSQL han ido evolucionando hasta el punto de llegar a ser indispensables para muchos desarrollos o análisis, Pero, Qué son estas bases de datos? Qué diferencias Plantean con respecto al modelo tradicional? y cuales son algunas de las bases de datos pertenecientes a este paradigma? En esta charla se dará respuesta a estas preguntas y se dará un panorama global sobre este nuevo paradigma que ha ido cambiando la forma de concebir el almacenamiento de la información.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Introducción a las bases de datos NoSQL** — Germán Grandas ([perfil](https://twitter.com/germangrandas))
+2. **Desarrolla posibilidades con Rails** — Jonatan Gutiérrez ([perfil](https://twitter.com/jotangutierrez))
+
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup featuring Introducción a las bases de datos NoSQL · Desarrolla posibilidades con Rails. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Introducción a las bases de datos NoSQL** — Germán Grandas
+2. **Desarrolla posibilidades con Rails** — Jonatan Gutiérrez
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261814865)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

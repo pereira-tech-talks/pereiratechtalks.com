@@ -30,8 +30,18 @@ draft: false
 
 ## Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)**.
+Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)**.
+**Desarrollo móvil con Ionic + Angular by [Julian Patiño](https://www.meetup.com/es-ES/PereiraJs_/members/230813066/)**
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre: **Desarrollo móvil con Ionic + Angular by [Julian Patiño](https://www.meetup.com/es-ES/PereiraJs_/members/230813066/)**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

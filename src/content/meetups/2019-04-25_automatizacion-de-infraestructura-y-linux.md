@@ -30,8 +30,29 @@ draft: false
 
 ## 💻 Hablemos de automatización de infraestructura y linux 
 
-Meetup histórico de Pereira Tech Talks. Programa original: **💻 Hablemos de automatización de infraestructura y linux **. Sede: Universidad Tecnológica de Pereira.
+📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **💻 Hablemos de automatización de infraestructura y linux **. Venue: Universidad Tecnológica de Pereira.
+🔎 La IaC nos permite abstraer el manejo del stack IT, mediante código sencillo y fácil de leer. En esta charla conoceremos un poco más sobre herramientas, buenas prácticas, tips y ejemplos para implementar desde cero o migrar infraestructuras existentes a un modelo sobre código.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **IaC: Automatizando nuestra infraestructura** — Luis Uribe ([perfil](https://twitter.com/luisuribe))
+2. **Hablemos de Linux** — Harold Sánchez Ospina ([perfil](https://twitter.com/sancospi))
+
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup featuring IaC: Automatizando nuestra infraestructura · Hablemos de Linux. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **IaC: Automatizando nuestra infraestructura** — Luis Uribe
+2. **Hablemos de Linux** — Harold Sánchez Ospina
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260589719)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

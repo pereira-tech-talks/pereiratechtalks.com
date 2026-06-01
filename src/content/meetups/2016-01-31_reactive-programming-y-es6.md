@@ -30,8 +30,18 @@ draft: false
 
 ## Reactive Programming && EcmaScript 6
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Reactive Programming && EcmaScript 6**.
+Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz).
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Reactive Programming && EcmaScript 6**.
+Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2016 Pereira Tech Talks meetup. Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz). Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

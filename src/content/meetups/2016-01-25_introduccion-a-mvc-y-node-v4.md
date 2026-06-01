@@ -30,8 +30,27 @@ draft: false
 
 ## Introducción a MV* && Node.js v4
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a MV* && Node.js v4**.
+Decimocuarto Meetup de PereiraJs hablando sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a MV* && Node.js v4**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Introducción a MV by [Oscar Granada](https://twitter.com/oagranada)**
+1. **Node.js v4 by [Daniel Aristizabal](https://twitter.com/cronopio2)**** ([perfil](https://twitter.com/oagranada))
+
+---
+
+### Summary in English
+
+A 2016 Pereira Tech Talks meetup featuring **Introducción a MV by [Oscar Granada](https://twitter.com/oagranada)**
+1. **Node.js v4 by [Daniel Aristizabal](https://twitter.com/cronopio2)**. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Introducción a MV by [Oscar Granada](https://twitter.com/oagranada)**
+1. **Node.js v4 by [Daniel Aristizabal](https://twitter.com/cronopio2)****
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

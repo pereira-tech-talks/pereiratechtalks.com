@@ -30,8 +30,28 @@ draft: false
 
 ## APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana
 
-Meetup histórico de Pereira Tech Talks. Programa original: **APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana**.
+En PereiraJs nuestros Speakers se lucieron hablando sobre contrucción de APIs con SailsJs y Monitoreo con StatsD y Grafana:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana**.
+Conoceras cómo puedes contruir de manera casí automatizada APIs reactivas mediante el uso de WebSockets con [SailsJs](https://sailsjs.com/).
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. ****APIs y WebSockets con SailsJs** — ** ([perfil](https://twitter.com/jdmorales092))
+2. ****Monitoreo y visualización de datos con StatsD y Grafana** — ** ([perfil](https://twitter.com/pin3da_))
+
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup featuring **APIs y WebSockets con SailsJs · **Monitoreo y visualización de datos con StatsD y Grafana. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****APIs y WebSockets con SailsJs** — **
+2. ****Monitoreo y visualización de datos con StatsD y Grafana** — **
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

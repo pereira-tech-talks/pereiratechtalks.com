@@ -30,8 +30,22 @@ draft: false
 
 ## Software libre y Automatización
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Software libre y Automatización**.
+¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀
+Esta vez tendremos un gran meetup con la mejor energia por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompañanos este Miércoles 28 de Julio a la charla.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Open Source y Automatización**.
+Charla: Software libre para una sociedad libre.
+Expositor: Steven Mejía
+Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingeniería de sistemas. Su tesis de maestría es un sistema de votaciones basado en blockchain, que actualmente se está utilizando como "termómetro electoral" de los comicios presidenciales de Colombia para el 2022.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2021 Pereira Tech Talks meetup. ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energia por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompañanos este Miércoles 28 de Julio a la charla. Charla: Software libre para una…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/279620621)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

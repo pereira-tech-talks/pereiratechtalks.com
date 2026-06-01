@@ -30,8 +30,19 @@ draft: false
 
 ## De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional
 
-Meetup histórico de Pereira Tech Talks. Programa original: **De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional**. Sede: Universidad Tecnológica de Pereira.
+¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional**. Venue: Universidad Tecnológica de Pereira.
+En esta ocasión tendremos unos ponentes muy top que nos contaran sus historias de crecimiento y éxito profesional.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. ¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más. En esta ocasión tendremos unos ponentes muy top que nos contaran sus historias de crecimiento y éxito profesional.
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

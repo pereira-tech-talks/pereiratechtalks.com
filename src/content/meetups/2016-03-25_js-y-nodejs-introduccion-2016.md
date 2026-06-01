@@ -30,8 +30,29 @@ draft: false
 
 ## Introducción a Javascript && Introducción a NodeJs
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a Javascript && Introducción a NodeJs**.
+Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a Javascript && Introducción a NodeJs**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Introducción a Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/intro-js/** ([perfil](https://twitter.com/jonalvarezz))
+2. ****Introducción a NodeJs** — ** ([perfil](https://twitter.com/cronopio2))
+
+---
+
+### Summary in English
+
+A 2016 Pereira Tech Talks meetup featuring **Introducción a Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/intro-js/ · **Introducción a NodeJs. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Introducción a Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+Slides disponibles en: http://jonalvarezz.github.io/intro-js/**
+2. ****Introducción a NodeJs** — **
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

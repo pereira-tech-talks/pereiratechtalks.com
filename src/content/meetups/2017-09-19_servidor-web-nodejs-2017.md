@@ -30,8 +30,18 @@ draft: false
 
 ## Creando un servidor web desde cero con NodeJs
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Creando un servidor web desde cero con NodeJs**.
+Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin Morales](https://twitter.com/jdmorales092) y [Sergio Alexander Florez](https://twitter.com/xergioalex).
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Building a web server web desde cero con NodeJs**.
+Slides disponibles en: http://slides.com/rockalabs/creando-un-servidor-web-con-nodejs#/
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin Morales](https://twitter.com/jdmorales092) y…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

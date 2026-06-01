@@ -30,8 +30,19 @@ draft: false
 
 ## Explorando CI/CD: Tekton en Kubernetes y GitHub Actions 
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Explorando CI/CD: Tekton en Kubernetes y GitHub Actions **. Sede: Catholic University of Pereira.
+**Charla 1: Introducción a Tekton CI/CD**
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Exploring CI/CD: Tekton en Kubernetes y GitHub Actions **. Venue: Catholic University of Pereira.
+En esta charla se hará una introducción a los conceptos básicos de Tekton, una solución de código abierto para CI/CD en Kubernetes.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. **Charla 1: Introducción a Tekton CI/CD** En esta charla se hará una introducción a los conceptos básicos de Tekton, una solución de código abierto para CI/CD en Kubernetes.
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

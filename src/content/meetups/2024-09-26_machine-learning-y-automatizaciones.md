@@ -30,8 +30,19 @@ draft: false
 
 ## Machine Learning, Automatizaciones, Videojuegos y Más.
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Machine Learning, Automatizaciones, Videojuegos y Más.**. Sede: Catholic University of Pereira.
+¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Machine Learning, Automatizaciones, Videojuegos y Más.**. Venue: Catholic University of Pereira.
+¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más. ¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/303545199)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

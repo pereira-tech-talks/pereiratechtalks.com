@@ -30,8 +30,19 @@ draft: false
 
 ## Quarantine Tech Talks
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Quarantine Tech Talks**.
+las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Quarantine Tech Talks**.
+### 2 de abril - [Quarantine Tech Talks 💻 - Meetup 2.](https://www.meetup.com/es-ES/pereira-tech-talks/events/269780095/)
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2020 Pereira Tech Talks meetup. las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo: ### 2 de abril - [Quarantine Tech Talks 💻 - Meetup…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269942102)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

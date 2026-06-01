@@ -30,8 +30,29 @@ draft: false
 
 ## De Cero a Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud 
 
-Meetup histórico de Pereira Tech Talks. Programa original: **De Cero a Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud **. Sede: Universidad Tecnológica de Pereira.
+📣 ¡Un emocionate Julio nos espera! Tendremos unas charlas buenísimas sobre desarrollo en Go y servicios de Google Cloud Platform:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **From Zero to Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud **. Venue: Universidad Tecnológica de Pereira.
+🔎 Si estás buscando un lenguaje de programación concurrente, paralelo, simple, rápido, compilado y con posibilidades de crecimiento, Go sin duda es un lenguaje al que deberías prestar atención. Se podría considerar cómo una evolución de C adaptado al desarrollo de aplicaciones modernas, con una sintaxis simple e intuitiva. En está charla introductoria aprenderás un poco de su historia, evolución y todo lo que puedes hacer con este poderoso lenguaje.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Introducción al desarrollo de aplicaciones modernas en Go** — Sergio Alexander Florez ([perfil](https://twitter.com/xergioalex))
+2. **Kubernetes && Serverless en Google Cloud de Cero a Super Heroe** — Mauricio Cuenca ([perfil](https://twitter.com/macuenka))
+
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup featuring Introducción al desarrollo de aplicaciones modernas en Go · Kubernetes && Serverless en Google Cloud de Cero a Super Heroe. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Introducción al desarrollo de aplicaciones modernas en Go** — Sergio Alexander Florez
+2. **Kubernetes && Serverless en Google Cloud de Cero a Super Heroe** — Mauricio Cuenca
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

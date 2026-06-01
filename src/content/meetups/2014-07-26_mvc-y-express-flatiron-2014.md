@@ -30,8 +30,27 @@ draft: false
 
 ## MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos
 
-Meetup histórico de Pereira Tech Talks. Programa original: **MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos**.
+Sexto Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****MV, el camino a las web apps del futuro by [Oscar Granada](https://twitter.com/oagranada)**
+2. **Express.js y Flatiron.js juntos pero no revueltos by [Daniel Aristizabal](https://twitter.com/cronopio2)**** ([perfil](https://twitter.com/oagranada))
+
+---
+
+### Summary in English
+
+A 2014 Pereira Tech Talks meetup featuring **MV, el camino a las web apps del futuro by [Oscar Granada](https://twitter.com/oagranada)**
+2. **Express.js y Flatiron.js juntos pero no revueltos by [Daniel Aristizabal](https://twitter.com/cronopio2)**. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****MV, el camino a las web apps del futuro by [Oscar Granada](https://twitter.com/oagranada)**
+2. **Express.js y Flatiron.js juntos pero no revueltos by [Daniel Aristizabal](https://twitter.com/cronopio2)****
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

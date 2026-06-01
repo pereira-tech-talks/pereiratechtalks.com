@@ -30,8 +30,19 @@ draft: false
 
 ## Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente**. Sede: Universidad Tecnológica de Pereira.
+Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Technology con Propósito: Conexiones Humanas y Colaboración Inteligente**. Venue: Universidad Tecnológica de Pereira.
+¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestras invitadas expertos. ¡Nosotros nos encargamos del resto!
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente. ¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestras invitadas…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

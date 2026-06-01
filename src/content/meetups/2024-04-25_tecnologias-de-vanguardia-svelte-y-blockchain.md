@@ -30,8 +30,21 @@ draft: false
 
 ## Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.**. Sede: Sala Magistral 1 (Edificio 13).
+¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y blockchain con dos temas fascinantes que no querrás perderte.
+**¿Qué necesitas traer?** Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender sobre las últimas tendencias en tecnología. ¡Nosotros nos encargamos del resto!
+**Ubicación y cómo encontrarnos:** Nos reuniremos en Universidad Tecnológica de Pereira Sala Magistral 1 Bloque *Y.* Un espacio ideal para la interacción y el aprendizaje.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Technologies de Vanguardia: Svelte y Blockchain al descubierto.**. Venue: Sala Magistral 1 (Edificio 13).
+**Charlas:**
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2024 Pereira Tech Talks meetup. ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y blockchain con dos temas fascinantes que no querrás…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

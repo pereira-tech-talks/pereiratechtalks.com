@@ -30,8 +30,29 @@ draft: false
 
 ## Noche de DevOps - Introducción a Docker y Kubernetes
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de DevOps - Introducción a Docker y Kubernetes**. Sede: Universidad Católica de Pereira.
+📣 ¡Anunciamos nuestro gran meetup de cierre! Acompañanos a despedir el 2018 compartiendo con la comunidad y aprendiendo muchos sobre infraestructura y arquitecturas orientadas a microservicios.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **DevOps Night - Introducción a Docker y Kubernetes**. Venue: Universidad Católica de Pereira.
+🔎 Docker es una herramienta diseñada para beneficiar tanto a desarrolladores, testers, como administradores de sistemas, en relación a las máquinas, a los entornos en sí donde se ejecutan las aplicaciones software, los procesos de despliegue, etc, permitiendo desarrollar arquitecturas orientadas a microservicios enjaulando cada unidad de funcionalidad/sistema mediante contenedores.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+### Charlas
+
+1. **Introducción a Docker** — Sergio Florez ([perfil](https://twitter.com/xergioalex))
+2. **Introducción a Kubernetes** — Héctor F. Jiménez ([perfil](https://twitter.com/c1b3rh4ck))
+
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup featuring Introducción a Docker · Introducción a Kubernetes. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. **Introducción a Docker** — Sergio Florez
+2. **Introducción a Kubernetes** — Héctor F. Jiménez
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/257037605)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

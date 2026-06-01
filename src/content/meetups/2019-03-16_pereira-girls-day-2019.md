@@ -30,8 +30,19 @@ draft: false
 
 ## Pereira Girls Day
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Pereira Girls Day**. Sede: Universidad Tecnológica de Pereira.
+📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología!
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Pereira Girls Day**. Venue: Universidad Tecnológica de Pereira.
+👉 1. Tips para dar charlas y presentaciones públicas by Natalia Moncada Suárez ([https://twitter.com/natamonkada](https://twitter.com/natamonkada))
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2019 Pereira Tech Talks meetup. 📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología! 👉 1. Tips para dar charlas y presentaciones públicas by Natalia Moncada Suárez…
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

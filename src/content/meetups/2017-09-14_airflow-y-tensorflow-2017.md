@@ -23,8 +23,19 @@ draft: false
 
 ## Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow**. Sede: Edificio de postgrados (UTP).
+Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de  compartir conocimiento tecnológico y conectar con el talento local y regional.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow**. Venue: Edificio de postgrados (UTP).
+En nuestra apertura presentaremos dos charlas muy interesantes:
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2017 Pereira Tech Talks meetup. Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento tecnológico y conectar con el talento local y regional. En nuestra apertura presentaremos dos charlas muy interesantes:
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

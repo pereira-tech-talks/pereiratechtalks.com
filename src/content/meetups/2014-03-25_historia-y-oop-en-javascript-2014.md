@@ -30,8 +30,36 @@ draft: false
 
 ## Historia, aplicaciones y programación orientada a objetos con Javascript
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Historia, aplicaciones y programación orientada a objetos con Javascript**.
+Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **History, aplicaciones y programación orientada a objetos con Javascript**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****JavaScript Historia y aplicaciones by [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
+ Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
+ 
+2. **Programación Orientada a Objetos con JavaScript by [Oscar Granada](https://twitter.com/oagranada)** 
+ Slides disponibles en:** ([perfil](https://twitter.com/pin3da))
+
+---
+
+### Summary in English
+
+A 2014 Pereira Tech Talks meetup featuring **JavaScript Historia y aplicaciones by [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
+ Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
+ 
+2. **Programación Orientada a Objetos con JavaScript by [Oscar Granada](https://twitter.com/oagranada)** 
+ Slides disponibles en:. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****JavaScript Historia y aplicaciones by [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
+ Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
+ 
+2. **Programación Orientada a Objetos con JavaScript by [Oscar Granada](https://twitter.com/oagranada)** 
+ Slides disponibles en:**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

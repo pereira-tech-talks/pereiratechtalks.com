@@ -1,0 +1,18 @@
+name: "Frederick Johan Castañeda Pérez"
+role:
+  en: "AI Engineer at Silicogenix"
+  es: "AI Engineer en Silicogenix"
+bio:
+  en: "Frederick Johan Castañeda Pérez spoke at a Pereira Tech Talks meetup. Speaker bio pending — pull requests welcome."
+  es: "Frederick Johan Castañeda Pérez dio una charla en un meetup de Pereira Tech Talks. Bio del ponente pendiente — pull requests bienvenidos."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Frederick Johan Castañeda Pérez"
+    es: "Retrato de Frederick Johan Castañeda Pérez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

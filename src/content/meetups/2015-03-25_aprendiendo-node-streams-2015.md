@@ -30,8 +30,32 @@ draft: false
 
 ## Aprendiendo node && Streams - Event Emitter
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Aprendiendo node && Streams - Event Emitter**.
+Décimo Meetup de Pereirajs sobre node y streams en Javascript.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Learning node && Streams - Event Emitter**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Aprendiendo node by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+Slides disponibles en: https://github.com/workshopper/learnyounode** ([perfil](https://twitter.com/cronopio2))
+1. ****Streams - Event Emitter by [Manuel Felipe Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides** ([perfil](https://twitter.com/pin3da_))
+
+---
+
+### Summary in English
+
+A 2015 Pereira Tech Talks meetup featuring **Aprendiendo node by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+Slides disponibles en: https://github.com/workshopper/learnyounode · **Streams - Event Emitter by [Manuel Felipe Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Aprendiendo node by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+Slides disponibles en: https://github.com/workshopper/learnyounode**
+1. ****Streams - Event Emitter by [Manuel Felipe Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

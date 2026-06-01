@@ -30,8 +30,32 @@ draft: false
 
 ## ZeroMQ + Node.js && WebSockets y Socket.io
 
-Meetup histórico de Pereira Tech Talks. Programa original: **ZeroMQ + Node.js && WebSockets y Socket.io**.
+Decimotercer Meetup de PereiraJs hablando sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **ZeroMQ + Node.js && WebSockets y Socket.io**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****ZeroMQ + Node.js by [Manuel Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides/zeromq_node.html** ([perfil](https://twitter.com/pin3da_))
+1. ****WebSockets y Socket.io by [Jhon Jimenez](https://twitter.com/jh0nb3r)**
+Slides disponibles en: http://jhonber.github.io/webSockets-slides/** ([perfil](https://twitter.com/jh0nb3r))
+
+---
+
+### Summary in English
+
+A 2015 Pereira Tech Talks meetup featuring **ZeroMQ + Node.js by [Manuel Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides/zeromq_node.html · **WebSockets y Socket.io by [Jhon Jimenez](https://twitter.com/jh0nb3r)**
+Slides disponibles en: http://jhonber.github.io/webSockets-slides/. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****ZeroMQ + Node.js by [Manuel Pineda](https://twitter.com/pin3da_)**
+Slides disponibles en: http://pin3da.github.io/slides/zeromq_node.html**
+1. ****WebSockets y Socket.io by [Jhon Jimenez](https://twitter.com/jh0nb3r)**
+Slides disponibles en: http://jhonber.github.io/webSockets-slides/**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

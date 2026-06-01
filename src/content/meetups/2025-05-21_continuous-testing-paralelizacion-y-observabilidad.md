@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/continuous-testing-paralelizacion-y-observabilidad/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - continuous-testing-paralelizacion-y-observabilidad--1-la-forma-de-escalar-tus-tests-de-software-sin-escalar-tu-nom
+  - continuous-testing-paralelizacion-y-observabilidad--2-qa-en-streaming-dale-vida-a-tu-suite-de-pruebas-automatizada
+speakers:
+  - sebastian-agudelo-morales
+  - juan-de-jesus-fernandez-graciano
 sponsors: []
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307796521/
 status: completed

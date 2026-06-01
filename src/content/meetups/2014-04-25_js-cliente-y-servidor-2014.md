@@ -30,8 +30,32 @@ draft: false
 
 ## Introducción a Javascript del lado del cliente y del servidor
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Introducción a Javascript del lado del cliente y del servidor**.
+Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Introduction a Javascript del lado del cliente y del servidor**.
+### Charlas
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+1. ****Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
+ Slides disponibles en:** ([perfil](https://twitter.com/jh0nb3r))
+2. ****Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+ Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:** ([perfil](https://twitter.com/cronopio2))
+
+---
+
+### Summary in English
+
+A 2014 Pereira Tech Talks meetup featuring **Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
+ Slides disponibles en: · **Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+ Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:. The community gathered for talks, networking, and snacks.
+
+**Talks:**
+
+1. ****Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
+ Slides disponibles en:**
+2. ****Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+ Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:**
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

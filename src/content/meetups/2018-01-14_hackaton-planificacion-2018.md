@@ -30,8 +30,18 @@ draft: false
 
 ## Hackaton de planificación de actividades 2018
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Hackaton de planificación de actividades 2018**.
+En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](https://pereiratechtalks.org)** y **[Pereira Js](https://pereira.js.org/)** a pasar un buen rato, con el propósito de planificar el nuevo año y como buenos geeks que somos a ¡codear hasta el amanecer!; como resultado logramos mejorar radicalmente la apariencia de nuestro sitio web y unificar en un mismo lugar a ambas comunidades hermanas, mediante una plataforma de gestión de contenidos.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Planning Hackathon de actividades 2018**.
+[Aquí](https://pereiratechtalks.org) podrás encontrar información relevante respecto a las comunidades de Pereira, también podrás consultar memorias sobre meetups, workshops, desarrollos, participación en proyectos y demás eventos pasados.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2018 Pereira Tech Talks meetup. En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](https://pereiratechtalks.org)** y **[Pereira Js](https://pereira.js.org/)** a pasar un buen rato, con el propósito de planificar el nuevo año y como buenos geeks que somos a ¡codear hasta el amanecer!;…
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

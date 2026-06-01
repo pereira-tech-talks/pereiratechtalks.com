@@ -30,8 +30,19 @@ draft: false
 
 ## Noche de Machine Learning y Google Interview
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de Machine Learning y Google Interview**.
+Noche de Machine Learning y Google Interview.
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **Machine Learning Night y Google Interview**.
+Comenzamos el año cargado de valiosa información. Y con estos dos titanes de Google que quieren compartirnos su conocimiento. Sean todos bienvenidos a este primer meetUp del año.
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2022 Pereira Tech Talks meetup. Noche de Machine Learning y Google Interview. Comenzamos el año cargado de valiosa información. Y con estos dos titanes de Google que quieren compartirnos su conocimiento. Sean todos bienvenidos a este primer meetUp del año.
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283129605)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

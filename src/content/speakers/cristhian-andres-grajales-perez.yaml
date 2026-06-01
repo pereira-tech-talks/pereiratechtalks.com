@@ -1,0 +1,18 @@
+name: "Cristhian Andrés Grajales Pérez"
+role:
+  en: "Game Developer at Alternova Inc"
+  es: "Game Developer en Alternova Inc"
+bio:
+  en: "Cristhian Andrés Grajales Pérez spoke at a Pereira Tech Talks meetup. Speaker bio pending — pull requests welcome."
+  es: "Cristhian Andrés Grajales Pérez dio una charla en un meetup de Pereira Tech Talks. Bio del ponente pendiente — pull requests bienvenidos."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Cristhian Andrés Grajales Pérez"
+    es: "Retrato de Cristhian Andrés Grajales Pérez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -30,8 +30,19 @@ draft: false
 
 ## Noche de IA & ChatGPT: Tendencias y Posibilidades
 
-Meetup histórico de Pereira Tech Talks. Programa original: **Noche de IA & ChatGPT: Tendencias y Posibilidades**. Sede: Sala Magistral 2, Edificio 13.
+¡Descubre el poder de la inteligencia artificial! Únete a charlas fascinantes y explora cómo la IA está moldeando el futuro. ¡No te lo pierdas!
 
-> **EN:** Historical Pereira Tech Talks meetup. Original program: **AI Night & ChatGPT: Tendencias y Posibilidades**. Venue: Sala Magistral 2, Edificio 13.
+[Tendremos streaming en vivo aquí.]([https://www.youtube.com/watch?v=u-pSII46BJQ](https://www.youtube.com/watch?v=u-pSII46BJQ))
 
-Detailed program notes, speakers, and recordings are pending recovery from the community archives. Help us complete the historical record by sending pull requests with photos, slide links, or speaker bios.
+---
+
+### Summary in English
+
+A 2023 Pereira Tech Talks meetup. ¡Descubre el poder de la inteligencia artificial! Únete a charlas fascinantes y explora cómo la IA está moldeando el futuro. ¡No te lo pierdas! [Tendremos streaming en vivo aquí.]([https://www.youtube.com/watch?v=u-pSII46BJQ](https://www.youtube.com/watch?v=u-pSII46BJQ))
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/293065563)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
