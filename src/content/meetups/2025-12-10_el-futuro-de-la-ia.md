@@ -22,9 +22,11 @@ heroImage: "/images/meetups/el-futuro-de-la-ia/hero.png"
 verticals:
   - monthly-meetups
   - ai-channel
-talks: []
+talks:
+  - el-futuro-de-la-ia--1-codigo-hardware-y-agentes
 speakers:
   - sergio-florez
+  - sebastian-mora
 sponsors: []
 linkMeetupCom: https://luma.com/e0qp2vux
 status: completed

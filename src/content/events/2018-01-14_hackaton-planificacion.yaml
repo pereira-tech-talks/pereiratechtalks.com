@@ -1,0 +1,25 @@
+title:
+  en: "Pereira Tech Talks + Pereira JS 2018 Planning Hackathon"
+  es: "Hackaton de planificación Pereira Tech Talks + Pereira JS 2018"
+description:
+  en: "An all-night collaborative hackathon between Pereira Tech Talks and Pereira JS to plan the 2018 community calendar, unify both communities under a single content platform, and rebuild the website."
+  es: "Hackaton colaborativo de toda la noche entre Pereira Tech Talks y Pereira JS para planificar el calendario comunitario de 2018, unificar ambas comunidades bajo una sola plataforma de contenido y reconstruir el sitio web."
+type: hackathon
+date: 2018-01-14
+location:
+  name: "Pereira, Risaralda"
+  city: "Pereira"
+  country: "Colombia"
+  online: false
+hero:
+  src: "/images/meetups/hackaton-planificacion-2018/hero.jpg"
+  alt:
+    en: "Pereira Tech Talks + Pereira JS 2018 planning hackathon"
+    es: "Hackaton de planificación Pereira Tech Talks + Pereira JS 2018"
+  layout: banner
+verticals:
+  - monthly-meetups
+related:
+  - collection: meetups
+    slug: "2018-01-14_hackaton-planificacion-2018"
+status: completed

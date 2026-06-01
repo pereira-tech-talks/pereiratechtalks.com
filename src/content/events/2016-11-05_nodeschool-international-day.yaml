@@ -1,0 +1,16 @@
+title:
+  en: "NodeSchool International Day 2016"
+  es: "NodeSchool International Day 2016"
+description:
+  en: "Pereira's participation in the global NodeSchool International Day 2016, in collaboration with JointDeveloper. Hands-on, free, open-to-all workshops on JavaScript and Node.js."
+  es: "Participación de Pereira en el NodeSchool International Day 2016 global, en colaboración con JointDeveloper. Talleres prácticos, gratuitos y abiertos a todo el público sobre JavaScript y Node.js."
+type: workshop
+date: 2016-11-05
+location:
+  name: "Pereira, Risaralda"
+  city: "Pereira"
+  country: "Colombia"
+  online: false
+verticals:
+  - monthly-meetups
+status: completed

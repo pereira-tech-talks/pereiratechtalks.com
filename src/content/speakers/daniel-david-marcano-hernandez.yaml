@@ -1,0 +1,15 @@
+name: "Daniel David Marcano Hernández"
+role:
+  en: "Senior Go Developer"
+  es: "Senior Go Developer"
+bio:
+  en: "Daniel David Marcano Hernández covered the right signals to migrate workloads to Kubernetes at the March 2025 Pereira Tech Talks CNCF meetup, drawing from his hands-on experience as a Senior Go Developer."
+  es: "Daniel David Marcano Hernández abordó las señales para migrar cargas de trabajo a Kubernetes en el meetup CNCF de marzo de 2025 de Pereira Tech Talks, apoyado en su experiencia hands-on como Senior Go Developer."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Daniel David Marcano Hernández"
+    es: "Retrato de Daniel David Marcano Hernández"
+talks: []
+languages:
+  - es

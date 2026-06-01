@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/conoce-a-la-cloud-native-computing-foundation/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - conoce-a-la-cloud-native-computing-foundation--1-introduccion-a-la-cncf
+  - conoce-a-la-cloud-native-computing-foundation--2-cuando-migrar-a-kubernetes
+speakers:
+  - andres-torres
+  - daniel-david-marcano-hernandez
 sponsors: []
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/306731274/
 status: completed

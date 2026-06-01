@@ -22,9 +22,12 @@ heroImage: "/images/meetups/ia-como-motor-de-crecimiento/hero.png"
 verticals:
   - monthly-meetups
   - ai-channel
-talks: []
+talks:
+  - ia-como-motor-de-crecimiento--1-ai-engineer-2026
+  - ia-como-motor-de-crecimiento--2-ia-como-infraestructura
 speakers:
   - sebastian-franco
+  - henry-bravo
 sponsors: []
 linkMeetupCom: https://luma.com/8uige1ke
 status: announced

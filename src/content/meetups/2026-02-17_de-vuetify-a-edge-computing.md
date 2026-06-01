@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/de-vuetify-a-edge-computing/hero.png"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - de-vuetify-a-edge-computing--1-vuetify-y-figma
+  - de-vuetify-a-edge-computing--2-multiagentes-iot-edge
+speakers:
+  - juan-jose-cardona
+  - david-ricardo-rivera-arbelaez
 sponsors: []
 linkMeetupCom: https://luma.com/xjga6v67
 status: completed

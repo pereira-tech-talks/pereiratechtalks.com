@@ -1,0 +1,25 @@
+title:
+  en: "NodeSchool Day Pereira 2018"
+  es: "NodeSchool Day Pereira 2018"
+description:
+  en: "Local edition of the global NodeSchool International Day, hosted in Pereira with hands-on JavaScript and Node.js workshops. Run by Pereira JS in coordination with Pereira Tech Talks; 35 free seats with preferential access for women in tech."
+  es: "Edición local del NodeSchool International Day global, organizada en Pereira con talleres prácticos de JavaScript y Node.js. Dirigida por Pereira JS en coordinación con Pereira Tech Talks; 35 cupos gratuitos con acceso preferencial para mujeres en tech."
+type: workshop
+date: 2018-06-23
+location:
+  name: "Pereira, Risaralda"
+  city: "Pereira"
+  country: "Colombia"
+  online: false
+hero:
+  src: "/images/meetups/nodeschool-day-pereira-2018/hero.jpg"
+  alt:
+    en: "NodeSchool Day Pereira 2018"
+    es: "NodeSchool Day Pereira 2018"
+  layout: banner
+verticals:
+  - monthly-meetups
+related:
+  - collection: meetups
+    slug: "2018-06-23_nodeschool-day-pereira-2018"
+status: completed

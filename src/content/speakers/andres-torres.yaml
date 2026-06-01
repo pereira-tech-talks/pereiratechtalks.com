@@ -1,0 +1,18 @@
+name: "Andrés Torres"
+role:
+  en: "Cloud Native Computing Foundation ambassador"
+  es: "Embajador de la Cloud Native Computing Foundation"
+bio:
+  en: "Andrés Torres introduced the CNCF and its flagship projects at the March 2025 Pereira Tech Talks meetup. Speaker bio pending — pull requests welcome."
+  es: "Andrés Torres presentó la CNCF y sus proyectos insignia en el meetup de marzo de 2025 de Pereira Tech Talks. Bio del ponente pendiente — pull requests bienvenidos."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Andrés Torres"
+    es: "Retrato de Andrés Torres"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -1,0 +1,15 @@
+name: "Jorge Martínez Gómez"
+role:
+  en: "Geospatial software engineer at the World Food Programme"
+  es: "Ingeniero de software geoespacial en el World Food Programme"
+bio:
+  en: "Jorge Martínez Gómez is a geospatial software engineer at the World Food Programme, working with data collection and analysis to respond to global emergencies. He holds a background in electronic engineering and a master's in computer science, with research in computer vision and machine learning, and currently develops open-source tools in the GIS field."
+  es: "Jorge Martínez Gómez es ingeniero de software geoespacial en el World Food Programme, donde trabaja con recolección y análisis de datos para atender emergencias globales. Tiene formación en ingeniería electrónica y una maestría en ciencias de la computación. Ha investigado en visión por computador y machine learning, y actualmente desarrolla herramientas de código abierto en el campo GIS."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Jorge Martínez Gómez"
+    es: "Retrato de Jorge Martínez Gómez"
+talks: []
+languages:
+  - es

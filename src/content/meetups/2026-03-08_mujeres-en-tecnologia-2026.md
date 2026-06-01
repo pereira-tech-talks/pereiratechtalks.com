@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/mujeres-en-tecnologia-2026/hero.png"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - mujeres-en-tecnologia-2026--1-the-art-of-code
+  - mujeres-en-tecnologia-2026--2-el-codigo-invisible
+speakers:
+  - melissa-escobar-gutierrez
+  - mayra-valentina-velasquez
 sponsors: []
 linkMeetupCom: https://luma.com/4a8c1ypc
 status: announced

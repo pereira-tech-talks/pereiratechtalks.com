@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/noche-de-python-2025/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - noche-de-python-2025--1-explorando-adk
+  - noche-de-python-2025--2-cuadernos-reactivos-con-marimo
+speakers:
+  - german-grandas
+  - jorge-martinez-gomez
 sponsors: []
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/308000000/
 status: completed

@@ -1,0 +1,20 @@
+name: "David Ricardo Rivera Arbeláez"
+role:
+  en: "PhD candidate in engineering · Director of the Software Development program at U.C.P."
+  es: "Candidato a doctor en ingeniería · Director del programa de Tec. en Desarrollo de Software de la U.C.P."
+bio:
+  en: "David Ricardo Rivera Arbeláez is a PhD candidate in engineering and the director of the Software Development program at Universidad Católica de Pereira. His doctoral thesis explores how autonomous AI agents can optimize energy consumption on IoT devices running at the edge."
+  es: "David Ricardo Rivera Arbeláez es candidato a doctor en ingeniería y director del programa de Tecnología en Desarrollo de Software de la Universidad Católica de Pereira. Su tesis doctoral explora cómo agentes de IA autónomos pueden optimizar el consumo energético de dispositivos IoT que operan en el borde."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of David Ricardo Rivera Arbeláez"
+    es: "Retrato de David Ricardo Rivera Arbeláez"
+social:
+  linkedin: "https://www.linkedin.com/in/davidriveraarbelaez/"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
