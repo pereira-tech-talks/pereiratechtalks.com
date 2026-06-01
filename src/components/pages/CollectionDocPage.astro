@@ -1,0 +1,94 @@
+---
+/**
+ * PTT v3.0.0 generic collection-driven page (shared between EN and ES).
+ *
+ * Renders any entry from the `pages` content collection (community,
+ * conduct, contributing, governance, etc.) as a long-form, readable
+ * document — title, optional eyebrow, last-updated timestamp, and the
+ * Markdown body via Astro's <Content />.
+ *
+ * Usage:
+ *   <CollectionDocPage lang="en" slug="conduct" eyebrow="Policy" />
+ */
+
+import { getEntry, render } from 'astro:content';
+
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { type Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  /** Page slug inside `src/content/pages/{lang}/{slug}.md` */
+  slug: string;
+  /** Optional uppercase label rendered above the H1 */
+  eyebrow?: string;
+}
+
+const { lang, slug, eyebrow } = Astro.props;
+
+const entry = await getEntry('pages', `${lang}/${slug}`);
+if (!entry) {
+  throw new Error(`Missing pages collection entry: ${lang}/${slug}`);
+}
+
+const { Content } = await render(entry);
+const { title, description, lastUpdated } = entry.data;
+
+const lastUpdatedLabel = lastUpdated
+  ? new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(lastUpdated)
+  : null;
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: lang === 'es' ? '/es/' : '/',
+  },
+  { label: title },
+];
+
+const lastUpdatedPrefix = lang === 'es' ? 'Actualizado el' : 'Last updated';
+---
+
+<MainLayout lang={lang} title={title} description={description}>
+  <div class="bg-white dark:bg-gray-950">
+    <div
+      class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4"
+    >
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h1
+        class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50"
+      >
+        {title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
+        {description}
+      </p>
+      {
+        lastUpdatedLabel && (
+          <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">
+            {lastUpdatedPrefix} <time datetime={lastUpdated?.toISOString()}>{lastUpdatedLabel}</time>
+          </p>
+        )
+      }
+    </div>
+  </div>
+
+  <article
+    class="bg-white dark:bg-gray-950 pb-16 sm:pb-24"
+  >
+    <div
+      class="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose-headings:scroll-mt-24 prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark prose-headings:text-gray-900 dark:prose-headings:text-gray-50 prose-p:text-gray-700 dark:prose-p:text-gray-200 prose-strong:text-gray-900 dark:prose-strong:text-gray-50 prose-li:text-gray-700 dark:prose-li:text-gray-200 prose-table:text-sm prose-th:text-gray-900 dark:prose-th:text-gray-50 prose-td:text-gray-700 dark:prose-td:text-gray-200"
+    >
+      <Content />
+    </div>
+  </article>
+</MainLayout>

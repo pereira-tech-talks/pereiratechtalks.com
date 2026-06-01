@@ -56,6 +56,16 @@ const SITE_NAV_SECTIONS: NavSection[] = [
       },
       { label: { en: 'Channels', es: 'Canales' }, path: '/channels' },
       { label: { en: 'Press', es: 'Prensa' }, path: '/press' },
+      { label: { en: 'Community', es: 'Comunidad' }, path: '/community' },
+      {
+        label: { en: 'Contributing', es: 'Cómo contribuir' },
+        path: '/contributing',
+      },
+      { label: { en: 'Governance', es: 'Gobernanza' }, path: '/governance' },
+      {
+        label: { en: 'Code of Conduct', es: 'Código de Conducta' },
+        path: '/conduct',
+      },
     ],
   },
   {

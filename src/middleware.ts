@@ -53,6 +53,10 @@ const KNOWN_ROOT_PATHS = new Set([
   'sponsor-us',
   'channels',
   'press',
+  'community',
+  'conduct',
+  'contributing',
+  'governance',
   'api',
   'es',
   'internal',
@@ -79,6 +83,10 @@ const KNOWN_ES_PATHS = new Set([
   'sponsor-us',
   'channels',
   'press',
+  'community',
+  'conduct',
+  'contributing',
+  'governance',
   'rss.xml',
 ]);
 

@@ -10,12 +10,53 @@ const { lang = 'en' } = Astro.props;
 const t = getTranslations(lang as Language);
 
 const iconClass = 'w-6 h-6 text-current';
+
+const prefix = lang === 'es' ? '/es' : '';
+const footerLinks = [
+  {
+    label: lang === 'es' ? 'Comunidad' : 'Community',
+    href: `${prefix}/community`,
+  },
+  {
+    label: lang === 'es' ? 'Cómo contribuir' : 'Contributing',
+    href: `${prefix}/contributing`,
+  },
+  {
+    label: lang === 'es' ? 'Gobernanza' : 'Governance',
+    href: `${prefix}/governance`,
+  },
+  {
+    label: lang === 'es' ? 'Código de Conducta' : 'Code of Conduct',
+    href: `${prefix}/conduct`,
+  },
+  {
+    label: lang === 'es' ? 'Canales' : 'Channels',
+    href: `${prefix}/channels`,
+  },
+  {
+    label: lang === 'es' ? 'Prensa' : 'Press',
+    href: `${prefix}/press`,
+  },
+];
 ---
 
 <footer
 	class="bg-gray-50 dark:bg-gray-900 pt-16 pb-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-600 dark:text-gray-300"
 >
-	<div class="max-w-4xl mx-auto flex flex-col items-center gap-2">
+	<div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
+		<nav
+			aria-label={lang === 'es' ? 'Enlaces de comunidad' : 'Community links'}
+			class="flex flex-wrap justify-center gap-x-4 gap-y-2"
+		>
+			{footerLinks.map((link) => (
+				<a
+					href={link.href}
+					class="text-gray-600 dark:text-gray-300 hover:text-ptt-primary dark:hover:text-ptt-primary-dark transition-colors"
+				>
+					{link.label}
+				</a>
+			))}
+		</nav>
 		<div>
 			&copy; <span id="copyright-year">{new Date().getFullYear()}</span> {t.footer.copyright}. {t.footer.allRightsReserved}
 		</div>
