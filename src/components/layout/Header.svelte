@@ -62,18 +62,21 @@ function closeAllDropdowns() {
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
-      class="font-extrabold text-2xl md:text-3xl tracking-tight select-none"
+      class="flex items-center gap-2.5 font-bold tracking-tight select-none text-white"
       aria-label="Pereira Tech Talks"
     >
       <img
-        class="h-7 w-auto md:h-8"
-        src="/images/logo_small_version_white.svg"
+        class="h-8 w-auto md:h-9"
+        src="/images/pereira-tech-talks/logo-white.png"
         alt=""
-        width={952}
-        height={168}
+        width={178}
+        height={178}
         loading="eager"
         fetchpriority="high"
       />
+      <span class="text-base md:text-lg lg:text-xl whitespace-nowrap">
+        Pereira <span class="font-extrabold">Tech Talks</span>
+      </span>
     </a>
 
     <div class="hidden lg:flex items-center gap-6">

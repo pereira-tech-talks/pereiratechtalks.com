@@ -140,7 +140,9 @@ const t = {
 };
 
 const contactHref =
-  lang === 'es' ? '/es/contact/?reason=press' : '/contact/?reason=press';
+  lang === 'es'
+    ? `/es/contact/?reason=other&subject=${encodeURIComponent('Consulta de prensa')}`
+    : `/contact/?reason=other&subject=${encodeURIComponent('Press inquiry')}`;
 
 const breadcrumbs = [
   {

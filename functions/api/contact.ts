@@ -50,12 +50,17 @@ interface ContactPayload {
   website?: string;
 }
 
+/**
+ * Allowlist must match the `reasonOptions` values rendered by the contact form
+ * (`src/lib/translations/{en,es}.ts → contactPage.reasonOptions`). When adding
+ * new options to the dropdown, mirror them here.
+ */
 const ALLOWED_REASONS = new Set([
   'general',
-  'speaking',
-  'sponsor',
-  'media',
-  'feedback',
+  'tech-talk',
+  'collaboration',
+  'project',
+  'the-library-of-tomorrow',
   'other',
 ]);
 

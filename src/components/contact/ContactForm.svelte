@@ -164,7 +164,7 @@ async function submitToApi(endpoint) {
       payload = null;
     }
     const errorCode =
-      (payload && typeof payload === 'object' && payload && payload.error) ||
+      (payload && typeof payload === 'object' && payload?.error) ||
       `http_${response.status}`;
     throw new Error(errorCode);
   }
