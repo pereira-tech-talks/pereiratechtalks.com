@@ -6,9 +6,9 @@ This document serves as the central reference for all available Skills and Agent
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 13             | 8                  | 0              | 21    |
+| Skills | 13             | 10                 | 1              | 24    |
 | Agents | 0              | 5                  | 1              | 6     |
-| **Total** | **13**      | **13**             | **1**          | **27** |
+| **Total** | **13**      | **15**             | **2**          | **30** |
 
 ---
 
@@ -44,6 +44,8 @@ Everyday development work.
 |---------------|----------|------------------|--------|--------------------------------------------------------------------------|
 | add-blog-post | create   | `/add-blog-post` | sonnet | **Mandatory for new blog posts** — topic mode (writes content) or content mode (scaffolding). |
 | add-slide-deck | create  | `/add-slide-deck` | sonnet | **Mandatory for new slide decks** — internal Reveal.js, external-embed, or external-link. |
+| add-meetup    | create   | `/add-meetup`    | sonnet | **Mandatory for new meetups** — bilingual entries in the `meetups` collection with optional talk/speaker/sponsor references. |
+| add-event     | create   | `/add-event`     | sonnet | **Mandatory for new events** — workshops, hackathons, conferences, webinars in the `events` collection. |
 | audit-post    | review   | `/audit-post`    | sonnet | Pre-publication audit for blog posts — SEO, AEO, accessibility, images, content quality, i18n parity, and project conventions. |
 | audit-series  | review   | `/audit-series`  | sonnet | Pre-publication audit for blog series — series definition, post ordering, cross-post consistency, navigation, and individual post summary checks. |
 | audit-taxonomy | review  | `/audit-taxonomy` | sonnet | Read-only audit of the blog tag taxonomy — frequency, orphans, hierarchy, and proposals for new subtopic tags. Writes report to `tmp/audit-taxonomy/`. See [Blog Posts → Tags](../../docs/features/BLOG_POSTS.md). |
@@ -57,7 +59,7 @@ Complex planning and architecture.
 
 | Skill | Intent | Invocation | Model | Description |
 |-------|--------|-------------|-------|-------------|
-| *Add with /skill-create* | | | | |
+| add-ptd-edition | create | `/add-ptd-edition` | sonnet | **Mandatory for new Pereira Tech Day editions** — annual conference with schedule, keynotes, brand kit, organizers, and gallery. |
 
 ---
 

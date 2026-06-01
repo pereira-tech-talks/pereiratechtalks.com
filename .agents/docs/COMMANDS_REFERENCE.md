@@ -64,6 +64,9 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/new-post` | `.agents/commands/new-post.md` | Create a new blog post (interactive guided flow) |
 | `/add-blog-post` | `.agents/skills/add-blog-post/SKILL.md` | Create blog posts — topic mode (writes content) or content mode (scaffolding) |
 | `/add-slide-deck` | `.agents/skills/add-slide-deck/SKILL.md` | Create slide decks — internal Reveal.js, external-embed, or external-link |
+| `/add-meetup` | `.agents/skills/add-meetup/SKILL.md` | Create a Pereira Tech Talks monthly meetup entry (bilingual frontmatter, optional talk/speaker/sponsor refs) |
+| `/add-event` | `.agents/skills/add-event/SKILL.md` | Create a non-meetup event entry (workshop, hackathon, conference, webinar) in the `events` collection |
+| `/add-ptd-edition` | `.agents/skills/add-ptd-edition/SKILL.md` | Create a Pereira Tech Day annual edition (schedule, keynotes, brand kit, organizers, gallery) |
 | `/promote-post` | `.agents/skills/promote-post/SKILL.md` | Generate social media content for blog posts across multiple platforms |
 | `/optimize-image` | `.agents/skills/optimize-image/SKILL.md` | Convert and optimize images to WebP for blog posts |
 | `/audit-post` | `.agents/skills/audit-post/SKILL.md` | Pre-publication audit for blog posts (SEO, AEO, accessibility, images, content quality, i18n) |
