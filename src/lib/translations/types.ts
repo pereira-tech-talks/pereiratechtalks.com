@@ -25,6 +25,14 @@ export interface SiteTranslations {
     about: string;
     contact: string;
     slides: string;
+    meetups: string;
+    pereiraTechDays: string;
+    speakers: string;
+    talks: string;
+    sponsors: string;
+    contributors: string;
+    verticals: string;
+    community: string;
   };
 
   // Footer

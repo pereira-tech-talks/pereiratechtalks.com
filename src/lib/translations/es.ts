@@ -16,9 +16,17 @@ export const es: SiteTranslations = {
   nav: {
     home: 'Inicio',
     blog: 'Blog',
-    about: 'Comunidad',
+    about: 'Sobre nosotros',
     contact: 'Contacto',
     slides: 'Slides',
+    meetups: 'Meetups',
+    pereiraTechDays: 'Pereira Tech Days',
+    speakers: 'Ponentes',
+    talks: 'Charlas',
+    sponsors: 'Patrocinadores',
+    contributors: 'Equipo',
+    verticals: 'Programas',
+    community: 'Comunidad',
   },
 
   // Footer

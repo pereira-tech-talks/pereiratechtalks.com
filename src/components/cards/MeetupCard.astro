@@ -1,0 +1,108 @@
+---
+/**
+ * PTT v3.0.0 meetup card — preview card for a single meetup entry from the
+ * `meetups` collection.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  meetup: CollectionEntry<'meetups'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { meetup, lang, loading = 'lazy' } = Astro.props;
+
+const prefix = getUrlPrefix(lang);
+const title = tr(meetup.data.title, lang);
+const description = tr(meetup.data.description, lang);
+const heroSrc =
+  meetup.data.hero?.src ||
+  meetup.data.heroImage ||
+  '/images/blog/shared/blog-placeholder-1.webp';
+const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
+
+const date = new Date(meetup.data.date);
+const dateLabel = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(date);
+
+const venueLine = meetup.data.venue
+  ? [meetup.data.venue.name, meetup.data.venue.city].filter(Boolean).join(' · ')
+  : '';
+
+const talksCount = meetup.data.talks?.length ?? 0;
+const status = meetup.data.status ?? 'completed';
+
+// Slug stripped of YYYY-MM-DD_ prefix in case the loader keeps it.
+const slug = meetup.id.replace(/^\d{4}-\d{2}-\d{2}_/, '');
+const url = `${prefix}/meetups/${slug}/`;
+
+const statusLabels: Record<string, { en: string; es: string }> = {
+  announced: { en: 'Upcoming', es: 'Próximamente' },
+  'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
+  completed: { en: 'Past', es: 'Pasado' },
+  cancelled: { en: 'Cancelled', es: 'Cancelado' },
+};
+const statusVariant = (
+  status === 'announced' || status === 'rsvp-open'
+    ? 'announced'
+    : status === 'cancelled'
+      ? 'cancelled'
+      : 'completed'
+) as 'announced' | 'cancelled' | 'completed';
+const statusLabel = statusLabels[status]?.[lang] ?? status;
+
+const talksLabel =
+  talksCount === 1
+    ? lang === 'es'
+      ? '1 charla'
+      : '1 talk'
+    : lang === 'es'
+      ? `${talksCount} charlas`
+      : `${talksCount} talks`;
+---
+
+<a
+  href={url}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="relative aspect-[16/9] overflow-hidden bg-gray-100 dark:bg-gray-800">
+    <img
+      src={heroSrc}
+      alt={heroAlt}
+      width="640"
+      height="360"
+      loading={loading}
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <div class="absolute left-3 top-3 flex gap-2">
+      <Badge variant={statusVariant}>{statusLabel}</Badge>
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
+      <time datetime={date.toISOString()}>{dateLabel}</time>
+      {talksCount > 0 && <span aria-hidden="true">·</span>}
+      {talksCount > 0 && <span>{talksLabel}</span>}
+    </div>
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark line-clamp-2">
+      {title}
+    </h3>
+    {description && (
+      <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+        {description}
+      </p>
+    )}
+    {venueLine && (
+      <p class="mt-auto pt-2 text-xs text-gray-600 dark:text-gray-300">
+        {venueLine}
+      </p>
+    )}
+  </div>
+</a>

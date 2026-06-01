@@ -1,0 +1,64 @@
+---
+/**
+ * PTT v3.0.0 talk card — preview card for a `talks` collection entry.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  talk: CollectionEntry<'talks'>;
+  lang: Language;
+  speakerNames?: string[];
+}
+
+const { talk, lang, speakerNames = [] } = Astro.props;
+
+const prefix = getUrlPrefix(lang);
+const title = tr(talk.data.title, lang);
+const abstract = tr(talk.data.abstract, lang);
+const url = `${prefix}/talks/${talk.id}/`;
+const langLabel = (talk.data.language || 'es').toUpperCase();
+const date = talk.data.date ? new Date(talk.data.date) : null;
+const dateLabel = date
+  ? new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(date)
+  : '';
+const typeLabels: Record<string, { en: string; es: string }> = {
+  keynote: { en: 'Keynote', es: 'Keynote' },
+  lightning: { en: 'Lightning', es: 'Relámpago' },
+  panel: { en: 'Panel', es: 'Panel' },
+  workshop: { en: 'Workshop', es: 'Taller' },
+  talk: { en: 'Talk', es: 'Charla' },
+};
+const typeLabel = typeLabels[talk.data.type ?? 'talk'][lang];
+---
+
+<a
+  href={url}
+  class="group flex h-full flex-col gap-3 rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-5 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300">
+    <Badge variant="neutral">{typeLabel}</Badge>
+    <Badge variant="neutral">{langLabel}</Badge>
+    {dateLabel && <time datetime={date?.toISOString()}>{dateLabel}</time>}
+  </div>
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark line-clamp-2">
+    {title}
+  </h3>
+  <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+    {abstract}
+  </p>
+  {speakerNames.length > 0 && (
+    <p class="mt-auto text-xs text-gray-600 dark:text-gray-300">
+      <span class="font-semibold text-gray-700 dark:text-gray-200">
+        {lang === 'es' ? 'Por' : 'By'}:
+      </span>{' '}
+      {speakerNames.join(', ')}
+    </p>
+  )}
+</a>

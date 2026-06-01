@@ -32,7 +32,14 @@ export const getTalksByEvent = async (
   slug: string
 ): Promise<Talk[]> => {
   const all = await getTalks();
-  return all.filter(
-    (t) => t.data.event?.collection === collection && t.data.event.slug === slug
-  );
+  return all.filter((t) => {
+    if (t.data.event?.collection !== collection) return false;
+    const eventSlug = t.data.event.slug;
+    // Match either exact id, or slug stripped of date prefix.
+    return (
+      eventSlug === slug ||
+      slug.endsWith(`/${eventSlug}`) ||
+      slug.replace(/^\d{4}-\d{2}-\d{2}_/, '') === eventSlug
+    );
+  });
 };

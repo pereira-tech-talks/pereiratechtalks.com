@@ -1,0 +1,83 @@
+---
+/**
+ * PTT v3.0.0 sponsor card — preview card for a `sponsors` collection entry.
+ * Tier-aware: tier label, accent ring, light/dark logo variants.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  sponsor: CollectionEntry<'sponsors'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { sponsor, lang, loading = 'lazy' } = Astro.props;
+
+const tier = sponsor.data.tier;
+const tierLabel: Record<typeof tier, { en: string; es: string }> = {
+  diamond: { en: 'Diamond', es: 'Diamante' },
+  gold: { en: 'Gold', es: 'Oro' },
+  silver: { en: 'Silver', es: 'Plata' },
+  bronze: { en: 'Bronze', es: 'Bronce' },
+  community: { en: 'Community', es: 'Comunidad' },
+};
+
+const description = tr(sponsor.data.description, lang);
+const logoLight = sponsor.data.logo.light;
+const logoDark = sponsor.data.logo.dark;
+const logoAlt = sponsor.data.logo.alt;
+const sameLogo = logoLight === logoDark;
+---
+
+<a
+  href={sponsor.data.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex h-16 w-32 items-center">
+      {
+        sameLogo ? (
+          <img
+            src={logoLight}
+            alt={logoAlt}
+            width="160"
+            height="64"
+            loading={loading}
+            class="max-h-16 max-w-full object-contain"
+          />
+        ) : (
+          <>
+            <img
+              src={logoLight}
+              alt={logoAlt}
+              width="160"
+              height="64"
+              loading={loading}
+              class="max-h-16 max-w-full object-contain dark:hidden"
+            />
+            <img
+              src={logoDark}
+              alt={logoAlt}
+              width="160"
+              height="64"
+              loading={loading}
+              class="hidden max-h-16 max-w-full object-contain dark:block"
+            />
+          </>
+        )
+      }
+    </div>
+    <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>
+  </div>
+  <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
+    {sponsor.data.name}
+  </h3>
+  <p class="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">
+    {description}
+  </p>
+</a>

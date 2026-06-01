@@ -1,0 +1,93 @@
+---
+/**
+ * PTT v3.0.0 Pereira Tech Days catalog page (shared between EN and ES).
+ * Lists every edition with year, hero, status.
+ */
+
+import EditionCard from '@/components/cards/EditionCard.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { type Language } from '@/lib/i18n';
+import { getEditions } from '@/lib/pereiraTechDay';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const editions = await getEditions();
+const upcoming = editions.filter(
+  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
+);
+const past = editions.filter(
+  (e) => e.data.status === 'completed' || e.data.status === 'cancelled'
+);
+
+const t = {
+  title: 'Pereira Tech Days',
+  description:
+    lang === 'es'
+      ? 'El evento anual insignia de la comunidad: una jornada completa de charlas, paneles y networking en Pereira.'
+      : "The community's flagship annual event: a full day of talks, panels, and networking in Pereira.",
+  intro:
+    lang === 'es'
+      ? `${editions.length} ediciones desde 2017. Cada año reunimos speakers de Colombia y la región para una jornada técnica que celebra a la comunidad del Eje Cafetero.`
+      : `${editions.length} editions since 2017. Every year we bring together speakers from Colombia and the region for a technical day that celebrates the Eje Cafetero community.`,
+  upcoming: lang === 'es' ? 'Próxima edición' : 'Upcoming edition',
+  past: lang === 'es' ? 'Ediciones pasadas' : 'Past editions',
+};
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: lang === 'es' ? '/es/' : '/',
+  },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/80 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} onDark />
+    </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
+      <Eyebrow variant="accent">
+        {lang === 'es' ? 'Evento anual' : 'Annual event'}
+      </Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-6xl font-bold tracking-tight">
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-gray-200">{t.intro}</p>
+    </div>
+  </div>
+
+  {
+    upcoming.length > 0 && (
+      <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.upcoming}>
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {upcoming.map((edition) => (
+            <li>
+              <EditionCard edition={edition} lang={lang} loading="eager" />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  <Section eyebrow={lang === 'es' ? 'Historia' : 'History'} title={t.past} surface="alt">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        past.map((edition) => (
+          <li>
+            <EditionCard edition={edition} lang={lang} />
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+</MainLayout>

@@ -1,0 +1,96 @@
+---
+/**
+ * PTT v3.0.0 edition card — preview for a single Pereira Tech Day edition
+ * (year-keyed). Uses brandKit accent for visual differentiation.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  edition: CollectionEntry<'pereiraTechDays'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { edition, lang, loading = 'lazy' } = Astro.props;
+
+const prefix = getUrlPrefix(lang);
+const year = edition.data.year;
+const title = tr(edition.data.title, lang);
+const tagline = tr(edition.data.tagline, lang);
+
+const heroSrc = edition.data.hero.src;
+const heroAlt = tr(edition.data.hero.alt, lang) || title;
+const url = `${prefix}/pereira-tech-days/${year}/`;
+const accent =
+  edition.data.brandKit?.paletteLight?.accent || 'var(--color-ptt-accent)';
+const status = edition.data.status;
+
+const date =
+  typeof edition.data.date === 'object' && 'start' in edition.data.date
+    ? edition.data.date.start
+    : edition.data.date;
+const dateLabel = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(new Date(date));
+
+const statusLabels: Record<string, { en: string; es: string }> = {
+  announced: { en: 'Upcoming', es: 'Próximamente' },
+  'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
+  completed: { en: 'Past edition', es: 'Edición pasada' },
+  cancelled: { en: 'Cancelled', es: 'Cancelada' },
+};
+const statusVariant = (
+  status === 'announced' || status === 'rsvp-open'
+    ? 'announced'
+    : status === 'cancelled'
+      ? 'cancelled'
+      : 'completed'
+) as 'announced' | 'cancelled' | 'completed';
+const statusLabel = statusLabels[status]?.[lang] ?? status;
+---
+
+<a
+  href={url}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="relative aspect-[16/9] overflow-hidden">
+    <img
+      src={heroSrc}
+      alt={heroAlt}
+      width="640"
+      height="360"
+      loading={loading}
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <div
+      class="absolute inset-x-0 bottom-0 h-2"
+      style={`background-color: ${accent}`}
+      aria-hidden="true"
+    >
+    </div>
+    <div class="absolute left-3 top-3">
+      <Badge variant={statusVariant}>{statusLabel}</Badge>
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div class="flex items-baseline gap-2 text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+      <span>{year}</span>
+      <span aria-hidden="true">·</span>
+      <span>Pereira Tech Day</span>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark line-clamp-2">
+      {title}
+    </h3>
+    <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+      {tagline}
+    </p>
+    <p class="mt-auto pt-2 text-xs text-gray-600 dark:text-gray-300">
+      <time datetime={new Date(date).toISOString()}>{dateLabel}</time>
+    </p>
+  </div>
+</a>

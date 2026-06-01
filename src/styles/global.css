@@ -33,10 +33,19 @@
   --color-ptt-primary: #1f6f73;
   --color-ptt-primary-strong: #155054;
   --color-ptt-primary-soft: #e1f2f1;
+  /* Dark-mode variants exposed as utility classes so components can opt-in
+   * to the dark-mode primary/accent in any context (e.g. against a dark
+   * hero canvas in light mode). These never change between modes. */
+  --color-ptt-primary-dark: #3fa8ad;
   --color-ptt-accent: #e8a33d;
   --color-ptt-accent-strong: #b87c1f;
+  --color-ptt-accent-dark: #f4b95c;
   --color-ptt-bg: #fafbfb;
   --color-ptt-bg-elevated: #ffffff;
+  /* Always-dark hero canvas (same in light and dark mode). Used by hero
+   * sections that intentionally remain dark regardless of theme so the
+   * brand keeps its night identity above the fold. */
+  --color-ptt-bg-dark: #08191a;
   --color-ptt-border: #e2e8e8;
   --color-ptt-border-strong: #c9d4d5;
   --color-ptt-text: #0f2a2c;

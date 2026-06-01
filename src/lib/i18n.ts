@@ -157,3 +157,25 @@ export function getAlternateUrls(
     url: getLocalizedUrl(basePath, lang),
   }));
 }
+
+/**
+ * Bilingual i18n value used by v3 collections (meetups, events, PTDs,
+ * verticals, sponsors, etc.) — accepts either a plain string (language-
+ * neutral, rendered as-is) or a `{ en, es }` object.
+ */
+export type I18nValue =
+  | string
+  | { en?: string; es?: string }
+  | undefined
+  | null;
+
+/**
+ * Resolve an `i18nString` field for a target language, returning a single
+ * string. Falls back across languages so callers always get a renderable
+ * string when at least one language has content.
+ */
+export function tr(value: I18nValue, lang: Language): string {
+  if (value === null || value === undefined) return '';
+  if (typeof value === 'string') return value;
+  return value[lang] ?? value.en ?? value.es ?? '';
+}

@@ -1,13 +1,22 @@
 ---
+import EditionCard from '@/components/cards/EditionCard.astro';
+import MeetupCard from '@/components/cards/MeetupCard.astro';
+import VerticalCard from '@/components/cards/VerticalCard.astro';
 import BlogPreviewSection from '@/components/home/BlogPreviewSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
 import HeroSection from '@/components/home/HeroSection/HeroSection.astro';
 import { HomeSectionContentAlignmentEType } from '@/components/home/HomeSection/enum';
 import HomeSection from '@/components/home/HomeSection/HomeSection.astro';
+import LinkArrow from '@/components/ui/LinkArrow.astro';
+import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
+import { getMeetups, getUpcomingMeetups } from '@/lib/meetup';
+import { getEditions } from '@/lib/pereiraTechDay';
+import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
+import { getActiveVerticals } from '@/lib/vertical';
 
 interface Props {
   lang: Language;
@@ -16,15 +25,88 @@ interface Props {
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
+
+const upcomingMeetups = await getUpcomingMeetups();
+const latestMeetups = (await getMeetups()).slice(0, 3);
+const editions = await getEditions();
+const upcomingEdition = editions.find(
+  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
+);
+const lastEdition =
+  upcomingEdition ?? editions.find((e) => e.data.status === 'completed');
+const verticals = await getActiveVerticals();
+const sponsors = (await getActiveSponsors()).slice(0, 12);
+
+const meetupsToShow =
+  upcomingMeetups.length > 0 ? upcomingMeetups.slice(0, 3) : latestMeetups;
+const meetupsHeading =
+  upcomingMeetups.length > 0
+    ? lang === 'es'
+      ? 'Próximos meetups'
+      : 'Upcoming meetups'
+    : lang === 'es'
+      ? 'Últimos meetups'
+      : 'Latest meetups';
+const meetupsEyebrow = lang === 'es' ? 'Calendario' : 'Calendar';
+const meetupsCta = lang === 'es' ? 'Ver todos los meetups' : 'See all meetups';
+
+const verticalsHeading =
+  lang === 'es' ? 'Programas de la comunidad' : 'Community programs';
+const verticalsEyebrow = lang === 'es' ? 'Estructura' : 'Structure';
+const verticalsSubtitle =
+  lang === 'es'
+    ? 'Cuatro frentes que sostienen lo que hacemos: meetups mensuales, Speaker School, La Biblioteca del Mañana y el Canal IA.'
+    : 'Four community fronts that sustain what we do: monthly meetups, Speaker School, The Library of Tomorrow, and the AI Channel.';
+const verticalsCta =
+  lang === 'es' ? 'Conocer los programas' : 'Explore the programs';
+
+const ptdEyebrow = lang === 'es' ? 'Evento anual' : 'Annual event';
+const ptdHeading = 'Pereira Tech Day';
+const ptdSubtitle =
+  lang === 'es'
+    ? 'Una jornada al año donde la comunidad se reúne con speakers internacionales para celebrar lo que construimos.'
+    : 'One day a year when the community comes together with international speakers to celebrate what we build.';
+const ptdCta =
+  lang === 'es' ? 'Explorar todas las ediciones' : 'Explore all editions';
+
+const sponsorsEyebrow = lang === 'es' ? 'Aliados' : 'Partners';
+const sponsorsHeading =
+  lang === 'es'
+    ? 'La comunidad existe gracias a'
+    : 'The community is powered by';
+const sponsorsSubtitle =
+  lang === 'es'
+    ? 'Empresas y aliados comunitarios que aportan venues, catering, becas y mentoría.'
+    : 'Companies and community partners providing venues, catering, scholarships, and mentorship.';
+const sponsorsCta =
+  lang === 'es' ? 'Ver todos los patrocinadores' : 'See all sponsors';
 ---
 
 <MainLayout
   lang={lang}
   title={t.siteTitleFull}
   description={t.siteDescription}
-  keywords={lang === 'en'
-    ? ['Pereira Tech Talks', 'tech community Pereira', 'Risaralda tech meetups', 'bilingual tech community Colombia', 'Pereira Tech Day', 'Speaker School', 'La Biblioteca del Mañana']
-    : ['Pereira Tech Talks', 'comunidad tecnología Pereira', 'meetups tecnología Risaralda', 'comunidad tecnología bilingüe Colombia', 'Pereira Tech Day', 'Escuela de Speakers', 'La Biblioteca del Mañana']}
+  keywords={
+    lang === 'en'
+      ? [
+          'Pereira Tech Talks',
+          'tech community Pereira',
+          'Risaralda tech meetups',
+          'bilingual tech community Colombia',
+          'Pereira Tech Day',
+          'Speaker School',
+          'La Biblioteca del Mañana',
+        ]
+      : [
+          'Pereira Tech Talks',
+          'comunidad tecnología Pereira',
+          'meetups tecnología Risaralda',
+          'comunidad tecnología bilingüe Colombia',
+          'Pereira Tech Day',
+          'Escuela de Speakers',
+          'La Biblioteca del Mañana',
+        ]
+  }
 >
   <HeroSection
     name={t.siteTitle}
@@ -33,7 +115,6 @@ const prefix = getUrlPrefix(lang);
     typewriterWords={t.hero.typewriterWords}
   />
 
-  <!-- About PTT Section -->
   <HomeSection
     title={t.homeSections.about.title}
     description={t.homeSections.about.description}
@@ -45,22 +126,123 @@ const prefix = getUrlPrefix(lang);
     contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
   />
 
-  <!-- Community & Speaking Section -->
-  <HomeSection
-    title={t.homeSections.community.title}
-    subtitle={t.homeSections.community.subtitle}
-    description={t.homeSections.community.description}
-    ctaText={t.homeSections.community.cta}
-    ctaLink={`${prefix}/about`}
-    image="/images/techtalks.png"
-    contentAlignment={HomeSectionContentAlignmentEType.LEFT}
-    variant="alt"
-    grouped
-  />
+  {/* Meetups */}
+  {
+    meetupsToShow.length > 0 && (
+      <Section
+        eyebrow={meetupsEyebrow}
+        title={meetupsHeading}
+        surface="alt"
+      >
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {meetupsToShow.map((meetup) => (
+            <li>
+              <MeetupCard meetup={meetup} lang={lang} />
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/meetups/`}>{meetupsCta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
 
-  <!-- Blog Preview Section -->
+  {/* Verticals */}
+  {
+    verticals.length > 0 && (
+      <Section
+        eyebrow={verticalsEyebrow}
+        title={verticalsHeading}
+        subtitle={verticalsSubtitle}
+      >
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {verticals.map((vertical) => (
+            <li>
+              <VerticalCard vertical={vertical} lang={lang} />
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/verticals/`}>{verticalsCta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  {/* Pereira Tech Day */}
+  {
+    lastEdition && (
+      <Section
+        eyebrow={ptdEyebrow}
+        title={ptdHeading}
+        subtitle={ptdSubtitle}
+        surface="alt"
+      >
+        <div class="grid gap-6 lg:grid-cols-2">
+          <EditionCard edition={lastEdition} lang={lang} />
+          {editions
+            .filter((e) => e.id !== lastEdition.id)
+            .slice(0, 1)
+            .map((edition) => (
+              <EditionCard edition={edition} lang={lang} />
+            ))}
+        </div>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/pereira-tech-days/`}>{ptdCta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  {/* Sponsors strip */}
+  {
+    sponsors.length > 0 && (
+      <Section
+        eyebrow={sponsorsEyebrow}
+        title={sponsorsHeading}
+        subtitle={sponsorsSubtitle}
+      >
+        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          {sponsors.map((sponsor) => (
+            <li class="flex h-24 items-center justify-center rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4">
+              <a
+                href={sponsor.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+                aria-label={sponsor.data.name}
+              >
+                <img
+                  src={sponsor.data.logo.light}
+                  alt={sponsor.data.logo.alt}
+                  width="160"
+                  height="64"
+                  loading="lazy"
+                  class="max-h-12 max-w-full object-contain dark:hidden"
+                />
+                <img
+                  src={sponsor.data.logo.dark}
+                  alt={sponsor.data.logo.alt}
+                  width="160"
+                  height="64"
+                  loading="lazy"
+                  class="hidden max-h-12 max-w-full object-contain dark:block"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/sponsors/`}>{sponsorsCta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  {/* Blog preview */}
   <BlogPreviewSection lang={lang} grouped surface="alt" />
 
-  <!-- Contact Section -->
+  {/* Contact */}
   <ContactSection lang={lang} />
 </MainLayout>

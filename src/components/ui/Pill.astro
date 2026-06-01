@@ -1,0 +1,53 @@
+---
+/**
+ * PTT v3.0.0 small status/category pill (filter pills, tag chips).
+ *
+ * For tier-aware sponsor badges or sponsor levels, use `<Badge variant="...">`
+ * instead.
+ */
+
+interface Props {
+  href?: string;
+  active?: boolean;
+  variant?: 'default' | 'primary' | 'accent' | 'outline';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  href,
+  active = false,
+  variant = 'default',
+  size = 'md',
+  class: className = '',
+} = Astro.props;
+
+const sizeClass = size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm';
+
+const variantBase = {
+  default:
+    'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700',
+  primary:
+    'bg-ptt-primary text-white hover:bg-ptt-primary/90 dark:bg-ptt-primary-dark dark:text-gray-950 dark:hover:bg-ptt-primary-dark/90',
+  accent:
+    'bg-ptt-accent text-gray-950 hover:bg-ptt-accent/90 dark:bg-ptt-accent-dark dark:text-gray-950 dark:hover:bg-ptt-accent-dark/90',
+  outline:
+    'border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800',
+};
+const activeClass = active
+  ? 'ring-2 ring-ptt-primary dark:ring-ptt-primary-dark ring-offset-2 ring-offset-white dark:ring-offset-gray-950'
+  : '';
+const base = `inline-flex items-center gap-1 rounded-full font-medium transition-colors ${sizeClass} ${variantBase[variant]} ${activeClass} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={base}>
+      <slot />
+    </a>
+  ) : (
+    <span class={base}>
+      <slot />
+    </span>
+  )
+}

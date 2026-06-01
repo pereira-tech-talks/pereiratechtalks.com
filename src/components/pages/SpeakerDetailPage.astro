@@ -1,0 +1,179 @@
+---
+/**
+ * PTT v3.0.0 single speaker detail page — bio + their talks.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import TalkCard from '@/components/cards/TalkCard.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getTalksBySpeaker } from '@/lib/talk';
+
+interface Props {
+  speaker: CollectionEntry<'speakers'>;
+  lang: Language;
+}
+
+const { speaker, lang } = Astro.props;
+
+const prefix = getUrlPrefix(lang);
+const name = speaker.data.name;
+const role = tr(speaker.data.role, lang);
+const bio = tr(speaker.data.bio, lang);
+const photoSrc = speaker.data.photo.src;
+const photoAlt = tr(speaker.data.photo.alt, lang) || `Portrait of ${name}`;
+
+const talks = await getTalksBySpeaker(speaker.id);
+const social = (speaker.data.social ?? {}) as {
+  twitter?: string;
+  linkedin?: string;
+  github?: string;
+  website?: string;
+  mastodon?: string;
+  bluesky?: string;
+};
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: prefix === '' ? '/' : `${prefix}/`,
+  },
+  {
+    label: lang === 'es' ? 'Ponentes' : 'Speakers',
+    href: `${prefix}/speakers/`,
+  },
+  { label: name },
+];
+
+const SITE_URL = 'https://pereiratechtalks.org';
+const sameAs = [
+  social.twitter,
+  social.linkedin,
+  social.github,
+  social.website,
+  social.mastodon,
+  social.bluesky,
+].filter((s): s is string => Boolean(s));
+const personJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name,
+  jobTitle: role,
+  description: bio,
+  image: photoSrc?.startsWith('http') ? photoSrc : `${SITE_URL}${photoSrc}`,
+  url: `${SITE_URL}${prefix}/speakers/${speaker.id}/`,
+  sameAs: sameAs.length > 0 ? sameAs : undefined,
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={`${name} — ${role}`}
+  description={bio}
+  image={photoSrc}
+>
+  <JsonLd data={personJsonLd} />
+  <article class="bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <Breadcrumbs items={breadcrumbs} />
+      <div class="mt-8 flex flex-col items-start gap-8 sm:flex-row">
+        <div class="relative h-40 w-40 shrink-0 overflow-hidden rounded-full ring-4 ring-ptt-accent/30 dark:ring-ptt-accent-dark/30 bg-gray-100 dark:bg-gray-800">
+          <img
+            src={photoSrc}
+            alt={photoAlt}
+            width="160"
+            height="160"
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+        </div>
+        <div class="flex-1">
+          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+            {name}
+          </h1>
+          <p class="mt-2 text-lg text-ptt-primary dark:text-ptt-primary-dark font-medium">
+            {role}
+          </p>
+          <p class="mt-4 text-gray-700 dark:text-gray-200 max-w-3xl leading-relaxed">
+            {bio}
+          </p>
+          {
+            Object.keys(social).length > 0 && (
+              <ul class="mt-6 flex flex-wrap gap-3 text-sm">
+                {social.github && (
+                  <li>
+                    <a
+                      href={social.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-gray-700 dark:text-gray-200 hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
+                    >
+                      GitHub
+                    </a>
+                  </li>
+                )}
+                {social.linkedin && (
+                  <li>
+                    <a
+                      href={social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-gray-700 dark:text-gray-200 hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
+                    >
+                      LinkedIn
+                    </a>
+                  </li>
+                )}
+                {social.twitter && (
+                  <li>
+                    <a
+                      href={social.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-gray-700 dark:text-gray-200 hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
+                    >
+                      X
+                    </a>
+                  </li>
+                )}
+                {social.website && (
+                  <li>
+                    <a
+                      href={social.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1.5 text-gray-700 dark:text-gray-200 hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
+                    >
+                      {lang === 'es' ? 'Sitio web' : 'Website'}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+    {
+      talks.length > 0 && (
+        <section class="bg-gray-50 dark:bg-gray-900/50 py-16 sm:py-20">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+              {lang === 'es' ? `Charlas de ${name}` : `${name}'s talks`}
+            </h2>
+            <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+              {talks.map((talk) => (
+                <li>
+                  <TalkCard talk={talk} lang={lang} speakerNames={[name]} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+  </article>
+</MainLayout>

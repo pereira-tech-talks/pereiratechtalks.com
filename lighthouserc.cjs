@@ -2,7 +2,21 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: ['/', '/about/', '/blog/', '/es/'],
+      url: [
+        '/',
+        '/about/',
+        '/blog/',
+        '/meetups/',
+        '/pereira-tech-days/',
+        '/speakers/',
+        '/talks/',
+        '/sponsors/',
+        '/contributors/',
+        '/verticals/',
+        '/call-for-speakers/',
+        '/sponsor-us/',
+        '/es/',
+      ],
       numberOfRuns: 3,
       settings: {
         chromeFlags: '--no-sandbox --headless',

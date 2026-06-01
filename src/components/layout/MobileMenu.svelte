@@ -13,22 +13,19 @@ import { getTranslations } from '@/lib/translations';
 export let lang: string = 'en';
 export let open: boolean;
 export let toggleMenu: () => void;
-let workOpen = false;
-let aboutOpen = false;
+let communityOpen = false;
 let languageOpen = false;
 let lockedScrollY = 0;
 let isScrollLocked = false;
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
-$: currentLangConfig = getLanguageConfig(lang);
 $: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
 
 function lockBodyScroll() {
   if (isScrollLocked) return;
   lockedScrollY = window.scrollY;
   isScrollLocked = true;
-  // Defer DOM writes to next frame to avoid forced reflow (read/write in same tick as Svelte update)
   requestAnimationFrame(() => {
     document.body.style.position = 'fixed';
     document.body.style.top = `-${lockedScrollY}px`;
@@ -50,7 +47,6 @@ function unlockBodyScroll() {
   requestAnimationFrame(() => window.scrollTo(0, y));
 }
 
-// Lock body scroll when menu is open
 $: if (typeof document !== 'undefined') {
   if (open) {
     lockBodyScroll();
@@ -59,7 +55,6 @@ $: if (typeof document !== 'undefined') {
   }
 }
 
-// Alternate language URLs - computed on mount from current page path
 let alternateLanguageUrls: {
   lang: string;
   url: string;
@@ -89,84 +84,61 @@ onDestroy(() => {
 </script>
 
 {#if open}
-  <div class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start pt-20 gap-6 overflow-y-auto overscroll-contain transition-all duration-300 md:hidden">
+  <div class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start pt-20 gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden">
     <button
       class="absolute top-6 right-6 p-2"
       aria-label="Close menu"
       on:click={toggleMenu}
       type="button"
     >
-      <!-- Close icon (X) -->
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
       </svg>
     </button>
+
     <a href={prefix || '/'} class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'home', source: 'mobile' })}>{t.nav.home}</a>
+    <a href="{prefix}/meetups" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups', source: 'mobile' })}>{t.nav.meetups}</a>
+    <a href="{prefix}/pereira-tech-days" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'pereira_tech_days', source: 'mobile' })}>{t.nav.pereiraTechDays}</a>
+    <a href="{prefix}/verticals" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals', source: 'mobile' })}>{t.nav.verticals}</a>
+    <a href="{prefix}/speakers" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers', source: 'mobile' })}>{t.nav.speakers}</a>
     <a href="{prefix}/blog" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'blog', source: 'mobile' })}>{t.nav.blog}</a>
+
     <button
       class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
-      on:click={() => workOpen = !workOpen}
-      aria-expanded={workOpen}
-      aria-controls="work-dropdown"
+      on:click={() => communityOpen = !communityOpen}
+      aria-expanded={communityOpen}
+      aria-controls="community-dropdown"
       type="button"
     >
-      {t.nav.work}
+      {t.nav.community}
       <svg
         class="w-5 h-5 transition-transform duration-200"
-        class:rotate-180={workOpen}
+        class:rotate-180={communityOpen}
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
       </svg>
     </button>
-    {#if workOpen}
+    {#if communityOpen}
       <div
-        id="work-dropdown"
+        id="community-dropdown"
         class="flex flex-col items-center gap-2 mt-1"
         transition:fade={{ duration: 150 }}
       >
-        <a href="{prefix}/portfolio" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'portfolio', source: 'mobile' })}>{t.nav.portfolio}</a>
-        <a href="{prefix}/dailybot" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'dailybot', source: 'mobile' })}>{t.nav.dailybot}</a>
-        <a href="{prefix}/tech-talks" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'tech_talks', source: 'mobile' })}>{t.nav.techTalks}</a>
-        <a href="{prefix}/trading" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'trading', source: 'mobile' })}>{t.nav.trading}</a>
+        <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about', source: 'mobile' })}>{t.nav.about}</a>
+        <a href="{prefix}/contributors" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors', source: 'mobile' })}>{t.nav.contributors}</a>
+        <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
+        <a href="{prefix}/talks" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'talks', source: 'mobile' })}>{t.nav.talks}</a>
+        <a href="{prefix}/slides" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides', source: 'mobile' })}>{t.nav.slides}</a>
       </div>
     {/if}
-    <button
-      class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
-      on:click={() => aboutOpen = !aboutOpen}
-      aria-expanded={aboutOpen}
-      aria-controls="about-dropdown"
-      type="button"
-    >
-      {t.nav.about}
-      <svg
-        class="w-5 h-5 transition-transform duration-200"
-        class:rotate-180={aboutOpen}
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </button>
-    {#if aboutOpen}
-      <div
-        id="about-dropdown"
-        class="flex flex-col items-center gap-2 mt-1"
-        transition:fade={{ duration: 150 }}
-      >
-        <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about_me', source: 'mobile' })}>{t.nav.aboutMe}</a>
-        <a href="{prefix}/cv" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'cv', source: 'mobile' })}>{t.nav.cv}</a>
-        <a href="{prefix}/entrepreneur" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'entrepreneur', source: 'mobile' })}>{t.nav.entrepreneur}</a>
-        <a href="{prefix}/foodie" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'foodie', source: 'mobile' })}>{t.nav.foodie}</a>
-        <a href="{prefix}/hobbies" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'hobbies', source: 'mobile' })}>{t.nav.hobbies}</a>
-      </div>
-    {/if}
+
     <a href="{prefix}/contact" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contact', source: 'mobile' })}>{t.nav.contact}</a>
+
     <button
       class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
       on:click={() => languageOpen = !languageOpen}
@@ -185,6 +157,7 @@ onDestroy(() => {
         stroke="currentColor"
         stroke-width="2"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
       </svg>
@@ -196,7 +169,7 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-blue-400 transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
+          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
             {alt.nativeName}
           </a>
         {/each}

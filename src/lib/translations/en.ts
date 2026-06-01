@@ -19,6 +19,14 @@ export const en: SiteTranslations = {
     about: 'About',
     contact: 'Contact',
     slides: 'Slides',
+    meetups: 'Meetups',
+    pereiraTechDays: 'Pereira Tech Days',
+    speakers: 'Speakers',
+    talks: 'Talks',
+    sponsors: 'Sponsors',
+    contributors: 'Team',
+    verticals: 'Programs',
+    community: 'Community',
   },
 
   // Footer

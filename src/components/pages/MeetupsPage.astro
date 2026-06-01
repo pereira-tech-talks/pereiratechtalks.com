@@ -1,0 +1,153 @@
+---
+/**
+ * PTT v3.0.0 meetups timeline page (shared between EN and ES).
+ *
+ * Renders all meetups grouped by year, with upcoming meetups highlighted at
+ * the top. Used by the thin wrappers `src/pages/meetups/index.astro` and
+ * `src/pages/es/meetups/index.astro`.
+ */
+
+import MeetupCard from '@/components/cards/MeetupCard.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import EmptyState from '@/components/ui/EmptyState.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { type Language } from '@/lib/i18n';
+import {
+  getMeetups,
+  getUpcomingMeetups,
+  groupMeetupsByYear,
+} from '@/lib/meetup';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const all = await getMeetups();
+const upcoming = await getUpcomingMeetups();
+const past = all.filter((m) => !upcoming.some((u) => u.id === m.id));
+const groups = groupMeetupsByYear(past);
+
+const t = {
+  title:
+    lang === 'es'
+      ? 'Meetups de Pereira Tech Talks'
+      : 'Pereira Tech Talks Meetups',
+  description:
+    lang === 'es'
+      ? 'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech del Eje Cafetero.'
+      : 'Over 90 meetups since 2014. Monthly talks, lightning rounds, panels and workshops from the Eje Cafetero tech community.',
+  intro:
+    lang === 'es'
+      ? 'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.'
+      : 'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
+  upcoming: lang === 'es' ? 'Próximos meetups' : 'Upcoming meetups',
+  past: lang === 'es' ? 'Meetups pasados' : 'Past meetups',
+  emptyUpcomingTitle:
+    lang === 'es'
+      ? 'No hay meetups anunciados todavía'
+      : 'No upcoming meetups announced yet',
+  emptyUpcomingDescription:
+    lang === 'es'
+      ? 'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.'
+      : "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
+  ctaLabel:
+    lang === 'es' ? 'Síguenos en Meetup.com' : 'Follow us on Meetup.com',
+  ctaHref: 'https://www.meetup.com/pereira-tech-talks/',
+  meetupsCount:
+    lang === 'es'
+      ? `${past.length} meetups en el archivo`
+      : `${past.length} meetups in the archive`,
+  yearLabel: (n: number) =>
+    lang === 'es' ? `${n} — Meetups del año` : `${n} — Meetups`,
+};
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: lang === 'es' ? '/es/' : '/',
+  },
+  { label: lang === 'es' ? 'Meetups' : 'Meetups' },
+];
+---
+
+<MainLayout
+  lang={lang}
+  title={t.title}
+  description={t.description}
+  keywords={
+    lang === 'en'
+      ? [
+          'Pereira Tech Talks meetups',
+          'Pereira tech community',
+          'Risaralda tech meetups',
+          'Colombian tech meetups',
+        ]
+      : [
+          'meetups Pereira Tech Talks',
+          'meetups tecnología Pereira',
+          'comunidad tech Risaralda',
+          'meetups tecnología Colombia',
+        ]
+  }
+>
+  <div class="bg-white dark:bg-gray-950">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+      <Eyebrow>{t.meetupsCount}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
+        {t.intro}
+      </p>
+    </div>
+  </div>
+
+  <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.upcoming} surface="alt">
+    {
+      upcoming.length > 0 ? (
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {upcoming.map((m) => (
+            <li>
+              <MeetupCard meetup={m} lang={lang} loading="eager" />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyState
+          title={t.emptyUpcomingTitle}
+          description={t.emptyUpcomingDescription}
+          ctaLabel={t.ctaLabel}
+          ctaHref={t.ctaHref}
+        />
+      )
+    }
+  </Section>
+
+  <Section eyebrow={lang === 'es' ? 'Archivo' : 'Archive'} title={t.past}>
+    <div class="space-y-16">
+      {
+        groups.map(({ year, meetups }) => (
+          <div>
+            <h3 class="mb-6 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+              {t.yearLabel(year)}
+            </h3>
+            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {meetups.map((m) => (
+                <li>
+                  <MeetupCard meetup={m} lang={lang} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+</MainLayout>
