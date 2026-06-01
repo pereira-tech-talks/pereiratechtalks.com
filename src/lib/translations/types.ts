@@ -122,6 +122,7 @@ export interface SiteTranslations {
     sendAnotherButton: string;
     requiredField: string;
     invalidEmail: string;
+    submitError: string;
     fallbackMessage: string;
     fallbackEmailText: string;
     formNote: string;

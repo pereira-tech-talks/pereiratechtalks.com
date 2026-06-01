@@ -4,6 +4,12 @@ import { EVENTS, trackEvent } from '@/lib/analytics';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'en';
+/**
+ * Cloudflare Pages Function endpoint (e.g. `/api/contact`) that proxies the
+ * submission to Resend. When empty, the form falls back to the Google Forms
+ * direct POST configured in `entries` / `formUrl`.
+ */
+export let apiEndpoint = '';
 export let formUrl = '';
 export let entries = {
   name: '',
@@ -25,8 +31,14 @@ let reason = '';
 let subject = '';
 let message = '';
 
+// Honeypot — must stay empty for real submissions
+let website = '';
+
 // Validation errors
 let errors = { name: '', email: '', reason: '', subject: '', message: '' };
+
+// Generic submit error message (rendered above the form)
+let submitError = '';
 
 // Reference for focus management
 let successRef;
@@ -129,7 +141,54 @@ function validate() {
   return valid;
 }
 
+async function submitToApi(endpoint) {
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      email,
+      reason,
+      subject,
+      message,
+      lang,
+      website,
+    }),
+  });
+
+  if (!response.ok) {
+    let payload;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+    const errorCode =
+      (payload && typeof payload === 'object' && payload && payload.error) ||
+      `http_${response.status}`;
+    throw new Error(errorCode);
+  }
+}
+
+async function submitToGoogleForms() {
+  const formData = new FormData();
+  formData.append(entries.name, name);
+  formData.append(entries.email, email);
+  formData.append(entries.reason, reason);
+  formData.append(entries.subject, subject);
+  formData.append(entries.message, message);
+
+  await fetch(formUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData),
+  });
+}
+
 async function handleSubmit() {
+  submitError = '';
+
   if (!validate()) {
     const failedCount = Object.values(errors).filter(Boolean).length;
     trackEvent(EVENTS.CONTACT_FORM_ERROR, { field_count: failedCount });
@@ -139,27 +198,26 @@ async function handleSubmit() {
   formState = 'submitting';
 
   try {
-    const formData = new FormData();
-    formData.append(entries.name, name);
-    formData.append(entries.email, email);
-    formData.append(entries.reason, reason);
-    formData.append(entries.subject, subject);
-    formData.append(entries.message, message);
-
-    await fetch(formUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData),
-    });
+    if (apiEndpoint) {
+      await submitToApi(apiEndpoint);
+    } else if (formUrl) {
+      await submitToGoogleForms();
+    } else {
+      throw new Error('no_backend_configured');
+    }
 
     formState = 'success';
     trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { reason: reason || 'unspecified' });
-    // Focus success message for screen readers
     setTimeout(() => successRef?.focus(), 100);
   } catch (error) {
-    // With no-cors, fetch only throws on network errors
-    // Still show success since we can't confirm either way
+    if (apiEndpoint) {
+      submitError = t.contactPage.submitError;
+      formState = 'idle';
+      trackEvent(EVENTS.CONTACT_FORM_ERROR, { reason: 'submit_failed' });
+      return;
+    }
+    // Google Forms uses no-cors so fetch only throws on hard network errors;
+    // treat as success since we cannot confirm either way.
     formState = 'success';
     trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { reason: reason || 'unspecified' });
     setTimeout(() => successRef?.focus(), 100);
@@ -172,7 +230,9 @@ function resetForm() {
   reason = '';
   subject = '';
   message = '';
+  website = '';
   errors = { name: '', email: '', reason: '', subject: '', message: '' };
+  submitError = '';
   formState = 'idle';
 }
 </script>
@@ -206,6 +266,31 @@ function resetForm() {
     on:submit|preventDefault={handleSubmit}
     novalidate
   >
+    {#if submitError}
+      <div
+        class="rounded-lg border border-red-300 bg-red-50 text-red-800 dark:border-red-700 dark:bg-red-950 dark:text-red-200 p-4"
+        role="alert"
+        aria-live="assertive"
+      >
+        {submitError}
+      </div>
+    {/if}
+
+    <div
+      style="position:absolute;left:-9999px;height:0;overflow:hidden;"
+      aria-hidden="true"
+    >
+      <label for="contact-website">Website</label>
+      <input
+        id="contact-website"
+        name="website"
+        type="text"
+        autocomplete="off"
+        tabindex="-1"
+        bind:value={website}
+      />
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
         <label for="contact-name" class={labelClass}>

@@ -235,6 +235,8 @@ Everything we publish here — articles, recaps, slide decks — is free, commun
     sendAnotherButton: 'Send another message',
     requiredField: 'This field is required',
     invalidEmail: 'Please enter a valid email address',
+    submitError:
+      "We couldn't deliver your message right now. Please try again in a few minutes or email hello@pereiratechtalks.org.",
     fallbackMessage:
       'The contact form is currently unavailable. You can reach us directly by email.',
     fallbackEmailText: 'Send us an email at',

@@ -235,6 +235,8 @@ Todo lo que publicamos aquí — artículos, recapitulaciones, slides — es gra
     sendAnotherButton: 'Enviar otro mensaje',
     requiredField: 'Este campo es obligatorio',
     invalidEmail: 'Por favor ingresa un correo electrónico válido',
+    submitError:
+      'No pudimos entregar tu mensaje en este momento. Inténtalo nuevamente en unos minutos o escríbenos a hello@pereiratechtalks.org.',
     fallbackMessage:
       'El formulario de contacto no está disponible. Puedes escribirnos directamente por correo.',
     fallbackEmailText: 'Escríbenos a',

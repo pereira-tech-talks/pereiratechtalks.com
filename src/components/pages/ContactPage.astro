@@ -80,10 +80,11 @@ const breadcrumbSchema = {
           {t.contactPage.formTitle}
         </h2>
       </div>
-      {CONTACT_FORM.googleForms.formUrl ? (
+      {CONTACT_FORM.apiEndpoint || CONTACT_FORM.googleForms.formUrl ? (
         <ContactForm
           client:visible
           lang={lang}
+          apiEndpoint={CONTACT_FORM.apiEndpoint}
           formUrl={CONTACT_FORM.googleForms.formUrl}
           entries={CONTACT_FORM.googleForms.entries}
         />

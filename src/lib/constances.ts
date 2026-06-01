@@ -29,8 +29,27 @@ export const NEWSLETTER = {
   },
 } as const;
 
-// Contact form configuration — Google Forms direct POST
+/**
+ * Contact form configuration.
+ *
+ * Two backends are supported:
+ *
+ * 1. **Cloudflare Pages Function + Resend (preferred for production).**
+ *    Set `PUBLIC_CONTACT_API_ENDPOINT` (e.g. `/api/contact`) and configure
+ *    the server-side `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and
+ *    `CONTACT_FROM_EMAIL` secrets on the Cloudflare Pages project.
+ *    The Svelte form POSTs a JSON payload that `functions/api/contact.ts`
+ *    validates, spam-checks, and forwards via Resend.
+ *
+ * 2. **Google Forms fallback (legacy / static-only deployments).** When
+ *    `PUBLIC_CONTACT_API_ENDPOINT` is empty, the Svelte form posts the
+ *    submission directly to the Google Forms endpoint below using the
+ *    same entry IDs configured in Google Forms.
+ *
+ * Both flows can coexist — the env-driven endpoint always wins.
+ */
 export const CONTACT_FORM = {
+  apiEndpoint: (import.meta.env.PUBLIC_CONTACT_API_ENDPOINT || '').trim(),
   googleForms: {
     formUrl:
       'https://docs.google.com/forms/d/e/1FAIpQLScuGSujpXLKF5eS4Z_6ZGAYf6j1iPrOIHwtJ-3i1_7MGk466Q/formResponse',
