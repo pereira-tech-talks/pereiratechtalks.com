@@ -110,7 +110,123 @@ communities:
   - name: Pereira Tech Talks
     logo: /images/communities/ptt.png
     url: "https://pereiratechtalks.org/"
-gallery: []
+gallery:
+  - src: /images/pereira-tech-days/2024/memories/recepcion.png
+    alt:
+      en: Attendees arriving and registering at the welcome desk
+      es: Asistentes llegando y registrándose en la recepción
+  - src: /images/pereira-tech-days/2024/memories/previa.png
+    alt:
+      en: Pre-event setup at the Auditorio Jorge Roa Martínez
+      es: Preparativos en el Auditorio Jorge Roa Martínez
+  - src: /images/pereira-tech-days/2024/memories/badge.png
+    alt:
+      en: PTD 2024 attendee badge
+      es: Credencial de asistente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/massive.png
+    alt:
+      en: Packed auditorium during the opening keynote
+      es: Auditorio lleno durante el keynote de apertura
+  - src: /images/pereira-tech-days/2024/memories/ponente.png
+    alt:
+      en: A speaker presenting on stage
+      es: Un ponente presentando en escenario
+  - src: /images/pereira-tech-days/2024/memories/ponentes.png
+    alt:
+      en: The PTD 2024 speakers' line-up
+      es: La línea de ponentes de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/relampago.png
+    alt:
+      en: Lightning talks block in progress
+      es: Bloque de lightning talks en curso
+  - src: /images/pereira-tech-days/2024/memories/jon.png
+    alt:
+      en: Jonathan Alvarez delivering a lightning talk
+      es: Jonathan Alvarez en una lightning talk
+  - src: /images/pereira-tech-days/2024/memories/jose.png
+    alt:
+      en: Dr. Jose Jaramillo on the applied-research keynote
+      es: Dr. Jose Jaramillo en el keynote de investigación aplicada
+  - src: /images/pereira-tech-days/2024/memories/franco.png
+    alt:
+      en: Sebastián Franco presenting at PTD 2024
+      es: Sebastián Franco presentando en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/break.png
+    alt:
+      en: Coffee break and networking moment
+      es: Pausa de café y networking
+  - src: /images/pereira-tech-days/2024/memories/aseutp.png
+    alt:
+      en: ASE-UTP sponsor presence at PTD 2024
+      es: Presencia del patrocinador ASE-UTP en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/github.png
+    alt:
+      en: GitHub sponsor booth at PTD 2024
+      es: Stand del patrocinador GitHub en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/gorila.png
+    alt:
+      en: Gorilla Logic sponsor presence at PTD 2024
+      es: Presencia del patrocinador Gorilla Logic en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/patrocinadores.png
+    alt:
+      en: PTD 2024 sponsors banner
+      es: Banner de patrocinadores de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/patrocinadores2.png
+    alt:
+      en: Sponsor logos display
+      es: Panel con logos de los patrocinadores
+  - src: /images/pereira-tech-days/2024/memories/organizadores.png
+    alt:
+      en: PTD 2024 organizing crew portrait
+      es: Retrato del equipo organizador de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/premios.png
+    alt:
+      en: Closing prize moment at PTD 2024
+      es: Momento de premios al cierre de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/stickers.png
+    alt:
+      en: PTD 2024 stickers and swag
+      es: Stickers y merchandising de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/cierre.png
+    alt:
+      en: Closing photo with the community
+      es: Foto de cierre con la comunidad
+  - src: /images/pereira-tech-days/2024/memories/abde.png
+    alt:
+      en: PTD 2024 atmosphere
+      es: Ambiente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/aja.png
+    alt:
+      en: PTD 2024 atmosphere
+      es: Ambiente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/activo.png
+    alt:
+      en: An active PTD 2024 networking moment
+      es: Un momento activo de networking en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/chica.png
+    alt:
+      en: A PTD 2024 attendee
+      es: Una asistente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/epic.png
+    alt:
+      en: A defining PTD 2024 moment
+      es: Un momento icónico de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/kw.png
+    alt:
+      en: PTD 2024 venue detail
+      es: Detalle del venue de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/mafioso.png
+    alt:
+      en: PTD 2024 portrait
+      es: Retrato en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/master.png
+    alt:
+      en: PTD 2024 master shot
+      es: Toma maestra de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/1.png
+    alt:
+      en: PTD 2024 photo memory
+      es: Foto memoria de PTD 2024
 linkMeetupCom: "https://www.meetup.com/pereira-tech-talks/events/302603058/"
 status: completed
 draft: false
