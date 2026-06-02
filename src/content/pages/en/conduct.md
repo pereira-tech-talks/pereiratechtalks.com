@@ -36,6 +36,32 @@ Examples of unacceptable behavior include:
 
 ---
 
+## Thematic focus and respect for the community space
+
+Pereira Tech Talks is a community focused on technology, innovation, learning, collaboration, and professional growth.
+
+To keep our space inclusive and comfortable for every attendee, talks, interventions, and participation forums should avoid discussions or messages outside the event's purpose — especially partisan politics, geopolitical conflict, religion, ideologies, or highly polarizing social topics.
+
+Every person is free to hold and express their views in personal spaces. Within community activities, however, speakers, attendees, sponsors, and organizers are expected to keep the focus on technical, professional, and community topics.
+
+Aggressive, provocative, or confrontational rhetoric that may create discomfort, division, or attacks on people or groups will not be permitted. Organizers may intervene, moderate, or stop any participation they consider inappropriate or counter to the community's purpose.
+
+---
+
+## Environmental responsibility
+
+As a community that cares about the planet, we take responsibility for the environmental footprint of what we do. We commit to:
+
+- Reduce, reuse, and recycle materials across our events and activities.
+- Encourage sustainable and shared transportation options.
+- Choose digital over printed solutions whenever possible.
+- Promote environmental awareness among members and attendees.
+- Partner with vendors and sponsors that share our sustainability commitments.
+
+Small actions add up — we try to leave every venue better than we found it.
+
+---
+
 ## Enforcement responsibilities
 
 Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.

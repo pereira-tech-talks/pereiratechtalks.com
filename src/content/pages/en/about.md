@@ -1,37 +1,45 @@
 ---
 title: "About Pereira Tech Talks"
-description: "Get to know Pereira Tech Talks — a bilingual technology community in Pereira, Risaralda, Colombia. Monthly meetups, the Pereira Tech Day annual conference, the Speaker School, and the La Biblioteca del Mañana reading club since 2014."
-lastUpdated: 2026-05-30
+description: "Get to know Pereira Tech Talks — the bilingual technology community of Pereira, Risaralda. 84+ monthly meetups since 2014, 10 Pereira Tech Day editions, the Speaker School, and La Biblioteca del Mañana reading club."
+lastUpdated: 2026-06-02
 ---
 
 ## A bilingual technology community from Pereira to the world
 
-Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. We were born in 2014 as a small group of engineers and designers wanting a space to share what we were learning. A decade later, the community has grown into a multi-program organization that hosts monthly meetups, the annual **Pereira Tech Day** conference, the **Speaker School**, the **La Biblioteca del Mañana** reading club, and a dedicated AI channel — all with a bilingual EN/ES voice and an international outlook.
+Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual **Pereira Tech Day** conference (10 editions since 2017), the **Speaker School**, and the **La Biblioteca del Mañana** reading club. All volunteer-built. All bilingual. All open.
 
-Our work is volunteer-run, sponsor-supported, and open. The website is the operational backbone: a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, designed to be just as readable for AI agents as it is for humans.
+The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, and more) and open by default. The site you are reading is a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, structured to be just as useful to AI agents as it is to humans.
+
+---
+
+## Three beliefs that anchor the community
+
+- **Technology grows faster when we share what we learn** — that is why every meetup recap is published the same week.
+- **Pereira has world-class talent that deserves world-class stages** — that is why the Speaker School exists, and why community alumni now keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups.
+- **A tech community should look like the city it lives in** — open, warm, mixed, unpretentious. That is why our events are free, our channels are public, and our content is bilingual by default.
 
 ---
 
 ## What we do
 
-- **Monthly Meetups** — In-person and hybrid sessions every month — talks, workshops, and lightning rounds on the topics shaping the industry.
-- **Pereira Tech Day** — Our flagship annual conference — a full day of keynotes, workshops, and networking with international speakers and local partners.
-- **Speaker School** — A program to grow new technical speakers — from idea to stage — with mentorship, practice runs, and rehearsals.
-- **La Biblioteca del Mañana** — A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
-- **AI Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
-- **Bilingual Library** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech community alike.
+- **[Monthly Meetups](/verticals/monthly-meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
+- **[Pereira Tech Day](/pereira-tech-days)** — Our flagship annual conference: 10 editions since 2017. A full day of keynotes, workshops, and networking with international speakers and local partners.
+- **[Speaker School](/verticals/speaker-school)** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
+- **[La Biblioteca del Mañana](/verticals/library-of-tomorrow)** — A bilingual reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
+- **[AI & Agents Channel](/verticals/ai-channel)** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
+- **[Bilingual Library](/blog)** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech ecosystem alike.
 
 ---
 
 ## Quick facts
 
-- Founded in Pereira, Risaralda, Colombia (2014)
-- Bilingual community: English and Spanish
-- 90+ monthly meetups since 2014
-- Multiple Pereira Tech Day editions hosted
+- Founded in Pereira, Risaralda, Colombia (February 2014)
+- Bilingual community: Spanish primary, English first-class international
+- 84+ monthly meetups since 2014
+- 10 Pereira Tech Day editions (2017–2026)
 - Volunteer-run, sponsor-supported, free to attend
-- Fully AI-agent-readable content (AEO 100)
-- Philosophy: share what you learn, grow the local ecosystem
+- Fully AI-agent-readable content (AEO 100, Markdown-for-Agents on every page)
+- Open source: site, content, and brand kit on GitHub
 
 ---
 
@@ -42,6 +50,7 @@ Whether you want to speak, sponsor, partner, or just attend — there's a place 
 - [Read the blog](/blog)
 - [Browse slides](/slides)
 - [Get in touch](/contact)
+- [Become a sponsor](/sponsor-us)
 - GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
 - X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)

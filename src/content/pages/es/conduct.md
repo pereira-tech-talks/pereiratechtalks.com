@@ -36,6 +36,32 @@ Ejemplos de comportamientos inaceptables:
 
 ---
 
+## Enfoque temático y respeto del espacio comunitario
+
+Pereira Tech Talks es una comunidad enfocada en tecnología, innovación, aprendizaje, colaboración y crecimiento profesional.
+
+Para mantener un ambiente inclusivo y cómodo para todas las personas asistentes, las charlas, intervenciones y espacios de participación deben evitar discusiones o mensajes ajenos al propósito del evento — especialmente política partidista, conflictos geopolíticos, religión, ideologías o temas sociales altamente polarizantes.
+
+Todas las personas son libres de tener y expresar sus opiniones en espacios personales. Dentro de las actividades de la comunidad, sin embargo, se espera que speakers, asistentes, patrocinadores y organizadores mantengan el enfoque en temas técnicos, profesionales y comunitarios.
+
+No se permitirán discursos agresivos, provocadores o confrontacionales que puedan generar incomodidad, división o ataques hacia personas o grupos. Los organizadores podrán intervenir, moderar o detener cualquier participación que consideren inapropiada o contraria al propósito de la comunidad.
+
+---
+
+## Responsabilidad ambiental
+
+Como comunidad comprometida con el bienestar del planeta, asumimos la responsabilidad de la huella ambiental de lo que hacemos. Nos comprometemos a:
+
+- Reducir, reutilizar y reciclar materiales en todos los eventos y actividades.
+- Fomentar el uso de medios de transporte sostenibles y compartidos.
+- Optar por soluciones digitales en lugar de impresas siempre que sea posible.
+- Promover la conciencia ambiental entre nuestros miembros y participantes.
+- Colaborar con proveedores y patrocinadores que compartan nuestro compromiso con la sostenibilidad.
+
+Las pequeñas acciones suman — intentamos dejar cada venue mejor de como lo encontramos.
+
+---
+
 ## Responsabilidades de aplicación
 
 Los líderes de la comunidad son responsables de aclarar y aplicar nuestros estándares de comportamiento aceptable y tomarán acciones correctivas apropiadas y justas en respuesta a cualquier comportamiento que consideren inapropiado, amenazante, ofensivo o dañino.

@@ -94,43 +94,43 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',
     bioText:
-      'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. We were born in 2014 as a small group of engineers and designers wanting a space to share what we were learning. A decade later, the community has grown into a multi-program organization that hosts monthly meetups, the annual <strong>Pereira Tech Day</strong> conference, the <strong>Speaker School</strong>, the <strong>La Biblioteca del Mañana</strong> reading club, and a dedicated AI channel — all with a bilingual EN/ES voice and an international outlook.<br /><br />Our work is volunteer-run, sponsor-supported, and open. The website you are reading is the operational backbone: a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, designed to be just as readable for AI agents as it is for humans.<br /><br />We believe technology grows faster when we share what we learn. We believe Pereira has world-class talent that deserves world-class stages. We believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious.',
+      'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual <strong>Pereira Tech Day</strong> conference (10 editions since 2017), the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All bilingual. All open.<br /><br />The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, and more) and open by default. The site you are reading is a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, structured to be just as useful to AI agents as it is to humans.<br /><br />We believe technology grows faster when we share what we learn — that is why every meetup recap is published the same week. We believe Pereira has world-class talent that deserves world-class stages — that is why the Speaker School exists and why community alumni now keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. And we believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious. That is why our events are free, our channels are public, and our content is bilingual by default.',
     passionsTitle: 'What we do',
     passions: [
       {
         title: 'Monthly Meetups',
         description:
-          'In-person and hybrid sessions every month — talks, workshops, and lightning rounds on the topics shaping the industry.',
+          'In-person and hybrid sessions every month — talks, workshops, and lightning rounds on AI, web platforms, devops, mobile, security, and the craft of shipping software.',
         icon: '\u{1F465}',
-        link: '/blog',
+        link: '/verticals/monthly-meetups',
       },
       {
         title: 'Pereira Tech Day',
         description:
-          'Our flagship annual conference — a full day of keynotes, workshops, and networking with international speakers and local partners.',
+          'Our flagship annual conference — 10 editions and counting (since 2017). A full day of keynotes, workshops, and networking with international speakers and local partners.',
         icon: '\u{1F389}',
-        link: '/blog',
+        link: '/pereira-tech-days',
       },
       {
         title: 'Speaker School',
         description:
-          'A program to grow new technical speakers — from idea to stage — with mentorship, practice runs, and rehearsals.',
+          'A program to grow new technical speakers — from idea to stage — with mentorship, practice runs, and rehearsals. Alumni keynote in Bogotá, Medellín, and Mexico City.',
         icon: '\u{1F3A4}',
-        link: '/blog',
+        link: '/verticals/speaker-school',
       },
       {
         title: 'La Biblioteca del Mañana',
         description:
-          'A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.',
+          'A bilingual reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.',
         icon: '\u{1F4DA}',
-        link: '/blog',
+        link: '/verticals/library-of-tomorrow',
       },
       {
-        title: 'AI Channel',
+        title: 'AI & Agents Channel',
         description:
           'A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.',
         icon: '\u{1F916}',
-        link: '/blog',
+        link: '/verticals/ai-channel',
       },
       {
         title: 'Bilingual Library',
@@ -142,13 +142,13 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     ],
     quickFactsTitle: 'Quick facts',
     quickFacts: [
-      'Founded in Pereira, Risaralda, Colombia (2014)',
-      'Bilingual community: English and Spanish',
-      '90+ monthly meetups since 2014',
-      'Multiple Pereira Tech Day editions hosted',
+      'Founded in Pereira, Risaralda, Colombia (February 2014)',
+      'Bilingual community: Spanish primary, English first-class international',
+      '84+ monthly meetups since 2014',
+      '10 Pereira Tech Day editions (2017–2026)',
       'Volunteer-run, sponsor-supported, free to attend',
-      'Fully AI-agent-readable content (AEO 100)',
-      'Philosophy: share what you learn, grow the local ecosystem',
+      'Fully AI-agent-readable content (AEO 100, Markdown-for-Agents on every page)',
+      'Open source: site, content, and brand kit on GitHub',
     ],
     ctaTitle: 'Want to be part of it?',
     ctaDescription:

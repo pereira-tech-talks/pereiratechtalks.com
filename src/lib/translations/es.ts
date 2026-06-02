@@ -94,43 +94,43 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
     bioTitle: 'Quiénes somos',
     bioText:
-      'Pereira Tech Talks (PTT) es la comunidad de tecnología de Pereira, Risaralda, Colombia. Nacimos en 2014 como un pequeño grupo de ingenieras, ingenieros y diseñadoras que querían un espacio para compartir lo que estaban aprendiendo. Una década después, la comunidad creció hasta convertirse en una organización con múltiples programas: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong>, el club de lectura <strong>La Biblioteca del Mañana</strong> y un canal dedicado de IA — todo con una voz bilingüe EN/ES y una mirada internacional.<br /><br />Nuestro trabajo es voluntario, sostenido por patrocinadores y abierto. El sitio web que estás leyendo es la columna operativa: un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, diseñado para ser tan legible para agentes de IA como para personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial. Creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones.',
+      'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (10 ediciones desde 2017), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo bilingüe. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido es bilingüe por defecto.',
     passionsTitle: 'Lo que hacemos',
     passions: [
       {
         title: 'Meetups mensuales',
         description:
-          'Sesiones presenciales e híbridas cada mes — charlas, talleres y rondas lightning sobre los temas que dan forma a la industria.',
+          'Sesiones presenciales e híbridas cada mes — charlas, talleres y rondas lightning sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.',
         icon: '\u{1F465}',
-        link: '/es/blog',
+        link: '/es/verticals/monthly-meetups',
       },
       {
         title: 'Pereira Tech Day',
         description:
-          'Nuestra conferencia anual insignia — un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
+          'Nuestra conferencia anual insignia — 10 ediciones y contando (desde 2017). Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
         icon: '\u{1F389}',
-        link: '/es/blog',
+        link: '/es/pereira-tech-days',
       },
       {
         title: 'Escuela de Speakers',
         description:
-          'Un programa para hacer crecer nuevas voces técnicas — desde la idea hasta el escenario — con mentoría, ensayos y rehearsals.',
+          'Un programa para hacer crecer nuevas voces técnicas — desde la idea hasta el escenario — con mentoría y ensayos. Sus egresadas y egresados hoy dan keynotes en Bogotá, Medellín y Ciudad de México.',
         icon: '\u{1F3A4}',
-        link: '/es/blog',
+        link: '/es/verticals/speaker-school',
       },
       {
         title: 'La Biblioteca del Mañana',
         description:
-          'Un club de lectura que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.',
+          'Un club de lectura bilingüe que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.',
         icon: '\u{1F4DA}',
-        link: '/es/blog',
+        link: '/es/verticals/library-of-tomorrow',
       },
       {
-        title: 'Canal de IA',
+        title: 'Canal de IA y Agentes',
         description:
           'Un track dedicado a IA, LLMs, agentes y la web agéntica — donde la comunidad se encuentra con la tecnología más disruptiva de la década.',
         icon: '\u{1F916}',
-        link: '/es/blog',
+        link: '/es/verticals/ai-channel',
       },
       {
         title: 'Biblioteca bilingüe',
@@ -142,13 +142,13 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     ],
     quickFactsTitle: 'Datos rápidos',
     quickFacts: [
-      'Fundada en Pereira, Risaralda, Colombia (2014)',
-      'Comunidad bilingüe: español e inglés',
-      'Más de 90 meetups mensuales desde 2014',
-      'Múltiples ediciones de Pereira Tech Day organizadas',
+      'Fundada en Pereira, Risaralda, Colombia (febrero de 2014)',
+      'Comunidad bilingüe: español como idioma principal, inglés como segundo idioma de primera clase',
+      '84+ meetups mensuales desde 2014',
+      '10 ediciones de Pereira Tech Day (2017–2026)',
       'Voluntaria, sostenida por patrocinadores y gratuita',
-      'Contenido completamente legible por agentes de IA (AEO 100)',
-      'Filosofía: comparte lo que aprendes, haz crecer el ecosistema local',
+      'Contenido completamente legible por agentes de IA (AEO 100, Markdown-for-Agents en cada página)',
+      'Open source: el sitio, el contenido y el brand kit en GitHub',
     ],
     ctaTitle: '¿Quieres ser parte?',
     ctaDescription:

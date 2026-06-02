@@ -1,6 +1,6 @@
 ---
 title: "La comunidad Pereira Tech Talks"
-description: "Cómo está estructurada la comunidad Pereira Tech Talks: programas, roles y las personas que hacen posibles una década de meetups y siete ediciones de Pereira Tech Day."
+description: "Cómo está estructurada la comunidad Pereira Tech Talks: programas, roles y las personas que hacen posibles una década de meetups y 10 ediciones de Pereira Tech Day."
 lastUpdated: 2026-05-30
 ---
 
