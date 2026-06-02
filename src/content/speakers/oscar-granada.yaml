@@ -3,8 +3,8 @@ role:
   en: "Web UI Engineer at Globant"
   es: "Web UI Engineer en Globant"
 bio:
-  en: "Óscar Granada spoke at a Pereira Tech Talks meetup. Speaker bio pending — pull requests welcome."
-  es: "Óscar Granada dio una charla en un meetup de Pereira Tech Talks. Bio del ponente pendiente — pull requests bienvenidos."
+  en: "Óscar is a Web UI Engineer at Globant and one of the long-running voices of the Pereira tech community. He has given foundational talks at Pereira Tech Talks since the earliest PereiraJS days, covering JavaScript fundamentals, Node.js, and the craft of frontend engineering."
+  es: "Óscar es Web UI Engineer en Globant y una de las voces recurrentes de la comunidad tech de Pereira. Ha dado charlas fundacionales en Pereira Tech Talks desde los primeros días de PereiraJS, cubriendo fundamentos de JavaScript, Node.js y el oficio de la ingeniería frontend."
 photo:
   src: "/images/speakers/_placeholder.svg"
   alt:
