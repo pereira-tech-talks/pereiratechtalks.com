@@ -10,16 +10,13 @@ author: sergio-florez
 draft: false
 ---
 
-## NodeSchool International Day 2016 — Pereira
 
-PereiraJS partnered with the JointDeveloper community at UTP to host the 2016 NodeSchool International Day. A short photo recap of the event.
+We had the chance to participate in NodeSchool International Day, supporting the [JointDeveloper](https://sirius.utp.edu.co/jointdeveloper/) community.
 
-> **Translation in progress.** This community post was originally written in Spanish during the early years of Pereira Tech Talks. The full English translation is being completed by community contributors. In the meantime, read the [Spanish version](/es/blog/nodeschool-international-day-2016/) for the full content.
+More info at: https://nodeschool.io/pereira/
 
-## Summary
+![14918897_1606681392968170_7471907548765979729_o](/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-banner.png)
 
-PereiraJS partnered with the JointDeveloper community at UTP to host the 2016 NodeSchool International Day. A short photo recap of the event.
+Event memories:
 
----
-
-_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereiratechtalks/pereiratechtalks.org)._
+![14902836_1608961406073502_7334005740488801646_o](/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-people.jpg)

@@ -10,16 +10,11 @@ author: santiago-bernal
 draft: false
 ---
 
-## PereiraJS joins Pereira Tech Talks
 
-In 2024, the JavaScript-focused PereiraJS community merged into Pereira Tech Talks. PereiraJS organizer Santiago Bernal explains what changes — and what stays.
+PereiraJS was born in 2014, founded by a group of enthusiasts of the JavaScript programming language. For several years it ran talks and workshops — including NodeSchool Day — promoting the use of the language to build software.
 
-> **Translation in progress.** This community post was originally written in Spanish during the early years of Pereira Tech Talks. The full English translation is being completed by community contributors. In the meantime, read the [Spanish version](/es/blog/pereirajs-joins-pereira-tech-talks/) for the full content.
+Years later, Pereira Tech Talks emerged with a goal to host these same kinds of talks, but in a more language-agnostic format that could welcome a larger audience and more speakers.
 
-## Summary
+Over the years, PereiraJS and PerTT organizers have increasingly prioritized that broader space. That is why PereiraJS is "joining" Pereira Tech Talks. But what does that mean in practice?
 
-In 2024, the JavaScript-focused PereiraJS community merged into Pereira Tech Talks. PereiraJS organizer Santiago Bernal explains what changes — and what stays.
-
----
-
-_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereiratechtalks/pereiratechtalks.org)._
+The talks continue under Pereira Tech Talks. PereiraJS still keeps its [website](https://pereira.js.org/), its [repository](https://github.com/pereirajs/pagina), its [Meetup.com space](https://www.meetup.com/es-ES/pereirajs_), and its [social channels](https://www.instagram.com/pereirajs_/) — but the focus has shifted toward PerTT events.

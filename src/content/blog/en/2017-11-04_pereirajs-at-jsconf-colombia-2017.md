@@ -10,16 +10,35 @@ author: sergio-florez
 draft: false
 ---
 
-## PereiraJS at JSConf Colombia 2017
 
-A photo recap from JSConf Colombia 2017 — PereiraJS attended and brought back energy, ideas, and connections for the local JavaScript community.
+We were present at JSConf Colombia and bring back some memories from this excellent event.
 
-> **Translation in progress.** This community post was originally written in Spanish during the early years of Pereira Tech Talks. The full English translation is being completed by community contributors. In the meantime, read the [Spanish version](/es/blog/pereirajs-at-jsconf-colombia-2017/) for the full content.
+**More memories from the gathering:**
 
-## Summary
+![jsconf2017-1](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-1.jpg)
 
-A photo recap from JSConf Colombia 2017 — PereiraJS attended and brought back energy, ideas, and connections for the local JavaScript community.
+![jsconf2017-2](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-2.jpg)
 
----
+![jsconf2017-3](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-3.jpg)
 
-_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereiratechtalks/pereiratechtalks.org)._
+![jsconf2017-4](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-4.jpg)
+
+![jsconf2017-5](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-5.jpg)
+
+![jsconf2017-6](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-6.jpg)
+
+![jsconf2017-7](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-7.jpg)
+
+![jsconf2017-8](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-8.jpg)
+
+![jsconf2017-9](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-9.jpg)
+
+![jsconf2017-10](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-10.jpg)
+
+![jsconf2017-11](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-11.jpg)
+
+![jsconf2017-12](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-12.jpg)
+
+![jsconf2017-13](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-13.jpg)
+
+![jsconf2017-14](/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-14.jpg)

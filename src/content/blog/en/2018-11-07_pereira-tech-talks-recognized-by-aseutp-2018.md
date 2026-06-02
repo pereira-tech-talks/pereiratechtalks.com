@@ -10,16 +10,13 @@ author: sergio-florez
 draft: false
 ---
 
-## Pereira Tech Talks recognized at the 2018 ASE-UTP Convention
 
-Pereira Tech Talks was named one of the standout collectives shaping innovation in the region during the XX ASE-UTP Convention in 2018.
+🎉 As part of the [XX Convention of the UTP National Alumni Association](http://aseutp.com/convencion2018/), Pereira Tech Talks was selected as one of the outstanding collectives that have made a significant impact on innovation and leadership in the region.
 
-> **Translation in progress.** This community post was originally written in Spanish during the early years of Pereira Tech Talks. The full English translation is being completed by community contributors. In the meantime, read the [Spanish version](/es/blog/pereira-tech-talks-recognized-by-aseutp-2018/) for the full content.
+As a community we are very happy to receive this recognition, and we will keep working with great passion to share technical knowledge — giving the city more visibility as a valuable, unique source of talent for the entire country, both academically and technically.
 
-## Summary
-
-Pereira Tech Talks was named one of the standout collectives shaping innovation in the region during the XX ASE-UTP Convention in 2018.
-
----
-
-_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereiratechtalks/pereiratechtalks.org)._
+![pereiratechtalks-articulo-1](/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-1.jpg)
+![pereiratechtalks-articulo-2](/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-2.jpg)
+![pereiratechtalks-articulo-3](/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-3.jpg)
+![pereiratechtalks-articulo-4](/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-4.jpg)
+![pereiratechtalks-articulo-5](/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-5.jpg)
