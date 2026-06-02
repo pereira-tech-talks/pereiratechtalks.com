@@ -36,7 +36,7 @@ Aprenderas que es el internet de las cosas (IoT) y porque es considerado como un
 
 ### Charlas
 
-1. ****Introducción al Internet de las cosas usando Javascript** — ** ([perfil](https://twitter.com/xergioalex))
+1. ****Introducción al Internet de las cosas usando Javascript** — **
 2. ****Administración de un pequeño cluster con #nodeJS, aplicado en laboratorio de Sirius de la UTP** — ** ([perfil](https://twitter.com/alejoerendon))
 
 ---

@@ -36,32 +36,23 @@ El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por
 
 ### Charlas
 
-1. **[**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
+1. **Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs** — Sergio Alexander Florez _(slides no longer available)_
 2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
 3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
- * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
 4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
- *** ([perfil](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/))
 
 ---
 
 ### Summary in English
 
-A 2018 Pereira Tech Talks meetup featuring [**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
-2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
-3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
- * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
-4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
- *. The community gathered for talks, networking, and snacks.
+A 2018 Pereira Tech Talks meetup featuring:
 
-**Talks:**
+1. **Welcome to NodeSchool Pereira and the PereiraJs community** — Sergio Alexander Florez _(slides no longer available)_
+2. [**JavaScript Fundamentals**](https://gitlab.com/caal-15/custom-javascripting)
+3. [**Learn You Node (Node.js workshop)**](https://github.com/jointDeveloper/learnyounode)
+4. [**Peer-to-peer networks in Node.js**](https://gitlab.com/pin3da/p2p-talk)
 
-1. **[**Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs**](https://slides.com/xergioalex/bienvenida-al-nodeschool-day-pereira#/)
-2. [**Fundamentos de Javascript**](https://gitlab.com/caal-15/custom-javascripting)
-3. [**Learn You Node (Taller de NodeJs)**](https://github.com/jointDeveloper/learnyounode)
- * [Soluciones](https://github.com/xergioalex/learnyounode-solutions)
-4. [**Creando redes Peer-to-peer en NodeJs**](https://gitlab.com/pin3da/p2p-talk)
- ***
+The community gathered for talks, networking, and snacks.
 
 ---
 

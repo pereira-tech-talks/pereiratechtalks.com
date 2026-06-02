@@ -36,7 +36,7 @@ draft: false
 
 ### Charlas
 
-1. **Aprendiendo Serverless con enfásis en IoT** — Sergio Florez ([perfil](https://twitter.com/xergioalex))
+1. **Aprendiendo Serverless con enfásis en IoT** — Sergio Florez
 2. **Seguridad Informática en instituciones del eje cafetero y OWASP** — Santiago Bernal ([perfil](https://twitter.com/santiaguf))
 
 ---

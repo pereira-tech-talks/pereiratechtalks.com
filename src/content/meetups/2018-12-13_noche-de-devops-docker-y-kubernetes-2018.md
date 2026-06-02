@@ -36,7 +36,7 @@ draft: false
 
 ### Charlas
 
-1. **Introducción a Docker** — Sergio Florez ([perfil](https://twitter.com/xergioalex))
+1. **Introducción a Docker** — Sergio Florez
 2. **Introducción a Kubernetes** — Héctor F. Jiménez ([perfil](https://twitter.com/c1b3rh4ck))
 
 ---

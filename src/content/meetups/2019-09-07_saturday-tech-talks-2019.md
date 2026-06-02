@@ -39,7 +39,7 @@ draft: false
 1. **Next.js: Server-side rendering your React App** — Andrés Rodriguez Escudero ([perfil](https://twitter.com/arodrigueze_))
 2. **Introducción a Amazon Web Services (AWS)** — Steven Pineda Cortes ([perfil](https://twitter.com/Steven2308))
 3. **Patrones de arquitectura - Android** — Zorayda Gutiérrez Montes ([perfil](https://www.facebook.com/zoraidayadi.gutierrezmontes))
-4. **Desarrollo serverless de interfaces conversacionales en Amazon Alexa y Google Home** — Sergio Alexander Florez Galeano ([perfil](https://twitter.com/xergioalex))
+4. **Desarrollo serverless de interfaces conversacionales en Amazon Alexa y Google Home** — Sergio Alexander Florez Galeano
 
 ---
 

@@ -30,15 +30,15 @@ draft: false
 
 ## ¿Qué es el blockchain y cómo transformará radicalmente la economía?
 
-Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de [Sergio Alexander Florez](https://twitter.com/xergioalex), contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran revolución tecnológica que és, y cómo podemos crear aplicaciones que consuman servicios basados en Blockchain desde Javascript.
+Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran revolución tecnológica que és, y cómo podemos crear aplicaciones que consuman servicios basados en Blockchain desde Javascript.
 
-Slides disponibles en: http://slides.com/xergioalex/what-is-blockchain#/
+_Slides no longer available._
 
 ---
 
 ### Summary in English
 
-A 2017 Pereira Tech Talks meetup. Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de [Sergio Alexander Florez](https://twitter.com/xergioalex), contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran…
+A 2017 Pereira Tech Talks meetup. Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran…
 
 ---
 

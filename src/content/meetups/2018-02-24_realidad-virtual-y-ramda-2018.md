@@ -36,7 +36,7 @@ Hoy en día, la web es la plataforma de distribución masiva más importante, es
 
 ### Charlas
 
-1. **Realidad Virtual para la web con A-Frame** ([perfil](https://twitter.com/xergioalex))
+1. **Realidad Virtual para la web con A-Frame**
 2. **Point-free Javascript con RamdaJS** ([perfil](https://twitter.com/alsug4))
 
 ---

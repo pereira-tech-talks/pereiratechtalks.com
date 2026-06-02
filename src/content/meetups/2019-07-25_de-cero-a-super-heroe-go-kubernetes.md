@@ -36,7 +36,7 @@ draft: false
 
 ### Charlas
 
-1. **Introducción al desarrollo de aplicaciones modernas en Go** — Sergio Alexander Florez ([perfil](https://twitter.com/xergioalex))
+1. **Introducción al desarrollo de aplicaciones modernas en Go** — Sergio Alexander Florez
 2. **Kubernetes && Serverless en Google Cloud de Cero a Super Heroe** — Mauricio Cuenca ([perfil](https://twitter.com/macuenka))
 
 ---

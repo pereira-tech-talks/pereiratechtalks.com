@@ -30,7 +30,7 @@ draft: false
 
 ## Creando un servidor web desde cero con NodeJs
 
-Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin Morales](https://twitter.com/jdmorales092) y [Sergio Alexander Florez](https://twitter.com/xergioalex).
+Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin Morales](https://twitter.com/jdmorales092) y Sergio Alexander Florez.
 
 Slides disponibles en: http://slides.com/rockalabs/creando-un-servidor-web-con-nodejs#/
 
