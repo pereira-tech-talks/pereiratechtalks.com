@@ -1,22 +1,28 @@
 ---
 title: "Pereira Tech Talks — Bilingual technology community of Pereira, Colombia"
-description: "Bilingual community of builders, speakers, and learners shaping the future of technology from Pereira, Risaralda, Colombia. Monthly meetups, the Pereira Tech Day annual conference, the Speaker School, and the La Biblioteca del Mañana reading club."
-lastUpdated: 2026-05-30
+description: "Pereira Tech Talks (PTT) — 80+ monthly meetups since 2014, 10 Pereira Tech Day editions, an active Speaker School and La Biblioteca del Mañana reading club. Bilingual EN/ES, volunteer-run, open to the world."
+lastUpdated: 2026-06-02
 ---
 
 ## Bilingual tech community · Pereira, Risaralda · Since 2014
 
-We are **Pereira Tech Talks (PTT)** — a community of builders, speakers, and learners shaping the future of technology. We host monthly meetups, run the annual *Pereira Tech Day*, organize a Speaker School, and curate a bilingual knowledge library that connects local talent with the global tech ecosystem.
+**Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 80+ monthly meetups since 2014. 10 Pereira Tech Day editions. An active Speaker School. La Biblioteca del Mañana reading club. A bilingual library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
+
+---
+
+## Where we started
+
+On a February evening in 2014, eight developers crowded into a UTP classroom for the first PereiraJS meetup. Twelve years and 80+ meetups later, PereiraJS became Pereira Tech Talks — four flagship programs running in parallel, every recap and slide deck published bilingually, every page structured to be just as useful to AI agents as to humans.
 
 ---
 
 ## What we do
 
 - **Monthly Meetups** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of building software.
-- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners.
-- **Speaker School** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
-- **La Biblioteca del Mañana** — A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
-- **AI Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
+- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners. 10 editions and counting (2017–2026).
+- **Speaker School** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals. Alumni now keynote in Bogotá, Medellín, and Mexico City.
+- **La Biblioteca del Mañana** — A bilingual reading club connecting technology with science fiction, philosophy, and the broader human story.
+- **AI & Agents Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
 - **Bilingual Library** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech ecosystem alike.
 
 ---
@@ -24,11 +30,12 @@ We are **Pereira Tech Talks (PTT)** — a community of builders, speakers, and l
 ## Quick facts
 
 - Founded in Pereira, Risaralda, Colombia (2014)
-- Bilingual community: English and Spanish
-- 90+ monthly meetups since 2014
-- Multiple Pereira Tech Day editions hosted
+- Bilingual community: English and Spanish, slugs always English
+- 80+ monthly meetups since 2014
+- 10 Pereira Tech Day editions (2017–2026)
 - Volunteer-run, sponsor-supported, free to attend
-- Fully AI-agent-readable content (AEO 100)
+- Fully AI-agent-readable content (AEO 100; Markdown-for-Agents on every page)
+- Open-source: site code, content, and brand kit live on GitHub
 
 ---
 
@@ -38,6 +45,7 @@ We are **Pereira Tech Talks (PTT)** — a community of builders, speakers, and l
 - [Read the blog](/blog)
 - [Slides catalog](/slides)
 - [Get in touch](/contact)
+- [Become a sponsor](/sponsor-us)
 
 ---
 

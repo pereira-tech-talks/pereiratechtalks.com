@@ -80,6 +80,8 @@ const sponsorsSubtitle =
     : 'Companies and community partners providing venues, catering, scholarships, and mentorship.';
 const sponsorsCta =
   lang === 'es' ? 'Ver todos los patrocinadores' : 'See all sponsors';
+const sponsorsCtaJoin =
+  lang === 'es' ? 'Quiero patrocinar' : 'Become a sponsor';
 ---
 
 <MainLayout
@@ -233,8 +235,9 @@ const sponsorsCta =
             </li>
           ))}
         </ul>
-        <div class="mt-10">
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
           <LinkArrow href={`${prefix}/sponsors/`}>{sponsorsCta}</LinkArrow>
+          <LinkArrow href={`${prefix}/sponsor-us/`}>{sponsorsCtaJoin}</LinkArrow>
         </div>
       </Section>
     )

@@ -10,7 +10,7 @@ export const en: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Bilingual technology community of Pereira, Colombia',
   siteDescription:
-    'Bilingual community of builders, speakers, and learners shaping the future of technology from Pereira, Colombia to the world.',
+    'Pereira Tech Talks — Colombia’s bilingual tech community since 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, Speaker School, La Biblioteca del Mañana.',
 
   // Navigation
   nav: {
@@ -41,13 +41,13 @@ export const en: SiteTranslations = {
   hero: {
     tagline: 'Bilingual tech community · Pereira, Risaralda · Since 2014',
     description:
-      'We are <strong class="text-white">Pereira Tech Talks</strong> — a community of builders, speakers, and learners shaping the future of technology. We host monthly meetups, run the annual <em>Pereira Tech Day</em>, organize a Speaker School, and curate a bilingual knowledge library that connects local talent with the global tech ecosystem.',
+      'We are <strong class="text-white">Pereira Tech Talks</strong> — 80+ monthly meetups since 2014, 10 <em>Pereira Tech Day</em> editions, an active Speaker School, and a bilingual library. Where Pereira’s tech community ships to YC startups, conference stages across Latin America, and global engineering roles.',
     typewriterWords: [
-      'Monthly tech meetups',
-      'Pereira Tech Day',
+      'Monthly meetups since 2014',
+      'Pereira Tech Day, every year',
       'Speaker School',
       'La Biblioteca del Mañana',
-      'Bilingual knowledge library',
+      'AI & Agents Channel',
     ],
   },
 
@@ -55,9 +55,9 @@ export const en: SiteTranslations = {
   homeSections: {
     about: {
       title: "We are <span class='text-secondary'>Pereira Tech Talks</span>",
-      description: `A community born in Pereira, Risaralda, that has been hosting tech meetups, workshops, and conferences since 2014. We bring together engineers, designers, founders, students, and enthusiasts around a shared belief: technology grows faster when we share what we learn.<br /><br />
-Today we run multiple programs — monthly meetups, the <strong>Pereira Tech Day</strong> annual conference, the <strong>Speaker School</strong> for new voices, and the <strong>La Biblioteca del Mañana</strong> reading club — all with a bilingual EN/ES voice that connects local talent with the global tech ecosystem.<br /><br />
-Everything we publish here — articles, recaps, slide decks — is free, community-built, and AI-agent-friendly. Browse the blog, explore the meetups, or get in touch if you want to speak, sponsor, or join us.`,
+      description: `On a February evening in 2014, eight developers crowded into a UTP classroom for the first PereiraJS meetup. Twelve years and 80+ meetups later, that small circle became Pereira Tech Talks — four flagship programs running in parallel: monthly meetups, the annual <strong>Pereira Tech Day</strong> conference, the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All bilingual. All open.<br /><br />
+Every recap, slide deck, and blog post is published in English and Spanish, structured to be just as useful to AI agents as to humans. Speakers who started in this room now keynote in Bogotá, Medellín, and Mexico City; alumni work at YC startups, GitHub-sponsored projects, and international engineering teams.<br /><br />
+Browse the catalog, attend the next meetup, or get in touch if you want to speak, sponsor, or join us.`,
       cta: 'About the community',
       cta2: 'Get in touch',
     },
@@ -91,7 +91,7 @@ Everything we publish here — articles, recaps, slide decks — is free, commun
     description:
       'Get to know Pereira Tech Talks — a bilingual technology community in Pereira, Risaralda, hosting meetups, the Pereira Tech Day conference, the Speaker School, and the La Biblioteca del Mañana reading club since 2014.',
     heroDescription:
-      'A community of builders, speakers, and learners shaping the future of technology from Pereira, Risaralda, Colombia. Founded in 2014. Bilingual EN/ES. Always open.',
+      'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',
     bioText:
       'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. We were born in 2014 as a small group of engineers and designers wanting a space to share what we were learning. A decade later, the community has grown into a multi-program organization that hosts monthly meetups, the annual <strong>Pereira Tech Day</strong> conference, the <strong>Speaker School</strong>, the <strong>La Biblioteca del Mañana</strong> reading club, and a dedicated AI channel — all with a bilingual EN/ES voice and an international outlook.<br /><br />Our work is volunteer-run, sponsor-supported, and open. The website you are reading is the operational backbone: a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, designed to be just as readable for AI agents as it is for humans.<br /><br />We believe technology grows faster when we share what we learn. We believe Pereira has world-class talent that deserves world-class stages. We believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious.',
