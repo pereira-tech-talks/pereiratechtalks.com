@@ -361,6 +361,7 @@ body.reveal-theme-dark {
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  min-height: 44px;
   padding: 6px 10px;
   border-radius: 10px;
   background: var(--slide-backlink-bg);
@@ -434,6 +435,8 @@ body.reveal-theme-dark {
   justify-content: center;
   width: 30px;
   height: 30px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   border-radius: 6px;
   border: none;
