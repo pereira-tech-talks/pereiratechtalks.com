@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onDestroy, onMount } from 'svelte';
+import { onDestroy, onMount, tick } from 'svelte';
 import { fade } from 'svelte/transition';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
@@ -17,6 +17,17 @@ let communityOpen = false;
 let languageOpen = false;
 let lockedScrollY = 0;
 let isScrollLocked = false;
+let menuRoot: HTMLElement | undefined;
+let closeButtonRef: HTMLButtonElement | undefined;
+let previouslyFocused: HTMLElement | null = null;
+
+function handleKeydown(event: KeyboardEvent) {
+  if (!open) return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    toggleMenu();
+  }
+}
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
@@ -49,9 +60,13 @@ function unlockBodyScroll() {
 
 $: if (typeof document !== 'undefined') {
   if (open) {
+    previouslyFocused = document.activeElement as HTMLElement | null;
     lockBodyScroll();
+    tick().then(() => closeButtonRef?.focus());
   } else {
     unlockBodyScroll();
+    previouslyFocused?.focus();
+    previouslyFocused = null;
   }
 }
 
@@ -83,11 +98,23 @@ onDestroy(() => {
 });
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
+
 {#if open}
-  <div class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start pt-20 gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden">
+  <div
+    bind:this={menuRoot}
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label={t.nav.menu}
+    class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
+    style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 5rem)); padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
+  >
     <button
-      class="absolute top-6 right-6 p-2"
-      aria-label="Close menu"
+      bind:this={closeButtonRef}
+      class="absolute right-4 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
+      style="top: max(1.5rem, calc(env(safe-area-inset-top) + 0.75rem));"
+      aria-label={t.nav.closeMenu}
       on:click={toggleMenu}
       type="button"
     >

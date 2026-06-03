@@ -58,7 +58,10 @@ function closeAllDropdowns() {
 
 <svelte:window on:click={closeAllDropdowns} />
 
-<header class="bg-main text-white sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+<header
+  class="bg-main text-white sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300"
+  style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
+>
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
@@ -191,8 +194,10 @@ function closeAllDropdowns() {
     </div>
 
     <button
-      class="block lg:hidden p-2"
-      aria-label="Open menu"
+      class="block lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
+      aria-label={t.nav.openMenu}
+      aria-expanded={open}
+      aria-controls="mobile-menu"
       on:click={toggleMenu}
       type="button"
     >

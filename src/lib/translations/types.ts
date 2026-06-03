@@ -35,6 +35,9 @@ export interface SiteTranslations {
     channels: string;
     press: string;
     community: string;
+    menu: string;
+    closeMenu: string;
+    openMenu: string;
   };
 
   // Footer

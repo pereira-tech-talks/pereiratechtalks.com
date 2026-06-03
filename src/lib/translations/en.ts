@@ -29,6 +29,9 @@ export const en: SiteTranslations = {
     channels: 'Channels',
     press: 'Press',
     community: 'Community',
+    menu: 'Menu',
+    closeMenu: 'Close menu',
+    openMenu: 'Open menu',
   },
 
   // Footer
