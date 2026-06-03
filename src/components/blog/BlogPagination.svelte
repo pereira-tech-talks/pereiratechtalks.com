@@ -82,7 +82,7 @@ function getVisiblePages() {
           <button
             on:click={() => handlePageChange(currentPage - 1)}
             aria-label={t.previous}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             {t.previous}
           </button>
@@ -91,7 +91,7 @@ function getVisiblePages() {
             href={getPageUrl(currentPage - 1)}
             on:click={() => trackEvent(EVENTS.PAGINATION_CLICK, { page: currentPage - 1 })}
             aria-label={t.previous}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             {t.previous}
           </a>
@@ -109,7 +109,7 @@ function getVisiblePages() {
             class={`px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium rounded-md ${
               page === currentPage
                 ? 'bg-blue-600 text-white'
-                : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
+                : 'text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
             }`}
           >
             {page}
@@ -123,7 +123,7 @@ function getVisiblePages() {
             class={`px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium rounded-md ${
               page === currentPage
                 ? 'bg-blue-600 text-white'
-                : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
+                : 'text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
             }`}
           >
             {page}
@@ -136,7 +136,7 @@ function getVisiblePages() {
           <button
             on:click={() => handlePageChange(currentPage + 1)}
             aria-label={t.next}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             {t.next}
           </button>
@@ -145,7 +145,7 @@ function getVisiblePages() {
             href={getPageUrl(currentPage + 1)}
             on:click={() => trackEvent(EVENTS.PAGINATION_CLICK, { page: currentPage + 1 })}
             aria-label={t.next}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             {t.next}
           </a>
