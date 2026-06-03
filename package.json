@@ -38,6 +38,11 @@
     "md:check:strict": "node scripts/check-md-parity.mjs --strict",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
+    "responsive:inventory": "node scripts/responsive-audit/build-url-list.mjs",
+    "responsive:capture": "node scripts/responsive-audit/capture.mjs",
+    "responsive:capture:quick": "node scripts/responsive-audit/capture.mjs --quick",
+    "test:responsive": "playwright test tests/e2e/responsive/",
+    "test:responsive:update": "playwright test tests/e2e/responsive/ --update-snapshots",
     "release": "bash .github/scripts/prepare_release.sh"
   },
   "dependencies": {
@@ -58,6 +63,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
     "@lhci/cli": "0.15.1",
+    "@playwright/test": "^1.60.0",
     "@sveltejs/vite-plugin-svelte": "7.1.2",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.3.0",
