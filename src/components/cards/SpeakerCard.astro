@@ -28,14 +28,13 @@ const talkCount = speaker.data.talks?.length ?? 0;
   class="group flex h-full flex-col items-center overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div class="relative h-28 w-28 overflow-hidden rounded-full bg-gradient-to-br from-ptt-primary/20 to-ptt-bg-dark/20 ring-2 ring-white dark:ring-gray-800 shadow-sm">
-    <img
+    <img decoding="async"
       src={photoSrc}
       alt={photoAlt}
       width="112"
       height="112"
       loading={loading}
-      class="h-full w-full object-cover"
-    />
+      class="h-full w-full object-cover" />
   </div>
   <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
     {speaker.data.name}

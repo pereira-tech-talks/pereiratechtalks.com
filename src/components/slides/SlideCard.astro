@@ -19,14 +19,13 @@ const { title, description, heroImage, eventName, eventDate, type } = deck.data;
 <article class="group flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-gray-200 dark:border-gray-700">
   <a href={href} class="block relative aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 overflow-hidden">
     {heroImage ? (
-      <img
+      <img decoding="async"
         src={heroImage}
         alt={title}
         width={640}
         height={360}
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        loading="lazy"
-      />
+        loading="lazy" />
     ) : (
       <div class="flex items-center justify-center w-full h-full">
         <svg class="w-12 h-12 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

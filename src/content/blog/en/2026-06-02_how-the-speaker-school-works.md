@@ -2,8 +2,7 @@
 title: "How the Speaker School works (and what graduates do next)"
 description: "A deep look at Pereira Tech Talks' Speaker School: why it exists, the curriculum, the mentor model, and the alumni trajectories that justify the bet."
 pubDate: 2026-06-02
-heroImage: "/images/blog/posts/how-the-speaker-school-works/hero.jpg"
-heroLayout: banner
+heroLayout: none
 tags:
   - speakers-school
   - community

@@ -10,6 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 // @ts-check
 import { defineConfig } from 'astro/config';
 import rehypeExternalLinks from 'rehype-external-links';
+import { rehypeImageDefaults } from './src/lib/rehype-image-defaults.mjs';
 
 import excludeInternal from './src/integrations/exclude-internal';
 
@@ -34,6 +35,7 @@ export default defineConfig({
           rel: ['noopener', 'noreferrer'],
         },
       ],
+      rehypeImageDefaults,
     ],
   },
   integrations: [

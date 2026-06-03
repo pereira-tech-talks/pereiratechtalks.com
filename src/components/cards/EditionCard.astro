@@ -59,14 +59,13 @@ const statusLabel = statusLabels[status]?.[lang] ?? status;
   class="group flex h-full flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div class="relative aspect-[16/9] overflow-hidden">
-    <img
+    <img decoding="async"
       src={heroSrc}
       alt={heroAlt}
       width="640"
       height="360"
       loading={loading}
-      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-    />
+      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
     <div
       class="absolute inset-x-0 bottom-0 h-2"
       style={`background-color: ${accent}`}

@@ -42,32 +42,29 @@ const sameLogo = logoLight === logoDark;
     <div class="flex h-16 w-32 items-center">
       {
         sameLogo ? (
-          <img
+          <img decoding="async"
             src={logoLight}
             alt={logoAlt}
             width="160"
             height="64"
             loading={loading}
-            class="max-h-16 max-w-full object-contain"
-          />
+            class="max-h-16 max-w-full object-contain" />
         ) : (
           <>
-            <img
+            <img decoding="async"
               src={logoLight}
               alt={logoAlt}
               width="160"
               height="64"
               loading={loading}
-              class="max-h-16 max-w-full object-contain dark:hidden"
-            />
-            <img
+              class="max-h-16 max-w-full object-contain dark:hidden" />
+            <img decoding="async"
               src={logoDark}
               alt={logoAlt}
               width="160"
               height="64"
               loading={loading}
-              class="hidden max-h-16 max-w-full object-contain dark:block"
-            />
+              class="hidden max-h-16 max-w-full object-contain dark:block" />
           </>
         )
       }

@@ -39,14 +39,13 @@ const roleLabels: Record<string, { en: string; es: string }> = {
 
 <article class="group flex h-full flex-col items-center rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6 text-center transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40">
   <div class="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-ptt-primary/20 to-ptt-bg-dark/20 ring-2 ring-white dark:ring-gray-800 shadow-sm">
-    <img
+    <img decoding="async"
       src={avatar}
       alt={`Portrait of ${contributor.data.name}`}
       width="96"
       height="96"
       loading={loading}
-      class="h-full w-full object-cover"
-    />
+      class="h-full w-full object-cover" />
   </div>
   <h3 class="mt-4 text-base font-semibold text-gray-900 dark:text-gray-50">
     {contributor.data.name}

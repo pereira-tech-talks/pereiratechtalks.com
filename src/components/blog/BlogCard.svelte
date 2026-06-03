@@ -170,14 +170,13 @@ $: displayDescription = searchQuery
   ></a>
   {#if postData.heroImage}
     <div class="bg-gray-100 dark:bg-gray-700">
-      <img
+      <img decoding="async"
         src={postData.heroImage}
         alt=""
         width={400}
         height={192}
         class="w-full h-48 object-cover"
-        loading="lazy"
-      />
+        loading="lazy" />
     </div>
   {/if}
   <div class="p-6">
