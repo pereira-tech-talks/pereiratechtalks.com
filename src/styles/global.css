@@ -149,6 +149,21 @@
     overflow-x: auto;
   }
 
+  /*
+   * Responsive iframe defense: any raw <iframe width=560 height=315 ...>
+   * authored inside markdown (YouTube embeds, slide embeds, etc.) becomes
+   * fluid + 16:9 by default. Prevents the 256–297px horizontal overflow
+   * observed on /blog/quarantine-tech-talks (7 embeds) and other recap
+   * posts at narrow phone viewports.
+   */
+  :where(.prose) iframe {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+
   a,
   button,
   input,
