@@ -185,10 +185,10 @@ const ctaHref =
   </div>
 
   <Section eyebrow={lang === 'es' ? 'Cifras' : 'Numbers'} title={t.reachTitle}>
-    <ul class="grid grid-cols-2 sm:grid-cols-4 gap-6 list-none">
+    <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 list-none">
       {
         t.reachStats.map((stat) => (
-          <li class="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6 text-center">
+          <li class="min-w-0 rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6 text-center">
             <p class="text-4xl sm:text-5xl font-bold text-ptt-primary dark:text-ptt-primary-dark">
               {stat.value}
             </p>
@@ -209,8 +209,8 @@ const ctaHref =
     <ul class="grid gap-6 sm:grid-cols-2 list-none">
       {
         t.tiers.map((tier) => (
-          <li class="flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6">
-            <div class="flex items-center justify-between">
+          <li class="flex h-full min-w-0 flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-2">
               <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-50">
                 {tier.name}
               </h3>

@@ -134,6 +134,21 @@
     scroll-behavior: smooth;
   }
 
+  /*
+   * Defensive wrap-anywhere for long unbreakable strings (emails, URLs,
+   * code identifiers) inside long-form prose. Without this, strings like
+   * `conduct@pereiratechtalks.org` overflow the viewport at 280–320px
+   * narrow phones (Galaxy Z Fold folded, iPhone SE original).
+   */
+  :where(.prose) :is(p, li, dd, td, blockquote, strong, em, code, a) {
+    overflow-wrap: anywhere;
+  }
+
+  /* Always allow code blocks to scroll horizontally rather than break the page. */
+  :where(.prose) pre {
+    overflow-x: auto;
+  }
+
   a,
   button,
   input,

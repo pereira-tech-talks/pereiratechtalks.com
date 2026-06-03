@@ -86,8 +86,8 @@ const breadcrumbs = [
       <Section title={t.primaryHeading}>
         <ul class="grid gap-6 sm:grid-cols-2 list-none">
           {primary.map((c) => (
-            <li class="flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 ring-2 ring-ptt-primary dark:ring-ptt-primary-dark p-6 shadow-sm">
-              <div class="flex items-center justify-between gap-3">
+            <li class="flex h-full min-w-0 flex-col rounded-2xl bg-white dark:bg-gray-900 ring-2 ring-ptt-primary dark:ring-ptt-primary-dark p-4 sm:p-6 shadow-sm">
+              <div class="flex flex-wrap items-center justify-between gap-3">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-gray-50">
                   {c.data.name}
                 </h3>
@@ -125,7 +125,7 @@ const breadcrumbs = [
       <Section title={t.otherHeading} surface="alt">
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
           {secondary.map((c) => (
-            <li class="flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6">
+            <li class="flex h-full min-w-0 flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6">
               <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">
                 {c.data.name}
               </h3>
