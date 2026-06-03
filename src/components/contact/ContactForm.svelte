@@ -44,7 +44,7 @@ let submitError = '';
 let successRef;
 
 const inputClass =
-  'w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors';
+  'w-full min-h-[44px] text-base p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors';
 const labelClass =
   'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2';
 const errorClass = 'mt-1 text-sm text-red-600 dark:text-red-400';
@@ -299,6 +299,7 @@ function resetForm() {
         <input
           id="contact-name"
           type="text"
+          autocomplete="name"
           placeholder={t.contactPage.namePlaceholder}
           class={inputClass}
           class:border-red-500={errors.name}
@@ -320,6 +321,8 @@ function resetForm() {
         <input
           id="contact-email"
           type="email"
+          autocomplete="email"
+          inputmode="email"
           placeholder={t.contactPage.emailPlaceholder}
           class={inputClass}
           class:border-red-500={errors.email}
