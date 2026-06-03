@@ -47,5 +47,9 @@ jobs:
         run: corepack pnpm run build
       - name: Step 6 - 📏 Check search performance budgets
         run: corepack pnpm run search:budgets
-      - name: Step 7 - 🔦 Run Lighthouse audit
+      - name: Step 7 - 🖥️ Install Playwright Chromium for responsive suite
+        run: corepack pnpm exec playwright install --with-deps chromium
+      - name: Step 8 - 📱 Run responsive regression suite
+        run: corepack pnpm run test:responsive
+      - name: Step 9 - 🔦 Run Lighthouse audit
         run: corepack pnpm run lighthouse
