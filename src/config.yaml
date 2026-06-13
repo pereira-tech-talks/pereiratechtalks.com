@@ -72,10 +72,10 @@ analytics:
 
 popup:
   enabled: true
-  contentFile: 'meetup-mayo-2026.mdx'
+  contentFile: 'meetup-junio-2026.mdx'
   buttonText: 'Más información'
   buttonLink: '/meetups'
-  storageKey: 'popup-dismissed-2026-05'
+  storageKey: 'popup-dismissed-2026-06'
 
 ui:
   theme: 'dark'
