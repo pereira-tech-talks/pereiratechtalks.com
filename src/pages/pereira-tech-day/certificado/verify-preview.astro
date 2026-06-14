@@ -1,0 +1,44 @@
+---
+import { mockCertificate } from '~/data/certificates/mock-ptd-2026';
+import CertificateLayout from '~/layouts/CertificateLayout.astro';
+
+const metadata = {
+  title: 'Verificación de Certificado — Vista Previa',
+  robots: { index: false, follow: false },
+};
+
+const certId = Astro.url.searchParams.get('id') || mockCertificate.id;
+
+const eventDate = new Date(mockCertificate.event.date + 'T12:00:00');
+const formattedDate = eventDate.toLocaleDateString('es-CO', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<CertificateLayout metadata={metadata}>
+  <div class="ptd-verify">
+    <div class="ptd-verify__badge">
+      <svg class="ptd-verify__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Certificado válido
+    </div>
+
+    <h1 class="ptd-verify__title">Verificación de Certificado</h1>
+
+    <p class="ptd-verify__detail"><strong>Nombre:</strong> {mockCertificate.subject.name}</p>
+    <p class="ptd-verify__detail"><strong>Evento:</strong> {mockCertificate.event.name}</p>
+    <p class="ptd-verify__detail"><strong>Fecha:</strong> {formattedDate}</p>
+    <p class="ptd-verify__detail"><strong>Lugar:</strong> {mockCertificate.event.location}</p>
+    <p class="ptd-verify__detail"><strong>Emisor:</strong> {mockCertificate.issuer.name}</p>
+    <p class="ptd-verify__detail"><strong>ID:</strong> {certId}</p>
+
+    <div class="ptd-verify__note">
+      Página de verificación de prueba — sin firma criptográfica ni backend.
+      En producción, este endpoint validará la integridad de la credencial firmada.
+    </div>
+  </div>
+</CertificateLayout>

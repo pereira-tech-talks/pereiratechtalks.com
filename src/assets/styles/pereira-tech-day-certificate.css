@@ -1,0 +1,410 @@
+/* Certificate styles — reuses tokens from pereira-tech-day.css */
+
+.ptd-cert-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: var(--ptd-cream);
+}
+
+/* Preview banner */
+.ptd-cert-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--ptd-coral);
+  color: #fff;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.ptd-cert-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.ptd-cert-actions__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--ptd-teal);
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ptd-cert-actions__btn:hover {
+  background: color-mix(in srgb, var(--ptd-teal) 80%, #000);
+}
+
+/* Certificate document */
+.ptd-cert {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 297 / 210;
+  background: var(--ptd-cream);
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(31, 63, 89, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ptd-cert__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--ptd-cert-bg);
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.ptd-cert__bg-accent {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--ptd-cert-bg-accent);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.ptd-cert__wave-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ptd-cert__wave-left svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ptd-cert__border-top {
+  position: relative;
+  z-index: 1;
+  height: 6px;
+  background: linear-gradient(90deg, var(--ptd-coral) 0%, var(--ptd-teal) 50%, var(--ptd-title) 100%);
+}
+
+.ptd-cert__body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3rem 1.5rem;
+}
+
+.ptd-cert__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.ptd-cert__logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%);
+}
+
+.ptd-cert__title {
+  font-family: "Bebas Neue", "Arial Black", sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: 4px;
+  color: var(--ptd-title);
+  margin: 0;
+}
+
+.ptd-cert__divider {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ptd-coral), var(--ptd-teal));
+  margin: 0.75rem 0;
+  border: none;
+}
+
+/* Main content area */
+.ptd-cert__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.ptd-cert__preamble {
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--ptd-text);
+  margin: 0;
+}
+
+.ptd-cert__subject-name {
+  font-family: "Bebas Neue", "Arial Black", sans-serif;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  letter-spacing: 3px;
+  color: var(--ptd-title);
+  margin: 0.25rem 0;
+  line-height: 1.1;
+}
+
+.ptd-cert__event-line {
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+  color: var(--ptd-text);
+  margin: 0;
+}
+
+.ptd-cert__event-name {
+  font-weight: 700;
+  color: var(--ptd-coral);
+}
+
+/* Footer area */
+.ptd-cert__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.ptd-cert__footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ptd-cert__seal {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--ptd-teal), var(--ptd-coral), var(--ptd-teal));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.ptd-cert__seal::after {
+  content: "";
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+}
+
+.ptd-cert__seal-label {
+  position: relative;
+  z-index: 1;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 1px;
+  color: var(--ptd-title);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.ptd-cert__issuer {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.75rem;
+  color: var(--ptd-text);
+  opacity: 0.8;
+}
+
+.ptd-cert__issued-date {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.7rem;
+  color: var(--ptd-text);
+  opacity: 0.6;
+}
+
+.ptd-cert__footer-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ptd-cert__communities {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.ptd-cert__community-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+.ptd-cert__community-logo[alt="Pereira Tech Talks"] {
+  filter: brightness(0) saturate(100%);
+}
+
+.ptd-cert__footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ptd-cert__qr {
+  width: 80px;
+  height: 80px;
+}
+
+.ptd-cert__cert-id {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.6rem;
+  color: var(--ptd-text);
+  opacity: 0.6;
+  word-break: break-all;
+  max-width: 100px;
+  text-align: center;
+}
+
+.ptd-cert__verify-label {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ptd-teal);
+}
+
+/* Verify page */
+.ptd-verify {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.ptd-verify__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  background: #d4edda;
+  color: #155724;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ptd-verify__badge-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.ptd-verify__title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  color: var(--ptd-title);
+  margin: 0 0 1rem;
+}
+
+.ptd-verify__detail {
+  font-size: 0.9rem;
+  color: var(--ptd-text);
+  margin: 0.35rem 0;
+}
+
+.ptd-verify__detail strong {
+  color: var(--ptd-title);
+}
+
+.ptd-verify__note {
+  margin-top: 2rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ptd-teal) 10%, transparent);
+  font-size: 0.8rem;
+  color: var(--ptd-text);
+  opacity: 0.8;
+}
+
+/* Print styles */
+@media print {
+  .ptd-cert-banner,
+  .ptd-cert-actions {
+    display: none !important;
+  }
+
+  .ptd-cert-page {
+    padding: 0;
+    min-height: auto;
+    background: #fff;
+  }
+
+  .ptd-cert {
+    max-width: none;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    aspect-ratio: auto;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ptd-cert__bg {
+    opacity: 0.22;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ptd-cert__bg-accent {
+    opacity: 0.35;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ptd-cert__wave-left {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+}

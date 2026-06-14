@@ -1,0 +1,53 @@
+---
+import { getImage } from 'astro:assets';
+import QRCode from 'qrcode';
+import CertificateDocument from '~/components/certificates/CertificateDocument.astro';
+import { mockCertificate } from '~/data/certificates/mock-ptd-2026';
+import CertificateLayout from '~/layouts/CertificateLayout.astro';
+import { findImage } from '~/utils/images';
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://pereiratechtalks.org';
+const verificationUrl = `${siteUrl}/pereira-tech-day/certificado/verify-preview?id=${mockCertificate.id}`;
+const qrDataUrl = await QRCode.toDataURL(verificationUrl, { margin: 1, width: 160 });
+
+const certBgMeta = await findImage('~/assets/images/pereira-tech-day/hero-illustration-2026.png');
+const certBg = certBgMeta
+  ? await getImage({ src: certBgMeta, width: 1400, format: 'webp' })
+  : null;
+
+const certBgAccentMeta = await findImage('~/assets/images/pereira-tech-day/about-section-bg-2026.png');
+const certBgAccent = certBgAccentMeta
+  ? await getImage({ src: certBgAccentMeta, width: 1800, format: 'webp' })
+  : null;
+
+const metadata = {
+  title: 'Certificado de Asistencia — Vista Previa',
+  robots: { index: false, follow: false },
+};
+---
+
+<CertificateLayout metadata={metadata}>
+  <div class="ptd-cert-banner">
+    Vista previa — datos de prueba
+  </div>
+
+  <CertificateDocument
+    certificate={mockCertificate}
+    verificationUrl={verificationUrl}
+    qrDataUrl={qrDataUrl}
+    backgroundSrc={certBg?.src}
+    backgroundAccentSrc={certBgAccent?.src}
+  />
+
+  <div class="ptd-cert-actions">
+    <button class="ptd-cert-actions__btn" id="print-btn" type="button">
+      🖨️ Imprimir / Guardar PDF
+    </button>
+  </div>
+
+  <script>
+    document.getElementById("print-btn")?.addEventListener("click", () => {
+      window.print();
+    });
+  </script>
+</CertificateLayout>

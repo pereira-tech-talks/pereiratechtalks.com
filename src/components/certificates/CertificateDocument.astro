@@ -1,0 +1,120 @@
+---
+import type { CertificationPayload } from '~/types/certification';
+import Image from '~/components/common/Image.astro';
+import { findImage } from '~/utils/images';
+import { getImage } from 'astro:assets';
+
+export interface Props {
+  certificate: CertificationPayload;
+  verificationUrl: string;
+  qrDataUrl: string;
+  backgroundSrc?: string;
+  backgroundAccentSrc?: string;
+}
+
+const { certificate, verificationUrl, qrDataUrl, backgroundSrc, backgroundAccentSrc } = Astro.props;
+
+const logoMeta = await findImage('~/assets/images/pereira-tech-day/logo.png');
+const logo = logoMeta
+  ? await getImage({ src: logoMeta, height: 80, format: 'png' })
+  : null;
+
+const eventDate = new Date(certificate.event.date + 'T12:00:00');
+const formattedDate = eventDate.toLocaleDateString('es-CO', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const issuedDate = new Date(certificate.issuedAt);
+const formattedIssuedDate = issuedDate.toLocaleDateString('es-CO', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+
+const communities = [
+  { image: '~/assets/images/pereira-tech-day/community/pypereira.png', name: 'Python Pereira' },
+  { image: '~/assets/images/pereira-tech-day/community/jointdev.png', name: 'JointDev' },
+  { image: '~/assets/images/pereira-tech-day/community/perjs.jpeg', name: 'PereiraJS' },
+  { image: '~/assets/images/pereira-tech-day/community/ptt.png', name: 'Pereira Tech Talks' },
+  { image: '~/assets/images/pereira-tech-day/community/qaconf.png', name: 'QA Conf' },
+];
+---
+
+<div
+  class="ptd-cert"
+  style={[
+    backgroundSrc ? `--ptd-cert-bg: url('${backgroundSrc}')` : '',
+    backgroundAccentSrc ? `--ptd-cert-bg-accent: url('${backgroundAccentSrc}')` : '',
+  ].filter(Boolean).join('; ') || undefined}
+>
+  <div class="ptd-cert__bg" aria-hidden="true"></div>
+  <div class="ptd-cert__bg-accent" aria-hidden="true"></div>
+  <div class="ptd-cert__wave-left" aria-hidden="true">
+    <svg viewBox="0 0 40 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 0 Q35 30 20 60 Q5 90 20 120 Q35 150 20 180 Q5 210 20 240 Q35 270 20 300 Q5 330 20 360 Q35 390 20 420 Q5 450 20 480 Q35 510 20 540 Q5 570 20 600" fill="none" stroke="var(--ptd-coral)" stroke-width="2" opacity="0.5"/>
+      <path d="M12 0 Q27 35 12 70 Q-3 105 12 140 Q27 175 12 210 Q-3 245 12 280 Q27 315 12 350 Q-3 385 12 420 Q27 455 12 490 Q-3 525 12 560 Q27 595 12 600" fill="none" stroke="var(--ptd-teal)" stroke-width="1.5" opacity="0.4"/>
+      <path d="M28 0 Q38 25 28 50 Q18 75 28 100 Q38 125 28 150 Q18 175 28 200 Q38 225 28 250 Q18 275 28 300 Q38 325 28 350 Q18 375 28 400 Q38 425 28 450 Q18 475 28 500 Q38 525 28 550 Q18 575 28 600" fill="none" stroke="var(--ptd-title)" stroke-width="1" opacity="0.25"/>
+    </svg>
+  </div>
+  <div class="ptd-cert__border-top"></div>
+  <div class="ptd-cert__body">
+    <header class="ptd-cert__header">
+      {logo && (
+        <img
+          src={logo.src}
+          alt="Pereira Tech Day"
+          class="ptd-cert__logo"
+          loading="eager"
+          decoding="async"
+        />
+      )}
+      <h1 class="ptd-cert__title">Certificado de Asistencia</h1>
+    </header>
+
+    <hr class="ptd-cert__divider" />
+
+    <div class="ptd-cert__content">
+      <p class="ptd-cert__preamble">Se certifica que</p>
+      <p class="ptd-cert__subject-name">{certificate.subject.name}</p>
+      <p class="ptd-cert__event-line">
+        asistió a <span class="ptd-cert__event-name">{certificate.event.name}</span>
+      </p>
+      <p class="ptd-cert__event-line">
+        {formattedDate}{certificate.event.location ? ` · ${certificate.event.location}` : ''}
+      </p>
+    </div>
+
+    <footer class="ptd-cert__footer">
+      <div class="ptd-cert__footer-left">
+        <div class="ptd-cert__seal">
+          <span class="ptd-cert__seal-label">Documento<br/>Verificable</span>
+        </div>
+        <span class="ptd-cert__issuer">Emitido por {certificate.issuer.name}</span>
+        <span class="ptd-cert__issued-date">{formattedIssuedDate}</span>
+      </div>
+
+      <div class="ptd-cert__footer-center">
+        <div class="ptd-cert__communities">
+          {communities.map((c) => (
+            <Image
+              src={c.image}
+              alt={c.name}
+              class="ptd-cert__community-logo"
+              width={28}
+              height={28}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div class="ptd-cert__footer-right">
+        <img src={qrDataUrl} alt="QR de verificación" class="ptd-cert__qr" />
+        <span class="ptd-cert__verify-label">Verificar</span>
+        <span class="ptd-cert__cert-id">{certificate.id}</span>
+      </div>
+    </footer>
+  </div>
+</div>
