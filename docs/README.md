@@ -92,8 +92,8 @@ pereiratechtalks.org/
 │   └── styles/          # Tailwind 4 theme tokens (--color-ptt-*)
 ├── public/              # Static assets (images, fonts, icons, .well-known/)
 ├── docs/                # This documentation folder
-├── .agents/             # Cross-agent skills, commands, agent definitions
-└── .agent_commands/     # Deep work plan templates
+├── .agents/             # Cross-agent skills (incl. the deepworkplan skill), commands, agent definitions
+└── .dwp/                # Deep Work Plan outputs — plans/ + drafts/ (git-ignored)
 ```
 
 ## Quick Commands

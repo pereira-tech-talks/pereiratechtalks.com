@@ -94,7 +94,7 @@ scripts/                        # Build utilities (image optimization, agent ski
 docs/                           # Project documentation
 .agents/                        # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents               # Backward-compat symlink for Claude Code
-.agent_commands/                # Deep work plan templates and skill/agent generators
+.dwp/                           # Deep Work Plan outputs — plans/ + drafts/ (git-ignored)
 tmp/                            # Temporary workspace (git-ignored)
 ```
 
@@ -266,6 +266,14 @@ See **[Accessibility Guide](docs/ACCESSIBILITY.md)**.
 ## Shared Agent Coordination
 
 Multiple AI agents collaborate on this codebase. When updating agent guidance, mirror changes across all relevant files. See **[AI Agent Collaboration](docs/AI_AGENT_COLLAB.md)**.
+
+### DWP progress reporting — Dailybot addon (optional, non-blocking)
+
+The [DeepWorkPlan Dailybot addon](.agents/skills/deepworkplan/addons/dailybot/SKILL.md) is installed (agent skill vendored at `.agents/skills/dailybot/`). When Dailybot is authenticated, DWP work surfaces to the team as standup-style reports via **four lifecycle events** — **kickoff** (plan starts), **significant task** (a feature/fix/major refactor lands), **blocked** (an unattended run halts), and **completion** (milestone: what was built). Reporting is **best-effort and never blocks** `create`/`execute`: it is skipped silently if Dailybot is absent, unauthenticated, or `.dailybot/disabled` exists. Auth is per-contributor via the Dailybot skill's own flow (`dailybot login` / `DAILYBOT_API_KEY`) — never prompted or stored here. Repo report identity: `.dailybot/profile.json` (credential-free, no `key` field). Full lifecycle detail in **[AI Agent Collaboration](docs/AI_AGENT_COLLAB.md)**.
+
+### DWP Security Review augmentation — AI Diff Reviewer addon (optional, local-only / Flow A)
+
+The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer/SKILL.md) is installed in **Flow A (local-only)**: vendored skill at `.agents/skills/ai-diff-reviewer/` + a repo-tailored `.review/extension.md`. The mandatory DWP **Security Review** task gains an additional local-review step — invoke *"Review my current branch"*, then append the verdict + findings table under `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`. A `critical` finding follows the Security Review contract (blocks until fixed or explicitly accepted); `warning`/`info` are reported but do not block. Best-effort and **never-block** — skipped (with one warning) if the skill or extension is absent. **No CI workflow** is installed (Flow B deferred); Flow A needs **no** provider secret.
 
 ## Quick Commands
 

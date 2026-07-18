@@ -29,13 +29,16 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 ## Deep Work Plans
 
+> Thin delegators to the installed [`deepworkplan` skill](../skills/deepworkplan/SKILL.md) (currently **v2.17.0**, from [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)). Plans live in `.dwp/plans/`; drafts in `.dwp/drafts/`. Opt-in addons installed: `dailybot` (team reporting), `ai-diff-reviewer` (Flow A local-only review), `dependency-upgrade` (`/lib-upgrade`).
+
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
 | `/dwp-create` | `.agents/commands/dwp-create.md` | Create a deep work plan (unified flow: info, draft, refine, final) |
-| `/dwp-execute` | `.agents/commands/dwp-execute.md` | Execute an existing deep work plan |
+| `/dwp-execute` | `.agents/commands/dwp-execute.md` | Execute an existing deep work plan task by task |
 | `/dwp-refine` | `.agents/commands/dwp-refine.md` | Refine a draft or modify an existing final plan |
-| `/dwp-resume` | `.agents/commands/dwp-resume.md` | Resume an interrupted deep work plan |
+| `/dwp-resume` | `.agents/commands/dwp-resume.md` | Resume an interrupted deep work plan from the first open task |
 | `/dwp-status` | `.agents/commands/dwp-status.md` | Check status of deep work plans without executing |
+| `/dwp-verify` | `.agents/commands/dwp-verify.md` | Objective pass/fail conformance report for the repo and its plans |
 
 ## Git & Version Control
 
@@ -94,7 +97,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/lib-upgrade` | `.agents/commands/lib-upgrade.md` | Upgrade project dependencies (npm packages via ncu) |
+| `/lib-upgrade` | `.agents/commands/lib-upgrade.md` | Safely upgrade pnpm dependencies (batched, validated, revertible) via the DeepWorkPlan [`dependency-upgrade` addon](../skills/deepworkplan/addons/dependency-upgrade/SKILL.md) — patch/minor/major batches gated by `biome:check`, `astro:check`, `test`, `build` |
 
 ## Skills & Agents Management
 

@@ -100,7 +100,7 @@ src/
 public/images/                  # Brand, blog, meetups, events, PTDs, speakers, sponsors
 docs/                           # Project documentation
 .agents/                        # Cross-agent skills, commands, agents, settings
-.agent_commands/                # Deep work plan templates and skill/agent generators
+.dwp/                           # Deep Work Plan outputs — plans/ + drafts/ (git-ignored)
 tmp/                            # Git-ignored scratch space
 ```
 

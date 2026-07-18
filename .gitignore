@@ -38,10 +38,8 @@ coverage/
 # devcontainer (local dev setup)
 .devcontainer/
 
-# Agent Deep Work Plans (execution results, not templates)
-.agent_commands/agent_deep_work_plans/results/drafts/
-.agent_commands/agent_deep_work_plans/results/plans/PLAN_*/
-.agent_commands/agent_deep_work_plans/results/plans/old/
+# Deep Work Plan outputs (plans + drafts are working artifacts, not tracked source)
+.dwp/
 
 # Temporary workspace (agent outputs, scratch files, ephemeral content)
 tmp/*
@@ -49,3 +47,9 @@ tmp/*
 
 english.png
 spanish.png
+
+# Dailybot per-repo API keys / auth context (per-developer, never committed)
+.dailybot/env.json
+
+# Playwright ephemeral test output
+test-results/

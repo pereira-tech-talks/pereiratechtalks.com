@@ -59,15 +59,16 @@ Tracking documentation coverage for Pereira Tech Talks v3.0.0.
 | [src/content/README.md](../src/content/README.md) | ✅ Current | Content Collections |
 | [src/styles/README.md](../src/styles/README.md) | ✅ Current | Styling guide |
 
-### .agent_commands/ Documentation
+### DeepWorkPlan skill (`.agents/skills/deepworkplan/`)
 
 | File | Status | Description |
 |------|--------|-------------|
-| [README.md](../.agent_commands/README.md) | ✅ Current | Agent commands overview |
-| [agent_skills_generator/](../.agent_commands/agent_skills_generator/) | ✅ Current | Skills creation system |
-| [agent_deep_work_plans/](../.agent_commands/agent_deep_work_plans/) | ✅ Current | Deep work plans system |
-| [agent_library_upgrades/](../.agent_commands/agent_library_upgrades/) | ✅ Current | Library upgrade system |
-| [PLAN_EXAMPLE_add_blog_feature/](../.agent_commands/agent_deep_work_plans/example_prompts/PLAN_EXAMPLE_add_blog_feature/) | ✅ Current | Astro-specific example plan |
+| [SKILL.md](../.agents/skills/deepworkplan/SKILL.md) | ✅ Current | DWP router skill (routes to sub-skills) |
+| [create/ · execute/ · refine/ · resume/ · status/ · verify/](../.agents/skills/deepworkplan/) | ✅ Current | Plan-execute-verify sub-skills (`/dwp-*`) |
+| [onboard/](../.agents/skills/deepworkplan/onboard/SKILL.md) | ✅ Current | Make a repo AI-first |
+| [author/](../.agents/skills/deepworkplan/author/SKILL.md) | ✅ Current | Create/update skills & agents (`/skill-create`, `/agent-create`) |
+| [guide/GUIDE.md](../.agents/skills/deepworkplan/guide/GUIDE.md) | ✅ Current | DWP methodology guide |
+| [addons/dependency-upgrade/](../.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md) | ✅ Current | Dependency upgrade addon (`/lib-upgrade`) |
 
 ### .agents/ Documentation
 

@@ -5,7 +5,7 @@ identity. All AI agents, designers, and developers reference this document when
 making UI, color, typography, content, or brand decisions.
 
 > The canonical, machine-readable color/spacing/motion source is
-> [`analysis_results/BRAND_PALETTE.md`](../.agent_commands/agent_deep_work_plans/results/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md).
+> [`analysis_results/BRAND_PALETTE.md`](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md).
 > This guide is the human-friendly companion mirroring its content.
 
 ## Brand Identity
@@ -271,7 +271,7 @@ Implemented at runtime by `<EditionScope edition={edition}>` (Task 5).
 - Evitar: jerga corporativa, anglicismos innecesarios, signos de admiración acumulados.
 
 For full do/don't tables and the orthography hard rule, see
-[`analysis_results/BRAND_PALETTE.md` §8](../.agent_commands/agent_deep_work_plans/results/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md#8-voice--tone)
+[`analysis_results/BRAND_PALETTE.md` §8](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md#8-voice--tone)
 and [`docs/WRITING_VOICE_GUIDE.md`](WRITING_VOICE_GUIDE.md).
 
 ---
@@ -321,4 +321,4 @@ Muted:         #6E8589 light · #8FA3A6 dark → text-ptt-muted (large text only
 - [Writing Voice Guide](WRITING_VOICE_GUIDE.md) — Voice & tone in EN + ES.
 - [Standards](STANDARDS.md) — Coding conventions including styling.
 - [Public Assets](features/PUBLIC_ASSETS.md) — Static asset inventory.
-- [`analysis_results/BRAND_PALETTE.md`](../.agent_commands/agent_deep_work_plans/results/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md) — Source-of-truth machine-readable palette.
+- [`analysis_results/BRAND_PALETTE.md`](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md) — Source-of-truth machine-readable palette.

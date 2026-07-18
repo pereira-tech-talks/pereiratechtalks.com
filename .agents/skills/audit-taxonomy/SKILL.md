@@ -56,7 +56,7 @@ Before running this skill:
 
 - [Blog Posts Guide § Tags](../../../docs/features/BLOG_POSTS.md) — governance rules.
 - [add-blog-post skill](../add-blog-post/SKILL.md) — canonical post-authoring procedure (uses tag governance).
-- The original tier-3 design spec (if present): `.agent_commands/agent_deep_work_plans/results/plans/PLAN_implement_third_level_tags_taxonomy/analysis_results/TIER_3_DESIGN_SPEC.md`.
+- The original tier-3 design spec (if present): `.dwp/plans/PLAN_implement_third_level_tags_taxonomy/analysis_results/TIER_3_DESIGN_SPEC.md`.
 
 ## Steps
 

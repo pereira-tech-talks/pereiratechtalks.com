@@ -2,10 +2,10 @@ packages:
   - .
 
 # Supply-chain guard: only allow installing package versions that were
-# published to the registry at least 1 week ago (10080 minutes). Protects
+# published to the registry at least 3 days ago (4320 minutes). Protects
 # against compromised packages that get yanked or patched within days.
 # Affects new installs / updates only — the existing lockfile is respected.
-minimumReleaseAge: 10080
+minimumReleaseAge: 4320
 
 allowBuilds:
   # Native bindings / install scripts pnpm 10+ would otherwise refuse to run.

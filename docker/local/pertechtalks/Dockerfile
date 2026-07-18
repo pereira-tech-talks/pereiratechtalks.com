@@ -1,4 +1,4 @@
-FROM node:24.15.0-trixie-slim
+FROM node:24.18.0-trixie-slim
 LABEL maintainer="hello@pereiratechtalks.org"
 
 # System packages (apt requires root)
@@ -43,6 +43,25 @@ RUN mkdir -p "${PNPM_HOME}/bin" \
 
 # Make node user's CLI install dirs available on PATH (pnpm globals, Claude, Cursor agent)
 ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:$PATH
+
+# Ensure the container's image-installed Node (/usr/local/bin) precedes any
+# IDE-bundled Node that gets prepended to PATH at shell startup — Cursor Server
+# (~/.cursor-server/bin/<commit>/node), VS Code Server, etc. Without this,
+# `node`/`npx`/`pnpm` in agent shells resolves to the IDE's bundled binary
+# (often an older LTS), even though `FROM node:<X>-...` installs the right one.
+# Login shells source /etc/profile.d/*; this is the most universal anchor.
+RUN printf '%s\n' \
+    '# Container-installed Node must win over IDE-bundled Node (Cursor Server, etc.).' \
+    '# Idempotent: only prepends if /usr/local/bin is not already the first PATH entry.' \
+    'if [ -x /usr/local/bin/node ]; then' \
+    '  case "${PATH%%:*}" in' \
+    '    /usr/local/bin) : ;;' \
+    '    *) PATH="/usr/local/bin:${PATH}" ;;' \
+    '  esac' \
+    '  export PATH' \
+    'fi' \
+    > /etc/profile.d/00-container-node-first.sh \
+    && chmod 0644 /etc/profile.d/00-container-node-first.sh
 
 # Redirect any `npm` invocation to pnpm — this repo uses pnpm exclusively,
 # so running npm would corrupt node_modules and pnpm-lock.yaml. Replace the

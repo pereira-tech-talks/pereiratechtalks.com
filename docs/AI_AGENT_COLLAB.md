@@ -245,6 +245,41 @@ If conflicts arise:
 2. Look for handoff notes
 3. Review recent file changes
 
+## DeepWorkPlan Addons (optional, non-blocking)
+
+The vendored `deepworkplan` skill (v2.17.0) has three opt-in addons wired into this repo. All are **best-effort and never block** DWP `create`/`execute`. The core methodology has **zero** dependency on any of them — declining or uninstalling any addon still leaves a fully AI-first repo.
+
+### Dailybot reporting — four lifecycle events
+
+When the vendored Dailybot skill (`.agents/skills/dailybot/`, ≥ 3.10.3) is installed **and authenticated**, DWP work surfaces to the team as standup-style reports through four events (addon SPEC §5.1):
+
+| Event | When | Kind | Payload |
+|---|---|---|---|
+| **Kickoff** | A plan is materialized + approved | regular | "Starting: \<what is being built and why\>" |
+| **Significant task** | A feature / bug fix / major refactor completes (never intermediate setup) | regular | The outcome shipped |
+| **Blocked** | An unattended run halts on a stop condition (`state.json.blocked` populated) | regular (with `blockers`) | What is stuck and what it needs |
+| **Completion** | The plan finishes | **milestone** | What was built (never "completed a plan") |
+
+Rules:
+
+- **Auth is deferred and per-contributor.** Run `dailybot login` (email OTP) or set `DAILYBOT_API_KEY` via the Dailybot skill's own flow — never prompted or stored by DWP. Decline auth → reporting is skipped, work continues.
+- **Never blocks.** If Dailybot is absent, unauthenticated, unreachable, or `.dailybot/disabled` exists, the event is skipped silently (warn once at most).
+- **Report identity** is the credential-free `.dailybot/profile.json` (tracked, **no** `key` field). The per-developer `.dailybot/env.json` (API keys / org context) is gitignored.
+- **Optional hook enforcement** (`dailybot hook …`, CLI ≥ 3.7.0) can make the harness itself remind agents about unreported work; deferred to the Dailybot skill's `report/hooks.md`. Not committed here — opt in per team preference.
+
+### AI Diff Reviewer — Security Review augmentation (Flow A, local-only)
+
+Installed in **Flow A**: vendored skill (`.agents/skills/ai-diff-reviewer/`) + repo-tailored `.review/extension.md`. **No CI workflow** (`.github/workflows/pr-review.yml`) — Flow B is deferred.
+
+- The mandatory DWP **Security Review** task gains a local-review step: invoke *"Review my current branch"* (or `/ai-diff-reviewer`), then append the verdict + findings table + per-finding bodies under `## AI Diff Reviewer local review` in the plan's `analysis_results/SECURITY_REVIEW.md`.
+- **Severity contract:** a `critical` finding blocks Security Review completion until fixed or explicitly accepted; `warning`/`info` are reported but do not block.
+- **Never blocks.** Skipped (one warning) if the skill or extension is missing, or the local review errors. Flow A needs **no** provider secret — an unset `CURSOR_API_KEY` is Flow B / CI only and never a reason to skip the local pass.
+- **To upgrade to Flow B later:** run `/deepworkplan-addon-ai-diff-reviewer`, choose Flow B; the upstream `setup` sub-skill writes `pr-review.yml` reading the same `.review/extension.md` for byte-identical CI parity.
+
+### Dependency upgrade — `/lib-upgrade`
+
+The `dependency-upgrade` addon backs `/lib-upgrade`: detects this repo's manager (**pnpm**), classifies upgrades by semver, upgrades in safe batches, runs the real gate (`pnpm run biome:check && pnpm run astro:check && pnpm run test && pnpm run build`) after each, reverts a failing batch, and summarizes. It never auto-commits — it surfaces the diff for you to commit.
+
 ## Resources
 
 - [AGENTS.md](../AGENTS.md) - Main guidance

@@ -34,8 +34,8 @@ pereiratechtalks.org/
 │   └── styles/          # Tailwind 4 theme tokens (--color-ptt-*)
 ├── public/              # Static assets (.well-known/, openapi.json, robots.txt)
 ├── docs/                # Documentation
-├── .agent_commands/     # Deep work plan templates
-└── .agents/             # Skills, commands, agent definitions
+├── .agents/             # Skills (incl. the deepworkplan skill), commands, agent definitions
+└── .dwp/                # Deep Work Plan outputs — plans/ + drafts/ (git-ignored)
 ```
 
 ## Critical Rules (MUST FOLLOW)

@@ -85,7 +85,7 @@ This project includes reusable **Skills** (procedures) and **Agents** (specializ
 > **IMPORTANT:** When creating new skills or agents, you MUST update the catalog
 > (`.agents/docs/skills_agents_catalog.md`) following the 5-step process (overview table, tier table,
 > interaction map, domain section, changelog) AND update this README's quick reference tables.
-> See the [Catalog Maintenance section](../.agent_commands/agent_skills_generator/GUIDE_TO_CREATE_SKILLS_AND_AGENTS.md) (Section 10) for detailed instructions.
+> See the installed deepworkplan **author** sub-skill ([`.agents/skills/deepworkplan/author/SKILL.md`](skills/deepworkplan/author/SKILL.md)) for detailed instructions — it is the source of truth for creating/updating skills and agents and keeping the catalog in sync.
 
 ---
 
@@ -202,8 +202,8 @@ Create a complete deep work plan with unified flow (info → draft → refine �
 ```
 
 **Output:**
-- Drafts: `.agent_commands/agent_deep_work_plans/results/drafts/`
-- Plans: `.agent_commands/agent_deep_work_plans/results/plans/PLAN_{name}/`
+- Drafts: `.dwp/drafts/`
+- Plans: `.dwp/plans/PLAN_{name}/`
 
 ---
 
@@ -645,13 +645,13 @@ Options:
 ## File Locations
 
 ### Deep Work Plans
-- **Drafts:** `.agent_commands/agent_deep_work_plans/results/drafts/`
-- **Plans:** `.agent_commands/agent_deep_work_plans/results/plans/`
-- **Guide:** `.agent_commands/agent_deep_work_plans/GUIDE_TO_CREATE_AGENT_DEEP_WORK_PLANS.md`
+- **Drafts:** `.dwp/drafts/` (git-ignored)
+- **Plans:** `.dwp/plans/` (git-ignored)
+- **Skill:** [`.agents/skills/deepworkplan/`](skills/deepworkplan/) — the installed engine (create/execute/refine/resume/status/verify/onboard/author sub-skills)
+- **Methodology guide:** [`.agents/skills/deepworkplan/guide/GUIDE.md`](skills/deepworkplan/guide/GUIDE.md)
 
 ### Library Upgrades
-- **Guide:** `.agent_commands/agent_library_upgrades/GUIDE.md`
-- **Examples:** `.agent_commands/agent_library_upgrades/example_prompts/`
+- **Addon:** [`.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md`](skills/deepworkplan/addons/dependency-upgrade/SKILL.md) (invoked via `/lib-upgrade`)
 
 ---
 
@@ -676,8 +676,8 @@ Options:
 
 ## Related Documentation
 
-- **[Deep Work Plans Guide](../.agent_commands/agent_deep_work_plans/GUIDE_TO_CREATE_AGENT_DEEP_WORK_PLANS.md)**
-- **[Library Upgrades Guide](../.agent_commands/agent_library_upgrades/GUIDE.md)**
+- **[Deep Work Plan Methodology Guide](skills/deepworkplan/guide/GUIDE.md)**
+- **[Dependency Upgrade Addon](skills/deepworkplan/addons/dependency-upgrade/SKILL.md)**
 - **[Development Commands](../docs/DEVELOPMENT_COMMANDS.md)**
 - **[Repository Standards](../docs/STANDARDS.md)**
 

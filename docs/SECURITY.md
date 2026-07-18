@@ -82,6 +82,14 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL;
 - [ ] Rotate secrets if accidentally exposed
 - [ ] Use CI/CD environment variables for builds
 
+### Agent Tooling Secrets (DeepWorkPlan addons)
+
+The repo vendors opt-in AI-agent tooling (DeepWorkPlan v2.17.0 + the Dailybot and AI Diff Reviewer addons). None of it ships to the production site — it is developer/agent-only — and its secrets are **never committed**:
+
+- **Dailybot:** identity lives in `.dailybot/profile.json` (tracked, **credential-free — no `key` field**; the CLI hard-errors if one is present). Per-developer auth (`DAILYBOT_API_KEY` / `dailybot login`) lives outside the repo or in the gitignored `.dailybot/env.json` — never in `profile.json`.
+- **AI Diff Reviewer:** installed in **Flow A (local-only)** — no CI workflow, no provider secret required. If Flow B (CI review) is ever adopted, the provider secret (typical: `CURSOR_API_KEY`) is set **only** in GitHub → Settings → Secrets and variables → Actions, never in the repo.
+- **Skill installs** use the checksummed `npx skills add … -y` path (content hashes recorded in `skills-lock.json`) — no remote-installer-piped-to-shell.
+
 ## Content Security
 
 ### User-Generated Content

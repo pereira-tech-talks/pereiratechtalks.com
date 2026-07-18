@@ -322,6 +322,6 @@ Use hooks to enforce rules:
 ## Related Documentation
 
 - [AGENTS.md](../../AGENTS.md) — Root agent instructions
-- [DWP Guide](../../.agent_commands/agent_deep_work_plans/GUIDE_TO_CREATE_AGENT_DEEP_WORK_PLANS.md) — Plan creation spec
+- [DWP Methodology Guide](../../.agents/skills/deepworkplan/guide/GUIDE.md) — Plan creation spec (installed deepworkplan skill)
 - [Skills & Agents Catalog](../../.agents/docs/skills_agents_catalog.md) — Available skills and agents
 - [Official Claude Code Team Agents Docs](https://code.claude.com/docs/en/agent-teams) — Authoritative API reference

@@ -376,18 +376,17 @@ All skills and agents are adapted for this Astro repository:
 
 | Date | Change | Details |
 |------|--------|---------|
+| 2026-07-18 | DWP skill upgraded to v2.17.0 + 3 addons installed | Bumped the vendored `deepworkplan` skill v2.15.0 → **v2.17.0** (integrity-verified; adds the **`ai-diff-reviewer`** addon → 5 addons; adds the `.cursor → .agents` symlink; Dailybot-3.10.3 alignment + security fixes). Installed three opt-in addon skills (recorded in `skills-lock.json`): **Dailybot** agent skill v3.10.4 (`.agents/skills/dailybot/`, four lifecycle events wired into `AGENTS.md` + `docs/AI_AGENT_COLLAB.md`, credential-free `.dailybot/profile.json`, auth deferred); **AI Diff Reviewer** v2.0.1 in **Flow A (local-only)** (`.agents/skills/ai-diff-reviewer/` + repo-tailored `.review/extension.md`; Security Review augmentation wired; **no** CI workflow); **dependency-upgrade** reconciled to 2.17.0 (`/lib-upgrade` already tailored). No new bespoke skill/agent warranted. |
+| 2026-06-12 | DWP skill upgraded to v2.15.0 | Bumped the installed `deepworkplan` skill (and bundled `addons/dailybot`, `addons/dependency-upgrade`, `addons/devcontainer`, `addons/design-system`) from v2.13.0 → v2.15.0. New mandatory **Security Review** as third-to-last task (in addition to Skills & Agents Discovery and Executive Report); design-system addon generalized to interface-surface profiles (visual-ui, cli-output, conversational); `docs/SECURITY.md` is now part of the conformance floor (already present in this repo). Added `/dwp-verify` to the Commands Reference. |
 | 2026-04-26 | add-slide-deck skill added | New Tier 2 skill for creating slide decks — internal Reveal.js, external-embed, or external-link. Mandatory for new files in `src/content/slides/`. Added Slides & Presentations domain section (#2). |
-| 2026-03-23 | audit-series skill added | New Tier 2 skill for pre-publication blog series auditing — 9-step review covering series definition, post discovery, ordering validation, cross-post consistency, i18n parity, individual post summary checks, build validation, and final report. Companion to audit-post. |
-| 2026-03-23 | audit-post skill added | New Tier 2 skill for pre-publication blog post auditing — 10-step comprehensive review covering frontmatter, SEO, AEO, images, accessibility, content quality, i18n parity, resources, build validation. |
 
 ---
 
 ## Related Documentation
 
 - [Commands Reference](COMMANDS_REFERENCE.md) — All slash commands with procedure files and cross-agent invocation convention
-- [Guide to Create Skills and Agents](../../.agent_commands/agent_skills_generator/GUIDE_TO_CREATE_SKILLS_AND_AGENTS.md)
-- [Model Routing](../../.agent_commands/agent_skills_generator/MODEL_ROUTING.md)
-- [Skill Template](../../.agent_commands/agent_skills_generator/templates/SKILL_TEMPLATE.md)
-- [Agent Template](../../.agent_commands/agent_skills_generator/templates/AGENT_TEMPLATE.md)
+- [Author sub-skill (create/update skills & agents)](../skills/deepworkplan/author/SKILL.md) — invoked via `/skill-create` and `/agent-create`
+- [Skill Template](../skills/deepworkplan/author/templates/SKILL_TEMPLATE.md)
+- [Agent Template](../skills/deepworkplan/author/templates/AGENT_TEMPLATE.md)
 - [AGENTS.md](../../AGENTS.md) - Main AI agent guidance
 - [docs/STANDARDS.md](../../docs/STANDARDS.md) - Coding standards
