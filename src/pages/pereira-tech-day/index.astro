@@ -198,6 +198,11 @@ const communities = [
     name: 'QA Conf',
     socialLink: 'https://qaconf.co',
   },
+  {
+    image: '~/assets/images/pereira-tech-day/community/backbone.png',
+    name: 'Backbone UTP',
+    socialLink: 'https://backboneutp.com',
+  },
 ];
 
 const organizers = [
@@ -205,6 +210,21 @@ const organizers = [
     image: '~/assets/images/people/santiago-bernal.jpeg',
     name: 'Santiago Bernal',
     socialLink: 'https://www.linkedin.com/in/santiaguf',
+  },
+  {
+    image: '~/assets/images/people/sebastian-agudelo.jpg',
+    name: 'Sebastian Agudelo Morales',
+    socialLink: 'https://www.linkedin.com/in/sebastianamo',
+  },
+  {
+    image: '~/assets/images/people/andres-torres.jpeg',
+    name: 'Andres Torres',
+    socialLink: 'https://www.linkedin.com/in/elfotografo007',
+  },
+  {
+    image: '~/assets/images/people/sebastian-franco.jpeg',
+    name: 'Sebastian Franco',
+    socialLink: 'https://www.linkedin.com/in/elfotografo007',
   },
   {
     image: '~/assets/images/people/eliana-osorio.jpeg',
@@ -231,6 +251,16 @@ const organizers = [
     name: 'Katherine López',
     socialLink: '',
   },
+  {
+    image: '~/assets/images/people/luisa-banol.webp',
+    name: 'Luisa Bañol',
+    socialLink: 'https://www.linkedin.com/in/luisamariabañol',
+  },
+  {
+    image: '~/assets/images/people/sergio-estrella.jpeg',
+    name: 'Sergio Estrella',
+    socialLink: 'https://www.linkedin.com/in/djkde',
+  },
 ];
 
 const collaborators = [
@@ -249,6 +279,7 @@ const collaboratorsSorted = collaborators.sort((a, b) =>
 );
 
 const speakers: Array<Testimonial> = [
+  // Actualizar lo mas pronto posible
   {
     testimonial:
       'Vanessa es Ingeniera de Sistemas con experiencia como desarrolladora web. Es Google Developer Expert en Angular y tecnologías web, y GitHub Star, reconocida por sus contribuciones a la comunidad. Como creadora de contenido, comparte su pasión por la tecnología, los libros, el diseño, la ilustración y, especialmente, el código, con un enfoque en JavaScript. Vanessa se dedica a fomentar el crecimiento personal y profesional a través de la tecnología',
@@ -379,7 +410,7 @@ const sponsorTiers = [
     ],
     callToAction: {
       text: 'Contactar',
-      href: createWhatsAppLink('Platinum Sponsor'),
+      href: 'mailto:pereiratechtalks@gmail.com?subject=Inter%C3%A9s%20en%20patrocinio%20de%20Pereira%20Tech%20Talks&body=Hola%20equipo%20de%20Pereira%20Tech%20Talks,%0A%0AEstoy%20interesado%20en%20conocer%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20opciones%20de%20patrocinio%20para%20el%20evento,%20espec%C3%ADficamente%20las%20categor%C3%ADas:%0A-%20Golden%20Sponsor%0A-%20Silver%20Sponsor%0A-%20Platinum%20Sponsor%0A%0APor%20favor,%20comp%C3%A1rtanme%20el%20media%20kit,%20beneficios,%20costos%20y%20dem%C3%A1s%20informaci%C3%B3n%20relevante.%0A%0AMuchas%20gracias.',
     },
   },
 ];
@@ -425,7 +456,7 @@ const extraPartnerships = [
     ],
     callToAction: {
       text: 'Visita nuestro Vaki',
-      href: 'https://vaki.co/vaki/laredindependiente',
+      href: 'https://vaki.co/vaki/pereiratechday',
     },
   },
 ];
@@ -442,7 +473,7 @@ const faqsList = [
   },
   {
     title: '¿Cuántos días dura el evento?',
-    description: 'El evento es un solo día, el viernes 22 de agosto.',
+    description: 'El evento es un solo día, el sábado 22 de agosto.',
   },
   {
     title: ' ¿Si no soy de la UTP puedo asistir?',
@@ -504,32 +535,22 @@ const sponsors = {
     {
       src: 'github.png',
       alt: 'GitHub',
-      url: 'https://gh.io/pereira24',
+      url: 'https://github.com/',
     },
     {
-      src: 'source-meridian.png',
-      alt: 'Source Meridian',
-      url: 'https://sourcemeridian.com/',
+      src: 'veritran.png',
+      alt: 'Veritran',
+      url: 'https://veritran.com/',
     },
   ],
-  silver: [
-    {
-      src: 'gorilla.png',
-      alt: 'Gorilla Logic',
-      url: 'https://gorillalogic.com/',
-    },
+  silver: [],
+  bronze: [
     {
       src: 'dailybot.png',
       alt: 'DailyBot',
       url: 'https://www.dailybot.com/',
     },
-    {
-      src: 'made-for-germany.png',
-      alt: 'Made for Germany',
-      url: 'https://www.made-for-germany.eu/apply/',
-    },
   ],
-  bronze: [],
 };
 
 const lightningTalks = [
@@ -638,106 +659,107 @@ void lightningTalks;
     <section
       id="hero"
       class="ptd-intro ptd-hero-shell relative md:-mt-[76px] not-prose"
-      style={
-        heroIllustrationBg
-          ? `--ptd-hero-bg: url('${heroIllustrationBg.src}')`
-          : undefined
-      }
+      style={heroIllustrationBg
+        ? `--ptd-hero-bg: url('${heroIllustrationBg.src}')`
+        : undefined}
     >
       <div class="ptd-intro__inner pt-0 md:pt-[76px]">
         <div class="ptd-intro__copy">
-            <p class="ptd-intro__eyebrow">Agosto 22, 2026 — 08:00 AM</p>
+          <p class="ptd-intro__eyebrow">Agosto 22, 2026 — 08:00 AM</p>
 
-            <div class="ptd-intro__headline">
-              {
-                introLogoMeta && (
-                  <img
-                    src={typeof introLogoMeta === 'string' ? introLogoMeta : introLogoMeta.src}
-                    alt="Pereira Tech Talks"
-                    class="ptd-intro__brand-logo-image"
-                    loading="eager"
-                    decoding="async"
-                  />
-                )
-              }
+          <div class="ptd-intro__headline">
+            {
+              introLogoMeta && (
+                <img
+                  src={
+                    typeof introLogoMeta === "string"
+                      ? introLogoMeta
+                      : introLogoMeta.src
+                  }
+                  alt="Pereira Tech Talks"
+                  class="ptd-intro__brand-logo-image"
+                  loading="eager"
+                  decoding="async"
+                />
+              )
+            }
 
-              <h1 class="ptd-intro__title">
-                <span class="ptd-intro__title-tech">Pereira Tech</span>
-                <span class="ptd-intro__title-day-year">
-                  <span class="ptd-intro__title-day">Day</span>
-                  <span class="ptd-intro__title-year"> 2026</span>
-                </span>
-              </h1>
+            <h1 class="ptd-intro__title">
+              <span class="ptd-intro__title-tech">Pereira Tech</span>
+              <span class="ptd-intro__title-day-year">
+                <span class="ptd-intro__title-day">Day</span>
+                <span class="ptd-intro__title-year"> 2026</span>
+              </span>
+            </h1>
+          </div>
+
+          <p class="ptd-intro__tagline">
+            Donde el talento, la tecnología y las marcas <strong
+              >se encuentran.</strong
+            >
+          </p>
+
+          <ul class="ptd-intro__meta">
+            <li>
+              <Icon name="tabler:calendar-event" class="ptd-intro__meta-icon" />
+              Sábado, 22 de agosto de 2026
+            </li>
+            <li>
+              <a
+                href="https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="tabler:map-pin" class="ptd-intro__meta-icon" />
+                UTP: Auditorio Jorge Roa Martínez, Pereira
+              </a>
+            </li>
+          </ul>
+
+          <div class="ptd-intro__stat" aria-label="300+ asistentes esperados">
+            <div class="ptd-intro__stat-inner">
+              <Icon
+                name="tabler:users"
+                class="ptd-intro__meta-icon ptd-intro__meta-icon--coral"
+              />
+              <span class="ptd-intro__stat-value">300+</span>
+              <span class="ptd-intro__stat-label">asistentes esperados</span>
             </div>
+          </div>
 
-            <p class="ptd-intro__tagline">
-              Donde el talento, la tecnología y las marcas <strong>se encuentran.</strong>
+          <div class="ptd-countdown-block">
+            <Countdown
+              id="countdown"
+              targetDate="2026-08-22T08:00:00-05:00"
+              endDate="2026-08-22T14:00:00-05:00"
+              numberColor="#3A7F7C"
+            />
+          </div>
+
+          <div class="ptd-notify-block">
+            <p class="ptd-notify-copy">
+              Entérate cuando se habiliten las inscripciones para el evento. ¡No
+              te lo pierdas!
             </p>
 
-            <ul class="ptd-intro__meta">
-              <li>
-                <Icon
-                  name="tabler:calendar-event"
-                  class="ptd-intro__meta-icon"
-                />
-                Sábado, 22 de agosto de 2026
-              </li>
-              <li>
-                <a
-                  href="https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Icon name="tabler:map-pin" class="ptd-intro__meta-icon" />
-                  UTP: Auditorio Jorge Roa Martínez, Pereira
-                </a>
-              </li>
-            </ul>
-
-            <div class="ptd-intro__stat" aria-label="300+ asistentes esperados">
-              <div class="ptd-intro__stat-inner">
-                <Icon
-                  name="tabler:users"
-                  class="ptd-intro__meta-icon ptd-intro__meta-icon--coral"
-                />
-                <span class="ptd-intro__stat-value">300+</span>
-                <span class="ptd-intro__stat-label">asistentes esperados</span>
-              </div>
-            </div>
-
-            <div class="ptd-countdown-block">
-              <Countdown
-                id="countdown"
-                targetDate="2026-08-22T08:00:00-05:00"
-                endDate="2026-08-22T14:00:00-05:00"
-                numberColor="#3A7F7C"
+            <form
+              id="pereira-tech-day-tickets-notification"
+              data-google-sheets-url={googleSheetsUrl}
+              class="ptd-notify-form"
+            >
+              <input
+                type="email"
+                name="email"
+                id="notification-email"
+                placeholder="Ingresa tu correo electrónico"
+                required
+                class="ptd-notify-input"
               />
-            </div>
-
-            <div class="ptd-notify-block">
-              <p class="ptd-notify-copy">
-                Entérate cuando se habiliten las inscripciones para el evento. ¡No
-                te lo pierdas!
-              </p>
-
-              <form
-                id="pereira-tech-day-tickets-notification"
-                data-google-sheets-url={googleSheetsUrl}
-                class="ptd-notify-form"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  id="notification-email"
-                  placeholder="Ingresa tu correo electrónico"
-                  required
-                  class="ptd-notify-input"
-                />
-                <button type="submit" class="ptd-notify-button">
-                  Suscribirse
-                </button>
-              </form>
-            </div>
+              <button type="submit" class="ptd-notify-button">
+                Suscribirse
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -756,7 +778,10 @@ void lightningTalks;
 
           const titleHeight = title.getBoundingClientRect().height;
           if (titleHeight > 0) {
-            headline.style.setProperty("--ptd-intro-title-height", `${titleHeight}px`);
+            headline.style.setProperty(
+              "--ptd-intro-title-height",
+              `${titleHeight}px`,
+            );
           }
         };
 
@@ -841,38 +866,42 @@ void lightningTalks;
       <section
         id="about"
         class="ptd-about ptd-section-spacer not-prose"
-        style={
-          aboutSectionBg
-            ? `--ptd-about-bg: url('${aboutSectionBg.src}')`
-            : undefined
-        }
+        style={aboutSectionBg
+          ? `--ptd-about-bg: url('${aboutSectionBg.src}')`
+          : undefined}
       >
         <div class="ptd-about__inner">
           <article class="ptd-about__card">
             <div class="ptd-about__copy">
               <h2 class="ptd-about__title">Sobre Pereira Tech Day</h2>
               <p>
-                <b>Pereira Tech Day</b> es un evento organizado en conjunto por las comunidades
-                de <a href="https://pereira.js.org/"><i>PereiraJs</i></a>,
+                <b>Pereira Tech Day</b> es un evento organizado en conjunto por las
+                comunidades de <a href="https://pereira.js.org/"
+                  ><i>PereiraJs</i></a
+                >,
                 <a href="https://pypereira.co"><i>Python Pereira</i></a>, <a
-                  href="https://pereiratechtalks.org"><i>Pereira Tech Talks</i></a
+                  href="https://pereiratechtalks.org"
+                  ><i>Pereira Tech Talks</i></a
                 > y <a href="https://jointdevweb.firebaseapp.com/"
                   ><i>Joint Developer</i></a
-                >. Unimos fuerzas para crear un evento diverso y enriquecedor, con
-                charlas que abarcan diferentes aspectos de la tecnología.
+                >. Unimos fuerzas para crear un evento diverso y enriquecedor,
+                con charlas que abarcan diferentes aspectos de la tecnología.
               </p>
               <p>
                 En <b>Pereira Tech Day</b>, nuestro objetivo es compartir con la
                 comunidad temas relacionados al mundo tecnológico, enfocados en
-                inspirar y motivar a las personas. Las charlas de este año no solo
-                cubrirán temas tecnológicos, sino también trayectorias
+                inspirar y motivar a las personas. Las charlas de este año no
+                solo cubrirán temas tecnológicos, sino también trayectorias
                 profesionales, desarrollo comunitario y motivación, buscando
                 incentivar a los asistentes a seguir explorando, investigando y
                 adentrándose en el maravilloso mundo de la tecnología.
               </p>
               <ul class="ptd-about__topics" aria-label="Temas principales">
                 <li>
-                  <Icon name="tabler:chart-bubble" class="ptd-about__topic-icon" />
+                  <Icon
+                    name="tabler:chart-bubble"
+                    class="ptd-about__topic-icon"
+                  />
                   <span>Inteligencia Artificial</span>
                 </li>
                 <li>
@@ -880,14 +909,18 @@ void lightningTalks;
                   <span>Desarrollo de software</span>
                 </li>
                 <li>
-                  <Icon name="tabler:shield-lock" class="ptd-about__topic-icon" />
+                  <Icon
+                    name="tabler:shield-lock"
+                    class="ptd-about__topic-icon"
+                  />
                   <span>Ciber Seguridad</span>
                 </li>
               </ul>
             </div>
             <div aria-hidden="true" class="ptd-about__media">
               <Image
-                src={aboutSectionStyleMedia?.src || '~/assets/images/pereira-tech-day/event-2024.png'}
+                src={aboutSectionStyleMedia?.src ||
+                  "~/assets/images/pereira-tech-day/event-2024.png"}
                 alt="Colorful Image"
                 loading="eager"
                 width={1280}
@@ -915,11 +948,9 @@ void lightningTalks;
       <section
         id="community"
         class="ptd-community ptd-section-spacer not-prose"
-        style={
-          communitySectionBg
-            ? `--ptd-community-bg: url('${communitySectionBg.src}')`
-            : undefined
-        }
+        style={communitySectionBg
+          ? `--ptd-community-bg: url('${communitySectionBg.src}')`
+          : undefined}
       >
         <div class="ptd-community__inner">
           <header class="ptd-community__header">
@@ -927,49 +958,61 @@ void lightningTalks;
               class="ptd-community__brand-logo"
               role="img"
               aria-label="Pereira Tech Talks"
-              style={
-                pttLogoMask
-                  ? `--ptd-logo-mask: url('${pttLogoMask.src}')`
-                  : undefined
-              }
-            />
+              style={pttLogoMask
+                ? `--ptd-logo-mask: url('${pttLogoMask.src}')`
+                : undefined}
+            >
+            </div>
             <div class="ptd-community__heading-copy">
               <h2 class="ptd-community__title">Organiza</h2>
               <p class="ptd-community__subtitle">
-                Junto a estas comunidades fortalecemos el ecosistema tech de Pereira y la región.
+                Junto a estas comunidades fortalecemos el ecosistema tech de
+                Pereira y la región.
               </p>
             </div>
           </header>
 
-          <ul class="ptd-community__grid" aria-label="Comunidades organizadoras">
-            {communities.map(
-              (community) =>
-                community && (
-                  <li class="ptd-community__item">
-                    <a
-                      class="ptd-community__card"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={community.socialLink}
-                      aria-label={`Visitar ${community.name}`}
-                    >
-                      <Image
-                        src={community.image}
-                        alt={community.name || ''}
-                        class="ptd-community__logo"
-                      />
-                    </a>
-                  </li>
-                )
-            )}
+          <ul
+            class="ptd-community__grid"
+            aria-label="Comunidades organizadoras"
+          >
+            {
+              communities.map(
+                (community) =>
+                  community && (
+                    <li class="ptd-community__item">
+                      <a
+                        class="ptd-community__card"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={community.socialLink}
+                        aria-label={`Visitar ${community.name}`}
+                      >
+                        <Image
+                          src={community.image}
+                          alt={community.name || ""}
+                          class="ptd-community__logo"
+                        />
+                      </a>
+                    </li>
+                  ),
+              )
+            }
           </ul>
 
           <div class="ptd-community__footer-pill" aria-hidden="true">
-            <span class="ptd-community__footer-dot ptd-community__footer-dot--coral" />
-            <span class="ptd-community__footer-dot ptd-community__footer-dot--teal" />
-            <span class="ptd-community__footer-dot ptd-community__footer-dot--navy" />
+            <span
+              class="ptd-community__footer-dot ptd-community__footer-dot--coral"
+            ></span>
+            <span
+              class="ptd-community__footer-dot ptd-community__footer-dot--teal"
+            ></span>
+            <span
+              class="ptd-community__footer-dot ptd-community__footer-dot--navy"
+            ></span>
             <p class="ptd-community__footer-text">
-              Una red de comunidades que conecta talento, aprendizaje y colaboración.
+              Una red de comunidades que conecta talento, aprendizaje y
+              colaboración.
             </p>
           </div>
         </div>
@@ -977,11 +1020,9 @@ void lightningTalks;
       <section
         id="organizers"
         class="ptd-team ptd-section-spacer not-prose"
-        style={
-          teamSectionBg
-            ? `--ptd-team-bg: url('${teamSectionBg.src}')`
-            : undefined
-        }
+        style={teamSectionBg
+          ? `--ptd-team-bg: url('${teamSectionBg.src}')`
+          : undefined}
       >
         <div class="ptd-team__inner">
           <div class="ptd-team__block">
@@ -993,27 +1034,29 @@ void lightningTalks;
             </header>
 
             <ul class="ptd-team__grid" aria-label="Equipo organizador">
-              {organizersSorted.map(
-                (person) =>
-                  person && (
-                    <li class="ptd-team__item">
-                      <a
-                        class="ptd-team__card"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={person.socialLink || undefined}
-                        aria-label={`Visitar perfil de ${person.name}`}
-                      >
-                        <Image
-                          src={person.image}
-                          alt={person.name || ''}
-                          class="ptd-team__photo"
-                        />
-                        <span class="ptd-team__name">{person.name}</span>
-                      </a>
-                    </li>
-                  )
-              )}
+              {
+                organizersSorted.map(
+                  (person) =>
+                    person && (
+                      <li class="ptd-team__item">
+                        <a
+                          class="ptd-team__card"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={person.socialLink || undefined}
+                          aria-label={`Visitar perfil de ${person.name}`}
+                        >
+                          <Image
+                            src={person.image}
+                            alt={person.name || ""}
+                            class="ptd-team__photo"
+                          />
+                          <span class="ptd-team__name">{person.name}</span>
+                        </a>
+                      </li>
+                    ),
+                )
+              }
             </ul>
           </div>
 
@@ -1026,27 +1069,29 @@ void lightningTalks;
             </header>
 
             <ul class="ptd-team__grid" aria-label="Equipo colaborador">
-              {collaboratorsSorted.map(
-                (person) =>
-                  person && (
-                    <li class="ptd-team__item">
-                      <a
-                        class="ptd-team__card"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={person.socialLink || undefined}
-                        aria-label={`Visitar perfil de ${person.name}`}
-                      >
-                        <Image
-                          src={person.image}
-                          alt={person.name || ''}
-                          class="ptd-team__photo"
-                        />
-                        <span class="ptd-team__name">{person.name}</span>
-                      </a>
-                    </li>
-                  )
-              )}
+              {
+                collaboratorsSorted.map(
+                  (person) =>
+                    person && (
+                      <li class="ptd-team__item">
+                        <a
+                          class="ptd-team__card"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={person.socialLink || undefined}
+                          aria-label={`Visitar perfil de ${person.name}`}
+                        >
+                          <Image
+                            src={person.image}
+                            alt={person.name || ""}
+                            class="ptd-team__photo"
+                          />
+                          <span class="ptd-team__name">{person.name}</span>
+                        </a>
+                      </li>
+                    ),
+                )
+              }
             </ul>
           </div>
         </div>
@@ -1054,34 +1099,44 @@ void lightningTalks;
       <section
         id="faqs"
         class="ptd-faq ptd-section-spacer not-prose"
-        style={
-          faqsSectionBg
-            ? `--ptd-faq-bg: url('${faqsSectionBg.src}')`
-            : undefined
-        }
+        style={faqsSectionBg
+          ? `--ptd-faq-bg: url('${faqsSectionBg.src}')`
+          : undefined}
       >
         <div class="ptd-faq__inner">
           <header class="ptd-faq__header">
             <h2 class="ptd-faq__title">Preguntas Frecuentes (FAQ)</h2>
             <p class="ptd-faq__subtitle">
-              Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escribinos un email y nos pondremos en contacto contigo.
+              Algunas pequeñas preguntas que te pueden sacar algunas dudas. De
+              cualquier forma, si hay algo que no quede claro aquí, por favor
+              escribinos un email y nos pondremos en contacto contigo.
             </p>
           </header>
 
           <ul class="ptd-faq__grid" aria-label="Preguntas frecuentes">
-            {faqsList.map((item) => (
-              <li class="ptd-faq__item">
-                <div class="ptd-faq__item-body">
-                  <Icon name="tabler:chevron-right" class="ptd-faq__item-icon" />
-                  <div class="ptd-faq__copy">
-                    {item.title && <h3 class="ptd-faq__item-title">{item.title}</h3>}
-                    {item.description && (
-                      <p class="ptd-faq__item-description" set:html={item.description} />
-                    )}
+            {
+              faqsList.map((item) => (
+                <li class="ptd-faq__item">
+                  <div class="ptd-faq__item-body">
+                    <Icon
+                      name="tabler:chevron-right"
+                      class="ptd-faq__item-icon"
+                    />
+                    <div class="ptd-faq__copy">
+                      {item.title && (
+                        <h3 class="ptd-faq__item-title">{item.title}</h3>
+                      )}
+                      {item.description && (
+                        <p
+                          class="ptd-faq__item-description"
+                          set:html={item.description}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))
+            }
           </ul>
         </div>
       </section>
