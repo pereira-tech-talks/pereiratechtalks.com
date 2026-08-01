@@ -261,7 +261,7 @@ See [i18n Guide](../../docs/I18N_GUIDE.md) for details.
 
    ```astro
    ---
-   // src/pages/es/new-page.astro
+   // src/pages/en/new-page.astro
    import NewPage from '@/components/pages/NewPage.astro';
    ---
    <NewPage lang="es" />

@@ -52,9 +52,9 @@ describe('SearchResults', () => {
     const linkB = screen.getByLabelText('Beta Post About Svelte');
     const linkC = screen.getByLabelText('Gamma Post About PreTeXt');
 
-    expect(linkA.getAttribute('href')).toBe('/blog/alpha-post/');
-    expect(linkB.getAttribute('href')).toBe('/blog/beta-post/');
-    expect(linkC.getAttribute('href')).toBe('/blog/gamma-post/');
+    expect(linkA.getAttribute('href')).toBe('/en/blog/alpha-post/');
+    expect(linkB.getAttribute('href')).toBe('/en/blog/beta-post/');
+    expect(linkC.getAttribute('href')).toBe('/en/blog/gamma-post/');
   });
 
   it('updates links correctly when filtered posts change', async () => {
@@ -81,7 +81,7 @@ describe('SearchResults', () => {
     expect(cards).toHaveLength(1);
 
     const link = screen.getByLabelText('Beta Post About Svelte');
-    expect(link.getAttribute('href')).toBe('/blog/beta-post/');
+    expect(link.getAttribute('href')).toBe('/en/blog/beta-post/');
   });
 
   it('keeps href in sync with card content after reordering', async () => {
@@ -109,14 +109,14 @@ describe('SearchResults', () => {
 
     // First card should link to gamma-post, not alpha-post
     const firstCardLink = cards[0].querySelector('a');
-    expect(firstCardLink?.getAttribute('href')).toBe('/blog/gamma-post/');
+    expect(firstCardLink?.getAttribute('href')).toBe('/en/blog/gamma-post/');
     expect(firstCardLink?.getAttribute('aria-label')).toBe(
       'Gamma Post About PreTeXt'
     );
 
     // Second card should link to alpha-post
     const secondCardLink = cards[1].querySelector('a');
-    expect(secondCardLink?.getAttribute('href')).toBe('/blog/alpha-post/');
+    expect(secondCardLink?.getAttribute('href')).toBe('/en/blog/alpha-post/');
     expect(secondCardLink?.getAttribute('aria-label')).toBe(
       'Alpha Post About Astro'
     );

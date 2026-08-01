@@ -50,7 +50,7 @@ Por eso nuestras relaciones de patrocinio se volvieron más profundas y duradera
 
 Toda comunidad voluntaria que conocemos ha tenido al menos un momento en que un organizador tomó una decisión con la que otro organizador estaba fuertemente en desacuerdo. Formato. Selección de ponentes. Aceptación de patrocinador. Dirección de marca. Estos conflictos son sanos y resolubles.
 
-Lo que no es sano y no es resoluble es cuando el conflicto se vuelve sobre identidad en lugar de sobre la decisión. Hemos visto comunidades voluntarias caerse no por la decisión en sí sino por la manera de enmarcar quién tenía autoridad para tomarla. Nuestra protección contra esto es la página de [Gobernanza](/es/governance), el [Código de Conducta](/es/conduct) (especialmente la sección de enfoque temático que nos pide mantener temas políticos e ideológicos fuera del espacio comunitario), y una norma simple: **decidir juntos, estar en desacuerdo sin volverlo personal, seguir adelante**.
+Lo que no es sano y no es resoluble es cuando el conflicto se vuelve sobre identidad en lugar de sobre la decisión. Hemos visto comunidades voluntarias caerse no por la decisión en sí sino por la manera de enmarcar quién tenía autoridad para tomarla. Nuestra protección contra esto es la página de [Gobernanza](/governance), el [Código de Conducta](/conduct) (especialmente la sección de enfoque temático que nos pide mantener temas políticos e ideológicos fuera del espacio comunitario), y una norma simple: **decidir juntos, estar en desacuerdo sin volverlo personal, seguir adelante**.
 
 Doce años de esa norma son la razón real de que esta comunidad siga aquí.
 

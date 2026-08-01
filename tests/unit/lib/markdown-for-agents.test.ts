@@ -75,7 +75,7 @@ describe('serializePostToAgentMarkdown', () => {
     expect(result).toContain('Updated: 2024-04-01');
     expect(result).toContain('Language: en');
     expect(result).toContain(
-      'Canonical: https://pereiratechtalks.org/blog/my-awesome-post'
+      'Canonical: https://pereiratechtalks.org/en/blog/my-awesome-post'
     );
     expect(result).toContain('Tags: tech, astro');
     expect(result).toContain('---');
@@ -113,7 +113,7 @@ describe('serializePostToAgentMarkdown', () => {
 
     expect(result).toContain('Language: es');
     expect(result).toContain(
-      'Canonical: https://pereiratechtalks.org/es/blog/empty-body'
+      'Canonical: https://pereiratechtalks.org/blog/empty-body'
     );
   });
 
@@ -177,7 +177,7 @@ describe('serializeBlogIndexToMarkdown', () => {
     expect(result).toContain('# Pereira Tech Talks Blog');
     expect(result).toContain('> A technical blog.');
     expect(result).toContain('Language: en');
-    expect(result).toContain('Canonical: https://pereiratechtalks.org/blog');
+    expect(result).toContain('Canonical: https://pereiratechtalks.org/en/blog');
     expect(result).toContain('Total posts: 2');
     expect(result).toContain('## Posts');
   });
@@ -189,11 +189,11 @@ describe('serializeBlogIndexToMarkdown', () => {
       description: 'Test.',
     });
 
-    expect(result).toContain('[First Post](/blog/first-post.md)');
-    expect(result).toContain('[Second Post](/blog/second-post.md)');
+    expect(result).toContain('[First Post](/en/blog/first-post.md)');
+    expect(result).toContain('[Second Post](/en/blog/second-post.md)');
   });
 
-  it('should use ES prefix for Spanish index', () => {
+  it('should use no prefix for the Spanish (default) index', () => {
     const result = serializeBlogIndexToMarkdown(entries, {
       lang: 'es',
       title: 'Blog de Pereira Tech Talks',
@@ -201,8 +201,8 @@ describe('serializeBlogIndexToMarkdown', () => {
     });
 
     expect(result).toContain('Language: es');
-    expect(result).toContain('Canonical: https://pereiratechtalks.org/es/blog');
-    expect(result).toContain('/es/blog/first-post.md');
+    expect(result).toContain('Canonical: https://pereiratechtalks.org/blog');
+    expect(result).toContain('/blog/first-post.md');
   });
 
   it('should handle empty entries list', () => {
@@ -231,7 +231,9 @@ describe('serializePageToAgentMarkdown', () => {
       '> The bilingual technology community of Pereira, Colombia.'
     );
     expect(result).toContain('Language: en');
-    expect(result).toContain('Canonical: https://pereiratechtalks.org/about');
+    expect(result).toContain(
+      'Canonical: https://pereiratechtalks.org/en/about'
+    );
     expect(result).toContain('Last Updated: 2026-03-09');
     expect(result).toContain('## Who We Are');
   });
@@ -248,7 +250,7 @@ describe('serializePageToAgentMarkdown', () => {
     });
 
     expect(result).toContain('Canonical: https://pereiratechtalks.org');
-    // Should not be https://pereiratechtalks.org/index
+    // Should not be https://pereiratechtalks.org/en/index
     expect(result).not.toContain('/index');
   });
 
@@ -259,9 +261,7 @@ describe('serializePageToAgentMarkdown', () => {
     });
 
     expect(result).toContain('Language: es');
-    expect(result).toContain(
-      'Canonical: https://pereiratechtalks.org/es/contact'
-    );
+    expect(result).toContain('Canonical: https://pereiratechtalks.org/contact');
     expect(result).not.toContain('Last Updated:');
   });
 

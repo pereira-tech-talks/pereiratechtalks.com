@@ -2,9 +2,15 @@
  * Centralized i18n configuration module.
  *
  * This is the single source of truth for language configuration.
+ *
+ * Routing: Spanish (the community's primary language) is served at the root
+ * with no prefix; English lives under `/en`. Every URL prefix is derived from
+ * the LANGUAGES registry below — never hardcode `'/es'` or `'/en'` in a
+ * component, use `getUrlPrefix(lang)` so a future swap stays a one-line change.
+ *
  * To add a new language:
  *   1. Add the code to the Language type union
- *   2. Add an entry to the LANGUAGES registry below
+ *   2. Add an entry to the LANGUAGES registry below (non-empty urlPrefix)
  *   3. Add translations in translations.ts
  *   4. Create page wrappers in src/pages/{lang}/
  */
@@ -15,8 +21,14 @@
  */
 export type Language = 'en' | 'es';
 
-/** Default (fallback) language — used when no language prefix is detected */
-export const DEFAULT_LANGUAGE: Language = 'en';
+/**
+ * Default (fallback) language — used when no language prefix is detected.
+ *
+ * Spanish is the community's primary language, so it is served at the site
+ * root (`/`) with no prefix; English is first-class international and lives
+ * under `/en`. The default language MUST be the one whose `urlPrefix` is `''`.
+ */
+export const DEFAULT_LANGUAGE: Language = 'es';
 
 /** Metadata for a supported language */
 export interface LanguageConfig {
@@ -41,6 +53,15 @@ export interface LanguageConfig {
  * The default language MUST have an empty urlPrefix.
  */
 export const LANGUAGES: Record<Language, LanguageConfig> = {
+  es: {
+    code: 'es',
+    name: 'Spanish',
+    nativeName: 'Espa\u00F1ol',
+    dateLocale: 'es-CO',
+    ogLocale: 'es_CO',
+    flag: '\u{1F1EA}\u{1F1F8}',
+    urlPrefix: '',
+  },
   en: {
     code: 'en',
     name: 'English',
@@ -48,16 +69,7 @@ export const LANGUAGES: Record<Language, LanguageConfig> = {
     dateLocale: 'en-US',
     ogLocale: 'en_US',
     flag: '\u{1F1EC}\u{1F1E7}',
-    urlPrefix: '',
-  },
-  es: {
-    code: 'es',
-    name: 'Spanish',
-    nativeName: 'Espa\u00F1ol',
-    dateLocale: 'es-ES',
-    ogLocale: 'es_ES',
-    flag: '\u{1F1EA}\u{1F1F8}',
-    urlPrefix: '/es',
+    urlPrefix: '/en',
   },
 };
 

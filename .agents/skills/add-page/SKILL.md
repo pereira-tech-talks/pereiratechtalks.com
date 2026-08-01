@@ -111,7 +111,7 @@ import {Name}Page from '@/components/pages/{Name}Page.astro';
 <{Name}Page lang="en" />
 ```
 
-**Spanish wrapper** (`src/pages/es/{name}.astro`):
+**Spanish wrapper** (`src/pages/en/{name}.astro`):
 ```astro
 ---
 import {Name}Page from '@/components/pages/{Name}Page.astro';
@@ -156,7 +156,7 @@ pnpm run build
 
 ### Pages
 - English: `src/pages/{path}.astro` -> URL: `/{route}`
-- Spanish: `src/pages/es/{path}.astro` -> URL: `/es/{route}`
+- Spanish: `src/pages/en/{path}.astro` -> URL: `/es/{route}`
 - Type: {Static|Dynamic}
 
 ### SEO
@@ -228,7 +228,7 @@ $DESCRIPTION: A showcase of my development projects
 
 **Creates:**
 - `src/pages/projects.astro` -> `/projects`
-- `src/pages/es/projects.astro` -> `/es/projects`
+- `src/pages/en/projects.astro` -> `/es/projects`
 
 ### Example 2: Page with Translations
 
@@ -241,7 +241,7 @@ $DESCRIPTION: Information about me
 
 **Creates:**
 - `src/pages/about.astro` (English, `lang='en'`)
-- `src/pages/es/about.astro` (Spanish, `lang='es'`)
+- `src/pages/en/about.astro` (Spanish, `lang='es'`)
 
 ### Example 3: Dynamic Page
 

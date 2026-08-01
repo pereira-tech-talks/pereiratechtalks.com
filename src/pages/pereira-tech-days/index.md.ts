@@ -9,7 +9,7 @@ import { getEditions } from '@/lib/pereiraTechDay';
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const editions = await getEditions();
   const lines = editions.map((e) => {
     const title = resolveI18n(e.data.title, lang);
@@ -20,11 +20,11 @@ export const GET: APIRoute = async () => {
   const markdown = serializeGenericToMarkdown({
     title: 'Pereira Tech Days — Pereira Tech Talks',
     description:
-      'Catalogue of all Pereira Tech Day editions: the annual technology conference of Pereira, Risaralda, Colombia. Editions, programs, speakers, and recordings.',
+      'Catálogo de todas las ediciones de Pereira Tech Day: la conferencia anual de tecnología de Pereira, Risaralda, Colombia. Ediciones, programas, ponentes y grabaciones.',
     lang,
     canonical: `${SITE_URL}/pereira-tech-days`,
-    metadata: [['Total editions', String(editions.length)]],
-    sections: [{ heading: 'Editions', lines }],
+    metadata: [['Total de ediciones', String(editions.length)]],
+    sections: [{ heading: 'Ediciones', lines }],
   });
 
   return new Response(markdown, {

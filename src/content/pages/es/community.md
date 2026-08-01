@@ -20,13 +20,13 @@ La comunidad funciona en tres capas:
 
 Puedes navegar cualquiera de esas tres capas desde el sitio:
 
-- [Programas](/es/verticals)
-- [Meetups](/es/meetups)
-- [Pereira Tech Days](/es/pereira-tech-days)
-- [Ponentes](/es/speakers)
-- [Contribuyentes](/es/contributors)
-- [Patrocinadores](/es/sponsors)
-- [Canales](/es/channels)
+- [Programas](/verticals)
+- [Meetups](/meetups)
+- [Pereira Tech Days](/pereira-tech-days)
+- [Ponentes](/speakers)
+- [Contribuyentes](/contributors)
+- [Patrocinadores](/sponsors)
+- [Canales](/channels)
 
 ---
 
@@ -45,13 +45,13 @@ Las personas aparecen de formas distintas, y cualquiera de ellas basta para pert
 - **Equipo de conducta** — las personas responsables de hacer cumplir el Código de Conducta.
 - **Alumni** — personas que estuvieron activas en un capítulo previo de la comunidad y que siguen formando parte de la red.
 
-El directorio completo está en [Contribuyentes](/es/contributors).
+El directorio completo está en [Contribuyentes](/contributors).
 
 ---
 
 ## Cómo se toman las decisiones
 
-Versión corta, expandida en [Gobernanza](/es/governance):
+Versión corta, expandida en [Gobernanza](/governance):
 
 - Las decisiones operativas del día a día las toman los organizadores activos.
 - La dirección de cada programa (cadencia, tema, contenido) la decide el líder del programa en conversación con los organizadores.
@@ -67,13 +67,13 @@ Optimizamos por transparencia antes que por jerarquía: cualquiera en la comunid
 Tres caminos:
 
 - **Asiste a un meetup.** Ese es el punto de entrada canónico. Reserva en [Meetup.com](https://www.meetup.com/pereira-tech-talks/) y aparece.
-- **Propón una charla.** Usa la página de [Convocatoria de ponentes](/es/call-for-speakers) o el formulario de contacto. Las charlas pueden ser en español, inglés o mezcla.
-- **Contribuye.** Lee [Cómo contribuir](/es/contributing) para encontrar un programa, rol o tarea que se ajuste al tiempo y energía que puedas ofrecer.
+- **Propón una charla.** Usa la página de [Convocatoria de ponentes](/call-for-speakers) o el formulario de contacto. Las charlas pueden ser en español, inglés o mezcla.
+- **Contribuye.** Lee [Cómo contribuir](/contributing) para encontrar un programa, rol o tarea que se ajuste al tiempo y energía que puedas ofrecer.
 
 ---
 
 ## Dónde encontrarnos
 
-- [Canales](/es/channels) — todos los canales oficiales con una recomendación clara de "por dónde empezar".
-- [Contacto](/es/contact) — para mensajes que necesitan una respuesta humana.
-- [Prensa](/es/press) — para solicitudes de medios y editoriales.
+- [Canales](/channels) — todos los canales oficiales con una recomendación clara de "por dónde empezar".
+- [Contacto](/contact) — para mensajes que necesitan una respuesta humana.
+- [Prensa](/press) — para solicitudes de medios y editoriales.

@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ props }) => {
 
   const posts = allPosts
     .filter((post) => {
-      if (!post.id.startsWith('en/')) return false;
+      if (!post.id.startsWith('es/')) return false;
       if (!isPostVisibleInProduction(post)) return false;
       if (post.data.series !== series.data.name) return false;
       return true;
@@ -35,7 +35,7 @@ export const GET: APIRoute = async ({ props }) => {
     slug: series.id,
     seriesTitle: series.data.title,
     seriesDescription: series.data.description || '',
-    lang: 'en',
+    lang: 'es',
   });
 
   return new Response(markdown, {

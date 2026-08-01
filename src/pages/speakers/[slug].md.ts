@@ -17,20 +17,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const lang = 'en';
+  const lang = 'es';
   const { entry } = props as {
     entry: Awaited<ReturnType<typeof getSpeakers>>[number];
   };
   const role = resolveI18n(entry.data.role, lang);
   const bio = resolveI18n(entry.data.bio, lang);
   const metadata: Array<[string, string]> = [
-    ['Role', role],
-    ['Languages', entry.data.languages.join(', ')],
+    ['Rol', role],
+    ['Idiomas', entry.data.languages.join(', ')],
   ];
-  if (entry.data.pronouns) metadata.push(['Pronouns', entry.data.pronouns]);
+  if (entry.data.pronouns) metadata.push(['Pronombres', entry.data.pronouns]);
   if (entry.data.location) {
     metadata.push([
-      'Location',
+      'Ubicación',
       `${entry.data.location.city}, ${entry.data.location.country}`,
     ]);
   }
@@ -44,7 +44,7 @@ export const GET: APIRoute = ({ props }) => {
   const sections = [];
   if (entry.data.talks.length > 0) {
     sections.push({
-      heading: 'Talks',
+      heading: 'Charlas',
       lines: entry.data.talks.map((t) => `- [${t}](/talks/${t}.md)`),
     });
   }

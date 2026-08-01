@@ -10,7 +10,7 @@ import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getSponsors } from '@/lib/sponsor';
 
 interface Props {
@@ -53,7 +53,7 @@ const t = {
     lang === 'es'
       ? 'Patrocínanos: descarga el deck'
       : 'Sponsor us: download the deck',
-  sponsorUsHref: lang === 'es' ? '/es/contact/' : '/contact/',
+  sponsorUsHref: `${getUrlPrefix(lang)}/contact/`,
   emptyTitle:
     lang === 'es' ? 'Aún no hay patrocinadores registrados' : 'No sponsors yet',
   emptyDesc:
@@ -65,7 +65,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];

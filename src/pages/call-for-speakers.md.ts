@@ -6,36 +6,36 @@ const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
-    title: 'Call for Speakers — Pereira Tech Talks',
+    title: 'Convocatoria de ponentes — Pereira Tech Talks',
     description:
-      'Submit your talk proposal for an upcoming Pereira Tech Talks meetup, Pereira Tech Day, or a Speaker School cohort. Talks may be given in Spanish, English, or mixed.',
-    lang: 'en',
+      'Propón tu charla para un próximo meetup de Pereira Tech Talks, una edición de Pereira Tech Day o una cohorte de la Speaker School. Las charlas pueden ser en español, inglés o mezcla.',
+    lang: 'es',
     canonical: `${SITE_URL}/call-for-speakers`,
     sections: [
       {
-        heading: 'What we look for',
+        heading: 'Qué buscamos',
         lines: [
-          '- Practical, technical talks grounded in real experience',
-          '- Architecture, engineering craft, AI/agents, devops, mobile, web platforms, security, software lifecycle',
-          '- Community programs: La Biblioteca del Mañana, Speaker School cohorts, AI Channel sessions',
-          '- First-time speakers welcome — we mentor through the Speaker School program',
+          '- Charlas técnicas y prácticas, ancladas en experiencia real',
+          '- Arquitectura, oficio del software, IA/agentes, devops, mobile, plataformas web, seguridad, ciclo de vida del software',
+          '- Programas de comunidad: La Biblioteca del Mañana, cohortes de Speaker School, sesiones del AI Channel',
+          '- Ponentes primerizos bienvenidos: damos mentoría a través del programa Speaker School',
         ],
       },
       {
-        heading: 'Formats',
+        heading: 'Formatos',
         lines: [
           '- Lightning talk (5–10 min)',
-          '- Standard talk (20–30 min)',
-          '- Workshop or hands-on session (60–120 min)',
-          '- Panel (multiple speakers, 45–60 min)',
+          '- Charla estándar (20–30 min)',
+          '- Workshop o sesión hands-on (60–120 min)',
+          '- Panel (varios ponentes, 45–60 min)',
         ],
       },
       {
-        heading: 'How to apply',
+        heading: 'Cómo aplicar',
         lines: [
-          `- Submit via the contact form: ${SITE_URL}/contact/?reason=speaker`,
-          '- Or email hello@pereiratechtalks.org with subject "Call for Speakers"',
-          '- Include: proposed title, abstract (150–300 words), bio, language, target format',
+          `- Envía tu propuesta por el formulario de contacto: ${SITE_URL}/contact/?reason=speaker`,
+          '- O escribe a hello@pereiratechtalks.org con asunto "Convocatoria de ponentes"',
+          '- Incluye: título propuesto, abstract (150–300 palabras), bio, idioma, formato deseado',
         ],
       },
     ],

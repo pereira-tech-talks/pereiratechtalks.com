@@ -12,7 +12,7 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getActiveContributors } from '@/lib/contributor';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 interface Props {
   lang: Language;
@@ -88,7 +88,7 @@ const t = {
       ? `${contributors.length} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`
       : `${contributors.length} active people make up the extended community team. Want to join? Reach out.`,
   joinLabel: lang === 'es' ? 'Únete al equipo' : 'Join the team',
-  joinHref: lang === 'es' ? '/es/contact/' : '/contact/',
+  joinHref: `${getUrlPrefix(lang)}/contact/`,
   emptyTitle:
     lang === 'es' ? 'Aún no hay miembros registrados' : 'No team members yet',
   emptyDesc:
@@ -100,7 +100,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];

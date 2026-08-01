@@ -34,7 +34,7 @@ describe('BlogCard', () => {
         props: { post: publishedEnglishPost as never, lang: 'en' },
       });
       const link = screen.getByLabelText('My Awesome Post');
-      expect(link?.getAttribute('href')).toBe('/blog/my-awesome-post/');
+      expect(link?.getAttribute('href')).toBe('/en/blog/my-awesome-post/');
     });
 
     it('generates correct link URL for Spanish post', () => {
@@ -42,7 +42,7 @@ describe('BlogCard', () => {
         props: { post: publishedSpanishPost as never, lang: 'es' },
       });
       const link = screen.getByLabelText('Mi Post Increible');
-      expect(link?.getAttribute('href')).toBe('/es/blog/mi-post-increible/');
+      expect(link?.getAttribute('href')).toBe('/blog/mi-post-increible/');
     });
 
     it('renders the post date', () => {

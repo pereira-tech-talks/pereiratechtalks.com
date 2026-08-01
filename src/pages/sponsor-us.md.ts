@@ -6,43 +6,43 @@ const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
-    title: 'Sponsor us — Pereira Tech Talks',
+    title: 'Patrocínanos — Pereira Tech Talks',
     description:
-      'Connect your brand with the most active technical community in the Eje Cafetero. Since 2014 we have run 90+ meetups and 7 Pereira Tech Day editions.',
-    lang: 'en',
+      'Conecta tu marca con la comunidad técnica más activa del Eje Cafetero. Desde 2014 hemos llevado a cabo más de 90 meetups y 7 ediciones de Pereira Tech Day.',
+    lang: 'es',
     canonical: `${SITE_URL}/sponsor-us`,
     sections: [
       {
-        heading: 'Why sponsor',
+        heading: 'Por qué patrocinar',
         lines: [
-          "Sponsoring Pereira Tech Talks is not advertising — it's building community.",
-          'Every contribution funds accessible venues, food for attendees, Speaker School scholarships, travel for invited speakers, and events open to the whole region.',
+          'Patrocinar a Pereira Tech Talks no es publicidad: es construir comunidad.',
+          'Cada aporte se traduce en venues accesibles, comida para asistentes, becas para Speaker School, transporte para ponentes invitados y eventos abiertos a toda la región.',
         ],
       },
       {
-        heading: 'Estimated reach',
+        heading: 'Alcance estimado',
         lines: [
-          '- 90+ meetups since 2014',
-          '- 200+ talks delivered',
-          '- 6,500+ cumulative attendees',
-          '- 12 active years',
+          '- 90+ meetups desde 2014',
+          '- 200+ charlas dictadas',
+          '- 6.500+ asistencias acumuladas',
+          '- 12 años activos',
         ],
       },
       {
-        heading: 'Sponsorship tiers',
+        heading: 'Niveles de patrocinio',
         lines: [
-          '- **Diamond** — Strategic annual partner. Co-branding on PTD and full-year meetups, keynote slot, monthly social mentions, hiring pool access, main site banner.',
-          '- **Gold** — Annual partner. Logo on PTD program, one sponsored technical talk per year, mentions at 6+ meetups, hiring pool access.',
-          '- **Silver** — One-off sponsor. Logo on the sponsored event, pre/post social mentions, optional booth.',
-          '- **Community** — Non-monetary contribution (venues, food, transportation, scholarships). Logo on the supported event and recognition on the sponsors page.',
+          '- **Diamante** — Aliado estratégico anual. Co-branding en PTD y meetups del año, spot de keynote, menciones mensuales, acceso al hiring pool, logo en banner principal.',
+          '- **Oro** — Aliado anual. Logo en el programa de PTD, una charla técnica patrocinada al año, menciones en 6+ meetups, acceso al hiring pool.',
+          '- **Plata** — Patrocinador puntual. Logo en el evento patrocinado, menciones pre y post, stand opcional.',
+          '- **Comunidad** — Aporte no monetario (venues, comida, transporte, becas). Logo en el evento apoyado y reconocimiento en la página de patrocinadores.',
         ],
       },
       {
-        heading: 'How to start a conversation',
+        heading: 'Cómo iniciar la conversación',
         lines: [
-          `- Form: ${SITE_URL}/contact/?reason=collaboration`,
-          '- Email: hello@pereiratechtalks.org',
-          '- Tell us what you want to support (a meetup, a program, Pereira Tech Day, scholarships) and we will send a tailored sponsor deck.',
+          `- Formulario: ${SITE_URL}/contact/?reason=collaboration`,
+          '- Correo: hello@pereiratechtalks.org',
+          '- Cuéntanos qué te interesa apoyar (un meetup, un programa, Pereira Tech Day, becas) y te mandamos un sponsor deck a la medida.',
         ],
       },
     ],

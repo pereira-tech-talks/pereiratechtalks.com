@@ -6,53 +6,53 @@ const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
-    title: 'Press — Pereira Tech Talks',
+    title: 'Prensa — Pereira Tech Talks',
     description:
-      'Resources for journalists, podcasters, and media partners covering Pereira Tech Talks: key facts, brand downloads, boilerplate, and a direct press contact.',
-    lang: 'en',
+      'Recursos para periodistas, podcasters y aliados de medios que cubren Pereira Tech Talks: hechos clave, descargas de marca, boilerplate y contacto directo.',
+    lang: 'es',
     canonical: `${SITE_URL}/press`,
     sections: [
       {
-        heading: 'Key facts',
+        heading: 'Hechos clave',
         lines: [
-          '- Founded: Pereira, Risaralda, Colombia · 2014',
-          '- Nature: Non-profit, volunteer-organized community',
-          '- Languages: Spanish and English (fully bilingual)',
-          '- Programs: Monthly meetups · Pereira Tech Day · Speaker School · La Biblioteca del Mañana · AI Channel',
-          '- Numbers: 90+ meetups · 200+ talks · 6,500+ attendees · 7 Pereira Tech Day editions',
-          '- Model: Free events sustained by sponsorships',
+          '- Fundación: Pereira, Risaralda, Colombia · 2014',
+          '- Naturaleza: comunidad sin fines de lucro, organizada por voluntariado',
+          '- Idiomas: español e inglés (totalmente bilingüe)',
+          '- Programas: Meetups mensuales · Pereira Tech Day · Speaker School · La Biblioteca del Mañana · AI Channel',
+          '- Cifras: 90+ meetups · 200+ charlas · 6.500+ asistencias · 7 ediciones de Pereira Tech Day',
+          '- Modelo: eventos gratuitos sostenidos por patrocinadores',
         ],
       },
       {
-        heading: 'Boilerplate',
+        heading: 'Descripción breve (boilerplate)',
         lines: [
-          'Pereira Tech Talks is a bilingual community of builders, speakers, and learners headquartered in Pereira, Risaralda, Colombia. Since 2014 we have hosted 90+ meetups and seven Pereira Tech Day editions, connecting local talent to the global tech ecosystem through monthly meetups, the Speaker School, La Biblioteca del Mañana, and the AI Channel.',
+          'Pereira Tech Talks es una comunidad bilingüe de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y siete ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global a través de meetups mensuales, la Speaker School, La Biblioteca del Mañana y el AI Channel.',
         ],
       },
       {
-        heading: 'Brand downloads',
+        heading: 'Descargas de marca',
         lines: [
-          `- [Primary logotype (SVG)](${SITE_URL}/images/brand/pereira-tech-talks-logo.svg) — vector for light/dark backgrounds`,
-          `- [Square avatar (PNG 512×512)](${SITE_URL}/icons/icon-512x512.png) — profile pictures and covers`,
-          `- [Apple touch icon (PNG 180×180)](${SITE_URL}/icons/apple-touch-icon.png) — mobile integrations`,
+          `- [Logotipo principal (SVG)](${SITE_URL}/images/brand/pereira-tech-talks-logo.svg) — vector para fondos claros y oscuros`,
+          `- [Avatar cuadrado (PNG 512×512)](${SITE_URL}/icons/icon-512x512.png) — para perfiles y portadas`,
+          `- [Apple touch icon (PNG 180×180)](${SITE_URL}/icons/apple-touch-icon.png) — para integraciones móviles`,
         ],
       },
       {
-        heading: 'Press contact',
+        heading: 'Contacto de prensa',
         lines: [
-          `- Form: ${SITE_URL}/contact/?reason=press`,
-          '- Email: hello@pereiratechtalks.org',
-          '- For interviews, on-site coverage, photography, or any editorial request.',
+          `- Formulario: ${SITE_URL}/contact/?reason=press`,
+          '- Correo: hello@pereiratechtalks.org',
+          '- Para entrevistas, cubrimientos en sitio, fotografía o cualquier solicitud editorial.',
         ],
       },
       {
-        heading: 'Useful pages',
+        heading: 'Páginas útiles',
         lines: [
-          `- [About the community](${SITE_URL}/about/)`,
-          `- [Programs](${SITE_URL}/verticals/)`,
+          `- [Sobre la comunidad](${SITE_URL}/about/)`,
+          `- [Programas](${SITE_URL}/verticals/)`,
           `- [Pereira Tech Days](${SITE_URL}/pereira-tech-days/)`,
-          `- [Sponsors](${SITE_URL}/sponsors/)`,
-          `- [Contributors](${SITE_URL}/contributors/)`,
+          `- [Patrocinadores](${SITE_URL}/sponsors/)`,
+          `- [Contribuyentes](${SITE_URL}/contributors/)`,
         ],
       },
     ],

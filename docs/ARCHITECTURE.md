@@ -136,8 +136,8 @@ src/
 │       └── es.ts            # Spanish translations
 │
 ├── pages/                   # File-based routing
-│   ├── index.astro          # Home (English)
-│   ├── es/index.astro       # Home (Spanish)
+│   ├── index.astro          # Home (Spanish — primary, served at /)
+│   ├── en/index.astro       # Home (English, served at /en)
 │   ├── about.astro
 │   ├── contact.astro
 │   ├── blog/
@@ -482,14 +482,14 @@ const { Content } = await render(post);
 
 ### Middleware Allowlist (CRITICAL)
 
-`src/middleware.ts` enforces a **hardcoded allowlist** of single-segment top-level paths via `KNOWN_ROOT_PATHS` and `KNOWN_ES_PATHS`. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**.
+`src/middleware.ts` enforces a **hardcoded allowlist** of single-segment top-level paths via `KNOWN_ROOT_PATHS` and `KNOWN_EN_PATHS`. Any single-segment URL not in the set is rewritten to `/404` — **even if the file exists at `src/pages/<name>/index.astro`**.
 
 **Why it matters when adding a new page:**
 
 When you add a new top-level page (e.g. `/slides`, `/foo`), you MUST also add `'<name>'` to:
 
 - `KNOWN_ROOT_PATHS` — for the English version (`/<name>`)
-- `KNOWN_ES_PATHS` — for the Spanish version (`/es/<name>`), if it exists
+- `KNOWN_EN_PATHS` — for the Spanish version (`/es/<name>`), if it exists
 
 **Symptoms of forgetting:**
 

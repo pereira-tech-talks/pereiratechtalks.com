@@ -102,7 +102,7 @@ describe('BlogPagination', () => {
         props: { currentPage: 1, totalPages: 3 },
       });
       const page2Link = screen.getByLabelText('Page 2');
-      expect(page2Link.getAttribute('href')).toBe('/blog/page/2/');
+      expect(page2Link.getAttribute('href')).toBe('/en/blog/page/2/');
     });
 
     it('generates page 1 URL as /blog/', () => {
@@ -110,7 +110,7 @@ describe('BlogPagination', () => {
         props: { currentPage: 2, totalPages: 3 },
       });
       const page1Link = screen.getByLabelText('Page 1');
-      expect(page1Link.getAttribute('href')).toBe('/blog/');
+      expect(page1Link.getAttribute('href')).toBe('/en/blog/');
     });
 
     it('includes tag in URL when currentTag is set', () => {
@@ -118,7 +118,7 @@ describe('BlogPagination', () => {
         props: { currentPage: 1, totalPages: 3, currentTag: 'tech' },
       });
       const page2Link = screen.getByLabelText('Page 2');
-      expect(page2Link.getAttribute('href')).toBe('/blog/tag/tech/page/2/');
+      expect(page2Link.getAttribute('href')).toBe('/en/blog/tag/tech/page/2/');
     });
 
     it('generates Spanish URLs with /es prefix', () => {
@@ -126,7 +126,7 @@ describe('BlogPagination', () => {
         props: { currentPage: 1, totalPages: 3, lang: 'es' },
       });
       const page2Link = screen.getByLabelText('Page 2');
-      expect(page2Link.getAttribute('href')).toBe('/es/blog/page/2/');
+      expect(page2Link.getAttribute('href')).toBe('/blog/page/2/');
     });
   });
 

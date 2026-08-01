@@ -11,7 +11,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 interface Props {
   lang: Language;
@@ -121,33 +121,34 @@ const t = {
     lang === 'es' ? 'Escríbenos al formulario' : 'Reach out via the form',
   contactEmail: 'hello@pereiratechtalks.org',
   linksTitle: lang === 'es' ? 'Páginas útiles' : 'Useful pages',
-  links:
-    lang === 'es'
-      ? [
-          { label: 'Sobre la comunidad', href: '/es/about/' },
-          { label: 'Programas', href: '/es/verticals/' },
-          { label: 'Pereira Tech Days', href: '/es/pereira-tech-days/' },
-          { label: 'Patrocinadores', href: '/es/sponsors/' },
-          { label: 'Contribuyentes', href: '/es/contributors/' },
-        ]
-      : [
-          { label: 'About the community', href: '/about/' },
-          { label: 'Programs', href: '/verticals/' },
-          { label: 'Pereira Tech Days', href: '/pereira-tech-days/' },
-          { label: 'Sponsors', href: '/sponsors/' },
-          { label: 'Contributors', href: '/contributors/' },
-        ],
+  // Paths are language-neutral; only the labels differ. The prefix comes from
+  // the i18n registry so a language-routing change never strands these links.
+  links: (lang === 'es'
+    ? [
+        { label: 'Sobre la comunidad', path: '/about/' },
+        { label: 'Programas', path: '/verticals/' },
+        { label: 'Pereira Tech Days', path: '/pereira-tech-days/' },
+        { label: 'Patrocinadores', path: '/sponsors/' },
+        { label: 'Contribuyentes', path: '/contributors/' },
+      ]
+    : [
+        { label: 'About the community', path: '/about/' },
+        { label: 'Programs', path: '/verticals/' },
+        { label: 'Pereira Tech Days', path: '/pereira-tech-days/' },
+        { label: 'Sponsors', path: '/sponsors/' },
+        { label: 'Contributors', path: '/contributors/' },
+      ]
+  ).map(({ label, path }) => ({ label, href: `${getUrlPrefix(lang)}${path}` })),
 };
 
-const contactHref =
-  lang === 'es'
-    ? `/es/contact/?reason=other&subject=${encodeURIComponent('Consulta de prensa')}`
-    : `/contact/?reason=other&subject=${encodeURIComponent('Press inquiry')}`;
+const contactHref = `${getUrlPrefix(lang)}/contact/?reason=other&subject=${encodeURIComponent(
+  lang === 'es' ? 'Consulta de prensa' : 'Press inquiry'
+)}`;
 
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];

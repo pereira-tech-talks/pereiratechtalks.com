@@ -1,4 +1,5 @@
 ---
+import { DEFAULT_LANGUAGE, getUrlPrefix } from '@/lib/i18n';
 import type { Language } from '@/lib/translations';
 import { getTranslations } from '@/lib/translations';
 
@@ -6,12 +7,12 @@ interface Props {
   lang?: string;
 }
 
-const { lang = 'en' } = Astro.props;
+const { lang = DEFAULT_LANGUAGE } = Astro.props;
 const t = getTranslations(lang as Language);
 
 const iconClass = 'w-6 h-6 text-current';
 
-const prefix = lang === 'es' ? '/es' : '';
+const prefix = getUrlPrefix(lang as Language);
 const footerLinks = [
   {
     label: lang === 'es' ? 'Comunidad' : 'Community',

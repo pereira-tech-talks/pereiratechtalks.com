@@ -148,7 +148,7 @@ import {PageName}Page from '@/components/pages/{PageName}Page.astro';
 <{PageName}Page lang="en" />
 ```
 
-**`src/pages/es/$SLUG.astro`** (3 lines):
+**`src/pages/en/$SLUG.astro`** (3 lines):
 ```astro
 ---
 import {PageName}Page from '@/components/pages/{PageName}Page.astro';
@@ -191,7 +191,7 @@ Verify the new page appears in the build and the AEO `.md` endpoint is generated
 Files created:
   - src/components/pages/{PageName}Page.astro
   - src/pages/$SLUG.astro
-  - src/pages/es/$SLUG.astro
+  - src/pages/en/$SLUG.astro
   - src/content/pages/en/$SLUG.md
   - src/content/pages/es/$SLUG.md
 Files modified:
@@ -213,7 +213,7 @@ Missing prerequisite: {description}
 ### Scope Limits
 
 - **Maximum files:** 8
-- **Allowed directories:** `src/components/pages/`, `src/pages/`, `src/pages/es/`, `src/lib/translations/`, `src/content/pages/`
+- **Allowed directories:** `src/components/pages/`, `src/pages/`, `src/pages/en/`, `src/lib/translations/`, `src/content/pages/`
 - **Forbidden:** Modifying `TagTimelineInfiniteScroll.svelte`, `blog.ts`, or the API endpoint
 
 ### Safety Checks
@@ -238,7 +238,7 @@ This skill is **complete** when ALL of the following are true:
 
 - [ ] Page component created at `src/components/pages/{PageName}Page.astro`
 - [ ] EN wrapper at `src/pages/$SLUG.astro`
-- [ ] ES wrapper at `src/pages/es/$SLUG.astro`
+- [ ] ES wrapper at `src/pages/en/$SLUG.astro`
 - [ ] Translation keys in both `en.ts` and `es.ts` and `types.ts`
 - [ ] AEO markdown in both `en/$SLUG.md` and `es/$SLUG.md`
 - [ ] Spanish content has correct diacritical marks

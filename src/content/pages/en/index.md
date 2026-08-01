@@ -41,11 +41,11 @@ On a February evening in 2014, eight developers crowded into a UTP classroom for
 
 ## Explore the site
 
-- [About the community](/about)
-- [Read the blog](/blog)
-- [Slides catalog](/slides)
-- [Get in touch](/contact)
-- [Become a sponsor](/sponsor-us)
+- [About the community](/en/about)
+- [Read the blog](/en/blog)
+- [Slides catalog](/en/slides)
+- [Get in touch](/en/contact)
+- [Become a sponsor](/en/sponsor-us)
 
 ---
 

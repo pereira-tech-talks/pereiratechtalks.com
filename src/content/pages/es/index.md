@@ -41,11 +41,11 @@ Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón d
 
 ## Explora el sitio
 
-- [Sobre la comunidad](/es/about)
-- [Lee el blog](/es/blog)
-- [Catálogo de slides](/es/slides)
-- [Escríbenos](/es/contact)
-- [Quiero patrocinar](/es/sponsor-us)
+- [Sobre la comunidad](/about)
+- [Lee el blog](/blog)
+- [Catálogo de slides](/slides)
+- [Escríbenos](/contact)
+- [Quiero patrocinar](/sponsor-us)
 
 ---
 

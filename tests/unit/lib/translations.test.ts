@@ -143,7 +143,7 @@ describe('re-exports from translations/index.ts', () => {
     expect(isValidLanguage('fr')).toBe(false);
   });
 
-  it('getDefaultLanguage is re-exported and returns "en"', () => {
-    expect(getDefaultLanguage()).toBe('en');
+  it('getDefaultLanguage is re-exported and returns "es"', () => {
+    expect(getDefaultLanguage()).toBe('es');
   });
 });

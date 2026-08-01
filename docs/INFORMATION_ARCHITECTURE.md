@@ -264,7 +264,7 @@ blog
 SEO sees a clean 404 for anything truly missing. The v3.0.0 diff adds:
 
 ```ts
-// Add to KNOWN_ROOT_PATHS (and mirror in KNOWN_ES_PATHS):
+// Add to KNOWN_ROOT_PATHS (and mirror in KNOWN_EN_PATHS):
 '/about-us',
 '/community',
 '/verticals',

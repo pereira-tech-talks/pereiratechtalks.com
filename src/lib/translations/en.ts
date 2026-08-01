@@ -105,42 +105,42 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
         description:
           'In-person and hybrid sessions every month — talks, workshops, and lightning rounds on AI, web platforms, devops, mobile, security, and the craft of shipping software.',
         icon: '\u{1F465}',
-        link: '/verticals/monthly-meetups',
+        link: '/en/verticals/monthly-meetups',
       },
       {
         title: 'Pereira Tech Day',
         description:
           'Our flagship annual conference — 10 editions and counting (since 2017). A full day of keynotes, workshops, and networking with international speakers and local partners.',
         icon: '\u{1F389}',
-        link: '/pereira-tech-days',
+        link: '/en/pereira-tech-days',
       },
       {
         title: 'Speaker School',
         description:
           'A program to grow new technical speakers — from idea to stage — with mentorship, practice runs, and rehearsals. Alumni keynote in Bogotá, Medellín, and Mexico City.',
         icon: '\u{1F3A4}',
-        link: '/verticals/speaker-school',
+        link: '/en/verticals/speaker-school',
       },
       {
         title: 'La Biblioteca del Mañana',
         description:
           'A bilingual reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.',
         icon: '\u{1F4DA}',
-        link: '/verticals/library-of-tomorrow',
+        link: '/en/verticals/library-of-tomorrow',
       },
       {
         title: 'AI & Agents Channel',
         description:
           'A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.',
         icon: '\u{1F916}',
-        link: '/verticals/ai-channel',
+        link: '/en/verticals/ai-channel',
       },
       {
         title: 'Bilingual Library',
         description:
           'Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech community alike.',
         icon: '\u{1F30D}',
-        link: '/blog',
+        link: '/en/blog',
       },
     ],
     quickFactsTitle: 'Quick facts',
@@ -263,7 +263,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     description:
       'We are always open to new conversations — speakers, sponsors, partners, and curious community members. Reach out and let’s build the next chapter together.',
     ctaText: 'Get in touch',
-    ctaLink: '/contact?topic=general&subject=General%20Inquiry',
+    ctaLink: '/en/contact?topic=general&subject=General%20Inquiry',
   },
 
   // Search input

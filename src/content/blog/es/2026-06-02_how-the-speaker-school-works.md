@@ -78,4 +78,4 @@ Te respondemos con fechas de cohorte y detalles de onboarding.
 
 Si alguna vez has pensado "debería dar una charla sobre eso algún día" — este es el algún día. Vení a construir la charla con gente que construyó la suya.
 
-El currículo completo y las FAQ: [/es/verticals/speaker-school](/es/verticals/speaker-school).
+El currículo completo y las FAQ: [/verticals/speaker-school](/verticals/speaker-school).

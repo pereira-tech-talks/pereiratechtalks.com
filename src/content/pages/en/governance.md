@@ -71,7 +71,7 @@ When a member of the community disagrees with a decision, the path is:
 
 1. Raise it with any active organizer at a meetup or via the contact form.
 2. If it is not addressed satisfactorily, raise it with the founding organizers (`hello@pereiratechtalks.org`, subject "Governance question").
-3. If it relates to the Code of Conduct, follow the reporting process documented in [Code of Conduct](/conduct).
+3. If it relates to the Code of Conduct, follow the reporting process documented in [Code of Conduct](/en/conduct).
 
 ---
 
@@ -103,4 +103,4 @@ You can see the full revision history of this page in the [open-source repositor
 
 - Governance questions: `hello@pereiratechtalks.org` (subject "Governance question").
 - Code of Conduct: `conduct@pereiratechtalks.org`.
-- Contact form: [contact us](/contact).
+- Contact form: [contact us](/en/contact).

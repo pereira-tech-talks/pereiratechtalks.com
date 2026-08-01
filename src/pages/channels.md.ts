@@ -9,7 +9,7 @@ import {
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const channels = await getChannels();
   const primary = channels.filter((c) => c.data.isPrimary);
   const secondary = channels.filter((c) => !c.data.isPrimary);
@@ -19,22 +19,22 @@ export const GET: APIRoute = async () => {
 
   const sections = [
     {
-      heading: 'Primary channel',
+      heading: 'Canal principal',
       lines: primary.map(renderChannel),
     },
     {
-      heading: 'Other channels',
+      heading: 'Otros canales',
       lines: secondary.map(renderChannel),
     },
   ];
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Channels — Pereira Tech Talks',
+    title: 'Canales — Pereira Tech Talks',
     description:
-      'All official Pereira Tech Talks channels: Meetup.com (primary), social networks, GitHub, and Linktree, with guidance on where to start.',
+      'Todos los canales oficiales de Pereira Tech Talks: Meetup.com (principal), redes sociales, GitHub y Linktree, con orientación sobre por dónde empezar.',
     lang,
     canonical: `${SITE_URL}/channels`,
-    metadata: [['Total channels', String(channels.length)]],
+    metadata: [['Total de canales', String(channels.length)]],
     sections,
   });
 

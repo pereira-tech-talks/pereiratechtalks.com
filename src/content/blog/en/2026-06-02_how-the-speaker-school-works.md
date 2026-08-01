@@ -78,4 +78,4 @@ We will respond with cohort dates and onboarding details.
 
 If you have ever thought "I should give a talk about that someday" — this is the someday. Come build the talk with people who have built theirs.
 
-The full curriculum and FAQ: [/verticals/speaker-school](/verticals/speaker-school).
+The full curriculum and FAQ: [/en/verticals/speaker-school](/en/verticals/speaker-school).

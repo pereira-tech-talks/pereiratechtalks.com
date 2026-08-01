@@ -7,13 +7,13 @@ Guide for implementing and maintaining multilingual support in Pereira Tech Talk
 Pereira Tech Talks is a fully bilingual site supporting English and Spanish. The i18n system is built on three pillars:
 
 1. **Centralized translations** via `src/lib/translations.ts`
-2. **Route-based language routing** (English at `/`, Spanish at `/es/`)
+2. **Route-based language routing** (Spanish at `/`, English at `/en/`)
 3. **Language-split content collections** for blog posts (`en/` and `es/` folders)
 
 | Language | Code | Route Prefix | Status |
 |----------|------|-------------|--------|
-| English  | `en` | `/` (root)  | Default |
-| Spanish  | `es` | `/es/`      | Secondary |
+| Spanish  | `es` | `/` (root)  | Default (primary) |
+| English  | `en` | `/en/`      | First-class international |
 
 ## Translation System
 
@@ -124,7 +124,7 @@ Tags use **centralized translations** (not bilingual frontmatter). This means:
 - Tag **slugs** are language-neutral identifiers (`tech`, `personal`, `talks`, `trading`, `portfolio`)
 - Tag **display names** come from `t.tagNames[slug]` in `translations.ts`
 - Tag **descriptions** come from `t.tagDescriptions[slug]` in `translations.ts`
-- Tag **URLs** always use the slug: `/blog/tag/tech/`, `/es/blog/tag/tech/`
+- Tag **URLs** always use the slug: `/blog/tag/tech/`, `/en/blog/tag/tech/`
 
 This approach was chosen because:
 - Consistent with the existing centralized translation system
@@ -280,10 +280,10 @@ Pages follow a route-based approach:
 
 ```
 src/pages/
-├── index.astro          # English (lang="en")
-├── about.astro          # English
-├── contact.astro        # English
-├── blog/                # English blog routes
+├── index.astro          # Spanish (lang="es") — primary, served at /
+├── about.astro          # Spanish
+├── contact.astro        # Spanish
+├── blog/                # Spanish blog routes
 │   ├── index.astro
 │   ├── [...slug].astro
 │   ├── page/[page].astro
@@ -291,10 +291,10 @@ src/pages/
 │       ├── [tag].astro
 │       └── [tag]/page/[page].astro
 └── es/
-    ├── index.astro      # Spanish (lang="es")
-    ├── about.astro      # Spanish
-    ├── contact.astro    # Spanish
-    └── blog/            # Spanish blog routes (mirrors EN structure)
+    ├── index.astro      # English (lang="en") — served at /en
+    ├── about.astro      # English
+    ├── contact.astro    # English
+    └── blog/            # English blog routes (mirrors the root structure)
         ├── index.astro
         ├── [...slug].astro
         ├── page/[page].astro
@@ -303,7 +303,7 @@ src/pages/
             └── [tag]/page/[page].astro
 ```
 
-Every English page must have a Spanish equivalent under `es/`, and vice versa.
+Every Spanish page at the root must have an English equivalent under `en/`, and vice versa.
 
 ### Page Wrapper Pattern
 
@@ -415,15 +415,15 @@ const locale = lang === 'es' ? 'es-ES' : 'en-US';
 
 The header includes a language switcher that toggles between English and Spanish. It maps current route paths between language versions:
 
-- `/about/` ↔ `/es/about/`
-- `/blog/` ↔ `/es/blog/`
-- `/blog/tag/tech/` ↔ `/es/blog/tag/tech/`
+- `/about/` ↔ `/en/about/`
+- `/blog/` ↔ `/en/blog/`
+- `/blog/tag/tech/` ↔ `/en/blog/tag/tech/`
 
 ## Bilingual Compliance Checklist
 
 Before committing any content change, verify:
 
-- [ ] All new/modified pages exist in both `src/pages/` and `src/pages/es/`
+- [ ] All new/modified pages exist in both `src/pages/` and `src/pages/en/`
 - [ ] All new/modified blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
 - [ ] When introducing or updating an author, both `role.en`/`role.es` and `bio.en`/`bio.es` are populated in `src/content/authors/{slug}.yaml`
 - [ ] Same `author` slug used in EN and ES versions of a post

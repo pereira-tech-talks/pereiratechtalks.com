@@ -7,7 +7,7 @@ import { serializePostToAgentMarkdown } from '@/lib/markdown-for-agents';
 export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getCollection('blog');
   const posts = allPosts.filter(
-    (post) => post.id.startsWith('en/') && isPostVisibleInProduction(post)
+    (post) => post.id.startsWith('es/') && isPostVisibleInProduction(post)
   );
   return posts.map((post) => ({
     params: { slug: getPostSlug(post.id) },
@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const GET: APIRoute = ({ props }) => {
   const { post } = props;
   const slug = getPostSlug(post.id);
-  const markdown = serializePostToAgentMarkdown(post, { slug, lang: 'en' });
+  const markdown = serializePostToAgentMarkdown(post, { slug, lang: 'es' });
 
   return new Response(markdown, {
     headers: {

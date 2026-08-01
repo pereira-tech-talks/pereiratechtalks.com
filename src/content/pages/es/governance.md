@@ -71,7 +71,7 @@ Cuando un miembro de la comunidad discrepa con una decisión, el camino es:
 
 1. Plantearlo a cualquier organizador activo en un meetup o por el formulario de contacto.
 2. Si no se atiende satisfactoriamente, plantearlo a los organizadores fundadores (`hello@pereiratechtalks.org`, asunto "Pregunta de gobernanza").
-3. Si se relaciona con el Código de Conducta, seguir el proceso de reporte documentado en [Código de Conducta](/es/conduct).
+3. Si se relaciona con el Código de Conducta, seguir el proceso de reporte documentado en [Código de Conducta](/conduct).
 
 ---
 
@@ -103,4 +103,4 @@ Puedes ver el historial completo de revisiones de esta página en el [repositori
 
 - Preguntas de gobernanza: `hello@pereiratechtalks.org` (asunto "Pregunta de gobernanza").
 - Código de Conducta: `conduct@pereiratechtalks.org`.
-- Formulario: [contáctanos](/es/contact).
+- Formulario: [contáctanos](/contact).

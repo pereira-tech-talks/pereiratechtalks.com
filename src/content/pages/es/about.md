@@ -22,12 +22,12 @@ El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gori
 
 ## Lo que hacemos
 
-- **[Meetups mensuales](/es/verticals/monthly-meetups)** — Sesiones presenciales e híbridas cada mes sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.
-- **[Pereira Tech Day](/es/pereira-tech-days)** — Nuestra conferencia anual insignia: 10 ediciones desde 2017. Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.
-- **[Escuela de Speakers](/es/verticals/speaker-school)** — Un programa para hacer crecer nuevas voces técnicas, desde la idea hasta el escenario, con mentoría y ensayos.
-- **[La Biblioteca del Mañana](/es/verticals/library-of-tomorrow)** — Un club de lectura bilingüe que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.
-- **[Canal de IA y Agentes](/es/verticals/ai-channel)** — Un track dedicado a IA, LLMs, agentes y la web agéntica — donde la comunidad se encuentra con la tecnología más disruptiva de la década.
-- **[Biblioteca bilingüe](/es/blog)** — Artículos, slides y recapitulaciones publicados en inglés y español — accesibles tanto para el talento local como para la comunidad tecnológica internacional.
+- **[Meetups mensuales](/verticals/monthly-meetups)** — Sesiones presenciales e híbridas cada mes sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.
+- **[Pereira Tech Day](/pereira-tech-days)** — Nuestra conferencia anual insignia: 10 ediciones desde 2017. Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.
+- **[Escuela de Speakers](/verticals/speaker-school)** — Un programa para hacer crecer nuevas voces técnicas, desde la idea hasta el escenario, con mentoría y ensayos.
+- **[La Biblioteca del Mañana](/verticals/library-of-tomorrow)** — Un club de lectura bilingüe que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.
+- **[Canal de IA y Agentes](/verticals/ai-channel)** — Un track dedicado a IA, LLMs, agentes y la web agéntica — donde la comunidad se encuentra con la tecnología más disruptiva de la década.
+- **[Biblioteca bilingüe](/blog)** — Artículos, slides y recapitulaciones publicados en inglés y español — accesibles tanto para el talento local como para la comunidad tecnológica internacional.
 
 ---
 
@@ -47,10 +47,10 @@ El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gori
 
 Si quieres ser ponente, patrocinador, aliado o simplemente asistir — hay un lugar para ti.
 
-- [Lee el blog](/es/blog)
-- [Explora los slides](/es/slides)
-- [Escríbenos](/es/contact)
-- [Quiero patrocinar](/es/sponsor-us)
+- [Lee el blog](/blog)
+- [Explora los slides](/slides)
+- [Escríbenos](/contact)
+- [Quiero patrocinar](/sponsor-us)
 - GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
 - X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)

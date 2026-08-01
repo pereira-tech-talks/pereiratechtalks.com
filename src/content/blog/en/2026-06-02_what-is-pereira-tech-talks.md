@@ -34,29 +34,29 @@ Every month, on the third week, the community gathers — physically in Pereira 
 
 Recent meetup topics: continuous testing and observability, generative AI for drug discovery, the CNCF cloud-native landscape, vibe coding, Rust fundamentals, Python in 2025, mobile development trade-offs, edge computing.
 
-The full archive: [/meetups](/meetups).
+The full archive: [/en/meetups](/en/meetups).
 
 ### 2. Pereira Tech Day
 
 The flagship annual conference. Ten editions and counting (2017–2024 plus 2026). One full day at UTP. Four to six keynotes, lightning talks, networking, sponsors, swag, food, sometimes prizes. The 2024 edition packed the Auditorio Jorge Roa Martínez with hundreds of attendees.
 
-The full archive: [/pereira-tech-days](/pereira-tech-days).
+The full archive: [/en/pereira-tech-days](/en/pereira-tech-days).
 
 ### 3. Speaker School
 
 The bet that anchors this program: Pereira has world-class engineering talent. Some of it just needs a path to the stage. Speaker School is that path. Biweekly mentorship sessions, four core modules (body language, narrative arc, Q&A handling, AV preparation), 5-minute practice presentations, mentor and peer feedback. Free. Cohort-based.
 
-Alumni go on to keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. The full curriculum: [/verticals/speaker-school](/verticals/speaker-school).
+Alumni go on to keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. The full curriculum: [/en/verticals/speaker-school](/en/verticals/speaker-school).
 
 ### 4. La Biblioteca del Mañana
 
 The bilingual reading club. One book per month — applied AI, philosophy of technology, science fiction, leadership, climate, society. A 90-minute conversation. Reading guide published a week ahead. Discussion in Spanish, notes published bilingually.
 
-Most of the tech industry reads tweet threads. We read books. The full picture: [/verticals/library-of-tomorrow](/verticals/library-of-tomorrow).
+Most of the tech industry reads tweet threads. We read books. The full picture: [/en/verticals/library-of-tomorrow](/en/verticals/library-of-tomorrow).
 
 ### Bonus track: AI & Agents Channel
 
-The newest vertical. An async channel plus quarterly deep-dive meetups, focused on what is actually working in production with LLMs, agents, RAG, evaluations, and the agentic web. The rule: bring code or a demo, not opinions. Details: [/verticals/ai-channel](/verticals/ai-channel).
+The newest vertical. An async channel plus quarterly deep-dive meetups, focused on what is actually working in production with LLMs, agents, RAG, evaluations, and the agentic web. The rule: bring code or a demo, not opinions. Details: [/en/verticals/ai-channel](/en/verticals/ai-channel).
 
 ## Why we publish everything bilingually
 
@@ -81,8 +81,8 @@ We are one of the most consistent tech communities in the Colombian coffee regio
 ## How to join
 
 - **Show up.** The next meetup is on [Luma](https://luma.com/pertechtalks). Free, public, no application required.
-- **Speak.** Apply through the [Call for Speakers](/call-for-speakers) form. First-time speakers are welcome — that is what the Speaker School is for.
-- **Sponsor.** See [Sponsor us](/sponsor-us) for the pitch.
-- **Contribute.** Read [Contributing](/contributing) for paths from speaking to editing the open-source site.
+- **Speak.** Apply through the [Call for Speakers](/en/call-for-speakers) form. First-time speakers are welcome — that is what the Speaker School is for.
+- **Sponsor.** See [Sponsor us](/en/sponsor-us) for the pitch.
+- **Contribute.** Read [Contributing](/en/contributing) for paths from speaking to editing the open-source site.
 
 If you are reading this because you are deciding whether to be part of something, the answer is yes. Come once, see how it feels. The door has been open since February 2014.

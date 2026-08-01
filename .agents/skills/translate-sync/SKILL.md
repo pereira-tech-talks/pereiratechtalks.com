@@ -57,7 +57,7 @@ Determine the source language and content type from the file path:
 
 | Path Pattern | Language | Content Type |
 |---|---|---|
-| `src/pages/es/**` | Spanish | page |
+| `src/pages/en/**` | Spanish | page |
 | `src/pages/**` (not es/) | English | page |
 | `src/content/blog/es/**` | Spanish | blog |
 | `src/content/blog/en/**` | English | blog |
@@ -72,8 +72,8 @@ Map source to target path:
 
 | Source | Target |
 |---|---|
-| `src/pages/{path}.astro` | `src/pages/es/{path}.astro` |
-| `src/pages/es/{path}.astro` | `src/pages/{path}.astro` |
+| `src/pages/{path}.astro` | `src/pages/en/{path}.astro` |
+| `src/pages/en/{path}.astro` | `src/pages/{path}.astro` |
 | `src/content/blog/en/{slug}.md` | `src/content/blog/es/{slug}.md` |
 | `src/content/blog/es/{slug}.md` | `src/content/blog/en/{slug}.md` |
 
@@ -212,7 +212,7 @@ $SOURCE_FILE: src/content/blog/en/getting-started-with-astro.md
 
 **Input:**
 ```
-$SOURCE_FILE: src/pages/es/about.astro
+$SOURCE_FILE: src/pages/en/about.astro
 ```
 
 **Actions:**

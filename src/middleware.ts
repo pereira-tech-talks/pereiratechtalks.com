@@ -6,7 +6,7 @@
  * ⚠️  CRITICAL — READ BEFORE ADDING NEW TOP-LEVEL ROUTES ⚠️
  *
  * This middleware uses a HARDCODED ALLOWLIST (`KNOWN_ROOT_PATHS` and
- * `KNOWN_ES_PATHS`). Single-segment paths NOT in the allowlist are rewritten
+ * `KNOWN_EN_PATHS`). Single-segment paths NOT in the allowlist are rewritten
  * to /404 — even if the corresponding `src/pages/<name>/index.astro` exists.
  *
  * Symptoms when forgotten:
@@ -19,8 +19,8 @@
  * When adding a new top-level page (e.g. `src/pages/foo.astro` or
  * `src/pages/foo/index.astro`):
  *   1. Add `'foo'` to KNOWN_ROOT_PATHS below
- *   2. If the page also has a Spanish version at `src/pages/es/foo*`,
- *      add `'foo'` to KNOWN_ES_PATHS too
+ *   2. If the page also has an English version at `src/pages/en/foo*`,
+ *      add `'foo'` to KNOWN_EN_PATHS too
  *
  * Do NOT debug Astro routing, file-system caches, or `[...slug]` vs `[slug]`
  * before checking this allowlist first.
@@ -58,7 +58,7 @@ const KNOWN_ROOT_PATHS = new Set([
   'contributing',
   'governance',
   'api',
-  'es',
+  'en',
   'internal',
   '404',
   'favicon.ico',
@@ -67,7 +67,7 @@ const KNOWN_ROOT_PATHS = new Set([
   'rss.xml',
 ]);
 
-const KNOWN_ES_PATHS = new Set([
+const KNOWN_EN_PATHS = new Set([
   'about',
   'blog',
   'contact',
@@ -113,11 +113,11 @@ export const onRequest = defineMiddleware((context, next) => {
     return context.rewrite(new URL('/404', context.url));
   }
 
-  // /es/xxx when xxx is not a known Spanish route
+  // /en/xxx when xxx is not a known English route
   if (
     segments.length === 2 &&
-    segments[0] === 'es' &&
-    !KNOWN_ES_PATHS.has(segments[1])
+    segments[0] === 'en' &&
+    !KNOWN_EN_PATHS.has(segments[1])
   ) {
     return context.rewrite(new URL('/404', context.url));
   }

@@ -13,8 +13,8 @@
     `style="--ptt-primary: …"` on a component. Chrome (Header/footer/lang switch/theme
     toggle) must keep the global PTT brand on every PTD edition page.
   - **New top-level route not in the middleware allowlist.** A new page under
-    `src/pages/` (or `src/pages/es/`) without a matching entry in
-    `src/middleware.ts` (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`) — the route 404s in
+    `src/pages/` (or `src/pages/en/`) without a matching entry in
+    `src/middleware.ts` (`KNOWN_ROOT_PATHS` / `KNOWN_EN_PATHS`) — the route 404s in
     production until allowlisted.
   - **Reveal.js CSS/JS imported outside `SlideLayout.astro`** (e.g. into `MainLayout`
     or a shared component) — leaks deck assets onto every route.
@@ -70,7 +70,7 @@
 ## Repo-specific conventions
 
 - **Pages** = 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers
-  in `src/pages/` (EN) and `src/pages/es/` (ES). Flag deviations as `warning`.
+  in `src/pages/` (ES, served at `/`) and `src/pages/en/` (EN, served at `/en`). Flag deviations as `warning`.
 - **Content** lives in Astro Content Collections with Zod schemas in
   `src/content.config.ts`; new fields must be added to the schema.
 - **Markdown-for-Agents twins:** when page/translation content changes, the matching

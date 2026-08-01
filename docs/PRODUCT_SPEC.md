@@ -158,7 +158,7 @@ Inventory of official PTT channels (Discord, X, Instagram, LinkedIn, GitHub, You
 
 **Purpose:** PTT is bilingual by default.
 
-- English at `/`, Spanish at `/es/`.
+- Spanish at `/` (primary), English at `/en/`.
 - All slugs in English (filenames, series IDs, image directories) — even for Spanish content.
 - Spanish content must use proper diacritical marks (ñ, á, é, í, ó, ú, ü, interrogative accents).
 - All UI strings live in `src/lib/translations/{en,es}.ts` — no hardcoded user-visible text.

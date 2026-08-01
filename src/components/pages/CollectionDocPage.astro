@@ -16,7 +16,7 @@ import { getEntry, render } from 'astro:content';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 interface Props {
   lang: Language;
@@ -47,7 +47,7 @@ const lastUpdatedLabel = lastUpdated
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: title },
 ];

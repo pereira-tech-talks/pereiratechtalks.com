@@ -214,7 +214,7 @@ export const GET: APIRoute = async () => {
 ### Add a Page
 
 1. Create shared component in `src/components/pages/*Page.astro` (handles `MainLayout` internally)
-2. Create thin wrappers in `src/pages/` and `src/pages/es/` (3 lines each, pass `lang` as string literal)
+2. Create thin wrappers in `src/pages/` and `src/pages/en/` (3 lines each, pass `lang` as string literal)
 3. Add translation keys to `src/lib/translations/` if needed
 
 ## What NOT to Do

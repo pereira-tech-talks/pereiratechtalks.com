@@ -38,6 +38,6 @@ Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados re
 
 ## Más sobre la comunidad
 
-- [Sobre Pereira Tech Talks](/es/about)
-- [Lee el blog](/es/blog)
-- [Explora los slides](/es/slides)
+- [Sobre Pereira Tech Talks](/about)
+- [Lee el blog](/blog)
+- [Explora los slides](/slides)

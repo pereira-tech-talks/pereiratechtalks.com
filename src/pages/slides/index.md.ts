@@ -3,20 +3,20 @@ import type { APIRoute } from 'astro';
 import { getDeckSlug, getSlideDecks } from '@/lib/slides';
 
 export const GET: APIRoute = async () => {
-  const decks = await getSlideDecks('en');
+  const decks = await getSlideDecks('es');
 
-  let markdown = '# Slides — Presentation Decks\n\n';
+  let markdown = '# Diapositivas — Presentaciones\n\n';
   markdown +=
-    '> A collection of presentation decks by Sergio Alexander — conference talks, meetup slides, and technical deep dives.\n\n';
+    '> Una colección de presentaciones de Sergio Alexander — charlas de conferencias, slides de meetups y deep dives técnicos.\n\n';
 
   for (const deck of decks) {
     const slug = getDeckSlug(deck.id);
     markdown += `## [${deck.data.title}](/slides/${slug})\n\n`;
     markdown += `> ${deck.data.description}\n\n`;
-    markdown += `- **Type:** ${deck.data.type}\n`;
-    markdown += `- **Date:** ${deck.data.pubDate.toISOString().split('T')[0]}\n`;
+    markdown += `- **Tipo:** ${deck.data.type}\n`;
+    markdown += `- **Fecha:** ${deck.data.pubDate.toISOString().split('T')[0]}\n`;
     if (deck.data.eventName)
-      markdown += `- **Event:** ${deck.data.eventName}\n`;
+      markdown += `- **Evento:** ${deck.data.eventName}\n`;
     markdown += '\n---\n\n';
   }
 

@@ -16,7 +16,7 @@ The site uses a layered SEO architecture:
 | Crawl control | `public/robots.txt` | Crawler directives + AI bot allows |
 | AI guidance | `public/llms.txt`, `public/llms-full.txt` | LLM/AI engine discovery files |
 | Sitemap | Auto-generated via `@astrojs/sitemap` | All pages in both languages |
-| RSS feeds | `src/pages/rss.xml.js`, `src/pages/es/rss.xml.js` | Per-language RSS |
+| RSS feeds | `src/pages/rss.xml.js`, `src/pages/en/rss.xml.js` | Per-language RSS |
 | Manifest | `public/site.webmanifest` | PWA metadata and icons |
 | i18n config | `src/lib/i18n.ts` | Language config, hreflang helpers, URL utilities |
 | Constants | `src/lib/constances.ts` | SITE_TITLE, SITE_DESCRIPTION |
@@ -188,7 +188,7 @@ Built from `Astro.url.pathname` + `Astro.site`. Each language version has its ow
 ### Content Parity
 
 All content MUST exist in both languages:
-- Pages: `src/pages/` (EN) + `src/pages/es/` (ES)
+- Pages: `src/pages/` (EN) + `src/pages/en/` (ES)
 - Blog posts: `src/content/blog/en/` + `src/content/blog/es/`
 - Translations: `src/lib/translations/en.ts` + `src/lib/translations/es.ts`
 
@@ -350,7 +350,7 @@ Structure:
 - [ ] Page component has `title` and `description` props passed to MainLayout
 - [ ] Meta description is 130-160 characters (EN and ES independently)
 - [ ] BreadcrumbList JSON-LD schema added via `<Fragment slot="head">`
-- [ ] Page exists in both `src/pages/` (EN) and `src/pages/es/` (ES)
+- [ ] Page exists in both `src/pages/` (ES, root) and `src/pages/en/` (EN)
 - [ ] Translation strings added to both `en.ts` and `es.ts`
 - [ ] `llms.txt` Core Sections updated with new page
 - [ ] `llms-full.txt` Pages section updated

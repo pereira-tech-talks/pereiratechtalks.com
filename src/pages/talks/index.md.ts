@@ -9,7 +9,7 @@ import { getTalks } from '@/lib/talk';
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const talks = await getTalks();
   const lines = talks.map((t) => {
     const title = resolveI18n(t.data.title, lang);
@@ -18,13 +18,13 @@ export const GET: APIRoute = async () => {
   });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Talks — Pereira Tech Talks',
+    title: 'Charlas — Pereira Tech Talks',
     description:
-      'Browse the catalogue of talks given at Pereira Tech Talks meetups and Pereira Tech Day editions. Recordings, abstracts, and slide decks where available.',
+      'Explora el catálogo de charlas dictadas en los meetups de Pereira Tech Talks y en las ediciones de Pereira Tech Day. Grabaciones, abstracts y slides cuando están disponibles.',
     lang,
     canonical: `${SITE_URL}/talks`,
-    metadata: [['Total talks', String(talks.length)]],
-    sections: [{ heading: 'All talks', lines }],
+    metadata: [['Total de charlas', String(talks.length)]],
+    sections: [{ heading: 'Todas las charlas', lines }],
   });
 
   return new Response(markdown, {

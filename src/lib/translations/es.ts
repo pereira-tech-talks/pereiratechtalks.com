@@ -105,42 +105,42 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
         description:
           'Sesiones presenciales e híbridas cada mes — charlas, talleres y rondas lightning sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.',
         icon: '\u{1F465}',
-        link: '/es/verticals/monthly-meetups',
+        link: '/verticals/monthly-meetups',
       },
       {
         title: 'Pereira Tech Day',
         description:
           'Nuestra conferencia anual insignia — 10 ediciones y contando (desde 2017). Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
         icon: '\u{1F389}',
-        link: '/es/pereira-tech-days',
+        link: '/pereira-tech-days',
       },
       {
         title: 'Escuela de Speakers',
         description:
           'Un programa para hacer crecer nuevas voces técnicas — desde la idea hasta el escenario — con mentoría y ensayos. Sus egresadas y egresados hoy dan keynotes en Bogotá, Medellín y Ciudad de México.',
         icon: '\u{1F3A4}',
-        link: '/es/verticals/speaker-school',
+        link: '/verticals/speaker-school',
       },
       {
         title: 'La Biblioteca del Mañana',
         description:
           'Un club de lectura bilingüe que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.',
         icon: '\u{1F4DA}',
-        link: '/es/verticals/library-of-tomorrow',
+        link: '/verticals/library-of-tomorrow',
       },
       {
         title: 'Canal de IA y Agentes',
         description:
           'Un track dedicado a IA, LLMs, agentes y la web agéntica — donde la comunidad se encuentra con la tecnología más disruptiva de la década.',
         icon: '\u{1F916}',
-        link: '/es/verticals/ai-channel',
+        link: '/verticals/ai-channel',
       },
       {
         title: 'Biblioteca bilingüe',
         description:
           'Artículos, slides y recapitulaciones publicadas en inglés y español — accesibles tanto para el talento local como para la comunidad tecnológica internacional.',
         icon: '\u{1F30D}',
-        link: '/es/blog',
+        link: '/blog',
       },
     ],
     quickFactsTitle: 'Datos rápidos',
@@ -263,7 +263,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     description:
       'Estamos siempre abiertas y abiertos a nuevas conversaciones — ponentes, patrocinadores, aliados y miembros curiosos de la comunidad. Escríbenos y construyamos juntas y juntos el próximo capítulo.',
     ctaText: 'Escríbenos',
-    ctaLink: '/es/contact?topic=general&subject=Consulta%20General',
+    ctaLink: '/contact?topic=general&subject=Consulta%20General',
   },
 
   // Search input

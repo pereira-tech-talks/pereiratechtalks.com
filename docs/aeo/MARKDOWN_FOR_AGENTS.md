@@ -82,11 +82,11 @@ Tags: tag1, tag2
 | `functions/_middleware.ts` | Content negotiation (Accept: text/markdown) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
 | `src/pages/blog/[slug].md.ts` | EN blog post endpoint |
-| `src/pages/es/blog/[slug].md.ts` | ES blog post endpoint |
+| `src/pages/en/blog/[slug].md.ts` | ES blog post endpoint |
 | `src/pages/blog/index.md.ts` | EN blog index |
-| `src/pages/es/blog/index.md.ts` | ES blog index |
+| `src/pages/en/blog/index.md.ts` | ES blog index |
 | `src/pages/[page].md.ts` | EN page endpoint |
-| `src/pages/es/[page].md.ts` | ES page endpoint |
+| `src/pages/en/[page].md.ts` | ES page endpoint |
 | `src/content/pages/{en,es}/` | Page Markdown source files |
 | `src/content.config.ts` | Pages collection schema |
 | `tests/unit/lib/markdown-for-agents.test.ts` | Unit tests |

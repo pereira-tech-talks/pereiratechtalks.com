@@ -20,13 +20,13 @@ La contribución de mayor apalancamiento: trae un tema, comparte lo que has apre
 
 - **Qué buscamos:** charlas técnicas y prácticas, ancladas en experiencia real. Arquitectura, IA/agentes, devops, mobile, plataformas web, seguridad, ciclo de vida del software, programas comunitarios.
 - **Los ponentes primerizos son bienvenidos.** Hacemos mentoría a través de la Speaker School.
-- **Cómo proponer:** [Convocatoria de ponentes](/es/call-for-speakers).
+- **Cómo proponer:** [Convocatoria de ponentes](/call-for-speakers).
 
 ### 2. Acompaña a un ponente nuevo
 
 Si ya has dado charlas, lo más multiplicador que puedes hacer es acompañar a alguien preparando la primera. Las cohortes de Speaker School siempre necesitan mentores.
 
-- Escríbenos por el [formulario de contacto](/es/contact/?reason=collaboration) con asunto "Mentor en Speaker School" y cuéntanos tu área.
+- Escríbenos por el [formulario de contacto](/contact/?reason=collaboration) con asunto "Mentor en Speaker School" y cuéntanos tu área.
 
 ### 3. Lidera o co-lidera un programa (vertical)
 
@@ -45,13 +45,13 @@ Logística, comunicación, fotografía, grabación, hospedaje, conducción. Son 
 El blog bilingüe es parte de cómo conectamos a Pereira con el ecosistema tech global. Publicamos recaps, deep-dives técnicos, charlas convertidas en ensayos y reflexiones comunitarias.
 
 - Trae un tema, un ángulo y un borrador. Co-escribimos y editamos antes de publicar.
-- Abre la conversación con el [formulario de contacto](/es/contact/?reason=collaboration) con asunto "Contribución al blog".
+- Abre la conversación con el [formulario de contacto](/contact/?reason=collaboration) con asunto "Contribución al blog".
 
 ### 6. Conecta a un patrocinador
 
 Si trabajas en — o tienes línea directa con — una empresa que se beneficia de una comunidad tech local fuerte, preséntanos. Los patrocinios sostienen todo lo que es gratis de asistir.
 
-- Mira [Patrocínanos](/es/sponsor-us) para el pitch.
+- Mira [Patrocínanos](/sponsor-us) para el pitch.
 
 ### 7. Contribuye al sitio open source
 
@@ -78,7 +78,7 @@ Aparecerse es una contribución. Cada asistente devuelve energía que los ponent
 
 ## Reconocimiento
 
-Los contribuyentes aparecen en [Contribuyentes](/es/contributors). Los ponentes en [Ponentes](/es/speakers). Los patrocinadores en [Patrocinadores](/es/sponsors). Si has contribuido y aún no estás listado, escríbenos y te agregamos.
+Los contribuyentes aparecen en [Contribuyentes](/contributors). Los ponentes en [Ponentes](/speakers). Los patrocinadores en [Patrocinadores](/sponsors). Si has contribuido y aún no estás listado, escríbenos y te agregamos.
 
 ---
 
@@ -95,4 +95,4 @@ Los contribuyentes aparecen en [Contribuyentes](/es/contributors). Los ponentes 
 
 - Contacto general: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
 - Código de Conducta: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
-- Formulario: [Contáctanos](/es/contact)
+- Formulario: [Contáctanos](/contact)

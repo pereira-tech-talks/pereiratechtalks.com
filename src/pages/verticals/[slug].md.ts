@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const lang = 'en';
+  const lang = 'es';
   const { entry } = props as {
     entry: Awaited<ReturnType<typeof getVerticals>>[number];
   };
@@ -27,24 +27,24 @@ export const GET: APIRoute = ({ props }) => {
   const schedule = resolveI18n(entry.data.schedule ?? null, lang);
 
   const metadata: Array<[string, string]> = [
-    ['Mission', mission],
-    ['Status', entry.data.status],
+    ['Misión', mission],
+    ['Estado', entry.data.status],
   ];
-  if (schedule) metadata.push(['Schedule', schedule]);
+  if (schedule) metadata.push(['Frecuencia', schedule]);
 
   const sections = [];
   if (description) {
-    sections.push({ heading: 'About this program', lines: [description] });
+    sections.push({ heading: 'Sobre este programa', lines: [description] });
   }
   if (entry.data.leaders.length > 0) {
     sections.push({
-      heading: 'Leaders',
+      heading: 'Líderes',
       lines: entry.data.leaders.map((l) => `- [${l}](/contributors)`),
     });
   }
   if (entry.data.channels.length > 0) {
     sections.push({
-      heading: 'Channels',
+      heading: 'Canales',
       lines: entry.data.channels.map((c) => `- ${c}`),
     });
   }

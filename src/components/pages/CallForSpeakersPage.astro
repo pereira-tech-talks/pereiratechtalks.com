@@ -11,7 +11,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 interface Props {
   lang: Language;
@@ -102,7 +102,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];
@@ -112,10 +112,7 @@ const subjectParam = encodeURIComponent(
     ? 'Postulación a Call for Speakers'
     : 'Call for Speakers submission'
 );
-const ctaHref =
-  lang === 'es'
-    ? `/es/contact/?reason=tech-talk&subject=${subjectParam}`
-    : `/contact/?reason=tech-talk&subject=${subjectParam}`;
+const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subjectParam}`;
 ---
 
 <MainLayout lang={lang} title={t.title} description={t.description}>

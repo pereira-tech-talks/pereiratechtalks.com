@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { DEFAULT_LANGUAGE, getUrlPrefix, isValidLanguage } from '@/lib/i18n';
 
 const SITE_URL = 'https://pereiratechtalks.org';
 
@@ -158,8 +159,13 @@ function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
 }
 
+/**
+ * URL prefix for a language, derived from the i18n registry rather than
+ * assuming which language sits at the root. Spanish is the default and is
+ * served unprefixed; English lives under `/en`.
+ */
 function buildUrlPrefix(lang: string): string {
-  return lang === 'en' ? '' : `/${lang}`;
+  return getUrlPrefix(isValidLanguage(lang) ? lang : DEFAULT_LANGUAGE);
 }
 
 /**

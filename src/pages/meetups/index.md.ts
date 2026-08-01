@@ -9,7 +9,7 @@ import { getMeetupSlug, getMeetups, groupMeetupsByYear } from '@/lib/meetup';
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const meetups = await getMeetups();
   const grouped = groupMeetupsByYear(meetups);
 
@@ -27,7 +27,7 @@ export const GET: APIRoute = async () => {
   const markdown = serializeGenericToMarkdown({
     title: 'Meetups — Pereira Tech Talks',
     description:
-      'Complete archive of Pereira Tech Talks monthly meetups since 2014: web, AI, devops, mobile, security, and software craft, in Pereira, Risaralda, Colombia.',
+      'Archivo completo de los meetups mensuales de Pereira Tech Talks desde 2014: web, IA, devops, mobile, seguridad y oficio del software, en Pereira, Risaralda, Colombia.',
     lang,
     canonical: `${SITE_URL}/meetups`,
     metadata: [['Total meetups', String(meetups.length)]],

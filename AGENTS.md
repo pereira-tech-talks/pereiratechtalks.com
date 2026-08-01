@@ -85,8 +85,8 @@ src/
 ├── layouts/                   # MainLayout, InternalLayout, ShowcaseLayout, SlideLayout
 ├── lib/                       # blog.ts, meetups.ts, events.ts, ptd.ts, i18n.ts, translations/
 ├── pages/                     # File-based routing
-│   ├── (root EN routes)       # /, /about-us, /meetups, /events, /pereira-tech-days, ...
-│   ├── es/                    # Mirror in Spanish (Spanish is the primary language)
+│   ├── (root ES routes)       # /, /about, /meetups, /events, /pereira-tech-days, ...
+│   ├── en/                    # Mirror in English (Spanish is the primary language, served at /)
 │   ├── internal/              # Dev-only hub (brand book, design system, admin views)
 │   └── api/                   # JSON endpoints (search index, sitemap helpers)
 └── styles/                    # global.css (Tailwind 4 @theme PTT tokens), slides.css
@@ -194,7 +194,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 **Content type rules:**
 
-- **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` (English) and `src/pages/es/` (Spanish primary) passing `lang` as string literal.
+- **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` (Spanish primary, served at `/`) and `src/pages/en/` (English, served at `/en`) passing `lang` as string literal.
 - **Blog Posts:** Both `src/content/blog/en/` and `src/content/blog/es/` MUST have the equivalent post. Translate `title`, `description`, body. Preserve `pubDate`, `heroImage`, `tags`, `author`, code blocks. **Use `/add-blog-post` skill for new posts.**
 - **Meetups:** Both `src/content/meetups/{en,es}/` MUST have the equivalent entry. **Use `/add-meetup` skill.**
 - **Events / PTD editions:** Define in single source-of-truth collection (`events`, `pereiraTechDays`); translatable fields use `{ en, es }` shape per the Zod schema (Task 4).
@@ -205,7 +205,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 **Compliance checklist:**
 
-- [ ] Pages exist in both `src/pages/` and `src/pages/es/`
+- [ ] Pages exist in both `src/pages/` (ES, root) and `src/pages/en/` (EN)
 - [ ] Blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
 - [ ] Meetups exist in both `src/content/meetups/en/` and `src/content/meetups/es/`
 - [ ] Same `author` slug used in EN and ES versions of a post
@@ -366,7 +366,7 @@ import AboutUsPage from '@/components/pages/AboutUsPage.astro';
 
 ### 5. i18n Routing
 
-English pages at root (`src/pages/`), Spanish in `src/pages/es/`. Page components in `src/components/pages/` receive `lang` and handle translations internally. Spanish is the **primary language** of the community; English is first-class international.
+Spanish pages at root (`src/pages/` → `/`), English in `src/pages/en/` (→ `/en`). Page components in `src/components/pages/` receive `lang` and handle translations internally. Spanish is the **primary language** of the community and therefore the unprefixed default; English is first-class international. Never hardcode a `/en` or `/es` prefix — derive it from `getUrlPrefix(lang)`.
 
 ### 6. Per-Edition Theming Runtime
 
@@ -486,7 +486,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 22. **Override `--ptt-*` tokens outside `src/styles/global.css` or `[data-edition-theme]` scopes** — per-edition kits must be scoped; no inline `style="--ptt-primary: ..."`
 23. **Let per-edition palette leak outside `/pereira-tech-days/{year}/*`** — header/footer/lang switcher/theme toggle must keep the global PTT brand even on edition pages
 24. **Import Reveal CSS outside `SlideLayout`** — Reveal styles must not leak to non-deck routes
-25. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_ES_PATHS`). New top-level routes return 404 until added to the allowlist. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
+25. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_EN_PATHS`). New top-level routes return 404 until added to the allowlist. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 26. Use `--ptt-accent` for body text — it fails WCAG AA on `--ptt-bg`. Reserve for icons, large text, pills with `--ptt-bg-elevated`.
 
 ### DO:

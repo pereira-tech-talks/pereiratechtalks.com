@@ -12,7 +12,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getActiveSponsors } from '@/lib/sponsor';
 
 interface Props {
@@ -148,7 +148,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];
@@ -156,10 +156,7 @@ const breadcrumbs = [
 const subjectParam = encodeURIComponent(
   lang === 'es' ? 'Solicitud de sponsor deck' : 'Sponsor deck request'
 );
-const ctaHref =
-  lang === 'es'
-    ? `/es/contact/?reason=collaboration&subject=${subjectParam}`
-    : `/contact/?reason=collaboration&subject=${subjectParam}`;
+const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${subjectParam}`;
 ---
 
 <MainLayout lang={lang} title={t.title} description={t.description}>

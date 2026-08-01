@@ -38,6 +38,6 @@ Based in Pereira, Risaralda, Colombia. Bilingual EN/ES. Open to remote partners 
 
 ## More about the community
 
-- [About Pereira Tech Talks](/about)
-- [Read the blog](/blog)
-- [Browse slides](/slides)
+- [About Pereira Tech Talks](/en/about)
+- [Read the blog](/en/blog)
+- [Browse slides](/en/slides)

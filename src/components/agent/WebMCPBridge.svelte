@@ -1,5 +1,6 @@
 <script lang="ts">
 import { onDestroy, onMount } from 'svelte';
+import { getUrlPrefix } from '@/lib/i18n';
 
 interface Props {
   lang?: 'en' | 'es';
@@ -89,7 +90,7 @@ onMount(() => {
       },
       execute: async (args: { slug: string; lang?: 'en' | 'es' }) => {
         const targetLang = args.lang ?? lang;
-        const urlBase = targetLang === 'es' ? '/es' : '';
+        const urlBase = getUrlPrefix(targetLang);
         const url = `${urlBase}/blog/${encodeURIComponent(args.slug)}.md`;
         const res = await fetch(url);
         if (!res.ok) return { url, error: `HTTP ${res.status}` };

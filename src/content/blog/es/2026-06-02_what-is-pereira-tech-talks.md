@@ -34,29 +34,29 @@ Cada mes, en la tercera semana, la comunidad se reúne — físicamente en Perei
 
 Temas recientes: continuous testing y observabilidad, IA generativa para descubrimiento de fármacos, el paisaje cloud-native de la CNCF, vibe coding, fundamentos de Rust, Python en 2025, trade-offs de desarrollo móvil, edge computing.
 
-El archivo completo: [/es/meetups](/es/meetups).
+El archivo completo: [/meetups](/meetups).
 
 ### 2. Pereira Tech Day
 
 La conferencia anual insignia. Diez ediciones y contando (2017–2024 más 2026). Un día completo en la UTP. Cuatro a seis keynotes, lightning talks, networking, patrocinadores, swag, comida, a veces premios. La edición 2024 llenó el Auditorio Jorge Roa Martínez con cientos de asistentes.
 
-El archivo completo: [/es/pereira-tech-days](/es/pereira-tech-days).
+El archivo completo: [/pereira-tech-days](/pereira-tech-days).
 
 ### 3. Escuela de Speakers
 
 La apuesta que ancla este programa: Pereira tiene talento de ingeniería de talla mundial. Parte de ese talento solo necesita una ruta hacia el escenario. La Escuela de Speakers es esa ruta. Sesiones de mentoría quincenales, cuatro módulos centrales (lenguaje corporal, arco narrativo, manejo de preguntas, preparación audiovisual), presentaciones prácticas de 5 minutos, retroalimentación de mentores y pares. Gratuita. Por cohortes.
 
-Sus egresadas y egresados terminan dando keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. El currículo completo: [/es/verticals/speaker-school](/es/verticals/speaker-school).
+Sus egresadas y egresados terminan dando keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. El currículo completo: [/verticals/speaker-school](/verticals/speaker-school).
 
 ### 4. La Biblioteca del Mañana
 
 El club de lectura bilingüe. Un libro al mes — IA aplicada, filosofía de la tecnología, ciencia ficción, liderazgo, clima, sociedad. Una conversación de 90 minutos. La guía de lectura se publica una semana antes. La discusión en español, las notas se publican bilingüemente.
 
-La mayor parte de la industria tech lee threads de tweets. Nosotros leemos libros. El panorama completo: [/es/verticals/library-of-tomorrow](/es/verticals/library-of-tomorrow).
+La mayor parte de la industria tech lee threads de tweets. Nosotros leemos libros. El panorama completo: [/verticals/library-of-tomorrow](/verticals/library-of-tomorrow).
 
 ### Track adicional: Canal de IA y Agentes
 
-La vertical más reciente. Un canal asíncrono más meetups en profundidad cada trimestre, enfocados en lo que sí está funcionando en producción con LLMs, agentes, RAG, evaluaciones y la web agéntica. La regla: trae código o un demo, no opiniones. Detalles: [/es/verticals/ai-channel](/es/verticals/ai-channel).
+La vertical más reciente. Un canal asíncrono más meetups en profundidad cada trimestre, enfocados en lo que sí está funcionando en producción con LLMs, agentes, RAG, evaluaciones y la web agéntica. La regla: trae código o un demo, no opiniones. Detalles: [/verticals/ai-channel](/verticals/ai-channel).
 
 ## Por qué publicamos todo bilingüemente
 
@@ -81,8 +81,8 @@ Somos una de las comunidades tech más constantes de la región cafetera colombi
 ## Cómo unirse
 
 - **Aparece.** El próximo meetup está en [Luma](https://luma.com/pertechtalks). Gratuito, público, sin aplicación.
-- **Habla.** Aplica vía la [Convocatoria de Ponentes](/es/call-for-speakers). Las primeras veces son bienvenidas — para eso existe la Escuela de Speakers.
-- **Patrocina.** Mira [Quiero patrocinar](/es/sponsor-us) para el pitch.
-- **Contribuye.** Lee [Cómo contribuir](/es/contributing) para rutas que van desde dar charlas hasta editar el sitio open source.
+- **Habla.** Aplica vía la [Convocatoria de Ponentes](/call-for-speakers). Las primeras veces son bienvenidas — para eso existe la Escuela de Speakers.
+- **Patrocina.** Mira [Quiero patrocinar](/sponsor-us) para el pitch.
+- **Contribuye.** Lee [Cómo contribuir](/contributing) para rutas que van desde dar charlas hasta editar el sitio open source.
 
 Si estás leyendo esto porque estás decidiendo si ser parte de algo, la respuesta es sí. Ven una vez, mira cómo se siente. La puerta está abierta desde febrero de 2014.

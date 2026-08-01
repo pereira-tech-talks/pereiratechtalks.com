@@ -50,7 +50,7 @@ This is why our sponsor relationships became deeper and more durable starting ar
 
 Every volunteer community we know has had at least one moment when an organizer made a decision that another organizer strongly disagreed with. Format. Speaker selection. Sponsor acceptance. Brand direction. These conflicts are healthy and resolvable.
 
-What is not healthy and not resolvable is when conflict becomes about identity rather than the decision. We have seen volunteer communities fall apart not over the decision itself but over the framing of who had authority to make it. Our protection against this is the [Governance](/governance) page, the [Code of Conduct](/conduct) (especially the thematic-focus section that asks us to keep political and ideological topics out of the community space), and a simple norm: **decide together, disagree without making it personal, move on**.
+What is not healthy and not resolvable is when conflict becomes about identity rather than the decision. We have seen volunteer communities fall apart not over the decision itself but over the framing of who had authority to make it. Our protection against this is the [Governance](/en/governance) page, the [Code of Conduct](/en/conduct) (especially the thematic-focus section that asks us to keep political and ideological topics out of the community space), and a simple norm: **decide together, disagree without making it personal, move on**.
 
 Twelve years of that norm is the actual reason this community is still here.
 

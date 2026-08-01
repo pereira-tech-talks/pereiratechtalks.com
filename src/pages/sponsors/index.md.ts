@@ -9,7 +9,7 @@ import { getSponsors } from '@/lib/sponsor';
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const sponsors = await getSponsors();
   const lines = sponsors.map((s) => {
     const description = resolveI18n(s.data.description, lang);
@@ -17,13 +17,13 @@ export const GET: APIRoute = async () => {
   });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Sponsors — Pereira Tech Talks',
+    title: 'Patrocinadores — Pereira Tech Talks',
     description:
-      'Companies and organizations that have supported Pereira Tech Talks meetups, Speaker School, La Biblioteca del Mañana, and Pereira Tech Day editions.',
+      'Empresas y organizaciones que han apoyado los meetups, la Escuela de Ponentes, La Biblioteca del Mañana y las ediciones de Pereira Tech Day.',
     lang,
     canonical: `${SITE_URL}/sponsors`,
-    metadata: [['Total sponsors', String(sponsors.length)]],
-    sections: [{ heading: 'All sponsors', lines }],
+    metadata: [['Total de patrocinadores', String(sponsors.length)]],
+    sections: [{ heading: 'Todos los patrocinadores', lines }],
   });
 
   return new Response(markdown, {

@@ -22,12 +22,12 @@ The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made fo
 
 ## What we do
 
-- **[Monthly Meetups](/verticals/monthly-meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
-- **[Pereira Tech Day](/pereira-tech-days)** — Our flagship annual conference: 10 editions since 2017. A full day of keynotes, workshops, and networking with international speakers and local partners.
-- **[Speaker School](/verticals/speaker-school)** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
-- **[La Biblioteca del Mañana](/verticals/library-of-tomorrow)** — A bilingual reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
-- **[AI & Agents Channel](/verticals/ai-channel)** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
-- **[Bilingual Library](/blog)** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech ecosystem alike.
+- **[Monthly Meetups](/en/verticals/monthly-meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
+- **[Pereira Tech Day](/en/pereira-tech-days)** — Our flagship annual conference: 10 editions since 2017. A full day of keynotes, workshops, and networking with international speakers and local partners.
+- **[Speaker School](/en/verticals/speaker-school)** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
+- **[La Biblioteca del Mañana](/en/verticals/library-of-tomorrow)** — A bilingual reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
+- **[AI & Agents Channel](/en/verticals/ai-channel)** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
+- **[Bilingual Library](/en/blog)** — Articles, slides, and recaps published in English and Spanish — accessible to local talent and the international tech ecosystem alike.
 
 ---
 
@@ -47,10 +47,10 @@ The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made fo
 
 Whether you want to speak, sponsor, partner, or just attend — there's a place for you.
 
-- [Read the blog](/blog)
-- [Browse slides](/slides)
-- [Get in touch](/contact)
-- [Become a sponsor](/sponsor-us)
+- [Read the blog](/en/blog)
+- [Browse slides](/en/slides)
+- [Get in touch](/en/contact)
+- [Become a sponsor](/en/sponsor-us)
 - GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
 - X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)

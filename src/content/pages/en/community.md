@@ -20,13 +20,13 @@ The community runs on three layers:
 
 You can navigate any of those three layers from the site:
 
-- [Programs](/verticals)
-- [Meetups](/meetups)
-- [Pereira Tech Days](/pereira-tech-days)
-- [Speakers](/speakers)
-- [Contributors](/contributors)
-- [Sponsors](/sponsors)
-- [Channels](/channels)
+- [Programs](/en/verticals)
+- [Meetups](/en/meetups)
+- [Pereira Tech Days](/en/pereira-tech-days)
+- [Speakers](/en/speakers)
+- [Contributors](/en/contributors)
+- [Sponsors](/en/sponsors)
+- [Channels](/en/channels)
 
 ---
 
@@ -45,13 +45,13 @@ People show up in different ways, and any of them is enough to belong. The most 
 - **Conduct team** — the people responsible for upholding the Code of Conduct.
 - **Alumni** — people who were active in a previous chapter of the community and remain part of the network.
 
-The full directory lives at [Contributors](/contributors).
+The full directory lives at [Contributors](/en/contributors).
 
 ---
 
 ## How decisions get made
 
-A short version, expanded in [Governance](/governance):
+A short version, expanded in [Governance](/en/governance):
 
 - Day-to-day operational decisions are made by the active organizers.
 - Program direction (cadence, theme, content) is decided by the vertical lead of that program in conversation with the organizers.
@@ -67,13 +67,13 @@ We optimize for transparency over hierarchy: anyone in the community can ask why
 Three paths:
 
 - **Show up to a meetup.** That is the canonical entry point. RSVP via [Meetup.com](https://www.meetup.com/pereira-tech-talks/) and come.
-- **Propose a talk.** Use the [Call for Speakers](/call-for-speakers) page or the contact form. Talks may be in Spanish, English, or mixed.
-- **Contribute.** Read [Contributing](/contributing) to find a vertical, role, or task that fits how much time and energy you can offer.
+- **Propose a talk.** Use the [Call for Speakers](/en/call-for-speakers) page or the contact form. Talks may be in Spanish, English, or mixed.
+- **Contribute.** Read [Contributing](/en/contributing) to find a vertical, role, or task that fits how much time and energy you can offer.
 
 ---
 
 ## Where to find us
 
-- [Channels](/channels) — every official channel with a clear "where do I start" recommendation.
-- [Contact](/contact) — for messages that need a human reply.
-- [Press](/press) — for media and editorial requests.
+- [Channels](/en/channels) — every official channel with a clear "where do I start" recommendation.
+- [Contact](/en/contact) — for messages that need a human reply.
+- [Press](/en/press) — for media and editorial requests.

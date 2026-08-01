@@ -20,13 +20,13 @@ The highest-leverage contribution: bring a topic, share what you have learned, a
 
 - **What we look for:** practical, technical talks grounded in real experience. Architecture, AI/agents, devops, mobile, web platforms, security, software lifecycle, community programs.
 - **First-time speakers are welcome.** We mentor through the Speaker School.
-- **How to propose:** [Call for Speakers](/call-for-speakers).
+- **How to propose:** [Call for Speakers](/en/call-for-speakers).
 
 ### 2. Mentor a new speaker
 
 If you have given talks before, the most multiplicative thing you can do is mentor someone preparing their first one. Speaker School cohorts always need mentors.
 
-- Reach out via the [contact form](/contact/?reason=collaboration) with the subject "Mentor at Speaker School" and tell us your area.
+- Reach out via the [contact form](/en/contact/?reason=collaboration) with the subject "Mentor at Speaker School" and tell us your area.
 
 ### 3. Lead or co-lead a vertical
 
@@ -45,13 +45,13 @@ Logistics, communication, photography, recording, hosting, MC. These are the inv
 The bilingual blog is part of how we connect Pereira to the global tech ecosystem. We publish recaps, technical deep-dives, talks turned into essays, and community reflections.
 
 - Bring a topic, an angle, and a draft. We pair-write and edit before publishing.
-- Open a discussion via the [contact form](/contact/?reason=collaboration) with the subject "Blog contribution".
+- Open a discussion via the [contact form](/en/contact/?reason=collaboration) with the subject "Blog contribution".
 
 ### 6. Connect a sponsor
 
 If you work at — or have a clear line to — a company that benefits from a strong local tech community, intro us. Sponsorship sustains everything that is free to attend.
 
-- See [Sponsor us](/sponsor-us) for the pitch.
+- See [Sponsor us](/en/sponsor-us) for the pitch.
 
 ### 7. Contribute to the open-source website
 
@@ -78,7 +78,7 @@ Showing up is a contribution. Every attendee gives back energy that the speakers
 
 ## Recognition
 
-Contributors are listed at [Contributors](/contributors). Speakers appear at [Speakers](/speakers). Sponsors appear at [Sponsors](/sponsors). If you have contributed and are not yet listed, write to us and we will add you.
+Contributors are listed at [Contributors](/en/contributors). Speakers appear at [Speakers](/en/speakers). Sponsors appear at [Sponsors](/en/sponsors). If you have contributed and are not yet listed, write to us and we will add you.
 
 ---
 
@@ -95,4 +95,4 @@ Contributors are listed at [Contributors](/contributors). Speakers appear at [Sp
 
 - General contact: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
 - Code of Conduct: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
-- Form: [Contact us](/contact)
+- Form: [Contact us](/en/contact)

@@ -10,7 +10,7 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getChannels } from '@/lib/channel';
-import { type Language, tr } from '@/lib/i18n';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 
 interface Props {
   lang: Language;
@@ -57,7 +57,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];

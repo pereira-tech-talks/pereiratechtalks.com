@@ -4,10 +4,10 @@ import { getBlogPosts } from '@/lib/blog';
 import type { Language } from '@/lib/i18n';
 import type { BlogPostsResultType } from '@/lib/types';
 
-const lang: Language = 'en';
+const lang: Language = 'es';
 
 export async function getStaticPaths() {
-  const lang: Language = 'en';
+  const lang: Language = 'es';
   const blogPostsResult: BlogPostsResultType = await getBlogPosts({ lang });
   const totalPages = blogPostsResult.totalPages;
 

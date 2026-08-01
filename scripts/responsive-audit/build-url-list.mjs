@@ -44,7 +44,7 @@ function classify(route) {
       .replace(/index\.html$/, '')
       .replace(/\.html$/, '')
       .replace(/\/$/, '');
-  const lang = r.startsWith('/es/') || r === '/es' ? 'es' : 'en';
+  const lang = r.startsWith('/en/') || r === '/en' ? 'en' : 'es';
   const path = r === '' ? '/' : r;
 
   // Internal hub
@@ -55,10 +55,10 @@ function classify(route) {
   if (path.endsWith('.md')) return { path, lang, template: 'md-twin' };
 
   // Root
-  if (path === '/' || path === '/es') return { path, lang, template: 'home' };
+  if (path === '/' || path === '/en') return { path, lang, template: 'home' };
 
   // Strip lang prefix
-  const p = path.replace(/^\/es/, '') || '/';
+  const p = path.replace(/^\/en/, '') || '/';
 
   // Blog
   if (p === '/blog' || p.match(/^\/blog\/page\/\d+$/))

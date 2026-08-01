@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const lang = 'en';
+  const lang = 'es';
   const { entry } = props as {
     entry: Awaited<ReturnType<typeof getMeetups>>[number];
   };
@@ -27,42 +27,42 @@ export const GET: APIRoute = ({ props }) => {
 
   const date = entry.data.date.toISOString().split('T')[0];
   const metadata: Array<[string, string]> = [
-    ['Date', date],
-    ['Mode', entry.data.mode],
+    ['Fecha', date],
+    ['Modalidad', entry.data.mode],
     [
-      'Venue',
+      'Lugar',
       `${entry.data.venue.name}, ${entry.data.venue.city}, ${entry.data.venue.country}`,
     ],
-    ['Status', entry.data.status],
+    ['Estado', entry.data.status],
   ];
   if (entry.data.linkRecording)
-    metadata.push(['Recording', entry.data.linkRecording]);
-  if (entry.data.linkPhotos) metadata.push(['Photos', entry.data.linkPhotos]);
+    metadata.push(['Grabación', entry.data.linkRecording]);
+  if (entry.data.linkPhotos) metadata.push(['Fotos', entry.data.linkPhotos]);
   if (entry.data.linkMeetupCom)
     metadata.push(['Meetup.com', entry.data.linkMeetupCom]);
 
   const sections = [];
   if (entry.data.speakers.length > 0) {
     sections.push({
-      heading: 'Speakers',
+      heading: 'Ponentes',
       lines: entry.data.speakers.map((s) => `- [${s}](/speakers/${s}.md)`),
     });
   }
   if (entry.data.talks.length > 0) {
     sections.push({
-      heading: 'Talks',
+      heading: 'Charlas',
       lines: entry.data.talks.map((t) => `- [${t}](/talks/${t}.md)`),
     });
   }
   if (entry.data.verticals.length > 0) {
     sections.push({
-      heading: 'Programs',
+      heading: 'Programas',
       lines: entry.data.verticals.map((v) => `- [${v}](/verticals/${v}.md)`),
     });
   }
   if (entry.data.sponsors.length > 0) {
     sections.push({
-      heading: 'Sponsors',
+      heading: 'Patrocinadores',
       lines: entry.data.sponsors.map((s) => `- ${s.slug} (${s.tier})`),
     });
   }

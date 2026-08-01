@@ -9,7 +9,7 @@ import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getSpeakers } from '@/lib/speaker';
 
 interface Props {
@@ -34,7 +34,7 @@ const t = {
     lang === 'es'
       ? '¿Quieres ser ponente? Postúlate'
       : 'Want to speak? Submit your talk',
-  cfsHref: lang === 'es' ? '/es/contact/' : '/contact/',
+  cfsHref: `${getUrlPrefix(lang)}/contact/`,
   emptyTitle:
     lang === 'es'
       ? 'Aún no hay ponentes registrados'
@@ -48,7 +48,7 @@ const t = {
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: lang === 'es' ? '/es/' : '/',
+    href: `${getUrlPrefix(lang)}/`,
   },
   { label: t.title },
 ];
