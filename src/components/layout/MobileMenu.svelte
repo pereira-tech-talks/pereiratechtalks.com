@@ -8,9 +8,10 @@ import {
   getUrlPrefix,
   stripLangPrefix,
 } from '@/lib/i18n';
+import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
 import { getTranslations } from '@/lib/translations';
 
-export let lang: string = 'en';
+export let lang: string = 'es';
 export let open: boolean;
 export let toggleMenu: () => void;
 let communityOpen = false;
@@ -20,6 +21,18 @@ let isScrollLocked = false;
 let menuRoot: HTMLElement | undefined;
 let closeButtonRef: HTMLButtonElement | undefined;
 let previouslyFocused: HTMLElement | null = null;
+
+/**
+ * Persist an explicit language choice so the first-visit browser detection in
+ * `LanguageRedirect.astro` never overrides it on a later visit.
+ */
+function rememberLanguage(target: string) {
+  try {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, target);
+  } catch {
+    // Storage disabled (private mode) — the switch still navigates.
+  }
+}
 
 function handleKeydown(event: KeyboardEvent) {
   if (!open) return;
@@ -198,7 +211,7 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition flex items-center gap-2" on:click={() => { trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
+          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition flex items-center gap-2" on:click={() => { rememberLanguage(alt.lang); trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
             {alt.nativeName}
           </a>
         {/each}

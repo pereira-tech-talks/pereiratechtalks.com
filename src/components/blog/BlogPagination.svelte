@@ -8,7 +8,7 @@ export let totalPages = 1;
 export let isSearchMode = false;
 export let onPageChange = null;
 export let currentTag = null;
-export let lang = 'en';
+export let lang = 'es';
 
 $: t = getTranslations(lang);
 $: basePrefix = getUrlPrefix(lang);

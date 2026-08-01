@@ -6,7 +6,7 @@ interface Props {
   lang?: 'en' | 'es';
 }
 
-const { lang = 'en' }: Props = $props();
+const { lang = 'es' }: Props = $props();
 
 type WebMCPContext = {
   provideContext?: (ctx: { tools: unknown[] }) => void;

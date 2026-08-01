@@ -7,10 +7,11 @@ import {
   getUrlPrefix,
   stripLangPrefix,
 } from '@/lib/i18n';
+import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
 import { getTranslations } from '@/lib/translations';
 import MobileMenu from './MobileMenu.svelte';
 
-export let lang: string = 'en';
+export let lang: string = 'es';
 let open: boolean = false;
 let communityOpen = false;
 let languageOpen = false;
@@ -39,6 +40,18 @@ onMount(() => {
     return { lang: l, url, flag: config.flag, nativeName: config.nativeName };
   });
 });
+
+/**
+ * Persist an explicit language choice so the first-visit browser detection in
+ * `LanguageRedirect.astro` never overrides it on a later visit.
+ */
+function rememberLanguage(target: string) {
+  try {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, target);
+  } catch {
+    // Storage disabled (private mode) — the switch still navigates.
+  }
+}
 
 function toggleMenu() {
   open = !open;
@@ -184,7 +197,10 @@ function closeAllDropdowns() {
             style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
           >
             {#each alternateLanguageUrls as alt}
-              <a href={alt.url} class="block w-full text-center px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang })}>
+              <a href={alt.url} class="block w-full text-center px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => {
+                rememberLanguage(alt.lang);
+                trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang });
+              }}>
                 {alt.lang.toUpperCase()}
               </a>
             {/each}

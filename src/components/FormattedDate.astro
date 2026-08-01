@@ -6,7 +6,7 @@ interface Props {
   lang?: string;
 }
 
-const { date, lang = 'en' } = Astro.props;
+const { date, lang = 'es' } = Astro.props;
 const locale = getDateLocale(lang as Language);
 ---
 

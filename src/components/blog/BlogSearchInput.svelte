@@ -4,7 +4,7 @@ import { getTranslations } from '@/lib/translations';
 export let searchQuery;
 export let isSearching;
 export let resultsCount;
-export let lang = 'en';
+export let lang = 'es';
 /** @type {(value: string) => void} */
 export let onSearch;
 /** @type {() => void} */

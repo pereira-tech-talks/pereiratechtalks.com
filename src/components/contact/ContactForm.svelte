@@ -3,7 +3,7 @@ import { onMount } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import { getTranslations } from '@/lib/translations';
 
-export let lang = 'en';
+export let lang = 'es';
 /**
  * Cloudflare Pages Function endpoint (e.g. `/api/contact`) that proxies the
  * submission to Resend. When empty, the form falls back to the Google Forms

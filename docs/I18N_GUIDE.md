@@ -419,6 +419,43 @@ The header includes a language switcher that toggles between English and Spanish
 - `/blog/` ↔ `/en/blog/`
 - `/blog/tag/tech/` ↔ `/en/blog/tag/tech/`
 
+## Browser-Language Detection
+
+First-time visitors land on the language their browser asks for; returning
+visitors get whatever they last chose. Implemented by
+[`src/components/LanguageRedirect.astro`](../src/components/LanguageRedirect.astro)
+(a blocking inline script in `<head>`, so there is no flash of the wrong
+language) over the pure, unit-tested rules in
+[`src/lib/language-preference.ts`](../src/lib/language-preference.ts).
+
+**Decision order**
+
+1. **`?lang=es|en`** — an explicit override. Wins over everything and is stored.
+2. **Stored preference** (`localStorage['ptt:lang']`) — set whenever the visitor
+   uses the language switcher, and also written on the first visit. Beats the
+   browser, so an explicit choice is never second-guessed.
+3. **Browser language** — `navigator.languages`, matched on the primary subtag
+   (`es-CO`, `es-419` and `es` all resolve to `es`). Falls back to the site
+   default (`es`) when nothing matches.
+
+**Deliberate limits**
+
+- **Only the home page negotiates.** Deep links are never rewritten: a Spanish
+  article shared with an English-browser reader keeps its language. This also
+  keeps both language trees independently crawlable, so hreflang stays truthful
+  — auto-redirecting every URL is a classic way to get one language deindexed.
+- **Cannot loop.** A redirect is only issued when the target differs from the
+  page being served; after it, the stored preference matches and the next
+  evaluation is a no-op.
+- **Never fatal.** All storage access is wrapped — private mode or disabled
+  storage degrades to plain browser detection, and any error leaves the page as
+  served.
+
+**Changing the language must persist.** Both `Header.svelte` and
+`MobileMenu.svelte` call `rememberLanguage()` on switch. A new language entry
+point MUST do the same, or the next visit will silently revert to the browser's
+language.
+
 ## Bilingual Compliance Checklist
 
 Before committing any content change, verify:

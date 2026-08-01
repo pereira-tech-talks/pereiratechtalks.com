@@ -11,7 +11,7 @@ interface Props {
   surface?: 'default' | 'alt';
 }
 
-const { lang = 'en', grouped = false, surface = 'alt' } = Astro.props;
+const { lang = 'es', grouped = false, surface = 'alt' } = Astro.props;
 const t = getTranslations(lang as Language);
 const sectionSpacing = grouped
   ? 'pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20'

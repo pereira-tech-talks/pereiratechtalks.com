@@ -5,7 +5,7 @@ import BlogCard from './BlogCard.svelte';
 
 export let filteredPosts = [];
 export let searchQuery;
-export let lang = 'en';
+export let lang = 'es';
 export let searchResultsWithMatches = [];
 export let topicTagNames = [];
 export let subtopicTagNames = [];

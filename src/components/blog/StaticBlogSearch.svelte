@@ -16,7 +16,7 @@ export let totalPages;
 export let currentPage;
 export let tagsResult = [];
 export let totalPostsAvailable = 0;
-export let lang = 'en';
+export let lang = 'es';
 export let subtopicAccentByName = {};
 
 // Performance: Debounce timing (reduced for snappier feel)

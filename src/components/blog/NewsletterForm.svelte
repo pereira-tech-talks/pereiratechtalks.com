@@ -5,7 +5,7 @@ import { getTranslations } from '@/lib/translations';
 
 const STORAGE_KEY = 'newsletter-subscribed';
 
-export let lang = 'en';
+export let lang = 'es';
 export let formUrl = '';
 export let entries = { email: '' };
 

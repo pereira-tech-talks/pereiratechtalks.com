@@ -3,7 +3,7 @@ import { onMount } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import { getTranslations } from '@/lib/translations';
 
-export let lang: string = 'en';
+export let lang: string = 'es';
 export let targetLabel = '';
 
 $: t = getTranslations(lang);

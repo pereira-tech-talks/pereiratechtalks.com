@@ -3,6 +3,7 @@ import '@/styles/global.css';
 import WebMCPBridge from '@/components/agent/WebMCPBridge.svelte';
 import BaseHead from '@/components/BaseHead.astro';
 import Footer from '@/components/Footer.astro';
+import LanguageRedirect from '@/components/LanguageRedirect.astro';
 import Header from '@/components/layout/Header.svelte';
 import ThemeToggle from '@/components/ThemeToggle.astro';
 
@@ -48,6 +49,7 @@ const {
       ogImageHeight={ogImageHeight}
     />
     <slot name="head" />
+    <LanguageRedirect lang={lang} />
     <script is:inline>
   (function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
 </script>

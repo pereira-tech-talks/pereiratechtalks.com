@@ -16,7 +16,7 @@ export interface Props {
   currentTag?: string;
   lang?: string;
 }
-const { blogPostsResult, currentTag, lang = 'en' } = Astro.props;
+const { blogPostsResult, currentTag, lang = 'es' } = Astro.props;
 const subtopicAccentByName = await getSubtopicAccentMap();
 
 const lightweightPosts = await Promise.all(

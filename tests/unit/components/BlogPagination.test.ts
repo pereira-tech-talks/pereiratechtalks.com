@@ -24,7 +24,7 @@ describe('BlogPagination', () => {
 
     it('marks current page with aria-current="page"', () => {
       render(BlogPagination, {
-        props: { currentPage: 3, totalPages: 5 },
+        props: { currentPage: 3, totalPages: 5, lang: 'en' },
       });
       const currentPageEl = screen.getByLabelText('Page 3');
       expect(currentPageEl.getAttribute('aria-current')).toBe('page');
@@ -32,7 +32,7 @@ describe('BlogPagination', () => {
 
     it('does not mark non-current pages with aria-current', () => {
       render(BlogPagination, {
-        props: { currentPage: 3, totalPages: 5 },
+        props: { currentPage: 3, totalPages: 5, lang: 'en' },
       });
       const otherPage = screen.getByLabelText('Page 1');
       expect(otherPage.getAttribute('aria-current')).toBeNull();
@@ -87,7 +87,7 @@ describe('BlogPagination', () => {
 
     it('shows both Previous and Next on middle pages', () => {
       render(BlogPagination, {
-        props: { currentPage: 3, totalPages: 5 },
+        props: { currentPage: 3, totalPages: 5, lang: 'en' },
       });
       expect(screen.getByText('Previous')).toBeDefined();
       expect(screen.getByText('Next')).toBeDefined();
@@ -99,7 +99,7 @@ describe('BlogPagination', () => {
   describe('URL generation', () => {
     it('generates correct blog page URLs', () => {
       render(BlogPagination, {
-        props: { currentPage: 1, totalPages: 3 },
+        props: { currentPage: 1, totalPages: 3, lang: 'en' },
       });
       const page2Link = screen.getByLabelText('Page 2');
       expect(page2Link.getAttribute('href')).toBe('/en/blog/page/2/');
@@ -107,7 +107,7 @@ describe('BlogPagination', () => {
 
     it('generates page 1 URL as /blog/', () => {
       render(BlogPagination, {
-        props: { currentPage: 2, totalPages: 3 },
+        props: { currentPage: 2, totalPages: 3, lang: 'en' },
       });
       const page1Link = screen.getByLabelText('Page 1');
       expect(page1Link.getAttribute('href')).toBe('/en/blog/');
@@ -115,7 +115,12 @@ describe('BlogPagination', () => {
 
     it('includes tag in URL when currentTag is set', () => {
       render(BlogPagination, {
-        props: { currentPage: 1, totalPages: 3, currentTag: 'tech' },
+        props: {
+          currentPage: 1,
+          totalPages: 3,
+          currentTag: 'tech',
+          lang: 'en',
+        },
       });
       const page2Link = screen.getByLabelText('Page 2');
       expect(page2Link.getAttribute('href')).toBe('/en/blog/tag/tech/page/2/');
@@ -148,7 +153,7 @@ describe('BlogPagination', () => {
 
     it('uses links (anchor tags) in non-search mode', () => {
       render(BlogPagination, {
-        props: { currentPage: 1, totalPages: 3 },
+        props: { currentPage: 1, totalPages: 3, lang: 'en' },
       });
       const page2 = screen.getByLabelText('Page 2');
       expect(page2.tagName).toBe('A');

@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import BlogSearchInput from '@/components/blog/BlogSearchInput.svelte';
 
 describe('BlogSearchInput', () => {
-  it('renders search input with English placeholder by default', () => {
+  it('renders the Spanish placeholder by default (Spanish is the site default)', () => {
     render(BlogSearchInput, {
       props: {
         searchQuery: '',
@@ -15,8 +15,8 @@ describe('BlogSearchInput', () => {
 
     const input = screen.getByRole('searchbox');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute('placeholder', 'Search articles...');
-    expect(input).toHaveAttribute('aria-label', 'Search articles...');
+    expect(input).toHaveAttribute('placeholder', 'Buscar artículos...');
+    expect(input).toHaveAttribute('aria-label', 'Buscar artículos...');
   });
 
   it('renders translated placeholder when lang is Spanish', () => {
@@ -40,6 +40,7 @@ describe('BlogSearchInput', () => {
         searchQuery: '',
         isSearching: false,
         resultsCount: 0,
+        lang: 'en',
         onSearch,
       },
     });
@@ -57,6 +58,7 @@ describe('BlogSearchInput', () => {
         searchQuery: '',
         isSearching: false,
         resultsCount: 0,
+        lang: 'en',
         onFocus,
       },
     });
@@ -74,6 +76,7 @@ describe('BlogSearchInput', () => {
         searchQuery: 'astro',
         isSearching: false,
         resultsCount: 0,
+        lang: 'en',
         onSearch,
       },
     });
@@ -92,6 +95,7 @@ describe('BlogSearchInput', () => {
         searchQuery: 'svelte',
         isSearching: false,
         resultsCount: 0,
+        lang: 'en',
         onSearch,
       },
     });
@@ -108,6 +112,7 @@ describe('BlogSearchInput', () => {
         searchQuery: 'astro',
         isSearching: true,
         resultsCount: 2,
+        lang: 'en',
       },
     });
 
@@ -124,6 +129,7 @@ describe('BlogSearchInput', () => {
         searchQuery: '',
         isSearching: false,
         resultsCount: 3,
+        lang: 'en',
       },
     });
 

@@ -12,7 +12,7 @@ export let totalPosts = 0;
 export let currentPagePosts = 0;
 export let currentPage = 1;
 export let totalPages = 1;
-export let lang = 'en';
+export let lang = 'es';
 
 $: t = getTranslations(lang);
 $: basePrefix = getUrlPrefix(lang);
