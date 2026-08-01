@@ -48,8 +48,5 @@ tmp/*
 english.png
 spanish.png
 
-# Dailybot per-repo API keys / auth context (per-developer, never committed)
-.dailybot/env.json
-
 # Playwright ephemeral test output
 test-results/

@@ -29,7 +29,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 ## Deep Work Plans
 
-> Thin delegators to the installed [`deepworkplan` skill](../skills/deepworkplan/SKILL.md) (currently **v2.17.0**, from [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)). Plans live in `.dwp/plans/`; drafts in `.dwp/drafts/`. Opt-in addons installed: `dailybot` (team reporting), `ai-diff-reviewer` (Flow A local-only review), `dependency-upgrade` (`/lib-upgrade`).
+> Thin delegators to the installed [`deepworkplan` skill](../skills/deepworkplan/SKILL.md) (currently **v2.17.0**, from [`DailybotHQ/deepworkplan-skill`](https://github.com/DailybotHQ/deepworkplan-skill)). Plans live in `.dwp/plans/`; drafts in `.dwp/drafts/`. Opt-in addons installed: `ai-diff-reviewer` (Flow A local-only review), `dependency-upgrade` (`/lib-upgrade`), `design-system` (`/design-system`).
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
@@ -92,6 +92,12 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
 | `/translate-sync` | `.agents/skills/translate-sync/SKILL.md` | Synchronize content between English and Spanish versions |
+
+## Design System
+
+| Command | Procedure File | Description |
+|---------|---------------|-------------|
+| `/design-system` | `.agents/commands/design-system.md` | Create or refresh [`docs/DESIGN.md`](../../docs/DESIGN.md) — the agent-facing UI contract (`--ptt-*` tokens, type/spacing/radius scales, component patterns, WCAG AA rules) — via the DeepWorkPlan [`design-system` addon](../skills/deepworkplan/addons/design-system/SKILL.md). `visual-ui` profile only |
 
 ## Dependency Management
 

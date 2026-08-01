@@ -19,6 +19,7 @@ Welcome to the **Pereira Tech Talks** documentation. This guide helps developers
 | [Product Spec](PRODUCT_SPEC.md) | Vision, features, and goals for Pereira Tech Talks |
 | [Information Architecture](INFORMATION_ARCHITECTURE.md) | URL surface, navigation, content relationships |
 | [Brand Guide](BRAND_GUIDE.md) | PTT palette, typography, logo, voice & per-edition kits |
+| [Design System](DESIGN.md) | Agent-facing UI contract — tokens, scales, component patterns, integrity rules |
 | [Architecture](ARCHITECTURE.md) | Technical architecture, patterns, and decisions |
 | [Performance](PERFORMANCE.md) | SSG optimization, images, caching strategies |
 

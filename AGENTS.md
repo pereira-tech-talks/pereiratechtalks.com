@@ -9,6 +9,7 @@
 | Architecture | [Architecture](docs/ARCHITECTURE.md) | Components, Content Collections, Svelte integration, project structure, per-edition theming runtime |
 | Standards | [Standards](docs/STANDARDS.md) | Canonical coding rules, orthography, import order |
 | Brand | [Brand Guide](docs/BRAND_GUIDE.md) | PTT global identity, per-edition kits, voice & tone |
+| Design | [Design System](docs/DESIGN.md) | Agent-facing UI contract — `--ptt-*` tokens, type/spacing/radius scales, component patterns |
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Vision, audiences, verticals, success metrics |
 | Blog | [Blog Posts](docs/features/BLOG_POSTS.md) | Tags, series, hero layouts, images, content lifecycle |
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
@@ -266,10 +267,6 @@ See **[Accessibility Guide](docs/ACCESSIBILITY.md)**.
 ## Shared Agent Coordination
 
 Multiple AI agents collaborate on this codebase. When updating agent guidance, mirror changes across all relevant files. See **[AI Agent Collaboration](docs/AI_AGENT_COLLAB.md)**.
-
-### DWP progress reporting — Dailybot addon (optional, non-blocking)
-
-The [DeepWorkPlan Dailybot addon](.agents/skills/deepworkplan/addons/dailybot/SKILL.md) is installed (agent skill vendored at `.agents/skills/dailybot/`). When Dailybot is authenticated, DWP work surfaces to the team as standup-style reports via **four lifecycle events** — **kickoff** (plan starts), **significant task** (a feature/fix/major refactor lands), **blocked** (an unattended run halts), and **completion** (milestone: what was built). Reporting is **best-effort and never blocks** `create`/`execute`: it is skipped silently if Dailybot is absent, unauthenticated, or `.dailybot/disabled` exists. Auth is per-contributor via the Dailybot skill's own flow (`dailybot login` / `DAILYBOT_API_KEY`) — never prompted or stored here. Repo report identity: `.dailybot/profile.json` (credential-free, no `key` field). Full lifecycle detail in **[AI Agent Collaboration](docs/AI_AGENT_COLLAB.md)**.
 
 ### DWP Security Review augmentation — AI Diff Reviewer addon (optional, local-only / Flow A)
 
