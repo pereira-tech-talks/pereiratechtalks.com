@@ -1,0 +1,21 @@
+name: Juan Alejandro Pérez Bermúdez
+pronouns: he/him
+role:
+  en: Distribution Engineer at DailyBot
+  es: Distribution Engineer en DailyBot
+bio:
+  en: Distribution engineer at DailyBot and a Pereira Tech Talks organizer. Speaker on software quality and how open-source communities built the practices that hold up much of the internet.
+  es: Distribution engineer en DailyBot y organizador de Pereira Tech Talks. Ponente sobre calidad de software y cómo las comunidades open source construyeron las prácticas que hoy sostienen buena parte de internet.
+photo:
+  src: /images/speakers/mega-barto.jpeg
+  alt:
+    en: Portrait of Juan Alejandro Pérez Bermúdez
+    es: Retrato de Juan Alejandro Pérez Bermúdez
+social:
+  linkedin: "https://www.linkedin.com/in/mega-barto/"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

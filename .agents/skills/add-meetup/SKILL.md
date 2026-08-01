@@ -56,7 +56,7 @@ This skill is the mandatory workflow for creating new meetup entries in this rep
 - `$SLUG`: Custom slug (default: kebab-case of title, **English-only**).
 - `$DESCRIPTION`: 130-160 char description. If omitted, the skill drafts one from the title and date.
 - `$HERO_IMAGE`: Path under `public/images/meetups/<slug>/hero.{ext}`.
-- `$STATUS`: `announced` | `scheduled` | `completed` | `cancelled` (default inferred from date).
+- `$STATUS`: `announced` | `rsvp-open` | `completed` | `cancelled` (default: `announced`). These are the only values the `eventStatus` enum in `src/content.config.ts` accepts — `scheduled` is **not** valid and fails the build.
 - `$TALKS`: Array of talk slugs (must exist in `src/content/talks/`).
 - `$SPEAKERS`: Array of speaker slugs (must exist in `src/content/speakers/`).
 - `$SPONSORS`: Array of sponsor refs.
@@ -82,7 +82,7 @@ This skill is the mandatory workflow for creating new meetup entries in this rep
 **Status semantics:**
 
 - `announced`: Date set, registration not yet open or in-progress.
-- `scheduled`: Confirmed, registration open.
+- `rsvp-open`: Confirmed, registration open.
 - `completed`: Past event with recap / photos / recording.
 - `cancelled`: Cancelled.
 
@@ -117,7 +117,7 @@ talks:
 speakers:
   - juan-jose-cardona
 sponsors: []
-status: scheduled
+status: announced
 draft: false
 ---
 ```

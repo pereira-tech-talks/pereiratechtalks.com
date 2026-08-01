@@ -4,10 +4,10 @@ title:
   es: Pereira Tech Day 2026
 tagline:
   en: The next chapter — registration opens soon.
-  es: The next chapter — registration opens soon.
+  es: El siguiente capítulo — las inscripciones abren pronto.
 description:
-  en: A historical Pereira Tech Day edition (2026). Detailed program, photos, and speaker lineup are pending recovery from community archives.
-  es: Edición histórica de Pereira Tech Day (2026). El programa detallado, las fotos y la lista de ponentes están pendientes de recuperación desde los archivos de la comunidad.
+  en: The 2026 edition of Pereira Tech Day, the community's annual flagship conference. The organizing team, allied communities, and first confirmed sponsors are in place; the program and speaker lineup are still being assembled.
+  es: La edición 2026 de Pereira Tech Day, la conferencia anual insignia de la comunidad. El equipo organizador, las comunidades aliadas y los primeros patrocinadores confirmados ya están definidos; el programa y la lista de ponentes aún se están armando.
 date: 2026-09-26
 venue:
   name: Pereira, Colombia
@@ -32,9 +32,46 @@ brandKit:
 schedule: []
 keynotes: []
 lightningTalks: []
-sponsors: []
-organizers: []
-communities: []
+sponsors:
+  - slug: ase-utp
+    tier: gold
+  - slug: github
+    tier: gold
+  - slug: veritran
+    tier: gold
+  - slug: dailybot
+    tier: bronze
+organizers:
+  - santiago-bernal
+  - sebastian-agudelo
+  - andres-torres
+  - sebastian-franco
+  - eliana-osorio
+  - mega-barto
+  - sergio-florez
+  - melisa-escobar
+  - katherine-lopez
+  - luisa-banol
+  - sergio-estrella
+communities:
+  - name: Python Pereira
+    logo: /images/communities/pypereira.png
+    url: "https://pypereira.co/"
+  - name: JointDev
+    logo: /images/communities/jointdev.png
+    url: "https://jointdevweb.firebaseapp.com/"
+  - name: PereiraJS
+    logo: /images/communities/perjs.jpeg
+    url: "https://perjs.org/"
+  - name: Pereira Tech Talks
+    logo: /images/communities/ptt.png
+    url: "https://pereiratechtalks.org/"
+  - name: QA Conf
+    logo: /images/communities/qaconf.png
+    url: "https://qaconf.co"
+  - name: Backbone UTP
+    logo: /images/communities/backbone-utp.png
+    url: "https://backboneutp.com"
 gallery: []
 status: announced
 draft: false
