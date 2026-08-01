@@ -3,17 +3,19 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 EventEmitter.defaultMaxListeners = 20;
-import { unified } from '@astrojs/markdown-remark';
+import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwindcss from '@tailwindcss/vite';
 // @ts-check
 import { defineConfig } from 'astro/config';
-import rehypeExternalLinks from 'rehype-external-links';
-import { rehypeImageDefaults } from './src/lib/rehype-image-defaults.mjs';
 
 import excludeInternal from './src/integrations/exclude-internal';
+import {
+  satteriExternalLinks,
+  satteriImageDefaults,
+} from './src/lib/satteri-plugins';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,20 +29,12 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   markdown: {
-    // Astro 7: `markdown.remarkPlugins` / `rehypePlugins` / `remarkRehype` are
-    // replaced by an explicit processor. `unified()` is the same remark/rehype
-    // pipeline Astro used before, now configured directly.
-    processor: unified({
-      rehypePlugins: [
-        [
-          rehypeExternalLinks,
-          {
-            target: '_blank',
-            rel: ['noopener', 'noreferrer'],
-          },
-        ],
-        rehypeImageDefaults,
-      ],
+    // Astro 7 ships Sätteri (the Rust Markdown/MDX compiler) as the default
+    // compiler. It does not run remark/rehype plugins, so our former rehype
+    // plugins are ported to Sätteri HAST plugins. `@astrojs/mdx` inherits this
+    // processor automatically, so `.md` and `.mdx` share the same pipeline.
+    processor: satteri({
+      hastPlugins: [satteriExternalLinks(), satteriImageDefaults()],
     }),
   },
   integrations: [

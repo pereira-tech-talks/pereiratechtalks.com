@@ -39,7 +39,8 @@ This is **v3.0.0** — the third major iteration of the website, rebuilt on the 
 
 **Technology Stack:**
 
-- **Astro 7.x** — Static site generator (islands architecture). The Rust Markdown/Astro compiler is the default (the old `experimental.rustCompiler` flag was removed), and the Markdown pipeline is configured via `markdown.processor: unified({ … })` from `@astrojs/markdown-remark` — not the deprecated `markdown.remarkPlugins`/`rehypePlugins` keys
+- **Astro 7.x** — Static site generator (islands architecture). The Rust `.astro` compiler is the default (the old `experimental.rustCompiler` flag was removed)
+- **Sätteri** — the Rust Markdown/MDX compiler, configured via `markdown.processor: satteri({ hastPlugins: [...] })` from `@astrojs/markdown-satteri`. It does **not** run remark/rehype plugins: markdown transforms live in `src/lib/satteri-plugins.ts` as HAST plugins. `@astrojs/mdx` inherits the processor, so `.md` and `.mdx` share one pipeline. **Never** add `markdown.remarkPlugins`/`rehypePlugins` (deprecated) or a `rehype-*` dependency — port the transform to a Sätteri HAST plugin instead
 - **Svelte 5.x** — Interactive components (with `client:visible`/`client:idle`/`client:only` hydration directives)
 - **TypeScript 6.x** — Type-safe development. **Pinned to 6.x on purpose:** TypeScript 7's native compiler does not yet expose the programmatic API `astro check` relies on, so upgrading breaks the type-check gate. Do not bump until [withastro/roadmap#1321](https://github.com/withastro/roadmap/discussions/1321) ships
 - **Tailwind CSS 4.x** — Utility-first styling with the PTT `@theme` token system
