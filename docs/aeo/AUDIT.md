@@ -3,7 +3,7 @@
 **Date:** Template — to be populated post-launch.
 **Auditor:** _Pending — recommend running the `security-auditor` and `architect` agents jointly._
 **Site:** https://pereiratechtalks.org
-**Stack:** Astro 5.16.15 (SSG), Svelte 5.48, TypeScript 5.9, Tailwind CSS 4.1, Biome 2.3
+**Stack:** Astro 7.1.6 (SSG, Sätteri Markdown compiler), Svelte 5.56, TypeScript 6.0, Tailwind CSS 4.3, Biome 2.5
 **Content scope:** Bilingual (EN/ES) blog, slides, meetups, events, Pereira Tech Days editions (per-edition brand kits), verticals, speakers, talks, contributors, sponsors, channels.
 
 > **Note:** The previous audit on this file was for a different site (a personal blog migrated into PTT v3.0.0). It has been retired. This template captures the audit shape so that the next agent or auditor can run a clean baseline assessment for PTT once the v3.0.0 launch content is in place.

@@ -127,6 +127,7 @@ src/
 │   ├── i18n.ts              # Centralized i18n config & utilities
 │   ├── constances.ts        # Site constants
 │   ├── enum.ts              # Shared enums
+│   ├── satteri-plugins.ts   # Sätteri HAST plugins (Markdown transforms)
 │   ├── types.ts             # TypeScript types
 │   └── translations/        # Modular translation system
 │       ├── index.ts         # Public API barrel: getTranslations(), re-exports
@@ -393,6 +394,39 @@ Post content in Markdown or MDX...
 ```
 
 For complete blog post documentation including hero layouts, image organization, and naming conventions, see **[Blog Posts Feature Guide](features/BLOG_POSTS.md)**.
+
+### Markdown Pipeline — Sätteri (Astro 7)
+
+Markdown and MDX are compiled by **Sätteri**, the Rust-powered compiler (pulldown-cmark + Oxc) that is Astro 7's default processor. It is configured once in `astro.config.mjs`:
+
+```javascript
+import { satteri } from '@astrojs/markdown-satteri';
+import {
+  satteriExternalLinks,
+  satteriImageDefaults,
+} from './src/lib/satteri-plugins';
+
+export default defineConfig({
+  markdown: {
+    processor: satteri({
+      hastPlugins: [satteriExternalLinks(), satteriImageDefaults()],
+    }),
+  },
+});
+```
+
+**Critical constraint:** Sätteri does **not** run remark/rehype plugins. The legacy `markdown.remarkPlugins` / `rehypePlugins` / `remarkRehype` keys are deprecated and must not be used, and no `rehype-*` / `remark-*` dependency should be added. Content transforms are written as **HAST plugins** in [`src/lib/satteri-plugins.ts`](../src/lib/satteri-plugins.ts):
+
+| Plugin | Applies to | Effect |
+|--------|-----------|--------|
+| `satteriExternalLinks()` | `<a>` | Adds `target="_blank"` + `rel="noopener noreferrer"` to `http(s)` links |
+| `satteriImageDefaults()` | `<img>` | Adds `loading="lazy"` and `decoding="async"` when not already set |
+
+A HAST plugin declares the tags it cares about via `element.filter`, and mutates nodes **through the visitor context** (`ctx.setProperty(...)`) rather than by writing to the tree directly — the context is what mirrors changes back into the Rust arena.
+
+`@astrojs/mdx` inherits `markdown.processor` automatically, so `.md` and `.mdx` share one pipeline. To add a transform, write a new HAST plugin in `satteri-plugins.ts` and register it in the `hastPlugins` array.
+
+> **A note on `@astrojs/markdown-remark`.** Astro 7 still ships `unified()` as a compatibility path for projects that depend on the old remark/rehype ecosystem. This repo deliberately does **not** use it — Sätteri is the supported default and the faster pipeline.
 
 ## Routing System
 

@@ -4,7 +4,7 @@
 
 **Pereira Tech Talks** (PTT) is the bilingual technology community of Pereira, Risaralda, Colombia. The website at `pereiratechtalks.org` is the public face and operational backbone of the community — a platform for monthly meetups, the flagship Pereira Tech Day annual conference, the Speaker School, the verticals (La Biblioteca del Mañana, AI channel, and others), and the bilingual blog and slide deck library that comes out of all of it.
 
-This document covers v3.0.0 — a full rewrite that replaced the previous PTT site (xergioalex.com-based clone) with a community-first, AI-agent-friendly, bilingual platform built on the Astro 5 / Svelte 5 / Tailwind 4 stack.
+This document covers v3.0.0 — a full rewrite that replaced the previous PTT site (xergioalex.com-based clone) with a community-first, AI-agent-friendly, bilingual platform built on the Astro 7 / Svelte 5 / Tailwind 4 stack.
 
 ## Brand Positioning
 

@@ -105,7 +105,7 @@ Key configuration:
 
 - **Environment:** `happy-dom` (lightweight DOM for tests)
 - **Path aliases:** `@/` maps to `src/` (matches tsconfig)
-- **Svelte support:** `@sveltejs/vite-plugin-svelte` with `hot: false`
+- **Svelte support:** `@sveltejs/vite-plugin-svelte` (plain `svelte()` — the `hot` option was removed in v7; HMR is already off outside dev)
 - **Browser resolve:** `conditions: ['browser']` required for Svelte 5 component tests
 - **astro:content mock:** Aliased to `tests/mocks/astro-content.ts` since Vitest cannot resolve Astro virtual modules
 

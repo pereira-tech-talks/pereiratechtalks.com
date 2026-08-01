@@ -64,7 +64,7 @@ Add or expand tests for existing code. This skill creates or extends test files 
 - **Config:** `vitest.config.ts` at project root
 - **Environment:** happy-dom
 - **Path aliases:** `@/` maps to `src/` (matches tsconfig)
-- **Svelte:** `@sveltejs/vite-plugin-svelte` with `hot: false`
+- **Svelte:** `@sveltejs/vite-plugin-svelte` — plain `svelte()`, no options. The `hot` option was removed in v7; HMR is already disabled outside dev, so tests need no explicit opt-out
 - **Browser resolve:** `conditions: ['browser']` for Svelte 5 component tests
 - **astro:content mock:** `tests/mocks/astro-content.ts` (aliased in vitest config)
 

@@ -18,6 +18,13 @@
     production until allowlisted.
   - **Reveal.js CSS/JS imported outside `SlideLayout.astro`** (e.g. into `MainLayout`
     or a shared component) — leaks deck assets onto every route.
+  - **remark/rehype reintroduced into the Markdown pipeline.** Adding
+    `markdown.remarkPlugins` / `rehypePlugins` / `remarkRehype` to `astro.config.mjs`,
+    switching `markdown.processor` back to `unified()`, or adding a `rehype-*` /
+    `remark-*` / `unist-*` dependency. This repo compiles Markdown with **Sätteri**
+    (`markdown.processor: satteri({ hastPlugins: [...] })`), which does not run
+    remark/rehype plugins — the transform silently never runs. Port it to a HAST
+    plugin in `src/lib/satteri-plugins.ts` instead.
   - **Placeholder content shipped.** `[AUTHOR:`, `[AUTOR:`, `[TODO:`, `[TBD]`,
     `[FIXME]` or any bracketed "fill-in-later" text in `src/content/**`.
   - **Secret committed.** Any API key / token / `PUBLIC_GOOGLE_SITE_VERIFICATION`
