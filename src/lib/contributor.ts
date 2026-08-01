@@ -34,6 +34,20 @@ export const getContributorBySlug = async (
   return all.find((c) => c.id === slug);
 };
 
+/**
+ * Resolve a list of contributor slugs, preserving the caller's order (e.g. the
+ * `organizers` array on a Pereira Tech Day edition). Unknown slugs are dropped
+ * rather than rendered as raw text.
+ */
+export const getContributorsBySlugs = async (
+  slugs: string[]
+): Promise<Contributor[]> => {
+  const all = await getContributors();
+  return slugs
+    .map((slug) => all.find((c) => c.id === slug))
+    .filter((c): c is Contributor => Boolean(c));
+};
+
 export const getOrganizers = async (): Promise<Contributor[]> => {
   const all = await getActiveContributors();
   return all.filter(

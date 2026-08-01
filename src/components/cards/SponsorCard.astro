@@ -12,11 +12,17 @@ interface Props {
   sponsor: CollectionEntry<'sponsors'>;
   lang: Language;
   loading?: 'lazy' | 'eager';
+  /**
+   * Overrides the sponsor's default tier. Used when a card is rendered in the
+   * context of a specific Pereira Tech Day edition, where the tier recorded on
+   * that edition wins over the sponsor's own.
+   */
+  tier?: CollectionEntry<'sponsors'>['data']['tier'];
 }
 
-const { sponsor, lang, loading = 'lazy' } = Astro.props;
+const { sponsor, lang, loading = 'lazy', tier: tierProp } = Astro.props;
 
-const tier = sponsor.data.tier;
+const tier = tierProp ?? sponsor.data.tier;
 const tierLabel: Record<typeof tier, { en: string; es: string }> = {
   diamond: { en: 'Diamond', es: 'Diamante' },
   gold: { en: 'Gold', es: 'Oro' },
@@ -38,8 +44,8 @@ const sameLogo = logoLight === logoDark;
   rel="noopener noreferrer"
   class="group flex h-full min-w-0 flex-col rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
-  <div class="flex items-start justify-between gap-4">
-    <div class="flex h-16 w-32 items-center">
+  <div class="flex flex-wrap items-start justify-between gap-3 sm:gap-4">
+    <div class="flex h-16 w-32 max-w-full min-w-0 items-center">
       {
         sameLogo ? (
           <img decoding="async"
