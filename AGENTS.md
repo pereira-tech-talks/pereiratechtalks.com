@@ -39,9 +39,9 @@ This is **v3.0.0** — the third major iteration of the website, rebuilt on the 
 
 **Technology Stack:**
 
-- **Astro 6.x** — Static site generator (islands architecture)
+- **Astro 7.x** — Static site generator (islands architecture). The Rust Markdown/Astro compiler is the default (the old `experimental.rustCompiler` flag was removed), and the Markdown pipeline is configured via `markdown.processor: unified({ … })` from `@astrojs/markdown-remark` — not the deprecated `markdown.remarkPlugins`/`rehypePlugins` keys
 - **Svelte 5.x** — Interactive components (with `client:visible`/`client:idle`/`client:only` hydration directives)
-- **TypeScript 6.x** — Type-safe development
+- **TypeScript 6.x** — Type-safe development. **Pinned to 6.x on purpose:** TypeScript 7's native compiler does not yet expose the programmatic API `astro check` relies on, so upgrading breaks the type-check gate. Do not bump until [withastro/roadmap#1321](https://github.com/withastro/roadmap/discussions/1321) ships
 - **Tailwind CSS 4.x** — Utility-first styling with the PTT `@theme` token system
 - **Biome 2.x** — Linter and formatter (replaces ESLint + Prettier)
 - **MDX** — Enhanced Markdown for blog posts

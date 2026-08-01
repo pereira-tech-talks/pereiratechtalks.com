@@ -2,7 +2,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [svelte({ hot: false })],
+  // `hot: false` was removed in @sveltejs/vite-plugin-svelte 7 — HMR is already
+  // disabled outside dev/serve, so test runs need no explicit opt-out.
+  plugins: [svelte()],
   resolve: {
     conditions: ['browser'],
     alias: {

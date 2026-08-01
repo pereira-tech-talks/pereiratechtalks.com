@@ -3,6 +3,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 EventEmitter.defaultMaxListeners = 20;
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
@@ -19,24 +20,28 @@ const __dirname = dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    rustCompiler: true,
-  },
+  // Astro 7 ships the Rust Markdown/Astro compiler as the default — the former
+  // `experimental.rustCompiler` flag was removed, so there is nothing to opt into.
   site: 'https://pereiratechtalks.org',
   build: {
     inlineStylesheets: 'always',
   },
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer'],
-        },
+    // Astro 7: `markdown.remarkPlugins` / `rehypePlugins` / `remarkRehype` are
+    // replaced by an explicit processor. `unified()` is the same remark/rehype
+    // pipeline Astro used before, now configured directly.
+    processor: unified({
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener', 'noreferrer'],
+          },
+        ],
+        rehypeImageDefaults,
       ],
-      rehypeImageDefaults,
-    ],
+    }),
   },
   integrations: [
     mdx(),

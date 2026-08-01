@@ -1,7 +1,7 @@
 # AI Diff Reviewer — repo extension for `pereiratechtalks.org` v3
 
 > Layered on top of the shipped default review prompt. Anchors severity to this
-> repo's real conventions (Astro 6 SSG + Svelte 5 islands + TS 6 + Tailwind 4
+> repo's real conventions (Astro 7 SSG + Svelte 5 islands + TS 6 + Tailwind 4
 > `@theme` PTT tokens + Biome 2, pnpm, bilingual ES-primary/EN static site on
 > Cloudflare Pages). Adapt as conventions evolve — see `AGENTS.md`.
 
