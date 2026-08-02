@@ -40,7 +40,7 @@ export const GET: APIRoute = () => {
       {
         heading: 'Cómo iniciar la conversación',
         lines: [
-          `- Formulario: ${SITE_URL}/contact/?reason=collaboration`,
+          `- Formulario: ${SITE_URL}/contact/?topic=collaboration`,
           '- Correo: hello@pereiratechtalks.org',
           '- Cuéntanos qué te interesa apoyar (un meetup, un programa, Pereira Tech Day, becas) y te mandamos un sponsor deck a la medida.',
         ],

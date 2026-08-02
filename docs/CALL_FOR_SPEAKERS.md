@@ -2,7 +2,7 @@
 
 Pereira Tech Talks runs an **always-open** Call for Speakers. We accept proposals year-round for monthly meetups, special events, and the annual Pereira Tech Day.
 
-> **Apply now:** [`/cfs`](https://pereiratechtalks.org/cfs) (English) · [`/es/cfp`](https://pereiratechtalks.org/es/cfp) (Spanish).
+> **Apply now:** [`/call-for-speakers`](https://pereiratechtalks.org/call-for-speakers) (Spanish primary) · [`/en/call-for-speakers`](https://pereiratechtalks.org/en/call-for-speakers) (English).
 
 ## What we look for
 

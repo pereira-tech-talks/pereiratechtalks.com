@@ -161,10 +161,12 @@ The contact form (`ContactForm.svelte` + optional Cloudflare Pages Function at `
 | Input bounds | Subject ≤ 140 chars, message ≤ 2000 chars (`sanitizeContactText`) |
 | Email format | Basic pattern check before submit |
 | No secrets in client | API keys for Resend live only in Cloudflare env vars, never in the Astro bundle |
-| Rate limiting | Enforced at the Cloudflare Function layer (document expected limits in function code) |
-| Validation tests | `tests/unit/lib/contact-form.test.ts` covers happy path, honeypot, and invalid reason |
+| Rate limiting | Isolate-local sliding window on `functions/api/contact.ts` (default 8 / 10 min via `CONTACT_RATE_LIMIT` / `CONTACT_RATE_WINDOW_MS`). Not a global Durable Object — best-effort per isolate. |
+| Turnstile | Deferred — `CONTACT_TURNSTILE_SECRET` reserved; not enforced until wired |
+| Auto-ack | Resend best-effort to submitter after inbox send; ack failure does not fail the request |
+| Validation tests | `tests/unit/lib/contact-form.test.ts` covers topics, CFS/sponsor, honeypot, rate-limit helper, ack copy |
 
-Prefill query params (`topic`, `subject`, `message`) are sanitized on mount; never render raw query strings as HTML.
+Prefill query params (`topic` preferred, legacy `reason` alias, plus `subject`, `message`) are sanitized on mount; never render raw query strings as HTML.
 
 ### External Links
 

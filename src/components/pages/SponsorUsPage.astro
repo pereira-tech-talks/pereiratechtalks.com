@@ -7,32 +7,31 @@
  * subject. No standalone backend wired here.
  */
 
+import SponsorInquiryForm from '@/components/contact/SponsorInquiryForm.svelte';
 import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { CONTACT_FORM } from '@/lib/constances';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getActiveSponsors } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+const tr = getTranslations(lang);
+const page = tr.sponsorUsPage;
 
 const sponsors = await getActiveSponsors();
 
 const t = {
-  title: lang === 'es' ? 'Patrocínanos' : 'Sponsor us',
-  description:
-    lang === 'es'
-      ? 'Conecta tu marca con la comunidad técnica más activa del Eje Cafetero. Desde 2014 hemos llevado a cabo más de 90 meetups y 7 ediciones de Pereira Tech Day.'
-      : 'Connect your brand with the most active technical community in the Eje Cafetero. Since 2014 we have run 90+ meetups and 7 Pereira Tech Day editions.',
-  intro:
-    lang === 'es'
-      ? 'Patrocinar a Pereira Tech Talks no es publicidad: es construir comunidad. Cada peso aportado se traduce en venues accesibles, comida para asistentes, becas para Speaker School, transporte para ponentes invitados y eventos abiertos a toda la región.'
-      : "Sponsoring Pereira Tech Talks is not advertising — it's building community. Every dollar translates into accessible venues, food for attendees, Speaker School scholarships, travel for invited speakers, and events open to the whole region.",
+  title: page.title,
+  description: page.description,
+  intro: page.intro,
   reachTitle: lang === 'es' ? 'Alcance estimado' : 'Estimated reach',
   reachStats: [
     {
@@ -138,7 +137,10 @@ const t = {
     lang === 'es'
       ? 'Cuéntanos qué te interesa apoyar (un meetup, un programa, Pereira Tech Day, becas) y te mandamos un sponsor deck a la medida.'
       : 'Tell us what you want to support (a meetup, a program, Pereira Tech Day, scholarships) and we will send a tailored sponsor deck.',
-  ctaButton: lang === 'es' ? 'Solicitar sponsor deck' : 'Request sponsor deck',
+  ctaButton:
+    lang === 'es'
+      ? 'Enviar consulta de patrocinio'
+      : 'Send sponsorship inquiry',
   currentSponsorsTitle:
     lang === 'es'
       ? 'Empresas que ya nos apoyan'
@@ -153,10 +155,7 @@ const breadcrumbs = [
   { label: t.title },
 ];
 
-const subjectParam = encodeURIComponent(
-  lang === 'es' ? 'Solicitud de sponsor deck' : 'Sponsor deck request'
-);
-const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${subjectParam}`;
+const ctaHref = '#sponsor-form';
 ---
 
 <MainLayout lang={lang} title={t.title} description={t.description}>
@@ -274,18 +273,17 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${s
     )
   }
 
-  <div class="bg-ptt-bg-dark text-white py-16">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
-        {t.ctaTitle}
-      </h2>
-      <p class="mt-3 text-white/85">{t.ctaDescription}</p>
-      <a
-        href={ctaHref}
-        class="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
-      >
-        {t.ctaButton}
-      </a>
+  <Section
+    id="sponsor-form"
+    eyebrow={page.formEyebrow}
+    title={page.formSectionTitle}
+  >
+    <div class="max-w-2xl mx-auto">
+      <SponsorInquiryForm
+        client:visible
+        lang={lang}
+        apiEndpoint={CONTACT_FORM.apiEndpoint}
+      />
     </div>
-  </div>
+  </Section>
 </MainLayout>

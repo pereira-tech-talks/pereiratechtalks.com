@@ -26,7 +26,7 @@ La contribución de mayor apalancamiento: trae un tema, comparte lo que has apre
 
 Si ya has dado charlas, lo más multiplicador que puedes hacer es acompañar a alguien preparando la primera. Las cohortes de Speaker School siempre necesitan mentores.
 
-- Escríbenos por el [formulario de contacto](/contact/?reason=collaboration) con asunto "Mentor en Speaker School" y cuéntanos tu área.
+- Escríbenos por el [formulario de contacto](/contact/?topic=collaboration) con asunto "Mentor en Speaker School" y cuéntanos tu área.
 
 ### 3. Lidera o co-lidera un programa (vertical)
 
@@ -45,7 +45,7 @@ Logística, comunicación, fotografía, grabación, hospedaje, conducción. Son 
 El blog bilingüe es parte de cómo conectamos a Pereira con el ecosistema tech global. Publicamos recaps, deep-dives técnicos, charlas convertidas en ensayos y reflexiones comunitarias.
 
 - Trae un tema, un ángulo y un borrador. Co-escribimos y editamos antes de publicar.
-- Abre la conversación con el [formulario de contacto](/contact/?reason=collaboration) con asunto "Contribución al blog".
+- Abre la conversación con el [formulario de contacto](/contact/?topic=collaboration) con asunto "Contribución al blog".
 
 ### 6. Conecta a un patrocinador
 

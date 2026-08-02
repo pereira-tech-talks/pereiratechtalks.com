@@ -74,6 +74,12 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   }
 
   const data = raw as Record<string, unknown>;
+  const website =
+    typeof data.website === 'string' ? data.website.trim() : '';
+  if (website) {
+    // Honeypot — pretend success
+    return jsonResponse({ ok: true }, 200, origin);
+  }
   const email =
     typeof data.email === 'string' ? data.email.trim().toLowerCase().slice(0, 254) : '';
   const year = typeof data.year === 'number' ? data.year : 2026;

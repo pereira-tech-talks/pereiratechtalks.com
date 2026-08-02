@@ -33,7 +33,7 @@ export const GET: APIRoute = () => {
       {
         heading: 'Cómo aplicar',
         lines: [
-          `- Envía tu propuesta por el formulario de contacto: ${SITE_URL}/contact/?reason=speaker`,
+          `- Envía tu propuesta por el formulario de contacto: ${SITE_URL}/contact/?topic=tech-talk`,
           '- O escribe a hello@pereiratechtalks.org con asunto "Convocatoria de ponentes"',
           '- Incluye: título propuesto, abstract (150–300 palabras), bio, idioma, formato deseado',
         ],

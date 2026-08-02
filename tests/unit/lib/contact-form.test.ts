@@ -1,9 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  checkRateLimit,
+  composeCfsMessage,
   isValidContactEmail,
+  normalizeTopic,
+  pickAckCopy,
+  resolveTopicFromSearchParams,
   sanitizeContactText,
+  validateCfsForm,
   validateContactForm,
+  validateSponsorForm,
 } from '@/lib/contact-form';
 
 describe('contact-form', () => {
@@ -22,8 +29,31 @@ describe('contact-form', () => {
     expect(isValidContactEmail('not-an-email')).toBe(false);
   });
 
+  it('normalizes topic aliases', () => {
+    expect(normalizeTopic('project')).toBe('sponsorship');
+    expect(normalizeTopic('speaker')).toBe('tech-talk');
+    expect(normalizeTopic('REASON')).toBe('reason');
+    expect(normalizeTopic('press')).toBe('press');
+  });
+
+  it('resolves topic from topic or legacy reason query params', () => {
+    const allowed = new Set(['tech-talk', 'sponsorship', 'general']);
+    expect(
+      resolveTopicFromSearchParams(
+        new URLSearchParams('topic=tech-talk'),
+        allowed
+      )
+    ).toBe('tech-talk');
+    expect(
+      resolveTopicFromSearchParams(
+        new URLSearchParams('reason=project'),
+        allowed
+      )
+    ).toBe('sponsorship');
+  });
+
   it('accepts a complete valid form', () => {
-    const allowed = new Set(['general', 'tech-talk']);
+    const allowed = new Set(['general', 'tech-talk', 'sponsorship']);
     const result = validateContactForm(
       {
         name: 'Ada',
@@ -36,13 +66,22 @@ describe('contact-form', () => {
       messages
     );
     expect(result.valid).toBe(true);
-    expect(result.errors).toEqual({
-      name: '',
-      email: '',
-      reason: '',
-      subject: '',
-      message: '',
-    });
+  });
+
+  it('accepts sponsorship alias project when allowlist has sponsorship', () => {
+    const allowed = new Set(['sponsorship']);
+    const result = validateContactForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        reason: 'project',
+        subject: 'Sponsor',
+        message: 'We want to help',
+      },
+      allowed,
+      messages
+    );
+    expect(result.valid).toBe(true);
   });
 
   it('rejects honeypot submissions', () => {
@@ -77,5 +116,93 @@ describe('contact-form', () => {
     );
     expect(result.valid).toBe(false);
     expect(result.errors.reason).toBe('Required');
+  });
+
+  it('validates CFS payloads', () => {
+    const ok = validateCfsForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        reason: 'tech-talk',
+        subject: 'CFS',
+        message: 'notes',
+        talkTitle: 'Rust at the edge',
+        format: 'regular',
+        abstract: 'A long enough abstract about shipping Rust in production.',
+        takeaways: 'When to choose Rust',
+        socialUrl: 'https://linkedin.com/in/ada',
+        firstTime: true,
+        speakerSchool: true,
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const bad = validateCfsForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        reason: 'tech-talk',
+        subject: 'CFS',
+        message: '',
+        talkTitle: '',
+        format: 'nope',
+        abstract: 'short',
+        takeaways: '',
+        socialUrl: '',
+        firstTime: false,
+        speakerSchool: false,
+      },
+      messages
+    );
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.talkTitle).toBe('Required');
+  });
+
+  it('validates sponsor payloads and composes CFS message', () => {
+    const ok = validateSponsorForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        reason: 'sponsorship',
+        subject: 'Sponsor',
+        message: 'We want Diamond support for PTD.',
+        company: 'Acme',
+        contactRole: 'CMO',
+        tierInterest: 'gold',
+        contributionType: 'cash',
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const composed = composeCfsMessage({
+      name: 'Ada',
+      email: 'ada@example.com',
+      reason: 'tech-talk',
+      subject: 'CFS',
+      message: 'Extra',
+      talkTitle: 'Title',
+      format: 'lightning',
+      abstract: 'Abstract body here for the talk proposal.',
+      takeaways: 'Takeaway',
+      socialUrl: 'https://x.com/ada',
+      firstTime: false,
+      speakerSchool: false,
+    });
+    expect(composed).toContain('Talk title: Title');
+    expect(composed).toContain('Additional notes:');
+  });
+
+  it('picks bilingual ack copy and rate-limits', () => {
+    const es = pickAckCopy('tech-talk', 'es');
+    expect(es.subject.toLowerCase()).toContain('postulación');
+    const en = pickAckCopy('sponsorship', 'en');
+    expect(en.subject.toLowerCase()).toContain('sponsorship');
+
+    const store = new Map<string, number[]>();
+    expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(true);
+    expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(true);
+    expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(false);
   });
 });

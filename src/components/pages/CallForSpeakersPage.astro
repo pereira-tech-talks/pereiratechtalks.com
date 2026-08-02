@@ -1,118 +1,33 @@
 ---
 /**
- * PTT v3.0.0 Call for Speakers landing page.
- *
- * Informational page that explains the CFS process and links to the contact
- * form with a prefilled subject. No standalone backend wired here — the
- * contact form already covers submission.
+ * Call for Speakers — process copy + structured application form.
  */
 
+import SpeakersApplicationForm from '@/components/contact/SpeakersApplicationForm.svelte';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { CONTACT_FORM } from '@/lib/constances';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
-
-const t = {
-  title: lang === 'es' ? 'Call for Speakers' : 'Call for Speakers',
-  description:
-    lang === 'es'
-      ? '¿Quieres compartir lo que sabes en Pereira Tech Talks? Esta es la guía para postular tu charla a meetups, Pereira Tech Days o nuestros programas.'
-      : 'Want to share what you know at Pereira Tech Talks? This is the guide to submit your talk for meetups, Pereira Tech Days, or our programs.',
-  intro:
-    lang === 'es'
-      ? 'Buscamos voces nuevas y experimentadas, locales e internacionales. Si tienes algo que aporte a la comunidad —una charla técnica, un panel, un workshop, una lightning— queremos escucharte.'
-      : 'We look for new and seasoned voices, local and international. If you have something to bring to the community — a technical talk, a panel, a workshop, a lightning — we want to hear from you.',
-  whatWeLookForTitle: lang === 'es' ? '¿Qué buscamos?' : 'What we look for',
-  whatWeLookFor:
-    lang === 'es'
-      ? [
-          'Contenido técnico real: experiencia de producción, arquitectura, postmortems, ingeniería honesta.',
-          'Charlas accesibles: no necesitas ser senior para postular. La Speaker School está pensada para acompañarte.',
-          'Diversidad de perspectivas: género, ciudad, nivel, lenguaje (EN/ES), industria.',
-          'Temas relevantes: AI/ML, web platforms, devops, mobile, security, data, product engineering, leadership.',
-        ]
-      : [
-          'Real technical content: production experience, architecture, postmortems, honest engineering.',
-          "Accessible talks: you don't need to be senior to apply. The Speaker School is designed to support you.",
-          'Diverse perspectives: gender, city, level, language (EN/ES), industry.',
-          'Relevant topics: AI/ML, web platforms, devops, mobile, security, data, product engineering, leadership.',
-        ],
-  formatsTitle: lang === 'es' ? 'Formatos disponibles' : 'Available formats',
-  formats: [
-    {
-      name: lang === 'es' ? 'Charla regular (25 min)' : 'Regular talk (25 min)',
-      description:
-        lang === 'es'
-          ? 'El formato estándar de meetup. Tema técnico con espacio para preguntas.'
-          : 'The standard meetup format. Technical topic with space for questions.',
-    },
-    {
-      name: lang === 'es' ? 'Lightning (5–10 min)' : 'Lightning (5–10 min)',
-      description:
-        lang === 'es'
-          ? 'Idea precisa, ejemplo, demo o reflexión. Ideal para primera charla.'
-          : 'Sharp idea, example, demo or reflection. Ideal for a first talk.',
-    },
-    {
-      name: lang === 'es' ? 'Panel (40 min)' : 'Panel (40 min)',
-      description:
-        lang === 'es'
-          ? 'Conversación moderada con 2–3 voces sobre un tema. Aplican grupos.'
-          : 'Moderated conversation with 2–3 voices on a topic. Groups can apply.',
-    },
-    {
-      name: lang === 'es' ? 'Workshop (90 min)' : 'Workshop (90 min)',
-      description:
-        lang === 'es'
-          ? 'Sesión práctica con asistentes que llevan laptop. Aplica para audiencia técnica activa.'
-          : 'Hands-on session where attendees bring laptops. For active technical audiences.',
-    },
-  ],
-  processTitle: lang === 'es' ? 'Cómo postular' : 'How to apply',
-  process:
-    lang === 'es'
-      ? [
-          'Escríbenos por el formulario de contacto con el asunto "Call for Speakers".',
-          'Cuéntanos: tema, formato propuesto, abstract de 3–5 líneas y mínimo un dato sobre ti (LinkedIn, blog, repo).',
-          'Te respondemos en máximo 7 días para alinear fecha y formato.',
-          'Si es tu primera vez, te conectamos con la Speaker School para preparar tu charla con apoyo.',
-        ]
-      : [
-          'Write us through the contact form with the subject "Call for Speakers".',
-          'Tell us: topic, proposed format, 3–5 line abstract, and at least one link about you (LinkedIn, blog, repo).',
-          'We reply within 7 days to align on date and format.',
-          "If it's your first time, we connect you with the Speaker School to prepare with support.",
-        ],
-  ctaTitle:
-    lang === 'es' ? '¿Tienes una idea? Cuéntanos' : 'Have an idea? Tell us',
-  ctaDescription:
-    lang === 'es'
-      ? 'Estamos disponibles todo el año para revisar propuestas. La cabecera principal de Pereira Tech Day también acepta postulaciones formales entre marzo y junio cada año.'
-      : 'We review proposals year-round. The main Pereira Tech Day stage also takes formal submissions between March and June each year.',
-  ctaButton: lang === 'es' ? 'Postular mi charla' : 'Submit my talk',
-};
+const tr = getTranslations(lang);
+const t = tr.cfsPage;
+const prefix = getUrlPrefix(lang);
 
 const breadcrumbs = [
   {
     label: lang === 'es' ? 'Inicio' : 'Home',
-    href: `${getUrlPrefix(lang)}/`,
+    href: `${prefix}/`,
   },
   { label: t.title },
 ];
-
-const subjectParam = encodeURIComponent(
-  lang === 'es'
-    ? 'Postulación a Call for Speakers'
-    : 'Call for Speakers submission'
-);
-const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subjectParam}`;
 ---
 
 <MainLayout lang={lang} title={t.title} description={t.description}>
@@ -121,29 +36,36 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
       <Breadcrumbs items={breadcrumbs} onDark />
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
-      <Eyebrow variant="accent">
-        {lang === 'es' ? 'Comparte lo que sabes' : 'Share what you know'}
-      </Eyebrow>
+      <Eyebrow variant="accent">{t.eyebrow}</Eyebrow>
       <h1 class="mt-3 text-4xl sm:text-6xl font-bold tracking-tight">
         {t.title}
       </h1>
       <p class="mt-4 max-w-3xl text-lg text-white/85">{t.intro}</p>
       <a
-        href={ctaHref}
+        href="#cfs-form"
         class="mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
       >
-        {t.ctaButton}
+        {tr.cfsForm.submitButton}
       </a>
     </div>
   </div>
 
-  <Section eyebrow={lang === 'es' ? 'Criterios' : 'Criteria'} title={t.whatWeLookForTitle}>
+  <Section eyebrow={t.criteriaEyebrow} title={t.whatWeLookForTitle}>
     <ul class="grid gap-4 sm:grid-cols-2 list-none">
       {
         t.whatWeLookFor.map((item) => (
           <li class="flex items-start gap-3 rounded-xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-5">
-            <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
             </svg>
             <p class="text-ptt-secondary">{item}</p>
           </li>
@@ -152,44 +74,34 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
     </ul>
   </Section>
 
-  <Section
-    eyebrow={lang === 'es' ? 'Formatos' : 'Formats'}
-    title={t.formatsTitle}
-    surface="alt"
-  >
+  <Section eyebrow={t.formatsEyebrow} title={t.formatsTitle} surface="alt">
     <ul class="grid gap-6 sm:grid-cols-2 list-none">
       {
         t.formats.map((format) => (
           <li class="rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-6">
-            <h3 class="text-lg font-semibold text-ptt">
-              {format.name}
-            </h3>
-            <p class="mt-2 text-ptt-secondary">
-              {format.description}
-            </p>
+            <h3 class="text-lg font-semibold text-ptt">{format.name}</h3>
+            <p class="mt-2 text-ptt-secondary">{format.description}</p>
           </li>
         ))
       }
     </ul>
   </Section>
 
-  <Section eyebrow={lang === 'es' ? 'Proceso' : 'Process'} title={t.processTitle}>
-    <ol class="space-y-4 list-decimal list-inside text-ptt-secondary marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold">
-      {
-        t.process.map((step) => (
-          <li class="text-base leading-relaxed">{step}</li>
-        ))
-      }
+  <Section eyebrow={t.processEyebrow} title={t.processTitle}>
+    <ol
+      class="space-y-4 list-decimal list-inside text-ptt-secondary marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold"
+    >
+      {t.process.map((step) => <li class="text-base leading-relaxed">{step}</li>)}
     </ol>
-    <div class="mt-10 rounded-2xl bg-ptt-bg-dark text-white p-8 sm:p-10">
-      <h3 class="text-2xl font-bold tracking-tight">{t.ctaTitle}</h3>
-      <p class="mt-3 text-white/85">{t.ctaDescription}</p>
-      <a
-        href={ctaHref}
-        class="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
-      >
-        {t.ctaButton}
-      </a>
+  </Section>
+
+  <Section id="cfs-form" eyebrow={t.formEyebrow} title={tr.cfsForm.formTitle}>
+    <div class="max-w-2xl mx-auto">
+      <SpeakersApplicationForm
+        client:visible
+        lang={lang}
+        apiEndpoint={CONTACT_FORM.apiEndpoint}
+      />
     </div>
   </Section>
 </MainLayout>

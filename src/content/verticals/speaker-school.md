@@ -91,7 +91,7 @@ La meta no es solo "dar una charla en PerTT". La meta es construir un speaker qu
 
 ## Cómo aplicar
 
-Escríbenos al [formulario de contacto](/contact/?reason=collaboration) con el asunto **"Speaker School"** y cuéntanos:
+Escríbenos al [formulario de contacto](/contact/?topic=collaboration) con el asunto **"Speaker School"** y cuéntanos:
 
 - En qué tema o charla estás pensando
 - Tu nivel de experiencia hablando en público

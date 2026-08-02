@@ -15,6 +15,7 @@ $: t = getTranslations(lang);
 let formState = 'idle';
 let email = '';
 let emailError = '';
+let website = '';
 let successRef;
 
 onMount(() => {
@@ -29,6 +30,12 @@ function validateEmail(value) {
 
 async function handleSubmit() {
   emailError = '';
+
+  if (website.trim()) {
+    // Honeypot — pretend success
+    formState = 'success';
+    return;
+  }
 
   if (!email.trim() || !validateEmail(email)) {
     emailError = t.engagement.newsletterInvalidEmail;
@@ -114,6 +121,19 @@ async function handleSubmit() {
       class="mt-4 flex flex-col gap-3 sm:flex-row"
       novalidate
     >
+      <div
+        style="position:absolute;left:-9999px;height:0;overflow:hidden;"
+        aria-hidden="true"
+      >
+        <label for="newsletter-website">Website</label>
+        <input
+          id="newsletter-website"
+          type="text"
+          tabindex="-1"
+          autocomplete="off"
+          bind:value={website}
+        />
+      </div>
       <div class="flex flex-1 flex-col">
         <label for="newsletter-email" class="sr-only">
           {t.engagement.newsletterPlaceholder}
@@ -127,7 +147,7 @@ async function handleSubmit() {
           disabled={formState === 'submitting'}
           aria-describedby={emailError ? 'newsletter-email-error' : undefined}
           aria-invalid={emailError ? 'true' : undefined}
-          class="flex-1 rounded-lg border bg-ptt-bg-elevated px-4 py-2.5 text-sm text-ptt placeholder-ptt-muted transition-colors focus:border-ptt-primary focus:outline-none focus:ring-2 focus:ring-ptt-primary/20 disabled:opacity-60 disabled:cursor-not-allowed {emailError ? 'border-ptt-danger' : 'border-ptt-border'}"
+          class="min-h-[44px] flex-1 rounded-lg border bg-ptt-bg-elevated px-4 py-2.5 text-base text-ptt placeholder-ptt-muted transition-colors focus:border-ptt-primary focus:outline-none focus:ring-2 focus:ring-ptt-primary/20 disabled:opacity-60 disabled:cursor-not-allowed {emailError ? 'border-ptt-danger' : 'border-ptt-border'}"
         />
         {#if emailError}
           <p id="newsletter-email-error" class="mt-1 text-sm text-ptt-danger" aria-live="polite">

@@ -36,6 +36,7 @@ export const EVENTS = {
   CONTACT_FORM_SUBMIT: 'contact_form_submit',
   CONTACT_FORM_ERROR: 'contact_form_error',
   NEWSLETTER_SUBSCRIBE: 'newsletter_subscribe',
+  PTD_SUBSCRIBE: 'ptd_subscribe',
   SOCIAL_CLICK: 'social_click',
   OUTBOUND_CLICK: 'outbound_click',
   SCROLL_DEPTH: 'scroll_depth',

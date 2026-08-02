@@ -121,7 +121,7 @@ We publish full quarterly summaries at `/sponsors#budget` (linking out from the 
 
 ## Process
 
-1. **Inquiry** — email <sponsors@pereiratechtalks.org> with a one-paragraph intro and the tier you're considering. We schedule a 30-min call within 7 days.
+1. **Inquiry** — use [`/sponsor-us`](https://pereiratechtalks.org/sponsor-us) or email <sponsors@pereiratechtalks.org> with a one-paragraph intro and the tier you're considering. We schedule a 30-min call within 7 days.
 2. **Mutual fit call** — we walk through your goals, our community values, and the calendar of upcoming events. We reserve the right to decline sponsorships that conflict with our values (e.g., heavy crypto-spamming, aggressive recruiting, dishonest marketing).
 3. **Proposal** — within 7 days of the call we send a tailored proposal: tier, deliverables, pricing, deliverables timeline, transparent terms.
 4. **Contract** — a simple 2-page agreement (Spanish + English). Signed via email.
@@ -162,4 +162,4 @@ We'll respond within 5 working days.
 **Last reviewed:** 2026.
 **Owner:** Sponsorship lead.
 
-A user-facing public version lives at `/sponsor-us` (EN) and `/es/patrocinanos` (ES). The form there generates a draft email to <sponsors@pereiratechtalks.org> with the tier and details pre-filled.
+A user-facing public version lives at `/sponsor-us` (Spanish primary) and `/en/sponsor-us` (English). The structured form posts to `/api/contact` with topic `sponsorship` (Resend → `CONTACT_TO_SPONSORS` or `CONTACT_TO_EMAIL`). You can still email <sponsors@pereiratechtalks.org> directly.

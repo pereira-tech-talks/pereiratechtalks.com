@@ -4,6 +4,8 @@ import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
   MAX_MESSAGE_LENGTH,
   MAX_SUBJECT_LENGTH,
+  normalizeTopic,
+  resolveTopicFromSearchParams,
   sanitizeContactText,
   validateContactForm,
 } from '@/lib/contact-form';
@@ -68,16 +70,14 @@ function applyPrefillFromQueryParams() {
   }
 
   const params = new URLSearchParams(window.location.search);
-  const topicParam = params.get('topic');
+  const allowedValues = getAllowedReasonValues();
+  const topic = resolveTopicFromSearchParams(params, allowedValues);
+  if (topic) {
+    reason = topic;
+  }
+
   const subjectParam = params.get('subject');
   const messageParam = params.get('message');
-
-  if (topicParam) {
-    const allowedValues = getAllowedReasonValues();
-    if (allowedValues.has(topicParam)) {
-      reason = topicParam;
-    }
-  }
 
   if (subjectParam) {
     subject = sanitizeContactText(subjectParam, MAX_SUBJECT_LENGTH);
@@ -110,7 +110,14 @@ function focusFirstInvalidField() {
 
 function validate() {
   const result = validateContactForm(
-    { name, email, reason, subject, message, website },
+    {
+      name,
+      email,
+      reason: normalizeTopic(reason) || reason,
+      subject,
+      message,
+      website,
+    },
     getAllowedReasonValues(),
     {
       requiredField: t.contactPage.requiredField,
@@ -118,6 +125,9 @@ function validate() {
     }
   );
   errors = result.errors;
+  if (result.valid) {
+    reason = normalizeTopic(reason) || reason;
+  }
   return result.valid;
 }
 
@@ -229,8 +239,13 @@ function resetForm() {
     <h3 class="text-2xl font-bold text-ptt mb-3">
       {t.contactPage.successTitle}
     </h3>
-    <p class="text-ptt-secondary mb-6">
+    <p class="text-ptt-secondary mb-2">
       {t.contactPage.successMessage}
+    </p>
+    <p class="text-ptt-secondary mb-6 text-sm">
+      {t.contactPage.successNextSteps[reason] ||
+        t.contactPage.successNextSteps.general ||
+        t.contactPage.formNote}
     </p>
     <button
       type="button"

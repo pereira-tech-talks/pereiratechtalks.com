@@ -40,7 +40,7 @@ export const GET: APIRoute = () => {
       {
         heading: 'Contacto de prensa',
         lines: [
-          `- Formulario: ${SITE_URL}/contact/?reason=press`,
+          `- Formulario: ${SITE_URL}/contact/?topic=press`,
           '- Correo: hello@pereiratechtalks.org',
           '- Para entrevistas, cubrimientos en sitio, fotografía o cualquier solicitud editorial.',
         ],

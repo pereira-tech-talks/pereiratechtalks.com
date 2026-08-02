@@ -81,7 +81,7 @@ Este Código de Conducta aplica dentro de todos los espacios de la comunidad y t
 Si experimentas o presencias un comportamiento que viola este Código de Conducta:
 
 - **En persona durante un evento:** busca a cualquier organizador (identificado en el venue) o habla directamente con los organizadores fundadores. Te llevaremos a un espacio tranquilo y te escucharemos.
-- **En línea o después del hecho:** escribe a **conduct@pereiratechtalks.org** o a **hello@pereiratechtalks.org** con el asunto "Reporte de Código de Conducta". También puedes usar el [formulario de contacto](/contact/?reason=press) y marcar el motivo como confidencial.
+- **En línea o después del hecho:** escribe a **conduct@pereiratechtalks.org** o a **hello@pereiratechtalks.org** con el asunto "Reporte de Código de Conducta". También puedes usar el [formulario de contacto](/contact/?topic=conduct) y marcar el motivo como confidencial.
 
 Todas las quejas serán revisadas e investigadas con prontitud y justicia. Todos los líderes de la comunidad están obligados a respetar la privacidad y la seguridad de quien reporta cualquier incidente.
 

@@ -65,7 +65,7 @@ El próximo libro se decide al final de cada sesión, con tres reglas:
 
 ## Cómo participar
 
-- **Escríbenos** al [formulario de contacto](/contact/?reason=the-library-of-tomorrow) con el asunto **"La Biblioteca del Mañana"**.
+- **Escríbenos** al [formulario de contacto](/contact/?topic=the-library-of-tomorrow) con el asunto **"La Biblioteca del Mañana"**.
 - Te enviamos el libro actual, la fecha de la siguiente sesión y el enlace para sumarte.
 - Si propones un libro y lo aceptamos para una sesión, **moderás la conversación** de esa sesión. Esa es la única "responsabilidad" del club.
 

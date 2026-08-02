@@ -26,7 +26,7 @@ The highest-leverage contribution: bring a topic, share what you have learned, a
 
 If you have given talks before, the most multiplicative thing you can do is mentor someone preparing their first one. Speaker School cohorts always need mentors.
 
-- Reach out via the [contact form](/en/contact/?reason=collaboration) with the subject "Mentor at Speaker School" and tell us your area.
+- Reach out via the [contact form](/en/contact/?topic=collaboration) with the subject "Mentor at Speaker School" and tell us your area.
 
 ### 3. Lead or co-lead a vertical
 
@@ -45,7 +45,7 @@ Logistics, communication, photography, recording, hosting, MC. These are the inv
 The bilingual blog is part of how we connect Pereira to the global tech ecosystem. We publish recaps, technical deep-dives, talks turned into essays, and community reflections.
 
 - Bring a topic, an angle, and a draft. We pair-write and edit before publishing.
-- Open a discussion via the [contact form](/en/contact/?reason=collaboration) with the subject "Blog contribution".
+- Open a discussion via the [contact form](/en/contact/?topic=collaboration) with the subject "Blog contribution".
 
 ### 6. Connect a sponsor
 

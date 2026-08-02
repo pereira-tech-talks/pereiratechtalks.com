@@ -279,17 +279,34 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       { value: '', label: '— Select a topic —' },
       { value: 'general', label: 'General / Just saying hello' },
       { value: 'tech-talk', label: 'Speaker proposal / Talk submission' },
+      { value: 'sponsorship', label: 'Sponsor / Sponsorship inquiry' },
       {
         value: 'collaboration',
         label: 'Community collaboration / Partnership',
       },
-      { value: 'project', label: 'Sponsor / Sponsorship inquiry' },
       {
         value: 'the-library-of-tomorrow',
         label: 'Join La Biblioteca del Mañana',
       },
+      { value: 'press', label: 'Press / Media inquiry' },
+      { value: 'conduct', label: 'Code of Conduct report' },
       { value: 'other', label: 'Other' },
     ],
+    successNextSteps: {
+      general:
+        "We'll reply as soon as we can — usually within a few business days.",
+      'tech-talk':
+        'We review talk proposals year-round and reply within 7 business days.',
+      sponsorship:
+        'An organizer will follow up within 5 business days about tiers and next steps.',
+      collaboration:
+        "We'll connect you with the right organizer within a few business days.",
+      'the-library-of-tomorrow':
+        'A Biblioteca del Mañana host will reply with the next reading session details.',
+      press: 'Our press contacts will reply as soon as possible.',
+      conduct: 'Your message is handled confidentially by the conduct team.',
+      other: "We'll get back to you as soon as possible.",
+    },
     subjectLabel: 'Subject',
     subjectPlaceholder: 'What is this about?',
     messageLabel: 'Message',
@@ -376,6 +393,123 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     visitLabel: 'Visit community',
   },
 
+  cfsForm: {
+    formTitle: 'Submit your talk',
+    talkTitleLabel: 'Talk title',
+    talkTitlePlaceholder: 'A clear, specific title',
+    formatLabel: 'Format',
+    formatOptions: [
+      { value: '', label: '— Select a format —' },
+      { value: 'regular', label: 'Regular talk (25 min)' },
+      { value: 'lightning', label: 'Lightning (5–10 min)' },
+      { value: 'panel', label: 'Panel (40 min)' },
+      { value: 'workshop', label: 'Workshop (90 min)' },
+    ],
+    abstractLabel: 'Abstract',
+    abstractPlaceholder: '3–5 sentences about what you will cover…',
+    takeawaysLabel: 'Key takeaways',
+    takeawaysPlaceholder: 'What should attendees leave with?',
+    socialLabel: 'LinkedIn, blog, or GitHub',
+    socialPlaceholder: 'https://…',
+    firstTimeLabel: 'This would be my first talk at Pereira Tech Talks',
+    speakerSchoolLabel: 'I am interested in Speaker School mentorship',
+    notesLabel: 'Anything else we should know?',
+    notesPlaceholder: 'Preferred dates, co-speakers, AV needs…',
+    submitButton: 'Submit proposal',
+    successTitle: 'Proposal received!',
+    successMessage:
+      'Thanks — we will reply within 7 business days to align on date and format.',
+    defaultSubject: 'Call for Speakers submission',
+  },
+  sponsorForm: {
+    formTitle: 'Sponsorship inquiry',
+    companyLabel: 'Company / brand',
+    companyPlaceholder: 'Company name',
+    roleLabel: 'Your role',
+    rolePlaceholder: 'e.g. Marketing lead, Founder',
+    tierLabel: 'Tier interest',
+    tierOptions: [
+      { value: '', label: '— Select a tier —' },
+      { value: 'diamond', label: 'Diamond' },
+      { value: 'gold', label: 'Gold' },
+      { value: 'silver', label: 'Silver' },
+      { value: 'bronze', label: 'Bronze' },
+      { value: 'community', label: 'Community' },
+      { value: 'unsure', label: 'Not sure yet' },
+    ],
+    contributionLabel: 'Contribution type',
+    contributionOptions: [
+      { value: '', label: '— Select —' },
+      { value: 'cash', label: 'Monetary' },
+      { value: 'in-kind', label: 'In-kind (venue, food, swag…)' },
+      { value: 'both', label: 'Both' },
+      { value: 'unsure', label: 'Not sure yet' },
+    ],
+    messageLabel: 'Tell us about your goals',
+    messagePlaceholder: 'Hiring, brand presence, PTD edition, meetup series…',
+    submitButton: 'Send sponsorship inquiry',
+    successTitle: 'Inquiry received!',
+    successMessage:
+      'Thanks — an organizer will follow up within 5 business days.',
+    defaultSubject: 'Sponsorship inquiry',
+  },
+  cfsPage: {
+    title: 'Call for Speakers',
+    description:
+      'Want to share what you know at Pereira Tech Talks? Submit your talk for meetups, Pereira Tech Days, or our programs.',
+    intro:
+      'We look for new and seasoned voices, local and international. If you have something to bring to the community — a technical talk, a panel, a workshop, a lightning — we want to hear from you.',
+    eyebrow: 'Share what you know',
+    whatWeLookForTitle: 'What we look for',
+    whatWeLookFor: [
+      'Real technical content: production experience, architecture, postmortems, honest engineering.',
+      "Accessible talks: you don't need to be senior to apply. The Speaker School is designed to support you.",
+      'Diverse perspectives: gender, city, level, language (EN/ES), industry.',
+      'Relevant topics: AI/ML, web platforms, devops, mobile, security, data, product engineering, leadership.',
+    ],
+    formatsTitle: 'Available formats',
+    formats: [
+      {
+        name: 'Regular talk (25 min)',
+        description:
+          'The standard meetup format. Technical topic with space for questions.',
+      },
+      {
+        name: 'Lightning (5–10 min)',
+        description:
+          'Sharp idea, example, demo or reflection. Ideal for a first talk.',
+      },
+      {
+        name: 'Panel (40 min)',
+        description:
+          'Moderated conversation with 2–3 voices on a topic. Groups can apply.',
+      },
+      {
+        name: 'Workshop (90 min)',
+        description:
+          'Hands-on session where attendees bring laptops. For active technical audiences.',
+      },
+    ],
+    processTitle: 'How to apply',
+    process: [
+      'Fill the form below with title, format, abstract, takeaways, and a link about you.',
+      'We reply within 7 days to align on date and format.',
+      "If it's your first time, we can connect you with Speaker School mentorship.",
+    ],
+    criteriaEyebrow: 'Criteria',
+    formatsEyebrow: 'Formats',
+    processEyebrow: 'Process',
+    formEyebrow: 'Application',
+  },
+  sponsorUsPage: {
+    title: 'Sponsor us',
+    description:
+      'Connect your brand with the most active technical community in the Eje Cafetero. Since 2014 we have run 90+ meetups and 7 Pereira Tech Day editions.',
+    intro:
+      "Sponsoring Pereira Tech Talks is not advertising — it's building community. Every dollar translates into accessible venues, food for attendees, Speaker School scholarships, travel for invited speakers, and events open to the whole region.",
+    formEyebrow: 'Inquiry',
+    formSectionTitle: 'Tell us about your sponsorship interest',
+  },
   sponsorsPage: {
     title: 'Sponsors',
     description:

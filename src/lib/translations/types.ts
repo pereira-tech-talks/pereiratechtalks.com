@@ -178,6 +178,7 @@ export interface SiteTranslations {
     sendingButton: string;
     successTitle: string;
     successMessage: string;
+    successNextSteps: Record<string, string>;
     sendAnotherButton: string;
     requiredField: string;
     invalidEmail: string;
@@ -200,6 +201,71 @@ export interface SiteTranslations {
       startupCollaboration: string;
       techTalkInvitation: string;
     };
+  };
+
+  cfsForm: {
+    formTitle: string;
+    talkTitleLabel: string;
+    talkTitlePlaceholder: string;
+    formatLabel: string;
+    formatOptions: { value: string; label: string }[];
+    abstractLabel: string;
+    abstractPlaceholder: string;
+    takeawaysLabel: string;
+    takeawaysPlaceholder: string;
+    socialLabel: string;
+    socialPlaceholder: string;
+    firstTimeLabel: string;
+    speakerSchoolLabel: string;
+    notesLabel: string;
+    notesPlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+    defaultSubject: string;
+  };
+
+  sponsorForm: {
+    formTitle: string;
+    companyLabel: string;
+    companyPlaceholder: string;
+    roleLabel: string;
+    rolePlaceholder: string;
+    tierLabel: string;
+    tierOptions: { value: string; label: string }[];
+    contributionLabel: string;
+    contributionOptions: { value: string; label: string }[];
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+    defaultSubject: string;
+  };
+
+  cfsPage: {
+    title: string;
+    description: string;
+    intro: string;
+    eyebrow: string;
+    whatWeLookForTitle: string;
+    whatWeLookFor: string[];
+    formatsTitle: string;
+    formats: { name: string; description: string }[];
+    processTitle: string;
+    process: string[];
+    criteriaEyebrow: string;
+    formatsEyebrow: string;
+    processEyebrow: string;
+    formEyebrow: string;
+  };
+
+  sponsorUsPage: {
+    title: string;
+    description: string;
+    intro: string;
+    formEyebrow: string;
+    formSectionTitle: string;
   };
 
   calendarPage: {

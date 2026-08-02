@@ -277,19 +277,37 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     reasonLabel: 'Quiero contactarlos por',
     reasonOptions: [
       { value: '', label: '— Selecciona un tema —' },
-      { value: 'general', label: 'General / Solo decir hola' },
-      { value: 'tech-talk', label: 'Propuesta de ponencia / Charla' },
+      { value: 'general', label: 'General / Solo saludar' },
+      { value: 'tech-talk', label: 'Propuesta de charla / Call for Speakers' },
+      { value: 'sponsorship', label: 'Patrocinio / Sponsorship' },
       {
         value: 'collaboration',
-        label: 'Colaboración con la comunidad / Alianza',
+        label: 'Colaboración comunitaria / Alianza',
       },
-      { value: 'project', label: 'Patrocinio / Sponsorship' },
       {
         value: 'the-library-of-tomorrow',
-        label: 'Sumarme a La Biblioteca del Mañana',
+        label: 'Unirme a La Biblioteca del Mañana',
       },
+      { value: 'press', label: 'Prensa / Medios' },
+      { value: 'conduct', label: 'Reporte de Código de Conducta' },
       { value: 'other', label: 'Otro' },
     ],
+    successNextSteps: {
+      general:
+        'Te responderemos tan pronto como podamos — normalmente en pocos días hábiles.',
+      'tech-talk':
+        'Revisamos propuestas todo el año y respondemos en máximo 7 días hábiles.',
+      sponsorship:
+        'Un organizador te contactará en máximo 5 días hábiles sobre niveles y siguientes pasos.',
+      collaboration:
+        'Te conectaremos con el organizador adecuado en pocos días hábiles.',
+      'the-library-of-tomorrow':
+        'Un anfitrión de La Biblioteca del Mañana te escribirá con la próxima sesión.',
+      press: 'El equipo de prensa responderá lo antes posible.',
+      conduct:
+        'Tu mensaje se trata con confidencialidad por el equipo de conducta.',
+      other: 'Te responderemos tan pronto como podamos.',
+    },
     subjectLabel: 'Asunto',
     subjectPlaceholder: '¿De qué se trata?',
     messageLabel: 'Mensaje',
@@ -376,6 +394,123 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     visitLabel: 'Visitar comunidad',
   },
 
+  cfsForm: {
+    formTitle: 'Postula tu charla',
+    talkTitleLabel: 'Título de la charla',
+    talkTitlePlaceholder: 'Un título claro y específico',
+    formatLabel: 'Formato',
+    formatOptions: [
+      { value: '', label: '— Selecciona un formato —' },
+      { value: 'regular', label: 'Charla regular (25 min)' },
+      { value: 'lightning', label: 'Lightning (5–10 min)' },
+      { value: 'panel', label: 'Panel (40 min)' },
+      { value: 'workshop', label: 'Workshop (90 min)' },
+    ],
+    abstractLabel: 'Abstract',
+    abstractPlaceholder: '3–5 oraciones sobre lo que vas a cubrir…',
+    takeawaysLabel: 'Aprendizajes clave',
+    takeawaysPlaceholder: '¿Con qué se debería ir la audiencia?',
+    socialLabel: 'LinkedIn, blog o GitHub',
+    socialPlaceholder: 'https://…',
+    firstTimeLabel: 'Sería mi primera charla en Pereira Tech Talks',
+    speakerSchoolLabel: 'Me interesa la mentoría de Speaker School',
+    notesLabel: '¿Algo más que debamos saber?',
+    notesPlaceholder: 'Fechas preferidas, co-ponentes, necesidades AV…',
+    submitButton: 'Enviar postulación',
+    successTitle: '¡Propuesta recibida!',
+    successMessage:
+      'Gracias — te responderemos en máximo 7 días hábiles para alinear fecha y formato.',
+    defaultSubject: 'Postulación a Call for Speakers',
+  },
+  sponsorForm: {
+    formTitle: 'Consulta de patrocinio',
+    companyLabel: 'Empresa / marca',
+    companyPlaceholder: 'Nombre de la empresa',
+    roleLabel: 'Tu rol',
+    rolePlaceholder: 'p. ej. Marketing, Founder',
+    tierLabel: 'Nivel de interés',
+    tierOptions: [
+      { value: '', label: '— Selecciona un nivel —' },
+      { value: 'diamond', label: 'Diamante' },
+      { value: 'gold', label: 'Oro' },
+      { value: 'silver', label: 'Plata' },
+      { value: 'bronze', label: 'Bronce' },
+      { value: 'community', label: 'Comunidad' },
+      { value: 'unsure', label: 'Aún no estoy seguro/a' },
+    ],
+    contributionLabel: 'Tipo de aporte',
+    contributionOptions: [
+      { value: '', label: '— Selecciona —' },
+      { value: 'cash', label: 'Monetario' },
+      { value: 'in-kind', label: 'En especie (venue, comida, swag…)' },
+      { value: 'both', label: 'Ambos' },
+      { value: 'unsure', label: 'Aún no estoy seguro/a' },
+    ],
+    messageLabel: 'Cuéntanos tus objetivos',
+    messagePlaceholder: 'Hiring, marca, edición PTD, serie de meetups…',
+    submitButton: 'Enviar consulta de patrocinio',
+    successTitle: '¡Consulta recibida!',
+    successMessage:
+      'Gracias — un organizador te contactará en máximo 5 días hábiles.',
+    defaultSubject: 'Consulta de patrocinio',
+  },
+  cfsPage: {
+    title: 'Call for Speakers',
+    description:
+      '¿Quieres compartir lo que sabes en Pereira Tech Talks? Postula tu charla a meetups, Pereira Tech Days o nuestros programas.',
+    intro:
+      'Buscamos voces nuevas y experimentadas, locales e internacionales. Si tienes algo que aporte a la comunidad —una charla técnica, un panel, un workshop, una lightning— queremos escucharte.',
+    eyebrow: 'Comparte lo que sabes',
+    whatWeLookForTitle: '¿Qué buscamos?',
+    whatWeLookFor: [
+      'Contenido técnico real: experiencia de producción, arquitectura, postmortems, ingeniería honesta.',
+      'Charlas accesibles: no necesitas ser senior para postular. La Speaker School está pensada para acompañarte.',
+      'Diversidad de perspectivas: género, ciudad, nivel, lenguaje (EN/ES), industria.',
+      'Temas relevantes: AI/ML, web platforms, devops, mobile, security, data, product engineering, leadership.',
+    ],
+    formatsTitle: 'Formatos disponibles',
+    formats: [
+      {
+        name: 'Charla regular (25 min)',
+        description:
+          'El formato estándar de meetup. Tema técnico con espacio para preguntas.',
+      },
+      {
+        name: 'Lightning (5–10 min)',
+        description:
+          'Idea precisa, ejemplo, demo o reflexión. Ideal para primera charla.',
+      },
+      {
+        name: 'Panel (40 min)',
+        description:
+          'Conversación moderada con 2–3 voces sobre un tema. Aplican grupos.',
+      },
+      {
+        name: 'Workshop (90 min)',
+        description:
+          'Sesión práctica con asistentes que llevan laptop. Para audiencia técnica activa.',
+      },
+    ],
+    processTitle: 'Cómo postular',
+    process: [
+      'Completa el formulario con título, formato, abstract, aprendizajes y un enlace sobre ti.',
+      'Te respondemos en máximo 7 días para alinear fecha y formato.',
+      'Si es tu primera vez, podemos conectarte con la mentoría de Speaker School.',
+    ],
+    criteriaEyebrow: 'Criterios',
+    formatsEyebrow: 'Formatos',
+    processEyebrow: 'Proceso',
+    formEyebrow: 'Postulación',
+  },
+  sponsorUsPage: {
+    title: 'Patrocínanos',
+    description:
+      'Conecta tu marca con la comunidad técnica más activa del Eje Cafetero. Desde 2014 hemos llevado a cabo más de 90 meetups y 7 ediciones de Pereira Tech Day.',
+    intro:
+      'Patrocinar a Pereira Tech Talks no es publicidad: es construir comunidad. Cada peso aportado se traduce en venues accesibles, comida para asistentes, becas para Speaker School, transporte para ponentes invitados y eventos abiertos a toda la región.',
+    formEyebrow: 'Consulta',
+    formSectionTitle: 'Cuéntanos tu interés en patrocinar',
+  },
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
