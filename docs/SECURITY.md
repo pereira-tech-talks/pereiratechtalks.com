@@ -119,6 +119,25 @@ const blog = defineCollection({
 });
 ```
 
+### Top notifications / alerts
+
+Site-wide `TopNotificationBar` reads from the `notifications` content collection (YAML). Rules:
+
+- **Plain text only** in title/summary/body — no HTML rendering of notification fields.
+- **Date window** (`startsAt`/`endsAt`) + `active` flag filter via `src/lib/notifications.ts`.
+- **CTA hrefs** validated by Zod (`notificationSafeHref`): internal paths (`/…`) or absolute `http(s)://` only.
+- **Dismiss state** is client-local (`localStorage`); never used for server security decisions.
+- **Modal** focus trap is client UX only — content remains author-controlled YAML.
+
+### PTD subscribe (`functions/api/ptd-subscribe.ts`)
+
+Cloudflare Pages Function for Pereira Tech Day interest signups:
+
+- Email validated and length-capped; year/lang bounded.
+- Forwards to `PTD_SUBSCRIBE_SHEETS_URL` (server env only — never `PUBLIC_*`).
+- CORS origin allowlist via `CONTACT_ALLOWED_ORIGINS`.
+- Returns generic errors; no secrets or sheet contents in responses.
+
 ### Community calendar feeds
 
 The `/calendar` page embeds **public** Google Calendar IDs from the `communityCalendars` content collection. Security rules:
