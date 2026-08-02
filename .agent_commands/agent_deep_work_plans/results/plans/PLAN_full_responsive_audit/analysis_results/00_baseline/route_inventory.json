@@ -1,0 +1,2246 @@
+{
+  "totalFiles": 423,
+  "byTemplate": {
+    "404": {
+      "en": 0,
+      "es": 1
+    },
+    "narrative-about": {
+      "en": 1,
+      "es": 1
+    },
+    "blog-post": {
+      "en": 19,
+      "es": 19
+    },
+    "blog-listing": {
+      "en": 2,
+      "es": 2
+    },
+    "blog-series-listing": {
+      "en": 1,
+      "es": 1
+    },
+    "blog-tag": {
+      "en": 8,
+      "es": 8
+    },
+    "unclassified": {
+      "en": 2,
+      "es": 2
+    },
+    "form-call-for-speakers": {
+      "en": 1,
+      "es": 1
+    },
+    "channels": {
+      "en": 1,
+      "es": 1
+    },
+    "narrative-community": {
+      "en": 1,
+      "es": 1
+    },
+    "narrative-conduct": {
+      "en": 1,
+      "es": 1
+    },
+    "form-contact": {
+      "en": 1,
+      "es": 1
+    },
+    "narrative-contributing": {
+      "en": 1,
+      "es": 1
+    },
+    "contributors": {
+      "en": 1,
+      "es": 1
+    },
+    "narrative-governance": {
+      "en": 1,
+      "es": 1
+    },
+    "home": {
+      "en": 1,
+      "es": 1
+    },
+    "meetups-detail": {
+      "en": 91,
+      "es": 91
+    },
+    "meetups-list": {
+      "en": 1,
+      "es": 1
+    },
+    "ptd-edition": {
+      "en": 10,
+      "es": 10
+    },
+    "ptd-catalog": {
+      "en": 1,
+      "es": 1
+    },
+    "press": {
+      "en": 1,
+      "es": 1
+    },
+    "slides-deck": {
+      "en": 1,
+      "es": 1
+    },
+    "slides-catalog": {
+      "en": 1,
+      "es": 1
+    },
+    "speakers-detail": {
+      "en": 31,
+      "es": 31
+    },
+    "speakers-list": {
+      "en": 1,
+      "es": 1
+    },
+    "form-sponsor-us": {
+      "en": 1,
+      "es": 1
+    },
+    "sponsors": {
+      "en": 1,
+      "es": 1
+    },
+    "talks-detail": {
+      "en": 23,
+      "es": 23
+    },
+    "talks-list": {
+      "en": 1,
+      "es": 1
+    },
+    "verticals-detail": {
+      "en": 4,
+      "es": 4
+    },
+    "verticals-list": {
+      "en": 1,
+      "es": 1
+    }
+  },
+  "inventory": [
+    {
+      "path": "/404",
+      "lang": "es",
+      "template": "404"
+    },
+    {
+      "path": "/about",
+      "lang": "es",
+      "template": "narrative-about"
+    },
+    {
+      "path": "/blog/applying-for-software-engineering-at-google",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/events-2019-recap",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/first-pereirajs-meetup",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/happy-new-year-2018",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/how-the-speaker-school-works",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog",
+      "lang": "es",
+      "template": "blog-listing"
+    },
+    {
+      "path": "/blog/moved-to-luma",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/my-experience-at-digital-product-school",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/nodeschool-international-day-2015",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/nodeschool-international-day-2016",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/page/1",
+      "lang": "es",
+      "template": "blog-listing"
+    },
+    {
+      "path": "/blog/pereira-tech-talks-recognized-by-aseutp-2018",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/pereirajs-at-jsconf-colombia-2017",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/pereirajs-joins-pereira-tech-talks",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/quarantine-tech-talks",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/series",
+      "lang": "es",
+      "template": "blog-series-listing"
+    },
+    {
+      "path": "/blog/tag/career",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/community",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/i18n",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/javascript",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/lessons-learned",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/pereira",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/pereira-tech-talks",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/tag/speakers-school",
+      "lang": "es",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/blog/telegram-community-channel",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/ten-years-running-a-volunteer-tech-community",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/the-bilingual-library-model",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/what-is-pereira-tech-talks",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/why-competitive-programming-matters",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/blog/why-pereira",
+      "lang": "es",
+      "template": "blog-post"
+    },
+    {
+      "path": "/calendar",
+      "lang": "es",
+      "template": "unclassified"
+    },
+    {
+      "path": "/call-for-speakers",
+      "lang": "es",
+      "template": "form-call-for-speakers"
+    },
+    {
+      "path": "/channels",
+      "lang": "es",
+      "template": "channels"
+    },
+    {
+      "path": "/communities",
+      "lang": "es",
+      "template": "unclassified"
+    },
+    {
+      "path": "/community",
+      "lang": "es",
+      "template": "narrative-community"
+    },
+    {
+      "path": "/conduct",
+      "lang": "es",
+      "template": "narrative-conduct"
+    },
+    {
+      "path": "/contact",
+      "lang": "es",
+      "template": "form-contact"
+    },
+    {
+      "path": "/contributing",
+      "lang": "es",
+      "template": "narrative-contributing"
+    },
+    {
+      "path": "/contributors",
+      "lang": "es",
+      "template": "contributors"
+    },
+    {
+      "path": "/en/about",
+      "lang": "en",
+      "template": "narrative-about"
+    },
+    {
+      "path": "/en/blog/applying-for-software-engineering-at-google",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/events-2019-recap",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/first-pereirajs-meetup",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/happy-new-year-2018",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/how-the-speaker-school-works",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog",
+      "lang": "en",
+      "template": "blog-listing"
+    },
+    {
+      "path": "/en/blog/moved-to-luma",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/my-experience-at-digital-product-school",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/nodeschool-international-day-2015",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/nodeschool-international-day-2016",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/page/1",
+      "lang": "en",
+      "template": "blog-listing"
+    },
+    {
+      "path": "/en/blog/pereira-tech-talks-recognized-by-aseutp-2018",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/pereirajs-at-jsconf-colombia-2017",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/pereirajs-joins-pereira-tech-talks",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/quarantine-tech-talks",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/series",
+      "lang": "en",
+      "template": "blog-series-listing"
+    },
+    {
+      "path": "/en/blog/tag/career",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/community",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/i18n",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/javascript",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/lessons-learned",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/pereira",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/pereira-tech-talks",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/tag/speakers-school",
+      "lang": "en",
+      "template": "blog-tag"
+    },
+    {
+      "path": "/en/blog/telegram-community-channel",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/ten-years-running-a-volunteer-tech-community",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/the-bilingual-library-model",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/what-is-pereira-tech-talks",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/why-competitive-programming-matters",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/blog/why-pereira",
+      "lang": "en",
+      "template": "blog-post"
+    },
+    {
+      "path": "/en/calendar",
+      "lang": "en",
+      "template": "unclassified"
+    },
+    {
+      "path": "/en/call-for-speakers",
+      "lang": "en",
+      "template": "form-call-for-speakers"
+    },
+    {
+      "path": "/en/channels",
+      "lang": "en",
+      "template": "channels"
+    },
+    {
+      "path": "/en/communities",
+      "lang": "en",
+      "template": "unclassified"
+    },
+    {
+      "path": "/en/community",
+      "lang": "en",
+      "template": "narrative-community"
+    },
+    {
+      "path": "/en/conduct",
+      "lang": "en",
+      "template": "narrative-conduct"
+    },
+    {
+      "path": "/en/contact",
+      "lang": "en",
+      "template": "form-contact"
+    },
+    {
+      "path": "/en/contributing",
+      "lang": "en",
+      "template": "narrative-contributing"
+    },
+    {
+      "path": "/en/contributors",
+      "lang": "en",
+      "template": "contributors"
+    },
+    {
+      "path": "/en/governance",
+      "lang": "en",
+      "template": "narrative-governance"
+    },
+    {
+      "path": "/en",
+      "lang": "en",
+      "template": "home"
+    },
+    {
+      "path": "/en/meetups/abril-mobile-2026",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/airflow-y-tensorflow-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/aprendiendo-bases-de-datos-nosql-y-rails",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/aprendiendo-con-vibe-coding",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/aprendiendo-node-streams-2015",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/automatizacion-de-infraestructura-y-linux",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/bitcoin-y-blockchain-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/buenas-practicas-js-y-tdd-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/chatbots-y-es6-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/conoce-a-la-cloud-native-computing-foundation",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/conociendo-la-nube",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/continuous-testing-paralelizacion-y-observabilidad",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/conversatorio-hackathon",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/d3-y-mean-stack-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/de-cero-a-super-heroe-go-kubernetes",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/de-la-utp-a-la-academia-y-lo-empresarial",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/de-vuetify-a-edge-computing",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/desarrollo-web-moderno-con-astro",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/design-night-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/dom-y-git-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/edicion-especial-utp-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/el-futuro-de-la-ia",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/explorando-cicd-tekton-y-github-actions",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/gcp-y-owasp-2021",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/hackaton-planificacion-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/historia-y-oop-en-javascript-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/ia-como-motor-de-crecimiento",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/ia-en-accion-2024",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/inauguracion-gdg-pereira",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups",
+      "lang": "en",
+      "template": "meetups-list"
+    },
+    {
+      "path": "/en/meetups/introduccion-a-mvc-y-node-v4",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/introduccion-a-npm-2015",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/ionic-angular-y-solidity-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/iot-y-clustering-nodejs-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/jasmine-y-iojs-2015",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/js-cliente-y-servidor-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/js-y-nodejs-i-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/js-y-nodejs-ii-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/js-y-nodejs-introduccion-2016",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/jwt-json-web-tokens-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/lightning-talks-2025-11",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/machine-learning-y-automatizaciones",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/maraton-utp-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/meetup-virtual-code-review-y-auth0",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/mujeres-en-tecnologia-2026",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/mvc-y-express-flatiron-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/nginx-y-elasticsearch-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-accesibilidad-y-ios-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-ai-generativa-2025",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-career-path-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-devops-ansible-y-gitlab-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-devops-docker-y-kubernetes-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-experiencias-en-software-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-ia-y-chatgpt-2023",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-liderazgo-y-testing-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-machine-learning-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-python-2025",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-rust-2025",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-seguridad-y-testing-2022",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-serverless-y-seguridad-2019",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-testing-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/noche-de-unity-2024",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/nodeschool-day-pereira-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/p2p-y-meteorjs-2016",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/pereira-girls-day-2019",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/primera-reunion-pereirajs-2014",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/qa-pilar-del-software",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-2",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-3",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-4",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-5",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-6",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/quarantine-tech-talks-2020-overview",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/que-es-el-blockchain-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/react-native-y-npm-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/reactive-programming-y-es6",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/realidad-virtual-y-ramda-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/redes-neuronales-keras-2018",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/revolucionando-el-deep-learning",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/sails-websockets-y-grafana-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/saturday-tech-talks-2019",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/seguridad-informatica-y-proteccion-legal-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/servidor-web-nodejs-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/software-libre-y-automatizacion-2021",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/tdd-y-microservicios-2021",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/tech-soft-skills-ia-y-trabajo-remoto",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/tecnologia-con-proposito",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/tecnologias-de-vanguardia-svelte-y-blockchain",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/three-js-y-react-2016",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/vision-artificial-y-haskell-2017",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/webassembly-2015",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/meetups/zeromq-y-websockets-2015",
+      "lang": "en",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/en/pereira-tech-days/2017",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2018",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2019",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2020",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2021",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2022",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2023",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2024",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2025",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days/2026",
+      "lang": "en",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/en/pereira-tech-days",
+      "lang": "en",
+      "template": "ptd-catalog"
+    },
+    {
+      "path": "/en/press",
+      "lang": "en",
+      "template": "press"
+    },
+    {
+      "path": "/en/slides/demo-revealjs-features",
+      "lang": "en",
+      "template": "slides-deck"
+    },
+    {
+      "path": "/en/slides",
+      "lang": "en",
+      "template": "slides-catalog"
+    },
+    {
+      "path": "/en/speakers/abdenago-lopez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/andres-torres",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/cesar-camacho",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/cristhian-andres-grajales-perez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/daniel-david-marcano-hernandez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/david-ricardo-rivera-arbelaez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/frederick-johan-castaneda-perez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/german-grandas",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/hector-pulido",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/henry-bravo",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers",
+      "lang": "en",
+      "template": "speakers-list"
+    },
+    {
+      "path": "/en/speakers/jesus-david-mena-rivera",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/jonathan-alvarez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/jorge-martinez-gomez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/jose-felipe-duarte",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/jose-jaramillo",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/juan-de-jesus-fernandez-graciano",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/juan-diego-campuzano",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/juan-jose-cardona",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/juan-pablo-franco",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/karolina-ladino",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/laura-daniela-santa",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/mayra-valentina-velasquez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/mega-barto",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/melissa-escobar-gutierrez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/oscar-granada",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/sary-libreros",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/sebastian-agudelo-morales",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/sebastian-franco",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/sebastian-mora",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/sergio-florez",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/speakers/vanessa-aristizabal",
+      "lang": "en",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/en/sponsor-us",
+      "lang": "en",
+      "template": "form-sponsor-us"
+    },
+    {
+      "path": "/en/sponsors",
+      "lang": "en",
+      "template": "sponsors"
+    },
+    {
+      "path": "/en/talks/abril-mobile-2026--1-kotlin-multiplatform",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/abril-mobile-2026--2-interfaces-liquidas-genui-flutter",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/aprendiendo-con-vibe-coding--1-aprendiendo-con-vibe-coding",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/aprendiendo-con-vibe-coding--2-conectando-la-ia-con-el-mundo-real-potenciando-agentes-con-e",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/conoce-a-la-cloud-native-computing-foundation--1-introduccion-a-la-cncf",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/conoce-a-la-cloud-native-computing-foundation--2-cuando-migrar-a-kubernetes",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/continuous-testing-paralelizacion-y-observabilidad--1-la-forma-de-escalar-tus-tests-de-software-sin-escalar-tu-nom",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/continuous-testing-paralelizacion-y-observabilidad--2-qa-en-streaming-dale-vida-a-tu-suite-de-pruebas-automatizada",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/de-vuetify-a-edge-computing--1-vuetify-y-figma",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/de-vuetify-a-edge-computing--2-multiagentes-iot-edge",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/el-futuro-de-la-ia--1-codigo-hardware-y-agentes",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/ia-como-motor-de-crecimiento--1-ai-engineer-2026",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/ia-como-motor-de-crecimiento--2-ia-como-infraestructura",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks",
+      "lang": "en",
+      "template": "talks-list"
+    },
+    {
+      "path": "/en/talks/mujeres-en-tecnologia-2026--1-the-art-of-code",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/mujeres-en-tecnologia-2026--2-el-codigo-invisible",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-ai-generativa-2025--1-generacion-procedural-en-videojuegos-creando-mundos-infinito",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-ai-generativa-2025--2-ia-y-biotecnologia-descubriendo-medicamentos-con-modelos-de-",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-python-2025--1-explorando-adk",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-python-2025--2-cuadernos-reactivos-con-marimo",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-rust-2025--1-introduccion-a-rust-por-que-es-importante",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/noche-de-rust-2025--2-rust-y-web-assembly-companeros-inseparables-de-javascript",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/qa-pilar-del-software--1-qa-first-open-source",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/talks/qa-pilar-del-software--2-qa-mas-alla-del-testing",
+      "lang": "en",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/en/verticals/ai-channel",
+      "lang": "en",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/en/verticals",
+      "lang": "en",
+      "template": "verticals-list"
+    },
+    {
+      "path": "/en/verticals/library-of-tomorrow",
+      "lang": "en",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/en/verticals/monthly-meetups",
+      "lang": "en",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/en/verticals/speaker-school",
+      "lang": "en",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/governance",
+      "lang": "es",
+      "template": "narrative-governance"
+    },
+    {
+      "path": "/",
+      "lang": "es",
+      "template": "home"
+    },
+    {
+      "path": "/meetups/abril-mobile-2026",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/airflow-y-tensorflow-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/aprendiendo-bases-de-datos-nosql-y-rails",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/aprendiendo-con-vibe-coding",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/aprendiendo-node-streams-2015",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/automatizacion-de-infraestructura-y-linux",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/bitcoin-y-blockchain-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/buenas-practicas-js-y-tdd-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/chatbots-y-es6-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/conoce-a-la-cloud-native-computing-foundation",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/conociendo-la-nube",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/continuous-testing-paralelizacion-y-observabilidad",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/conversatorio-hackathon",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/d3-y-mean-stack-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/de-cero-a-super-heroe-go-kubernetes",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/de-la-utp-a-la-academia-y-lo-empresarial",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/de-vuetify-a-edge-computing",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/desarrollo-web-moderno-con-astro",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/design-night-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/dom-y-git-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/edicion-especial-utp-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/el-futuro-de-la-ia",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/explorando-cicd-tekton-y-github-actions",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/gcp-y-owasp-2021",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/hackaton-planificacion-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/historia-y-oop-en-javascript-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/ia-como-motor-de-crecimiento",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/ia-en-accion-2024",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/inauguracion-gdg-pereira",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups",
+      "lang": "es",
+      "template": "meetups-list"
+    },
+    {
+      "path": "/meetups/introduccion-a-mvc-y-node-v4",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/introduccion-a-npm-2015",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/ionic-angular-y-solidity-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/iot-y-clustering-nodejs-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/jasmine-y-iojs-2015",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/js-cliente-y-servidor-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/js-y-nodejs-i-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/js-y-nodejs-ii-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/js-y-nodejs-introduccion-2016",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/jwt-json-web-tokens-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/lightning-talks-2025-11",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/machine-learning-y-automatizaciones",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/maraton-utp-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/meetup-virtual-code-review-y-auth0",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/mujeres-en-tecnologia-2026",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/mvc-y-express-flatiron-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/nginx-y-elasticsearch-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-accesibilidad-y-ios-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-ai-generativa-2025",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-career-path-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-devops-ansible-y-gitlab-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-devops-docker-y-kubernetes-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-experiencias-en-software-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-ia-y-chatgpt-2023",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-liderazgo-y-testing-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-machine-learning-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-python-2025",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-rust-2025",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-seguridad-y-testing-2022",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-serverless-y-seguridad-2019",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-testing-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/noche-de-unity-2024",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/nodeschool-day-pereira-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/p2p-y-meteorjs-2016",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/pereira-girls-day-2019",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/primera-reunion-pereirajs-2014",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/qa-pilar-del-software",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-2",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-3",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-4",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-5",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-6",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/quarantine-tech-talks-2020-overview",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/que-es-el-blockchain-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/react-native-y-npm-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/reactive-programming-y-es6",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/realidad-virtual-y-ramda-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/redes-neuronales-keras-2018",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/revolucionando-el-deep-learning",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/sails-websockets-y-grafana-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/saturday-tech-talks-2019",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/seguridad-informatica-y-proteccion-legal-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/servidor-web-nodejs-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/software-libre-y-automatizacion-2021",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/tdd-y-microservicios-2021",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/tech-soft-skills-ia-y-trabajo-remoto",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/tecnologia-con-proposito",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/tecnologias-de-vanguardia-svelte-y-blockchain",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/three-js-y-react-2016",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/vision-artificial-y-haskell-2017",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/webassembly-2015",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/meetups/zeromq-y-websockets-2015",
+      "lang": "es",
+      "template": "meetups-detail"
+    },
+    {
+      "path": "/pereira-tech-days/2017",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2018",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2019",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2020",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2021",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2022",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2023",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2024",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2025",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days/2026",
+      "lang": "es",
+      "template": "ptd-edition"
+    },
+    {
+      "path": "/pereira-tech-days",
+      "lang": "es",
+      "template": "ptd-catalog"
+    },
+    {
+      "path": "/press",
+      "lang": "es",
+      "template": "press"
+    },
+    {
+      "path": "/slides/demo-revealjs-features",
+      "lang": "es",
+      "template": "slides-deck"
+    },
+    {
+      "path": "/slides",
+      "lang": "es",
+      "template": "slides-catalog"
+    },
+    {
+      "path": "/speakers/abdenago-lopez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/andres-torres",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/cesar-camacho",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/cristhian-andres-grajales-perez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/daniel-david-marcano-hernandez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/david-ricardo-rivera-arbelaez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/frederick-johan-castaneda-perez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/german-grandas",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/hector-pulido",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/henry-bravo",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers",
+      "lang": "es",
+      "template": "speakers-list"
+    },
+    {
+      "path": "/speakers/jesus-david-mena-rivera",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/jonathan-alvarez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/jorge-martinez-gomez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/jose-felipe-duarte",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/jose-jaramillo",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/juan-de-jesus-fernandez-graciano",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/juan-diego-campuzano",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/juan-jose-cardona",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/juan-pablo-franco",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/karolina-ladino",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/laura-daniela-santa",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/mayra-valentina-velasquez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/mega-barto",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/melissa-escobar-gutierrez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/oscar-granada",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/sary-libreros",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/sebastian-agudelo-morales",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/sebastian-franco",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/sebastian-mora",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/sergio-florez",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/speakers/vanessa-aristizabal",
+      "lang": "es",
+      "template": "speakers-detail"
+    },
+    {
+      "path": "/sponsor-us",
+      "lang": "es",
+      "template": "form-sponsor-us"
+    },
+    {
+      "path": "/sponsors",
+      "lang": "es",
+      "template": "sponsors"
+    },
+    {
+      "path": "/talks/abril-mobile-2026--1-kotlin-multiplatform",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/abril-mobile-2026--2-interfaces-liquidas-genui-flutter",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/aprendiendo-con-vibe-coding--1-aprendiendo-con-vibe-coding",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/aprendiendo-con-vibe-coding--2-conectando-la-ia-con-el-mundo-real-potenciando-agentes-con-e",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/conoce-a-la-cloud-native-computing-foundation--1-introduccion-a-la-cncf",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/conoce-a-la-cloud-native-computing-foundation--2-cuando-migrar-a-kubernetes",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/continuous-testing-paralelizacion-y-observabilidad--1-la-forma-de-escalar-tus-tests-de-software-sin-escalar-tu-nom",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/continuous-testing-paralelizacion-y-observabilidad--2-qa-en-streaming-dale-vida-a-tu-suite-de-pruebas-automatizada",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/de-vuetify-a-edge-computing--1-vuetify-y-figma",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/de-vuetify-a-edge-computing--2-multiagentes-iot-edge",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/el-futuro-de-la-ia--1-codigo-hardware-y-agentes",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/ia-como-motor-de-crecimiento--1-ai-engineer-2026",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/ia-como-motor-de-crecimiento--2-ia-como-infraestructura",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks",
+      "lang": "es",
+      "template": "talks-list"
+    },
+    {
+      "path": "/talks/mujeres-en-tecnologia-2026--1-the-art-of-code",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/mujeres-en-tecnologia-2026--2-el-codigo-invisible",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-ai-generativa-2025--1-generacion-procedural-en-videojuegos-creando-mundos-infinito",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-ai-generativa-2025--2-ia-y-biotecnologia-descubriendo-medicamentos-con-modelos-de-",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-python-2025--1-explorando-adk",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-python-2025--2-cuadernos-reactivos-con-marimo",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-rust-2025--1-introduccion-a-rust-por-que-es-importante",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/noche-de-rust-2025--2-rust-y-web-assembly-companeros-inseparables-de-javascript",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/qa-pilar-del-software--1-qa-first-open-source",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/talks/qa-pilar-del-software--2-qa-mas-alla-del-testing",
+      "lang": "es",
+      "template": "talks-detail"
+    },
+    {
+      "path": "/verticals/ai-channel",
+      "lang": "es",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/verticals",
+      "lang": "es",
+      "template": "verticals-list"
+    },
+    {
+      "path": "/verticals/library-of-tomorrow",
+      "lang": "es",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/verticals/monthly-meetups",
+      "lang": "es",
+      "template": "verticals-detail"
+    },
+    {
+      "path": "/verticals/speaker-school",
+      "lang": "es",
+      "template": "verticals-detail"
+    }
+  ]
+}
