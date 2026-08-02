@@ -90,7 +90,7 @@ const isDraft = isDraftDeck(deck);
               href={data.eventUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-secondary hover:underline"
+              class="text-ptt-primary hover:underline"
             >
               Event page ↗
             </a>
@@ -110,13 +110,13 @@ const isDraft = isDraftDeck(deck);
         href={data.externalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-secondary text-white font-medium hover:opacity-90 transition-opacity"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-ptt-primary text-white font-medium hover:opacity-90 transition-opacity"
       >
         {ctaText} →
       </a>
       <a
         href={`${prefix}/slides`}
-        class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-ptt-border text-ptt-secondary font-medium hover:bg-ptt-bg-elevated transition-colors"
       >
         {t.slides.external.backToCatalog}
       </a>
