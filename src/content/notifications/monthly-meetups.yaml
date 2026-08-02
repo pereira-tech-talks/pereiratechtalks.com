@@ -1,23 +1,25 @@
-severity: important
+severity: info
 title:
-  en: "May 27, 2026"
-  es: "27 de mayo de 2026"
+  en: Free monthly meetups in Pereira
+  es: Meetups mensuales y gratuitos en Pereira
 summary:
-  en: AI as a growth engine — meetup at UTP
-  es: IA como motor de crecimiento — meetup en la UTP
+  en: We have met every month since 2017 — talks, demos, and community.
+  es: Nos reunimos cada mes desde 2017 — charlas, demos y comunidad.
 body:
   en: |
-    Join us for a meetup on AI Engineering, AI as infrastructure, and scaling AI systems
-    in enterprise environments. Talks by Sebastián Franco Gomez and Henry Bravo.
+    Pereira Tech Talks runs a free, in-person meetup every month, with technical talks,
+    live demos, and time to connect with the local tech community. Check the calendar
+    for the next date, venue, and speaker lineup.
   es: |
-    Acompáñanos en un meetup sobre AI Engineering, IA como infraestructura y cómo escalar
-    sistemas de IA en entornos empresariales. Charlas con Sebastián Franco Gomez y Henry Bravo.
+    Pereira Tech Talks organiza un meetup presencial y gratuito cada mes, con charlas
+    técnicas, demostraciones en vivo y espacio para conectar con la comunidad tech local.
+    Revisa el calendario para conocer la próxima fecha, el lugar y quiénes presentan.
 ctaLabel:
-  en: See meetup
-  es: Ver meetup
-ctaHref: /meetups/ia-como-motor-de-crecimiento/
+  en: See upcoming meetups
+  es: Ver próximos meetups
+ctaHref: /meetups
 modalEnabled: true
-startsAt: 2026-04-01T00:00:00.000Z
-endsAt: 2026-05-28T05:59:59.000Z
-priority: 80
+startsAt: 2026-01-01T00:00:00.000Z
+endsAt: 2026-12-31T23:59:59.000Z
+priority: 50
 active: true

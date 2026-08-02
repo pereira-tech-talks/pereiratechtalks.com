@@ -19,8 +19,48 @@ let { lang, notifications }: Props = $props();
 
 let dismissed = $state<Record<string, boolean>>({});
 let openModalId = $state<string | null>(null);
+let dialogEl = $state<HTMLDivElement | undefined>(undefined);
+let lastFocusedEl: HTMLElement | null = null;
 
 const storageKey = (id: string): string => `ptt:notify-dismiss:${id}`;
+
+const focusableSelector =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+/** Native-like focus trap: keeps Tab/Shift+Tab cycling inside the dialog. */
+function trapFocus(e: KeyboardEvent): void {
+  if (e.key !== 'Tab' || !dialogEl) return;
+  const focusable = Array.from(
+    dialogEl.querySelectorAll<HTMLElement>(focusableSelector)
+  );
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+function openModal(id: string): void {
+  lastFocusedEl = document.activeElement as HTMLElement | null;
+  openModalId = id;
+}
+
+function closeModal(): void {
+  openModalId = null;
+  lastFocusedEl?.focus();
+  lastFocusedEl = null;
+}
+
+$effect(() => {
+  if (openModalId && dialogEl) {
+    dialogEl.focus();
+  }
+});
 
 $effect(() => {
   if (typeof sessionStorage === 'undefined') return;
@@ -48,7 +88,7 @@ function dismiss(id: string): void {
   } catch {
     /* private mode */
   }
-  if (openModalId === id) openModalId = null;
+  if (openModalId === id) closeModal();
 }
 
 function severityClass(severity: LocalizedNotification['severity']): string {
@@ -90,9 +130,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
             <button
               type="button"
               class="underline underline-offset-2 font-medium min-h-[44px] px-1"
-              onclick={() => {
-                openModalId = n.id;
-              }}
+              onclick={() => openModal(n.id)}
             >
               {moreLabel}
             </button>
@@ -123,17 +161,20 @@ function severityClass(severity: LocalizedNotification['severity']): string {
     class="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/50"
     role="presentation"
     onclick={(e) => {
-      if (e.target === e.currentTarget) openModalId = null;
+      if (e.target === e.currentTarget) closeModal();
     }}
     onkeydown={(e) => {
-      if (e.key === 'Escape') openModalId = null;
+      if (e.key === 'Escape') closeModal();
+      else trapFocus(e);
     }}
   >
     <div
+      bind:this={dialogEl}
       role="dialog"
       aria-modal="true"
       aria-labelledby={`notify-title-${openEntry.id}`}
-      class="w-full max-w-lg rounded-xl bg-ptt-bg-elevated text-ptt border border-ptt-border p-6 shadow-xl"
+      tabindex="-1"
+      class="w-full max-w-lg rounded-xl bg-ptt-bg-elevated text-ptt border border-ptt-border p-6 shadow-xl focus:outline-none"
     >
       <h2
         id={`notify-title-${openEntry.id}`}
