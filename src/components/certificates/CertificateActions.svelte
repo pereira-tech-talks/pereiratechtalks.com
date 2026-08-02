@@ -1,4 +1,5 @@
 <script lang="ts">
+import { EVENTS, trackEvent } from '@/lib/analytics';
 import type { CertificatePayload } from '@/lib/certificates/types';
 
 interface Props {
@@ -26,10 +27,12 @@ function clearStatusSoon(): void {
 }
 
 function printCertificate(): void {
+  trackEvent(EVENTS.CERTIFICATE_PRINT, { cert_id: payload.id });
   window.print();
 }
 
 function downloadJson(): void {
+  trackEvent(EVENTS.CERTIFICATE_JSON, { cert_id: payload.id });
   const blob = new Blob([JSON.stringify(payload, null, 2)], {
     type: 'application/json',
   });
@@ -44,6 +47,7 @@ function downloadJson(): void {
 async function copyLink(): Promise<void> {
   try {
     await navigator.clipboard.writeText(pageUrl);
+    trackEvent(EVENTS.CERTIFICATE_COPY, { cert_id: payload.id });
     status = labels.copied;
     clearStatusSoon();
   } catch {
@@ -60,6 +64,7 @@ async function shareLink(): Promise<void> {
         text: payload.subject.name,
         url: pageUrl,
       });
+      trackEvent(EVENTS.CERTIFICATE_SHARE, { cert_id: payload.id });
       status = labels.shared;
       clearStatusSoon();
       return;

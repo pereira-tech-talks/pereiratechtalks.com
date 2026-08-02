@@ -70,6 +70,8 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/add-meetup` | `.agents/skills/add-meetup/SKILL.md` | Create a Pereira Tech Talks monthly meetup entry (bilingual frontmatter, optional talk/speaker/sponsor refs) |
 | `/add-event` | `.agents/skills/add-event/SKILL.md` | Create a non-meetup event entry (workshop, hackathon, conference, webinar) in the `events` collection |
 | `/add-ptd-edition` | `.agents/skills/add-ptd-edition/SKILL.md` | Create a Pereira Tech Day annual edition (schedule, keynotes, brand kit, organizers, gallery) |
+| `/issue-certificates` | `.agents/skills/issue-certificates/SKILL.md` | Batch-issue signed attendance certificates from CSV (import → sign → verify → build) |
+| `/audit-analytics` | `.agents/skills/audit-analytics/SKILL.md` | Audit Umami event coverage, first-party proxy, and privacy-safe payloads |
 | `/promote-post` | `.agents/skills/promote-post/SKILL.md` | Generate social media content for blog posts across multiple platforms |
 | `/optimize-image` | `.agents/skills/optimize-image/SKILL.md` | Convert and optimize images to WebP for blog posts |
 | `/audit-post` | `.agents/skills/audit-post/SKILL.md` | Pre-publication audit for blog posts (SEO, AEO, accessibility, images, content quality, i18n) |

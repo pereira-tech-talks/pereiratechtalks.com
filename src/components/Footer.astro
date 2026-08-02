@@ -178,6 +178,9 @@ const tagline =
                 <a
                   href={link.href}
                   class="inline-flex min-h-[44px] items-center text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"
+                  data-umami-event="nav_click"
+                  data-umami-event-item={link.href.split('/').filter(Boolean).pop() ?? 'home'}
+                  data-umami-event-source="footer"
                 >
                   {link.label}
                 </a>
@@ -203,6 +206,9 @@ const tagline =
                 <a
                   href={link.href}
                   class="inline-flex min-h-[44px] items-center text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"
+                  data-umami-event="nav_click"
+                  data-umami-event-item={link.href.split('/').filter(Boolean).pop() ?? 'home'}
+                  data-umami-event-source="footer"
                 >
                   {link.label}
                 </a>
@@ -223,6 +229,9 @@ const tagline =
       <a
         href={`${prefix}/contact`}
         class="inline-flex min-h-[44px] items-center font-medium text-ptt-primary hover:underline"
+        data-umami-event="nav_click"
+        data-umami-event-item="contact"
+        data-umami-event-source="footer"
       >
         {lang === 'es' ? 'Contacto' : 'Contact'}
       </a>

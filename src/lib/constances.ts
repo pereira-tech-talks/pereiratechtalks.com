@@ -7,11 +7,27 @@ export const SITE_DESCRIPTION: string =
   'Pereira Tech Talks v3.0.0 — comunidad técnica bilingüe de Pereira (Risaralda, Colombia). Meetups mensuales, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, AI Channel, blog y slides.';
 export const BLOG_PAGE_SIZE: number = 30;
 
+const umamiWebsiteId = (import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '').trim();
+const umamiScriptOverride = (
+  import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || ''
+).trim();
+const umamiUseProxy = import.meta.env.PUBLIC_UMAMI_USE_PROXY !== 'false';
+
 // Analytics configuration — scripts load only when IDs are provided
 export const ANALYTICS = {
   umami: {
-    websiteId: import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '',
-    scriptUrl: 'https://cloud.umami.is/script.js',
+    websiteId: umamiWebsiteId,
+    /** Load tracker in production when website ID is set; opt-in locally via PUBLIC_UMAMI_ENABLE=true */
+    enabled:
+      Boolean(umamiWebsiteId) &&
+      (import.meta.env.PROD || import.meta.env.PUBLIC_UMAMI_ENABLE === 'true'),
+    scriptUrl:
+      umamiScriptOverride ||
+      (umamiUseProxy
+        ? '/api/umami/script.js'
+        : 'https://cloud.umami.is/script.js'),
+    /** Same-origin collect endpoint when first-party proxy is enabled */
+    hostUrl: umamiUseProxy ? '/api/umami' : '',
   },
   verification: {
     bing: import.meta.env.PUBLIC_BING_SITE_VERIFICATION || '',

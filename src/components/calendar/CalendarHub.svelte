@@ -1,4 +1,5 @@
 <script lang="ts">
+import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
   buildGoogleCalendarEmbedUrl,
   type CalendarViewMode,
@@ -80,17 +81,21 @@ function toggleSlug(slug: string): void {
   if (selectedSlugs.includes(slug)) {
     if (selectedSlugs.length === 1) return;
     selectedSlugs = selectedSlugs.filter((s) => s !== slug);
+    trackEvent(EVENTS.CALENDAR_FILTER, { slug, action: 'remove' });
     return;
   }
   selectedSlugs = [...selectedSlugs, slug];
+  trackEvent(EVENTS.CALENDAR_FILTER, { slug, action: 'add' });
 }
 
 function selectAll(): void {
   selectedSlugs = calendars.map((c) => c.slug);
+  trackEvent(EVENTS.CALENDAR_FILTER, { slug: 'all', action: 'select_all' });
 }
 
 function setView(mode: CalendarViewMode): void {
   viewMode = mode;
+  trackEvent(EVENTS.CALENDAR_VIEW, { mode: mode.toLowerCase() });
 }
 </script>
 
@@ -243,6 +248,8 @@ function setView(mode: CalendarViewMode): void {
             <a
               href={cal.icsUrl}
               class="font-medium text-ptt-primary dark:text-ptt-primary-dark underline underline-offset-2"
+              onclick={() =>
+                trackEvent(EVENTS.CALENDAR_SUBSCRIBE, { slug: cal.slug })}
             >
               {copy.subscribeIcs}
             </a>
@@ -252,6 +259,8 @@ function setView(mode: CalendarViewMode): void {
                 target="_blank"
                 rel="noopener noreferrer"
                 class="font-medium text-ptt-primary dark:text-ptt-primary-dark underline underline-offset-2"
+                onclick={() =>
+                  trackEvent(EVENTS.CALENDAR_LUMA, { slug: cal.slug })}
               >
                 {copy.lumaRsvp}
               </a>

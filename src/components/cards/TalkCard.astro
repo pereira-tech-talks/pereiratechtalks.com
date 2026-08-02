@@ -48,6 +48,8 @@ const typeLabel = typeLabels[talk.data.type ?? 'talk'][lang];
 
 <a
   href={url}
+  data-umami-event="talk_card_click"
+  data-umami-event-slug={talk.id}
   class="group flex h-full flex-col gap-3 rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border p-5 transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-secondary">

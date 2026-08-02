@@ -13,6 +13,19 @@ interface UmamiWindow extends Window {
   };
 }
 
+/** Keys that must never appear in event payloads (PII guard). */
+export const PII_DENYLIST_KEYS = [
+  'email',
+  'name',
+  'message',
+  'phone',
+  'address',
+  'password',
+  'firstname',
+  'lastname',
+  'fullname',
+] as const;
+
 /**
  * Centralized event name catalog.
  * All event names are defined here to ensure consistency across the codebase.
@@ -37,36 +50,180 @@ export const EVENTS = {
   CONTACT_FORM_ERROR: 'contact_form_error',
   NEWSLETTER_SUBSCRIBE: 'newsletter_subscribe',
   PTD_SUBSCRIBE: 'ptd_subscribe',
+  PTD_CTA_CLICK: 'ptd_cta_click',
   SOCIAL_CLICK: 'social_click',
   OUTBOUND_CLICK: 'outbound_click',
   SCROLL_DEPTH: 'scroll_depth',
   SCROLL_TO_TIMELINE: 'scroll_to_timeline',
   TIMELINE_CLICK: 'timeline_click',
   AI_BOT_VISIT: 'ai_bot_visit',
+  UNKNOWN_BOT_VISIT: 'unknown_bot_visit',
+  MARKDOWN_REQUEST: 'markdown_request',
+  NOTIFICATION_DISMISS: 'notification_dismiss',
+  NOTIFICATION_CTA: 'notification_cta',
+  NOTIFICATION_MODAL_OPEN: 'notification_modal_open',
+  CALENDAR_FILTER: 'calendar_filter',
+  CALENDAR_VIEW: 'calendar_view',
+  CALENDAR_SUBSCRIBE: 'calendar_subscribe',
+  CALENDAR_LUMA: 'calendar_luma',
+  COMMUNITY_CLICK: 'community_click',
+  SPEAKER_CARD_CLICK: 'speaker_card_click',
+  MEETUP_CARD_CLICK: 'meetup_card_click',
+  TALK_CARD_CLICK: 'talk_card_click',
+  SPEAKER_APPLICATION_SUBMIT: 'speaker_application_submit',
+  SPONSOR_INQUIRY_SUBMIT: 'sponsor_inquiry_submit',
+  CERTIFICATE_PRINT: 'certificate_print',
+  CERTIFICATE_SHARE: 'certificate_share',
+  CERTIFICATE_COPY: 'certificate_copy',
+  CERTIFICATE_JSON: 'certificate_json',
 } as const;
+
+export type AnalyticsEventName = (typeof EVENTS)[keyof typeof EVENTS];
+
+export interface AnalyticsContext {
+  lang: string;
+  section: string;
+  edition_year?: number;
+}
+
+/** Long-form routes where scroll_depth is meaningful (not listing pages). */
+const SCROLL_DEPTH_PATH_PATTERNS: ReadonlyArray<RegExp> = [
+  /^\/blog\/[^/]+\/?$/,
+  /^\/en\/blog\/[^/]+\/?$/,
+  /^\/meetups\/[^/]+\/?$/,
+  /^\/en\/meetups\/[^/]+\/?$/,
+  /^\/about\/?$/,
+  /^\/en\/about\/?$/,
+  /^\/about-us\/?$/,
+  /^\/en\/about-us\/?$/,
+  /^\/pereira-tech-days\/\d{4}\/?$/,
+  /^\/en\/pereira-tech-days\/\d{4}\/?$/,
+];
+
+/**
+ * Strip language prefix for section detection.
+ */
+export function normalizePathname(pathname: string): string {
+  if (pathname.startsWith('/en/')) return pathname.slice(3) || '/';
+  if (pathname === '/en') return '/';
+  return pathname;
+}
+
+/**
+ * Derive stable page section from URL (first path segment after optional /en).
+ */
+export function getPageSection(pathname: string): string {
+  const clean = normalizePathname(pathname);
+  if (clean === '/' || clean === '') return 'home';
+  const segment = clean.split('/').filter(Boolean)[0];
+  return segment ?? 'home';
+}
+
+/**
+ * Extract PTD edition year when on an edition route.
+ */
+export function getEditionYear(pathname: string): number | undefined {
+  const match = pathname.match(/\/pereira-tech-days\/(\d{4})/);
+  if (!match) return undefined;
+  const year = Number.parseInt(match[1], 10);
+  return Number.isFinite(year) ? year : undefined;
+}
+
+/**
+ * Build analytics dimensions for event payloads.
+ */
+export function getAnalyticsContext(
+  lang: string,
+  pathname: string
+): AnalyticsContext {
+  const context: AnalyticsContext = {
+    lang,
+    section: getPageSection(pathname),
+  };
+  const editionYear = getEditionYear(pathname);
+  if (editionYear !== undefined) {
+    context.edition_year = editionYear;
+  }
+  return context;
+}
+
+/**
+ * Whether scroll_depth should fire on this pathname.
+ */
+export function shouldTrackScrollDepth(pathname: string): boolean {
+  const normalized =
+    pathname.endsWith('/') && pathname.length > 1
+      ? pathname.slice(0, -1)
+      : pathname;
+  return SCROLL_DEPTH_PATH_PATTERNS.some((pattern) => pattern.test(normalized));
+}
+
+/**
+ * Remove PII-like keys from event payloads before sending.
+ */
+export function sanitizeEventData(
+  data?: Record<string, string | number>
+): Record<string, string | number> | undefined {
+  if (!data) return undefined;
+
+  const sanitized: Record<string, string | number> = {};
+  for (const [key, value] of Object.entries(data)) {
+    const lower = key.toLowerCase();
+    const isDenied = PII_DENYLIST_KEYS.some((denied) => lower.includes(denied));
+    if (!isDenied) {
+      sanitized[key] = value;
+    }
+  }
+
+  return Object.keys(sanitized).length > 0 ? sanitized : undefined;
+}
 
 /**
  * Track a custom event via Umami.
  * @param eventName - Name of the event (e.g., 'nav_click', 'blog_search')
- * @param eventData - Optional data payload
+ * @param eventData - Optional data payload (PII keys stripped automatically)
  */
 export function trackEvent(
   eventName: string,
   eventData?: Record<string, string | number>
 ): void {
   const win = typeof window !== 'undefined' ? (window as UmamiWindow) : null;
-  if (win?.umami) {
-    win.umami.track(eventName, eventData);
+  if (!win?.umami) return;
+
+  const payload = sanitizeEventData(eventData);
+  win.umami.track(eventName, payload);
+}
+
+/**
+ * Track with page context dimensions merged into payload.
+ */
+export function trackEventWithContext(
+  eventName: string,
+  eventData: Record<string, string | number> | undefined,
+  context: AnalyticsContext
+): void {
+  const merged: Record<string, string | number> = {
+    lang: context.lang,
+    section: context.section,
+    ...eventData,
+  };
+  if (context.edition_year !== undefined) {
+    merged.edition_year = context.edition_year;
   }
+  trackEvent(eventName, merged);
 }
 
 /**
  * Track scroll depth milestones (25%, 50%, 75%, 100%).
  * Each threshold fires only once per page load.
  * Uses a passive scroll listener for zero performance impact.
+ * Guarded against double-binding (e.g. layout + page both calling).
  */
+let scrollDepthBound = false;
+
 export function trackScrollDepth(): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || scrollDepthBound) return;
+  scrollDepthBound = true;
 
   const thresholds = [25, 50, 75, 100];
   const fired = new Set<number>();
@@ -91,6 +248,11 @@ export function trackScrollDepth(): void {
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+/** Reset scroll binding guard (tests only). */
+export function resetScrollDepthBinding(): void {
+  scrollDepthBound = false;
 }
 
 /**
@@ -128,7 +290,6 @@ export function setupOutboundTracking(): void {
     );
     if (!link) return;
 
-    // Skip links already tracked via data attributes
     if (link.hasAttribute('data-umami-event')) return;
 
     const href = link.getAttribute('href');
@@ -152,4 +313,9 @@ export function setupOutboundTracking(): void {
       // Invalid URL, skip
     }
   });
+}
+
+/** Reset outbound binding guard (tests only). */
+export function resetOutboundTracking(): void {
+  outboundTrackingSetUp = false;
 }

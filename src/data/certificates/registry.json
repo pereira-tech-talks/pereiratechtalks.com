@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "ptd-2026",
+      "year": 2026,
+      "slug": "pereira-tech-day",
+      "name": {
+        "en": "Pereira Tech Day 2026",
+        "es": "Pereira Tech Day 2026"
+      },
+      "date": "2026-08-22",
+      "location": {
+        "en": "Universidad Tecnológica de Pereira, Pereira, Colombia",
+        "es": "Universidad Tecnológica de Pereira, Pereira, Colombia"
+      },
+      "issuerName": {
+        "en": "Pereira Tech Talks",
+        "es": "Pereira Tech Talks"
+      },
+      "transparencyLevel": "vc-level-2"
+    }
+  ],
+  "certificates": [
+    {
+      "id": "ptd26_demo_a7k3m9qx",
+      "eventId": "ptd-2026",
+      "subjectName": "Alex Rivera Demo",
+      "role": "attendee",
+      "issuedAt": "2026-08-25T15:00:00.000Z",
+      "status": "valid"
+    },
+    {
+      "id": "ptd26_demo_b2n8w4pz",
+      "eventId": "ptd-2026",
+      "subjectName": "Sam Ortega Demo",
+      "role": "speaker",
+      "issuedAt": "2026-08-25T15:05:00.000Z",
+      "status": "valid"
+    },
+    {
+      "id": "ptd26_demo_c5r1v6jy",
+      "eventId": "ptd-2026",
+      "subjectName": "Jordan Méndez Demo",
+      "role": "volunteer",
+      "issuedAt": "2026-08-25T15:10:00.000Z",
+      "status": "valid"
+    },
+    {
+      "id": "ptd26_demo_revoked01",
+      "eventId": "ptd-2026",
+      "subjectName": "Casey Demo Revoked",
+      "role": "attendee",
+      "issuedAt": "2026-08-25T15:15:00.000Z",
+      "status": "revoked"
+    }
+  ]
+}

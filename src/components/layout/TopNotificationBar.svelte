@@ -1,4 +1,6 @@
 <script lang="ts">
+import { EVENTS, trackEvent } from '@/lib/analytics';
+
 interface LocalizedNotification {
   id: string;
   severity: 'info' | 'important' | 'success' | 'warning';
@@ -48,6 +50,7 @@ function trapFocus(e: KeyboardEvent): void {
 function openModal(id: string): void {
   lastFocusedEl = document.activeElement as HTMLElement | null;
   openModalId = id;
+  trackEvent(EVENTS.NOTIFICATION_MODAL_OPEN, { id });
 }
 
 function closeModal(): void {
@@ -90,6 +93,7 @@ const importantLabel = lang === 'es' ? 'IMPORTANTE' : 'IMPORTANT';
 
 function dismiss(id: string): void {
   dismissed = { ...dismissed, [id]: true };
+  trackEvent(EVENTS.NOTIFICATION_DISMISS, { id });
   try {
     sessionStorage.setItem(storageKey(id), '1');
   } catch {
@@ -149,6 +153,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
             <a
               href={n.ctaHref}
               class="relative inline-flex items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+              onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
             >
               {n.ctaLabel}
             </a>
@@ -202,6 +207,8 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           <a
             href={openEntry.ctaHref}
             class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-5 py-2 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
+            onclick={() =>
+              trackEvent(EVENTS.NOTIFICATION_CTA, { id: openEntry.id })}
           >
             {openEntry.ctaLabel}
           </a>

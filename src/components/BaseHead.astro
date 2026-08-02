@@ -208,12 +208,15 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
   }}
 />
 
-<!-- Analytics: Umami (cookieless, privacy-first) -->
-{ANALYTICS.umami.websiteId && (
+<!-- Analytics: Umami (cookieless, privacy-first) — prod-only unless PUBLIC_UMAMI_ENABLE=true -->
+{ANALYTICS.umami.enabled && (
   <script
     is:inline
     defer
     src={ANALYTICS.umami.scriptUrl}
     data-website-id={ANALYTICS.umami.websiteId}
+    {...(ANALYTICS.umami.hostUrl
+      ? { 'data-host-url': ANALYTICS.umami.hostUrl }
+      : {})}
   />
 )}

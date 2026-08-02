@@ -104,9 +104,16 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
     </main>
     <Footer lang={lang} />
     <WebMCPBridge client:load lang={lang as 'en' | 'es'} />
-    <script>
-      import { setupOutboundTracking } from '@/lib/analytics';
+    <script define:vars={{ lang }}>
+      import {
+        setupOutboundTracking,
+        shouldTrackScrollDepth,
+        trackScrollDepth,
+      } from '@/lib/analytics';
       setupOutboundTracking();
+      if (shouldTrackScrollDepth(window.location.pathname)) {
+        trackScrollDepth();
+      }
     </script>
   </body>
 </html>

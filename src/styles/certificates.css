@@ -325,11 +325,7 @@
       var(--ptt-accent, #e8a33d) 0%,
       transparent 45%
     ),
-    radial-gradient(
-      ellipse at 10% 80%,
-      var(--ptt-primary) 0%,
-      transparent 40%
-    );
+    radial-gradient(ellipse at 10% 80%, var(--ptt-primary) 0%, transparent 40%);
 }
 
 @media (max-width: 640px) {
@@ -363,7 +359,7 @@
   .ptt-cert-actions,
   .ptt-cert-page__banner,
   .ptt-cert-page__back,
-  [data-testid='theme-toggle'],
+  [data-testid="theme-toggle"],
   header,
   footer,
   .fixed {

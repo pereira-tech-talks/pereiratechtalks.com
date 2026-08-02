@@ -1,0 +1,35 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
+  ],
+  "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx.json",
+  "type": [
+    "VerifiableCredential",
+    "EventAttendanceCredential"
+  ],
+  "issuer": "did:web:pereiratechtalks.org",
+  "validFrom": "2026-08-25T15:00:00.000Z",
+  "credentialSubject": {
+    "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx",
+    "name": "Alex Rivera Demo",
+    "role": "attendee",
+    "event": {
+      "name": "Pereira Tech Day 2026",
+      "startDate": "2026-08-22",
+      "location": "Universidad Tecnológica de Pereira, Pereira, Colombia"
+    }
+  },
+  "credentialStatus": {
+    "type": "CertificateStatus",
+    "status": "valid"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
+    "created": "2026-08-25T15:00:00.000Z",
+    "verificationMethod": "did:web:pereiratechtalks.org#key-1",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "Rvw6GTBNhfzu5zSMafw-DcyIPSqSWlOhDitMcT2C-wZKwMKqVJEPkQ3dBd13coPLzre0-5yMGcPY4LLQNrTnDw"
+  }
+}

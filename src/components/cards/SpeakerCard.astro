@@ -34,6 +34,8 @@ const latestYear = latestTalkDate ? latestTalkDate.getFullYear() : null;
 
 <a
   href={url}
+  data-umami-event="speaker_card_click"
+  data-umami-event-slug={speaker.id}
   class="group flex h-full flex-col items-center overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border p-6 transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div

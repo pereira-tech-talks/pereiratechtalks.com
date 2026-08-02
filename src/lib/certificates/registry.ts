@@ -1,4 +1,9 @@
-import { DEMO_CERTIFICATE_FIXTURES } from '@/data/certificates/demo-fixtures';
+import registryData from '@/data/certificates/registry.json';
+import {
+  type CertificateRegistry,
+  parseCertificateRegistry,
+  registryRecordToFixture,
+} from '@/lib/certificates/registry-schema';
 import {
   assertCertificateFixture,
   type CertificateFixture,
@@ -8,17 +13,30 @@ import {
 import type { Language } from '@/lib/i18n';
 
 /**
- * Demo fixture registry for certificate diploma UX.
- * Production CSV / signed issuance will replace this module later
- * (see PLAN_certificate_generation_system handoff).
+ * Certificate registry backed by validated JSON (no emails).
+ * Demo fixtures are derived from registry records for diploma UX.
  */
 
+const registry: CertificateRegistry = parseCertificateRegistry(registryData);
+
 const fixtures: CertificateFixture[] = (() => {
-  for (const item of DEMO_CERTIFICATE_FIXTURES) {
-    assertCertificateFixture(item);
+  const eventsById = new Map(registry.events.map((e) => [e.id, e]));
+  const list: CertificateFixture[] = [];
+  for (const record of registry.certificates) {
+    const event = eventsById.get(record.eventId);
+    if (!event) {
+      throw new Error(`Unknown event for certificate ${record.id}`);
+    }
+    const fixture = registryRecordToFixture(record, event);
+    assertCertificateFixture(fixture);
+    list.push(fixture);
   }
-  return DEMO_CERTIFICATE_FIXTURES;
+  return list;
 })();
+
+export function getRegistry(): CertificateRegistry {
+  return registry;
+}
 
 export function getAllCertificateFixtures(): CertificateFixture[] {
   return fixtures;
@@ -30,6 +48,12 @@ export function getCertificateById(id: string): CertificateFixture | undefined {
 
 export function getCertificatesByYear(year: number): CertificateFixture[] {
   return fixtures.filter((f) => f.eventYear === year);
+}
+
+export function getCertificateEventId(
+  certificateId: string
+): string | undefined {
+  return registry.certificates.find((c) => c.id === certificateId)?.eventId;
 }
 
 export function toCertificatePayload(
@@ -64,6 +88,12 @@ export type VerifyResult = {
   reasons: string[];
   payload?: CertificatePayload;
   verifiedAt: string;
+  crypto?: {
+    checked: boolean;
+    signatureValid: boolean;
+    provider?: string;
+    mode: 'signed' | 'unsigned' | 'demo';
+  };
 };
 
 export function verifyCertificateId(
@@ -113,4 +143,11 @@ export function certificateDiplomaPath(
 export function certificateVerifyPath(id: string, lang: Language): string {
   const prefix = lang === 'en' ? '/en' : '';
   return `${prefix}/certificates/verify?id=${encodeURIComponent(id)}`;
+}
+
+export function signedCredentialPublicPath(
+  eventId: string,
+  certificateId: string
+): string {
+  return `/certificates/${eventId}/${certificateId}.json`;
 }

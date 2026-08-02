@@ -939,6 +939,16 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       viewDiploma: 'Ver diploma',
       emptyHint:
         'Pega un ID de certificado para ver su estado de verificación.',
+      cryptoLabel: 'Prueba criptográfica',
+      cryptoSigned:
+        'Firma Ed25519 verificada contra did:web:pereiratechtalks.org.',
+      cryptoDemo:
+        'Firma de demostración verificada (clave de desarrollo — no es emisión de producción).',
+      cryptoUnsigned:
+        'No hay artefacto JSON-LD firmado (solo fixture del registro).',
+      cryptoFailed: 'La verificación de firma falló o falta la prueba.',
+      cryptoRevokedSigned:
+        'La firma es válida, pero el estado del ciclo de vida no es válido.',
       statuses: {
         valid: 'Válido',
         revoked: 'Revocado',

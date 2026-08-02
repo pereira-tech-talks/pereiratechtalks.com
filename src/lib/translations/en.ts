@@ -934,6 +934,16 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       certId: 'Certificate ID',
       viewDiploma: 'View diploma',
       emptyHint: 'Paste a certificate ID to see its verification status.',
+      cryptoLabel: 'Cryptographic proof',
+      cryptoSigned:
+        'Ed25519 signature verified against did:web:pereiratechtalks.org.',
+      cryptoDemo:
+        'Demo signature verified (development key — not production issuance).',
+      cryptoUnsigned:
+        'No signed JSON-LD artifact on file (registry fixture only).',
+      cryptoFailed: 'Signature verification failed or proof is missing.',
+      cryptoRevokedSigned:
+        'Signature is valid, but the credential lifecycle status is not valid.',
       statuses: {
         valid: 'Valid',
         revoked: 'Revoked',

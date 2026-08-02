@@ -82,6 +82,19 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL;
 - [ ] Rotate secrets if accidentally exposed
 - [ ] Use CI/CD environment variables for builds
 
+## Analytics Privacy
+
+Umami analytics on pereiratechtalks.org is **cookieless** and **PII-free** by policy:
+
+- **No GA4** — Umami Cloud only, with optional first-party proxy at `/api/umami/*`
+- **No consent banner** — no cookies set by the analytics stack
+- **Public env vars only** — `PUBLIC_UMAMI_WEBSITE_ID` and related `PUBLIC_UMAMI_*` flags; no Umami API secrets on the client
+- **PII stripping** — `sanitizeEventData()` in `src/lib/analytics.ts` blocks payload keys matching `email`, `name`, `message`, etc.; enforced by `tests/unit/lib/analytics-privacy.test.ts`
+- **Proxy hardening** — `functions/api/umami/[[path]].ts` allowlists only `script.js` and `api/send`; no arbitrary upstream forwarding
+- **Server events** — AI bot and markdown analytics send bot name + path only; request bodies are never logged
+
+See `docs/ANALYTICS.md` for the full event catalog and operator runbook (`.dwp/plans/PLAN_world_class_umami_analytics/analysis_results/UMAMI_OPERATOR_RUNBOOK.md`).
+
 ### Agent Tooling Secrets (DeepWorkPlan addons)
 
 The repo vendors opt-in AI-agent tooling (DeepWorkPlan v2.17.0 + the AI Diff Reviewer and design-system addons). None of it ships to the production site — it is developer/agent-only — and its secrets are **never committed**:
@@ -333,6 +346,22 @@ If a secret is accidentally committed:
 2. **Remove from history** - Use `git filter-branch` or BFG Repo-Cleaner
 3. **Audit usage** - Check if secret was used maliciously
 4. **Update documentation** - Prevent recurrence
+
+## Event Certificates (W3C VC Level 2)
+
+Static attendance diplomas use Ed25519 signing at build time — never in the browser.
+
+| Secret / asset | Handling |
+|----------------|----------|
+| `CERT_SIGNING_PRIVATE_KEY` | CI/Cloudflare secret only; base64 32-byte Ed25519 seed |
+| `public/.well-known/did.json` | Public key only — safe to commit |
+| `tests/fixtures/cert-test-signing-key.json` | TEST ONLY — never use in production |
+| Attendee CSV | `tmp/` only; emails stripped at import |
+| `src/data/certificates/registry.json` | Names + opaque IDs; no emails |
+
+Scripts: `pnpm run certs:import`, `certs:sign`, `certs:verify`. See `docs/features/CERTIFICATES.md` and operator runbook in plan `analysis_results/CERT_OPERATOR_RUNBOOK.md`.
+
+Signing library (`src/lib/certificates/crypto/sign.ts`) must not be imported from client bundles. Verification uses browser-safe `verify.ts` only.
 
 ## Resources
 

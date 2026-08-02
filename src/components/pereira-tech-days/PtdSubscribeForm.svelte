@@ -1,5 +1,9 @@
 <script lang="ts">
-import { EVENTS, trackEvent } from '@/lib/analytics';
+import {
+  EVENTS,
+  getAnalyticsContext,
+  trackEventWithContext,
+} from '@/lib/analytics';
 import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -40,7 +44,11 @@ async function handleSubmit(event: SubmitEvent) {
     if (!response.ok) throw new Error('submit_failed');
     status = 'success';
     statusMessage = t.success;
-    trackEvent(EVENTS.PTD_SUBSCRIBE, { year });
+    trackEventWithContext(
+      EVENTS.PTD_SUBSCRIBE,
+      { year },
+      getAnalyticsContext(lang, window.location.pathname)
+    );
     email = '';
     setTimeout(() => {
       status = 'idle';

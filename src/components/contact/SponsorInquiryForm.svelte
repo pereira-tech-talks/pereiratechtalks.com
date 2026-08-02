@@ -106,7 +106,7 @@ async function handleSubmit() {
     });
     if (!response.ok) throw new Error('fail');
     formState = 'success';
-    trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { reason: 'sponsorship' });
+    trackEvent(EVENTS.SPONSOR_INQUIRY_SUBMIT);
     setTimeout(() => successRef?.focus(), 100);
   } catch {
     submitError = cp.submitError;

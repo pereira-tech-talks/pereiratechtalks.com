@@ -5,7 +5,10 @@ export {
   certificateVerifyPath,
   getAllCertificateFixtures,
   getCertificateById,
+  getCertificateEventId,
   getCertificatesByYear,
+  getRegistry,
+  signedCredentialPublicPath,
   toCertificatePayload,
   verifyCertificateId,
 } from '@/lib/certificates/registry';

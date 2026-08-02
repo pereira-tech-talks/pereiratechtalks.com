@@ -1,0 +1,35 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
+  ],
+  "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_revoked01.json",
+  "type": [
+    "VerifiableCredential",
+    "EventAttendanceCredential"
+  ],
+  "issuer": "did:web:pereiratechtalks.org",
+  "validFrom": "2026-08-25T15:15:00.000Z",
+  "credentialSubject": {
+    "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_revoked01",
+    "name": "Casey Demo Revoked",
+    "role": "attendee",
+    "event": {
+      "name": "Pereira Tech Day 2026",
+      "startDate": "2026-08-22",
+      "location": "Universidad Tecnológica de Pereira, Pereira, Colombia"
+    }
+  },
+  "credentialStatus": {
+    "type": "CertificateStatus",
+    "status": "revoked"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "cryptosuite": "eddsa-2022",
+    "created": "2026-08-25T15:15:00.000Z",
+    "verificationMethod": "did:web:pereiratechtalks.org#key-1",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "yk5kD1RKixp19CXU2VlsbgsszfQXE_TaixA6koRknEAodXcfNCBLbxpv5caXZDnCHBa6IbgoyJAs2IRdACgfCw"
+  }
+}

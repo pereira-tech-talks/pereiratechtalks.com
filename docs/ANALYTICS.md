@@ -96,9 +96,15 @@ These tools add small tracking scripts to `BaseHead.astro`. Scripts load conditi
 | **Consent banner** | Not needed |
 | **Data retention** | ~6 months (Cloud free tier) |
 | **Dashboard** | [cloud.umami.is](https://cloud.umami.is) |
-| **Env variable** | `PUBLIC_UMAMI_WEBSITE_ID` |
+| **Env variable** | `PUBLIC_UMAMI_WEBSITE_ID` (+ optional proxy vars below) |
+| **Script URL (default)** | `/api/umami/script.js` (first-party proxy) |
+| **Collect URL (default)** | `/api/umami/api/send` via `data-host-url` |
 
-**Setup:** Register at [umami.is](https://umami.is), create a website, copy the Website ID. Set `PUBLIC_UMAMI_WEBSITE_ID` in environment variables.
+**Setup:** Register at [umami.is](https://umami.is), create a website, copy the Website ID. Set `PUBLIC_UMAMI_WEBSITE_ID` in Cloudflare Pages environment variables.
+
+**First-party proxy:** A Cloudflare Pages Function at `/api/umami/*` forwards the tracker script and collect endpoint to Umami Cloud. This reduces ad-blocker under-count for developer audiences. See ADR: `.dwp/plans/PLAN_world_class_umami_analytics/analysis_results/04_UMAMI_HOSTING_PROXY_ADR.md`.
+
+**Local development:** Umami does **not** load unless `PUBLIC_UMAMI_ENABLE=true` is set (production loads automatically when website ID is configured). Test the proxy with `pnpm run build && pnpm exec wrangler pages dev dist/`.
 
 **Unique value:** Privacy-first GA4 alternative with a clean, fast dashboard. Top Pages view directly shows which blog content gets the most traction. Custom events track specific interactions (external link clicks, language switches).
 
@@ -296,7 +302,7 @@ Umami custom events are used to track specific user interactions beyond page vie
 | `data-umami-event` HTML attributes | Astro components (`.astro`) | Zero JS overhead — Umami script reads attributes at click time |
 | `trackEvent()` programmatic calls | Svelte components (`.svelte`) | Calls `window.umami.track()` inside event handlers |
 
-**Utility file:** `src/lib/analytics.ts` exports the `EVENTS` constant catalog, `trackEvent()`, and helper functions (`trackScrollDepth`, `trackSearch`, `setupOutboundTracking`).
+**Utility file:** `src/lib/analytics.ts` exports the `EVENTS` constant catalog, `trackEvent()`, `trackEventWithContext()`, `getAnalyticsContext()`, `sanitizeEventData()`, and helper functions (`trackScrollDepth`, `shouldTrackScrollDepth`, `trackSearch`, `setupOutboundTracking`).
 
 ### Event Naming Convention
 
@@ -310,6 +316,20 @@ Umami custom events are used to track specific user interactions beyond page vie
 - Contact form tracks validation failure field names (e.g., `{ fields: "name,email" }`) but never field values
 - Newsletter form tracks the subscribe event but not the email address
 - Umami is cookieless and GDPR-compliant by default
+
+### Content dimensions
+
+Custom events may include stable dimensions via `trackEventWithContext()` or `getAnalyticsContext()`:
+
+| Dimension | Description | Example |
+|-----------|-------------|---------|
+| `lang` | Active locale | `es`, `en` |
+| `section` | First URL path segment | `blog`, `meetups` |
+| `edition_year` | PTD edition year when applicable | `2026` |
+
+### Scroll depth policy
+
+`scroll_depth` fires on **long-form pages only** (blog posts, meetup detail, about, PTD editions) — not on listing pages. Implemented in `MainLayout.astro` via `shouldTrackScrollDepth()`. Thresholds: 25%, 50%, 75%, 100% (once each per page load).
 
 ### Event Catalog
 
@@ -333,17 +353,37 @@ Umami custom events are used to track specific user interactions beyond page vie
 | `newsletter_subscribe` | Newsletter signup | — | NewsletterForm.svelte |
 | `social_click` | Footer social link | `{ platform }` | Footer.astro |
 | `outbound_click` | External link click | `{ url }` | MainLayout.astro (delegated) |
-| `scroll_depth` | Scroll milestone | `{ depth }` | BlogPostPage.astro |
+| `scroll_depth` | Scroll milestone | `{ depth }` | MainLayout.astro (long-form policy) |
 | `scroll_to_timeline` | Scroll-to-timeline button | — | ScrollToTimeline.svelte |
 | `timeline_click` | Timeline card title click | `{ page, slug }` | PortfolioTimeline, DailyBotTimeline, EntrepreneurTimeline, TechTalksTimeline, TradingTimeline |
+| `ptd_subscribe` | PTD edition email signup | `{ year, lang?, section? }` | PtdSubscribeForm.svelte |
+| `ptd_cta_click` | PTD hero/section CTA | `{ cta, year? }` | PTD pages (P1 wiring) |
+| `speaker_application_submit` | Call for speakers form | — | SpeakersApplicationForm.svelte |
+| `sponsor_inquiry_submit` | Sponsor inquiry form | — | SponsorInquiryForm.svelte |
+| `notification_dismiss` | Top bar dismissed | `{ id }` | TopNotificationBar.svelte |
+| `notification_cta` | Notification CTA clicked | `{ id }` | TopNotificationBar.svelte |
+| `notification_modal_open` | Notification modal opened | `{ id }` | TopNotificationBar.svelte |
+| `calendar_filter` | Calendar filter toggle | `{ slug, action }` | CalendarHub.svelte |
+| `calendar_view` | Calendar view mode | `{ mode }` | CalendarHub.svelte |
+| `calendar_subscribe` | ICS subscribe click | `{ slug }` | CalendarHub.svelte |
+| `calendar_luma` | Luma RSVP link | `{ slug }` | CalendarHub.svelte |
+| `community_click` | Community card | `{ slug }` | CommunityCard.astro |
+| `speaker_card_click` | Speaker directory card | `{ slug }` | SpeakerCard.astro |
+| `meetup_card_click` | Meetup timeline card | `{ slug, status }` | MeetupCard.astro |
+| `talk_card_click` | Talk card | `{ slug }` | TalkCard.astro |
+| `certificate_print` | Certificate print | `{ cert_id }` | CertificateActions.svelte |
+| `certificate_share` | Certificate native share | `{ cert_id }` | CertificateActions.svelte |
+| `certificate_copy` | Certificate link copy | `{ cert_id }` | CertificateActions.svelte |
+| `certificate_json` | Certificate JSON download | `{ cert_id }` | CertificateActions.svelte |
 | `ai_bot_visit` | AI crawler page visit (server-side) | `{ bot, path, method }` | `functions/_middleware.ts` (edge middleware) |
+| `unknown_bot_visit` | Unknown bot crawl (server-side) | `{ bot, path, method, user_agent }` | `functions/_middleware.ts` (edge middleware) |
 | `markdown_request` | Markdown endpoint request (server-side) | `{ bot, path, source, user_agent }` | `functions/_middleware.ts` (edge middleware) |
 
 ### How to Verify Events
 
 1. Run `pnpm run dev` and open the site in a browser
 2. Open DevTools → **Network** tab
-3. Filter requests by `api/send` (Umami's event endpoint)
+3. Filter requests by `api/send` or `/api/umami/api/send` (Umami collect endpoint)
 4. Perform an interaction (e.g., click a nav link)
 5. Verify a POST request appears with the event name in the payload
 6. Check the [Umami Cloud dashboard](https://cloud.umami.is) → Events tab for real-time data
@@ -414,6 +454,9 @@ All analytics-related environment variables:
 | Variable | Tool | Required | Description |
 |----------|------|----------|-------------|
 | `PUBLIC_UMAMI_WEBSITE_ID` | Umami | Optional | Website ID from Umami Cloud dashboard |
+| `PUBLIC_UMAMI_SCRIPT_URL` | Umami | Optional | Override script URL (default: `/api/umami/script.js`) |
+| `PUBLIC_UMAMI_USE_PROXY` | Umami | Optional | Set `false` to load directly from `cloud.umami.is` |
+| `PUBLIC_UMAMI_ENABLE` | Umami | Optional | Set `true` to enable tracking in local dev |
 | `PUBLIC_BING_SITE_VERIFICATION` | Bing | Optional | Verification code from Bing Webmaster Tools |
 
 **All variables are optional.** If not set, the corresponding scripts/meta tags simply don't render. The site works perfectly without any analytics configured.

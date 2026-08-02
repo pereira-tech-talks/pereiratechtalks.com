@@ -43,7 +43,10 @@
     "responsive:capture:quick": "node scripts/responsive-audit/capture.mjs --quick",
     "test:responsive": "playwright test tests/e2e/responsive/",
     "test:responsive:update": "playwright test tests/e2e/responsive/ --update-snapshots",
-    "release": "bash .github/scripts/prepare_release.sh"
+    "release": "bash .github/scripts/prepare_release.sh",
+    "certs:import": "tsx scripts/certificates/import-csv.ts",
+    "certs:sign": "tsx scripts/certificates/sign.ts",
+    "certs:verify": "tsx scripts/certificates/verify.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.10",
@@ -53,13 +56,16 @@
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.3",
     "@astrojs/svelte": "9.0.1",
+    "@noble/ed25519": "^3.1.0",
+    "@noble/hashes": "^2.2.0",
     "astro": "7.1.6",
     "fuse.js": "7.5.0",
     "qrcode": "^1.5.4",
     "reveal.js": "^6.0.1",
     "svelte": "5.56.8",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.6",
@@ -75,6 +81,7 @@
     "happy-dom": "20.11.1",
     "npm-check-updates": "23.0.0",
     "sharp": "0.35.3",
+    "tsx": "^4.23.1",
     "vitest": "4.1.10"
   }
 }

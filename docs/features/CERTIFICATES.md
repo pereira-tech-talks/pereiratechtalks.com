@@ -16,13 +16,35 @@ See ADR: `.dwp/plans/PLAN_certificates_diploma_experience/analysis_results/02_AD
 
 ## Demo fixtures
 
-Source: `src/data/certificates/demo-fixtures.ts`  
-Registry: `src/lib/certificates/registry.ts`
+Source: `src/data/certificates/registry.json` (validated registry)  
+Derived fixtures: `src/data/certificates/demo-fixtures.ts`  
+Registry loader: `src/lib/certificates/registry.ts`
 
 - Opaque IDs (`ptd26_demo_*`); fictional `* Demo` names
 - Roles: attendee, speaker, volunteer (+ revoked sample)
 - **Never** commit real attendee emails or PII
-- Production CSV / signed issuance lands via `PLAN_certificate_generation_system`
+- Signed public artifacts: `public/certificates/ptd-2026/{id}.json`
+
+## Cryptography (VC Level 2)
+
+| Component | Path |
+|-----------|------|
+| Sign (build/CI only) | `src/lib/certificates/crypto/sign.ts` |
+| Verify (browser + CLI) | `src/lib/certificates/crypto/verify.ts` |
+| DID document | `public/.well-known/did.json` |
+| JSON-LD context | `public/schemas/event-attendance/v1.jsonld` |
+| Operator scripts | `scripts/certificates/{import-csv,sign,verify}.ts` |
+
+### Operator commands
+
+```bash
+pnpm run certs:import -- --csv tmp/attendees.csv --event ptd-2026
+CERT_SIGNING_PRIVATE_KEY=<base64> pnpm run certs:sign   # production
+pnpm run certs:sign -- --demo                           # local dev
+pnpm run certs:verify
+```
+
+CI secret: `CERT_SIGNING_PRIVATE_KEY`. Never commit private keys. See `docs/SECURITY.md`.
 
 Demo attendee link:
 
@@ -56,6 +78,6 @@ Edition accents: wrap diploma in `EditionScope` on PTD routes.
 
 All UI strings under `certificates` in `src/lib/translations/{en,es}.ts`.
 
-## Handoff to crypto plan
+## Skill
 
-This UX slice keeps URL shapes and status enum (`valid` / `revoked` / `replaced` / `expired` / `unknown`) stable for signing, VC payloads, and CI in `PLAN_certificate_generation_system`.
+Batch issuance: `#issue-certificates` (`.agents/skills/issue-certificates/SKILL.md`).

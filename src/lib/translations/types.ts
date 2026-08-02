@@ -634,6 +634,12 @@ export interface SiteTranslations {
       certId: string;
       viewDiploma: string;
       emptyHint: string;
+      cryptoLabel: string;
+      cryptoSigned: string;
+      cryptoDemo: string;
+      cryptoUnsigned: string;
+      cryptoFailed: string;
+      cryptoRevokedSigned: string;
       statuses: {
         valid: string;
         revoked: string;

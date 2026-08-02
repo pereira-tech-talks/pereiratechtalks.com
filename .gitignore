@@ -45,6 +45,14 @@ coverage/
 tmp/*
 !tmp/.gitkeep
 
+# Certificate signing secrets and raw attendee CSV drops (never commit)
+.secrets/
+tmp/certs/
+*.pem
+*-private*
+*-private.key
+attendees*.csv
+
 english.png
 spanish.png
 

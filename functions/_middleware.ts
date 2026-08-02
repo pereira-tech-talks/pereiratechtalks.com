@@ -62,7 +62,9 @@ const SPIDER_CRAWLER_PATTERN =
 const IGNORED_BOTS_PATTERN =
   /Googlebot|bingbot|YandexBot|Baiduspider|DuckDuckBot|Slurp|facebot|ia_archiver|Uptimebot|UptimeRobot|pingdom|StatusCake|NodePing|Site24x7|Checkly|DatadogSynthetics|NewRelicPinger|Better Uptime|AhrefsBot|SemrushBot|DataForSeoBot|MJ12bot|Discordbot|PetalBot|Barkrowler|BitSightBot|Jetslide|archive\.org_bot|RafineriBot|AwarioBot|Applebot(?!-Extended)|Twitterbot|SeznamBot|DotBot|AgentWarsBot|meta-webindexer/i;
 
-const UMAMI_API_URL = 'https://cloud.umami.is/api/send';
+import { buildUmamiUpstreamUrl } from './_lib/umami-proxy';
+
+const UMAMI_API_URL = buildUmamiUpstreamUrl('api/send');
 
 function detectAiBot(userAgent: string): string | null {
   for (const { pattern, name } of AI_BOT_PATTERNS) {
