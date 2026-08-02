@@ -37,8 +37,8 @@ const roleLabels: Record<string, { en: string; es: string }> = {
 };
 ---
 
-<article class="group flex h-full flex-col items-center rounded-2xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 p-6 text-center transition hover:shadow-lg hover:ring-ptt-primary/30 dark:hover:ring-ptt-primary-dark/40">
-  <div class="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-ptt-primary/20 to-ptt-bg-dark/20 ring-2 ring-white dark:ring-gray-800 shadow-sm">
+<article class="group flex h-full flex-col items-center rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border p-6 text-center transition hover:shadow-lg hover:ring-ptt-primary/30">
+  <div class="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-ptt-primary/20 to-ptt-bg-dark/20 ring-2 ring-ptt-bg-elevated shadow-sm">
     <img decoding="async"
       src={avatar}
       alt={`Portrait of ${contributor.data.name}`}
@@ -47,19 +47,19 @@ const roleLabels: Record<string, { en: string; es: string }> = {
       loading={loading}
       class="h-full w-full object-cover" />
   </div>
-  <h3 class="mt-4 text-base font-semibold text-gray-900 dark:text-gray-50">
+  <h3 class="mt-4 text-base font-semibold text-ptt">
     {contributor.data.name}
   </h3>
   <p class="mt-1 text-sm text-ptt-primary dark:text-ptt-primary-dark font-medium">
     {role}
   </p>
-  <p class="mt-2 text-xs text-gray-600 dark:text-gray-300 line-clamp-3">
+  <p class="mt-2 text-xs text-ptt-secondary line-clamp-3">
     {bio}
   </p>
   <ul class="mt-3 flex flex-wrap justify-center gap-1.5">
     {
       contributor.data.roles.map((r) => (
-        <li class="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">
+        <li class="inline-flex items-center rounded-full bg-ptt-primary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-ptt-secondary">
           {roleLabels[r]?.[lang] ?? r}
         </li>
       ))
@@ -67,7 +67,7 @@ const roleLabels: Record<string, { en: string; es: string }> = {
   </ul>
   {
     Object.keys(social).length > 0 && (
-      <ul class="mt-4 flex gap-3 text-gray-600 dark:text-gray-300">
+      <ul class="mt-4 flex gap-3 text-ptt-secondary">
         {social.github && (
           <li>
             <a
