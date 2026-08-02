@@ -1,0 +1,21 @@
+name: Sary Libreros
+pronouns: she/her
+role:
+  en: Community Lead at AWS Women Colombia
+  es: Líder de Comunidad en AWS Women Colombia
+bio:
+  en: Lightning-talk presenter at Pereira Tech Day 2024 on her journey from chemical engineering to the tech world.
+  es: Ponente lightning de Pereira Tech Day 2024 sobre su viaje de la ingeniería química al mundo tech.
+photo:
+  src: /images/speakers/sary-libreros.jpg
+  alt:
+    en: Portrait of Sary Libreros
+    es: Retrato de Sary Libreros
+social:
+  website: "https://bento.me/sarylibreros"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

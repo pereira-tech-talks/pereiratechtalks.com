@@ -1,0 +1,32 @@
+---
+/**
+ * Sticky year jump rail for the meetups archive.
+ * Desktop: vertical sticky nav. Mobile: horizontal chip scroll.
+ */
+
+interface Props {
+  years: number[];
+  label: string;
+}
+
+const { years, label } = Astro.props;
+---
+
+<nav aria-label={label} class="meetup-year-rail">
+  <ul
+    class="flex gap-2 overflow-x-auto pb-2 sm:flex-col sm:overflow-visible sm:pb-0 sm:sticky sm:top-24"
+  >
+    {
+      years.map((year) => (
+        <li class="shrink-0">
+          <a
+            href={`#year-${year}`}
+            class="inline-flex min-h-[44px] min-w-[4.5rem] items-center justify-center rounded-full border border-ptt-border bg-ptt-bg-elevated px-3 py-2 text-sm font-semibold text-ptt-secondary transition-colors hover:border-ptt-primary hover:text-ptt-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:hover:border-ptt-primary-dark dark:hover:text-ptt-primary-dark"
+          >
+            {year}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

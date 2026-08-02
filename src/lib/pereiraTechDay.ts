@@ -43,11 +43,6 @@ export const getUpcomingEdition = async (): Promise<
   });
 };
 
-/**
- * Build a CSS rule for the edition's per-edition theme scope, suitable for
- * injection into <style> in the edition page layout. The selector is
- * [data-edition-theme="{year}"] and never leaks outside that scope.
- */
 export const buildEditionThemeCss = (edition: PereiraTechDay): string => {
   const { brandKit, year } = edition.data;
   const lines: string[] = [];
@@ -97,3 +92,49 @@ export const buildEditionThemeCss = (edition: PereiraTechDay): string => {
 
   return lines.join('\n');
 };
+
+/** Resolve edition start date as a Date (handles single-day and range shapes). */
+export const getEditionStartDate = (edition: PereiraTechDay): Date => {
+  const d = edition.data.date;
+  return d instanceof Date ? d : d.start;
+};
+
+/** Resolve edition end date when the entry uses a date range. */
+export const getEditionEndDate = (edition: PereiraTechDay): Date | null => {
+  const d = edition.data.date;
+  return d instanceof Date ? null : d.end;
+};
+
+/** ISO timestamp for countdown / JSON-LD start, combining date + optional startTime. */
+export const getEditionStartIso = (edition: PereiraTechDay): string => {
+  const start = getEditionStartDate(edition);
+  const time = edition.data.startTime;
+  if (time) {
+    const [hours, minutes] = time.split(':').map(Number);
+    const local = new Date(start);
+    local.setHours(hours, minutes ?? 0, 0, 0);
+    return local.toISOString();
+  }
+  return start.toISOString();
+};
+
+/** ISO timestamp for event end (date + endTime or same-day fallback). */
+export const getEditionEndIso = (
+  edition: PereiraTechDay
+): string | undefined => {
+  const endDate = getEditionEndDate(edition);
+  const time = edition.data.endTime;
+  const base = endDate ?? getEditionStartDate(edition);
+  if (time) {
+    const [hours, minutes] = time.split(':').map(Number);
+    const local = new Date(base);
+    local.setHours(hours, minutes ?? 0, 0, 0);
+    return local.toISOString();
+  }
+  if (endDate) return endDate.toISOString();
+  return undefined;
+};
+
+/** Whether the edition is the upcoming flagship template (announced / RSVP). */
+export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
+  edition.data.status === 'announced' || edition.data.status === 'rsvp-open';

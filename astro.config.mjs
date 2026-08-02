@@ -41,8 +41,13 @@ export default defineConfig({
     mdx(),
     sitemap({
       lastmod: new Date(),
+      // '/talks' and '/talks/{slug}' are 301 redirect stubs (Task 22 of
+      // PLAN_world_class_site_upgrade) — meetups is the canonical surface,
+      // so the redirected URLs must not appear in the sitemap.
       filter: (page) =>
-        !page.includes('/internal/') && !page.endsWith('/internal'),
+        !page.includes('/internal/') &&
+        !page.endsWith('/internal') &&
+        !/\/talks(\/|$)/.test(page),
     }),
     svelte(),
     excludeInternal(),

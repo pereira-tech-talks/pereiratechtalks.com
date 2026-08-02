@@ -1,0 +1,21 @@
+name: Abdenago Lopez Hernandez
+pronouns: he/him
+role:
+  en: QA at Blossom
+  es: QA en Blossom
+bio:
+  en: Lightning-talk presenter at Pereira Tech Day 2024 on communication as the key to successful teamwork.
+  es: Ponente lightning de Pereira Tech Day 2024 sobre la comunicación como clave del trabajo en equipo.
+photo:
+  src: /images/speakers/abdenago-lopez.jpg
+  alt:
+    en: Portrait of Abdenago Lopez Hernandez
+    es: Retrato de Abdenago Lopez Hernandez
+social:
+  linkedin: "https://www.linkedin.com/in/alopezhe-800141221"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

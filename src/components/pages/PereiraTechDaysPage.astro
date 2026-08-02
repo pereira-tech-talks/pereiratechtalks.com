@@ -1,7 +1,7 @@
 ---
 /**
  * PTT v3.0.0 Pereira Tech Days catalog page (shared between EN and ES).
- * Lists every edition with year, hero, status.
+ * Features the upcoming edition prominently, then past editions.
  */
 
 import EditionCard from '@/components/cards/EditionCard.astro';
@@ -9,16 +9,20 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getEditions } from '@/lib/pereiraTechDay';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getEditions, getUpcomingEdition } from '@/lib/pereiraTechDay';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+const t = getTranslations(lang).ptdPage;
+const prefix = getUrlPrefix(lang);
 
 const editions = await getEditions();
+const featured = await getUpcomingEdition();
 const upcoming = editions.filter(
   (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
 );
@@ -26,60 +30,76 @@ const past = editions.filter(
   (e) => e.data.status === 'completed' || e.data.status === 'cancelled'
 );
 
-const t = {
-  title: 'Pereira Tech Days',
-  description:
-    lang === 'es'
-      ? 'El evento anual insignia de la comunidad: una jornada completa de charlas, paneles y networking en Pereira.'
-      : "The community's flagship annual event: a full day of talks, panels, and networking in Pereira.",
-  intro:
-    lang === 'es'
-      ? `${editions.length} ediciones desde 2017. Cada año reunimos speakers de Colombia y la región para una jornada técnica que celebra a la comunidad del Eje Cafetero.`
-      : `${editions.length} editions since 2017. Every year we bring together speakers from Colombia and the region for a technical day that celebrates the Eje Cafetero community.`,
-  upcoming: lang === 'es' ? 'Próxima edición' : 'Upcoming edition',
-  past: lang === 'es' ? 'Ediciones pasadas' : 'Past editions',
-};
+const pageTitle = 'Pereira Tech Days';
+const pageDescription =
+  lang === 'es'
+    ? 'El evento anual insignia de la comunidad: una jornada completa de charlas, paneles y networking en Pereira.'
+    : "The community's flagship annual event: a full day of talks, panels, and networking in Pereira.";
 
 const breadcrumbs = [
-  {
-    label: lang === 'es' ? 'Inicio' : 'Home',
-    href: `${getUrlPrefix(lang)}/`,
-  },
-  { label: t.title },
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: pageTitle },
 ];
 ---
 
-<MainLayout lang={lang} title={t.title} description={t.description}>
+<MainLayout lang={lang} title={pageTitle} description={pageDescription}>
   <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/80 text-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+    <div class="mx-auto max-w-6xl px-4 pt-12 pb-4 sm:px-6 sm:pt-16 lg:px-8">
       <Breadcrumbs items={breadcrumbs} onDark />
     </div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
-      <Eyebrow variant="accent">
-        {lang === 'es' ? 'Evento anual' : 'Annual event'}
-      </Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-6xl font-bold tracking-tight">
-        {t.title}
-      </h1>
-      <p class="mt-4 max-w-3xl text-lg text-gray-200">{t.intro}</p>
+    <div class="mx-auto max-w-6xl px-4 pt-6 pb-16 sm:px-6 lg:px-8">
+      <Eyebrow variant="accent">{lang === 'es' ? 'Evento anual' : 'Annual event'}</Eyebrow>
+      <h1 class="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">{pageTitle}</h1>
+      <p class="mt-4 max-w-3xl text-lg text-gray-200">
+        {t.indexIntro}
+      </p>
     </div>
   </div>
 
   {
-    upcoming.length > 0 && (
-      <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.upcoming}>
+    featured && (
+      <Section eyebrow={t.indexFeatured} title={tr(featured.data.title, lang)} surface="alt">
+        <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+              {featured.data.year}
+            </p>
+            <p class="mt-3 text-lg text-gray-600 dark:text-gray-300">
+              {tr(featured.data.tagline, lang)}
+            </p>
+            <p class="mt-4 text-sm text-gray-600 dark:text-gray-300">
+              {tr(featured.data.description, lang)}
+            </p>
+            <a
+              href={`${prefix}/pereira-tech-days/${featured.data.year}/`}
+              class="mt-6 inline-flex rounded-full bg-ptt-primary px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+            >
+              {lang === 'es' ? 'Ver edición 2026' : 'View 2026 edition'}
+            </a>
+          </div>
+          <EditionCard edition={featured} lang={lang} loading="eager" />
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    upcoming.length > 1 && (
+      <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.indexUpcoming}>
         <ul class="grid gap-6 sm:grid-cols-2">
-          {upcoming.map((edition) => (
-            <li>
-              <EditionCard edition={edition} lang={lang} loading="eager" />
-            </li>
-          ))}
+          {upcoming
+            .filter((e) => e.id !== featured?.id)
+            .map((edition) => (
+              <li>
+                <EditionCard edition={edition} lang={lang} loading="eager" />
+              </li>
+            ))}
         </ul>
       </Section>
     )
   }
 
-  <Section eyebrow={lang === 'es' ? 'Historia' : 'History'} title={t.past} surface="alt">
+  <Section eyebrow={lang === 'es' ? 'Historia' : 'History'} title={t.indexPast} surface="alt">
     <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         past.map((edition) => (

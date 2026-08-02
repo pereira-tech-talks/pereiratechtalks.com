@@ -1,0 +1,109 @@
+---
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  year: number;
+  title: string;
+  tagline: string;
+  dateLabel: string;
+  startDate: string;
+  venueName: string;
+  venueMapUrl?: string;
+  heroSrc: string;
+  logoSrc?: string;
+  recordingUrl?: string;
+  statusLabel: string;
+  recordingCta: string;
+}
+
+const {
+  year,
+  title,
+  tagline,
+  dateLabel,
+  startDate,
+  venueName,
+  venueMapUrl,
+  heroSrc,
+  logoSrc,
+  recordingUrl,
+  statusLabel,
+  recordingCta,
+} = Astro.props;
+---
+
+<header class="relative overflow-hidden bg-[var(--ptt-bg)] text-[var(--ptt-text)]">
+  <div class="absolute inset-0 opacity-20" aria-hidden="true">
+    <img
+      src={heroSrc}
+      alt=""
+      width="1920"
+      height="640"
+      class="h-full w-full object-cover"
+    />
+  </div>
+  <div class="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+  {
+    logoSrc && (
+      <img
+        src={logoSrc}
+        alt="Pereira Tech Day"
+        width="120"
+        height="120"
+        class="mx-auto mb-8 h-auto w-28 sm:w-32"
+      />
+    )
+  }
+    <div class="flex flex-wrap items-center gap-3 text-sm">
+      <span class="rounded-full bg-[var(--ptt-accent)]/15 px-3 py-1 font-semibold uppercase tracking-widest text-[var(--ptt-text)]">
+        {statusLabel}
+      </span>
+      <time
+        datetime={startDate}
+        class="font-semibold uppercase tracking-widest text-[var(--ptt-accent)]"
+      >
+        {dateLabel}
+      </time>
+    </div>
+    <p class="mt-2 text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ptt-accent)]">
+      Pereira Tech Day · {year}
+    </p>
+    <h1 class="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">{title}</h1>
+    <p class="mt-4 max-w-3xl text-lg text-[var(--ptt-text)]/90">{tagline}</p>
+    {
+      venueName && (
+        <p class="mt-6 text-sm text-[var(--ptt-text-muted)]">
+          {
+            venueMapUrl ? (
+              <a
+                href={venueMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
+              >
+                {venueName}
+              </a>
+            ) : (
+              venueName
+            )
+          }
+        </p>
+      )
+    }
+    {
+      recordingUrl && (
+        <div class="mt-8">
+          <a
+            href={recordingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-full bg-[var(--ptt-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+          >
+            {recordingCta}
+          </a>
+        </div>
+      )
+    }
+  </div>
+</header>

@@ -145,7 +145,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
             <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
-            <p class="text-gray-700 dark:text-gray-200">{item}</p>
+            <p class="text-ptt-secondary">{item}</p>
           </li>
         ))
       }
@@ -161,10 +161,10 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
       {
         t.formats.map((format) => (
           <li class="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50">
+            <h3 class="text-lg font-semibold text-ptt">
               {format.name}
             </h3>
-            <p class="mt-2 text-gray-600 dark:text-gray-300">
+            <p class="mt-2 text-ptt-secondary">
               {format.description}
             </p>
           </li>
@@ -174,7 +174,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
   </Section>
 
   <Section eyebrow={lang === 'es' ? 'Proceso' : 'Process'} title={t.processTitle}>
-    <ol class="space-y-4 list-decimal list-inside text-gray-700 dark:text-gray-200 marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold">
+    <ol class="space-y-4 list-decimal list-inside text-ptt-secondary marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold">
       {
         t.process.map((step) => (
           <li class="text-base leading-relaxed">{step}</li>

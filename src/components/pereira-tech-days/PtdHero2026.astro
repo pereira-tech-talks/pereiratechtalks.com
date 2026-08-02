@@ -1,0 +1,120 @@
+---
+import PtdCountdown from '@/components/pereira-tech-days/PtdCountdown.svelte';
+import PtdSubscribeForm from '@/components/pereira-tech-days/PtdSubscribeForm.svelte';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  year: number;
+  title: string;
+  tagline: string;
+  eyebrow: string;
+  dateLong: string;
+  venueName: string;
+  venueMapUrl?: string;
+  expectedAttendance?: string;
+  heroIllustration?: string;
+  logoSrc?: string;
+  mascotSrc?: string;
+  targetDate: string;
+  endDate?: string;
+}
+
+const {
+  lang,
+  year,
+  title,
+  tagline,
+  eyebrow,
+  dateLong,
+  venueName,
+  venueMapUrl,
+  expectedAttendance,
+  heroIllustration,
+  logoSrc,
+  mascotSrc,
+  targetDate,
+  endDate,
+} = Astro.props;
+---
+
+<section
+  class="relative overflow-hidden bg-[var(--ptt-bg)] text-[var(--ptt-text)]"
+  style={heroIllustration ? `background-image: url('${heroIllustration}'); background-size: cover; background-position: center right;` : undefined}
+>
+  <div class="absolute inset-0 bg-gradient-to-r from-[var(--ptt-bg)] via-[var(--ptt-bg)]/95 to-[var(--ptt-bg)]/40" aria-hidden="true"></div>
+  <div class="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-12 lg:px-8 lg:py-20">
+    <div class="min-w-0">
+      <p class="text-sm font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">{eyebrow}</p>
+      {
+        logoSrc && (
+          <img
+            src={logoSrc}
+            alt="Pereira Tech Day"
+            width="80"
+            height="80"
+            class="mt-4 h-16 w-auto sm:h-20"
+          />
+        )
+      }
+      <h1 class="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+        <span class="block text-[var(--ptt-primary)]">{title}</span>
+        <span class="sr-only"> {year}</span>
+      </h1>
+      <p class="mt-4 max-w-xl text-lg text-[var(--ptt-text)]/90">
+        {tagline}
+      </p>
+      <ul class="mt-6 space-y-2 text-sm text-[var(--ptt-text-muted)]">
+        <li>{dateLong}</li>
+        <li>
+          {
+            venueMapUrl ? (
+              <a
+                href={venueMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
+              >
+                {venueName}
+              </a>
+            ) : (
+              venueName
+            )
+          }
+        </li>
+      </ul>
+      {
+        expectedAttendance && (
+          <div
+            class="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2 ring-1 ring-[var(--ptt-border)]"
+            aria-label={expectedAttendance}
+          >
+            <span class="text-lg font-bold text-[var(--ptt-primary)]">300+</span>
+            <span class="text-sm text-[var(--ptt-text-muted)]">
+              {lang === 'es' ? 'asistentes esperados' : 'expected attendees'}
+            </span>
+          </div>
+        )
+      }
+      <div class="mt-8 max-w-md">
+        <PtdCountdown client:visible lang={lang} targetDate={targetDate} endDate={endDate} />
+      </div>
+      <PtdSubscribeForm client:visible lang={lang} year={year} />
+    </div>
+    {
+      mascotSrc && (
+        <div class="flex justify-center lg:justify-end">
+          <img
+            src={mascotSrc}
+            alt=""
+            width="560"
+            height="560"
+            class="max-h-[min(70vh,520px)] w-auto object-contain"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      )
+    }
+  </div>
+</section>

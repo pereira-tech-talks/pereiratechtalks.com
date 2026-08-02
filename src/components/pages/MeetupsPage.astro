@@ -2,12 +2,11 @@
 /**
  * PTT v3.0.0 meetups timeline page (shared between EN and ES).
  *
- * Renders all meetups grouped by year, with upcoming meetups highlighted at
- * the top. Used by the thin wrappers `src/pages/meetups/index.astro` and
- * `src/pages/es/meetups/index.astro`.
+ * Full archive + sticky year jump rail (see MEETUPS_NAV_DECISION.md).
  */
 
 import MeetupCard from '@/components/cards/MeetupCard.astro';
+import MeetupYearRail from '@/components/meetups/MeetupYearRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
@@ -30,6 +29,7 @@ const all = await getMeetups();
 const upcoming = await getUpcomingMeetups();
 const past = all.filter((m) => !upcoming.some((u) => u.id === m.id));
 const groups = groupMeetupsByYear(past);
+const years = groups.map((g) => g.year);
 
 const t = {
   title:
@@ -63,6 +63,7 @@ const t = {
       : `${past.length} meetups in the archive`,
   yearLabel: (n: number) =>
     lang === 'es' ? `${n} — Meetups del año` : `${n} — Meetups`,
+  yearNav: lang === 'es' ? 'Saltar al año' : 'Jump to year',
 };
 
 const breadcrumbs = [
@@ -100,16 +101,20 @@ const breadcrumbs = [
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
       <Eyebrow>{t.meetupsCount}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
         {t.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
         {t.intro}
       </p>
     </div>
   </div>
 
-  <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.upcoming} surface="alt">
+  <Section
+    eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'}
+    title={t.upcoming}
+    surface="alt"
+  >
     {
       upcoming.length > 0 ? (
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -131,23 +136,30 @@ const breadcrumbs = [
   </Section>
 
   <Section eyebrow={lang === 'es' ? 'Archivo' : 'Archive'} title={t.past}>
-    <div class="space-y-16">
+    <div class="grid gap-10 lg:grid-cols-[7rem_1fr]">
       {
-        groups.map(({ year, meetups }) => (
-          <div>
-            <h3 class="mb-6 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-              {t.yearLabel(year)}
-            </h3>
-            <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {meetups.map((m) => (
-                <li>
-                  <MeetupCard meetup={m} lang={lang} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
+        years.length > 0 && (
+          <MeetupYearRail years={years} label={t.yearNav} />
+        )
       }
+      <div class="space-y-16 min-w-0">
+        {
+          groups.map(({ year, meetups }) => (
+            <div id={`year-${year}`} class="scroll-mt-28">
+              <h3 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
+                {t.yearLabel(year)}
+              </h3>
+              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {meetups.map((m) => (
+                  <li>
+                    <MeetupCard meetup={m} lang={lang} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </Section>
 </MainLayout>

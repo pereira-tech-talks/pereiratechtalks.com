@@ -1,0 +1,23 @@
+---
+/**
+ * EditionScope — scopes per-edition brand kit tokens to `[data-edition-theme]`.
+ * Header, footer, and chrome remain outside this wrapper (global PTT brand).
+ */
+
+interface Props {
+  year: number;
+  class?: string;
+}
+
+const { year, class: className = '' } = Astro.props;
+---
+
+<div data-edition-theme={year} class:list={['ptd-edition-scope bg-ptt-bg text-ptt', className]}>
+  <slot />
+</div>
+
+<style>
+  .ptd-edition-scope {
+    --ptd-section-pad: clamp(3rem, 6vw, 5rem);
+  }
+</style>

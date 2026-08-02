@@ -3,22 +3,40 @@ title:
   en: Pereira Tech Day 2026
   es: Pereira Tech Day 2026
 tagline:
-  en: The next chapter — registration opens soon.
-  es: El siguiente capítulo — las inscripciones abren pronto.
+  en: Where talent, technology, and brands meet.
+  es: Donde el talento, la tecnología y las marcas se encuentran.
 description:
-  en: The 2026 edition of Pereira Tech Day, the community's annual flagship conference. The organizing team, allied communities, and first confirmed sponsors are in place; the program and speaker lineup are still being assembled.
-  es: La edición 2026 de Pereira Tech Day, la conferencia anual insignia de la comunidad. El equipo organizador, las comunidades aliadas y los primeros patrocinadores confirmados ya están definidos; el programa y la lista de ponentes aún se están armando.
-date: 2026-09-26
+  en: The 2026 edition of Pereira Tech Day returns to the Universidad Tecnológica de Pereira on Saturday, August 22. A full day of software development, artificial intelligence, cybersecurity, and community — with international speakers, sponsor activations, and the howler-monkey energy of the Risaralda tech scene.
+  es: La edición 2026 de Pereira Tech Day regresa a la Universidad Tecnológica de Pereira el sábado 22 de agosto. Un día completo de desarrollo de software, inteligencia artificial, ciberseguridad y comunidad — con ponentes internacionales, activaciones de patrocinadores y la energía del mono aullador del ecosistema tech de Risaralda.
+date: 2026-08-22
+startTime: "08:00"
+endTime: "14:00"
 venue:
-  name: Pereira, Colombia
+  name: Auditorio Jorge Roa Martínez, Universidad Tecnológica de Pereira
   city: Pereira
   country: Colombia
+  mapUrl: "https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
 mode: in-person
-hero:
-  src: /images/pereira-tech-days/_placeholder/hero.png
+expectedAttendance:
+  en: "300+ expected attendees"
+  es: "300+ asistentes esperados"
+aboutTopics:
+  - en: Artificial Intelligence
+    es: Inteligencia Artificial
+  - en: Software Development
+    es: Desarrollo de software
+  - en: Cybersecurity
+    es: Ciberseguridad
+aboutMedia:
+  src: /images/pereira-tech-days/2026/about-panel.jpg
   alt:
-    en: Pereira Tech Day 2026 placeholder cover
-    es: Cubierta de Pereira Tech Day 2026
+    en: Pereira Tech Day community gathering at UTP
+    es: Comunidad de Pereira Tech Day reunida en la UTP
+hero:
+  src: /images/pereira-tech-days/2026/mascot/hero.webp
+  alt:
+    en: Pereira Tech Day 2026 mascot — a howler monkey with a laptop at UTP
+    es: Mascota de Pereira Tech Day 2026 — un mono aullador con laptop en la UTP
   layout: banner
 brandKit:
   paletteLight:
@@ -29,6 +47,26 @@ brandKit:
     text: "#0f2a2c"
     textMuted: "#6e8589"
     border: "#e2e8e8"
+  paletteDark:
+    primary: "#3ab9c9"
+    accent: "#e3a648"
+    bg: "#0f2a2c"
+    bgElevated: "#1a3a3d"
+    text: "#f4f9f9"
+    textMuted: "#a8bdbf"
+    border: "#2a4a4d"
+  typography:
+    headingFamily: "Bebas Neue, \"Arial Black\", sans-serif"
+    headingTransform: uppercase
+    headingTracking: 0.12em
+    fontSources:
+      - family: Bebas Neue
+        npmPackage: "@fontsource/bebas-neue"
+  hero:
+    backgroundImage: /images/pereira-tech-days/2026/hero-illustration.png
+  ui:
+    buttonShape: pill
+    cardShape: rounded
 schedule: []
 keynotes: []
 lightningTalks: []
@@ -53,6 +91,8 @@ organizers:
   - katherine-lopez
   - luisa-banol
   - sergio-estrella
+collaborators:
+  - lizeth-franco
 communities:
   - name: Python Pereira
     logo: /images/communities/pypereira.png
@@ -73,5 +113,245 @@ communities:
     logo: /images/communities/backbone-utp.png
     url: "https://backboneutp.com"
 gallery: []
+sponsorshipPlans:
+  - tier: silver
+    title:
+      en: Silver Sponsor
+      es: Patrocinador Silver
+    subtitle:
+      en: Visibility and relationship building.
+      es: Visibilidad y relacionamiento.
+    price: "200"
+    period:
+      en: USD
+      es: USD
+    benefits:
+      - en: Logo on web and brochure
+        es: Logo en web y brochure
+      - en: Official mention
+        es: Mención oficial
+      - en: Social media thank-you
+        es: Agradecimiento en redes
+      - en: Logo on printed and virtual materials
+        es: Logo en material impreso y virtual
+    ctaLabel:
+      en: Contact us
+      es: Contactar
+    ctaUrl: "https://wa.me/?text=Hola%2C%20deseo%20saber%20el%20proceso%20para%20el%20rango%20%22Silver%20Sponsor%22%20para%20Pereira%20Tech%20Day."
+  - tier: gold
+    title:
+      en: Gold Sponsor
+      es: Patrocinador Gold
+    subtitle:
+      en: Direct access.
+      es: Acceso directo.
+    price: "500"
+    period:
+      en: USD
+      es: USD
+    featured: true
+    benefits:
+      - en: Lightning talk (3 min)
+        es: Lightning talk (3 min)
+      - en: Attendee database (with consent)
+        es: Base de datos (con autorización)
+      - en: Social media post
+        es: Publicación en redes
+      - en: Networking invitation
+        es: Invitación a networking
+      - en: Logo on printed and virtual materials
+        es: Logo en material impreso y virtual
+    ctaLabel:
+      en: Contact us
+      es: Contactar
+    ctaUrl: "https://wa.me/?text=Hola%2C%20deseo%20saber%20el%20proceso%20para%20el%20rango%20%22Gold%20Sponsor%22%20para%20Pereira%20Tech%20Day."
+  - tier: platinum
+    title:
+      en: Platinum Sponsor
+      es: Patrocinador Platinum
+    subtitle:
+      en: High impact.
+      es: Alto impacto.
+    price: "1000+"
+    period:
+      en: USD
+      es: USD
+    benefits:
+      - en: Featured lightning talk (5 min)
+        es: Lightning talk destacado (5 min)
+      - en: Brand booth (2×2 m)
+        es: Stand de marca (2×2 m)
+      - en: Brand activation
+        es: Activación de marca
+      - en: Dedicated reel
+        es: Reel dedicado
+      - en: Priority for 2027
+        es: Prioridad 2027
+      - en: Logo on printed and virtual materials
+        es: Logo en material impreso y virtual
+    ctaLabel:
+      en: Contact us
+      es: Contactar
+    ctaUrl: "mailto:pereiratechtalks@gmail.com?subject=Inter%C3%A9s%20en%20patrocinio%20de%20Pereira%20Tech%20Talks"
+extraPartnerships:
+  - title:
+      en: Custom Support
+      es: Apoyo Personalizado
+    subtitle:
+      en: Tailored modalities and alliances.
+      es: Modalidades y alianzas a la medida.
+    items:
+      - title:
+          en: Modalities
+          es: Modalidades
+      - description:
+          en: Monetary contribution
+          es: Aporte monetario
+      - description:
+          en: In-kind contribution
+          es: Aporte en especie
+      - description:
+          en: Hybrid modality
+          es: Modalidad híbrida
+      - subtitle:
+          en: Benefits scale with total value
+          es: Los beneficios se escalan según el valor total
+      - title:
+          en: Special collaborations
+          es: Colaboraciones especiales
+      - description:
+          en: Catering and coffee breaks
+          es: Alimentación y coffee breaks
+      - description:
+          en: Kits and merchandising
+          es: Kits y merchandising
+      - description:
+          en: Services and technology
+          es: Servicios y tecnología
+      - description:
+          en: Logistics
+          es: Logística
+      - subtitle:
+          en: Each alliance is built around your goals.
+          es: Cada alianza se construye a la medida de tus objetivos.
+    ctaLabel:
+      en: Contact us
+      es: Contactar
+    ctaUrl: "https://wa.me/?text=Hola%2C%20deseo%20saber%20el%20proceso%20para%20%22Apoyo%20Personalizado%22%20para%20Pereira%20Tech%20Day."
+  - title:
+      en: Open Alliance and Vaki
+      es: Alianza Abierta y Vaki
+    subtitle:
+      en: Community support.
+      es: Apoyo comunitario.
+    items:
+      - subtitle:
+          en: Your support makes this event possible, no matter the size. We welcome organizations and individuals who want to be part of the ecosystem.
+          es: Tu apoyo hace posible este evento, sin importar el tamaño. Buscamos organizaciones y personas que quieran ser parte activa del ecosistema.
+      - title:
+          en: Ways to support
+          es: Vías de apoyo
+      - description:
+          en: Monetary contribution
+          es: Aporte monetario
+      - description:
+          en: In-kind contribution
+          es: Aporte en especie
+      - description:
+          en: Hybrid modality
+          es: Modalidad híbrida
+      - title:
+          en: Rewards
+          es: Recompensas
+      - description:
+          en: Public recognition
+          es: Reconocimiento público
+      - description:
+          en: Social media mentions
+          es: Menciones en redes
+      - description:
+          en: Inclusion in official event thank-yous
+          es: Inclusión en los agradecimientos oficiales del evento
+    ctaLabel:
+      en: Visit our Vaki
+      es: Visita nuestro Vaki
+    ctaUrl: "https://vaki.co/vaki/pereiratechday"
+faqs:
+  - question:
+      en: How can I register?
+      es: ¿Cómo puedo registrarme?
+    answer:
+      en: Watch our social channels and this website. We have limited capacity (around 200 seats), so register as soon as tickets open.
+      es: Debes estar atento a las redes del evento y a nuestra página web. Solo tenemos 200 cupos, así que reserva tan pronto se habiliten las inscripciones.
+  - question:
+      en: Is the event free?
+      es: ¿El evento es gratuito?
+    answer:
+      en: Yes, Pereira Tech Day is completely free.
+      es: Sí, el evento es totalmente gratuito.
+  - question:
+      en: How many days does the event last?
+      es: ¿Cuántos días dura el evento?
+    answer:
+      en: One day — Saturday, August 22, 2026.
+      es: El evento es un solo día, el sábado 22 de agosto de 2026.
+  - question:
+      en: Can I attend if I am not from UTP?
+      es: ¿Si no soy de la UTP puedo asistir?
+    answer:
+      en: Yes. Pereira Tech Day is open to anyone interested in technology and learning.
+      es: Sí puedes asistir; este es un evento abierto a todo público interesado en aprender más sobre estos temas.
+  - question:
+      en: How can my organization become a sponsor?
+      es: ¿Cómo puede mi organización convertirse en patrocinador del evento?
+    answer:
+      en: Email pereiratechtalks@gmail.com with your interest. Sponsorship plans are on this page, and we are open to new proposals.
+      es: Escríbenos a pereiratechtalks@gmail.com indicando que estás interesado en patrocinarnos. Los planes están en la sección Planes de esta página, pero estamos abiertos a nuevas propuestas.
+  - question:
+      en: What topics will Pereira Tech Day cover?
+      es: ¿Qué temas se hablarán en el Pereira Tech Day?
+    answer:
+      en: Software development, data science, machine learning, infrastructure, AI, and cybersecurity.
+      es: Tendremos un día de desarrollo de software, data science, machine learning, infraestructura y más.
+  - question:
+      en: Will food be provided?
+      es: ¿El evento cuenta con alimentación garantizada?
+    answer:
+      en: Thanks to our sponsors, we plan morning and afternoon refreshments plus coffee throughout the day.
+      es: Gracias a la gestión del equipo organizador y a patrocinadores, contaremos con refrigerios en la mañana y en la tarde, además de una estación de café durante todo el día.
+  - question:
+      en: Can I attend only part of the day without registering?
+      es: ¿Solo quiero/puedo asistir durante unas horas sin registrarse?
+    answer:
+      en: No. Seats are limited and we expect attendees who can stay for the full program.
+      es: No, contamos con cupos limitados y esperamos que los ocupen personas que puedan asistir durante toda la jornada.
+  - question:
+      en: Will I receive a certificate of attendance?
+      es: ¿Recibiré un certificado de asistencia?
+    answer:
+      en: Yes, certificates are emailed a few days after the event.
+      es: Sí, este será enviado vía correo electrónico días después del evento.
+  - question:
+      en: Do I need to bring a laptop?
+      es: ¿Necesito llevar mi computador?
+    answer:
+      en: It is not required, but you may bring one for notes.
+      es: No es necesario, aunque si quieres tomar apuntes lo puedes traer.
+  - question:
+      en: Is the venue safe?
+      es: ¿El sitio es seguro?
+    answer:
+      en: Yes, but keep an eye on personal belongings — organizers are not responsible for lost items.
+      es: Sí, pero debes estar pendiente de tus objetos personales; los organizadores no se hacen responsables por pérdidas o hurtos durante el evento.
+  - question:
+      en: Code of Conduct
+      es: Código de Conducta
+    answer:
+      en: To foster a welcoming environment, Pereira Tech Day follows the Pereira Tech Talks Code of Conduct.
+      es: Con el fin de crear un ambiente sensible y abierto para todos, la organización de Pereira Tech Day está comprometida con el Código de Conducta de Pereira Tech Talks.
+    linkUrl: "/conduct"
+    linkLabel:
+      en: Read the Code of Conduct
+      es: Leer el Código de Conducta
 status: announced
 draft: false

@@ -3,16 +3,19 @@ title:
   en: Pereira Tech Day 2024
   es: Pereira Tech Day 2024
 tagline:
-  en: A day of technology, growth, and community in Pereira.
-  es: Un día de tecnología, crecimiento y comunidad en Pereira.
+  en: A day of technology, software development, data science, machine learning, infrastructure, and more!
+  es: Un día de Tecnología, Desarrollo de software, Data Science, Machine Learning, Infraestructura y más!
 description:
   en: Pereira Tech Day 2024 brought together hundreds of builders, students, and community members at the Universidad Tecnológica de Pereira for a free full-day program of keynotes, lightning talks, and networking. Four keynotes covered frontend engineering, product management and Python community, applied research, and AI-driven entrepreneurship; the lightning talks gave first-time speakers a stage to share what they are building.
   es: Pereira Tech Day 2024 reunió a cientos de personas constructoras, estudiantes y miembros de la comunidad en la Universidad Tecnológica de Pereira para una jornada gratuita de keynotes, lightning talks y networking. Cuatro keynotes cubrieron ingeniería frontend, product management y comunidad Python, investigación aplicada y emprendimiento con IA; las lightning talks dieron escenario a ponentes debutantes para compartir lo que están construyendo.
 date: 2024-09-21
+startTime: "08:00"
+endTime: "14:00"
 venue:
   name: Auditorio Jorge Roa Martínez, Universidad Tecnológica de Pereira
   city: Pereira
   country: Colombia
+  mapUrl: "https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
 mode: in-person
 hero:
   src: /images/pereira-tech-days/2024/hero.jpeg
@@ -75,7 +78,11 @@ keynotes:
   - cesar-camacho
 lightningTalks:
   - jonathan-alvarez
+  - juan-pablo-franco
   - sebastian-franco
+  - juan-jose-cardona
+  - abdenago-lopez
+  - sary-libreros
 sponsors:
   - slug: github
     tier: gold
@@ -88,7 +95,7 @@ sponsors:
   - slug: gorilla-logic
     tier: silver
   - slug: made-for-germany
-    tier: community
+    tier: silver
 organizers:
   - carolina-gomez-trejos
   - jose-felipe-duarte
@@ -97,6 +104,14 @@ organizers:
   - alejandro-rendon
   - angelica-aguirre
   - melisa-escobar
+collaborators:
+  - santiago-bernal
+  - eliana-osorio
+  - andres-rodriguez
+  - katherine-lopez
+  - lizeth-franco
+  - leiver-campeon
+  - cindy-jimenez
 communities:
   - name: Python Pereira
     logo: /images/communities/pypereira.png
@@ -228,5 +243,6 @@ gallery:
       en: PTD 2024 photo memory
       es: Foto memoria de PTD 2024
 linkMeetupCom: "https://www.meetup.com/pereira-tech-talks/events/302603058/"
+linkRecording: "https://www.youtube.com/watch?v=5BWnHA-vBvg"
 status: completed
 draft: false

@@ -1,0 +1,74 @@
+---
+import { type Language, tr } from '@/lib/i18n';
+
+/** Matches content-collection `i18nString` (plain string or {en,es}). */
+type I18nText = string | { en?: string; es?: string };
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  topics?: I18nText[];
+  mediaSrc?: string;
+  mediaAlt?: string;
+  sectionBg?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  topics = [],
+  mediaSrc,
+  mediaAlt,
+  sectionBg,
+} = Astro.props;
+---
+
+<section
+  class="relative py-[var(--ptd-section-pad)]"
+  style={sectionBg ? `background-image: url('${sectionBg}'); background-size: cover;` : undefined}
+  aria-labelledby="ptd-about-title"
+>
+  {
+    sectionBg && (
+      <div class="absolute inset-0 bg-[var(--ptt-bg)]/85" aria-hidden="true"></div>
+    )
+  }
+  <div class="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8">
+    <div>
+      <h2 id="ptd-about-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+        {title}
+      </h2>
+      <p class="mt-4 text-lg leading-relaxed text-[var(--ptt-text-muted)]">{description}</p>
+      {
+        topics.length > 0 && (
+          <ul class="mt-6 flex flex-wrap gap-2">
+            {topics.map((topic) => (
+              <li
+                class="rounded-full bg-[var(--ptt-primary)]/10 px-4 py-2 text-sm font-semibold text-[var(--ptt-primary)]"
+              >
+                {tr(topic, lang)}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+    {
+      mediaSrc && (
+        <div class="overflow-hidden rounded-2xl ring-1 ring-[var(--ptt-border)]">
+          <img
+            src={mediaSrc}
+            alt={mediaAlt || ''}
+            width="640"
+            height="480"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      )
+    }
+  </div>
+</section>

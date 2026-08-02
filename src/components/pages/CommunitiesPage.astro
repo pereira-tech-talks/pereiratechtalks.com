@@ -1,11 +1,14 @@
 ---
 /**
- * Allied communities stub — full page craft lands in Tasks 71–72.
+ * Allied communities directory — celebrates Pereira's tech ecosystem partners.
  */
+
+import CommunityCard from '@/components/community/CommunityCard.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getActiveCommunities } from '@/lib/communities';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -15,63 +18,102 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);
+const cp = t.communitiesPage;
 const prefix = getUrlPrefix(lang);
 
-const title = t.nav.communities;
-const description =
-  lang === 'es'
-    ? 'Comunidades aliadas del ecosistema tech de Pereira: PereiraJS, Python Pereira, JointDev, QA Conf, Backbone y más.'
-    : 'Allied communities in Pereira’s tech ecosystem: PereiraJS, Python Pereira, JointDev, QA Conf, Backbone, and more.';
+const communities = await getActiveCommunities();
 
 const breadcrumbs = [
   { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
-  { label: title },
+  { label: cp.title },
 ];
 
-const allies = [
-  { name: 'PereiraJS', href: 'https://pereirajs.org/' },
-  { name: 'Python Pereira', href: 'https://pypereira.dev/' },
-  { name: 'JointDev', href: 'https://www.instagram.com/jointdev/' },
-  { name: 'QA Conf', href: 'https://www.qaconf.co/' },
-  { name: 'Backbone UTP', href: '#' },
-];
+const contactHref = `${prefix}/contact/?topic=collaboration&subject=${encodeURIComponent(
+  lang === 'es'
+    ? 'Propuesta de alianza comunitaria'
+    : 'Community alliance proposal'
+)}`;
+const channelsHref = `${prefix}/channels/`;
 ---
 
-<MainLayout lang={lang} title={title} description={description}>
-  <div class="bg-ptt-bg">
+<MainLayout lang={lang} title={cp.title} description={cp.description}>
+  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/90 text-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
-      <Breadcrumbs items={breadcrumbs} />
+      <Breadcrumbs items={breadcrumbs} onDark />
     </div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      <Eyebrow>{lang === 'es' ? 'Ecosistema' : 'Ecosystem'}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
-        {title}
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
+      <Eyebrow variant="accent">{cp.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
+        {cp.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
-        {
-          lang === 'es'
-            ? 'Pereira Tech Talks crece junto a otras comunidades de la ciudad. Esta página celebrará alianzas, calendarios compartidos y colaboraciones.'
-            : 'Pereira Tech Talks grows alongside other city communities. This page will celebrate alliances, shared calendars, and collaborations.'
-        }
-      </p>
+      <p class="mt-4 max-w-3xl text-lg text-gray-200">{cp.heroLead}</p>
     </div>
   </div>
-  <Section eyebrow={lang === 'es' ? 'Aliadas' : 'Allies'}>
-    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+  <Section title={cp.narrativeTitle}>
+    <p class="max-w-3xl text-lg text-ptt-secondary">{cp.narrativeText}</p>
+  </Section>
+
+  <Section title={cp.alliesTitle} surface="alt">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
       {
-        allies.map((a) => (
+        communities.map((community) => (
           <li>
-            <a
-              href={a.href}
-              class="block rounded-xl border border-ptt-border bg-ptt-bg-elevated px-5 py-4 text-ptt font-semibold hover:border-ptt-primary transition-colors"
-              target={a.href.startsWith('http') ? '_blank' : undefined}
-              rel={a.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {a.name}
-            </a>
+            <CommunityCard
+              community={community}
+              lang={lang}
+              visitLabel={cp.visitLabel}
+            />
           </li>
         ))
       }
     </ul>
   </Section>
+
+  <Section title={cp.allianceTitle}>
+    <ul class="grid gap-4 sm:grid-cols-2 list-none max-w-4xl">
+      {
+        cp.allianceSteps.map((step) => (
+          <li class="flex items-start gap-3 rounded-xl border border-ptt-border bg-ptt-bg-elevated p-5">
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <p class="text-ptt-secondary">{step}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <div class="bg-ptt-bg-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {cp.ctaTitle}
+      </h2>
+      <p class="mt-3 text-gray-200">{cp.ctaDescription}</p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href={contactHref}
+          class="inline-flex items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-gray-950 shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+        >
+          {cp.ctaPrimary}
+        </a>
+        <a
+          href={channelsHref}
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-base font-semibold text-white ring-1 ring-white/30 hover:bg-white/15"
+        >
+          {cp.ctaSecondary}
+        </a>
+      </div>
+    </div>
+  </div>
 </MainLayout>

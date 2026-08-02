@@ -18,7 +18,15 @@ const { talk, lang, speakerNames = [] } = Astro.props;
 const prefix = getUrlPrefix(lang);
 const title = tr(talk.data.title, lang);
 const abstract = tr(talk.data.abstract, lang);
-const url = `${prefix}/talks/${talk.id}/`;
+const event = talk.data.event;
+const url =
+  event?.collection === 'meetups'
+    ? `${prefix}/meetups/${event.slug}/`
+    : event?.collection === 'pereiraTechDays'
+      ? `${prefix}/pereira-tech-days/${event.slug}/`
+      : event?.collection === 'events'
+        ? `${prefix}/events/${event.slug}/`
+        : `${prefix}/meetups/`;
 const langLabel = (talk.data.language || 'es').toUpperCase();
 const date = talk.data.date ? new Date(talk.data.date) : null;
 const dateLabel = date

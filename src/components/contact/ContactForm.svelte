@@ -1,6 +1,12 @@
 <script>
 import { onMount } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
+import {
+  MAX_MESSAGE_LENGTH,
+  MAX_SUBJECT_LENGTH,
+  sanitizeContactText,
+  validateContactForm,
+} from '@/lib/contact-form';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'es';
@@ -44,17 +50,9 @@ let submitError = '';
 let successRef;
 
 const inputClass =
-  'w-full min-h-[44px] text-base p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-colors';
-const labelClass =
-  'block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2';
+  'w-full min-h-[44px] text-base p-3 rounded-lg border border-ptt-border bg-ptt-bg-elevated text-ptt focus:outline-none focus:ring-2 focus:ring-ptt-primary/30 focus:border-ptt-primary transition-colors';
+const labelClass = 'block text-sm font-medium text-ptt-secondary mb-2';
 const errorClass = 'mt-1 text-sm text-red-600 dark:text-red-400';
-
-const MAX_SUBJECT_LENGTH = 140;
-const MAX_MESSAGE_LENGTH = 2000;
-
-function sanitizeText(value, maxLength) {
-  return value.trim().slice(0, maxLength);
-}
 
 function getAllowedReasonValues() {
   return new Set(
@@ -82,11 +80,11 @@ function applyPrefillFromQueryParams() {
   }
 
   if (subjectParam) {
-    subject = sanitizeText(subjectParam, MAX_SUBJECT_LENGTH);
+    subject = sanitizeContactText(subjectParam, MAX_SUBJECT_LENGTH);
   }
 
   if (messageParam) {
-    message = sanitizeText(messageParam, MAX_MESSAGE_LENGTH);
+    message = sanitizeContactText(messageParam, MAX_MESSAGE_LENGTH);
   }
 }
 
@@ -111,34 +109,16 @@ function focusFirstInvalidField() {
 }
 
 function validate() {
-  let valid = true;
-  errors = { name: '', email: '', reason: '', subject: '', message: '' };
-
-  if (!name.trim()) {
-    errors.name = t.contactPage.requiredField;
-    valid = false;
-  }
-  if (!email.trim()) {
-    errors.email = t.contactPage.requiredField;
-    valid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.email = t.contactPage.invalidEmail;
-    valid = false;
-  }
-  if (!subject.trim()) {
-    errors.subject = t.contactPage.requiredField;
-    valid = false;
-  }
-  if (!reason.trim()) {
-    errors.reason = t.contactPage.requiredField;
-    valid = false;
-  }
-  if (!message.trim()) {
-    errors.message = t.contactPage.requiredField;
-    valid = false;
-  }
-
-  return valid;
+  const result = validateContactForm(
+    { name, email, reason, subject, message, website },
+    getAllowedReasonValues(),
+    {
+      requiredField: t.contactPage.requiredField,
+      invalidEmail: t.contactPage.invalidEmail,
+    }
+  );
+  errors = result.errors;
+  return result.valid;
 }
 
 async function submitToApi(endpoint) {

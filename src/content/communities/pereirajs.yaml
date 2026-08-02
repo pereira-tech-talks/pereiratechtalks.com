@@ -1,0 +1,13 @@
+name: PereiraJS
+logo:
+  src: /images/communities/perjs.jpeg
+  alt: PereiraJS logo
+url: "https://perjs.org/"
+focus:
+  en: JavaScript, Node.js, and frontend meetups since 2014
+  es: JavaScript, Node.js y meetups de frontend desde 2014
+description:
+  en: The JavaScript community that started it all in Pereira. Co-hosts Pereira Tech Day stages and cross-promotes monthly meetups with Pereira Tech Talks.
+  es: La comunidad JavaScript que lo empezó todo en Pereira. Co-produce escenarios de Pereira Tech Day y hace cross-promo de meetups mensuales con Pereira Tech Talks.
+status: active
+order: 1

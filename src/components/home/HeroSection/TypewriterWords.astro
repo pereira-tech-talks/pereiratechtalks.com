@@ -11,9 +11,11 @@ export interface Props {
   words: string[];
   /** When "inline", inherits text color for embedding in blog/content. Default "hero" uses white text. */
   variant?: 'hero' | 'inline';
+  /** Text alignment of the rotating word. Default "center". */
+  align?: 'center' | 'left';
 }
 
-const { words, variant = 'hero' } = Astro.props;
+const { words, variant = 'hero', align = 'center' } = Astro.props;
 const n = words?.length ?? 1;
 const cycleDuration = n * 4;
 const cursorColor = 'rgb(96 165 250)';
@@ -84,7 +86,11 @@ const dynamicCSS =
   words?.map((w, i) => generateWordAnimation(w, i)).join('\n') ?? '';
 ---
 
-<div class={`tw-container ${variant === 'inline' ? 'tw-inline' : ''}`} role="marquee" aria-live="polite">
+<div
+  class={`tw-container ${variant === 'inline' ? 'tw-inline' : ''} ${align === 'left' ? 'tw-align-left' : ''}`}
+  role="marquee"
+  aria-live="polite"
+>
   {words?.map((word, i) => (
     <span class="tw-word" data-tw={String(i)}>
       <span class="tw-sizer" aria-hidden="true">{word}</span>
@@ -133,6 +139,15 @@ const dynamicCSS =
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
+  }
+
+  /* Left-aligned variant for asymmetric layouts (e.g. the full-bleed hero) */
+  .tw-align-left {
+    text-align: left;
+  }
+  .tw-align-left .tw-word {
+    left: 0;
+    transform: none;
   }
 
   /* Hidden duplicate keeps .tw-word at full text width for stable centering */

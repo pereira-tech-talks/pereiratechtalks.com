@@ -1,0 +1,113 @@
+import type { CollectionEntry } from 'astro:content';
+import { describe, expect, it } from 'vitest';
+import {
+  buildEditionThemeCss,
+  getEditionEndIso,
+  getEditionStartDate,
+  getEditionStartIso,
+  isUpcomingEdition,
+} from '@/lib/pereiraTechDay';
+
+const mockEdition = (
+  overrides: Partial<CollectionEntry<'pereiraTechDays'>['data']> = {}
+): CollectionEntry<'pereiraTechDays'> =>
+  ({
+    id: '2026',
+    collection: 'pereiraTechDays',
+    data: {
+      year: 2026,
+      title: { en: 'PTD 2026', es: 'PTD 2026' },
+      tagline: { en: 'Tagline', es: 'Tagline' },
+      description: { en: 'Desc', es: 'Desc' },
+      date: new Date('2026-08-22'),
+      startTime: '08:00',
+      endTime: '14:00',
+      venue: { name: 'UTP', city: 'Pereira', country: 'Colombia' },
+      mode: 'in-person',
+      hero: { src: '/hero.webp', layout: 'banner' },
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+      },
+      schedule: [],
+      keynotes: [],
+      lightningTalks: [],
+      sponsors: [],
+      organizers: [],
+      collaborators: [],
+      communities: [],
+      gallery: [],
+      aboutTopics: [],
+      faqs: [],
+      sponsorshipPlans: [],
+      extraPartnerships: [],
+      status: 'announced',
+      draft: false,
+      ...overrides,
+    },
+  }) as CollectionEntry<'pereiraTechDays'>;
+
+describe('pereiraTechDay helpers', () => {
+  it('getEditionStartDate returns single-day date', () => {
+    const edition = mockEdition();
+    expect(
+      getEditionStartDate(edition).toISOString().startsWith('2026-08-22')
+    ).toBe(true);
+  });
+
+  it('getEditionStartIso combines date and startTime', () => {
+    const edition = mockEdition();
+    const iso = getEditionStartIso(edition);
+    expect(iso).toMatch(/2026-08-22/);
+  });
+
+  it('getEditionEndIso uses endTime on same day', () => {
+    const edition = mockEdition();
+    const iso = getEditionEndIso(edition);
+    expect(iso).toBeDefined();
+    expect(iso).toMatch(/2026-08-22/);
+  });
+
+  it('isUpcomingEdition detects announced status', () => {
+    expect(isUpcomingEdition(mockEdition({ status: 'announced' }))).toBe(true);
+    expect(isUpcomingEdition(mockEdition({ status: 'completed' }))).toBe(false);
+  });
+
+  it('buildEditionThemeCss scopes variables under edition year', () => {
+    const css = buildEditionThemeCss(mockEdition());
+    expect(css).toContain('[data-edition-theme="2026"]');
+    expect(css).toContain('--ptt-primary: #1f6f73');
+    expect(css).not.toContain('body {');
+  });
+
+  it('buildEditionThemeCss includes dark palette when defined', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        paletteDark: {
+          primary: '#3ab9c9',
+          accent: '#e3a648',
+          bg: '#0f2a2c',
+          bgElevated: '#1a3a3d',
+          text: '#f4f9f9',
+          textMuted: '#a8bdbf',
+        },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('.dark [data-edition-theme="2026"]');
+  });
+});

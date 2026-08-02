@@ -1,0 +1,13 @@
+name: QA Conf
+logo:
+  src: /images/communities/qaconf.png
+  alt: QA Conf logo
+url: "https://qaconf.co"
+focus:
+  en: Quality assurance conference and testing community
+  es: Conferencia de calidad de software y comunidad de testing
+description:
+  en: Colombia's QA-focused conference born in Pereira. Partners with Pereira Tech Talks on testing tracks, workshops, and speaker cross-invites.
+  es: La conferencia enfocada en QA nacida en Pereira. Aliada de Pereira Tech Talks en tracks de testing, talleres e invitaciones cruzadas de ponentes.
+status: active
+order: 4

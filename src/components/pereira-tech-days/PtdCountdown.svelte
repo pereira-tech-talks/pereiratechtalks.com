@@ -1,0 +1,82 @@
+<script lang="ts">
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  targetDate: string;
+  endDate?: string;
+}
+
+let { lang, targetDate, endDate }: Props = $props();
+
+const labels = {
+  en: {
+    days: 'Days',
+    hours: 'Hours',
+    minutes: 'Minutes',
+    seconds: 'Seconds',
+    ended: 'Event started',
+  },
+  es: {
+    days: 'Días',
+    hours: 'Horas',
+    minutes: 'Minutos',
+    seconds: 'Segundos',
+    ended: 'El evento comenzó',
+  },
+};
+const t = labels[lang];
+
+let remaining = $state({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+let ended = $state(false);
+
+function tick() {
+  const now = Date.now();
+  const target = new Date(targetDate).getTime();
+  const end = endDate ? new Date(endDate).getTime() : target;
+  if (now >= end) {
+    ended = true;
+    return;
+  }
+  const diff = Math.max(0, target - now);
+  remaining = {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff % 86400000) / 3600000),
+    minutes: Math.floor((diff % 3600000) / 60000),
+    seconds: Math.floor((diff % 60000) / 1000),
+  };
+}
+
+$effect(() => {
+  tick();
+  const id = setInterval(tick, 1000);
+  return () => clearInterval(id);
+});
+</script>
+
+<div
+  class="grid grid-cols-4 gap-2 sm:gap-4"
+  role="timer"
+  aria-live="polite"
+  aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
+>
+  {#if ended}
+    <p class="col-span-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
+  {:else}
+    {#each [
+      { value: remaining.days, label: t.days },
+      { value: remaining.hours, label: t.hours },
+      { value: remaining.minutes, label: t.minutes },
+      { value: remaining.seconds, label: t.seconds },
+    ] as unit}
+      <div class="rounded-xl bg-[var(--ptt-bg-elevated)] px-2 py-3 text-center ring-1 ring-[var(--ptt-border)] sm:px-4">
+        <span class="block text-2xl font-bold tabular-nums text-[var(--ptt-primary)] sm:text-3xl">
+          {String(unit.value).padStart(2, '0')}
+        </span>
+        <span class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)] sm:text-xs">
+          {unit.label}
+        </span>
+      </div>
+    {/each}
+  {/if}
+</div>

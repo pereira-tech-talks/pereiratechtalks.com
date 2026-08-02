@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SpeakerCard from '@/components/cards/SpeakerCard.astro';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  tagline?: string;
+  speakers: CollectionEntry<'speakers'>[];
+}
+
+const { lang, title, tagline, speakers } = Astro.props;
+---
+
+<section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-lightning-title">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <h2 id="ptd-lightning-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+      {title}
+    </h2>
+    {
+      tagline && (
+        <p class="mt-2 text-sm font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)]">
+          {tagline}
+        </p>
+      )
+    }
+    <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        speakers.map((speaker) => (
+          <li>
+            <SpeakerCard speaker={speaker} lang={lang} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

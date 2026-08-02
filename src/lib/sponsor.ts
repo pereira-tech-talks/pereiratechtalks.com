@@ -17,14 +17,27 @@ const sortByTierThenOrder = (a: Sponsor, b: Sponsor): number => {
   return (a.data.order ?? 0) - (b.data.order ?? 0);
 };
 
+export const sortSponsors = (sponsors: Sponsor[]): Sponsor[] =>
+  [...sponsors].sort(sortByTierThenOrder);
+
+export const filterSponsorsByStatus = (
+  sponsors: Sponsor[],
+  status: Sponsor['data']['status']
+): Sponsor[] => sponsors.filter((s) => s.data.status === status);
+
 export const getSponsors = async (): Promise<Sponsor[]> => {
   const all = await getCollection('sponsors');
-  return all.sort(sortByTierThenOrder);
+  return sortSponsors(all);
 };
 
 export const getActiveSponsors = async (): Promise<Sponsor[]> => {
   const all = await getSponsors();
-  return all.filter((s) => s.data.status === 'active');
+  return filterSponsorsByStatus(all, 'active');
+};
+
+export const getPastSponsors = async (): Promise<Sponsor[]> => {
+  const all = await getSponsors();
+  return filterSponsorsByStatus(all, 'past');
 };
 
 export const getSponsorsByTier = async (

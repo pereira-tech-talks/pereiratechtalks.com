@@ -1,8 +1,9 @@
 ---
 import JsonLd from '@/components/JsonLd.astro';
 import HighlightCard from '@/components/pages/HighlightCard.astro';
-import PageHero from '@/components/pages/PageHero.astro';
-import PageSection from '@/components/pages/PageSection.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
@@ -84,6 +85,18 @@ const breadcrumbSchema = {
     },
   ],
 };
+
+const stats = [
+  { value: '90+', label: lang === 'es' ? 'meetups' : 'meetups' },
+  { value: '200+', label: lang === 'es' ? 'charlas' : 'talks' },
+  { value: '6.5K+', label: lang === 'es' ? 'asistencias' : 'attendees' },
+  { value: '2014', label: lang === 'es' ? 'desde' : 'since' },
+];
+
+const breadcrumbs = [
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: t.aboutPage.title },
+];
 ---
 
 <MainLayout
@@ -100,16 +113,50 @@ const breadcrumbSchema = {
     <JsonLd data={breadcrumbSchema} />
   </Fragment>
 
-  <PageHero
-    title={t.aboutPage.title}
-    subtitle={t.aboutPage.subtitle}
-    description={t.aboutPage.heroDescription}
-    image="/images/profile.png"
-  />
+  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/90 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} onDark />
+    </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+      <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+        <div>
+          <Eyebrow variant="accent">{t.aboutPage.subtitle}</Eyebrow>
+          <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
+            {t.aboutPage.title}
+          </h1>
+          <p class="mt-4 text-lg text-gray-200">{t.aboutPage.heroDescription}</p>
+        </div>
+        <div class="mt-10 lg:mt-0">
+          <img
+            src="/images/pereira-tech-days/2024/memories/massive.png"
+            alt={lang === 'es'
+              ? 'Auditorio lleno durante Pereira Tech Day 2024'
+              : 'Packed auditorium during Pereira Tech Day 2024'}
+            width="640"
+            height="360"
+            loading="eager"
+            class="w-full rounded-2xl shadow-2xl ring-1 ring-white/20 object-cover aspect-video"
+          />
+        </div>
+      </div>
+      <ul class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 list-none">
+        {
+          stats.map((stat) => (
+            <li class="rounded-xl bg-white/10 px-4 py-5 text-center ring-1 ring-white/20">
+              <p class="text-3xl sm:text-4xl font-bold text-ptt-accent">{stat.value}</p>
+              <p class="mt-1 text-sm text-gray-200">{stat.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
 
-  <PageSection background="white" title={t.aboutPage.bioTitle} description={t.aboutPage.bioText} />
+  <Section title={t.aboutPage.bioTitle}>
+    <div class="prose prose-lg dark:prose-invert max-w-3xl prose-p:text-ptt-secondary" set:html={t.aboutPage.bioText} />
+  </Section>
 
-  <PageSection background="gray" title={t.aboutPage.passionsTitle}>
+  <Section title={t.aboutPage.passionsTitle} surface="alt">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {t.aboutPage.passions.map((passion) => (
         <HighlightCard
@@ -120,37 +167,39 @@ const breadcrumbSchema = {
         />
       ))}
     </div>
-  </PageSection>
+  </Section>
 
-  <PageSection background="white" title={t.aboutPage.quickFactsTitle}>
-    <ul class="space-y-3 max-w-2xl">
+  <Section title={t.aboutPage.quickFactsTitle}>
+    <ul class="space-y-3 max-w-2xl list-none">
       {t.aboutPage.quickFacts.map((fact) => (
-        <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
-          <span class="text-secondary mt-0.5 flex-shrink-0">&#10003;</span>
+        <li class="flex items-start gap-3 text-ptt-secondary">
+          <span class="text-ptt-primary dark:text-ptt-primary-dark mt-0.5 shrink-0" aria-hidden="true">✓</span>
           <span>{fact}</span>
         </li>
       ))}
     </ul>
-  </PageSection>
+  </Section>
 
-  <PageSection
-    background="gray"
-    title={t.aboutPage.ctaTitle}
-    description={t.aboutPage.ctaDescription}
-  >
-    <div class="flex flex-wrap gap-4 mt-4">
-      <a
-        href={`${prefix}/blog`}
-        class="inline-flex items-center px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary/90 transition-colors duration-200"
-      >
-        {t.aboutPage.ctaCv}
-      </a>
-      <a
-        href={contactCtaHref}
-        class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-secondary text-secondary dark:text-secondary font-semibold hover:bg-secondary/10 transition-colors duration-200"
-      >
-        {t.aboutPage.ctaContact}
-      </a>
+  <div class="bg-ptt-bg-dark text-white py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {t.aboutPage.ctaTitle}
+      </h2>
+      <p class="mt-3 text-gray-200">{t.aboutPage.ctaDescription}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a
+          href={`${prefix}/blog`}
+          class="inline-flex items-center px-6 py-3 rounded-full bg-ptt-accent text-gray-950 font-semibold hover:bg-ptt-accent/90 transition-colors"
+        >
+          {t.aboutPage.ctaCv}
+        </a>
+        <a
+          href={contactCtaHref}
+          class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 text-white font-semibold ring-1 ring-white/30 hover:bg-white/15 transition-colors"
+        >
+          {t.aboutPage.ctaContact}
+        </a>
+      </div>
     </div>
-  </PageSection>
+  </div>
 </MainLayout>

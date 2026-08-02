@@ -1,7 +1,7 @@
 ---
 /**
  * PTT v3.0.0 sponsors directory page (shared between EN and ES).
- * Grouped by tier (diamond → community).
+ * Current sponsors prominently; past sponsors in a dedicated archive section.
  */
 
 import SponsorCard from '@/components/cards/SponsorCard.astro';
@@ -11,15 +11,20 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getSponsors } from '@/lib/sponsor';
+import { getActiveSponsors, getPastSponsors } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+const t = getTranslations(lang);
+const sp = t.sponsorsPage;
+const prefix = getUrlPrefix(lang);
 
-const sponsors = await getSponsors();
+const currentSponsors = await getActiveSponsors();
+const pastSponsors = await getPastSponsors();
 
 type Tier = 'diamond' | 'gold' | 'silver' | 'bronze' | 'community';
 const tierOrder: Tier[] = ['diamond', 'gold', 'silver', 'bronze', 'community'];
@@ -32,77 +37,57 @@ const tierTitles: Record<Tier, { en: string; es: string }> = {
   community: { en: 'Community partners', es: 'Aliados comunitarios' },
 };
 
-const groupedByTier = tierOrder
-  .map((tier) => ({
-    tier,
-    sponsors: sponsors.filter((s) => s.data.tier === tier),
-  }))
-  .filter((group) => group.sponsors.length > 0);
+function groupByTier(sponsors: Awaited<ReturnType<typeof getActiveSponsors>>) {
+  return tierOrder
+    .map((tier) => ({
+      tier,
+      sponsors: sponsors.filter((s) => s.data.tier === tier),
+    }))
+    .filter((group) => group.sponsors.length > 0);
+}
 
-const t = {
-  title: lang === 'es' ? 'Patrocinadores' : 'Sponsors',
-  description:
-    lang === 'es'
-      ? 'Empresas y aliados comunitarios que hacen posibles los meetups, los Pereira Tech Days y los programas de la comunidad.'
-      : 'Companies and community partners that make our meetups, Pereira Tech Days, and community programs possible.',
-  intro:
-    lang === 'es'
-      ? `${sponsors.length} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`
-      : `${sponsors.length} partners sustaining the community with venues, food, scholarships, and mentorship.`,
-  sponsorUsLabel:
-    lang === 'es'
-      ? 'Patrocínanos: descarga el deck'
-      : 'Sponsor us: download the deck',
-  sponsorUsHref: `${getUrlPrefix(lang)}/contact/`,
-  emptyTitle:
-    lang === 'es' ? 'Aún no hay patrocinadores registrados' : 'No sponsors yet',
-  emptyDesc:
-    lang === 'es'
-      ? '¿Te interesa apoyar la comunidad? Escríbenos.'
-      : 'Want to support the community? Reach out.',
-};
+const currentByTier = groupByTier(currentSponsors);
+const pastByTier = groupByTier(pastSponsors);
+const totalCount = currentSponsors.length + pastSponsors.length;
 
 const breadcrumbs = [
-  {
-    label: lang === 'es' ? 'Inicio' : 'Home',
-    href: `${getUrlPrefix(lang)}/`,
-  },
-  { label: t.title },
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: sp.title },
 ];
 ---
 
-<MainLayout lang={lang} title={t.title} description={t.description}>
+<MainLayout lang={lang} title={sp.title} description={sp.description}>
   <div class="bg-ptt-bg">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      <Eyebrow>{lang === 'es' ? 'Aliados' : 'Partners'}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-        {t.title}
+      <Eyebrow>{sp.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {sp.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
-        {t.intro}
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {sp.intro(totalCount)}
       </p>
       <a
-        href={t.sponsorUsHref}
+        href={`${prefix}/sponsor-us/`}
         class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-gray-950 dark:hover:bg-ptt-primary-dark/90"
       >
-        {t.sponsorUsLabel}
+        {sp.sponsorUsLabel}
       </a>
     </div>
   </div>
 
   {
-    groupedByTier.length > 0 ? (
-      <Section surface="alt" spacing="lg">
+    currentByTier.length > 0 ? (
+      <Section surface="alt" spacing="lg" title={sp.currentTitle}>
         <div class="space-y-16">
-          {groupedByTier.map(({ tier, sponsors: group }) => (
+          {currentByTier.map(({ tier, sponsors: group }) => (
             <div>
-              <h2 class="mb-6 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+              <h2 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
                 {tierTitles[tier][lang]}
               </h2>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
                 {group.map((sponsor) => (
                   <li>
                     <SponsorCard sponsor={sponsor} lang={lang} />
@@ -115,7 +100,31 @@ const breadcrumbs = [
       </Section>
     ) : (
       <Section surface="alt">
-        <EmptyState title={t.emptyTitle} description={t.emptyDesc} />
+        <EmptyState title={sp.emptyTitle} description={sp.emptyDesc} />
+      </Section>
+    )
+  }
+
+  {
+    pastByTier.length > 0 && (
+      <Section spacing="lg" title={sp.pastTitle}>
+        <p class="mb-10 max-w-3xl text-ptt-secondary">{sp.pastIntro}</p>
+        <div class="space-y-12">
+          {pastByTier.map(({ tier, sponsors: group }) => (
+            <div>
+              <h2 class="mb-6 text-xl font-semibold tracking-tight text-ptt-secondary">
+                {tierTitles[tier][lang]}
+              </h2>
+              <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 list-none">
+                {group.map((sponsor) => (
+                  <li>
+                    <SponsorCard sponsor={sponsor} lang={lang} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </Section>
     )
   }

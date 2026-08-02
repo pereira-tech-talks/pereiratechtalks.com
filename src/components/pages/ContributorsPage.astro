@@ -1,8 +1,7 @@
 ---
 /**
  * PTT v3.0.0 contributors directory page (shared between EN and ES).
- * Grouped by primary role: founding organizers, organizers, vertical leads,
- * mentors, conduct team, alumni.
+ * Current team prominently; alumni and past organizers in a dedicated section.
  */
 
 import ContributorCard from '@/components/cards/ContributorCard.astro';
@@ -11,16 +10,21 @@ import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getActiveContributors } from '@/lib/contributor';
+import { getActiveContributors, getPastContributors } from '@/lib/contributor';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
+const t = getTranslations(lang);
+const cp = t.contributorsPage;
+const prefix = getUrlPrefix(lang);
 
-const contributors = await getActiveContributors();
+const currentContributors = await getActiveContributors();
+const pastContributors = await getPastContributors();
 
 type Role =
   | 'founding-organizer'
@@ -42,8 +46,9 @@ const roleOrder: Role[] = [
   'press-lead',
   'sponsor-liaison',
   'contributor',
-  'alumni',
 ];
+
+const alumniRoleOrder: Role[] = ['alumni', 'contributor'];
 
 const roleTitles: Record<Role, { en: string; es: string }> = {
   'founding-organizer': {
@@ -63,81 +68,63 @@ const roleTitles: Record<Role, { en: string; es: string }> = {
   alumni: { en: 'Alumni', es: 'Alumni' },
 };
 
-// Each contributor shows up under their first matching role group only, so a
-// person with `[founding-organizer, mentor]` appears under "Founding organizers"
-// and not duplicated under "Mentors".
-const seen = new Set<string>();
-const groupedByRole = roleOrder
-  .map((role) => {
-    const inRole = contributors.filter(
-      (c) => !seen.has(c.id) && c.data.roles.includes(role)
-    );
-    for (const c of inRole) seen.add(c.id);
-    return { role, contributors: inRole };
-  })
-  .filter((group) => group.contributors.length > 0);
+function groupContributors(
+  contributors: Awaited<ReturnType<typeof getActiveContributors>>,
+  roles: Role[]
+) {
+  const seen = new Set<string>();
+  return roles
+    .map((role) => {
+      const inRole = contributors.filter(
+        (c) => !seen.has(c.id) && c.data.roles.includes(role)
+      );
+      for (const c of inRole) seen.add(c.id);
+      return { role, contributors: inRole };
+    })
+    .filter((group) => group.contributors.length > 0);
+}
 
-const t = {
-  title: lang === 'es' ? 'Equipo y comunidad' : 'Team and community',
-  description:
-    lang === 'es'
-      ? 'Las personas que sostienen Pereira Tech Talks: organizadores, líderes de programa, mentores y voluntarios.'
-      : 'The people who keep Pereira Tech Talks alive: organizers, program leads, mentors, and volunteers.',
-  intro:
-    lang === 'es'
-      ? `${contributors.length} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`
-      : `${contributors.length} active people make up the extended community team. Want to join? Reach out.`,
-  joinLabel: lang === 'es' ? 'Únete al equipo' : 'Join the team',
-  joinHref: `${getUrlPrefix(lang)}/contact/`,
-  emptyTitle:
-    lang === 'es' ? 'Aún no hay miembros registrados' : 'No team members yet',
-  emptyDesc:
-    lang === 'es'
-      ? 'Estamos consolidando el directorio. Vuelve pronto.'
-      : "We're consolidating the directory. Check back soon.",
-};
+const currentByRole = groupContributors(currentContributors, roleOrder);
+const pastByRole = groupContributors(pastContributors, alumniRoleOrder);
 
 const breadcrumbs = [
-  {
-    label: lang === 'es' ? 'Inicio' : 'Home',
-    href: `${getUrlPrefix(lang)}/`,
-  },
-  { label: t.title },
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: cp.title },
 ];
 ---
 
-<MainLayout lang={lang} title={t.title} description={t.description}>
+<MainLayout lang={lang} title={cp.title} description={cp.description}>
   <div class="bg-ptt-bg">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      <Eyebrow>{lang === 'es' ? 'Personas' : 'People'}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-        {t.title}
+      <Eyebrow>{cp.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {cp.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
-        {t.intro}
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {cp.intro(currentContributors.length)}
       </p>
       <a
-        href={t.joinHref}
+        href={`${prefix}/contact/`}
         class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-gray-950 dark:hover:bg-ptt-primary-dark/90"
       >
-        {t.joinLabel}
+        {cp.joinLabel}
       </a>
     </div>
   </div>
 
   {
-    groupedByRole.length > 0 ? (
-      <Section surface="alt" spacing="lg">
+    currentByRole.length > 0 ? (
+      <Section surface="alt" spacing="lg" title={cp.currentTitle}>
         <div class="space-y-16">
-          {groupedByRole.map(({ role, contributors: group }) => (
+          {currentByRole.map(({ role, contributors: group }) => (
             <div>
-              <h2 class="mb-6 text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-                {roleTitles[role as Role][lang]}
+              <h2 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
+                {roleTitles[role][lang]}
               </h2>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 list-none">
                 {group.map((contributor) => (
                   <li>
                     <ContributorCard contributor={contributor} lang={lang} />
@@ -150,7 +137,31 @@ const breadcrumbs = [
       </Section>
     ) : (
       <Section surface="alt">
-        <EmptyState title={t.emptyTitle} description={t.emptyDesc} />
+        <EmptyState title={cp.emptyTitle} description={cp.emptyDesc} />
+      </Section>
+    )
+  }
+
+  {
+    pastByRole.length > 0 && (
+      <Section spacing="lg" title={cp.pastTitle}>
+        <p class="mb-10 max-w-3xl text-ptt-secondary">{cp.pastIntro}</p>
+        <div class="space-y-12">
+          {pastByRole.map(({ role, contributors: group }) => (
+            <div>
+              <h2 class="mb-6 text-xl font-semibold tracking-tight text-ptt-secondary">
+                {roleTitles[role][lang]}
+              </h2>
+              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 list-none">
+                {group.map((contributor) => (
+                  <li>
+                    <ContributorCard contributor={contributor} lang={lang} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </Section>
     )
   }

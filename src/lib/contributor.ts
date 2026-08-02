@@ -10,14 +10,30 @@ const sortByOrderThenName = (a: Contributor, b: Contributor): number => {
   return a.data.name.localeCompare(b.data.name);
 };
 
+export const sortContributors = (contributors: Contributor[]): Contributor[] =>
+  [...contributors].sort(sortByOrderThenName);
+
+export const filterActiveContributors = (
+  contributors: Contributor[]
+): Contributor[] => contributors.filter((c) => !c.data.inactiveSince);
+
+export const filterPastContributors = (
+  contributors: Contributor[]
+): Contributor[] => contributors.filter((c) => Boolean(c.data.inactiveSince));
+
 export const getContributors = async (): Promise<Contributor[]> => {
   const all = await getCollection('contributors');
-  return all.sort(sortByOrderThenName);
+  return sortContributors(all);
 };
 
 export const getActiveContributors = async (): Promise<Contributor[]> => {
   const all = await getContributors();
-  return all.filter((c) => !c.data.inactiveSince);
+  return filterActiveContributors(all);
+};
+
+export const getPastContributors = async (): Promise<Contributor[]> => {
+  const all = await getContributors();
+  return filterPastContributors(all);
 };
 
 export const getContributorsByRole = async (

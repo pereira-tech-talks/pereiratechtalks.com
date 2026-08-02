@@ -46,8 +46,10 @@ match this IA, you are creating drift.
 | PTT Day edition | `/pereira-tech-days/{year}` | `/es/pereira-tech-days/{year}` | `pereiraTechDays` | `pereira-tech-days/[year].astro` | `PereiraTechDayEditionPage.astro` (wraps in `EditionScope`) | per-year `.md` |
 | Speakers catalog | `/speakers` | `/es/speakers` | `speakers` | `speakers/index.astro` | `SpeakersCatalogPage.astro` | yes |
 | Speaker profile | `/speakers/{slug}` | `/es/speakers/{slug}` | `speakers` | `speakers/[slug].astro` | `SpeakerProfilePage.astro` | per-slug `.md` |
-| Talks catalog | `/talks` | `/es/talks` | `talks` | `talks/index.astro` | `TalksCatalogPage.astro` | yes |
-| Talk detail | `/talks/{slug}` | `/es/talks/{slug}` | `talks` | `talks/[slug].astro` | `TalkDetailPage.astro` (embeds slides if present) | per-slug `.md` |
+| ~~Talks catalog~~ | `/talks` → 301 `/meetups` | `/es/talks` → 301 `/es/meetups` | `talks` | `talks/index.astro` (redirect stub) | removed (Task 22) | n/a |
+| ~~Talk detail~~ | `/talks/{slug}` → 301 `/meetups` | `/es/talks/{slug}` → 301 `/es/meetups` | `talks` | `talks/[slug].astro` (redirect stub) | removed (Task 22) | n/a |
+| Community Calendar (stub) | `/calendar` | `/es/calendar` | static | `calendar.astro` | `CalendarPage.astro` (full GCal hub lands in Tasks 63–70) | pending |
+| Allied Communities (stub) | `/communities` | `/es/communities` | static | `communities.astro` | `CommunitiesPage.astro` (full page craft lands in Tasks 71–72) | pending |
 | Contributors catalog | `/contributors` | `/es/contributors` | `contributors` | `contributors/index.astro` | `ContributorsCatalogPage.astro` | yes |
 | Contributor profile | `/contributors/{slug}` | `/es/contributors/{slug}` | `contributors` | `contributors/[slug].astro` | `ContributorProfilePage.astro` | per-slug `.md` |
 | Sponsors catalog | `/sponsors` | `/es/sponsors` | `sponsors` | `sponsors/index.astro` | `SponsorsCatalogPage.astro` (grouped by tier) | yes |
@@ -119,10 +121,10 @@ under `nav.*`.
    - Meetups — `/meetups`
    - Events — `/events`
    - Pereira Tech Days — `/pereira-tech-days`
-3. **Speakers & Talks** (dropdown)
+3. **Speakers & Slides** (dropdown)
    - Speakers — `/speakers`
-   - Talks — `/talks`
    - Slides — `/slides`
+   - *(Talks catalog removed in Task 22 — talk history now lives on speaker/meetup detail pages; `/talks` 301-redirects to `/meetups`)*
 4. **Blog** — `/blog`
 5. **Sponsor Us** — `/sponsor-us` (CTA-styled)
 
@@ -150,7 +152,6 @@ Three columns + bottom strip.
 - Events
 - Pereira Tech Days
 - Speakers
-- Talks
 - Slides
 
 **Column C — Connect**
@@ -272,7 +273,9 @@ SEO sees a clean 404 for anything truly missing. The v3.0.0 diff adds:
 '/events',
 '/pereira-tech-days',
 '/speakers',
-'/talks',
+'/talks',       // redirect stub only (Task 22) — 301s to /meetups
+'/calendar',    // Task 26
+'/communities', // Task 26 — allied communities stub
 '/slides',
 '/contributors',
 '/sponsors',

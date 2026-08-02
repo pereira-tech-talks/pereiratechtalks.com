@@ -1,0 +1,53 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  community: CollectionEntry<'communities'>;
+  lang: Language;
+  visitLabel: string;
+}
+
+const { community, lang, visitLabel } = Astro.props;
+const { name, logo, url, focus, description } = community.data;
+const focusText = focus ? tr(focus, lang) : undefined;
+const descriptionText = tr(description, lang);
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group flex h-full min-w-0 flex-col rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-5 sm:p-6 shadow-sm transition hover:border-ptt-primary/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="flex items-start gap-4">
+    <img
+      src={logo.src}
+      alt={logo.alt}
+      width="72"
+      height="72"
+      loading="lazy"
+      class="h-16 w-16 shrink-0 rounded-xl bg-white object-contain p-1 ring-1 ring-ptt-border dark:bg-gray-900"
+    />
+    <div class="min-w-0 flex-1">
+      <h3 class="text-lg font-bold text-ptt group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
+        {name}
+      </h3>
+      {
+        focusText && (
+          <p class="mt-1 text-xs font-semibold uppercase tracking-wide text-ptt-primary dark:text-ptt-primary-dark">
+            {focusText}
+          </p>
+        )
+      }
+    </div>
+  </div>
+  <p class="mt-4 flex-1 text-sm text-ptt-secondary line-clamp-4">
+    {descriptionText}
+  </p>
+  <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark">
+    {visitLabel}
+    <span aria-hidden="true">→</span>
+  </span>
+</a>

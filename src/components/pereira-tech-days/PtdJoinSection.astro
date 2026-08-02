@@ -1,0 +1,34 @@
+---
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  subtitle: string;
+  ctaLabel: string;
+  ctaUrl: string;
+  illustrationSrc?: string;
+}
+
+const { title, subtitle, ctaLabel, ctaUrl, illustrationSrc } = Astro.props;
+---
+
+<section
+  class="relative overflow-hidden py-[var(--ptd-section-pad)]"
+  style={illustrationSrc ? `background-image: url('${illustrationSrc}'); background-size: cover; background-position: center;` : undefined}
+  aria-labelledby="ptd-join-title"
+>
+  <div class="absolute inset-0 bg-[var(--ptt-primary)]/90" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+    <h2 id="ptd-join-title" class="text-3xl font-bold tracking-tight text-white">
+      {title}
+    </h2>
+    <p class="mt-4 text-lg text-white/90">{subtitle}</p>
+    <a
+      href={ctaUrl}
+      class="mt-8 inline-flex rounded-full bg-white px-8 py-3 text-sm font-semibold text-[var(--ptt-primary)] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    >
+      {ctaLabel}
+    </a>
+  </div>
+</section>
