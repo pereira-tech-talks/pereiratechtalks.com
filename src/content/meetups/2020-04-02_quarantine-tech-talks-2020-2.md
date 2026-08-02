@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks 💻 - Meetup 2"
   es: "Quarantine Tech Talks 💻 - Meetup 2"
 description:
-  en: "Historical Pereira Tech Talks meetup (2020-04-02). Original program: Quarantine Tech Talks 💻 - Meetup 2."
-  es: "Meetup histórico de Pereira Tech Talks (2020-04-02). Programa original: Quarantine Tech Talks 💻 - Meetup 2."
+  en: "Pereira Tech Talks meetup (2020-04-02). ===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wz."
+  es: "===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wz."
 pubDate: 2020-04-02
 date: 2020-04-02
 venue:
@@ -41,7 +41,7 @@ En colaboración con las comunidades del eje cafetero les traemos un meetup carg
 
 ### Summary in English
 
-A 2020 Pereira Tech Talks meetup. ===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wzc7EX9s) ¡Saludos! En colaboración con las…
+A Pereira Tech Talks meetup on 2020-04-02: Quarantine Tech Talks 💻 - Meetup 2. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

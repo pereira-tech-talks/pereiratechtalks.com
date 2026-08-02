@@ -3,8 +3,8 @@ title:
   en: "Planning Hackathon de actividades 2018"
   es: "Hackaton de planificación de actividades 2018"
 description:
-  en: "Historical Pereira Tech Talks meetup (2018-01-14). Original program: Hackaton de planificación de actividades 2018."
-  es: "Meetup histórico de Pereira Tech Talks (2018-01-14). Programa original: Hackaton de planificación de actividades 2018."
+  en: "Pereira Tech Talks meetup (2018-01-14). En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](https://pereiratechtalks.org)** y **[Pereira Js](https://pereira.js.org/)** a pasar un buen rato, con el propósito de planificar el nuevo año y como bueno."
+  es: "En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](https://pereiratechtalks.org)** y **[Pereira Js](https://pereira.js.org/)** a pasar un buen rato, con el propósito de planificar el nuevo año y como bueno."
 pubDate: 2018-01-14
 date: 2018-01-14
 venue:

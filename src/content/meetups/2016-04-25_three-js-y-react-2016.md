@@ -3,8 +3,8 @@ title:
   en: "Three.js && Introducción a React"
   es: "Three JS && Introducción a React"
 description:
-  en: "Historical Pereira Tech Talks meetup (2016-04-25). Original program: Three JS && Introducción a React."
-  es: "Meetup histórico de Pereira Tech Talks (2016-04-25). Programa original: Three JS && Introducción a React."
+  en: "Pereira Tech Talks meetup (2016-04-25). Decimoctavo Meetup de PereiraJs con dos charlas sobre:."
+  es: "Decimoctavo Meetup de PereiraJs con dos charlas sobre:."
 pubDate: 2016-04-25
 date: 2016-04-25
 venue:

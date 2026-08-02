@@ -3,8 +3,8 @@ title:
   en: "Introduction a MV* && Node.js v4"
   es: "Introducción a MV* && Node.js v4"
 description:
-  en: "Historical Pereira Tech Talks meetup (2016-01-25). Original program: Introducción a MV* && Node.js v4."
-  es: "Meetup histórico de Pereira Tech Talks (2016-01-25). Programa original: Introducción a MV* && Node.js v4."
+  en: "Pereira Tech Talks meetup (2016-01-25). Decimocuarto Meetup de PereiraJs hablando sobre:."
+  es: "Decimocuarto Meetup de PereiraJs hablando sobre:."
 pubDate: 2016-01-25
 date: 2016-01-25
 venue:

@@ -121,6 +121,24 @@ export interface SiteTranslations {
     sendButton: string;
   };
 
+  // Meetups listing page
+  meetupsPage: {
+    title: string;
+    description: string;
+    intro: string;
+    upcoming: string;
+    past: string;
+    emptyUpcomingTitle: string;
+    emptyUpcomingDescription: string;
+    ctaMeetupCom: string;
+    archiveCount: string; // use {n} placeholder
+    yearLabel: string; // use {year} placeholder
+    yearNav: string;
+    calendarEyebrow: string;
+    archiveEyebrow: string;
+    breadcrumbHome: string;
+  };
+
   // About page
   aboutPage: {
     title: string;

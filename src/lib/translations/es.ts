@@ -131,6 +131,27 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   },
 
   // About page
+
+  meetupsPage: {
+    title: 'Meetups de Pereira Tech Talks',
+    description:
+      'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech bilingüe del Eje Cafetero, Risaralda.',
+    intro:
+      'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.',
+    upcoming: 'Próximos meetups',
+    past: 'Meetups pasados',
+    emptyUpcomingTitle: 'No hay meetups anunciados todavía',
+    emptyUpcomingDescription:
+      'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.',
+    ctaMeetupCom: 'Síguenos en Meetup.com',
+    archiveCount: '{n} meetups en el archivo',
+    yearLabel: '{year} — Meetups del año',
+    yearNav: 'Saltar al año',
+    calendarEyebrow: 'Calendario',
+    archiveEyebrow: 'Archivo',
+    breadcrumbHome: 'Inicio',
+  },
+
   aboutPage: {
     title: 'Sobre Pereira Tech Talks',
     subtitle: 'Una comunidad bilingüe de tecnología desde Pereira al mundo',

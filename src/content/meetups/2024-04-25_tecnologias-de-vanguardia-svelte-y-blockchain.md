@@ -48,7 +48,7 @@ Tal vez pienses que el blockchain es solo para actividades ilegales o una apuest
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-04-25). ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…
+A Pereira Tech Talks meetup on 2024-04-25: Technologies de Vanguardia: Svelte y Blockchain al descubierto.. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

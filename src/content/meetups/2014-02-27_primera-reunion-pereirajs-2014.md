@@ -3,8 +3,8 @@ title:
   en: "First meeting of PereiraJs"
   es: "Primera reunión PereiraJs"
 description:
-  en: "Historical Pereira Tech Talks meetup (2014-02-27). Original program: Primera reunión PereiraJs."
-  es: "Meetup histórico de Pereira Tech Talks (2014-02-27). Programa original: Primera reunión PereiraJs."
+  en: "Pereira Tech Talks meetup (2014-02-27). Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
+  es: "Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
 pubDate: 2014-02-27
 date: 2014-02-27
 venue:
@@ -38,7 +38,7 @@ Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel Pineda](h
 
 ### Summary in English
 
-A 2014 Pereira Tech Talks meetup. Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo. Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel…
+A Pereira Tech Talks meetup on 2014-02-27: First meeting of PereiraJs. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

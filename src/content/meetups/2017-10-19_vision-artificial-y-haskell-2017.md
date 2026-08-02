@@ -3,8 +3,8 @@ title:
   en: "Computer Vision con OpenCV && Programación funcional en Haskell"
   es: "Visión artificial con OpenCV && Programación funcional en Haskell"
 description:
-  en: "Historical Pereira Tech Talks meetup (2017-10-19). Original program: Visión artificial con OpenCV && Programación funcional en Haskell."
-  es: "Meetup histórico de Pereira Tech Talks (2017-10-19). Programa original: Visión artificial con OpenCV && Programación funcional en Haskell."
+  en: "Pereira Tech Talks meetup (2017-10-19). En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meetup, con dos charlas muy interesantes:."
+  es: "En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meetup, con dos charlas muy interesantes:."
 pubDate: 2017-10-19
 date: 2017-10-19
 venue:
@@ -31,7 +31,7 @@ En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meet
 
 ### Summary in English
 
-A 2017 Pereira Tech Talks meetup. En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meetup, con dos charlas muy interesantes: **"Image Stitching", una introducción a OpenCV by [Carlos Álvaro](http://caal-15.github.io/#programming) **
+A Pereira Tech Talks meetup on 2017-10-19: Computer Vision con OpenCV && Programación funcional en Haskell. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

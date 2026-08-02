@@ -60,7 +60,7 @@ Descubre cómo Astro está transformando el desarrollo web con ejemplos práctic
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-08-01). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 1 de Agosto a las 6:30 p.m. para conocer sobre desarrollo web moderno con Astro.
+A Pereira Tech Talks meetup on 2024-08-01: Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

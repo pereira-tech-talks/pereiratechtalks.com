@@ -59,7 +59,7 @@ En un mundo globalizado, las oportunidades laborales no tienen fronteras. Descub
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-08-29). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas.
+A Pereira Tech Talks meetup on 2024-08-29: Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

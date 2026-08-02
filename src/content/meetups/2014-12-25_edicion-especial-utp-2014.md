@@ -3,8 +3,8 @@ title:
   en: "Special Edition desde la UTP"
   es: "Edición Especial desde la UTP"
 description:
-  en: "Historical Pereira Tech Talks meetup (2014-12-25). Original program: Edición Especial desde la UTP."
-  es: "Meetup histórico de Pereira Tech Talks (2014-12-25). Programa original: Edición Especial desde la UTP."
+  en: "Pereira Tech Talks meetup (2014-12-25). En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:."
+  es: "En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:."
 pubDate: 2014-12-25
 date: 2014-12-25
 venue:

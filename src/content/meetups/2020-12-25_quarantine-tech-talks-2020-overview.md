@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks"
   es: "Quarantine Tech Talks"
 description:
-  en: "Historical Pereira Tech Talks meetup (2020-12-25). Original program: Quarantine Tech Talks."
-  es: "Meetup histórico de Pereira Tech Talks (2020-12-25). Programa original: Quarantine Tech Talks."
+  en: "Pereira Tech Talks meetup (2020-12-25). las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo:."
+  es: "las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo:."
 pubDate: 2020-12-25
 date: 2020-12-25
 venue:

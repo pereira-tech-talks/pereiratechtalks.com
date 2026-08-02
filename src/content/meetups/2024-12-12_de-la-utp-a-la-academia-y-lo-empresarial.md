@@ -68,7 +68,7 @@ Parte de la conversación incluye compartir algunos de los tips que me mantuvier
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-12-12). ¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más.
+A Pereira Tech Talks meetup on 2024-12-12: From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Por qué Pereira: 12 años construyendo una comunidad tech en Risaralda"
-description: "Por qué una ciudad de 470.000 habitantes en la región cafetera de Colombia ha producido una de las comunidades tech más constantes del país — y qué significa eso para la próxima década de ingeniería regional."
+description: "Por qué una ciudad de 470.000 habitantes en la región cafetera de Colombia ha producido una de las comunidades tech más constantes del país — y qué…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

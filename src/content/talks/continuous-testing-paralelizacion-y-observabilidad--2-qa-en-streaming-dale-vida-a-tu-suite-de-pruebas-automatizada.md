@@ -3,7 +3,7 @@ title:
   en: "QA en streaming: Dale vida a tu suite de pruebas automatizadas"
   es: "QA en streaming: Dale vida a tu suite de pruebas automatizadas"
 abstract:
-  en: "Aprende cómo monitorear pruebas en tiempo real con dashboards en Grafana y reportes detallados con SerenityBDD. Descubre cómo la observabilidad, el monitoreo y el shift left-right testing permiten anticipar y resolver fallos antes de que escalen."
+  en: "Talk: QA en streaming: Dale vida a tu suite de pruebas automatizadas. See the Spanish abstract for the full description."
   es: "Aprende cómo monitorear pruebas en tiempo real con dashboards en Grafana y reportes detallados con SerenityBDD. Descubre cómo la observabilidad, el monitoreo y el shift left-right testing permiten anticipar y resolver fallos antes de que escalen."
 speakers:
   - juan-de-jesus-fernandez-graciano

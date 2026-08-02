@@ -1,6 +1,6 @@
 ---
 title: "¿Las competencias de programación son importantes en la vida laboral?"
-description: "Ensayo comunitario que defiende cómo las competencias de programación afilan habilidades de resolución de problemas, revisión de código, depuración y entrevistas que se trasladan directo al trabajo de ingeniería de software."
+description: "Ensayo comunitario que defiende cómo las competencias de programación afilan habilidades de resolución de problemas, revisión de código, depuración y…"
 pubDate: 2018-01-19
 heroImage: "/images/blog/posts/why-competitive-programming-matters/hero.jpg"
 heroLayout: banner

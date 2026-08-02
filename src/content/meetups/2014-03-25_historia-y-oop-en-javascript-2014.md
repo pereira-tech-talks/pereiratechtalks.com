@@ -3,8 +3,8 @@ title:
   en: "History, aplicaciones y programación orientada a objetos con Javascript"
   es: "Historia, aplicaciones y programación orientada a objetos con Javascript"
 description:
-  en: "Historical Pereira Tech Talks meetup (2014-03-25). Original program: Historia, aplicaciones y programación orientada a objetos con Javascript."
-  es: "Meetup histórico de Pereira Tech Talks (2014-03-25). Programa original: Historia, aplicaciones y programación orientada a objetos con Javascript."
+  en: "Pereira Tech Talks meetup (2014-03-25). Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  es: "Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
 pubDate: 2014-03-25
 date: 2014-03-25
 venue:

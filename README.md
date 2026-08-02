@@ -85,7 +85,7 @@ src/
 │   └── pages/                 # Shared page components (*Page.astro)
 ├── content/                   # Astro Content Collections
 │   ├── authors/ blog/{en,es}/ slides/{en,es}/ tags/ series/
-│   ├── meetups/{en,es}/       # Monthly meetups
+│   ├── meetups/               # Monthly meetups — single bilingual file per meetup
 │   ├── events/                # Calendar events
 │   ├── pereiraTechDays/       # PTD editions (with brandKit per edition)
 │   ├── verticals/ speakers/ talks/

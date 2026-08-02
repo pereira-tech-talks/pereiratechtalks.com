@@ -3,8 +3,8 @@ title:
   en: "React Native && Seguridad en npm"
   es: "React native && Seguridad en npm"
 description:
-  en: "Historical Pereira Tech Talks meetup (2017-08-01). Original program: React native && Seguridad en npm."
-  es: "Meetup histórico de Pereira Tech Talks (2017-08-01). Programa original: React native && Seguridad en npm."
+  en: "Pereira Tech Talks meetup (2017-08-01). Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:."
+  es: "Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:."
 pubDate: 2017-08-01
 date: 2017-08-01
 venue:

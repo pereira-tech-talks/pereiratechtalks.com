@@ -3,8 +3,8 @@ title:
   en: "Career Path Night con Óscar Barajas de Platzi"
   es: "Noche de Career Path con Óscar Barajas de Platzi"
 description:
-  en: "Historical Pereira Tech Talks meetup (2022-02-03). Original program: Noche de Career Path con Óscar Barajas de Platzi."
-  es: "Meetup histórico de Pereira Tech Talks (2022-02-03). Programa original: Noche de Career Path con Óscar Barajas de Platzi."
+  en: "Pereira Tech Talks meetup (2022-02-03). Tenemos MeetUp y el cuerpo lo sabe. Y tenemos como invitado a Óscar Barajas de Platzi."
+  es: "Tenemos MeetUp y el cuerpo lo sabe. Y tenemos como invitado a Óscar Barajas de Platzi."
 pubDate: 2022-02-03
 date: 2022-02-03
 venue:
@@ -38,7 +38,7 @@ En esta charla Óscar nos compartirá su experiencia, nos hablará de su career 
 
 ### Summary in English
 
-A 2022 Pereira Tech Talks meetup. Tenemos MeetUp y el cuerpo lo sabe. Y tenemos como invitado a Óscar Barajas de Platzi. En esta charla Óscar nos compartirá su experiencia, nos hablará de su career path y nos dará algunos consejos para quienes empiezan en la industria de la tecnología y para aquellos que tienen…
+A Pereira Tech Talks meetup on 2022-02-03: Career Path Night con Óscar Barajas de Platzi. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

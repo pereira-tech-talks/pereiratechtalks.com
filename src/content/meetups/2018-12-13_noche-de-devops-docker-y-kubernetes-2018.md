@@ -3,8 +3,8 @@ title:
   en: "DevOps Night - Introducción a Docker y Kubernetes"
   es: "Noche de DevOps - Introducción a Docker y Kubernetes"
 description:
-  en: "Historical Pereira Tech Talks meetup (2018-12-13). Original program: Noche de DevOps - Introducción a Docker y Kubernetes."
-  es: "Meetup histórico de Pereira Tech Talks (2018-12-13). Programa original: Noche de DevOps - Introducción a Docker y Kubernetes."
+  en: "Pereira Tech Talks meetup (2018-12-13). 📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y arquitecturas orientadas a microservicios."
+  es: "📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y arquitecturas orientadas a microservicios."
 pubDate: 2018-12-13
 date: 2018-12-13
 venue:

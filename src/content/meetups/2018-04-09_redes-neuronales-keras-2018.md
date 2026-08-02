@@ -3,8 +3,8 @@ title:
   en: "Introduction a las redes neuronales con Keras + Random Forest"
   es: "Introducción a las redes neuronales con Keras + Random Forest"
 description:
-  en: "Historical Pereira Tech Talks meetup (2018-04-09). Original program: Introducción a las redes neuronales con Keras + Random Forest."
-  es: "Meetup histórico de Pereira Tech Talks (2018-04-09). Programa original: Introducción a las redes neuronales con Keras + Random Forest."
+  en: "Pereira Tech Talks meetup (2018-04-09). En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter."
+  es: "En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter."
 pubDate: 2018-04-09
 date: 2018-04-09
 venue:

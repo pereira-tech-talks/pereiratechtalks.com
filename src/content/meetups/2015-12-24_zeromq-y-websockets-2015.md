@@ -3,8 +3,8 @@ title:
   en: "ZeroMQ + Node.js && WebSockets y Socket.io"
   es: "ZeroMQ + Node.js && WebSockets y Socket.io"
 description:
-  en: "Historical Pereira Tech Talks meetup (2015-12-24). Original program: ZeroMQ + Node.js && WebSockets y Socket.io."
-  es: "Meetup histórico de Pereira Tech Talks (2015-12-24). Programa original: ZeroMQ + Node.js && WebSockets y Socket.io."
+  en: "Pereira Tech Talks meetup (2015-12-24). Decimotercer Meetup de PereiraJs hablando sobre:."
+  es: "Decimotercer Meetup de PereiraJs hablando sobre:."
 pubDate: 2015-12-24
 date: 2015-12-24
 venue:

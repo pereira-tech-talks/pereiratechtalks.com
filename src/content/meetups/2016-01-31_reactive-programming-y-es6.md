@@ -3,8 +3,8 @@ title:
   en: "Reactive Programming && EcmaScript 6"
   es: "Reactive Programming && EcmaScript 6"
 description:
-  en: "Historical Pereira Tech Talks meetup (2016-01-31). Original program: Reactive Programming && EcmaScript 6."
-  es: "Meetup histórico de Pereira Tech Talks (2016-01-31). Programa original: Reactive Programming && EcmaScript 6."
+  en: "Pereira Tech Talks meetup (2016-01-31). Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
+  es: "Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
 pubDate: 2016-01-31
 date: 2016-01-31
 venue:

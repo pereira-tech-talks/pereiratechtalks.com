@@ -3,8 +3,8 @@ title:
   en: "What is Blockchain? y cómo transformará radicalmente la economía?"
   es: "¿Qué es el blockchain y cómo transformará radicalmente la economía?"
 description:
-  en: "Historical Pereira Tech Talks meetup (2017-09-20). Original program: ¿Qué es el blockchain y cómo transformará radicalmente la economía?."
-  es: "Meetup histórico de Pereira Tech Talks (2017-09-20). Programa original: ¿Qué es el blockchain y cómo transformará radicalmente la economía?."
+  en: "Pereira Tech Talks meetup (2017-09-20). Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como."
+  es: "Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como."
 pubDate: 2017-09-20
 date: 2017-09-20
 venue:

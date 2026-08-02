@@ -3,8 +3,8 @@ title:
   en: "💻 Hablemos de automatización de infraestructura y linux "
   es: "💻 Hablemos de automatización de infraestructura y linux "
 description:
-  en: "Historical Pereira Tech Talks meetup (2019-04-25). Original program: 💻 Hablemos de automatización de infraestructura y linux ."
-  es: "Meetup histórico de Pereira Tech Talks (2019-04-25). Programa original: 💻 Hablemos de automatización de infraestructura y linux ."
+  en: "Pereira Tech Talks meetup (2019-04-25). 📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:."
+  es: "📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:."
 pubDate: 2019-04-25
 date: 2019-04-25
 venue:

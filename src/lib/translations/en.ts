@@ -131,6 +131,27 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   },
 
   // About page
+
+  meetupsPage: {
+    title: 'Pereira Tech Talks Meetups',
+    description:
+      'Over 90 meetups since 2014. Monthly talks, lightning rounds, panels, and workshops from the bilingual Eje Cafetero tech community in Risaralda.',
+    intro:
+      'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
+    upcoming: 'Upcoming meetups',
+    past: 'Past meetups',
+    emptyUpcomingTitle: 'No upcoming meetups announced yet',
+    emptyUpcomingDescription:
+      "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
+    ctaMeetupCom: 'Follow us on Meetup.com',
+    archiveCount: '{n} meetups in the archive',
+    yearLabel: '{year} — Meetups',
+    yearNav: 'Jump to year',
+    calendarEyebrow: 'Calendar',
+    archiveEyebrow: 'Archive',
+    breadcrumbHome: 'Home',
+  },
+
   aboutPage: {
     title: 'About Pereira Tech Talks',
     subtitle: 'A bilingual technology community from Pereira to the world',

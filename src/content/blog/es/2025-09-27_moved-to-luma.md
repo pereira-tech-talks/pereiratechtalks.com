@@ -1,6 +1,6 @@
 ---
 title: "Nos trasladamos a Luma"
-description: "A partir de finales de 2025, todos los meetups de Pereira Tech Talks se publican y registran a través de Luma en luma.com/pertechtalks — reemplazando a Meetup.com como nuestra plataforma principal de eventos."
+description: "A partir de finales de 2025, todos los meetups de Pereira Tech Talks se publican y registran a través de Luma en luma.com/pertechtalks — reemplazando a…"
 pubDate: 2025-09-27
 heroImage: "/images/blog/posts/moved-to-luma/hero.jpg"
 heroLayout: banner

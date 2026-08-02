@@ -7,7 +7,7 @@
 - [ ] Check if `public/llms.txt` includes all recent blog posts, meetups, and Pereira Tech Day editions
 - [ ] Check if `public/llms-full.txt` has accurate descriptions and URLs
 - [ ] Verify blog post count in llms files matches actual content (`ls src/content/blog/en/ | grep -v _demo | wc -l`)
-- [ ] Verify meetup count (`ls src/content/meetups/en/ | wc -l`) and event count match the public catalogs
+- [ ] Verify meetup count (`ls src/content/meetups/*.md | wc -l`) and event count match the public catalogs
 - [ ] If new blog posts were added, verify they have complete frontmatter (`title`, `description`, `pubDate`, `tags`, `heroImage`, `author`)
 - [ ] If a new Pereira Tech Day edition was published, verify its `brandKit` is complete and the `[data-edition-theme="{year}"]` scope renders correctly
 

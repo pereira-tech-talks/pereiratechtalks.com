@@ -61,7 +61,7 @@ Charla sobre cómo crear tecnología consciente con las personas, accesible, fun
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-11-28). Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente.
+A Pereira Tech Talks meetup on 2024-11-28: Technology con Propósito: Conexiones Humanas y Colaboración Inteligente. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

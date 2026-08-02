@@ -15,6 +15,7 @@
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
 | Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, PTT voice, vocabulary blocklist |
+| Content QA | [Content QA Checklist](docs/features/CONTENT_QA_CHECKLIST.md) | Bilingual parity, orthography, SEO/AEO, automated gates |
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
@@ -73,7 +74,7 @@ src/
 │   ├── blog/{en,es}/          # Community blog posts (YYYY-MM-DD_slug.md)
 │   ├── slides/{en,es}/        # Talk decks (3 types: internal/external-embed/external-link)
 │   ├── tags/ series/          # Tag definitions + series
-│   ├── meetups/{en,es}/       # Monthly meetups (separate from blog)
+│   ├── meetups/               # Monthly meetups — single bilingual file per meetup
 │   ├── events/                # Calendar events (workshops, hackathons, etc.)
 │   ├── pereiraTechDays/       # PTD editions with brandKit per edition
 │   ├── verticals/             # Vertical metadata (Speaker School, etc.)
@@ -196,7 +197,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 - **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` (Spanish primary, served at `/`) and `src/pages/en/` (English, served at `/en`) passing `lang` as string literal.
 - **Blog Posts:** Both `src/content/blog/en/` and `src/content/blog/es/` MUST have the equivalent post. Translate `title`, `description`, body. Preserve `pubDate`, `heroImage`, `tags`, `author`, code blocks. **Use `/add-blog-post` skill for new posts.**
-- **Meetups:** Both `src/content/meetups/{en,es}/` MUST have the equivalent entry. **Use `/add-meetup` skill.**
+- **Meetups:** One bilingual file per meetup in `src/content/meetups/` (`title`/`description` with `en`/`es`). **Use `/add-meetup` skill.**
 - **Events / PTD editions:** Define in single source-of-truth collection (`events`, `pereiraTechDays`); translatable fields use `{ en, es }` shape per the Zod schema (Task 4).
 - **Authors / Contributors:** Defined as YAML with localized `role`/`bio` (`en`/`es` keys required by schema). Posts and talks reference by slug.
 - **Translation Strings:** Add to BOTH `src/lib/translations/en.ts` and `es.ts`. Update `types.ts` with any new interface keys.
@@ -207,7 +208,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 - [ ] Pages exist in both `src/pages/` (ES, root) and `src/pages/en/` (EN)
 - [ ] Blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
-- [ ] Meetups exist in both `src/content/meetups/en/` and `src/content/meetups/es/`
+- [ ] Meetup entries exist in `src/content/meetups/` with both `en` and `es` fields filled
 - [ ] Same `author` slug used in EN and ES versions of a post
 - [ ] New/updated authors and contributors have both `role.en`/`role.es` and `bio.en`/`bio.es` filled in
 - [ ] UI strings in both `en.ts` and `es.ts`
@@ -404,11 +405,11 @@ The blog hosts **community blog posts** (recaps, deep-dives, vertical announceme
 
 > Full reference: **[Meetups Guide](docs/features/MEETUPS.md)** (created in Task 4 onwards)
 
-**File naming:** `YYYY-MM-DD_slug.md` in `src/content/meetups/{en,es}/`. **Slugs MUST be in English.**
+**File naming:** `YYYY-MM-DD_slug.md` in `src/content/meetups/`. **Slugs MUST be in English.**
 
 **Frontmatter:** `title`, `description`, `date`, `vertical` (Speaker School / La Biblioteca del Mañana / AI Channel / general), `format` (online / in-person / hybrid), `venue` (optional), `speakers` (array of slugs), `talks` (array of slugs, optional), `recordingUrl` (optional), `slidesUrl` (optional), `coverImage`.
 
-**URL surface:** `/meetups` (timeline) + `/meetups/{slug}` (detail). ES mirror: `/es/meetups`, `/es/meetups/{slug}`.
+**URL surface:** `/meetups` (timeline) + `/meetups/{slug}` (detail). English: `/en/meetups`, `/en/meetups/{slug}`. Spanish is unprefixed at `/`.
 
 **New meetup workflow:** Use `/add-meetup` skill.
 

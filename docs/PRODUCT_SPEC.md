@@ -48,7 +48,7 @@ See [INFORMATION_ARCHITECTURE.md](INFORMATION_ARCHITECTURE.md) for the canonical
 - **Home** (`/`, `/es/`) — value proposition, what PTT is, verticals, upcoming events, recent meetups, blog preview, sponsors strip, contact.
 - **About** (`/about`, `/es/sobre-nosotros`) — who we are, mission, history, team.
 - **Pereira Tech Days** (`/pereira-tech-days`, `/pereira-tech-days/{year}`) — flagship annual conference; per-edition brand kit.
-- **Meetups** (`/meetups`, `/es/meetups`) — monthly community gatherings; recap, photos, slides, talks.
+- **Meetups** (`/meetups`, `/en/meetups`) — monthly community gatherings; recap, photos, slides, talks.
 - **Events** (`/events`, `/es/eventos`) — special one-off events that aren't Tech Days or meetups.
 - **Verticals** (`/verticals/...`) — La Biblioteca del Mañana, AI channel, Speaker School, etc.
 - **Speaker School** (`/speaker-school`, `/es/escuela-de-ponentes`) — first-class section: how to become a PTT speaker.

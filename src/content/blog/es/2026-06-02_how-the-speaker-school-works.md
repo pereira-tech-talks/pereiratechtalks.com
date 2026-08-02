@@ -1,6 +1,6 @@
 ---
 title: "Cómo funciona la Escuela de Speakers (y qué hacen sus egresadas y egresados)"
-description: "Una mirada profunda a la Escuela de Speakers de Pereira Tech Talks: por qué existe, el currículo, el modelo de mentoría y las trayectorias de egresadas y egresados que justifican la apuesta."
+description: "Una mirada profunda a la Escuela de Speakers de Pereira Tech Talks: por qué existe, el currículo, el modelo de mentoría y las trayectorias de egresadas y…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

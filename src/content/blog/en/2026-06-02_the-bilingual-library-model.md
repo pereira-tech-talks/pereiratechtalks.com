@@ -1,6 +1,6 @@
 ---
 title: "The bilingual library model: why we publish everything in Spanish AND English"
-description: "Why Pereira Tech Talks deliberately publishes every blog post, slide deck, meetup recap, and speaker profile in both Spanish and English — and why this matters for Latin American tech communities in the age of AI agents."
+description: "Why Pereira Tech Talks deliberately publishes every blog post, slide deck, meetup recap, and speaker profile in both Spanish and English — and why this…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

@@ -3,8 +3,8 @@ title:
   en: "Introduction al IoT && Administración de un pequeño cluster con nodeJS"
   es: "Introducción al IoT && Administración de un pequeño cluster con nodeJS"
 description:
-  en: "Historical Pereira Tech Talks meetup (2017-03-28). Original program: Introducción al IoT && Administración de un pequeño cluster con nodeJS."
-  es: "Meetup histórico de Pereira Tech Talks (2017-03-28). Programa original: Introducción al IoT && Administración de un pequeño cluster con nodeJS."
+  en: "Pereira Tech Talks meetup (2017-03-28). En nuestro segundo Meetup del 2017 tuvimos el gusto de contar con dos charlas muy interesantes sobre IoT y clustering con NodeJs:."
+  es: "En nuestro segundo Meetup del 2017 tuvimos el gusto de contar con dos charlas muy interesantes sobre IoT y clustering con NodeJs:."
 pubDate: 2017-03-28
 date: 2017-03-28
 venue:

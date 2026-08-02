@@ -1,6 +1,6 @@
 ---
 title: "El modelo de biblioteca bilingüe: por qué publicamos todo en español E inglés"
-description: "Por qué Pereira Tech Talks publica deliberadamente cada artículo, slide, recapitulación de meetup y bio de ponente en español e inglés — y por qué esto importa para las comunidades tech latinoamericanas en la era de los agentes de IA."
+description: "Por qué Pereira Tech Talks publica deliberadamente cada artículo, slide, recapitulación de meetup y bio de ponente en español e inglés — y por qué esto…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

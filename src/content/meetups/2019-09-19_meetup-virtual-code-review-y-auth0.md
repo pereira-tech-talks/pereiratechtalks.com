@@ -3,8 +3,8 @@ title:
   en: "Virtual Meetup: Noche de Code Review y IDaaS at Scale en Auth0"
   es: "MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0"
 description:
-  en: "Historical Pereira Tech Talks meetup (2019-09-19). Original program: MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0."
-  es: "Meetup histórico de Pereira Tech Talks (2019-09-19). Programa original: MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0."
+  en: "Pereira Tech Talks meetup (2019-09-19). 📣 No se pierdan estas poderosas charlas tech este jueves en la noche:."
+  es: "📣 No se pierdan estas poderosas charlas tech este jueves en la noche:."
 pubDate: 2019-09-19
 date: 2019-09-19
 venue:

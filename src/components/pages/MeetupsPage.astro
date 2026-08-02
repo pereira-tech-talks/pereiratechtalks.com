@@ -18,6 +18,7 @@ import {
   getUpcomingMeetups,
   groupMeetupsByYear,
 } from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
@@ -31,47 +32,32 @@ const past = all.filter((m) => !upcoming.some((u) => u.id === m.id));
 const groups = groupMeetupsByYear(past);
 const years = groups.map((g) => g.year);
 
+const tr = getTranslations(lang);
+const mp = tr.meetupsPage;
+
 const t = {
-  title:
-    lang === 'es'
-      ? 'Meetups de Pereira Tech Talks'
-      : 'Pereira Tech Talks Meetups',
-  description:
-    lang === 'es'
-      ? 'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech bilingüe del Eje Cafetero, Risaralda.'
-      : 'Over 90 meetups since 2014. Monthly talks, lightning rounds, panels, and workshops from the bilingual Eje Cafetero tech community in Risaralda.',
-  intro:
-    lang === 'es'
-      ? 'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.'
-      : 'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
-  upcoming: lang === 'es' ? 'Próximos meetups' : 'Upcoming meetups',
-  past: lang === 'es' ? 'Meetups pasados' : 'Past meetups',
-  emptyUpcomingTitle:
-    lang === 'es'
-      ? 'No hay meetups anunciados todavía'
-      : 'No upcoming meetups announced yet',
-  emptyUpcomingDescription:
-    lang === 'es'
-      ? 'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.'
-      : "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
-  ctaLabel:
-    lang === 'es' ? 'Síguenos en Meetup.com' : 'Follow us on Meetup.com',
+  title: mp.title,
+  description: mp.description,
+  intro: mp.intro,
+  upcoming: mp.upcoming,
+  past: mp.past,
+  emptyUpcomingTitle: mp.emptyUpcomingTitle,
+  emptyUpcomingDescription: mp.emptyUpcomingDescription,
+  ctaLabel: mp.ctaMeetupCom,
   ctaHref: 'https://www.meetup.com/pereira-tech-talks/',
-  meetupsCount:
-    lang === 'es'
-      ? `${past.length} meetups en el archivo`
-      : `${past.length} meetups in the archive`,
-  yearLabel: (n: number) =>
-    lang === 'es' ? `${n} — Meetups del año` : `${n} — Meetups`,
-  yearNav: lang === 'es' ? 'Saltar al año' : 'Jump to year',
+  meetupsCount: mp.archiveCount.replace('{n}', String(past.length)),
+  yearLabel: (n: number) => mp.yearLabel.replace('{year}', String(n)),
+  yearNav: mp.yearNav,
+  calendarEyebrow: mp.calendarEyebrow,
+  archiveEyebrow: mp.archiveEyebrow,
 };
 
 const breadcrumbs = [
   {
-    label: lang === 'es' ? 'Inicio' : 'Home',
+    label: mp.breadcrumbHome,
     href: `${getUrlPrefix(lang)}/`,
   },
-  { label: lang === 'es' ? 'Meetups' : 'Meetups' },
+  { label: tr.nav.meetups },
 ];
 ---
 
@@ -111,7 +97,7 @@ const breadcrumbs = [
   </div>
 
   <Section
-    eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'}
+    eyebrow={t.calendarEyebrow}
     title={t.upcoming}
     surface="alt"
   >
@@ -135,7 +121,7 @@ const breadcrumbs = [
     }
   </Section>
 
-  <Section eyebrow={lang === 'es' ? 'Archivo' : 'Archive'} title={t.past}>
+  <Section eyebrow={t.archiveEyebrow} title={t.past}>
     <div class="grid gap-10 lg:grid-cols-[7rem_1fr]">
       {
         years.length > 0 && (

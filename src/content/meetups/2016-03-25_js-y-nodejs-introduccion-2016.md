@@ -3,8 +3,8 @@ title:
   en: "Introduction a Javascript && Introducción a NodeJs"
   es: "Introducción a Javascript && Introducción a NodeJs"
 description:
-  en: "Historical Pereira Tech Talks meetup (2016-03-25). Original program: Introducción a Javascript && Introducción a NodeJs."
-  es: "Meetup histórico de Pereira Tech Talks (2016-03-25). Programa original: Introducción a Javascript && Introducción a NodeJs."
+  en: "Pereira Tech Talks meetup (2016-03-25). Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
+  es: "Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
 pubDate: 2016-03-25
 date: 2016-03-25
 venue:

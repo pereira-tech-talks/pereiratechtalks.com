@@ -3,8 +3,8 @@ title:
   en: "Open Source y Automatización"
   es: "Software libre y Automatización"
 description:
-  en: "Historical Pereira Tech Talks meetup (2021-07-28). Original program: Software libre y Automatización."
-  es: "Meetup histórico de Pereira Tech Talks (2021-07-28). Programa original: Software libre y Automatización."
+  en: "Pereira Tech Talks meetup (2021-07-28). ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la ."
+  es: "¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la ."
 pubDate: 2021-07-28
 date: 2021-07-28
 venue:
@@ -41,7 +41,7 @@ Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingenie
 
 ### Summary in English
 
-A 2021 Pereira Tech Talks meetup. ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la charla. Charla: Software libre para una…
+A Pereira Tech Talks meetup on 2021-07-28: Open Source y Automatización. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

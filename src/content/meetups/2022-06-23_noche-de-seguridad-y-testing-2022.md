@@ -3,8 +3,8 @@ title:
   en: "Security Night y  Testing"
   es: "Noche de seguridad y  Testing"
 description:
-  en: "Historical Pereira Tech Talks meetup (2022-06-23). Original program: Noche de seguridad y  Testing."
-  es: "Meetup histórico de Pereira Tech Talks (2022-06-23). Programa original: Noche de seguridad y  Testing."
+  en: "Pereira Tech Talks meetup (2022-06-23). Tenemos meetUp presencial. Con dos charlas mega increibles."
+  es: "Tenemos meetUp presencial. Con dos charlas mega increibles."
 pubDate: 2022-06-23
 date: 2022-06-23
 venue:
@@ -43,7 +43,7 @@ Revisaremos las ventajas, técnicas e importancia del testing para el desarrollo
 
 ### Summary in English
 
-A 2022 Pereira Tech Talks meetup. Tenemos meetUp presencial. Con dos charlas mega increibles. Seguridad en cadenas de suministro de software Por Andrés Torres. Software Engineer VMware, Entrepreneur, Backend Ruby On Rails Developer, Data Scientist Desde hace un par de años los ataques informáticos a través de la…
+A Pereira Tech Talks meetup on 2022-06-23: Security Night y  Testing. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

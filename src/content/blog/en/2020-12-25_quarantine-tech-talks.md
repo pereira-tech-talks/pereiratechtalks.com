@@ -1,6 +1,6 @@
 ---
 title: "Quarantine Tech Talks: how the community went virtual in 2020"
-description: "When in-person meetups stopped in 2020, Pereira Tech Talks ran a series of fully-virtual sessions — Quarantine Tech Talks — covering the state of JavaScript, Svelte, Chaos Engineering, WebAssembly, Gatsby, Nuxt.js, soft skills, and frontend performance."
+description: "When in-person meetups stopped in 2020, Pereira Tech Talks ran a series of fully-virtual sessions — Quarantine Tech Talks — covering the state of…"
 pubDate: 2020-12-25
 heroImage: "/images/blog/posts/quarantine-tech-talks/hero.png"
 heroLayout: banner

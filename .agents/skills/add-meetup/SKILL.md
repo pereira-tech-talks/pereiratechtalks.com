@@ -18,7 +18,7 @@ max-loc: 600
 
 ## Objective
 
-Create a new entry in the `meetups` content collection for Pereira Tech Talks v3.0.0. A meetup represents a single monthly community gathering (in-person, virtual, or hybrid). Each meetup is one bilingual Markdown file that drives the `/meetups/<slug>` and `/es/meetups/<slug>` pages plus the AEO Markdown twins.
+Create a new entry in the `meetups` content collection for Pereira Tech Talks v3.0.0. A meetup represents a single monthly community gathering (in-person, virtual, or hybrid). Each meetup is one bilingual Markdown file that drives the `/meetups/<slug>` and `/en/meetups/<slug> (ES unprefixed at /meetups/<slug>)` pages plus the AEO Markdown twins.
 
 ## Mandatory Invocation Policy (CRITICAL)
 
@@ -73,7 +73,7 @@ This skill is the mandatory workflow for creating new meetup entries in this rep
 
 **File naming:** `YYYY-MM-DD_{slug}.md` in `src/content/meetups/` (single file, bilingual fields).
 
-**URL surface:** `/meetups/<slug>` (EN) and `/es/meetups/<slug>` (ES).
+**URL surface:** `/meetups/<slug>` (EN) and `/en/meetups/<slug> (ES unprefixed at /meetups/<slug>)` (ES).
 
 **Slugs:** English-only, even for Spanish-primary content.
 
@@ -176,7 +176,7 @@ The build should pick up the new meetup automatically and emit `/meetups/<slug>/
 
 ### URLs
 - English: `/meetups/{slug}/` (+ `.md`)
-- Spanish: `/es/meetups/{slug}/` (+ `.md`)
+- Spanish: `/meetups/{slug}/` (+ `.md`); English: `/en/meetups/{slug}/`
 
 ### Details
 - **Title (EN):** {title.en}

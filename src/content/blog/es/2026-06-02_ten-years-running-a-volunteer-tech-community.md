@@ -1,6 +1,6 @@
 ---
 title: "10+ años corriendo una comunidad tech por voluntariado: 5 lecciones que aprendimos por las malas"
-description: "Doce años y 84 meetups después, estas son cinco lecciones operativas de Pereira Tech Talks — lo que hicimos bien, lo que hicimos mal, y lo que le diríamos a cualquiera que esté empezando algo parecido."
+description: "Doce años y 84 meetups después, estas son cinco lecciones operativas de Pereira Tech Talks — lo que hicimos bien, lo que hicimos mal, y lo que le diríamos a…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

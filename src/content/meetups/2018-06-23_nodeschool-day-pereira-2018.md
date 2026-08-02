@@ -3,8 +3,8 @@ title:
   en: "NodeSchool Day Pereira 2018"
   es: "NodeSchool Day Pereira 2018"
 description:
-  en: "Historical Pereira Tech Talks meetup (2018-06-23). Original program: NodeSchool Day Pereira 2018."
-  es: "Meetup histórico de Pereira Tech Talks (2018-06-23). Programa original: NodeSchool Day Pereira 2018."
+  en: "Pereira Tech Talks meetup (2018-06-23). El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y participación, contando con mentores expertos compartiendo su conocimiento y experiencia."
+  es: "El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y participación, contando con mentores expertos compartiendo su conocimiento y experiencia."
 pubDate: 2018-06-23
 date: 2018-06-23
 venue:

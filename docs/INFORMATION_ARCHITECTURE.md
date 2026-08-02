@@ -38,16 +38,16 @@ match this IA, you are creating drift.
 | Community | `/community` | `/es/community` | static | `community.astro` | `CommunityPage.astro` | yes |
 | Verticals umbrella | `/verticals` | `/es/verticals` | `verticals` | `verticals/index.astro` | `VerticalsListPage.astro` | yes |
 | Vertical detail | `/verticals/{slug}` | `/es/verticals/{slug}` | `verticals` | `verticals/[slug].astro` | `VerticalDetailPage.astro` | per-slug `.md` |
-| Meetups timeline | `/meetups` | `/es/meetups` | `meetups` | `meetups/index.astro` | `MeetupsTimelinePage.astro` | yes |
-| Meetup detail | `/meetups/{slug}` | `/es/meetups/{slug}` | `meetups` | `meetups/[slug].astro` | `MeetupDetailPage.astro` | per-slug `.md` |
+| Meetups timeline | `/meetups` | `/en/meetups` | `meetups` | `meetups/index.astro` | `MeetupsTimelinePage.astro` | yes |
+| Meetup detail | `/meetups/{slug}` | `/en/meetups/{slug}` | `meetups` | `meetups/[slug].astro` | `MeetupDetailPage.astro` | per-slug `.md` |
 | Events calendar | `/events` | `/es/events` | `events` + `meetups` | `events/index.astro` | `EventsCalendarPage.astro` | yes |
 | Event detail | `/events/{slug}` | `/es/events/{slug}` | `events` | `events/[slug].astro` | `EventDetailPage.astro` | per-slug `.md` |
 | PTT Days umbrella | `/pereira-tech-days` | `/es/pereira-tech-days` | `pereiraTechDays` | `pereira-tech-days/index.astro` | `PereiraTechDaysListPage.astro` | yes |
 | PTT Day edition | `/pereira-tech-days/{year}` | `/es/pereira-tech-days/{year}` | `pereiraTechDays` | `pereira-tech-days/[year].astro` | `PereiraTechDayEditionPage.astro` (wraps in `EditionScope`) | per-year `.md` |
 | Speakers catalog | `/speakers` | `/es/speakers` | `speakers` | `speakers/index.astro` | `SpeakersCatalogPage.astro` | yes |
 | Speaker profile | `/speakers/{slug}` | `/es/speakers/{slug}` | `speakers` | `speakers/[slug].astro` | `SpeakerProfilePage.astro` | per-slug `.md` |
-| ~~Talks catalog~~ | `/talks` → 301 `/meetups` | `/es/talks` → 301 `/es/meetups` | `talks` | `talks/index.astro` (redirect stub) | removed (Task 22) | n/a |
-| ~~Talk detail~~ | `/talks/{slug}` → 301 `/meetups` | `/es/talks/{slug}` → 301 `/es/meetups` | `talks` | `talks/[slug].astro` (redirect stub) | removed (Task 22) | n/a |
+| ~~Talks catalog~~ | `/talks` → 301 `/meetups` | `/en/talks` → 301 `/en/meetups` | `talks` | `talks/index.astro` (redirect stub) | removed (Task 22) | n/a |
+| ~~Talk detail~~ | `/talks/{slug}` → 301 `/meetups` | `/en/talks/{slug}` → 301 `/en/meetups` | `talks` | `talks/[slug].astro` (redirect stub) | removed (Task 22) | n/a |
 | Community Calendar (stub) | `/calendar` | `/es/calendar` | static | `calendar.astro` | `CalendarPage.astro` (full GCal hub lands in Tasks 63–70) | pending |
 | Allied Communities (stub) | `/communities` | `/es/communities` | static | `communities.astro` | `CommunitiesPage.astro` (full page craft lands in Tasks 71–72) | pending |
 | Contributors catalog | `/contributors` | `/es/contributors` | `contributors` | `contributors/index.astro` | `ContributorsCatalogPage.astro` | yes |

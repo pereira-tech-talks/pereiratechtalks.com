@@ -3,7 +3,7 @@ title:
   en: "La forma de escalar tus tests de software sin escalar tu nómina"
   es: "La forma de escalar tus tests de software sin escalar tu nómina"
 abstract:
-  en: "Veremos cómo implementar ejecución paralela en múltiples navegadores y sistemas operativos, aprovechar contenedores y Selenium Grid, y aumentar la cobertura de pruebas de manera eficiente."
+  en: "Talk: La forma de escalar tus tests de software sin escalar tu nómina. See the Spanish abstract for the full description."
   es: "Veremos cómo implementar ejecución paralela en múltiples navegadores y sistemas operativos, aprovechar contenedores y Selenium Grid, y aumentar la cobertura de pruebas de manera eficiente."
 speakers:
   - sebastian-agudelo-morales

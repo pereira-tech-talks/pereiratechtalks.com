@@ -3,8 +3,8 @@ title:
   en: "Pereira Girls Day"
   es: "Pereira Girls Day"
 description:
-  en: "Historical Pereira Tech Talks meetup (2019-03-16). Original program: Pereira Girls Day."
-  es: "Meetup histórico de Pereira Tech Talks (2019-03-16). Programa original: Pereira Girls Day."
+  en: "Pereira Tech Talks meetup (2019-03-16). 📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología!."
+  es: "📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología!."
 pubDate: 2019-03-16
 date: 2019-03-16
 venue:
@@ -38,7 +38,7 @@ draft: false
 
 ### Summary in English
 
-A 2019 Pereira Tech Talks meetup. 📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología! 👉 1. Tips para dar charlas y presentaciones públicas by Natalia Moncada Suárez…
+A Pereira Tech Talks meetup on 2019-03-16: Pereira Girls Day. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

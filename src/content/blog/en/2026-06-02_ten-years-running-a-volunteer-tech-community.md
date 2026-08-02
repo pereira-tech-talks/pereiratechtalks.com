@@ -1,6 +1,6 @@
 ---
 title: "10+ years of running a volunteer tech community: 5 lessons we learned the hard way"
-description: "Twelve years and 84 meetups in, here are five operational lessons from Pereira Tech Talks — what we got right, what we got wrong, and what we would tell anyone trying to start something similar."
+description: "Twelve years and 84 meetups in, here are five operational lessons from Pereira Tech Talks — what we got right, what we got wrong, and what we would tell…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

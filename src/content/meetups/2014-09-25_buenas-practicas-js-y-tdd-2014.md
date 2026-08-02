@@ -3,8 +3,8 @@ title:
   en: "Best Practices en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
   es: "Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
 description:
-  en: "Historical Pereira Tech Talks meetup (2014-09-25). Original program: Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas."
-  es: "Meetup histórico de Pereira Tech Talks (2014-09-25). Programa original: Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas."
+  en: "Pereira Tech Talks meetup (2014-09-25). Octavo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  es: "Octavo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
 pubDate: 2014-09-25
 date: 2014-09-25
 venue:

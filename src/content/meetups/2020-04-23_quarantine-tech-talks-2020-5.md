@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks - Meetup 5"
   es: "Quarantine Tech Talks - Meetup 5"
 description:
-  en: "Historical Pereira Tech Talks meetup (2020-04-23). Original program: Quarantine Tech Talks - Meetup 5."
-  es: "Meetup histórico de Pereira Tech Talks (2020-04-23). Programa original: Quarantine Tech Talks - Meetup 5."
+  en: "Pereira Tech Talks meetup (2020-04-23). Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)."
+  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)."
 pubDate: 2020-04-23
 date: 2020-04-23
 venue:
@@ -40,7 +40,7 @@ Las comunidades del eje cafetero se unen para realizar durante esta cuarentena e
 
 ### Summary in English
 
-A 2020 Pereira Tech Talks meetup. Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU) Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.
+A Pereira Tech Talks meetup on 2020-04-23: Quarantine Tech Talks - Meetup 5. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Why Pereira: 12 years of building a tech community in Risaralda"
-description: "Why a city of 470,000 people in Colombia's coffee region has produced one of the most consistent tech communities in the country — and what that means for the next decade of regional engineering."
+description: "Why a city of 470,000 people in Colombia's coffee region has produced one of the most consistent tech communities in the country — and what that means for…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

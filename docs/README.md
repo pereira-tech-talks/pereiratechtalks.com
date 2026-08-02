@@ -75,7 +75,7 @@ pereiratechtalks.org/
 │   ├── content/         # Content Collections
 │   │   ├── blog/{en,es}/         # Blog posts (date-prefixed slugs)
 │   │   ├── slides/{en,es}/       # Reveal.js / external decks
-│   │   ├── meetups/{en,es}/      # Monthly meetup recaps
+│   │   ├── meetups/              # Monthly meetup recaps (bilingual files)
 │   │   ├── events/{en,es}/       # One-off events
 │   │   ├── pereira-tech-days/    # Pereira Tech Day editions (per-edition brand)
 │   │   ├── verticals/            # La Biblioteca del Mañana, AI, Speaker School, etc.

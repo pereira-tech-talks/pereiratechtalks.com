@@ -1,6 +1,6 @@
 ---
 title: "The first PereiraJS meetup"
-description: "On a February evening in 2014, the PereiraJS community gathered for the first time. Daniel Aristizabal welcomed the group; Jhonber Jimenez and Manuel Pineda gave the opening talk on JavaScript history and applications."
+description: "On a February evening in 2014, the PereiraJS community gathered for the first time. Daniel Aristizabal welcomed the group; Jhonber Jimenez and Manuel Pineda…"
 pubDate: 2014-02-27
 heroImage: "/images/blog/posts/first-pereirajs-meetup/hero.jpg"
 heroLayout: banner

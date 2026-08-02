@@ -3,8 +3,8 @@ title:
   en: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
   es: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
 description:
-  en: "Historical Pereira Tech Talks meetup (2019-06-05). Original program: 5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails ."
-  es: "Meetup histórico de Pereira Tech Talks (2019-06-05). Programa original: 5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails ."
+  en: "Pereira Tech Talks meetup (2019-06-05). 📣 ¡Un emocionate Junio nos espera! Tendremos unas charlas buenísimas sobre bases de datos no relacionales y el framework de desarrollo ruby on rails:."
+  es: "📣 ¡Un emocionate Junio nos espera! Tendremos unas charlas buenísimas sobre bases de datos no relacionales y el framework de desarrollo ruby on rails:."
 pubDate: 2019-06-05
 date: 2019-06-05
 venue:

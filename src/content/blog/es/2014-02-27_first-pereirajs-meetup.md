@@ -1,6 +1,6 @@
 ---
 title: "La primera reunión de PereiraJS"
-description: "Una noche de febrero de 2014, la comunidad de PereiraJS se reunió por primera vez. Daniel Aristizabal dio la bienvenida al grupo; Jhonber Jimenez y Manuel Pineda dictaron la charla de apertura sobre historia y aplicaciones de JavaScript."
+description: "Una noche de febrero de 2014, la comunidad de PereiraJS se reunió por primera vez. Daniel Aristizabal dio la bienvenida al grupo; Jhonber Jimenez y Manuel…"
 pubDate: 2014-02-27
 heroImage: "/images/blog/posts/first-pereirajs-meetup/hero.jpg"
 heroLayout: banner

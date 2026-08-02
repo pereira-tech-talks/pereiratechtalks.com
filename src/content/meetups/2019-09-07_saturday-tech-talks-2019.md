@@ -3,8 +3,8 @@ title:
   en: "Pereira - Saturday Tech Talks"
   es: "Pereira - Saturday Tech Talks"
 description:
-  en: "Historical Pereira Tech Talks meetup (2019-09-07). Original program: Pereira - Saturday Tech Talks."
-  es: "Meetup histórico de Pereira Tech Talks (2019-09-07). Programa original: Pereira - Saturday Tech Talks."
+  en: "Pereira Tech Talks meetup (2019-09-07). 📣 ¡Un gran evento organizado por todas las comunidades de tecnología en Pereira nos espera! Tendremos unas charlas buenísimas que no te puedes perder:."
+  es: "📣 ¡Un gran evento organizado por todas las comunidades de tecnología en Pereira nos espera! Tendremos unas charlas buenísimas que no te puedes perder:."
 pubDate: 2019-09-07
 date: 2019-09-07
 venue:

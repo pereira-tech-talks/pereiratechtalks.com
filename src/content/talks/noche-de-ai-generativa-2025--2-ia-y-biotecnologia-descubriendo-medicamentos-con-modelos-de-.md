@@ -3,7 +3,7 @@ title:
   en: "IA y biotecnología: descubriendo medicamentos con modelos de lenguaje"
   es: "IA y biotecnología: descubriendo medicamentos con modelos de lenguaje"
 abstract:
-  en: "Explora cómo la inteligencia artificial está revolucionando el descubrimiento de nuevos fármacos. Hablaremos sobre el papel de los modelos de lenguaje de gran escala en la investigación biomédica, el uso de arquitecturas como AlphaFold 2 y AlphaFold 3 para predecir estructuras proteicas, y cómo estas tecnologías permiten simular interacciones entre proteínas y compuestos químicos. Con ejemplos claros y aplicaciones reales, esta charla está dirigida a desarrolladores, investigadores y entusiastas que buscan comprender cómo la IA está acelerando la innovación en la biotecnología y la medicina."
+  en: "Talk: IA y biotecnología: descubriendo medicamentos con modelos de lenguaje. See the Spanish abstract for the full description."
   es: "Explora cómo la inteligencia artificial está revolucionando el descubrimiento de nuevos fármacos. Hablaremos sobre el papel de los modelos de lenguaje de gran escala en la investigación biomédica, el uso de arquitecturas como AlphaFold 2 y AlphaFold 3 para predecir estructuras proteicas, y cómo estas tecnologías permiten simular interacciones entre proteínas y compuestos químicos. Con ejemplos claros y aplicaciones reales, esta charla está dirigida a desarrolladores, investigadores y entusiastas que buscan comprender cómo la IA está acelerando la innovación en la biotecnología y la medicina."
 speakers:
   - frederick-johan-castaneda-perez

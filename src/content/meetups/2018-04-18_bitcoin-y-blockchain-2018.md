@@ -3,8 +3,8 @@ title:
   en: "Introduction a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
   es: "Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
 description:
-  en: "Historical Pereira Tech Talks meetup (2018-04-18). Original program: Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.."
-  es: "Meetup histórico de Pereira Tech Talks (2018-04-18). Programa original: Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.."
+  en: "Pereira Tech Talks meetup (2018-04-18). Tenemos el gusto de invitarlos a una gran noche dedicada a hablar sobre Bitcoin y su base tecnológica Blockchain, una de las tecnologías emergentes más populares y revolucionaria de los últimos años, con un invitado muy especial:."
+  es: "Tenemos el gusto de invitarlos a una gran noche dedicada a hablar sobre Bitcoin y su base tecnológica Blockchain, una de las tecnologías emergentes más populares y revolucionaria de los últimos años, con un invitado muy especial:."
 pubDate: 2018-04-18
 date: 2018-04-18
 venue:

@@ -1,6 +1,6 @@
 ---
 title: "Mi experiencia en DPS"
-description: "Crónica en primera persona de Batch #5 en Digital Product School en Múnich — aplicar, viajar, construir un producto en equipo multidisciplinar y sobrevivir a las caminatas en los Alpes."
+description: "Crónica en primera persona de Batch #5 en Digital Product School en Múnich — aplicar, viajar, construir un producto en equipo multidisciplinar y sobrevivir…"
 pubDate: 2018-12-06
 heroImage: "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg"
 heroLayout: banner

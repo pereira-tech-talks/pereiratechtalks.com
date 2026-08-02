@@ -1,6 +1,6 @@
 ---
 title: "What is Pereira Tech Talks (and why it matters)"
-description: "The definitive answer to what Pereira Tech Talks is, what we run, and why this bilingual tech community from Pereira, Risaralda, Colombia has grown into one of the most consistent tech communities in Latin America."
+description: "The definitive answer to what Pereira Tech Talks is, what we run, and why this bilingual tech community from Pereira, Risaralda, Colombia has grown into one…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:

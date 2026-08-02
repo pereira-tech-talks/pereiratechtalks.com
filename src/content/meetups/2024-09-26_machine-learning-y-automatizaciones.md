@@ -58,7 +58,7 @@ Aprenderemos cómo la nube, especialmente con herramientas de AWS como SageMaker
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-09-26). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más.
+A Pereira Tech Talks meetup on 2024-09-26: Machine Learning, Automatizaciones, Videojuegos y Más.. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

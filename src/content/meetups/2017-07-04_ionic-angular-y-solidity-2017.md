@@ -3,8 +3,8 @@ title:
   en: "Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)"
   es: "Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)"
 description:
-  en: "Historical Pereira Tech Talks meetup (2017-07-04). Original program: Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)."
-  es: "Meetup histórico de Pereira Tech Talks (2017-07-04). Programa original: Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)."
+  en: "Pereira Tech Talks meetup (2017-07-04). Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre:."
+  es: "Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre:."
 pubDate: 2017-07-04
 date: 2017-07-04
 venue:

@@ -3,8 +3,8 @@ title:
   en: "Introduction a npm"
   es: "Introducción a npm"
 description:
-  en: "Historical Pereira Tech Talks meetup (2015-01-25). Original program: Introducción a npm."
-  es: "Meetup histórico de Pereira Tech Talks (2015-01-25). Programa original: Introducción a npm."
+  en: "Pereira Tech Talks meetup (2015-01-25). Noveno Meetup de PereiraJs introduciendonos al mundo de npm."
+  es: "Noveno Meetup de PereiraJs introduciendonos al mundo de npm."
 pubDate: 2015-01-25
 date: 2015-01-25
 venue:

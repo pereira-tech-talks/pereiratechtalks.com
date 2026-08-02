@@ -59,7 +59,7 @@ Resumen: El Deep Learning ha supuesto una revolución en el campo del Machine Le
 
 ### Summary in English
 
-Pereira Tech Talks meetup (2024-05-30). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial.
+A Pereira Tech Talks meetup on 2024-05-30: Revolutionizing el Deep Learning: Potenciando modelos con datos limitados. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
 
 ---
 

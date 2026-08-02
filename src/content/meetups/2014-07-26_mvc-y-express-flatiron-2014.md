@@ -3,8 +3,8 @@ title:
   en: "MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos"
   es: "MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos"
 description:
-  en: "Historical Pereira Tech Talks meetup (2014-07-26). Original program: MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos."
-  es: "Meetup histórico de Pereira Tech Talks (2014-07-26). Programa original: MV*, el camino a las web apps del futuro && Express.js y Flatiron.js juntos pero no revueltos."
+  en: "Pereira Tech Talks meetup (2014-07-26). Sexto Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  es: "Sexto Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
 pubDate: 2014-07-26
 date: 2014-07-26
 venue:
