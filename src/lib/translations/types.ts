@@ -29,6 +29,8 @@ export interface SiteTranslations {
     pereiraTechDays: string;
     speakers: string;
     talks: string;
+    calendar: string;
+    communities: string;
     sponsors: string;
     contributors: string;
     verticals: string;

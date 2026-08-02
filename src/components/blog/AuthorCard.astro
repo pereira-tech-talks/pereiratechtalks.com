@@ -53,23 +53,23 @@ const socialLinks = [
 ].filter((link) => link.url);
 ---
 
-<div class="rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+<div class="rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-6">
   <div class="flex flex-col items-center gap-5 sm:flex-row sm:items-start" data-lightbox-ignore>
     <img decoding="async"
       src={author.avatar}
       alt={author.name}
       width="80"
       height="80"
-      class="shrink-0 rounded-full border border-gray-200 dark:border-gray-700"
+      class="shrink-0 rounded-full border border-ptt-border"
       loading="lazy" />
     <div class="flex-1 text-center sm:text-left">
-      <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+      <h3 class="text-lg font-bold text-ptt">
         {author.name}
       </h3>
-      <p class="text-sm text-gray-600 dark:text-gray-300">
+      <p class="text-sm text-ptt-secondary">
         {authorRole}
       </p>
-      <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+      <p class="mt-2 text-sm leading-relaxed text-ptt-secondary">
         {authorBio}
       </p>
       {socialLinks.length > 0 && (
@@ -79,7 +79,7 @@ const socialLinks = [
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+              class="text-ptt-secondary transition-colors hover:text-ptt"
               aria-label={link.label}
             >
               <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

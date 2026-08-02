@@ -1,16 +1,12 @@
 ---
-import TalkDetailPage from '@/components/pages/TalkDetailPage.astro';
 import { getTalks } from '@/lib/talk';
 
 export async function getStaticPaths() {
   const talks = await getTalks();
   return talks.map((talk) => ({
     params: { slug: talk.id },
-    props: { talk },
   }));
 }
 
-const { talk } = Astro.props;
+return Astro.redirect('/en/meetups/', 301);
 ---
-
-<TalkDetailPage talk={talk} lang="en" />

@@ -274,7 +274,7 @@ onMount(() => {
   {#if loadError}
     <!-- Error state -->
     <div
-      class="bg-red-100 dark:bg-red-900/30 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded mb-4"
+      class="bg-ptt-danger/10 border border-ptt-danger/40 text-ptt-danger px-4 py-3 rounded mb-4"
       role="alert"
     >
       <p>{t.loadError}</p>
@@ -289,12 +289,12 @@ onMount(() => {
     <!-- Skeleton loading state -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {#each Array(6) as _}
-        <div class="animate-pulse bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-          <div class="bg-gray-200 dark:bg-gray-700 h-48"></div>
+        <div class="animate-pulse bg-ptt-bg-elevated rounded-lg shadow-md overflow-hidden">
+          <div class="bg-ptt-border h-48"></div>
           <div class="p-6">
-            <div class="bg-gray-200 dark:bg-gray-700 h-6 rounded w-3/4 mb-3"></div>
-            <div class="bg-gray-200 dark:bg-gray-700 h-4 rounded w-full mb-2"></div>
-            <div class="bg-gray-200 dark:bg-gray-700 h-4 rounded w-2/3"></div>
+            <div class="bg-ptt-border h-6 rounded w-3/4 mb-3"></div>
+            <div class="bg-ptt-border h-4 rounded w-full mb-2"></div>
+            <div class="bg-ptt-border h-4 rounded w-2/3"></div>
           </div>
         </div>
       {/each}

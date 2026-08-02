@@ -1,0 +1,66 @@
+---
+/**
+ * Community calendar stub — full Google Calendar aggregation lands in Tasks 63–70.
+ */
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const title = t.nav.calendar;
+const description =
+  lang === 'es'
+    ? 'Calendario compartido de la comunidad tech de Pereira: meetups de PTT y eventos de comunidades aliadas.'
+    : 'Shared calendar for Pereira’s tech community: PTT meetups and allied community events.';
+
+const breadcrumbs = [
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: title },
+];
+---
+
+<MainLayout lang={lang} title={title} description={description}>
+  <div class="bg-ptt-bg">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
+      <Eyebrow>{lang === 'es' ? 'Comunidad' : 'Community'}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {
+          lang === 'es'
+            ? 'Estamos conectando calendarios públicos de Google de Pereira Tech Talks y comunidades aliadas. Mientras tanto, revisa nuestros meetups.'
+            : 'We are connecting public Google calendars from Pereira Tech Talks and allied communities. Meanwhile, browse our meetups.'
+        }
+      </p>
+      <a
+        href={`${prefix}/meetups/`}
+        class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
+      >
+        {lang === 'es' ? 'Ver meetups' : 'See meetups'}
+      </a>
+    </div>
+  </div>
+  <Section eyebrow={lang === 'es' ? 'Próximamente' : 'Coming soon'}>
+    <p class="text-ptt-secondary max-w-2xl">
+      {
+        lang === 'es'
+          ? 'Si tu comunidad quiere publicar fechas aquí, escríbenos — el hub multi-calendario llega en la siguiente iteración.'
+          : 'If your community wants dates listed here, contact us — the multi-calendar hub ships in the next iteration.'
+      }
+    </p>
+  </Section>
+</MainLayout>

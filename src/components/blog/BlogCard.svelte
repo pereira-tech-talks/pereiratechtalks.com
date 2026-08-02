@@ -160,7 +160,7 @@ $: displayDescription = searchQuery
   : postData.description;
 </script>
 
-<article class="article-card group relative bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+<article class="article-card group relative bg-ptt-bg-elevated rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
   <!-- Full-card clickable link (background layer) -->
   <a
     href={`${prefix}/blog/${postSlug}/`}
@@ -169,7 +169,7 @@ $: displayDescription = searchQuery
     on:click={() => trackEvent(EVENTS.BLOG_CARD_CLICK, { slug: postSlug })}
   ></a>
   {#if postData.heroImage}
-    <div class="bg-gray-100 dark:bg-gray-700">
+    <div class="bg-ptt-primary-soft">
       <img decoding="async"
         src={postData.heroImage}
         alt=""
@@ -180,15 +180,15 @@ $: displayDescription = searchQuery
     </div>
   {/if}
   <div class="p-6">
-    <h2 class="text-lg sm:text-xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+    <h2 class="text-lg sm:text-xl font-bold mb-2 text-ptt group-hover:text-ptt-primary transition-colors">
       {@html displayTitle}
     </h2>
-    <p class="text-gray-600 dark:text-gray-300 mb-4">
+    <p class="text-ptt-secondary mb-4">
       {@html displayDescription}
     </p>
     <div class="relative z-10 flex flex-wrap justify-between items-center gap-2">
       <div class="flex flex-wrap items-center gap-2">
-        <time class="text-sm text-gray-600 dark:text-gray-300">
+        <time class="text-sm text-ptt-secondary">
           {postData.pubDate.toLocaleDateString(t.dateLocale, {
             year: 'numeric',
             month: 'short',
@@ -211,14 +211,14 @@ $: displayDescription = searchQuery
             {#if seriesSlug}
               <a
                 href={`${prefix}/blog/series/${seriesSlug}/`}
-                class="inline-flex items-center rounded-full border-2 border-blue-200 bg-blue-50/70 px-2.5 py-0.5 text-[11px] font-medium text-blue-700 transition-colors hover:bg-blue-100 hover:border-blue-300 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-200 dark:hover:bg-blue-900/50 dark:hover:border-blue-700"
+                class="inline-flex items-center rounded-full border-2 border-ptt-primary/30 bg-ptt-primary-soft px-2.5 py-0.5 text-[11px] font-medium text-ptt-primary transition-colors hover:bg-ptt-primary/15 hover:border-ptt-primary/50"
                 title={seriesBadgeLabel}
               >
                 {seriesCurrent}/{seriesTotal}
               </a>
             {:else}
               <span
-                class="inline-flex items-center rounded-full border-2 border-blue-200 bg-blue-50/70 px-2.5 py-0.5 text-[11px] font-medium text-blue-700 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                class="inline-flex items-center rounded-full border-2 border-ptt-primary/30 bg-ptt-primary-soft px-2.5 py-0.5 text-[11px] font-medium text-ptt-primary"
                 title={seriesBadgeLabel}
               >
                 {seriesCurrent}/{seriesTotal}
@@ -226,7 +226,7 @@ $: displayDescription = searchQuery
             {/if}
             {#if seriesTitle}
               <span
-                class="pointer-events-none absolute top-full left-1/2 z-10 mt-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 px-2 py-1 text-[10px] font-medium text-white opacity-0 shadow-md transition-opacity duration-150 group-hover/series:opacity-100 group-focus-within/series:opacity-100 dark:bg-gray-100 dark:text-gray-900"
+                class="pointer-events-none absolute top-full left-1/2 z-10 mt-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-ptt-bg-dark px-2 py-1 text-[10px] font-medium text-white opacity-0 shadow-md transition-opacity duration-150 group-hover/series:opacity-100 group-focus-within/series:opacity-100"
                 role="tooltip"
               >
                 {seriesTitle}
@@ -240,7 +240,7 @@ $: displayDescription = searchQuery
           {#each postData.tags as tag}
             <a
               href={`${prefix}/blog/tag/${tag}/`}
-              class="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
+              class="text-xs px-2 py-1 rounded bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary/15 transition-colors"
             >
               #{t.tagNames[tag] || tag}
             </a>
@@ -248,7 +248,7 @@ $: displayDescription = searchQuery
           {#each postData.topics as topic}
             <a
               href={`${prefix}/blog/tag/${topic}/`}
-              class="text-xs px-2 py-1 rounded border border-gray-200 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+              class="text-xs px-2 py-1 rounded border border-ptt-border bg-ptt-bg-elevated text-ptt-secondary hover:border-ptt-border-strong hover:text-ptt transition-colors"
             >
               {t.tagNames[topic] || topic}
             </a>
@@ -256,9 +256,9 @@ $: displayDescription = searchQuery
           {#each postData.subtopics as sub}
             <a
               href={`${prefix}/blog/tag/${sub}/`}
-              class="inline-flex items-center text-xs px-2 py-1 rounded bg-gray-50 text-gray-700 border border-dashed border-gray-300 hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+              class="inline-flex items-center text-xs px-2 py-1 rounded bg-ptt-bg-elevated text-ptt-secondary border border-dashed border-ptt-border hover:bg-ptt-primary-soft hover:border-ptt-border-strong hover:text-ptt transition-colors"
             >
-              <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+              <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-ptt-secondary'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
             </a>
           {/each}
         </div>

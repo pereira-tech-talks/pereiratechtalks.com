@@ -39,7 +39,7 @@ function handleKeyDown(e) {
       placeholder={t.searchPlaceholder}
       aria-label={t.searchPlaceholder}
       aria-describedby={isSearching ? 'search-results-count' : undefined}
-      class="w-full rounded-lg border border-gray-300 px-4 py-2.5 transition focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+      class="w-full rounded-lg border border-ptt-border bg-ptt-bg-elevated px-4 py-2.5 text-ptt transition focus:outline-none focus:ring-2 focus:ring-ptt-primary"
       on:input={handleInput}
       on:focus={handleFocus}
       on:keydown={handleKeyDown}
@@ -47,7 +47,7 @@ function handleKeyDown(e) {
     {#if searchQuery}
       <button
         type="button"
-        class="rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+        class="rounded-lg border border-ptt-border px-3 py-2.5 text-sm text-ptt-secondary transition-colors hover:bg-ptt-primary-soft"
         on:click={() => {
           searchQuery = '';
           onSearch?.('');
@@ -57,10 +57,10 @@ function handleKeyDown(e) {
       </button>
     {/if}
   </div>
-  <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">{t.searchHint}</p>
+  <p class="mt-2 text-xs text-ptt-secondary">{t.searchHint}</p>
   
   {#if isSearching}
-    <div id="search-results-count" class="mt-2 text-sm text-gray-600 dark:text-gray-300" aria-live="polite">
+    <div id="search-results-count" class="mt-2 text-sm text-ptt-secondary" aria-live="polite">
       {t.resultsFound(resultsCount)}
     </div>
   {/if}

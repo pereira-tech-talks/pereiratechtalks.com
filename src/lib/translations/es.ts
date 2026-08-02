@@ -23,6 +23,8 @@ export const es: SiteTranslations = {
     pereiraTechDays: 'Pereira Tech Days',
     speakers: 'Ponentes',
     talks: 'Charlas',
+    calendar: 'Calendario',
+    communities: 'Comunidades aliadas',
     sponsors: 'Patrocinadores',
     contributors: 'Equipo',
     verticals: 'Programas',

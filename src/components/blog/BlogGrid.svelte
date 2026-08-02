@@ -23,7 +23,7 @@ $: t = getTranslations(lang);
     {/each}
   </div>
 {:else}
-  <div class="rounded-xl border border-dashed border-gray-300 py-10 text-center text-sm text-gray-600 dark:border-gray-700 dark:text-gray-300">
+  <div class="rounded-xl border border-dashed border-ptt-border py-10 text-center text-sm text-ptt-secondary">
     {t.noPostsAvailable}
   </div>
 {/if}
