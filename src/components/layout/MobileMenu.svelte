@@ -120,7 +120,7 @@ onDestroy(() => {
     role="dialog"
     aria-modal="true"
     aria-label={t.nav.menu}
-    class="fixed inset-0 z-50 bg-main/95 flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
+    class="fixed inset-0 z-50 bg-ptt-bg-dark/95 flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
     style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 5rem)); padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
   >
     <button

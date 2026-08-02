@@ -116,7 +116,7 @@ const { lang = 'en', title, description } = Astro.props;
 
 Both components use:
 - **Tailwind CSS** utility classes
-- **CSS custom property** `.bg-main` for consistent background
+- **PTT design tokens** (`bg-ptt-bg-dark`, `text-ptt-secondary`, etc.) for consistent background/text
 - **Dark mode support** via `dark:` prefix
 - **Responsive breakpoints** (`md:` for desktop)
 

@@ -195,6 +195,8 @@ onMount(() => {
 					class="lightbox-image"
 					loading="eager"
 					decoding="async"
+					width="1200"
+					height="675"
 				/>
 				{#if currentCaption}
 					<p class="lightbox-caption">{@html currentCaption}</p>

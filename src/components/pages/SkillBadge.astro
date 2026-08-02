@@ -7,10 +7,9 @@ interface Props {
 const { label, variant = 'neutral' } = Astro.props;
 
 const variantClasses: Record<string, string> = {
-  primary: 'bg-main text-white hover:bg-main/80',
-  secondary: 'bg-secondary/10 text-secondary hover:bg-secondary/20',
-  neutral:
-    'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+  primary: 'bg-ptt-primary text-white hover:bg-ptt-primary-strong',
+  secondary: 'bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary-soft/70',
+  neutral: 'bg-ptt-bg-elevated text-ptt-secondary hover:bg-ptt-primary-soft',
 };
 ---
 

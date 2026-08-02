@@ -404,6 +404,8 @@ function formatDate(pubDate: string): string {
             class="hero-lightbox-image"
             loading="eager"
             decoding="async"
+            width="600"
+            height="400"
           />
           <p class="hero-lightbox-caption">{seriesTitle}</p>
         </div>

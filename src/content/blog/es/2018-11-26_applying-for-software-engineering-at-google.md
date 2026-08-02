@@ -29,7 +29,7 @@ Si te has preguntado alguna vez cómo aplicar para obtener un puesto de trabajo 
 
 * **Habilidades técnicas:** Lista de lenguajes de programación y tu nivel de habilidad en cada uno, sistemas operativos y/o dispositivos con los que hayas trabajado, habilidades de IT, habilidades de hardware/redes, etc.
 
-* **Experiencia Laboral:** Debes armar una lista con toda tu experiencia laboral relevante (empresa, titulo, fechas de empleo). Utiliza viñetas para describir cada trabajo. Cuentanos que tecnolologias utilizaste, utiliza cifras para resaltar tu impacto en un proyecto (por ej., creé, diseñé, depuré, probé).
+* **Experiencia Laboral:** Debes armar una lista con toda tu experiencia laboral relevante (empresa, título, fechas de empleo). Utiliza viñetas para describir cada trabajo. Cuéntanos qué tecnologías utilizaste; utiliza cifras para resaltar tu impacto en un proyecto (por ej., creé, diseñé, depuré, probé).
 
 * **Actividades extra curriculares:** Cuéntanos en qué magnificas actividades extracurriculares participas (por ej., competiciones de programación, asistente de clase, desarrollo de aplicaciones, startup, etcétera).
 

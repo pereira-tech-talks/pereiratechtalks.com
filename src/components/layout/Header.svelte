@@ -72,7 +72,7 @@ function closeAllDropdowns() {
 <svelte:window on:click={closeAllDropdowns} />
 
 <header
-  class="bg-main text-white sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300"
+  class="bg-ptt-bg-dark text-white sticky top-0 z-50 border-b border-white/10 transition-colors duration-300"
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <nav class="main-container flex items-center justify-between">
@@ -138,17 +138,17 @@ function closeAllDropdowns() {
           ></div>
           <div
             id="community-dropdown"
-            class="absolute left-1/2 -translate-x-1/2 top-full w-56 bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded shadow-lg z-50 overflow-hidden transition-all duration-200"
+            class="absolute left-1/2 -translate-x-1/2 top-full w-56 bg-ptt-bg-elevated text-ptt rounded shadow-lg z-50 overflow-hidden transition-all duration-200"
             style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
           >
-            <a href="{prefix}/about" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about' })}>{t.nav.about}</a>
-            <a href="{prefix}/communities" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities' })}>{t.nav.communities}</a>
-            <a href="{prefix}/contributors" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors' })}>{t.nav.contributors}</a>
-            <a href="{prefix}/sponsors" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors' })}>{t.nav.sponsors}</a>
-            <a href="{prefix}/verticals" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals' })}>{t.nav.verticals}</a>
-            <a href="{prefix}/slides" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides' })}>{t.nav.slides}</a>
-            <a href="{prefix}/channels" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels' })}>{t.nav.channels}</a>
-            <a href="{prefix}/press" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press' })}>{t.nav.press}</a>
+            <a href="{prefix}/about" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about' })}>{t.nav.about}</a>
+            <a href="{prefix}/communities" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities' })}>{t.nav.communities}</a>
+            <a href="{prefix}/contributors" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors' })}>{t.nav.contributors}</a>
+            <a href="{prefix}/sponsors" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors' })}>{t.nav.sponsors}</a>
+            <a href="{prefix}/verticals" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals' })}>{t.nav.verticals}</a>
+            <a href="{prefix}/slides" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides' })}>{t.nav.slides}</a>
+            <a href="{prefix}/channels" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels' })}>{t.nav.channels}</a>
+            <a href="{prefix}/press" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press' })}>{t.nav.press}</a>
           </div>
         {/if}
       </div>
@@ -194,11 +194,11 @@ function closeAllDropdowns() {
           ></div>
           <div
             id="language-dropdown"
-            class="absolute left-1/2 -translate-x-1/2 top-full w-20 bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded shadow-lg z-50 overflow-hidden transition-all duration-200"
+            class="absolute left-1/2 -translate-x-1/2 top-full w-20 bg-ptt-bg-elevated text-ptt rounded shadow-lg z-50 overflow-hidden transition-all duration-200"
             style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
           >
             {#each alternateLanguageUrls as alt}
-              <a href={alt.url} class="block w-full text-center px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition" on:click={() => {
+              <a href={alt.url} class="block w-full text-center px-3 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => {
                 rememberLanguage(alt.lang);
                 trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang });
               }}>

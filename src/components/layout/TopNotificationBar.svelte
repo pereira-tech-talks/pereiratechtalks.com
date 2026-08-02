@@ -71,7 +71,14 @@ $effect(() => {
   dismissed = next;
 });
 
+/** All non-dismissed alerts (priority order preserved from server). */
 const visible = $derived(notifications.filter((n) => !dismissed[n.id]));
+
+/**
+ * Sticky chrome shows one bar at a time (highest priority). Dismissing it
+ * reveals the next — avoids stacking two full-width bars on every page.
+ */
+const visibleBar = $derived(visible.slice(0, 1));
 
 const openEntry = $derived(
   openModalId ? visible.find((n) => n.id === openModalId) : undefined
@@ -105,9 +112,9 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 }
 </script>
 
-{#if visible.length > 0}
+{#if visibleBar.length > 0}
   <div class="w-full" data-testid="top-notification-bar">
-    {#each visible as n (n.id)}
+    {#each visibleBar as n (n.id)}
       <div
         class={`flex items-center gap-3 px-3 sm:px-4 py-2 text-sm ${severityClass(n.severity)}`}
         role="region"
