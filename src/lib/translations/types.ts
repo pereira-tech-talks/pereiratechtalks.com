@@ -56,6 +56,7 @@ export interface SiteTranslations {
     ctaMeetups: string;
     ctaPtd: string;
     ctaContact: string;
+    scrollLabel: string;
   };
 
   // Homepage sections

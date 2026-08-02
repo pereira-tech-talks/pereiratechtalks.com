@@ -44,15 +44,16 @@ export const es: SiteTranslations = {
 
   // Homepage hero
   hero: {
-    tagline: 'Comunidad tecnológica bilingüe · Pereira, Risaralda · Desde 2014',
+    tagline: 'Pereira, Risaralda · Desde 2014',
     description:
-      'Somos <strong class="text-white">Pereira Tech Talks</strong> — 90+ meetups mensuales desde 2014, 10 ediciones de <em>Pereira Tech Day</em>, una Escuela de Speakers activa y una biblioteca bilingüe. La comunidad tech de Pereira que sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.',
+      'Comunidad tech bilingüe: meetups, <em>Pereira Tech Day</em> y escuelas — talento local con alcance global.',
     ctaMeetups: 'Ver meetups',
     ctaPtd: 'Pereira Tech Day 2026',
     ctaContact: 'Escríbenos',
+    scrollLabel: 'Bajar',
     typewriterWords: [
-      'Meetups mensuales desde 2014',
-      'Pereira Tech Day, cada año',
+      'Meetups mensuales',
+      'Pereira Tech Day',
       'Escuela de Speakers',
       'La Biblioteca del Mañana',
       'Canal de IA y Agentes',

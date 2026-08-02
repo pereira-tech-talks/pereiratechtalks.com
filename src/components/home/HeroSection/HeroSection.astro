@@ -12,6 +12,7 @@ export interface Props {
   ptdHref: string;
   contactLabel: string;
   contactHref: string;
+  scrollLabel: string;
 }
 
 const {
@@ -25,31 +26,43 @@ const {
   ptdHref,
   contactLabel,
   contactHref,
+  scrollLabel,
 } = Astro.props;
 ---
 
 <section
-  class="relative min-h-[calc(100dvh-4.25rem)] flex flex-col justify-end sm:justify-center overflow-hidden"
+  class="hero-viewport relative flex flex-col justify-end sm:justify-center overflow-hidden"
+  aria-label={name}
 >
-  <!-- Full-bleed auditorium photo — same image in light and dark -->
+  <!-- Full-bleed auditorium — same image light + dark -->
   <div aria-hidden="true" class="absolute inset-0 z-0">
     <img
       src="/images/home/hero-dark.webp"
       alt=""
       width={1920}
       height={768}
-      class="absolute inset-0 h-full w-full object-cover"
+      class="hero-photo absolute inset-0 h-full w-full object-cover object-center"
       loading="eager"
       fetchpriority="high"
     />
+    <!-- Cinematic scrim: strong left for type, soft right for photo -->
     <div
-      class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/35"
+      class="absolute inset-0 bg-gradient-to-r from-black/88 via-black/60 to-black/25"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35"
+    >
+    </div>
+    <!-- Amber accent hairline -->
+    <div
+      class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-ptt-primary via-ptt-accent to-transparent opacity-90"
     >
     </div>
   </div>
 
   <div
-    class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24"
+    class="hero-content relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
   >
     <div class="max-w-2xl text-left">
       <img
@@ -59,30 +72,29 @@ const {
         height={178}
         loading="eager"
         fetchpriority="high"
-        class="h-16 w-auto sm:h-20 drop-shadow-xl"
+        class="hero-logo w-auto drop-shadow-xl"
         draggable="false"
       />
       {
         tagline && (
-          <p class="mt-4 text-sm sm:text-base text-white/85 font-medium tracking-wide">
+          <p class="hero-tagline mt-3 sm:mt-4 text-white/80 font-medium tracking-[0.08em] uppercase">
             {tagline}
           </p>
         )
       }
       <h1
-        class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg"
+        class="hero-title mt-2 sm:mt-3 font-extrabold text-white tracking-tight drop-shadow-lg"
       >
         {name}
       </h1>
-      <div class="mt-3 w-full max-w-xl">
+      <div class="mt-2 sm:mt-3 w-full max-w-xl">
         <TypewriterWords words={typewriterWords} align="left" />
       </div>
       <p
-        class="mt-4 text-base sm:text-lg text-white/90 max-w-xl leading-relaxed"
+        class="hero-desc mt-3 sm:mt-4 text-white/90 max-w-lg leading-relaxed"
         set:html={description}
       />
-      <div class="mt-8 flex flex-wrap gap-3">
-        <!-- Fixed dark text on white — text-ptt flips light in dark mode and becomes invisible -->
+      <div class="hero-ctas mt-6 sm:mt-8 flex flex-wrap gap-2.5 sm:gap-3">
         <a
           href={meetupsHref}
           class="inline-flex min-h-[44px] items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-white/90 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -102,21 +114,21 @@ const {
           {contactLabel}
         </a>
       </div>
-      <div class="mt-8 flex gap-3">
+      <div class="hero-social mt-5 sm:mt-6 flex gap-2">
         <a
           href="https://github.com/pereiratechtalks"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/github_white.svg"
             alt=""
-            width={28}
-            height={28}
+            width={22}
+            height={22}
             loading="eager"
-            class="w-6 h-6"
+            class="w-5 h-5"
           />
         </a>
         <a
@@ -124,15 +136,15 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/linkedin_white.svg"
             alt=""
-            width={28}
-            height={28}
+            width={22}
+            height={22}
             loading="eager"
-            class="w-6 h-6"
+            class="w-5 h-5"
           />
         </a>
         <a
@@ -140,15 +152,15 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="X (Twitter)"
-          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/x_white.svg"
             alt=""
-            width={28}
-            height={28}
+            width={22}
+            height={22}
             loading="eager"
-            class="w-6 h-6"
+            class="w-5 h-5"
           />
         </a>
         <a
@@ -156,18 +168,129 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
-          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 hover:opacity-80 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/instagram_white.svg"
             alt=""
-            width={28}
-            height={28}
+            width={22}
+            height={22}
             loading="eager"
-            class="w-6 h-6"
+            class="w-5 h-5"
           />
         </a>
       </div>
     </div>
   </div>
+
+  <a
+    href="#main-after-hero"
+    class="hero-scroll absolute bottom-4 left-1/2 z-10 -translate-x-1/2 hidden sm:inline-flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    aria-label={scrollLabel}
+  >
+    <span class="text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >{scrollLabel}</span
+    >
+    <span
+      class="hero-scroll-chevron block h-5 w-5 border-r-2 border-b-2 border-current rotate-45 opacity-80"
+      aria-hidden="true"></span>
+  </a>
 </section>
+
+<style>
+  /*
+   * Fill the remaining viewport below sticky chrome (notification ~2.5rem +
+   * header ~4.25rem ≈ 6.75rem). On large screens lock exact height so the
+   * first paint is one cinematic frame.
+   */
+  .hero-viewport {
+    --ptt-chrome-offset: 6.75rem;
+    min-height: calc(100dvh - var(--ptt-chrome-offset));
+    min-height: calc(100svh - var(--ptt-chrome-offset));
+  }
+
+  @media (min-width: 1024px) {
+    .hero-viewport {
+      height: calc(100dvh - var(--ptt-chrome-offset));
+      height: calc(100svh - var(--ptt-chrome-offset));
+      min-height: calc(100dvh - var(--ptt-chrome-offset));
+    }
+  }
+
+  .hero-content {
+    padding-block: clamp(1.25rem, 4vh, 5rem);
+  }
+
+  .hero-logo {
+    height: clamp(3rem, 7vh, 5rem);
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.65rem, 1.4vh, 0.8rem);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5.5vh + 1vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.9rem, 2vh + 0.2vw, 1.125rem);
+  }
+
+  .hero-photo {
+    transform: scale(1.02);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-photo {
+      animation: hero-ken 22s ease-out forwards;
+    }
+    .hero-scroll-chevron {
+      animation: hero-chevron 1.6s ease-in-out infinite;
+    }
+  }
+
+  @keyframes hero-ken {
+    from {
+      transform: scale(1.02);
+    }
+    to {
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes hero-chevron {
+    0%,
+    100% {
+      transform: rotate(45deg) translate(0, 0);
+      opacity: 0.55;
+    }
+    50% {
+      transform: rotate(45deg) translate(3px, 3px);
+      opacity: 1;
+    }
+  }
+
+  /* Short laptops / landscape phones — compress stack */
+  @media (max-height: 720px) {
+    .hero-social {
+      display: none;
+    }
+    .hero-scroll {
+      display: none;
+    }
+    .hero-content {
+      padding-block: 1rem;
+    }
+    .hero-ctas {
+      margin-top: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-chevron {
+      animation: none;
+    }
+  }
+</style>
