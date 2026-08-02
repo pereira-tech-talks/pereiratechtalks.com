@@ -617,6 +617,34 @@ const contributors = defineCollection({
   }),
 });
 
+/**
+ * Site-wide top notifications / alerts with date windows.
+ * Plain strings only (no HTML) — rendered as text in the bar/modal.
+ */
+const notifications = defineCollection({
+  loader: glob({
+    base: './src/content/notifications',
+    pattern: '**/*.{yaml,yml}',
+  }),
+  schema: z.object({
+    severity: z
+      .enum(['info', 'important', 'success', 'warning'])
+      .default('info'),
+    title: z.object({ en: z.string(), es: z.string() }),
+    summary: z.object({ en: z.string(), es: z.string() }),
+    body: z
+      .object({ en: z.string().optional(), es: z.string().optional() })
+      .optional(),
+    ctaLabel: z.object({ en: z.string(), es: z.string() }).optional(),
+    ctaHref: z.string().optional(),
+    modalEnabled: z.boolean().default(false),
+    startsAt: z.coerce.date(),
+    endsAt: z.coerce.date(),
+    priority: z.number().int().default(0),
+    active: z.boolean().default(true),
+  }),
+});
+
 export const collections = {
   // Existing
   blog,
@@ -635,4 +663,5 @@ export const collections = {
   sponsors,
   channels,
   contributors,
+  notifications,
 };

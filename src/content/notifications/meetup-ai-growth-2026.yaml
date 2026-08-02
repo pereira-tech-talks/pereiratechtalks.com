@@ -1,0 +1,23 @@
+severity: important
+title:
+  en: "May 27, 2026"
+  es: "27 de mayo de 2026"
+summary:
+  en: AI as a growth engine — meetup at UTP
+  es: IA como motor de crecimiento — meetup en la UTP
+body:
+  en: |
+    Join us for a meetup on AI Engineering, AI as infrastructure, and scaling AI systems
+    in enterprise environments. Talks by Sebastián Franco Gomez and Henry Bravo.
+  es: |
+    Acompáñanos en un meetup sobre AI Engineering, IA como infraestructura y cómo escalar
+    sistemas de IA en entornos empresariales. Charlas con Sebastián Franco Gomez y Henry Bravo.
+ctaLabel:
+  en: See meetup
+  es: Ver meetup
+ctaHref: /meetups/ia-como-motor-de-crecimiento/
+modalEnabled: true
+startsAt: 2026-04-01T00:00:00.000Z
+endsAt: 2026-05-28T05:59:59.000Z
+priority: 80
+active: true

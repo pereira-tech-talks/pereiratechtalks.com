@@ -1,0 +1,14 @@
+# Inactive stub — keeps the notifications collection valid in empty states.
+# Real alerts are seeded in active entries (see ptd-2026.yaml, etc.).
+severity: info
+title:
+  en: Schema stub (inactive)
+  es: Stub de esquema (inactivo)
+summary:
+  en: Placeholder entry for schema validation. Never shown.
+  es: Entrada de marcador para validar el esquema. Nunca se muestra.
+modalEnabled: false
+startsAt: 2020-01-01T00:00:00.000Z
+endsAt: 2020-01-02T00:00:00.000Z
+priority: 0
+active: false

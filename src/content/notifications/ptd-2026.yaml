@@ -1,0 +1,25 @@
+severity: important
+title:
+  en: Pereira Tech Day 2026
+  es: Pereira Tech Day 2026
+summary:
+  en: "August 22, 2026 — Where talent, technology, and brands meet. Save the date."
+  es: "22 de agosto de 2026 — Donde el talento, la tecnología y las marcas se encuentran."
+body:
+  en: |
+    Pereira Tech Day 2026 lands at UTP (Auditorio Jorge Roa Martínez) on Saturday, August 22.
+    Expect talks, community energy, and 300+ builders in one day.
+    Follow the edition page for registration news.
+  es: |
+    Pereira Tech Day 2026 llega a la UTP (Auditorio Jorge Roa Martínez) el sábado 22 de agosto.
+    Charlas, energía comunitaria y 300+ personas constructoras en un solo día.
+    Sigue la página de la edición para enterarte de las inscripciones.
+ctaLabel:
+  en: View edition
+  es: Ver edición
+ctaHref: /pereira-tech-days/2026/
+modalEnabled: true
+startsAt: 2026-01-01T00:00:00.000Z
+endsAt: 2026-08-23T05:59:59.000Z
+priority: 100
+active: true

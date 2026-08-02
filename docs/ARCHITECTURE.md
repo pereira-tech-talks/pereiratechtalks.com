@@ -105,18 +105,20 @@ src/
 │   │
 │   └── layout/
 │       ├── Header.svelte        # Main navigation
-│       └── MobileMenu.svelte    # Mobile nav menu
+│       ├── MobileMenu.svelte    # Mobile nav menu
+│       └── TopNotificationBar.svelte  # Date-windowed site alerts
 │
 ├── content/                 # Content Collections
 │   ├── authors/             # Author definitions (YAML, one per author)
 │   ├── blog/                # Blog posts (auto-generates .md endpoints)
+│   ├── notifications/       # Top-bar alerts (startsAt/endsAt, bilingual)
 │   ├── pages/               # Page Markdown for AI agents
 │   │   ├── en/              # English page content (.md endpoints)
 │   │   └── es/              # Spanish page content (.md endpoints)
 │   ├── series/              # Blog series definitions
 │   └── tags/                # Tag definitions
 │
-├── content.config.ts        # Collection schemas (blog, tags, series, slides, pages, authors)
+├── content.config.ts        # Collection schemas (+ notifications, meetups, PTD, …)
 ├── env.d.ts                 # TypeScript environment
 │
 ├── layouts/
