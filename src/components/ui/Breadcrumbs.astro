@@ -36,14 +36,10 @@ const jsonLd = {
   })),
 };
 
-const baseTextClass = onDark
-  ? 'text-gray-300'
-  : 'text-gray-600 dark:text-gray-300';
-const linkHoverClass = onDark
-  ? 'hover:text-white'
-  : 'hover:text-ptt-primary dark:hover:text-ptt-primary-dark';
-const currentClass = onDark ? 'text-white' : 'text-gray-900 dark:text-gray-50';
-const separatorClass = 'text-ptt-secondary';
+const baseTextClass = onDark ? 'text-white/70' : 'text-ptt-secondary';
+const linkHoverClass = onDark ? 'hover:text-white' : 'hover:text-ptt-primary';
+const currentClass = onDark ? 'text-white' : 'text-ptt';
+const separatorClass = onDark ? 'text-white/50' : 'text-ptt-secondary';
 ---
 
 <nav aria-label="Breadcrumb" class="text-sm">

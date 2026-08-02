@@ -134,7 +134,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'About Pereira Tech Talks',
     subtitle: 'A bilingual technology community from Pereira to the world',
     description:
-      'Meet Pereira Tech Talks — a bilingual tech community in Pereira, Risaralda since 2014. Monthly meetups, Pereira Tech Day, Speaker School, and La Biblioteca del Mañana.',
+      'Meet Pereira Tech Talks — bilingual tech community in Pereira, Risaralda since 2014. Monthly meetups, Pereira Tech Day, Speaker School, and La Biblioteca del Mañana.',
     heroDescription:
       'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',

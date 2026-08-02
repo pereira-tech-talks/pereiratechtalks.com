@@ -134,7 +134,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Sobre Pereira Tech Talks',
     subtitle: 'Una comunidad bilingüe de tecnología desde Pereira al mundo',
     description:
-      'Conoce a Pereira Tech Talks — una comunidad bilingüe de tecnología en Pereira, Risaralda, que desde 2014 organiza meetups, la conferencia Pereira Tech Day, la Escuela de Speakers y el club de lectura La Biblioteca del Mañana.',
+      'Conoce Pereira Tech Talks — comunidad tech bilingüe en Pereira, Risaralda, desde 2014. Meetups, Pereira Tech Day, Escuela de Speakers y La Biblioteca del Mañana.',
     heroDescription:
       'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
     bioTitle: 'Quiénes somos',
@@ -207,7 +207,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Slides',
     subtitle: 'Decks de nuestros meetups, conferencias y talleres',
     description:
-      'Explora todos los decks de slides de los meetups de Pereira Tech Talks, las ediciones de Pereira Tech Day y las sesiones de la Escuela de Speakers — presentaciones bilingües de las y los ponentes de la comunidad.',
+      'Explora decks de slides de meetups, Pereira Tech Day y la Escuela de Speakers — presentaciones bilingües de ponentes de la comunidad Pereira Tech Talks.',
     heroDescription:
       'Una biblioteca bilingüe de presentaciones de los eventos de Pereira Tech Talks — meetups, Pereira Tech Day, Escuela de Speakers y talleres. Construidas internamente con Reveal.js o alojadas en plataformas externas.',
     timelineTitle: 'Todos los slides',
@@ -507,7 +507,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   seriesListingPage: {
     title: 'Series del blog',
     description:
-      'Colecciones curadas de artículos en varios capítulos de la comunidad Pereira Tech Talks — análisis profundos sobre tecnología, ingeniería de software y el oficio de construir.',
+      'Colecciones curadas de artículos en varios capítulos de Pereira Tech Talks — análisis sobre tecnología, ingeniería de software y el oficio de construir.',
     heading: 'Series',
     postsCount: (count) => `${count} ${count === 1 ? 'capítulo' : 'capítulos'}`,
     exploreSeries: 'Explorar series',
@@ -646,7 +646,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   verticalsPage: {
     title: 'Programas',
     description:
-      'Cuatro frentes complementarios de la comunidad: Escuela de Speakers, La Biblioteca del Mañana, Canal IA y los meetups mensuales. Cada uno con su propio ritmo, público y objetivos.',
+      'Cuatro programas de Pereira Tech Talks: Escuela de Speakers, La Biblioteca del Mañana, Canal IA y meetups mensuales — cada uno con ritmo, público y objetivos.',
     intro:
       'Estos son los espacios donde la comunidad construye en el largo plazo. Si quieres participar, escríbenos.',
     eyebrow: 'Estructura',

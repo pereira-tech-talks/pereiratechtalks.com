@@ -54,7 +54,10 @@ export type CommunityCalendar = CollectionEntry<'communityCalendars'>;
 export type CommunityCalendarData = CommunityCalendar['data'];
 
 export type { CalendarViewMode } from '@/lib/calendar-embed';
-export { buildGoogleCalendarEmbedUrl, GOOGLE_CALENDAR_EMBED_ORIGIN } from '@/lib/calendar-embed';
+export {
+  buildGoogleCalendarEmbedUrl,
+  GOOGLE_CALENDAR_EMBED_ORIGIN,
+} from '@/lib/calendar-embed';
 
 export interface EmbedCalendarInput {
   id: string;

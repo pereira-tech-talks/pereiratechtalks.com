@@ -51,7 +51,7 @@ const mockEdition = (
       draft: false,
       ...overrides,
     },
-  }) as CollectionEntry<'pereiraTechDays'>;
+  }) as PereiraTechDay;
 
 describe('pereiraTechDay helpers', () => {
   it('getEditionStartDate returns single-day date', () => {

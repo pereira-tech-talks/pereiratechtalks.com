@@ -2,7 +2,7 @@
 import {
   buildGoogleCalendarEmbedUrl,
   type CalendarViewMode,
-} from '@/lib/calendar';
+} from '@/lib/calendar-embed';
 
 export interface SerializedCalendar {
   slug: string;
