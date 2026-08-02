@@ -122,7 +122,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
       >
         {#if n.severity === 'important'}
           <span
-            class="shrink-0 rounded px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide bg-white/20"
+            class="shrink-0 rounded px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide bg-white text-ptt-primary dark:bg-ptt-bg dark:text-ptt-primary-dark"
           >
             {importantLabel}
           </span>

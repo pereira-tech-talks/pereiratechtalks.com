@@ -9,7 +9,6 @@ module.exports = {
         '/meetups/',
         '/pereira-tech-days/',
         '/speakers/',
-        '/talks/',
         '/sponsors/',
         '/contributors/',
         '/verticals/',
