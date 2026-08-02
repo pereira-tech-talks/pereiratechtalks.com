@@ -6,6 +6,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   vertical: CollectionEntry<'verticals'>;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const { vertical, lang } = Astro.props;
+const t = getTranslations(lang);
 
 const prefix = getUrlPrefix(lang);
 const title = tr(vertical.data.title, lang);
@@ -22,40 +24,34 @@ const status = vertical.data.status;
 const statusVariant = status === 'archived' ? 'completed' : 'community';
 const statusLabel =
   status === 'paused'
-    ? lang === 'es'
-      ? 'En pausa'
-      : 'Paused'
+    ? t.verticalsPage.statusPaused
     : status === 'archived'
-      ? lang === 'es'
-        ? 'Archivado'
-        : 'Archived'
-      : lang === 'es'
-        ? 'Activo'
-        : 'Active';
+      ? t.verticalsPage.statusArchived
+      : t.verticalsPage.statusActive;
 ---
 
 <a
   href={url}
-  class="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-6 ring-1 ring-gray-200 dark:ring-gray-800 transition hover:ring-ptt-primary/40 dark:hover:ring-ptt-primary-dark/40 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+  class="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-6 ring-1 ring-ptt-border transition hover:ring-ptt-primary/40 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div
-    class="absolute inset-0 -z-10 bg-gradient-to-br from-ptt-primary/10 via-white to-ptt-accent/10 dark:from-ptt-primary-dark/15 dark:via-gray-900 dark:to-ptt-accent-dark/15"
+    class="absolute inset-0 -z-10 bg-gradient-to-br from-ptt-primary/10 via-ptt-bg-elevated to-ptt-accent/10 dark:from-ptt-primary-dark/15 dark:via-ptt-bg dark:to-ptt-accent-dark/15"
   >
   </div>
   <div class="flex items-center justify-between">
     <span class="text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
-      {lang === 'es' ? 'Programa' : 'Program'}
+      {t.verticalsPage.programLabel}
     </span>
     <Badge variant={statusVariant}>{statusLabel}</Badge>
   </div>
-  <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-50 group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
+  <h3 class="text-2xl font-bold text-ptt group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
     {title}
   </h3>
-  <p class="text-gray-600 dark:text-gray-300">
+  <p class="text-ptt-secondary">
     {mission}
   </p>
   <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark">
-    {lang === 'es' ? 'Conoce más' : 'Learn more'}
+    {t.verticalsPage.learnMore}
     <svg
       aria-hidden="true"
       class="h-4 w-4 transition-transform group-hover:translate-x-0.5"

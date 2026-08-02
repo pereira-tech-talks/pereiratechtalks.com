@@ -11,6 +11,7 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 import { getVerticals } from '@/lib/vertical';
 
 interface Props {
@@ -18,48 +19,28 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
 const verticals = await getVerticals();
 
-const t = {
-  title: lang === 'es' ? 'Programas' : 'Programs',
-  description:
-    lang === 'es'
-      ? 'Cuatro frentes complementarios de la comunidad: Speaker School, La Biblioteca del Mañana, Canal IA y los meetups mensuales. Cada uno con su propio ritmo, su propio público y sus propios objetivos.'
-      : 'Four complementary fronts of the community: Speaker School, The Library of Tomorrow, AI Channel, and monthly meetups. Each with its own rhythm, audience, and goals.',
-  intro:
-    lang === 'es'
-      ? `Estos son los espacios donde la comunidad construye en el largo plazo. Si quieres participar, escríbenos.`
-      : `These are the spaces where the community builds for the long run. Want to participate? Reach out.`,
-  emptyTitle:
-    lang === 'es' ? 'Aún no hay programas registrados' : 'No programs yet',
-  emptyDesc:
-    lang === 'es'
-      ? 'Estamos consolidando los programas. Vuelve pronto.'
-      : "We're consolidating the programs. Check back soon.",
-};
-
 const breadcrumbs = [
-  {
-    label: lang === 'es' ? 'Inicio' : 'Home',
-    href: `${getUrlPrefix(lang)}/`,
-  },
-  { label: t.title },
+  { label: t.nav.home, href: `${prefix}/` },
+  { label: t.verticalsPage.title },
 ];
 ---
 
-<MainLayout lang={lang} title={t.title} description={t.description}>
+<MainLayout lang={lang} title={t.verticalsPage.title} description={t.verticalsPage.description}>
   <div class="bg-ptt-bg">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
-      <Eyebrow>{lang === 'es' ? 'Estructura' : 'Structure'}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-        {t.title}
+      <Eyebrow>{t.verticalsPage.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {t.verticalsPage.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-gray-600 dark:text-gray-300">
-        {t.intro}
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.verticalsPage.intro}
       </p>
     </div>
   </div>
@@ -67,8 +48,8 @@ const breadcrumbs = [
   {
     verticals.length > 0 ? (
       <Section
-        eyebrow={lang === 'es' ? 'Programas' : 'Programs'}
-        title={lang === 'es' ? 'Cuatro frentes activos' : 'Four active fronts'}
+        eyebrow={t.verticalsPage.sectionEyebrow}
+        title={t.verticalsPage.sectionTitle}
         surface="alt"
         spacing="lg"
       >
@@ -82,7 +63,7 @@ const breadcrumbs = [
       </Section>
     ) : (
       <Section surface="alt">
-        <EmptyState title={t.emptyTitle} description={t.emptyDesc} />
+        <EmptyState title={t.verticalsPage.emptyTitle} description={t.verticalsPage.emptyDesc} />
       </Section>
     )
   }

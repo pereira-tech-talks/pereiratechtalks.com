@@ -10,7 +10,7 @@ export const es: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Comunidad bilingüe de tecnología de Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — la comunidad tech bilingüe de Colombia desde 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day, Escuela de Speakers, La Biblioteca del Mañana.',
+    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day y Escuela de Speakers.',
 
   // Navigation
   nav: {
@@ -633,11 +633,33 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Página no encontrada',
     description:
       'La página que buscas no existe o fue movida. Explora el blog o vuelve al inicio para seguir navegando por la comunidad de Pereira Tech Talks.',
-    heading: 'Página no encontrada',
+    heading: 'Esta página se salió del mapa',
     message:
-      'Lo sentimos, la página que buscas no existe o pudo haber sido movida. Intenta volver a la página de inicio o buscar en el blog.',
+      'La URL puede estar desactualizada o escrita con un error. Elige un destino — meetups, Pereira Tech Day o el blog — y sigue explorando la comunidad.',
+    eyebrow: '404 · Señal perdida',
     backHome: 'Volver al inicio',
-    searchBlog: 'Buscar en el blog',
+    searchBlog: 'Explorar el blog',
+    meetupsCta: 'Ver meetups',
+    ptdCta: 'Pereira Tech Day',
+  },
+
+  verticalsPage: {
+    title: 'Programas',
+    description:
+      'Cuatro frentes complementarios de la comunidad: Escuela de Speakers, La Biblioteca del Mañana, Canal IA y los meetups mensuales. Cada uno con su propio ritmo, público y objetivos.',
+    intro:
+      'Estos son los espacios donde la comunidad construye en el largo plazo. Si quieres participar, escríbenos.',
+    eyebrow: 'Estructura',
+    sectionEyebrow: 'Programas',
+    sectionTitle: 'Cuatro frentes activos',
+    programLabel: 'Programa',
+    learnMore: 'Conoce más',
+    relatedMeetups: 'Meetups asociados',
+    emptyTitle: 'Aún no hay programas registrados',
+    emptyDesc: 'Estamos consolidando los programas. Vuelve pronto.',
+    statusActive: 'Activo',
+    statusPaused: 'En pausa',
+    statusArchived: 'Archivado',
   },
 
   ptdPage: {

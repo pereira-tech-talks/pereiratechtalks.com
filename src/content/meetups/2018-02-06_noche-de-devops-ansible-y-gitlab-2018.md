@@ -32,7 +32,7 @@ draft: false
 
 Tenemos el gusto de invitarlos a nuestro primer Meetup del año, en esta ocasión tendremos una noche dedicada a las operaciones DevOps.
 
-Hoy en dia el numero de servidores que los sysadmin deben administrar crece a un ritmo muy alto, obligandolos a buscar nuevos métodos para desplegar, configurar y actualizar las máquinas de forma que estas tareas mecánicas y repetitivas se puedan hacer en el menor tiempo posible.
+Hoy en día el número de servidores que los sysadmin deben administrar crece a un ritmo muy alto, obligándolos a buscar nuevos métodos para desplegar, configurar y actualizar las máquinas de forma que estas tareas mecánicas y repetitivas se puedan hacer en el menor tiempo posible.
 
 ### Charlas
 

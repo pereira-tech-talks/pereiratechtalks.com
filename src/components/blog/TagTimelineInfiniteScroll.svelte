@@ -122,14 +122,14 @@ function buildSeriesBadgeLabel(
 
 {#if renderedPosts.length === 0 && !loading}
   <div class="text-center py-16">
-    <p class="text-gray-600 dark:text-gray-300 text-lg">
+    <p class="text-ptt-secondary text-lg">
       {emptyStateMessage || (lang === 'es' ? 'Aún no hay posts disponibles.' : 'No posts available yet.')}
     </p>
   </div>
 {:else}
   <div class="relative py-8">
     <!-- Timeline line: left on mobile, centered on desktop -->
-    <div class="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600"></div>
+    <div class="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-ptt-border"></div>
 
     {#each renderedPosts as post, index}
       {@const isLeft = index % 2 === 0}
@@ -143,7 +143,7 @@ function buildSeriesBadgeLabel(
       {#if showYear}
         <div class="relative flex items-center h-8 mb-6 mt-4">
           <div class="absolute left-10 md:left-1/2 md:-translate-x-1/2 z-10">
-            <span class="inline-block px-4 py-1.5 bg-secondary text-white text-sm font-bold rounded-full shadow-md">
+            <span class="inline-block px-4 py-1.5 bg-ptt-primary text-white text-sm font-bold rounded-full shadow-md">
               {year}
             </span>
           </div>
@@ -154,7 +154,7 @@ function buildSeriesBadgeLabel(
       {#if showMonth}
         <div class="relative flex items-center h-6 mb-6 mt-4">
           <div class="absolute left-10 md:left-1/2 md:-translate-x-1/2 z-10">
-            <span class="inline-block px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full capitalize translate-y-1">
+            <span class="inline-block px-3 py-1 bg-ptt-bg-elevated text-ptt-secondary text-xs font-medium rounded-full capitalize translate-y-1 border border-ptt-border">
               {getMonthName(post.pubDate)}
             </span>
           </div>
@@ -165,12 +165,12 @@ function buildSeriesBadgeLabel(
       <div class="relative flex items-start mb-12 group">
         <!-- Dot on the line: left on mobile, centered on desktop -->
         <div class="absolute left-6 md:left-1/2 -translate-x-1/2 z-10 mt-6">
-          <div class="w-4 h-4 bg-secondary rounded-full border-4 border-white dark:border-gray-900 shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
+          <div class="w-4 h-4 bg-ptt-primary rounded-full border-4 border-ptt-bg shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
         </div>
 
         <!-- Card: always right of line on mobile (ml-14), alternating on desktop -->
         <div class={`ml-14 md:ml-0 md:w-1/2 ${isLeft ? 'md:pr-12' : 'md:pl-12 md:ml-auto'}`}>
-          <article class="relative bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-secondary/30 dark:hover:border-secondary/30 hover:-translate-y-1">
+          <article class="relative bg-ptt-bg-elevated rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-ptt-border hover:border-ptt-primary/30 hover:-translate-y-1">
             <!-- Full-card clickable link (background layer) -->
             <!-- svelte-ignore a11y-click-events-have-key-events a11y-interactive-supports-focus -->
             <a
@@ -194,16 +194,16 @@ function buildSeriesBadgeLabel(
             {/if}
 
             <div class="p-5">
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-secondary transition-colors">
+              <h3 class="text-lg font-bold text-ptt mb-2 group-hover:text-ptt-primary transition-colors">
                 {post.title}
               </h3>
 
-              <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-3">
+              <p class="text-sm text-ptt-secondary mb-3 line-clamp-3">
                 {post.description}
               </p>
 
               <div class="relative z-10 flex flex-wrap items-center gap-2">
-                <time class="text-xs text-gray-600 dark:text-gray-300">
+                <time class="text-xs text-ptt-secondary">
                   {formatDate(post.pubDate)}
                 </time>
 

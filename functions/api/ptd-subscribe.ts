@@ -13,12 +13,6 @@ interface EventContext {
   env: Env;
 }
 
-interface SubscribePayload {
-  email: string;
-  year?: number;
-  lang?: string;
-}
-
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function jsonResponse(data: unknown, status: number, origin: string): Response {

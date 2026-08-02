@@ -377,8 +377,29 @@ export interface SiteTranslations {
     description: string;
     heading: string;
     message: string;
+    eyebrow: string;
     backHome: string;
     searchBlog: string;
+    meetupsCta: string;
+    ptdCta: string;
+  };
+
+  // Verticals / programs pages
+  verticalsPage: {
+    title: string;
+    description: string;
+    intro: string;
+    eyebrow: string;
+    sectionEyebrow: string;
+    sectionTitle: string;
+    programLabel: string;
+    learnMore: string;
+    relatedMeetups: string;
+    emptyTitle: string;
+    emptyDesc: string;
+    statusActive: string;
+    statusPaused: string;
+    statusArchived: string;
   };
 
   // Pereira Tech Day edition pages

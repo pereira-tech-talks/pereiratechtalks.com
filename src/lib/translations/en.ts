@@ -10,7 +10,7 @@ export const en: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Bilingual technology community of Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — Colombia’s bilingual tech community since 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, Speaker School, La Biblioteca del Mañana.',
+    'Pereira Tech Talks — Colombia’s bilingual tech community since 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, and an active Speaker School.',
 
   // Navigation
   nav: {
@@ -629,11 +629,33 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'Page Not Found',
     description:
       'The page you are looking for does not exist or has been moved. Explore the blog or head back to the homepage to keep browsing the Pereira Tech Talks community.',
-    heading: 'Page Not Found',
+    heading: 'This page wandered off the map',
     message:
-      "Sorry, the page you are looking for doesn't exist or may have been moved. Try navigating back to the homepage or searching the blog.",
+      'The URL may be outdated or mistyped. Pick a destination below — meetups, Pereira Tech Day, or the blog — and keep exploring the community.',
+    eyebrow: '404 · Lost signal',
     backHome: 'Go back home',
-    searchBlog: 'Search the blog',
+    searchBlog: 'Browse the blog',
+    meetupsCta: 'See meetups',
+    ptdCta: 'Pereira Tech Day',
+  },
+
+  verticalsPage: {
+    title: 'Programs',
+    description:
+      'Four complementary fronts of the Pereira Tech Talks community: Speaker School, The Library of Tomorrow, AI Channel, and monthly meetups. Each with its own rhythm, audience, and goals.',
+    intro:
+      'These are the spaces where the community builds for the long run. Want to participate? Reach out.',
+    eyebrow: 'Structure',
+    sectionEyebrow: 'Programs',
+    sectionTitle: 'Four active fronts',
+    programLabel: 'Program',
+    learnMore: 'Learn more',
+    relatedMeetups: 'Related meetups',
+    emptyTitle: 'No programs yet',
+    emptyDesc: "We're consolidating the programs. Check back soon.",
+    statusActive: 'Active',
+    statusPaused: 'Paused',
+    statusArchived: 'Archived',
   },
 
   ptdPage: {

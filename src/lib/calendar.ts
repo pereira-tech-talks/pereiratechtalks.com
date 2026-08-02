@@ -2,15 +2,11 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { z } from 'astro/zod';
 
 import type { Language } from '@/lib/i18n';
-
-export type CommunityCalendar = CollectionEntry<'communityCalendars'>;
-
-export type CommunityCalendarData = CommunityCalendar['data'];
-
-export type CalendarViewMode = 'MONTH' | 'AGENDA';
-
-export const GOOGLE_CALENDAR_EMBED_ORIGIN =
-  'https://calendar.google.com/calendar/embed';
+import {
+  buildGoogleCalendarEmbedUrl,
+  GOOGLE_CALENDAR_EMBED_ORIGIN,
+  type CalendarViewMode,
+} from '@/lib/calendar-embed';
 
 export const GOOGLE_CALENDAR_ICS_ORIGIN =
   'https://calendar.google.com/calendar/ical';
@@ -58,6 +54,13 @@ export const publicHttpsUrlSchema = z
 export const hexColorToEmbedParam = (hex: string): string =>
   hex.startsWith('#') ? hex : `#${hex}`;
 
+export type CommunityCalendar = CollectionEntry<'communityCalendars'>;
+
+export type CommunityCalendarData = CommunityCalendar['data'];
+
+export type { CalendarViewMode } from '@/lib/calendar-embed';
+export { buildGoogleCalendarEmbedUrl, GOOGLE_CALENDAR_EMBED_ORIGIN } from '@/lib/calendar-embed';
+
 export interface EmbedCalendarInput {
   id: string;
   color?: string;
@@ -65,40 +68,9 @@ export interface EmbedCalendarInput {
 
 /**
  * Build a Google Calendar embed URL for one or more public calendar IDs.
+ * @deprecated Import from `@/lib/calendar-embed` in client components.
  */
-export const buildGoogleCalendarEmbedUrl = (
-  calendars: readonly EmbedCalendarInput[],
-  options?: {
-    mode?: CalendarViewMode;
-    timezone?: string;
-    lang?: Language;
-  }
-): string => {
-  if (calendars.length === 0) {
-    return GOOGLE_CALENDAR_EMBED_ORIGIN;
-  }
-
-  const params = new URLSearchParams();
-  for (const cal of calendars) {
-    params.append('src', cal.id.trim());
-    if (cal.color) {
-      params.append('color', hexColorToEmbedParam(cal.color));
-    }
-  }
-
-  params.set('ctz', options?.timezone ?? 'America/Bogota');
-  params.set('mode', options?.mode ?? 'MONTH');
-  params.set('showTitle', '0');
-  params.set('showNav', '1');
-  params.set('showDate', '1');
-  params.set('showPrint', '0');
-  params.set('showTabs', '1');
-  params.set('showCalendars', '0');
-  params.set('wkst', '1');
-  params.set('hl', options?.lang === 'es' ? 'es' : 'en');
-
-  return `${GOOGLE_CALENDAR_EMBED_ORIGIN}?${params.toString()}`;
-};
+export { buildGoogleCalendarEmbedUrl } from '@/lib/calendar-embed';
 
 /** Public ICS subscribe URL for a single calendar ID. */
 export const buildGoogleCalendarIcsUrl = (calendarId: string): string => {

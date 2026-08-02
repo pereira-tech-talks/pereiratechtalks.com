@@ -336,7 +336,11 @@ const breadcrumbData = {
     left: 0;
     width: 0%;
     height: 3px;
-    background: linear-gradient(to right, #2563eb, #3b82f6);
+    background: linear-gradient(
+      to right,
+      var(--color-ptt-primary),
+      color-mix(in srgb, var(--color-ptt-primary) 70%, var(--color-ptt-accent))
+    );
     z-index: 60;
     pointer-events: none;
     animation: reading-progress-fill linear;
