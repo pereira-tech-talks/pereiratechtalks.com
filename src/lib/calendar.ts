@@ -2,11 +2,6 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { z } from 'astro/zod';
 
 import type { Language } from '@/lib/i18n';
-import {
-  buildGoogleCalendarEmbedUrl,
-  GOOGLE_CALENDAR_EMBED_ORIGIN,
-  type CalendarViewMode,
-} from '@/lib/calendar-embed';
 
 export const GOOGLE_CALENDAR_ICS_ORIGIN =
   'https://calendar.google.com/calendar/ical';
@@ -65,12 +60,6 @@ export interface EmbedCalendarInput {
   id: string;
   color?: string;
 }
-
-/**
- * Build a Google Calendar embed URL for one or more public calendar IDs.
- * @deprecated Import from `@/lib/calendar-embed` in client components.
- */
-export { buildGoogleCalendarEmbedUrl } from '@/lib/calendar-embed';
 
 /** Public ICS subscribe URL for a single calendar ID. */
 export const buildGoogleCalendarIcsUrl = (calendarId: string): string => {

@@ -134,7 +134,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'About Pereira Tech Talks',
     subtitle: 'A bilingual technology community from Pereira to the world',
     description:
-      'Get to know Pereira Tech Talks — a bilingual technology community in Pereira, Risaralda, hosting meetups, the Pereira Tech Day conference, the Speaker School, and the La Biblioteca del Mañana reading club since 2014.',
+      'Meet Pereira Tech Talks — a bilingual tech community in Pereira, Risaralda since 2014. Monthly meetups, Pereira Tech Day, Speaker School, and La Biblioteca del Mañana.',
     heroDescription:
       'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 80+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',
@@ -207,7 +207,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'Slides',
     subtitle: 'Decks from our meetups, conferences & workshops',
     description:
-      'Browse all slide decks from Pereira Tech Talks meetups, Pereira Tech Day editions, and Speaker School sessions — bilingual presentations from our community speakers.',
+      'Browse slide decks from Pereira Tech Talks meetups, Pereira Tech Day editions, and Speaker School — bilingual presentations from community speakers.',
     heroDescription:
       'A bilingual library of presentation decks from Pereira Tech Talks events — meetups, Pereira Tech Day, Speaker School, and workshops. Built in-house with Reveal.js or hosted on external platforms.',
     timelineTitle: 'All Slides',
@@ -244,7 +244,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'Contact',
     subtitle: 'Speak, sponsor, partner — or just say hi',
     description:
-      'Get in touch with Pereira Tech Talks — open to speakers, sponsors, partners, and members of the community who want to participate, propose ideas, or collaborate.',
+      'Contact Pereira Tech Talks — speakers, sponsors, partners, and community members welcome to propose ideas, collaborate, or ask how to get involved.',
     heroDescription:
       "We are always open to new speakers, sponsors, partners, and community members. Whether you have a talk to propose, want to sponsor a meetup, or just want to say hi — we'd love to hear from you.",
     formTitle: 'Send us a message',
@@ -642,7 +642,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   verticalsPage: {
     title: 'Programs',
     description:
-      'Four complementary fronts of the Pereira Tech Talks community: Speaker School, The Library of Tomorrow, AI Channel, and monthly meetups. Each with its own rhythm, audience, and goals.',
+      'Four Pereira Tech Talks programs: Speaker School, La Biblioteca del Mañana, AI Channel, and monthly meetups — each with its own rhythm, audience, and goals.',
     intro:
       'These are the spaces where the community builds for the long run. Want to participate? Reach out.',
     eyebrow: 'Structure',

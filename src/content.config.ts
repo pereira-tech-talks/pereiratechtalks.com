@@ -735,7 +735,15 @@ const communityCalendars = defineCollection({
 /**
  * Site-wide top notifications / alerts with date windows.
  * Plain strings only (no HTML) — rendered as text in the bar/modal.
+ * CTA hrefs: internal paths or absolute http(s) only (blocks javascript:/data:).
  */
+const notificationSafeHref = z
+  .string()
+  .regex(
+    /^(\/(?!\/)|https?:\/\/)/,
+    'ctaHref must be an internal path (starting with /) or an absolute http(s) URL'
+  );
+
 const notifications = defineCollection({
   loader: glob({
     base: './src/content/notifications',
@@ -751,7 +759,7 @@ const notifications = defineCollection({
       .object({ en: z.string().optional(), es: z.string().optional() })
       .optional(),
     ctaLabel: z.object({ en: z.string(), es: z.string() }).optional(),
-    ctaHref: z.string().optional(),
+    ctaHref: notificationSafeHref.optional(),
     modalEnabled: z.boolean().default(false),
     startsAt: z.coerce.date(),
     endsAt: z.coerce.date(),
