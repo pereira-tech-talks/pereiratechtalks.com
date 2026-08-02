@@ -120,7 +120,7 @@ onDestroy(() => {
     role="dialog"
     aria-modal="true"
     aria-label={t.nav.menu}
-    class="fixed inset-0 z-50 bg-ptt-bg-dark/95 flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
+    class="fixed inset-0 z-50 bg-ptt-bg/95 text-ptt dark:bg-ptt-bg-dark/95 dark:text-white flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
     style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 5rem)); padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
   >
     <button
@@ -169,14 +169,14 @@ onDestroy(() => {
         class="flex flex-col items-center gap-2 mt-1"
         transition:fade={{ duration: 150 }}
       >
-        <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about', source: 'mobile' })}>{t.nav.about}</a>
-        <a href="{prefix}/communities" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities', source: 'mobile' })}>{t.nav.communities}</a>
-        <a href="{prefix}/contributors" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors', source: 'mobile' })}>{t.nav.contributors}</a>
-        <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
-        <a href="{prefix}/verticals" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals', source: 'mobile' })}>{t.nav.verticals}</a>
-        <a href="{prefix}/slides" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides', source: 'mobile' })}>{t.nav.slides}</a>
-        <a href="{prefix}/channels" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels', source: 'mobile' })}>{t.nav.channels}</a>
-        <a href="{prefix}/press" class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press', source: 'mobile' })}>{t.nav.press}</a>
+        <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about', source: 'mobile' })}>{t.nav.about}</a>
+        <a href="{prefix}/communities" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities', source: 'mobile' })}>{t.nav.communities}</a>
+        <a href="{prefix}/contributors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors', source: 'mobile' })}>{t.nav.contributors}</a>
+        <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
+        <a href="{prefix}/verticals" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals', source: 'mobile' })}>{t.nav.verticals}</a>
+        <a href="{prefix}/slides" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides', source: 'mobile' })}>{t.nav.slides}</a>
+        <a href="{prefix}/channels" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels', source: 'mobile' })}>{t.nav.channels}</a>
+        <a href="{prefix}/press" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press', source: 'mobile' })}>{t.nav.press}</a>
       </div>
     {/if}
 
@@ -212,7 +212,7 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="nav-link text-base sm:text-lg text-gray-300 text-center py-1 hover:text-ptt-accent transition flex items-center gap-2" on:click={() => { rememberLanguage(alt.lang); trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
+          <a href={alt.url} class="nav-link text-base sm:text-lg text-center py-1 flex items-center gap-2" on:click={() => { rememberLanguage(alt.lang); trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
             {alt.nativeName}
           </a>
         {/each}

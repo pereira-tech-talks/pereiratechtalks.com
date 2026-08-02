@@ -167,6 +167,29 @@ and `src/components/pages/*Page.astro`.
   Header, footer, language switcher, and theme toggle always keep the **global**
   PTT palette — including on Pereira Tech Day edition pages.
 
+### Chrome personality
+
+Site chrome (header, footer, language switcher, theme toggle) reads the user
+theme and stays on the **global PTT palette** — never an edition kit.
+
+- **Header** — `Header.svelte`. Light: `bg-ptt-bg-elevated/95` with
+  `logo-color.png` (`dark:hidden`). Dark: `bg-ptt-bg-dark/95` with
+  `logo-white.png` (`dark:block`). Nav links inherit via `.nav-link` in
+  `global.css` (`text-ptt-secondary` → `dark:text-white/85`).
+- **Hero CTAs on dark canvases** — white pill buttons use
+  `text-ptt-bg-dark`, **not** `text-ptt` — `text-ptt` auto-flips light in
+  dark mode and becomes illegible on white. Accent pills pair
+  `bg-ptt-accent text-ptt-bg-dark`. See `HeroSection.astro`.
+- **Dark heroes** — body copy on photo/dark overlays uses `text-white/85` or
+  `text-white/90`, not `text-gray-200` / `dark:text-gray-300` (fails the
+  no-gray-muted rule on tinted backgrounds).
+- **Theme toggle** — `ThemeToggle.astro` FAB: morphing SVG sun/moon icons only
+  (no emoji), `bg-ptt-bg-elevated` + token borders. Icon/fab transitions are
+  disabled under `prefers-reduced-motion: reduce` (see `global.css`).
+- **PTD edition pages** — `EditionScope` skins only the edition body; chrome
+  renders as a sibling and keeps umbrella PTT branding (see Per-edition
+  theming below).
+
 ### Per-edition theming
 
 Pereira Tech Day editions ship their own `brandKit` in

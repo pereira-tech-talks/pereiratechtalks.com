@@ -116,13 +116,13 @@ function severityClass(severity: LocalizedNotification['severity']): string {
   <div class="w-full" data-testid="top-notification-bar">
     {#each visibleBar as n (n.id)}
       <div
-        class={`flex items-center gap-3 px-3 sm:px-4 py-2 text-sm ${severityClass(n.severity)}`}
+        class={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1 text-xs sm:text-sm leading-snug ${severityClass(n.severity)}`}
         role="region"
         aria-label={n.title}
       >
         {#if n.severity === 'important'}
           <span
-            class="shrink-0 rounded px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide bg-white text-ptt-primary dark:bg-ptt-bg dark:text-ptt-primary-dark"
+            class="shrink-0 rounded px-1.5 py-px text-[10px] sm:text-xs font-bold uppercase tracking-wide bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
           >
             {importantLabel}
           </span>
@@ -132,11 +132,11 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           <span class="mx-1 opacity-70">—</span>
           <span class="opacity-95">{n.summary}</span>
         </p>
-        <div class="flex shrink-0 items-center gap-2">
+        <div class="flex shrink-0 items-center gap-0.5 sm:gap-1">
           {#if n.modalEnabled && n.body}
             <button
               type="button"
-              class="underline underline-offset-2 font-medium min-h-[44px] px-1"
+              class="underline underline-offset-2 font-medium min-h-[44px] px-2 text-xs sm:text-sm"
               onclick={() => openModal(n.id)}
             >
               {moreLabel}
@@ -144,7 +144,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           {:else if n.ctaHref && n.ctaLabel}
             <a
               href={n.ctaHref}
-              class="underline underline-offset-2 font-medium min-h-[44px] inline-flex items-center px-1"
+              class="underline underline-offset-2 font-medium min-h-[44px] inline-flex items-center px-2 text-xs sm:text-sm"
             >
               {n.ctaLabel}
             </a>
@@ -155,7 +155,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
             aria-label={dismissLabel}
             onclick={() => dismiss(n.id)}
           >
-            <span aria-hidden="true" class="text-lg leading-none">×</span>
+            <span aria-hidden="true" class="text-base leading-none">×</span>
           </button>
         </div>
       </div>

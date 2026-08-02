@@ -12,33 +12,56 @@ const t = getTranslations(lang);
 
 <section
   id="contacto"
-  class="py-16 bg-gradient-to-b from-secondary/5 via-transparent to-transparent dark:from-secondary/10 dark:via-transparent dark:to-transparent transition-colors duration-300"
+  class="relative overflow-hidden py-20 sm:py-24 bg-ptt-bg-dark text-white"
 >
-  <div
-    class="max-w-3xl mx-auto px-4 text-center rounded-2xl border border-gray-200/80 dark:border-gray-700/80 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm py-12 shadow-sm"
-  >
+  <div aria-hidden="true" class="absolute inset-0">
+    <img
+      src="/images/home/hero-dark.webp"
+      alt=""
+      width={1920}
+      height={768}
+      class="h-full w-full object-cover opacity-30"
+      loading="lazy"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-ptt-bg-dark via-ptt-bg-dark/85 to-ptt-bg-dark/70"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.2em] text-ptt-accent"
+    >
+      {lang === 'es' ? 'Comunidad' : 'Community'}
+    </p>
     <h2
-      class="text-2xl sm:text-3xl md:text-4xl font-bold text-ptt mb-4"
+      class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white"
     >
       {t.contactSection.title}
     </h2>
-    <p class="text-base sm:text-lg text-ptt-secondary mb-8 max-w-xl mx-auto">
+    <p
+      class="mt-4 text-base sm:text-lg text-white/85 max-w-xl mx-auto leading-relaxed"
+    >
       {t.contactSection.description}
     </p>
 
-    <!-- Social links -->
-    <div class="flex justify-center gap-8 mb-10">
+    <div class="mt-8 flex justify-center gap-3 sm:gap-4">
       <a
         href="https://github.com/pereiratechtalks"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
-        class="text-ptt-secondary hover:text-gray-900 dark:hover:text-white transition-colors"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="github"
       >
         <img
           src="/icons/github_white.svg"
           alt=""
-          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+          width={22}
+          height={22}
+          class="w-5 h-5"
         />
       </a>
       <a
@@ -46,12 +69,16 @@ const t = getTranslations(lang);
         target="_blank"
         rel="noopener noreferrer"
         aria-label="LinkedIn"
-        class="text-ptt-secondary hover:text-gray-900 dark:hover:text-white transition-colors"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="linkedin"
       >
         <img
           src="/icons/linkedin_white.svg"
           alt=""
-          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+          width={22}
+          height={22}
+          class="w-5 h-5"
         />
       </a>
       <a
@@ -59,33 +86,34 @@ const t = getTranslations(lang);
         target="_blank"
         rel="noopener noreferrer"
         aria-label="X (Twitter)"
-        class="text-ptt-secondary hover:text-gray-900 dark:hover:text-white transition-colors"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="twitter"
       >
-        <img
-          src="/icons/x_white.svg"
-          alt=""
-          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
-        />
+        <img src="/icons/x_white.svg" alt="" width={22} height={22} class="w-5 h-5" />
       </a>
       <a
         href="https://www.instagram.com/pereiratechtalks"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"
-        class="text-ptt-secondary hover:text-gray-900 dark:hover:text-white transition-colors"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="instagram"
       >
         <img
           src="/icons/instagram_white.svg"
           alt=""
-          class="w-10 h-10 dark:opacity-80 dark:hover:opacity-100 transition-opacity invert dark:invert-0" width={40} height={40}
+          width={22}
+          height={22}
+          class="w-5 h-5"
         />
       </a>
     </div>
 
-    <!-- CTA to contact page -->
     <a
       href={t.contactSection.ctaLink}
-      class="inline-flex items-center gap-2 px-8 py-4 bg-ptt-primary text-white font-semibold rounded-full hover:bg-ptt-primary-strong transition-colors shadow-lg hover:shadow-xl"
+      class="mt-10 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-8 py-3.5 text-sm sm:text-base font-semibold text-ptt-bg-dark shadow-lg shadow-black/30 hover:bg-ptt-accent-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
     >
       {t.contactSection.ctaText}
       <svg
@@ -93,13 +121,13 @@ const t = getTranslations(lang);
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="2"
-          d="M17 8l4 4m0 0l-4 4m4-4H3"
-        />
+          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
       </svg>
     </a>
   </div>

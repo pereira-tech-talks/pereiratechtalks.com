@@ -107,6 +107,23 @@
     @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
   }
 
+  /* Theme-aware nav links (header + mobile). Inherit header canvas. */
+  .nav-link {
+    @apply text-ptt-secondary hover:text-ptt-primary transition-colors duration-200;
+  }
+  .dark .nav-link {
+    @apply text-white/85 hover:text-white;
+  }
+
+  /* Theme toggle morph — respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle-icon,
+    .theme-toggle-fab {
+      /* biome-ignore lint/complexity/noImportantStyles: must win over utility transition-* on the FAB */
+      transition: none !important;
+    }
+  }
+
   /* step-2-get-started.png: half width on desktop */
   .prose .prose-img-narrow {
     @apply md:max-w-[50%];

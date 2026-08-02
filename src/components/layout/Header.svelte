@@ -72,17 +72,26 @@ function closeAllDropdowns() {
 <svelte:window on:click={closeAllDropdowns} />
 
 <header
-  class="bg-ptt-bg-dark text-white sticky top-0 z-50 border-b border-white/10 transition-colors duration-300"
+  class="sticky top-0 z-50 border-b transition-colors duration-300 bg-ptt-bg-elevated/95 text-ptt border-ptt-border shadow-sm shadow-ptt-primary/5 backdrop-blur-md dark:bg-ptt-bg-dark/95 dark:text-white dark:border-white/10 dark:shadow-black/30"
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
-      class="flex items-center gap-2.5 font-bold tracking-tight select-none text-white"
+      class="flex items-center gap-2.5 font-bold tracking-tight select-none text-ptt dark:text-white"
       aria-label="Pereira Tech Talks"
     >
       <img
-        class="h-8 w-auto md:h-9"
+        class="h-8 w-auto md:h-9 dark:hidden"
+        src="/images/pereira-tech-talks/logo-color.png"
+        alt=""
+        width={178}
+        height={178}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img
+        class="hidden h-8 w-auto md:h-9 dark:block"
         src="/images/pereira-tech-talks/logo-white.png"
         alt=""
         width={178}

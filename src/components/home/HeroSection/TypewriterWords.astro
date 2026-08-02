@@ -18,7 +18,7 @@ export interface Props {
 const { words, variant = 'hero', align = 'center' } = Astro.props;
 const n = words?.length ?? 1;
 const cycleDuration = n * 4;
-const cursorColor = 'rgb(96 165 250)';
+const cursorColor = 'var(--color-ptt-accent-dark)';
 
 function fmt(num: number): string {
   return num.toFixed(2);

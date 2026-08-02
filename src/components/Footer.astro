@@ -9,112 +9,223 @@ interface Props {
 
 const { lang = DEFAULT_LANGUAGE } = Astro.props;
 const t = getTranslations(lang as Language);
-
-const iconClass = 'w-6 h-6 text-current';
-
 const prefix = getUrlPrefix(lang as Language);
-const footerLinks = [
-  {
-    label: lang === 'es' ? 'Comunidad' : 'Community',
-    href: `${prefix}/community`,
-  },
-  {
-    label: lang === 'es' ? 'Cómo contribuir' : 'Contributing',
-    href: `${prefix}/contributing`,
-  },
-  {
-    label: lang === 'es' ? 'Gobernanza' : 'Governance',
-    href: `${prefix}/governance`,
-  },
-  {
-    label: lang === 'es' ? 'Código de Conducta' : 'Code of Conduct',
-    href: `${prefix}/conduct`,
-  },
-  {
-    label: lang === 'es' ? 'Canales' : 'Channels',
-    href: `${prefix}/channels`,
-  },
-  {
-    label: lang === 'es' ? 'Prensa' : 'Press',
-    href: `${prefix}/press`,
-  },
-];
+const year = new Date().getFullYear();
+
+const explore =
+  lang === 'es'
+    ? [
+        { label: 'Meetups', href: `${prefix}/meetups` },
+        { label: 'Pereira Tech Days', href: `${prefix}/pereira-tech-days` },
+        { label: 'Calendario', href: `${prefix}/calendar` },
+        { label: 'Ponentes', href: `${prefix}/speakers` },
+        { label: 'Blog', href: `${prefix}/blog` },
+      ]
+    : [
+        { label: 'Meetups', href: `${prefix}/meetups` },
+        { label: 'Pereira Tech Days', href: `${prefix}/pereira-tech-days` },
+        { label: 'Calendar', href: `${prefix}/calendar` },
+        { label: 'Speakers', href: `${prefix}/speakers` },
+        { label: 'Blog', href: `${prefix}/blog` },
+      ];
+
+const community =
+  lang === 'es'
+    ? [
+        { label: 'Sobre nosotros', href: `${prefix}/about` },
+        { label: 'Comunidades', href: `${prefix}/communities` },
+        { label: 'Cómo contribuir', href: `${prefix}/contributing` },
+        { label: 'Gobernanza', href: `${prefix}/governance` },
+        { label: 'Código de Conducta', href: `${prefix}/conduct` },
+        { label: 'Canales', href: `${prefix}/channels` },
+        { label: 'Prensa', href: `${prefix}/press` },
+      ]
+    : [
+        { label: 'About', href: `${prefix}/about` },
+        { label: 'Communities', href: `${prefix}/communities` },
+        { label: 'Contributing', href: `${prefix}/contributing` },
+        { label: 'Governance', href: `${prefix}/governance` },
+        { label: 'Code of Conduct', href: `${prefix}/conduct` },
+        { label: 'Channels', href: `${prefix}/channels` },
+        { label: 'Press', href: `${prefix}/press` },
+      ];
+
+const iconClass = 'w-5 h-5';
+const tagline =
+  lang === 'es'
+    ? 'Comunidad tech bilingüe en Pereira, Risaralda — desde 2014.'
+    : 'Bilingual tech community in Pereira, Risaralda — since 2014.';
 ---
 
 <footer
-	class="bg-ptt-bg pt-16 border-t border-ptt-border text-center text-sm text-ptt-secondary"
-	style="padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));"
+  class="relative border-t border-ptt-border bg-ptt-bg text-ptt-secondary"
+  style="padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));"
 >
-	<div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
-		<nav
-			aria-label={lang === 'es' ? 'Enlaces de comunidad' : 'Community links'}
-			class="flex flex-wrap justify-center gap-x-4 gap-y-2"
-		>
-			{footerLinks.map((link) => (
-				<a
-					href={link.href}
-					class="inline-flex items-center min-h-[44px] px-1 text-ptt-secondary hover:text-ptt-primary transition-colors"
-				>
-					{link.label}
-				</a>
-			))}
-		</nav>
-		<div>
-			&copy; <span id="copyright-year">{new Date().getFullYear()}</span> {t.footer.copyright}. {t.footer.allRightsReserved}
-		</div>
-		<div class="flex gap-4 justify-center mt-2">
-			<a
-				href="https://github.com/pereiratechtalks"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 text-ptt-secondary hover:text-ptt transition-colors"
-				aria-label="GitHub"
-				data-umami-event="social_click"
-				data-umami-event-platform="github"
-			>
-				<svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-					<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-				</svg>
-			</a>
-			<a
-				href="https://www.linkedin.com/company/pereira-tech-talks/"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 text-ptt-secondary hover:text-ptt transition-colors"
-				aria-label="LinkedIn"
-				data-umami-event="social_click"
-				data-umami-event-platform="linkedin"
-			>
-				<svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-					<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-				</svg>
-			</a>
-			<a
-				href="https://x.com/pereiratechtalks"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 text-ptt-secondary hover:text-ptt transition-colors"
-				aria-label="X (Twitter)"
-				data-umami-event="social_click"
-				data-umami-event-platform="twitter"
-			>
-				<svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-				</svg>
-			</a>
-			<a
-				href="https://www.instagram.com/pereiratechtalks"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 text-ptt-secondary hover:text-ptt transition-colors"
-				aria-label="Instagram"
-				data-umami-event="social_click"
-				data-umami-event-platform="instagram"
-			>
-				<svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-					<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-				</svg>
-			</a>
-		</div>
-	</div>
+  <div
+    class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-ptt-primary via-ptt-accent to-ptt-primary"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-14 pb-10">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5 text-left">
+        <a
+          href={prefix || '/'}
+          class="inline-flex items-center gap-2.5 font-bold text-ptt"
+          aria-label="Pereira Tech Talks"
+        >
+          <img
+            src="/images/pereira-tech-talks/logo-color.png"
+            alt=""
+            width={40}
+            height={40}
+            class="h-9 w-auto dark:hidden"
+            loading="lazy"
+          />
+          <img
+            src="/images/pereira-tech-talks/logo-white.png"
+            alt=""
+            width={40}
+            height={40}
+            class="hidden h-9 w-auto dark:block"
+            loading="lazy"
+          />
+          <span class="text-lg tracking-tight">
+            Pereira <span class="font-extrabold">Tech Talks</span>
+          </span>
+        </a>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-ptt-secondary">
+          {tagline}
+        </p>
+        <div class="mt-6 flex gap-2">
+          <a
+            href="https://github.com/pereiratechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"
+            aria-label="GitHub"
+            data-umami-event="social_click"
+            data-umami-event-platform="github"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://www.linkedin.com/company/pereira-tech-talks/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"
+            aria-label="LinkedIn"
+            data-umami-event="social_click"
+            data-umami-event-platform="linkedin"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://x.com/pereiratechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"
+            aria-label="X (Twitter)"
+            data-umami-event="social_click"
+            data-umami-event-platform="twitter"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://www.instagram.com/pereiratechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"
+            aria-label="Instagram"
+            data-umami-event="social_click"
+            data-umami-event-platform="instagram"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              ></path></svg
+            >
+          </a>
+        </div>
+      </div>
+
+      <nav
+        aria-label={lang === 'es' ? 'Explorar' : 'Explore'}
+        class="lg:col-span-3 text-left"
+      >
+        <p
+          class="text-xs font-semibold uppercase tracking-widest text-ptt-primary"
+        >
+          {lang === 'es' ? 'Explorar' : 'Explore'}
+        </p>
+        <ul class="mt-4 space-y-1">
+          {
+            explore.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="inline-flex min-h-[40px] items-center text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav
+        aria-label={lang === 'es' ? 'Comunidad' : 'Community'}
+        class="lg:col-span-4 text-left"
+      >
+        <p
+          class="text-xs font-semibold uppercase tracking-widest text-ptt-primary"
+        >
+          {lang === 'es' ? 'Comunidad' : 'Community'}
+        </p>
+        <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+          {
+            community.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="inline-flex min-h-[40px] items-center text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t border-ptt-border pt-6 text-xs text-ptt-secondary"
+    >
+      <p>
+        &copy; {year}
+        {t.footer.copyright}. {t.footer.allRightsReserved}
+      </p>
+      <a
+        href={`${prefix}/contact`}
+        class="inline-flex min-h-[40px] items-center font-medium text-ptt-primary hover:underline"
+      >
+        {lang === 'es' ? 'Contacto' : 'Contact'}
+      </a>
+    </div>
+  </div>
 </footer>

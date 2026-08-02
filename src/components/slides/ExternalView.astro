@@ -60,16 +60,16 @@ const isDraft = isDraftDeck(deck);
       </div>
     )}
 
-    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+    <h1 class="text-3xl sm:text-4xl font-bold text-ptt mb-4">
       {data.title}
     </h1>
 
-    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+    <p class="text-lg text-ptt-secondary mb-6">
       {data.description}
     </p>
 
     {data.eventName && (
-      <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 mb-8">
+      <div class="flex items-center gap-2 text-sm text-ptt-secondary mb-8">
         <span>{data.eventName}</span>
         {data.eventDate && (
           <>
