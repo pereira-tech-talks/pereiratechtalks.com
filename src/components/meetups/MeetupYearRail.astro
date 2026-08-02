@@ -12,9 +12,9 @@ interface Props {
 const { years, label } = Astro.props;
 ---
 
-<nav aria-label={label} class="meetup-year-rail">
+<nav aria-label={label} class="meetup-year-rail min-w-0 max-w-full">
   <ul
-    class="flex gap-2 overflow-x-auto pb-2 sm:flex-col sm:overflow-visible sm:pb-0 sm:sticky sm:top-24"
+    class="flex w-full max-w-full gap-2 overflow-x-auto overscroll-x-contain pb-2 [-webkit-overflow-scrolling:touch] lg:flex-col lg:overflow-visible lg:pb-0 lg:sticky lg:top-24"
   >
     {
       years.map((year) => (

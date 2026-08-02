@@ -120,18 +120,18 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         invisible hit-area expanders, not min-h on the row.
       -->
       <div
-        class={`flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 text-xs leading-snug ${severityClass(n.severity)}`}
+        class={`flex min-w-0 max-w-full items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 text-xs leading-snug overflow-hidden ${severityClass(n.severity)}`}
         role="region"
         aria-label={n.title}
       >
         {#if n.severity === 'important'}
           <span
-            class="shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
+            class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
           >
             {importantLabel}
           </span>
         {/if}
-        <p class="min-w-0 flex-1 truncate">
+        <p class="min-w-0 flex-1 truncate overflow-hidden">
           <span class="font-medium">{n.title}</span>
           <span class="mx-1 opacity-70">—</span>
           <span class="opacity-95">{n.summary}</span>

@@ -99,7 +99,7 @@ function closeAllDropdowns() {
         loading="eager"
         fetchpriority="high"
       />
-      <span class="text-base md:text-lg lg:text-xl whitespace-nowrap">
+      <span class="hidden min-[360px]:inline text-base md:text-lg lg:text-xl whitespace-nowrap">
         Pereira <span class="font-extrabold">Tech Talks</span>
       </span>
     </a>

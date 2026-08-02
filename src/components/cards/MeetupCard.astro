@@ -70,7 +70,7 @@ const talksLabel =
 
 <a
   href={url}
-  class="group flex h-full flex-col overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+  class="group flex h-full min-w-0 w-full flex-col overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
   <div class="relative aspect-[16/9] overflow-hidden bg-ptt-primary-soft">
     <img decoding="async"
@@ -84,17 +84,17 @@ const talksLabel =
       <Badge variant={statusVariant}>{statusLabel}</Badge>
     </div>
   </div>
-  <div class="flex flex-1 flex-col gap-3 p-5">
-    <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
-      <time datetime={date.toISOString()}>{dateLabel}</time>
+  <div class="flex min-w-0 flex-1 flex-col gap-3 p-5">
+    <div class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
+      <time class="min-w-0 break-words" datetime={date.toISOString()}>{dateLabel}</time>
       {talksCount > 0 && <span aria-hidden="true">·</span>}
-      {talksCount > 0 && <span>{talksLabel}</span>}
+      {talksCount > 0 && <span class="shrink-0">{talksLabel}</span>}
     </div>
-    <h3 class="text-lg font-semibold text-ptt group-hover:text-ptt-primary line-clamp-2">
+    <h3 class="text-lg font-semibold text-ptt group-hover:text-ptt-primary line-clamp-2 break-words">
       {title}
     </h3>
     {description && (
-      <p class="text-sm text-ptt-secondary line-clamp-3">
+      <p class="text-sm text-ptt-secondary line-clamp-3 break-words">
         {description}
       </p>
     )}

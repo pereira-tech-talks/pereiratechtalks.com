@@ -122,7 +122,7 @@ const breadcrumbs = [
   </Section>
 
   <Section eyebrow={t.archiveEyebrow} title={t.past}>
-    <div class="grid gap-10 lg:grid-cols-[7rem_1fr]">
+    <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">
       {
         years.length > 0 && (
           <MeetupYearRail years={years} label={t.yearNav} />
@@ -135,9 +135,9 @@ const breadcrumbs = [
               <h3 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
                 {t.yearLabel(year)}
               </h3>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <ul class="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {meetups.map((m) => (
-                  <li>
+                  <li class="min-w-0">
                     <MeetupCard meetup={m} lang={lang} />
                   </li>
                 ))}

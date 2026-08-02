@@ -120,7 +120,7 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/github_white.svg"
@@ -136,7 +136,7 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/linkedin_white.svg"
@@ -152,7 +152,7 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="X (Twitter)"
-          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/x_white.svg"
@@ -168,7 +168,7 @@ const {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
-          class="inline-flex items-center justify-center min-h-[40px] min-w-[40px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <img
             src="/icons/instagram_white.svg"
@@ -199,14 +199,19 @@ const {
 
 <style>
   /*
-   * Fill the remaining viewport below sticky chrome (notification ~2.5rem +
-   * header ~4.25rem ≈ 6.75rem). On large screens lock exact height so the
-   * first paint is one cinematic frame.
+   * Fill remaining viewport below chrome.
+   * Default = header only (~4.25rem). When the top notification bar is in the
+   * DOM, :has() bumps the offset (~6.75rem). Dismissing the bar shrinks the
+   * offset automatically — no JS.
    */
   .hero-viewport {
-    --ptt-chrome-offset: 6.75rem;
+    --ptt-chrome-offset: 4.25rem;
     min-height: calc(100dvh - var(--ptt-chrome-offset));
     min-height: calc(100svh - var(--ptt-chrome-offset));
+  }
+
+  :global(body:has([data-testid='top-notification-bar'])) .hero-viewport {
+    --ptt-chrome-offset: 6.75rem;
   }
 
   @media (min-width: 1024px) {
@@ -219,10 +224,11 @@ const {
 
   .hero-content {
     padding-block: clamp(1.25rem, 4vh, 5rem);
+    padding-bottom: clamp(1.5rem, 5vh, 5rem);
   }
 
   .hero-logo {
-    height: clamp(3rem, 7vh, 5rem);
+    height: clamp(2.75rem, 7vh, 5rem);
   }
 
   .hero-tagline {
@@ -230,12 +236,12 @@ const {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 5.5vh + 1vw, 3.75rem);
+    font-size: clamp(1.85rem, 5.5vh + 1vw, 3.75rem);
     line-height: 1.05;
   }
 
   .hero-desc {
-    font-size: clamp(0.9rem, 2vh + 0.2vw, 1.125rem);
+    font-size: clamp(0.875rem, 2vh + 0.2vw, 1.125rem);
   }
 
   .hero-photo {
@@ -272,6 +278,17 @@ const {
     }
   }
 
+  /* Narrow phones — keep CTAs usable, hide scroll cue */
+  @media (max-width: 379px) {
+    .hero-scroll {
+      display: none;
+    }
+    .hero-ctas a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
   /* Short laptops / landscape phones — compress stack */
   @media (max-height: 720px) {
     .hero-social {
@@ -288,8 +305,23 @@ const {
     }
   }
 
+  @media (max-height: 560px) {
+    .hero-tagline {
+      display: none;
+    }
+    .hero-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-scroll-chevron {
+      animation: none;
+    }
+    .hero-photo {
       animation: none;
     }
   }

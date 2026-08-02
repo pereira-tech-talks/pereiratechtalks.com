@@ -216,10 +216,27 @@ Touch targets are ≥ 44×44px. Wide content must scroll inside its own containe
 (`.table-responsive`), never the page body — verified by the Playwright
 overflow suite down to 280px (Galaxy Z Fold folded, iPhone SE).
 
+### Homepage hero viewport contract
+
+The home hero fills the **remaining viewport below sticky chrome**, not a fixed
+`100vh` that ignores the header.
+
+| Chrome state | `--ptt-chrome-offset` | Mechanism |
+|---|---|---|
+| Header only (notification absent or dismissed) | `4.25rem` | Default on `.hero-viewport` |
+| Header + top notification bar | `6.75rem` | `body:has([data-testid='top-notification-bar']) .hero-viewport` |
+
+Height uses `min-height: calc(100svh − offset)` (with `dvh` fallback). From
+`lg` upward the hero also locks exact `height` so the first paint is one
+cinematic frame. Short viewports (`max-height: 720px` / `560px`) hide the
+scroll cue / social row and clamp description so CTAs stay in view. Narrow
+phones (`max-width: 379px`) stack CTAs full-width.
+
 **Motion:** `duration-fast 120ms` (hover, pill toggles), `duration-base 200ms`
 (default transitions), `duration-slow 320ms` (modals, drawers). All non-essential
 animation is gated by the global `prefers-reduced-motion: reduce` block in
-`global.css`, which also disables `.animate-chevron-bounce`.
+`global.css`, which also disables `.animate-chevron-bounce`. Hero ken-burns and
+scroll-chevron animations respect the same preference inside `HeroSection`.
 
 ## Do's and Don'ts
 
