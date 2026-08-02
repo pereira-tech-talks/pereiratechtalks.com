@@ -174,7 +174,7 @@ const breadcrumbs = [
 
   <Section title={t.factsTitle}>
     <dl
-      class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-gray-700 dark:text-gray-200"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 text-ptt-secondary"
     >
       {
         t.facts.map(([key, value]) => (
@@ -191,7 +191,7 @@ const breadcrumbs = [
 
   <Section title={t.boilerplateTitle} surface="alt">
     <blockquote
-      class="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6 text-lg italic text-gray-800 dark:text-gray-100"
+      class="rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-6 text-lg italic text-ptt"
     >
       {t.boilerplate}
     </blockquote>
@@ -201,11 +201,11 @@ const breadcrumbs = [
     <ul class="grid gap-4 sm:grid-cols-3 list-none">
       {
         t.brand.map((asset) => (
-          <li class="flex h-full flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-5">
-            <p class="text-sm font-semibold text-gray-900 dark:text-gray-50">
+          <li class="flex h-full flex-col rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-5">
+            <p class="text-sm font-semibold text-ptt">
               {asset.label}
             </p>
-            <p class="mt-1 text-xs text-gray-600 dark:text-gray-300">{asset.note}</p>
+            <p class="mt-1 text-xs text-ptt-secondary">{asset.note}</p>
             <a
               href={asset.href}
               download
@@ -218,7 +218,7 @@ const breadcrumbs = [
         ))
       }
     </ul>
-    <p class="mt-4 text-sm italic text-gray-600 dark:text-gray-300">
+    <p class="mt-4 text-sm italic text-ptt-secondary">
       {t.brandFootnote}
     </p>
   </Section>
@@ -253,7 +253,7 @@ const breadcrumbs = [
           <li>
             <a
               href={link.href}
-              class="block rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:ring-ptt-primary/40 dark:hover:ring-ptt-primary-dark/40"
+              class="block rounded-xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-4 text-sm font-semibold text-ptt hover:ring-ptt-primary/40"
             >
               <span class="text-ptt-primary dark:text-ptt-primary-dark">→</span>{' '}
               {link.label}

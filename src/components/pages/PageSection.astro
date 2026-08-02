@@ -19,13 +19,13 @@ const {
 
 const bgClasses =
   background === 'gray'
-    ? 'bg-gray-50 dark:bg-gray-800/50'
-    : 'bg-white dark:bg-gray-900';
+    ? 'bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated'
+    : 'bg-ptt-bg';
 
 const headerClasses = center ? 'mb-8 md:mb-12 text-center' : 'mb-8 md:mb-12';
 const descClasses = center
-  ? 'mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl leading-relaxed mx-auto'
-  : 'mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-4xl leading-relaxed';
+  ? 'mt-4 text-base sm:text-lg text-ptt-secondary max-w-4xl leading-relaxed mx-auto'
+  : 'mt-4 text-base sm:text-lg text-ptt-secondary max-w-4xl leading-relaxed';
 ---
 
 <section id={id} class={`py-16 md:py-20 ${bgClasses} transition-colors duration-300`}>
@@ -34,7 +34,7 @@ const descClasses = center
       <div class={headerClasses}>
         {title && (
           <h2
-            class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3"
+            class="text-2xl sm:text-3xl md:text-4xl font-bold text-ptt mb-3"
             set:html={title}
           />
         )}

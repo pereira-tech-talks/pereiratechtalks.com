@@ -122,7 +122,7 @@ import { HomeSectionContentAlignmentEType } from './HomeSection/enum';
 <HomeSection
   title="About Me"
   description="I'm a software engineer..."
-  image="/images/profile.png"
+  image="/images/home/hero-light.webp"
   contentAlignment={HomeSectionContentAlignmentEType.LEFT}
   ctaText="Learn More"
   ctaLink="/about"

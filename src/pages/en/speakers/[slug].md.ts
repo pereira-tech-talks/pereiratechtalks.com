@@ -45,7 +45,7 @@ export const GET: APIRoute = ({ props }) => {
   if (entry.data.talks.length > 0) {
     sections.push({
       heading: 'Talks',
-      lines: entry.data.talks.map((t) => `- [${t}](/en/talks/${t}.md)`),
+      lines: entry.data.talks.map((t) => `- ${t}`),
     });
   }
 

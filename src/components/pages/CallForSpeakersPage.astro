@@ -141,7 +141,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
     <ul class="grid gap-4 sm:grid-cols-2 list-none">
       {
         t.whatWeLookFor.map((item) => (
-          <li class="flex items-start gap-3 rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-5">
+          <li class="flex items-start gap-3 rounded-xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-5">
             <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
@@ -160,7 +160,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=tech-talk&subject=${subje
     <ul class="grid gap-6 sm:grid-cols-2 list-none">
       {
         t.formats.map((format) => (
-          <li class="rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-6">
+          <li class="rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-6">
             <h3 class="text-lg font-semibold text-ptt">
               {format.name}
             </h3>

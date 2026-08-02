@@ -99,7 +99,7 @@ const blogPostingData = {
     '@type': 'Person',
     name: authorData?.name ?? 'Sergio Alexander Florez Galeano',
     url: new URL('/about/', Astro.site).href,
-    image: new URL(authorData?.avatar ?? '/images/profile.png', Astro.site)
+    image: new URL(authorData?.avatar ?? '/images/og-default.png', Astro.site)
       .href,
   },
   publisher: {

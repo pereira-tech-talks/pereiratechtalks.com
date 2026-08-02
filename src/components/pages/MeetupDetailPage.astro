@@ -211,7 +211,7 @@ if (speakers.length > 0) {
                 href={meetupComLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-gray-50 hover:text-ptt-primary dark:hover:text-ptt-primary-dark"
+                class="inline-flex items-center gap-2 text-sm font-medium text-ptt hover:text-ptt-primary dark:hover:text-ptt-primary-dark"
               >
                 Meetup.com
                 <svg aria-hidden="true" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -227,10 +227,10 @@ if (speakers.length > 0) {
               <h3 class="text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
                 {lang === 'es' ? 'Sede' : 'Venue'}
               </h3>
-              <p class="text-sm text-gray-700 dark:text-gray-200 font-medium">
+              <p class="text-sm text-ptt-secondary font-medium">
                 {venue.name}
               </p>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
+              <p class="text-sm text-ptt-secondary">
                 {venue.city}, {venue.country}
               </p>
             </div>
@@ -241,9 +241,9 @@ if (speakers.length > 0) {
 
     {
       talks.length > 0 && (
-        <section class="bg-gray-50 dark:bg-gray-900/50 py-16 sm:py-20">
+        <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
           <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {lang === 'es' ? 'Charlas' : 'Talks'}
             </h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2">
@@ -268,7 +268,7 @@ if (speakers.length > 0) {
       speakers.length > 0 && (
         <section class="py-16 sm:py-20">
           <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {lang === 'es' ? 'Ponentes' : 'Speakers'}
             </h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

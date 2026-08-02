@@ -185,7 +185,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${s
     <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 list-none">
       {
         t.reachStats.map((stat) => (
-          <li class="min-w-0 rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6 text-center">
+          <li class="min-w-0 rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-4 sm:p-6 text-center">
             <p class="text-4xl sm:text-5xl font-bold text-ptt-primary dark:text-ptt-primary-dark">
               {stat.value}
             </p>
@@ -206,7 +206,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${s
     <ul class="grid gap-6 sm:grid-cols-2 list-none">
       {
         t.tiers.map((tier) => (
-          <li class="flex h-full min-w-0 flex-col rounded-2xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4 sm:p-6">
+          <li class="flex h-full min-w-0 flex-col rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-4 sm:p-6">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <h3 class="text-2xl font-bold tracking-tight text-ptt">
                 {tier.name}
@@ -218,7 +218,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${s
             <p class="mt-2 text-sm font-medium text-ptt-primary dark:text-ptt-primary-dark">
               {tier.headline}
             </p>
-            <ul class="mt-4 space-y-2 text-sm text-gray-700 dark:text-gray-200">
+            <ul class="mt-4 space-y-2 text-sm text-ptt-secondary">
               {tier.perks.map((perk) => (
                 <li class="flex items-start gap-2">
                   <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -242,7 +242,7 @@ const ctaHref = `${getUrlPrefix(lang)}/contact/?reason=collaboration&subject=${s
       >
         <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 list-none">
           {sponsors.slice(0, 12).map((sponsor) => (
-            <li class="flex h-24 items-center justify-center rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4">
+            <li class="flex h-24 items-center justify-center rounded-xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-4">
               <a
                 href={sponsor.data.url}
                 target="_blank"
