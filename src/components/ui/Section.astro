@@ -31,7 +31,9 @@ const {
 } = Astro.props;
 
 const surfaceClass =
-  surface === 'alt' ? 'bg-gray-50 dark:bg-gray-900/50' : 'bg-ptt-bg';
+  surface === 'alt'
+    ? 'bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated'
+    : 'bg-ptt-bg';
 const spacingClass =
   spacing === 'sm'
     ? 'py-12 sm:py-16'

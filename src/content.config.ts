@@ -269,20 +269,6 @@ const authors = defineCollection({
   }),
 });
 
-const notificationSeverity = z.enum(['info', 'success', 'warning', 'critical']);
-
-// Internal paths ('/...') or absolute http(s) URLs only — blocks
-// `javascript:`/`data:` pseudo-schemes since notification copy is rendered
-// site-wide with no review gate beyond this schema.
-const safeHref = z
-  .string()
-  .regex(
-    /^(\/(?!\/)|https?:\/\/)/,
-    'ctaHref must be an internal path (starting with /) or an absolute http(s) URL'
-  );
-
-const bilingualText = z.object({ en: z.string(), es: z.string() });
-
 /**
  * NEW v3.0.0 COLLECTIONS
  */

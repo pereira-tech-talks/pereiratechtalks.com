@@ -146,7 +146,7 @@ function formatDate(pubDate: string): string {
 
 {#if renderedPosts.length === 0 && !loading}
   <div class="text-center py-16">
-    <p class="text-gray-600 dark:text-gray-300 text-lg">
+    <p class="text-ptt-secondary text-lg">
       {emptyStateMessage || t.seriesPage.emptyState}
     </p>
   </div>
@@ -156,16 +156,16 @@ function formatDate(pubDate: string): string {
     <div class="grid grid-cols-1 items-center gap-8 {seriesHeroImage ? 'md:grid-cols-2' : ''}">
       <!-- Text column -->
       <div class="{seriesHeroImage ? '' : 'text-center mx-auto max-w-2xl'}">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        <h1 class="text-3xl md:text-4xl font-bold text-ptt mb-3">
           {seriesTitle}
         </h1>
         {#if seriesDescription}
-          <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+          <p class="text-lg text-ptt-secondary mb-4">
             {seriesDescription}
           </p>
         {/if}
         <div class="flex flex-wrap items-center gap-3">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-200 text-sm font-medium">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ptt-primary-soft text-ptt-primary text-sm font-medium">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
@@ -175,8 +175,8 @@ function formatDate(pubDate: string): string {
 
         <!-- Share buttons -->
         {#if shareUrl}
-          <div class="flex flex-wrap items-center gap-2 mt-4 border-l-2 border-gray-300 dark:border-gray-600 pl-3">
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-300 mr-0.5">
+          <div class="flex flex-wrap items-center gap-2 mt-4 border-l-2 border-ptt-border pl-3">
+            <span class="text-sm font-medium text-ptt-secondary mr-0.5">
               {t.engagement.shareSeriesTitle}:
             </span>
             {#each shareLinks as link}
@@ -184,7 +184,7 @@ function formatDate(pubDate: string): string {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 px-2.5 py-1.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+                class="inline-flex items-center gap-1.5 rounded-lg border border-ptt-border px-2.5 py-1.5 text-sm font-medium text-ptt-secondary transition-colors hover:bg-ptt-primary-soft hover:text-ptt"
                 aria-label={link.label}
                 data-umami-event="share_click"
                 data-umami-event-platform={link.platform}
@@ -216,7 +216,7 @@ function formatDate(pubDate: string): string {
             <img
               src={seriesHeroImage}
               alt={seriesTitle}
-              class="block w-full h-auto md:h-96 rounded-xl object-cover shadow-lg ring-1 ring-gray-200 dark:ring-gray-700"
+              class="block w-full h-auto md:h-96 rounded-xl object-cover shadow-lg ring-1 ring-ptt-border"
               loading="eager"
               width="600"
               height="400"
@@ -225,7 +225,7 @@ function formatDate(pubDate: string): string {
         </div>
       {/if}
     </div>
-    <div class="mt-6 border-b border-gray-200 dark:border-gray-700"></div>
+    <div class="mt-6 border-b border-ptt-border"></div>
   </div>
 
   <!-- Chapters list -->
@@ -233,7 +233,7 @@ function formatDate(pubDate: string): string {
     {#each renderedPosts as post, index}
       {@const chapterNum = post.seriesCurrent ?? index + 1}
 
-      <article class="group relative flex gap-4 md:gap-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700 hover:-translate-y-0.5">
+      <article class="group relative flex gap-4 md:gap-6 bg-ptt-bg-elevated rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-ptt-border hover:border-ptt-primary/30 hover:-translate-y-0.5">
         <!-- Full-card clickable link (background layer) -->
         <!-- svelte-ignore a11y-click-events-have-key-events a11y-interactive-supports-focus -->
         <a
@@ -244,11 +244,11 @@ function formatDate(pubDate: string): string {
         ></a>
 
         <!-- Chapter number -->
-        <div class="flex-shrink-0 w-16 md:w-20 flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-blue-100/50 dark:from-blue-900/30 dark:to-blue-900/10 border-r border-gray-100 dark:border-gray-700">
-          <span class="text-xs font-medium text-blue-600 dark:text-blue-300 uppercase tracking-wider">
+        <div class="flex-shrink-0 w-16 md:w-20 flex flex-col items-center justify-center bg-ptt-primary-soft border-r border-ptt-border">
+          <span class="text-xs font-medium text-ptt-primary uppercase tracking-wider">
             {t.seriesPage.chapter}
           </span>
-          <span class="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-200 mt-0.5">
+          <span class="text-2xl md:text-3xl font-bold text-ptt-primary mt-0.5">
             {chapterNum}
           </span>
         </div>
@@ -257,16 +257,16 @@ function formatDate(pubDate: string): string {
         <div class="flex-1 py-4 pr-4 md:py-5 md:pr-6 min-w-0">
           <div class="flex items-start gap-4">
             <div class="flex-1 min-w-0">
-              <h2 class="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <h2 class="text-base md:text-lg font-bold text-ptt mb-1.5 group-hover:text-ptt-primary transition-colors">
                 {post.title}
               </h2>
 
-              <p class="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
+              <p class="text-sm text-ptt-secondary mb-3 line-clamp-2">
                 {post.description}
               </p>
 
               <div class="relative z-10 flex flex-wrap items-center gap-2">
-                <time class="text-xs text-gray-600 dark:text-gray-300">
+                <time class="text-xs text-ptt-secondary">
                   {formatDate(post.pubDate)}
                 </time>
 
@@ -286,7 +286,7 @@ function formatDate(pubDate: string): string {
                   {#each post.tags.filter((tag) => !topicTagNames.includes(tag)) as tag}
                     <a
                       href={`${prefix}/blog/tag/${tag}/`}
-                      class="text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
+                      class="text-xs px-2 py-0.5 rounded bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary/15 transition-colors"
                     >
                       #{t.tagNames[tag] || tag}
                     </a>
@@ -294,7 +294,7 @@ function formatDate(pubDate: string): string {
                   {#each post.tags.filter((tag) => topicTagNames.includes(tag) && !subtopicTagNames.includes(tag)) as topic}
                     <a
                       href={`${prefix}/blog/tag/${topic}/`}
-                      class="text-xs px-2 py-0.5 rounded border border-gray-200 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+                      class="text-xs px-2 py-0.5 rounded border border-ptt-border bg-ptt-bg-elevated text-ptt-secondary hover:border-ptt-border-strong hover:text-ptt transition-colors"
                     >
                       {t.tagNames[topic] || topic}
                     </a>
@@ -302,9 +302,9 @@ function formatDate(pubDate: string): string {
                   {#each post.tags.filter((tag) => subtopicTagNames.includes(tag)) as sub}
                     <a
                       href={`${prefix}/blog/tag/${sub}/`}
-                      class="inline-flex items-center text-xs px-2 py-1 rounded bg-gray-50 text-gray-700 border border-dashed border-gray-300 hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+                      class="inline-flex items-center text-xs px-2 py-1 rounded bg-ptt-bg-elevated text-ptt-secondary border border-dashed border-ptt-border hover:bg-ptt-primary-soft hover:border-ptt-border-strong hover:text-ptt transition-colors"
                     >
-                      <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+                      <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-ptt-secondary'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
                     </a>
                   {/each}
                 {/if}
@@ -343,7 +343,7 @@ function formatDate(pubDate: string): string {
       </span>
       <div
         aria-hidden="true"
-        class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+        class="w-8 h-8 border-4 border-ptt-primary border-t-transparent rounded-full animate-spin"
       ></div>
     </div>
   {/if}
@@ -351,12 +351,12 @@ function formatDate(pubDate: string): string {
   <!-- Error state -->
   {#if fetchError}
     <div role="alert" class="text-center py-8">
-      <p class="text-gray-600 dark:text-gray-300 mb-3">
+      <p class="text-ptt-secondary mb-3">
         {lang === 'es' ? 'Error al cargar más capítulos.' : 'Failed to load more chapters.'}
       </p>
       <button
         on:click={loadMore}
-        class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        class="px-4 py-2 text-sm bg-ptt-primary text-white rounded-lg hover:bg-ptt-primary-strong transition-colors"
       >
         {t.retry}
       </button>
@@ -366,16 +366,16 @@ function formatDate(pubDate: string): string {
   <!-- Series complete end cap -->
   {#if allLoaded && renderedPosts.length > 0}
     <div class="flex flex-col items-center gap-4 pt-8 pb-6">
-      <div class="w-12 h-12 rounded-full bg-green-500 shadow-lg shadow-green-500/25 flex items-center justify-center ring-4 ring-green-500/10 dark:ring-green-500/20">
+      <div class="w-12 h-12 rounded-full bg-ptt-success shadow-lg shadow-ptt-success/25 flex items-center justify-center ring-4 ring-ptt-success/15">
         <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <div class="bg-white dark:bg-gray-800 px-8 py-4 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 text-center">
-        <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+      <div class="bg-ptt-bg-elevated px-8 py-4 rounded-2xl shadow-md border border-ptt-border text-center">
+        <p class="text-sm font-semibold text-ptt-secondary">
           {lang === 'es' ? 'Serie completa' : 'Series complete'}
         </p>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+        <p class="text-sm text-ptt-secondary mt-1">
           {totalCount} {t.seriesPage.chapters}
         </p>
       </div>

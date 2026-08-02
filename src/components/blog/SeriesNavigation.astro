@@ -28,24 +28,24 @@ const nextSlug = seriesInfo.nextPost
 <nav
   id="series-navigation"
   aria-label={`${t.seriesPartOf}: ${localizedTitle}`}
-  class="mt-12 scroll-mt-24 rounded-xl border border-blue-200 bg-blue-50/50 p-6 dark:border-blue-800 dark:bg-blue-950/30"
+  class="mt-12 scroll-mt-24 rounded-xl border border-ptt-primary/25 bg-ptt-primary-soft p-6"
 >
   <div class="mb-4">
-    <p class="mb-1 text-sm font-medium text-blue-700 dark:text-blue-300">
+    <p class="mb-1 text-sm font-medium text-ptt-primary">
       {t.seriesPartOf}
     </p>
-    <h2 class="text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
+    <h2 class="text-lg font-bold text-ptt sm:text-xl">
       {localizedTitle}
     </h2>
     {localizedDescription && (
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+      <p class="mt-1 text-sm text-ptt-secondary">
         {localizedDescription}
       </p>
     )}
   </div>
 
   <div class="mb-5">
-    <h3 class="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+    <h3 class="mb-2 text-sm font-semibold text-ptt-secondary">
       {t.seriesToC}
     </h3>
     <ol class="space-y-1">
@@ -56,7 +56,7 @@ const nextSlug = seriesInfo.nextPost
         return (
           <li class="flex items-baseline gap-2 text-sm">
             {isCurrent ? (
-              <span class="flex items-baseline gap-2 font-bold text-gray-900 dark:text-white" aria-current="page">
+              <span class="flex items-baseline gap-2 font-bold text-ptt" aria-current="page">
                 <span class="shrink-0 font-mono text-xs">
                   {t.seriesChapter(item.seriesOrder)}
                 </span>
@@ -65,7 +65,7 @@ const nextSlug = seriesInfo.nextPost
             ) : (
               <a
                 href={href}
-                class="flex items-baseline gap-2 text-blue-600 transition-colors hover:text-blue-800 hover:underline dark:text-blue-400 dark:hover:text-blue-200"
+                class="flex items-baseline gap-2 text-ptt-primary transition-colors hover:text-ptt-primary-strong hover:underline"
                 data-umami-event="series_nav"
                 data-umami-event-action="chapter"
               >
@@ -85,7 +85,7 @@ const nextSlug = seriesInfo.nextPost
   <div class="mb-4 text-center">
     <a
       href={`${blogPrefix}/series/${seriesInfo.name}/`}
-      class="inline-flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+      class="inline-flex items-center gap-1 text-sm font-medium text-ptt-primary transition-colors hover:text-ptt-primary-strong"
       data-umami-event="series_nav"
       data-umami-event-action="view_series"
     >
@@ -93,11 +93,11 @@ const nextSlug = seriesInfo.nextPost
     </a>
   </div>
 
-  <div class="flex items-center justify-between gap-4 border-t border-blue-200 pt-4 dark:border-blue-800">
+  <div class="flex items-center justify-between gap-4 border-t border-ptt-primary/25 pt-4">
     {previousSlug ? (
       <a
         href={`${blogPrefix}/${previousSlug}/`}
-        class="flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+        class="flex items-center gap-1 text-sm font-medium text-ptt-primary transition-colors hover:text-ptt-primary-strong"
         data-umami-event="series_nav"
         data-umami-event-action="prev"
       >
@@ -110,7 +110,7 @@ const nextSlug = seriesInfo.nextPost
     {nextSlug ? (
       <a
         href={`${blogPrefix}/${nextSlug}/`}
-        class="flex items-center gap-1 text-sm font-medium text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+        class="flex items-center gap-1 text-sm font-medium text-ptt-primary transition-colors hover:text-ptt-primary-strong"
         data-umami-event="series_nav"
         data-umami-event-action="next"
       >

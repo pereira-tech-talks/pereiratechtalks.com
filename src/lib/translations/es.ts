@@ -47,6 +47,9 @@ export const es: SiteTranslations = {
     tagline: 'Comunidad tecnológica bilingüe · Pereira, Risaralda · Desde 2014',
     description:
       'Somos <strong class="text-white">Pereira Tech Talks</strong> — 80+ meetups mensuales desde 2014, 10 ediciones de <em>Pereira Tech Day</em>, una Escuela de Speakers activa y una biblioteca bilingüe. La comunidad tech de Pereira que sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.',
+    ctaMeetups: 'Ver meetups',
+    ctaPtd: 'Pereira Tech Day 2026',
+    ctaContact: 'Escríbenos',
     typewriterWords: [
       'Meetups mensuales desde 2014',
       'Pereira Tech Day, cada año',
@@ -59,7 +62,8 @@ export const es: SiteTranslations = {
   // Homepage sections
   homeSections: {
     about: {
-      title: "Somos <span class='text-secondary'>Pereira Tech Talks</span>",
+      title:
+        "Somos <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
       description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 80+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo bilingüe. Todo abierto.<br /><br />
 Cada recapitulación, slide y artículo se publica en español e inglés, estructurado para ser tan útil a agentes de IA como a personas. Speakers que empezaron en este salón hoy dan keynotes en Bogotá, Medellín y Ciudad de México; sus colegas trabajan en startups YC, proyectos patrocinados por GitHub y equipos de ingeniería internacionales.<br /><br />
 Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser ponente, patrocinar o sumarte.`,
@@ -72,6 +76,42 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       description:
         'Cada mes nos reunimos para compartir charlas, talleres y sesiones lightning sobre los temas que están dando forma a la industria: IA y agentes, plataformas web, devops, móvil, seguridad y el oficio de construir software a escala. Una vez al año celebramos el <strong>Pereira Tech Day</strong>, nuestra conferencia insignia donde la comunidad se encuentra con ponentes internacionales y aliados. Durante el año dirigimos la <strong>Escuela de Speakers</strong> para hacer crecer nuevas voces y el club de lectura <strong>La Biblioteca del Mañana</strong> para conectar la tecnología con la historia humana en sentido amplio. Todas y todos son bienvenidos: quienes están comenzando, las personas con mayor experiencia, estudiantes, fundadores, curiosas y curiosos.',
       cta: 'Conócenos más',
+    },
+    meetups: {
+      eyebrow: 'Calendario',
+      upcomingTitle: 'Próximos meetups',
+      latestTitle: 'Últimos meetups',
+      cta: 'Ver todos los meetups',
+    },
+    verticals: {
+      eyebrow: 'Programas',
+      title: 'Programas de la comunidad',
+      subtitle:
+        'Cuatro frentes que sostienen lo que hacemos: meetups mensuales, Escuela de Speakers, La Biblioteca del Mañana y el Canal IA.',
+      cta: 'Conocer los programas',
+    },
+    ptd: {
+      eyebrow: 'Evento anual',
+      title: 'Pereira Tech Day',
+      subtitle:
+        'Una jornada al año donde la comunidad se reúne con speakers internacionales para celebrar lo que construimos.',
+      cta: 'Explorar todas las ediciones',
+    },
+    ptdStrip: {
+      title: 'Donde el talento encuentra oportunidad',
+      subtitle:
+        'Únete a la edición 2026 de Pereira Tech Day — charlas, talleres y la energía del mono aullador de la comunidad tech de Risaralda.',
+      cta: 'Explorar Pereira Tech Day 2026',
+      date: '22 de agosto de 2026',
+      venue: 'UTP — Auditorio Jorge Roa Martínez, Pereira',
+    },
+    sponsors: {
+      eyebrow: 'Aliados',
+      title: 'La comunidad existe gracias a',
+      subtitle:
+        'Empresas y aliados comunitarios que aportan venues, catering, becas y mentoría.',
+      cta: 'Ver todos los patrocinadores',
+      ctaJoin: 'Quiero patrocinar',
     },
     latestArticles: 'Últimos artículos',
     viewAllPosts: 'Ver todos los artículos',

@@ -47,6 +47,9 @@ export const en: SiteTranslations = {
     tagline: 'Bilingual tech community · Pereira, Risaralda · Since 2014',
     description:
       'We are <strong class="text-white">Pereira Tech Talks</strong> — 80+ monthly meetups since 2014, 10 <em>Pereira Tech Day</em> editions, an active Speaker School, and a bilingual library. Where Pereira’s tech community ships to YC startups, conference stages across Latin America, and global engineering roles.',
+    ctaMeetups: 'See meetups',
+    ctaPtd: 'Pereira Tech Day 2026',
+    ctaContact: 'Get in touch',
     typewriterWords: [
       'Monthly meetups since 2014',
       'Pereira Tech Day, every year',
@@ -59,7 +62,8 @@ export const en: SiteTranslations = {
   // Homepage sections
   homeSections: {
     about: {
-      title: "We are <span class='text-secondary'>Pereira Tech Talks</span>",
+      title:
+        "We are <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
       description: `On a February evening in 2014, eight developers crowded into a UTP classroom for the first PereiraJS meetup. Twelve years and 80+ meetups later, that small circle became Pereira Tech Talks — four flagship programs running in parallel: monthly meetups, the annual <strong>Pereira Tech Day</strong> conference, the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All bilingual. All open.<br /><br />
 Every recap, slide deck, and blog post is published in English and Spanish, structured to be just as useful to AI agents as to humans. Speakers who started in this room now keynote in Bogotá, Medellín, and Mexico City; alumni work at YC startups, GitHub-sponsored projects, and international engineering teams.<br /><br />
 Browse the catalog, attend the next meetup, or get in touch if you want to speak, sponsor, or join us.`,
@@ -72,6 +76,42 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       description:
         'Every month we gather to share talks, workshops, and lightning sessions on the topics shaping the industry: AI and agents, web platforms, devops, mobile, security, and the craft of building software at scale. Once a year we celebrate the <strong>Pereira Tech Day</strong>, our flagship conference where the community comes together with international speakers and partners. Throughout the year we run the <strong>Speaker School</strong> to grow new voices and the <strong>La Biblioteca del Mañana</strong> book club to connect technology with the broader human story. Everyone is welcome — beginners, seniors, students, founders, the curious.',
       cta: 'Learn more about us',
+    },
+    meetups: {
+      eyebrow: 'Calendar',
+      upcomingTitle: 'Upcoming meetups',
+      latestTitle: 'Latest meetups',
+      cta: 'See all meetups',
+    },
+    verticals: {
+      eyebrow: 'Programs',
+      title: 'Community programs',
+      subtitle:
+        'Four fronts that sustain what we do: monthly meetups, Speaker School, The Library of Tomorrow, and the AI Channel.',
+      cta: 'Explore the programs',
+    },
+    ptd: {
+      eyebrow: 'Annual event',
+      title: 'Pereira Tech Day',
+      subtitle:
+        'One day a year when the community comes together with international speakers to celebrate what we build.',
+      cta: 'Explore all editions',
+    },
+    ptdStrip: {
+      title: 'Where talent meets opportunity',
+      subtitle:
+        'Join the 2026 edition of Pereira Tech Day — talks, workshops, and the howler-monkey energy of the Risaralda tech community.',
+      cta: 'Explore Pereira Tech Day 2026',
+      date: 'August 22, 2026',
+      venue: 'UTP — Auditorio Jorge Roa Martínez, Pereira',
+    },
+    sponsors: {
+      eyebrow: 'Partners',
+      title: 'The community is powered by',
+      subtitle:
+        'Companies and community partners providing venues, catering, scholarships, and mentorship.',
+      cta: 'See all sponsors',
+      ctaJoin: 'Become a sponsor',
     },
     latestArticles: 'Latest Articles',
     viewAllPosts: 'View all posts',

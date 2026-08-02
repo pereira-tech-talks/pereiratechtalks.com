@@ -7,6 +7,7 @@ import ContactSection from '@/components/home/ContactSection.astro';
 import HeroSection from '@/components/home/HeroSection/HeroSection.astro';
 import { HomeSectionContentAlignmentEType } from '@/components/home/HomeSection/enum';
 import HomeSection from '@/components/home/HomeSection/HomeSection.astro';
+import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import LinkArrow from '@/components/ui/LinkArrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -25,6 +26,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
+const hs = t.homeSections;
 
 const upcomingMeetups = await getUpcomingMeetups();
 const latestMeetups = (await getMeetups()).slice(0, 3);
@@ -41,53 +43,15 @@ const meetupsToShow =
   upcomingMeetups.length > 0 ? upcomingMeetups.slice(0, 3) : latestMeetups;
 const meetupsHeading =
   upcomingMeetups.length > 0
-    ? lang === 'es'
-      ? 'Próximos meetups'
-      : 'Upcoming meetups'
-    : lang === 'es'
-      ? 'Últimos meetups'
-      : 'Latest meetups';
-const meetupsEyebrow = lang === 'es' ? 'Calendario' : 'Calendar';
-const meetupsCta = lang === 'es' ? 'Ver todos los meetups' : 'See all meetups';
-
-const verticalsHeading =
-  lang === 'es' ? 'Programas de la comunidad' : 'Community programs';
-const verticalsEyebrow = lang === 'es' ? 'Estructura' : 'Structure';
-const verticalsSubtitle =
-  lang === 'es'
-    ? 'Cuatro frentes que sostienen lo que hacemos: meetups mensuales, Speaker School, La Biblioteca del Mañana y el Canal IA.'
-    : 'Four community fronts that sustain what we do: monthly meetups, Speaker School, The Library of Tomorrow, and the AI Channel.';
-const verticalsCta =
-  lang === 'es' ? 'Conocer los programas' : 'Explore the programs';
-
-const ptdEyebrow = lang === 'es' ? 'Evento anual' : 'Annual event';
-const ptdHeading = 'Pereira Tech Day';
-const ptdSubtitle =
-  lang === 'es'
-    ? 'Una jornada al año donde la comunidad se reúne con speakers internacionales para celebrar lo que construimos.'
-    : 'One day a year when the community comes together with international speakers to celebrate what we build.';
-const ptdCta =
-  lang === 'es' ? 'Explorar todas las ediciones' : 'Explore all editions';
-
-const sponsorsEyebrow = lang === 'es' ? 'Aliados' : 'Partners';
-const sponsorsHeading =
-  lang === 'es'
-    ? 'La comunidad existe gracias a'
-    : 'The community is powered by';
-const sponsorsSubtitle =
-  lang === 'es'
-    ? 'Empresas y aliados comunitarios que aportan venues, catering, becas y mentoría.'
-    : 'Companies and community partners providing venues, catering, scholarships, and mentorship.';
-const sponsorsCta =
-  lang === 'es' ? 'Ver todos los patrocinadores' : 'See all sponsors';
-const sponsorsCtaJoin =
-  lang === 'es' ? 'Quiero patrocinar' : 'Become a sponsor';
+    ? hs.meetups.upcomingTitle
+    : hs.meetups.latestTitle;
 ---
 
 <MainLayout
   lang={lang}
   title={t.siteTitleFull}
   description={t.siteDescription}
+  image="/images/home/hero-light.webp"
   keywords={
     lang === 'en'
       ? [
@@ -115,27 +79,26 @@ const sponsorsCtaJoin =
     tagline={t.hero.tagline}
     description={t.hero.description}
     typewriterWords={t.hero.typewriterWords}
+    meetupsLabel={t.hero.ctaMeetups}
+    meetupsHref={`${prefix}/meetups/`}
+    ptdLabel={t.hero.ctaPtd}
+    ptdHref={`${prefix}/pereira-tech-days/2026/`}
+    contactLabel={t.hero.ctaContact}
+    contactHref={`${prefix}/contact/`}
   />
 
-  <HomeSection
-    title={t.homeSections.about.title}
-    description={t.homeSections.about.description}
-    ctaText={t.homeSections.about.cta}
-    ctaLink={`${prefix}/about`}
-    cta2Text={t.homeSections.about.cta2}
-    cta2Link={`${prefix}/contact`}
-    image="/images/profile.png"
-    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+  <PtdAnnouncementStrip
+    lang={lang}
+    title={hs.ptdStrip.title}
+    subtitle={hs.ptdStrip.subtitle}
+    ctaLabel={hs.ptdStrip.cta}
+    dateLabel={hs.ptdStrip.date}
+    venueLabel={hs.ptdStrip.venue}
   />
 
-  {/* Meetups */}
   {
     meetupsToShow.length > 0 && (
-      <Section
-        eyebrow={meetupsEyebrow}
-        title={meetupsHeading}
-        surface="alt"
-      >
+      <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {meetupsToShow.map((meetup) => (
             <li>
@@ -144,42 +107,18 @@ const sponsorsCtaJoin =
           ))}
         </ul>
         <div class="mt-10">
-          <LinkArrow href={`${prefix}/meetups/`}>{meetupsCta}</LinkArrow>
+          <LinkArrow href={`${prefix}/meetups/`}>{hs.meetups.cta}</LinkArrow>
         </div>
       </Section>
     )
   }
 
-  {/* Verticals */}
-  {
-    verticals.length > 0 && (
-      <Section
-        eyebrow={verticalsEyebrow}
-        title={verticalsHeading}
-        subtitle={verticalsSubtitle}
-      >
-        <ul class="grid gap-6 sm:grid-cols-2">
-          {verticals.map((vertical) => (
-            <li>
-              <VerticalCard vertical={vertical} lang={lang} />
-            </li>
-          ))}
-        </ul>
-        <div class="mt-10">
-          <LinkArrow href={`${prefix}/verticals/`}>{verticalsCta}</LinkArrow>
-        </div>
-      </Section>
-    )
-  }
-
-  {/* Pereira Tech Day */}
   {
     lastEdition && (
       <Section
-        eyebrow={ptdEyebrow}
-        title={ptdHeading}
-        subtitle={ptdSubtitle}
-        surface="alt"
+        eyebrow={hs.ptd.eyebrow}
+        title={hs.ptd.title}
+        subtitle={hs.ptd.subtitle}
       >
         <div class="grid gap-6 lg:grid-cols-2">
           <EditionCard edition={lastEdition} lang={lang} />
@@ -191,23 +130,56 @@ const sponsorsCtaJoin =
             ))}
         </div>
         <div class="mt-10">
-          <LinkArrow href={`${prefix}/pereira-tech-days/`}>{ptdCta}</LinkArrow>
+          <LinkArrow href={`${prefix}/pereira-tech-days/`}>{hs.ptd.cta}</LinkArrow>
         </div>
       </Section>
     )
   }
 
-  {/* Sponsors strip */}
+  {
+    verticals.length > 0 && (
+      <Section
+        eyebrow={hs.verticals.eyebrow}
+        title={hs.verticals.title}
+        subtitle={hs.verticals.subtitle}
+        surface="alt"
+      >
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {verticals.map((vertical) => (
+            <li>
+              <VerticalCard vertical={vertical} lang={lang} />
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/verticals/`}>{hs.verticals.cta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  <HomeSection
+    title={hs.about.title}
+    description={hs.about.description}
+    ctaText={hs.about.cta}
+    ctaLink={`${prefix}/about`}
+    cta2Text={hs.about.cta2}
+    cta2Link={`${prefix}/contact`}
+    image="/images/home/hero-light.webp"
+    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+  />
+
   {
     sponsors.length > 0 && (
       <Section
-        eyebrow={sponsorsEyebrow}
-        title={sponsorsHeading}
-        subtitle={sponsorsSubtitle}
+        eyebrow={hs.sponsors.eyebrow}
+        title={hs.sponsors.title}
+        subtitle={hs.sponsors.subtitle}
+        surface="alt"
       >
-        <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
           {sponsors.map((sponsor) => (
-            <li class="flex h-24 items-center justify-center rounded-xl bg-white dark:bg-gray-900 ring-1 ring-gray-200 dark:ring-gray-800 p-4">
+            <li class="flex h-24 items-center justify-center rounded-xl bg-ptt-bg-elevated p-4 ring-1 ring-ptt-border">
               <a
                 href={sponsor.data.url}
                 target="_blank"
@@ -236,16 +208,14 @@ const sponsorsCtaJoin =
           ))}
         </ul>
         <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
-          <LinkArrow href={`${prefix}/sponsors/`}>{sponsorsCta}</LinkArrow>
-          <LinkArrow href={`${prefix}/sponsor-us/`}>{sponsorsCtaJoin}</LinkArrow>
+          <LinkArrow href={`${prefix}/sponsors/`}>{hs.sponsors.cta}</LinkArrow>
+          <LinkArrow href={`${prefix}/sponsor-us/`}>{hs.sponsors.ctaJoin}</LinkArrow>
         </div>
       </Section>
     )
   }
 
-  {/* Blog preview */}
-  <BlogPreviewSection lang={lang} grouped surface="alt" />
+  <BlogPreviewSection lang={lang} grouped surface="default" />
 
-  {/* Contact */}
   <ContactSection lang={lang} />
 </MainLayout>

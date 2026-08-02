@@ -63,7 +63,7 @@ async function handleSubmit() {
 }
 </script>
 
-<div class="rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+<div class="rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-6">
   {#if formState === 'success'}
     <div
       bind:this={successRef}
@@ -72,41 +72,41 @@ async function handleSubmit() {
       role="status"
       aria-live="polite"
     >
-      <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+      <h3 class="text-lg font-bold text-ptt">
         {t.engagement.newsletterSuccessTitle}
       </h3>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+      <p class="mt-1 text-sm text-ptt-secondary">
         {t.engagement.newsletterSuccessMessage}
       </p>
       <button
         type="button"
         on:click={() => { localStorage.removeItem(STORAGE_KEY); email = ''; emailError = ''; formState = 'idle'; }}
-        class="mt-3 text-sm font-medium text-blue-600 underline-offset-2 hover:underline dark:text-blue-400"
+        class="mt-3 text-sm font-medium text-ptt-primary underline-offset-2 hover:underline"
       >
         {t.engagement.newsletterResubscribe}
       </button>
     </div>
   {:else if formState === 'subscribed'}
     <div class="text-center" role="status">
-      <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+      <h3 class="text-lg font-bold text-ptt">
         {t.engagement.newsletterSuccessTitle}
       </h3>
-      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+      <p class="mt-1 text-sm text-ptt-secondary">
         {t.engagement.newsletterAlreadySubscribed}
       </p>
       <button
         type="button"
         on:click={() => { localStorage.removeItem(STORAGE_KEY); email = ''; emailError = ''; formState = 'idle'; }}
-        class="mt-3 text-sm font-medium text-blue-600 underline-offset-2 hover:underline dark:text-blue-400"
+        class="mt-3 text-sm font-medium text-ptt-primary underline-offset-2 hover:underline"
       >
         {t.engagement.newsletterResubscribe}
       </button>
     </div>
   {:else}
-    <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+    <h3 class="text-lg font-bold text-ptt">
       {t.engagement.newsletterTitle}
     </h3>
-    <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+    <p class="mt-1 text-sm text-ptt-secondary">
       {t.engagement.newsletterDescription}
     </p>
     <form
@@ -127,10 +127,10 @@ async function handleSubmit() {
           disabled={formState === 'submitting'}
           aria-describedby={emailError ? 'newsletter-email-error' : undefined}
           aria-invalid={emailError ? 'true' : undefined}
-          class="flex-1 rounded-lg border bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 dark:focus:border-blue-400 dark:focus:ring-blue-400/20 disabled:opacity-60 disabled:cursor-not-allowed {emailError ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'}"
+          class="flex-1 rounded-lg border bg-ptt-bg-elevated px-4 py-2.5 text-sm text-ptt placeholder-ptt-muted transition-colors focus:border-ptt-primary focus:outline-none focus:ring-2 focus:ring-ptt-primary/20 disabled:opacity-60 disabled:cursor-not-allowed {emailError ? 'border-ptt-danger' : 'border-ptt-border'}"
         />
         {#if emailError}
-          <p id="newsletter-email-error" class="mt-1 text-sm text-red-600 dark:text-red-400" aria-live="polite">
+          <p id="newsletter-email-error" class="mt-1 text-sm text-ptt-danger" aria-live="polite">
             {emailError}
           </p>
         {/if}
@@ -138,7 +138,7 @@ async function handleSubmit() {
       <button
         type="submit"
         disabled={formState === 'submitting'}
-        class="shrink-0 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-400/20 disabled:opacity-60 disabled:cursor-not-allowed"
+        class="shrink-0 rounded-lg bg-ptt-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ptt-primary-strong focus:outline-none focus:ring-2 focus:ring-ptt-primary/20 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {#if formState === 'submitting'}
           {t.engagement.newsletterSubmitting}
@@ -147,7 +147,7 @@ async function handleSubmit() {
         {/if}
       </button>
     </form>
-    <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
+    <p class="mt-2 text-xs text-ptt-secondary">
       {t.engagement.newsletterPrivacy}
     </p>
   {/if}

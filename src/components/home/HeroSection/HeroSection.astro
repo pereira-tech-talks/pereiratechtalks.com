@@ -6,113 +6,176 @@ export interface Props {
   tagline?: string;
   description: string;
   typewriterWords: string[];
+  meetupsLabel: string;
+  meetupsHref: string;
+  ptdLabel: string;
+  ptdHref: string;
+  contactLabel: string;
+  contactHref: string;
 }
-const { name, tagline, description, typewriterWords } = Astro.props;
+
+const {
+  name,
+  tagline,
+  description,
+  typewriterWords,
+  meetupsLabel,
+  meetupsHref,
+  ptdLabel,
+  ptdHref,
+  contactLabel,
+  contactHref,
+} = Astro.props;
 ---
 
 <section
-  class="bg-main relative h-[calc(100dvh-68px)] flex flex-col justify-center items-center transition-colors duration-300 overflow-hidden"
+  class="relative min-h-[calc(100dvh-4.25rem)] flex flex-col justify-end sm:justify-center overflow-hidden"
 >
-  <!-- Grid background -->
-  <div aria-hidden="true" class="absolute inset-0 pointer-events-none z-0">
-    <svg width="100%" height="100%" class="w-full h-full" style="opacity:0.05">
-      <defs>
-        <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#fff" stroke-width="1"
-          ></path>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)"></rect>
-    </svg>
-  </div>
-  <div
-    class="main-container relative z-10 flex flex-col items-center justify-center w-full pt-2 pb-2 sm:pt-4 sm:pb-4 md:pt-8 md:pb-8 [@media(max-height:900px)]:pt-2 [@media(max-height:900px)]:pb-2 [@media(max-height:820px)]:scale-95 [@media(max-height:760px)]:scale-[0.88] [@media(max-height:700px)]:scale-[0.82] [@media(max-height:640px)]:scale-[0.78]"
-  >
+  <!-- Full-bleed photo — light / dark variants -->
+  <div aria-hidden="true" class="absolute inset-0 z-0">
     <img
-      src="/images/pereira-tech-talks/logo-white.png"
-      alt="Pereira Tech Talks logo"
-      width={178}
-      height={178}
+      src="/images/home/hero-light.webp"
+      alt=""
+      width={1920}
+      height={1080}
+      class="absolute inset-0 h-full w-full object-cover dark:hidden"
       loading="eager"
       fetchpriority="high"
-      class="w-32 sm:w-36 md:w-44 lg:w-48 xl:w-52 max-w-full mx-auto drop-shadow-xl transition-transform duration-500 hover:scale-105 [@media(max-height:760px)]:w-28"
-      draggable="false"
-      style="user-select: none;"
     />
-    {tagline && (
-      <p
-        class="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 text-center font-medium tracking-wide [@media(max-height:760px)]:text-sm"
-      >
-        {tagline}
-      </p>
-    )}
-    <h1
-      class="mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white text-center drop-shadow-lg leading-tight px-4"
-    >
-      {name}
-    </h1>
-    <div class="mt-2 sm:mt-3 w-full px-4">
-      <TypewriterWords words={typewriterWords} />
-    </div>
-    <p
-      class="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-gray-300 text-center max-w-2xl px-4 [@media(max-height:760px)]:text-sm"
-      set:html={description}
-    />
-    <!-- Social icons -->
-    <div class="flex gap-3 sm:gap-5 md:gap-6 mt-3 sm:mt-5">
-      <a
-        href="https://github.com/pereiratechtalks"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
-      >
-        <img src="/icons/github_white.svg" alt="" width={28} height={28} loading="eager" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/pereira-tech-talks/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
-      >
-        <img src="/icons/linkedin_white.svg" alt="" width={28} height={28} loading="eager" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-      </a>
-      <a
-        href="https://x.com/pereiratechtalks"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="X (Twitter)"
-        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
-      >
-        <img src="/icons/x_white.svg" alt="" width={28} height={28} loading="eager" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-      </a>
-      <a
-        href="https://www.instagram.com/pereiratechtalks"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
-      >
-        <img
-          src="/icons/instagram_white.svg"
-          alt=""
-          width={28}
-          height={28}
-          loading="eager"
-          class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7"
-        />
-      </a>
-    </div>
     <img
-      src="/icons/chevron_down_white.svg"
+      src="/images/home/hero-dark.webp"
       alt=""
-      aria-hidden="true"
-      width={24}
-      height={24}
-      class="mt-3 sm:mt-5 w-4 sm:w-5 md:w-6 [@media(max-height:760px)]:mt-2 [@media(max-height:760px)]:w-4 animate-chevron-bounce"
-      draggable="false"
-      style="user-select: none;"
+      width={1920}
+      height={1080}
+      class="absolute inset-0 hidden h-full w-full object-cover dark:block"
+      loading="eager"
+      fetchpriority="high"
     />
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/35 dark:from-black/85 dark:via-black/65 dark:to-black/45"
+    >
+    </div>
+  </div>
+
+  <div
+    class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24"
+  >
+    <div class="max-w-2xl text-left">
+      <img
+        src="/images/pereira-tech-talks/logo-white.png"
+        alt=""
+        width={178}
+        height={178}
+        loading="eager"
+        fetchpriority="high"
+        class="h-16 w-auto sm:h-20 drop-shadow-xl"
+        draggable="false"
+      />
+      {
+        tagline && (
+          <p class="mt-4 text-sm sm:text-base text-white/85 font-medium tracking-wide">
+            {tagline}
+          </p>
+        )
+      }
+      <h1
+        class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg"
+      >
+        {name}
+      </h1>
+      <div class="mt-3 w-full max-w-xl">
+        <TypewriterWords words={typewriterWords} />
+      </div>
+      <p
+        class="mt-4 text-base sm:text-lg text-white/90 max-w-xl leading-relaxed"
+        set:html={description}
+      />
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={meetupsHref}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ptt-text hover:bg-white/90 transition-colors"
+        >
+          {meetupsLabel}
+        </a>
+        <a
+          href={ptdHref}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-ptt-primary/90 dark:bg-ptt-primary-dark dark:text-ptt-bg transition-colors"
+        >
+          {ptdLabel}
+        </a>
+        <a
+          href={contactHref}
+          class="inline-flex min-h-[44px] items-center rounded-full border border-white/70 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+        >
+          {contactLabel}
+        </a>
+      </div>
+      <div class="mt-8 flex gap-3">
+        <a
+          href="https://github.com/pereiratechtalks"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/icons/github_white.svg"
+            alt=""
+            width={28}
+            height={28}
+            loading="eager"
+            class="w-6 h-6"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/pereira-tech-talks/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/icons/linkedin_white.svg"
+            alt=""
+            width={28}
+            height={28}
+            loading="eager"
+            class="w-6 h-6"
+          />
+        </a>
+        <a
+          href="https://x.com/pereiratechtalks"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X (Twitter)"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/icons/x_white.svg"
+            alt=""
+            width={28}
+            height={28}
+            loading="eager"
+            class="w-6 h-6"
+          />
+        </a>
+        <a
+          href="https://www.instagram.com/pereiratechtalks"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-1.5 hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/icons/instagram_white.svg"
+            alt=""
+            width={28}
+            height={28}
+            loading="eager"
+            class="w-6 h-6"
+          />
+        </a>
+      </div>
+    </div>
   </div>
 </section>

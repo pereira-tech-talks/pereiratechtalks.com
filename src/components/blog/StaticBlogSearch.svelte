@@ -301,8 +301,8 @@ onMount(() => {
     </div>
   {:else if isLoading}
     <div class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-      <p class="mt-2 text-gray-600 dark:text-gray-300">{t.searching}</p>
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-ptt-primary"></div>
+      <p class="mt-2 text-ptt-secondary">{t.searching}</p>
     </div>
   {:else if isSearching}
     <SearchResults filteredPosts={searchResults} {searchQuery} {lang} searchResultsWithMatches={searchResultsWithMatches} topicTagNames={topicTags} subtopicTagNames={subtopicTags} {subtopicAccentByName} />

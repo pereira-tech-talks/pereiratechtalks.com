@@ -53,6 +53,9 @@ export interface SiteTranslations {
     tagline: string;
     description: string;
     typewriterWords: string[];
+    ctaMeetups: string;
+    ctaPtd: string;
+    ctaContact: string;
   };
 
   // Homepage sections
@@ -68,6 +71,38 @@ export interface SiteTranslations {
       subtitle: string;
       description: string;
       cta: string;
+    };
+    meetups: {
+      eyebrow: string;
+      upcomingTitle: string;
+      latestTitle: string;
+      cta: string;
+    };
+    verticals: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      cta: string;
+    };
+    ptd: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      cta: string;
+    };
+    ptdStrip: {
+      title: string;
+      subtitle: string;
+      cta: string;
+      date: string;
+      venue: string;
+    };
+    sponsors: {
+      eyebrow: string;
+      title: string;
+      subtitle: string;
+      cta: string;
+      ctaJoin: string;
     };
     latestArticles: string;
     viewAllPosts: string;

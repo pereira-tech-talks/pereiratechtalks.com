@@ -34,19 +34,19 @@ $: showingText = t.showingArticles(currentPagePosts, totalPosts);
 $: availableText = t.articlesAvailable(totalPosts);
 </script>
 
-<h1 class="mb-2 text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl md:text-5xl">
+<h1 class="mb-2 text-3xl font-extrabold text-ptt sm:text-4xl md:text-5xl">
   {headerTitle}
 </h1>
-<p class="mb-5 max-w-3xl text-base text-gray-600 dark:text-gray-300 sm:text-lg">
+<p class="mb-5 max-w-3xl text-base text-ptt-secondary sm:text-lg">
   {headerSubtitle}
 </p>
 
 <!-- Post counter -->
-<div class="mb-4 text-gray-600 dark:text-gray-300">
+<div class="mb-4 text-ptt-secondary">
   {#if totalPages > 1}
     <p class="text-sm">
       {showingText}
-      <span class="text-gray-600 dark:text-gray-300">({t.pageOf(currentPage, totalPages)})</span>
+      <span class="text-ptt-secondary">({t.pageOf(currentPage, totalPages)})</span>
     </p>
   {:else}
     <p class="text-sm">
@@ -59,7 +59,7 @@ $: availableText = t.articlesAvailable(totalPosts);
 <div class="mb-4">
   <a
     href={`${basePrefix}/blog/series/`}
-    class="inline-flex items-center gap-1.5 text-sm text-purple-700 transition-colors hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-200"
+    class="inline-flex items-center gap-1.5 text-sm text-ptt-primary transition-colors hover:text-ptt-primary-strong"
     on:click={() => trackEvent(EVENTS.TAG_FILTER, { tag: 'series' })}
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
@@ -77,8 +77,8 @@ $: availableText = t.articlesAvailable(totalPosts);
     href={`${basePrefix}/blog/`}
     class={`inline-flex items-center rounded px-3 py-1 text-xs font-semibold transition-colors ${
       !currentTag
-        ? "bg-blue-600 text-white shadow-sm"
-        : "bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+        ? "bg-ptt-primary text-white shadow-sm"
+        : "bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary/15"
     }`}
   >
     {t.allPosts}
@@ -90,8 +90,8 @@ $: availableText = t.articlesAvailable(totalPosts);
       href={`${basePrefix}/blog/tag/${tag}/`}
       class={`inline-flex items-center rounded px-3 py-1 text-xs font-semibold transition-colors ${
         currentTag === tag
-          ? "bg-blue-600 text-white shadow-sm"
-          : "bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
+          ? "bg-ptt-primary text-white shadow-sm"
+          : "bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary/15"
       }`}
       on:click={() => trackEvent(EVENTS.TAG_FILTER, { tag })}
     >
@@ -108,8 +108,8 @@ $: availableText = t.articlesAvailable(totalPosts);
         href={`${basePrefix}/blog/tag/${topic}/`}
         class={`rounded px-2.5 py-0.5 text-xs transition-colors ${
           currentTag === topic
-            ? "border border-gray-800 bg-gray-800 text-white dark:border-gray-200 dark:bg-gray-200 dark:text-gray-900"
-            : "border border-gray-200 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100"
+            ? "border border-ptt-text bg-ptt-text text-ptt-bg"
+            : "border border-ptt-border bg-ptt-bg-elevated text-ptt-secondary hover:border-ptt-border-strong hover:text-ptt"
         }`}
         on:click={() => trackEvent(EVENTS.TAG_FILTER, { tag: topic })}
       >
@@ -127,12 +127,12 @@ $: availableText = t.articlesAvailable(totalPosts);
         href={`${basePrefix}/blog/tag/${sub}/`}
         class={`inline-flex items-center rounded px-2 py-0.5 text-xs transition-colors ${
           currentTag === sub
-            ? "border border-gray-800 bg-gray-800 text-white dark:border-gray-200 dark:bg-gray-200 dark:text-gray-900"
-            : "bg-gray-50 text-gray-700 border border-dashed border-gray-300 hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100"
+            ? "border border-ptt-text bg-ptt-text text-ptt-bg"
+            : "bg-ptt-bg-elevated text-ptt-secondary border border-dashed border-ptt-border hover:bg-ptt-primary-soft hover:border-ptt-border-strong hover:text-ptt"
         }`}
         on:click={() => trackEvent(EVENTS.TAG_FILTER, { tag: sub })}
       >
-        <span class={`mr-1 ${currentTag === sub ? 'opacity-70' : (subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300')}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+        <span class={`mr-1 ${currentTag === sub ? 'opacity-70' : (subtopicAccentByName[sub] || 'text-ptt-secondary')}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
       </a>
     {/each}
   </div>
