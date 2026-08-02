@@ -51,6 +51,14 @@
   --color-ptt-text: #0f2a2c;
   --color-ptt-text-secondary: #4a6164;
   --color-ptt-text-muted: #6e8589;
+  /* Short aliases for the two most-used text tokens. Dozens of components
+   * across the codebase (and AGENTS.md itself) reference `text-ptt` /
+   * `text-ptt-secondary` as shorthand for `text-ptt-text` /
+   * `text-ptt-text-secondary`. These re-export via var() so they inherit
+   * the same automatic light/dark flip — no separate .dark declaration
+   * needed. */
+  --color-ptt: var(--color-ptt-text);
+  --color-ptt-secondary: var(--color-ptt-text-secondary);
   --color-ptt-success: #2e8757;
   --color-ptt-warning: #c68417;
   --color-ptt-danger: #b83a3a;
