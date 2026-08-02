@@ -593,6 +593,58 @@ export interface SiteTranslations {
     writtenBy: string;
   };
 
+  // Certificates / diplomas
+  certificates: {
+    pageTitle: string;
+    pageDescription: string;
+    diplomaTitle: string;
+    preamble: string;
+    attendedPrefix: string;
+    sealLabel: string;
+    issuedBy: string;
+    verifyLabel: string;
+    qrAlt: string;
+    demoBanner: string;
+    backToEvent: string;
+    watermarkRevoked: string;
+    roles: {
+      attendee: string;
+      speaker: string;
+      volunteer: string;
+    };
+    actions: {
+      print: string;
+      downloadJson: string;
+      copyLink: string;
+      share: string;
+      copied: string;
+      shared: string;
+      shareFailed: string;
+    };
+    verify: {
+      title: string;
+      description: string;
+      intro: string;
+      idLabel: string;
+      idPlaceholder: string;
+      submit: string;
+      statusLabel: string;
+      subject: string;
+      event: string;
+      certId: string;
+      viewDiploma: string;
+      emptyHint: string;
+      statuses: {
+        valid: string;
+        revoked: string;
+        replaced: string;
+        expired: string;
+        unknown: string;
+      };
+      reasons: Record<string, string>;
+    };
+  };
+
   // Errors
   searchError: string;
   loadError: string;

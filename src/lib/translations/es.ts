@@ -894,6 +894,69 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     writtenBy: 'Escrito por',
   },
 
+  certificates: {
+    pageTitle: 'Certificado de asistencia',
+    pageDescription:
+      'Diploma digital para {name} — {event}. Imprime, guarda como PDF o comparte tu enlace personal.',
+    diplomaTitle: 'Certificado de Asistencia',
+    preamble: 'Se certifica que',
+    attendedPrefix: 'asistió a',
+    sealLabel: 'Documento\nVerificable',
+    issuedBy: 'Emitido por',
+    verifyLabel: 'Verificar',
+    qrAlt: 'Código QR para verificar este certificado',
+    demoBanner:
+      'Diploma de demostración — destinatario ficticio. Los certificados de producción usarán el mismo patrón de URL personal.',
+    backToEvent: 'Volver a Pereira Tech Day',
+    watermarkRevoked: 'Revocado',
+    roles: {
+      attendee: 'Asistente',
+      speaker: 'Ponente',
+      volunteer: 'Voluntario',
+    },
+    actions: {
+      print: 'Imprimir / Guardar PDF',
+      downloadJson: 'Descargar JSON',
+      copyLink: 'Copiar enlace',
+      share: 'Compartir',
+      copied: 'Enlace copiado',
+      shared: 'Compartido',
+      shareFailed: 'No se pudo copiar o compartir. Inténtalo de nuevo.',
+    },
+    verify: {
+      title: 'Verificar un certificado',
+      description:
+        'Consulta el estado de un diploma de asistencia de Pereira Tech Talks con su identificador opaco.',
+      intro:
+        'Ingresa el ID del certificado que aparece en el diploma o escanea el código QR para confirmar su autenticidad.',
+      idLabel: 'ID del certificado',
+      idPlaceholder: 'ej. ptd26_demo_a7k3m9qx',
+      submit: 'Verificar',
+      statusLabel: 'Estado',
+      subject: 'Destinatario',
+      event: 'Evento',
+      certId: 'ID del certificado',
+      viewDiploma: 'Ver diploma',
+      emptyHint:
+        'Pega un ID de certificado para ver su estado de verificación.',
+      statuses: {
+        valid: 'Válido',
+        revoked: 'Revocado',
+        replaced: 'Reemplazado',
+        expired: 'Expirado',
+        unknown: 'Desconocido',
+      },
+      reasons: {
+        missing_id: 'No se proporcionó un ID de certificado.',
+        not_found: 'Ningún certificado coincide con este ID.',
+        revoked: 'Este certificado fue revocado por el emisor.',
+        replaced:
+          'Este certificado fue reemplazado por un documento más reciente.',
+        expired: 'Este certificado está fuera de su ventana de validez.',
+      },
+    },
+  },
+
   // Errors
   searchError: 'Ocurrió un error al buscar. Por favor, inténtalo de nuevo.',
   loadError:

@@ -890,6 +890,67 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     writtenBy: 'Written by',
   },
 
+  certificates: {
+    pageTitle: 'Certificate of attendance',
+    pageDescription:
+      'Digital diploma for {name} — {event}. Print, save as PDF, or share your personal link.',
+    diplomaTitle: 'Certificate of Attendance',
+    preamble: 'This certifies that',
+    attendedPrefix: 'attended',
+    sealLabel: 'Verifiable\nDocument',
+    issuedBy: 'Issued by',
+    verifyLabel: 'Verify',
+    qrAlt: 'QR code to verify this certificate',
+    demoBanner:
+      'Demo diploma — fictional recipient. Production certificates will use the same personal URL pattern.',
+    backToEvent: 'Back to Pereira Tech Day',
+    watermarkRevoked: 'Revoked',
+    roles: {
+      attendee: 'Attendee',
+      speaker: 'Speaker',
+      volunteer: 'Volunteer',
+    },
+    actions: {
+      print: 'Print / Save PDF',
+      downloadJson: 'Download JSON',
+      copyLink: 'Copy link',
+      share: 'Share',
+      copied: 'Link copied',
+      shared: 'Shared',
+      shareFailed: 'Could not copy or share. Try again.',
+    },
+    verify: {
+      title: 'Verify a certificate',
+      description:
+        'Check the status of a Pereira Tech Talks attendance diploma using its opaque identifier.',
+      intro:
+        'Enter the certificate ID from the diploma or scan the QR code to confirm authenticity.',
+      idLabel: 'Certificate ID',
+      idPlaceholder: 'e.g. ptd26_demo_a7k3m9qx',
+      submit: 'Verify',
+      statusLabel: 'Status',
+      subject: 'Recipient',
+      event: 'Event',
+      certId: 'Certificate ID',
+      viewDiploma: 'View diploma',
+      emptyHint: 'Paste a certificate ID to see its verification status.',
+      statuses: {
+        valid: 'Valid',
+        revoked: 'Revoked',
+        replaced: 'Replaced',
+        expired: 'Expired',
+        unknown: 'Unknown',
+      },
+      reasons: {
+        missing_id: 'No certificate ID was provided.',
+        not_found: 'No certificate matches this ID.',
+        revoked: 'This certificate was revoked by the issuer.',
+        replaced: 'This certificate was replaced by a newer document.',
+        expired: 'This certificate is past its validity window.',
+      },
+    },
+  },
+
   // Errors
   searchError: 'An error occurred while searching. Please try again.',
   loadError: 'Failed to load search index. Please refresh the page.',

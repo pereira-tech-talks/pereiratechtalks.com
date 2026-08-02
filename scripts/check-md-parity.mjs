@@ -43,6 +43,10 @@ const EXCLUDED_PATTERNS = [
   /^images(\/|$)/,
   /\/page\/\d+/,
   /\/tag\//,
+  // Personal diplomas + verify — noindex, opaque IDs (see CERTIFICATES.md)
+  /\/certificates(\/|$)/,
+  /^certificates(\/|$)/,
+  /^en\/certificates(\/|$)/,
 ];
 
 /**

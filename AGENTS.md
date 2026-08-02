@@ -13,6 +13,7 @@
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Vision, audiences, verticals, success metrics |
 | Blog | [Blog Posts](docs/features/BLOG_POSTS.md) | Tags, series, hero layouts, images, content lifecycle |
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
+| Certificates | [Certificates](docs/features/CERTIFICATES.md) | Individual diploma pages, print/PDF, verify UX, fixtures |
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
 | Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, PTT voice, vocabulary blocklist |
 | Content QA | [Content QA Checklist](docs/features/CONTENT_QA_CHECKLIST.md) | Bilingual parity, orthography, SEO/AEO, automated gates |

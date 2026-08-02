@@ -1,0 +1,50 @@
+---
+import CertificateVerify from '@/components/certificates/CertificateVerify.svelte';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const initialId = Astro.url.searchParams.get('id') ?? '';
+---
+
+<MainLayout
+  lang={lang}
+  title={t.certificates.verify.title}
+  description={t.certificates.verify.description}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+  <section class="mx-auto max-w-2xl px-4 py-12" data-testid="certificate-verify">
+    <h1 class="text-3xl font-bold text-ptt mb-2">{t.certificates.verify.title}</h1>
+    <p class="text-gray-600 dark:text-gray-300 mb-8">
+      {t.certificates.verify.intro}
+    </p>
+    <CertificateVerify
+      client:load
+      lang={lang}
+      formAction={`${prefix}/certificates/verify`}
+      initialId={initialId}
+      labels={{
+        idLabel: t.certificates.verify.idLabel,
+        idPlaceholder: t.certificates.verify.idPlaceholder,
+        submit: t.certificates.verify.submit,
+        statusLabel: t.certificates.verify.statusLabel,
+        subject: t.certificates.verify.subject,
+        event: t.certificates.verify.event,
+        certId: t.certificates.verify.certId,
+        viewDiploma: t.certificates.verify.viewDiploma,
+        emptyHint: t.certificates.verify.emptyHint,
+        statuses: t.certificates.verify.statuses,
+        reasons: t.certificates.verify.reasons,
+      }}
+    />
+  </section>
+</MainLayout>

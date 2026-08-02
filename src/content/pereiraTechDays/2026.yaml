@@ -329,8 +329,14 @@ faqs:
       en: Will I receive a certificate of attendance?
       es: ¿Recibiré un certificado de asistencia?
     answer:
-      en: Yes, certificates are emailed a few days after the event.
-      es: Sí, este será enviado vía correo electrónico días después del evento.
+      en: >-
+        Yes. After the event you receive a personal diploma link you can open,
+        print or save as PDF, and share. You can also verify it online.
+        Demo example (attendee): /pereira-tech-days/2026/certificates/ptd26_demo_a7k3m9qx
+      es: >-
+        Sí. Después del evento recibes un enlace personal al diploma que puedes abrir,
+        imprimir o guardar como PDF, y compartir. También puedes verificarlo en línea.
+        Ejemplo de demostración (asistente): /pereira-tech-days/2026/certificates/ptd26_demo_a7k3m9qx
   - question:
       en: Do I need to bring a laptop?
       es: ¿Necesito llevar mi computador?

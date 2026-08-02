@@ -47,6 +47,7 @@ export default defineConfig({
       filter: (page) =>
         !page.includes('/internal/') &&
         !page.endsWith('/internal') &&
+        !page.includes('/certificates/') &&
         !/\/talks(\/|$)/.test(page),
     }),
     svelte(),
