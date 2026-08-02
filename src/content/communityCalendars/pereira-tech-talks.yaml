@@ -1,0 +1,13 @@
+name:
+  en: Pereira Tech Talks
+  es: Pereira Tech Talks
+description:
+  en: Monthly meetups, Speaker School sessions, Pereira Tech Day, and community workshops in Pereira.
+  es: Meetups mensuales, sesiones de la Escuela de Speakers, Pereira Tech Day y talleres de la comunidad en Pereira.
+googleCalendarId: pereiratechtalks@gmail.com
+color: "#1E6F5C"
+website: https://pereiratechtalks.org
+lumaUrl: https://luma.com/pertechtalks
+active: true
+order: 0
+primary: true

@@ -1,0 +1,12 @@
+name:
+  en: PereiraJS
+  es: PereiraJS
+description:
+  en: JavaScript and web platform meetups in Pereira — the community that grew into Pereira Tech Talks.
+  es: Meetups de JavaScript y plataforma web en Pereira — la comunidad que dio origen a Pereira Tech Talks.
+googleCalendarId: placeholder@group.calendar.google.com
+color: "#F7DF1E"
+website: https://pereirajs.org
+active: false
+order: 10
+primary: false

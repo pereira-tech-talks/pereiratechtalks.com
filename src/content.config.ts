@@ -397,6 +397,59 @@ const pereiraTechDays = defineCollection({
     lightningTalks: z.array(z.string()).default([]),
     sponsors: z.array(sponsorRef).default([]),
     organizers: z.array(z.string()).default([]),
+    collaborators: z.array(z.string()).default([]),
+    startTime: z.string().optional(),
+    endTime: z.string().optional(),
+    expectedAttendance: i18nStringOptional,
+    aboutTopics: z.array(i18nString).default([]),
+    aboutMedia: z
+      .object({
+        src: z.string(),
+        alt: i18nStringOptional,
+      })
+      .optional(),
+    faqs: z
+      .array(
+        z.object({
+          question: i18nString,
+          answer: i18nString,
+          linkUrl: z.string().optional(),
+          linkLabel: i18nStringOptional,
+        })
+      )
+      .default([]),
+    sponsorshipPlans: z
+      .array(
+        z.object({
+          tier: z.enum(['silver', 'gold', 'platinum']),
+          title: i18nString,
+          subtitle: i18nStringOptional,
+          price: z.string(),
+          period: i18nStringOptional,
+          featured: z.boolean().default(false),
+          benefits: z.array(i18nString).default([]),
+          ctaLabel: i18nString,
+          ctaUrl: z.string(),
+        })
+      )
+      .default([]),
+    extraPartnerships: z
+      .array(
+        z.object({
+          title: i18nString,
+          subtitle: i18nStringOptional,
+          items: z.array(
+            z.union([
+              z.object({ title: i18nString }),
+              z.object({ description: i18nString }),
+              z.object({ subtitle: i18nString }),
+            ])
+          ),
+          ctaLabel: i18nString,
+          ctaUrl: z.string(),
+        })
+      )
+      .default([]),
     communities: z
       .array(
         z.object({
@@ -566,6 +619,22 @@ const channels = defineCollection({
   }),
 });
 
+const communities = defineCollection({
+  loader: glob({ base: './src/content/communities', pattern: '**/*.yaml' }),
+  schema: z.object({
+    name: z.string(),
+    logo: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }),
+    url: z.url(),
+    focus: z.object({ en: z.string(), es: z.string() }).optional(),
+    description: i18nString,
+    status: z.enum(['active', 'past']).default('active'),
+    order: z.number().default(0),
+  }),
+});
+
 const contributors = defineCollection({
   // Distinct from `authors` (which stays the canonical author collection for
   // blog posts). Contributors include all kinds of community members:
@@ -618,6 +687,52 @@ const contributors = defineCollection({
 });
 
 /**
+ * Public Google Calendars for allied Pereira tech communities.
+ * IDs must be embeddable (public); no API keys.
+ */
+const communityCalendars = defineCollection({
+  loader: glob({
+    base: './src/content/communityCalendars',
+    pattern: '**/*.{yaml,yml}',
+  }),
+  schema: z
+    .object({
+      name: z.object({ en: z.string(), es: z.string() }),
+      description: z.object({ en: z.string(), es: z.string() }).optional(),
+      googleCalendarId: z.string().trim(),
+      color: hex,
+      website: z.string().optional(),
+      lumaUrl: z.string().optional(),
+      active: z.boolean().default(true),
+      order: z.number().int().default(0),
+      primary: z.boolean().default(false),
+    })
+    .superRefine((data, ctx) => {
+      const idPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$|^[^\s@]+@group(\.v)?\.calendar\.google\.com$/i;
+      if (data.active && !idPattern.test(data.googleCalendarId)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Active calendars need a valid public Google Calendar ID',
+          path: ['googleCalendarId'],
+        });
+      }
+      for (const [field, value] of [
+        ['website', data.website],
+        ['lumaUrl', data.lumaUrl],
+      ] as const) {
+        if (value && !value.startsWith('https://')) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `${field} must use https://`,
+            path: [field],
+          });
+        }
+      }
+    }),
+});
+
+/**
  * Site-wide top notifications / alerts with date windows.
  * Plain strings only (no HTML) — rendered as text in the bar/modal.
  */
@@ -662,6 +777,8 @@ export const collections = {
   talks,
   sponsors,
   channels,
+  communities,
   contributors,
+  communityCalendars,
   notifications,
 };

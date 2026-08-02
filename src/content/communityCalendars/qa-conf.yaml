@@ -1,0 +1,12 @@
+name:
+  en: QA Conf
+  es: QA Conf
+description:
+  en: Quality-assurance community events and conferences connected to Pereira’s tech ecosystem.
+  es: Eventos y conferencias de calidad de software conectados al ecosistema tech de Pereira.
+googleCalendarId: placeholder@group.calendar.google.com
+color: "#7C3AED"
+website: https://www.qaconf.co
+active: false
+order: 30
+primary: false

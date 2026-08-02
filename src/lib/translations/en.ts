@@ -290,6 +290,33 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     locationTitle: 'Location',
     locationText:
       'Based in Pereira, Risaralda, Colombia. Bilingual EN/ES. Open to remote partners and international speakers worldwide.',
+    quickLinksTitle: 'Quick links',
+    quickLinks: [
+      {
+        label: 'Call for Speakers',
+        href: '/en/call-for-speakers',
+        description: 'Submit a talk for meetups or Pereira Tech Day.',
+      },
+      {
+        label: 'Sponsor us',
+        href: '/en/sponsor-us',
+        description:
+          'Partner with the most active tech community in the Coffee Region.',
+      },
+      {
+        label: 'Channels',
+        href: '/en/channels',
+        description: 'Meetup.com, GitHub, LinkedIn, and more.',
+      },
+      {
+        label: 'Community calendar',
+        href: '/en/calendar',
+        description: 'Upcoming meetups and allied community events.',
+      },
+    ],
+    meetInPersonTitle: 'Meet us in person',
+    meetInPersonText:
+      'Most monthly meetups happen in Pereira — Universidad Tecnológica de Pereira, coworking spaces, and partner venues across Risaralda. Check the meetups page for the next date and venue.',
     prefillSubjects: {
       generalInquiry: 'General Inquiry',
       collaboration: 'Community Collaboration',
@@ -298,6 +325,103 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       startupCollaboration: 'Startup Collaboration',
       techTalkInvitation: 'Speaker Proposal',
     },
+  },
+
+  communitiesPage: {
+    title: 'Allied communities',
+    description:
+      'Allied tech communities in Pereira: PereiraJS, Python Pereira, JointDev, QA Conf, Backbone UTP, and more. A collaborative Coffee Region ecosystem.',
+    eyebrow: 'Ecosystem',
+    heroLead:
+      'Pereira Tech Talks does not exist in a vacuum. We grow alongside other city communities that share venues, calendars, and stages.',
+    narrativeTitle: 'One ecosystem, many communities',
+    narrativeText:
+      'Pereira Tech Talks is the umbrella for monthly meetups and Pereira Tech Day. Allied communities are specialized groups — JavaScript, Python, QA, university entrepreneurship — that co-produce events, cross-promote on channels, and extend the reach of tech in Risaralda.',
+    alliesTitle: 'Allied communities',
+    allianceTitle: 'How we collaborate',
+    allianceSteps: [
+      'Shared stages at Pereira Tech Day and flagship events',
+      'Cross-posts on Meetup.com, LinkedIn, and community channels',
+      'Co-organized thematic meetups and workshops',
+      'Cross-inviting speakers across programs',
+      'Public calendar at /calendar with allied community events',
+    ],
+    ctaTitle: 'Want your community to join?',
+    ctaDescription:
+      'If you lead a tech group in Pereira or Risaralda and want to explore a formal alliance, reach out. We are always open to new collaborations.',
+    ctaPrimary: 'Propose an alliance',
+    ctaSecondary: 'See our channels',
+    visitLabel: 'Visit community',
+  },
+
+  sponsorsPage: {
+    title: 'Sponsors',
+    description:
+      'Companies and community partners that make our meetups, Pereira Tech Days, and community programs possible.',
+    eyebrow: 'Partners',
+    intro: (count) =>
+      `${count} partners sustaining the community with venues, food, scholarships, and mentorship.`,
+    currentTitle: 'Current sponsors',
+    pastTitle: 'Past sponsors',
+    pastIntro:
+      'Organizations that supported previous editions. We are grateful for every partnership that helped the community grow.',
+    sponsorUsLabel: 'Sponsor us: request the deck',
+    emptyTitle: 'No sponsors yet',
+    emptyDesc: 'Want to support the community? Reach out.',
+  },
+
+  contributorsPage: {
+    title: 'Team and community',
+    description:
+      'The people who keep Pereira Tech Talks alive: organizers, program leads, mentors, and volunteers.',
+    eyebrow: 'People',
+    intro: (count) =>
+      `${count} active people make up the extended community team. Want to join? Reach out.`,
+    currentTitle: 'Current team',
+    pastTitle: 'Alumni and past organizers',
+    pastIntro:
+      'Former organizers and contributors who shaped earlier chapters of the community. They remain part of the extended network.',
+    joinLabel: 'Join the team',
+    emptyTitle: 'No team members yet',
+    emptyDesc: "We're consolidating the directory. Check back soon.",
+  },
+
+  calendarPage: {
+    title: 'Community calendar',
+    subtitle: 'Pereira tech events in one place',
+    description:
+      'Shared calendar for Pereira’s tech community — Pereira Tech Talks meetups and allied community events across Risaralda.',
+    heroDescription:
+      'Browse upcoming meetups, workshops, and conferences from Pereira Tech Talks and allied communities. Filter by group, switch between month and agenda views, and subscribe with your favorite calendar app.',
+    eyebrow: 'Community',
+    hubEyebrow: 'Live schedule',
+    filterLabel: 'Show calendars',
+    filterAll: 'All communities',
+    viewMonth: 'Month',
+    viewAgenda: 'Agenda',
+    legendLabel: 'Selected community calendars',
+    embedTitle: 'Community events calendar',
+    embedFallback:
+      'If the embed does not load, open the calendar directly in Google Calendar:',
+    openExternal: 'Open in Google Calendar',
+    subscribeIcs: 'Subscribe (ICS)',
+    lumaRsvp: 'RSVP on Luma',
+    websiteLink: 'Website',
+    noActiveCalendars:
+      'No public calendars are active yet. Browse our meetup archive or contact us to add your community.',
+    comingSoon: 'More communities coming soon',
+    inactiveNote:
+      'These allied groups are joining the hub. Organizers can share a public Google Calendar ID via our contact form.',
+    quickLinksEyebrow: 'Quick links',
+    quickLinksTitle: 'RSVP and archives',
+    meetupsLink: 'Meetup archive',
+    lumaLink: 'PTT events on Luma',
+    contributeEyebrow: 'Contribute',
+    contributeTitle: 'List your community calendar',
+    contributeDescription:
+      'If you run a Pereira tech meetup or user group, make your Google Calendar public and send us the ID. We will add a color-coded feed to this hub after a quick review.',
+    contributeCta: 'Propose your calendar',
+    breadcrumbHome: 'Home',
   },
 
   contactSection: {
@@ -510,6 +634,43 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       "Sorry, the page you are looking for doesn't exist or may have been moved. Try navigating back to the homepage or searching the blog.",
     backHome: 'Go back home',
     searchBlog: 'Search the blog',
+  },
+
+  ptdPage: {
+    recordingCta: 'Watch event recording',
+    schedule: 'Schedule',
+    talks: 'Talks',
+    speakers: 'Speakers',
+    gallery: 'Gallery',
+    galleryMemories: 'Event memories',
+    sponsors: 'Sponsors',
+    communities: 'Allied communities',
+    communitiesOrganizes: 'Organizes',
+    organizers: 'Organizing team',
+    collaborators: 'Collaborators',
+    about: 'About Pereira Tech Day',
+    pricing: 'Sponsorship plans',
+    faq: 'Frequently asked questions',
+    joinTitle: 'Join the community',
+    joinSubtitle:
+      'Meetups every month, an annual conference, and channels to keep learning together in Pereira.',
+    joinCta: 'Explore Pereira Tech Talks',
+    lightningTitle: 'Lightning talks',
+    lightningTagline: 'Short talks',
+    subscribe: {
+      copy: 'Get notified when registration opens for the event. Do not miss it!',
+      emailLabel: 'Email',
+      emailPlaceholder: 'Enter your email address',
+      button: 'Subscribe',
+      submitting: 'Sending…',
+      success: 'Registered!',
+      error: 'Could not subscribe. Try again.',
+    },
+    indexFeatured: 'Featured edition',
+    indexUpcoming: 'Upcoming edition',
+    indexPast: 'Past editions',
+    indexIntro:
+      'The community flagship conference — one full day of talks, panels, and networking in Pereira since 2017.',
   },
 
   // Blog post engagement

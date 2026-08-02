@@ -290,6 +290,33 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     locationTitle: 'Ubicación',
     locationText:
       'Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.',
+    quickLinksTitle: 'Enlaces rápidos',
+    quickLinks: [
+      {
+        label: 'Call for Speakers',
+        href: '/call-for-speakers',
+        description: 'Postula una charla para meetups o Pereira Tech Day.',
+      },
+      {
+        label: 'Patrocínanos',
+        href: '/sponsor-us',
+        description:
+          'Aliá tu marca con la comunidad tech más activa del Eje Cafetero.',
+      },
+      {
+        label: 'Canales',
+        href: '/channels',
+        description: 'Meetup.com, GitHub, LinkedIn y más.',
+      },
+      {
+        label: 'Calendario comunitario',
+        href: '/calendar',
+        description: 'Próximos meetups y eventos de comunidades aliadas.',
+      },
+    ],
+    meetInPersonTitle: 'Encuéntranos en persona',
+    meetInPersonText:
+      'La mayoría de meetups mensuales son en Pereira — Universidad Tecnológica de Pereira, coworkings y venues aliados en Risaralda. Revisa la página de meetups para la próxima fecha y lugar.',
     prefillSubjects: {
       generalInquiry: 'Consulta general',
       collaboration: 'Colaboración con la comunidad',
@@ -298,6 +325,103 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       startupCollaboration: 'Colaboración con startup',
       techTalkInvitation: 'Propuesta de ponencia',
     },
+  },
+
+  communitiesPage: {
+    title: 'Comunidades aliadas',
+    description:
+      'Comunidades tech aliadas en Pereira: PereiraJS, Python Pereira, JointDev, QA Conf, Backbone UTP y más. Ecosistema colaborativo del Eje Cafetero.',
+    eyebrow: 'Ecosistema',
+    heroLead:
+      'Pereira Tech Talks no existe en el vacío. Crecemos junto a otras comunidades de la ciudad que comparten venues, calendarios y escenarios.',
+    narrativeTitle: 'Un ecosistema, muchas comunidades',
+    narrativeText:
+      'Pereira Tech Talks es el paraguas de meetups mensuales y Pereira Tech Day. Las comunidades aliadas son grupos especializados — JavaScript, Python, QA, emprendimiento universitario — que co-producen eventos, hacen cross-promo en canales y amplían el alcance del tech en Risaralda.',
+    alliesTitle: 'Comunidades aliadas',
+    allianceTitle: 'Cómo colaboramos',
+    allianceSteps: [
+      'Escenarios compartidos en Pereira Tech Day y eventos insignia',
+      'Cross-post en Meetup.com, LinkedIn y canales comunitarios',
+      'Meetups temáticos y talleres co-organizados',
+      'Invitación cruzada de ponentes entre programas',
+      'Calendario público en /calendar con eventos de comunidades aliadas',
+    ],
+    ctaTitle: '¿Tu comunidad quiere sumarse?',
+    ctaDescription:
+      'Si lideras un grupo tech en Pereira o Risaralda y quieres explorar una alianza formal, escríbenos. Siempre estamos abiertos a nuevas colaboraciones.',
+    ctaPrimary: 'Proponer alianza',
+    ctaSecondary: 'Ver nuestros canales',
+    visitLabel: 'Visitar comunidad',
+  },
+
+  sponsorsPage: {
+    title: 'Patrocinadores',
+    description:
+      'Empresas y aliados comunitarios que hacen posibles los meetups, los Pereira Tech Days y los programas de la comunidad.',
+    eyebrow: 'Aliados',
+    intro: (count) =>
+      `${count} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`,
+    currentTitle: 'Patrocinadores actuales',
+    pastTitle: 'Patrocinadores anteriores',
+    pastIntro:
+      'Organizaciones que apoyaron ediciones previas. Agradecemos cada alianza que ayudó a la comunidad a crecer.',
+    sponsorUsLabel: 'Patrocínanos: solicita el deck',
+    emptyTitle: 'Aún no hay patrocinadores registrados',
+    emptyDesc: '¿Te interesa apoyar la comunidad? Escríbenos.',
+  },
+
+  contributorsPage: {
+    title: 'Equipo y comunidad',
+    description:
+      'Las personas que sostienen Pereira Tech Talks: organizadores, líderes de programa, mentores y voluntarios.',
+    eyebrow: 'Personas',
+    intro: (count) =>
+      `${count} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`,
+    currentTitle: 'Equipo actual',
+    pastTitle: 'Alumni y organizadores anteriores',
+    pastIntro:
+      'Organizadores y contribuidores de capítulos anteriores de la comunidad. Siguen siendo parte de la red extendida.',
+    joinLabel: 'Únete al equipo',
+    emptyTitle: 'Aún no hay miembros registrados',
+    emptyDesc: 'Estamos consolidando el directorio. Vuelve pronto.',
+  },
+
+  calendarPage: {
+    title: 'Calendario comunitario',
+    subtitle: 'Eventos tech de Pereira en un solo lugar',
+    description:
+      'Calendario compartido de la comunidad tech de Pereira: meetups de Pereira Tech Talks y eventos de comunidades aliadas en Risaralda.',
+    heroDescription:
+      'Explora próximos meetups, talleres y conferencias de Pereira Tech Talks y comunidades aliadas. Filtra por grupo, alterna entre vista mensual y agenda, y suscríbete con tu app de calendario favorita.',
+    eyebrow: 'Comunidad',
+    hubEyebrow: 'Agenda en vivo',
+    filterLabel: 'Mostrar calendarios',
+    filterAll: 'Todas las comunidades',
+    viewMonth: 'Mes',
+    viewAgenda: 'Agenda',
+    legendLabel: 'Calendarios comunitarios seleccionados',
+    embedTitle: 'Calendario de eventos comunitarios',
+    embedFallback:
+      'Si el embed no carga, abre el calendario directamente en Google Calendar:',
+    openExternal: 'Abrir en Google Calendar',
+    subscribeIcs: 'Suscribirse (ICS)',
+    lumaRsvp: 'RSVP en Luma',
+    websiteLink: 'Sitio web',
+    noActiveCalendars:
+      'Aún no hay calendarios públicos activos. Revisa nuestro archivo de meetups o escríbenos para sumar tu comunidad.',
+    comingSoon: 'Más comunidades muy pronto',
+    inactiveNote:
+      'Estos grupos aliados se están sumando al hub. Las organizaciones pueden compartir un ID público de Google Calendar mediante el formulario de contacto.',
+    quickLinksEyebrow: 'Enlaces rápidos',
+    quickLinksTitle: 'RSVP y archivos',
+    meetupsLink: 'Archivo de meetups',
+    lumaLink: 'Eventos PTT en Luma',
+    contributeEyebrow: 'Contribuir',
+    contributeTitle: 'Publica el calendario de tu comunidad',
+    contributeDescription:
+      'Si organizas un meetup o grupo de usuarios tech en Pereira, haz público tu Google Calendar y envíanos el ID. Añadiremos un feed con color propio después de una revisión rápida.',
+    contributeCta: 'Proponer tu calendario',
+    breadcrumbHome: 'Inicio',
   },
 
   contactSection: {
@@ -514,6 +638,43 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Lo sentimos, la página que buscas no existe o pudo haber sido movida. Intenta volver a la página de inicio o buscar en el blog.',
     backHome: 'Volver al inicio',
     searchBlog: 'Buscar en el blog',
+  },
+
+  ptdPage: {
+    recordingCta: 'Ver grabación del evento',
+    schedule: 'Programa',
+    talks: 'Charlas',
+    speakers: 'Ponentes',
+    gallery: 'Galería',
+    galleryMemories: 'Memorias del evento',
+    sponsors: 'Patrocinadores',
+    communities: 'Comunidades aliadas',
+    communitiesOrganizes: 'Organiza',
+    organizers: 'Equipo organizador',
+    collaborators: 'Colaboradores',
+    about: 'Sobre Pereira Tech Day',
+    pricing: 'Planes de patrocinio',
+    faq: 'Preguntas frecuentes',
+    joinTitle: 'Únete a la comunidad',
+    joinSubtitle:
+      'Meetups cada mes, una conferencia anual y canales para seguir aprendiendo juntos en Pereira.',
+    joinCta: 'Explorar Pereira Tech Talks',
+    lightningTitle: 'Lightning talks',
+    lightningTagline: 'Charlas cortas',
+    subscribe: {
+      copy: 'Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!',
+      emailLabel: 'Correo electrónico',
+      emailPlaceholder: 'Ingresa tu correo electrónico',
+      button: 'Suscribirse',
+      submitting: 'Enviando…',
+      success: '¡Registrado!',
+      error: 'No se pudo suscribir. Intenta de nuevo.',
+    },
+    indexFeatured: 'Edición destacada',
+    indexUpcoming: 'Próxima edición',
+    indexPast: 'Ediciones pasadas',
+    indexIntro:
+      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira desde 2017.',
   },
 
   // Blog post engagement

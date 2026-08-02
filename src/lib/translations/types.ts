@@ -169,6 +169,10 @@ export interface SiteTranslations {
     socialTitle: string;
     locationTitle: string;
     locationText: string;
+    quickLinksTitle: string;
+    quickLinks: { label: string; href: string; description: string }[];
+    meetInPersonTitle: string;
+    meetInPersonText: string;
     prefillSubjects: {
       generalInquiry: string;
       collaboration: string;
@@ -177,6 +181,81 @@ export interface SiteTranslations {
       startupCollaboration: string;
       techTalkInvitation: string;
     };
+  };
+
+  calendarPage: {
+    title: string;
+    subtitle: string;
+    description: string;
+    heroDescription: string;
+    eyebrow: string;
+    hubEyebrow: string;
+    filterLabel: string;
+    filterAll: string;
+    viewMonth: string;
+    viewAgenda: string;
+    legendLabel: string;
+    embedTitle: string;
+    embedFallback: string;
+    openExternal: string;
+    subscribeIcs: string;
+    lumaRsvp: string;
+    websiteLink: string;
+    noActiveCalendars: string;
+    comingSoon: string;
+    inactiveNote: string;
+    quickLinksEyebrow: string;
+    quickLinksTitle: string;
+    meetupsLink: string;
+    lumaLink: string;
+    contributeEyebrow: string;
+    contributeTitle: string;
+    contributeDescription: string;
+    contributeCta: string;
+    breadcrumbHome: string;
+  };
+
+  communitiesPage: {
+    title: string;
+    description: string;
+    eyebrow: string;
+    heroLead: string;
+    narrativeTitle: string;
+    narrativeText: string;
+    alliesTitle: string;
+    allianceTitle: string;
+    allianceSteps: string[];
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    visitLabel: string;
+  };
+
+  sponsorsPage: {
+    title: string;
+    description: string;
+    eyebrow: string;
+    intro: (count: number) => string;
+    currentTitle: string;
+    pastTitle: string;
+    pastIntro: string;
+    sponsorUsLabel: string;
+    emptyTitle: string;
+    emptyDesc: string;
+  };
+
+  contributorsPage: {
+    title: string;
+    description: string;
+    eyebrow: string;
+    intro: (count: number) => string;
+    currentTitle: string;
+    pastTitle: string;
+    pastIntro: string;
+    joinLabel: string;
+    emptyTitle: string;
+    emptyDesc: string;
   };
 
   // Homepage Let's Connect section
@@ -300,6 +379,42 @@ export interface SiteTranslations {
     message: string;
     backHome: string;
     searchBlog: string;
+  };
+
+  // Pereira Tech Day edition pages
+  ptdPage: {
+    recordingCta: string;
+    schedule: string;
+    talks: string;
+    speakers: string;
+    gallery: string;
+    galleryMemories: string;
+    sponsors: string;
+    communities: string;
+    communitiesOrganizes: string;
+    organizers: string;
+    collaborators: string;
+    about: string;
+    pricing: string;
+    faq: string;
+    joinTitle: string;
+    joinSubtitle: string;
+    joinCta: string;
+    lightningTitle: string;
+    lightningTagline: string;
+    subscribe: {
+      copy: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      button: string;
+      submitting: string;
+      success: string;
+      error: string;
+    };
+    indexFeatured: string;
+    indexUpcoming: string;
+    indexPast: string;
+    indexIntro: string;
   };
 
   // Blog post engagement

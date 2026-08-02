@@ -119,6 +119,34 @@ const blog = defineCollection({
 });
 ```
 
+### Community calendar feeds
+
+The `/calendar` page embeds **public** Google Calendar IDs from the `communityCalendars` content collection. Security rules:
+
+- **No Google API keys** in the repo or client bundle — only embeddable public calendar IDs (`googleCalendarId`).
+- **HTTPS only** for `website` and `lumaUrl` fields (enforced by Zod at build time).
+- **Calendar ID validation** rejects URL-shaped values (`http://`, `https://`) so embed `src` params cannot be hijacked to third-party origins.
+- **ICS subscribe links** are built server-side from validated IDs; users leave the site only to `calendar.google.com`.
+- **iframe** loads Google-hosted content only; no `sandbox` attribute (breaks Google Calendar UI). Rely on Google origin isolation.
+
+To add a calendar, organizers must make the Google Calendar public and share the ID via the contact form — never share service-account credentials.
+
+### Contact form (`/contact`)
+
+The contact form (`ContactForm.svelte` + optional Cloudflare Pages Function at `/api/contact`) follows this threat model:
+
+| Control | Implementation |
+|---------|----------------|
+| Honeypot | Hidden `website` field — submissions with any value are rejected client-side (`validateContactForm`) and should be dropped server-side |
+| Reason allowlist | Only values from `t.contactPage.reasonOptions` are accepted |
+| Input bounds | Subject ≤ 140 chars, message ≤ 2000 chars (`sanitizeContactText`) |
+| Email format | Basic pattern check before submit |
+| No secrets in client | API keys for Resend live only in Cloudflare env vars, never in the Astro bundle |
+| Rate limiting | Enforced at the Cloudflare Function layer (document expected limits in function code) |
+| Validation tests | `tests/unit/lib/contact-form.test.ts` covers happy path, honeypot, and invalid reason |
+
+Prefill query params (`topic`, `subject`, `message`) are sanitized on mount; never render raw query strings as HTML.
+
 ### External Links
 
 When linking to external sites:
