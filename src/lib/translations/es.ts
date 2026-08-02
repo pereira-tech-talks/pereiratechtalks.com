@@ -357,7 +357,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
-      'Empresas y aliados comunitarios que hacen posibles los meetups, los Pereira Tech Days y los programas de la comunidad.',
+      'Conoce a las empresas y aliados comunitarios que hacen posibles los meetups, Pereira Tech Day y los programas bilingües de la comunidad.',
     eyebrow: 'Aliados',
     intro: (count) =>
       `${count} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`,
@@ -373,7 +373,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   contributorsPage: {
     title: 'Equipo y comunidad',
     description:
-      'Las personas que sostienen Pereira Tech Talks: organizadores, líderes de programa, mentores y voluntarios.',
+      'Conoce a organizadores, líderes de programa, mentores y voluntarios que sostienen Pereira Tech Talks — equipo actual y red alumni.',
     eyebrow: 'Personas',
     intro: (count) =>
       `${count} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`,
@@ -390,7 +390,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Calendario comunitario',
     subtitle: 'Eventos tech de Pereira en un solo lugar',
     description:
-      'Calendario compartido de la comunidad tech de Pereira: meetups de Pereira Tech Talks y eventos de comunidades aliadas en Risaralda.',
+      'Calendario compartido de la comunidad tech de Pereira: meetups de Pereira Tech Talks y eventos de comunidades aliadas en Risaralda, Colombia.',
     heroDescription:
       'Explora próximos meetups, talleres y conferencias de Pereira Tech Talks y comunidades aliadas. Filtra por grupo, alterna entre vista mensual y agenda, y suscríbete con tu app de calendario favorita.',
     eyebrow: 'Comunidad',
@@ -459,7 +459,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   blogTitle: 'Blog',
   blogHeading: 'Artículos e historias',
   blogDescription:
-    'Artículos, recapitulaciones y tutoriales de la comunidad Pereira Tech Talks',
+    'Artículos, recapitulaciones de meetups y tutoriales de Pereira Tech Talks — escritura bilingüe de la comunidad tech de Risaralda desde 2014.',
   allPosts: 'Todos los artículos',
   showingArticles: (showing, total) =>
     `Mostrando ${showing} de ${total} artículos`,

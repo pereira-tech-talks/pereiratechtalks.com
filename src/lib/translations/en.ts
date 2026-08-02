@@ -357,7 +357,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   sponsorsPage: {
     title: 'Sponsors',
     description:
-      'Companies and community partners that make our meetups, Pereira Tech Days, and community programs possible.',
+      'Meet the companies and community partners that make Pereira Tech Talks meetups, Pereira Tech Day, and bilingual programs possible.',
     eyebrow: 'Partners',
     intro: (count) =>
       `${count} partners sustaining the community with venues, food, scholarships, and mentorship.`,
@@ -373,7 +373,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   contributorsPage: {
     title: 'Team and community',
     description:
-      'The people who keep Pereira Tech Talks alive: organizers, program leads, mentors, and volunteers.',
+      'Meet the organizers, program leads, mentors, and volunteers who keep Pereira Tech Talks running — current team and alumni network.',
     eyebrow: 'People',
     intro: (count) =>
       `${count} active people make up the extended community team. Want to join? Reach out.`,
@@ -390,7 +390,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'Community calendar',
     subtitle: 'Pereira tech events in one place',
     description:
-      'Shared calendar for Pereira’s tech community — Pereira Tech Talks meetups and allied community events across Risaralda.',
+      'Shared calendar for Pereira’s tech community — Pereira Tech Talks meetups plus allied community events across Risaralda, Colombia.',
     heroDescription:
       'Browse upcoming meetups, workshops, and conferences from Pereira Tech Talks and allied communities. Filter by group, switch between month and agenda views, and subscribe with your favorite calendar app.',
     eyebrow: 'Community',
@@ -456,7 +456,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   blogTitle: 'Blog',
   blogHeading: 'Articles & Stories',
   blogDescription:
-    'Articles, recaps, and tutorials from the Pereira Tech Talks community',
+    'Articles, meetup recaps, and tutorials from Pereira Tech Talks — bilingual community writing from Risaralda’s tech scene since 2014.',
   allPosts: 'All Posts',
   showingArticles: (showing, total) =>
     `Showing ${showing} of ${total} articles`,
