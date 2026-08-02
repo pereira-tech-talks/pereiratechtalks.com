@@ -1,5 +1,5 @@
-import type { CollectionEntry } from 'astro:content';
 import { describe, expect, it } from 'vitest';
+import type { PereiraTechDay } from '@/lib/pereiraTechDay';
 import {
   buildEditionThemeCss,
   getEditionEndIso,
@@ -9,8 +9,8 @@ import {
 } from '@/lib/pereiraTechDay';
 
 const mockEdition = (
-  overrides: Partial<CollectionEntry<'pereiraTechDays'>['data']> = {}
-): CollectionEntry<'pereiraTechDays'> =>
+  overrides: Partial<PereiraTechDay['data']> = {}
+): PereiraTechDay =>
   ({
     id: '2026',
     collection: 'pereiraTechDays',
