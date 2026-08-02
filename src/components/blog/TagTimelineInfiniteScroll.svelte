@@ -225,14 +225,14 @@ function buildSeriesBadgeLabel(
                   {#if post.seriesSlug}
                     <a
                       href={`${prefix}/blog/series/${post.seriesSlug}/`}
-                      class="inline-flex items-center rounded-full border-2 border-blue-300 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 transition-colors hover:bg-blue-100 hover:border-blue-400 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-200 dark:hover:bg-blue-900/60 dark:hover:border-blue-600"
+                      class="inline-flex items-center rounded-full border-2 border-ptt-primary/40 bg-ptt-primary-soft px-2 py-0.5 text-[11px] font-medium text-ptt-primary transition-colors hover:bg-ptt-primary/15 hover:border-ptt-primary/60"
                       title={seriesBadgeLabel}
                     >
                       {post.seriesCurrent}/{post.seriesTotal}
                     </a>
                   {:else}
                     <span
-                      class="inline-flex items-center rounded-full border-2 border-blue-300 bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-blue-700 dark:border-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
+                      class="inline-flex items-center rounded-full border-2 border-ptt-primary/40 bg-ptt-primary-soft px-2 py-0.5 text-[11px] font-medium text-ptt-primary"
                       title={seriesBadgeLabel}
                     >
                       {post.seriesCurrent}/{post.seriesTotal}
@@ -244,7 +244,7 @@ function buildSeriesBadgeLabel(
                   {#each post.tags.filter((tag) => !topicTagNames.includes(tag)) as tag}
                     <a
                       href={`${prefix}/blog/tag/${tag}/`}
-                      class="text-xs px-2 py-0.5 rounded bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800 transition-colors"
+                      class="text-xs px-2 py-0.5 rounded bg-ptt-primary-soft text-ptt-primary hover:bg-ptt-primary/15 transition-colors"
                     >
                       #{t.tagNames[tag] || tag}
                     </a>
@@ -252,7 +252,7 @@ function buildSeriesBadgeLabel(
                   {#each post.tags.filter((tag) => topicTagNames.includes(tag) && !subtopicTagNames.includes(tag)) as topic}
                     <a
                       href={`${prefix}/blog/tag/${topic}/`}
-                      class="text-xs px-2 py-0.5 rounded border border-gray-200 bg-white text-gray-600 hover:border-gray-400 hover:text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+                      class="text-xs px-2 py-0.5 rounded border border-ptt-border bg-ptt-bg-elevated text-ptt-secondary hover:border-ptt-border-strong hover:text-ptt transition-colors"
                     >
                       {t.tagNames[topic] || topic}
                     </a>
@@ -260,9 +260,9 @@ function buildSeriesBadgeLabel(
                   {#each post.tags.filter((tag) => subtopicTagNames.includes(tag)) as sub}
                     <a
                       href={`${prefix}/blog/tag/${sub}/`}
-                      class="inline-flex items-center text-xs px-2 py-1 rounded bg-gray-50 text-gray-700 border border-dashed border-gray-300 hover:bg-gray-100 hover:border-gray-500 hover:text-gray-900 dark:bg-gray-800/60 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-400 dark:hover:text-gray-100 transition-colors"
+                      class="inline-flex items-center text-xs px-2 py-1 rounded bg-ptt-bg-elevated text-ptt-secondary border border-dashed border-ptt-border hover:bg-ptt-primary-soft hover:border-ptt-border-strong hover:text-ptt transition-colors"
                     >
-                      <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-gray-600 dark:text-gray-300'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
+                      <span class={`mr-1 ${subtopicAccentByName[sub] || 'text-ptt-secondary'}`} aria-hidden="true">›</span>{t.tagNames[sub] || sub}
                     </a>
                   {/each}
                 {/if}
@@ -286,7 +286,7 @@ function buildSeriesBadgeLabel(
         </span>
         <div
           aria-hidden="true"
-          class="w-8 h-8 border-4 border-secondary border-t-transparent rounded-full animate-spin"
+          class="w-8 h-8 border-4 border-ptt-primary border-t-transparent rounded-full animate-spin"
         ></div>
       </div>
     {/if}
@@ -294,12 +294,12 @@ function buildSeriesBadgeLabel(
     <!-- Error state -->
     {#if fetchError}
       <div role="alert" class="text-center py-8">
-        <p class="text-gray-600 dark:text-gray-300 mb-3">
+        <p class="text-ptt-secondary mb-3">
           {lang === 'es' ? 'Error al cargar más posts.' : 'Failed to load more posts.'}
         </p>
         <button
           on:click={loadMore}
-          class="px-4 py-2 text-sm bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors"
+          class="px-4 py-2 text-sm bg-ptt-primary text-white rounded-lg hover:bg-ptt-primary-strong transition-colors"
         >
           {lang === 'es' ? 'Reintentar' : 'Retry'}
         </button>
@@ -311,16 +311,16 @@ function buildSeriesBadgeLabel(
   <!-- Timeline end cap — outside the line container so the line terminates cleanly -->
   {#if allLoaded && renderedPosts.length > 0}
     <div class="flex flex-col items-center gap-4 pb-6">
-      <div class="w-12 h-12 rounded-full bg-secondary shadow-lg shadow-secondary/25 flex items-center justify-center ring-4 ring-secondary/10 dark:ring-secondary/20">
+      <div class="w-12 h-12 rounded-full bg-ptt-primary shadow-lg shadow-ptt-primary/25 flex items-center justify-center ring-4 ring-ptt-primary/15">
         <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <div class="bg-white dark:bg-gray-800 px-8 py-4 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 text-center">
-        <p class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+      <div class="bg-ptt-bg-elevated px-8 py-4 rounded-2xl shadow-md border border-ptt-border text-center">
+        <p class="text-sm font-semibold text-ptt-secondary">
           {lang === 'es' ? 'Has llegado al inicio' : "You've reached the beginning"}
         </p>
-        <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+        <p class="text-sm text-ptt-secondary mt-1">
           {renderedPosts.length} {lang === 'es' ? 'posts en total' : 'total posts'}
         </p>
       </div>

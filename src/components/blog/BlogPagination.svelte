@@ -82,7 +82,7 @@ function getVisiblePages() {
           <button
             on:click={() => handlePageChange(currentPage - 1)}
             aria-label={t.previous}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border rounded-md hover:bg-ptt-primary-soft"
           >
             {t.previous}
           </button>
@@ -91,7 +91,7 @@ function getVisiblePages() {
             href={getPageUrl(currentPage - 1)}
             on:click={() => trackEvent(EVENTS.PAGINATION_CLICK, { page: currentPage - 1 })}
             aria-label={t.previous}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border rounded-md hover:bg-ptt-primary-soft"
           >
             {t.previous}
           </a>
@@ -100,7 +100,7 @@ function getVisiblePages() {
 
       {#each visiblePages as page}
         {#if typeof page === 'string'}
-          <span class="px-2 text-gray-600 dark:text-gray-300" aria-hidden="true">...</span>
+          <span class="px-2 text-ptt-secondary" aria-hidden="true">...</span>
         {:else if isSearchMode}
           <button
             on:click={() => handlePageChange(page)}
@@ -108,8 +108,8 @@ function getVisiblePages() {
             aria-current={page === currentPage ? 'page' : undefined}
             class={`px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium rounded-md ${
               page === currentPage
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
+                ? 'bg-ptt-primary text-white'
+                : 'text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border hover:bg-ptt-primary-soft'
             }`}
           >
             {page}
@@ -122,8 +122,8 @@ function getVisiblePages() {
             aria-current={page === currentPage ? 'page' : undefined}
             class={`px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium rounded-md ${
               page === currentPage
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-600 bg-white border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
+                ? 'bg-ptt-primary text-white'
+                : 'text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border hover:bg-ptt-primary-soft'
             }`}
           >
             {page}
@@ -136,7 +136,7 @@ function getVisiblePages() {
           <button
             on:click={() => handlePageChange(currentPage + 1)}
             aria-label={t.next}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border rounded-md hover:bg-ptt-primary-soft"
           >
             {t.next}
           </button>
@@ -145,7 +145,7 @@ function getVisiblePages() {
             href={getPageUrl(currentPage + 1)}
             on:click={() => trackEvent(EVENTS.PAGINATION_CLICK, { page: currentPage + 1 })}
             aria-label={t.next}
-            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+            class="px-3 py-2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center text-sm font-medium text-ptt-secondary bg-ptt-bg-elevated border border-ptt-border rounded-md hover:bg-ptt-primary-soft"
           >
             {t.next}
           </a>
