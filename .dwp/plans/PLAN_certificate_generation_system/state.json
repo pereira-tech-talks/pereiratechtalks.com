@@ -1,0 +1,186 @@
+{
+  "schema": "https://deepworkplan.com/schema/plan-state/v1.json",
+  "plan": "PLAN_certificate_generation_system",
+  "updated_at": "2026-08-02T05:12:48Z",
+  "tasks": {
+    "1": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "2": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "3": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "4": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "5": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "6": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "7": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "8": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "9": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "10": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "11": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "12": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "13": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "14": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "15": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "16": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "17": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "18": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "19": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "20": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "21": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "22": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "23": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "24": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "25": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "26": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "27": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "28": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    },
+    "29": {
+      "status": "pending",
+      "gates": [],
+      "outcome": null,
+      "commit": null
+    }
+  },
+  "gates_summary": {
+    "passed": 0,
+    "failed": 0,
+    "pending": 29
+  }
+}
