@@ -1,6 +1,6 @@
 ---
 title: "Sobre Pereira Tech Talks"
-description: "Conoce a Pereira Tech Talks — la comunidad bilingüe de tecnología de Pereira, Risaralda. 84+ meetups mensuales desde 2014, 10 ediciones de Pereira Tech Day, la Escuela de Speakers y el club de lectura La Biblioteca del Mañana."
+description: "Conoce a Pereira Tech Talks — la comunidad bilingüe de tecnología de Pereira, Risaralda. 90+ meetups mensuales desde 2014, 10 ediciones de Pereira Tech Day, la Escuela de Speakers y el club de lectura La Biblioteca del Mañana."
 lastUpdated: 2026-06-02
 ---
 
@@ -35,7 +35,7 @@ El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gori
 
 - Fundada en Pereira, Risaralda, Colombia (febrero de 2014)
 - Comunidad bilingüe: español como idioma principal, inglés como segundo idioma de primera clase
-- 84+ meetups mensuales desde 2014
+- 90+ meetups mensuales desde 2014
 - 10 ediciones de Pereira Tech Day (2017–2026)
 - Voluntaria, sostenida por patrocinadores y gratuita
 - Contenido completamente legible por agentes de IA (AEO 100, Markdown-for-Agents en cada página)

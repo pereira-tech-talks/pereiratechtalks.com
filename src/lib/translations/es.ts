@@ -10,7 +10,7 @@ export const es: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Comunidad bilingüe de tecnología de Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day y Escuela de Speakers.',
+    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 90+ meetups mensuales, 10 ediciones de Pereira Tech Day y Escuela de Speakers.',
 
   // Navigation
   nav: {
@@ -46,7 +46,7 @@ export const es: SiteTranslations = {
   hero: {
     tagline: 'Comunidad tecnológica bilingüe · Pereira, Risaralda · Desde 2014',
     description:
-      'Somos <strong class="text-white">Pereira Tech Talks</strong> — 80+ meetups mensuales desde 2014, 10 ediciones de <em>Pereira Tech Day</em>, una Escuela de Speakers activa y una biblioteca bilingüe. La comunidad tech de Pereira que sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.',
+      'Somos <strong class="text-white">Pereira Tech Talks</strong> — 90+ meetups mensuales desde 2014, 10 ediciones de <em>Pereira Tech Day</em>, una Escuela de Speakers activa y una biblioteca bilingüe. La comunidad tech de Pereira que sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.',
     ctaMeetups: 'Ver meetups',
     ctaPtd: 'Pereira Tech Day 2026',
     ctaContact: 'Escríbenos',
@@ -64,7 +64,7 @@ export const es: SiteTranslations = {
     about: {
       title:
         "Somos <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
-      description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 80+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo bilingüe. Todo abierto.<br /><br />
+      description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 90+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo bilingüe. Todo abierto.<br /><br />
 Cada recapitulación, slide y artículo se publica en español e inglés, estructurado para ser tan útil a agentes de IA como a personas. Speakers que empezaron en este salón hoy dan keynotes en Bogotá, Medellín y Ciudad de México; sus colegas trabajan en startups YC, proyectos patrocinados por GitHub y equipos de ingeniería internacionales.<br /><br />
 Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser ponente, patrocinar o sumarte.`,
       cta: 'Sobre la comunidad',
@@ -136,7 +136,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     description:
       'Conoce Pereira Tech Talks — comunidad tech bilingüe en Pereira, Risaralda, desde 2014. Meetups, Pereira Tech Day, Escuela de Speakers y La Biblioteca del Mañana.',
     heroDescription:
-      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 80+ meetups mensuales, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
+      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 90+ meetups mensuales, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
     bioTitle: 'Quiénes somos',
     bioText:
       'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (10 ediciones desde 2017), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo bilingüe. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido es bilingüe por defecto.',
@@ -189,7 +189,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     quickFacts: [
       'Fundada en Pereira, Risaralda, Colombia (febrero de 2014)',
       'Comunidad bilingüe: español como idioma principal, inglés como segundo idioma de primera clase',
-      '84+ meetups mensuales desde 2014',
+      '90+ meetups mensuales desde 2014',
       '10 ediciones de Pereira Tech Day (2017–2026)',
       'Voluntaria, sostenida por patrocinadores y gratuita',
       'Contenido completamente legible por agentes de IA (AEO 100, Markdown-for-Agents en cada página)',

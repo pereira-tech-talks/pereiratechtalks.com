@@ -3,8 +3,8 @@ title:
   en: "Technologies de Vanguardia: Svelte y Blockchain al descubierto."
   es: "Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
 description:
-  en: "Historical Pereira Tech Talks meetup (2024-04-25). Original program: Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.."
-  es: "Meetup histórico de Pereira Tech Talks (2024-04-25). Programa original: Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.."
+  en: "Pereira Tech Talks meetup (2024-04-25). ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…"
+  es: "¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…"
 pubDate: 2024-04-25
 date: 2024-04-25
 venue:
@@ -36,15 +36,23 @@ draft: false
 
 **Charlas:**
 
+**Svelte: La Elegancia del Desarrollo Web Moderno.**
+Descubre cómo Svelte, a través de su enfoque en la eficiencia, la elegancia y la simplicidad, permite crear aplicaciones web con menos código y un rendimiento excepcional. Exploraremos sus características, ventajas, la vibrante comunidad que lo respalda y los recursos clave para que continúes aprendiendo.
+
+**Por qué deberías aprender Web3 y por dónde empezar?**
+Tal vez pienses que el blockchain es solo para actividades ilegales o una apuesta para hacerse rico rápidamente. ¡Pero hay mucho más! Blockchain es inevitable y las oportunidades laborales en este campo están en aumento. En esta charla, descubrirás por qué deberías involucrarte y cómo puedes empezar a prepararte para el futuro.
+
+> Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357/)
+
 ---
 
 ### Summary in English
 
-A 2024 Pereira Tech Talks meetup. ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y blockchain con dos temas fascinantes que no querrás…
+Pereira Tech Talks meetup (2024-04-25). ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…
 
 ---
 
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Content migrated from the production archive (`main` branch) for date/content parity.

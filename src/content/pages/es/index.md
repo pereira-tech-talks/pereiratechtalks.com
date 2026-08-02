@@ -1,12 +1,12 @@
 ---
 title: "Pereira Tech Talks — Comunidad bilingüe de tecnología de Pereira, Colombia"
-description: "Pereira Tech Talks (PTT) — 80+ meetups mensuales desde 2014, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y el club de lectura La Biblioteca del Mañana. Bilingüe EN/ES, voluntaria, abierta al mundo."
+description: "Pereira Tech Talks (PTT) — 90+ meetups mensuales desde 2014, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y el club de lectura La Biblioteca del Mañana. Bilingüe EN/ES, voluntaria, abierta al mundo."
 lastUpdated: 2026-08-02
 ---
 
 ## Comunidad tecnológica bilingüe · Pereira, Risaralda · Desde 2014
 
-**Pereira Tech Talks (PTT)** es la comunidad tecnológica de Pereira (Risaralda, Colombia). 80+ meetups mensuales desde 2014. 10 ediciones de Pereira Tech Day. Una Escuela de Speakers activa. El club de lectura La Biblioteca del Mañana. Una biblioteca bilingüe donde la comunidad tech de Pereira sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.
+**Pereira Tech Talks (PTT)** es la comunidad tecnológica de Pereira (Risaralda, Colombia). 90+ meetups mensuales desde 2014. 10 ediciones de Pereira Tech Day. Una Escuela de Speakers activa. El club de lectura La Biblioteca del Mañana. Una biblioteca bilingüe donde la comunidad tech de Pereira sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.
 
 **Próximo hito:** Pereira Tech Day 2026 — 22 de agosto de 2026 en la UTP (Auditorio Jorge Roa Martínez). Eslogan: *Donde el talento encuentra oportunidad*.
 
@@ -14,7 +14,7 @@ lastUpdated: 2026-08-02
 
 ## Dónde empezamos
 
-Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 80+ meetups después, PereiraJS se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo, cada recapitulación y slide publicados bilingüemente, cada página estructurada para ser tan útil a agentes de IA como a personas.
+Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 90+ meetups después, PereiraJS se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo, cada recapitulación y slide publicados bilingüemente, cada página estructurada para ser tan útil a agentes de IA como a personas.
 
 ---
 
@@ -33,7 +33,7 @@ Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón d
 
 - Fundada en Pereira, Risaralda, Colombia (2014)
 - Comunidad bilingüe: español e inglés; los slugs siempre en inglés
-- 80+ meetups mensuales desde 2014
+- 90+ meetups mensuales desde 2014
 - 10 ediciones de Pereira Tech Day (2017–2026)
 - Voluntaria, sostenida por patrocinadores y gratuita
 - Contenido completamente legible por agentes de IA (AEO 100; Markdown-for-Agents en cada página)
