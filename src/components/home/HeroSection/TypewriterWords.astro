@@ -40,10 +40,17 @@ function generateWordAnimation(word: string, index: number): string {
   const b2off = typeEnd + holdDur * 0.62;
   const b2on = typeEnd + holdDur * 0.8;
 
+  // First word starts fully typed (hold phase) so FCP/SI see real copy
+  // instead of an empty max-width:0 reveal on first paint.
+  const startAtHold =
+    index === 0
+      ? `  animation-delay: -${fmt((holdEnd / 100) * cycleDuration)}s;\n`
+      : '';
+
   return `
 [data-tw="${index}"] > .tw-text {
   animation: tw-${index} ${cycleDuration}s infinite;
-}
+${startAtHold}}
 @keyframes tw-${index} {
   0%, ${fmt(start)}% {
     max-width: 0;

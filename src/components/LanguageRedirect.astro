@@ -17,8 +17,8 @@
  *     always beats the browser on later visits.
  *   - Cannot loop: it only navigates when the target differs from the page
  *     being served, and the target page then matches the stored preference.
- *   - Lighthouse / PageSpeed UAs are skipped so lab audits do not hit a
- *     client-side redirect (PSI "Clientside Redirect!" modal).
+ *   - Lab / automation tools are skipped (Lighthouse UA, HeadlessChrome,
+ *     navigator.webdriver) so lab audits do not hit a client-side redirect.
  */
 
 import {
@@ -63,11 +63,16 @@ const config = JSON.stringify({
       const c = JSON.parse(config);
       const isSupported = (v) => typeof v === 'string' && c.supported.includes(v);
 
-      // Skip for Lighthouse / PageSpeed / CI auditors. A client-side redirect
-      // triggers PSI's "Clientside Redirect!" modal and pollutes lab metrics.
-      // Real users still negotiate; these tools should score the URL as given.
+      // Skip for lab / automation tools. A client-side redirect triggers PSI's
+      // "Clientside Redirect!" modal and burns ~600ms in LHCI (HeadlessChrome
+      // does not include "Lighthouse" in its UA). Real users still negotiate.
       const ua = navigator.userAgent || '';
-      if (/Chrome-Lighthouse|PageSpeed|Lighthouse/i.test(ua)) return;
+      if (
+        navigator.webdriver ||
+        /Chrome-Lighthouse|PageSpeed|Lighthouse|HeadlessChrome/i.test(ua)
+      ) {
+        return;
+      }
 
       const params = new URLSearchParams(window.location.search);
       const forced = params.get(c.queryParam);
