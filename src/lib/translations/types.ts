@@ -521,6 +521,15 @@ export interface SiteTranslations {
     indexUpcoming: string;
     indexPast: string;
     indexIntro: string;
+    indexEyebrow: string;
+    indexCfsCta: string;
+    indexSponsorCta: string;
+    indexStatEditions: string;
+    indexStatYears: string;
+    indexStatSince: string;
+    indexCalendarEyebrow: string;
+    indexHistoryEyebrow: string;
+    indexPastSubtitle: string;
   };
 
   // Blog post engagement

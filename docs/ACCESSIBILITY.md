@@ -24,7 +24,8 @@ These are the **only** gray text classes that should be used for body/secondary 
 
 | Use Case | Light Mode | Dark Mode | Combined Class |
 |----------|-----------|-----------|----------------|
-| **Body text on white/gray-50** | `text-gray-600` | `dark:text-gray-300` | `text-gray-600 dark:text-gray-300` |
+| **Body / secondary on canvas** | `text-ptt-secondary` | `text-ptt-secondary` (token flips in `.dark`) | Prefer PTT tokens over raw gray utilities |
+| **Legacy gray pair (avoid in new UI)** | `text-gray-600` | `dark:text-gray-300` | Only if migrating old markup; convert to `text-ptt-secondary` |
 | **Primary text** | `text-gray-900` | `dark:text-white` | `text-gray-900 dark:text-white` |
 | **Headings** | `text-gray-900` | `dark:text-white` | `text-gray-900 dark:text-white` |
 | **Text on dark bg-main (#0f1124)** | N/A | `text-gray-300` | `text-gray-300` |
@@ -211,7 +212,7 @@ Use `font-display: swap` for custom fonts to prevent invisible text during loadi
 Before creating or modifying a component:
 
 - [ ] Text contrast meets WCAG AA (4.5:1 normal, 3:1 large)
-- [ ] Uses `text-gray-600 dark:text-gray-300` for secondary text (never `text-gray-400` or `dark:text-gray-400`)
+- [ ] Uses `text-ptt-secondary` (or approved PTT secondary) for secondary text — never `text-gray-400`, `text-gray-500`, or dark equivalents
 - [ ] All `<img>` elements have `width`, `height`, and appropriate `alt` text
 - [ ] Interactive elements are keyboard accessible (`<button>` or `<a>`)
 - [ ] Heading hierarchy is sequential (no skipped levels)

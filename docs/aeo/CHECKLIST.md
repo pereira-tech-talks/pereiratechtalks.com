@@ -61,8 +61,8 @@ Record results:
 
 ## 7. RSS & Feeds
 
-- [ ] Verify English RSS: `curl -s https://pereiratechtalks.org/rss.xml | head -20`
-- [ ] Verify Spanish RSS: `curl -s https://pereiratechtalks.org/es/rss.xml | head -20`
+- [ ] Verify Spanish RSS: `curl -s https://pereiratechtalks.org/rss.xml | head -20`
+- [ ] Verify English RSS: `curl -s https://pereiratechtalks.org/en/rss.xml | head -20`
 - [ ] Confirm latest posts appear in feeds
 
 ## 8. Markdown for Agents
@@ -70,7 +70,7 @@ Record results:
 - [ ] Verify `.md` endpoints are generated: `find dist -name "*.md" | wc -l` (should be 100+)
 - [ ] Spot-check a blog post `.md` endpoint: `cat dist/blog/march-2026-meetup-recap.md | head -15`
 - [ ] Verify content-type is set in endpoint source: `grep "text/markdown" src/pages/blog/\[slug\].md.ts`
-- [ ] Check page endpoints exist: `ls dist/about.md dist/contact.md dist/es/about.md`
+- [ ] Check page endpoints exist: `ls dist/about.md dist/contact.md dist/en/about.md`
 - [ ] Verify blog index: `cat dist/blog/index.md | head -20`
 - [ ] Ensure `llms.txt` references Markdown endpoints: `grep "\.md" public/llms.txt`
 - [ ] Verify content negotiation middleware: `grep "text/markdown" functions/_middleware.ts`

@@ -27,26 +27,26 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 
 | Pattern | Example |
 |---------|---------|
-| `/blog/{slug}.md` (EN) | `/blog/meetup-recap-march.md` |
-| `/es/blog/{slug}.md` (ES) | `/es/blog/meetup-recap-march.md` |
+| `/blog/{slug}.md` (ES) | `/blog/meetup-recap-march.md` |
+| `/en/blog/{slug}.md` (EN) | `/en/blog/meetup-recap-march.md` |
 
-Source: `post.body` from Astro content collection (raw Markdown without frontmatter).
+Source: `post.body` from Astro content collection (raw Markdown without frontmatter). Collection folders remain `src/content/blog/{en,es}/` — only public URLs differ (Spanish at site root, English under `/en/`).
 
 ### Blog Index
 
 | Pattern | Description |
 |---------|-------------|
-| `/blog/index.md` (EN) | Lists all EN posts with `.md` links |
-| `/es/blog/index.md` (ES) | Lists all ES posts with `.md` links |
+| `/blog/index.md` (ES) | Lists all ES posts with `.md` links |
+| `/en/blog/index.md` (EN) | Lists all EN posts with `.md` links |
 
 ### Pages
 
 | Pattern | Example |
 |---------|---------|
-| `/{page}.md` (EN) | `/about.md`, `/cv.md`, `/dailybot.md` |
-| `/es/{page}.md` (ES) | `/es/about.md`, `/es/cv.md` |
+| `/{page}.md` (ES) | `/about.md`, `/contact.md` |
+| `/en/{page}.md` (EN) | `/en/about.md`, `/en/contact.md` |
 
-Source: `src/content/pages/{en,es}/` content collection.
+Source: `src/content/pages/{en,es}/` content collection. Public Spanish pages are unprefixed; English pages live under `/en/`.
 
 ## Response Format
 
@@ -81,12 +81,12 @@ Tags: tag1, tag2
 |------|---------|
 | `functions/_middleware.ts` | Content negotiation (Accept: text/markdown) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
-| `src/pages/blog/[slug].md.ts` | EN blog post endpoint |
-| `src/pages/en/blog/[slug].md.ts` | ES blog post endpoint |
-| `src/pages/blog/index.md.ts` | EN blog index |
-| `src/pages/en/blog/index.md.ts` | ES blog index |
-| `src/pages/[page].md.ts` | EN page endpoint |
-| `src/pages/en/[page].md.ts` | ES page endpoint |
+| `src/pages/blog/[slug].md.ts` | ES blog post endpoint (site root) |
+| `src/pages/en/blog/[slug].md.ts` | EN blog post endpoint (`/en/`) |
+| `src/pages/blog/index.md.ts` | ES blog index |
+| `src/pages/en/blog/index.md.ts` | EN blog index |
+| `src/pages/[page].md.ts` | ES page endpoint (site root) |
+| `src/pages/en/[page].md.ts` | EN page endpoint (`/en/`) |
 | `src/content/pages/{en,es}/` | Page Markdown source files |
 | `src/content.config.ts` | Pages collection schema |
 | `tests/unit/lib/markdown-for-agents.test.ts` | Unit tests |
@@ -105,7 +105,7 @@ Every serialized markdown output includes a **Site Navigation** section appended
 The navigation is generated programmatically by `generateSiteNavigation(lang)` in `markdown-for-agents.ts` — a single source of truth that is language-aware (applies the correct URL prefix for EN/ES). The navigation structure is defined as data (`SITE_NAV_SECTIONS`) in the same file, organized into sections: Main, Work, About, and Connect (social links).
 
 **Why programmatic instead of a `.md` partial file?**
-- Language-aware: automatically applies `/es/` prefix for Spanish pages
+- Language-aware: Spanish links stay unprefixed at site root; English links get the `/en/` prefix
 - Single definition: one data structure generates both EN and ES navigation
 - No manual sync: adding the nav to new serialization functions requires only one line (`generateSiteNavigation(lang)`)
 - Always consistent: impossible for individual page markdown files to have stale navigation
@@ -144,7 +144,7 @@ The Cloudflare Pages middleware (`functions/_middleware.ts`) supports automatic 
 | `/about` | `/about.md` |
 | `/about/` | `/about.md` |
 | `/blog/my-post` | `/blog/my-post.md` |
-| `/es/about` | `/es/about.md` |
+| `/en/about` | `/en/about.md` |
 
 **Excluded paths:** `/api/*`, `/internal/*`, `/_*`, and any path with a file extension (`.js`, `.css`, `.png`, etc.).
 

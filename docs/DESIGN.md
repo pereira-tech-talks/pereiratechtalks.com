@@ -67,35 +67,34 @@ transitional remaps to the PTT brand. **Never use them in new components.**
 
 ## Typography
 
-No custom font family is wired. `tailwind.config.mjs` has an empty
-`fontFamily: {}`, and neither `MainLayout.astro` nor `global.css` sets a
-`font-family` on `body` — so public pages render in **Tailwind's default
-`font-sans` stack** (`ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-Roboto, …`). Use the size/weight scale below and let the stack resolve.
+Public pages use **Atkinson Hyperlegible** (`--font-sans` in `global.css`),
+loaded from `public/fonts/atkinson-{regular,bold}.woff` with `font-display: swap`.
+Fallbacks: system UI sans. Do **not** introduce Inter or another display family
+on public chrome without updating this contract and the Brand Guide together.
 
 | Level | Size / weight / tracking | Used for |
 |---|---|---|
-| Display / H1 | `text-4xl md:text-5xl font-bold tracking-tight` | Hero, page title |
-| H2 | `text-2xl md:text-3xl font-bold` | Section headings |
-| H3 | `text-xl font-semibold` | Sub-sections |
+| Display / H1 | `text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight` | Hero, page title |
+| Section H2 | `text-3xl sm:text-4xl font-bold tracking-tight` | `Section.astro` titles |
+| H3 | `text-xl font-semibold` | Sub-sections, card titles (large) |
 | H4 | `text-lg font-semibold` | Card titles |
-| Body | `text-base leading-relaxed` | Paragraphs |
-| Small | `text-sm` | Meta, captions, card body |
-| Eyebrow | `text-xs uppercase tracking-widest font-medium` | Kickers, tier labels |
-| Mono | `font-mono text-sm` | Code, internal-hub icons |
+| Body | `text-base leading-relaxed` | Paragraphs, featured descriptions |
+| Lead | `text-lg text-ptt-secondary` | Section subtitles, intros |
+| Small | `text-sm` | Meta, captions, secondary card body |
+| Eyebrow | `text-sm font-semibold uppercase tracking-widest` | Kickers (`Eyebrow` / Section) |
+| Caption | `text-xs font-semibold uppercase tracking-widest` | Dense meta only (year pills, badges) — **never** primary readable body |
+| Mono | `font-mono text-sm` | Code |
 
-Long-form content uses `@tailwindcss/typography` (`.prose`), customized in
-`tailwind.config.mjs` (h1 `fontWeight: 700`) and hardened in `global.css`:
-`overflow-wrap: anywhere` on prose text, `overflow-x: auto` on `pre`, and raw
-`<iframe>`s forced fluid at `16 / 9`.
+**Hard rules**
 
-> ⚠️ **Flagged discrepancy — confirm before relying on it.** `BRAND_GUIDE.md`
-> documents `Inter Variable` as the family, and `global.css` declares an
-> `@font-face` for **Atkinson** (`public/fonts/atkinson-{regular,bold}.woff`).
-> Neither is actually applied: Inter is not loaded at all, and the Atkinson face
-> is declared but never referenced by a `font-family` rule. Either wire the
-> intended family or correct `BRAND_GUIDE.md` — this file documents shipped
-> behavior.
+- Never use arbitrary sizes below `text-xs` for UI copy (`text-[11px]`, `text-[10px]`).
+- Primary paragraphs use **Body** (`text-base`), not `text-sm`.
+- Eyebrows stay `text-sm` for WCAG readability on colored/dark heroes.
+- Long-form content uses `@tailwindcss/typography` (`.prose`).
+
+> Historical note: Brand Guide once listed Inter Variable; Atkinson was declared
+> but unused. As of this plan, Atkinson is wired via `--font-sans` and is the
+> single shipped family for public UI.
 
 ## Layout & spacing
 

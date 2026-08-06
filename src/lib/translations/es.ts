@@ -853,7 +853,17 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     indexUpcoming: 'Próxima edición',
     indexPast: 'Ediciones pasadas',
     indexIntro:
-      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira. Consulta el archivo 2024 y la próxima edición 2026.',
+      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira. Explora el archivo y la próxima edición.',
+    indexEyebrow: 'Conferencia anual',
+    indexCfsCta: 'Call for Speakers',
+    indexSponsorCta: 'Patrocinar el evento',
+    indexStatEditions: 'Ediciones',
+    indexStatYears: 'Años',
+    indexStatSince: 'Desde',
+    indexCalendarEyebrow: 'Calendario',
+    indexHistoryEyebrow: 'Historia',
+    indexPastSubtitle:
+      'Cada año deja su propia marca — vuelve a las ediciones que ya marcaron a Pereira.',
   },
 
   // Blog post engagement
