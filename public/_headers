@@ -20,6 +20,11 @@
   Content-Type: application/json
   Cache-Control: public, max-age=300, must-revalidate
 
+# auth.md — WorkOS auth.md / isitagentready scanner expects text/markdown
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
+
 /.well-known/mcp/server-card.json
   Cache-Control: public, max-age=300, must-revalidate
 

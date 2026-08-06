@@ -37,6 +37,20 @@
       "digest": "sha256:6898ebeeb90247ab9ec0ccce5f493af7c366135901790eaca6298ab3941b3192"
     },
     {
+      "name": "auth-md",
+      "type": "skill-md",
+      "description": "Publish /auth.md with agent registration discovery instructions and pair it with OAuth Protected Resource Metadata.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/auth-md/SKILL.md",
+      "digest": "sha256:1794fff49d4ae401e782230c9aed1a268ce094b3200a02c5f7c98e72b21f1222"
+    },
+    {
+      "name": "dns-aid",
+      "type": "skill-md",
+      "description": "Publish DNS for AI Discovery (DNS-AID) HTTPS/SVCB records under _agents so agents can discover endpoints via DNS.",
+      "url": "https://isitagentready.com/.well-known/agent-skills/dns-aid/SKILL.md",
+      "digest": "sha256:f84b55c0855cb51805a023580d00b5b8047c0fb89ba03ea4c28317a06c857a9b"
+    },
+    {
       "name": "mcp-server-card",
       "type": "skill-md",
       "description": "Publish an MCP server card at /.well-known/mcp/server-card.json so agents can discover this site as an MCP-compatible surface.",
