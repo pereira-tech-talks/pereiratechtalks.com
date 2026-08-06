@@ -125,7 +125,8 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
       <slot />
     </main>
     <Footer lang={lang} />
-    <WebMCPBridge client:visible lang={lang as 'en' | 'es'} />
+    {/* client:load — WebMCP scanners detect tools on first paint; client:visible misses them. */}
+    <WebMCPBridge client:load lang={lang as 'en' | 'es'} />
     {/*
       Do NOT use define:vars here — Astro wraps define:vars scripts in an IIFE,
       which breaks ES module `import` and causes:

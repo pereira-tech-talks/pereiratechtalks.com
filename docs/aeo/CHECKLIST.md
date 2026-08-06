@@ -80,6 +80,15 @@ Record results:
 - [ ] **Analytics sources:** Check both `content_negotiation` and `direct_url` sources are being captured
 - [ ] Full docs: [Markdown for Agents](MARKDOWN_FOR_AGENTS.md)
 
+## 8b. Agent-readiness (isitagentready.com)
+
+- [ ] `/auth.md` returns `200` with `Content-Type: text/markdown` and an H1 containing `auth.md`
+- [ ] `/.well-known/oauth-protected-resource` — `resource` origin matches the scanned host; `bearer_methods_supported` includes `header`
+- [ ] `/.well-known/oauth-authorization-server` includes `agent_auth` with `register_uri` + anonymous method
+- [ ] WebMCP tools register on page load via `navigator.modelContext.registerTool()` (`WebMCPBridge` uses `client:load`)
+- [ ] DNS-AID: HTTPS records for `_index._agents` and `_index._agents.v3` — see [DNS_AID.md](DNS_AID.md)
+- [ ] Re-scan: `curl -s https://isitagentready.com/api/scan -H 'content-type: application/json' -d '{"url":"https://v3.pereiratechtalks.org"}'`
+
 ## 9. Quick Local Validation
 
 Run these commands before deploying:
