@@ -74,6 +74,33 @@ const meetupsHeading =
         ]
   }
 >
+  <link
+    slot="head"
+    rel="preload"
+    href="/images/home/hero-dark-768.webp"
+    as="image"
+    type="image/webp"
+    media="(max-width: 767px)"
+    fetchpriority="high"
+  />
+  <link
+    slot="head"
+    rel="preload"
+    href="/images/home/hero-dark-1280.webp"
+    as="image"
+    type="image/webp"
+    media="(min-width: 768px) and (max-width: 1279px)"
+    fetchpriority="high"
+  />
+  <link
+    slot="head"
+    rel="preload"
+    href="/images/home/hero-dark.webp"
+    as="image"
+    type="image/webp"
+    media="(min-width: 1280px)"
+    fetchpriority="high"
+  />
   <HeroSection
     name={t.siteTitle}
     tagline={t.hero.tagline}

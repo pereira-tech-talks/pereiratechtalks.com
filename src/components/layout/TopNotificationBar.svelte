@@ -120,52 +120,58 @@ function severityClass(severity: LocalizedNotification['severity']): string {
   <div class="w-full" data-testid="top-notification-bar">
     {#each visibleBar as n (n.id)}
       <!--
+        Full-bleed surface; inner row matches Header width
+        (max-w-7xl + mx-auto + px-4 md:px-8 as utilities).
         Mid-height bar (~36–40px). Touch targets stay ≥44px via
         invisible hit-area expanders, not min-h on the row.
       -->
       <div
-        class={`flex min-w-0 max-w-full items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 text-xs leading-snug overflow-hidden ${severityClass(n.severity)}`}
+        class={severityClass(n.severity)}
         role="region"
         aria-label={n.title}
       >
-        {#if n.severity === 'important'}
-          <span
-            class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
-          >
-            {importantLabel}
-          </span>
-        {/if}
-        <p class="min-w-0 flex-1 truncate overflow-hidden">
-          <span class="font-medium">{n.title}</span>
-          <span class="mx-1 opacity-70">—</span>
-          <span class="opacity-95">{n.summary}</span>
-        </p>
-        <div class="flex shrink-0 items-center gap-0.5">
-          {#if n.modalEnabled && n.body}
+        <div
+          class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-8"
+        >
+          {#if n.severity === 'important'}
+            <span
+              class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
+            >
+              {importantLabel}
+            </span>
+          {/if}
+          <p class="min-w-0 flex-1 truncate overflow-hidden">
+            <span class="font-medium">{n.title}</span>
+            <span class="mx-1 opacity-70">—</span>
+            <span class="opacity-95">{n.summary}</span>
+          </p>
+          <div class="flex shrink-0 items-center gap-0.5">
+            {#if n.modalEnabled && n.body}
+              <button
+                type="button"
+                class="relative underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                onclick={() => openModal(n.id)}
+              >
+                {moreLabel}
+              </button>
+            {:else if n.ctaHref && n.ctaLabel}
+              <a
+                href={n.ctaHref}
+                class="relative inline-flex items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
+              >
+                {n.ctaLabel}
+              </a>
+            {/if}
             <button
               type="button"
-              class="relative underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-              onclick={() => openModal(n.id)}
+              class="relative inline-flex h-6 w-6 items-center justify-center rounded hover:bg-black/10 dark:hover:bg-white/10 before:absolute before:content-[''] before:inset-[-10px]"
+              aria-label={dismissLabel}
+              onclick={() => dismiss(n.id)}
             >
-              {moreLabel}
+              <span aria-hidden="true" class="text-sm leading-none">×</span>
             </button>
-          {:else if n.ctaHref && n.ctaLabel}
-            <a
-              href={n.ctaHref}
-              class="relative inline-flex items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-              onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
-            >
-              {n.ctaLabel}
-            </a>
-          {/if}
-          <button
-            type="button"
-            class="relative inline-flex h-6 w-6 items-center justify-center rounded hover:bg-black/10 dark:hover:bg-white/10 before:absolute before:content-[''] before:inset-[-10px]"
-            aria-label={dismissLabel}
-            onclick={() => dismiss(n.id)}
-          >
-            <span aria-hidden="true" class="text-sm leading-none">×</span>
-          </button>
+          </div>
         </div>
       </div>
     {/each}

@@ -13,12 +13,12 @@ venue:
   country: "Colombia"
 mode: in-person
 hero:
-  src: "/images/meetups/ia-como-motor-de-crecimiento/hero.png"
+  src: "/images/meetups/ia-como-motor-de-crecimiento/hero.webp"
   alt:
     en: "AI as a growth engine"
     es: "IA como motor de crecimiento"
   layout: banner
-heroImage: "/images/meetups/ia-como-motor-de-crecimiento/hero.png"
+heroImage: "/images/meetups/ia-como-motor-de-crecimiento/hero.webp"
 verticals:
   - monthly-meetups
   - ai-channel

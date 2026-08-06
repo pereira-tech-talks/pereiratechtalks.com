@@ -83,16 +83,22 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-ptt-bg-elevated focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:text-ptt-primary">
       Skip to content
     </a>
-    {
-      activeNotifications.length > 0 && (
-        <TopNotificationBar
-          client:idle
-          lang={lang}
-          notifications={activeNotifications}
-        />
-      )
-    }
-    <Header client:load lang={lang} />
+    {/*
+      Sticky chrome: notification bar + header travel together so the green
+      (important) alert stays visible on small viewports after scroll.
+    */}
+    <div class="sticky top-0 z-50">
+      {
+        activeNotifications.length > 0 && (
+          <TopNotificationBar
+            client:idle
+            lang={lang}
+            notifications={activeNotifications}
+          />
+        )
+      }
+      <Header client:idle lang={lang} />
+    </div>
     <div
       class="fixed z-50"
       style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
@@ -103,8 +109,13 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
       <slot />
     </main>
     <Footer lang={lang} />
-    <WebMCPBridge client:load lang={lang as 'en' | 'es'} />
-    <script define:vars={{ lang }}>
+    <WebMCPBridge client:idle lang={lang as 'en' | 'es'} />
+    {/*
+      Do NOT use define:vars here — Astro wraps define:vars scripts in an IIFE,
+      which breaks ES module `import` and causes:
+      "SyntaxError: Cannot use import statement outside a module" (Best Practices).
+    */}
+    <script>
       import {
         setupOutboundTracking,
         shouldTrackScrollDepth,

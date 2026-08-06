@@ -450,6 +450,10 @@ language) over the pure, unit-tested rules in
 - **Never fatal.** All storage access is wrapped — private mode or disabled
   storage degrades to plain browser detection, and any error leaves the page as
   served.
+- **Audit tools are skipped.** Lighthouse / PageSpeed / Chrome-Lighthouse user
+  agents do not negotiate language. A client-side redirect would trigger PSI's
+  "Clientside Redirect!" modal and pollute lab metrics; those tools should score
+  the URL they were given.
 
 **Changing the language must persist.** Both `Header.svelte` and
 `MobileMenu.svelte` call `rememberLanguage()` on switch. A new language entry

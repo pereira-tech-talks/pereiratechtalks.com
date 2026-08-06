@@ -100,7 +100,11 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 />
 
 <!-- Header logo preload (prevents alt text flash on navigation) -->
-<link rel="preload" href="/images/pereira-tech-talks/logo-white.png" as="image" type="image/png" />
+<link rel="preload" href="/images/pereira-tech-talks/logo-white.webp" as="image" type="image/webp" />
+
+<!-- Early connection for Cloudflare Web Analytics (when injected) -->
+<link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+<link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

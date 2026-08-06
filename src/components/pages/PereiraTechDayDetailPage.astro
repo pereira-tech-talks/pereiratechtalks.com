@@ -197,7 +197,7 @@ const sectionBgs = {
   <style is:inline set:html={themeCss}></style>
 
   <EditionScope year={year}>
-    <div class="mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
+    <div class="main-container pt-6">
       <Breadcrumbs items={breadcrumbs} baseUrl={SITE_URL} />
     </div>
 
@@ -259,7 +259,7 @@ const sectionBgs = {
     {
       !upcomingTemplate && keynoteSpeakers.length > 0 && (
         <section class="py-[var(--ptd-section-pad)]" aria-labelledby="ptd-speakers-title">
-          <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 id="ptd-speakers-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
               {t.speakers}
             </h2>
@@ -321,7 +321,7 @@ const sectionBgs = {
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }
-          <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="relative main-container">
             <h2 id="ptd-sponsors-title" class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
               {t.sponsors}
             </h2>
@@ -349,7 +349,7 @@ const sectionBgs = {
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }
-          <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="relative main-container">
             {
               organizers.length > 0 && (
                 <>
@@ -399,7 +399,7 @@ const sectionBgs = {
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }
-          <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="relative main-container">
             <h2 id="ptd-communities-title" class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
               {upcomingTemplate ? t.communities : t.communitiesOrganizes}
             </h2>
@@ -455,7 +455,7 @@ const sectionBgs = {
     {
       edition.data.schedule.length > 0 && (
         <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]">
-          <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="mb-8 text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.schedule}</h2>
             <ol class="space-y-3">
               {edition.data.schedule.map((slot) => (
@@ -482,7 +482,7 @@ const sectionBgs = {
     {
       talks.length > 0 && (
         <section class="py-[var(--ptd-section-pad)]">
-          <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.talks}</h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2">
               {talks.map((talk) => (
@@ -530,8 +530,10 @@ const sectionBgs = {
     {
       description && !upcomingTemplate && (
         <section class="py-[var(--ptd-section-pad)]">
-          <div class="prose prose-lg max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose-headings:text-[var(--ptt-text)] prose-a:text-[var(--ptt-primary)]">
-            <Content />
+          <div class="main-container">
+            <div class="prose prose-lg max-w-3xl prose-headings:text-[var(--ptt-text)] prose-a:text-[var(--ptt-primary)]">
+              <Content />
+            </div>
           </div>
         </section>
       )

@@ -76,7 +76,7 @@ const personJsonLd: Record<string, unknown> = {
 >
   <JsonLd data={personJsonLd} />
   <article class="bg-ptt-bg">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="main-container py-12">
       <Breadcrumbs items={breadcrumbs} />
       <div class="mt-8 flex flex-col items-start gap-8 sm:flex-row">
         <div class="relative h-40 w-40 shrink-0 overflow-hidden rounded-full ring-4 ring-ptt-accent/30 dark:ring-ptt-accent-dark/30 bg-ptt-primary-soft dark:bg-ptt-bg-elevated">
@@ -160,7 +160,7 @@ const personJsonLd: Record<string, unknown> = {
     {
       talks.length > 0 && (
         <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
-          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {lang === 'es'
                 ? `Historial de charlas de ${name}`
