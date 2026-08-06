@@ -152,6 +152,19 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     breadcrumbHome: 'Home',
   },
 
+  meetupDetail: {
+    talks: 'Talks',
+    speakers: 'Speakers',
+    venue: 'Venue',
+    originalEvent: 'Original event',
+    statusAnnounced: 'Upcoming',
+    statusRsvpOpen: 'RSVP open',
+    statusCompleted: 'Past meetup',
+    statusCancelled: 'Cancelled',
+    breadcrumbHome: 'Home',
+    breadcrumbMeetups: 'Meetups',
+  },
+
   aboutPage: {
     title: 'About Pereira Tech Talks',
     subtitle: 'A bilingual technology community from Pereira to the world',
@@ -524,6 +537,14 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     sponsorUsLabel: 'Sponsor us: request the deck',
     emptyTitle: 'No sponsors yet',
     emptyDesc: 'Want to support the community? Reach out.',
+    breadcrumbHome: 'Home',
+    tiers: {
+      diamond: 'Diamond sponsors',
+      gold: 'Gold sponsors',
+      silver: 'Silver sponsors',
+      bronze: 'Bronze sponsors',
+      community: 'Community partners',
+    },
   },
 
   contributorsPage: {
@@ -807,6 +828,8 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     programLabel: 'Program',
     learnMore: 'Learn more',
     relatedMeetups: 'Related meetups',
+    contactCta: 'Contact us',
+    joinCta: 'How to join',
     emptyTitle: 'No programs yet',
     emptyDesc: "We're consolidating the programs. Check back soon.",
     statusActive: 'Active',
@@ -848,7 +871,17 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     indexUpcoming: 'Upcoming edition',
     indexPast: 'Past editions',
     indexIntro:
-      'The community flagship conference — one full day of talks, panels, and networking in Pereira. Browse the 2024 archive and the upcoming 2026 edition.',
+      'The community flagship conference — one full day of talks, panels, and networking in Pereira. Browse the archive and the next edition.',
+    indexEyebrow: 'Annual conference',
+    indexCfsCta: 'Call for Speakers',
+    indexSponsorCta: 'Sponsor the event',
+    indexStatEditions: 'Editions',
+    indexStatYears: 'Years',
+    indexStatSince: 'Since',
+    indexCalendarEyebrow: 'Calendar',
+    indexHistoryEyebrow: 'History',
+    indexPastSubtitle:
+      'Every year leaves its own mark — revisit the editions that shaped Pereira.',
   },
 
   // Blog post engagement

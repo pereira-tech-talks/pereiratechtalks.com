@@ -115,13 +115,13 @@ mode and a **deep green-teal canvas** in dark mode.
 
 | Role | Family | Weight | Tailwind |
 |------|--------|--------|----------|
-| Display / H1 | `Inter Variable` | 700 | `text-4xl md:text-5xl font-bold tracking-tight` |
-| H2 | `Inter Variable` | 700 | `text-2xl md:text-3xl font-bold` |
-| H3 | `Inter Variable` | 600 | `text-xl font-semibold` |
-| H4 | `Inter Variable` | 600 | `text-lg font-semibold` |
-| Body | `Inter Variable` | 400 | `text-base leading-relaxed` |
-| Small | `Inter Variable` | 400 | `text-sm` |
-| Caption / Eyebrow | `Inter Variable` | 500 | `text-xs uppercase tracking-widest` |
+| Display / H1 | `Atkinson` | 700 | `text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight` |
+| Section H2 | `Atkinson` | 700 | `text-3xl sm:text-4xl font-bold tracking-tight` |
+| H3 | `Atkinson` | 600 | `text-xl font-semibold` |
+| H4 | `Atkinson` | 600 | `text-lg font-semibold` |
+| Body | `Atkinson` | 400 | `text-base leading-relaxed` |
+| Small | `Atkinson` | 400 | `text-sm` |
+| Caption / Eyebrow | `Atkinson` | 600 | `text-sm font-semibold uppercase tracking-widest` |
 | Mono | system mono | 400 | `font-mono text-sm` |
 
 Use `text-ptt` for primary text, `text-ptt-secondary` for secondary, `text-ptt-muted` only for large/decorative text. **Never** use `text-gray-400` / `text-gray-500` for body text.

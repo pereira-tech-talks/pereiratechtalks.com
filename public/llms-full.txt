@@ -21,18 +21,18 @@ The community exists to lower the barrier to entry to technology in the Eje Cafe
 - **About** (/about/) - Who we are, mission, history, team
 - **Pereira Tech Days** (/pereira-tech-days/) - Flagship annual conference; per-edition microsites with their own brand kits at /pereira-tech-days/{year}
 - **Meetups** (/meetups/) - Monthly community gatherings: theme, recap, photos, talks, slide decks
-- **Events** (/events/) - One-off special events
-- **Verticals** (/verticals/) - Community programs (La Biblioteca del Mañana, AI channel, Speaker School, etc.)
-- **Speaker School** (/speaker-school/) - First-class section: how to become a PTT speaker
+- **Calendar** (/calendar/) - Workshops and special events on the community calendar
+- **Verticals** (/verticals/) - Community programs (La Biblioteca del Mañana, AI channel, Speaker School, monthly meetups)
 - **Speakers** (/speakers/) - Speaker bios + talks index
-- **Talks** (/talks/) - Individual talk pages
 - **Blog** (/blog/) - Bilingual articles, series, tags, search
 - **Slides** (/slides/) - Reveal.js / external-embed / external-link decks library
 - **Contributors** (/contributors/) - The people who make PTT happen
-- **Sponsors** (/sponsors/) - Current and historical sponsors with what they paid for and what we delivered
+- **Sponsors** (/sponsors/) - Current and historical sponsors
 - **Channels** (/channels/) - Inventory of official PTT channels
 - **Call for Speakers** (/call-for-speakers/) - Always-open speaker submission form
+- **Sponsor us** (/sponsor-us/) - Sponsorship inquiry
 - **Contact** (/contact/)
+- **Verify certificate** (/certificates/verify/)
 
 ### Content Collections
 

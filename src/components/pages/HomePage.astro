@@ -92,6 +92,7 @@ const meetupsHeading =
     scrollLabel={t.hero.scrollLabel}
   />
 
+  <div class="home-below-fold">
   <PtdAnnouncementStrip
     lang={lang}
     title={hs.ptdStrip.title}
@@ -101,7 +102,6 @@ const meetupsHeading =
     venueLabel={hs.ptdStrip.venue}
   />
 
-  <div class="home-below-fold">
   {
     meetupsToShow.length > 0 && (
       <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">

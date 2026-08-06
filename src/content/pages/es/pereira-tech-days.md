@@ -8,6 +8,15 @@ lastUpdated: 2026-08-06
 
 La conferencia anual insignia de la comunidad — un día completo de keynotes, lightning talks, paneles y networking en Pereira, Risaralda.
 
+La página de catálogo en [/pereira-tech-days](/pereira-tech-days) incluye:
+
+- Hero atmosférico con la marca **Pereira Tech Days**
+- Estadísticas respaldadas por datos (ediciones, años activos, año de inicio)
+- Historia de la edición destacada con CTA dinámico al año vigente
+- Archivo de ediciones pasadas
+- Enlaces a Call for Speakers y patrocinio
+- JSON-LD `ItemList` + `EventSeries`
+
 ## Próxima edición
 
 - [Pereira Tech Day 2026](/pereira-tech-days/2026) — sábado 22 de agosto de 2026 en el Auditorio Jorge Roa Martínez de la UTP
@@ -15,10 +24,6 @@ La conferencia anual insignia de la comunidad — un día completo de keynotes, 
 ## Edición pasada
 
 - [Pereira Tech Day 2024](/pereira-tech-days/2024)
-
-## Todas las ediciones
-
-Consulta las ediciones en [/pereira-tech-days](/pereira-tech-days).
 
 ## English
 

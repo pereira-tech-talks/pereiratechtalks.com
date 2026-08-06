@@ -1,12 +1,14 @@
 ---
 /**
- * PTT v3.0.0 Pereira Tech Days catalog page (shared between EN and ES).
- * Features the upcoming edition prominently, then past editions.
+ * PTT v3.0.0 Pereira Tech Days catalog — flagship conference hub.
+ * Atmospheric hero + featured edition story + archive grid + JSON-LD.
  */
 
 import EditionCard from '@/components/cards/EditionCard.astro';
+import JsonLd from '@/components/JsonLd.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
+import LinkArrow from '@/components/ui/LinkArrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
@@ -18,8 +20,10 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const t = getTranslations(lang).ptdPage;
+const translations = getTranslations(lang);
+const t = translations.ptdPage;
 const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
 const editions = await getEditions();
 const featured = await getUpcomingEdition();
@@ -29,6 +33,10 @@ const upcoming = editions.filter(
 const past = editions.filter(
   (e) => e.data.status === 'completed' || e.data.status === 'cancelled'
 );
+
+const firstYear = Math.min(...editions.map((e) => e.data.year));
+const editionCount = editions.length;
+const yearsRunning = new Date().getFullYear() - firstYear + 1;
 
 const pageTitle = 'Pereira Tech Days';
 const pageDescription =
@@ -40,42 +48,170 @@ const breadcrumbs = [
   { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
   { label: pageTitle },
 ];
+
+const featuredHref = featured
+  ? `${prefix}/pereira-tech-days/${featured.data.year}/`
+  : `${prefix}/pereira-tech-days/`;
+const featuredCta = featured
+  ? lang === 'es'
+    ? `Ver edición ${featured.data.year}`
+    : `View ${featured.data.year} edition`
+  : t.indexUpcoming;
+
+const listJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: pageTitle,
+  description: pageDescription,
+  numberOfItems: editions.length,
+  itemListElement: editions.map((edition, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${siteUrl}${prefix}/pereira-tech-days/${edition.data.year}/`,
+    name: tr(edition.data.title, lang),
+  })),
+};
+
+const eventSeriesJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EventSeries',
+  name: 'Pereira Tech Day',
+  description: pageDescription,
+  url: `${siteUrl}${prefix}/pereira-tech-days/`,
+  organizer: {
+    '@type': 'Organization',
+    name: 'Pereira Tech Talks',
+    url: siteUrl || 'https://pereiratechtalks.org',
+  },
+  location: {
+    '@type': 'Place',
+    name: 'Pereira, Risaralda, Colombia',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Pereira',
+      addressRegion: 'Risaralda',
+      addressCountry: 'CO',
+    },
+  },
+};
 ---
 
 <MainLayout lang={lang} title={pageTitle} description={pageDescription}>
-  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/80 text-white">
-    <div class="main-container pt-12 pb-4 sm:pt-16">
+  <JsonLd data={listJsonLd} />
+  <JsonLd data={eventSeriesJsonLd} />
+
+  <!-- Full-bleed dark hero — brand-first, one CTA -->
+  <section
+    class="relative overflow-hidden bg-ptt-bg-dark text-white"
+    aria-label={pageTitle}
+  >
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+      <img
+        src="/images/home/hero-dark-1280.webp"
+        alt=""
+        width={1280}
+        height={512}
+        class="h-full w-full object-cover opacity-40"
+        loading="eager"
+        decoding="async"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-ptt-bg-dark via-ptt-bg-dark/85 to-ptt-bg-dark/40"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-ptt-bg-dark via-transparent to-ptt-bg-dark/50"
+      >
+      </div>
+    </div>
+
+    <div class="relative main-container pt-10 pb-4 sm:pt-14">
       <Breadcrumbs items={breadcrumbs} onDark />
     </div>
-    <div class="main-container pt-6 pb-16">
-      <Eyebrow variant="accent">{lang === 'es' ? 'Evento anual' : 'Annual event'}</Eyebrow>
-      <h1 class="mt-3 text-4xl font-bold tracking-tight sm:text-6xl">{pageTitle}</h1>
-      <p class="mt-4 max-w-3xl text-lg text-white/85">
+
+    <div class="relative main-container pb-16 pt-6 sm:pb-20 sm:pt-10 lg:pb-24">
+      <Eyebrow variant="accent">{t.indexEyebrow}</Eyebrow>
+      <h1
+        class="mt-3 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+      >
+        {pageTitle}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">
         {t.indexIntro}
       </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={featuredHref}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark transition hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+        >
+          {featuredCta}
+        </a>
+        <a
+          href={`${prefix}/call-for-speakers/`}
+          class="inline-flex min-h-[44px] items-center rounded-full border border-white/70 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          {t.indexCfsCta}
+        </a>
+      </div>
+
+      <dl
+        class="mt-12 grid max-w-3xl grid-cols-3 gap-4 border-t border-white/15 pt-8 sm:gap-8"
+      >
+        <div>
+          <dt class="text-sm font-semibold uppercase tracking-widest text-white/60">
+            {t.indexStatEditions}
+          </dt>
+          <dd class="mt-1 text-3xl font-bold tabular-nums sm:text-4xl">
+            {editionCount}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-semibold uppercase tracking-widest text-white/60">
+            {t.indexStatYears}
+          </dt>
+          <dd class="mt-1 text-3xl font-bold tabular-nums sm:text-4xl">
+            {yearsRunning}+
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-semibold uppercase tracking-widest text-white/60">
+            {t.indexStatSince}
+          </dt>
+          <dd class="mt-1 text-3xl font-bold tabular-nums sm:text-4xl">
+            {firstYear}
+          </dd>
+        </div>
+      </dl>
     </div>
-  </div>
+  </section>
 
   {
     featured && (
-      <Section eyebrow={t.indexFeatured} title={tr(featured.data.title, lang)} surface="alt">
-        <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
+      <Section
+        eyebrow={t.indexFeatured}
+        title={tr(featured.data.title, lang)}
+        subtitle={tr(featured.data.tagline, lang)}
+        surface="alt"
+      >
+        <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <p class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
               {featured.data.year}
             </p>
-            <p class="mt-3 text-lg text-ptt-secondary">
-              {tr(featured.data.tagline, lang)}
-            </p>
-            <p class="mt-4 text-sm text-ptt-secondary">
+            <p class="mt-4 text-base leading-relaxed text-ptt-secondary">
               {tr(featured.data.description, lang)}
             </p>
-            <a
-              href={`${prefix}/pereira-tech-days/${featured.data.year}/`}
-              class="mt-6 inline-flex rounded-full bg-ptt-primary px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-            >
-              {lang === 'es' ? 'Ver edición 2026' : 'View 2026 edition'}
-            </a>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={`${prefix}/pereira-tech-days/${featured.data.year}/`}
+                class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+              >
+                {featuredCta}
+              </a>
+              <LinkArrow href={`${prefix}/sponsor-us/`}>
+                {t.indexSponsorCta}
+              </LinkArrow>
+            </div>
           </div>
           <EditionCard edition={featured} lang={lang} loading="eager" />
         </div>
@@ -85,7 +221,7 @@ const breadcrumbs = [
 
   {
     upcoming.length > 1 && (
-      <Section eyebrow={lang === 'es' ? 'Calendario' : 'Calendar'} title={t.indexUpcoming}>
+      <Section eyebrow={t.indexCalendarEyebrow} title={t.indexUpcoming}>
         <ul class="grid gap-6 sm:grid-cols-2">
           {upcoming
             .filter((e) => e.id !== featured?.id)
@@ -99,15 +235,44 @@ const breadcrumbs = [
     )
   }
 
-  <Section eyebrow={lang === 'es' ? 'Historia' : 'History'} title={t.indexPast} surface="alt">
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        past.map((edition) => (
-          <li>
-            <EditionCard edition={edition} lang={lang} />
-          </li>
-        ))
-      }
-    </ul>
+  {
+    past.length > 0 && (
+      <Section
+        eyebrow={t.indexHistoryEyebrow}
+        title={t.indexPast}
+        subtitle={t.indexPastSubtitle}
+        surface="alt"
+      >
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {past.map((edition) => (
+            <li>
+              <EditionCard edition={edition} lang={lang} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  <Section
+    eyebrow={t.joinTitle}
+    title={t.joinTitle}
+    subtitle={t.joinSubtitle}
+    centered
+  >
+    <div class="flex flex-wrap justify-center gap-3">
+      <a
+        href={`${prefix}/`}
+        class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+      >
+        {t.joinCta}
+      </a>
+      <a
+        href={`${prefix}/meetups/`}
+        class="inline-flex min-h-[44px] items-center rounded-full border border-ptt-border px-6 py-2.5 text-sm font-semibold text-ptt transition hover:bg-ptt-bg-elevated"
+      >
+        {translations.hero.ctaMeetups}
+      </a>
+    </div>
   </Section>
 </MainLayout>

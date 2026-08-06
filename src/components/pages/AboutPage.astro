@@ -117,7 +117,7 @@ const breadcrumbs = [
     <div class="main-container pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} onDark />
     </div>
-    <div class="main-container pt-6 pb-12">
+    <div class="main-container pt-6 pb-12 sm:pb-16">
       <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
         <div>
           <Eyebrow variant="accent">{t.aboutPage.subtitle}</Eyebrow>
@@ -139,7 +139,12 @@ const breadcrumbs = [
           />
         </div>
       </div>
-      <ul class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 list-none">
+    </div>
+  </div>
+
+  <div class="bg-ptt-bg-dark text-white border-t border-white/10">
+    <div class="main-container py-10 sm:py-12">
+      <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4 list-none">
         {
           stats.map((stat) => (
             <li class="rounded-xl bg-white/10 px-4 py-5 text-center ring-1 ring-white/20">

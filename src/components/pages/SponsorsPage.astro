@@ -29,14 +29,6 @@ const pastSponsors = await getPastSponsors();
 type Tier = 'diamond' | 'gold' | 'silver' | 'bronze' | 'community';
 const tierOrder: Tier[] = ['diamond', 'gold', 'silver', 'bronze', 'community'];
 
-const tierTitles: Record<Tier, { en: string; es: string }> = {
-  diamond: { en: 'Diamond sponsors', es: 'Patrocinadores diamante' },
-  gold: { en: 'Gold sponsors', es: 'Patrocinadores oro' },
-  silver: { en: 'Silver sponsors', es: 'Patrocinadores plata' },
-  bronze: { en: 'Bronze sponsors', es: 'Patrocinadores bronce' },
-  community: { en: 'Community partners', es: 'Aliados comunitarios' },
-};
-
 function groupByTier(sponsors: Awaited<ReturnType<typeof getActiveSponsors>>) {
   return tierOrder
     .map((tier) => ({
@@ -51,13 +43,13 @@ const pastByTier = groupByTier(pastSponsors);
 const totalCount = currentSponsors.length + pastSponsors.length;
 
 const breadcrumbs = [
-  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: sp.breadcrumbHome, href: `${prefix}/` },
   { label: sp.title },
 ];
 ---
 
 <MainLayout lang={lang} title={sp.title} description={sp.description}>
-  <div class="bg-ptt-bg">
+  <div class="bg-gradient-to-b from-ptt-primary-soft/50 to-ptt-bg dark:from-ptt-bg-elevated dark:to-ptt-bg">
     <div class="main-container pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
@@ -85,7 +77,7 @@ const breadcrumbs = [
           {currentByTier.map(({ tier, sponsors: group }) => (
             <div>
               <h2 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
-                {tierTitles[tier][lang]}
+                {sp.tiers[tier]}
               </h2>
               <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
                 {group.map((sponsor) => (
@@ -113,7 +105,7 @@ const breadcrumbs = [
           {pastByTier.map(({ tier, sponsors: group }) => (
             <div>
               <h2 class="mb-6 text-xl font-semibold tracking-tight text-ptt-secondary">
-                {tierTitles[tier][lang]}
+                {sp.tiers[tier]}
               </h2>
               <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 list-none">
                 {group.map((sponsor) => (
