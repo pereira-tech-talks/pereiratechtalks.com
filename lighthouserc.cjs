@@ -2,27 +2,10 @@ module.exports = {
   ci: {
     collect: {
       staticDistDir: './dist',
-      url: [
-        '/',
-        '/about/',
-        '/blog/',
-        '/meetups/',
-        '/pereira-tech-days/',
-        '/speakers/',
-        '/sponsors/',
-        '/contributors/',
-        '/verticals/',
-        '/call-for-speakers/',
-        '/sponsor-us/',
-        '/channels/',
-        '/press/',
-        '/community/',
-        '/conduct/',
-        '/contributing/',
-        '/governance/',
-        '/es/',
-      ],
-      numberOfRuns: 3,
+      // Keep CI lean: home + flagship conference listing only.
+      // Full surface lives in lighthouserc.full.cjs (`pnpm run lighthouse:full`).
+      url: ['/', '/pereira-tech-days/'],
+      numberOfRuns: 1,
       settings: {
         chromeFlags: '--no-sandbox --headless',
         // Skip the robots-txt audit because it follows RFC 9309 strictly and
@@ -36,35 +19,12 @@ module.exports = {
       },
     },
     assert: {
-      assertMatrix: [
-        {
-          matchingUrlPattern: '^(?!.*/blog/).*$',
-          assertions: {
-            'categories:performance': ['error', { minScore: 0.9 }],
-            'categories:accessibility': ['error', { minScore: 1.0 }],
-            'categories:best-practices': ['error', { minScore: 0.95 }],
-            'categories:seo': ['error', { minScore: 0.95 }],
-          },
-        },
-        {
-          matchingUrlPattern: '.*/blog/$',
-          assertions: {
-            'categories:performance': ['error', { minScore: 0.7 }],
-            'categories:accessibility': ['error', { minScore: 1.0 }],
-            'categories:best-practices': ['error', { minScore: 0.95 }],
-            'categories:seo': ['error', { minScore: 0.95 }],
-          },
-        },
-        {
-          matchingUrlPattern: '.*/blog/[^/]+/',
-          assertions: {
-            'categories:performance': ['error', { minScore: 0.9 }],
-            'categories:accessibility': ['error', { minScore: 0.95 }],
-            'categories:best-practices': ['error', { minScore: 0.95 }],
-            'categories:seo': ['error', { minScore: 0.95 }],
-          },
-        },
-      ],
+      assertions: {
+        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:accessibility': ['error', { minScore: 1.0 }],
+        'categories:best-practices': ['error', { minScore: 0.95 }],
+        'categories:seo': ['error', { minScore: 0.95 }],
+      },
     },
     upload: {
       target: 'temporary-public-storage',
