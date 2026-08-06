@@ -58,11 +58,11 @@ const lastUpdatedPrefix = lang === 'es' ? 'Actualizado el' : 'Last updated';
 <MainLayout lang={lang} title={title} description={description}>
   <div class="bg-ptt-bg">
     <div
-      class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-4"
+      class="main-container pt-12 sm:pt-16 pb-4"
     >
       <Breadcrumbs items={breadcrumbs} />
     </div>
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
+    <div class="main-container pt-6 pb-10">
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h1
         class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt"
@@ -82,23 +82,23 @@ const lastUpdatedPrefix = lang === 'es' ? 'Actualizado el' : 'Last updated';
     </div>
   </div>
 
-  <article
-    class="bg-ptt-bg pb-16 sm:pb-24"
-  >
-    <div
-      class="prose prose-lg dark:prose-invert max-w-4xl mx-auto px-4 sm:px-6 lg:px-8
-      prose-headings:scroll-mt-24 prose-headings:text-ptt prose-headings:font-bold
-      prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
-      prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl
-      prose-p:text-ptt-secondary prose-p:leading-relaxed
-      prose-a:text-ptt-primary prose-a:font-medium dark:prose-a:text-ptt-primary-dark
-      prose-strong:text-ptt prose-strong:font-semibold
-      prose-ul:my-5 prose-ol:my-5 prose-li:text-ptt-secondary prose-li:leading-relaxed prose-li:my-1.5
-      prose-hr:my-10 prose-hr:border-ptt-border
-      prose-table:text-sm prose-table:my-6 prose-th:text-ptt prose-th:font-semibold prose-td:text-ptt-secondary
-      prose-code:text-ptt prose-code:before:content-none prose-code:after:content-none"
-    >
-      <Content />
+  <article class="bg-ptt-bg pb-16 sm:pb-24">
+    <div class="main-container">
+      <div
+        class="prose prose-lg dark:prose-invert max-w-4xl
+        prose-headings:scroll-mt-24 prose-headings:text-ptt prose-headings:font-bold
+        prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
+        prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl
+        prose-p:text-ptt-secondary prose-p:leading-relaxed
+        prose-a:text-ptt-primary prose-a:font-medium dark:prose-a:text-ptt-primary-dark
+        prose-strong:text-ptt prose-strong:font-semibold
+        prose-ul:my-5 prose-ol:my-5 prose-li:text-ptt-secondary prose-li:leading-relaxed prose-li:my-1.5
+        prose-hr:my-10 prose-hr:border-ptt-border
+        prose-table:text-sm prose-table:my-6 prose-th:text-ptt prose-th:font-semibold prose-td:text-ptt-secondary
+        prose-code:text-ptt prose-code:before:content-none prose-code:after:content-none"
+      >
+        <Content />
+      </div>
     </div>
   </article>
 </MainLayout>

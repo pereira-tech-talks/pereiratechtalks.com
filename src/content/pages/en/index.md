@@ -1,12 +1,12 @@
 ---
 title: "Pereira Tech Talks — Bilingual technology community of Pereira, Colombia"
-description: "Pereira Tech Talks (PTT) — 90+ monthly meetups since 2014, 10 Pereira Tech Day editions, an active Speaker School and La Biblioteca del Mañana reading club. Bilingual EN/ES, volunteer-run, open to the world."
+description: "Pereira Tech Talks (PTT) — 90+ monthly meetups since 2014, Pereira Tech Day, an active Speaker School and La Biblioteca del Mañana reading club. Bilingual EN/ES, volunteer-run, open to the world."
 lastUpdated: 2026-08-02
 ---
 
 ## Bilingual tech community · Pereira, Risaralda · Since 2014
 
-**Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 90+ monthly meetups since 2014. 10 Pereira Tech Day editions. An active Speaker School. La Biblioteca del Mañana reading club. A bilingual library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
+**Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 90+ monthly meetups since 2014. Pereira Tech Day (2024 archive, 2026 upcoming). An active Speaker School. La Biblioteca del Mañana reading club. A bilingual library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
 
 **Next milestone:** Pereira Tech Day 2026 — August 22, 2026 at UTP (Auditorio Jorge Roa Martínez). Slogan: *Where talent meets opportunity*.
 
@@ -21,7 +21,7 @@ On a February evening in 2014, eight developers crowded into a UTP classroom for
 ## What we do
 
 - **Monthly Meetups** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of building software.
-- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners. 10 editions and counting (2017–2026).
+- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners. 2024 archived; 2026 next.
 - **Speaker School** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals. Alumni now keynote in Bogotá, Medellín, and Mexico City.
 - **La Biblioteca del Mañana** — A bilingual reading club connecting technology with science fiction, philosophy, and the broader human story.
 - **AI & Agents Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.
@@ -34,7 +34,7 @@ On a February evening in 2014, eight developers crowded into a UTP classroom for
 - Founded in Pereira, Risaralda, Colombia (2014)
 - Bilingual community: English and Spanish, slugs always English
 - 90+ monthly meetups since 2014
-- 10 Pereira Tech Day editions (2017–2026)
+- Pereira Tech Day editions in 2024 and 2026
 - Volunteer-run, sponsor-supported, free to attend
 - Fully AI-agent-readable content (AEO 100; Markdown-for-Agents on every page)
 - Open-source: site code, content, and brand kit live on GitHub

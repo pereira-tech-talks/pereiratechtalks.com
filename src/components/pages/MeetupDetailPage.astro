@@ -143,7 +143,7 @@ if (speakers.length > 0) {
           </div>
         )
       }
-      <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
+      <div class="relative main-container py-16 sm:py-20 text-white">
         <Breadcrumbs items={breadcrumbs} baseUrl="https://pereiratechtalks.org" onDark />
         <div class="mt-6 flex items-center gap-3">
           <Badge variant={statusVariant}>{statusLabels[status][lang]}</Badge>
@@ -193,7 +193,7 @@ if (speakers.length > 0) {
       </div>
     </header>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid gap-12 lg:grid-cols-[1fr_280px]">
+    <div class="main-container py-12 sm:py-16 grid gap-12 lg:grid-cols-[1fr_280px]">
       {/* Body */}
       <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark prose-img:rounded-xl">
         <Content />
@@ -242,7 +242,7 @@ if (speakers.length > 0) {
     {
       talks.length > 0 && (
         <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
-          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {lang === 'es' ? 'Charlas' : 'Talks'}
             </h2>
@@ -267,7 +267,7 @@ if (speakers.length > 0) {
     {
       speakers.length > 0 && (
         <section class="py-16 sm:py-20">
-          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {lang === 'es' ? 'Ponentes' : 'Speakers'}
             </h2>

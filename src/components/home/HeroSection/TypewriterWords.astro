@@ -1,11 +1,11 @@
 ---
 /**
- * CSS-only typewriter effect with character-by-character reveal.
- * Each word is independently centered via a hidden sizer span.
- * Uses max-width + overflow:hidden + CSS steps() for typing simulation.
- * Cursor (border-right) blinks during hold, stays solid during type/erase.
- * Zero JavaScript — avoids critical request chain.
- * Respects prefers-reduced-motion: shows first word only.
+ * CSS typewriter with character-by-character reveal.
+ *
+ * First paint shows the first word fully (static) — continuous max-width
+ * animation tanks Lighthouse Speed Index because the hero keeps "changing".
+ * Motion starts only after idle + a short delay (beyond the SI window), and
+ * prefers-reduced-motion keeps the static first word permanently.
  */
 export interface Props {
   words: string[];
@@ -40,10 +40,16 @@ function generateWordAnimation(word: string, index: number): string {
   const b2off = typeEnd + holdDur * 0.62;
   const b2on = typeEnd + holdDur * 0.8;
 
+  // Begin at hold so when .tw-run flips on, word 0 is fully visible.
+  const startAtHold =
+    index === 0
+      ? `  animation-delay: -${fmt((holdEnd / 100) * cycleDuration)}s;\n`
+      : '';
+
   return `
-[data-tw="${index}"] > .tw-text {
+.tw-run[data-tw-ready] [data-tw="${index}"] > .tw-text {
   animation: tw-${index} ${cycleDuration}s infinite;
-}
+${startAtHold}}
 @keyframes tw-${index} {
   0%, ${fmt(start)}% {
     max-width: 0;
@@ -88,18 +94,49 @@ const dynamicCSS =
 
 <div
   class={`tw-container ${variant === 'inline' ? 'tw-inline' : ''} ${align === 'left' ? 'tw-align-left' : ''}`}
+  data-tw-root
   role="marquee"
   aria-live="polite"
 >
-  {words?.map((word, i) => (
-    <span class="tw-word" data-tw={String(i)}>
-      <span class="tw-sizer" aria-hidden="true">{word}</span>
-      <span class="tw-text">{word}</span>
-    </span>
-  ))}
+  {
+    words?.map((word, i) => (
+      <span class="tw-word" data-tw={String(i)}>
+        <span class="tw-sizer" aria-hidden="true">
+          {word}
+        </span>
+        <span class="tw-text">{word}</span>
+      </span>
+    ))
+  }
 </div>
 
 <style is:inline set:html={dynamicCSS}></style>
+
+<script>
+  const prefersReduced = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+  if (!prefersReduced) {
+    const arm = (root: HTMLElement) => {
+      const start = () => {
+        root.dataset.twReady = '';
+        root.classList.add('tw-run');
+      };
+      const schedule = () => window.setTimeout(start, 4500);
+      if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(schedule, { timeout: 5000 });
+      } else {
+        window.addEventListener('load', schedule, { once: true });
+      }
+    };
+    for (const root of document.querySelectorAll<HTMLElement>(
+      '[data-tw-root]:not([data-tw-bound])'
+    )) {
+      root.dataset.twBound = '';
+      arm(root);
+    }
+  }
+</script>
 
 <style>
   .tw-container {
@@ -141,7 +178,6 @@ const dynamicCSS =
     white-space: nowrap;
   }
 
-  /* Left-aligned variant for asymmetric layouts (e.g. the full-bleed hero) */
   .tw-align-left {
     text-align: left;
   }
@@ -150,14 +186,12 @@ const dynamicCSS =
     transform: none;
   }
 
-  /* Hidden duplicate keeps .tw-word at full text width for stable centering */
   .tw-sizer {
     visibility: hidden;
     display: inline-block;
     white-space: nowrap;
   }
 
-  /* Visible text with typewriter reveal */
   .tw-text {
     position: absolute;
     top: 0;
@@ -168,25 +202,49 @@ const dynamicCSS =
     border-right: 2px solid transparent;
   }
 
+  /* Default / SI window: static first word (same as reduced-motion). */
+  .tw-word:not([data-tw='0']) {
+    display: none;
+  }
+  .tw-word[data-tw='0'] {
+    position: relative;
+    left: auto;
+    transform: none;
+  }
+  .tw-word[data-tw='0'] > .tw-text {
+    max-width: none;
+    border-right: none;
+    position: relative;
+  }
+  .tw-word[data-tw='0'] > .tw-sizer {
+    display: none;
+  }
+
+  /* Motion enabled: restore stacked words + animated reveal. */
+  .tw-run[data-tw-ready] .tw-word:not([data-tw='0']) {
+    display: block;
+  }
+  .tw-run[data-tw-ready] .tw-word[data-tw='0'] {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tw-align-left.tw-run[data-tw-ready] .tw-word[data-tw='0'] {
+    left: 0;
+    transform: none;
+  }
+  .tw-run[data-tw-ready] .tw-word[data-tw='0'] > .tw-text {
+    position: absolute;
+    max-width: 0;
+    border-right: 2px solid transparent;
+  }
+  .tw-run[data-tw-ready] .tw-word[data-tw='0'] > .tw-sizer {
+    display: inline-block;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .tw-text {
       animation: none !important;
-    }
-    .tw-word:not([data-tw='0']) {
-      display: none;
-    }
-    .tw-word[data-tw='0'] {
-      position: relative;
-      left: auto;
-      transform: none;
-    }
-    .tw-word[data-tw='0'] > .tw-text {
-      max-width: none;
-      border-right: none;
-      position: relative;
-    }
-    .tw-word[data-tw='0'] > .tw-sizer {
-      display: none;
     }
   }
 </style>

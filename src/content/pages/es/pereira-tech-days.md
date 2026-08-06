@@ -1,22 +1,27 @@
 ---
 title: "Pereira Tech Days"
-description: "The community flagship annual conference in Pereira — keynotes, lightning talks, panels, and networking. Browse every edition since 2017 and the upcoming 2026 edition at UTP."
-lastUpdated: 2026-08-01
+description: "La conferencia anual insignia de la comunidad en Pereira — keynotes, lightning talks, paneles y networking. Consulta el archivo 2024 y la próxima edición del 22 de agosto de 2026 en la UTP."
+lastUpdated: 2026-08-06
 ---
 
 # Pereira Tech Days
 
-The community flagship annual conference — one full day of keynotes, lightning talks, panels, and networking in Pereira, Risaralda.
+La conferencia anual insignia de la comunidad — un día completo de keynotes, lightning talks, paneles y networking en Pereira, Risaralda.
 
-## Upcoming edition
+## Próxima edición
 
-- [Pereira Tech Day 2026](/pereira-tech-days/2026) — Saturday, August 22, 2026 at UTP Auditorio Jorge Roa Martínez
+- [Pereira Tech Day 2026](/pereira-tech-days/2026) — sábado 22 de agosto de 2026 en el Auditorio Jorge Roa Martínez de la UTP
 
-## All editions
+## Edición pasada
 
-Browse every edition since 2017 at [/pereira-tech-days](/pereira-tech-days).
+- [Pereira Tech Day 2024](/pereira-tech-days/2024)
+
+## Todas las ediciones
+
+Consulta las ediciones en [/pereira-tech-days](/pereira-tech-days).
 
 ## English
 
 - [Pereira Tech Days (EN)](/en/pereira-tech-days)
 - [Pereira Tech Day 2026 (EN)](/en/pereira-tech-days/2026)
+- [Pereira Tech Day 2024 (EN)](/en/pereira-tech-days/2024)

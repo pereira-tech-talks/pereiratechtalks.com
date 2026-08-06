@@ -3,13 +3,13 @@ module.exports = {
     collect: {
       staticDistDir: './dist',
       url: [
-        // Base pages (same as lighthouserc.cjs)
-        '/',
+        // Base pages (same as lighthouserc.cjs) — pin home lang (see lighthouserc.cjs).
+        '/?lang=es',
         '/about/',
         '/blog/',
-        '/es/',
-        // Blog listing ES (i18n parity)
-        '/es/blog/',
+        '/en/',
+        // Blog listing EN (i18n parity)
+        '/en/blog/',
         // Series pages
         '/blog/series/',
         // Blog tag listing
@@ -29,7 +29,8 @@ module.exports = {
       ],
       numberOfRuns: 3,
       settings: {
-        chromeFlags: '--no-sandbox --headless',
+        chromeFlags:
+          '--no-sandbox --headless --lang=es-ES --user-agent="Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36 Chrome-Lighthouse"',
       },
     },
     assert: {

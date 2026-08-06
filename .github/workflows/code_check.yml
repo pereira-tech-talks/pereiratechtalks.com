@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'v3'
       - 'dev'
     types:
       - opened
@@ -23,12 +24,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24.15.0'
-      - name: Step 0 - 📁 Get pnpm store path
+      - name: Step 0 - ⚙️ Enable Corepack (pnpm on PATH for Playwright webServer)
+        run: corepack enable
+      - name: Step 0b - 📁 Get pnpm store path
         id: pnpm-store
         run: |
-          STORE_PATH=$(corepack pnpm store path --silent)
+          STORE_PATH=$(pnpm store path --silent)
           echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
-      - name: Step 0a - 📁 Cache pnpm store
+      - name: Step 0c - 📁 Cache pnpm store
         uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
@@ -36,20 +39,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       - name: Step 1 - ⚙️ Install Dependencies
-        run: corepack pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Step 2 - 🧪 Run astro checks
-        run: corepack pnpm run astro:check
+        run: pnpm run astro:check
       - name: Step 3 - 🧪🧪 Run biome checks
-        run: corepack pnpm run biome:check
+        run: pnpm run biome:check
       - name: Step 4 - 🧪🧪🧪 Run tests
-        run: corepack pnpm run test
+        run: pnpm run test
       - name: Step 5 - 🏗️ Build site
-        run: corepack pnpm run build
+        run: pnpm run build
       - name: Step 6 - 📏 Check search performance budgets
-        run: corepack pnpm run search:budgets
+        run: pnpm run search:budgets
       - name: Step 7 - 🖥️ Install Playwright Chromium for responsive suite
-        run: corepack pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium
       - name: Step 8 - 📱 Run responsive regression suite
-        run: corepack pnpm run test:responsive
+        run: pnpm run test:responsive
       - name: Step 9 - 🔦 Run Lighthouse audit
-        run: corepack pnpm run lighthouse
+        run: pnpm run lighthouse

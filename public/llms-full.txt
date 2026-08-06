@@ -51,17 +51,17 @@ PTT is built on Astro Content Collections. Every collection has a strict Zod sch
 
 All pages and content are available in:
 
-- English (default): /
-- Spanish: /es/
+- [Spanish (primary)](/) — unprefixed routes at the site root
+- [English](/en/) — first-class international mirror under `/en/`
 
 All slugs (filenames, series IDs, image directories) are in English even for Spanish content. Spanish content uses proper diacritical marks (ñ, á, é, í, ó, ú, ü).
 
 ## Content Model
 
-- Bilingual routing: English base routes (`/`, `/blog/`, etc.) and Spanish routes under `/es/`.
+- Bilingual routing: Spanish base routes (`/`, `/blog/`, etc.) and English routes under `/en/`.
 - Blog posts authored with Astro Content Collections supporting Markdown and MDX.
-- Blog pagination: `/blog/page/{n}/` and `/es/blog/page/{n}/`.
-- Tag archives: `/blog/tag/{tag}/` and `/es/blog/tag/{tag}/`.
+- Blog pagination: `/blog/page/{n}/` and `/en/blog/page/{n}/`.
+- Tag archives: `/blog/tag/{tag}/` and `/en/blog/tag/{tag}/`.
 - Three-tier tag taxonomy (primary / secondary / subtopic), max 5 tags per post.
 - All pages use structured data (JSON-LD) for machine readability.
 - All public pages have a Markdown twin for AI agents (see below).
@@ -98,12 +98,12 @@ Every public HTML page on PTT has a native Markdown twin for AI agents. Content 
 
 ### URL Patterns
 
-- **Pages**: `/{page}.md` (EN), `/es/{page}.md` (ES)
-  - Examples: `/about.md`, `/contact.md`, `/sponsors.md`, `/es/about.md`
-- **Blog index**: `/blog/index.md` (EN), `/es/blog/index.md` (ES)
-- **Blog posts**: `/blog/{slug}.md` (EN), `/es/blog/{slug}.md` (ES)
-- **Slide decks**: `/slides/{slug}.md` (EN), `/es/slides/{slug}.md` (ES)
-- **Meetups**: `/meetups/{slug}.md` (EN), `/es/meetups/{slug}.md` (ES)
+- **Pages**: `/{page}.md` (ES primary), `/en/{page}.md` (EN)
+  - Examples: `/about.md`, `/contact.md`, `/sponsors.md`, `/en/about.md`
+- **Blog index**: `/blog/index.md` (ES), `/en/blog/index.md` (EN)
+- **Blog posts**: `/blog/{slug}.md` (ES), `/en/blog/{slug}.md` (EN)
+- **Slide decks**: `/slides/{slug}.md` (ES), `/en/slides/{slug}.md` (EN)
+- **Meetups**: `/meetups/{slug}.md` (ES), `/en/meetups/{slug}.md` (EN)
 - **Pereira Tech Days**: `/pereira-tech-days/{year}.md`
 
 ### Response Format
@@ -138,16 +138,16 @@ curl -H "Accept: text/markdown" https://pereiratechtalks.org/about
 
 ## Feeds & Discovery
 
-- RSS Feed (English): /rss.xml
-- RSS Feed (Spanish): /es/rss.xml
-- Sitemap: /sitemap-index.xml
-- Search API: /api/posts-en.json, /api/posts-es.json
-- OpenAPI spec: /openapi.json
-- MCP server card: /.well-known/mcp/server-card.json
-- API catalog: /.well-known/api-catalog
-- robots.txt: /robots.txt
-- This file: /llms-full.txt
-- Short version: /llms.txt
+- [RSS Feed (Spanish)](/rss.xml)
+- [RSS Feed (English)](/en/rss.xml)
+- [Sitemap](/sitemap-index.xml)
+- [Search API](/api/posts-en.json) · [Search API (ES)](/api/posts-es.json)
+- [OpenAPI spec](/openapi.json)
+- [MCP server card](/.well-known/mcp/server-card.json)
+- [API catalog](/.well-known/api-catalog)
+- [robots.txt](/robots.txt)
+- [This file](/llms-full.txt)
+- [Short version](/llms.txt)
 
 ## Structured Data
 

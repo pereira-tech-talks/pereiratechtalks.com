@@ -62,7 +62,7 @@ const breadcrumbs = [
           </div>
         )
       }
-      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div class="relative main-container py-16 sm:py-24">
         <Breadcrumbs items={breadcrumbs} baseUrl="https://pereiratechtalks.org" onDark />
         <Eyebrow variant="accent" class="mt-6">
           {t.verticalsPage.programLabel}
@@ -82,7 +82,7 @@ const breadcrumbs = [
     </header>
 
     <section class="py-12 sm:py-16">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="main-container">
         <p class="text-lg text-ptt-secondary leading-relaxed">
           {description}
         </p>
@@ -90,15 +90,17 @@ const breadcrumbs = [
     </section>
 
     <section class="py-12 sm:py-16 bg-ptt-bg-elevated">
-      <div class="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark">
-        <Content />
+      <div class="main-container">
+        <div class="prose prose-lg dark:prose-invert max-w-3xl prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark">
+          <Content />
+        </div>
       </div>
     </section>
 
     {
       meetups.length > 0 && (
         <section class="py-16 sm:py-20">
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
               {t.verticalsPage.relatedMeetups}
             </h2>

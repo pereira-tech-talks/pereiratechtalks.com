@@ -68,14 +68,14 @@ const seriesApiEndpoint = `/api/series/${lang}/index.json`;
 >
   <section class="py-10 sm:py-12 lg:py-16">
     <!-- Breadcrumb -->
-    <nav class="max-w-7xl mx-auto px-4 md:px-8 mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
+    <nav class="main-container mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
       <a href={`${prefix}/blog/`} class="font-semibold text-ptt-secondary transition-colors hover:text-ptt-primary">{t.nav.blog}</a>
       <span class="font-semibold text-ptt-secondary select-none" aria-hidden="true">/</span>
       <span class="truncate font-normal text-ptt-secondary" aria-current="page">{t.seriesListingPage.heading}</span>
     </nav>
 
     <!-- Page header -->
-    <div class="max-w-7xl mx-auto px-4 md:px-8 mb-10 text-center">
+    <div class="main-container mb-10 text-center">
       <h1 class="text-3xl md:text-4xl font-bold text-ptt mb-3">
         {t.seriesListingPage.heading}
       </h1>
@@ -94,7 +94,7 @@ const seriesApiEndpoint = `/api/series/${lang}/index.json`;
     />
 
     <!-- Back to blog -->
-    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-10">
+    <div class="main-container mt-10">
       <a
         href={`${prefix}/blog/`}
         class="inline-flex items-center gap-2 text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"

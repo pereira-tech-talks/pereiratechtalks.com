@@ -8,26 +8,26 @@ This site is the public face and operational backbone of the community. It hosts
 
 ## Core Sections
 
-- Home: /
-- About: /about/
-- Pereira Tech Days (flagship annual conference): /pereira-tech-days/
-- Meetups (monthly community gatherings): /meetups/
-- Events (special one-off events): /events/
-- Verticals (community programs — La Biblioteca del Mañana, AI channel, etc.): /verticals/
-- Speaker School: /speaker-school/
-- Blog (bilingual articles, series, tags, search): /blog/
-- Slides (Reveal.js / external decks): /slides/
-- Speakers: /speakers/
-- Contributors: /contributors/
-- Sponsors: /sponsors/
-- Channels (official communication channels): /channels/
-- Call for Speakers: /call-for-speakers/
-- Contact: /contact/
+- [Home](/)
+- [About](/about/)
+- [Pereira Tech Days](/pereira-tech-days/) (flagship annual conference)
+- [Meetups](/meetups/) (monthly community gatherings)
+- [Events](/events/) (special one-off events)
+- [Verticals](/verticals/) (community programs — La Biblioteca del Mañana, AI channel, etc.)
+- [Speaker School](/speaker-school/)
+- [Blog](/blog/) (bilingual articles, series, tags, search)
+- [Slides](/slides/) (Reveal.js / external decks)
+- [Speakers](/speakers/)
+- [Contributors](/contributors/)
+- [Sponsors](/sponsors/)
+- [Channels](/channels/) (official communication channels)
+- [Call for Speakers](/call-for-speakers/)
+- [Contact](/contact/)
 
 ## Languages
 
-- English (default): /
-- Spanish: /es/
+- [Spanish (primary)](/) — unprefixed routes at the site root
+- [English](/en/) — first-class international mirror under `/en/`
 
 All slugs are in English even for Spanish content. Spanish content uses proper diacritical marks.
 
@@ -35,27 +35,27 @@ All slugs are in English even for Spanish content. Spanish content uses proper d
 
 Every public HTML page has a native Markdown twin for AI agents:
 
-- Page Markdown: /{page}.md (EN), /es/{page}.md (ES)
-- Blog index: /blog/index.md (EN), /es/blog/index.md (ES)
-- Blog posts: /blog/{slug}.md (EN), /es/blog/{slug}.md (ES)
-- Slide decks: /slides/{slug}.md (EN), /es/slides/{slug}.md (ES)
+- [Page Markdown (ES)](/about.md) and [Page Markdown (EN)](/en/about.md)
+- [Blog index (ES)](/blog/index.md) and [Blog index (EN)](/en/blog/index.md)
+- Blog posts: `/blog/{slug}.md` (ES), `/en/blog/{slug}.md` (EN)
+- Slide decks: `/slides/{slug}.md` (ES), `/en/slides/{slug}.md` (EN)
 - Content Negotiation: send `Accept: text/markdown` header to get Markdown for any page
-- Content-Type: text/markdown; charset=utf-8
+- Content-Type: `text/markdown; charset=utf-8`
 - Source Markdown — not HTML-to-Markdown conversion
 
 ## Machine-Readable Feeds
 
-- Sitemap: /sitemap-index.xml
-- RSS (English): /rss.xml
-- RSS (Spanish): /es/rss.xml
-- Search API: /api/posts-en.json and /api/posts-es.json
-- OpenAPI spec: /openapi.json
-- MCP server card: /.well-known/mcp/server-card.json
-- API catalog: /.well-known/api-catalog
+- [Sitemap](/sitemap-index.xml)
+- [RSS (Spanish)](/rss.xml)
+- [RSS (English)](/en/rss.xml)
+- [Search API (EN)](/api/posts-en.json) and [Search API (ES)](/api/posts-es.json)
+- [OpenAPI spec](/openapi.json)
+- [MCP server card](/.well-known/mcp/server-card.json)
+- [API catalog](/.well-known/api-catalog)
 
 ## Per-Edition Branding
 
-Each Pereira Tech Day edition (`/pereira-tech-days/{year}`) ships its own brand kit (palette, typography, hero assets) that overrides the global PTT design tokens within that route subtree. The global brand and per-edition contracts are documented at `/internal/brand` (dev only).
+Each Pereira Tech Day edition (`/pereira-tech-days/{year}`) ships its own brand kit (palette, typography, hero assets) that overrides the global PTT design tokens within that route subtree.
 
 ## Crawling Guidance
 
@@ -66,4 +66,4 @@ Each Pereira Tech Day edition (`/pereira-tech-days/{year}`) ships its own brand 
 
 ## Detailed Version
 
-For comprehensive content descriptions, see: /llms-full.txt
+For comprehensive content descriptions, see: [llms-full.txt](/llms-full.txt)
