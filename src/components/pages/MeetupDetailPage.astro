@@ -18,6 +18,7 @@ import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug } from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getTalksByEvent } from '@/lib/talk';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   meetup: CollectionEntry<'meetups'>;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const { meetup, lang } = Astro.props;
+const md = getTranslations(lang).meetupDetail;
 
 const prefix = getUrlPrefix(lang);
 const slug = getMeetupSlug(meetup);
@@ -57,18 +59,18 @@ const { Content } = await render(meetup);
 
 const breadcrumbs = [
   {
-    label: lang === 'es' ? 'Inicio' : 'Home',
+    label: md.breadcrumbHome,
     href: prefix === '' ? '/' : `${prefix}/`,
   },
-  { label: 'Meetups', href: `${prefix}/meetups/` },
+  { label: md.breadcrumbMeetups, href: `${prefix}/meetups/` },
   { label: title },
 ];
 
-const statusLabels: Record<string, { en: string; es: string }> = {
-  announced: { en: 'Upcoming', es: 'Próximamente' },
-  'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
-  completed: { en: 'Past meetup', es: 'Meetup pasado' },
-  cancelled: { en: 'Cancelled', es: 'Cancelado' },
+const statusLabels: Record<string, string> = {
+  announced: md.statusAnnounced,
+  'rsvp-open': md.statusRsvpOpen,
+  completed: md.statusCompleted,
+  cancelled: md.statusCancelled,
 };
 const statusVariant = (
   status === 'announced' || status === 'rsvp-open'
@@ -146,7 +148,7 @@ if (speakers.length > 0) {
       <div class="relative main-container py-16 sm:py-20 text-white">
         <Breadcrumbs items={breadcrumbs} baseUrl="https://pereiratechtalks.org" onDark />
         <div class="mt-6 flex items-center gap-3">
-          <Badge variant={statusVariant}>{statusLabels[status][lang]}</Badge>
+          <Badge variant={statusVariant}>{statusLabels[status]}</Badge>
           <time
             datetime={date.toISOString()}
             class="text-sm font-semibold uppercase tracking-widest text-ptt-accent dark:text-ptt-accent-dark"
@@ -205,7 +207,7 @@ if (speakers.length > 0) {
           meetupComLink && (
             <div>
               <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
-                {lang === 'es' ? 'Evento original' : 'Original event'}
+                {md.originalEvent}
               </h3>
               <a
                 href={meetupComLink}
@@ -225,7 +227,7 @@ if (speakers.length > 0) {
           venue && (
             <div>
               <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
-                {lang === 'es' ? 'Sede' : 'Venue'}
+                {md.venue}
               </h3>
               <p class="text-sm text-ptt-secondary font-medium">
                 {venue.name}
@@ -244,7 +246,7 @@ if (speakers.length > 0) {
         <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
           <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
-              {lang === 'es' ? 'Charlas' : 'Talks'}
+              {md.talks}
             </h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2">
               {talks.map((talk) => (
@@ -269,7 +271,7 @@ if (speakers.length > 0) {
         <section class="py-16 sm:py-20">
           <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
-              {lang === 'es' ? 'Ponentes' : 'Speakers'}
+              {md.speakers}
             </h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {speakers.map((speaker) => (

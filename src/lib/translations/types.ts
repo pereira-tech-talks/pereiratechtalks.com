@@ -139,6 +139,19 @@ export interface SiteTranslations {
     breadcrumbHome: string;
   };
 
+  meetupDetail: {
+    talks: string;
+    speakers: string;
+    venue: string;
+    originalEvent: string;
+    statusAnnounced: string;
+    statusRsvpOpen: string;
+    statusCompleted: string;
+    statusCancelled: string;
+    breadcrumbHome: string;
+    breadcrumbMeetups: string;
+  };
+
   // About page
   aboutPage: {
     title: string;
@@ -328,6 +341,14 @@ export interface SiteTranslations {
     sponsorUsLabel: string;
     emptyTitle: string;
     emptyDesc: string;
+    breadcrumbHome: string;
+    tiers: {
+      diamond: string;
+      gold: string;
+      silver: string;
+      bronze: string;
+      community: string;
+    };
   };
 
   contributorsPage: {
@@ -480,6 +501,8 @@ export interface SiteTranslations {
     programLabel: string;
     learnMore: string;
     relatedMeetups: string;
+    contactCta: string;
+    joinCta: string;
     emptyTitle: string;
     emptyDesc: string;
     statusActive: string;

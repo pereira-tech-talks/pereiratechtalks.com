@@ -70,14 +70,28 @@ const breadcrumbs = [
         <h1 class="mt-3 text-4xl sm:text-6xl font-bold tracking-tight">
           {title}
         </h1>
-        <p class="mt-4 max-w-3xl text-xl text-ptt-secondary">{mission}</p>
+        <p class="mt-4 max-w-3xl text-xl leading-relaxed text-white/85">{mission}</p>
         {
           schedule && (
-            <p class="mt-6 text-sm font-medium text-ptt-accent dark:text-ptt-accent-dark">
+            <p class="mt-6 text-sm font-medium text-ptt-accent">
               {schedule}
             </p>
           )
         }
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={`${prefix}/contact/`}
+            class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark transition hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+          >
+            {t.verticalsPage.contactCta}
+          </a>
+          <a
+            href={`${prefix}/channels/`}
+            class="inline-flex min-h-[44px] items-center rounded-full border border-white/70 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {t.verticalsPage.joinCta}
+          </a>
+        </div>
       </div>
     </header>
 
