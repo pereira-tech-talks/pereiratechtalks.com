@@ -28,9 +28,13 @@ jobs:
       - name: Step 2 - Check if there is any pr with packages upgrades available
         id: check_upgrades_available_pr_step
         run: |
-          PR_NUMBER=$(gh pr list -B main -s open -L 1 --json number,headRefName -q '.[] | select(.headRefName == "feature__packages_versions_update") | .number')
+          # Prefer `v3` (active integration trunk); fall back to `main`.
+          PR_NUMBER=$(gh pr list -B v3 -s open -L 1 --json number,headRefName -q '.[] | select(.headRefName == "feature__packages_versions_update") | .number')
           if [ -z "$PR_NUMBER" ]; then
-            echo "No open PRs from feature__packages_versions_update to main"
+            PR_NUMBER=$(gh pr list -B main -s open -L 1 --json number,headRefName -q '.[] | select(.headRefName == "feature__packages_versions_update") | .number')
+          fi
+          if [ -z "$PR_NUMBER" ]; then
+            echo "No open PRs from feature__packages_versions_update to v3 or main"
             exit 0
           fi
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
