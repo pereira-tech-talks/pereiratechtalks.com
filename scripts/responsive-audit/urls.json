@@ -188,14 +188,49 @@
       "lang": "en"
     },
     {
-      "url": "/en/talks",
-      "template": "talks-list",
+      "url": "/speakers",
+      "template": "speakers-list",
+      "lang": "es"
+    },
+    {
+      "url": "/en/verticals",
+      "template": "verticals-list",
       "lang": "en"
+    },
+    {
+      "url": "/verticals",
+      "template": "verticals-list",
+      "lang": "es"
     },
     {
       "url": "/en/slides",
       "template": "slides-catalog",
       "lang": "en"
+    },
+    {
+      "url": "/slides",
+      "template": "slides-catalog",
+      "lang": "es"
+    },
+    {
+      "url": "/en/blog/series",
+      "template": "blog-series-listing",
+      "lang": "en"
+    },
+    {
+      "url": "/blog/series",
+      "template": "blog-series-listing",
+      "lang": "es"
+    },
+    {
+      "url": "/en/certificates/verify",
+      "template": "certificate-verify",
+      "lang": "en"
+    },
+    {
+      "url": "/certificates/verify",
+      "template": "certificate-verify",
+      "lang": "es"
     }
   ]
 }

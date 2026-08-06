@@ -12,6 +12,12 @@ export function isAllowedUmamiPath(path: string): boolean {
   return ALLOWED_UMAMI_PATHS.has(path);
 }
 
+/** Normalize Cloudflare Pages `[[path]]` params (string | string[] | undefined). */
+export function resolveUmamiPath(raw: string | string[] | undefined): string {
+  const joined = Array.isArray(raw) ? raw.join('/') : (raw ?? 'script.js');
+  return String(joined).replace(/^\/+/, '');
+}
+
 export function buildUmamiUpstreamUrl(path: string): string {
   return `${UMAMI_CLOUD_ORIGIN}/${path}`;
 }

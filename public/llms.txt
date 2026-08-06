@@ -4,7 +4,7 @@
 
 ## About
 
-This site is the public face and operational backbone of the community. It hosts monthly meetup recaps, special events, every edition of the Pereira Tech Day flagship conference (each with its own per-edition brand), an always-open Call for Speakers, the Speaker School, and bilingual long-form content from the people who make PTT happen.
+This site is the public face and operational backbone of the community. It hosts monthly meetup recaps, calendar events, every edition of the Pereira Tech Day flagship conference (each with its own per-edition brand), an always-open Call for Speakers, the Speaker School, and bilingual long-form content from the people who make PTT happen.
 
 ## Core Sections
 
@@ -12,9 +12,8 @@ This site is the public face and operational backbone of the community. It hosts
 - [About](/about/)
 - [Pereira Tech Days](/pereira-tech-days/) (flagship annual conference)
 - [Meetups](/meetups/) (monthly community gatherings)
-- [Events](/events/) (special one-off events)
-- [Verticals](/verticals/) (community programs — La Biblioteca del Mañana, AI channel, etc.)
-- [Speaker School](/speaker-school/)
+- [Calendar](/calendar/) (workshops and special events)
+- [Verticals](/verticals/) (Speaker School, La Biblioteca del Mañana, AI channel, monthly meetups)
 - [Blog](/blog/) (bilingual articles, series, tags, search)
 - [Slides](/slides/) (Reveal.js / external decks)
 - [Speakers](/speakers/)
@@ -22,7 +21,9 @@ This site is the public face and operational backbone of the community. It hosts
 - [Sponsors](/sponsors/)
 - [Channels](/channels/) (official communication channels)
 - [Call for Speakers](/call-for-speakers/)
+- [Sponsor us](/sponsor-us/)
 - [Contact](/contact/)
+- [Verify certificate](/certificates/verify/)
 
 ## Languages
 

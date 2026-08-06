@@ -29,6 +29,12 @@
  * inside [data-edition-theme="{year}"] only — never globally.
  */
 @theme {
+  /* Shipped body font — Atkinson Hyperlegible (already @font-face above).
+   * Brand Guide previously claimed Inter; that was never loaded. */
+  --font-sans:
+    "Atkinson", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
   /* PTT global palette — light mode (defaults) */
   --color-ptt-primary: #1f6f73;
   --color-ptt-primary-strong: #155054;
@@ -157,6 +163,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
   }
 
   /*

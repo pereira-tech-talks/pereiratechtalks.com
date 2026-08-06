@@ -42,6 +42,20 @@ const breadcrumbs = [
       <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
         {t.verticalsPage.intro}
       </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`${prefix}/contact/`}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+        >
+          {t.verticalsPage.contactCta}
+        </a>
+        <a
+          href={`${prefix}/channels/`}
+          class="inline-flex min-h-[44px] items-center rounded-full border border-ptt-border px-6 py-2.5 text-sm font-semibold text-ptt transition hover:bg-ptt-bg-elevated"
+        >
+          {t.verticalsPage.joinCta}
+        </a>
+      </div>
     </div>
   </div>
 

@@ -152,6 +152,19 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     breadcrumbHome: 'Inicio',
   },
 
+  meetupDetail: {
+    talks: 'Charlas',
+    speakers: 'Ponentes',
+    venue: 'Sede',
+    originalEvent: 'Evento original',
+    statusAnnounced: 'Próximamente',
+    statusRsvpOpen: 'RSVP abierto',
+    statusCompleted: 'Meetup pasado',
+    statusCancelled: 'Cancelado',
+    breadcrumbHome: 'Inicio',
+    breadcrumbMeetups: 'Meetups',
+  },
+
   aboutPage: {
     title: 'Sobre Pereira Tech Talks',
     subtitle: 'Una comunidad bilingüe de tecnología desde Pereira al mundo',
@@ -525,6 +538,14 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     sponsorUsLabel: 'Patrocínanos: solicita el deck',
     emptyTitle: 'Aún no hay patrocinadores registrados',
     emptyDesc: '¿Te interesa apoyar la comunidad? Escríbenos.',
+    breadcrumbHome: 'Inicio',
+    tiers: {
+      diamond: 'Patrocinadores diamante',
+      gold: 'Patrocinadores oro',
+      silver: 'Patrocinadores plata',
+      bronze: 'Patrocinadores bronce',
+      community: 'Aliados comunitarios',
+    },
   },
 
   contributorsPage: {
@@ -812,6 +833,8 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     programLabel: 'Programa',
     learnMore: 'Conoce más',
     relatedMeetups: 'Meetups asociados',
+    contactCta: 'Escríbenos',
+    joinCta: 'Cómo participar',
     emptyTitle: 'Aún no hay programas registrados',
     emptyDesc: 'Estamos consolidando los programas. Vuelve pronto.',
     statusActive: 'Activo',
@@ -853,7 +876,17 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     indexUpcoming: 'Próxima edición',
     indexPast: 'Ediciones pasadas',
     indexIntro:
-      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira. Consulta el archivo 2024 y la próxima edición 2026.',
+      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira. Explora el archivo y la próxima edición.',
+    indexEyebrow: 'Conferencia anual',
+    indexCfsCta: 'Call for Speakers',
+    indexSponsorCta: 'Patrocinar el evento',
+    indexStatEditions: 'Ediciones',
+    indexStatYears: 'Años',
+    indexStatSince: 'Desde',
+    indexCalendarEyebrow: 'Calendario',
+    indexHistoryEyebrow: 'Historia',
+    indexPastSubtitle:
+      'Cada año deja su propia marca — vuelve a las ediciones que ya marcaron a Pereira.',
   },
 
   // Blog post engagement

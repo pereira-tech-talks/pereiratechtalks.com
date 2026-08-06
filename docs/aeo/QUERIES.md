@@ -15,14 +15,14 @@ Broad queries where PTT can be cited as an authority on the topic.
 |---|-------|-----------|-----------------|
 | 1 | "tech community Pereira Colombia" | / | Pending homepage |
 | 2 | "Pereira Tech Talks" | / | Pending homepage |
-| 3 | "comunidad tecnológica Pereira" | /es/ | Pending homepage |
+| 3 | "comunidad tecnológica Pereira" | / | Pending homepage |
 | 4 | "Pereira Tech Day" | /pereira-tech-days/ | Pending |
 | 5 | "La Biblioteca del Mañana" | /verticals/la-biblioteca-del-manana/ | Pending |
-| 6 | "Speaker School Pereira" | /speaker-school/ | Pending |
+| 6 | "Speaker School Pereira" | /verticals/speaker-school/ | Pending |
 | 7 | "AI meetup Pereira" | /verticals/ai/ | Pending |
 | 8 | "tech meetup Eje Cafetero" | /meetups/ | Pending |
 | 9 | "Colombia bilingual tech community" | / | Pending |
-| 10 | "comunidades tech Risaralda" | /es/ | Pending |
+| 10 | "comunidades tech Risaralda" | / | Pending |
 
 ## MOFU (Middle of Funnel) — Comparative / Evaluative
 
@@ -35,8 +35,8 @@ Queries where PTT-published case studies, recaps, or talk write-ups can be cited
 | 13 | "Astro multilingual blog architecture" | /blog/{tbd}/ | Pending |
 | 14 | "open source community in Colombia" | /about/ | Pending |
 | 15 | "how to start a tech community" | /blog/{tbd}/ | Pending |
-| 16 | "first time speaker tips" | /speaker-school/ | Pending |
-| 17 | "técnicas para hablar en público en tech" | /es/speaker-school/ | Pending |
+| 16 | "first time speaker tips" | /verticals/speaker-school/ | Pending |
+| 17 | "técnicas para hablar en público en tech" | /verticals/speaker-school/ | Pending |
 | 18 | "tech sponsorship Colombia" | /sponsors/ | Pending |
 | 19 | "annual tech conference Pereira" | /pereira-tech-days/ | Pending |
 | 20 | "bilingual tech blog LATAM" | /blog/ | Pending |
@@ -53,8 +53,8 @@ Queries where the searcher is ready to participate, contribute, or sponsor.
 | 24 | "Pereira Tech Day 2026 schedule" | /pereira-tech-days/2026/ | Pending |
 | 25 | "Pereira Tech Talks contact" | /contact/ | Pending |
 | 26 | "join Pereira Tech Talks discord" | /channels/ | Pending |
-| 27 | "convocatoria de ponentes Pereira" | /es/convocatoria-de-ponentes/ | Pending |
-| 28 | "patrocinar Pereira Tech Day" | /es/patrocinadores/ | Pending |
+| 27 | "convocatoria de ponentes Pereira" | /call-for-speakers/ | Pending |
+| 28 | "patrocinar Pereira Tech Day" | /sponsor-us/ | Pending |
 | 29 | "Pereira Tech Talks collaborators" | /contributors/ | Pending |
 | 30 | "Pereira Tech Talks YouTube" | /channels/ | Pending |
 

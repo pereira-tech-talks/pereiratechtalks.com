@@ -8,6 +8,15 @@ lastUpdated: 2026-08-06
 
 The community flagship annual conference — one full day of keynotes, lightning talks, panels, and networking in Pereira, Risaralda.
 
+The catalog at [/en/pereira-tech-days](/en/pereira-tech-days) includes:
+
+- Atmospheric hero with the **Pereira Tech Days** brand
+- Data-backed stats (editions, years running, founding year)
+- Featured edition story with a dynamic CTA to the current year
+- Past editions archive
+- Links to Call for Speakers and sponsorship
+- `ItemList` + `EventSeries` JSON-LD
+
 ## Upcoming edition
 
 - [Pereira Tech Day 2026](/en/pereira-tech-days/2026) — Saturday, August 22, 2026 at UTP Auditorio Jorge Roa Martínez
@@ -15,10 +24,6 @@ The community flagship annual conference — one full day of keynotes, lightning
 ## Past edition
 
 - [Pereira Tech Day 2024](/en/pereira-tech-days/2024)
-
-## All editions
-
-Browse editions at [/en/pereira-tech-days](/en/pereira-tech-days).
 
 ## Spanish
 

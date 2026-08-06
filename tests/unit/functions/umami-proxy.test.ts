@@ -5,6 +5,7 @@ import {
   buildUmamiUpstreamUrl,
   getUmamiProxyCacheControl,
   isAllowedUmamiPath,
+  resolveUmamiPath,
 } from '../../../functions/_lib/umami-proxy';
 
 describe('umami proxy helpers', () => {
@@ -21,6 +22,15 @@ describe('umami proxy helpers', () => {
         'api/send',
         'script.js',
       ]);
+    });
+  });
+
+  describe('resolveUmamiPath', () => {
+    it('defaults and normalizes string / array catch-all params', () => {
+      expect(resolveUmamiPath(undefined)).toBe('script.js');
+      expect(resolveUmamiPath('script.js')).toBe('script.js');
+      expect(resolveUmamiPath('/api/send')).toBe('api/send');
+      expect(resolveUmamiPath(['api', 'send'])).toBe('api/send');
     });
   });
 

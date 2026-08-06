@@ -166,20 +166,20 @@ const breadcrumbSchema = {
 
 | Language | Code | URL Prefix | OG Locale | RSS Feed |
 |----------|------|------------|-----------|----------|
-| English | `en` | (none) | `en_US` | `/rss.xml` |
-| Spanish | `es` | `/es` | `es_ES` | `/es/rss.xml` |
+| Spanish (primary) | `es` | (none — site root) | `es_ES` | `/rss.xml` |
+| English | `en` | `/en` | `en_US` | `/en/rss.xml` |
 
 ### Hreflang
 
 Automatically generated in `BaseHead.astro` using `getAlternateUrls()` from `src/lib/i18n.ts`. Every page gets:
 
-- `<link rel="alternate" hreflang="en" href="...">` — English version
 - `<link rel="alternate" hreflang="es" href="...">` — Spanish version
-- `<link rel="alternate" hreflang="x-default" href="...">` — Points to English (default)
+- `<link rel="alternate" hreflang="en" href="...">` — English version
+- `<link rel="alternate" hreflang="x-default" href="...">` — Points to **Spanish** (primary / `DEFAULT_LANGUAGE`)
 
 ### RSS Discovery
 
-The RSS `<link>` tag in BaseHead is language-aware: English pages discover `/rss.xml`, Spanish pages discover `/es/rss.xml`.
+The RSS `<link>` tag in BaseHead is language-aware: Spanish pages discover `/rss.xml`, English pages discover `/en/rss.xml`.
 
 ### Canonical URLs
 
@@ -188,7 +188,7 @@ Built from `Astro.url.pathname` + `Astro.site`. Each language version has its ow
 ### Content Parity
 
 All content MUST exist in both languages:
-- Pages: `src/pages/` (EN) + `src/pages/en/` (ES)
+- Pages: `src/pages/` (ES, root) + `src/pages/en/` (EN)
 - Blog posts: `src/content/blog/en/` + `src/content/blog/es/`
 - Translations: `src/lib/translations/en.ts` + `src/lib/translations/es.ts`
 
