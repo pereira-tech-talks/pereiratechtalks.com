@@ -147,7 +147,7 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
           }
         );
       };
-      if ('requestIdleCallback' in window) {
+      if (typeof window.requestIdleCallback === 'function') {
         window.requestIdleCallback(bootAnalytics, { timeout: 4000 });
       } else {
         window.addEventListener('load', () => setTimeout(bootAnalytics, 1), {

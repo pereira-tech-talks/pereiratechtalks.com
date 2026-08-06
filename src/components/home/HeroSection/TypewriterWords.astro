@@ -123,7 +123,7 @@ const dynamicCSS =
         root.classList.add('tw-run');
       };
       const schedule = () => window.setTimeout(start, 4500);
-      if ('requestIdleCallback' in window) {
+      if (typeof window.requestIdleCallback === 'function') {
         window.requestIdleCallback(schedule, { timeout: 5000 });
       } else {
         window.addEventListener('load', schedule, { once: true });
