@@ -34,20 +34,31 @@ const {
   class="hero-viewport relative flex flex-col justify-end sm:justify-center overflow-hidden"
   aria-label={name}
 >
-  <!-- Full-bleed auditorium — responsive WebP for LCP -->
+  <!-- Full-bleed auditorium — picture so mobile never negotiates a 1280w LCP candidate -->
   <div aria-hidden="true" class="absolute inset-0 z-0">
-    <img
-      src="/images/home/hero-dark.webp"
-      srcset="/images/home/hero-dark-768.webp 768w, /images/home/hero-dark-1280.webp 1280w, /images/home/hero-dark.webp 1600w"
-      sizes="100vw"
-      alt=""
-      width={1600}
-      height={640}
-      class="hero-photo absolute inset-0 h-full w-full object-cover object-center"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
+    <picture>
+      <source
+        media="(max-width: 1023px)"
+        srcset="/images/home/hero-dark-480.webp"
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 1024px)"
+        srcset="/images/home/hero-dark-1280.webp 1280w, /images/home/hero-dark.webp 1600w"
+        sizes="100vw"
+        type="image/webp"
+      />
+      <img
+        src="/images/home/hero-dark-480.webp"
+        alt=""
+        width={480}
+        height={192}
+        class="hero-photo absolute inset-0 h-full w-full object-cover object-center"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
     <!-- Cinematic scrim: strong left for type, soft right for photo -->
     <div
       class="absolute inset-0 bg-gradient-to-r from-black/88 via-black/60 to-black/25"
@@ -74,7 +85,7 @@ const {
         width={66}
         height={108}
         loading="eager"
-        fetchpriority="high"
+        decoding="async"
         class="hero-logo w-auto drop-shadow-xl"
         draggable="false"
       />
@@ -117,7 +128,7 @@ const {
           {contactLabel}
         </a>
       </div>
-      <div class="hero-social mt-5 sm:mt-6 flex gap-2">
+      <div class="hero-social mt-5 sm:mt-6 hidden gap-2 lg:flex">
         <a
           href="https://github.com/pereiratechtalks"
           target="_blank"
@@ -130,7 +141,7 @@ const {
             alt=""
             width={22}
             height={22}
-            loading="eager"
+            loading="lazy"
             class="w-5 h-5"
           />
         </a>
@@ -146,7 +157,7 @@ const {
             alt=""
             width={22}
             height={22}
-            loading="eager"
+            loading="lazy"
             class="w-5 h-5"
           />
         </a>
@@ -162,7 +173,7 @@ const {
             alt=""
             width={22}
             height={22}
-            loading="eager"
+            loading="lazy"
             class="w-5 h-5"
           />
         </a>
@@ -178,7 +189,7 @@ const {
             alt=""
             width={22}
             height={22}
-            loading="eager"
+            loading="lazy"
             class="w-5 h-5"
           />
         </a>
@@ -203,9 +214,9 @@ const {
 <style>
   /*
    * Fill remaining viewport below chrome.
-   * Default = header only (~4.25rem). When the top notification bar is in the
-   * DOM, :has() bumps the offset (~6.75rem). Dismissing the bar shrinks the
-   * offset automatically — no JS.
+   * Default = header only (~4.25rem). When MainLayout adds .has-top-notification
+   * (SSR), bump the offset (~6.75rem). Avoid :has() — it is expensive on style
+   * recalc and delayed LCP paint under LHCI throttling.
    */
   .hero-viewport {
     --ptt-chrome-offset: 4.25rem;
@@ -213,7 +224,7 @@ const {
     min-height: calc(100svh - var(--ptt-chrome-offset));
   }
 
-  :global(body:has([data-testid='top-notification-bar'])) .hero-viewport {
+  :global(body.has-top-notification) .hero-viewport {
     --ptt-chrome-offset: 6.75rem;
   }
 
@@ -248,24 +259,13 @@ const {
   }
 
   .hero-photo {
+    /* Keep LCP static — ken-burns on the LCP node delays paint / tanks SI. */
     transform: scale(1.02);
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .hero-photo {
-      animation: hero-ken 22s ease-out forwards;
-    }
     .hero-scroll-chevron {
       animation: hero-chevron 1.6s ease-in-out infinite;
-    }
-  }
-
-  @keyframes hero-ken {
-    from {
-      transform: scale(1.02);
-    }
-    to {
-      transform: scale(1.08);
     }
   }
 

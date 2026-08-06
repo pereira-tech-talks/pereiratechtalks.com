@@ -26,7 +26,11 @@ export default defineConfig({
   // `experimental.rustCompiler` flag was removed, so there is nothing to opt into.
   site: 'https://pereiratechtalks.org',
   build: {
-    inlineStylesheets: 'always',
+    // 'always' inlined ~156KB of Tailwind into every HTML document, which
+    // delayed LCP paint (render-delay ~1.8s) under LHCI Slow-4G. 'auto' keeps
+    // tiny scoped sheets inline and emits the shared bundle as a cacheable
+    // /_astro/*.css file discovered in parallel with the LCP preload.
+    inlineStylesheets: 'auto',
   },
   markdown: {
     // Astro 7 ships Sätteri (the Rust Markdown/MDX compiler) as the default

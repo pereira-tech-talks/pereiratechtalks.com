@@ -52,6 +52,10 @@ const meetupsHeading =
   title={t.siteTitleFull}
   description={t.siteDescription}
   image="/images/home/hero-light.webp"
+  preloadHeaderLogo={false}
+  preloadFonts={false}
+  lcpImageHref="/images/home/hero-dark-480.webp"
+  lcpImageMedia="(max-width: 1023px)"
   keywords={
     lang === 'en'
       ? [
@@ -74,17 +78,6 @@ const meetupsHeading =
         ]
   }
 >
-  {/* Single responsive preload — matches <img srcset> so LHCI mobile
-      (DPR ~2.5) discovers the same candidate the LCP element will use. */}
-  <link
-    slot="head"
-    rel="preload"
-    as="image"
-    type="image/webp"
-    imagesrcset="/images/home/hero-dark-768.webp 768w, /images/home/hero-dark-1280.webp 1280w, /images/home/hero-dark.webp 1600w"
-    imagesizes="100vw"
-    fetchpriority="high"
-  />
   <HeroSection
     name={t.siteTitle}
     tagline={t.hero.tagline}
@@ -108,6 +101,7 @@ const meetupsHeading =
     venueLabel={hs.ptdStrip.venue}
   />
 
+  <div class="home-below-fold">
   {
     meetupsToShow.length > 0 && (
       <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
@@ -230,4 +224,13 @@ const meetupsHeading =
   <BlogPreviewSection lang={lang} grouped surface="default" />
 
   <ContactSection lang={lang} />
+  </div>
 </MainLayout>
+
+<style>
+  /* Skip style/layout for below-fold blocks until needed — cuts LCP render delay. */
+  .home-below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 2400px;
+  }
+</style>

@@ -10,7 +10,8 @@ module.exports = {
       // HeadlessChrome/Lighthouse in the UA, so LanguageRedirect would
       // otherwise send `/` → `/en/` and tank Performance.
       url: ['/?lang=es', '/pereira-tech-days/'],
-      numberOfRuns: 1,
+      // Median of 3 reduces LHCI noise around the 0.99↔1.00 boundary.
+      numberOfRuns: 3,
       settings: {
         // --lang=es-ES: browser languages match Spanish primary (belt + suspenders).
         // Lighthouse in UA: same skip path PageSpeed uses if negotiation runs.
@@ -28,10 +29,13 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.9 }],
+        'categories:performance': ['error', { minScore: 1 }],
         'categories:accessibility': ['error', { minScore: 1.0 }],
+        // object-fit:cover on the full-bleed home hero can trip aspect-ratio;
+        // keep BP strict but not brittle on that single lab heuristic.
         'categories:best-practices': ['error', { minScore: 0.95 }],
-        'categories:seo': ['error', { minScore: 0.95 }],
+        'categories:seo': ['error', { minScore: 1.0 }],
+        'image-aspect-ratio': 'off',
       },
     },
     upload: {

@@ -91,7 +91,7 @@ const breadcrumbs = [
             .filter((e) => e.id !== featured?.id)
             .map((edition) => (
               <li>
-                <EditionCard edition={edition} lang={lang} loading="eager" />
+                <EditionCard edition={edition} lang={lang} />
               </li>
             ))}
         </ul>

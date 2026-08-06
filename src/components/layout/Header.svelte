@@ -88,7 +88,7 @@ function closeAllDropdowns() {
         width={66}
         height={108}
         loading="eager"
-        fetchpriority="high"
+        decoding="async"
       />
       <img
         class="hidden h-8 w-auto md:h-9 dark:block"
@@ -97,7 +97,7 @@ function closeAllDropdowns() {
         width={66}
         height={108}
         loading="eager"
-        fetchpriority="high"
+        decoding="async"
       />
       <span class="hidden min-[360px]:inline text-base md:text-lg lg:text-xl whitespace-nowrap">
         Pereira <span class="font-extrabold">Tech Talks</span>

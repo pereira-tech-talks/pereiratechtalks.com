@@ -25,6 +25,11 @@ interface Props {
   ogType?: string;
   ogImageWidth?: number;
   ogImageHeight?: number;
+  /** Forwarded to BaseHead — disable on pages with a dedicated LCP preload. */
+  preloadHeaderLogo?: boolean;
+  preloadFonts?: boolean;
+  lcpImageHref?: string;
+  lcpImageMedia?: string;
 }
 
 const {
@@ -38,6 +43,10 @@ const {
   ogType,
   ogImageWidth,
   ogImageHeight,
+  preloadHeaderLogo = true,
+  preloadFonts = true,
+  lcpImageHref,
+  lcpImageMedia,
 } = Astro.props;
 
 const language = lang as Language;
@@ -70,6 +79,10 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
       ogType={ogType}
       ogImageWidth={ogImageWidth}
       ogImageHeight={ogImageHeight}
+      preloadHeaderLogo={preloadHeaderLogo}
+      preloadFonts={preloadFonts}
+      lcpImageHref={lcpImageHref}
+      lcpImageMedia={lcpImageMedia}
     />
     <slot name="head" />
     <LanguageRedirect lang={lang} />
@@ -78,7 +91,10 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
 </script>
   </head>
   <body
-    class="flex flex-col min-h-screen bg-ptt-bg text-ptt transition-colors duration-300"
+    class:list={[
+      'flex flex-col min-h-screen bg-ptt-bg text-ptt',
+      activeNotifications.length > 0 && 'has-top-notification',
+    ]}
   >
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-ptt-bg-elevated focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:text-ptt-primary">
       Skip to content
@@ -109,21 +125,34 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
       <slot />
     </main>
     <Footer lang={lang} />
-    <WebMCPBridge client:idle lang={lang as 'en' | 'es'} />
+    <WebMCPBridge client:visible lang={lang as 'en' | 'es'} />
     {/*
       Do NOT use define:vars here — Astro wraps define:vars scripts in an IIFE,
       which breaks ES module `import` and causes:
       "SyntaxError: Cannot use import statement outside a module" (Best Practices).
+      Defer setup until idle so analytics does not contend with LCP/TBT.
     */}
     <script>
-      import {
-        setupOutboundTracking,
-        shouldTrackScrollDepth,
-        trackScrollDepth,
-      } from '@/lib/analytics';
-      setupOutboundTracking();
-      if (shouldTrackScrollDepth(window.location.pathname)) {
-        trackScrollDepth();
+      const bootAnalytics = () => {
+        void import('@/lib/analytics').then(
+          ({
+            setupOutboundTracking,
+            shouldTrackScrollDepth,
+            trackScrollDepth,
+          }) => {
+            setupOutboundTracking();
+            if (shouldTrackScrollDepth(window.location.pathname)) {
+              trackScrollDepth();
+            }
+          }
+        );
+      };
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(bootAnalytics, { timeout: 4000 });
+      } else {
+        window.addEventListener('load', () => setTimeout(bootAnalytics, 1), {
+          once: true,
+        });
       }
     </script>
   </body>
