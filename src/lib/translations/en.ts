@@ -10,7 +10,7 @@ export const en: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Bilingual technology community of Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — Colombia’s bilingual tech community since 2014. 90+ monthly meetups, 10 Pereira Tech Day editions, and an active Speaker School.',
+    'Pereira Tech Talks — Colombia’s bilingual tech community since 2014. 90+ monthly meetups, Pereira Tech Day, and an active Speaker School.',
 
   // Navigation
   nav: {
@@ -158,10 +158,10 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     description:
       'Meet Pereira Tech Talks — bilingual tech community in Pereira, Risaralda since 2014. Monthly meetups, Pereira Tech Day, Speaker School, and La Biblioteca del Mañana.',
     heroDescription:
-      'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 90+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
+      'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 90+ monthly meetups, Pereira Tech Day, an active Speaker School and bilingual library. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',
     bioText:
-      'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual <strong>Pereira Tech Day</strong> conference (10 editions since 2017), the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All bilingual. All open.<br /><br />The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, and more) and open by default. The site you are reading is a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, structured to be just as useful to AI agents as it is to humans.<br /><br />We believe technology grows faster when we share what we learn — that is why every meetup recap is published the same week. We believe Pereira has world-class talent that deserves world-class stages — that is why the Speaker School exists and why community alumni now keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. And we believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious. That is why our events are free, our channels are public, and our content is bilingual by default.',
+      'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual <strong>Pereira Tech Day</strong> conference (2024 archive, 2026 upcoming), the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All bilingual. All open.<br /><br />The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, and more) and open by default. The site you are reading is a bilingual catalog of meetups, talks, slides, speakers, contributors, and sponsors, structured to be just as useful to AI agents as it is to humans.<br /><br />We believe technology grows faster when we share what we learn — that is why every meetup recap is published the same week. We believe Pereira has world-class talent that deserves world-class stages — that is why the Speaker School exists and why community alumni now keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. And we believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious. That is why our events are free, our channels are public, and our content is bilingual by default.',
     passionsTitle: 'What we do',
     passions: [
       {
@@ -174,7 +174,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       {
         title: 'Pereira Tech Day',
         description:
-          'Our flagship annual conference — 10 editions and counting (since 2017). A full day of keynotes, workshops, and networking with international speakers and local partners.',
+          'Our flagship annual conference — 2024 archived, 2026 next. A full day of keynotes, workshops, and networking with international speakers and local partners.',
         icon: '\u{1F389}',
         link: '/en/pereira-tech-days',
       },
@@ -212,7 +212,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       'Founded in Pereira, Risaralda, Colombia (February 2014)',
       'Bilingual community: Spanish primary, English first-class international',
       '90+ monthly meetups since 2014',
-      '10 Pereira Tech Day editions (2017–2026)',
+      'Pereira Tech Day editions in 2024 and 2026',
       'Volunteer-run, sponsor-supported, free to attend',
       'Fully AI-agent-readable content (AEO 100, Markdown-for-Agents on every page)',
       'Open source: site, content, and brand kit on GitHub',
@@ -848,7 +848,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     indexUpcoming: 'Upcoming edition',
     indexPast: 'Past editions',
     indexIntro:
-      'The community flagship conference — one full day of talks, panels, and networking in Pereira since 2017.',
+      'The community flagship conference — one full day of talks, panels, and networking in Pereira. Browse the 2024 archive and the upcoming 2026 edition.',
   },
 
   // Blog post engagement

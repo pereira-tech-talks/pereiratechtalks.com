@@ -13,12 +13,12 @@ venue:
   country: "Colombia"
 mode: in-person
 hero:
-  src: "/images/meetups/qa-pilar-del-software/hero.png"
+  src: "/images/meetups/qa-pilar-del-software/hero.webp"
   alt:
     en: "QA: the pillar of software"
     es: "QA: Pilar del software"
   layout: banner
-heroImage: "/images/meetups/qa-pilar-del-software/hero.png"
+heroImage: "/images/meetups/qa-pilar-del-software/hero.webp"
 verticals:
   - monthly-meetups
 talks:

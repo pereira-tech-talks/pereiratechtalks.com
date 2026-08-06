@@ -10,7 +10,7 @@ export const es: SiteTranslations = {
   siteTitleFull:
     'Pereira Tech Talks — Comunidad bilingüe de tecnología de Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 90+ meetups mensuales, 10 ediciones de Pereira Tech Day y Escuela de Speakers.',
+    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 90+ meetups mensuales, Pereira Tech Day y Escuela de Speakers.',
 
   // Navigation
   nav: {
@@ -158,10 +158,10 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     description:
       'Conoce Pereira Tech Talks — comunidad tech bilingüe en Pereira, Risaralda, desde 2014. Meetups, Pereira Tech Day, Escuela de Speakers y La Biblioteca del Mañana.',
     heroDescription:
-      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 90+ meetups mensuales, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
+      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 90+ meetups mensuales, Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
     bioTitle: 'Quiénes somos',
     bioText:
-      'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (10 ediciones desde 2017), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo bilingüe. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido es bilingüe por defecto.',
+      'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (archivo 2024, próxima 2026), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo bilingüe. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido es bilingüe por defecto.',
     passionsTitle: 'Lo que hacemos',
     passions: [
       {
@@ -174,7 +174,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       {
         title: 'Pereira Tech Day',
         description:
-          'Nuestra conferencia anual insignia — 10 ediciones y contando (desde 2017). Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
+          'Nuestra conferencia anual insignia — 2024 en archivo, 2026 a continuación. Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
         icon: '\u{1F389}',
         link: '/pereira-tech-days',
       },
@@ -212,7 +212,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Fundada en Pereira, Risaralda, Colombia (febrero de 2014)',
       'Comunidad bilingüe: español como idioma principal, inglés como segundo idioma de primera clase',
       '90+ meetups mensuales desde 2014',
-      '10 ediciones de Pereira Tech Day (2017–2026)',
+      'Ediciones de Pereira Tech Day en 2024 y 2026',
       'Voluntaria, sostenida por patrocinadores y gratuita',
       'Contenido completamente legible por agentes de IA (AEO 100, Markdown-for-Agents en cada página)',
       'Open source: el sitio, el contenido y el brand kit en GitHub',
@@ -853,7 +853,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     indexUpcoming: 'Próxima edición',
     indexPast: 'Ediciones pasadas',
     indexIntro:
-      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira desde 2017.',
+      'La conferencia insignia de la comunidad — un día completo de charlas, paneles y networking en Pereira. Consulta el archivo 2024 y la próxima edición 2026.',
   },
 
   // Blog post engagement

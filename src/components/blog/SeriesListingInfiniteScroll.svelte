@@ -92,7 +92,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
   <!-- Adaptive layout: stack (≤4 series) or grid (5+) -->
   {#if renderedSeries.length <= 4}
     <!-- Stack layout: all cards use premium horizontal layout -->
-    <div class="max-w-5xl mx-auto px-4 md:px-8 space-y-6">
+    <div class="main-container space-y-6">
       {#each renderedSeries as series, index}
         {@const hero = getHeroImage(series)}
         {@const isFirst = index === 0}
@@ -155,7 +155,7 @@ function getHeroImage(series: SeriesListingEntry): string | null {
 
   {:else}
     <!-- Grid layout: featured first card + grid for 5+ series -->
-    <div class="max-w-7xl mx-auto px-4 md:px-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="main-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {#each renderedSeries as series, index}
         {@const hero = getHeroImage(series)}
         {@const isFirst = index === 0}

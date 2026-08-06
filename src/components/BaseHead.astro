@@ -24,6 +24,13 @@ interface Props {
   ogType?: string;
   ogImageWidth?: number;
   ogImageHeight?: number;
+  /** When false, skip header-logo preload so a page LCP image keeps the only high-priority slot. */
+  preloadHeaderLogo?: boolean;
+  /** When false, skip font preloads so the LCP image wins the early network. */
+  preloadFonts?: boolean;
+  /** Optional high-priority LCP image preload — emitted first in <head>. */
+  lcpImageHref?: string;
+  lcpImageMedia?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -39,6 +46,10 @@ const {
   ogType = 'website',
   ogImageWidth = 1200,
   ogImageHeight = 630,
+  preloadHeaderLogo = true,
+  preloadFonts = true,
+  lcpImageHref,
+  lcpImageMedia,
 } = Astro.props;
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
 const imageExtension = image.split('.').pop()?.toLowerCase();
@@ -83,24 +94,50 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link
-	rel="preload"
-	href="/fonts/atkinson-regular.woff"
-	as="font"
-	type="font/woff"
-	crossorigin
-/>
-<link
-	rel="preload"
-	href="/fonts/atkinson-bold.woff"
-	as="font"
-	type="font/woff"
-	crossorigin
-/>
+{
+  lcpImageHref && (
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href={lcpImageHref}
+      media={lcpImageMedia}
+      fetchpriority="high"
+    />
+  )
+}
 
-<!-- Header logo preload (prevents alt text flash on navigation) -->
-<link rel="preload" href="/images/pereira-tech-talks/logo-white.png" as="image" type="image/png" />
+<!-- Font preloads (skipped on home so the LCP image owns early bandwidth) -->
+{
+  preloadFonts && (
+    <>
+      <link
+        rel="preload"
+        href="/fonts/atkinson-regular.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+      />
+      <link
+        rel="preload"
+        href="/fonts/atkinson-bold.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+      />
+    </>
+  )
+}
+
+<!-- Header logo preload (prevents alt text flash on navigation).
+     Skip on pages that preload a larger LCP image (e.g. home hero). -->
+{preloadHeaderLogo && (
+  <link rel="preload" href="/images/pereira-tech-talks/logo-white.webp" as="image" type="image/webp" />
+)}
+
+<!-- Early connection for Cloudflare Web Analytics (when injected) -->
+<link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+<link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

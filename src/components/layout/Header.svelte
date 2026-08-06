@@ -72,7 +72,7 @@ function closeAllDropdowns() {
 <svelte:window on:click={closeAllDropdowns} />
 
 <header
-  class="sticky top-0 z-50 border-b transition-colors duration-300 bg-ptt-bg-elevated/95 text-ptt border-ptt-border shadow-sm shadow-ptt-primary/5 backdrop-blur-md dark:bg-ptt-bg-dark/95 dark:text-white dark:border-white/10 dark:shadow-black/30"
+  class="border-b transition-colors duration-300 bg-ptt-bg-elevated/95 text-ptt border-ptt-border shadow-sm shadow-ptt-primary/5 backdrop-blur-md dark:bg-ptt-bg-dark/95 dark:text-white dark:border-white/10 dark:shadow-black/30"
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <nav class="main-container flex items-center justify-between">
@@ -83,21 +83,21 @@ function closeAllDropdowns() {
     >
       <img
         class="h-8 w-auto md:h-9 dark:hidden"
-        src="/images/pereira-tech-talks/logo-color.png"
+        src="/images/pereira-tech-talks/logo-color.webp"
         alt=""
-        width={178}
-        height={178}
+        width={66}
+        height={108}
         loading="eager"
-        fetchpriority="high"
+        decoding="async"
       />
       <img
         class="hidden h-8 w-auto md:h-9 dark:block"
-        src="/images/pereira-tech-talks/logo-white.png"
+        src="/images/pereira-tech-talks/logo-white.webp"
         alt=""
-        width={178}
-        height={178}
+        width={66}
+        height={108}
         loading="eager"
-        fetchpriority="high"
+        decoding="async"
       />
       <span class="hidden min-[360px]:inline text-base md:text-lg lg:text-xl whitespace-nowrap">
         Pereira <span class="font-extrabold">Tech Talks</span>

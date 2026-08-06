@@ -59,7 +59,7 @@ const tagline =
 
 <footer
   class="relative border-t border-ptt-border bg-ptt-bg text-ptt-secondary"
-  style="padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right));"
+  style="padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <div
     class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-ptt-primary via-ptt-accent to-ptt-primary"
@@ -67,7 +67,7 @@ const tagline =
   >
   </div>
 
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-14 pb-10">
+  <div class="main-container pt-14 pb-10">
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
       <div class="lg:col-span-5 text-left">
         <a
@@ -76,18 +76,18 @@ const tagline =
           aria-label="Pereira Tech Talks"
         >
           <img
-            src="/images/pereira-tech-talks/logo-color.png"
+            src="/images/pereira-tech-talks/logo-color.webp"
             alt=""
-            width={40}
-            height={40}
+            width={66}
+            height={108}
             class="h-9 w-auto dark:hidden"
             loading="lazy"
           />
           <img
-            src="/images/pereira-tech-talks/logo-white.png"
+            src="/images/pereira-tech-talks/logo-white.webp"
             alt=""
-            width={40}
-            height={40}
+            width={66}
+            height={108}
             class="hidden h-9 w-auto dark:block"
             loading="lazy"
           />

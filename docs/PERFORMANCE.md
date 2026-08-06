@@ -255,7 +255,7 @@ const posts = await response.json();
 
 | Diagnostic | Mitigation |
 |------------|------------|
-| **Render-blocking requests** | Theme script inlined in MainLayout; CSS inlined via `build.inlineStylesheets: 'always'` |
+| **Render-blocking requests** | Theme script inlined in MainLayout; shared CSS emitted as `/_astro/*.css` via `build.inlineStylesheets: 'auto'` (avoid inlining the full Tailwind bundle into HTML — that delayed LCP paint under LHCI) |
 | **Improve image delivery** | WebP pipeline (`pnpm run images:webp`): homepage, blog shared, blog post heroes; `<picture>` with `source type="image/webp"` in BlogHeroImage, HomeSectionImage, PageHero |
 | **LCP request discovery** | Preload hero logo on homepage; `fetchpriority="high"` on above-fold images |
 | **Forced reflow** | MobileMenu: scroll lock deferred with `requestAnimationFrame`; `transition:fade` instead of `transition:slide` |

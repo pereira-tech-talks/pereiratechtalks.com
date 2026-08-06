@@ -61,7 +61,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 >
   <section class="py-10 sm:py-12 lg:py-16">
     <!-- Breadcrumb navigation -->
-    <nav class="max-w-7xl mx-auto px-4 md:px-8 mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
+    <nav class="main-container mb-6 flex flex-wrap items-center gap-x-2 text-sm" aria-label="Breadcrumb">
       <a href={`${prefix}/blog/`} class="font-semibold text-ptt-secondary transition-colors hover:text-ptt-primary">{t.nav.blog}</a>
       <span class="font-semibold text-ptt-secondary select-none" aria-hidden="true">/</span>
       <a href={`${prefix}/blog/series/`} class="font-semibold text-ptt-secondary transition-colors hover:text-ptt-primary">{t.seriesPage.breadcrumb}</a>
@@ -69,7 +69,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <span class="truncate font-normal text-ptt-secondary" aria-current="page">{localizedTitle}</span>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-4 md:px-8">
+    <div class="main-container">
       <SeriesInfiniteScroll
         client:visible
         {initialPosts}
@@ -89,7 +89,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <!-- Back to series listing -->
-    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-8 flex gap-4">
+    <div class="main-container mt-8 flex gap-4">
       <a
         href={`${prefix}/blog/series/`}
         class="inline-flex items-center gap-2 text-sm text-ptt-secondary hover:text-ptt-primary transition-colors"
