@@ -58,6 +58,16 @@ const SKILLS = [
       'Publish OAuth 2.0 protected resource metadata per RFC 9728 so agents know which authorization servers govern this resource.',
   },
   {
+    name: 'auth-md',
+    description:
+      'Publish /auth.md with agent registration discovery instructions and pair it with OAuth Protected Resource Metadata.',
+  },
+  {
+    name: 'dns-aid',
+    description:
+      'Publish DNS for AI Discovery (DNS-AID) HTTPS/SVCB records under _agents so agents can discover endpoints via DNS.',
+  },
+  {
     name: 'mcp-server-card',
     description:
       'Publish an MCP server card at /.well-known/mcp/server-card.json so agents can discover this site as an MCP-compatible surface.',

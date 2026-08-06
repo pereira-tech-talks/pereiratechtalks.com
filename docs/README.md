@@ -54,6 +54,7 @@ Welcome to the **Pereira Tech Talks** documentation. This guide helps developers
 | [Documentation Guide](DOCUMENTATION_GUIDE.md) | How to write and maintain docs |
 | [Documentation Inventory](DOCUMENTATION_INVENTORY.md) | Coverage tracking |
 | [Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md) | AEO Markdown endpoints contract |
+| [DNS-AID](aeo/DNS_AID.md) | DNS for AI Discovery records (isitagentready) |
 
 ## Technology Stack
 

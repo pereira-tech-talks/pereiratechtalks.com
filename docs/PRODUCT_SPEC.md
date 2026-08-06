@@ -151,7 +151,7 @@ Inventory of official PTT channels (Discord, X, Instagram, LinkedIn, GitHub, You
 
 - Native Markdown twins for every public HTML page (`.md` URLs).
 - Content negotiation via `Accept: text/markdown` header (Cloudflare middleware).
-- Discovery via `llms.txt`, `llms-full.txt`, `robots.txt`, `.well-known/api-catalog`, and `.well-known/mcp/server-card.json`.
+- Discovery via `llms.txt`, `llms-full.txt`, `robots.txt`, `/.well-known/api-catalog`, `/.well-known/mcp/server-card.json`, `/auth.md`, origin-aware OAuth PRM/AS metadata, WebMCP tools, and DNS-AID `_agents` records.
 - See [Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md).
 
 ### 14. Multilingual Support
