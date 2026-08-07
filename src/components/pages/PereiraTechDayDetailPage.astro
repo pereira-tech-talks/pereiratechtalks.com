@@ -6,12 +6,11 @@
 
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
-import ContributorCard from '@/components/cards/ContributorCard.astro';
-import SponsorCard from '@/components/cards/SponsorCard.astro';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import EditionScope from '@/components/pereira-tech-days/EditionScope.astro';
 import PtdAboutSection from '@/components/pereira-tech-days/PtdAboutSection.astro';
+import PtdCommunitiesOrganiza from '@/components/pereira-tech-days/PtdCommunitiesOrganiza.astro';
 import PtdEditionFonts from '@/components/pereira-tech-days/PtdEditionFonts.astro';
 import PtdFaqs from '@/components/pereira-tech-days/PtdFaqs.svelte';
 import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarousel.svelte';
@@ -21,7 +20,8 @@ import PtdJoinSection from '@/components/pereira-tech-days/PtdJoinSection.astro'
 import PtdKeynoteQuoteCard from '@/components/pereira-tech-days/PtdKeynoteQuoteCard.astro';
 import PtdLightningSection from '@/components/pereira-tech-days/PtdLightningSection.astro';
 import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.astro';
-import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
+import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
@@ -105,15 +105,6 @@ const communities = edition.data.communities;
 
 const { Content } = await render(edition);
 
-const breadcrumbs = [
-  {
-    label: lang === 'es' ? 'Inicio' : 'Home',
-    href: prefix === '' ? '/' : `${prefix}/`,
-  },
-  { label: 'Pereira Tech Days', href: `${prefix}/pereira-tech-days/` },
-  { label: `${year}` },
-];
-
 const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
   talk: { en: 'Talk', es: 'Charla' },
   keynote: { en: 'Keynote', es: 'Keynote' },
@@ -190,10 +181,6 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   {fontPackages.length > 0 && <PtdEditionFonts packages={fontPackages} />}
 
   <EditionScope year={year}>
-    <div class="main-container pt-6">
-      <Breadcrumbs items={breadcrumbs} baseUrl={SITE_URL} />
-    </div>
-
     {
       upcomingTemplate ? (
         <PtdHero2026
@@ -304,150 +291,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
-      editionSponsors.length > 0 && (
-        <section
-          class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.sponsors ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
-          aria-labelledby="ptd-sponsors-title"
-        >
-          {
-            upcomingTemplate && sectionBgs.sponsors && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            <h2 id="ptd-sponsors-title" class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-              {t.sponsors}
-            </h2>
-            <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {editionSponsors.map(({ sponsor, tier }) => (
-                <li>
-                  <SponsorCard sponsor={sponsor} tier={tier} lang={lang} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )
-    }
-
-    {
-      (organizers.length > 0 || collaborators.length > 0) && (
-        <section
-          class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
-          aria-labelledby="ptd-team-title"
-        >
-          {
-            upcomingTemplate && sectionBgs.team && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            {
-              organizers.length > 0 && (
-                <>
-                  <h2 id="ptd-team-title" class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-                    {t.organizers}
-                  </h2>
-                  <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {organizers.map((contributor) => (
-                      <li>
-                        <ContributorCard contributor={contributor} lang={lang} />
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )
-            }
-            {
-              collaborators.length > 0 && (
-                <>
-                  <h2 class="mt-12 text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-                    {t.collaborators}
-                  </h2>
-                  <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {collaborators.map((contributor) => (
-                      <li>
-                        <ContributorCard contributor={contributor} lang={lang} />
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )
-            }
-          </div>
-        </section>
-      )
-    }
-
-    {
-      communities.length > 0 && (
-        <section
-          class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.community ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
-          aria-labelledby="ptd-communities-title"
-        >
-          {
-            upcomingTemplate && sectionBgs.community && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            <h2 id="ptd-communities-title" class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-              {upcomingTemplate ? t.communities : t.communitiesOrganizes}
-            </h2>
-            <ul class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {communities.map((community) => (
-                <li class="flex min-w-0 flex-col items-center gap-3 rounded-xl bg-[var(--ptt-bg-elevated)] p-4 ring-1 ring-[var(--ptt-border)]">
-                  {
-                    community.url ? (
-                      <a
-                        href={community.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex flex-col items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
-                      >
-                        <img
-                          src={community.logo}
-                          alt={community.name}
-                          width="160"
-                          height="64"
-                          loading="lazy"
-                          decoding="async"
-                          class="max-h-14 max-w-full object-contain"
-                        />
-                        <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
-                          {community.name}
-                        </span>
-                      </a>
-                    ) : (
-                      <>
-                        <img
-                          src={community.logo}
-                          alt={community.name}
-                          width="160"
-                          height="64"
-                          loading="lazy"
-                          decoding="async"
-                          class="max-h-14 max-w-full object-contain"
-                        />
-                        <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
-                          {community.name}
-                        </span>
-                      </>
-                    )
-                  }
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )
-    }
-
-    {
-      edition.data.schedule.length > 0 && (
+      upcomingTemplate && edition.data.schedule.length > 0 && (
         <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]">
           <div class="main-container">
             <h2 class="mb-8 text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.schedule}</h2>
@@ -468,6 +312,72 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      editionSponsors.length > 0 && (
+        <section
+          class="relative py-[var(--ptd-section-pad)]"
+          style={upcomingTemplate && sectionBgs.sponsors ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
+          aria-label={t.sponsors}
+        >
+          {
+            upcomingTemplate && sectionBgs.sponsors && (
+              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+            )
+          }
+          <div class="relative main-container">
+            <PtdSponsorsShowcase sponsors={editionSponsors} lang={lang} title={t.sponsors} />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      communities.length > 0 && (
+        <section
+          class="relative py-[var(--ptd-section-pad)]"
+          style={upcomingTemplate && sectionBgs.community ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
+          aria-label={t.communitiesOrganizes}
+        >
+          {
+            upcomingTemplate && sectionBgs.community && (
+              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+            )
+          }
+          <div class="relative main-container">
+            <PtdCommunitiesOrganiza communities={communities} lang={lang} title={t.communitiesOrganizes} />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      (organizers.length > 0 || collaborators.length > 0) && (
+        <section
+          class="relative py-[var(--ptd-section-pad)]"
+          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
+          aria-label={t.organizers}
+        >
+          {
+            upcomingTemplate && sectionBgs.team && (
+              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+            )
+          }
+          <div class="relative main-container space-y-12">
+            {
+              organizers.length > 0 && (
+                <PtdTeamGrid contributors={organizers} lang={lang} title={t.organizers} />
+              )
+            }
+            {
+              collaborators.length > 0 && (
+                <PtdTeamGrid contributors={collaborators} lang={lang} title={t.collaborators} />
+              )
+            }
           </div>
         </section>
       )
@@ -514,8 +424,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           lang={lang}
           title={t.joinTitle}
           subtitle={t.joinSubtitle}
-          ctaLabel={t.joinCta}
-          ctaUrl={prefix === '' ? '/' : `${prefix}/`}
+          showCta={false}
           illustrationSrc={sectionBgs.join}
         />
       )

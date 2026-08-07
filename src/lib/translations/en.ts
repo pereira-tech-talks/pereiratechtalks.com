@@ -852,9 +852,8 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     about: 'About Pereira Tech Day',
     pricing: 'Sponsorship plans',
     faq: 'Frequently asked questions',
-    joinTitle: 'Join the community',
-    joinSubtitle:
-      'Meetups every month, an annual conference, and channels to keep learning together in Pereira.',
+    joinTitle: "Join the region's tech future.",
+    joinSubtitle: "Be part of the ecosystem's growth.",
     joinCta: 'Explore Pereira Tech Talks',
     lightningTitle: 'Lightning talks',
     lightningTagline: 'Short talks',
