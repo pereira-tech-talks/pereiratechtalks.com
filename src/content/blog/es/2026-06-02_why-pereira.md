@@ -7,7 +7,7 @@ tags:
   - community
   - pereira
 author: sergio-florez
-draft: false
+draft: true
 ---
 
 ## La pregunta que todo el mundo hace

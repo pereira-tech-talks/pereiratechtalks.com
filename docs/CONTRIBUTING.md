@@ -72,7 +72,7 @@ Help fund venues, snacks, swag, recording gear, and speaker travel. See [docs/SP
 
 We always need hands for: door check-in, livestream production, photography, social media, post-event content production, translation review, accessibility review, recording editing.
 
-Email <hello@pereiratechtalks.org> with the role you'd like to help with.
+Email <pereiratechtalks@gmail.com> with the role you'd like to help with.
 
 ## Code Contribution Workflow
 
@@ -132,11 +132,11 @@ Examples:
 
 We maintain a public **[Contributors directory](https://v3.pereiratechtalks.org/contributors)** built from `src/content/contributors/`. Every contributor — code, content, mentor, volunteer, sponsor — gets recognized there.
 
-If you've contributed in any form and don't see yourself listed within two weeks of your first contribution, please email <hello@pereiratechtalks.org> with your name, role, and a 1-paragraph bio.
+If you've contributed in any form and don't see yourself listed within two weeks of your first contribution, please email <pereiratechtalks@gmail.com> with your name, role, and a 1-paragraph bio.
 
 ## Questions?
 
-- General questions: <hello@pereiratechtalks.org>
+- General questions: <pereiratechtalks@gmail.com>
 - Speaker / talk: <speakers@pereiratechtalks.org>
 - Sponsorship: <sponsors@pereiratechtalks.org>
 - Code of Conduct concerns: <conduct@pereiratechtalks.org>

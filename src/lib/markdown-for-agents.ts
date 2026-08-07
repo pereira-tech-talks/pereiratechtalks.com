@@ -93,7 +93,7 @@ const SITE_NAV_SECTIONS: NavSection[] = [
       },
       {
         label: { en: 'X/Twitter', es: 'X/Twitter' },
-        path: 'https://x.com/pereiratechtalks',
+        path: 'https://x.com/pertechtalks',
         external: true,
       },
       {

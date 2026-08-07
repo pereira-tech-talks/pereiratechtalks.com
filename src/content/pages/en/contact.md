@@ -22,10 +22,10 @@ We are always open to new speakers, sponsors, partners, and community members. W
 
 ## Connect with us
 
-- Email: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Email: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
-- X (Twitter): [@pereira-tech-talks](https://x.com/pereiratechtalks)
+- X (Twitter): [@pertechtalks](https://x.com/pertechtalks)
 - Instagram: [@pertechtalks](https://www.instagram.com/pertechtalks)
 
 ---

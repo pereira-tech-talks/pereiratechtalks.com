@@ -33,7 +33,7 @@ These guidelines describe **how we behave in PTT spaces**. They complement the f
 
 ## On social media (X, LinkedIn, Instagram, YouTube)
 
-- **Tag generously.** When you talk about PTT, tag `@pereiratechtalks` so others can find us.
+- **Tag generously.** When you talk about PTT, tag `@pertechtalks` so others can find us.
 - **Quote responsibly.** When quoting a speaker, attribute clearly and link to the original recording or slides.
 - **Disagree well.** Public disagreement with a speaker or organizer is welcome — do it on the substance, not the person.
 
@@ -83,4 +83,4 @@ These guidelines describe **how we behave in PTT spaces**. They complement the f
 **Last reviewed:** 2026.
 **Owner:** Organizers' team.
 
-These guidelines evolve as the community grows. Suggest changes via PR or by writing to <hello@pereiratechtalks.org>.
+These guidelines evolve as the community grows. Suggest changes via PR or by writing to <pereiratechtalks@gmail.com>.

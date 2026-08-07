@@ -1,0 +1,12 @@
+name: Aumentada
+logo:
+  light: /images/sponsors/aumentada.png
+  dark: /images/sponsors/aumentada-dark.png
+  alt: Aumentada logo
+url: "https://aumentada.net/"
+description:
+  en: IT solutions from Pereira. Active community partner of Pereira Tech Talks — supporting monthly meetups and the local tech ecosystem.
+  es: Soluciones de TI desde Pereira. Aliado activo de Pereira Tech Talks — apoya los meetups mensuales y el ecosistema tech local.
+tier: community
+status: active
+order: 5

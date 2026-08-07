@@ -8,7 +8,7 @@ lastUpdated: 2026-08-07
 
 Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual **Pereira Tech Day** (archivo 2024, próxima 2026), la **Escuela de Speakers** y el club de lectura **La Biblioteca del Mañana**. Todo construido por voluntariado. Todo abierto.
 
-El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores — disponible en español e inglés — estructurado para ser tan útil a agentes de IA como a personas.
+El trabajo se sostiene gracias a patrocinadores (Veritran, GitHub, ASE-UTP, DailyBot, Aumentada, y aliados anteriores como Gorilla Logic, Made for Germany y Source Meridian) y es abierto por defecto. El sitio que estás leyendo es un catálogo de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores — disponible en español e inglés — estructurado para ser tan útil a agentes de IA como a personas.
 
 ---
 
@@ -52,5 +52,5 @@ Si quieres ser ponente, patrocinador, aliado o simplemente asistir — hay un lu
 - [Quiero patrocinar](/sponsor-us)
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
-- X (Twitter): [@pereira-tech-talks](https://x.com/pereiratechtalks)
+- X (Twitter): [@pertechtalks](https://x.com/pertechtalks)
 - Instagram: [@pertechtalks](https://www.instagram.com/pertechtalks)

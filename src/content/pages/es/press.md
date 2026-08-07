@@ -42,7 +42,7 @@ Pereira Tech Talks es una comunidad de constructores, ponentes y aprendices con 
 Entrevistas, cobertura en sitio, fotografía o solicitudes editoriales:
 
 - Formulario: [Contacto — consulta de prensa](/contact/?topic=other&subject=Consulta%20de%20prensa)
-- Correo: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Correo: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 
 ---
 
