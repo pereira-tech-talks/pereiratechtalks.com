@@ -93,7 +93,7 @@ Site images for branding, sections, and profile. Located directly in `public/ima
 
 | Image | Size | Purpose | Referenced By |
 |-------|-----:|---------|---------------|
-| `og-default.jpg` | ~98 KB | Default Open Graph / Twitter share image (1200×630) | BaseHead |
+| `og-default.jpg` | ~98 KB | Default Open Graph / Twitter share image (1200×630) | BaseHead, HomePage |
 | `trading.png` | 416 KB | Trading section | HomePage |
 | `techtalks.png` | 296 KB | Tech talks section | HomePage |
 | `dailybotyc.png` | 252 KB | DailyBot YC image | HomePage, DailybotPage |

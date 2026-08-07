@@ -56,6 +56,7 @@ const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
+const ogImageSrc = edition.data.ogImage ?? heroSrc;
 const upcomingTemplate = isUpcomingEdition(edition);
 const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
 
@@ -171,7 +172,9 @@ const eventJsonLd: Record<string, unknown> = {
         ? 'https://schema.org/MixedEventAttendanceMode'
         : 'https://schema.org/OfflineEventAttendanceMode',
   url: `${SITE_URL}${editionPublicHref}`,
-  image: heroSrc?.startsWith('http') ? heroSrc : `${SITE_URL}${heroSrc}`,
+  image: ogImageSrc?.startsWith('http')
+    ? ogImageSrc
+    : `${SITE_URL}${ogImageSrc}`,
   organizer: {
     '@type': 'Organization',
     name: 'Pereira Tech Talks',
@@ -203,7 +206,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   lang={lang}
   title={title}
   description={metaDescription}
-  image={heroSrc}
+  image={ogImageSrc}
   chrome="ptd-edition"
   ptdYear={year}
   ptdEditions={ptdEditionNav}

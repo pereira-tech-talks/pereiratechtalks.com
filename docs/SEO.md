@@ -215,9 +215,10 @@ All content MUST exist in both languages:
 
 ### OG Image Guidelines
 
-- Recommended: 1200x630px
-- Default fallback: `/images/og-default.jpg`
+- Recommended: 1200x630px JPEG (widest crawler support)
+- Default fallback: `/images/og-default.jpg` (home + pages without a custom `image`)
 - For blog posts: can set `heroImage` in frontmatter
+- For Pereira Tech Day editions: optional `ogImage` in the edition YAML (falls back to `hero.src`)
 
 ## AI Engine Optimization (AEO)
 
