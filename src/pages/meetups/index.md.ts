@@ -1,12 +1,11 @@
 import type { APIRoute } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
 import { getMeetupSlug, getMeetups, groupMeetupsByYear } from '@/lib/meetup';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
   const lang = 'es';

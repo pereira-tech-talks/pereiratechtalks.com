@@ -38,7 +38,7 @@ Generate ready-to-paste social media content for a specific blog post, tailored 
 - `$SLUG`: Blog post slug or URL. Accepts any of these formats:
   - Slug: `how-we-got-into-y-combinator`
   - Local URL: `http://localhost:8888/blog/how-we-got-into-y-combinator/` or `http://localhost:8888/es/blog/how-we-got-into-y-combinator/`
-  - Production URL: `https://pereiratechtalks.org/blog/how-we-got-into-y-combinator/` or `https://pereiratechtalks.org/es/blog/how-we-got-into-y-combinator/`
+  - Production URL: `https://v3.pereiratechtalks.org/blog/how-we-got-into-y-combinator/` or `https://v3.pereiratechtalks.org/es/blog/how-we-got-into-y-combinator/`
 
 ### Optional Parameters
 
@@ -173,15 +173,15 @@ title: "{post title}"
 published: true
 description: "{post description}"
 tags: {up to 4 dev.to tags, comma-separated}
-canonical_url: https://pereiratechtalks.org/blog/{slug}/
-cover_image: https://pereiratechtalks.org{heroImage path}
+canonical_url: https://v3.pereiratechtalks.org/blog/{slug}/
+cover_image: https://v3.pereiratechtalks.org{heroImage path}
 ---
 
 {Adapted intro — first 3-4 paragraphs of the post, slightly rewritten to work standalone on dev.to}
 
 ---
 
-*This post was originally published on the [Pereira Tech Talks blog](https://pereiratechtalks.org/blog/{slug}/). Read the full version there for the complete experience.*
+*This post was originally published on the [Pereira Tech Talks blog](https://v3.pereiratechtalks.org/blog/{slug}/). Read the full version there for the complete experience.*
 ```
 
 **Tone:** Same as the blog post — first person, technical, conversational.
@@ -256,7 +256,7 @@ Present all generated content in a clear, structured format:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Post: {title}
-URL: https://pereiratechtalks.org/blog/{slug}/
+URL: https://v3.pereiratechtalks.org/blog/{slug}/
 Tags: {tags}
 Language: {lang}
 Platforms: {list}
@@ -341,7 +341,7 @@ This skill is **complete** when ALL of the following are true:
 - [ ] HN title character limit respected (≤ 80)
 - [ ] dev.to includes `canonical_url`
 - [ ] All content presented in copy-pasteable format
-- [ ] Post URL (https://pereiratechtalks.org/blog/{slug}/) included in all platform outputs
+- [ ] Post URL (https://v3.pereiratechtalks.org/blog/{slug}/) included in all platform outputs
 
 ## Escalation Conditions
 
@@ -402,7 +402,7 @@ Here's what they actually asked us...
 [Tweet 4]
 Full story on the Pereira Tech Talks blog — every detail from application to Demo Day:
 
-https://pereiratechtalks.org/blog/how-we-got-into-y-combinator/
+https://v3.pereiratechtalks.org/blog/how-we-got-into-y-combinator/
 
 #YCombinator #startups #SaaS
 

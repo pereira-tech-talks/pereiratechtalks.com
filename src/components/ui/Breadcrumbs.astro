@@ -8,6 +8,8 @@
  * for WCAG AA contrast.
  */
 
+import { SITE_URL } from '@/lib/constances';
+
 interface BreadcrumbItem {
   label: string;
   href?: string;
@@ -19,11 +21,7 @@ interface Props {
   onDark?: boolean;
 }
 
-const {
-  items,
-  baseUrl = 'https://pereiratechtalks.org',
-  onDark = false,
-} = Astro.props;
+const { items, baseUrl = SITE_URL, onDark = false } = Astro.props;
 
 const jsonLd = {
   '@context': 'https://schema.org',

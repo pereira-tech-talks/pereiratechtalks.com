@@ -66,14 +66,14 @@ export function credentialArtifactUrl(
   eventId: string,
   certificateId: string
 ): string {
-  return `https://pereiratechtalks.org/certificates/${eventId}/${certificateId}.json`;
+  return `https://v3.pereiratechtalks.org/certificates/${eventId}/${certificateId}.json`;
 }
 
 export function credentialSubjectId(
   eventId: string,
   certificateId: string
 ): string {
-  return `https://pereiratechtalks.org/certificates/${eventId}/${certificateId}`;
+  return `https://v3.pereiratechtalks.org/certificates/${eventId}/${certificateId}`;
 }
 
 export function buildUnsignedCredential(

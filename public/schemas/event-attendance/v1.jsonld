@@ -2,24 +2,24 @@
   "@context": {
     "@version": 1.1,
     "EventAttendanceCredential": {
-      "@id": "https://pereiratechtalks.org/schemas/event-attendance#EventAttendanceCredential",
+      "@id": "https://v3.pereiratechtalks.org/schemas/event-attendance#EventAttendanceCredential",
       "@context": {
         "@protected": true,
         "id": "@id",
         "type": "@type",
         "name": "https://schema.org/name",
-        "role": "https://pereiratechtalks.org/schemas/event-attendance#role",
+        "role": "https://v3.pereiratechtalks.org/schemas/event-attendance#role",
         "event": "https://schema.org/event",
         "startDate": "https://schema.org/startDate",
         "location": "https://schema.org/location"
       }
     },
     "CertificateStatus": {
-      "@id": "https://pereiratechtalks.org/schemas/event-attendance#CertificateStatus",
+      "@id": "https://v3.pereiratechtalks.org/schemas/event-attendance#CertificateStatus",
       "@context": {
         "@protected": true,
-        "status": "https://pereiratechtalks.org/schemas/event-attendance#status",
-        "replacedBy": "https://pereiratechtalks.org/schemas/event-attendance#replacedBy"
+        "status": "https://v3.pereiratechtalks.org/schemas/event-attendance#status",
+        "replacedBy": "https://v3.pereiratechtalks.org/schemas/event-attendance#replacedBy"
       }
     }
   }

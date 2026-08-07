@@ -39,7 +39,7 @@ export const GET: APIRoute = ({ props }) => {
     markdown += `- **Related post:** /en/blog/${data.relatedPost}\n`;
   }
   markdown +=
-    '- **Source:** Pereira Tech Talks (https://pereiratechtalks.org)\n';
+    '- **Source:** Pereira Tech Talks (https://v3.pereiratechtalks.org)\n';
   markdown += '\n';
 
   // Type-specific fields

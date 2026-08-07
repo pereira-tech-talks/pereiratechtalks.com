@@ -1,9 +1,9 @@
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
-    "https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
+    "https://v3.pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
   ],
-  "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_b2n8w4pz.json",
+  "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_b2n8w4pz.json",
   "type": [
     "VerifiableCredential",
     "EventAttendanceCredential"
@@ -11,7 +11,7 @@
   "issuer": "did:web:pereiratechtalks.org",
   "validFrom": "2026-08-25T15:05:00.000Z",
   "credentialSubject": {
-    "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_b2n8w4pz",
+    "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_b2n8w4pz",
     "name": "Sam Ortega Demo",
     "role": "speaker",
     "event": {

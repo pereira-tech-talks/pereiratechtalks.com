@@ -58,7 +58,7 @@ Source: `src/content/pages/{en,es}/` content collection. Public Spanish pages ar
 Published: 2026-03-09
 Updated: 2026-03-10
 Language: en
-Canonical: https://pereiratechtalks.org/blog/post-slug
+Canonical: https://v3.pereiratechtalks.org/blog/post-slug
 Tags: tag1, tag2
 
 ---
@@ -153,13 +153,13 @@ The Cloudflare Pages middleware (`functions/_middleware.ts`) supports automatic 
 **Testing with curl:**
 ```bash
 # Get Markdown
-curl -H "Accept: text/markdown" https://pereiratechtalks.org/about
+curl -H "Accept: text/markdown" https://v3.pereiratechtalks.org/about
 
 # Get HTML (default)
-curl https://pereiratechtalks.org/about
+curl https://v3.pereiratechtalks.org/about
 
 # Direct .md URL also works
-curl https://pereiratechtalks.org/about.md
+curl https://v3.pereiratechtalks.org/about.md
 ```
 
 **Response headers for content-negotiated Markdown:**

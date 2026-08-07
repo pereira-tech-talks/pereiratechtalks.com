@@ -20,8 +20,8 @@
 
 ## 3. Sitemap & Robots
 
-- [ ] Verify sitemap is accessible: `curl -s https://pereiratechtalks.org/sitemap-index.xml | head -5`
-- [ ] Verify robots.txt is accessible: `curl -s https://pereiratechtalks.org/robots.txt | head -10`
+- [ ] Verify sitemap is accessible: `curl -s https://v3.pereiratechtalks.org/sitemap-index.xml | head -5`
+- [ ] Verify robots.txt is accessible: `curl -s https://v3.pereiratechtalks.org/robots.txt | head -10`
 - [ ] Confirm no accidental blocks in robots.txt for content pages
 - [ ] Verify sitemap includes `<lastmod>` entries (automatically set at build time)
 - [ ] Verify `/internal/*` pages are excluded from the sitemap
@@ -29,10 +29,10 @@
 ## 4. Schema Validation
 
 - [ ] Run Rich Results Test on 2-3 pages:
-  - Homepage: https://search.google.com/test/rich-results?url=https://pereiratechtalks.org/
-  - A blog post: https://search.google.com/test/rich-results?url=https://pereiratechtalks.org/blog/march-2026-meetup-recap/
-  - A Pereira Tech Day edition: https://search.google.com/test/rich-results?url=https://pereiratechtalks.org/pereira-tech-days/2026/
-  - About page: https://search.google.com/test/rich-results?url=https://pereiratechtalks.org/about/
+  - Homepage: https://search.google.com/test/rich-results?url=https://v3.pereiratechtalks.org/
+  - A blog post: https://search.google.com/test/rich-results?url=https://v3.pereiratechtalks.org/blog/march-2026-meetup-recap/
+  - A Pereira Tech Day edition: https://search.google.com/test/rich-results?url=https://v3.pereiratechtalks.org/pereira-tech-days/2026/
+  - About page: https://search.google.com/test/rich-results?url=https://v3.pereiratechtalks.org/about/
 - [ ] Verify JSON-LD is valid (no warnings or errors)
 - [ ] Check that BlogPosting schema has: headline, description, datePublished, dateModified, author (with image), publisher
 - [ ] Check that Event schema is present on Pereira Tech Day pages
@@ -61,8 +61,8 @@ Record results:
 
 ## 7. RSS & Feeds
 
-- [ ] Verify Spanish RSS: `curl -s https://pereiratechtalks.org/rss.xml | head -20`
-- [ ] Verify English RSS: `curl -s https://pereiratechtalks.org/en/rss.xml | head -20`
+- [ ] Verify Spanish RSS: `curl -s https://v3.pereiratechtalks.org/rss.xml | head -20`
+- [ ] Verify English RSS: `curl -s https://v3.pereiratechtalks.org/en/rss.xml | head -20`
 - [ ] Confirm latest posts appear in feeds
 
 ## 8. Markdown for Agents

@@ -1,12 +1,10 @@
 import type { APIRoute } from 'astro';
-
 import { getChannels } from '@/lib/channel';
+import { SITE_URL } from '@/lib/constances';
 import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
   const lang = 'es';

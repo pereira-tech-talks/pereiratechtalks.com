@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({

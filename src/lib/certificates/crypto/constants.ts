@@ -9,7 +9,7 @@ export const PTT_DID_DOCUMENT_PATH = '/.well-known/did.json';
 
 /** JSON-LD context for event attendance credentials. */
 export const EVENT_ATTENDANCE_CONTEXT =
-  'https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld';
+  'https://v3.pereiratechtalks.org/schemas/event-attendance/v1.jsonld';
 
 /** W3C Verifiable Credentials 2.0 context. */
 export const VC_CONTEXT = 'https://www.w3.org/ns/credentials/v2';

@@ -48,7 +48,7 @@ describe('umami proxy helpers', () => {
   describe('buildUmamiProxyRequestHeaders', () => {
     it('forwards client IP and user agent', () => {
       const request = new Request(
-        'https://pereiratechtalks.org/api/umami/api/send',
+        'https://v3.pereiratechtalks.org/api/umami/api/send',
         {
           method: 'POST',
           headers: {

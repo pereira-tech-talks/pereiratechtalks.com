@@ -248,7 +248,7 @@ PUBLIC_SITE_URL=http://localhost:8888
 PUBLIC_SITE_URL=https://v3.pereiratechtalks.org
 
 # After DNS cutover to apex (when apex serves this build):
-# PUBLIC_SITE_URL=https://pereiratechtalks.org
+# PUBLIC_SITE_URL=https://v3.pereiratechtalks.org
 ```
 
 **Access in code:**
