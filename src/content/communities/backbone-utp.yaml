@@ -1,6 +1,7 @@
 name: Backbone UTP
 logo:
   src: /images/communities/backbone-utp.png
+  dark: /images/communities/backbone-utp-dark.png
   alt: Backbone UTP logo
 url: "https://backboneutp.com"
 focus:

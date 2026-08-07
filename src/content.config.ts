@@ -656,6 +656,7 @@ const communities = defineCollection({
     name: z.string(),
     logo: z.object({
       src: z.string(),
+      dark: z.string().optional(),
       alt: z.string(),
     }),
     url: z.url(),
