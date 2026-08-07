@@ -13,6 +13,10 @@
   "agent_auth": {
     "skill": "https://pereiratechtalks.org/auth.md",
     "register_uri": "https://pereiratechtalks.org/agent/register",
+    "identity_endpoint": "https://pereiratechtalks.org/agent/register",
+    "claim_uri": "https://pereiratechtalks.org/agent/claim",
+    "claim_endpoint": "https://pereiratechtalks.org/agent/claim",
+    "claim_complete_uri": "https://pereiratechtalks.org/agent/claim/complete",
     "identity_types_supported": ["anonymous"],
     "anonymous": {
       "credential_types_supported": ["access_token"],
