@@ -8,7 +8,7 @@ import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { type Language, tr } from '@/lib/i18n';
-import { getEditionHref } from '@/lib/pereiraTechDay';
+import { getEditionHref, resolveEditionStatus } from '@/lib/pereiraTechDay';
 
 interface Props {
   edition: CollectionEntry<'pereiraTechDays'>;
@@ -34,7 +34,7 @@ const heroAlt = tr(edition.data.hero.alt, lang) || title;
 const url = getEditionHref(edition, lang);
 const accent =
   edition.data.brandKit?.paletteLight?.accent || 'var(--color-ptt-accent)';
-const status = edition.data.status;
+const status = resolveEditionStatus(edition);
 
 const date =
   typeof edition.data.date === 'object' && 'start' in edition.data.date

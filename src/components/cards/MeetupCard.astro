@@ -8,6 +8,7 @@ import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { resolveMeetupStatus } from '@/lib/meetup';
 
 interface Props {
   meetup: CollectionEntry<'meetups'>;
@@ -34,7 +35,7 @@ const venueLine = meetup.data.venue
   : '';
 
 const talksCount = meetup.data.talks?.length ?? 0;
-const status = meetup.data.status ?? 'completed';
+const status = resolveMeetupStatus(meetup);
 
 // Slug stripped of YYYY-MM-DD_ prefix in case the loader keeps it.
 const slug = meetup.id.replace(/^\d{4}-\d{2}-\d{2}_/, '');

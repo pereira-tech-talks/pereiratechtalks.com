@@ -1,6 +1,10 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
-import { combineCalendarDateAndTime } from '@/lib/dates';
+import {
+  combineCalendarDateAndTime,
+  getTodayInSiteTimezone,
+  isCalendarDateOnOrAfterToday,
+} from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 export type PereiraTechDay = CollectionEntry<'pereiraTechDays'>;
@@ -163,6 +167,26 @@ export const getEditionCountdownTargets = (
 /** Whether the edition is the upcoming flagship template (announced / RSVP). */
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
   edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
+
+export type EditionLifecycleStatus =
+  | 'announced'
+  | 'rsvp-open'
+  | 'completed'
+  | 'cancelled';
+
+/** Derive próximamente/pasado from the edition calendar date, not stale frontmatter. */
+export const resolveEditionStatus = (
+  edition: PereiraTechDay,
+  todayInTz: string = getTodayInSiteTimezone()
+): EditionLifecycleStatus => {
+  if (edition.data.status === 'cancelled') return 'cancelled';
+  if (!isCalendarDateOnOrAfterToday(getEditionStartDate(edition), todayInTz)) {
+    return 'completed';
+  }
+  if (edition.data.status === 'rsvp-open') return 'rsvp-open';
+  if (edition.data.status === 'announced') return 'announced';
+  return 'completed';
+};
 
 /** Singular public landing slug for the current/upcoming flagship edition. */
 export const PTD_LANDING_SLUG = 'pereira-tech-day';

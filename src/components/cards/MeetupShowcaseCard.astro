@@ -1,0 +1,26 @@
+---
+/**
+ * Renders a meetup or Pereira Tech Day edition in upcoming-meetup grids.
+ */
+
+import EditionCard from '@/components/cards/EditionCard.astro';
+import MeetupCard from '@/components/cards/MeetupCard.astro';
+import type { Language } from '@/lib/i18n';
+import type { MeetupShowcaseItem } from '@/lib/meetup';
+
+interface Props {
+  item: MeetupShowcaseItem;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { item, lang, loading = 'lazy' } = Astro.props;
+---
+
+{
+  item.type === 'meetup' ? (
+    <MeetupCard meetup={item.data} lang={lang} loading={loading} />
+  ) : (
+    <EditionCard edition={item.data} lang={lang} loading={loading} />
+  )
+}
