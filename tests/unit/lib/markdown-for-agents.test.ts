@@ -177,7 +177,9 @@ describe('serializeBlogIndexToMarkdown', () => {
     expect(result).toContain('# Pereira Tech Talks Blog');
     expect(result).toContain('> A technical blog.');
     expect(result).toContain('Language: en');
-    expect(result).toContain('Canonical: https://v3.pereiratechtalks.org/en/blog');
+    expect(result).toContain(
+      'Canonical: https://v3.pereiratechtalks.org/en/blog'
+    );
     expect(result).toContain('Total posts: 2');
     expect(result).toContain('## Posts');
   });
@@ -261,7 +263,9 @@ describe('serializePageToAgentMarkdown', () => {
     });
 
     expect(result).toContain('Language: es');
-    expect(result).toContain('Canonical: https://v3.pereiratechtalks.org/contact');
+    expect(result).toContain(
+      'Canonical: https://v3.pereiratechtalks.org/contact'
+    );
     expect(result).not.toContain('Last Updated:');
   });
 
