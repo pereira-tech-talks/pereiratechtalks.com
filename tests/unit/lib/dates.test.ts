@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
+import { SITE_TIMEZONE_OFFSET } from '@/lib/constances';
 import {
   combineCalendarDateAndTime,
   formatCalendarDate,
   formatCalendarDateLocale,
+  formatInstantInSiteTimezone,
   getCalendarDateString,
   getCalendarYear,
   getCalendarYearMonth,
@@ -63,6 +65,18 @@ describe('calendar date helpers', () => {
       '08:00'
     );
     expect(iso).toBe('2026-08-22T08:00:00-05:00');
+    expect(SITE_TIMEZONE_OFFSET).toBe('-05:00');
+  });
+
+  it('formatInstantInSiteTimezone formats real timestamps in GMT-5', () => {
+    const instant = new Date('2026-03-04T18:30:00.000Z');
+    const formatted = formatInstantInSiteTimezone(instant, 'en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+    expect(formatted).toContain('4');
+    expect(formatted).not.toContain('5');
   });
 });
 
