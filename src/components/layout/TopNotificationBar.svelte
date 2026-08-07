@@ -19,12 +19,11 @@ interface Props {
 
 let { lang, notifications }: Props = $props();
 
-let dismissed = $state<Record<string, boolean>>({});
 let openModalId = $state<string | null>(null);
 let dialogEl = $state<HTMLDivElement | undefined>(undefined);
+/** Visible only while the page is scrolled to the top. */
+let atTop = $state(true);
 let lastFocusedEl: HTMLElement | null = null;
-
-const storageKey = (id: string): string => `ptt:notify-dismiss:${id}`;
 
 const focusableSelector =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
@@ -65,42 +64,30 @@ $effect(() => {
   }
 });
 
+/** Collapse the bar once the user scrolls away from the top. */
 $effect(() => {
-  if (typeof sessionStorage === 'undefined') return;
-  const next: Record<string, boolean> = {};
-  for (const n of notifications) {
-    next[n.id] = sessionStorage.getItem(storageKey(n.id)) === '1';
-  }
-  dismissed = next;
+  if (typeof window === 'undefined') return;
+  const onScroll = (): void => {
+    atTop = window.scrollY <= 4;
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  return () => window.removeEventListener('scroll', onScroll);
 });
 
-/** All non-dismissed alerts (priority order preserved from server). */
-const visible = $derived(notifications.filter((n) => !dismissed[n.id]));
-
 /**
- * Sticky chrome shows one bar at a time (highest priority). Dismissing it
- * reveals the next — avoids stacking two full-width bars on every page.
+ * Sticky chrome shows one bar at a time (highest priority). Avoids stacking
+ * two full-width bars on every page.
  */
-const visibleBar = $derived(visible.slice(0, 1));
+const visibleBar = $derived(notifications.slice(0, 1));
 
 const openEntry = $derived(
-  openModalId ? visible.find((n) => n.id === openModalId) : undefined
+  openModalId ? notifications.find((n) => n.id === openModalId) : undefined
 );
 
-const dismissLabel = lang === 'es' ? 'Cerrar aviso' : 'Dismiss notice';
 const moreLabel = lang === 'es' ? 'Ver más' : 'Learn more';
+const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
 const importantLabel = lang === 'es' ? 'IMPORTANTE' : 'IMPORTANT';
-
-function dismiss(id: string): void {
-  dismissed = { ...dismissed, [id]: true };
-  trackEvent(EVENTS.NOTIFICATION_DISMISS, { id });
-  try {
-    sessionStorage.setItem(storageKey(id), '1');
-  } catch {
-    /* private mode */
-  }
-  if (openModalId === id) closeModal();
-}
 
 function severityClass(severity: LocalizedNotification['severity']): string {
   switch (severity) {
@@ -117,13 +104,20 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 </script>
 
 {#if visibleBar.length > 0}
-  <div class="w-full" data-testid="top-notification-bar">
+  <div
+    class="w-full overflow-hidden transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none {atTop
+      ? 'max-h-12 opacity-100'
+      : 'max-h-0 opacity-0 pointer-events-none'}"
+    data-testid="top-notification-bar"
+    aria-hidden={!atTop}
+  >
     {#each visibleBar as n (n.id)}
       <!--
-        Full-bleed surface; inner row matches Header width
-        (max-w-7xl + mx-auto + px-4 md:px-8 as utilities).
+        Full-bleed surface; inner row matches Header / `.main-container`
+        width (max-w-7xl + mx-auto + px-4 md:px-6).
         Mid-height bar (~36–40px). Touch targets stay ≥44px via
         invisible hit-area expanders, not min-h on the row.
+        Non-dismissible — hides on scroll, returns at top.
       -->
       <div
         class={severityClass(n.severity)}
@@ -131,7 +125,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         aria-label={n.title}
       >
         <div
-          class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-8"
+          class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
         >
           {#if n.severity === 'important'}
             <span
@@ -150,6 +144,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
               <button
                 type="button"
                 class="relative underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                tabindex={atTop ? 0 : -1}
                 onclick={() => openModal(n.id)}
               >
                 {moreLabel}
@@ -158,19 +153,12 @@ function severityClass(severity: LocalizedNotification['severity']): string {
               <a
                 href={n.ctaHref}
                 class="relative inline-flex items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                tabindex={atTop ? 0 : -1}
                 onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
               >
                 {n.ctaLabel}
               </a>
             {/if}
-            <button
-              type="button"
-              class="relative inline-flex h-6 w-6 items-center justify-center rounded hover:bg-black/10 dark:hover:bg-white/10 before:absolute before:content-[''] before:inset-[-10px]"
-              aria-label={dismissLabel}
-              onclick={() => dismiss(n.id)}
-            >
-              <span aria-hidden="true" class="text-sm leading-none">×</span>
-            </button>
           </div>
         </div>
       </div>
@@ -222,11 +210,9 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         <button
           type="button"
           class="inline-flex min-h-[44px] items-center rounded-full border border-ptt-border px-5 py-2 text-sm font-semibold"
-          onclick={() => {
-            if (openEntry) dismiss(openEntry.id);
-          }}
+          onclick={closeModal}
         >
-          {dismissLabel}
+          {closeLabel}
         </button>
       </div>
     </div>

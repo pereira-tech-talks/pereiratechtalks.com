@@ -139,7 +139,7 @@ Site-wide `TopNotificationBar` reads from the `notifications` content collection
 - **Plain text only** in title/summary/body — no HTML rendering of notification fields.
 - **Date window** (`startsAt`/`endsAt`) + `active` flag filter via `src/lib/notifications.ts`.
 - **CTA hrefs** validated by Zod (`notificationSafeHref`): internal paths (`/…`) or absolute `http(s)://` only.
-- **Dismiss state** is client-local (`localStorage`); never used for server security decisions.
+- **Non-dismissible** — the bar has no close control; it only collapses while the page is scrolled away from the top.
 - **Modal** focus trap is client UX only — content remains author-controlled YAML.
 
 ### PTD subscribe (`functions/api/ptd-subscribe.ts`)

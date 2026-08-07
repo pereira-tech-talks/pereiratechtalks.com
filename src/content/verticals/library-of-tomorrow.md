@@ -9,8 +9,8 @@ mission:
   en: Read together the books that shape tomorrow's technology, science, and society.
   es: Leer en comunidad los libros que dan forma a la tecnología, la ciencia y la sociedad del mañana.
 description:
-  en: "La Biblioteca del Mañana is the bilingual reading club of Pereira Tech Talks. Once a month we meet to discuss a book that touches the future — applied AI, philosophy of technology, science fiction, leadership, climate, society. The reading is the prompt; the conversation is the point."
-  es: "La Biblioteca del Mañana es el club de lectura bilingüe de Pereira Tech Talks. Una vez al mes nos reunimos para discutir un libro que toca el futuro — IA aplicada, filosofía de la tecnología, ciencia ficción, liderazgo, clima, sociedad. La lectura es el detonador; la conversación es el punto."
+  en: "La Biblioteca del Mañana is the reading club of Pereira Tech Talks. Once a month we meet to discuss a book that touches the future — applied AI, philosophy of technology, science fiction, leadership, climate, society. The reading is the prompt; the conversation is the point."
+  es: "La Biblioteca del Mañana es el club de lectura de Pereira Tech Talks. Una vez al mes nos reunimos para discutir un libro que toca el futuro — IA aplicada, filosofía de la tecnología, ciencia ficción, liderazgo, clima, sociedad. La lectura es el detonador; la conversación es el punto."
 leaders:
   - sergio-florez
 channels:

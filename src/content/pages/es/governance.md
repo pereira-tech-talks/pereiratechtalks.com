@@ -95,7 +95,7 @@ Los resúmenes financieros anuales se publican en el post de cierre de año en e
 
 Esta página no está congelada. A medida que la comunidad crece, el modelo evoluciona. Los cambios materiales se proponen por escrito, se discuten públicamente por el blog o un meetup, y los aprueban los organizadores fundadores. Las aclaraciones menores pueden editarse directamente.
 
-Puedes ver el historial completo de revisiones de esta página en el [repositorio open source](https://github.com/pereiratechtalks).
+Puedes ver el historial completo de revisiones de esta página en el [repositorio open source](https://github.com/pereira-tech-talks).
 
 ---
 

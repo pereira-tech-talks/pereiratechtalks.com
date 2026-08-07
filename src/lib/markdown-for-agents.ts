@@ -85,7 +85,7 @@ const SITE_NAV_SECTIONS: NavSection[] = [
     links: [
       {
         label: { en: 'GitHub', es: 'GitHub' },
-        path: 'https://github.com/pereiratechtalks',
+        path: 'https://github.com/pereira-tech-talks',
         external: true,
       },
       {
@@ -100,7 +100,7 @@ const SITE_NAV_SECTIONS: NavSection[] = [
       },
       {
         label: { en: 'Instagram', es: 'Instagram' },
-        path: 'https://www.instagram.com/pereiratechtalks',
+        path: 'https://www.instagram.com/pertechtalks',
         external: true,
       },
     ],

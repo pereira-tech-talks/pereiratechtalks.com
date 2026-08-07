@@ -1,7 +1,8 @@
 ---
 /**
  * PTT v3.0.0 single Pereira Tech Day edition detail page.
- * Per-edition theming via EditionScope; chrome stays global PTT.
+ * Per-edition theming via EditionScope; PTD pages use dedicated edition chrome
+ * (minimal header: current edition + previous editions) instead of global PTT nav.
  */
 
 import type { CollectionEntry } from 'astro:content';
@@ -31,6 +32,7 @@ import {
   getEditionFontPackages,
   getEditionStartDate,
   getEditionStartIso,
+  getEditions,
   isUpcomingEdition,
   normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
@@ -68,6 +70,17 @@ const dateFormatter = new Intl.DateTimeFormat(
 );
 const dateLabel = dateFormatter.format(startDate);
 
+/** Legacy 2024 hero date: "SEPTIEMBRE 21, 2024." */
+const heroDateParts = new Intl.DateTimeFormat(
+  lang === 'es' ? 'es-CO' : 'en-US',
+  { year: 'numeric', month: 'long', day: 'numeric' }
+).formatToParts(startDate);
+const heroMonth =
+  heroDateParts.find((p) => p.type === 'month')?.value.toUpperCase() ?? '';
+const heroDay = heroDateParts.find((p) => p.type === 'day')?.value ?? '';
+const heroYearPart = heroDateParts.find((p) => p.type === 'year')?.value ?? '';
+const heroDateLabel = `${heroMonth} ${heroDay}, ${heroYearPart}`;
+
 const longDateFormatter = new Intl.DateTimeFormat(
   lang === 'es' ? 'es-CO' : 'en-US',
   {
@@ -78,6 +91,13 @@ const longDateFormatter = new Intl.DateTimeFormat(
   }
 );
 const dateLong = longDateFormatter.format(startDate);
+
+const allEditions = await getEditions();
+const ptdEditionNav = allEditions.map((entry) => ({
+  year: entry.data.year,
+  href: `${prefix}/pereira-tech-days/${entry.data.year}/`,
+  label: `Pereira Tech Day ${entry.data.year}`,
+}));
 
 const venue = edition.data.venue;
 const status = edition.data.status;
@@ -175,7 +195,16 @@ if (keynoteSpeakers.length > 0) {
 const sectionBgs = edition.data.sectionBackgrounds ?? {};
 ---
 
-<MainLayout lang={lang} title={title} description={metaDescription} image={heroSrc}>
+<MainLayout
+  lang={lang}
+  title={title}
+  description={metaDescription}
+  image={heroSrc}
+  chrome="ptd-edition"
+  ptdYear={year}
+  ptdEditions={ptdEditionNav}
+  ptdChromeVariant={upcomingTemplate ? 'light' : 'dark'}
+>
   <JsonLd data={eventJsonLd} />
   <style is:inline set:html={themeCss}></style>
   {fontPackages.length > 0 && <PtdEditionFonts packages={fontPackages} />}
@@ -220,11 +249,10 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           year={year}
           title={title}
           tagline={tagline}
-          dateLabel={dateLabel}
+          dateLabel={heroDateLabel}
           startDate={startIso}
           venueName={venue.name}
           venueMapUrl={venue.mapUrl}
-          heroSrc={heroSrc}
           logoSrc="/images/pereira-tech-days/2024/logo.png"
           recordingUrl={edition.data.linkRecording}
           recordingCta={t.recordingCta}
@@ -251,14 +279,20 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
     {
       !upcomingTemplate && keynoteSpeakers.length > 0 && (
-        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-speakers-title">
+        <section
+          class="bg-[var(--ptt-bg)] pb-[var(--ptd-section-pad)] pt-4 sm:pt-6"
+          aria-labelledby="ptd-speakers-title"
+        >
           <div class="main-container">
-            <h2 id="ptd-speakers-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+            <h2
+              id="ptd-speakers-title"
+              class="text-center text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl md:text-4xl"
+            >
               {t.speakers}
             </h2>
-            <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+            <ul class="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               {keynoteSpeakers.map((speaker) => (
-                <li>
+                <li class="min-w-0">
                   <PtdKeynoteQuoteCard speaker={speaker} lang={lang} />
                 </li>
               ))}
@@ -372,15 +406,41 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
             )
           }
-          <div class="relative main-container">
+          <div class="relative main-container space-y-12 sm:space-y-14">
             <PtdCommunitiesOrganiza communities={communities} lang={lang} title={t.communitiesOrganizes} />
+            {
+              /* Legacy places organizer portraits directly under Organiza */
+              organizers.length > 0 && (
+                <PtdTeamGrid contributors={organizers} lang={lang} />
+              )
+            }
           </div>
         </section>
       )
     }
 
     {
-      (organizers.length > 0 || collaborators.length > 0) && (
+      collaborators.length > 0 && (
+        <section
+          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
+          aria-label={t.collaborators}
+        >
+          {
+            upcomingTemplate && sectionBgs.team && (
+              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+            )
+          }
+          <div class="relative main-container">
+            <PtdTeamGrid contributors={collaborators} lang={lang} title={t.collaborators} />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      /* Fallback: organizers without communities still need a home */
+      communities.length === 0 && organizers.length > 0 && (
         <section
           class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
           style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
@@ -391,17 +451,8 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
             )
           }
-          <div class="relative main-container space-y-12">
-            {
-              organizers.length > 0 && (
-                <PtdTeamGrid contributors={organizers} lang={lang} title={t.organizers} />
-              )
-            }
-            {
-              collaborators.length > 0 && (
-                <PtdTeamGrid contributors={collaborators} lang={lang} title={t.collaborators} />
-              )
-            }
+          <div class="relative main-container">
+            <PtdTeamGrid contributors={organizers} lang={lang} title={t.organizers} />
           </div>
         </section>
       )

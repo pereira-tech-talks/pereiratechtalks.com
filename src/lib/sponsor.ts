@@ -65,17 +65,24 @@ export interface EditionSponsor {
 /**
  * Resolve the `sponsors` refs declared on a Pereira Tech Day edition, keeping
  * the per-edition tier rather than the sponsor's own default. Sorted by tier
- * (diamond first). Unknown slugs are dropped.
+ * (diamond first), preserving declaration order within the same tier.
  */
 export const getEditionSponsors = async (
   refs: { slug: string; tier: Sponsor['data']['tier'] }[]
 ): Promise<EditionSponsor[]> => {
   const all = await getSponsors();
   return refs
-    .map((ref) => {
+    .map((ref, index) => {
       const sponsor = all.find((s) => s.id === ref.slug);
-      return sponsor ? { sponsor, tier: ref.tier } : undefined;
+      return sponsor ? { sponsor, tier: ref.tier, index } : undefined;
     })
-    .filter((e): e is EditionSponsor => Boolean(e))
-    .sort((a, b) => tierOrder[a.tier] - tierOrder[b.tier]);
+    .filter(
+      (e): e is EditionSponsor & { index: number } => Boolean(e)
+    )
+    .sort((a, b) => {
+      const tierDiff = tierOrder[a.tier] - tierOrder[b.tier];
+      if (tierDiff !== 0) return tierDiff;
+      return a.index - b.index;
+    })
+    .map(({ sponsor, tier }) => ({ sponsor, tier }));
 };

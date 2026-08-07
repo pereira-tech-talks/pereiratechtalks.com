@@ -75,7 +75,7 @@ Full-viewport hero section with animated typewriter effect.
 ```astro
 <HeroSection 
   name="Pereira Tech Talks"
-  description="Bilingual tech community of Pereira, Risaralda, Colombia"
+  description="Tech community of Pereira, Risaralda, Colombia"
   typewriterWords={['Builders', 'Speakers', 'Mentors', 'Learners']}
 />
 ```

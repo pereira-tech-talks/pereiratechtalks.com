@@ -1,10 +1,10 @@
 # Pereira Tech Talks
 
-> Pereira Tech Talks is the bilingual technology community of Pereira, Risaralda, Colombia. We run monthly meetups, the annual Pereira Tech Day, the Speaker School, La Biblioteca del Mañana, and a bilingual blog and slide deck library — all open, all free, all in public.
+> Pereira Tech Talks is the technology community of Pereira, Risaralda, Colombia. We run monthly meetups, the annual Pereira Tech Day, the Speaker School, La Biblioteca del Mañana, and a blog and slide deck library — all open, all free, all in public. The website is available in Spanish and English.
 
 ## About
 
-This site is the public face and operational backbone of the community. It hosts monthly meetup recaps, calendar events, every edition of the Pereira Tech Day flagship conference (each with its own per-edition brand), an always-open Call for Speakers, the Speaker School, and bilingual long-form content from the people who make PTT happen.
+This site is the public face and operational backbone of the community. It hosts monthly meetup recaps, calendar events, every edition of the Pereira Tech Day flagship conference (each with its own per-edition brand), an always-open Call for Speakers, the Speaker School, and long-form content in Spanish and English from the people who make PTT happen.
 
 ## Core Sections
 
@@ -14,7 +14,7 @@ This site is the public face and operational backbone of the community. It hosts
 - [Meetups](/meetups/) (monthly community gatherings)
 - [Calendar](/calendar/) (workshops and special events)
 - [Verticals](/verticals/) (Speaker School, La Biblioteca del Mañana, AI channel, monthly meetups)
-- [Blog](/blog/) (bilingual articles, series, tags, search)
+- [Blog](/blog/) (articles, series, tags, search — Spanish and English)
 - [Slides](/slides/) (Reveal.js / external decks)
 - [Speakers](/speakers/)
 - [Contributors](/contributors/)

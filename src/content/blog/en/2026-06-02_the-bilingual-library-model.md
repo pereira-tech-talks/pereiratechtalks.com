@@ -75,4 +75,4 @@ If you run a Latin American tech community, consider this argument seriously. Yo
 
 Auto-translation does not count. Spanglish does not count. English-only does not count. Real bilingual content, written natively in both languages, in lockstep, is the standard.
 
-We are happy to help any community thinking through this transition. The site you are reading is open source. Steal the structure: [github.com/pereiratechtalks](https://github.com/pereiratechtalks).
+We are happy to help any community thinking through this transition. The site you are reading is open source. Steal the structure: [github.com/pereira-tech-talks](https://github.com/pereira-tech-talks).

@@ -39,7 +39,7 @@ The main stylesheet that imports Tailwind and defines global styles.
 /* 4. Component Classes */
 @layer components {
   .main-container {
-    @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
+    @apply mx-auto max-w-7xl py-4 px-4 md:px-6;
   }
 }
 
@@ -74,7 +74,7 @@ Standard content container with responsive padding:
 
 ```css
 .main-container {
-  @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
+  @apply mx-auto max-w-7xl py-4 px-4 md:px-6;
 }
 ```
 

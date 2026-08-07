@@ -59,7 +59,6 @@ export const EVENTS = {
   AI_BOT_VISIT: 'ai_bot_visit',
   UNKNOWN_BOT_VISIT: 'unknown_bot_visit',
   MARKDOWN_REQUEST: 'markdown_request',
-  NOTIFICATION_DISMISS: 'notification_dismiss',
   NOTIFICATION_CTA: 'notification_cta',
   NOTIFICATION_MODAL_OPEN: 'notification_modal_open',
   CALENDAR_FILTER: 'calendar_filter',

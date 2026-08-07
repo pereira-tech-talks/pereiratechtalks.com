@@ -1,8 +1,7 @@
 ---
 /**
- * PtdCommunitiesOrganiza — "Organiza" logo-tile grid for the allied
- * communities behind a Pereira Tech Day edition. Matches the legacy density
- * (compact logo + name tiles) rather than the shared directory card style.
+ * PtdCommunitiesOrganiza — legacy "Organiza" community logo tiles:
+ * large logo cards in a full-width row, title centered.
  */
 import type { Language } from '@/lib/i18n';
 
@@ -27,18 +26,21 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
 ---
 
 <div class="ptd-communities-organiza">
-  <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-    {title}
-  </Heading>
-  {
-    subtitle && (
-      <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{subtitle}</p>
-    )
-  }
-  <ul class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+  <header class="mb-8 text-center md:mb-10">
+    <Heading class="ptd-organiza-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+      {title}
+    </Heading>
+    {
+      subtitle && (
+        <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{subtitle}</p>
+      )
+    }
+  </header>
+
+  <ul class="mx-auto grid w-full max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
     {
       communities.map((community) => (
-        <li class="flex min-w-0 flex-col items-center gap-3 rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] p-4 ring-1 ring-[var(--ptt-border)]">
+        <li class="min-w-0">
           {
             community.url ? (
               <a
@@ -46,36 +48,30 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${visitLabel} ${community.name}`}
-                class="flex flex-col items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition duration-200 hover:-translate-y-1 hover:border-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] sm:min-h-44 sm:px-5 sm:py-6"
               >
                 <img
                   src={community.logo}
                   alt={community.name}
-                  width="160"
-                  height="64"
+                  width="200"
+                  height="200"
                   loading="lazy"
                   decoding="async"
-                  class="max-h-14 max-w-full object-contain"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
                 />
-                <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
-                  {community.name}
-                </span>
               </a>
             ) : (
-              <>
+              <div class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 sm:min-h-44 sm:px-5 sm:py-6">
                 <img
                   src={community.logo}
                   alt={community.name}
-                  width="160"
-                  height="64"
+                  width="200"
+                  height="200"
                   loading="lazy"
                   decoding="async"
-                  class="max-h-14 max-w-full object-contain"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
                 />
-                <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
-                  {community.name}
-                </span>
-              </>
+              </div>
             )
           }
         </li>
@@ -83,3 +79,10 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
     }
   </ul>
 </div>
+
+<style>
+  .ptd-organiza-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

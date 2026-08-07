@@ -1,9 +1,8 @@
 ---
 /**
- * PtdTeamGrid — photo + name team grid for PTD landing pages (organizers,
- * collaborators). Deliberately lighter than the shared `ContributorCard`
- * bio/role/social directory style — render one instance per group (e.g.
- * organizers, then collaborators) to keep them visually separate.
+ * PtdTeamGrid — legacy photo + name team grid (organizers / collaborators).
+ * Large circular portraits in a centered flex-wrap row so incomplete last
+ * rows stay centered.
  */
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '@/lib/i18n';
@@ -11,7 +10,7 @@ import type { Language } from '@/lib/i18n';
 interface Props {
   contributors: CollectionEntry<'contributors'>[];
   lang: Language;
-  title: string;
+  title?: string;
   headingLevel?: 'h2' | 'h3';
 }
 
@@ -22,25 +21,29 @@ const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
 ---
 
 <div class="ptd-team-grid">
-  <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-    {title}
-  </Heading>
-  <ul class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+  {
+    title && (
+      <header class="mb-8 text-center md:mb-10">
+        <Heading class="ptd-team-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+          {title}
+        </Heading>
+      </header>
+    )
+  }
+  <ul class="flex flex-wrap justify-center gap-x-5 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8">
     {
       contributors.map((contributor) => (
-        <li class="flex flex-col items-center gap-3 text-center">
-          <div class="h-20 w-20 overflow-hidden rounded-full ring-2 ring-[var(--ptt-bg-elevated)] shadow-sm">
-            <img
-              src={contributor.data.avatar}
-              alt={`${portraitLabel} ${contributor.data.name}`}
-              width="80"
-              height="80"
-              loading="lazy"
-              decoding="async"
-              class="h-full w-full object-cover"
-            />
-          </div>
-          <span class="text-sm font-semibold text-[var(--ptt-text)]">
+        <li class="flex w-[calc(50%-0.625rem)] flex-col items-center text-center sm:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.6rem)]">
+          <img
+            src={contributor.data.avatar}
+            alt={`${portraitLabel} ${contributor.data.name}`}
+            width="160"
+            height="160"
+            loading="lazy"
+            decoding="async"
+            class="mb-3 h-28 w-28 rounded-full object-cover sm:mb-3.5 sm:h-32 sm:w-32 md:h-36 md:w-36"
+          />
+          <span class="max-w-[10rem] text-sm font-medium leading-snug text-[var(--ptt-text)] sm:text-base">
             {contributor.data.name}
           </span>
         </li>
@@ -48,3 +51,10 @@ const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
     }
   </ul>
 </div>
+
+<style>
+  .ptd-team-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

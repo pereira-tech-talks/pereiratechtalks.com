@@ -17,7 +17,7 @@ export const GET: APIRoute = () => {
         lines: [
           '- Fundación: Pereira, Risaralda, Colombia · 2014',
           '- Naturaleza: comunidad sin fines de lucro, organizada por voluntariado',
-          '- Idiomas: español e inglés (totalmente bilingüe)',
+          '- Idiomas: sitio en español e inglés',
           '- Programas: Meetups mensuales · Pereira Tech Day · Speaker School · La Biblioteca del Mañana · AI Channel',
           '- Cifras: 90+ meetups · 200+ charlas · 6.500+ asistencias · 7 ediciones de Pereira Tech Day',
           '- Modelo: eventos gratuitos sostenidos por patrocinadores',
@@ -26,7 +26,7 @@ export const GET: APIRoute = () => {
       {
         heading: 'Descripción breve (boilerplate)',
         lines: [
-          'Pereira Tech Talks es una comunidad bilingüe de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y siete ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global a través de meetups mensuales, la Speaker School, La Biblioteca del Mañana y el AI Channel.',
+          'Pereira Tech Talks es una comunidad de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y siete ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global a través de meetups mensuales, la Speaker School, La Biblioteca del Mañana y el AI Channel.',
         ],
       },
       {

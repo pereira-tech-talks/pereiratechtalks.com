@@ -79,7 +79,7 @@ Dos ritmos paralelos:
 
 ## Recursos publicados
 
-Las charlas y demos del canal se publican como parte del catálogo bilingüe del sitio:
+Las charlas y demos del canal se publican como parte del catálogo del sitio (español e inglés):
 
 - [Blog · etiqueta AI Agents](/blog/tag/ai-agents)
 - [Meetups asociados](/meetups) — filtra por verticales: AI Channel

@@ -31,7 +31,7 @@ const organizationData = {
   url: Astro.site?.href,
   logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
   description:
-    'Pereira Tech Talks — bilingual technology community of Pereira, Risaralda, Colombia. Since 2014: 90+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School, and La Biblioteca del Mañana reading club.',
+    'Pereira Tech Talks — technology community of Pereira, Risaralda, Colombia. Since 2014: 90+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School, and La Biblioteca del Mañana reading club.',
   foundingDate: '2014-02-27',
   foundingLocation: {
     '@type': 'Place',
@@ -52,10 +52,10 @@ const organizationData = {
     'Tech Community Building',
   ],
   sameAs: [
-    'https://github.com/pereiratechtalks',
+    'https://github.com/pereira-tech-talks',
     'https://www.linkedin.com/company/pereira-tech-talks/',
     'https://x.com/pereiratechtalks',
-    'https://www.instagram.com/pereiratechtalks',
+    'https://www.instagram.com/pertechtalks',
   ],
 };
 
@@ -104,8 +104,8 @@ const breadcrumbs = [
   title={t.aboutPage.title}
   description={t.aboutPage.description}
   keywords={lang === 'en'
-    ? ['about Pereira Tech Talks', 'PTT community', 'tech community Pereira', 'Risaralda tech ecosystem', 'bilingual tech community Colombia', 'Pereira Tech Day organizers']
-    : ['sobre Pereira Tech Talks', 'comunidad PTT', 'comunidad tecnología Pereira', 'ecosistema tecnología Risaralda', 'comunidad tecnología bilingüe Colombia', 'organizadores Pereira Tech Day']}
+    ? ['about Pereira Tech Talks', 'PTT community', 'tech community Pereira', 'Risaralda tech ecosystem', 'tech community Colombia', 'Pereira Tech Day organizers']
+    : ['sobre Pereira Tech Talks', 'comunidad PTT', 'comunidad tecnología Pereira', 'ecosistema tecnología Risaralda', 'comunidad tecnología Colombia', 'organizadores Pereira Tech Day']}
 >
   <Fragment slot="head">
     <JsonLd data={organizationData} />

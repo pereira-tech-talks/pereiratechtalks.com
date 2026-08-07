@@ -1,8 +1,8 @@
 ---
 /**
- * PtdSponsorsShowcase — logo-only sponsor showcase for PTD landing pages.
- * Deliberately lighter than the shared `SponsorCard` directory aesthetic
- * (no description, no card chrome) to match the legacy logo-row look.
+ * PtdSponsorsShowcase — legacy `/pereira-tech-day/2024/` sponsor cards:
+ * centered title, light gray rounded cards, gold row then silver row.
+ * Grid spans the full main-container width (same as Organiza below).
  */
 import type { Language } from '@/lib/i18n';
 import type { EditionSponsor } from '@/lib/sponsor';
@@ -24,70 +24,89 @@ const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
   bronze: { en: 'Bronze sponsor', es: 'Patrocinador Bronze' },
   community: { en: 'Community sponsor', es: 'Patrocinador Comunidad' },
 };
+
+const goldTiers = new Set(['diamond', 'gold']);
+const goldSponsors = sponsors.filter((s) => goldTiers.has(s.tier));
+const otherSponsors = sponsors.filter((s) => !goldTiers.has(s.tier));
+
+function logoSrc(entry: EditionSponsor): string {
+  // Cards are light gray — always prefer the light (dark-ink) logo.
+  return entry.sponsor.data.logo.light;
+}
 ---
 
 <div class="ptd-sponsors-showcase">
   {
     title && (
-      <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
-        {title}
-      </Heading>
+      <header class="mb-8 text-center md:mb-12">
+        <Heading class="ptd-sponsors-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+          {title}
+        </Heading>
+      </header>
     )
   }
-  <ul class:list={['flex flex-wrap items-center justify-center gap-x-10 gap-y-8', title && 'mt-8']}>
-    {
-      sponsors.map(({ sponsor, tier }) => {
-        const logoLight = sponsor.data.logo.light;
-        const logoDark = sponsor.data.logo.dark;
-        const sameLogo = logoLight === logoDark;
-        const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
-        return (
-          <li class="flex items-center justify-center" data-tier={tier}>
-            <a
-              href={sponsor.data.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              class="flex h-16 w-36 items-center justify-center opacity-90 transition hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
-            >
-              {
-                sameLogo ? (
+
+  {
+    (
+      [
+        { key: 'gold', items: goldSponsors, size: 'gold' as const },
+        { key: 'other', items: otherSponsors, size: 'silver' as const },
+      ] as const
+    )
+      .filter((row) => row.items.length > 0)
+      .map((row) => (
+        <ul
+          class:list={[
+            'grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6',
+            row.key === 'other' && goldSponsors.length > 0 && 'mt-4 sm:mt-5 lg:mt-6',
+          ]}
+        >
+          {row.items.map(({ sponsor, tier }) => {
+            const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
+            const isGold = row.size === 'gold';
+            // DailyBot wordmark is very wide/short — give it more width so it
+            // reads at a similar visual weight to the other silver logos.
+            const isDailybot = sponsor.id === 'dailybot';
+            const imgWidth = isGold ? 280 : isDailybot ? 320 : 240;
+            const imgHeight = isGold ? 110 : isDailybot ? 80 : 90;
+            const imgClass = isGold
+              ? 'max-h-24 max-w-[min(100%,17.5rem)]'
+              : isDailybot
+                ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
+                : 'max-h-20 max-w-[min(100%,15rem)]';
+            return (
+              <li
+                class="flex min-h-[8.5rem] w-full items-center justify-center rounded-md bg-gray-200 px-6 py-8 sm:min-h-[9.5rem] sm:px-8 sm:py-10"
+                data-tier={tier}
+              >
+                <a
+                  href={sponsor.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  class="flex w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+                >
                   <img
-                    src={logoLight}
+                    src={logoSrc({ sponsor, tier })}
                     alt={sponsor.data.logo.alt}
-                    width="160"
-                    height="64"
+                    width={imgWidth}
+                    height={imgHeight}
                     loading="lazy"
                     decoding="async"
-                    class="max-h-16 max-w-full object-contain"
+                    class:list={['w-auto object-contain', imgClass]}
                   />
-                ) : (
-                  <>
-                    <img
-                      src={logoLight}
-                      alt={sponsor.data.logo.alt}
-                      width="160"
-                      height="64"
-                      loading="lazy"
-                      decoding="async"
-                      class="max-h-16 max-w-full object-contain dark:hidden"
-                    />
-                    <img
-                      src={logoDark}
-                      alt={sponsor.data.logo.alt}
-                      width="160"
-                      height="64"
-                      loading="lazy"
-                      decoding="async"
-                      class="hidden max-h-16 max-w-full object-contain dark:block"
-                    />
-                  </>
-                )
-              }
-            </a>
-          </li>
-        );
-      })
-    }
-  </ul>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      ))
+  }
 </div>
+
+<style>
+  .ptd-sponsors-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

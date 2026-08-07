@@ -8,9 +8,9 @@ export const es: SiteTranslations = {
   // Site metadata
   siteTitle: 'Pereira Tech Talks',
   siteTitleFull:
-    'Pereira Tech Talks — Comunidad bilingüe de tecnología de Pereira, Colombia',
+    'Pereira Tech Talks — Comunidad de tecnología de Pereira, Colombia',
   siteDescription:
-    'Pereira Tech Talks — comunidad tech bilingüe de Pereira, Colombia desde 2014. 90+ meetups mensuales, Pereira Tech Day y Escuela de Speakers.',
+    'Pereira Tech Talks — comunidad tech de Pereira, Colombia desde 2014. 90+ meetups mensuales, Pereira Tech Day y Escuela de Speakers.',
 
   // Navigation
   nav: {
@@ -46,7 +46,7 @@ export const es: SiteTranslations = {
   hero: {
     tagline: 'Pereira, Risaralda · Desde 2014',
     description:
-      'Comunidad tech bilingüe: meetups, <em>Pereira Tech Day</em> y escuelas — talento local con alcance global.',
+      'Comunidad tech: meetups, <em>Pereira Tech Day</em> y escuelas — talento local con alcance global.',
     ctaMeetups: 'Ver meetups',
     ctaPtd: 'Pereira Tech Day 2026',
     ctaContact: 'Escríbenos',
@@ -65,7 +65,7 @@ export const es: SiteTranslations = {
     about: {
       title:
         "Somos <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
-      description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 90+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo bilingüe. Todo abierto.<br /><br />
+      description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 90+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo abierto.<br /><br />
 Cada recapitulación, slide y artículo se publica en español e inglés, estructurado para ser tan útil a agentes de IA como a personas. Speakers que empezaron en este salón hoy dan keynotes en Bogotá, Medellín y Ciudad de México; sus colegas trabajan en startups YC, proyectos patrocinados por GitHub y equipos de ingeniería internacionales.<br /><br />
 Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser ponente, patrocinar o sumarte.`,
       cta: 'Sobre la comunidad',
@@ -135,7 +135,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   meetupsPage: {
     title: 'Meetups de Pereira Tech Talks',
     description:
-      'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech bilingüe del Eje Cafetero, Risaralda.',
+      'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech del Eje Cafetero, Risaralda.',
     intro:
       'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.',
     upcoming: 'Próximos meetups',
@@ -167,14 +167,14 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
 
   aboutPage: {
     title: 'Sobre Pereira Tech Talks',
-    subtitle: 'Una comunidad bilingüe de tecnología desde Pereira al mundo',
+    subtitle: 'Una comunidad de tecnología desde Pereira al mundo',
     description:
-      'Conoce Pereira Tech Talks — comunidad tech bilingüe en Pereira, Risaralda, desde 2014. Meetups, Pereira Tech Day, Escuela de Speakers y La Biblioteca del Mañana.',
+      'Conoce Pereira Tech Talks — comunidad tech en Pereira, Risaralda, desde 2014. Meetups, Pereira Tech Day, Escuela de Speakers y La Biblioteca del Mañana.',
     heroDescription:
-      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 90+ meetups mensuales, Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe. Voluntaria. Abierta para todas y todos.',
+      'La comunidad tecnológica de Pereira (Risaralda, Colombia). Fundada en 2014. 90+ meetups mensuales, Pereira Tech Day, una Escuela de Speakers activa y una biblioteca de contenido en español e inglés. Voluntaria. Abierta para todas y todos.',
     bioTitle: 'Quiénes somos',
     bioText:
-      'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (archivo 2024, próxima 2026), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo bilingüe. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo bilingüe de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores, estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido es bilingüe por defecto.',
+      'Pereira Tech Talks (PTT) es la comunidad tecnológica de Pereira, Risaralda, Colombia. La historia empieza en febrero de 2014: ocho desarrolladores en un salón de la UTP para el primer meetup de PereiraJS. Doce años después, ese círculo pequeño es una comunidad de cuatro programas — meetups mensuales (84 y contando), la conferencia anual <strong>Pereira Tech Day</strong> (archivo 2024, próxima 2026), la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntariado. Todo abierto.<br /><br />El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, y más) y es abierto por defecto. El sitio que estás leyendo es un catálogo de meetups, charlas, slides, ponentes, contribuyentes y patrocinadores — disponible en español e inglés — estructurado para ser tan útil a agentes de IA como a personas.<br /><br />Creemos que la tecnología crece más rápido cuando compartimos lo que aprendemos — por eso cada recapitulación de meetup se publica esa misma semana. Creemos que Pereira tiene talento de talla mundial que merece escenarios de talla mundial — por eso existe la Escuela de Speakers y por eso egresadas y egresados de la comunidad hoy dan keynotes en Bogotá, Medellín, Ciudad de México y en startups respaldadas por YC. Y creemos que una comunidad de tecnología debería parecerse a la ciudad en la que vive — abierta, cálida, mixta y sin pretensiones. Por eso nuestros eventos son gratuitos, nuestros canales son públicos y nuestro contenido se publica en español e inglés.',
     passionsTitle: 'Lo que hacemos',
     passions: [
       {
@@ -201,7 +201,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       {
         title: 'La Biblioteca del Mañana',
         description:
-          'Un club de lectura bilingüe que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.',
+          'Un club de lectura que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.',
         icon: '\u{1F4DA}',
         link: '/verticals/library-of-tomorrow',
       },
@@ -213,9 +213,9 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
         link: '/verticals/ai-channel',
       },
       {
-        title: 'Biblioteca bilingüe',
+        title: 'Biblioteca de contenidos',
         description:
-          'Artículos, slides y recapitulaciones publicadas en inglés y español — accesibles tanto para el talento local como para la comunidad tecnológica internacional.',
+          'Artículos, slides y recapitulaciones publicadas en español e inglés — accesibles tanto para el talento local como para la comunidad tecnológica internacional.',
         icon: '\u{1F30D}',
         link: '/blog',
       },
@@ -223,7 +223,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     quickFactsTitle: 'Datos rápidos',
     quickFacts: [
       'Fundada en Pereira, Risaralda, Colombia (febrero de 2014)',
-      'Comunidad bilingüe: español como idioma principal, inglés como segundo idioma de primera clase',
+      'Sitio disponible en español (principal) e inglés',
       '90+ meetups mensuales desde 2014',
       'Ediciones de Pereira Tech Day en 2024 y 2026',
       'Voluntaria, sostenida por patrocinadores y gratuita',
@@ -242,9 +242,9 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Slides',
     subtitle: 'Decks de nuestros meetups, conferencias y talleres',
     description:
-      'Explora decks de slides de meetups, Pereira Tech Day y la Escuela de Speakers — presentaciones bilingües de ponentes de la comunidad Pereira Tech Talks.',
+      'Explora decks de slides de meetups, Pereira Tech Day y la Escuela de Speakers — presentaciones de ponentes de la comunidad Pereira Tech Talks.',
     heroDescription:
-      'Una biblioteca bilingüe de presentaciones de los eventos de Pereira Tech Talks — meetups, Pereira Tech Day, Escuela de Speakers y talleres. Construidas internamente con Reveal.js o alojadas en plataformas externas.',
+      'Una biblioteca de presentaciones de los eventos de Pereira Tech Talks — meetups, Pereira Tech Day, Escuela de Speakers y talleres. Construidas internamente con Reveal.js o alojadas en plataformas externas.',
     timelineTitle: 'Todos los slides',
     emptyState: '¡Aún no hay slides publicados! Vuelve pronto.',
     viewAll: 'Ver todos los slides',
@@ -342,7 +342,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     socialTitle: 'Conéctate con nosotros',
     locationTitle: 'Ubicación',
     locationText:
-      'Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.',
+      'Basados en Pereira, Risaralda, Colombia. Sitio disponible en español e inglés. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.',
     quickLinksTitle: 'Enlaces rápidos',
     quickLinks: [
       {
@@ -527,7 +527,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
-      'Conoce a las empresas y aliados comunitarios que hacen posibles los meetups, Pereira Tech Day y los programas bilingües de la comunidad.',
+      'Conoce a las empresas y aliados comunitarios que hacen posibles los meetups, Pereira Tech Day y los programas de la comunidad.',
     eyebrow: 'Aliados',
     intro: (count) =>
       `${count} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`,
@@ -637,7 +637,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   blogTitle: 'Blog',
   blogHeading: 'Artículos e historias',
   blogDescription:
-    'Artículos, recapitulaciones de meetups y tutoriales de Pereira Tech Talks — escritura bilingüe de la comunidad tech de Risaralda desde 2014.',
+    'Artículos, recapitulaciones de meetups y tutoriales de Pereira Tech Talks — escritura de la comunidad tech de Risaralda desde 2014.',
   allPosts: 'Todos los artículos',
   showingArticles: (showing, total) =>
     `Mostrando ${showing} de ${total} artículos`,
@@ -886,6 +886,9 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     indexHistoryEyebrow: 'Historia',
     indexPastSubtitle:
       'Cada año deja su propia marca — vuelve a las ediciones que ya marcaron a Pereira.',
+    editionNavLabel: 'Navegación de Pereira Tech Day',
+    previousEditions: 'Otras ediciones',
+    allEditions: 'Todas las ediciones',
   },
 
   // Blog post engagement

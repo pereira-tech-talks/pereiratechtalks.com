@@ -75,30 +75,27 @@ function closeAllDropdowns() {
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
-      class="flex items-center gap-2.5 font-bold tracking-tight select-none text-ptt dark:text-white"
+      class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
       aria-label="Pereira Tech Talks"
     >
       <img
         class="h-8 w-auto md:h-9 dark:hidden"
-        src="/images/pereira-tech-talks/logo-color.webp"
+        src="/images/pereira-tech-talks/topbar-logo-black.webp"
         alt=""
-        width={66}
-        height={108}
+        width={120}
+        height={48}
         loading="eager"
         decoding="async"
       />
       <img
         class="hidden h-8 w-auto md:h-9 dark:block"
-        src="/images/pereira-tech-talks/logo-white.webp"
+        src="/images/pereira-tech-talks/topbar-logo.webp"
         alt=""
-        width={66}
-        height={108}
+        width={120}
+        height={48}
         loading="eager"
         decoding="async"
       />
-      <span class="hidden min-[360px]:inline text-base md:text-lg lg:text-xl whitespace-nowrap">
-        Pereira <span class="font-extrabold">Tech Talks</span>
-      </span>
     </a>
 
     <div class="hidden lg:flex items-center gap-6">

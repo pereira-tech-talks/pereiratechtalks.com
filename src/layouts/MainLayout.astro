@@ -6,13 +6,19 @@ import Footer from '@/components/Footer.astro';
 import LanguageRedirect from '@/components/LanguageRedirect.astro';
 import Header from '@/components/layout/Header.svelte';
 import TopNotificationBar from '@/components/layout/TopNotificationBar.svelte';
+import PtdEditionHeader from '@/components/pereira-tech-days/PtdEditionHeader.svelte';
 import ThemeToggle from '@/components/ThemeToggle.astro';
-import type { Language } from '@/lib/i18n';
-import { getUrlPrefix } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getActiveNotifications,
   localizeNotification,
 } from '@/lib/notifications';
+
+interface PtdEditionNavItem {
+  year: number;
+  href: string;
+  label: string;
+}
 
 interface Props {
   lang: string;
@@ -30,6 +36,17 @@ interface Props {
   preloadFonts?: boolean;
   lcpImageHref?: string;
   lcpImageMedia?: string;
+  /**
+   * Site chrome variant. `ptd-edition` swaps the global PTT header for the
+   * minimal Pereira Tech Day nav (current edition + previous editions).
+   */
+  chrome?: 'default' | 'ptd-edition';
+  /** Required when chrome is `ptd-edition`. */
+  ptdYear?: number;
+  /** Other editions for the PTD header dropdown. */
+  ptdEditions?: PtdEditionNavItem[];
+  /** PTD header surface: dark navy (2024) or light (2026). */
+  ptdChromeVariant?: 'dark' | 'light';
 }
 
 const {
@@ -47,26 +64,38 @@ const {
   preloadFonts = true,
   lcpImageHref,
   lcpImageMedia,
+  chrome = 'default',
+  ptdYear,
+  ptdEditions = [],
+  ptdChromeVariant = 'dark',
 } = Astro.props;
+
+const isPtdEditionChrome =
+  chrome === 'ptd-edition' && typeof ptdYear === 'number';
 
 const language = lang as Language;
 const prefix = getUrlPrefix(language);
-const activeNotifications = (await getActiveNotifications()).map((entry) => {
-  const localized = localizeNotification(entry, language);
-  const href = localized.ctaHref;
-  if (
-    href?.startsWith('/') &&
-    !href.startsWith('//') &&
-    prefix &&
-    !href.startsWith(`${prefix}/`)
-  ) {
-    return { ...localized, ctaHref: `${prefix}${href}` };
-  }
-  return localized;
-});
+const activeNotifications = isPtdEditionChrome
+  ? []
+  : (await getActiveNotifications()).map((entry) => {
+      const localized = localizeNotification(entry, language);
+      const href = localized.ctaHref;
+      if (
+        href?.startsWith('/') &&
+        !href.startsWith('//') &&
+        prefix &&
+        !href.startsWith(`${prefix}/`)
+      ) {
+        return { ...localized, ctaHref: `${prefix}${href}` };
+      }
+      return localized;
+    });
 ---
 
-<html lang={lang}>
+<html
+  lang={lang}
+  class:list={[isPtdEditionChrome && ptdChromeVariant === 'dark' && 'dark']}
+>
   <head>
     <BaseHead
       title={title}
@@ -86,13 +115,30 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
     />
     <slot name="head" />
     <LanguageRedirect lang={lang} />
-    <script is:inline>
+    {
+      isPtdEditionChrome ? (
+        ptdChromeVariant === 'dark' ? (
+          <script is:inline>
+            document.documentElement.classList.add('dark');
+          </script>
+        ) : (
+          <script is:inline>
+            document.documentElement.classList.remove('dark');
+          </script>
+        )
+      ) : (
+        <script is:inline>
   (function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
 </script>
+      )
+    }
   </head>
   <body
     class:list={[
-      'flex flex-col min-h-screen bg-ptt-bg text-ptt',
+      'flex flex-col min-h-screen text-ptt',
+      isPtdEditionChrome && ptdChromeVariant === 'dark'
+        ? 'bg-[#0f1a2e]'
+        : 'bg-ptt-bg',
       activeNotifications.length > 0 && 'has-top-notification',
     ]}
   >
@@ -102,6 +148,7 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
     {/*
       Sticky chrome: notification bar + header travel together so the green
       (important) alert stays visible on small viewports after scroll.
+      PTD edition pages use a dedicated minimal header (legacy photocopy).
     */}
     <div class="sticky top-0 z-50">
       {
@@ -113,15 +160,39 @@ const activeNotifications = (await getActiveNotifications()).map((entry) => {
           />
         )
       }
-      <Header client:idle lang={lang} />
+      {
+        isPtdEditionChrome ? (
+          <PtdEditionHeader
+            client:idle
+            lang={lang}
+            year={ptdYear}
+            editions={ptdEditions}
+            variant={ptdChromeVariant}
+          />
+        ) : (
+          <Header client:idle lang={lang} />
+        )
+      }
     </div>
-    <div
-      class="fixed z-50"
-      style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
+    {
+      !isPtdEditionChrome && (
+        <div
+          class="fixed z-50"
+          style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
+        >
+          <ThemeToggle />
+        </div>
+      )
+    }
+    <main
+      id="main-content"
+      class:list={[
+        'flex-1',
+        isPtdEditionChrome && ptdChromeVariant === 'dark'
+          ? 'bg-[#0f1a2e]'
+          : 'bg-ptt-bg',
+      ]}
     >
-      <ThemeToggle />
-    </div>
-    <main id="main-content" class="flex-1 bg-ptt-bg">
       <slot />
     </main>
     <Footer lang={lang} />

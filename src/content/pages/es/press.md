@@ -14,7 +14,7 @@ Comunidad sin fines de lucro en Pereira, Risaralda. Activa desde 2014. Esta pág
 
 - **Fundación:** Pereira, Risaralda, Colombia · 2014
 - **Naturaleza:** Comunidad sin fines de lucro, voluntariado
-- **Idiomas:** Español e inglés (totalmente bilingüe)
+- **Idiomas:** Sitio en español e inglés
 - **Programas:** Meetups · Pereira Tech Day · Escuela de Speakers · La Biblioteca del Mañana · Canal de IA
 - **Cifras:** 90+ meetups · 200+ charlas · 6.500+ asistencias · 7+ ediciones PTD
 - **Modelo:** Eventos gratuitos sostenidos por patrocinio
@@ -23,7 +23,7 @@ Comunidad sin fines de lucro en Pereira, Risaralda. Activa desde 2014. Esta pág
 
 ## Boilerplate
 
-Pereira Tech Talks es una comunidad bilingüe de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y varias ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global.
+Pereira Tech Talks es una comunidad de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y varias ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global.
 
 ---
 

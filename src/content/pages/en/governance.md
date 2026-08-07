@@ -95,7 +95,7 @@ Annual financial summaries are published in the year-in-review blog post.
 
 This page is not frozen. As the community grows, the model will evolve. Material changes are proposed in writing, discussed publicly via the blog or a meetup, and merged by the founding organizers. Minor clarifications can be edited directly.
 
-You can see the full revision history of this page in the [open-source repository](https://github.com/pereiratechtalks).
+You can see the full revision history of this page in the [open-source repository](https://github.com/pereira-tech-talks).
 
 ---
 

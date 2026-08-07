@@ -6,7 +6,7 @@ The **Pereira Tech Day** (PTD) collection powers the annual flagship conference'
 
 - **Collection:** `pereiraTechDays` — one file per edition in `src/content/pereiraTechDays/{year}.{yaml,json,md,mdx}`.
 - **Orchestrator:** `src/components/pages/PereiraTechDayDetailPage.astro` — resolves the edition, decides upcoming vs. past, and composes every section.
-- **Theming:** `EditionScope` (`src/components/pereira-tech-days/EditionScope.astro`) scopes the edition's `brandKit` under `[data-edition-theme="{year}"]`. Site chrome (header, footer, language switcher, theme toggle) renders as a **sibling** of `EditionScope`, so it always keeps the global PTT brand — see [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days).
+- **Theming:** `EditionScope` (`src/components/pereira-tech-days/EditionScope.astro`) scopes the edition's `brandKit` under `[data-edition-theme="{year}"]`. Edition pages use a **dedicated PTD chrome** (`chrome="ptd-edition"` on `MainLayout`): `PtdEditionHeader` shows the current year + “Previous editions” dropdown instead of the global Meetups/Blog nav. **No theme toggle** on edition pages — the surface is locked (`ptdChromeVariant`: 2024 dark / 2026 light), including the footer via a forced `html.dark` (or light) class. See [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days).
 - **Legacy visual parity:** the 2026 and 2024 templates are near-photocopies of the legacy production landings (`pereiratechtalks.org/pereira-tech-day/` and `/pereira-tech-day/2024/`), rebuilt on the v3 component/content model instead of hardcoded legacy markup.
 
 ## Routes
@@ -183,7 +183,7 @@ Do not add a third template variant or branch new sections on `edition.data.year
 
 `EditionScope.astro` wraps its slot in `<div data-edition-theme={year} class="ptd-edition-scope bg-ptt-bg text-ptt">`. `buildEditionThemeCss(edition)` generates a scoped CSS block (`[data-edition-theme="{year}"] { --ptt-primary: ...; }`, plus a `.dark [data-edition-theme="{year}"] { ... }` block when `paletteDark` is set) that `PereiraTechDayDetailPage.astro` inlines via `<style is:inline set:html={themeCss}>` **before** `<EditionScope>`, so the palette is present at first paint (no FOUC).
 
-**Hard rule (mirrors [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days) and [AGENTS.md #8](../../AGENTS.md)):** `MainLayout`'s header, footer, language switcher, and theme toggle render **outside** `EditionScope` — as siblings, not descendants — so the umbrella PTT brand stays visible on every edition page. Never move chrome inside `EditionScope`, and never set `--ptt-*` tokens outside `global.css` or an `[data-edition-theme]` scope (no inline `style="--ptt-primary: ..."` on individual components).
+**Chrome rule:** `MainLayout` chrome renders **outside** `EditionScope` (siblings, not descendants). On edition detail routes, pass `chrome="ptd-edition"` so the global PTT header is replaced by `PtdEditionHeader` (site logo + `Pereira Tech Day {year}` + previous-editions disclosure). Footer stays global but follows the edition's locked theme (`ptdChromeVariant` forces `html.dark` for dark editions / removes it for light). Theme toggle is **omitted** on these routes. Never move chrome inside `EditionScope`, and never set `--ptt-*` tokens outside `global.css` or an `[data-edition-theme]` scope (no inline `style="--ptt-primary: ..."` on individual components).
 
 ## Component map
 

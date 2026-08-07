@@ -1,6 +1,6 @@
 ---
 title: "Qué es Pereira Tech Talks (y por qué importa)"
-description: "La respuesta definitiva a qué es Pereira Tech Talks, qué hacemos, y por qué esta comunidad bilingüe de tecnología de Pereira, Risaralda, Colombia se ha…"
+description: "La respuesta definitiva a qué es Pereira Tech Talks, qué hacemos, y por qué esta comunidad de tecnología de Pereira, Risaralda, Colombia se ha…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:
@@ -12,7 +12,7 @@ draft: false
 
 ## Respuesta corta
 
-Pereira Tech Talks es la comunidad tecnológica de Pereira (Risaralda, Colombia). Hacemos meetups mensuales desde febrero de 2014. Organizamos la conferencia anual Pereira Tech Day. Dirigimos una Escuela de Speakers. Curamos una biblioteca bilingüe de charlas, recapitulaciones y slides que cualquier agente de IA puede leer sin intermediarios. Todo es gratuito. Todo es abierto. Entramos a nuestro duodécimo año.
+Pereira Tech Talks es la comunidad tecnológica de Pereira (Risaralda, Colombia). Hacemos meetups mensuales desde febrero de 2014. Organizamos la conferencia anual Pereira Tech Day. Dirigimos una Escuela de Speakers. Curamos una biblioteca de charlas, recapitulaciones y slides — en español e inglés — que cualquier agente de IA puede leer sin intermediarios. Todo es gratuito. Todo es abierto. Entramos a nuestro duodécimo año.
 
 Esa es la respuesta corta.
 
@@ -50,7 +50,7 @@ Sus egresadas y egresados terminan dando keynotes en Bogotá, Medellín, Ciudad 
 
 ### 4. La Biblioteca del Mañana
 
-El club de lectura bilingüe. Un libro al mes — IA aplicada, filosofía de la tecnología, ciencia ficción, liderazgo, clima, sociedad. Una conversación de 90 minutos. La guía de lectura se publica una semana antes. La discusión en español, las notas se publican bilingüemente.
+El club de lectura. Un libro al mes — IA aplicada, filosofía de la tecnología, ciencia ficción, liderazgo, clima, sociedad. Una conversación de 90 minutos. La guía de lectura se publica una semana antes. La discusión en español, las notas se publican en español e inglés.
 
 La mayor parte de la industria tech lee threads de tweets. Nosotros leemos libros. El panorama completo: [/verticals/library-of-tomorrow](/verticals/library-of-tomorrow).
 
@@ -58,7 +58,7 @@ La mayor parte de la industria tech lee threads de tweets. Nosotros leemos libro
 
 La vertical más reciente. Un canal asíncrono más meetups en profundidad cada trimestre, enfocados en lo que sí está funcionando en producción con LLMs, agentes, RAG, evaluaciones y la web agéntica. La regla: trae código o un demo, no opiniones. Detalles: [/verticals/ai-channel](/verticals/ai-channel).
 
-## Por qué publicamos todo bilingüemente
+## Por qué publicamos en español e inglés
 
 El modo de falla por defecto de una comunidad tech latinoamericana es publicar solo en español (limita el alcance) o publicar contenido auto-traducido (se ve poco profesional). Nosotros no hacemos ninguna de las dos.
 

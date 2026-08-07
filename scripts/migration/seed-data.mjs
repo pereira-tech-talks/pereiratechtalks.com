@@ -72,7 +72,7 @@ export const CHANNELS = [
     slug: 'github',
     name: 'GitHub — Pereira Tech Talks',
     platform: 'github',
-    url: 'https://github.com/pereiratechtalks',
+    url: 'https://github.com/pereira-tech-talks',
     description: {
       en: 'Open-source projects, this website, and community tooling.',
       es: 'Proyectos open source, este sitio web y herramientas de la comunidad.',
@@ -104,7 +104,7 @@ export const CHANNELS = [
     slug: 'instagram',
     name: 'Instagram — Pereira Tech Talks',
     platform: 'instagram',
-    url: 'https://www.instagram.com/pereiratechtalks',
+    url: 'https://www.instagram.com/pertechtalks',
     description: {
       en: 'Behind-the-scenes photos, event highlights, and speaker spotlights.',
       es: 'Fotos de detrás de cámara, resúmenes de eventos y reflectores sobre los ponentes.',

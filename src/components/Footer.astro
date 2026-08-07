@@ -53,8 +53,8 @@ const community =
 const iconClass = 'w-5 h-5';
 const tagline =
   lang === 'es'
-    ? 'Comunidad tech bilingüe en Pereira, Risaralda — desde 2014.'
-    : 'Bilingual tech community in Pereira, Risaralda — since 2014.';
+    ? 'Comunidad tech en Pereira, Risaralda — desde 2014.'
+    : 'Tech community in Pereira, Risaralda — since 2014.';
 ---
 
 <footer
@@ -72,35 +72,34 @@ const tagline =
       <div class="lg:col-span-5 text-left">
         <a
           href={prefix || '/'}
-          class="inline-flex items-center gap-2.5 font-bold text-ptt"
+          class="inline-flex items-center"
           aria-label="Pereira Tech Talks"
         >
           <img
-            src="/images/pereira-tech-talks/logo-color.webp"
+            src="/images/pereira-tech-talks/logo-horizontal-black.webp"
             alt=""
-            width={66}
-            height={108}
-            class="h-9 w-auto dark:hidden"
+            width={200}
+            height={66}
+            class="h-10 w-auto dark:hidden sm:h-11"
             loading="lazy"
+            decoding="async"
           />
           <img
-            src="/images/pereira-tech-talks/logo-white.webp"
+            src="/images/pereira-tech-talks/logo-horizontal.webp"
             alt=""
-            width={66}
-            height={108}
-            class="hidden h-9 w-auto dark:block"
+            width={200}
+            height={66}
+            class="hidden h-10 w-auto dark:block sm:h-11"
             loading="lazy"
+            decoding="async"
           />
-          <span class="text-lg tracking-tight">
-            Pereira <span class="font-extrabold">Tech Talks</span>
-          </span>
         </a>
         <p class="mt-4 max-w-sm text-sm leading-relaxed text-ptt-secondary">
           {tagline}
         </p>
         <div class="mt-6 flex gap-2">
           <a
-            href="https://github.com/pereiratechtalks"
+            href="https://github.com/pereira-tech-talks"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"
@@ -145,7 +144,7 @@ const tagline =
             >
           </a>
           <a
-            href="https://www.instagram.com/pereiratechtalks"
+            href="https://www.instagram.com/pertechtalks"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-ptt-border text-ptt-secondary hover:text-ptt hover:border-ptt-primary transition-colors"

@@ -64,6 +64,6 @@ Si pudiéramos enviar este artículo de vuelta al 27 de febrero de 2014, esto es
 - **Pitcheá a los patrocinadores sobre el catálogo, no sobre la sala.** Construí el archivo en consecuencia.
 - **Decidan juntos, disientan sin volverlo personal, mantengan lo político y lo ideológico fuera del espacio comunitario.**
 
-Ese es el playbook. Doce años, 84 meetups, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca bilingüe después — lo seguimos aplicando cada mes.
+Ese es el playbook. Doce años, 84 meetups, 10 ediciones de Pereira Tech Day, una Escuela de Speakers activa y una biblioteca de contenidos después — lo seguimos aplicando cada mes.
 
 Si estás empezando una comunidad en algún lugar, escribí tu versión de estas cinco lecciones antes de olvidarlas. Luego volvé en 10 años y contános en qué nos equivocamos.

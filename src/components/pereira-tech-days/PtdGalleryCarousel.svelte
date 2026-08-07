@@ -51,27 +51,30 @@ function altFor(img: GalleryImage): string {
 
 <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-gallery-title">
   <div class="main-container">
-    <h2 id="ptd-gallery-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+    <h2
+      id="ptd-gallery-title"
+      class="ptd-gallery-title text-center text-3xl font-bold tracking-tight text-[var(--ptt-text)] md:text-4xl"
+    >
       {title}
     </h2>
 
     {#if mode === 'marquee'}
       {#if prefersReducedMotion}
-        <ul class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <ul class="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-3 lg:grid-cols-4">
           {#each images as img, i}
             <li>
               <button
                 type="button"
-                class="block w-full overflow-hidden rounded-xl ring-1 ring-[var(--ptt-border)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                class="block w-full overflow-hidden rounded-lg shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
                 onclick={() => openLightbox(i)}
                 aria-label={altFor(img)}
               >
                 <img
                   src={img.src}
                   alt={altFor(img)}
-                  width="320"
-                  height="220"
-                  class="aspect-[4/3] w-full object-cover"
+                  width="480"
+                  height="320"
+                  class="aspect-[3/2] w-full object-cover"
                   loading="lazy"
                   decoding="async"
                 />
@@ -80,20 +83,23 @@ function altFor(img: GalleryImage): string {
           {/each}
         </ul>
       {:else}
+        <!-- Legacy-style infinite strip: large photos, no frame, side fades -->
         <div
-          class="ptd-marquee group mt-8 overflow-hidden rounded-2xl ring-1 ring-[var(--ptt-border)]"
+          class="ptd-marquee group relative mt-8 overflow-hidden sm:mt-10"
           role="group"
           aria-label={title}
         >
+          <div class="ptd-marquee__fade ptd-marquee__fade--left" aria-hidden="true"></div>
+          <div class="ptd-marquee__fade ptd-marquee__fade--right" aria-hidden="true"></div>
           <div
-            class="ptd-marquee__track flex w-max gap-3 py-3"
+            class="ptd-marquee__track flex w-max py-4 sm:py-6 lg:py-8"
             style={`--ptd-marquee-duration: ${marqueeDurationS}s`}
           >
             {#each [...images, ...images] as img, i (i)}
               {@const isDuplicate = i >= images.length}
               <button
                 type="button"
-                class="block shrink-0 overflow-hidden rounded-xl ring-1 ring-[var(--ptt-border)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                class="ptd-marquee__slide shrink-0 px-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] sm:px-2.5 lg:px-3"
                 onclick={() => openLightbox(i % images.length)}
                 aria-label={altFor(img)}
                 tabindex={isDuplicate ? -1 : 0}
@@ -102,9 +108,9 @@ function altFor(img: GalleryImage): string {
                 <img
                   src={img.src}
                   alt={isDuplicate ? '' : altFor(img)}
-                  width="220"
-                  height="150"
-                  class="h-32 w-48 object-cover sm:h-40 sm:w-60"
+                  width="600"
+                  height="320"
+                  class="h-48 w-full rounded-lg object-cover shadow-xl sm:h-56 md:h-64 lg:h-72 xl:h-80"
                   loading="lazy"
                   decoding="async"
                 />
@@ -193,6 +199,11 @@ function altFor(img: GalleryImage): string {
     }
   }
 
+  .ptd-gallery-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
   .ptd-marquee__track {
     animation: ptd-marquee-scroll var(--ptd-marquee-duration, 30s) linear infinite;
     will-change: transform;
@@ -201,6 +212,100 @@ function altFor(img: GalleryImage): string {
   .ptd-marquee:hover .ptd-marquee__track,
   .ptd-marquee:focus-within .ptd-marquee__track {
     animation-play-state: paused;
+  }
+
+  /* Legacy slide widths — large photos, not thumbnails */
+  .ptd-marquee__slide {
+    width: 85vw;
+    max-width: 350px;
+  }
+
+  @media (min-width: 480px) {
+    .ptd-marquee__slide {
+      width: 70vw;
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .ptd-marquee__slide {
+      width: 55vw;
+      max-width: 450px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .ptd-marquee__slide {
+      width: 45vw;
+      max-width: 500px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ptd-marquee__slide {
+      width: 33.333vw;
+      max-width: 550px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .ptd-marquee__slide {
+      max-width: 600px;
+    }
+  }
+
+  /* Soft edge fade into edition background (legacy fade-left / fade-right) */
+  .ptd-marquee__fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 80px;
+    pointer-events: none;
+  }
+
+  .ptd-marquee__fade--left {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      var(--ptt-bg) 0%,
+      color-mix(in srgb, var(--ptt-bg) 98%, transparent) 8%,
+      color-mix(in srgb, var(--ptt-bg) 82%, transparent) 30%,
+      color-mix(in srgb, var(--ptt-bg) 45%, transparent) 55%,
+      color-mix(in srgb, var(--ptt-bg) 10%, transparent) 90%,
+      transparent 100%
+    );
+  }
+
+  .ptd-marquee__fade--right {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      var(--ptt-bg) 0%,
+      color-mix(in srgb, var(--ptt-bg) 98%, transparent) 8%,
+      color-mix(in srgb, var(--ptt-bg) 82%, transparent) 30%,
+      color-mix(in srgb, var(--ptt-bg) 45%, transparent) 55%,
+      color-mix(in srgb, var(--ptt-bg) 10%, transparent) 90%,
+      transparent 100%
+    );
+  }
+
+  @media (min-width: 640px) {
+    .ptd-marquee__fade {
+      width: 150px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ptd-marquee__fade {
+      width: 200px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .ptd-marquee__fade {
+      width: 250px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

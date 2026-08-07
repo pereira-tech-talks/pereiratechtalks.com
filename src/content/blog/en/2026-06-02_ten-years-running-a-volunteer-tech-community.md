@@ -64,6 +64,6 @@ If we could send this article back to February 27, 2014, here is what we would u
 - **Pitch sponsors on the catalog, not the room.** Build the archive accordingly.
 - **Decide together, disagree without making it personal, keep the political and ideological out of the community space.**
 
-That is the playbook. Twelve years, 84 meetups, 10 Pereira Tech Day editions, an active Speaker School, and a bilingual library later — we still apply it every month.
+That is the playbook. Twelve years, 84 meetups, 10 Pereira Tech Day editions, an active Speaker School, and a content library later — we still apply it every month.
 
 If you are starting a community somewhere, write your version of these five lessons before you forget them. Then come back in 10 years and tell us what we got wrong.

@@ -1,6 +1,6 @@
 ---
 title: "What is Pereira Tech Talks (and why it matters)"
-description: "The definitive answer to what Pereira Tech Talks is, what we run, and why this bilingual tech community from Pereira, Risaralda, Colombia has grown into one…"
+description: "The definitive answer to what Pereira Tech Talks is, what we run, and why this tech community from Pereira, Risaralda, Colombia has grown into one…"
 pubDate: 2026-06-02
 heroLayout: none
 tags:
@@ -12,7 +12,7 @@ draft: false
 
 ## A short answer
 
-Pereira Tech Talks is the technology community of Pereira (Risaralda, Colombia). We have been running monthly meetups since February 2014. We host the annual Pereira Tech Day conference. We run a Speaker School. We curate a bilingual library of talks, recaps, and slides that any AI agent can read without intermediaries. Everything is free. Everything is open. We are entering our twelfth year.
+Pereira Tech Talks is the technology community of Pereira (Risaralda, Colombia). We have been running monthly meetups since February 2014. We host the annual Pereira Tech Day conference. We run a Speaker School. We curate a library of talks, recaps, and slides — in Spanish and English — that any AI agent can read without intermediaries. Everything is free. Everything is open. We are entering our twelfth year.
 
 That is the short answer.
 
@@ -50,7 +50,7 @@ Alumni go on to keynote in Bogotá, Medellín, Mexico City, and at YC-backed sta
 
 ### 4. La Biblioteca del Mañana
 
-The bilingual reading club. One book per month — applied AI, philosophy of technology, science fiction, leadership, climate, society. A 90-minute conversation. Reading guide published a week ahead. Discussion in Spanish, notes published bilingually.
+The reading club. One book per month — applied AI, philosophy of technology, science fiction, leadership, climate, society. A 90-minute conversation. Reading guide published a week ahead. Discussion in Spanish, notes published in Spanish and English.
 
 Most of the tech industry reads tweet threads. We read books. The full picture: [/en/verticals/library-of-tomorrow](/en/verticals/library-of-tomorrow).
 
@@ -58,7 +58,7 @@ Most of the tech industry reads tweet threads. We read books. The full picture: 
 
 The newest vertical. An async channel plus quarterly deep-dive meetups, focused on what is actually working in production with LLMs, agents, RAG, evaluations, and the agentic web. The rule: bring code or a demo, not opinions. Details: [/en/verticals/ai-channel](/en/verticals/ai-channel).
 
-## Why we publish everything bilingually
+## Why we publish in Spanish and English
 
 The default failure mode of a Latin American tech community is to publish only in Spanish (limiting reach) or to publish auto-translated content (looking unprofessional). We do neither.
 

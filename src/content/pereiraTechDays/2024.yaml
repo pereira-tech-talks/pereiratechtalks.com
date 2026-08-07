@@ -25,17 +25,25 @@ hero:
   layout: banner
 brandKit:
   paletteLight:
-    primary: "#1f3f59"
+    primary: "#ffffff"
     accent: "#f06d6d"
-    bg: "#fef7f3"
-    bgElevated: "#ffffff"
-    text: "#1f3f59"
-    textMuted: "#b66844"
-    border: "#e8e2d9"
+    bg: "#0f1a2e"
+    bgElevated: "#162540"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
+  paletteDark:
+    primary: "#ffffff"
+    accent: "#f06d6d"
+    bg: "#0f1a2e"
+    bgElevated: "#162540"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
   typography:
     headingFamily: "Bebas Neue, \"Arial Black\", sans-serif"
     headingTransform: uppercase
-    headingTracking: 0.18em
+    headingTracking: 0.08em
     fontSources:
       - family: Bebas Neue
         npmPackage: "@fontsource/bebas-neue"
@@ -110,15 +118,15 @@ lightningTalks:
         5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería
         Química a los Datos
 sponsors:
+  - slug: ase-utp
+    tier: gold
   - slug: github
     tier: gold
   - slug: source-meridian
     tier: gold
-  - slug: ase-utp
-    tier: gold
-  - slug: dailybot
-    tier: silver
   - slug: gorilla-logic
+    tier: silver
+  - slug: dailybot
     tier: silver
   - slug: made-for-germany
     tier: silver

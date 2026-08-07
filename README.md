@@ -2,7 +2,7 @@
 
 # Pereira Tech Talks
 
-**Bilingual community website** · `pereiratechtalks.org` · v3.0.0
+**Community website (Spanish & English)** · `pereiratechtalks.org` · v3.0.0
 
 [![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?logo=astro)](https://astro.build)
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
