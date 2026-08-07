@@ -197,7 +197,7 @@ All content MUST exist in both languages:
 ### Open Graph Tags (Auto-Generated)
 
 - `og:type` — `website`
-- `og:url` — current page URL
+- `og:url` — current page URL (absolute, from `Astro.site`)
 - `og:title` — page title
 - `og:description` — page description
 - `og:image` — defaults to `/images/og-default.jpg`, customizable via `image` prop
@@ -206,6 +206,12 @@ All content MUST exist in both languages:
 - `og:site_name` — from SITE_TITLE
 - `og:locale` — language-specific (en_US / es_ES)
 - `og:locale:alternate` — the other language
+
+> **Host must match the URL you share.** Absolute OG URLs are built from
+> `astro.config.mjs` → `site` (override with `PUBLIC_SITE_URL` / `SITE`).
+> While sharing `https://v3.pereiratechtalks.org/`, `site` must be that
+> origin. Pointing `og:image` at apex `pereiratechtalks.org` today follows
+> redirects into the legacy stack and 404s — Facebook then shows the favicon.
 
 ### Twitter Card Tags
 

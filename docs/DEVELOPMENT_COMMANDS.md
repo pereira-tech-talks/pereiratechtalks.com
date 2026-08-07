@@ -242,8 +242,13 @@ Astro uses `.env` files for environment variables:
 # .env (local development)
 PUBLIC_SITE_URL=http://localhost:8888
 
-# .env.production (production)
-PUBLIC_SITE_URL=https://pereiratechtalks.org
+# Cloudflare Pages / production build (must match the hostname you share)
+# While the public preview is v3, keep this as the v3 host — apex
+# pereiratechtalks.org currently redirects OG assets to the legacy stack (404).
+PUBLIC_SITE_URL=https://v3.pereiratechtalks.org
+
+# After DNS cutover to apex (when apex serves this build):
+# PUBLIC_SITE_URL=https://pereiratechtalks.org
 ```
 
 **Access in code:**
