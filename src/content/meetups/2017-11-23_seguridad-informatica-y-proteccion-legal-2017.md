@@ -12,6 +12,13 @@ venue:
   city: "Pereira"
   country: "Colombia"
 mode: in-person
+hero:
+  src: "/images/meetups/seguridad-informatica-y-proteccion-legal-2017/hero.jpg"
+  alt:
+    en: "Getting Started en seguridad informática && Protección legal de la innovación"
+    es: "Como empezar en seguridad informática && Protección legal de la innovación"
+  layout: banner
+heroImage: "/images/meetups/seguridad-informatica-y-proteccion-legal-2017/hero.jpg"
 verticals:
   - monthly-meetups
 talks: []

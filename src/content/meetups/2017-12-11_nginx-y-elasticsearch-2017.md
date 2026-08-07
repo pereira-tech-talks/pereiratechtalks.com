@@ -12,6 +12,13 @@ venue:
   city: "Pereira"
   country: "Colombia"
 mode: in-person
+hero:
+  src: "/images/meetups/nginx-y-elasticsearch-2017/hero.jpg"
+  alt:
+    en: "Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch"
+    es: "Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch"
+  layout: banner
+heroImage: "/images/meetups/nginx-y-elasticsearch-2017/hero.jpg"
 verticals:
   - monthly-meetups
 talks: []

@@ -12,6 +12,13 @@ venue:
   city: "Pereira"
   country: "Colombia"
 mode: in-person
+hero:
+  src: "/images/meetups/vision-artificial-y-haskell-2017/hero.jpg"
+  alt:
+    en: "Computer Vision con OpenCV && Programación funcional en Haskell"
+    es: "Visión artificial con OpenCV && Programación funcional en Haskell"
+  layout: banner
+heroImage: "/images/meetups/vision-artificial-y-haskell-2017/hero.jpg"
 verticals:
   - monthly-meetups
 talks: []

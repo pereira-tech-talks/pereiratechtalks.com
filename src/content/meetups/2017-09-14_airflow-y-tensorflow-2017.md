@@ -12,6 +12,13 @@ venue:
   city: "Pereira"
   country: "Colombia"
 mode: in-person
+hero:
+  src: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
+  alt:
+    en: "Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
+    es: "Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
+  layout: banner
+heroImage: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
 verticals:
   - monthly-meetups
 talks: []
