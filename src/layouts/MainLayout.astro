@@ -170,7 +170,7 @@ const activeNotifications = isPtdEditionChrome
             variant={ptdChromeVariant}
           />
         ) : (
-          <Header client:idle lang={lang} />
+          <Header client:load lang={lang} />
         )
       }
     </div>

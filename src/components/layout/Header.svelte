@@ -216,15 +216,17 @@ function closeAllDropdowns() {
     </div>
 
     <button
-      class="block lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
+      class="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center p-2 lg:hidden {open
+        ? 'pointer-events-none invisible'
+        : 'block'}"
       aria-label={t.nav.openMenu}
       aria-expanded={open}
       aria-controls="mobile-menu"
       on:click={toggleMenu}
       type="button"
     >
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
   </nav>
