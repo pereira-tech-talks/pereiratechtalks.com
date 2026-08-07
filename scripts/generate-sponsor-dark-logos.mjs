@@ -103,9 +103,7 @@ async function main() {
   }
 
   const only = values.only?.trim().toLowerCase();
-  const jobs = only
-    ? DEFAULT_JOBS.filter((j) => j.id === only)
-    : DEFAULT_JOBS;
+  const jobs = only ? DEFAULT_JOBS.filter((j) => j.id === only) : DEFAULT_JOBS;
 
   if (jobs.length === 0) {
     console.error(
