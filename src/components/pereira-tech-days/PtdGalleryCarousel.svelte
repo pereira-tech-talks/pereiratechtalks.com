@@ -49,7 +49,7 @@ function altFor(img: GalleryImage): string {
 }
 </script>
 
-<section class="py-[var(--ptd-section-pad)]" aria-labelledby="ptd-gallery-title">
+<section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-gallery-title">
   <div class="main-container">
     <h2 id="ptd-gallery-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
       {title}

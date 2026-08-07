@@ -251,7 +251,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
     {
       !upcomingTemplate && keynoteSpeakers.length > 0 && (
-        <section class="py-[var(--ptd-section-pad)]" aria-labelledby="ptd-speakers-title">
+        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-speakers-title">
           <div class="main-container">
             <h2 id="ptd-speakers-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
               {t.speakers}
@@ -344,7 +344,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     {
       editionSponsors.length > 0 && (
         <section
-          class="relative py-[var(--ptd-section-pad)]"
+          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
           style={upcomingTemplate && sectionBgs.sponsors ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
           aria-label={t.sponsors}
         >
@@ -363,7 +363,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     {
       communities.length > 0 && (
         <section
-          class="relative py-[var(--ptd-section-pad)]"
+          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
           style={upcomingTemplate && sectionBgs.community ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
           aria-label={t.communitiesOrganizes}
         >
@@ -382,7 +382,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     {
       (organizers.length > 0 || collaborators.length > 0) && (
         <section
-          class="relative py-[var(--ptd-section-pad)]"
+          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
           style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
           aria-label={t.organizers}
         >
@@ -409,7 +409,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
 
     {
       talks.length > 0 && (
-        <section class="py-[var(--ptd-section-pad)]">
+        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]">
           <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.talks}</h2>
             <ul class="mt-8 grid gap-6 sm:grid-cols-2">
@@ -456,7 +456,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
 
     {
       description && !upcomingTemplate && (
-        <section class="py-[var(--ptd-section-pad)]">
+        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]">
           <div class="main-container">
             <div class="prose prose-lg max-w-3xl prose-headings:text-[var(--ptt-text)] prose-a:text-[var(--ptt-primary)]">
               <Content />

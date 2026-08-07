@@ -81,7 +81,7 @@ sectionBackgrounds:
   team: /images/pereira-tech-days/2026/sections/team-bg.png
   community: /images/pereira-tech-days/2026/sections/community-bg.png
   faqs: /images/pereira-tech-days/2026/sections/faqs-bg.png
-  join: /images/pereira-tech-days/2026/sections/join-illustration.png
+  join: /images/pereira-tech-days/2026/sections/join-illustration.webp
 ```
 
 ### `lightningTalks` object shape
