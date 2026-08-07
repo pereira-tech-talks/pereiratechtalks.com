@@ -9,7 +9,7 @@ import {
   isDraftPost,
   isScheduledPost,
 } from '@/lib/blog';
-import { SITE_TIMEZONE } from '@/lib/constances';
+import { getTodayInSiteTimezone } from '@/lib/dates';
 
 import {
   demoEnglishPost,
@@ -122,9 +122,7 @@ describe('isScheduledPost', () => {
     // Simulate how Astro parses a frontmatter date: "2026-03-04" → midnight UTC.
     // Use today's date in the site timezone so the test stays valid regardless
     // of the UTC offset when it runs.
-    const todayInTz = new Date().toLocaleDateString('en-CA', {
-      timeZone: SITE_TIMEZONE,
-    });
+    const todayInTz = getTodayInSiteTimezone();
     const todayPost = {
       id: 'en/2024-01-01_today-post',
       data: {
