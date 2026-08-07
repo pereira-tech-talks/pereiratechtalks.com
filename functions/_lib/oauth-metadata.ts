@@ -4,6 +4,10 @@
  *
  * `resource` / `issuer` MUST match the request origin — isitagentready.com
  * rejects PRM when `resource` origin ≠ scanned host (e.g. apex vs v3).
+ *
+ * auth.md scanners require top-level `agent_auth.claim_uri` when
+ * `identity_types_supported` includes `anonymous` (nested-only fails with
+ * "anonymous registration requires claim_uri").
  */
 
 export interface OAuthProtectedResourceMetadata {
@@ -29,6 +33,13 @@ export interface OAuthAuthorizationServerMetadata {
   agent_auth: {
     skill: string;
     register_uri: string;
+    /** WorkOS / clawhub alias for register_uri */
+    identity_endpoint: string;
+    /** Required at top level for anonymous by isitagentready authMd check */
+    claim_uri: string;
+    /** WorkOS / clawhub alias for claim_uri */
+    claim_endpoint: string;
+    claim_complete_uri: string;
     identity_types_supported: string[];
     anonymous: {
       credential_types_supported: string[];
@@ -59,12 +70,17 @@ export function buildOAuthProtectedResourceMetadata(
 export function buildOAuthAuthorizationServerMetadata(
   origin: string
 ): OAuthAuthorizationServerMetadata {
+  const registerUri = `${origin}/agent/register`;
+  const claimUri = `${origin}/agent/claim`;
+  const claimCompleteUri = `${origin}/agent/claim/complete`;
+  const revocationUri = `${origin}/oauth/revoke`;
+
   return {
     issuer: origin,
     authorization_endpoint: `${origin}/oauth/authorize`,
     token_endpoint: `${origin}/oauth/token`,
-    revocation_endpoint: `${origin}/oauth/revoke`,
-    registration_endpoint: `${origin}/agent/register`,
+    revocation_endpoint: revocationUri,
+    registration_endpoint: registerUri,
     jwks_uri: `${origin}/.well-known/jwks.json`,
     grant_types_supported: ['authorization_code', 'client_credentials'],
     response_types_supported: ['code'],
@@ -73,16 +89,20 @@ export function buildOAuthAuthorizationServerMetadata(
     bearer_methods_supported: ['header'],
     agent_auth: {
       skill: `${origin}/auth.md`,
-      register_uri: `${origin}/agent/register`,
+      register_uri: registerUri,
+      identity_endpoint: registerUri,
+      claim_uri: claimUri,
+      claim_endpoint: claimUri,
+      claim_complete_uri: claimCompleteUri,
       identity_types_supported: ['anonymous'],
       anonymous: {
         credential_types_supported: ['access_token'],
-        claim_uri: `${origin}/agent/claim`,
+        claim_uri: claimUri,
       },
       events_supported: [
         'https://schemas.openid.net/secevent/oauth/event-type/token-revoked',
       ],
-      revocation_uri: `${origin}/oauth/revoke`,
+      revocation_uri: revocationUri,
     },
   };
 }
