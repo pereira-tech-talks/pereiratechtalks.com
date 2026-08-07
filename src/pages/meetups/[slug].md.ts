@@ -37,8 +37,12 @@ export const GET: APIRoute = ({ props }) => {
   if (entry.data.linkRecording)
     metadata.push(['Grabación', entry.data.linkRecording]);
   if (entry.data.linkPhotos) metadata.push(['Fotos', entry.data.linkPhotos]);
-  if (entry.data.linkMeetupCom)
-    metadata.push(['Meetup.com', entry.data.linkMeetupCom]);
+  if (entry.data.linkMeetupCom) {
+    const label = entry.data.linkMeetupCom.includes('luma.com')
+      ? 'Luma'
+      : 'Meetup.com';
+    metadata.push([label, entry.data.linkMeetupCom]);
+  }
 
   const sections = [];
   if (entry.data.speakers.length > 0) {

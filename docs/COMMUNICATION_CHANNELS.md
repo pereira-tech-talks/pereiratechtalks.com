@@ -10,7 +10,7 @@ This document is the **canonical inventory** of every official Pereira Tech Talk
 |---|---|---|---|
 | **Website** | <https://v3.pereiratechtalks.org> | Source of truth: meetups, events, Pereira Tech Days, blog, slides, speakers, contributors, sponsors. | Real-time |
 | **Newsletter** | `pereiratechtalks.org/newsletter` | Monthly digest: upcoming meetups, latest talks, blog highlights, vertical news. | Monthly |
-| **Meetup.com** | <https://www.meetup.com/pereira-tech-talks> | RSVPs and event listing for monthly meetups. | Per meetup |
+| **Luma** | <https://luma.com/pertechtalks> | RSVPs and event listing for monthly meetups. | Per meetup |
 | **YouTube** | `@pereiratechtalks` | Recorded talks, livestream archives, Pereira Tech Day editions, special features. | Per event + on-demand uploads |
 | **X (Twitter)** | `@pertechtalks` | Real-time updates, threaded recaps, speaker spotlights, community amplification. | Daily |
 | **LinkedIn** | `company/pereira-tech-talks` | Long-form professional updates, sponsor announcements, jobs, speaker spotlights. | Weekly |
@@ -53,7 +53,7 @@ website (canonical)
    │
    ├─→ YouTube (talks recorded, slides linked)
    │
-   ├─→ Meetup.com (RSVPs synced from /events)
+   ├─→ Luma (RSVPs synced from /events)
    │
    └─→ Discord · WhatsApp · Telegram (community discussion of website content)
 ```

@@ -16,7 +16,7 @@ La comunidad funciona en tres capas:
 
 1. **Programas (verticales)** — la cadencia regular de lo que sucede. Monthly Meetups, la Speaker School, La Biblioteca del Mañana y el AI Channel. Cada programa tiene una misión clara y un líder.
 2. **Eventos** — los momentos donde todo se junta. Meetups mensuales, workshops y hackathons ocasionales, y la conferencia anual Pereira Tech Day.
-3. **Personas y canales** — el tejido social. Ponentes, contribuyentes, patrocinadores y los canales que usamos para coordinar (Meetup.com, GitHub, LinkedIn, Instagram, Linktree).
+3. **Personas y canales** — el tejido social. Ponentes, contribuyentes, patrocinadores y los canales que usamos para coordinar (Luma, GitHub, LinkedIn, Instagram, Linktree).
 
 Puedes navegar cualquiera de esas tres capas desde el sitio:
 
@@ -66,7 +66,7 @@ Optimizamos por transparencia antes que por jerarquía: cualquiera en la comunid
 
 Tres caminos:
 
-- **Asiste a un meetup.** Ese es el punto de entrada canónico. Reserva en [Meetup.com](https://www.meetup.com/pereira-tech-talks/) y aparece.
+- **Asiste a un meetup.** Ese es el punto de entrada canónico. Reserva en [Luma](https://luma.com/pertechtalks) y aparece.
 - **Propón una charla.** Usa la página de [Convocatoria de ponentes](/call-for-speakers) o el formulario de contacto. Las charlas pueden ser en español, inglés o mezcla.
 - **Contribuye.** Lee [Cómo contribuir](/contributing) para encontrar un programa, rol o tarea que se ajuste al tiempo y energía que puedas ofrecer.
 

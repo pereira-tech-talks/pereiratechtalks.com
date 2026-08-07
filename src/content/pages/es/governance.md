@@ -55,7 +55,7 @@ Un subconjunto de organizadores activos responsables de revisar y actuar sobre r
 
 ## Cómo comunicamos decisiones
 
-- **Decisiones operativas** (próximo meetup, tema, patrocinadores) se comunican por los canales: Meetup.com, redes sociales, el blog.
+- **Decisiones operativas** (próximo meetup, tema, patrocinadores) se comunican por los canales: Luma, redes sociales, el blog.
 - **Decisiones estratégicas** (plan anual, Pereira Tech Day, alianzas) se anuncian en el blog y el newsletter, y se ven en las content collections públicas de este sitio.
 - **Decisiones de conducta** se comunican en privado a las partes involucradas. Patrones y resultados que afectan a la comunidad amplia pueden resumirse públicamente sin identificar a personas.
 

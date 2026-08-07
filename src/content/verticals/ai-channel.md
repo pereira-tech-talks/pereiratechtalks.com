@@ -64,7 +64,7 @@ Dos ritmos paralelos:
 ## Cómo unirse
 
 - **Si trabajas con IA en producción** (o estás cerca): escríbenos al [formulario de contacto](/contact/?topic=collaboration) con el asunto **"Canal IA"** y cuéntanos en qué estás. Te conectamos.
-- **Si quieres aprender:** suscríbete a los meetups vía [Meetup.com](https://www.meetup.com/pereira-tech-talks/) y filtra por etiqueta *AI / Agents*.
+- **Si quieres aprender:** suscríbete a los meetups vía [Luma](https://luma.com/pertechtalks) y filtra por etiqueta *AI / Agents*.
 - **Si quieres presentar:** la barra es honestidad técnica, no senioridad. Si tienes algo que ya construiste o probaste — aunque haya fallado — queremos escucharlo.
 
 ---

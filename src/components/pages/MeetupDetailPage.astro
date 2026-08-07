@@ -83,6 +83,9 @@ const statusVariant = (
 ) as 'announced' | 'cancelled' | 'completed';
 
 const meetupComLink = (meetup.data as { linkMeetupCom?: string }).linkMeetupCom;
+const eventPlatformLabel = meetupComLink?.includes('luma.com')
+  ? 'Luma'
+  : 'Meetup.com';
 
 const eventJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -216,7 +219,7 @@ if (speakers.length > 0) {
                 rel="noopener noreferrer"
                 class="inline-flex items-center gap-2 text-sm font-medium text-ptt hover:text-ptt-primary dark:hover:text-ptt-primary-dark"
               >
-                Meetup.com
+                {eventPlatformLabel}
                 <svg aria-hidden="true" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
