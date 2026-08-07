@@ -40,10 +40,6 @@ const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
 const goldTiers = new Set(['diamond', 'gold']);
 const goldSponsors = sponsors.filter((s) => goldTiers.has(s.tier));
 const otherSponsors = sponsors.filter((s) => !goldTiers.has(s.tier));
-
-function logoSrc(entry: EditionSponsor): string {
-  return entry.sponsor.data.logo.light;
-}
 ---
 
 <div class="ptd-sponsors-showcase" data-layout={layout}>
@@ -94,6 +90,10 @@ function logoSrc(entry: EditionSponsor): string {
                 : isDailybot
                   ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
                   : 'max-h-20 max-w-[min(100%,15rem)]';
+            const logoLight = sponsor.data.logo.light;
+            const logoDark = sponsor.data.logo.dark;
+            /** Gray-cards sit on fixed light `bg-gray-200`; tree discs follow theme. */
+            const useThemeLogos = isTree && logoLight !== logoDark;
             return (
               <li
                 class:list={[
@@ -110,15 +110,38 @@ function logoSrc(entry: EditionSponsor): string {
                   aria-label={label}
                   class="flex h-full w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
                 >
-                  <img
-                    src={logoSrc({ sponsor, tier })}
-                    alt={sponsor.data.logo.alt}
-                    width={imgWidth}
-                    height={imgHeight}
-                    loading="lazy"
-                    decoding="async"
-                    class:list={['w-auto object-contain', imgClass]}
-                  />
+                  {useThemeLogos ? (
+                    <>
+                      <img
+                        src={logoLight}
+                        alt={sponsor.data.logo.alt}
+                        width={imgWidth}
+                        height={imgHeight}
+                        loading="lazy"
+                        decoding="async"
+                        class:list={['w-auto object-contain dark:hidden', imgClass]}
+                      />
+                      <img
+                        src={logoDark}
+                        alt={sponsor.data.logo.alt}
+                        width={imgWidth}
+                        height={imgHeight}
+                        loading="lazy"
+                        decoding="async"
+                        class:list={['hidden w-auto object-contain dark:block', imgClass]}
+                      />
+                    </>
+                  ) : (
+                    <img
+                      src={logoLight}
+                      alt={sponsor.data.logo.alt}
+                      width={imgWidth}
+                      height={imgHeight}
+                      loading="lazy"
+                      decoding="async"
+                      class:list={['w-auto object-contain', imgClass]}
+                    />
+                  )}
                 </a>
               </li>
             );

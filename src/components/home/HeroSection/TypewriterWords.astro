@@ -6,6 +6,12 @@
  * animation tanks Lighthouse Speed Index because the hero keeps "changing".
  * Motion starts only after idle + a short delay (beyond the SI window), and
  * prefers-reduced-motion keeps the static first word permanently.
+ *
+ * Timing model (per word slot, sums to 100% of the slot):
+ *   type 30% → hold 52% → erase 16% → gap 2%
+ * Words never overlap: erase finishes before the next slot starts.
+ * No negative animation-delay — that caused word 0 to re-enter during the
+ * last word's slot when the infinite loop wrapped.
  */
 export interface Props {
   words: string[];
@@ -16,73 +22,124 @@ export interface Props {
 }
 
 const { words, variant = 'hero', align = 'center' } = Astro.props;
-const n = words?.length ?? 1;
-const cycleDuration = n * 4;
+const n = Math.max(words?.length ?? 1, 1);
+/** Seconds each word gets in the cycle (type + hold + erase + gap). */
+const secondsPerWord = 4.5;
+const cycleDuration = n * secondsPerWord;
 const cursorColor = 'var(--color-ptt-accent-dark)';
 
 function fmt(num: number): string {
-  return num.toFixed(2);
+  // Clamp float noise so 100% slots don't emit "100.00" twice awkwardly.
+  const clamped = Math.min(Math.max(num, 0), 100);
+  return clamped.toFixed(2);
 }
 
 function generateWordAnimation(word: string, index: number): string {
-  const chars = word.length;
+  const chars = Math.max(word.length, 1);
   const slotPct = 100 / n;
   const start = index * slotPct;
-  const typeEnd = start + slotPct * 0.38;
-  const holdEnd = start + slotPct * 0.68;
-  const eraseEnd = start + slotPct * 0.92;
+  const typeEnd = start + slotPct * 0.3;
+  const holdEnd = start + slotPct * 0.82;
+  const eraseEnd = start + slotPct * 0.98;
   const slotEnd = (index + 1) * slotPct;
   const maxW = `${chars + 1}ch`;
 
+  // Cursor blinks during hold (two off/on pairs).
   const holdDur = holdEnd - typeEnd;
-  const b1off = typeEnd + holdDur * 0.3;
-  const b1on = typeEnd + holdDur * 0.45;
+  const b1off = typeEnd + holdDur * 0.28;
+  const b1on = typeEnd + holdDur * 0.42;
   const b2off = typeEnd + holdDur * 0.62;
-  const b2on = typeEnd + holdDur * 0.8;
+  const b2on = typeEnd + holdDur * 0.78;
 
-  // Begin at hold so when .tw-run flips on, word 0 is fully visible.
-  const startAtHold =
-    index === 0
-      ? `  animation-delay: -${fmt((holdEnd / 100) * cycleDuration)}s;\n`
-      : '';
-
-  return `
-.tw-run[data-tw-ready] [data-tw="${index}"] > .tw-text {
-  animation: tw-${index} ${cycleDuration}s infinite;
-${startAtHold}}
-@keyframes tw-${index} {
-  0%, ${fmt(start)}% {
-    max-width: 0;
-    border-right-color: transparent;
-  }
-  ${fmt(start + 0.1)}% {
-    max-width: 0;
-    border-right-color: ${cursorColor};
-    animation-timing-function: steps(${chars}, end);
-  }
-  ${fmt(typeEnd)}% {
+  /*
+   * Word 0 opens already held (matches the static first paint) so enabling
+   * .tw-run does not flash an empty line. Later words type in from 0.
+   * On loop wrap, word 0 pops back to full width for one frame — acceptable
+   * and overlap-free; last word is fully erased by eraseEnd (< slotEnd).
+   */
+  if (index === 0) {
+    return `
+.tw-run[data-tw-ready] [data-tw="0"] > .tw-text {
+  animation: tw-0 ${fmt(cycleDuration)}s linear infinite both;
+}
+@keyframes tw-0 {
+  0%, ${fmt(holdEnd)}% {
     max-width: ${maxW};
+    opacity: 1;
     border-right-color: ${cursorColor};
   }
-  ${fmt(b1off)}% { max-width: ${maxW}; border-right-color: transparent; }
-  ${fmt(b1on)}% { max-width: ${maxW}; border-right-color: ${cursorColor}; }
-  ${fmt(b2off)}% { max-width: ${maxW}; border-right-color: transparent; }
-  ${fmt(b2on)}% { max-width: ${maxW}; border-right-color: ${cursorColor}; }
+  ${fmt(b1off)}% { max-width: ${maxW}; opacity: 1; border-right-color: transparent; }
+  ${fmt(b1on)}% { max-width: ${maxW}; opacity: 1; border-right-color: ${cursorColor}; }
+  ${fmt(b2off)}% { max-width: ${maxW}; opacity: 1; border-right-color: transparent; }
+  ${fmt(b2on)}% { max-width: ${maxW}; opacity: 1; border-right-color: ${cursorColor}; }
   ${fmt(holdEnd)}% {
     max-width: ${maxW};
+    opacity: 1;
     border-right-color: ${cursorColor};
     animation-timing-function: steps(${chars}, end);
   }
   ${fmt(eraseEnd)}% {
     max-width: 0;
+    opacity: 1;
     border-right-color: ${cursorColor};
   }
-  ${fmt(eraseEnd + 0.1)}% {
+  ${fmt(Math.min(eraseEnd + 0.15, slotEnd))}% {
     max-width: 0;
+    opacity: 0;
     border-right-color: transparent;
   }
   ${fmt(slotEnd)}%, 100% {
     max-width: 0;
+    opacity: 0;
+    border-right-color: transparent;
+  }
+}`;
+  }
+
+  return `
+.tw-run[data-tw-ready] [data-tw="${index}"] > .tw-text {
+  animation: tw-${index} ${fmt(cycleDuration)}s linear infinite both;
+}
+@keyframes tw-${index} {
+  0%, ${fmt(start)}% {
+    max-width: 0;
+    opacity: 0;
+    border-right-color: transparent;
+  }
+  ${fmt(start + 0.05)}% {
+    max-width: 0;
+    opacity: 1;
+    border-right-color: ${cursorColor};
+    animation-timing-function: steps(${chars}, end);
+  }
+  ${fmt(typeEnd)}% {
+    max-width: ${maxW};
+    opacity: 1;
+    border-right-color: ${cursorColor};
+  }
+  ${fmt(b1off)}% { max-width: ${maxW}; opacity: 1; border-right-color: transparent; }
+  ${fmt(b1on)}% { max-width: ${maxW}; opacity: 1; border-right-color: ${cursorColor}; }
+  ${fmt(b2off)}% { max-width: ${maxW}; opacity: 1; border-right-color: transparent; }
+  ${fmt(b2on)}% { max-width: ${maxW}; opacity: 1; border-right-color: ${cursorColor}; }
+  ${fmt(holdEnd)}% {
+    max-width: ${maxW};
+    opacity: 1;
+    border-right-color: ${cursorColor};
+    animation-timing-function: steps(${chars}, end);
+  }
+  ${fmt(eraseEnd)}% {
+    max-width: 0;
+    opacity: 1;
+    border-right-color: ${cursorColor};
+  }
+  ${fmt(Math.min(eraseEnd + 0.15, slotEnd))}% {
+    max-width: 0;
+    opacity: 0;
+    border-right-color: transparent;
+  }
+  ${fmt(slotEnd)}%, 100% {
+    max-width: 0;
+    opacity: 0;
     border-right-color: transparent;
   }
 }`;
@@ -93,7 +150,11 @@ const dynamicCSS =
 ---
 
 <div
-  class={`tw-container ${variant === 'inline' ? 'tw-inline' : ''} ${align === 'left' ? 'tw-align-left' : ''}`}
+  class:list={[
+    'tw-container',
+    variant === 'inline' && 'tw-inline',
+    align === 'left' && 'tw-align-left',
+  ]}
   data-tw-root
   role="marquee"
   aria-live="polite"
@@ -142,6 +203,8 @@ const dynamicCSS =
   .tw-container {
     display: block;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     text-align: center;
     position: relative;
     min-height: 1.5em;
@@ -176,6 +239,7 @@ const dynamicCSS =
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
+    max-width: 100%;
   }
 
   .tw-align-left {
@@ -199,6 +263,7 @@ const dynamicCSS =
     overflow: hidden;
     white-space: nowrap;
     max-width: 0;
+    opacity: 0;
     border-right: 2px solid transparent;
   }
 
@@ -213,6 +278,7 @@ const dynamicCSS =
   }
   .tw-word[data-tw='0'] > .tw-text {
     max-width: none;
+    opacity: 1;
     border-right: none;
     position: relative;
   }
@@ -236,6 +302,7 @@ const dynamicCSS =
   .tw-run[data-tw-ready] .tw-word[data-tw='0'] > .tw-text {
     position: absolute;
     max-width: 0;
+    opacity: 0;
     border-right: 2px solid transparent;
   }
   .tw-run[data-tw-ready] .tw-word[data-tw='0'] > .tw-sizer {

@@ -553,6 +553,8 @@ export interface SiteTranslations {
     joinCta: string;
     lightningTitle: string;
     lightningTagline: string;
+    /** Primary hero CTA when registration is open (e.g. Luma). */
+    registerCta: string;
     subscribe: {
       copy: string;
       emailLabel: string;

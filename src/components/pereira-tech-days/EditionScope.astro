@@ -12,7 +12,10 @@ interface Props {
 const { year, class: className = '' } = Astro.props;
 ---
 
-<div data-edition-theme={year} class:list={['ptd-edition-scope bg-ptt-bg text-ptt', className]}>
+<div
+  data-edition-theme={year}
+  class:list={['ptd-edition-scope bg-[var(--ptt-bg)] text-[var(--ptt-text)]', className]}
+>
   <slot />
 </div>
 
