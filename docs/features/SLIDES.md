@@ -347,7 +347,7 @@ The slide chrome (back-link and toolbar) floats above the deck and auto-hides in
 
 ### Back Link (top-left)
 
-- Displays the site logo SVG (`/images/logo_small_version_white.svg`) with a `←` arrow
+- Displays the site logo (`/images/pereira-tech-talks/logo-white.webp`) with a `←` arrow
 - **Always uses dark background** (`#0f1124`, the site's `bg-main` color) regardless of theme
 - Inline `style="height:18px;width:auto;"` prevents FOUC before CSS loads
 - Hidden on mobile (< 480px) — only the arrow shows

@@ -38,47 +38,99 @@ function toggle(index: number) {
 </script>
 
 <section
-  class="relative py-[var(--ptd-section-pad)]"
-  style={sectionBg
-    ? `background-image: url('${sectionBg}'); background-size: cover; background-position: center;`
-    : undefined}
+  id="faqs"
+  class="ptd-faq relative isolate overflow-hidden"
+  class:ptd-faq--brochure={isOpenGrid && !!sectionBg}
+  class:py-[var(--ptd-section-pad)]={!isOpenGrid || !sectionBg}
+  style={isOpenGrid && sectionBg
+    ? `--ptd-faq-bg: url('${sectionBg}'); background: var(--ptt-bg, #fef7f3);`
+    : sectionBg
+      ? `background-image: url('${sectionBg}'); background-size: cover; background-position: center;`
+      : undefined}
   aria-labelledby="ptd-faq-title"
 >
-  {#if sectionBg}
+  {#if isOpenGrid && sectionBg}
+    <div class="ptd-faq__bg pointer-events-none absolute inset-0 z-0" aria-hidden="true"></div>
+    <div class="ptd-faq__fade pointer-events-none absolute inset-0 z-0" aria-hidden="true"></div>
+  {:else if sectionBg}
     <div class="absolute inset-0 bg-[var(--ptt-bg)]/55" aria-hidden="true"></div>
   {/if}
-  <div class="relative mx-auto max-w-4xl min-w-0 px-4 sm:px-6 lg:px-8">
-    <header class="text-center">
-      <h2 id="ptd-faq-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+
+  <div
+    class="relative z-10"
+    class:main-container={isOpenGrid}
+    class:mx-auto={!isOpenGrid}
+    class:max-w-4xl={!isOpenGrid}
+    class:min-w-0={!isOpenGrid}
+    class:px-4={!isOpenGrid}
+    class:sm:px-6={!isOpenGrid}
+    class:lg:px-8={!isOpenGrid}
+  >
+    <header class="ptd-faq__header" class:text-center={!isOpenGrid}>
+      <h2
+        id="ptd-faq-title"
+        class="ptd-faq__title m-0 font-bold uppercase leading-[1.05]"
+        class:text-[clamp(2rem,5.5vw,3.15rem)]={isOpenGrid}
+        class:tracking-[0.01em]={isOpenGrid}
+        class:text-[#3a7f7c]={isOpenGrid}
+        class:text-3xl={!isOpenGrid}
+        class:tracking-tight={!isOpenGrid}
+        class:text-[var(--ptt-text)]={!isOpenGrid}
+      >
         {title}
       </h2>
       {#if subtitle}
-        <p class="mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base">
+        <p
+          class="m-0"
+          class:mt-2={isOpenGrid}
+          class:max-w-[44rem]={isOpenGrid}
+          class:text-[clamp(0.95rem,2.2vw,1.1rem)]={isOpenGrid}
+          class:leading-[1.55]={isOpenGrid}
+          class:text-[color-mix(in_srgb,var(--ptt-text)_82%,transparent)]={isOpenGrid}
+          class:mx-auto={!isOpenGrid}
+          class:mt-3={!isOpenGrid}
+          class:max-w-2xl={!isOpenGrid}
+          class:text-sm={!isOpenGrid}
+          class:text-[var(--ptt-text-muted)]={!isOpenGrid}
+          class:md:text-base={!isOpenGrid}
+        >
           {subtitle}
         </p>
       {/if}
     </header>
 
     {#if isOpenGrid}
-      <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+      <ul class="ptd-faq__grid m-0 grid list-none grid-cols-1 gap-[clamp(0.9rem,2.8vw,1.25rem)] p-0 md:grid-cols-2">
         {#each items as item}
           <li
-            class="min-w-0 break-words rounded-2xl bg-[var(--ptt-bg-elevated)] p-5 text-left shadow-sm ring-1 ring-[var(--ptt-border)]"
+            class="ptd-faq__item min-w-0 break-words rounded-2xl border border-[color-mix(in_srgb,var(--ptt-text)_10%,white_90%)] bg-white/95 shadow-[0_10px_24px_rgba(31,63,89,0.08)]"
           >
-            <h3 class="flex min-w-0 items-start gap-2 text-base font-semibold text-[var(--ptt-text)]">
-              <span class="mt-1 shrink-0 text-[var(--ptt-accent)]" aria-hidden="true">›</span>
-              <span class="min-w-0">{tr(item.question, lang)}</span>
-            </h3>
-            <div class="mt-3 min-w-0 pl-4 text-sm leading-relaxed break-words text-[var(--ptt-text-muted)]">
-              <p>{tr(item.answer, lang)}</p>
-              {#if item.linkUrl && item.linkLabel}
-                <a
-                  href={item.linkUrl}
-                  class="mt-2 inline-block font-semibold text-[var(--ptt-primary)] underline underline-offset-2"
+            <div class="flex items-start gap-2.5 p-[clamp(1.05rem,2.4vw,1.35rem)]">
+              <span
+                class="mt-[0.15rem] shrink-0 text-[1.15rem] leading-none text-[var(--ptt-accent,#f06d6d)]"
+                aria-hidden="true"
+              >›</span>
+              <div class="min-w-0">
+                <h3
+                  class="m-0 text-[clamp(1rem,2.1vw,1.15rem)] font-bold leading-[1.3] tracking-[0.02em] text-[#3a7f7c]"
                 >
-                  {tr(item.linkLabel, lang)}
-                </a>
-              {/if}
+                  {tr(item.question, lang)}
+                </h3>
+                <div
+                  class="mt-[0.55rem] text-[clamp(0.92rem,1.9vw,0.98rem)] font-normal leading-[1.55] tracking-normal text-[color-mix(in_srgb,var(--ptt-text)_86%,transparent)] normal-case"
+                  style="font-family: Roboto, system-ui, sans-serif;"
+                >
+                  <p class="m-0">{tr(item.answer, lang)}</p>
+                  {#if item.linkUrl && item.linkLabel}
+                    <a
+                      href={item.linkUrl}
+                      class="mt-2 inline-block font-semibold text-[var(--ptt-primary,#3a7f7c)] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                    >
+                      {tr(item.linkLabel, lang)}
+                    </a>
+                  {/if}
+                </div>
+              </div>
             </div>
           </li>
         {/each}
@@ -123,3 +175,47 @@ function toggle(index: number) {
     {/if}
   </div>
 </section>
+
+<style>
+  .ptd-faq__title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.01em;
+  }
+
+  .ptd-faq--brochure {
+    min-height: calc(100vw * 576 / 1024);
+    padding: clamp(2.25rem, 7vw, 4rem) 0;
+  }
+
+  .ptd-faq__header {
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .ptd-faq__bg {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-faq-bg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  .ptd-faq__fade {
+    background:
+      linear-gradient(
+        to bottom,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 9%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 78%, transparent) 16%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 24%,
+        transparent 35%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 9%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 78%, transparent) 16%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 24%,
+        transparent 35%
+      );
+  }
+</style>

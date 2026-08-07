@@ -158,13 +158,13 @@
       "lang": "es"
     },
     {
-      "url": "/en/pereira-tech-days",
-      "template": "ptd-catalog",
+      "url": "/en/pereira-tech-day",
+      "template": "ptd-landing",
       "lang": "en"
     },
     {
-      "url": "/pereira-tech-days",
-      "template": "ptd-catalog",
+      "url": "/pereira-tech-day",
+      "template": "ptd-landing",
       "lang": "es"
     },
     {

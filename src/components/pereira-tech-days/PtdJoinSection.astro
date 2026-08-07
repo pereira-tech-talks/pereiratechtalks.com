@@ -1,4 +1,8 @@
 ---
+/**
+ * PtdJoinSection — closing CTA band for PTD editions.
+ * Upcoming brochure: full-bleed join illustration (ape + viaduct) with copy on the right.
+ */
 import type { Language } from '@/lib/i18n';
 
 interface Props {
@@ -21,6 +25,7 @@ const {
   showCta = true,
 } = Astro.props;
 const hasCta = showCta && Boolean(ctaUrl) && Boolean(ctaLabel);
+const brochure = Boolean(illustrationSrc);
 
 /**
  * Legacy split: last phrase of the title in coral (e.g. "DE LA REGIÓN.").
@@ -44,27 +49,56 @@ const subAfter =
 ---
 
 <section
-  class="relative overflow-hidden py-[var(--ptd-section-pad)]"
-  style={illustrationSrc
-    ? `background-image: url('${illustrationSrc}'); background-size: cover; background-position: center left;`
-    : undefined}
+  id="join"
+  class:list={[
+    'ptd-join relative isolate overflow-hidden',
+    brochure ? 'ptd-join--brochure' : 'py-[var(--ptd-section-pad)]',
+  ]}
+  style={brochure ? `--ptd-join-bg: url('${illustrationSrc}')` : undefined}
   aria-labelledby="ptd-join-title"
 >
+  {
+    brochure ? (
+      <>
+        <div class="ptd-join__bg pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+        {/* Soft right cream only — art already fades; do not wash the left. */}
+        <div
+          class="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-transparent from-[55%] via-[color-mix(in_srgb,var(--ptt-bg,#fef7f3)_45%,transparent)] via-[78%] to-[var(--ptt-bg,#fef7f3)]"
+          aria-hidden="true"
+        />
+      </>
+    ) : null
+  }
+
   <div
-    class="absolute inset-0 bg-gradient-to-r from-[var(--ptt-bg)] via-[var(--ptt-bg)]/92 to-[var(--ptt-bg)]/40"
-    aria-hidden="true"
-  ></div>
-  <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8">
-    <div class="max-w-xl">
+    class:list={[
+      'relative z-10',
+      brochure
+        ? 'main-container flex min-h-[inherit] items-start justify-end pt-[clamp(1.25rem,3.5vw,2.25rem)]'
+        : 'mx-auto max-w-4xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8',
+    ]}
+  >
+    <div class:list={[brochure ? 'w-full max-w-[min(100%,28rem)] lg:max-w-[32rem]' : 'max-w-xl']}>
       <h2
         id="ptd-join-title"
-        class="text-3xl font-bold uppercase leading-tight tracking-tight text-[var(--ptt-text)] sm:text-4xl md:text-5xl"
-        style="font-family: Bebas Neue, 'Arial Black', sans-serif; letter-spacing: 0.06em;"
+        class:list={[
+          'm-0 font-bold uppercase leading-[1.05]',
+          brochure
+            ? 'text-[clamp(2.1rem,5.2vw,3.35rem)] tracking-[0.04em] text-[var(--ptt-text)]'
+            : 'text-3xl tracking-tight text-[var(--ptt-text)] sm:text-4xl md:text-5xl',
+        ]}
+        style="font-family: Bebas Neue, 'Arial Black', sans-serif;"
       >
         {titleLead ? <span class="block">{titleLead}</span> : null}
         <span class="block text-[var(--ptt-accent)]">{titleAccent || title}</span>
       </h2>
-      <p class="mt-4 text-lg text-[var(--ptt-text)]">
+      <p
+        class:list={[
+          brochure
+            ? 'mt-3 text-[clamp(1rem,2.1vw,1.2rem)] leading-snug text-[var(--ptt-text)]'
+            : 'mt-4 text-lg text-[var(--ptt-text)]',
+        ]}
+      >
         {subBefore}
         {
           subEmphasis && (
@@ -89,3 +123,32 @@ const subAfter =
     </div>
   </div>
 </section>
+
+<style is:global>
+  .ptd-join--brochure {
+    /* Height tracks a ~half-screen-wide illustration (1673×940) */
+    min-height: clamp(17rem, calc(62vw * 940 / 1673), 32rem);
+    padding: clamp(1.25rem, 2.8vw, 1.75rem) 0 clamp(1.35rem, 3vw, 2rem);
+    background: var(--ptt-bg, #fef7f3);
+  }
+
+  .ptd-join__bg {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-join-bg);
+    background-repeat: no-repeat;
+    /* ~half+ of the viewport so the ape reads large on the left */
+    background-size: 62vw auto;
+    background-position: left top;
+  }
+
+  @media (max-width: 900px) {
+    .ptd-join--brochure {
+      min-height: clamp(15rem, calc(85vw * 940 / 1673), 26rem);
+    }
+
+    .ptd-join__bg {
+      background-size: 85vw auto;
+      background-position: left top;
+    }
+  }
+</style>

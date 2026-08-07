@@ -143,7 +143,7 @@ The `author` value must match an existing author slug. Astro's content schema va
 }
 ```
 
-When the slug doesn't resolve, `name` falls back to `'Sergio Alexander Florez Galeano'` and `image` to `/images/profile.png`.
+When the slug doesn't resolve, `name` falls back to `'Sergio Alexander Florez Galeano'` and `image` to `/images/og-default.png`.
 
 ## Components
 

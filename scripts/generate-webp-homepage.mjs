@@ -17,7 +17,6 @@ const IMAGES_DIR = join(ROOT, 'public/images');
 const RESPONSIVE_SIZES = [280, 360, 480];
 
 const HOMEPAGE_IMAGES = [
-  { file: 'profile.png', maxSize: null, responsive: false },
   { file: 'dailybotyc.png', maxSize: 480, responsive: true },
   { file: 'ia.png', maxSize: 480, responsive: true },
   { file: 'techtalks.png', maxSize: null, responsive: false },

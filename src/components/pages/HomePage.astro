@@ -14,7 +14,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import { getMeetups, getUpcomingMeetups } from '@/lib/meetup';
-import { getEditions } from '@/lib/pereiraTechDay';
+import { getEditions, getEditionCountdownTargets } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
 import { getActiveVerticals } from '@/lib/vertical';
@@ -36,6 +36,9 @@ const upcomingEdition = editions.find(
 );
 const lastEdition =
   upcomingEdition ?? editions.find((e) => e.data.status === 'completed');
+const ptdCountdown = upcomingEdition
+  ? getEditionCountdownTargets(upcomingEdition)
+  : null;
 const verticals = await getActiveVerticals();
 const sponsors = (await getActiveSponsors()).slice(0, 12);
 
@@ -86,7 +89,7 @@ const meetupsHeading =
     meetupsLabel={t.hero.ctaMeetups}
     meetupsHref={`${prefix}/meetups/`}
     ptdLabel={t.hero.ctaPtd}
-    ptdHref={`${prefix}/pereira-tech-days/2026/`}
+    ptdHref={`${prefix}/pereira-tech-day/`}
     contactLabel={t.hero.ctaContact}
     contactHref={`${prefix}/contact/`}
     scrollLabel={t.hero.scrollLabel}
@@ -95,11 +98,15 @@ const meetupsHeading =
   <div class="home-below-fold">
   <PtdAnnouncementStrip
     lang={lang}
+    eyebrow={hs.ptdStrip.eyebrow}
     title={hs.ptdStrip.title}
     subtitle={hs.ptdStrip.subtitle}
     ctaLabel={hs.ptdStrip.cta}
     dateLabel={hs.ptdStrip.date}
     venueLabel={hs.ptdStrip.venue}
+    attendanceLabel={hs.ptdStrip.attendance}
+    targetDate={ptdCountdown?.targetDate}
+    endDate={ptdCountdown?.endDate}
   />
 
   {
@@ -134,9 +141,6 @@ const meetupsHeading =
             .map((edition) => (
               <EditionCard edition={edition} lang={lang} />
             ))}
-        </div>
-        <div class="mt-10">
-          <LinkArrow href={`${prefix}/pereira-tech-days/`}>{hs.ptd.cta}</LinkArrow>
         </div>
       </Section>
     )

@@ -30,6 +30,7 @@ import {
   buildEditionThemeCss,
   getEditionEndIso,
   getEditionFontPackages,
+  getEditionHref,
   getEditionStartDate,
   getEditionStartIso,
   getEditions,
@@ -95,9 +96,10 @@ const longDateFormatter = new Intl.DateTimeFormat(
 const dateLong = longDateFormatter.format(startDate);
 
 const allEditions = await getEditions();
+const editionPublicHref = getEditionHref(edition, lang);
 const ptdEditionNav = allEditions.map((entry) => ({
   year: entry.data.year,
-  href: `${prefix}/pereira-tech-days/${entry.data.year}/`,
+  href: getEditionHref(entry, lang),
   label: `Pereira Tech Day ${entry.data.year}`,
 }));
 
@@ -168,7 +170,7 @@ const eventJsonLd: Record<string, unknown> = {
       : edition.data.mode === 'hybrid'
         ? 'https://schema.org/MixedEventAttendanceMode'
         : 'https://schema.org/OfflineEventAttendanceMode',
-  url: `${SITE_URL}${prefix}/pereira-tech-days/${year}/`,
+  url: `${SITE_URL}${editionPublicHref}`,
   image: heroSrc?.startsWith('http') ? heroSrc : `${SITE_URL}${heroSrc}`,
   organizer: {
     '@type': 'Organization',
@@ -386,16 +388,35 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     {
       editionSponsors.length > 0 && (
         <section
-          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.sponsors ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
+          id="sponsors"
+          class:list={[
+            'relative',
+            upcomingTemplate
+              ? 'ptd-sponsors-section'
+              : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
+          ]}
+          style={
+            upcomingTemplate && sectionBgs.sponsors
+              ? `--ptd-sponsors-bg: url('${sectionBgs.sponsors}')`
+              : undefined
+          }
           aria-label={t.sponsors}
         >
           {
             upcomingTemplate && sectionBgs.sponsors && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+              <>
+                <div
+                  class="ptd-sponsors-section__bg pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+                <div
+                  class="ptd-sponsors-section__fade pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+              </>
             )
           }
-          <div class="relative main-container">
+          <div class="relative z-10 main-container">
             <PtdSponsorsShowcase
               sponsors={editionSponsors}
               lang={lang}
@@ -412,23 +433,42 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     {
       communities.length > 0 && (
         <section
-          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.community ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
+          id="community"
+          class:list={[
+            'relative',
+            upcomingTemplate
+              ? 'ptd-community-section'
+              : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
+          ]}
+          style={
+            upcomingTemplate && sectionBgs.community
+              ? `--ptd-community-bg: url('${sectionBgs.community}')`
+              : undefined
+          }
           aria-label={t.communitiesOrganizes}
         >
           {
             upcomingTemplate && sectionBgs.community && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+              <>
+                <div
+                  class="ptd-community-section__bg pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+                <div
+                  class="ptd-community-section__fade pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+              </>
             )
           }
-          <div class="relative main-container">
+          <div class="relative z-10 main-container">
             <PtdCommunitiesOrganiza
               communities={communities}
               lang={lang}
               title={t.communitiesOrganizes}
               subtitle={upcomingTemplate ? t.communitiesOrganizesSubtitle : undefined}
               footerNote={upcomingTemplate ? t.communitiesOrganizesFooter : undefined}
-              logoSrc={upcomingTemplate ? '/images/pereira-tech-days/2026/logo.png' : undefined}
+              brochure={upcomingTemplate}
             />
           </div>
         </section>
@@ -436,54 +476,98 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
-      organizers.length > 0 && (
-        <section
-          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
-          aria-label={t.organizers}
-        >
-          {
-            upcomingTemplate && sectionBgs.team && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            <PtdTeamGrid
-              contributors={organizers}
-              lang={lang}
-              title={t.organizers}
-              subtitle={upcomingTemplate ? t.organizersSubtitle : undefined}
-              portraitStyle={landingChrome.portraitStyle}
-            />
-          </div>
-        </section>
-      )
-    }
-
-    {
-      collaborators.length > 0 && (
-        <section
-          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
-          aria-label={t.collaborators}
-        >
-          {
-            upcomingTemplate && sectionBgs.team && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            <PtdTeamGrid
-              contributors={collaborators}
-              lang={lang}
-              title={t.collaborators}
-              subtitle={upcomingTemplate ? t.collaboratorsSubtitle : undefined}
-              headingLevel="h3"
-              portraitStyle={landingChrome.portraitStyle}
-            />
-          </div>
-        </section>
-      )
+      (organizers.length > 0 || collaborators.length > 0) &&
+        (upcomingTemplate ? (
+          <section
+            id="team"
+            class="relative isolate min-h-[calc(100vw*576/1024)] overflow-hidden bg-[var(--ptt-bg,#fef7f3)] py-[clamp(2.25rem,7vw,4rem)]"
+            style={
+              sectionBgs.team
+                ? `--ptd-team-bg: url('${sectionBgs.team}')`
+                : undefined
+            }
+            aria-label={t.organizers}
+          >
+            {
+              sectionBgs.team && (
+                <>
+                  <div
+                    class="ptd-team-section__bg pointer-events-none absolute inset-0 z-0 bg-[var(--ptt-bg,#fef7f3)] bg-[length:100%_auto] bg-[position:center_top] bg-no-repeat"
+                    style="background-image: var(--ptd-team-bg)"
+                    aria-hidden="true"
+                  />
+                  <div
+                    class="ptd-team-section__fade pointer-events-none absolute inset-0 z-0"
+                    aria-hidden="true"
+                  />
+                </>
+              )
+            }
+            <div class="relative z-10 main-container flex flex-col gap-[clamp(5rem,12vw,8rem)]">
+              {
+                organizers.length > 0 && (
+                  <PtdTeamGrid
+                    contributors={organizers}
+                    lang={lang}
+                    title={t.organizers}
+                    subtitle={t.organizersSubtitle}
+                    brochure
+                  />
+                )
+              }
+              {
+                collaborators.length > 0 && (
+                  <PtdTeamGrid
+                    contributors={collaborators}
+                    lang={lang}
+                    title={t.collaborators}
+                    subtitle={t.collaboratorsSubtitle}
+                    headingLevel="h3"
+                    brochure
+                  />
+                )
+              }
+            </div>
+          </section>
+        ) : (
+          <>
+            {
+              organizers.length > 0 && (
+                <section
+                  class="relative overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+                  aria-label={t.organizers}
+                >
+                  <div class="relative main-container">
+                    <PtdTeamGrid
+                      contributors={organizers}
+                      lang={lang}
+                      title={t.organizers}
+                      portraitStyle={landingChrome.portraitStyle}
+                    />
+                  </div>
+                </section>
+              )
+            }
+            {
+              collaborators.length > 0 && (
+                <section
+                  class="relative overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+                  aria-label={t.collaborators}
+                >
+                  <div class="relative main-container">
+                    <PtdTeamGrid
+                      contributors={collaborators}
+                      lang={lang}
+                      title={t.collaborators}
+                      headingLevel="h3"
+                      portraitStyle={landingChrome.portraitStyle}
+                    />
+                  </div>
+                </section>
+              )
+            }
+          </>
+        ))
     }
 
     {

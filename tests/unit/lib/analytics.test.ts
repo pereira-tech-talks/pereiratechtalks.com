@@ -43,6 +43,8 @@ describe('analytics helpers', () => {
     it('extracts year from PTD edition URLs', () => {
       expect(getEditionYear('/pereira-tech-days/2026')).toBe(2026);
       expect(getEditionYear('/en/pereira-tech-days/2024/schedule')).toBe(2024);
+      expect(getEditionYear('/pereira-tech-day')).toBe(2026);
+      expect(getEditionYear('/en/pereira-tech-day/')).toBe(2026);
       expect(getEditionYear('/blog/post')).toBeUndefined();
     });
   });
@@ -50,6 +52,11 @@ describe('analytics helpers', () => {
   describe('getAnalyticsContext', () => {
     it('merges lang, section, and edition_year', () => {
       expect(getAnalyticsContext('es', '/pereira-tech-days/2026')).toEqual({
+        lang: 'es',
+        section: 'pereira-tech-days',
+        edition_year: 2026,
+      });
+      expect(getAnalyticsContext('es', '/pereira-tech-day')).toEqual({
         lang: 'es',
         section: 'pereira-tech-days',
         edition_year: 2026,
@@ -70,6 +77,7 @@ describe('analytics helpers', () => {
       expect(shouldTrackScrollDepth('/en/meetups/january-meetup')).toBe(true);
       expect(shouldTrackScrollDepth('/about')).toBe(true);
       expect(shouldTrackScrollDepth('/pereira-tech-days/2026')).toBe(true);
+      expect(shouldTrackScrollDepth('/pereira-tech-day')).toBe(true);
     });
 
     it('disables on listing pages', () => {

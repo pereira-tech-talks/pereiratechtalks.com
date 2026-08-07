@@ -95,6 +95,8 @@ const SCROLL_DEPTH_PATH_PATTERNS: ReadonlyArray<RegExp> = [
   /^\/en\/about\/?$/,
   /^\/about-us\/?$/,
   /^\/en\/about-us\/?$/,
+  /^\/pereira-tech-day\/?$/,
+  /^\/en\/pereira-tech-day\/?$/,
   /^\/pereira-tech-days\/\d{4}\/?$/,
   /^\/en\/pereira-tech-days\/\d{4}\/?$/,
 ];
@@ -115,17 +117,25 @@ export function getPageSection(pathname: string): string {
   const clean = normalizePathname(pathname);
   if (clean === '/' || clean === '') return 'home';
   const segment = clean.split('/').filter(Boolean)[0];
+  // Singular landing and year archive share the same analytics section.
+  if (segment === 'pereira-tech-day') return 'pereira-tech-days';
   return segment ?? 'home';
 }
 
 /**
  * Extract PTD edition year when on an edition route.
+ * Singular landing `/pereira-tech-day` maps to the current flagship year (2026).
  */
 export function getEditionYear(pathname: string): number | undefined {
   const match = pathname.match(/\/pereira-tech-days\/(\d{4})/);
-  if (!match) return undefined;
-  const year = Number.parseInt(match[1], 10);
-  return Number.isFinite(year) ? year : undefined;
+  if (match) {
+    const year = Number.parseInt(match[1], 10);
+    return Number.isFinite(year) ? year : undefined;
+  }
+  if (/\/pereira-tech-day\/?$/.test(pathname)) {
+    return 2026;
+  }
+  return undefined;
 }
 
 /**

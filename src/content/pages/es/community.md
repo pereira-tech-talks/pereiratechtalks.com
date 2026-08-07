@@ -22,7 +22,7 @@ Puedes navegar cualquiera de esas tres capas desde el sitio:
 
 - [Programas](/verticals)
 - [Meetups](/meetups)
-- [Pereira Tech Days](/pereira-tech-days)
+- [Pereira Tech Day](/pereira-tech-day)
 - [Ponentes](/speakers)
 - [Contribuyentes](/contributors)
 - [Patrocinadores](/sponsors)

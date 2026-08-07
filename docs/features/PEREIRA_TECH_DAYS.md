@@ -143,49 +143,29 @@ ui: z.object({
 - `typography.fontSources[].npmPackage` drives `getEditionFontPackages(edition)`, which returns the de-duplicated list of npm font packages an edition declares. The detail page only renders `<PtdEditionFonts packages={fontPackages} />` when that list is non-empty, so editions without a custom heading font never pay the webfont cost. `PtdEditionFonts.astro` statically imports `@fontsource/bebas-neue` (currently the only supported package) behind a `SUPPORTED_PACKAGES` allow-list.
 - `ui.buttonShape` / `ui.cardShape` map to `--ptd-button-radius` / `--ptd-card-radius` via `BUTTON_RADIUS_BY_SHAPE` / `CARD_RADIUS_BY_SHAPE` in `buildEditionThemeCss()` (`src/lib/pereiraTechDay.ts`), defaulting to the "rounded" mapping when `ui` is undeclared. Components consume these as `rounded-[var(--ptd-button-radius,9999px)]` / `rounded-[var(--ptd-card-radius,1rem)]` with a literal fallback, so every edition renders sane radii even without an explicit `ui` block (2024 has none).
 
-## Hub directory page (`/pereira-tech-days`)
+## Hub directory page (`/pereira-tech-days`) — removed
 
-The hub is the **flagship conference series homepage** — not a generic edition catalog. It has its own dedicated page component (`src/components/pages/PereiraTechDaysPage.astro`) and its own set of hub-only components. It uses **global PTT chrome only** — no `EditionScope` wrapper, no `data-edition-theme` attribute anywhere on this route.
+The plural hub/index at `/pereira-tech-days` (no year) was removed. The **canonical public landing** is the singular URL:
 
-### Composition order
+| URL | Role |
+|---|---|
+| `/pereira-tech-day` (and `/en/pereira-tech-day`) | Current/upcoming edition (2026) — same content as the year detail page |
+| `/pereira-tech-days/{year}` | Year archive (2024, 2026 deep links, certificates) |
+| `/pereira-tech-days` (no year) | **301 →** `/pereira-tech-day` |
 
-| Zone | Component | Notes |
-|---|---|---|
-| 1st viewport | `PtdHubFeaturedStage.astro` | Full-bleed dark stage for the upcoming edition; empty-state fallback when no upcoming edition exists |
-| Mid page | `PtdHubPastRow.astro` (one per past edition) | Horizontal band (image ≈45% + copy/CTA); single row, never a card grid |
-| Close | Join strip (`Section` primitive) | Slim community CTA via `t.joinTitle` / `t.joinSubtitle` / `t.joinCta` |
+Nav, footer, and primary CTAs use **“Pereira Tech Day”** → `/pereira-tech-day`. `getEditionHref()` / `getPtdLandingHref()` in `src/lib/pereiraTechDay.ts` route upcoming editions to the singular landing and past editions to `/pereira-tech-days/{year}/`.
 
-### `PtdHubFeaturedStage` — upcoming edition cinematic stage
+### Composition order (historical)
 
-- Renders when `getUpcomingEdition()` returns a result (`status: 'announced' | 'rsvp-open'`).
-- Atmospheric hero image: `opacity-30` + dual gradient overlays (left-dark + top-bottom-dark). No `EditionScope` — uses PTT global tokens throughout.
-- Includes a live countdown via `PtdCountdown.svelte` with `variant="hub"` (white/white-10 tokens for WCAG AA on the dark stage background; contrast verified ≥4.5:1).
-- Three tiered CTAs: primary (`t.indexStagePrimaryCta` → edition detail), secondary (`t.indexCfsCta` → call for speakers), tertiary (`t.indexSponsorCta` → sponsor-us, text-only).
-- Countdown ISO dates come from `getEditionCountdownTargets(edition)` → `{ targetDate, endDate? }`.
-
-**Empty state** (no upcoming edition): The stage renders a fallback section with `t.indexNoUpcomingTitle` + `t.indexNoUpcomingIntro` + a CTA to the latest past edition + a CFS link.
-
-### `PtdHubPastRow` — past edition horizontal band
-
-- One instance per `editions.filter(e => e.data.status === 'completed' || e.data.status === 'cancelled')` in `PereiraTechDaysPage.astro`.
-- Desktop: flex-row — image `md:w-[45%]` left, copy/CTA right.
-- Mobile: stacks vertically — continuous story, not a card grid.
-- Decorative 1px accent stripe (`h-1`) at the top uses `brandKit.paletteLight.accent` to echo the edition's identity without requiring `EditionScope`.
-- Image hover scale uses `motion-safe:group-hover:scale-[1.02] motion-reduce:transition-none` (reduced-motion compliant).
-- Image link is `tabindex="-1" aria-hidden="true"` (the CTA below is the keyboard-accessible link).
+The former hub used `PtdHubFeaturedStage` + `PtdHubPastRow`; those components were deleted with the hub page. Edition detail remains the only public template for flagship content.
 
 ### Hub chrome rule
 
-**No `EditionScope` on the hub.** The hub renders in the global PTT palette — `--ptt-primary`, `--ptt-bg`, `--ptt-text`, `--ptt-accent` are the standard site tokens. This keeps the header, footer, theme toggle, and language switcher in full PTT brand even when the most recent edition has a distinct per-edition palette (e.g., 2026 teal vs. 2024 dark). Edition-specific palettes are only scoped inside `[data-edition-theme]` on detail routes.
+**No `EditionScope` on non-edition chrome.** The singular landing and year detail pages use `EditionScope` + `PtdEditionHeader` as before. Global PTT header/footer stay outside the edition scope.
 
 ### Hub countdown variant
 
-`PtdCountdown.svelte` accepts a `variant: 'edition' | 'hub'` prop (default `'edition'`):
-
-| Variant | Token source | When to use |
-|---|---|---|
-| `'edition'` | Per-edition CSS vars (`--ptt-primary`, `--ptt-bg-elevated`, etc.) | Edition detail hero (`PtdHero2026`, edition chrome) |
-| `'hub'` | Global white/white-10 tokens | Hub featured stage (`PtdHubFeaturedStage`) |
+`PtdCountdown.svelte` still accepts `variant: 'edition' | 'hub'`. The `'hub'` variant remains available for cream landing surfaces (homepage strip); the deleted hub page no longer consumes it.
 
 ## Upcoming vs. past templates
 
@@ -235,10 +215,7 @@ All components live in `src/components/pereira-tech-days/`.
 
 ### Hub-only components
 
-| Component | Type | Used by | Role |
-|---|---|---|---|
-| `PtdHubFeaturedStage.astro` | Astro | Hub page (`PereiraTechDaysPage`) | Full-bleed dark stage for the upcoming edition: atmospheric hero image, edition title/tagline, `PtdCountdown variant="hub"`, and three tiered CTAs. Global PTT tokens only — no `EditionScope`. |
-| `PtdHubPastRow.astro` | Astro | Hub page (`PereiraTechDaysPage`) | Horizontal band per past edition: image (≈45%) + copy/CTA. Desktop side-by-side, mobile stacked. Decorative accent stripe from `brandKit.paletteLight.accent`. Not a card grid. |
+Removed with the hub index. Public entry is now the singular landing + year archive routes.
 
 ### Edition-detail components
 
@@ -258,14 +235,14 @@ All components live in `src/components/pereira-tech-days/`.
 | `PtdGalleryCarousel.svelte` | Svelte (`client:visible`) | Both | `mode="carousel"` (upcoming, single-frame + thumbnails) or `mode="marquee"` (past, infinite duplicated CSS track, pauses on hover/focus, static grid fallback under `prefers-reduced-motion`) |
 | `PtdFaqs.svelte` | Svelte (`client:visible`) | Both | `open-grid` (upcoming always-open) or `accordion` (past); optional section background |
 | `PtdJoinSection.astro` | Astro | Upcoming | Illustration + cream fade, split coral title; detail page passes `showCta={false}` |
-| `PtdCountdown.svelte` | Svelte (`client:visible`) | `PtdHero2026` (edition), `PtdHubFeaturedStage` (hub) | `variant="edition"`: discrete white cards with Bebas numerals; `variant="hub"`: white/10 grid on dark stage |
+| `PtdCountdown.svelte` | Svelte (`client:visible`) | `PtdHero2026` (edition), homepage strip | `variant="edition"`: discrete white cards with Bebas numerals; `variant="hub"`: discrete cream cards using `--ptd-hub-*` |
 | `PtdSubscribeForm.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Unboxed italic copy + cyan→teal gradient CTA; honeypot + `EVENTS.PTD_SUBSCRIBE` |
 
 Shared, non-PTD-specific components also used on the detail page: `TalkCard` (`src/components/cards/TalkCard.astro`) for the talks directory grid, `JsonLd` (`src/components/JsonLd.astro`) for the `Event` structured data.
 
 ## Related data helpers
 
-`src/lib/pereiraTechDay.ts` — `getEditions()`, `getEditionByYear()`, `getUpcomingEdition()`, `getLatestEdition()`, `buildEditionThemeCss()`, `getEditionStartDate()` / `getEditionEndDate()` / `getEditionStartIso()` / `getEditionEndIso()`, `getEditionCountdownTargets()` (hub helper: returns `{ targetDate, endDate? }` for countdown props), `isUpcomingEdition()`, `getEditionFontPackages()`, `normalizeLightningTalks()`.
+`src/lib/pereiraTechDay.ts` — `getEditions()`, `getEditionByYear()`, `getUpcomingEdition()`, `getLatestEdition()`, `buildEditionThemeCss()`, `getEditionStartDate()` / `getEditionEndDate()` / `getEditionStartIso()` / `getEditionEndIso()`, `getEditionCountdownTargets()`, `isUpcomingEdition()`, `getEditionHref()` / `getPtdLandingHref()` / `PTD_LANDING_SLUG`, `getEditionFontPackages()`, `normalizeLightningTalks()`.
 
 Cross-collection lookups used by the orchestrator: `getSpeakersBySlugs()` (`src/lib/speaker.ts`) for keynotes/lightning speakers, `getEditionSponsors()` (`src/lib/sponsor.ts`) for tiered sponsors, `getContributorsBySlugs()` (`src/lib/contributor.ts`) for organizers/collaborators, `getTalksByEvent('pereiraTechDays', edition.id)` (`src/lib/talk.ts`) for the talks directory.
 
