@@ -8,6 +8,7 @@ import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getCalendarYear } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getTalksBySpeaker } from '@/lib/talk';
 
@@ -173,8 +174,9 @@ const personJsonLd: Record<string, unknown> = {
             </p>
             <ol class="mt-8 relative space-y-8 border-l border-ptt-border pl-6">
               {talks.map((talk) => {
-                const d = talk.data.date ? new Date(talk.data.date) : null;
-                const year = d ? d.getFullYear() : null;
+                const year = talk.data.date
+                  ? getCalendarYear(talk.data.date)
+                  : null;
                 return (
                   <li class="relative">
                     <span
