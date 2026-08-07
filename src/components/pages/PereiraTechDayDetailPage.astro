@@ -182,6 +182,17 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
 
   <EditionScope year={year}>
     {
+      /**
+       * Section order contract (legacy parity — see plan tasks 7 & 11):
+       * Upcoming (2026): Hero -> About -> Lightning* -> Memories* -> Pricing
+       *   -> Schedule* -> Sponsors -> Organiza -> Organizadores -> Colaboradores
+       *   -> Talks* -> FAQ* -> Join
+       * Past (2024): Hero -> Ponentes -> Lightning* -> Memories* -> Sponsors
+       *   -> Organiza -> Organizadores -> Colaboradores -> Talks* -> FAQ*
+       * (* only renders when that edition actually has matching data)
+       */
+    }
+    {
       upcomingTemplate ? (
         <PtdHero2026
           lang={lang}
@@ -235,6 +246,9 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
       )
     }
 
+    {
+      /* Past-only: Ponentes (keynote quote cards) */
+    }
     {
       !upcomingTemplate && keynoteSpeakers.length > 0 && (
         <section class="py-[var(--ptd-section-pad)]" aria-labelledby="ptd-speakers-title">
@@ -291,6 +305,13 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
+      /**
+       * Upcoming-only: full agenda. Past editions soft-hide the schedule
+       * (data stays in YAML for record-keeping) — legacy 2024 has no
+       * schedule section; Ponentes + Lightning cover it instead.
+       */
+    }
+    {
       upcomingTemplate && edition.data.schedule.length > 0 && (
         <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]">
           <div class="main-container">
@@ -317,6 +338,9 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
       )
     }
 
+    {
+      /* Shared (both templates): logo-only sponsors, Organiza, and team grids */
+    }
     {
       editionSponsors.length > 0 && (
         <section
