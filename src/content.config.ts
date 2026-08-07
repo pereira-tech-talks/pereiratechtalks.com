@@ -631,6 +631,7 @@ const channels = defineCollection({
       'whatsapp',
       'telegram',
       'meetup-com',
+      'luma',
       'youtube',
       'x',
       'linkedin',
