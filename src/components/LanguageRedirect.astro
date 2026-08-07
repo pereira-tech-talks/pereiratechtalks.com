@@ -1,24 +1,16 @@
 ---
 /**
- * First-visit browser-language negotiation.
+ * Optional explicit `?lang=` pin — no automatic language negotiation.
  *
- * Renders a tiny blocking script in `<head>` so the decision happens before
- * first paint — a deferred script would flash the wrong language first.
+ * Language is URL-first (Spanish at `/`, English at `/en/`), matching
+ * xergioalex.com. Browser detection and localStorage never force a redirect
+ * (that triggered PageSpeed's "Clientside Redirect!" modal).
  *
- * The rules live in `src/lib/language-preference.ts` (pure and unit-tested);
- * they are inlined here because this must run before any module loads. Keep
- * the two in sync — the tests are the contract.
+ * The only redirect this script may issue is when the visitor (or LHCI)
+ * passes `?lang=es|en` and the current page language differs. Lab UAs are
+ * still skipped as belt-and-suspenders when combined with other tooling.
  *
- * Deliberate constraints:
- *   - Only the home page negotiates. Deep links are never rewritten, so a
- *     shared article keeps the language it was shared in, and both language
- *     trees stay independently crawlable (hreflang stays truthful).
- *   - An explicit choice (language switcher, or `?lang=`) is persisted and
- *     always beats the browser on later visits.
- *   - Cannot loop: it only navigates when the target differs from the page
- *     being served, and the target page then matches the stored preference.
- *   - Lab / automation tools are skipped (Lighthouse UA, HeadlessChrome,
- *     navigator.webdriver) so lab audits do not hit a client-side redirect.
+ * Pure rules: `src/lib/language-preference.ts` (unit-tested). Keep in sync.
  */
 
 import {
@@ -40,7 +32,6 @@ interface Props {
 const { lang } = Astro.props;
 const currentLang = isValidLanguage(lang) ? lang : DEFAULT_LANGUAGE;
 
-// Serialize the registry so the inline script needs no imports.
 const homeUrls: Record<string, string> = {};
 for (const l of getSupportedLanguages()) {
   const prefix = getUrlPrefix(l);
@@ -51,7 +42,6 @@ const config = JSON.stringify({
   current: currentLang,
   homeUrls,
   supported: getSupportedLanguages(),
-  fallback: DEFAULT_LANGUAGE,
   storageKey: LANGUAGE_STORAGE_KEY,
   queryParam: LANGUAGE_QUERY_PARAM,
 });
@@ -63,9 +53,6 @@ const config = JSON.stringify({
       const c = JSON.parse(config);
       const isSupported = (v) => typeof v === 'string' && c.supported.includes(v);
 
-      // Skip for lab / automation tools. A client-side redirect triggers PSI's
-      // "Clientside Redirect!" modal and burns ~600ms in LHCI (HeadlessChrome
-      // does not include "Lighthouse" in its UA). Real users still negotiate.
       const ua = navigator.userAgent || '';
       if (
         navigator.webdriver ||
@@ -76,62 +63,19 @@ const config = JSON.stringify({
 
       const params = new URLSearchParams(window.location.search);
       const forced = params.get(c.queryParam);
+      if (!isSupported(forced)) return;
 
-      let stored = null;
       try {
-        stored = window.localStorage.getItem(c.storageKey);
+        window.localStorage.setItem(c.storageKey, forced);
       } catch {
-        // Private mode / storage disabled — fall through to browser detection.
+        /* non-fatal */
       }
 
-      const persist = (value) => {
-        try {
-          window.localStorage.setItem(c.storageKey, value);
-        } catch {
-          /* non-fatal */
-        }
-      };
-
-      // `?lang=` wins and is remembered.
-      if (isSupported(forced)) {
-        persist(forced);
-        if (forced !== c.current) {
-          window.location.replace(c.homeUrls[forced]);
-        }
-        return;
+      if (forced !== c.current) {
+        window.location.replace(c.homeUrls[forced]);
       }
-
-      // Only the home page negotiates; deep links are left alone.
-      const path = window.location.pathname.replace(/(.)\/$/, '$1');
-      const isHome =
-        path === '' ||
-        path === '/' ||
-        c.supported.some((l) => c.homeUrls[l].replace(/(.)\/$/, '$1') === path);
-      if (!isHome) return;
-
-      // Later visits: an explicit choice beats the browser.
-      if (isSupported(stored)) {
-        if (stored !== c.current) window.location.replace(c.homeUrls[stored]);
-        return;
-      }
-
-      // First visit: match the browser, then remember it.
-      const candidates = navigator.languages?.length
-        ? navigator.languages
-        : [navigator.language || ''];
-      let detected = c.fallback;
-      for (const raw of candidates) {
-        const primary = String(raw).toLowerCase().split('-')[0];
-        if (c.supported.includes(primary)) {
-          detected = primary;
-          break;
-        }
-      }
-
-      persist(detected);
-      if (detected !== c.current) window.location.replace(c.homeUrls[detected]);
     } catch {
-      // Never let language negotiation break the page.
+      // Never let language handling break the page.
     }
   })();
 </script>

@@ -5,16 +5,13 @@ module.exports = {
       // Keep CI lean: home + flagship conference listing only.
       // Full surface lives in lighthouserc.full.cjs (`pnpm run lighthouse:full`).
       //
-      // `?lang=es` pins the Spanish home without a client redirect. LHCI's
-      // Chrome (new headless) neither sets navigator.webdriver nor puts
-      // HeadlessChrome/Lighthouse in the UA, so LanguageRedirect would
-      // otherwise send `/` → `/en/` and tank Performance.
+      // `?lang=es` still pins Spanish explicitly (optional now that there is
+      // no browser-language auto-redirect). Kept for stable LHCI baselines.
       url: ['/?lang=es', '/pereira-tech-days/'],
       // Median of 3 reduces LHCI noise around the 0.99↔1.00 boundary.
       numberOfRuns: 3,
       settings: {
-        // --lang=es-ES: browser languages match Spanish primary (belt + suspenders).
-        // Lighthouse in UA: same skip path PageSpeed uses if negotiation runs.
+        // --lang=es-ES + Lighthouse UA: leftover skip path in LanguageRedirect.
         chromeFlags:
           '--no-sandbox --headless --lang=es-ES --user-agent="Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36 Chrome-Lighthouse"',
         // Skip the robots-txt audit because it follows RFC 9309 strictly and

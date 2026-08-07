@@ -76,74 +76,34 @@ describe('homeUrlFor', () => {
 // ─── resolveLanguageDecision ───────────────────────────
 
 describe('resolveLanguageDecision', () => {
-  it('redirects a first-time English browser from the Spanish root', () => {
+  it('does not redirect a first-time English browser away from Spanish root', () => {
     const d = resolveLanguageDecision({
       currentLang: 'es',
       pathname: '/',
-      stored: null,
-      browserLanguages: ['en-US'],
-    });
-    expect(d).toEqual({ lang: 'en', redirectTo: '/en/', persist: true });
-  });
-
-  it('stays put — and still persists — when the browser already matches', () => {
-    const d = resolveLanguageDecision({
-      currentLang: 'es',
-      pathname: '/',
-      stored: null,
-      browserLanguages: ['es-CO'],
-    });
-    expect(d).toEqual({ lang: 'es', redirectTo: null, persist: true });
-  });
-
-  it('lets a stored preference beat the browser on later visits', () => {
-    const d = resolveLanguageDecision({
-      currentLang: 'es',
-      pathname: '/',
-      stored: 'en',
-      browserLanguages: ['es-CO'],
-    });
-    expect(d).toEqual({ lang: 'en', redirectTo: '/en/', persist: false });
-  });
-
-  it('does not re-persist or redirect when the stored preference is already served', () => {
-    const d = resolveLanguageDecision({
-      currentLang: 'en',
-      pathname: '/en/',
-      stored: 'en',
-      browserLanguages: ['es-CO'],
-    });
-    expect(d).toEqual({ lang: 'en', redirectTo: null, persist: false });
-  });
-
-  it('ignores a corrupt stored value and falls back to the browser', () => {
-    const d = resolveLanguageDecision({
-      currentLang: 'es',
-      pathname: '/',
-      stored: 'klingon',
-      browserLanguages: ['en'],
-    });
-    expect(d).toEqual({ lang: 'en', redirectTo: '/en/', persist: true });
-  });
-
-  it('never rewrites a deep link, even when the browser disagrees', () => {
-    const d = resolveLanguageDecision({
-      currentLang: 'es',
-      pathname: '/blog/some-post/',
       stored: null,
       browserLanguages: ['en-US'],
     });
     expect(d).toEqual({ lang: 'es', redirectTo: null, persist: false });
   });
 
-  it('never rewrites a deep link even with a conflicting stored preference', () => {
+  it('does not redirect when a stored preference disagrees with the URL', () => {
     const d = resolveLanguageDecision({
       currentLang: 'es',
-      pathname: '/about',
+      pathname: '/',
       stored: 'en',
-      browserLanguages: ['en'],
+      browserLanguages: ['es-CO'],
     });
-    expect(d.redirectTo).toBeNull();
+    expect(d).toEqual({ lang: 'es', redirectTo: null, persist: false });
+  });
+
+  it('never rewrites a deep link', () => {
+    const d = resolveLanguageDecision({
+      currentLang: 'es',
+      pathname: '/blog/some-post/',
+      stored: 'en',
+      browserLanguages: ['en-US'],
+    });
+    expect(d).toEqual({ lang: 'es', redirectTo: null, persist: false });
   });
 
   it('honours an explicit ?lang= override and remembers it', () => {
@@ -164,6 +124,7 @@ describe('resolveLanguageDecision', () => {
       forced: 'en',
     });
     expect(d.lang).toBe('en');
+    expect(d.redirectTo).toBe('/en/');
     expect(d.persist).toBe(true);
   });
 
@@ -172,23 +133,18 @@ describe('resolveLanguageDecision', () => {
       currentLang: 'es',
       pathname: '/',
       stored: null,
-      browserLanguages: ['es'],
+      browserLanguages: ['en'],
       forced: 'zz',
     });
-    expect(d.lang).toBe('es');
-    expect(d.redirectTo).toBeNull();
+    expect(d).toEqual({ lang: 'es', redirectTo: null, persist: false });
   });
 
-  it('cannot loop: the redirect target never equals the page being served', () => {
-    for (const current of ['es', 'en'] as const) {
-      for (const stored of ['es', 'en'] as const) {
-        const d = resolveLanguageDecision({
-          currentLang: current,
-          pathname: current === 'es' ? '/' : '/en/',
-          stored,
-        });
-        if (d.redirectTo !== null) expect(d.lang).not.toBe(current);
-      }
-    }
+  it('stays put when ?lang= matches the page already being served', () => {
+    const d = resolveLanguageDecision({
+      currentLang: 'es',
+      pathname: '/',
+      forced: 'es',
+    });
+    expect(d).toEqual({ lang: 'es', redirectTo: null, persist: true });
   });
 });
