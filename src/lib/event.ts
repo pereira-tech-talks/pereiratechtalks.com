@@ -1,5 +1,10 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
+import {
+  isCalendarDateBeforeToday,
+  isCalendarDateOnOrAfterToday,
+} from '@/lib/dates';
+
 export type Event = CollectionEntry<'events'>;
 
 const filterDrafts = (entry: Event): boolean => {
@@ -26,15 +31,15 @@ export const getEventBySlug = async (
 };
 
 export const getUpcomingEvents = async (): Promise<Event[]> => {
-  const now = Date.now();
   const all = await getEvents();
-  return all.filter((e) => e.data.date.getTime() >= now);
+  return all.filter((e) => isCalendarDateOnOrAfterToday(e.data.date));
 };
 
 export const getPastEvents = async (): Promise<Event[]> => {
-  const now = Date.now();
   const all = await getEvents();
-  return all.filter((e) => e.data.date.getTime() < now).sort(sortByDateDesc);
+  return all
+    .filter((e) => isCalendarDateBeforeToday(e.data.date))
+    .sort(sortByDateDesc);
 };
 
 export const getEventsByType = async (
