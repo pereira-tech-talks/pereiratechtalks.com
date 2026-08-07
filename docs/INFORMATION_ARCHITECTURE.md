@@ -50,17 +50,10 @@ match this IA, you are creating drift.
 | ~~Talk detail~~ | `/talks/{slug}` → 301 `/meetups` | `/en/talks/{slug}` → 301 `/en/meetups` | `talks` | `talks/[slug].astro` (redirect stub) | removed (Task 22) | n/a |
 | Community Calendar (stub) | `/calendar` | `/es/calendar` | static | `calendar.astro` | `CalendarPage.astro` (full GCal hub lands in Tasks 63–70) | pending |
 | Allied Communities (stub) | `/communities` | `/es/communities` | static | `communities.astro` | `CommunitiesPage.astro` (full page craft lands in Tasks 71–72) | pending |
-<<<<<<< HEAD
 | Contributors catalog | `/contributors` | `/en/contributors` | `contributors` | `contributors/index.astro` | `ContributorsPage.astro` (flat organizers + unified alumni) | yes |
 | ~~Contributor profile~~ | not shipped | — | — | — | Future; cards are not linked to `/contributors/{slug}` yet | n/a |
-| Sponsors catalog | `/sponsors` | `/es/sponsors` | `sponsors` | `sponsors/index.astro` | `SponsorsCatalogPage.astro` (grouped by tier) | yes |
-| Sponsor profile | `/sponsors/{slug}` | `/es/sponsors/{slug}` | `sponsors` | `sponsors/[slug].astro` | `SponsorProfilePage.astro` | per-slug `.md` |
-=======
-| Contributors catalog | `/contributors` | `/es/contributors` | `contributors` | `contributors/index.astro` | `ContributorsCatalogPage.astro` | yes |
-| Contributor profile | `/contributors/{slug}` | `/es/contributors/{slug}` | `contributors` | `contributors/[slug].astro` | `ContributorProfilePage.astro` | per-slug `.md` |
 | Sponsors catalog | `/sponsors` | `/en/sponsors` | `sponsors` | `sponsors/index.astro` | `SponsorsPage.astro` (current + past; no PTD tier headings) | yes |
 | ~~Sponsor profile~~ | not shipped | — | — | — | Future; cards link externally | n/a |
->>>>>>> origin/feature/sponsors-page-current-past-restructure
 | Channels | `/channels` | `/es/channels` | `channels` | `channels.astro` | `ChannelsPage.astro` | yes |
 | Press / Media kit | `/press` | `/es/press` | static | `press.astro` | `PressPage.astro` | yes |
 | Contact | `/contact` | `/es/contact` | form | `contact.astro` | `ContactPage.astro` | yes |

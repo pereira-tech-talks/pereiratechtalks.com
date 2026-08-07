@@ -227,11 +227,7 @@ function navClick(item: string) {
         class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
         on:click={() => navClick('pereira_tech_days')}
       >{t.nav.pereiraTechDays}</a>
-      <a
-        href="{prefix}/calendar"
-        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-        on:click={() => navClick('calendar')}
-      >{t.nav.calendar}</a>
+      <!-- Calendar nav link hidden temporarily — page still at /calendar -->
       <a
         href="{prefix}/blog"
         class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
