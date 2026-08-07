@@ -7,7 +7,6 @@
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import ContributorCard from '@/components/cards/ContributorCard.astro';
-import SpeakerCard from '@/components/cards/SpeakerCard.astro';
 import SponsorCard from '@/components/cards/SponsorCard.astro';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
@@ -19,6 +18,7 @@ import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarouse
 import PtdHero2024 from '@/components/pereira-tech-days/PtdHero2024.astro';
 import PtdHero2026 from '@/components/pereira-tech-days/PtdHero2026.astro';
 import PtdJoinSection from '@/components/pereira-tech-days/PtdJoinSection.astro';
+import PtdKeynoteQuoteCard from '@/components/pereira-tech-days/PtdKeynoteQuoteCard.astro';
 import PtdLightningSection from '@/components/pereira-tech-days/PtdLightningSection.astro';
 import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
@@ -255,10 +255,10 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
             <h2 id="ptd-speakers-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
               {t.speakers}
             </h2>
-            <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul class="mt-8 grid gap-6 sm:grid-cols-2">
               {keynoteSpeakers.map((speaker) => (
                 <li>
-                  <SpeakerCard speaker={speaker} lang={lang} />
+                  <PtdKeynoteQuoteCard speaker={speaker} lang={lang} />
                 </li>
               ))}
             </ul>
@@ -273,6 +273,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           lang={lang}
           title={t.lightningTitle}
           tagline={t.lightningTagline}
+          talks={normalizedLightningTalks}
           speakers={lightningSpeakers}
         />
       )

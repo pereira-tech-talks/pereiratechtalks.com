@@ -1,16 +1,25 @@
 ---
+/**
+ * PtdLightningSection — legacy `/pereira-tech-day/2024/` lightning talk
+ * grid: the **talk title** leads the card, with the speaker's photo, name,
+ * and role as a secondary footer (Task 9 — legacy visual parity). Consumes
+ * `normalizeLightningTalks()` output so callers keep supporting both the
+ * legacy slug-only shape and the title-first `{ speaker, title }` shape.
+ */
 import type { CollectionEntry } from 'astro:content';
-import SpeakerCard from '@/components/cards/SpeakerCard.astro';
-import type { Language } from '@/lib/i18n';
+import { type Language, tr } from '@/lib/i18n';
+import type { NormalizedLightningTalk } from '@/lib/pereiraTechDay';
 
 interface Props {
   lang: Language;
   title: string;
   tagline?: string;
+  talks: NormalizedLightningTalk[];
   speakers: CollectionEntry<'speakers'>[];
 }
 
-const { lang, title, tagline, speakers } = Astro.props;
+const { lang, title, tagline, talks, speakers } = Astro.props;
+const speakerBySlug = new Map(speakers.map((speaker) => [speaker.id, speaker]));
 ---
 
 <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]" aria-labelledby="ptd-lightning-title">
@@ -27,11 +36,41 @@ const { lang, title, tagline, speakers } = Astro.props;
     }
     <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        speakers.map((speaker) => (
-          <li>
-            <SpeakerCard speaker={speaker} lang={lang} />
-          </li>
-        ))
+        talks.map((entry) => {
+          const speaker = speakerBySlug.get(entry.speaker);
+          if (!speaker) return null;
+          const talkTitle = tr(entry.title, lang);
+          const role = tr(speaker.data.role, lang);
+          const photoAlt =
+            tr(speaker.data.photo.alt, lang) ||
+            `Portrait of ${speaker.data.name}`;
+          return (
+            <li class="flex h-full flex-col rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg)] p-6 ring-1 ring-[var(--ptt-border)]">
+              <p class="flex-1 text-lg font-semibold leading-snug text-[var(--ptt-text)]">
+                {talkTitle || speaker.data.name}
+              </p>
+              <div class="mt-4 flex items-center gap-3 border-t border-[var(--ptt-border)] pt-4">
+                <img
+                  decoding="async"
+                  src={speaker.data.photo.src}
+                  alt={photoAlt}
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                  class="h-10 w-10 shrink-0 rounded-full object-cover"
+                />
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-semibold text-[var(--ptt-text)]">
+                    {speaker.data.name}
+                  </p>
+                  <p class="truncate text-xs text-[var(--ptt-text-muted)]">
+                    {role}
+                  </p>
+                </div>
+              </div>
+            </li>
+          );
+        })
       }
     </ul>
   </div>

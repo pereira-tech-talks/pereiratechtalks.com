@@ -1,0 +1,50 @@
+---
+/**
+ * PtdKeynoteQuoteCard — legacy `/pereira-tech-day/2024/` "Ponentes" quote
+ * card: full bio as a blockquote, then a rule, then a compact photo/name/role
+ * footer. Used for past-edition keynotes instead of the generic directory
+ * `SpeakerCard` tile (Task 9 — legacy visual parity).
+ */
+import type { CollectionEntry } from 'astro:content';
+import { type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  speaker: CollectionEntry<'speakers'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { speaker, lang, loading = 'lazy' } = Astro.props;
+
+const bio = tr(speaker.data.bio, lang);
+const role = tr(speaker.data.role, lang);
+const photoSrc = speaker.data.photo.src;
+const photoAlt =
+  tr(speaker.data.photo.alt, lang) || `Portrait of ${speaker.data.name}`;
+---
+
+<figure class="flex h-full flex-col rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] p-6 shadow-sm ring-1 ring-[var(--ptt-border)] sm:p-8">
+  <blockquote class="flex-1 text-base leading-relaxed text-[var(--ptt-text)]">
+    <p>&ldquo;{bio}&rdquo;</p>
+  </blockquote>
+  <hr class="my-6 border-t border-[var(--ptt-border)]" />
+  <figcaption class="flex items-center gap-4">
+    <img
+      decoding="async"
+      src={photoSrc}
+      alt={photoAlt}
+      width="56"
+      height="56"
+      loading={loading}
+      class="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-[var(--ptt-bg)]"
+    />
+    <div class="min-w-0">
+      <p class="truncate text-base font-semibold text-[var(--ptt-text)]">
+        {speaker.data.name}
+      </p>
+      <p class="truncate text-sm text-[var(--ptt-text-muted)]">
+        {role}
+      </p>
+    </div>
+  </figcaption>
+</figure>
