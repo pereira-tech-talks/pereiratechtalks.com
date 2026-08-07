@@ -15,7 +15,6 @@
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
 | Certificates | [Certificates](docs/features/CERTIFICATES.md) | Individual diploma pages, print/PDF, verify UX, fixtures |
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
-| Contributors | [Contributors](docs/features/CONTRIBUTORS.md) | Equipo directory — flat organizers + unified alumni |
 | Sponsors | [Sponsors](docs/features/SPONSORS.md) | Community partners — current/past (tiers on PTD only) |
 | Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, PTT voice, vocabulary blocklist |
 | Content QA | [Content QA Checklist](docs/features/CONTENT_QA_CHECKLIST.md) | Bilingual parity, orthography, SEO/AEO, automated gates |
