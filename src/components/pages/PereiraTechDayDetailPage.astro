@@ -114,13 +114,6 @@ const breadcrumbs = [
   { label: `${year}` },
 ];
 
-const statusLabels: Record<string, { en: string; es: string }> = {
-  announced: { en: 'Upcoming', es: 'Próximamente' },
-  'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
-  completed: { en: 'Past edition', es: 'Edición pasada' },
-  cancelled: { en: 'Cancelled', es: 'Cancelada' },
-};
-
 const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
   talk: { en: 'Talk', es: 'Charla' },
   keynote: { en: 'Keynote', es: 'Keynote' },
@@ -236,7 +229,6 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           heroSrc={heroSrc}
           logoSrc="/images/pereira-tech-days/2024/logo.png"
           recordingUrl={edition.data.linkRecording}
-          statusLabel={statusLabels[status][lang]}
           recordingCta={t.recordingCta}
         />
       )
