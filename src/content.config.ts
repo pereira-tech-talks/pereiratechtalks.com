@@ -374,6 +374,11 @@ const pereiraTechDays = defineCollection({
       alt: i18nStringOptional,
       layout: heroLayout.default('banner'),
     }),
+    /**
+     * Optional Open Graph / Twitter share image (prefer 1200×630 JPEG).
+     * Falls back to `hero.src` when omitted.
+     */
+    ogImage: z.string().optional(),
     brandKit: editionBrandKit,
     /**
      * Decorative background images per landing section, data-driven so the
