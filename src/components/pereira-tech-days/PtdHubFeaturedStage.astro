@@ -10,8 +10,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
-  getEditionEndIso,
-  getEditionStartIso,
+  getEditionCountdownTargets,
   type PereiraTechDay,
 } from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
@@ -27,8 +26,7 @@ const t = getTranslations(lang).ptdPage;
 const prefix = getUrlPrefix(lang);
 
 const editionHref = `${prefix}/pereira-tech-days/${edition.data.year}/`;
-const targetDate = getEditionStartIso(edition);
-const endDate = getEditionEndIso(edition);
+const { targetDate, endDate } = getEditionCountdownTargets(edition);
 
 const heroSrc = edition.data.hero?.src ?? null;
 const editionTitle = tr(edition.data.title, lang);

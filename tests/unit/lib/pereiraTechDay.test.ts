@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { PereiraTechDay } from '@/lib/pereiraTechDay';
 import {
   buildEditionThemeCss,
+  getEditionCountdownTargets,
   getEditionEndIso,
   getEditionFontPackages,
   getEditionStartDate,
@@ -301,6 +302,38 @@ describe('pereiraTechDay helpers', () => {
         title: { en: 'Your first talk', es: 'Tu primera charla' },
       },
     ]);
+  });
+
+  // getEditionCountdownTargets — hub countdown helper
+
+  it('getEditionCountdownTargets returns targetDate matching getEditionStartIso', () => {
+    const edition = mockEdition();
+    const { targetDate } = getEditionCountdownTargets(edition);
+    expect(targetDate).toBe(getEditionStartIso(edition));
+  });
+
+  it('getEditionCountdownTargets returns endDate matching getEditionEndIso', () => {
+    const edition = mockEdition(); // has endTime: '14:00'
+    const { endDate } = getEditionCountdownTargets(edition);
+    expect(endDate).toBe(getEditionEndIso(edition));
+    expect(endDate).toBeDefined();
+  });
+
+  it('getEditionCountdownTargets returns endDate undefined for single-day edition with no endTime', () => {
+    const edition = mockEdition({ endTime: undefined });
+    const { endDate } = getEditionCountdownTargets(edition);
+    expect(endDate).toBeUndefined();
+  });
+
+  it('getEditionCountdownTargets returns both targetDate and endDate for date-range edition', () => {
+    const edition = mockEdition({
+      date: { start: new Date('2026-08-22'), end: new Date('2026-08-23') },
+      startTime: '09:00',
+      endTime: '18:00',
+    });
+    const { targetDate, endDate } = getEditionCountdownTargets(edition);
+    expect(targetDate).toMatch(/2026-08-22/);
+    expect(endDate).toMatch(/2026-08-23/);
   });
 
   it('normalizeLightningTalks accepts a mix of both shapes', () => {

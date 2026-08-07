@@ -152,6 +152,17 @@ export const getEditionEndIso = (
   return undefined;
 };
 
+/**
+ * Returns countdown ISO timestamps for the hub's `PtdCountdown variant="hub"`.
+ * Wraps `getEditionStartIso` / `getEditionEndIso` so call-sites stay simple.
+ */
+export const getEditionCountdownTargets = (
+  edition: PereiraTechDay
+): { targetDate: string; endDate?: string } => ({
+  targetDate: getEditionStartIso(edition),
+  endDate: getEditionEndIso(edition),
+});
+
 /** Whether the edition is the upcoming flagship template (announced / RSVP). */
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
   edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
