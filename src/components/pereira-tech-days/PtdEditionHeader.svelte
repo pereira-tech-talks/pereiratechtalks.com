@@ -24,8 +24,8 @@ $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
 $: homeHref = prefix === '' ? '/' : `${prefix}/`;
 $: currentHref =
-    editions.find((e) => e.year === year)?.href ??
-    `${prefix}/pereira-tech-days/${year}/`;
+  editions.find((e) => e.year === year)?.href ??
+  `${prefix}/pereira-tech-days/${year}/`;
 $: otherEditions = editions.filter((e) => e.year !== year);
 $: currentLabel = `Pereira Tech Day ${year}`;
 $: isDark = variant === 'dark';
