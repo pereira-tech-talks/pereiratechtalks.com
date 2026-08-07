@@ -367,6 +367,12 @@ export function displayMeetupDate(date: Date, lang: 'en' | 'es'): string {
 export function meetupDatetimeAttr(date: Date): string {
   return getCalendarDateString(date);
 }
+
+// Real timestamps (certificates, verification) — GMT-5
+formatInstantInSiteTimezone(issuedAt, 'es-CO');
+
+// Wall-clock PTD start → ISO with -05:00
+combineCalendarDateAndTime(editionDate, '08:00');
 ```
 
 ### Adding a New Translation
