@@ -1,22 +1,46 @@
 /**
- * Cloudflare Pages Function — Contact / CFS / Sponsor intake backend.
+ * Cloudflare Pages Function — community intake → Dailybot Forms API.
  *
- * Topic-discriminated JSON POST → Resend (inbox + optional submitter ack).
+ * Primary sink: Dailybot (`DAILYBOT_API_KEY`). Discriminator `_form`:
+ *   contact | cfs | speaker-school | sponsor | calendar | conduct
  *
- * Env (required for Resend path):
- *   RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL
- * Optional:
- *   CONTACT_TO_SPEAKERS, CONTACT_TO_SPONSORS, CONTACT_TO_PRESS, CONTACT_TO_CONDUCT
- *   CONTACT_ALLOWED_ORIGINS
- *   CONTACT_RATE_LIMIT (default 8), CONTACT_RATE_WINDOW_MS (default 600000)
- *   CONTACT_TURNSTILE_SECRET — reserved; when unset Turnstile is not enforced
+ * Legacy clients that still send `reason` / `topic` (without `_form`) are
+ * mapped: tech-talk→cfs, sponsorship→sponsor, conduct→conduct, else→contact.
+ *
+ * Optional Resend auto-ack after Dailybot 201 (never fails the request).
+ *
+ * Env:
+ *   DAILYBOT_API_KEY — required
+ *   RESEND_API_KEY, CONTACT_FROM_EMAIL — optional ack
+ *   CONTACT_ALLOWED_ORIGINS, CONTACT_RATE_LIMIT, CONTACT_RATE_WINDOW_MS
+ *   CONTACT_TURNSTILE_SECRET — reserved
  */
 
 import {
-  CANONICAL_TOPICS,
-  CFS_FORMATS,
-  CONTRIBUTION_TYPES,
-  SPONSOR_TIERS,
+  CALENDAR_FORM_UUID,
+  CALENDAR_Q,
+  CFS_FORM_UUID,
+  CFS_FORMAT_VALUES,
+  CFS_Q,
+  CONDUCT_FORM_UUID,
+  CONDUCT_Q,
+  CONTACT_FORM_UUID,
+  CONTACT_Q,
+  CONTACT_TOPIC_VALUES,
+  CONTRIBUTION_TYPE_VALUES,
+  EXPERIENCE_LEVEL_VALUES,
+  LANG_VALUES,
+  SPEAKER_SCHOOL_FORM_UUID,
+  SPEAKER_SCHOOL_Q,
+  SPONSOR_TIER_VALUES,
+  SPONSORS_FORM_UUID,
+  SPONSORS_Q,
+  booleanToDailyBot,
+  lookupChoice,
+  normalizePagePath,
+  submitFormResponse,
+} from './_dailybot';
+import {
   checkRateLimit,
   looksLikeSpamPayload,
   normalizeTopic,
@@ -31,15 +55,22 @@ const MAX_ABSTRACT_LENGTH = 2000;
 const MAX_TAKEAWAYS_LENGTH = 800;
 const MAX_SOCIAL_LENGTH = 300;
 const MAX_COMPANY_LENGTH = 160;
+const MAX_EMAIL_LENGTH = 254;
+
+const FORM_TYPES = [
+  'contact',
+  'cfs',
+  'speaker-school',
+  'sponsor',
+  'calendar',
+  'conduct',
+] as const;
+type FormType = (typeof FORM_TYPES)[number];
 
 interface Env {
+  DAILYBOT_API_KEY?: string;
   RESEND_API_KEY?: string;
-  CONTACT_TO_EMAIL?: string;
   CONTACT_FROM_EMAIL?: string;
-  CONTACT_TO_SPEAKERS?: string;
-  CONTACT_TO_SPONSORS?: string;
-  CONTACT_TO_PRESS?: string;
-  CONTACT_TO_CONDUCT?: string;
   CONTACT_ALLOWED_ORIGINS?: string;
   CONTACT_RATE_LIMIT?: string;
   CONTACT_RATE_WINDOW_MS?: string;
@@ -52,32 +83,7 @@ interface EventContext {
   waitUntil: (promise: Promise<unknown>) => void;
 }
 
-interface IntakePayload {
-  name: string;
-  email: string;
-  reason: string;
-  subject: string;
-  message: string;
-  lang: string;
-  website: string;
-  talkTitle: string;
-  format: string;
-  abstract: string;
-  takeaways: string;
-  socialUrl: string;
-  firstTime: boolean;
-  speakerSchool: boolean;
-  company: string;
-  contactRole: string;
-  tierInterest: string;
-  contributionType: string;
-}
-
-const ALLOWED_REASONS = new Set<string>(CANONICAL_TOPICS);
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const MAX_EMAIL_LENGTH = 254;
-
-/** Isolate-local rate limit store (best-effort on CF Workers). */
 const rateLimitStore = new Map<string, number[]>();
 
 function jsonResponse(
@@ -121,178 +127,260 @@ function sanitiseText(value: unknown, maxLength: number): string {
   return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLength);
 }
 
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
 function asBool(value: unknown): boolean {
   return value === true || value === 'true' || value === '1' || value === 'on';
 }
 
-function routeInbox(env: Env, reason: string): string {
-  const fallback = env.CONTACT_TO_EMAIL || '';
-  switch (reason) {
-    case 'tech-talk':
-      return env.CONTACT_TO_SPEAKERS || fallback;
-    case 'sponsorship':
-      return env.CONTACT_TO_SPONSORS || fallback;
-    case 'press':
-      return env.CONTACT_TO_PRESS || fallback;
-    case 'conduct':
-      return env.CONTACT_TO_CONDUCT || fallback;
-    default:
-      return fallback;
+function resolveFormType(data: Record<string, unknown>): FormType {
+  const raw = data._form;
+  if (typeof raw === 'string' && (FORM_TYPES as readonly string[]).includes(raw)) {
+    return raw as FormType;
   }
+  const reason = normalizeTopic(
+    sanitiseText(data.reason ?? data.topic, 64)
+  );
+  if (reason === 'tech-talk') return 'cfs';
+  if (reason === 'sponsorship') return 'sponsor';
+  if (reason === 'conduct') return 'conduct';
+  return 'contact';
 }
 
-function validate(payload: IntakePayload): string | null {
-  if (!payload.name) return 'name_required';
-  if (!payload.email) return 'email_required';
-  if (!EMAIL_REGEX.test(payload.email)) return 'email_invalid';
-  if (!payload.reason || !ALLOWED_REASONS.has(payload.reason)) {
-    return 'reason_invalid';
-  }
-  if (!payload.subject) return 'subject_required';
-  if (!payload.message) return 'message_required';
-  if (payload.message.length < 10) return 'message_too_short';
-
-  if (payload.reason === 'tech-talk') {
-    if (!payload.talkTitle) return 'talk_title_required';
-    if (!(CFS_FORMATS as readonly string[]).includes(payload.format)) {
-      return 'format_invalid';
-    }
-    if (payload.abstract.length < 20) return 'abstract_too_short';
-    if (!payload.takeaways) return 'takeaways_required';
-    if (!payload.socialUrl) return 'social_required';
-  }
-
-  if (payload.reason === 'sponsorship') {
-    if (!payload.company) return 'company_required';
-    if (!payload.contactRole) return 'role_required';
-    if (!(SPONSOR_TIERS as readonly string[]).includes(payload.tierInterest)) {
-      return 'tier_invalid';
-    }
-    if (
-      !(CONTRIBUTION_TYPES as readonly string[]).includes(
-        payload.contributionType
-      )
-    ) {
-      return 'contribution_invalid';
-    }
-  }
-
-  return null;
+interface ContentBuildResult {
+  ok: true;
+  formUuid: string;
+  content: Record<string, string>;
+  ackTopic: string;
 }
 
-function buildBodies(
-  payload: IntakePayload,
-  meta: { ip: string; userAgent: string; lang: string }
-): { text: string; html: string; subject: string } {
-  const subjectPrefix = `[PTT · ${payload.reason}]`;
-  const safeSubject = `${subjectPrefix} ${payload.subject}`.slice(0, 200);
+interface ContentBuildError {
+  ok: false;
+  error: string;
+}
 
-  const extraLines: string[] = [];
-  if (payload.reason === 'tech-talk') {
-    extraLines.push(
-      `Talk title: ${payload.talkTitle}`,
-      `Format: ${payload.format}`,
-      `First-time: ${payload.firstTime ? 'yes' : 'no'}`,
-      `Speaker School: ${payload.speakerSchool ? 'yes' : 'no'}`,
-      `Social: ${payload.socialUrl}`,
-      '',
-      'Abstract:',
-      payload.abstract,
-      '',
-      'Takeaways:',
-      payload.takeaways
+function requireNonEmpty(
+  fields: Record<string, string>,
+  keys: string[]
+): ContentBuildError | null {
+  const missing = keys.filter((k) => !fields[k]?.trim());
+  if (missing.length === 0) return null;
+  return { ok: false, error: `missing_${missing[0]}` };
+}
+
+function buildContent(
+  formType: FormType,
+  fields: Record<string, string>,
+  flags: Record<string, boolean>,
+  pagePath: string,
+  langRaw: string
+): ContentBuildResult | ContentBuildError {
+  const lang =
+    lookupChoice(langRaw || 'es', LANG_VALUES) ||
+    lookupChoice('Spanish', LANG_VALUES);
+  if (!lang) {
+    return { ok: false, error: 'lang_invalid' };
+  }
+
+  if (formType === 'contact') {
+    const missing = requireNonEmpty(fields, [
+      'name',
+      'email',
+      'topic',
+      'subject',
+      'message',
+    ]);
+    if (missing) return missing;
+    const topic = lookupChoice(fields.topic, CONTACT_TOPIC_VALUES);
+    if (topic === null) return { ok: false, error: 'topic_invalid' };
+    return {
+      ok: true,
+      formUuid: CONTACT_FORM_UUID,
+      ackTopic: 'general',
+      content: {
+        [CONTACT_Q.NAME]: fields.name,
+        [CONTACT_Q.EMAIL]: fields.email,
+        [CONTACT_Q.TOPIC]: topic as string,
+        [CONTACT_Q.SUBJECT]: fields.subject,
+        [CONTACT_Q.MESSAGE]: fields.message,
+        [CONTACT_Q.LANG]: lang,
+        [CONTACT_Q.PAGE_PATH]: pagePath,
+      },
+    };
+  }
+
+  if (formType === 'cfs') {
+    const missing = requireNonEmpty(fields, [
+      'name',
+      'email',
+      'talkTitle',
+      'format',
+      'abstract',
+      'takeaways',
+      'socialUrl',
+    ]);
+    if (missing) return missing;
+    if (fields.abstract.trim().length < 20) {
+      return { ok: false, error: 'abstract_too_short' };
+    }
+    const format = lookupChoice(fields.format, CFS_FORMAT_VALUES);
+    if (format === null) return { ok: false, error: 'format_invalid' };
+    return {
+      ok: true,
+      formUuid: CFS_FORM_UUID,
+      ackTopic: 'tech-talk',
+      content: {
+        [CFS_Q.NAME]: fields.name,
+        [CFS_Q.EMAIL]: fields.email,
+        [CFS_Q.TALK_TITLE]: fields.talkTitle,
+        [CFS_Q.FORMAT]: format as string,
+        [CFS_Q.ABSTRACT]: fields.abstract,
+        [CFS_Q.TAKEAWAYS]: fields.takeaways,
+        [CFS_Q.SOCIAL_URL]: fields.socialUrl,
+        [CFS_Q.FIRST_TIME]: booleanToDailyBot(flags.firstTime),
+        [CFS_Q.SPEAKER_SCHOOL]: booleanToDailyBot(flags.speakerSchool),
+        [CFS_Q.NOTES]: fields.message || fields.notes || '',
+        [CFS_Q.LANG]: lang,
+        [CFS_Q.PAGE_PATH]: pagePath,
+      },
+    };
+  }
+
+  if (formType === 'speaker-school') {
+    const missing = requireNonEmpty(fields, [
+      'name',
+      'email',
+      'experienceLevel',
+      'goals',
+      'topicsOfInterest',
+      'availability',
+    ]);
+    if (missing) return missing;
+    const level = lookupChoice(
+      fields.experienceLevel,
+      EXPERIENCE_LEVEL_VALUES
     );
+    if (level === null) return { ok: false, error: 'experience_level_invalid' };
+    return {
+      ok: true,
+      formUuid: SPEAKER_SCHOOL_FORM_UUID,
+      ackTopic: 'general',
+      content: {
+        [SPEAKER_SCHOOL_Q.NAME]: fields.name,
+        [SPEAKER_SCHOOL_Q.EMAIL]: fields.email,
+        [SPEAKER_SCHOOL_Q.EXPERIENCE_LEVEL]: level as string,
+        [SPEAKER_SCHOOL_Q.GOALS]: fields.goals,
+        [SPEAKER_SCHOOL_Q.TOPICS]: fields.topicsOfInterest,
+        [SPEAKER_SCHOOL_Q.AVAILABILITY]: fields.availability,
+        [SPEAKER_SCHOOL_Q.PRIOR_SPEAKING]: fields.priorSpeaking || '',
+        [SPEAKER_SCHOOL_Q.SOCIAL]: fields.socialOrLinkedin || '',
+        [SPEAKER_SCHOOL_Q.MESSAGE]: fields.message || '',
+        [SPEAKER_SCHOOL_Q.LANG]: lang,
+        [SPEAKER_SCHOOL_Q.PAGE_PATH]: pagePath,
+      },
+    };
   }
-  if (payload.reason === 'sponsorship') {
-    extraLines.push(
-      `Company: ${payload.company}`,
-      `Role: ${payload.contactRole}`,
-      `Tier: ${payload.tierInterest}`,
-      `Contribution: ${payload.contributionType}`
+
+  if (formType === 'sponsor') {
+    const missing = requireNonEmpty(fields, [
+      'name',
+      'email',
+      'company',
+      'contactRole',
+      'tierInterest',
+      'contributionType',
+      'message',
+    ]);
+    if (missing) return missing;
+    const tier = lookupChoice(fields.tierInterest, SPONSOR_TIER_VALUES);
+    const contribution = lookupChoice(
+      fields.contributionType,
+      CONTRIBUTION_TYPE_VALUES
     );
+    if (tier === null) return { ok: false, error: 'tier_invalid' };
+    if (contribution === null) {
+      return { ok: false, error: 'contribution_invalid' };
+    }
+    return {
+      ok: true,
+      formUuid: SPONSORS_FORM_UUID,
+      ackTopic: 'sponsorship',
+      content: {
+        [SPONSORS_Q.NAME]: fields.name,
+        [SPONSORS_Q.EMAIL]: fields.email,
+        [SPONSORS_Q.COMPANY]: fields.company,
+        [SPONSORS_Q.ROLE]: fields.contactRole,
+        [SPONSORS_Q.TIER]: tier as string,
+        [SPONSORS_Q.CONTRIBUTION]: contribution as string,
+        [SPONSORS_Q.MESSAGE]: fields.message,
+        [SPONSORS_Q.LANG]: lang,
+        [SPONSORS_Q.PAGE_PATH]: pagePath,
+      },
+    };
   }
 
-  const textBody = [
-    `Name: ${payload.name}`,
-    `Email: ${payload.email}`,
-    `Reason: ${payload.reason}`,
-    `Language: ${meta.lang}`,
-    `Subject: ${payload.subject}`,
-    '',
-    ...extraLines,
-    '',
-    'Message:',
-    payload.message,
-    '',
-    '---',
-    `IP: ${meta.ip}`,
-    `User-Agent: ${meta.userAgent}`,
-  ].join('\n');
+  if (formType === 'calendar') {
+    const missing = requireNonEmpty(fields, [
+      'name',
+      'email',
+      'communityName',
+      'googleCalendarId',
+      'shortDescription',
+    ]);
+    if (missing) return missing;
+    return {
+      ok: true,
+      formUuid: CALENDAR_FORM_UUID,
+      ackTopic: 'collaboration',
+      content: {
+        [CALENDAR_Q.NAME]: fields.name,
+        [CALENDAR_Q.EMAIL]: fields.email,
+        [CALENDAR_Q.COMMUNITY]: fields.communityName,
+        [CALENDAR_Q.CALENDAR_ID]: fields.googleCalendarId,
+        [CALENDAR_Q.CALENDAR_URL]: fields.publicCalendarUrl || '',
+        [CALENDAR_Q.WEBSITE]: fields.communityWebsite || '',
+        [CALENDAR_Q.DESCRIPTION]: fields.shortDescription,
+        [CALENDAR_Q.LANG]: lang,
+        [CALENDAR_Q.PAGE_PATH]: pagePath,
+      },
+    };
+  }
 
-  const extraHtml =
-    payload.reason === 'tech-talk'
-      ? `<h3>Talk</h3>
-         <p><strong>${escapeHtml(payload.talkTitle)}</strong> (${escapeHtml(payload.format)})</p>
-         <p>First-time: ${payload.firstTime ? 'yes' : 'no'} · Speaker School: ${payload.speakerSchool ? 'yes' : 'no'}</p>
-         <p>Social: ${escapeHtml(payload.socialUrl)}</p>
-         <h4>Abstract</h4><pre style="white-space:pre-wrap;background:#f3f4f6;padding:16px;border-radius:8px;">${escapeHtml(payload.abstract)}</pre>
-         <h4>Takeaways</h4><pre style="white-space:pre-wrap;background:#f3f4f6;padding:16px;border-radius:8px;">${escapeHtml(payload.takeaways)}</pre>`
-      : payload.reason === 'sponsorship'
-        ? `<h3>Sponsorship</h3>
-           <p>Company: ${escapeHtml(payload.company)}<br>
-           Role: ${escapeHtml(payload.contactRole)}<br>
-           Tier: ${escapeHtml(payload.tierInterest)}<br>
-           Contribution: ${escapeHtml(payload.contributionType)}</p>`
-        : '';
-
-  const htmlBody = `
-    <div style="font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; color: #111827;">
-      <h2 style="margin: 0 0 16px;">New PTT intake · ${escapeHtml(payload.reason)}</h2>
-      <table style="border-collapse: collapse;">
-        <tr><td style="padding: 4px 12px 4px 0;"><strong>Name</strong></td><td>${escapeHtml(payload.name)}</td></tr>
-        <tr><td style="padding: 4px 12px 4px 0;"><strong>Email</strong></td><td>${escapeHtml(payload.email)}</td></tr>
-        <tr><td style="padding: 4px 12px 4px 0;"><strong>Reason</strong></td><td>${escapeHtml(payload.reason)}</td></tr>
-        <tr><td style="padding: 4px 12px 4px 0;"><strong>Language</strong></td><td>${escapeHtml(meta.lang)}</td></tr>
-        <tr><td style="padding: 4px 12px 4px 0;"><strong>Subject</strong></td><td>${escapeHtml(payload.subject)}</td></tr>
-      </table>
-      ${extraHtml}
-      <h3 style="margin: 24px 0 8px;">Message</h3>
-      <pre style="white-space: pre-wrap; background: #f3f4f6; padding: 16px; border-radius: 8px;">${escapeHtml(payload.message)}</pre>
-      <hr style="margin: 24px 0; border: none; border-top: 1px solid #e5e7eb;">
-      <p style="font-size: 12px; color: #6b7280;">
-        IP: ${escapeHtml(meta.ip)}<br>
-        User-Agent: ${escapeHtml(meta.userAgent)}
-      </p>
-    </div>
-  `;
-
-  return { text: textBody, html: htmlBody, subject: safeSubject };
+  // conduct
+  const missing = requireNonEmpty(fields, ['incidentDescription']);
+  if (missing) return missing;
+  const anonymous = flags.anonymous;
+  const content: Record<string, string> = {
+    [CONDUCT_Q.INCIDENT]: fields.incidentDescription,
+    [CONDUCT_Q.WHEN]: fields.incidentDate || '',
+    [CONDUCT_Q.PEOPLE]: fields.peopleInvolved || '',
+    [CONDUCT_Q.ANONYMOUS]: booleanToDailyBot(anonymous),
+    [CONDUCT_Q.REPORTER_NAME]: anonymous ? '' : fields.name || '',
+    [CONDUCT_Q.REPORTER_EMAIL]: anonymous ? '' : fields.email || '',
+    [CONDUCT_Q.FOLLOWUP]: fields.preferredFollowup || '',
+    [CONDUCT_Q.LANG]: lang,
+    [CONDUCT_Q.PAGE_PATH]: pagePath,
+  };
+  // Legacy contact-shaped conduct: use message as incident if needed
+  if (!content[CONDUCT_Q.INCIDENT] && fields.message) {
+    content[CONDUCT_Q.INCIDENT] = fields.message;
+  }
+  return {
+    ok: true,
+    formUuid: CONDUCT_FORM_UUID,
+    ackTopic: 'conduct',
+    content,
+  };
 }
 
-async function resendSend(
+async function resendAck(
   env: Env,
-  args: {
-    to: string[];
-    replyTo?: string;
-    subject: string;
-    text: string;
-    html?: string;
-  }
-): Promise<{ ok: boolean; status: number; error?: string }> {
-  if (!env.RESEND_API_KEY || !env.CONTACT_FROM_EMAIL) {
-    return { ok: false, status: 503, error: 'backend_not_configured' };
-  }
+  to: string,
+  topic: string,
+  lang: 'en' | 'es'
+): Promise<void> {
+  if (!env.RESEND_API_KEY || !env.CONTACT_FROM_EMAIL || !to) return;
+  const ack = pickAckCopy(topic, lang);
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -300,27 +388,13 @@ async function resendSend(
       },
       body: JSON.stringify({
         from: env.CONTACT_FROM_EMAIL,
-        to: args.to,
-        reply_to: args.replyTo,
-        subject: args.subject,
-        text: args.text,
-        html: args.html,
+        to: [to],
+        subject: ack.subject,
+        text: ack.text,
       }),
     });
-    if (!response.ok) {
-      return {
-        ok: false,
-        status: 502,
-        error: `resend_error_${response.status}`,
-      };
-    }
-    return { ok: true, status: 200 };
-  } catch (error) {
-    return {
-      ok: false,
-      status: 502,
-      error: error instanceof Error ? error.message : 'unknown_error',
-    };
+  } catch (err) {
+    console.error('[contact] Resend ack failed', err);
   }
 }
 
@@ -344,42 +418,26 @@ export async function onRequestPost(
   context: EventContext
 ): Promise<Response> {
   const origin = resolveAllowedOrigin(context.request, context.env);
+
+  if (!context.env.DAILYBOT_API_KEY) {
+    return jsonResponse(
+      { ok: false, error: 'backend_not_configured' },
+      503,
+      origin
+    );
+  }
+
   let raw: unknown;
   try {
     raw = await context.request.json();
   } catch {
     return jsonResponse({ ok: false, error: 'invalid_json' }, 400, origin);
   }
-
   if (!raw || typeof raw !== 'object') {
     return jsonResponse({ ok: false, error: 'invalid_payload' }, 400, origin);
   }
 
   const data = raw as Record<string, unknown>;
-  const reason = normalizeTopic(sanitiseText(data.reason ?? data.topic, 32));
-
-  const payload: IntakePayload = {
-    name: sanitiseText(data.name, MAX_NAME_LENGTH),
-    email: sanitiseText(data.email, MAX_EMAIL_LENGTH).toLowerCase(),
-    reason,
-    subject: sanitiseText(data.subject, MAX_SUBJECT_LENGTH),
-    message: sanitiseText(data.message, MAX_MESSAGE_LENGTH),
-    lang: sanitiseText(data.lang, 8) || 'en',
-    website: sanitiseText(data.website, 200),
-    talkTitle: sanitiseText(data.talkTitle, MAX_TALK_TITLE_LENGTH),
-    format: sanitiseText(data.format, 32),
-    abstract: sanitiseText(data.abstract, MAX_ABSTRACT_LENGTH),
-    takeaways: sanitiseText(data.takeaways, MAX_TAKEAWAYS_LENGTH),
-    socialUrl: sanitiseText(data.socialUrl, MAX_SOCIAL_LENGTH),
-    firstTime: asBool(data.firstTime),
-    speakerSchool: asBool(data.speakerSchool),
-    company: sanitiseText(data.company, MAX_COMPANY_LENGTH),
-    contactRole: sanitiseText(data.contactRole, 120),
-    tierInterest: sanitiseText(data.tierInterest, 32),
-    contributionType: sanitiseText(data.contributionType, 32),
-  };
-
-  // Turnstile: reserved. When CONTACT_TURNSTILE_SECRET is unset, skip (documented defer).
   void context.env.CONTACT_TURNSTILE_SECRET;
 
   const ip =
@@ -399,65 +457,114 @@ export async function onRequestPost(
     );
   }
 
-  if (
-    looksLikeSpamPayload({
-      name: payload.name,
-      message: `${payload.message}\n${payload.abstract}`,
-      website: payload.website,
-    })
-  ) {
+  const website = sanitiseText(data.website, 200);
+  const name = sanitiseText(data.name, MAX_NAME_LENGTH);
+  const message = sanitiseText(
+    data.message ?? data.incidentDescription,
+    MAX_MESSAGE_LENGTH
+  );
+  if (looksLikeSpamPayload({ name, message, website })) {
     return jsonResponse({ ok: true }, 200, origin);
   }
 
-  const validationError = validate(payload);
-  if (validationError) {
-    return jsonResponse({ ok: false, error: validationError }, 400, origin);
+  const formType = resolveFormType(data);
+  const email = sanitiseText(data.email, MAX_EMAIL_LENGTH).toLowerCase();
+  const langRaw = sanitiseText(data.lang, 16) || 'es';
+
+  // Contact / most forms need email; anonymous conduct may omit it
+  if (formType !== 'conduct' || !asBool(data.anonymous)) {
+    if (!email || !EMAIL_REGEX.test(email)) {
+      return jsonResponse({ ok: false, error: 'email_invalid' }, 400, origin);
+    }
+  } else if (email && !EMAIL_REGEX.test(email)) {
+    return jsonResponse({ ok: false, error: 'email_invalid' }, 400, origin);
   }
 
-  const to = routeInbox(context.env, payload.reason);
-  if (!to || !context.env.RESEND_API_KEY || !context.env.CONTACT_FROM_EMAIL) {
-    return jsonResponse(
-      { ok: false, error: 'backend_not_configured' },
-      503,
-      origin
-    );
-  }
+  const reason = normalizeTopic(sanitiseText(data.reason ?? data.topic, 64));
+  const topicForContact =
+    formType === 'contact'
+      ? reason && reason !== 'tech-talk' && reason !== 'sponsorship' && reason !== 'conduct'
+        ? reason
+        : sanitiseText(data.topic, 64) || 'general'
+      : '';
 
-  const meta = {
-    ip,
-    userAgent: context.request.headers.get('User-Agent') || 'unknown',
-    lang: payload.lang || 'en',
+  const fields: Record<string, string> = {
+    name,
+    email,
+    topic: topicForContact || sanitiseText(data.topic, 64) || reason,
+    subject: sanitiseText(data.subject, MAX_SUBJECT_LENGTH),
+    message: sanitiseText(data.message, MAX_MESSAGE_LENGTH),
+    notes: sanitiseText(data.notes, MAX_MESSAGE_LENGTH),
+    talkTitle: sanitiseText(data.talkTitle, MAX_TALK_TITLE_LENGTH),
+    format: sanitiseText(data.format, 32),
+    abstract: sanitiseText(data.abstract, MAX_ABSTRACT_LENGTH),
+    takeaways: sanitiseText(data.takeaways, MAX_TAKEAWAYS_LENGTH),
+    socialUrl: sanitiseText(data.socialUrl, MAX_SOCIAL_LENGTH),
+    company: sanitiseText(data.company, MAX_COMPANY_LENGTH),
+    contactRole: sanitiseText(data.contactRole, 120),
+    tierInterest: sanitiseText(data.tierInterest, 32),
+    contributionType: sanitiseText(data.contributionType, 32),
+    experienceLevel: sanitiseText(data.experienceLevel, 32),
+    goals: sanitiseText(data.goals, MAX_MESSAGE_LENGTH),
+    topicsOfInterest: sanitiseText(data.topicsOfInterest, MAX_MESSAGE_LENGTH),
+    availability: sanitiseText(data.availability, MAX_MESSAGE_LENGTH),
+    priorSpeaking: sanitiseText(data.priorSpeaking, MAX_MESSAGE_LENGTH),
+    socialOrLinkedin: sanitiseText(data.socialOrLinkedin, MAX_SOCIAL_LENGTH),
+    communityName: sanitiseText(data.communityName, MAX_COMPANY_LENGTH),
+    googleCalendarId: sanitiseText(data.googleCalendarId, 300),
+    publicCalendarUrl: sanitiseText(data.publicCalendarUrl, 300),
+    communityWebsite: sanitiseText(data.communityWebsite, 300),
+    shortDescription: sanitiseText(data.shortDescription, MAX_MESSAGE_LENGTH),
+    incidentDescription: sanitiseText(
+      data.incidentDescription ?? data.message,
+      MAX_MESSAGE_LENGTH
+    ),
+    incidentDate: sanitiseText(data.incidentDate, 120),
+    peopleInvolved: sanitiseText(data.peopleInvolved, MAX_MESSAGE_LENGTH),
+    preferredFollowup: sanitiseText(data.preferredFollowup, MAX_MESSAGE_LENGTH),
   };
 
-  const bodies = buildBodies(payload, meta);
-  const result = await resendSend(context.env, {
-    to: [to],
-    replyTo: payload.email,
-    subject: bodies.subject,
-    text: bodies.text,
-    html: bodies.html,
-  });
+  const flags = {
+    firstTime: asBool(data.firstTime),
+    speakerSchool: asBool(data.speakerSchool),
+    anonymous: asBool(data.anonymous),
+  };
 
+  const pagePath = normalizePagePath(data.page_path ?? data.pagePath);
+  const built = buildContent(formType, fields, flags, pagePath, langRaw);
+  if (!built.ok) {
+    return jsonResponse({ ok: false, error: built.error }, 400, origin);
+  }
+
+  const result = await submitFormResponse(
+    built.formUuid,
+    built.content,
+    context.env
+  );
   if (!result.ok) {
-    return jsonResponse(
-      { ok: false, error: result.error || 'send_failed' },
-      result.status,
-      origin
+    const error =
+      result.error === 'INVALID_CHOICE'
+        ? 'invalid_choice'
+        : result.error === 'MISSING_REQUIRED'
+          ? 'missing_required'
+          : result.error === 'AUTH'
+            ? 'backend_not_configured'
+            : 'send_failed';
+    return jsonResponse({ ok: false, error }, result.status, origin);
+  }
+
+  const ackLang = langRaw === 'en' ? 'en' : 'es';
+  if (email) {
+    context.waitUntil(
+      resendAck(context.env, email, built.ackTopic, ackLang).then(() => undefined)
     );
   }
 
-  // Auto-ack — best-effort; never fail the primary submission.
-  const ackLang = payload.lang === 'es' ? 'es' : 'en';
-  const ack = pickAckCopy(payload.reason, ackLang);
-  context.waitUntil(
-    resendSend(context.env, {
-      to: [payload.email],
-      subject: ack.subject,
-      text: ack.text,
-    }).then(() => undefined)
+  return jsonResponse(
+    { ok: true, recordUuid: result.uuid, formType },
+    200,
+    origin
   );
-
-  return jsonResponse({ ok: true }, 200, origin);
 }
 
 export async function onRequest(context: EventContext): Promise<Response> {
