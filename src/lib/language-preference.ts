@@ -1,21 +1,16 @@
 /**
- * Browser-language detection with a persisted preference.
+ * Language preference helpers.
  *
- * Behaviour:
- *   1. First visit  — no stored preference: pick the best match for the
- *      browser's languages, persist it, and redirect if it differs from the
- *      page being served.
- *   2. Later visits — a stored preference exists: honour it and ignore the
- *      browser entirely, so an explicit choice always wins.
+ * PTT follows the same model as xergioalex.com: the URL is the source of
+ * truth for language. There is **no** automatic client-side redirect based
+ * on `navigator.languages` or a stored preference — that caused PageSpeed's
+ * "Clientside Redirect!" modal and hijacked first visits away from Spanish
+ * (the community primary).
  *
- * Scope is deliberately limited to the **home page**. Redirecting deep links
- * would hijack shared URLs — someone sending a Spanish article to a friend
- * with an English browser should not have their link silently swapped. Both
- * language versions therefore stay independently reachable and indexable,
- * which is also what keeps hreflang honest.
- *
- * The logic below is pure so it can be unit-tested without a DOM; the thin
- * browser wiring lives in `LanguageRedirect.astro`.
+ * The only navigation this module may request is an explicit `?lang=es|en`
+ * override (used by LHCI / shared links that want to pin a language). The
+ * header language switcher still writes `localStorage['ptt:lang']` for soft
+ * preference tracking, but that value never forces a redirect.
  */
 
 import {
@@ -26,7 +21,7 @@ import {
   type Language,
 } from '@/lib/i18n';
 
-/** localStorage key holding the visitor's explicit or first-visit language. */
+/** localStorage key holding the visitor's last explicit language switch. */
 export const LANGUAGE_STORAGE_KEY = 'ptt:lang';
 
 /** Query parameter that forces a language and persists it (e.g. `?lang=en`). */
@@ -37,6 +32,8 @@ export const LANGUAGE_QUERY_PARAM = 'lang';
  *
  * Matches on the primary subtag, so `es-CO`, `es-419` and `es` all resolve to
  * `es`. Returns the site default when nothing matches.
+ *
+ * Kept for optional UI hints; it does **not** drive redirects.
  */
 export function matchBrowserLanguage(
   browserLanguages: readonly string[] | undefined
@@ -74,9 +71,9 @@ export interface ResolveOptions {
   currentLang: Language;
   /** `window.location.pathname`. */
   pathname: string;
-  /** Value read from localStorage, if any. */
+  /** Value read from localStorage, if any (ignored for redirects). */
   stored?: string | null;
-  /** `navigator.languages` (or `[navigator.language]`). */
+  /** `navigator.languages` (ignored for redirects). */
   browserLanguages?: readonly string[];
   /** Value of the `?lang=` query parameter, if present. */
   forced?: string | null;
@@ -92,16 +89,15 @@ export interface LanguageDecision {
 }
 
 /**
- * Decide which language the visitor should see and whether to navigate.
+ * Decide whether to navigate for language.
  *
- * Never returns a redirect to the page already being served, so it cannot
- * loop: after a redirect the target page's `currentLang` equals the stored
- * preference and the next evaluation is a no-op.
+ * Only an explicit `?lang=` may redirect. Browser detection and stored
+ * preference never rewrite the URL — same URL-first model as xergioalex.com.
  */
 export function resolveLanguageDecision(
   options: ResolveOptions
 ): LanguageDecision {
-  const { currentLang, pathname, stored, browserLanguages, forced } = options;
+  const { currentLang, forced } = options;
 
   // An explicit `?lang=` always wins and is remembered.
   if (forced && isValidLanguage(forced)) {
@@ -112,25 +108,6 @@ export function resolveLanguageDecision(
     };
   }
 
-  // Deep links are never rewritten — only the home page negotiates language.
-  if (!isHomePath(pathname)) {
-    return { lang: currentLang, redirectTo: null, persist: false };
-  }
-
-  // Later visits: the stored choice wins outright.
-  if (stored && isValidLanguage(stored)) {
-    return {
-      lang: stored,
-      redirectTo: stored === currentLang ? null : homeUrlFor(stored),
-      persist: false,
-    };
-  }
-
-  // First visit: fall back to the browser, and remember the result.
-  const detected = matchBrowserLanguage(browserLanguages);
-  return {
-    lang: detected,
-    redirectTo: detected === currentLang ? null : homeUrlFor(detected),
-    persist: true,
-  };
+  // URL wins — no auto-negotiation from browser or localStorage.
+  return { lang: currentLang, redirectTo: null, persist: false };
 }

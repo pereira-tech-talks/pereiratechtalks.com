@@ -41,10 +41,7 @@ onMount(() => {
   });
 });
 
-/**
- * Persist an explicit language choice so the first-visit browser detection in
- * `LanguageRedirect.astro` never overrides it on a later visit.
- */
+/** Soft preference only — does not force redirects (URL is source of truth). */
 function rememberLanguage(target: string) {
   try {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, target);

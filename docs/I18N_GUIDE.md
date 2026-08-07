@@ -419,49 +419,38 @@ The header includes a language switcher that toggles between English and Spanish
 - `/blog/` ↔ `/en/blog/`
 - `/blog/tag/tech/` ↔ `/en/blog/tag/tech/`
 
-## Browser-Language Detection
+## Language selection (URL-first)
 
-First-time visitors land on the language their browser asks for; returning
-visitors get whatever they last chose. Implemented by
+Language is determined by the URL, the same model as xergioalex.com:
+
+| Language | Home |
+|----------|------|
+| Spanish (primary) | `/` |
+| English | `/en/` |
+
+There is **no** automatic client-side redirect based on `navigator.languages`
+or `localStorage`. Visitors stay on the URL they opened; they change language
+only via the header/mobile switcher (or an explicit `?lang=es|en` pin).
+
 [`src/components/LanguageRedirect.astro`](../src/components/LanguageRedirect.astro)
-(a blocking inline script in `<head>`, so there is no flash of the wrong
-language) over the pure, unit-tested rules in
+only handles `?lang=` (used by LHCI: `/?lang=es`). Pure helpers live in
 [`src/lib/language-preference.ts`](../src/lib/language-preference.ts).
 
-**Decision order**
+**Why no browser auto-redirect**
 
-1. **`?lang=es|en`** — an explicit override. Wins over everything and is stored.
-2. **Stored preference** (`localStorage['ptt:lang']`) — set whenever the visitor
-   uses the language switcher, and also written on the first visit. Beats the
-   browser, so an explicit choice is never second-guessed.
-3. **Browser language** — `navigator.languages`, matched on the primary subtag
-   (`es-CO`, `es-419` and `es` all resolve to `es`). Falls back to the site
-   default (`es`) when nothing matches.
+- PageSpeed Insights flagged a "Clientside Redirect!" when English browsers
+  hit `/` and were sent to `/en/`.
+- Shared deep links must keep the language they were shared in (hreflang
+  stays truthful).
+- Spanish is the community primary — first paint on `/` should stay Spanish.
 
-**Deliberate limits**
+**Optional persistence.** `Header.svelte` and `MobileMenu.svelte` still call
+`rememberLanguage()` into `localStorage['ptt:lang']` when the visitor uses
+the switcher. That value is soft preference only; it does **not** force a
+redirect on later visits.
 
-- **Only the home page negotiates.** Deep links are never rewritten: a Spanish
-  article shared with an English-browser reader keeps its language. This also
-  keeps both language trees independently crawlable, so hreflang stays truthful
-  — auto-redirecting every URL is a classic way to get one language deindexed.
-- **Cannot loop.** A redirect is only issued when the target differs from the
-  page being served; after it, the stored preference matches and the next
-  evaluation is a no-op.
-- **Never fatal.** All storage access is wrapped — private mode or disabled
-  storage degrades to plain browser detection, and any error leaves the page as
-  served.
-- **Audit tools are skipped.** Lighthouse / PageSpeed / Chrome-Lighthouse /
-  HeadlessChrome user agents, and any browser with `navigator.webdriver`, do
-  not negotiate language. A client-side redirect would trigger PSI's
-  "Clientside Redirect!" modal and pollute LHCI lab metrics; those tools should
-  score the URL they were given. LHCI additionally pins the Spanish home with
-  `/?lang=es` and `--lang=es-ES` because Chrome's new headless often exposes
-  neither `webdriver` nor `HeadlessChrome` in the UA.
-
-**Changing the language must persist.** Both `Header.svelte` and
-`MobileMenu.svelte` call `rememberLanguage()` on switch. A new language entry
-point MUST do the same, or the next visit will silently revert to the browser's
-language.
+**Lab tooling.** Prefer `/?lang=es` (and LHCI `--lang=es-ES`) when auditing
+the Spanish home so the language is pinned without relying on UA sniffing.
 
 ## Bilingual Compliance Checklist
 
