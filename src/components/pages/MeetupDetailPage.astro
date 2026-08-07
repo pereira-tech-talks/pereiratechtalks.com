@@ -38,8 +38,7 @@ const description = tr(meetup.data.description, lang);
 const heroSrc = meetup.data.hero?.src || meetup.data.heroImage;
 const heroLayout = meetup.data.hero?.layout ?? (heroSrc ? 'banner' : 'none');
 const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
-const bannerHeroSrc =
-  heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
+const bannerHeroSrc = heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
 
 const date = new Date(meetup.data.date);
 const dateLabel = formatCalendarDate(date, lang, {
