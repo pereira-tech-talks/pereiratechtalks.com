@@ -76,8 +76,18 @@ RUN rm -f /usr/local/bin/npm && \
 RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
     && chown node:node /home/node/.bashrc
 
-# Pre-create persistent data dirs so the named volumes inherit node ownership on first mount
-RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.ssh \
+# Install Dailybot CLI system-wide (must run as root — apt + pipx --global).
+# Python 3.13+ on Debian Trixie enforces PEP 668 (externally-managed-environment),
+# blocking bare `pip install`. pipx --global puts `dailybot` on PATH for all users
+# (incl. node). Separate layer so CLI bumps don't invalidate the Chromium layer.
+RUN apt-get update -y && apt-get install -y pipx \
+    && pipx install --global "dailybot-cli>=3.8.0" \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# Pre-create persistent data dirs so the named volumes inherit node ownership on first mount.
+# ~/.dailybot_data backs ~/.config/dailybot (CLI credentials/config) across rebuilds —
+# same pattern as Claude/Codex/Cursor/gh named volumes.
+RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.dailybot_data /home/node/.ssh \
     && chown -R node:node /home/node
 
 # Install AI CLIs and configure git as node user
