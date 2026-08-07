@@ -1,0 +1,50 @@
+---
+/**
+ * PtdTeamGrid — photo + name team grid for PTD landing pages (organizers,
+ * collaborators). Deliberately lighter than the shared `ContributorCard`
+ * bio/role/social directory style — render one instance per group (e.g.
+ * organizers, then collaborators) to keep them visually separate.
+ */
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  contributors: CollectionEntry<'contributors'>[];
+  lang: Language;
+  title: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { contributors, lang, title, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
+---
+
+<div class="ptd-team-grid">
+  <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
+    {title}
+  </Heading>
+  <ul class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+    {
+      contributors.map((contributor) => (
+        <li class="flex flex-col items-center gap-3 text-center">
+          <div class="h-20 w-20 overflow-hidden rounded-full ring-2 ring-[var(--ptt-bg-elevated)] shadow-sm">
+            <img
+              src={contributor.data.avatar}
+              alt={`${portraitLabel} ${contributor.data.name}`}
+              width="80"
+              height="80"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <span class="text-sm font-semibold text-[var(--ptt-text)]">
+            {contributor.data.name}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

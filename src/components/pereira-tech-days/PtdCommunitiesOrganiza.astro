@@ -1,0 +1,85 @@
+---
+/**
+ * PtdCommunitiesOrganiza — "Organiza" logo-tile grid for the allied
+ * communities behind a Pereira Tech Day edition. Matches the legacy density
+ * (compact logo + name tiles) rather than the shared directory card style.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Community {
+  name: string;
+  logo: string;
+  url?: string;
+}
+
+interface Props {
+  communities: Community[];
+  lang: Language;
+  title: string;
+  subtitle?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { communities, lang, title, subtitle, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
+---
+
+<div class="ptd-communities-organiza">
+  <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
+    {title}
+  </Heading>
+  {
+    subtitle && (
+      <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{subtitle}</p>
+    )
+  }
+  <ul class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    {
+      communities.map((community) => (
+        <li class="flex min-w-0 flex-col items-center gap-3 rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] p-4 ring-1 ring-[var(--ptt-border)]">
+          {
+            community.url ? (
+              <a
+                href={community.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${visitLabel} ${community.name}`}
+                class="flex flex-col items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+              >
+                <img
+                  src={community.logo}
+                  alt={community.name}
+                  width="160"
+                  height="64"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-14 max-w-full object-contain"
+                />
+                <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
+                  {community.name}
+                </span>
+              </a>
+            ) : (
+              <>
+                <img
+                  src={community.logo}
+                  alt={community.name}
+                  width="160"
+                  height="64"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-14 max-w-full object-contain"
+                />
+                <span class="text-center text-sm font-medium text-[var(--ptt-text)]">
+                  {community.name}
+                </span>
+              </>
+            )
+          }
+        </li>
+      ))
+    }
+  </ul>
+</div>

@@ -1,0 +1,93 @@
+---
+/**
+ * PtdSponsorsShowcase — logo-only sponsor showcase for PTD landing pages.
+ * Deliberately lighter than the shared `SponsorCard` directory aesthetic
+ * (no description, no card chrome) to match the legacy logo-row look.
+ */
+import type { Language } from '@/lib/i18n';
+import type { EditionSponsor } from '@/lib/sponsor';
+
+interface Props {
+  sponsors: EditionSponsor[];
+  lang: Language;
+  title?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { sponsors, lang, title, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
+  diamond: { en: 'Diamond sponsor', es: 'Patrocinador Diamante' },
+  gold: { en: 'Gold sponsor', es: 'Patrocinador Gold' },
+  silver: { en: 'Silver sponsor', es: 'Patrocinador Silver' },
+  bronze: { en: 'Bronze sponsor', es: 'Patrocinador Bronze' },
+  community: { en: 'Community sponsor', es: 'Patrocinador Comunidad' },
+};
+---
+
+<div class="ptd-sponsors-showcase">
+  {
+    title && (
+      <Heading class="text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl">
+        {title}
+      </Heading>
+    )
+  }
+  <ul class:list={['flex flex-wrap items-center justify-center gap-x-10 gap-y-8', title && 'mt-8']}>
+    {
+      sponsors.map(({ sponsor, tier }) => {
+        const logoLight = sponsor.data.logo.light;
+        const logoDark = sponsor.data.logo.dark;
+        const sameLogo = logoLight === logoDark;
+        const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
+        return (
+          <li class="flex items-center justify-center" data-tier={tier}>
+            <a
+              href={sponsor.data.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              class="flex h-16 w-36 items-center justify-center opacity-90 transition hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+            >
+              {
+                sameLogo ? (
+                  <img
+                    src={logoLight}
+                    alt={sponsor.data.logo.alt}
+                    width="160"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                    class="max-h-16 max-w-full object-contain"
+                  />
+                ) : (
+                  <>
+                    <img
+                      src={logoLight}
+                      alt={sponsor.data.logo.alt}
+                      width="160"
+                      height="64"
+                      loading="lazy"
+                      decoding="async"
+                      class="max-h-16 max-w-full object-contain dark:hidden"
+                    />
+                    <img
+                      src={logoDark}
+                      alt={sponsor.data.logo.alt}
+                      width="160"
+                      height="64"
+                      loading="lazy"
+                      decoding="async"
+                      class="hidden max-h-16 max-w-full object-contain dark:block"
+                    />
+                  </>
+                )
+              }
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>
