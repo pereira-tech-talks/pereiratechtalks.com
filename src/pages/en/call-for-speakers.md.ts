@@ -32,7 +32,7 @@ export const GET: APIRoute = () => {
       {
         heading: 'How to apply',
         lines: [
-          `- Submit via the contact form: ${SITE_URL}/en/contact/?topic=tech-talk`,
+          `- Submit via the Call for Speakers form: ${SITE_URL}/en/call-for-speakers/`,
           '- Or email pereiratechtalks@gmail.com with subject "Call for Speakers"',
           '- Include: proposed title, abstract (150–300 words), bio, language, target format',
         ],
