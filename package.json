@@ -3,7 +3,7 @@
   "description": "Pereira Tech Talks v3.0.0 — bilingual community website for the Pereira tech community (Risaralda, Colombia). Meetups, Pereira Tech Days, La Biblioteca del Mañana, Speaker School, contributors, sponsors.",
   "author": "Pereira Tech Talks <hello@pereiratechtalks.org>",
   "license": "MIT",
-  "homepage": "https://pereiratechtalks.org",
+  "homepage": "https://v3.pereiratechtalks.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/pereira-tech-talks/pereiratechtalks.org"

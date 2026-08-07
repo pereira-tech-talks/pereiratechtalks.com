@@ -65,7 +65,7 @@ export function toCertificatePayload(
     type: 'EventAttendanceCertificate',
     issuer: {
       name: fixture.issuerName[lang],
-      id: 'https://pereiratechtalks.org',
+      id: 'https://v3.pereiratechtalks.org',
     },
     subject: {
       name: fixture.subjectName,

@@ -1,5 +1,5 @@
 # robots.txt for Pereira Tech Talks
-# https://pereiratechtalks.org
+# https://v3.pereiratechtalks.org
 
 # Default: allow all crawlers
 User-agent: *
@@ -8,11 +8,11 @@ Disallow: /api/
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 # Sitemap location
-Sitemap: https://pereiratechtalks.org/sitemap-index.xml
+Sitemap: https://v3.pereiratechtalks.org/sitemap-index.xml
 
 # LLM guidance files
-# https://pereiratechtalks.org/llms.txt
-# https://pereiratechtalks.org/llms-full.txt
+# https://v3.pereiratechtalks.org/llms.txt
+# https://v3.pereiratechtalks.org/llms-full.txt
 
 # AI/LLM Crawlers - Explicitly allowed
 User-agent: GPTBot

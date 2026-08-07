@@ -24,6 +24,7 @@ import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.
 import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
 import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
@@ -140,7 +141,6 @@ const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
   closing: { en: 'Closing', es: 'Cierre' },
 };
 
-const SITE_URL = 'https://pereiratechtalks.org';
 const metaDescription = (description || tagline).slice(0, 160);
 
 const faqs = edition.data.faqs.map((faq) => ({
@@ -280,7 +280,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           communityLinks={[
             { name: 'PereiraJS', href: 'https://pereira.js.org/' },
             { name: 'Python Pereira', href: 'https://pypereira.co' },
-            { name: 'Pereira Tech Talks', href: 'https://pereiratechtalks.org' },
+            { name: 'Pereira Tech Talks', href: SITE_URL },
             { name: 'Joint Developer', href: 'https://jointdevweb.firebaseapp.com/' },
           ]}
         />

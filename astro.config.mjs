@@ -20,11 +20,25 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+/**
+ * Absolute origin baked into canonical / og:url / og:image / sitemap.
+ *
+ * Must match the hostname people actually share. The apex
+ * `pereiratechtalks.org` currently 301s asset URLs toward the legacy
+ * `.com` / `www` stack (and the OG image ends in 404), so Facebook falls
+ * back to the favicon. While the public surface is the v3 preview host,
+ * default to that; override with PUBLIC_SITE_URL (or SITE) at cutover.
+ */
+const site =
+  process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+  process.env.SITE?.replace(/\/$/, '') ||
+  'https://v3.pereiratechtalks.org';
+
 // https://astro.build/config
 export default defineConfig({
   // Astro 7 ships the Rust Markdown/Astro compiler as the default — the former
   // `experimental.rustCompiler` flag was removed, so there is nothing to opt into.
-  site: 'https://pereiratechtalks.org',
+  site,
   build: {
     // 'always' inlined ~156KB of Tailwind into every HTML document, which
     // delayed LCP paint (render-delay ~1.8s) under LHCI Slow-4G. 'auto' keeps

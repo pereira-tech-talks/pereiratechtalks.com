@@ -10,7 +10,7 @@ import {
   toCertificatePayload,
 } from '@/lib/certificates';
 
-const siteBase = Astro.site ?? new URL('https://pereiratechtalks.org');
+const siteBase = Astro.site ?? new URL(SITE_URL);
 const showcases = await Promise.all(
   getAllCertificateFixtures().map(async (fixture) => {
     const payload = toCertificatePayload(fixture, 'en');
@@ -20,6 +20,8 @@ const showcases = await Promise.all(
     return { fixture, payload, verifyPath, qrDataUrl };
   })
 );
+
+import { SITE_URL } from '@/lib/constances';
 ---
 
 <InternalLayout

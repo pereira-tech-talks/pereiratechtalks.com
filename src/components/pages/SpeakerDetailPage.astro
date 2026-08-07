@@ -8,6 +8,7 @@ import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE_URL } from '@/lib/constances';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getTalksBySpeaker } from '@/lib/talk';
 
@@ -47,7 +48,6 @@ const breadcrumbs = [
   { label: name },
 ];
 
-const SITE_URL = 'https://pereiratechtalks.org';
 const sameAs = [
   social.twitter,
   social.linkedin,

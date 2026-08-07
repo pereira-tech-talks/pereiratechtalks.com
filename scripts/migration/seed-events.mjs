@@ -130,7 +130,7 @@ export const PTD_2024 = {
     {
       name: 'Pereira Tech Talks',
       logo: '/images/communities/ptt.png',
-      url: 'https://pereiratechtalks.org/',
+      url: 'https://v3.pereiratechtalks.org/',
     },
   ],
   gallery: [],

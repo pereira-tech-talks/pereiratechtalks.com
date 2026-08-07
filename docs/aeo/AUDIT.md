@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-06  
 **Auditor:** PLAN_sitewide_pro_audit_design_typography_aeo (Task 5)  
-**Site:** https://pereiratechtalks.org  
+**Site:** https://v3.pereiratechtalks.org  
 **Routing:** Spanish primary at `/`; English at `/en/`
 
 ## Executive Summary

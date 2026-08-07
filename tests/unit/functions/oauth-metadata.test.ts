@@ -19,11 +19,11 @@ describe('oauth metadata helpers', () => {
   describe('buildOAuthProtectedResourceMetadata', () => {
     it('matches request origin for apex and v3', () => {
       const apex = buildOAuthProtectedResourceMetadata(
-        'https://pereiratechtalks.org'
+        'https://v3.pereiratechtalks.org'
       );
-      expect(apex.resource).toBe('https://pereiratechtalks.org');
+      expect(apex.resource).toBe('https://v3.pereiratechtalks.org');
       expect(apex.authorization_servers).toEqual([
-        'https://pereiratechtalks.org',
+        'https://v3.pereiratechtalks.org',
       ]);
       expect(apex.bearer_methods_supported).toContain('header');
       expect(apex.scopes_supported).toContain('public:read');

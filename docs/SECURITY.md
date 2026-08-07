@@ -59,7 +59,7 @@ PUBLIC_SITE_URL=http://localhost:8888
 PRIVATE_API_KEY=sk_xxxxx
 
 # .env.production
-PUBLIC_SITE_URL=https://pereiratechtalks.org
+PUBLIC_SITE_URL=https://v3.pereiratechtalks.org
 ```
 
 ### Naming Convention

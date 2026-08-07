@@ -1,6 +1,16 @@
 /** Timezone for scheduled post detection — build and badge use this consistently */
 export const SITE_TIMEZONE = 'America/Bogota';
 
+/**
+ * Public site origin (no trailing slash).
+ * Must match `astro.config.mjs` → `site` / `PUBLIC_SITE_URL`.
+ * While the shared surface is the v3 preview host, default to that;
+ * switch back to https://pereiratechtalks.org at DNS cutover.
+ */
+export const SITE_URL: string = (
+  import.meta.env.SITE || 'https://v3.pereiratechtalks.org'
+).replace(/\/$/, '');
+
 export const SITE_TITLE: string =
   'Pereira Tech Talks — Comunidad técnica de Pereira';
 export const SITE_DESCRIPTION: string =

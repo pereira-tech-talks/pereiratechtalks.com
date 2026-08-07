@@ -64,7 +64,7 @@ The default failure mode of a Latin American tech community is to publish only i
 
 Every meetup recap, every slide deck, every blog post, every speaker bio exists in real Spanish and real English. Spanish is our primary language because we live here. English is first-class because half of what we teach and learn happens at the intersection with global engineering culture, and because alumni who move to international roles can keep contributing back.
 
-We also publish [Markdown-for-Agents](https://pereiratechtalks.org/index.md) endpoints — every public page has a `.md` twin that AI agents can read directly without rendering JavaScript. This is a design choice, not an afterthought. We want the community to be discoverable by both humans and the agents humans will increasingly use.
+We also publish [Markdown-for-Agents](https://v3.pereiratechtalks.org/index.md) endpoints — every public page has a `.md` twin that AI agents can read directly without rendering JavaScript. This is a design choice, not an afterthought. We want the community to be discoverable by both humans and the agents humans will increasingly use.
 
 ## Why it matters (the part that is hard to say without bragging)
 

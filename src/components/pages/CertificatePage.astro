@@ -9,6 +9,7 @@ import {
   toCertificatePayload,
 } from '@/lib/certificates';
 import type { CertificateFixture } from '@/lib/certificates/types';
+import { SITE_URL } from '@/lib/constances';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -21,7 +22,7 @@ const { lang, fixture } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const payload = toCertificatePayload(fixture, lang);
-const siteBase = Astro.site ?? new URL('https://pereiratechtalks.org');
+const siteBase = Astro.site ?? new URL(SITE_URL);
 const pagePath = `${prefix}/pereira-tech-days/${fixture.eventYear}/certificates/${fixture.id}`;
 const pageUrl = new URL(pagePath.replace(/^\//, ''), siteBase).href;
 const verifyPath = certificateVerifyPath(fixture.id, lang);
