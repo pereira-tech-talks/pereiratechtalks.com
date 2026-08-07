@@ -15,8 +15,8 @@ mode: in-person
 hero:
   src: "/images/meetups/nginx-y-elasticsearch-2017/hero.jpg"
   alt:
-    en: "Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch"
-    es: "Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch"
+    en: "Next meeting flyer — NGINX web servers and Elasticsearch search engines (December 11, 2017)"
+    es: "Afiche de la próxima reunión — Introducción a servidores web NGINX y motores de búsqueda con Elasticsearch (11 de diciembre de 2017)"
   layout: banner
 heroImage: "/images/meetups/nginx-y-elasticsearch-2017/hero.jpg"
 verticals:
@@ -31,6 +31,8 @@ draft: false
 ## Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch
 
 Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes
+
+![Asistentes en el salón de la UTP durante el meetup de diciembre de 2017](/images/meetups/nginx-y-elasticsearch-2017/archive-photo.jpg)
 
 **Entendiendo y configurando servidores web NGINX  by [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
 
