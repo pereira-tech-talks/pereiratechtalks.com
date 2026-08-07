@@ -4,6 +4,8 @@ import { getDateLocale, type Language } from '@/lib/i18n';
 /** Fixed offset for Colombia — no DST. */
 const BOGOTA_UTC_OFFSET = '-05:00';
 
+const CALENDAR_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
 export type CalendarDateFormatOptions = Pick<
   Intl.DateTimeFormatOptions,
   'weekday' | 'year' | 'month' | 'day'
@@ -44,9 +46,76 @@ export function formatCalendarDateParts(
   }).formatToParts(date);
 }
 
+/** Format using a BCP-47 locale string (for Svelte `t.dateLocale`). */
+export function formatCalendarDateLocale(
+  date: Date | string,
+  locale: string,
+  options: CalendarDateFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  }
+): string {
+  return new Intl.DateTimeFormat(locale, {
+    ...options,
+    timeZone: 'UTC',
+  }).format(toCalendarDate(date));
+}
+
 /** `YYYY-MM-DD` from a calendar date stored as midnight UTC. */
 export function getCalendarDateString(date: Date): string {
   return date.toISOString().slice(0, 10);
+}
+
+/** Calendar year from a content date (UTC calendar, not viewer-local). */
+export function getCalendarYear(date: Date | string): number {
+  const dateStr = toCalendarDateString(date);
+  return Number.parseInt(dateStr.slice(0, 4), 10);
+}
+
+/** `YYYY-MM` bucket for timeline grouping. */
+export function getCalendarYearMonth(date: Date | string): string {
+  return toCalendarDateString(date).slice(0, 7);
+}
+
+/** Normalise API/JSON strings to a midnight-UTC `Date`. */
+export function toCalendarDate(date: Date | string): Date {
+  if (date instanceof Date) return date;
+  const iso = date.slice(0, 10);
+  return new Date(`${iso}T00:00:00.000Z`);
+}
+
+/** Today's calendar date (`YYYY-MM-DD`) in SITE_TIMEZONE — for scheduling gates. */
+export function getTodayInSiteTimezone(now: Date = new Date()): string {
+  return now.toLocaleDateString('en-CA', { timeZone: SITE_TIMEZONE });
+}
+
+/** Whether a calendar date is strictly after today in SITE_TIMEZONE. */
+export function isFutureCalendarDate(
+  date: Date | string,
+  todayInTz: string = getTodayInSiteTimezone()
+): boolean {
+  const dateStr = toCalendarDateString(date);
+  if (!CALENDAR_DATE_RE.test(dateStr)) return false;
+  return dateStr > todayInTz;
+}
+
+/** Whether a calendar date is today or later in SITE_TIMEZONE. */
+export function isCalendarDateOnOrAfterToday(
+  date: Date | string,
+  todayInTz: string = getTodayInSiteTimezone()
+): boolean {
+  const dateStr = toCalendarDateString(date);
+  return dateStr >= todayInTz;
+}
+
+/** Whether a calendar date is before today in SITE_TIMEZONE. */
+export function isCalendarDateBeforeToday(
+  date: Date | string,
+  todayInTz: string = getTodayInSiteTimezone()
+): boolean {
+  const dateStr = toCalendarDateString(date);
+  return dateStr < todayInTz;
 }
 
 /**
@@ -69,4 +138,10 @@ export function combineCalendarDateAndTime(
   throw new Error(
     `combineCalendarDateAndTime: unsupported timezone "${timezone}"`
   );
+}
+
+function toCalendarDateString(date: Date | string): string {
+  return typeof date === 'string'
+    ? date.slice(0, 10)
+    : getCalendarDateString(date);
 }
