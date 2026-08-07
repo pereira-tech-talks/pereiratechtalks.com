@@ -1,0 +1,20 @@
+---
+/**
+ * PtdEditionFonts — loads the webfont packages a Pereira Tech Day edition's
+ * `brandKit.typography.fontSources` declares (e.g. Bebas Neue for 2024/2026).
+ * Rendered conditionally by the detail page via `getEditionFontPackages`, so
+ * pages for editions without a custom heading font never pay the font cost.
+ */
+import '@fontsource/bebas-neue';
+
+const SUPPORTED_PACKAGES = new Set(['@fontsource/bebas-neue']);
+
+interface Props {
+  packages: string[];
+}
+
+const { packages } = Astro.props;
+const hasSupportedPackage = packages.some((pkg) => SUPPORTED_PACKAGES.has(pkg));
+---
+
+{hasSupportedPackage && <Fragment />}

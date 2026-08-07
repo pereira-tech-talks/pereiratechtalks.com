@@ -43,9 +43,24 @@ export const getUpcomingEdition = async (): Promise<
   });
 };
 
+/** Maps `brandKit.ui.buttonShape` to the CSS radius consumed via `--ptd-button-radius`. */
+const BUTTON_RADIUS_BY_SHAPE: Record<string, string> = {
+  pill: '9999px',
+  rounded: '0.75rem',
+  square: '0',
+};
+
+/** Maps `brandKit.ui.cardShape` to the CSS radius consumed via `--ptd-card-radius`. */
+const CARD_RADIUS_BY_SHAPE: Record<string, string> = {
+  rounded: '1rem',
+  sharp: '0',
+};
+
 export const buildEditionThemeCss = (edition: PereiraTechDay): string => {
   const { brandKit, year } = edition.data;
   const lines: string[] = [];
+  const buttonShape = brandKit.ui?.buttonShape ?? 'rounded';
+  const cardShape = brandKit.ui?.cardShape ?? 'rounded';
   const lightLines: string[] = [
     `--ptt-primary: ${brandKit.paletteLight.primary};`,
     `--ptt-accent: ${brandKit.paletteLight.accent};`,
@@ -53,6 +68,8 @@ export const buildEditionThemeCss = (edition: PereiraTechDay): string => {
     `--ptt-bg-elevated: ${brandKit.paletteLight.bgElevated};`,
     `--ptt-text: ${brandKit.paletteLight.text};`,
     `--ptt-text-muted: ${brandKit.paletteLight.textMuted};`,
+    `--ptd-button-radius: ${BUTTON_RADIUS_BY_SHAPE[buttonShape]};`,
+    `--ptd-card-radius: ${CARD_RADIUS_BY_SHAPE[cardShape]};`,
   ];
   if (brandKit.paletteLight.border) {
     lightLines.push(`--ptt-border: ${brandKit.paletteLight.border};`);
@@ -138,3 +155,16 @@ export const getEditionEndIso = (
 /** Whether the edition is the upcoming flagship template (announced / RSVP). */
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
   edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
+
+/**
+ * De-duplicated list of npm font packages declared by the edition's
+ * `brandKit.typography.fontSources`. Used to decide whether `PtdEditionFonts`
+ * needs to load a webfont for this edition at all.
+ */
+export const getEditionFontPackages = (edition: PereiraTechDay): string[] => {
+  const sources = edition.data.brandKit.typography?.fontSources ?? [];
+  const packages = sources
+    .map((source) => source.npmPackage)
+    .filter((pkg): pkg is string => Boolean(pkg));
+  return [...new Set(packages)];
+};

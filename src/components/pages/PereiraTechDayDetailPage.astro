@@ -13,6 +13,7 @@ import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import EditionScope from '@/components/pereira-tech-days/EditionScope.astro';
 import PtdAboutSection from '@/components/pereira-tech-days/PtdAboutSection.astro';
+import PtdEditionFonts from '@/components/pereira-tech-days/PtdEditionFonts.astro';
 import PtdFaqs from '@/components/pereira-tech-days/PtdFaqs.svelte';
 import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarousel.svelte';
 import PtdHero2024 from '@/components/pereira-tech-days/PtdHero2024.astro';
@@ -27,6 +28,7 @@ import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
   buildEditionThemeCss,
   getEditionEndIso,
+  getEditionFontPackages,
   getEditionStartDate,
   getEditionStartIso,
   isUpcomingEdition,
@@ -79,6 +81,7 @@ const dateLong = longDateFormatter.format(startDate);
 const venue = edition.data.venue;
 const status = edition.data.status;
 const themeCss = buildEditionThemeCss(edition);
+const fontPackages = getEditionFontPackages(edition);
 
 const talks = await getTalksByEvent('pereiraTechDays', edition.id);
 const keynoteSpeakers = await getSpeakersBySlugs(edition.data.keynotes ?? []);
@@ -181,20 +184,13 @@ if (keynoteSpeakers.length > 0) {
   }));
 }
 
-const sectionBgs = {
-  about: '/images/pereira-tech-days/2026/sections/about-bg.png',
-  pricing: '/images/pereira-tech-days/2026/sections/pricing-bg.png',
-  sponsors: '/images/pereira-tech-days/2026/sections/sponsors-bg.png',
-  team: '/images/pereira-tech-days/2026/sections/team-bg.png',
-  community: '/images/pereira-tech-days/2026/sections/community-bg.png',
-  faqs: '/images/pereira-tech-days/2026/sections/faqs-bg.png',
-  join: '/images/pereira-tech-days/2026/sections/join-illustration.png',
-};
+const sectionBgs = edition.data.sectionBackgrounds ?? {};
 ---
 
 <MainLayout lang={lang} title={title} description={metaDescription} image={heroSrc}>
   <JsonLd data={eventJsonLd} />
   <style is:inline set:html={themeCss}></style>
+  {fontPackages.length > 0 && <PtdEditionFonts packages={fontPackages} />}
 
   <EditionScope year={year}>
     <div class="main-container pt-6">
@@ -313,11 +309,11 @@ const sectionBgs = {
       editionSponsors.length > 0 && (
         <section
           class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
+          style={upcomingTemplate && sectionBgs.sponsors ? `background-image: url('${sectionBgs.sponsors}'); background-size: cover;` : undefined}
           aria-labelledby="ptd-sponsors-title"
         >
           {
-            upcomingTemplate && (
+            upcomingTemplate && sectionBgs.sponsors && (
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }
@@ -341,11 +337,11 @@ const sectionBgs = {
       (organizers.length > 0 || collaborators.length > 0) && (
         <section
           class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
+          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
           aria-labelledby="ptd-team-title"
         >
           {
-            upcomingTemplate && (
+            upcomingTemplate && sectionBgs.team && (
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }
@@ -391,11 +387,11 @@ const sectionBgs = {
       communities.length > 0 && (
         <section
           class="relative py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
+          style={upcomingTemplate && sectionBgs.community ? `background-image: url('${sectionBgs.community}'); background-size: cover;` : undefined}
           aria-labelledby="ptd-communities-title"
         >
           {
-            upcomingTemplate && (
+            upcomingTemplate && sectionBgs.community && (
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/90" aria-hidden="true"></div>
             )
           }

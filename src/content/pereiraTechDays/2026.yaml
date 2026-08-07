@@ -67,6 +67,14 @@ brandKit:
   ui:
     buttonShape: pill
     cardShape: rounded
+sectionBackgrounds:
+  about: /images/pereira-tech-days/2026/sections/about-bg.png
+  pricing: /images/pereira-tech-days/2026/sections/pricing-bg.png
+  sponsors: /images/pereira-tech-days/2026/sections/sponsors-bg.png
+  team: /images/pereira-tech-days/2026/sections/team-bg.png
+  community: /images/pereira-tech-days/2026/sections/community-bg.png
+  faqs: /images/pereira-tech-days/2026/sections/faqs-bg.png
+  join: /images/pereira-tech-days/2026/sections/join-illustration.png
 schedule: []
 keynotes: []
 lightningTalks: []

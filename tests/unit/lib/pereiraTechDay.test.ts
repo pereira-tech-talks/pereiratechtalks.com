@@ -3,6 +3,7 @@ import type { PereiraTechDay } from '@/lib/pereiraTechDay';
 import {
   buildEditionThemeCss,
   getEditionEndIso,
+  getEditionFontPackages,
   getEditionStartDate,
   getEditionStartIso,
   isUpcomingEdition,
@@ -109,5 +110,75 @@ describe('pereiraTechDay helpers', () => {
     });
     const css = buildEditionThemeCss(edition);
     expect(css).toContain('.dark [data-edition-theme="2026"]');
+  });
+
+  it('buildEditionThemeCss defaults ui shape vars when brandKit.ui is unset', () => {
+    const css = buildEditionThemeCss(mockEdition());
+    expect(css).toContain('--ptd-button-radius: 0.75rem;');
+    expect(css).toContain('--ptd-card-radius: 1rem;');
+  });
+
+  it('buildEditionThemeCss maps declared ui shapes to radius tokens', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        ui: { buttonShape: 'pill', cardShape: 'sharp' },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptd-button-radius: 9999px;');
+    expect(css).toContain('--ptd-card-radius: 0;');
+  });
+
+  it('buildEditionThemeCss maps square button shape to zero radius', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        ui: { buttonShape: 'square' },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptd-button-radius: 0;');
+  });
+
+  it('getEditionFontPackages returns declared npm font packages, deduped', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        typography: {
+          headingFamily: 'Bebas Neue',
+          fontSources: [
+            { family: 'Bebas Neue', npmPackage: '@fontsource/bebas-neue' },
+            { family: 'Bebas Neue', npmPackage: '@fontsource/bebas-neue' },
+          ],
+        },
+      },
+    });
+    expect(getEditionFontPackages(edition)).toEqual(['@fontsource/bebas-neue']);
+  });
+
+  it('getEditionFontPackages returns an empty array when no fontSources are declared', () => {
+    expect(getEditionFontPackages(mockEdition())).toEqual([]);
   });
 });
