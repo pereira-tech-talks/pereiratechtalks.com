@@ -46,10 +46,10 @@ hero:
   layout: banner
 brandKit:
   # Photocopy of legacy /pereira-tech-day/ (measured 2026-08-07).
-  # primary=teal CTA/countdown; accent=coral (large/decorative only); cyan year via --ptd-cyan in hero.
+  # primary=teal CTA/countdown; accent=coral text-safe on cream (≥4.5:1); year cyan via --ptd-year-cyan in hero.
   paletteLight:
     primary: "#3a7f7c"
-    accent: "#f06d6d"
+    accent: "#c93c3c"
     bg: "#fef7f3"
     bgElevated: "#ffffff"
     text: "#1f3f59"
@@ -71,14 +71,14 @@ brandKit:
       - family: Bebas Neue
         npmPackage: "@fontsource/bebas-neue"
   hero:
-    backgroundImage: /images/pereira-tech-days/2026/hero-illustration.png
+    backgroundImage: /images/pereira-tech-days/2026/hero-illustration.webp
   ui:
     buttonShape: pill
     cardShape: rounded
 sectionBackgrounds:
   about: /images/pereira-tech-days/2026/sections/about-bg.png
   pricing: /images/pereira-tech-days/2026/sections/pricing-bg.png
-  sponsors: /images/pereira-tech-days/2026/sections/sponsors-bg.png
+  sponsors: /images/pereira-tech-days/2026/sections/sponsors-bg.webp
   team: /images/pereira-tech-days/2026/sections/team-bg.png
   community: /images/pereira-tech-days/2026/sections/community-bg.png
   faqs: /images/pereira-tech-days/2026/sections/faqs-bg.png

@@ -77,7 +77,7 @@ Decorative background images per landing section, added so the detail page never
 sectionBackgrounds:
   about: /images/pereira-tech-days/2026/sections/about-bg.png
   pricing: /images/pereira-tech-days/2026/sections/pricing-bg.png
-  sponsors: /images/pereira-tech-days/2026/sections/sponsors-bg.png
+  sponsors: /images/pereira-tech-days/2026/sections/sponsors-bg.webp
   team: /images/pereira-tech-days/2026/sections/team-bg.png
   community: /images/pereira-tech-days/2026/sections/community-bg.png
   faqs: /images/pereira-tech-days/2026/sections/faqs-bg.png

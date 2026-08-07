@@ -7,7 +7,7 @@ module.exports = {
       //
       // `?lang=es` still pins Spanish explicitly (optional now that there is
       // no browser-language auto-redirect). Kept for stable LHCI baselines.
-      url: ['/?lang=es', '/pereira-tech-days/'],
+      url: ['/?lang=es', '/pereira-tech-day/'],
       // Median of 3 reduces LHCI noise around the 0.99↔1.00 boundary.
       numberOfRuns: 3,
       settings: {

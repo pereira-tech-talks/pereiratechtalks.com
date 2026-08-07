@@ -43,17 +43,17 @@ const href = `${prefix}/pereira-tech-days/2026/`;
 /** Matches PTD 2026 brandKit / PtdHero2026. */
 const CREAM = '#fef7f3';
 const CREAM_DARK = '#1a2a38';
-const YEAR_CYAN = '#3ab9c9';
-const CORAL = '#f06d6d';
+/** Text-safe on cream (≥4.5:1) — matches 2026 light brandKit accent. */
+const YEAR_CYAN = '#127a82';
+const CORAL = '#c93c3c';
 const NAVY = '#1f3f59';
 const TEAL = '#3a7f7c';
 
 /**
- * Same hero art as PtdHero2026 (soft-feathered edges already in the PNG).
- * Desktop paints it on the right half; cream fade covers the left black void.
- * Mobile uses the pre-cropped card crop (no black void).
+ * Same hero art as PtdHero2026 (WebP). Desktop paints it on the right half;
+ * cream fade covers the left void. Mobile uses the pre-cropped card crop.
  */
-const ILLUSTRATION = '/images/pereira-tech-days/2026/hero-illustration.png';
+const ILLUSTRATION = '/images/pereira-tech-days/2026/hero-illustration.webp';
 const ILLUSTRATION_MOBILE =
   '/images/pereira-tech-days/2026/mascot/card-hero.webp';
 const LOGO = '/images/pereira-tech-days/2026/logo.png';

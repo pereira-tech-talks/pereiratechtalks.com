@@ -34,7 +34,6 @@ const {
 const Heading = headingLevel;
 const useCircle = brochure || portraitStyle === 'circle';
 
-const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
 const profileLabel = lang === 'es' ? 'Visitar perfil de' : 'Visit profile of';
 ---
 
@@ -111,7 +110,7 @@ const profileLabel = lang === 'es' ? 'Visitar perfil de' : 'Visit profile of';
           <>
             <img
               src={contributor.data.avatar}
-              alt={`${portraitLabel} ${contributor.data.name}`}
+              alt=""
               width="200"
               height="200"
               loading="lazy"
@@ -129,7 +128,7 @@ const profileLabel = lang === 'es' ? 'Visitar perfil de' : 'Visit profile of';
                 href={linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${profileLabel} ${contributor.data.name}`}
+                title={`${profileLabel} ${contributor.data.name}`}
                 class:list={[
                   brochure
                     ? 'ptd-team-card flex w-[min(100%,12rem)] flex-col items-center text-inherit no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]'
