@@ -42,7 +42,7 @@ match this IA, you are creating drift.
 | Meetup detail | `/meetups/{slug}` | `/en/meetups/{slug}` | `meetups` | `meetups/[slug].astro` | `MeetupDetailPage.astro` | per-slug `.md` |
 | Events calendar | `/events` | `/es/events` | `events` + `meetups` | `events/index.astro` | `EventsCalendarPage.astro` | yes |
 | Event detail | `/events/{slug}` | `/es/events/{slug}` | `events` | `events/[slug].astro` | `EventDetailPage.astro` | per-slug `.md` |
-| PTT Days umbrella | `/pereira-tech-days` | `/es/pereira-tech-days` | `pereiraTechDays` | `pereira-tech-days/index.astro` | `PereiraTechDaysListPage.astro` | yes |
+| PTT Days umbrella | `/pereira-tech-days` | `/en/pereira-tech-days` | `pereiraTechDays` | `pereira-tech-days/index.astro` | `PereiraTechDaysPage.astro` | yes |
 | PTT Day edition | `/pereira-tech-days/{year}` | `/es/pereira-tech-days/{year}` | `pereiraTechDays` | `pereira-tech-days/[year].astro` | `PereiraTechDayEditionPage.astro` (wraps in `EditionScope`) | per-year `.md` |
 | Speakers catalog | `/speakers` | `/es/speakers` | `speakers` | `speakers/index.astro` | `SpeakersCatalogPage.astro` | yes |
 | Speaker profile | `/speakers/{slug}` | `/es/speakers/{slug}` | `speakers` | `speakers/[slug].astro` | `SpeakerProfilePage.astro` | per-slug `.md` |
@@ -50,10 +50,10 @@ match this IA, you are creating drift.
 | ~~Talk detail~~ | `/talks/{slug}` → 301 `/meetups` | `/en/talks/{slug}` → 301 `/en/meetups` | `talks` | `talks/[slug].astro` (redirect stub) | removed (Task 22) | n/a |
 | Community Calendar (stub) | `/calendar` | `/es/calendar` | static | `calendar.astro` | `CalendarPage.astro` (full GCal hub lands in Tasks 63–70) | pending |
 | Allied Communities (stub) | `/communities` | `/es/communities` | static | `communities.astro` | `CommunitiesPage.astro` (full page craft lands in Tasks 71–72) | pending |
-| Contributors catalog | `/contributors` | `/es/contributors` | `contributors` | `contributors/index.astro` | `ContributorsCatalogPage.astro` | yes |
-| Contributor profile | `/contributors/{slug}` | `/es/contributors/{slug}` | `contributors` | `contributors/[slug].astro` | `ContributorProfilePage.astro` | per-slug `.md` |
-| Sponsors catalog | `/sponsors` | `/es/sponsors` | `sponsors` | `sponsors/index.astro` | `SponsorsCatalogPage.astro` (grouped by tier) | yes |
-| Sponsor profile | `/sponsors/{slug}` | `/es/sponsors/{slug}` | `sponsors` | `sponsors/[slug].astro` | `SponsorProfilePage.astro` | per-slug `.md` |
+| Contributors catalog | `/contributors` | `/en/contributors` | `contributors` | `contributors/index.astro` | `ContributorsPage.astro` (flat organizers + unified alumni) | yes |
+| ~~Contributor profile~~ | not shipped | — | — | — | Future; cards are not linked to `/contributors/{slug}` yet | n/a |
+| Sponsors catalog | `/sponsors` | `/en/sponsors` | `sponsors` | `sponsors/index.astro` | `SponsorsPage.astro` (current + past; no PTD tier headings) | yes |
+| ~~Sponsor profile~~ | not shipped | — | — | — | Future; cards link externally | n/a |
 | Channels | `/channels` | `/es/channels` | `channels` | `channels.astro` | `ChannelsPage.astro` | yes |
 | Press / Media kit | `/press` | `/es/press` | static | `press.astro` | `PressPage.astro` | yes |
 | Contact | `/contact` | `/es/contact` | form | `contact.astro` | `ContactPage.astro` | yes |

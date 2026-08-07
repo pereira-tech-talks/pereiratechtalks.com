@@ -33,6 +33,7 @@ import {
   getEditionStartDate,
   getEditionStartIso,
   getEditions,
+  getUpcomingLandingChrome,
   isUpcomingEdition,
   normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
@@ -55,6 +56,7 @@ const tagline = tr(edition.data.tagline, lang);
 const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
 const upcomingTemplate = isUpcomingEdition(edition);
+const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
 
 const startDate = getEditionStartDate(edition);
 const endIso = getEditionEndIso(edition);
@@ -239,7 +241,6 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           expectedAttendance={tr(edition.data.expectedAttendance, lang)}
           heroIllustration={edition.data.brandKit.hero?.backgroundImage}
           logoSrc="/images/pereira-tech-days/2026/logo.png"
-          mascotSrc={heroSrc}
           targetDate={startIso}
           endDate={endIso}
         />
@@ -388,7 +389,14 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
             )
           }
           <div class="relative main-container">
-            <PtdSponsorsShowcase sponsors={editionSponsors} lang={lang} title={t.sponsors} />
+            <PtdSponsorsShowcase
+              sponsors={editionSponsors}
+              lang={lang}
+              title={t.sponsors}
+              subtitle={upcomingTemplate ? t.sponsorsSubtitle : undefined}
+              footerNote={upcomingTemplate ? t.sponsorsFooter : undefined}
+              layout={landingChrome.sponsorsLayout}
+            />
           </div>
         </section>
       )
@@ -406,14 +414,40 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
               <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
             )
           }
-          <div class="relative main-container space-y-12 sm:space-y-14">
-            <PtdCommunitiesOrganiza communities={communities} lang={lang} title={t.communitiesOrganizes} />
-            {
-              /* Legacy places organizer portraits directly under Organiza */
-              organizers.length > 0 && (
-                <PtdTeamGrid contributors={organizers} lang={lang} />
-              )
-            }
+          <div class="relative main-container">
+            <PtdCommunitiesOrganiza
+              communities={communities}
+              lang={lang}
+              title={t.communitiesOrganizes}
+              subtitle={upcomingTemplate ? t.communitiesOrganizesSubtitle : undefined}
+              footerNote={upcomingTemplate ? t.communitiesOrganizesFooter : undefined}
+              logoSrc={upcomingTemplate ? '/images/pereira-tech-days/2026/logo.png' : undefined}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      organizers.length > 0 && (
+        <section
+          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
+          aria-label={t.organizers}
+        >
+          {
+            upcomingTemplate && sectionBgs.team && (
+              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
+            )
+          }
+          <div class="relative main-container">
+            <PtdTeamGrid
+              contributors={organizers}
+              lang={lang}
+              title={t.organizers}
+              subtitle={upcomingTemplate ? t.organizersSubtitle : undefined}
+              portraitStyle={landingChrome.portraitStyle}
+            />
           </div>
         </section>
       )
@@ -432,27 +466,14 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
             )
           }
           <div class="relative main-container">
-            <PtdTeamGrid contributors={collaborators} lang={lang} title={t.collaborators} />
-          </div>
-        </section>
-      )
-    }
-
-    {
-      /* Fallback: organizers without communities still need a home */
-      communities.length === 0 && organizers.length > 0 && (
-        <section
-          class="relative bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
-          style={upcomingTemplate && sectionBgs.team ? `background-image: url('${sectionBgs.team}'); background-size: cover;` : undefined}
-          aria-label={t.organizers}
-        >
-          {
-            upcomingTemplate && sectionBgs.team && (
-              <div class="absolute inset-0 bg-[var(--ptt-bg)]/50" aria-hidden="true"></div>
-            )
-          }
-          <div class="relative main-container">
-            <PtdTeamGrid contributors={organizers} lang={lang} title={t.organizers} />
+            <PtdTeamGrid
+              contributors={collaborators}
+              lang={lang}
+              title={t.collaborators}
+              subtitle={upcomingTemplate ? t.collaboratorsSubtitle : undefined}
+              headingLevel="h3"
+              portraitStyle={landingChrome.portraitStyle}
+            />
           </div>
         </section>
       )
@@ -487,8 +508,10 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           client:visible
           lang={lang}
           title={t.faq}
+          subtitle={upcomingTemplate ? t.faqSubtitle : undefined}
           items={faqs}
           sectionBg={sectionBgs.faqs}
+          layout={landingChrome.faqLayout}
         />
       )
     }

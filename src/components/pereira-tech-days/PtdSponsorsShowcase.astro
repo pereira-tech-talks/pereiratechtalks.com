@@ -1,8 +1,8 @@
 ---
 /**
- * PtdSponsorsShowcase — legacy `/pereira-tech-day/2024/` sponsor cards:
- * centered title, light gray rounded cards, gold row then silver row.
- * Grid spans the full main-container width (same as Organiza below).
+ * PtdSponsorsShowcase — edition-aware sponsor chrome.
+ * - `gray-cards` (default): legacy 2024 gray rounded rectangles
+ * - `tree-circles`: legacy 2026 circular soft discs on illustrated/tree BG
  */
 import type { Language } from '@/lib/i18n';
 import type { EditionSponsor } from '@/lib/sponsor';
@@ -11,11 +11,23 @@ interface Props {
   sponsors: EditionSponsor[];
   lang: Language;
   title?: string;
+  subtitle?: string;
+  footerNote?: string;
   headingLevel?: 'h2' | 'h3';
+  layout?: 'gray-cards' | 'tree-circles';
 }
 
-const { sponsors, lang, title, headingLevel = 'h2' } = Astro.props;
+const {
+  sponsors,
+  lang,
+  title,
+  subtitle,
+  footerNote,
+  headingLevel = 'h2',
+  layout = 'gray-cards',
+} = Astro.props;
 const Heading = headingLevel;
+const isTree = layout === 'tree-circles';
 
 const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
   diamond: { en: 'Diamond sponsor', es: 'Patrocinador Diamante' },
@@ -30,18 +42,22 @@ const goldSponsors = sponsors.filter((s) => goldTiers.has(s.tier));
 const otherSponsors = sponsors.filter((s) => !goldTiers.has(s.tier));
 
 function logoSrc(entry: EditionSponsor): string {
-  // Cards are light gray — always prefer the light (dark-ink) logo.
   return entry.sponsor.data.logo.light;
 }
 ---
 
-<div class="ptd-sponsors-showcase">
+<div class="ptd-sponsors-showcase" data-layout={layout}>
   {
     title && (
       <header class="mb-8 text-center md:mb-12">
         <Heading class="ptd-sponsors-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
           {title}
         </Heading>
+        {subtitle && (
+          <p class="mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base">
+            {subtitle}
+          </p>
+        )}
       </header>
     )
   }
@@ -57,26 +73,34 @@ function logoSrc(entry: EditionSponsor): string {
       .map((row) => (
         <ul
           class:list={[
-            'grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6',
-            row.key === 'other' && goldSponsors.length > 0 && 'mt-4 sm:mt-5 lg:mt-6',
+            isTree
+              ? 'flex flex-wrap items-center justify-center gap-6 sm:gap-8'
+              : 'grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6',
+            row.key === 'other' && goldSponsors.length > 0 && (isTree ? 'mt-6' : 'mt-4 sm:mt-5 lg:mt-6'),
           ]}
         >
           {row.items.map(({ sponsor, tier }) => {
             const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
             const isGold = row.size === 'gold';
-            // DailyBot wordmark is very wide/short — give it more width so it
-            // reads at a similar visual weight to the other silver logos.
             const isDailybot = sponsor.id === 'dailybot';
             const imgWidth = isGold ? 280 : isDailybot ? 320 : 240;
             const imgHeight = isGold ? 110 : isDailybot ? 80 : 90;
-            const imgClass = isGold
-              ? 'max-h-24 max-w-[min(100%,17.5rem)]'
-              : isDailybot
-                ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
-                : 'max-h-20 max-w-[min(100%,15rem)]';
+            const imgClass = isTree
+              ? isGold
+                ? 'max-h-14 max-w-[9rem] sm:max-h-16 sm:max-w-[10rem]'
+                : 'max-h-12 max-w-[8rem] sm:max-h-14 sm:max-w-[9rem]'
+              : isGold
+                ? 'max-h-24 max-w-[min(100%,17.5rem)]'
+                : isDailybot
+                  ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
+                  : 'max-h-20 max-w-[min(100%,15rem)]';
             return (
               <li
-                class="flex min-h-[8.5rem] w-full items-center justify-center rounded-md bg-gray-200 px-6 py-8 sm:min-h-[9.5rem] sm:px-8 sm:py-10"
+                class:list={[
+                  isTree
+                    ? 'flex h-28 w-28 max-w-full items-center justify-center rounded-full bg-[var(--ptt-bg-elevated)] p-4 shadow-[0_10px_30px_-12px_rgba(31,63,89,0.25)] ring-1 ring-[var(--ptt-border)] sm:h-40 sm:w-40 sm:p-6'
+                    : 'flex min-h-[8.5rem] w-full max-w-full items-center justify-center rounded-md bg-gray-200 px-6 py-8 sm:min-h-[9.5rem] sm:px-8 sm:py-10',
+                ]}
                 data-tier={tier}
               >
                 <a
@@ -84,7 +108,7 @@ function logoSrc(entry: EditionSponsor): string {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  class="flex w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+                  class="flex h-full w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
                 >
                   <img
                     src={logoSrc({ sponsor, tier })}
@@ -101,6 +125,21 @@ function logoSrc(entry: EditionSponsor): string {
           })}
         </ul>
       ))
+  }
+
+  {
+    isTree && footerNote && (
+      <p class="mt-10 flex flex-wrap items-center justify-center gap-2 text-center text-sm text-[var(--ptt-text-muted)]">
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2 ring-1 ring-[var(--ptt-border)]"
+        >
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-accent)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-primary)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-text)]" aria-hidden="true" />
+          <span class="ml-1">{footerNote}</span>
+        </span>
+      </p>
+    )
   }
 </div>
 

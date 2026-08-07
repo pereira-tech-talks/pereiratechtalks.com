@@ -152,6 +152,17 @@ export const getEditionEndIso = (
   return undefined;
 };
 
+/**
+ * Returns countdown ISO timestamps for the hub's `PtdCountdown variant="hub"`.
+ * Wraps `getEditionStartIso` / `getEditionEndIso` so call-sites stay simple.
+ */
+export const getEditionCountdownTargets = (
+  edition: PereiraTechDay
+): { targetDate: string; endDate?: string } => ({
+  targetDate: getEditionStartIso(edition),
+  endDate: getEditionEndIso(edition),
+});
+
 /** Whether the edition is the upcoming flagship template (announced / RSVP). */
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
   edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
@@ -188,3 +199,34 @@ export const normalizeLightningTalks = (
   entries.map((entry) =>
     typeof entry === 'string' ? { speaker: entry } : entry
   );
+
+/** Upcoming (2026 photocopy) vs past (2024 photocopy) landing chrome modes. */
+export type PtdSponsorsLayout = 'gray-cards' | 'tree-circles';
+export type PtdFaqLayout = 'accordion' | 'open-grid';
+export type PtdPortraitStyle = 'circle' | 'square';
+
+export interface UpcomingLandingChrome {
+  sponsorsLayout: PtdSponsorsLayout;
+  faqLayout: PtdFaqLayout;
+  portraitStyle: PtdPortraitStyle;
+}
+
+/**
+ * Status-based chrome for edition landings — never branch on year in callers.
+ * Upcoming → 2026-style tree circles / open FAQ / square portraits.
+ * Past → 2024-style gray cards / accordion / circular portraits.
+ */
+export const getUpcomingLandingChrome = (
+  isUpcoming: boolean
+): UpcomingLandingChrome =>
+  isUpcoming
+    ? {
+        sponsorsLayout: 'tree-circles',
+        faqLayout: 'open-grid',
+        portraitStyle: 'square',
+      }
+    : {
+        sponsorsLayout: 'gray-cards',
+        faqLayout: 'accordion',
+        portraitStyle: 'circle',
+      };

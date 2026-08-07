@@ -111,7 +111,7 @@ function closeEditions() {
         >
           <button
             type="button"
-            class="inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1.5 text-sm font-semibold uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 {isDark
+            class="inline-flex max-w-[11rem] cursor-pointer items-center gap-1 truncate rounded px-2 py-1.5 text-xs font-semibold uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 sm:max-w-none sm:text-sm {isDark
               ? 'text-white/90 hover:text-white focus-visible:outline-white'
               : 'text-ptt hover:text-ptt-primary focus-visible:outline-ptt-primary'}"
             aria-expanded={editionsOpen}
@@ -122,7 +122,7 @@ function closeEditions() {
           >
             {t.ptdPage.previousEditions}
             <svg
-              class="h-4 w-4 transition-transform"
+              class="h-4 w-4 shrink-0 transition-transform motion-reduce:transition-none"
               class:rotate-180={editionsOpen}
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -137,7 +137,7 @@ function closeEditions() {
           </button>
           {#if editionsOpen}
             <!-- Hover bridge so the menu stays open while moving from trigger → list -->
-            <div class="absolute right-0 top-full z-50 min-w-[14rem] pt-2">
+            <div class="absolute right-0 top-full z-[60] min-w-[14rem] pt-2">
               <ul
                 id="ptd-editions-menu"
                 role="list"

@@ -527,18 +527,40 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
-      'Conoce a las empresas y aliados comunitarios que hacen posibles los meetups, Pereira Tech Day y los programas de la comunidad.',
+      'Aliados actuales y anteriores de Pereira Tech Talks — empresas y organizaciones que sostienen meetups, Pereira Tech Day y los programas de la comunidad en Pereira.',
     eyebrow: 'Aliados',
     intro: (count) =>
-      `${count} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`,
-    currentTitle: 'Patrocinadores actuales',
-    pastTitle: 'Patrocinadores anteriores',
+      `${count} aliados activos sostienen venues, logística y escenario. Las categorías de patrocinio por edición viven en cada Pereira Tech Day.`,
+    currentTitle: 'Aliados actuales',
+    currentIntro:
+      'Quienes acompañan a Pereira Tech Talks hoy — meetups mensuales y la conferencia anual.',
+    pastTitle: 'Aliados anteriores',
     pastIntro:
-      'Organizaciones que apoyaron ediciones previas. Agradecemos cada alianza que ayudó a la comunidad a crecer.',
-    sponsorUsLabel: 'Patrocínanos: solicita el deck',
+      'Organizaciones que apoyaron capítulos previos. Cada alianza dejó huella en la comunidad.',
+    sponsorUsLabel: 'Quiero patrocinar',
+    contactLabel: 'Escríbenos',
     emptyTitle: 'Aún no hay patrocinadores registrados',
     emptyDesc: '¿Te interesa apoyar la comunidad? Escríbenos.',
     breadcrumbHome: 'Inicio',
+    why: {
+      title: 'Por qué patrocinar',
+      intro:
+        'No vendemos un logo en una web. Construimos escenarios donde el talento local se encuentra con empresas que quieren contratar, enseñar y aprender en Pereira.',
+      items: {
+        meetups: {
+          title: 'Meetups reales',
+          body: 'Venue, snacks y continuidad mensual — la comunidad necesita aliados que hagan posible cada noche de charlas.',
+        },
+        ptd: {
+          title: 'Pereira Tech Day',
+          body: 'La conferencia anual con paquetes por edición (oro, plata, etc.). Ese menú de categorías vive en la página de cada año, no aquí.',
+        },
+        talent: {
+          title: 'Talento local',
+          body: 'Acceso a ingenieras e ingenieros, speakers y estudiantes de Risaralda que ya están construyendo en público.',
+        },
+      },
+    },
     tiers: {
       diamond: 'Patrocinadores diamante',
       gold: 'Patrocinadores oro',
@@ -551,15 +573,19 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   contributorsPage: {
     title: 'Equipo y comunidad',
     description:
-      'Conoce a organizadores, líderes de programa, mentores y voluntarios que sostienen Pereira Tech Talks — equipo actual y red alumni.',
+      'Conoce al equipo organizador de Pereira Tech Talks y a quienes acompañaron capítulos anteriores — personas reales detrás de los meetups y Pereira Tech Day.',
     eyebrow: 'Personas',
     intro: (count) =>
-      `${count} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`,
-    currentTitle: 'Equipo actual',
+      `${count} organizadoras y organizadores activos sostienen la comunidad día a día. Si quieres sumarte, escríbenos o revisa cómo contribuir.`,
+    sinceLabel: (year) => `Construyendo comunidad en Pereira desde ${year}.`,
+    currentTitle: 'Equipo organizador',
+    currentIntro:
+      'Quienes coordinan meetups, Pereira Tech Day, programas y la operación diaria de Pereira Tech Talks.',
     pastTitle: 'Alumni y organizadores anteriores',
     pastIntro:
-      'Organizadores y contribuidores de capítulos anteriores de la comunidad. Siguen siendo parte de la red extendida.',
+      'Organizadoras, organizadores y colaboradoras de capítulos anteriores. Siguen siendo parte de la red extendida de la comunidad.',
     joinLabel: 'Únete al equipo',
+    contributeLabel: 'Cómo contribuir',
     emptyTitle: 'Aún no hay miembros registrados',
     emptyDesc: 'Estamos consolidando el directorio. Vuelve pronto.',
   },
@@ -850,13 +876,25 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     gallery: 'Galería',
     galleryMemories: 'Memorias del evento',
     sponsors: 'Patrocinadores',
+    sponsorsSubtitle: 'Empresas que apoyarán esta edición del evento.',
+    sponsorsFooter:
+      'Gracias por impulsar el ecosistema tech de Pereira y la región.',
     communities: 'Comunidades aliadas',
     communitiesOrganizes: 'Organiza',
-    organizers: 'Equipo organizador',
+    communitiesOrganizesSubtitle:
+      'Junto a estas comunidades fortalecemos el ecosistema tech de Pereira y la región.',
+    communitiesOrganizesFooter:
+      'Una red de comunidades que conecta talento, aprendizaje y colaboración.',
+    organizers: 'Organizadores',
+    organizersSubtitle: 'Quienes lideran y hacen posible Pereira Tech Day.',
     collaborators: 'Colaboradores',
+    collaboratorsSubtitle:
+      'Personas y aliados que fortalecen la ejecución del evento.',
     about: 'Sobre Pereira Tech Day',
-    pricing: 'Planes de patrocinio',
-    faq: 'Preguntas frecuentes',
+    pricing: 'Planes de Patrocinio',
+    faq: 'Preguntas Frecuentes (FAQ)',
+    faqSubtitle:
+      'Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escríbenos un email y nos pondremos en contacto contigo.',
     joinTitle: 'Únete al futuro tech de la región.',
     joinSubtitle: 'Sé parte del crecimiento del ecosistema.',
     joinCta: 'Explorar Pereira Tech Talks',
@@ -889,6 +927,12 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     editionNavLabel: 'Navegación de Pereira Tech Day',
     previousEditions: 'Otras ediciones',
     allEditions: 'Todas las ediciones',
+    indexStagePrimaryCta: 'Ver esta edición',
+    indexPastRowEyebrow: 'Edición anterior',
+    indexPastRowCta: 'Ver resumen de la edición',
+    indexNoUpcomingTitle: 'Un año de charlas memorables',
+    indexNoUpcomingIntro:
+      'El próximo Pereira Tech Day está en camino. Síguenos para enterarte primero.',
   },
 
   // Blog post engagement

@@ -1,180 +1,55 @@
 # Layout Components (`src/components/layout/`)
 
-This directory contains navigation and layout-related Svelte components that are used across all pages.
+Navigation and chrome Svelte islands used across public pages.
 
 ## Directory Structure
 
 ```
 layout/
-├── Header.svelte      # Main navigation header
-└── MobileMenu.svelte  # Mobile navigation menu
+├── Header.svelte              # Global PTT header (desktop + mobile trigger)
+├── MobileMenu.svelte          # Full-viewport mobile nav (portaled to body)
+├── ThemeToggle.svelte         # Light/dark toggle
+└── TopNotificationBar.svelte  # Sticky announcement strip
 ```
 
-## Component Details
+## Critical: fixed overlays vs `backdrop-filter`
 
-### Header.svelte
+The global header uses `backdrop-blur-md`. **Never** render a `position: fixed` fullscreen overlay as a **DOM descendant** of an element with `backdrop-filter` / `filter` / `transform` — the browser treats that ancestor as the containing block, so `inset-0` only covers the header strip (users see only “Inicio” and a fighting X/hamburger).
 
-The main navigation header component with desktop and mobile navigation.
+`MobileMenu` uses a Svelte `use:portal` action to append the dialog to `document.body` at `z-[100]`.
+
+## Header.svelte
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `lang` | `string` | `'en'` | Current language code |
+| `lang` | `string` | `'es'` | Current language |
 
-**Features:**
-- Sticky positioning (stays at top when scrolling)
-- Desktop navigation with dropdown menus
-- Mobile hamburger menu trigger
-- Language switcher (EN/ES)
-- Logo link to homepage
-- About section dropdown with sub-pages
-- Dark mode compatible
+**Hydration:** `client:load` in `MainLayout` (reliable first-tap hamburger).
 
-**Internal State:**
-- `open` - Mobile menu visibility
-- `aboutOpen` - About dropdown visibility
-- `languageOpen` - Language dropdown visibility
+**Desktop (`lg+`):** Meetups, Pereira Tech Days, Calendar, Blog, Comunidad dropdown, Contact, language, theme.
 
-**Desktop Navigation Links:**
-- Home (`/`)
-- Blog (`/blog`)
-- About (dropdown with sub-pages)
-- Contact (`/contact`)
-- Language switcher
+**Mobile:** Hamburger trigger; when menu is open the trigger is `invisible` so only the sheet’s X is shown.
 
-**About Dropdown Sub-pages:**
-- About Me, CV, DailyBot, Entrepreneur, Tech Talks, Maker/Builder, Trading, Foodie Enthusiast, Hobbies
-
-**Usage in MainLayout:**
-
-```astro
----
-import Header from '@/components/layout/Header.svelte';
----
-
-<Header client:load lang={lang} />
-```
-
-**Important:** The `client:load` directive is required for interactivity.
-
-### MobileMenu.svelte
-
-Full-screen mobile navigation overlay menu.
+## MobileMenu.svelte
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `open` | `boolean` | Menu visibility state |
-| `toggleMenu` | `() => void` | Function to toggle menu |
+| `lang` | `string` | Language |
+| `open` | `boolean` | Visibility |
+| `toggleMenu` | `() => void` | Open/close |
 
 **Features:**
-- Full-screen overlay (`fixed inset-0`)
-- Slide transitions for dropdowns
-- Close button (X icon)
-- Same navigation structure as desktop
-- Touch-friendly large tap targets
-- Background opacity effect
+- Portaled fullscreen sheet (`100dvh`, `z-[100]`)
+- Primary links + Comunidad accordion (default open) + Contact
+- Theme toggle + language disclosure in footer
+- Body scroll lock, Escape, Tab focus trap, restore focus
+- Safe-area insets; `overscroll-contain`
+- Closing a link closes the sheet
 
-**Internal State:**
-- `aboutOpen` - About section expanded
-- `languageOpen` - Language section expanded
-
-**Transitions:**
-Uses Svelte's `slide` transition for smooth dropdown animations.
-
-## Integration with MainLayout
-
-The Header component is used in `MainLayout.astro`:
+## Usage
 
 ```astro
----
-import Header from '@/components/layout/Header.svelte';
-
-interface Props {
-  lang?: string;
-  title: string;
-  description: string;
-}
-
-const { lang = 'en', title, description } = Astro.props;
----
-
-<!doctype html>
-<html lang={lang}>
-  <head>
-    <BaseHead title={title} description={description} />
-  </head>
-  <body>
-    <Header client:load {lang} />
-    <main>
-      <slot />
-    </main>
-    <Footer />
-  </body>
-</html>
+<Header client:load lang={lang} />
 ```
 
-## Styling
-
-Both components use:
-- **Tailwind CSS** utility classes
-- **PTT design tokens** (`bg-ptt-bg-dark`, `text-ptt-secondary`, etc.) for consistent background/text
-- **Dark mode support** via `dark:` prefix
-- **Responsive breakpoints** (`md:` for desktop)
-
-## Navigation Structure
-
-```
-Header
-├── Logo (link to /)
-├── Desktop Navigation (hidden on mobile)
-│   ├── Home
-│   ├── Blog
-│   ├── About (dropdown)
-│   │   ├── About Me
-│   │   ├── CV
-│   │   ├── DailyBot
-│   │   ├── Entrepreneur
-│   │   ├── Tech Talks
-│   │   ├── Maker / Builder
-│   │   ├── Trading
-│   │   ├── Foodie Enthusiast
-│   │   └── Hobbies
-│   ├── Contact
-│   └── Language Switcher
-│       ├── 🇬🇧 EN
-│       └── 🇪🇸 ES
-├── Mobile Menu Button (visible only on mobile)
-└── MobileMenu (full-screen overlay)
-    └── (same structure as desktop)
-```
-
-## Accessibility
-
-- `aria-label` on buttons
-- `aria-expanded` for dropdown states
-- `aria-controls` linking buttons to dropdowns
-- `role="menu"` on dropdown containers
-- Keyboard navigation support via `tabindex`
-- Screen reader text for icons
-
-## Modifying Navigation
-
-To add a new navigation link:
-
-1. **Desktop (Header.svelte):**
-   ```svelte
-   <a href="/new-page" class="nav-link">New Page</a>
-   ```
-
-2. **Mobile (MobileMenu.svelte):**
-   ```svelte
-   <a href="/new-page" class="nav-link text-2xl text-center">New Page</a>
-   ```
-
-3. **As dropdown item:**
-   Add inside the appropriate `{#if ...Open}` block.
-
-## Related Documentation
-
-- [MainLayout](../../layouts/README.md)
-- [i18n Guide](../../../docs/I18N_GUIDE.md)
-- [Features: Dark Mode](../../../docs/features/DARK_MODE.md)
+PTD edition pages use `PtdEditionHeader` instead (minimal chrome) — see `docs/features/PEREIRA_TECH_DAYS.md`.

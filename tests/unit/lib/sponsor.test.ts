@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import type { Sponsor } from '@/lib/sponsor';
-import { filterSponsorsByStatus, sortSponsors } from '@/lib/sponsor';
+import {
+  filterSponsorsByStatus,
+  sortSponsors,
+  sortSponsorsByOrder,
+} from '@/lib/sponsor';
 
 const makeSponsor = (
   id: string,
@@ -24,7 +28,7 @@ const makeSponsor = (
   }) as Sponsor;
 
 describe('sponsor helpers', () => {
-  it('sorts sponsors by tier then order', () => {
+  it('sorts sponsors by tier then order (PTD path)', () => {
     const sponsors = sortSponsors([
       makeSponsor('silver', { tier: 'silver', order: 1 }),
       makeSponsor('gold', { tier: 'gold', order: 5 }),
@@ -32,6 +36,16 @@ describe('sponsor helpers', () => {
     ]);
 
     expect(sponsors.map((s) => s.id)).toEqual(['gold-first', 'gold', 'silver']);
+  });
+
+  it('sorts community catalog by order then name', () => {
+    const sponsors = sortSponsorsByOrder([
+      makeSponsor('zeta', { order: 2, name: 'Zeta', tier: 'diamond' }),
+      makeSponsor('alpha', { order: 1, name: 'Alpha', tier: 'bronze' }),
+      makeSponsor('beta', { order: 1, name: 'Beta', tier: 'diamond' }),
+    ]);
+
+    expect(sponsors.map((s) => s.id)).toEqual(['alpha', 'beta', 'zeta']);
   });
 
   it('filters sponsors by status without overlap', () => {

@@ -3,7 +3,9 @@ import { describe, expect, it } from 'vitest';
 import type { Contributor } from '@/lib/contributor';
 import {
   filterActiveContributors,
+  filterCurrentTeamOrganizers,
   filterPastContributors,
+  filterPastTeamMembers,
   sortContributors,
 } from '@/lib/contributor';
 
@@ -49,5 +51,57 @@ describe('contributor helpers', () => {
 
     expect(current.map((c) => c.id)).toEqual(['current']);
     expect(past.map((c) => c.id)).toEqual(['past']);
+  });
+
+  it('filterCurrentTeamOrganizers keeps active organizers only', () => {
+    const contributors = [
+      makeContributor('sergio', {
+        roles: ['organizer'],
+        order: 0,
+        name: 'Sergio',
+      }),
+      makeContributor('mentor-only', {
+        roles: ['mentor'],
+        order: 1,
+        name: 'Mentor',
+      }),
+      makeContributor('past-org', {
+        roles: ['alumni', 'organizer'],
+        inactiveSince: new Date('2025-12-31'),
+        order: 2,
+        name: 'Past',
+      }),
+      makeContributor('founder-compat', {
+        roles: ['founding-organizer'],
+        order: 3,
+        name: 'Legacy',
+      }),
+    ];
+
+    expect(filterCurrentTeamOrganizers(contributors).map((c) => c.id)).toEqual([
+      'sergio',
+      'founder-compat',
+    ]);
+  });
+
+  it('filterPastTeamMembers returns everyone with inactiveSince sorted', () => {
+    const contributors = [
+      makeContributor('b', {
+        inactiveSince: new Date('2025-01-01'),
+        order: 2,
+        name: 'B',
+      }),
+      makeContributor('a', {
+        inactiveSince: new Date('2025-01-01'),
+        order: 1,
+        name: 'A',
+      }),
+      makeContributor('active', { order: 0, name: 'Active' }),
+    ];
+
+    expect(filterPastTeamMembers(contributors).map((c) => c.id)).toEqual([
+      'a',
+      'b',
+    ]);
   });
 });

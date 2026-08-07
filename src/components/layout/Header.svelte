@@ -102,7 +102,7 @@ function closeAllDropdowns() {
     <div class="hidden lg:flex items-center gap-6">
       <a href="{prefix}/meetups" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups' })}>{t.nav.meetups}</a>
       <a href="{prefix}/pereira-tech-days" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'pereira_tech_days' })}>{t.nav.pereiraTechDays}</a>
-      <a href="{prefix}/calendar" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'calendar' })}>{t.nav.calendar}</a>
+      <!-- Calendar nav link hidden temporarily — page still at /calendar -->
       <a href="{prefix}/blog" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'blog' })}>{t.nav.blog}</a>
 
       <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
@@ -216,15 +216,17 @@ function closeAllDropdowns() {
     </div>
 
     <button
-      class="block lg:hidden inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
+      class="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center p-2 lg:hidden {open
+        ? 'pointer-events-none invisible'
+        : 'block'}"
       aria-label={t.nav.openMenu}
       aria-expanded={open}
       aria-controls="mobile-menu"
       on:click={toggleMenu}
       type="button"
     >
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
   </nav>

@@ -66,7 +66,7 @@ async function handleSubmit(event: SubmitEvent) {
 </script>
 
 <div class="ptd-subscribe">
-  <p class="text-sm text-[var(--ptt-text-muted)]">{t.copy}</p>
+  <p class="text-sm italic text-[var(--ptt-text-muted)]">{t.copy}</p>
   <form class="mt-3 flex flex-col gap-3 sm:flex-row" onsubmit={handleSubmit}>
     <div
       style="position:absolute;left:-9999px;height:0;overflow:hidden;"
@@ -90,12 +90,13 @@ async function handleSubmit(event: SubmitEvent) {
       placeholder={t.emailPlaceholder}
       bind:value={email}
       disabled={status === 'submitting'}
-      class="min-h-[44px] min-w-0 flex-1 rounded-[var(--ptd-button-radius,9999px)] border border-[var(--ptt-border)] bg-[var(--ptt-bg)] px-4 py-3 text-base text-[var(--ptt-text)] placeholder:text-[var(--ptt-text-muted)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] disabled:opacity-60"
+      class="min-h-[44px] min-w-0 flex-1 rounded-xl border border-[var(--ptt-border)] bg-[var(--ptt-bg-elevated)] px-4 py-3 text-base text-[var(--ptt-text)] placeholder:text-[var(--ptt-text-muted)] shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] disabled:opacity-60"
     />
     <button
       type="submit"
       disabled={status === 'submitting'}
-      class="min-h-[44px] rounded-[var(--ptd-button-radius,9999px)] bg-[var(--ptt-primary)] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+      class="min-h-[44px] rounded-xl px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+      style="background: linear-gradient(135deg, #3ab9c9 0%, var(--ptt-primary) 100%);"
     >
       {#if status === 'submitting'}
         {t.submitting}

@@ -1,7 +1,6 @@
 ---
 /**
- * PTT v3.0.0 sponsors directory page (shared between EN and ES).
- * Current sponsors prominently; past sponsors in a dedicated archive section.
+ * Community sponsors directory — Current + Past only (no PTD tier headings).
  */
 
 import SponsorCard from '@/components/cards/SponsorCard.astro';
@@ -26,97 +25,98 @@ const prefix = getUrlPrefix(lang);
 const currentSponsors = await getActiveSponsors();
 const pastSponsors = await getPastSponsors();
 
-type Tier = 'diamond' | 'gold' | 'silver' | 'bronze' | 'community';
-const tierOrder: Tier[] = ['diamond', 'gold', 'silver', 'bronze', 'community'];
-
-function groupByTier(sponsors: Awaited<ReturnType<typeof getActiveSponsors>>) {
-  return tierOrder
-    .map((tier) => ({
-      tier,
-      sponsors: sponsors.filter((s) => s.data.tier === tier),
-    }))
-    .filter((group) => group.sponsors.length > 0);
-}
-
-const currentByTier = groupByTier(currentSponsors);
-const pastByTier = groupByTier(pastSponsors);
-const totalCount = currentSponsors.length + pastSponsors.length;
-
 const breadcrumbs = [
   { label: sp.breadcrumbHome, href: `${prefix}/` },
   { label: sp.title },
 ];
+
+const whyItems = [sp.why.items.meetups, sp.why.items.ptd, sp.why.items.talent];
 ---
 
 <MainLayout lang={lang} title={sp.title} description={sp.description}>
-  <div class="bg-gradient-to-b from-ptt-primary-soft/50 to-ptt-bg dark:from-ptt-bg-elevated dark:to-ptt-bg">
-    <div class="main-container pt-12 sm:pt-16 pb-4">
+  <div class="relative overflow-hidden bg-ptt-bg">
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--ptt-primary)_0%,_transparent_55%)] opacity-[0.07] dark:opacity-[0.12]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="main-container relative pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
-    <div class="main-container pt-6 pb-12">
+    <div class="main-container relative pt-6 pb-14 sm:pb-16">
       <Eyebrow>{sp.eyebrow}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+      <h1 class="mt-3 max-w-3xl text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
         {sp.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
-        {sp.intro(totalCount)}
+      <p class="mt-4 max-w-2xl text-lg text-ptt-secondary">
+        {sp.intro(currentSponsors.length)}
       </p>
-      <a
-        href={`${prefix}/sponsor-us/`}
-        class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
-      >
-        {sp.sponsorUsLabel}
-      </a>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={`${prefix}/sponsor-us/`}
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
+        >
+          {sp.sponsorUsLabel}
+        </a>
+        <a
+          href={`${prefix}/contact/`}
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-ptt-border bg-ptt-bg-elevated px-5 py-2.5 text-sm font-semibold text-ptt transition-colors hover:border-ptt-primary/40 hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-white/15 dark:bg-ptt-bg-dark dark:text-white dark:hover:bg-white/10"
+        >
+          {sp.contactLabel}
+        </a>
+      </div>
     </div>
   </div>
 
+  <Section surface="alt" spacing="lg" title={sp.why.title}>
+    <p class="mb-8 max-w-2xl text-ptt-secondary">{sp.why.intro}</p>
+    <ul class="grid list-none gap-6 sm:grid-cols-3">
+      {
+        whyItems.map((item) => (
+          <li class="rounded-2xl bg-ptt-bg-elevated p-5 ring-1 ring-ptt-border dark:bg-ptt-bg-dark/40">
+            <h3 class="text-base font-semibold text-ptt">{item.title}</h3>
+            <p class="mt-2 text-sm text-ptt-secondary">{item.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
   {
-    currentByTier.length > 0 ? (
-      <Section surface="alt" spacing="lg" title={sp.currentTitle}>
-        <div class="space-y-16">
-          {currentByTier.map(({ tier, sponsors: group }) => (
-            <div>
-              <h2 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
-                {sp.tiers[tier]}
-              </h2>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
-                {group.map((sponsor) => (
-                  <li>
-                    <SponsorCard sponsor={sponsor} lang={lang} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+    currentSponsors.length > 0 ? (
+      <Section spacing="lg" title={sp.currentTitle}>
+        <p class="mb-10 max-w-2xl text-ptt-secondary">{sp.currentIntro}</p>
+        <ul class="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {currentSponsors.map((sponsor, index) => (
+            <li>
+              <SponsorCard
+                sponsor={sponsor}
+                lang={lang}
+                showTier={false}
+                loading={index < 3 ? 'eager' : 'lazy'}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     ) : (
-      <Section surface="alt">
+      <Section>
         <EmptyState title={sp.emptyTitle} description={sp.emptyDesc} />
       </Section>
     )
   }
 
   {
-    pastByTier.length > 0 && (
-      <Section spacing="lg" title={sp.pastTitle}>
+    pastSponsors.length > 0 && (
+      <Section surface="alt" spacing="lg" title={sp.pastTitle}>
         <p class="mb-10 max-w-3xl text-ptt-secondary">{sp.pastIntro}</p>
-        <div class="space-y-12">
-          {pastByTier.map(({ tier, sponsors: group }) => (
-            <div>
-              <h2 class="mb-6 text-xl font-semibold tracking-tight text-ptt-secondary">
-                {sp.tiers[tier]}
-              </h2>
-              <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 list-none">
-                {group.map((sponsor) => (
-                  <li>
-                    <SponsorCard sponsor={sponsor} lang={lang} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ul class="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {pastSponsors.map((sponsor) => (
+            <li class="opacity-90 transition-opacity motion-reduce:transition-none hover:opacity-100">
+              <SponsorCard sponsor={sponsor} lang={lang} showTier={false} muted />
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     )
   }

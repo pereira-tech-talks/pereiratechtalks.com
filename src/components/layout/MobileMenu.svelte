@@ -1,4 +1,9 @@
 <script lang="ts">
+/**
+ * Full-viewport mobile navigation.
+ * Portaled to document.body so `position: fixed` is NOT trapped by the
+ * header's `backdrop-filter` containing block (see PLAN_responsive_mobile_menu_fullscreen).
+ */
 import { onDestroy, onMount, tick } from 'svelte';
 import { fade } from 'svelte/transition';
 import { EVENTS, trackEvent } from '@/lib/analytics';
@@ -15,7 +20,20 @@ import ThemeToggle from './ThemeToggle.svelte';
 export let lang: string = 'es';
 export let open: boolean;
 export let toggleMenu: () => void;
-let communityOpen = false;
+
+/** Move the dialog node under document.body (escapes header backdrop-filter). */
+function portal(node: HTMLElement) {
+  document.body.appendChild(node);
+  return {
+    destroy() {
+      if (node.parentNode) {
+        node.parentNode.removeChild(node);
+      }
+    },
+  };
+}
+
+let communityOpen = true;
 let languageOpen = false;
 let lockedScrollY = 0;
 let isScrollLocked = false;
@@ -23,13 +41,22 @@ let menuRoot: HTMLElement | undefined;
 let closeButtonRef: HTMLButtonElement | undefined;
 let previouslyFocused: HTMLElement | null = null;
 
-/** Soft preference only — does not force redirects (URL is source of truth). */
 function rememberLanguage(target: string) {
   try {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, target);
   } catch {
-    // Storage disabled (private mode) — the switch still navigates.
+    // Storage disabled — navigation still works.
   }
+}
+
+function getFocusableElements(): HTMLElement[] {
+  if (!menuRoot) return [];
+  const nodes = menuRoot.querySelectorAll<HTMLElement>(
+    'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  );
+  return Array.from(nodes).filter(
+    (el) => !el.hasAttribute('disabled') && el.offsetParent !== null
+  );
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -37,6 +64,22 @@ function handleKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') {
     event.preventDefault();
     toggleMenu();
+    return;
+  }
+  if (event.key !== 'Tab') return;
+  const focusables = getFocusableElements();
+  if (focusables.length === 0) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  const active = document.activeElement as HTMLElement | null;
+  if (event.shiftKey) {
+    if (active === first || !menuRoot?.contains(active)) {
+      event.preventDefault();
+      last.focus();
+    }
+  } else if (active === last) {
+    event.preventDefault();
+    first.focus();
   }
 }
 
@@ -78,6 +121,7 @@ $: if (typeof document !== 'undefined') {
     unlockBodyScroll();
     previouslyFocused?.focus();
     previouslyFocused = null;
+    languageOpen = false;
   }
 }
 
@@ -107,115 +151,187 @@ onDestroy(() => {
     unlockBodyScroll();
   }
 });
+
+function navClick(item: string) {
+  trackEvent(EVENTS.NAV_CLICK, { item, source: 'mobile' });
+  toggleMenu();
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 {#if open}
   <div
+    use:portal
     bind:this={menuRoot}
     id="mobile-menu"
     role="dialog"
     aria-modal="true"
     aria-label={t.nav.menu}
-    class="fixed inset-0 z-50 bg-ptt-bg/95 text-ptt dark:bg-ptt-bg-dark/95 dark:text-white flex flex-col items-center justify-start gap-4 overflow-y-auto overscroll-contain transition-all duration-300 lg:hidden"
-    style="padding-top: max(5rem, calc(env(safe-area-inset-top) + 5rem)); padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
+    class="fixed inset-0 z-[100] flex h-[100dvh] max-h-[100dvh] flex-col bg-ptt-bg text-ptt dark:bg-ptt-bg-dark dark:text-white lg:hidden"
+    style="padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
   >
-    <button
-      bind:this={closeButtonRef}
-      class="absolute right-4 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
-      style="top: max(1.5rem, calc(env(safe-area-inset-top) + 0.75rem));"
-      aria-label={t.nav.closeMenu}
-      on:click={toggleMenu}
-      type="button"
-    >
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
-
-    <a href={prefix || '/'} class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'home', source: 'mobile' })}>{t.nav.home}</a>
-    <a href="{prefix}/meetups" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups', source: 'mobile' })}>{t.nav.meetups}</a>
-    <a href="{prefix}/pereira-tech-days" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'pereira_tech_days', source: 'mobile' })}>{t.nav.pereiraTechDays}</a>
-    <a href="{prefix}/calendar" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'calendar', source: 'mobile' })}>{t.nav.calendar}</a>
-    <a href="{prefix}/blog" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'blog', source: 'mobile' })}>{t.nav.blog}</a>
-
-    <button
-      class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
-      on:click={() => communityOpen = !communityOpen}
-      aria-expanded={communityOpen}
-      aria-controls="community-dropdown"
-      type="button"
-    >
-      {t.nav.community}
-      <svg
-        class="w-5 h-5 transition-transform duration-200"
-        class:rotate-180={communityOpen}
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
+    <!-- Top bar: brand + close (single visible X — header burger is covered by this sheet) -->
+    <div class="flex shrink-0 items-center justify-between gap-3 border-b border-ptt-border px-4 py-3 dark:border-white/10">
+      <a
+        href={prefix || '/'}
+        class="flex min-w-0 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        aria-label="Pereira Tech Talks"
+        on:click={() => navClick('home')}
       >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </button>
-    {#if communityOpen}
-      <div
-        id="community-dropdown"
-        class="flex flex-col items-center gap-2 mt-1"
-        transition:fade={{ duration: 150 }}
+        <img
+          class="h-8 w-auto dark:hidden"
+          src="/images/pereira-tech-talks/topbar-logo-black.webp"
+          alt=""
+          width={120}
+          height={48}
+        />
+        <img
+          class="hidden h-8 w-auto dark:block"
+          src="/images/pereira-tech-talks/topbar-logo.webp"
+          alt=""
+          width={120}
+          height={48}
+        />
+      </a>
+      <button
+        bind:this={closeButtonRef}
+        class="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg p-2 text-ptt hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-white dark:hover:bg-white/10"
+        aria-label={t.nav.closeMenu}
+        on:click={toggleMenu}
+        type="button"
       >
-        <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about', source: 'mobile' })}>{t.nav.about}</a>
-        <a href="{prefix}/speakers" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers', source: 'mobile' })}>{t.nav.speakers}</a>
-        <a href="{prefix}/communities" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities', source: 'mobile' })}>{t.nav.communities}</a>
-        <a href="{prefix}/contributors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors', source: 'mobile' })}>{t.nav.contributors}</a>
-        <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
-        <a href="{prefix}/verticals" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals', source: 'mobile' })}>{t.nav.verticals}</a>
-        <a href="{prefix}/channels" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels', source: 'mobile' })}>{t.nav.channels}</a>
-        <a href="{prefix}/press" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press', source: 'mobile' })}>{t.nav.press}</a>
+        <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scrollable nav -->
+    <nav
+      class="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain px-4 py-4"
+      aria-label={t.nav.menu}
+    >
+      <a
+        href={prefix || '/'}
+        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => navClick('home')}
+      >{t.nav.home}</a>
+      <a
+        href="{prefix}/meetups"
+        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => navClick('meetups')}
+      >{t.nav.meetups}</a>
+      <a
+        href="{prefix}/pereira-tech-days"
+        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => navClick('pereira_tech_days')}
+      >{t.nav.pereiraTechDays}</a>
+      <!-- Calendar nav link hidden temporarily — page still at /calendar -->
+      <a
+        href="{prefix}/blog"
+        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => navClick('blog')}
+      >{t.nav.blog}</a>
+
+      <div class="mt-2 border-t border-ptt-border pt-2 dark:border-white/10">
+        <button
+          class="nav-link flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-3 text-left text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          on:click={() => (communityOpen = !communityOpen)}
+          aria-expanded={communityOpen}
+          aria-controls="mobile-community-links"
+          type="button"
+        >
+          <span>{t.nav.community}</span>
+          <svg
+            class="h-5 w-5 shrink-0 transition-transform duration-200 motion-reduce:transition-none"
+            class:rotate-180={communityOpen}
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {#if communityOpen}
+          <div
+            id="mobile-community-links"
+            class="mb-1 flex flex-col gap-0.5 border-l-2 border-ptt-primary/30 pl-3 ml-3"
+            transition:fade={{ duration: 120 }}
+          >
+            <a href="{prefix}/about" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('about')}>{t.nav.about}</a>
+            <a href="{prefix}/speakers" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('speakers')}>{t.nav.speakers}</a>
+            <a href="{prefix}/communities" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('communities')}>{t.nav.communities}</a>
+            <a href="{prefix}/contributors" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('contributors')}>{t.nav.contributors}</a>
+            <a href="{prefix}/sponsors" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('sponsors')}>{t.nav.sponsors}</a>
+            <a href="{prefix}/verticals" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('verticals')}>{t.nav.verticals}</a>
+            <a href="{prefix}/channels" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('channels')}>{t.nav.channels}</a>
+            <a href="{prefix}/press" class="nav-link rounded-lg px-3 py-2.5 text-base text-ptt-secondary dark:text-white/80" on:click={() => navClick('press')}>{t.nav.press}</a>
+          </div>
+        {/if}
       </div>
-    {/if}
 
-    <a href="{prefix}/contact" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contact', source: 'mobile' })}>{t.nav.contact}</a>
+      <a
+        href="{prefix}/contact"
+        class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => navClick('contact')}
+      >{t.nav.contact}</a>
+    </nav>
 
-    <ThemeToggle {lang} placement="menu" />
-
-    <button
-      class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"
-      on:click={() => languageOpen = !languageOpen}
-      aria-expanded={languageOpen}
-      aria-controls="language-dropdown"
-      type="button"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-      {lang.toUpperCase()}
-      <svg
-        class="w-5 h-5 transition-transform duration-200"
-        class:rotate-180={languageOpen}
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </button>
-    {#if languageOpen}
-      <div
-        id="language-dropdown"
-        class="flex flex-col items-center gap-2 mt-1"
-        transition:fade={{ duration: 150 }}
-      >
-        {#each alternateLanguageUrls as alt}
-          <a href={alt.url} class="nav-link text-base sm:text-lg text-center py-1 flex items-center gap-2" on:click={() => { rememberLanguage(alt.lang); trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang }); toggleMenu(); }}>
-            {alt.nativeName}
-          </a>
-        {/each}
+    <!-- Utilities footer -->
+    <div class="shrink-0 space-y-3 border-t border-ptt-border px-4 py-4 dark:border-white/10">
+      <div class="flex items-center justify-end">
+        <ThemeToggle {lang} placement="menu" />
       </div>
-    {/if}
+
+      <button
+        class="nav-link flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-3 text-left text-base font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        on:click={() => (languageOpen = !languageOpen)}
+        aria-expanded={languageOpen}
+        aria-controls="mobile-language-links"
+        type="button"
+      >
+        <span class="inline-flex items-center gap-2">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          {lang.toUpperCase()}
+        </span>
+        <svg
+          class="h-5 w-5 transition-transform duration-200 motion-reduce:transition-none"
+          class:rotate-180={languageOpen}
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {#if languageOpen}
+        <div
+          id="mobile-language-links"
+          class="flex flex-col gap-1 pl-3"
+          transition:fade={{ duration: 120 }}
+        >
+          {#each alternateLanguageUrls as alt}
+            <a
+              href={alt.url}
+              class="nav-link rounded-lg px-3 py-2.5 text-base"
+              on:click={() => {
+                rememberLanguage(alt.lang);
+                trackEvent(EVENTS.LANGUAGE_SWITCH, { from: lang, to: alt.lang });
+                toggleMenu();
+              }}
+            >
+              {alt.nativeName}
+            </a>
+          {/each}
+        </div>
+      {/if}
+    </div>
   </div>
 {/if}

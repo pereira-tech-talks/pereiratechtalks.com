@@ -526,18 +526,40 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   sponsorsPage: {
     title: 'Sponsors',
     description:
-      'Meet the companies and community partners that make Pereira Tech Talks meetups, Pereira Tech Day, and community programs possible.',
+      'Current and past partners of Pereira Tech Talks — companies and organizations that sustain meetups, Pereira Tech Day, and community programs in Pereira.',
     eyebrow: 'Partners',
     intro: (count) =>
-      `${count} partners sustaining the community with venues, food, scholarships, and mentorship.`,
-    currentTitle: 'Current sponsors',
-    pastTitle: 'Past sponsors',
+      `${count} active partners help with venues, logistics, and the stage. Per-edition sponsorship tiers live on each Pereira Tech Day page — not here.`,
+    currentTitle: 'Current partners',
+    currentIntro:
+      'Who stands with Pereira Tech Talks today — monthly meetups and the annual conference.',
+    pastTitle: 'Past partners',
     pastIntro:
-      'Organizations that supported previous editions. We are grateful for every partnership that helped the community grow.',
-    sponsorUsLabel: 'Sponsor us: request the deck',
+      'Organizations that supported earlier chapters. Every partnership left a mark on the community.',
+    sponsorUsLabel: 'Become a sponsor',
+    contactLabel: 'Contact us',
     emptyTitle: 'No sponsors yet',
     emptyDesc: 'Want to support the community? Reach out.',
     breadcrumbHome: 'Home',
+    why: {
+      title: 'Why sponsor',
+      intro:
+        'We are not selling a logo on a website. We build stages where local talent meets companies that want to hire, teach, and learn in Pereira.',
+      items: {
+        meetups: {
+          title: 'Real meetups',
+          body: 'Venue, snacks, and monthly continuity — the community needs partners who make each talk night possible.',
+        },
+        ptd: {
+          title: 'Pereira Tech Day',
+          body: 'The annual conference with per-edition packages (gold, silver, and more). Those tier menus live on each year’s page, not here.',
+        },
+        talent: {
+          title: 'Local talent',
+          body: 'Access to engineers, speakers, and students across Risaralda who already build in public.',
+        },
+      },
+    },
     tiers: {
       diamond: 'Diamond sponsors',
       gold: 'Gold sponsors',
@@ -550,15 +572,19 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   contributorsPage: {
     title: 'Team and community',
     description:
-      'Meet the organizers, program leads, mentors, and volunteers who keep Pereira Tech Talks running — current team and alumni network.',
+      'Meet the organizing team behind Pereira Tech Talks and the people who shaped earlier chapters — the humans behind the meetups and Pereira Tech Day.',
     eyebrow: 'People',
     intro: (count) =>
-      `${count} active people make up the extended community team. Want to join? Reach out.`,
-    currentTitle: 'Current team',
+      `${count} active organizers keep the community running day to day. Want to join? Write to us or see how to contribute.`,
+    sinceLabel: (year) => `Building community in Pereira since ${year}.`,
+    currentTitle: 'Organizing team',
+    currentIntro:
+      'The people who coordinate meetups, Pereira Tech Day, programs, and the day-to-day operations of Pereira Tech Talks.',
     pastTitle: 'Alumni and past organizers',
     pastIntro:
-      'Former organizers and contributors who shaped earlier chapters of the community. They remain part of the extended network.',
+      'Former organizers and collaborators from earlier chapters. They remain part of the extended community network.',
     joinLabel: 'Join the team',
+    contributeLabel: 'How to contribute',
     emptyTitle: 'No team members yet',
     emptyDesc: "We're consolidating the directory. Check back soon.",
   },
@@ -845,13 +871,26 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     gallery: 'Gallery',
     galleryMemories: 'Event memories',
     sponsors: 'Sponsors',
+    sponsorsSubtitle: 'Companies supporting this edition of the event.',
+    sponsorsFooter:
+      'Thank you for powering the Pereira and regional tech ecosystem.',
     communities: 'Allied communities',
     communitiesOrganizes: 'Organizes',
-    organizers: 'Organizing team',
+    communitiesOrganizesSubtitle:
+      'Together with these communities we strengthen the Pereira and regional tech ecosystem.',
+    communitiesOrganizesFooter:
+      'A network of communities connecting talent, learning, and collaboration.',
+    organizers: 'Organizers',
+    organizersSubtitle:
+      'The people who lead and make Pereira Tech Day possible.',
     collaborators: 'Collaborators',
+    collaboratorsSubtitle:
+      'People and allies who strengthen the event’s delivery.',
     about: 'About Pereira Tech Day',
     pricing: 'Sponsorship plans',
-    faq: 'Frequently asked questions',
+    faq: 'Frequently asked questions (FAQ)',
+    faqSubtitle:
+      'A few short questions that may clear up common doubts. If anything is still unclear, email us and we will get back to you.',
     joinTitle: "Join the region's tech future.",
     joinSubtitle: "Be part of the ecosystem's growth.",
     joinCta: 'Explore Pereira Tech Talks',
@@ -884,6 +923,12 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     editionNavLabel: 'Pereira Tech Day navigation',
     previousEditions: 'Other editions',
     allEditions: 'All editions',
+    indexStagePrimaryCta: 'View this edition',
+    indexPastRowEyebrow: 'Past edition',
+    indexPastRowCta: 'View edition recap',
+    indexNoUpcomingTitle: 'A year of bold talks',
+    indexNoUpcomingIntro:
+      'The next Pereira Tech Day is in the making. Follow the community to be the first to know.',
   },
 
   // Blog post engagement

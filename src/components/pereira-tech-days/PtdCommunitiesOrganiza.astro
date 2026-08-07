@@ -1,7 +1,7 @@
 ---
 /**
- * PtdCommunitiesOrganiza — legacy "Organiza" community logo tiles:
- * large logo cards in a full-width row, title centered.
+ * PtdCommunitiesOrganiza — legacy "Organiza" community logo tiles with
+ * optional subtitle and footer motif (coral/teal/navy dots).
  */
 import type { Language } from '@/lib/i18n';
 
@@ -16,23 +16,49 @@ interface Props {
   lang: Language;
   title: string;
   subtitle?: string;
+  footerNote?: string;
+  logoSrc?: string;
   headingLevel?: 'h2' | 'h3';
 }
 
-const { communities, lang, title, subtitle, headingLevel = 'h2' } = Astro.props;
+const {
+  communities,
+  lang,
+  title,
+  subtitle,
+  footerNote,
+  logoSrc,
+  headingLevel = 'h2',
+} = Astro.props;
 const Heading = headingLevel;
 
 const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
+const logoAlt = lang === 'es' ? 'Pereira Tech Talks' : 'Pereira Tech Talks';
 ---
 
 <div class="ptd-communities-organiza">
   <header class="mb-8 text-center md:mb-10">
+    {
+      logoSrc && (
+        <img
+          src={logoSrc}
+          alt={logoAlt}
+          width="64"
+          height="64"
+          class="mx-auto mb-3 h-12 w-auto opacity-90"
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }
     <Heading class="ptd-organiza-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
       {title}
     </Heading>
     {
       subtitle && (
-        <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{subtitle}</p>
+        <p class="mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base">
+          {subtitle}
+        </p>
       )
     }
   </header>
@@ -48,7 +74,7 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${visitLabel} ${community.name}`}
-                class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition duration-200 hover:-translate-y-1 hover:border-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] sm:min-h-44 sm:px-5 sm:py-6"
+                class="flex min-h-40 items-center justify-center rounded-2xl bg-[var(--ptt-bg-elevated)] px-4 py-5 shadow-sm ring-1 ring-[var(--ptt-border)] transition duration-200 hover:-translate-y-1 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:min-h-44 sm:px-5 sm:py-6"
               >
                 <img
                   src={community.logo}
@@ -61,7 +87,7 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
                 />
               </a>
             ) : (
-              <div class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 sm:min-h-44 sm:px-5 sm:py-6">
+              <div class="flex min-h-40 items-center justify-center rounded-2xl bg-[var(--ptt-bg-elevated)] px-4 py-5 shadow-sm ring-1 ring-[var(--ptt-border)] sm:min-h-44 sm:px-5 sm:py-6">
                 <img
                   src={community.logo}
                   alt={community.name}
@@ -78,6 +104,19 @@ const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
       ))
     }
   </ul>
+
+  {
+    footerNote && (
+      <p class="mt-10 flex justify-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2 text-sm text-[var(--ptt-text-muted)] ring-1 ring-[var(--ptt-border)]">
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-accent)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-primary)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-text)]" aria-hidden="true" />
+          <span class="ml-1">{footerNote}</span>
+        </span>
+      </p>
+    )
+  }
 </div>
 
 <style>

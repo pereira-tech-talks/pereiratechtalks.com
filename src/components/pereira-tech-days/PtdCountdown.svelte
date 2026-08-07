@@ -5,9 +5,10 @@ interface Props {
   lang: Language;
   targetDate: string;
   endDate?: string;
+  variant?: 'edition' | 'hub';
 }
 
-let { lang, targetDate, endDate }: Props = $props();
+let { lang, targetDate, endDate, variant = 'edition' }: Props = $props();
 
 const labels = {
   en: {
@@ -52,31 +53,78 @@ $effect(() => {
   const id = setInterval(tick, 1000);
   return () => clearInterval(id);
 });
+
+const units = $derived([
+  { value: remaining.days, label: t.days },
+  { value: remaining.hours, label: t.hours },
+  { value: remaining.minutes, label: t.minutes },
+  { value: remaining.seconds, label: t.seconds },
+]);
 </script>
 
-<div
-  class="ptd-countdown-block grid grid-cols-4 divide-x divide-[var(--ptt-border)] rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] py-3 ring-1 ring-[var(--ptt-border)] sm:py-4"
-  role="timer"
-  aria-live="polite"
-  aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
->
-  {#if ended}
-    <p class="col-span-4 px-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
-  {:else}
-    {#each [
-      { value: remaining.days, label: t.days },
-      { value: remaining.hours, label: t.hours },
-      { value: remaining.minutes, label: t.minutes },
-      { value: remaining.seconds, label: t.seconds },
-    ] as unit}
-      <div class="px-1 text-center sm:px-2">
-        <span class="block text-2xl font-bold tabular-nums text-[var(--ptt-primary)] sm:text-3xl">
-          {String(unit.value).padStart(2, '0')}
-        </span>
-        <span class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)] sm:text-xs">
-          {unit.label}
-        </span>
+{#if variant === 'hub'}
+  <!-- Hub variant: PTT global tokens on dark stage background -->
+  <div
+    class="grid grid-cols-4 divide-x divide-white/20 rounded-2xl bg-white/10 py-3 ring-1 ring-white/20 backdrop-blur-sm sm:py-4"
+    role="timer"
+    aria-live="polite"
+    aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
+  >
+    {#if ended}
+      <p class="col-span-4 px-4 text-sm font-semibold text-white">{t.ended}</p>
+    {:else}
+      {#each units as unit}
+        <div class="px-1 text-center sm:px-2">
+          <span class="block text-2xl font-bold tabular-nums text-white sm:text-3xl">
+            {String(unit.value).padStart(2, '0')}
+          </span>
+          <span
+            class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-white/70 sm:text-xs"
+          >
+            {unit.label}
+          </span>
+        </div>
+      {/each}
+    {/if}
+  </div>
+{:else}
+  <!-- Edition variant: 2026 photocopy discrete cards (Bebas numerals) -->
+  <div
+    class="ptd-countdown-block"
+    role="timer"
+    aria-live="polite"
+    aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
+  >
+    {#if ended}
+      <p class="text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
+    {:else}
+      <div
+        class="grid w-full max-w-full grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-end sm:gap-3"
+      >
+        {#each units as unit, i}
+          {#if i > 0}
+            <span
+              class="mb-6 hidden text-2xl font-bold text-[var(--ptt-text-muted)] sm:mb-7 sm:inline"
+              aria-hidden="true">:</span
+            >
+          {/if}
+          <div
+            class="min-w-0 rounded-2xl bg-[var(--ptt-bg-elevated)] px-1.5 py-2.5 text-center shadow-md shadow-[var(--ptt-text)]/5 ring-1 ring-[var(--ptt-border)] sm:min-w-[4.75rem] sm:px-4 sm:py-3"
+          >
+            <span
+              class="block text-2xl font-bold tabular-nums leading-none text-[var(--ptt-primary)] sm:text-4xl"
+              style="font-family: Bebas Neue, 'Arial Black', sans-serif; letter-spacing: 0.04em;"
+            >
+              {String(unit.value).padStart(2, '0')}
+            </span>
+            <span
+              class="mt-1.5 block text-[9px] font-semibold uppercase tracking-wider text-[var(--ptt-text-muted)] sm:mt-2 sm:text-xs sm:tracking-widest"
+            >
+              {unit.label}
+            </span>
+          </div>
+        {/each}
       </div>
-    {/each}
-  {/if}
-</div>
+    {/if}
+  </div>
+{/if}

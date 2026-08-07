@@ -336,12 +336,24 @@ export interface SiteTranslations {
     eyebrow: string;
     intro: (count: number) => string;
     currentTitle: string;
+    currentIntro: string;
     pastTitle: string;
     pastIntro: string;
     sponsorUsLabel: string;
+    contactLabel: string;
     emptyTitle: string;
     emptyDesc: string;
     breadcrumbHome: string;
+    why: {
+      title: string;
+      intro: string;
+      items: {
+        meetups: { title: string; body: string };
+        ptd: { title: string; body: string };
+        talent: { title: string; body: string };
+      };
+    };
+    /** Kept for PTD / legacy copy; community `/sponsors` page does not render these. */
     tiers: {
       diamond: string;
       gold: string;
@@ -356,10 +368,13 @@ export interface SiteTranslations {
     description: string;
     eyebrow: string;
     intro: (count: number) => string;
+    sinceLabel: (year: number) => string;
     currentTitle: string;
+    currentIntro: string;
     pastTitle: string;
     pastIntro: string;
     joinLabel: string;
+    contributeLabel: string;
     emptyTitle: string;
     emptyDesc: string;
   };
@@ -519,13 +534,20 @@ export interface SiteTranslations {
     gallery: string;
     galleryMemories: string;
     sponsors: string;
+    sponsorsSubtitle: string;
+    sponsorsFooter: string;
     communities: string;
     communitiesOrganizes: string;
+    communitiesOrganizesSubtitle: string;
+    communitiesOrganizesFooter: string;
     organizers: string;
+    organizersSubtitle: string;
     collaborators: string;
+    collaboratorsSubtitle: string;
     about: string;
     pricing: string;
     faq: string;
+    faqSubtitle: string;
     joinTitle: string;
     joinSubtitle: string;
     joinCta: string;
@@ -556,6 +578,11 @@ export interface SiteTranslations {
     editionNavLabel: string;
     previousEditions: string;
     allEditions: string;
+    indexStagePrimaryCta: string;
+    indexPastRowEyebrow: string;
+    indexPastRowCta: string;
+    indexNoUpcomingTitle: string;
+    indexNoUpcomingIntro: string;
   };
 
   // Blog post engagement

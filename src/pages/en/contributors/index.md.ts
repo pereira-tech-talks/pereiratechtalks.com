@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 
-import { getContributors } from '@/lib/contributor';
+import {
+  filterCurrentTeamOrganizers,
+  filterPastTeamMembers,
+  getContributors,
+} from '@/lib/contributor';
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
 
 const SITE_URL = 'https://pereiratechtalks.org';
@@ -8,20 +12,33 @@ const SITE_URL = 'https://pereiratechtalks.org';
 export const GET: APIRoute = async () => {
   const lang = 'en';
   const contributors = await getContributors();
-  const lines = contributors.map((c) => {
-    const role = c.data.role.en;
-    const roles = c.data.roles.join(', ');
-    return `- **${c.data.name}** — ${role} (${roles})`;
-  });
+  const current = filterCurrentTeamOrganizers(contributors);
+  const past = filterPastTeamMembers(contributors);
+
+  const toLines = (list: typeof contributors): string[] =>
+    list.map((c) => {
+      const role = c.data.role.en;
+      return `- **${c.data.name}** — ${role}`;
+    });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Contributors — Pereira Tech Talks',
+    title: 'Team — Pereira Tech Talks',
     description:
-      'The community members who make Pereira Tech Talks possible: founding organizers, organizers, vertical leads, mentors, and conduct team.',
+      'Active organizing team of Pereira Tech Talks plus alumni and past organizers. Bilingual directory at /en/contributors.',
     lang,
     canonical: `${SITE_URL}/en/contributors`,
-    metadata: [['Total contributors', String(contributors.length)]],
-    sections: [{ heading: 'All contributors', lines }],
+    metadata: [
+      ['Active organizers', String(current.length)],
+      ['Alumni and past', String(past.length)],
+      ['Total in directory', String(contributors.length)],
+    ],
+    sections: [
+      { heading: 'Organizing team', lines: toLines(current) },
+      {
+        heading: 'Alumni and past organizers',
+        lines: toLines(past),
+      },
+    ],
   });
 
   return new Response(markdown, {

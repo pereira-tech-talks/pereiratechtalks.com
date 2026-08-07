@@ -1,0 +1,136 @@
+---
+/**
+ * Hub featured stage — first viewport for the PTD hub page.
+ * Presents the upcoming edition as a grand, cinematic full-bleed dark stage
+ * with a live countdown. Uses global PTT tokens only — no EditionScope.
+ */
+
+import PtdCountdown from '@/components/pereira-tech-days/PtdCountdown.svelte';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import {
+  getEditionCountdownTargets,
+  type PereiraTechDay,
+} from '@/lib/pereiraTechDay';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  edition: PereiraTechDay;
+  lang: Language;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const { edition, lang, breadcrumbs } = Astro.props;
+const t = getTranslations(lang).ptdPage;
+const prefix = getUrlPrefix(lang);
+
+const editionHref = `${prefix}/pereira-tech-days/${edition.data.year}/`;
+const { targetDate, endDate } = getEditionCountdownTargets(edition);
+
+const heroSrc = edition.data.hero?.src ?? null;
+const editionTitle = tr(edition.data.title, lang);
+const editionTagline = tr(edition.data.tagline, lang);
+---
+
+<section
+  class="relative overflow-hidden bg-ptt-bg-dark text-white"
+  aria-label={editionTitle}
+>
+  <!-- Atmospheric background image -->
+  {
+    heroSrc && (
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0"
+      >
+        <img
+          src={heroSrc}
+          alt=""
+          width={1280}
+          height={720}
+          class="h-full w-full object-cover opacity-30"
+          loading="eager"
+          decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-ptt-bg-dark via-ptt-bg-dark/90 to-ptt-bg-dark/60" />
+        <div class="absolute inset-0 bg-gradient-to-t from-ptt-bg-dark via-transparent to-ptt-bg-dark/40" />
+      </div>
+    )
+  }
+  {
+    !heroSrc && (
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-gradient-to-br from-ptt-bg-dark via-ptt-primary/10 to-ptt-bg-dark"
+      />
+    )
+  }
+
+  <!-- Breadcrumbs -->
+  {
+    breadcrumbs && breadcrumbs.length > 0 && (
+      <div class="relative main-container pt-10 pb-4 sm:pt-14">
+        <Breadcrumbs items={breadcrumbs} onDark />
+      </div>
+    )
+  }
+
+  <!-- Content -->
+  <div class="relative main-container pb-16 pt-6 sm:pb-20 sm:pt-10 lg:pb-24">
+    <Eyebrow variant="accent">{t.indexEyebrow}</Eyebrow>
+
+    <!-- Edition year badge -->
+    <p class="mt-2 text-sm font-semibold uppercase tracking-widest text-white/60">
+      {edition.data.year}
+    </p>
+
+    <!-- Edition title as primary H1 -->
+    <h1 class="mt-2 max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+      {editionTitle}
+    </h1>
+
+    <!-- Tagline / support line -->
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">
+      {editionTagline}
+    </p>
+
+    <!-- Countdown — client:visible, reduced-motion friendly -->
+    <div class="mt-8 max-w-sm">
+      <PtdCountdown
+        client:visible
+        lang={lang}
+        targetDate={targetDate}
+        endDate={endDate}
+        variant="hub"
+      />
+    </div>
+
+    <!-- CTAs -->
+    <div class="mt-8 flex flex-wrap gap-3">
+      <!-- Primary CTA -->
+      <a
+        href={editionHref}
+        class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+      >
+        {t.indexStagePrimaryCta}
+      </a>
+
+      <!-- Secondary: CFS -->
+      <a
+        href={`${prefix}/call-for-speakers/`}
+        class="inline-flex min-h-[44px] items-center rounded-full border border-white/50 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      >
+        {t.indexCfsCta}
+      </a>
+
+      <!-- Secondary: Sponsor -->
+      <a
+        href={`${prefix}/sponsor-us/`}
+        class="inline-flex min-h-[44px] items-center text-sm font-semibold text-white/70 underline-offset-2 transition hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      >
+        {t.indexSponsorCta}
+      </a>
+    </div>
+  </div>
+</section>

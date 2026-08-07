@@ -72,3 +72,30 @@ export const getOrganizers = async (): Promise<Contributor[]> => {
       c.data.roles.includes('founding-organizer')
   );
 };
+
+/** Active organizers for the Equipo page (flat current-team grid). */
+export const filterCurrentTeamOrganizers = (
+  contributors: Contributor[]
+): Contributor[] =>
+  sortContributors(
+    filterActiveContributors(contributors).filter(
+      (c) =>
+        c.data.roles.includes('organizer') ||
+        c.data.roles.includes('founding-organizer')
+    )
+  );
+
+/** Past / alumni members for the unified Equipo past section. */
+export const filterPastTeamMembers = (
+  contributors: Contributor[]
+): Contributor[] => sortContributors(filterPastContributors(contributors));
+
+export const getCurrentTeamOrganizers = async (): Promise<Contributor[]> => {
+  const all = await getContributors();
+  return filterCurrentTeamOrganizers(all);
+};
+
+export const getPastTeamMembers = async (): Promise<Contributor[]> => {
+  const all = await getContributors();
+  return filterPastTeamMembers(all);
+};
