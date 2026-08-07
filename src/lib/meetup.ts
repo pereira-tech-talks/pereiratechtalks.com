@@ -124,9 +124,58 @@ export const getUpcomingMeetups = async (): Promise<Meetup[]> => {
     .map((item) => item.data);
 };
 
+/**
+ * Past meetups plus completed Pereira Tech Day editions in the archive timeline.
+ */
+export const buildPastMeetupShowcase = (
+  meetups: Meetup[],
+  editions: PereiraTechDay[],
+  upcomingMeetupIds: Set<string>,
+  todayInTz: string = getTodayInSiteTimezone()
+): MeetupShowcaseItem[] => {
+  const pastMeetups: MeetupShowcaseItem[] = meetups
+    .filter(
+      (m) =>
+        !upcomingMeetupIds.has(m.id) &&
+        isCalendarDateBeforeToday(m.data.date, todayInTz)
+    )
+    .map((meetup) => ({ type: 'meetup', data: meetup }));
+
+  const pastEditions: MeetupShowcaseItem[] = editions
+    .filter((edition) =>
+      isCalendarDateBeforeToday(getEditionStartDate(edition), todayInTz)
+    )
+    .map((edition) => ({ type: 'pereira-tech-day', data: edition }));
+
+  return [...pastMeetups, ...pastEditions].sort(
+    (a, b) =>
+      getShowcaseItemDate(b).getTime() - getShowcaseItemDate(a).getTime()
+  );
+};
+
+export const getPastMeetupShowcase = async (): Promise<
+  MeetupShowcaseItem[]
+> => {
+  const [meetups, editions, upcoming] = await Promise.all([
+    getMeetups(),
+    getEditions(),
+    getUpcomingMeetupShowcase(),
+  ]);
+  const upcomingMeetupIds = new Set(
+    upcoming
+      .filter((item) => item.type === 'meetup')
+      .map((item) => item.data.id)
+  );
+  return buildPastMeetupShowcase(meetups, editions, upcomingMeetupIds);
+};
+
 export const getPastMeetups = async (): Promise<Meetup[]> => {
-  const all = await getMeetups();
-  return all.filter((e) => isCalendarDateBeforeToday(e.data.date));
+  const showcase = await getPastMeetupShowcase();
+  return showcase
+    .filter(
+      (item): item is { type: 'meetup'; data: Meetup } => item.type === 'meetup'
+    )
+    .map((item) => item.data);
 };
 
 export const getMeetupsByVertical = async (
@@ -162,4 +211,19 @@ export const groupMeetupsByYear = (
   return [...byYear.entries()]
     .sort((a, b) => b[0] - a[0])
     .map(([year, meetups]) => ({ year, meetups }));
+};
+
+/** Group showcase items by calendar year (descending). */
+export const groupMeetupShowcaseByYear = (
+  items: MeetupShowcaseItem[]
+): { year: number; items: MeetupShowcaseItem[] }[] => {
+  const byYear = new Map<number, MeetupShowcaseItem[]>();
+  for (const item of items) {
+    const y = getCalendarYear(getShowcaseItemDate(item));
+    if (!byYear.has(y)) byYear.set(y, []);
+    byYear.get(y)?.push(item);
+  }
+  return [...byYear.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([year, items]) => ({ year, items }));
 };

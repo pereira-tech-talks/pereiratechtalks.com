@@ -1,7 +1,11 @@
 import type { CollectionEntry } from 'astro:content';
 import { describe, expect, it } from 'vitest';
 
-import { buildUpcomingMeetupShowcase, resolveMeetupStatus } from '@/lib/meetup';
+import {
+  buildPastMeetupShowcase,
+  buildUpcomingMeetupShowcase,
+  resolveMeetupStatus,
+} from '@/lib/meetup';
 import { resolveEditionStatus } from '@/lib/pereiraTechDay';
 
 type Meetup = CollectionEntry<'meetups'>;
@@ -135,5 +139,37 @@ describe('buildUpcomingMeetupShowcase', () => {
     );
 
     expect(items).toHaveLength(0);
+  });
+});
+
+describe('buildPastMeetupShowcase', () => {
+  it('includes completed Pereira Tech Day editions in the archive', () => {
+    const items = buildPastMeetupShowcase(
+      [
+        makeMeetup('2024-10-30_ia', '2024-10-30', 'completed'),
+        makeMeetup('2024-09-26_ml', '2024-09-26', 'completed'),
+      ],
+      [makeEdition(2024, '2024-09-21', 'completed')],
+      new Set(),
+      TODAY
+    );
+
+    expect(items.some((item) => item.type === 'pereira-tech-day')).toBe(true);
+    expect(
+      items.find((item) => item.type === 'pereira-tech-day')?.data.data.year
+    ).toBe(2024);
+  });
+
+  it('sorts past meetups and PTD editions by date descending', () => {
+    const items = buildPastMeetupShowcase(
+      [makeMeetup('2024-09-26_ml', '2024-09-26', 'completed')],
+      [makeEdition(2024, '2024-09-21', 'completed')],
+      new Set(),
+      TODAY
+    );
+
+    expect(items).toHaveLength(2);
+    expect(items[0]?.type).toBe('meetup');
+    expect(items[1]?.type).toBe('pereira-tech-day');
   });
 });

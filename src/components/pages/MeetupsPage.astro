@@ -5,7 +5,6 @@
  * Full archive + sticky year jump rail (see MEETUPS_NAV_DECISION.md).
  */
 
-import MeetupCard from '@/components/cards/MeetupCard.astro';
 import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
@@ -15,9 +14,9 @@ import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
-  getMeetups,
+  getPastMeetupShowcase,
   getUpcomingMeetupShowcase,
-  groupMeetupsByYear,
+  groupMeetupShowcaseByYear,
 } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
@@ -27,13 +26,9 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const all = await getMeetups();
 const upcoming = await getUpcomingMeetupShowcase();
-const upcomingMeetupIds = new Set(
-  upcoming.filter((item) => item.type === 'meetup').map((item) => item.data.id)
-);
-const past = all.filter((m) => !upcomingMeetupIds.has(m.id));
-const groups = groupMeetupsByYear(past);
+const pastShowcase = await getPastMeetupShowcase();
+const groups = groupMeetupShowcaseByYear(pastShowcase);
 const years = groups.map((g) => g.year);
 
 const tr = getTranslations(lang);
@@ -49,7 +44,7 @@ const t = {
   emptyUpcomingDescription: mp.emptyUpcomingDescription,
   ctaLabel: mp.ctaLuma,
   ctaHref: 'https://luma.com/pertechtalks',
-  meetupsCount: mp.archiveCount.replace('{n}', String(past.length)),
+  meetupsCount: mp.archiveCount.replace('{n}', String(pastShowcase.length)),
   yearLabel: (n: number) => mp.yearLabel.replace('{year}', String(n)),
   yearNav: mp.yearNav,
   calendarEyebrow: mp.calendarEyebrow,
@@ -134,15 +129,15 @@ const breadcrumbs = [
       }
       <div class="space-y-16 min-w-0">
         {
-          groups.map(({ year, meetups }) => (
+          groups.map(({ year, items }) => (
             <div id={`year-${year}`} class="scroll-mt-28">
               <h3 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
                 {t.yearLabel(year)}
               </h3>
               <ul class="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {meetups.map((m) => (
+                {items.map((item) => (
                   <li class="min-w-0">
-                    <MeetupCard meetup={m} lang={lang} />
+                    <MeetupShowcaseCard item={item} lang={lang} />
                   </li>
                 ))}
               </ul>
