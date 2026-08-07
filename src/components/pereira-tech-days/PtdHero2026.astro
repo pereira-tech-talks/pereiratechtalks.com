@@ -79,12 +79,12 @@ const YEAR_CYAN = '#3ab9c9';
     )
   }
 
-  <div class="relative main-container py-12 lg:max-w-[58%] lg:py-20 xl:max-w-[55%]">
+  <div class="relative main-container max-w-full py-12 lg:max-w-[58%] lg:py-20 xl:max-w-[55%]">
     <p class="text-sm font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">
       {eyebrow}
     </p>
 
-    <div class="mt-3 flex items-start gap-3 sm:gap-4">
+    <div class="mt-3 flex min-w-0 items-start gap-3 sm:gap-4">
       {
         logoSrc && (
           <img
@@ -96,7 +96,7 @@ const YEAR_CYAN = '#3ab9c9';
           />
         )
       }
-      <h1 class="text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+      <h1 class="min-w-0 break-words text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
         <span class="block text-[var(--ptt-text)]">{titleLineTech}</span>
         {
           dayWord && (
@@ -114,16 +114,16 @@ const YEAR_CYAN = '#3ab9c9';
       </h1>
     </div>
 
-    <p class="mt-4 max-w-xl text-lg text-[var(--ptt-text)]/90">
+    <p class="mt-4 max-w-xl break-words text-lg text-[var(--ptt-text)]/90">
       {taglineLead ? `${taglineLead} ` : ''}
       <strong class="font-semibold text-[var(--ptt-accent)]">{taglineEmphasis}</strong>
     </p>
 
-    <ul class="mt-6 flex flex-col gap-2 text-sm text-[var(--ptt-text-muted)]">
-      <li class="flex items-center gap-2">
+    <ul class="mt-6 flex max-w-full flex-col gap-2 text-sm text-[var(--ptt-text-muted)]">
+      <li class="flex min-w-0 items-start gap-2">
         <svg
           aria-hidden="true"
-          class="h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
+          class="mt-0.5 h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -135,12 +135,12 @@ const YEAR_CYAN = '#3ab9c9';
             d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"
           />
         </svg>
-        <span>{dateLong}</span>
+        <span class="min-w-0 break-words">{dateLong}</span>
       </li>
-      <li class="flex items-center gap-2">
+      <li class="flex min-w-0 items-start gap-2">
         <svg
           aria-hidden="true"
-          class="h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
+          class="mt-0.5 h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -159,12 +159,12 @@ const YEAR_CYAN = '#3ab9c9';
               href={venueMapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
+              class="min-w-0 break-words underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
             >
               {venueName}
             </a>
           ) : (
-            <span>{venueName}</span>
+            <span class="min-w-0 break-words">{venueName}</span>
           )
         }
       </li>

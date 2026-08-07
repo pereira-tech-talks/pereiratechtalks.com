@@ -98,7 +98,9 @@ const units = $derived([
     {#if ended}
       <p class="text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
     {:else}
-      <div class="flex flex-wrap items-end gap-2 sm:gap-3">
+      <div
+        class="grid w-full max-w-full grid-cols-4 gap-1.5 sm:flex sm:flex-wrap sm:items-end sm:gap-3"
+      >
         {#each units as unit, i}
           {#if i > 0}
             <span
@@ -107,16 +109,16 @@ const units = $derived([
             >
           {/if}
           <div
-            class="min-w-[4.25rem] rounded-2xl bg-[var(--ptt-bg-elevated)] px-3 py-3 text-center shadow-md shadow-[var(--ptt-text)]/5 ring-1 ring-[var(--ptt-border)] sm:min-w-[4.75rem] sm:px-4"
+            class="min-w-0 rounded-2xl bg-[var(--ptt-bg-elevated)] px-1.5 py-2.5 text-center shadow-md shadow-[var(--ptt-text)]/5 ring-1 ring-[var(--ptt-border)] sm:min-w-[4.75rem] sm:px-4 sm:py-3"
           >
             <span
-              class="block text-3xl font-bold tabular-nums leading-none text-[var(--ptt-primary)] sm:text-4xl"
+              class="block text-2xl font-bold tabular-nums leading-none text-[var(--ptt-primary)] sm:text-4xl"
               style="font-family: Bebas Neue, 'Arial Black', sans-serif; letter-spacing: 0.04em;"
             >
               {String(unit.value).padStart(2, '0')}
             </span>
             <span
-              class="mt-2 block text-[10px] font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)] sm:text-xs"
+              class="mt-1.5 block text-[9px] font-semibold uppercase tracking-wider text-[var(--ptt-text-muted)] sm:mt-2 sm:text-xs sm:tracking-widest"
             >
               {unit.label}
             </span>

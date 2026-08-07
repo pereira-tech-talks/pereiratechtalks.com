@@ -47,7 +47,7 @@ function toggle(index: number) {
   {#if sectionBg}
     <div class="absolute inset-0 bg-[var(--ptt-bg)]/55" aria-hidden="true"></div>
   {/if}
-  <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+  <div class="relative mx-auto max-w-4xl min-w-0 px-4 sm:px-6 lg:px-8">
     <header class="text-center">
       <h2 id="ptd-faq-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
         {title}
@@ -63,13 +63,13 @@ function toggle(index: number) {
       <ul class="mt-10 grid gap-4 sm:grid-cols-2">
         {#each items as item}
           <li
-            class="rounded-2xl bg-[var(--ptt-bg-elevated)] p-5 text-left shadow-sm ring-1 ring-[var(--ptt-border)]"
+            class="min-w-0 break-words rounded-2xl bg-[var(--ptt-bg-elevated)] p-5 text-left shadow-sm ring-1 ring-[var(--ptt-border)]"
           >
-            <h3 class="flex items-start gap-2 text-base font-semibold text-[var(--ptt-text)]">
-              <span class="mt-1 text-[var(--ptt-accent)]" aria-hidden="true">›</span>
-              <span>{tr(item.question, lang)}</span>
+            <h3 class="flex min-w-0 items-start gap-2 text-base font-semibold text-[var(--ptt-text)]">
+              <span class="mt-1 shrink-0 text-[var(--ptt-accent)]" aria-hidden="true">›</span>
+              <span class="min-w-0">{tr(item.question, lang)}</span>
             </h3>
-            <div class="mt-3 pl-4 text-sm leading-relaxed text-[var(--ptt-text-muted)]">
+            <div class="mt-3 min-w-0 pl-4 text-sm leading-relaxed break-words text-[var(--ptt-text-muted)]">
               <p>{tr(item.answer, lang)}</p>
               {#if item.linkUrl && item.linkLabel}
                 <a
