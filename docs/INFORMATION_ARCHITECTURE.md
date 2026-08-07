@@ -42,7 +42,7 @@ match this IA, you are creating drift.
 | Meetup detail | `/meetups/{slug}` | `/en/meetups/{slug}` | `meetups` | `meetups/[slug].astro` | `MeetupDetailPage.astro` | per-slug `.md` |
 | Events calendar | `/events` | `/es/events` | `events` + `meetups` | `events/index.astro` | `EventsCalendarPage.astro` | yes |
 | Event detail | `/events/{slug}` | `/es/events/{slug}` | `events` | `events/[slug].astro` | `EventDetailPage.astro` | per-slug `.md` |
-| PTT Days umbrella | `/pereira-tech-days` | `/es/pereira-tech-days` | `pereiraTechDays` | `pereira-tech-days/index.astro` | `PereiraTechDaysListPage.astro` | yes |
+| PTT Days umbrella | `/pereira-tech-days` | `/en/pereira-tech-days` | `pereiraTechDays` | `pereira-tech-days/index.astro` | `PereiraTechDaysPage.astro` | yes |
 | PTT Day edition | `/pereira-tech-days/{year}` | `/es/pereira-tech-days/{year}` | `pereiraTechDays` | `pereira-tech-days/[year].astro` | `PereiraTechDayEditionPage.astro` (wraps in `EditionScope`) | per-year `.md` |
 | Speakers catalog | `/speakers` | `/es/speakers` | `speakers` | `speakers/index.astro` | `SpeakersCatalogPage.astro` | yes |
 | Speaker profile | `/speakers/{slug}` | `/es/speakers/{slug}` | `speakers` | `speakers/[slug].astro` | `SpeakerProfilePage.astro` | per-slug `.md` |
