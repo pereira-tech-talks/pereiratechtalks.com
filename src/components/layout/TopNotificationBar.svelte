@@ -178,12 +178,17 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 </script>
 
 {#if visibleBar.length > 0}
+  {@const bar = visibleBar[0]}
   <!--
     grid 0fr/1fr collapses height without max-height guessing (avoids
     mid-animation clipping when the row is taller than max-h-12/16).
+    Paint the severity surface on the collapsing wrapper so the hero/
+    page behind never flashes through while rows animate to 0fr.
   -->
   <div
-    class="grid w-full transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+    class="grid w-full transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none {severityClass(
+      bar.severity
+    )} {atTop ? '' : 'pointer-events-none'}"
     style="grid-template-rows: {atTop ? '1fr' : '0fr'}"
     data-testid="top-notification-bar"
     data-collapsed={atTop ? 'false' : 'true'}
@@ -197,14 +202,10 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           Mid-height bar (~36–40px). Touch targets stay ≥44px via
           invisible hit-area expanders, not min-h on the row.
           Non-dismissible — hides on scroll, returns at top.
+          No opacity fade: collapsing a transparent row would flash the
+          dark sticky/hero behind; the grid height animation alone hides it.
         -->
-        <div
-          class="{severityClass(n.severity)} {atTop
-            ? 'opacity-100'
-            : 'opacity-0 pointer-events-none'} transition-opacity duration-200 ease-out motion-reduce:transition-none"
-          role="region"
-          aria-label={n.title}
-        >
+        <div class="pointer-events-auto" role="region" aria-label={n.title}>
           <div
             class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
           >

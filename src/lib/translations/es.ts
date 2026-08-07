@@ -46,7 +46,7 @@ export const es: SiteTranslations = {
   hero: {
     tagline: 'Pereira, Risaralda · Desde 2014',
     description:
-      'Comunidad tech: meetups, <em>Pereira Tech Day</em> y escuelas — talento local con alcance global.',
+      'Comunidad abierta para aprender en público, compartir lo que sabes y crecer en compañía. Aquí caben quienes empiezan, quienes ya llevan camino y quienes quieren mentorear. Buscamos curiosidad, voces nuevas y gente con ganas de construir — talento local con mirada global y propósito compartido.',
     ctaMeetups: 'Ver meetups',
     ctaPtd: 'Pereira Tech Day 2026',
     ctaContact: 'Escríbenos',
@@ -900,6 +900,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     joinCta: 'Explorar Pereira Tech Talks',
     lightningTitle: 'Lightning talks',
     lightningTagline: 'Charlas cortas',
+    registerCta: 'Inscribirse',
     subscribe: {
       copy: 'Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!',
       emailLabel: 'Correo electrónico',

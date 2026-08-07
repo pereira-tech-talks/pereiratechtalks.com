@@ -41,13 +41,17 @@ function closeEditions() {
 <svelte:window on:click={closeEditions} />
 
 <header
-  class="ptd-edition-header border-b {isDark
-    ? 'border-white/10 bg-[#030620]/65 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-[#030620]/55'
-    : 'border-black/5 bg-ptt-bg/90 text-ptt backdrop-blur-md'}"
+  class="ptd-edition-header relative {isDark
+    ? 'border-b border-white/10 bg-[#030620]/65 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-[#030620]/55'
+    : 'overflow-visible border-b border-transparent bg-transparent text-[#1f3f59]'}"
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
+  {#if !isDark}
+    <!-- Frosted wash fades out at the bottom so hero art continues under the chrome. -->
+    <div class="ptd-edition-header__glass" aria-hidden="true"></div>
+  {/if}
   <nav
-    class="main-container flex items-center justify-between gap-2 md:gap-4"
+    class="relative z-10 main-container flex items-center justify-between gap-2 md:gap-4"
     aria-label={t.ptdPage.editionNavLabel}
   >
     <a
@@ -94,7 +98,7 @@ function closeEditions() {
         href={currentHref}
         class="hidden rounded px-2 py-1.5 text-sm font-semibold uppercase tracking-wide underline underline-offset-4 sm:inline-flex {isDark
           ? 'text-white decoration-white/80'
-          : 'text-ptt-primary decoration-ptt-accent'}"
+          : 'text-[#3ab9c9] decoration-[#3ab9c9]'}"
         aria-current="page"
       >
         {currentLabel}
@@ -113,7 +117,7 @@ function closeEditions() {
             type="button"
             class="inline-flex max-w-[11rem] cursor-pointer items-center gap-1 truncate rounded px-2 py-1.5 text-xs font-semibold uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 sm:max-w-none sm:text-sm {isDark
               ? 'text-white/90 hover:text-white focus-visible:outline-white'
-              : 'text-ptt hover:text-ptt-primary focus-visible:outline-ptt-primary'}"
+              : 'text-[#b66844] hover:text-[#1f3f59] focus-visible:outline-[#3a7f7c]'}"
             aria-expanded={editionsOpen}
             aria-haspopup="true"
             aria-controls="ptd-editions-menu"
@@ -188,3 +192,39 @@ function closeEditions() {
     </div>
   </nav>
 </header>
+
+<style>
+  /*
+   * Light PTD glass: frosted cream wash that dissolves downward past the
+   * nav so the illustration continues under the chrome without a hard cut.
+   */
+  .ptd-edition-header__glass {
+    position: absolute;
+    inset: 0 0 -2.75rem 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, #fef7f3 55%, transparent) 0%,
+      color-mix(in srgb, #fef7f3 28%, transparent) 42%,
+      color-mix(in srgb, #fef7f3 10%, transparent) 68%,
+      transparent 100%
+    );
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 38%,
+      rgba(0, 0, 0, 0.45) 62%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 38%,
+      rgba(0, 0, 0, 0.45) 62%,
+      transparent 100%
+    );
+  }
+</style>

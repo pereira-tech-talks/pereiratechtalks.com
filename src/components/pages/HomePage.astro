@@ -185,31 +185,38 @@ const meetupsHeading =
       >
         <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
           {sponsors.map((sponsor) => {
-            const logoMaxH = sponsor.id === 'veritran' ? 'max-h-16' : 'max-h-12';
+            /**
+             * Same card + height-led sizing so wide wordmarks match.
+             * Squarer marks (ASE) need a taller cap to match perceived weight.
+             */
+            const logoSize =
+              sponsor.id === 'ase-utp'
+                ? 'h-[4.25rem] w-auto max-w-full object-contain'
+                : 'h-14 w-auto max-w-full object-contain';
             return (
-            <li class="flex h-24 items-center justify-center rounded-xl bg-ptt-bg-elevated p-4 ring-1 ring-ptt-border">
+            <li class="flex h-28 items-center justify-center rounded-xl bg-ptt-bg-elevated p-5 ring-1 ring-ptt-border">
               <a
                 href={sponsor.data.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+                class="flex h-16 w-full max-w-[13rem] items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
                 aria-label={sponsor.data.name}
               >
                 <img
                   src={sponsor.data.logo.light}
                   alt={sponsor.data.logo.alt}
-                  width="160"
+                  width="240"
                   height="64"
                   loading="lazy"
-                  class={`${logoMaxH} max-w-full object-contain dark:hidden`}
+                  class={`${logoSize} dark:hidden`}
                 />
                 <img
                   src={sponsor.data.logo.dark}
                   alt={sponsor.data.logo.alt}
-                  width="160"
+                  width="240"
                   height="64"
                   loading="lazy"
-                  class={`hidden ${logoMaxH} max-w-full object-contain dark:block`}
+                  class={`hidden ${logoSize} dark:block`}
                 />
               </a>
             </li>

@@ -137,7 +137,9 @@ const activeNotifications = isPtdEditionChrome
       'flex flex-col min-h-screen text-ptt',
       isPtdEditionChrome && ptdChromeVariant === 'dark'
         ? 'bg-[#030620]'
-        : 'bg-ptt-bg',
+        : isPtdEditionChrome && ptdChromeVariant === 'light'
+          ? 'bg-[#fef7f3]'
+          : 'bg-ptt-bg',
       activeNotifications.length > 0 && 'has-top-notification',
     ]}
   >
@@ -150,7 +152,16 @@ const activeNotifications = isPtdEditionChrome
       reappears near the top — see TopNotificationBar.svelte.
       PTD edition pages use a dedicated minimal header (legacy photocopy).
     */}
-    <div class="sticky top-0 z-50">
+    <div
+      data-ptt-chrome
+      class:list={[
+        'sticky top-0 z-50',
+        /* Light PTD: keep chrome transparent so the hero illustration
+           fades under the glass header (2024-style), not a solid cream bar. */
+        isPtdEditionChrome && ptdChromeVariant === 'light' && 'overflow-visible bg-transparent',
+        isPtdEditionChrome && ptdChromeVariant === 'dark' && 'bg-[#030620]',
+      ]}
+    >
       {
         activeNotifications.length > 0 && (
           <TopNotificationBar
@@ -174,13 +185,52 @@ const activeNotifications = isPtdEditionChrome
         )
       }
     </div>
+    {/*
+      Keep --ptt-chrome-height in sync with sticky chrome (header ±
+      notification bar). Hero uses it for 100dvh fill; ResizeObserver
+      covers bar collapse/expand and header reflow without layout jump
+      below the hero (chrome shrink and hero grow cancel).
+      Also re-sync on transitionend + trailing rAF — grid 0fr/1fr
+      animations can skip the final ResizeObserver callback.
+    */}
+    <script is:inline>
+      (function () {
+        var el = document.querySelector('[data-ptt-chrome]');
+        if (!el) return;
+        var root = document.documentElement;
+        var raf = 0;
+        var sync = function () {
+          root.style.setProperty(
+            '--ptt-chrome-height',
+            el.getBoundingClientRect().height + 'px'
+          );
+        };
+        var syncSoon = function () {
+          sync();
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(function () {
+            raf = 0;
+            sync();
+          });
+        };
+        sync();
+        if (typeof ResizeObserver !== 'undefined') {
+          new ResizeObserver(syncSoon).observe(el);
+        } else {
+          window.addEventListener('resize', syncSoon);
+        }
+        el.addEventListener('transitionend', syncSoon);
+      })();
+    </script>
     <main
       id="main-content"
       class:list={[
         'flex-1',
         isPtdEditionChrome && ptdChromeVariant === 'dark'
           ? 'bg-[#030620]'
-          : 'bg-ptt-bg',
+          : isPtdEditionChrome && ptdChromeVariant === 'light'
+            ? 'bg-[#fef7f3]'
+            : 'bg-ptt-bg',
       ]}
     >
       <slot />

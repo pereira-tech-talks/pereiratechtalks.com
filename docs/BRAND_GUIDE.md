@@ -168,22 +168,27 @@ All animations gated by `prefers-reduced-motion: reduce`.
 
 ## Logo & assets
 
-> The logo source files live at `tmp/assets_brand/` (provided by the user) and
-> are imported into `public/images/branding/` during Task 5. Until then, asset
-> usage rules apply unchanged.
+> Vertical and horizontal raster marks live in
+> `public/images/pereira-tech-talks/`. Regenerate light/dark vertical variants
+> with `node scripts/generate-ptt-logo-variants.mjs` (forces ink to white while
+> preserving alpha). Prefer SVG sources when available under `public/images/brand/`.
 
 ### Variants
 
-- `logo-horizontal-color` (full wordmark on light)
-- `logo-horizontal-white` (wordmark on dark)
-- `logo-vertical-color` / `logo-vertical-white`
-- `icon-color` / `icon-white` (square mark only)
+| Token | File(s) | Use on |
+|-------|---------|--------|
+| `logo-vertical-color` | `logo-vertical-color.{png,webp}` | Light backgrounds |
+| `logo-vertical-white` | `logo-vertical-white.{png,webp}` | Dark backgrounds / photo heroes |
+| `logo-color` / `logo-white` | legacy aliases of the vertical pair | Existing components |
+| `logo-horizontal` / `logo-horizontal-black` | `logo-horizontal*.webp` | Footer wordmark |
+| `topbar-logo` / `topbar-logo-black` | `topbar-logo*.webp` | Header / mobile menu |
+| `icon-color` / `icon-white` | square mark only | Favicons, avatars, social cards |
 
 ### Usage rules
 
 **Do:**
-- Use `logo-horizontal-color` on light backgrounds.
-- Use `logo-horizontal-white` on dark backgrounds (incl. `--ptt-bg` dark).
+- Use `logo-vertical-color` / horizontal color marks on light backgrounds.
+- Use `logo-vertical-white` / white marks on dark backgrounds (incl. `--ptt-bg` dark).
 - Use `icon-color` / `icon-white` for favicons, avatars, social cards.
 - Maintain aspect ratio.
 

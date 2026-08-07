@@ -171,9 +171,10 @@ Site chrome (header, footer, language switcher, theme toggle) reads the user
 theme and stays on the **global PTT palette** — never an edition kit.
 
 - **Header** — `Header.svelte`. Light: `bg-ptt-bg-elevated/95` with
-  `logo-color.png` (`dark:hidden`). Dark: `bg-ptt-bg-dark/95` with
-  `logo-white.png` (`dark:block`). Nav links inherit via `.nav-link` in
+  `logo-color.png` / `logo-vertical-color.webp` (`dark:hidden`). Dark: `bg-ptt-bg-dark/95` with
+  `logo-white.png` / `logo-vertical-white.webp` (`dark:block`). Nav links inherit via `.nav-link` in
   `global.css` (`text-ptt-secondary` → `dark:text-white/85`).
+  Vertical marks: regenerate with `node scripts/generate-ptt-logo-variants.mjs`.
 - **Hero CTAs on dark canvases** — white pill buttons use
   `text-ptt-bg-dark`, **not** `text-ptt` — `text-ptt` auto-flips light in
   dark mode and becomes illegible on white. Accent pills pair
@@ -223,16 +224,25 @@ overflow suite down to 280px (Galaxy Z Fold folded, iPhone SE).
 The home hero fills the **remaining viewport below sticky chrome**, not a fixed
 `100vh` that ignores the header.
 
-| Chrome state | `--ptt-chrome-offset` | Mechanism |
-|---|---|---|
-| Header only (notification absent) | `4.25rem` | Default on `.hero-viewport` |
-| Header + top notification bar | `6.75rem` | `body.has-top-notification` on `MainLayout` when an active notification exists. The bar collapses after ~48px scroll (hysteresis; reappears near top) — offset still accounts for presence at first paint so the hero does not jump. |
+`--ptt-chrome-height` is set on `:root` by an inline script in `MainLayout`
+that measures `[data-ptt-chrome]` (notification bar + header) via
+`ResizeObserver`. When the top notification bar collapses on scroll (or is
+absent), the measured height updates and the hero grows/shrinks by the same
+amount — chrome shrink and hero grow cancel, so content below the hero does
+not jump.
 
-Height uses `min-height: calc(100svh − offset)` (with `dvh` fallback). From
-`lg` upward the hero also locks exact `height` so the first paint is one
-cinematic frame. Short viewports (`max-height: 720px` / `560px`) hide the
-scroll cue / social row and clamp description so CTAs stay in view. Narrow
-phones (`max-width: 379px`) stack CTAs full-width.
+| Chrome state | SSR fallback | Live value |
+|---|---|---|
+| Header only (no notification) | `4.25rem` | Measured header height |
+| Header + top notification bar | `6.3rem` (`body.has-top-notification`) | Measured sticky chrome height |
+| Bar collapsed after scroll | (same class; live measure) | Header height only |
+
+Height uses `min-height: calc(100dvh − var(--ptt-chrome-height))` (`svh` as
+cascade fallback before `dvh`). From `lg` upward the hero also locks exact
+`height` so the first paint is one cinematic frame. Short viewports
+(`max-height: 720px` / `560px`) hide the scroll cue / social row and clamp
+description so CTAs stay in view. Narrow phones (`max-width: 379px`) stack
+CTAs full-width.
 
 **Motion:** `duration-fast 120ms` (hover, pill toggles), `duration-base 200ms`
 (default transitions), `duration-slow 320ms` (modals, drawers). All non-essential

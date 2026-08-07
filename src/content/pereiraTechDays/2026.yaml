@@ -13,12 +13,12 @@ description:
   es: |-
     Pereira Tech Day es un evento organizado en conjunto por las comunidades de PereiraJS, Python Pereira, Pereira Tech Talks y Joint Developer. Unimos fuerzas para crear un evento diverso y enriquecedor, con charlas que abarcan diferentes aspectos de la tecnología.
 
-    En Pereira Tech Day, nuestro objetivo es compartir con la comunidad temas relacionados con el mundo tecnológico, enfocados en inspirar y motivar a las personas. Las charlas de este año no solo cubrirán temas tecnológicos, sino también trayectorias profesionales, desarrollo comunitario y motivación, buscando incentivar a los asistentes a seguir explorando, investigando y adentrándose en el maravilloso mundo de la tecnología.
+    En Pereira Tech Day, nuestro objetivo es compartir con la comunidad temas relacionados al mundo tecnológico, enfocados en inspirar y motivar a las personas. Las charlas de este año no solo cubrirán temas tecnológicos, sino también trayectorias profesionales, desarrollo comunitario y motivación, buscando incentivar a los asistentes a seguir explorando, investigando y adentrándose en el maravilloso mundo de la tecnología.
 date: 2026-08-22
 startTime: "08:00"
 endTime: "14:00"
 venue:
-  name: Auditorio Jorge Roa Martínez, Universidad Tecnológica de Pereira
+  name: "UTP: Auditorio Jorge Roa Martínez, Pereira"
   city: Pereira
   country: Colombia
   mapUrl: "https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
@@ -32,12 +32,12 @@ aboutTopics:
   - en: Software Development
     es: Desarrollo de software
   - en: Cybersecurity
-    es: Ciberseguridad
+    es: Ciber Seguridad
 aboutMedia:
-  src: /images/pereira-tech-days/2026/about-panel.jpg
+  src: /images/pereira-tech-days/2026/about-panel.webp
   alt:
-    en: Pereira Tech Day community gathering at UTP
-    es: Comunidad de Pereira Tech Day reunida en la UTP
+    en: Group photo of Pereira Tech Day attendees on stage at UTP
+    es: Foto grupal de asistentes de Pereira Tech Day en el escenario de la UTP
 hero:
   src: /images/pereira-tech-days/2026/mascot/hero.webp
   alt:
@@ -133,7 +133,7 @@ sponsorshipPlans:
   - tier: silver
     title:
       en: Silver Sponsor
-      es: Patrocinador Silver
+      es: Silver Sponsor
     subtitle:
       en: Visibility and relationship building.
       es: Visibilidad y relacionamiento.
@@ -142,8 +142,8 @@ sponsorshipPlans:
       en: USD
       es: USD
     benefits:
-      - en: Logo on web and brochure
-        es: Logo en web y brochure
+      - en: Logo on web/brochure
+        es: Logo en web/brochure
       - en: Official mention
         es: Mención oficial
       - en: Social media thank-you
@@ -157,7 +157,7 @@ sponsorshipPlans:
   - tier: gold
     title:
       en: Gold Sponsor
-      es: Patrocinador Gold
+      es: Gold Sponsor
     subtitle:
       en: Direct access.
       es: Acceso directo.
@@ -184,7 +184,7 @@ sponsorshipPlans:
   - tier: platinum
     title:
       en: Platinum Sponsor
-      es: Patrocinador Platinum
+      es: Platinum Sponsor
     subtitle:
       en: High impact.
       es: Alto impacto.
@@ -195,8 +195,8 @@ sponsorshipPlans:
     benefits:
       - en: Featured lightning talk (5 min)
         es: Lightning talk destacado (5 min)
-      - en: Brand booth (2×2 m)
-        es: Stand de marca (2×2 m)
+      - en: Brand booth (2x2m)
+        es: Stand de marca (2x2m)
       - en: Brand activation
         es: Activación de marca
       - en: Dedicated reel
@@ -297,8 +297,12 @@ faqs:
       en: How can I register?
       es: ¿Cómo puedo registrarme?
     answer:
-      en: Watch our social channels and this website. We have limited capacity (around 200 seats), so register as soon as tickets open.
-      es: Debes estar atento a las redes del evento y a nuestra página web. Solo tenemos 200 cupos, así que reserva tan pronto se habiliten las inscripciones.
+      en: Registration is open on Luma. Capacity is limited (around 200 seats), so reserve your spot as soon as you can.
+      es: Las inscripciones están abiertas en Luma. Solo tenemos alrededor de 200 cupos, así que reserva tu lugar cuanto antes.
+    linkUrl: "https://luma.com/6lo3vt4x"
+    linkLabel:
+      en: Register on Luma
+      es: Inscribirse en Luma
   - question:
       en: Is the event free?
       es: ¿El evento es gratuito?
@@ -377,5 +381,6 @@ faqs:
     linkLabel:
       en: Read the Code of Conduct
       es: Leer el Código de Conducta
-status: announced
+linkMeetupCom: "https://luma.com/6lo3vt4x"
+status: rsvp-open
 draft: false

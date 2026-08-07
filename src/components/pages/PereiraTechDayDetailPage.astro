@@ -232,8 +232,8 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           tagline={tagline}
           eyebrow={
             edition.data.startTime
-              ? `${dateLabel} — ${edition.data.startTime}`
-              : dateLabel
+              ? `${heroDateLabel} — ${/AM|PM/i.test(edition.data.startTime) ? edition.data.startTime : `${edition.data.startTime} AM`}`
+              : heroDateLabel
           }
           dateLong={dateLong}
           venueName={venue.name}
@@ -243,6 +243,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           logoSrc="/images/pereira-tech-days/2026/logo.png"
           targetDate={startIso}
           endDate={endIso}
+          registrationUrl={edition.data.linkMeetupCom}
         />
       ) : (
         <PtdHero2024
@@ -271,6 +272,12 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           mediaSrc={edition.data.aboutMedia?.src}
           mediaAlt={tr(edition.data.aboutMedia?.alt, lang)}
           sectionBg={sectionBgs.about}
+          communityLinks={[
+            { name: 'PereiraJS', href: 'https://pereira.js.org/' },
+            { name: 'Python Pereira', href: 'https://pypereira.co' },
+            { name: 'Pereira Tech Talks', href: 'https://pereiratechtalks.org' },
+            { name: 'Joint Developer', href: 'https://jointdevweb.firebaseapp.com/' },
+          ]}
         />
       )
     }
