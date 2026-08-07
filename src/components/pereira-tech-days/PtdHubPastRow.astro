@@ -1,0 +1,169 @@
+---
+/**
+ * Hub past-edition row — single horizontal band for a past Pereira Tech Day.
+ * Desktop: image (~45%) + copy/CTA side by side.
+ * Mobile: stacks vertically as one continuous story (not a card grid).
+ */
+
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getEditionStartDate, type PereiraTechDay } from '@/lib/pereiraTechDay';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  edition: PereiraTechDay;
+  lang: Language;
+}
+
+const { edition, lang } = Astro.props;
+const t = getTranslations(lang).ptdPage;
+const prefix = getUrlPrefix(lang);
+
+const editionHref = `${prefix}/pereira-tech-days/${edition.data.year}/`;
+const editionTitle = tr(edition.data.title, lang);
+const editionTagline = tr(edition.data.tagline, lang);
+const editionDescription = tr(edition.data.description, lang);
+
+const startDate = getEditionStartDate(edition);
+const dateLong = startDate.toLocaleDateString(
+  lang === 'es' ? 'es-CO' : 'en-US',
+  {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'America/Bogota',
+  }
+);
+
+const heroSrc = edition.data.hero?.src ?? null;
+const heroAlt = edition.data.hero?.alt
+  ? tr(edition.data.hero.alt, lang)
+  : editionTitle;
+
+const accentHex = edition.data.brandKit.paletteLight.accent;
+---
+
+<article
+  class="group relative overflow-hidden bg-ptt-bg-elevated motion-safe:animate-[fadeInUp_0.6s_ease_both]"
+  style={`--past-row-accent: ${accentHex};`}
+>
+  <!-- Decorative accent stripe (top) -->
+  <div
+    class="h-1 w-full"
+    style={`background: ${accentHex};`}
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="main-container py-12 sm:py-16">
+    <div class="flex flex-col gap-8 md:flex-row md:items-center md:gap-12 lg:gap-16">
+      <!-- Image — ~45% on md+ -->
+      <div class="w-full shrink-0 md:w-[45%]">
+        {
+          heroSrc ? (
+            <a
+              href={editionHref}
+              class="block overflow-hidden rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <img
+                src={heroSrc}
+                alt={heroAlt}
+                width={800}
+                height={450}
+                class="aspect-video w-full object-cover transition duration-500 motion-safe:group-hover:scale-[1.02]"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          ) : (
+            <div
+              class="flex aspect-video w-full items-center justify-center rounded-xl bg-ptt-bg"
+              aria-hidden="true"
+            >
+              <span class="text-5xl font-extrabold text-ptt-secondary/30">
+                {edition.data.year}
+              </span>
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Copy + CTA -->
+      <div class="min-w-0 flex-1">
+        <!-- Year badge + eyebrow -->
+        <p
+          class="text-xs font-semibold uppercase tracking-widest text-ptt-secondary"
+        >
+          {t.indexPastRowEyebrow} · {edition.data.year}
+        </p>
+
+        <!-- Title -->
+        <h2
+          class="mt-2 text-2xl font-bold tracking-tight text-ptt sm:text-3xl"
+        >
+          {editionTitle}
+        </h2>
+
+        <!-- Date -->
+        <p class="mt-1 text-sm text-ptt-secondary">
+          {dateLong}
+        </p>
+
+        <!-- Tagline -->
+        <p
+          class="mt-3 text-base font-medium leading-relaxed text-ptt"
+        >
+          {editionTagline}
+        </p>
+
+        <!-- Short description (first sentence) -->
+        {
+          editionDescription && (
+            <p class="mt-2 text-sm leading-relaxed text-ptt-secondary line-clamp-3">
+              {editionDescription}
+            </p>
+          )
+        }
+
+        <!-- CTA -->
+        <div class="mt-6">
+          <a
+            href={editionHref}
+            class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+          >
+            {t.indexPastRowCta}
+            <svg
+              aria-hidden="true"
+              class="h-4 w-4 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              >
+              </path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
