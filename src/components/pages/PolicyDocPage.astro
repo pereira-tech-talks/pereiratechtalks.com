@@ -37,6 +37,9 @@ const tocHeadings = headings
 const lastUpdatedLabel = lastUpdated
   ? formatCalendarDate(lastUpdated, lang)
   : null;
+const lastUpdatedDatetime = lastUpdated
+  ? getCalendarDateString(lastUpdated)
+  : null;
 
 const breadcrumbs = [
   {
@@ -65,7 +68,7 @@ const tocLabel = lang === 'es' ? 'En esta página' : 'On this page';
         lastUpdatedLabel && (
           <p class="mt-3 text-sm text-ptt-secondary">
             {lastUpdatedPrefix}{' '}
-            <time datetime={getCalendarDateString(lastUpdated)}>{lastUpdatedLabel}</time>
+            <time datetime={lastUpdatedDatetime}>{lastUpdatedLabel}</time>
           </p>
         )
       }
