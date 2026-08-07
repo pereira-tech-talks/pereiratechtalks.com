@@ -6,6 +6,7 @@ import {
   getEditionFontPackages,
   getEditionStartDate,
   getEditionStartIso,
+  getUpcomingLandingChrome,
   isUpcomingEdition,
   normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
@@ -318,5 +319,23 @@ describe('pereiraTechDay helpers', () => {
         title: '5 Pasos para Conquistar el Mundo Tech',
       },
     ]);
+  });
+});
+
+describe('getUpcomingLandingChrome', () => {
+  it('returns 2026 photocopy modes for upcoming editions', () => {
+    expect(getUpcomingLandingChrome(true)).toEqual({
+      sponsorsLayout: 'tree-circles',
+      faqLayout: 'open-grid',
+      portraitStyle: 'square',
+    });
+  });
+
+  it('returns 2024 photocopy modes for past editions', () => {
+    expect(getUpcomingLandingChrome(false)).toEqual({
+      sponsorsLayout: 'gray-cards',
+      faqLayout: 'accordion',
+      portraitStyle: 'circle',
+    });
   });
 });

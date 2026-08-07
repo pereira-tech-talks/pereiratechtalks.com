@@ -845,13 +845,26 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     gallery: 'Gallery',
     galleryMemories: 'Event memories',
     sponsors: 'Sponsors',
+    sponsorsSubtitle: 'Companies supporting this edition of the event.',
+    sponsorsFooter:
+      'Thank you for powering the Pereira and regional tech ecosystem.',
     communities: 'Allied communities',
     communitiesOrganizes: 'Organizes',
-    organizers: 'Organizing team',
+    communitiesOrganizesSubtitle:
+      'Together with these communities we strengthen the Pereira and regional tech ecosystem.',
+    communitiesOrganizesFooter:
+      'A network of communities connecting talent, learning, and collaboration.',
+    organizers: 'Organizers',
+    organizersSubtitle:
+      'The people who lead and make Pereira Tech Day possible.',
     collaborators: 'Collaborators',
+    collaboratorsSubtitle:
+      'People and allies who strengthen the event’s delivery.',
     about: 'About Pereira Tech Day',
     pricing: 'Sponsorship plans',
-    faq: 'Frequently asked questions',
+    faq: 'Frequently asked questions (FAQ)',
+    faqSubtitle:
+      'A few short questions that may clear up common doubts. If anything is still unclear, email us and we will get back to you.',
     joinTitle: "Join the region's tech future.",
     joinSubtitle: "Be part of the ecosystem's growth.",
     joinCta: 'Explore Pereira Tech Talks',

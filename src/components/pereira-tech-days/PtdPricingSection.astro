@@ -69,7 +69,6 @@ const tierSkins: Record<
 };
 
 const defaultSkin = tierSkins.silver;
-const featuredLabel = lang === 'es' ? 'Recomendado' : 'Recommended';
 const furnitureNote =
   lang === 'es'
     ? 'El sponsor provee su mobiliario.'
@@ -87,33 +86,37 @@ const furnitureNote =
     )
   }
   <div class="relative main-container">
-    <h2 id="ptd-pricing-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
-      {title}
-    </h2>
-    <ul class="mt-10 grid gap-6 lg:grid-cols-3">
+    <div class="text-center">
+      <h2 id="ptd-pricing-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+        {title}
+      </h2>
+      <span
+        class="mx-auto mt-3 block h-1 w-16 rounded-full bg-[var(--ptt-accent)]"
+        aria-hidden="true"
+      />
+    </div>
+    <ul class="mt-12 grid gap-8 lg:grid-cols-3 lg:items-stretch">
       {
         plans.map((plan) => {
           const skin = tierSkins[plan.tier] ?? defaultSkin;
+          const featuredCard = plan.featured
+            ? 'bg-[#fff1ea] ring-2 ring-[var(--ptt-accent)] shadow-lg shadow-[var(--ptt-accent)]/15'
+            : `bg-[var(--ptt-bg-elevated)] ${skin.cardClass}`;
           return (
-            <li
-              class:list={[
-                'relative flex flex-col rounded-2xl bg-[var(--ptt-bg-elevated)] p-6',
-                skin.cardClass,
-              ]}
-            >
-              {
-                plan.featured && (
-                  <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[var(--ptt-accent)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--ptt-text)]">
-                    {featuredLabel}
-                  </span>
-                )
-              }
+            <li class:list={['relative flex flex-col rounded-2xl p-6 pt-10 text-center', featuredCard]}>
+              <span
+                class:list={[
+                  'absolute left-1/2 top-0 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--ptt-bg-elevated)] shadow-md ring-1 ring-[var(--ptt-border)]',
+                  skin.iconColor,
+                ]}
+                aria-hidden="true"
+              >
               <svg
                 viewBox="0 0 24 24"
-                width="28"
-                height="28"
+                width="24"
+                height="24"
                 aria-hidden="true"
-                class:list={['shrink-0', skin.iconColor]}
+                class="shrink-0"
               >
                 {skin.iconKey === 'award' && (
                   <g
@@ -150,17 +153,10 @@ const furnitureNote =
                   />
                 )}
               </svg>
-              <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">
-                {plan.tier}
-              </p>
-              <h3 class="mt-1 text-xl font-bold text-[var(--ptt-text)]">{tr(plan.title, lang)}</h3>
-              {
-                plan.subtitle && (
-                  <p class="mt-1 text-sm text-[var(--ptt-text-muted)]">{tr(plan.subtitle, lang)}</p>
-                )
-              }
-              <p class="mt-4 text-3xl font-bold text-[var(--ptt-primary)]">
-                ${plan.price}
+              </span>
+              <h3 class="mt-2 text-xl font-bold text-[var(--ptt-text)]">{tr(plan.title, lang)}</h3>
+              <p class="mt-3 text-3xl font-bold text-[var(--ptt-text)]">
+                $ {plan.price}
                 {
                   plan.period && (
                     <span class="text-sm font-normal text-[var(--ptt-text-muted)]">
@@ -169,8 +165,13 @@ const furnitureNote =
                   )
                 }
               </p>
+              {
+                plan.subtitle && (
+                  <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{tr(plan.subtitle, lang)}</p>
+                )
+              }
               <span class="mt-4 border-t border-[var(--ptt-border)]" aria-hidden="true" />
-              <ul class="mt-4 flex-1 space-y-2 text-sm text-[var(--ptt-text-muted)]">
+              <ul class="mt-4 flex-1 space-y-2 text-left text-sm text-[var(--ptt-text-muted)]">
                 {plan.benefits.map((b) => (
                   <li class="flex gap-2">
                     <svg
@@ -197,7 +198,7 @@ const furnitureNote =
                 href={plan.ctaUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="mt-6 inline-flex justify-center rounded-full bg-[var(--ptt-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                class="mt-6 inline-flex justify-center rounded-full border-2 border-[var(--ptt-primary)] px-5 py-3 text-sm font-semibold text-[var(--ptt-primary)] transition hover:bg-[var(--ptt-primary)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
               >
                 {tr(plan.ctaLabel, lang)}
               </a>

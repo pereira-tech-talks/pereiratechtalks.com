@@ -15,6 +15,7 @@ interface Props {
   expectedAttendance?: string;
   heroIllustration?: string;
   logoSrc?: string;
+  /** @deprecated Legacy photocopy uses CSS-bg illustration only; ignored when illustration present. */
   mascotSrc?: string;
   targetDate: string;
   endDate?: string;
@@ -32,135 +33,188 @@ const {
   expectedAttendance,
   heroIllustration,
   logoSrc,
-  mascotSrc,
   targetDate,
   endDate,
 } = Astro.props;
 
-/** Legacy headline splits the brand name across two lines at the word "Day" (e.g. "Pereira Tech" / "Day 2026"). */
+/** Legacy: "Pereira Tech" / "Day" (coral) + "2026" (cyan). */
 const titleWords = title.trim().split(/\s+/);
 const dayWordIndex = titleWords.findIndex((word) => /^day$/i.test(word));
 const titleLineTech =
   dayWordIndex > 0 ? titleWords.slice(0, dayWordIndex).join(' ') : title;
-const titleLineDayYear =
-  dayWordIndex > 0 ? titleWords.slice(dayWordIndex).join(' ') : '';
+const dayWord = dayWordIndex >= 0 ? titleWords[dayWordIndex] : '';
+const yearWord =
+  dayWordIndex >= 0 ? titleWords.slice(dayWordIndex + 1).join(' ') : '';
 
-/** Legacy tagline puts strong emphasis on its closing words. */
+/** Legacy tagline emphasizes the closing words in coral. */
 const taglineWords = tagline.trim().split(/\s+/);
 const taglineLead = taglineWords.slice(0, -2).join(' ');
 const taglineEmphasis = taglineWords.slice(-2).join(' ');
 
-/** `expectedAttendance` is a localized "300+ expected attendees" string — split the leading stat from its label. */
 const attendanceMatch = expectedAttendance?.match(/^(\S+)\s+(.+)$/);
 const attendanceValue = attendanceMatch?.[1] ?? expectedAttendance;
 const attendanceLabel = attendanceMatch?.[2] ?? '';
 
 const logoAlt =
   lang === 'es' ? 'Logotipo de Pereira Tech Day' : 'Pereira Tech Day logo';
+
+/** Measured legacy cyan for the year digit (not a body-text token). */
+const YEAR_CYAN = '#3ab9c9';
 ---
 
-<section class="relative overflow-hidden bg-[var(--ptt-bg)] text-[var(--ptt-text)]">
+<section
+  class="relative overflow-hidden bg-[var(--ptt-bg)] text-[var(--ptt-text)]"
+  style={`--ptd-year-cyan: ${YEAR_CYAN};`}
+>
   {
     heroIllustration && (
-      <div class="absolute inset-y-0 right-0 hidden w-1/2 lg:block" aria-hidden="true">
-        <img
-          src={heroIllustration}
-          alt=""
-          width="960"
-          height="1080"
-          class="h-full w-full object-cover"
-          loading="eager"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-[var(--ptt-bg)] via-[var(--ptt-bg)]/50 to-transparent" />
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 hidden w-[min(52%,40rem)] bg-contain bg-right bg-no-repeat lg:block"
+        style={`background-image: url('${heroIllustration}');`}
+        aria-hidden="true"
+      >
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--ptt-bg)] via-[var(--ptt-bg)]/70 to-transparent" />
+        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--ptt-bg)] to-transparent" />
       </div>
     )
   }
-  <div class="absolute inset-0 bg-gradient-to-b from-[var(--ptt-accent)]/10 via-transparent to-transparent lg:hidden" aria-hidden="true"></div>
 
-  <div class="relative main-container grid gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-12 lg:py-20">
-    <div class="min-w-0">
-      <p class="text-sm font-semibold uppercase tracking-widest text-[var(--ptt-primary)]">{eyebrow}</p>
+  <div class="relative main-container py-12 lg:max-w-[58%] lg:py-20 xl:max-w-[55%]">
+    <p class="text-sm font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">
+      {eyebrow}
+    </p>
 
-      <div class="mt-3">
-        {
-          logoSrc && (
-            <img src={logoSrc} alt={logoAlt} width="80" height="80" class="h-14 w-auto sm:h-16" />
-          )
-        }
-        <h1 class="mt-3 text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
-          <span class="block text-[var(--ptt-primary)]">{titleLineTech}</span>
-          {
-            titleLineDayYear && (
-              <span class="block text-[var(--ptt-text)]">{titleLineDayYear}</span>
-            )
-          }
-        </h1>
-      </div>
-
-      <p class="mt-4 max-w-xl text-lg text-[var(--ptt-text)]/90">
-        {taglineLead ? `${taglineLead} ` : ''}
-        <strong class="font-semibold text-[var(--ptt-text)]">{taglineEmphasis}</strong>
-      </p>
-
-      <ul class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--ptt-text-muted)]">
-        <li class="flex items-center gap-2">
-          <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-[var(--ptt-primary)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z" />
-          </svg>
-          <span>{dateLong}</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-[var(--ptt-primary)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.19 7-11.5A7 7 0 105 9.5C5 14.81 12 21 12 21z" />
-            <circle cx="12" cy="9.5" r="2.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          {
-            venueMapUrl ? (
-              <a
-                href={venueMapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
-              >
-                {venueName}
-              </a>
-            ) : (
-              <span>{venueName}</span>
-            )
-          }
-        </li>
-      </ul>
-
+    <div class="mt-3 flex items-start gap-3 sm:gap-4">
       {
-        attendanceValue && (
-          <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2 ring-1 ring-[var(--ptt-border)]">
-            <svg aria-hidden="true" class="h-5 w-5 shrink-0 text-[var(--ptt-primary)]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9 11a4 4 0 100-8 4 4 0 000 8zM23 20v-1a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-            </svg>
-            <span class="text-lg font-bold text-[var(--ptt-primary)]">{attendanceValue}</span>
-            {attendanceLabel && <span class="text-sm text-[var(--ptt-text-muted)]">{attendanceLabel}</span>}
-          </div>
+        logoSrc && (
+          <img
+            src={logoSrc}
+            alt={logoAlt}
+            width="80"
+            height="80"
+            class="mt-1 h-12 w-auto shrink-0 sm:h-14"
+          />
         )
       }
+      <h1 class="text-4xl font-bold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+        <span class="block text-[var(--ptt-text)]">{titleLineTech}</span>
+        {
+          dayWord && (
+            <span class="block">
+              <span class="text-[var(--ptt-accent)]">{dayWord}</span>
+              {yearWord ? (
+                <>
+                  {' '}
+                  <span class="text-[color:var(--ptd-year-cyan)]">{yearWord}</span>
+                </>
+              ) : null}
+            </span>
+          )
+        }
+      </h1>
+    </div>
 
-      <div class="mt-8 max-w-md">
-        <PtdCountdown client:visible lang={lang} targetDate={targetDate} endDate={endDate} />
-      </div>
+    <p class="mt-4 max-w-xl text-lg text-[var(--ptt-text)]/90">
+      {taglineLead ? `${taglineLead} ` : ''}
+      <strong class="font-semibold text-[var(--ptt-accent)]">{taglineEmphasis}</strong>
+    </p>
 
-      <div class="mt-6 max-w-md rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] p-5 ring-1 ring-[var(--ptt-border)]">
-        <PtdSubscribeForm client:visible lang={lang} year={year} />
-      </div>
+    <ul class="mt-6 flex flex-col gap-2 text-sm text-[var(--ptt-text-muted)]">
+      <li class="flex items-center gap-2">
+        <svg
+          aria-hidden="true"
+          class="h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"
+          />
+        </svg>
+        <span>{dateLong}</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <svg
+          aria-hidden="true"
+          class="h-5 w-5 shrink-0 text-[var(--ptt-text-muted)]"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 21s7-6.19 7-11.5A7 7 0 105 9.5C5 14.81 12 21 12 21z"
+          />
+          <circle cx="12" cy="9.5" r="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        {
+          venueMapUrl ? (
+            <a
+              href={venueMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline decoration-[var(--ptt-accent)] underline-offset-2 hover:text-[var(--ptt-primary)]"
+            >
+              {venueName}
+            </a>
+          ) : (
+            <span>{venueName}</span>
+          )
+        }
+      </li>
+    </ul>
+
+    {
+      attendanceValue && (
+        <div
+          class="mt-6 inline-flex items-center gap-2 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2"
+          style="box-shadow: 0 0 0 1px color-mix(in srgb, var(--ptt-primary) 35%, transparent), 0 0 0 3px color-mix(in srgb, var(--ptd-year-cyan) 25%, transparent);"
+        >
+          <svg
+            aria-hidden="true"
+            class="h-5 w-5 shrink-0 text-[var(--ptt-primary)]"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9 11a4 4 0 100-8 4 4 0 000 8zM23 20v-1a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+            />
+          </svg>
+          <span class="text-lg font-bold text-[var(--ptt-text)]">{attendanceValue}</span>
+          {attendanceLabel && (
+            <span class="text-sm text-[var(--ptt-text-muted)]">{attendanceLabel}</span>
+          )}
+        </div>
+      )
+    }
+
+    <div class="mt-8 max-w-lg">
+      <PtdCountdown client:visible lang={lang} targetDate={targetDate} endDate={endDate} />
+    </div>
+
+    <div class="mt-6 max-w-lg">
+      <PtdSubscribeForm client:visible lang={lang} year={year} />
     </div>
 
     {
-      mascotSrc && (
-        <div class="flex justify-center lg:justify-end">
+      heroIllustration && (
+        <div class="mt-10 lg:hidden" aria-hidden="true">
           <img
-            src={mascotSrc}
+            src={heroIllustration}
             alt=""
-            width="560"
-            height="560"
-            class="max-h-[min(70vh,520px)] w-auto object-contain"
+            width="720"
+            height="720"
+            class="mx-auto max-h-80 w-auto object-contain"
             loading="eager"
             decoding="async"
           />

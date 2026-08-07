@@ -7,7 +7,7 @@ The **Pereira Tech Day** (PTD) collection powers the annual flagship conference'
 - **Collection:** `pereiraTechDays` — one file per edition in `src/content/pereiraTechDays/{year}.{yaml,json,md,mdx}`.
 - **Orchestrator:** `src/components/pages/PereiraTechDayDetailPage.astro` — resolves the edition, decides upcoming vs. past, and composes every section.
 - **Theming:** `EditionScope` (`src/components/pereira-tech-days/EditionScope.astro`) scopes the edition's `brandKit` under `[data-edition-theme="{year}"]`. Edition pages use a **dedicated PTD chrome** (`chrome="ptd-edition"` on `MainLayout`): `PtdEditionHeader` shows the current year + “Previous editions” dropdown instead of the global Meetups/Blog nav. **No theme toggle** on edition pages — the surface is locked (`ptdChromeVariant`: 2024 dark / 2026 light), including the footer via a forced `html.dark` (or light) class. See [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days).
-- **Legacy visual parity:** the 2026 and 2024 templates are near-photocopies of the legacy production landings (`pereiratechtalks.org/pereira-tech-day/` and `/pereira-tech-day/2024/`), rebuilt on the v3 component/content model instead of hardcoded legacy markup.
+- **Legacy visual parity:** the **2026 upcoming** landing is an audited cream/coral/navy photocopy of legacy [`/pereira-tech-day/`](https://www.pereiratechtalks.org/pereira-tech-day/) (discrete countdown cards, tree-circle sponsors, always-open FAQ grid, illustration-forward Join). The **2024 past** landing remains the dark photocopy of `/pereira-tech-day/2024/`. Both keep v3 architecture (`EditionScope`, status-based branching via `getUpcomingLandingChrome()`, subscribe API, diploma FAQ links). Chrome (header/footer) stays global PTT.
 
 ## Routes
 
@@ -193,18 +193,20 @@ All components live in `src/components/pereira-tech-days/`.
 |---|---|---|---|
 | `EditionScope.astro` | Astro | Orchestrator | Scopes `brandKit` CSS vars under `[data-edition-theme]`; chrome stays outside |
 | `PtdEditionFonts.astro` | Astro | Orchestrator | Conditionally loads the edition's declared webfont package(s) |
-| `PtdHero2026.astro` | Astro | Upcoming | Two-line "Pereira Tech / Day {year}" headline, meta icons, countdown (`PtdCountdown.svelte`), subscribe form (`PtdSubscribeForm.svelte`), right-half illustration |
+| `PtdHero2026.astro` | Astro | Upcoming | Cream photocopy hero: coffee logo, Tech navy / Day coral / Year cyan, stacked meta, CSS-bg illustration fade, discrete countdown cards, unboxed gradient subscribe |
 | `PtdHero2024.astro` | Astro | Past | Centered `Pereira•Tech•Day` dotted wordmark (Bebas Neue via `brandKit.typography`), venue link, optional recording CTA |
-| `PtdAboutSection.astro` | Astro | Upcoming | Two-paragraph about copy + keyword-matched topic pills (AI / code / security icons) |
-| `PtdPricingSection.astro` | Astro | Upcoming | Silver/Gold/Platinum sponsorship tier cards + `extraPartnerships` grid |
-| `PtdSponsorsShowcase.astro` | Astro | Both | Logo-only sponsor row (deliberately lighter than the shared `SponsorCard` directory look) |
-| `PtdCommunitiesOrganiza.astro` | Astro | Both | "Organiza" logo-tile grid for allied communities |
-| `PtdTeamGrid.astro` | Astro | Both | Photo + name grid for organizers / collaborators (render once per group) |
+| `PtdAboutSection.astro` | Astro | Upcoming | Cream elevated about card + quieter icon topic row (AI / code / security) |
+| `PtdPricingSection.astro` | Astro | Upcoming | Accent underline, top-edge icon badges, outline CTAs, peach featured tier + `extraPartnerships` |
+| `PtdSponsorsShowcase.astro` | Astro | Both | `layout`: `tree-circles` (upcoming) or `gray-cards` (past) via `getUpcomingLandingChrome()` |
+| `PtdCommunitiesOrganiza.astro` | Astro | Both | Organiza logo tiles; upcoming adds subtitle + footer dots |
+| `PtdTeamGrid.astro` | Astro | Both | Square+LinkedIn (upcoming) or circular (past); titled Organizadores sibling section |
 | `PtdKeynoteQuoteCard.astro` | Astro | Past | Bio blockquote → rule → circular photo/name/role footer (replaces `SpeakerCard` for past keynotes) |
 | `PtdLightningSection.astro` | Astro | Both | Title-first lightning talk cards with speaker footer; consumes `normalizeLightningTalks()` output |
 | `PtdGalleryCarousel.svelte` | Svelte (`client:visible`) | Both | `mode="carousel"` (upcoming, single-frame + thumbnails) or `mode="marquee"` (past, infinite duplicated CSS track, pauses on hover/focus, static grid fallback under `prefers-reduced-motion`) |
-| `PtdFaqs.svelte` | Svelte (`client:visible`) | Both | Accordion FAQ list, optional section background |
-| `PtdJoinSection.astro` | Astro | Upcoming | Closing CTA band; `showCta` defaults `true` but the detail page passes `false` (legacy Join has no button) |
+| `PtdFaqs.svelte` | Svelte (`client:visible`) | Both | `open-grid` (upcoming always-open) or `accordion` (past); optional section background |
+| `PtdJoinSection.astro` | Astro | Upcoming | Illustration + cream fade, split coral title; detail page passes `showCta={false}` |
+| `PtdCountdown.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Four discrete white countdown cards (Bebas numerals) |
+| `PtdSubscribeForm.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Unboxed italic copy + cyan→teal gradient CTA; honeypot + `EVENTS.PTD_SUBSCRIBE` |
 | `PtdCountdown.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Days/hours/minutes/seconds countdown to `targetDate` |
 | `PtdSubscribeForm.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Email capture posting to `/api/ptd-subscribe`, honeypot field, analytics event `EVENTS.PTD_SUBSCRIBE` |
 

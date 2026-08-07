@@ -21,28 +21,71 @@ const {
   showCta = true,
 } = Astro.props;
 const hasCta = showCta && Boolean(ctaUrl) && Boolean(ctaLabel);
+
+/**
+ * Legacy split: last phrase of the title in coral (e.g. "DE LA REGIÓN.").
+ * Subtitle emphasizes the penultimate strong word (crecimiento / growth).
+ */
+const titleWords = title.trim().split(/\s+/);
+const titleLead = titleWords.slice(0, -3).join(' ');
+const titleAccent = titleWords.slice(-3).join(' ');
+
+const subtitleWords = subtitle.trim().split(/\s+/);
+const emphasisIndex = subtitleWords.findIndex((w) =>
+  /crecimiento|growth/i.test(w.replace(/[^\p{L}]/gu, ''))
+);
+const subBefore =
+  emphasisIndex >= 0
+    ? subtitleWords.slice(0, emphasisIndex).join(' ')
+    : subtitle;
+const subEmphasis = emphasisIndex >= 0 ? subtitleWords[emphasisIndex] : '';
+const subAfter =
+  emphasisIndex >= 0 ? subtitleWords.slice(emphasisIndex + 1).join(' ') : '';
 ---
 
 <section
   class="relative overflow-hidden py-[var(--ptd-section-pad)]"
-  style={illustrationSrc ? `background-image: url('${illustrationSrc}'); background-size: cover; background-position: center;` : undefined}
+  style={illustrationSrc
+    ? `background-image: url('${illustrationSrc}'); background-size: cover; background-position: center left;`
+    : undefined}
   aria-labelledby="ptd-join-title"
 >
-  <div class="absolute inset-0 bg-[var(--ptt-primary)]/90" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-    <h2 id="ptd-join-title" class="text-3xl font-bold tracking-tight text-white">
-      {title}
-    </h2>
-    <p class="mt-4 text-lg text-white/90">{subtitle}</p>
-    {
-      hasCta && (
-        <a
-          href={ctaUrl}
-          class="mt-8 inline-flex rounded-full bg-white px-8 py-3 text-sm font-semibold text-[var(--ptt-primary)] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          {ctaLabel}
-        </a>
-      )
-    }
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-[var(--ptt-bg)] via-[var(--ptt-bg)]/92 to-[var(--ptt-bg)]/40"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto max-w-4xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8">
+    <div class="max-w-xl">
+      <h2
+        id="ptd-join-title"
+        class="text-3xl font-bold uppercase leading-tight tracking-tight text-[var(--ptt-text)] sm:text-4xl md:text-5xl"
+        style="font-family: Bebas Neue, 'Arial Black', sans-serif; letter-spacing: 0.06em;"
+      >
+        {titleLead ? <span class="block">{titleLead}</span> : null}
+        <span class="block text-[var(--ptt-accent)]">{titleAccent || title}</span>
+      </h2>
+      <p class="mt-4 text-lg text-[var(--ptt-text)]">
+        {subBefore}
+        {
+          subEmphasis && (
+            <>
+              {' '}
+              <strong class="font-semibold text-[var(--ptt-accent)]">{subEmphasis}</strong>
+              {subAfter ? ` ${subAfter}` : ''}
+            </>
+          )
+        }
+      </p>
+      {
+        hasCta && (
+          <a
+            href={ctaUrl}
+            class="mt-8 inline-flex rounded-full bg-[var(--ptt-primary)] px-8 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+          >
+            {ctaLabel}
+          </a>
+        )
+      }
+    </div>
   </div>
 </section>
