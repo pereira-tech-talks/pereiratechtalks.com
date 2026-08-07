@@ -1,12 +1,12 @@
 ---
+import type { CertificatePayload } from '@/lib/certificates/types';
+import { SITE_TIMEZONE } from '@/lib/constances';
 /**
  * Print-grade diploma document (elevated from PR #297 / feature/cert).
  * Uses PTT / edition tokens; no Roboto or emoji.
  */
 import { formatCalendarDate } from '@/lib/dates';
-import type { CertificatePayload } from '@/lib/certificates/types';
 import type { Language } from '@/lib/i18n';
-import { SITE_TIMEZONE } from '@/lib/constances';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
