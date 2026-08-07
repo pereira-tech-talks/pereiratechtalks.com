@@ -101,6 +101,4 @@ Puedes ver el historial completo de revisiones de esta página en el [repositori
 
 ## Contacto
 
-- Preguntas de gobernanza: `pereiratechtalks@gmail.com` (asunto "Pregunta de gobernanza").
-- Código de Conducta: `conduct@pereiratechtalks.org`.
-- Formulario: [contáctanos](/contact).
+Usa el [formulario de contacto](/contact) e indica el asunto correspondiente (por ejemplo, "Pregunta de gobernanza").

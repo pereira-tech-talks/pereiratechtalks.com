@@ -94,5 +94,4 @@ Los contribuyentes aparecen en [Contribuyentes](/contributors). Los ponentes en 
 ## ¿Preguntas?
 
 - Contacto general: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
-- Código de Conducta: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
 - Formulario: [Contáctanos](/contact)

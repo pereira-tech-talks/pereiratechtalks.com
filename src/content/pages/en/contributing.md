@@ -94,5 +94,4 @@ Contributors are listed at [Contributors](/en/contributors). Speakers appear at 
 ## Questions?
 
 - General contact: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
-- Code of Conduct: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
 - Form: [Contact us](/en/contact)

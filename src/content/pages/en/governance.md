@@ -101,6 +101,4 @@ You can see the full revision history of this page in the [open-source repositor
 
 ## Contact
 
-- Governance questions: `pereiratechtalks@gmail.com` (subject "Governance question").
-- Code of Conduct: `conduct@pereiratechtalks.org`.
-- Contact form: [contact us](/en/contact).
+Use the [contact form](/en/contact) and add the appropriate subject (for example, "Governance question").
