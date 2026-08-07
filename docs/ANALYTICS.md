@@ -360,6 +360,7 @@ Custom events may include stable dimensions via `trackEventWithContext()` or `ge
 | `ptd_cta_click` | PTD hero/section CTA | `{ cta, year? }` | PTD pages (P1 wiring) |
 | `speaker_application_submit` | Call for speakers form | — | SpeakersApplicationForm.svelte |
 | `speaker_school_apply_submit` | Speaker School application form | — | SpeakerSchoolForm.svelte |
+| `calendar_intake_submit` | Community calendar proposal form | — | CalendarIntakeForm.svelte |
 | `sponsor_inquiry_submit` | Sponsor inquiry form | — | SponsorInquiryForm.svelte |
 | `notification_cta` | Notification CTA clicked | `{ id }` | TopNotificationBar.svelte |
 | `notification_modal_open` | Notification modal opened | `{ id }` | TopNotificationBar.svelte |

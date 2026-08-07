@@ -642,7 +642,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Aún no hay calendarios públicos activos. Revisa nuestro archivo de meetups o escríbenos para sumar tu comunidad.',
     comingSoon: 'Más comunidades muy pronto',
     inactiveNote:
-      'Estos grupos aliados se están sumando al hub. Las organizaciones pueden compartir un ID público de Google Calendar mediante el formulario de contacto.',
+      'Estos grupos aliados se están sumando al hub. Las organizaciones pueden compartir un ID público de Google Calendar con el formulario de abajo.',
     quickLinksEyebrow: 'Enlaces rápidos',
     quickLinksTitle: 'RSVP y archivos',
     meetupsLink: 'Archivo de meetups',
@@ -650,9 +650,30 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     contributeEyebrow: 'Contribuir',
     contributeTitle: 'Publica el calendario de tu comunidad',
     contributeDescription:
-      'Si organizas un meetup o grupo de usuarios tech en Pereira, haz público tu Google Calendar y envíanos el ID. Añadiremos un feed con color propio después de una revisión rápida.',
+      'Si organizas un meetup o grupo de usuarios tech en Pereira, haz público tu Google Calendar y envía el ID en el formulario. Añadiremos un feed con color propio después de una revisión rápida.',
     contributeCta: 'Proponer tu calendario',
     breadcrumbHome: 'Inicio',
+  },
+
+  calendarForm: {
+    formTitle: 'Propuesta de calendario comunitario',
+    communityLabel: 'Nombre de la comunidad / meetup',
+    communityPlaceholder: 'p. ej. Pereira JS, Women Who Code Pereira',
+    calendarIdLabel: 'ID de Google Calendar',
+    calendarIdPlaceholder: 'tu-calendario@group.calendar.google.com',
+    calendarIdHint:
+      'En Google Calendar → Configuración → Integrar calendario → ID del calendario (debe ser público).',
+    publicUrlLabel: 'URL pública del calendario (opcional)',
+    publicUrlPlaceholder: 'https://calendar.google.com/calendar/…',
+    websiteLabel: 'Sitio web de la comunidad (opcional)',
+    websitePlaceholder: 'https://…',
+    descriptionLabel: 'Descripción corta',
+    descriptionPlaceholder:
+      'Quiénes son, cadencia y tipos de eventos que organizan…',
+    submitButton: 'Enviar propuesta de calendario',
+    successTitle: '¡Propuesta recibida!',
+    successMessage:
+      'Gracias — revisaremos el feed público y te contactaremos en un máximo de 7 días hábiles.',
   },
 
   contactSection: {

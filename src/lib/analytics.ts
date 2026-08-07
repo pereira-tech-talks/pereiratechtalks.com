@@ -71,6 +71,7 @@ export const EVENTS = {
   TALK_CARD_CLICK: 'talk_card_click',
   SPEAKER_APPLICATION_SUBMIT: 'speaker_application_submit',
   SPEAKER_SCHOOL_APPLY_SUBMIT: 'speaker_school_apply_submit',
+  CALENDAR_INTAKE_SUBMIT: 'calendar_intake_submit',
   SPONSOR_INQUIRY_SUBMIT: 'sponsor_inquiry_submit',
   CERTIFICATE_PRINT: 'certificate_print',
   CERTIFICATE_SHARE: 'certificate_share',

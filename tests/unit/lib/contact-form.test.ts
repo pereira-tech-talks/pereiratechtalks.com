@@ -4,10 +4,12 @@ import {
   checkRateLimit,
   composeCfsMessage,
   isValidContactEmail,
+  looksLikeGoogleCalendarId,
   normalizeTopic,
   pickAckCopy,
   resolveTopicFromSearchParams,
   sanitizeContactText,
+  validateCalendarIntakeForm,
   validateCfsForm,
   validateContactForm,
   validateSpeakerSchoolForm,
@@ -193,6 +195,38 @@ describe('contact-form', () => {
     });
     expect(composed).toContain('Talk title: Title');
     expect(composed).toContain('Additional notes:');
+  });
+
+  it('validates calendar intake payloads', () => {
+    expect(
+      looksLikeGoogleCalendarId('community@group.calendar.google.com')
+    ).toBe(true);
+    expect(looksLikeGoogleCalendarId('short')).toBe(false);
+
+    const ok = validateCalendarIntakeForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        communityName: 'Pereira JS',
+        googleCalendarId: 'pereirajs@group.calendar.google.com',
+        shortDescription: 'Monthly JS meetups in Pereira',
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const bad = validateCalendarIntakeForm(
+      {
+        name: '',
+        email: 'bad',
+        communityName: '',
+        googleCalendarId: 'x',
+        shortDescription: '',
+      },
+      messages
+    );
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.googleCalendarId).toBe('Required');
   });
 
   it('validates Speaker School payloads', () => {

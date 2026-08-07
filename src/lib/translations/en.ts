@@ -641,7 +641,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       'No public calendars are active yet. Browse our meetup archive or contact us to add your community.',
     comingSoon: 'More communities coming soon',
     inactiveNote:
-      'These allied groups are joining the hub. Organizers can share a public Google Calendar ID via our contact form.',
+      'These allied groups are joining the hub. Organizers can share a public Google Calendar ID with the form below.',
     quickLinksEyebrow: 'Quick links',
     quickLinksTitle: 'RSVP and archives',
     meetupsLink: 'Meetup archive',
@@ -649,9 +649,30 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     contributeEyebrow: 'Contribute',
     contributeTitle: 'List your community calendar',
     contributeDescription:
-      'If you run a Pereira tech meetup or user group, make your Google Calendar public and send us the ID. We will add a color-coded feed to this hub after a quick review.',
+      'If you run a Pereira tech meetup or user group, make your Google Calendar public and submit the ID below. We will add a color-coded feed to this hub after a quick review.',
     contributeCta: 'Propose your calendar',
     breadcrumbHome: 'Home',
+  },
+
+  calendarForm: {
+    formTitle: 'Community calendar proposal',
+    communityLabel: 'Community / meetup name',
+    communityPlaceholder: 'e.g. Pereira JS, Women Who Code Pereira',
+    calendarIdLabel: 'Google Calendar ID',
+    calendarIdPlaceholder: 'your-calendar@group.calendar.google.com',
+    calendarIdHint:
+      'In Google Calendar → Settings → Integrate calendar → Calendar ID (must be public).',
+    publicUrlLabel: 'Public calendar URL (optional)',
+    publicUrlPlaceholder: 'https://calendar.google.com/calendar/…',
+    websiteLabel: 'Community website (optional)',
+    websitePlaceholder: 'https://…',
+    descriptionLabel: 'Short description',
+    descriptionPlaceholder:
+      'Who you are, cadence, and the kinds of events you host…',
+    submitButton: 'Submit calendar proposal',
+    successTitle: 'Proposal received!',
+    successMessage:
+      'Thanks — we will review the public feed and follow up within 7 business days.',
   },
 
   contactSection: {

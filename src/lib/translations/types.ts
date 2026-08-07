@@ -339,6 +339,24 @@ export interface SiteTranslations {
     breadcrumbHome: string;
   };
 
+  calendarForm: {
+    formTitle: string;
+    communityLabel: string;
+    communityPlaceholder: string;
+    calendarIdLabel: string;
+    calendarIdPlaceholder: string;
+    calendarIdHint: string;
+    publicUrlLabel: string;
+    publicUrlPlaceholder: string;
+    websiteLabel: string;
+    websitePlaceholder: string;
+    descriptionLabel: string;
+    descriptionPlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+  };
+
   communitiesPage: {
     title: string;
     description: string;

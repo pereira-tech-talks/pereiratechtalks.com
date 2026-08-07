@@ -152,6 +152,25 @@ export interface SpeakerSchoolFormErrors {
   availability: string;
 }
 
+export interface CalendarIntakeFormFields {
+  name: string;
+  email: string;
+  communityName: string;
+  googleCalendarId: string;
+  shortDescription: string;
+  publicCalendarUrl?: string;
+  communityWebsite?: string;
+  website?: string;
+}
+
+export interface CalendarIntakeFormErrors {
+  name: string;
+  email: string;
+  communityName: string;
+  googleCalendarId: string;
+  shortDescription: string;
+}
+
 export const emptyContactFormErrors = (): ContactFormErrors => ({
   name: '',
   email: '',
@@ -373,6 +392,61 @@ export function validateSpeakerSchoolForm(
   }
   if (!fields.availability.trim()) {
     errors.availability = messages.requiredField;
+    valid = false;
+  }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+/** Light check: non-empty calendar ID; prefer email-like Google Calendar IDs. */
+export function looksLikeGoogleCalendarId(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (trimmed.includes('@')) return isValidContactEmail(trimmed);
+  // Public calendar IDs are usually email-shaped; allow short opaque tokens too.
+  return trimmed.length >= 8 && !/\s/.test(trimmed);
+}
+
+export function validateCalendarIntakeForm(
+  fields: CalendarIntakeFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: CalendarIntakeFormErrors } {
+  const errors: CalendarIntakeFormErrors = {
+    name: '',
+    email: '',
+    communityName: '',
+    googleCalendarId: '',
+    shortDescription: '',
+  };
+  let valid = true;
+
+  if (!fields.name.trim()) {
+    errors.name = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.email.trim()) {
+    errors.email = messages.requiredField;
+    valid = false;
+  } else if (!isValidContactEmail(fields.email.trim())) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+  if (!fields.communityName.trim()) {
+    errors.communityName = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.googleCalendarId.trim()) {
+    errors.googleCalendarId = messages.requiredField;
+    valid = false;
+  } else if (!looksLikeGoogleCalendarId(fields.googleCalendarId)) {
+    errors.googleCalendarId = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.shortDescription.trim()) {
+    errors.shortDescription = messages.requiredField;
     valid = false;
   }
   if (fields.website?.trim()) {
