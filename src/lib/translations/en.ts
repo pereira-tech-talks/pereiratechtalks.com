@@ -550,15 +550,19 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   contributorsPage: {
     title: 'Team and community',
     description:
-      'Meet the organizers, program leads, mentors, and volunteers who keep Pereira Tech Talks running — current team and alumni network.',
+      'Meet the organizing team behind Pereira Tech Talks and the people who shaped earlier chapters — the humans behind the meetups and Pereira Tech Day.',
     eyebrow: 'People',
     intro: (count) =>
-      `${count} active people make up the extended community team. Want to join? Reach out.`,
-    currentTitle: 'Current team',
+      `${count} active organizers keep the community running day to day. Want to join? Write to us or see how to contribute.`,
+    sinceLabel: (year) => `Building community in Pereira since ${year}.`,
+    currentTitle: 'Organizing team',
+    currentIntro:
+      'The people who coordinate meetups, Pereira Tech Day, programs, and the day-to-day operations of Pereira Tech Talks.',
     pastTitle: 'Alumni and past organizers',
     pastIntro:
-      'Former organizers and contributors who shaped earlier chapters of the community. They remain part of the extended network.',
+      'Former organizers and collaborators from earlier chapters. They remain part of the extended community network.',
     joinLabel: 'Join the team',
+    contributeLabel: 'How to contribute',
     emptyTitle: 'No team members yet',
     emptyDesc: "We're consolidating the directory. Check back soon.",
   },

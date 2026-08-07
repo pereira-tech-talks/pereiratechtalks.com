@@ -1,7 +1,6 @@
 ---
 /**
- * PTT v3.0.0 contributors directory page (shared between EN and ES).
- * Current team prominently; alumni and past organizers in a dedicated section.
+ * PTT v3.0.0 Equipo / Team directory — flat current organizers + unified past.
  */
 
 import ContributorCard from '@/components/cards/ContributorCard.astro';
@@ -10,7 +9,10 @@ import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getActiveContributors, getPastContributors } from '@/lib/contributor';
+import {
+  getCurrentTeamOrganizers,
+  getPastTeamMembers,
+} from '@/lib/contributor';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -23,69 +25,9 @@ const t = getTranslations(lang);
 const cp = t.contributorsPage;
 const prefix = getUrlPrefix(lang);
 
-const currentContributors = await getActiveContributors();
-const pastContributors = await getPastContributors();
-
-type Role =
-  | 'founding-organizer'
-  | 'organizer'
-  | 'vertical-lead'
-  | 'mentor'
-  | 'sponsor-liaison'
-  | 'press-lead'
-  | 'conduct-team'
-  | 'contributor'
-  | 'alumni';
-
-const roleOrder: Role[] = [
-  'founding-organizer',
-  'organizer',
-  'vertical-lead',
-  'mentor',
-  'conduct-team',
-  'press-lead',
-  'sponsor-liaison',
-  'contributor',
-];
-
-const alumniRoleOrder: Role[] = ['alumni', 'contributor'];
-
-const roleTitles: Record<Role, { en: string; es: string }> = {
-  'founding-organizer': {
-    en: 'Founding organizers',
-    es: 'Organizadores fundadores',
-  },
-  organizer: { en: 'Core organizers', es: 'Equipo organizador' },
-  'vertical-lead': { en: 'Vertical leads', es: 'Líderes de programa' },
-  mentor: { en: 'Mentors', es: 'Mentores' },
-  'conduct-team': { en: 'Conduct team', es: 'Equipo de conducta' },
-  'press-lead': { en: 'Press leads', es: 'Equipo de prensa' },
-  'sponsor-liaison': {
-    en: 'Sponsor liaisons',
-    es: 'Enlaces con patrocinadores',
-  },
-  contributor: { en: 'Contributors', es: 'Contribuidores' },
-  alumni: { en: 'Alumni', es: 'Alumni' },
-};
-
-function groupContributors(
-  contributors: Awaited<ReturnType<typeof getActiveContributors>>,
-  roles: Role[]
-) {
-  const seen = new Set<string>();
-  return roles
-    .map((role) => {
-      const inRole = contributors.filter(
-        (c) => !seen.has(c.id) && c.data.roles.includes(role)
-      );
-      for (const c of inRole) seen.add(c.id);
-      return { role, contributors: inRole };
-    })
-    .filter((group) => group.contributors.length > 0);
-}
-
-const currentByRole = groupContributors(currentContributors, roleOrder);
-const pastByRole = groupContributors(pastContributors, alumniRoleOrder);
+const currentOrganizers = await getCurrentTeamOrganizers();
+const pastMembers = await getPastTeamMembers();
+const sinceYear = 2014;
 
 const breadcrumbs = [
   { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
@@ -94,46 +36,58 @@ const breadcrumbs = [
 ---
 
 <MainLayout lang={lang} title={cp.title} description={cp.description}>
-  <div class="bg-ptt-bg">
-    <div class="main-container pt-12 sm:pt-16 pb-4">
+  <div class="relative overflow-hidden bg-ptt-bg">
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--ptt-primary)_0%,_transparent_55%)] opacity-[0.07] dark:opacity-[0.12]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="main-container relative pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
-    <div class="main-container pt-6 pb-12">
+    <div class="main-container relative pt-6 pb-14 sm:pb-16">
       <Eyebrow>{cp.eyebrow}</Eyebrow>
-      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+      <h1 class="mt-3 max-w-3xl text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
         {cp.title}
       </h1>
-      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
-        {cp.intro(currentContributors.length)}
+      <p class="mt-4 max-w-2xl text-lg text-ptt-secondary">
+        {cp.intro(currentOrganizers.length)}
       </p>
-      <a
-        href={`${prefix}/contact/`}
-        class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
-      >
-        {cp.joinLabel}
-      </a>
+      <p class="mt-3 text-sm font-medium text-ptt-secondary">
+        {cp.sinceLabel(sinceYear)}
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={`${prefix}/contact/`}
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
+        >
+          {cp.joinLabel}
+        </a>
+        <a
+          href={`${prefix}/contributing/`}
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-ptt-border bg-ptt-bg-elevated px-5 py-2.5 text-sm font-semibold text-ptt transition-colors hover:border-ptt-primary/40 hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-white/15 dark:bg-ptt-bg-dark dark:text-white dark:hover:bg-white/10"
+        >
+          {cp.contributeLabel}
+        </a>
+      </div>
     </div>
   </div>
 
   {
-    currentByRole.length > 0 ? (
+    currentOrganizers.length > 0 ? (
       <Section surface="alt" spacing="lg" title={cp.currentTitle}>
-        <div class="space-y-16">
-          {currentByRole.map(({ role, contributors: group }) => (
-            <div>
-              <h2 class="mb-6 text-2xl font-bold tracking-tight text-ptt">
-                {roleTitles[role][lang]}
-              </h2>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 list-none">
-                {group.map((contributor) => (
-                  <li>
-                    <ContributorCard contributor={contributor} lang={lang} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <p class="mb-10 max-w-2xl text-ptt-secondary">{cp.currentIntro}</p>
+        <ul class="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {currentOrganizers.map((contributor, index) => (
+            <li>
+              <ContributorCard
+                contributor={contributor}
+                lang={lang}
+                loading={index < 6 ? 'eager' : 'lazy'}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     ) : (
       <Section surface="alt">
@@ -143,25 +97,20 @@ const breadcrumbs = [
   }
 
   {
-    pastByRole.length > 0 && (
+    pastMembers.length > 0 && (
       <Section spacing="lg" title={cp.pastTitle}>
         <p class="mb-10 max-w-3xl text-ptt-secondary">{cp.pastIntro}</p>
-        <div class="space-y-12">
-          {pastByRole.map(({ role, contributors: group }) => (
-            <div>
-              <h2 class="mb-6 text-xl font-semibold tracking-tight text-ptt-secondary">
-                {roleTitles[role][lang]}
-              </h2>
-              <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 list-none">
-                {group.map((contributor) => (
-                  <li>
-                    <ContributorCard contributor={contributor} lang={lang} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ul class="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {pastMembers.map((contributor) => (
+            <li class="opacity-90 transition-opacity motion-reduce:transition-none hover:opacity-100">
+              <ContributorCard
+                contributor={contributor}
+                lang={lang}
+                muted
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     )
   }

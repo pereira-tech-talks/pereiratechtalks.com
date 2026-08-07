@@ -356,10 +356,13 @@ export interface SiteTranslations {
     description: string;
     eyebrow: string;
     intro: (count: number) => string;
+    sinceLabel: (year: number) => string;
     currentTitle: string;
+    currentIntro: string;
     pastTitle: string;
     pastIntro: string;
     joinLabel: string;
+    contributeLabel: string;
     emptyTitle: string;
     emptyDesc: string;
   };
