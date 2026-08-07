@@ -132,7 +132,7 @@ export interface SiteTranslations {
     past: string;
     emptyUpcomingTitle: string;
     emptyUpcomingDescription: string;
-    ctaMeetupCom: string;
+    ctaLuma: string;
     archiveCount: string; // use {n} placeholder
     yearLabel: string; // use {year} placeholder
     yearNav: string;

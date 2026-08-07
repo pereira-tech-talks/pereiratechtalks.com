@@ -29,7 +29,7 @@ export const GET: APIRoute = async () => {
   const markdown = serializeGenericToMarkdown({
     title: 'Canales — Pereira Tech Talks',
     description:
-      'Todos los canales oficiales de Pereira Tech Talks: Meetup.com (principal), redes sociales, GitHub y Linktree, con orientación sobre por dónde empezar.',
+      'Todos los canales oficiales de Pereira Tech Talks: Luma (principal), redes sociales, GitHub y Linktree, con orientación sobre por dónde empezar.',
     lang,
     canonical: `${SITE_URL}/channels`,
     metadata: [['Total de canales', String(channels.length)]],

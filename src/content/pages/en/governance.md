@@ -55,7 +55,7 @@ A subset of active organizers responsible for reviewing and acting on Code of Co
 
 ## How we communicate decisions
 
-- **Operational decisions** (next meetup, theme, sponsors) are communicated via the channels: Meetup.com, social media, the blog.
+- **Operational decisions** (next meetup, theme, sponsors) are communicated via the channels: Luma, social media, the blog.
 - **Strategic decisions** (annual plan, Pereira Tech Day, partnerships) are announced via the blog and the newsletter, and visible in the public content collections on this site.
 - **Conduct decisions** are communicated privately to the parties involved. Patterns and outcomes that affect the broader community may be summarized publicly without identifying individuals.
 
@@ -101,6 +101,4 @@ You can see the full revision history of this page in the [open-source repositor
 
 ## Contact
 
-- Governance questions: `pereiratechtalks@gmail.com` (subject "Governance question").
-- Code of Conduct: `conduct@pereiratechtalks.org`.
-- Contact form: [contact us](/en/contact).
+Use the [contact form](/en/contact) and add the appropriate subject (for example, "Governance question").

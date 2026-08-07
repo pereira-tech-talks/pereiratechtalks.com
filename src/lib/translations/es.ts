@@ -144,7 +144,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     emptyUpcomingTitle: 'No hay meetups anunciados todavía',
     emptyUpcomingDescription:
       'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.',
-    ctaMeetupCom: 'Síguenos en Meetup.com',
+    ctaLuma: 'Síguenos en Luma',
     archiveCount: '{n} meetups en el archivo',
     yearLabel: '{year} — Meetups del año',
     yearNav: 'Saltar al año',
@@ -360,7 +360,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       {
         label: 'Canales',
         href: '/channels',
-        description: 'Meetup.com, GitHub, LinkedIn y más.',
+        description: 'Luma, GitHub, LinkedIn y más.',
       },
       {
         label: 'Calendario comunitario',
@@ -395,7 +395,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     allianceTitle: 'Cómo colaboramos',
     allianceSteps: [
       'Escenarios compartidos en Pereira Tech Day y eventos insignia',
-      'Cross-post en Meetup.com, LinkedIn y canales comunitarios',
+      'Cross-post en Luma, LinkedIn y canales comunitarios',
       'Meetups temáticos y talleres co-organizados',
       'Invitación cruzada de ponentes entre programas',
       'Calendario público en /calendar con eventos de comunidades aliadas',

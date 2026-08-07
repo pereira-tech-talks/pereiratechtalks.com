@@ -16,7 +16,7 @@ The community runs on three layers:
 
 1. **Programs (verticals)** — the regular cadence of what happens. Monthly Meetups, the Speaker School, La Biblioteca del Mañana, and the AI Channel. Each program has a clear mission and a lead.
 2. **Events** — the moments where everything comes together. Monthly meetups, occasional workshops and hackathons, and the annual Pereira Tech Day conference.
-3. **People and channels** — the social fabric. Speakers, contributors, sponsors, and the channels we use to coordinate (Meetup.com, GitHub, LinkedIn, Instagram, Linktree).
+3. **People and channels** — the social fabric. Speakers, contributors, sponsors, and the channels we use to coordinate (Luma, GitHub, LinkedIn, Instagram, Linktree).
 
 You can navigate any of those three layers from the site:
 
@@ -66,7 +66,7 @@ We optimize for transparency over hierarchy: anyone in the community can ask why
 
 Three paths:
 
-- **Show up to a meetup.** That is the canonical entry point. RSVP via [Meetup.com](https://www.meetup.com/pereira-tech-talks/) and come.
+- **Show up to a meetup.** That is the canonical entry point. RSVP via [Luma](https://luma.com/pertechtalks) and come.
 - **Propose a talk.** Use the [Call for Speakers](/en/call-for-speakers) page or the contact form. Talks may be in Spanish, English, or mixed.
 - **Contribute.** Read [Contributing](/en/contributing) to find a vertical, role, or task that fits how much time and energy you can offer.
 

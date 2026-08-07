@@ -14,7 +14,7 @@ description:
 leaders:
   - sergio-florez
 channels:
-  - meetup-com
+  - luma
 schedule:
   en: Biweekly mentorship sessions, monthly cohort kickoffs.
   es: Sesiones de mentoría quincenales, inicios de cohorte mensuales.
