@@ -5,9 +5,10 @@ interface Props {
   lang: Language;
   targetDate: string;
   endDate?: string;
+  variant?: 'edition' | 'hub';
 }
 
-let { lang, targetDate, endDate }: Props = $props();
+let { lang, targetDate, endDate, variant = 'edition' }: Props = $props();
 
 const labels = {
   en: {
@@ -54,29 +55,60 @@ $effect(() => {
 });
 </script>
 
-<div
-  class="ptd-countdown-block grid grid-cols-4 divide-x divide-[var(--ptt-border)] rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] py-3 ring-1 ring-[var(--ptt-border)] sm:py-4"
-  role="timer"
-  aria-live="polite"
-  aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
->
-  {#if ended}
-    <p class="col-span-4 px-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
-  {:else}
-    {#each [
-      { value: remaining.days, label: t.days },
-      { value: remaining.hours, label: t.hours },
-      { value: remaining.minutes, label: t.minutes },
-      { value: remaining.seconds, label: t.seconds },
-    ] as unit}
-      <div class="px-1 text-center sm:px-2">
-        <span class="block text-2xl font-bold tabular-nums text-[var(--ptt-primary)] sm:text-3xl">
-          {String(unit.value).padStart(2, '0')}
-        </span>
-        <span class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)] sm:text-xs">
-          {unit.label}
-        </span>
-      </div>
-    {/each}
-  {/if}
-</div>
+{#if variant === 'hub'}
+  <!-- Hub variant: PTT global tokens, works on dark stage background -->
+  <div
+    class="grid grid-cols-4 divide-x divide-white/20 rounded-2xl bg-white/10 py-3 ring-1 ring-white/20 backdrop-blur-sm sm:py-4"
+    role="timer"
+    aria-live="polite"
+    aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
+  >
+    {#if ended}
+      <p class="col-span-4 px-4 text-sm font-semibold text-white">{t.ended}</p>
+    {:else}
+      {#each [
+        { value: remaining.days, label: t.days },
+        { value: remaining.hours, label: t.hours },
+        { value: remaining.minutes, label: t.minutes },
+        { value: remaining.seconds, label: t.seconds },
+      ] as unit}
+        <div class="px-1 text-center sm:px-2">
+          <span class="block text-2xl font-bold tabular-nums text-white sm:text-3xl">
+            {String(unit.value).padStart(2, '0')}
+          </span>
+          <span class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-white/70 sm:text-xs">
+            {unit.label}
+          </span>
+        </div>
+      {/each}
+    {/if}
+  </div>
+{:else}
+  <!-- Edition variant: per-edition CSS vars (default) -->
+  <div
+    class="ptd-countdown-block grid grid-cols-4 divide-x divide-[var(--ptt-border)] rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] py-3 ring-1 ring-[var(--ptt-border)] sm:py-4"
+    role="timer"
+    aria-live="polite"
+    aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
+  >
+    {#if ended}
+      <p class="col-span-4 px-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
+    {:else}
+      {#each [
+        { value: remaining.days, label: t.days },
+        { value: remaining.hours, label: t.hours },
+        { value: remaining.minutes, label: t.minutes },
+        { value: remaining.seconds, label: t.seconds },
+      ] as unit}
+        <div class="px-1 text-center sm:px-2">
+          <span class="block text-2xl font-bold tabular-nums text-[var(--ptt-primary)] sm:text-3xl">
+            {String(unit.value).padStart(2, '0')}
+          </span>
+          <span class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)] sm:text-xs">
+            {unit.label}
+          </span>
+        </div>
+      {/each}
+    {/if}
+  </div>
+{/if}
