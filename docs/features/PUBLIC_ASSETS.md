@@ -45,7 +45,7 @@ public/
 
 | File | Purpose |
 |------|---------|
-| `favicon.svg` | Primary site favicon (SVG, same as `images/isologo.svg`) |
+| `favicon.svg` | Primary site favicon (SVG) |
 | `favicon.ico` | ICO fallback for older browsers |
 | `robots.txt` | Search engine crawling rules |
 | `llms.txt` | LLM-readable site summary |
@@ -93,20 +93,19 @@ Site images for branding, sections, and profile. Located directly in `public/ima
 
 | Image | Size | Purpose | Referenced By |
 |-------|-----:|---------|---------------|
+| `og-default.jpg` | ~98 KB | Default Open Graph / Twitter share image (1200×630) | BaseHead |
 | `trading.png` | 416 KB | Trading section | HomePage |
 | `techtalks.png` | 296 KB | Tech talks section | HomePage |
 | `dailybotyc.png` | 252 KB | DailyBot YC image | HomePage, DailybotPage |
 | `foddie.png` | 200 KB | Foodie section | HomePage |
 | `bicycle.png` | 184 KB | Hobbies section | HomePage |
 | `ia.png` | 120 KB | AI/ML section | HomePage |
-| `logo_full.svg` | 88 KB | Full logo (hero section) | HeroSection |
-| `logo_small_version_white.svg` | 52 KB | Compact logo (header) | Header |
-| `profile.png` | 36 KB | Profile photo | AboutPage |
-| `isologo.svg` | 16 KB | Ninja face icon (avatars) | Components |
+
+Brand logos live under `images/pereira-tech-talks/` and `images/brand/`. App icons live under `icons/` (`apple-touch-icon.png`, `icon-192x192.png`, `icon-512x512.png`).
 
 See **[Brand Guide](../BRAND_GUIDE.md)** for logo usage rules and color pairing guidelines.
 
-**Note:** `dailybotyc.png`, `foddie.png`, `bicycle.png`, and `profile.png` have `.png` extensions but contain JPEG data internally. They display correctly in all browsers. Do not rename them (would break references).
+**Note:** `dailybotyc.png`, `foddie.png`, and `bicycle.png` have `.png` extensions but contain JPEG data internally. They display correctly in all browsers. Do not rename them (would break references).
 
 ### Blog Images
 
@@ -222,7 +221,8 @@ Files in `public/` are served from the site root:
 | File Location | URL |
 |---------------|-----|
 | `public/favicon.svg` | `/favicon.svg` |
-| `public/images/profile.png` | `/images/profile.png` |
+| `public/icons/apple-touch-icon.png` | `/icons/apple-touch-icon.png` |
+| `public/images/og-default.jpg` | `/images/og-default.jpg` |
 | `public/images/blog/posts/my-post/hero.jpg` | `/images/blog/posts/my-post/hero.jpg` |
 
 ## Related Documentation

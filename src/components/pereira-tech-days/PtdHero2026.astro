@@ -66,8 +66,8 @@ const attendanceLabel = attendanceMatch?.[2] ?? '';
 const logoAlt =
   lang === 'es' ? 'Logotipo de Pereira Tech Day' : 'Pereira Tech Day logo';
 
-/** Measured legacy cyan for the year digit (not a body-text token). */
-const YEAR_CYAN = '#3ab9c9';
+/** Year digit — WCAG AA on cream (≥3:1 large text); decorative glow may stay brighter. */
+const YEAR_CYAN = '#127a82';
 const CREAM = '#fef7f3';
 ---
 
@@ -255,10 +255,10 @@ const CREAM = '#fef7f3';
         heroIllustration && (
           <div class="mt-8 w-full lg:hidden" aria-hidden="true">
             <img
-              src={heroIllustration}
+              src="/images/pereira-tech-days/2026/hero-illustration-mobile.webp"
               alt=""
-              width="720"
-              height="383"
+              width="960"
+              height="510"
               class="mx-auto max-h-64 w-auto object-contain sm:max-h-80"
               loading="eager"
               decoding="async"

@@ -223,9 +223,9 @@ function navClick(item: string) {
         on:click={() => navClick('meetups')}
       >{t.nav.meetups}</a>
       <a
-        href="{prefix}/pereira-tech-days"
+        href="{prefix}/pereira-tech-day"
         class="nav-link rounded-lg px-3 py-3 text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-        on:click={() => navClick('pereira_tech_days')}
+        on:click={() => navClick('pereira_tech_day')}
       >{t.nav.pereiraTechDays}</a>
       <!-- Calendar nav link hidden temporarily — page still at /calendar -->
       <a

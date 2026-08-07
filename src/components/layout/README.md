@@ -26,7 +26,7 @@ The global header uses `backdrop-blur-md`. **Never** render a `position: fixed` 
 
 **Hydration:** `client:load` in `MainLayout` (reliable first-tap hamburger).
 
-**Desktop (`lg+`):** Meetups, Pereira Tech Days, Calendar, Blog, Comunidad dropdown, Contact, language, theme.
+**Desktop (`lg+`):** Meetups, Pereira Tech Day, Calendar, Blog, Comunidad dropdown, Contact, language, theme.
 
 **Mobile:** Hamburger trigger; when menu is open the trigger is `invisible` so only the sheet’s X is shown.
 

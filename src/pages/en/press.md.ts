@@ -50,7 +50,7 @@ export const GET: APIRoute = () => {
         lines: [
           `- [About the community](${SITE_URL}/en/about/)`,
           `- [Programs](${SITE_URL}/en/verticals/)`,
-          `- [Pereira Tech Days](${SITE_URL}/en/pereira-tech-days/)`,
+          `- [Pereira Tech Day](${SITE_URL}/en/pereira-tech-day/)`,
           `- [Sponsors](${SITE_URL}/en/sponsors/)`,
           `- [Contributors](${SITE_URL}/en/contributors/)`,
         ],

@@ -5,11 +5,14 @@ import {
   getEditionCountdownTargets,
   getEditionEndIso,
   getEditionFontPackages,
+  getEditionHref,
   getEditionStartDate,
   getEditionStartIso,
+  getPtdLandingHref,
   getUpcomingLandingChrome,
   isUpcomingEdition,
   normalizeLightningTalks,
+  PTD_LANDING_SLUG,
 } from '@/lib/pereiraTechDay';
 
 const mockEdition = (
@@ -109,6 +112,30 @@ describe('pereiraTechDay helpers', () => {
 
   it('isUpcomingEdition returns false for cancelled editions', () => {
     expect(isUpcomingEdition(mockEdition({ status: 'cancelled' }))).toBe(false);
+  });
+
+  it('getEditionHref uses singular landing for upcoming editions', () => {
+    expect(
+      getEditionHref(mockEdition({ status: 'rsvp-open', year: 2026 }), 'es')
+    ).toBe('/pereira-tech-day/');
+    expect(
+      getEditionHref(mockEdition({ status: 'announced', year: 2026 }), 'en')
+    ).toBe('/en/pereira-tech-day/');
+  });
+
+  it('getEditionHref keeps year archive for past editions', () => {
+    expect(
+      getEditionHref(mockEdition({ status: 'completed', year: 2024 }), 'es')
+    ).toBe('/pereira-tech-days/2024/');
+    expect(
+      getEditionHref(mockEdition({ status: 'completed', year: 2024 }), 'en')
+    ).toBe('/en/pereira-tech-days/2024/');
+  });
+
+  it('getPtdLandingHref returns the singular landing path', () => {
+    expect(PTD_LANDING_SLUG).toBe('pereira-tech-day');
+    expect(getPtdLandingHref('es')).toBe('/pereira-tech-day/');
+    expect(getPtdLandingHref('en')).toBe('/en/pereira-tech-day/');
   });
 
   it('buildEditionThemeCss scopes variables under edition year', () => {
@@ -360,7 +387,7 @@ describe('getUpcomingLandingChrome', () => {
     expect(getUpcomingLandingChrome(true)).toEqual({
       sponsorsLayout: 'tree-circles',
       faqLayout: 'open-grid',
-      portraitStyle: 'square',
+      portraitStyle: 'circle',
     });
   });
 

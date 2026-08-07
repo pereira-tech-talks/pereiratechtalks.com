@@ -31,6 +31,20 @@
 /es/blog/aeo-score-100-on-isitagentready/    /blog/aeo-score-100-on-isitagentready/     301
 
 # ---------------------------------------------------------------------------
+# Pereira Tech Day — hub index removed; singular landing is canonical
+# ---------------------------------------------------------------------------
+# `/pereira-tech-days` (no year) permanently redirects to `/pereira-tech-day`.
+# Year archives stay at `/pereira-tech-days/{year}/` (exact paths below do not
+# match those deeper URLs).
+
+/pereira-tech-days            /pereira-tech-day/            301
+/pereira-tech-days/           /pereira-tech-day/            301
+/pereira-tech-days.md         /pereira-tech-day.md          301
+/en/pereira-tech-days         /en/pereira-tech-day/         301
+/en/pereira-tech-days/        /en/pereira-tech-day/         301
+/en/pereira-tech-days.md      /en/pereira-tech-day.md       301
+
+# ---------------------------------------------------------------------------
 # Language swap: Spanish moved from /es to the site root
 # ---------------------------------------------------------------------------
 # Spanish is the community's primary language and is now served at `/`, with

@@ -40,7 +40,7 @@ The full archive: [/en/meetups](/en/meetups).
 
 The flagship annual conference. Ten editions and counting (2017–2024 plus 2026). One full day at UTP. Four to six keynotes, lightning talks, networking, sponsors, swag, food, sometimes prizes. The 2024 edition packed the Auditorio Jorge Roa Martínez with hundreds of attendees.
 
-The full archive: [/en/pereira-tech-days](/en/pereira-tech-days).
+The full archive: [/en/pereira-tech-day](/en/pereira-tech-day) (current edition) and [/en/pereira-tech-days/2024](/en/pereira-tech-days/2024).
 
 ### 3. Speaker School
 

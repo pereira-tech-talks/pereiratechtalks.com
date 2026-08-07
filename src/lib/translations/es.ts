@@ -20,7 +20,7 @@ export const es: SiteTranslations = {
     contact: 'Contacto',
     slides: 'Slides',
     meetups: 'Meetups',
-    pereiraTechDays: 'Pereira Tech Days',
+    pereiraTechDays: 'Pereira Tech Day',
     speakers: 'Ponentes',
     talks: 'Charlas',
     calendar: 'Calendario',
@@ -99,12 +99,13 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       cta: 'Explorar todas las ediciones',
     },
     ptdStrip: {
-      title: 'Donde el talento encuentra oportunidad',
-      subtitle:
-        'Únete a la edición 2026 de Pereira Tech Day — charlas, talleres y la energía del mono aullador de la comunidad tech de Risaralda.',
+      eyebrow: 'Agosto 22, 2026 — 08:00 AM',
+      title: 'Pereira Tech Day 2026',
+      subtitle: 'Donde el talento, la tecnología y las marcas se encuentran.',
       cta: 'Explorar Pereira Tech Day 2026',
-      date: '22 de agosto de 2026',
-      venue: 'UTP — Auditorio Jorge Roa Martínez, Pereira',
+      date: 'sábado, 22 de agosto de 2026',
+      venue: 'UTP: Auditorio Jorge Roa Martínez, Pereira',
+      attendance: '300+ asistentes esperados',
     },
     sponsors: {
       eyebrow: 'Aliados',
@@ -189,7 +190,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
         description:
           'Nuestra conferencia anual insignia — 2024 en archivo, 2026 a continuación. Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.',
         icon: '\u{1F389}',
-        link: '/pereira-tech-days',
+        link: '/pereira-tech-day',
       },
       {
         title: 'Escuela de Speakers',
@@ -876,7 +877,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     gallery: 'Galería',
     galleryMemories: 'Memorias del evento',
     sponsors: 'Patrocinadores',
-    sponsorsSubtitle: 'Empresas que apoyarán esta edición del evento.',
+    sponsorsSubtitle: 'Empresas que **apoyarán** esta edición del evento.',
     sponsorsFooter:
       'Gracias por impulsar el ecosistema tech de Pereira y la región.',
     communities: 'Comunidades aliadas',

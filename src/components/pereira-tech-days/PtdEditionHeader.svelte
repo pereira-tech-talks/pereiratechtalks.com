@@ -23,7 +23,9 @@ let editionsOpen = false;
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
 $: homeHref = prefix === '' ? '/' : `${prefix}/`;
-$: currentHref = `${prefix}/pereira-tech-days/${year}/`;
+$: currentHref =
+  editions.find((e) => e.year === year)?.href ??
+  `${prefix}/pereira-tech-days/${year}/`;
 $: otherEditions = editions.filter((e) => e.year !== year);
 $: currentLabel = `Pereira Tech Day ${year}`;
 $: isDark = variant === 'dark';
@@ -163,17 +165,6 @@ function closeEditions() {
                     </a>
                   </li>
                 {/each}
-                <li class="border-t {isDark ? 'border-white/10' : 'border-ptt-border'}">
-                  <a
-                    href={`${prefix}/pereira-tech-days/`}
-                    class="block px-4 py-2.5 text-sm font-medium focus-visible:outline-none {isDark
-                      ? 'text-white/70 hover:bg-white/10 hover:text-white focus-visible:bg-white/10'
-                      : 'text-ptt-secondary hover:bg-ptt-bg focus-visible:bg-ptt-bg'}"
-                    on:click={closeEditions}
-                  >
-                    {t.ptdPage.allEditions}
-                  </a>
-                </li>
               </ul>
             </div>
           {/if}

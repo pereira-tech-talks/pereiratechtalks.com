@@ -23,7 +23,7 @@ The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made fo
 ## What we do
 
 - **[Monthly Meetups](/en/verticals/monthly-meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
-- **[Pereira Tech Day](/en/pereira-tech-days)** — Our flagship annual conference: 2024 archived, 2026 next. A full day of keynotes, workshops, and networking with international speakers and local partners.
+- **[Pereira Tech Day](/en/pereira-tech-day)** — Our flagship annual conference: 2024 archived, 2026 next. A full day of keynotes, workshops, and networking with international speakers and local partners.
 - **[Speaker School](/en/verticals/speaker-school)** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
 - **[La Biblioteca del Mañana](/en/verticals/library-of-tomorrow)** — A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.
 - **[AI & Agents Channel](/en/verticals/ai-channel)** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.

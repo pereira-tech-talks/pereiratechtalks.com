@@ -22,7 +22,7 @@ You can navigate any of those three layers from the site:
 
 - [Programs](/en/verticals)
 - [Meetups](/en/meetups)
-- [Pereira Tech Days](/en/pereira-tech-days)
+- [Pereira Tech Day](/en/pereira-tech-day)
 - [Speakers](/en/speakers)
 - [Contributors](/en/contributors)
 - [Sponsors](/en/sponsors)

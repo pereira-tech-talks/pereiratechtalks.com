@@ -20,7 +20,7 @@ export const en: SiteTranslations = {
     contact: 'Contact',
     slides: 'Slides',
     meetups: 'Meetups',
-    pereiraTechDays: 'Pereira Tech Days',
+    pereiraTechDays: 'Pereira Tech Day',
     speakers: 'Speakers',
     talks: 'Talks',
     calendar: 'Calendar',
@@ -99,12 +99,13 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       cta: 'Explore all editions',
     },
     ptdStrip: {
-      title: 'Where talent meets opportunity',
-      subtitle:
-        'Join the 2026 edition of Pereira Tech Day — talks, workshops, and the howler-monkey energy of the Risaralda tech community.',
+      eyebrow: 'August 22, 2026 — 08:00 AM',
+      title: 'Pereira Tech Day 2026',
+      subtitle: 'Where talent, technology, and brands meet.',
       cta: 'Explore Pereira Tech Day 2026',
-      date: 'August 22, 2026',
-      venue: 'UTP — Auditorio Jorge Roa Martínez, Pereira',
+      date: 'Saturday, August 22, 2026',
+      venue: 'UTP: Auditorio Jorge Roa Martínez, Pereira',
+      attendance: '300+ expected attendees',
     },
     sponsors: {
       eyebrow: 'Partners',
@@ -189,7 +190,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
         description:
           'Our flagship annual conference — 2024 archived, 2026 next. A full day of keynotes, workshops, and networking with international speakers and local partners.',
         icon: '\u{1F389}',
-        link: '/en/pereira-tech-days',
+        link: '/en/pereira-tech-day',
       },
       {
         title: 'Speaker School',
@@ -871,7 +872,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     gallery: 'Gallery',
     galleryMemories: 'Event memories',
     sponsors: 'Sponsors',
-    sponsorsSubtitle: 'Companies supporting this edition of the event.',
+    sponsorsSubtitle: 'Companies **supporting** this edition of the event.',
     sponsorsFooter:
       'Thank you for powering the Pereira and regional tech ecosystem.',
     communities: 'Allied communities',

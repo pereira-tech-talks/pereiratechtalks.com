@@ -40,7 +40,7 @@ El archivo completo: [/meetups](/meetups).
 
 La conferencia anual insignia. Diez ediciones y contando (2017–2024 más 2026). Un día completo en la UTP. Cuatro a seis keynotes, lightning talks, networking, patrocinadores, swag, comida, a veces premios. La edición 2024 llenó el Auditorio Jorge Roa Martínez con cientos de asistentes.
 
-El archivo completo: [/pereira-tech-days](/pereira-tech-days).
+El archivo completo: [/pereira-tech-day](/pereira-tech-day) (edición actual) y [/pereira-tech-days/2024](/pereira-tech-days/2024).
 
 ### 3. Escuela de Speakers
 

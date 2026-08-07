@@ -1,0 +1,16 @@
+---
+/**
+ * Singular PTD landing — aliases the current/upcoming edition (2026).
+ * Past editions remain at `/pereira-tech-days/{year}/`.
+ */
+import PereiraTechDayDetailPage from '@/components/pages/PereiraTechDayDetailPage.astro';
+import { getEditionByYear, getUpcomingEdition } from '@/lib/pereiraTechDay';
+
+const edition = (await getUpcomingEdition()) ?? (await getEditionByYear(2026));
+
+if (!edition) {
+  return Astro.redirect('/pereira-tech-days/2024/', 302);
+}
+---
+
+<PereiraTechDayDetailPage edition={edition} lang="es" />

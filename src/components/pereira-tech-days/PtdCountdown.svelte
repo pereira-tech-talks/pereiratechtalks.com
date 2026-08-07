@@ -63,28 +63,41 @@ const units = $derived([
 </script>
 
 {#if variant === 'hub'}
-  <!-- Hub variant: PTT global tokens on dark stage background -->
+  <!-- Hub variant: discrete cards on cream featured stage (uses --ptd-hub-* when present) -->
   <div
-    class="grid grid-cols-4 divide-x divide-white/20 rounded-2xl bg-white/10 py-3 ring-1 ring-white/20 backdrop-blur-sm sm:py-4"
+    class="ptd-countdown-hub"
     role="timer"
     aria-live="polite"
     aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
   >
     {#if ended}
-      <p class="col-span-4 px-4 text-sm font-semibold text-white">{t.ended}</p>
+      <p
+        class="text-sm font-semibold text-[color:var(--ptd-hub-teal,var(--color-ptt-primary))]"
+      >
+        {t.ended}
+      </p>
     {:else}
-      {#each units as unit}
-        <div class="px-1 text-center sm:px-2">
-          <span class="block text-2xl font-bold tabular-nums text-white sm:text-3xl">
-            {String(unit.value).padStart(2, '0')}
-          </span>
-          <span
-            class="mt-1 block text-[10px] font-semibold uppercase tracking-widest text-white/70 sm:text-xs"
+      <div
+        class="grid w-full max-w-full grid-cols-4 gap-1.5 sm:gap-2.5"
+      >
+        {#each units as unit}
+          <div
+            class="min-w-0 rounded-2xl bg-white px-1.5 py-2.5 text-center shadow-md shadow-[color:var(--ptd-hub-navy,#1f3f59)]/8 ring-1 ring-[color:var(--ptd-hub-border,#eadcd4)] sm:px-3 sm:py-3 dark:bg-[color:var(--ptd-hub-cream-dark,#1a2a38)] dark:ring-white/15"
           >
-            {unit.label}
-          </span>
-        </div>
-      {/each}
+            <span
+              class="block text-2xl font-bold tabular-nums leading-none text-[color:var(--ptd-hub-teal,var(--color-ptt-primary))] sm:text-3xl lg:text-4xl dark:text-[color:var(--ptd-hub-cyan,#3ab9c9)]"
+              style="font-family: Bebas Neue, 'Arial Black', sans-serif; letter-spacing: 0.04em;"
+            >
+              {String(unit.value).padStart(2, '0')}
+            </span>
+            <span
+              class="mt-1.5 block text-[9px] font-semibold uppercase tracking-wider text-[color:var(--ptd-hub-muted,var(--color-ptt-secondary))] sm:mt-2 sm:text-xs sm:tracking-widest"
+            >
+              {unit.label}
+            </span>
+          </div>
+        {/each}
+      </div>
     {/if}
   </div>
 {:else}

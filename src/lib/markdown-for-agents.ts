@@ -36,8 +36,8 @@ const SITE_NAV_SECTIONS: NavSection[] = [
     title: { en: 'Community', es: 'Comunidad' },
     links: [
       {
-        label: { en: 'Pereira Tech Days', es: 'Pereira Tech Days' },
-        path: '/pereira-tech-days',
+        label: { en: 'Pereira Tech Day', es: 'Pereira Tech Day' },
+        path: '/pereira-tech-day',
       },
       { label: { en: 'Meetups', es: 'Meetups' }, path: '/meetups' },
       { label: { en: 'Talks', es: 'Charlas' }, path: '/talks' },

@@ -83,8 +83,9 @@ function classify(route) {
     return { path, lang, template: 'events-detail' };
 
   // PTD
+  if (p === '/pereira-tech-day') return { path, lang, template: 'ptd-landing' };
   if (p === '/pereira-tech-days')
-    return { path, lang, template: 'ptd-catalog' };
+    return { path, lang, template: 'ptd-landing-redirect' };
   if (p.match(/^\/pereira-tech-days\/\d+$/))
     return { path, lang, template: 'ptd-edition' };
   if (p.startsWith('/pereira-tech-days/'))

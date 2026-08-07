@@ -17,7 +17,7 @@ module.exports = {
         // Form page
         '/contact/',
         // Pereira Tech Days catalog
-        '/pereira-tech-days/',
+        '/pereira-tech-day/',
         // Meetups catalog
         '/meetups/',
         // Slides catalog

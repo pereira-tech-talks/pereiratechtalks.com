@@ -6,7 +6,8 @@
 
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
-import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { type Language, tr } from '@/lib/i18n';
+import { getEditionHref } from '@/lib/pereiraTechDay';
 
 interface Props {
   edition: CollectionEntry<'pereiraTechDays'>;
@@ -16,14 +17,20 @@ interface Props {
 
 const { edition, lang, loading = 'lazy' } = Astro.props;
 
-const prefix = getUrlPrefix(lang);
 const year = edition.data.year;
 const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 
-const heroSrc = edition.data.hero.src;
+/**
+ * 2026 mascot hero is compositionally right-weighted with a sparse left half.
+ * Use a pre-cropped card asset so the mascot fills the 16:9 frame edge-to-edge.
+ */
+const heroSrc =
+  year === 2026
+    ? '/images/pereira-tech-days/2026/mascot/card-hero-sm.webp'
+    : edition.data.hero.src;
 const heroAlt = tr(edition.data.hero.alt, lang) || title;
-const url = `${prefix}/pereira-tech-days/${year}/`;
+const url = getEditionHref(edition, lang);
 const accent =
   edition.data.brandKit?.paletteLight?.accent || 'var(--color-ptt-accent)';
 const status = edition.data.status;
@@ -58,7 +65,9 @@ const statusLabel = statusLabels[status]?.[lang] ?? status;
   href={url}
   class="group flex h-full flex-col overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
-  <div class="relative aspect-[16/9] overflow-hidden">
+  <div
+    class={`relative aspect-[16/9] overflow-hidden ${year === 2026 ? 'bg-[#F6EFE4]' : 'bg-ptt-bg'}`}
+  >
     <img decoding="async"
       src={heroSrc}
       alt={heroAlt}
@@ -66,7 +75,7 @@ const statusLabel = statusLabels[status]?.[lang] ?? status;
       height="360"
       loading={loading}
       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
-      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
     <div
       class="absolute inset-x-0 bottom-0 h-2"
       style={`background-color: ${accent}`}

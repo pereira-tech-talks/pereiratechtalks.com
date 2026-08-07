@@ -1,5 +1,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+
 export type PereiraTechDay = CollectionEntry<'pereiraTechDays'>;
 
 const filterDrafts = (entry: PereiraTechDay): boolean => {
@@ -167,6 +169,29 @@ export const getEditionCountdownTargets = (
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
   edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
 
+/** Singular public landing slug for the current/upcoming flagship edition. */
+export const PTD_LANDING_SLUG = 'pereira-tech-day';
+
+/** Href for the singular landing (`/pereira-tech-day` or `/en/pereira-tech-day`). */
+export const getPtdLandingHref = (lang: Language): string =>
+  `${getUrlPrefix(lang)}/${PTD_LANDING_SLUG}/`;
+
+/**
+ * Public href for an edition page.
+ * Upcoming editions use the singular landing; past editions stay under
+ * `/pereira-tech-days/{year}/`.
+ */
+export const getEditionHref = (
+  edition: PereiraTechDay,
+  lang: Language
+): string => {
+  const prefix = getUrlPrefix(lang);
+  if (isUpcomingEdition(edition)) {
+    return `${prefix}/${PTD_LANDING_SLUG}/`;
+  }
+  return `${prefix}/pereira-tech-days/${edition.data.year}/`;
+};
+
 /**
  * De-duplicated list of npm font packages declared by the edition's
  * `brandKit.typography.fontSources`. Used to decide whether `PtdEditionFonts`
@@ -213,7 +238,7 @@ export interface UpcomingLandingChrome {
 
 /**
  * Status-based chrome for edition landings — never branch on year in callers.
- * Upcoming → 2026-style tree circles / open FAQ / square portraits.
+ * Upcoming → 2026-style tree circles / open FAQ / circular portraits.
  * Past → 2024-style gray cards / accordion / circular portraits.
  */
 export const getUpcomingLandingChrome = (
@@ -223,7 +248,7 @@ export const getUpcomingLandingChrome = (
     ? {
         sponsorsLayout: 'tree-circles',
         faqLayout: 'open-grid',
-        portraitStyle: 'square',
+        portraitStyle: 'circle',
       }
     : {
         sponsorsLayout: 'gray-cards',

@@ -92,11 +92,13 @@ export interface SiteTranslations {
       cta: string;
     };
     ptdStrip: {
+      eyebrow: string;
       title: string;
       subtitle: string;
       cta: string;
       date: string;
       venue: string;
+      attendance: string;
     };
     sponsors: {
       eyebrow: string;

@@ -50,6 +50,6 @@ Entrevistas, cobertura en sitio, fotografía o solicitudes editoriales:
 
 - [Sobre la comunidad](/about/)
 - [Programas](/verticals/)
-- [Pereira Tech Days](/pereira-tech-days/)
+- [Pereira Tech Day](/pereira-tech-day/)
 - [Patrocinadores](/sponsors/)
 - [Contribuyentes](/contributors/)
