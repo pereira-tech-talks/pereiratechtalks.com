@@ -255,20 +255,21 @@ describe('POST /api/contact → Dailybot', () => {
       );
     vi.stubGlobal('fetch', fetchMock);
 
-    const res = await onRequestPost(
-      createContext({
-        _form: 'conduct',
-        anonymous: true,
-        incidentDescription:
-          'Enough detail about a confidential incident for organizers to review.',
-        incidentDate: 'Last meetup',
-        peopleInvolved: '',
-        name: 'ShouldClear',
-        email: '',
-        lang: 'es',
-        website: '',
-      })
-    );
+    const ctx = createContext({
+      _form: 'conduct',
+      anonymous: true,
+      incidentDescription:
+        'Enough detail about a confidential incident for organizers to review.',
+      incidentDate: 'Last meetup',
+      peopleInvolved: '',
+      name: 'ShouldClear',
+      // Sneaked email must not reach Dailybot or trigger Resend ack.
+      email: 'sneak@example.com',
+      lang: 'es',
+      website: '',
+    });
+
+    const res = await onRequestPost(ctx);
 
     expect(res.status).toBe(200);
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
@@ -280,6 +281,7 @@ describe('POST /api/contact → Dailybot', () => {
     expect(body.content[CONDUCT_Q.REPORTER_NAME]).toBe('');
     expect(body.content[CONDUCT_Q.REPORTER_EMAIL]).toBe('');
     expect(body.content[CONDUCT_Q.INCIDENT]).toContain('confidential incident');
+    expect(ctx.waitUntil).not.toHaveBeenCalled();
   });
 
   it('returns 502-style client error when Dailybot rejects', async () => {

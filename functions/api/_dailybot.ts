@@ -309,11 +309,8 @@ export async function submitFormResponse(
     return { ok: false, error: detail, status: 400 };
   }
 
-  console.error(
-    '[dailybot] unexpected error',
-    response.status,
-    rawBody.slice(0, 500)
-  );
+  // Do not log response bodies — Dailybot may echo submitted content (incl. CoC).
+  console.error('[dailybot] unexpected error', response.status, detail);
   return { ok: false, error: 'UNKNOWN', status: 502 };
 }
 

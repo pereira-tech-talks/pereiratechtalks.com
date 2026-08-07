@@ -468,16 +468,20 @@ export async function onRequestPost(
   }
 
   const formType = resolveFormType(data);
-  const email = sanitiseText(data.email, MAX_EMAIL_LENGTH).toLowerCase();
+  let email = sanitiseText(data.email, MAX_EMAIL_LENGTH).toLowerCase();
   const langRaw = sanitiseText(data.lang, 16) || 'es';
 
+  const isAnonymousConduct =
+    formType === 'conduct' && asBool(data.anonymous);
+
   // Contact / most forms need email; anonymous conduct may omit it
-  if (formType !== 'conduct' || !asBool(data.anonymous)) {
+  if (!isAnonymousConduct) {
     if (!email || !EMAIL_REGEX.test(email)) {
       return jsonResponse({ ok: false, error: 'email_invalid' }, 400, origin);
     }
-  } else if (email && !EMAIL_REGEX.test(email)) {
-    return jsonResponse({ ok: false, error: 'email_invalid' }, 400, origin);
+  } else {
+    // Drop any sneaked identity before Dailybot mapping / Resend ack.
+    email = '';
   }
 
   const reason = normalizeTopic(sanitiseText(data.reason ?? data.topic, 64));
@@ -554,7 +558,9 @@ export async function onRequestPost(
   }
 
   const ackLang = langRaw === 'en' ? 'en' : 'es';
-  if (email) {
+  // Never email-ack anonymous CoC reports (even if a client sneaks an address).
+  const allowAck = !(formType === 'conduct' && flags.anonymous);
+  if (allowAck && email) {
     context.waitUntil(
       resendAck(context.env, email, built.ackTopic, ackLang).then(() => undefined)
     );
