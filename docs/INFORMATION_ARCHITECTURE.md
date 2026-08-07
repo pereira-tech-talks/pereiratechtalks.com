@@ -334,7 +334,7 @@ fetch `<page-url>.md` to read content directly.
 ## 10. Pending Decisions
 
 - **Newsletter platform** (Task 15) — Resend contact list / Buttondown / Mailchimp.
-- **Forms backend** (Task 15) — Cloudflare Pages Functions + Resend (recommended) vs. third-party form provider.
+- **Forms backend** — Cloudflare Pages Functions + **Dailybot Forms** (system of record); optional Resend ack. See [FORMS.md](./features/FORMS.md).
 - **PTD 2026 brand kit** (Task 17 step 6) — placeholder uses global PTT
   brand until the design lands.
 - **Press kit downloads** — final asset list pending brand source files.

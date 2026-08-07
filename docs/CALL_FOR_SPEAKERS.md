@@ -94,19 +94,16 @@ If your talk references confidential employer data, sensitive client work, or pe
 
 ## How to submit
 
-Use the form at [`/cfs`](https://v3.pereiratechtalks.org/cfs). The form asks for:
+Use the form at [`/call-for-speakers`](https://v3.pereiratechtalks.org/call-for-speakers) (English: `/en/call-for-speakers`). Submissions go to Dailybot via `POST /api/contact` (`_form: "cfs"`) — see [FORMS.md](./features/FORMS.md). The form asks for:
 
-- Your name (and pronouns if you'd like to share)
-- Email + LinkedIn or X handle
-- A short bio (2–3 sentences)
-- Talk title, format (lightning / regular / workshop / panel / PTD keynote)
-- 1-paragraph abstract
-- 3 takeaways the audience will leave with
-- Whether you've spoken before publicly — and if not, whether you'd like Speaker School support
-- Optional: a video link (any past talk, even informal)
-- Preferred meetup window (3–4 candidate dates if you have constraints)
+- Your name and email
+- Talk title and format (regular / lightning / panel / workshop)
+- Abstract and key takeaways
+- Social / portfolio URL
+- Whether this is your first talk with us and whether you want Speaker School mentorship
+- Optional notes (dates, co-speakers, AV)
 
-You'll get an automated acknowledgement immediately and a real reply within 14 days.
+You'll see an on-page confirmation immediately; organizers reply within about 7 business days.
 
 ## Re-applying
 
@@ -118,4 +115,4 @@ If your proposal is declined for a given month, we keep it on file and re-evalua
 **Owner:** Speakers vertical lead.
 **Contact:** <speakers@pereiratechtalks.org>.
 
-A user-facing public form lives at `/cfs` (EN) and `/es/cfp` (ES). Backend submission goes to a Cloudflare Pages Function that emails <speakers@pereiratechtalks.org> and stores the entry in a private repo for tracking.
+A user-facing public form lives at `/call-for-speakers` (Spanish primary) and `/en/call-for-speakers`. Backend: Cloudflare Pages Function → Dailybot **PTT Call for Speakers** (optional Resend ack). You can still email <speakers@pereiratechtalks.org> directly.
