@@ -1,8 +1,5 @@
-import { SITE_TIMEZONE } from '@/lib/constances';
+import { SITE_TIMEZONE, SITE_TIMEZONE_OFFSET } from '@/lib/constances';
 import { getDateLocale, type Language } from '@/lib/i18n';
-
-/** Fixed offset for Colombia — no DST. */
-const BOGOTA_UTC_OFFSET = '-05:00';
 
 const CALENDAR_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -78,6 +75,22 @@ export function getCalendarYearMonth(date: Date | string): string {
   return toCalendarDateString(date).slice(0, 7);
 }
 
+/** Format a real timestamp in SITE_TIMEZONE (GMT−5 / America/Bogota). */
+export function formatInstantInSiteTimezone(
+  date: Date,
+  locale: string,
+  options: CalendarDateFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }
+): string {
+  return new Intl.DateTimeFormat(locale, {
+    ...options,
+    timeZone: SITE_TIMEZONE,
+  }).format(date);
+}
+
 /** Normalise API/JSON strings to a midnight-UTC `Date`. */
 export function toCalendarDate(date: Date | string): Date {
   if (date instanceof Date) return date;
@@ -132,7 +145,7 @@ export function combineCalendarDateAndTime(
   const pad = (value: string) => value.padStart(2, '0');
 
   if (timezone === 'America/Bogota') {
-    return `${dateStr}T${pad(hours)}:${pad(minutes)}:00${BOGOTA_UTC_OFFSET}`;
+    return `${dateStr}T${pad(hours)}:${pad(minutes)}:00${SITE_TIMEZONE_OFFSET}`;
   }
 
   throw new Error(
