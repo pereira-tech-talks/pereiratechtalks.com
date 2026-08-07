@@ -6,8 +6,14 @@ tagline:
   en: Where talent, technology, and brands meet.
   es: Donde el talento, la tecnología y las marcas se encuentran.
 description:
-  en: The 2026 edition of Pereira Tech Day returns to the Universidad Tecnológica de Pereira on Saturday, August 22. A full day of software development, artificial intelligence, cybersecurity, and community — with international speakers, sponsor activations, and the howler-monkey energy of the Risaralda tech scene.
-  es: La edición 2026 de Pereira Tech Day regresa a la Universidad Tecnológica de Pereira el sábado 22 de agosto. Un día completo de desarrollo de software, inteligencia artificial, ciberseguridad y comunidad — con ponentes internacionales, activaciones de patrocinadores y la energía del mono aullador del ecosistema tech de Risaralda.
+  en: |-
+    Pereira Tech Day is an event jointly organized by the PereiraJS, Python Pereira, Pereira Tech Talks, and Joint Developer communities. We join forces to create a diverse, enriching event, with talks covering many different facets of technology.
+
+    At Pereira Tech Day, our goal is to share topics related to the tech world with the community, focused on inspiring and motivating people. This year's talks will not only cover technology topics, but also career paths, community building, and motivation — encouraging attendees to keep exploring, researching, and diving into the wonderful world of technology.
+  es: |-
+    Pereira Tech Day es un evento organizado en conjunto por las comunidades de PereiraJS, Python Pereira, Pereira Tech Talks y Joint Developer. Unimos fuerzas para crear un evento diverso y enriquecedor, con charlas que abarcan diferentes aspectos de la tecnología.
+
+    En Pereira Tech Day, nuestro objetivo es compartir con la comunidad temas relacionados con el mundo tecnológico, enfocados en inspirar y motivar a las personas. Las charlas de este año no solo cubrirán temas tecnológicos, sino también trayectorias profesionales, desarrollo comunitario y motivación, buscando incentivar a los asistentes a seguir explorando, investigando y adentrándose en el maravilloso mundo de la tecnología.
 date: 2026-08-22
 startTime: "08:00"
 endTime: "14:00"
