@@ -77,12 +77,38 @@ keynotes:
   - jose-jaramillo
   - cesar-camacho
 lightningTalks:
-  - jonathan-alvarez
-  - juan-pablo-franco
-  - sebastian-franco
-  - juan-jose-cardona
-  - abdenago-lopez
-  - sary-libreros
+  - speaker: jonathan-alvarez
+    title:
+      en: Your first talk
+      es: Tu primera charla
+  - speaker: juan-pablo-franco
+    title:
+      en: Serverless in everyday life
+      es: Serleverless en lo cotidiano
+  - speaker: sebastian-franco
+    title:
+      en: >-
+        At what point did we stop understanding what happens inside Machine
+        Learning? An intuition about architectures and styles of modern ML
+      es: >-
+        ¿En qué momento dejamos de entender qué sucede dentro del Machine
+        Learning? Una intuición sobre arquitecturas y estilos del ML moderno
+  - speaker: juan-jose-cardona
+    title:
+      en: From 100 Django Models to a Complete GraphQL API in 1 Minute
+      es: De 100 Modelos Django a una API GraphQL Completa en 1 Minuto
+  - speaker: abdenago-lopez
+    title:
+      en: "Good communication: the key behind successful teamwork"
+      es: "Buena comunicación: la clave detrás del éxito en el trabajo en equipo"
+  - speaker: sary-libreros
+    title:
+      en: >-
+        5 Steps to Conquer the Tech World: My Journey from Chemical
+        Engineering to Data
+      es: >-
+        5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería
+        Química a los Datos
 sponsors:
   - slug: github
     tier: gold

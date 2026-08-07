@@ -32,6 +32,7 @@ import {
   getEditionStartDate,
   getEditionStartIso,
   isUpcomingEdition,
+  normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
@@ -85,8 +86,11 @@ const fontPackages = getEditionFontPackages(edition);
 
 const talks = await getTalksByEvent('pereiraTechDays', edition.id);
 const keynoteSpeakers = await getSpeakersBySlugs(edition.data.keynotes ?? []);
-const lightningSpeakers = await getSpeakersBySlugs(
+const normalizedLightningTalks = normalizeLightningTalks(
   edition.data.lightningTalks ?? []
+);
+const lightningSpeakers = await getSpeakersBySlugs(
+  normalizedLightningTalks.map((entry) => entry.speaker)
 );
 const speakerNameById = new Map(
   [...keynoteSpeakers, ...lightningSpeakers].map((s) => [s.id, s.data.name])

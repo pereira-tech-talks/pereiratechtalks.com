@@ -168,3 +168,23 @@ export const getEditionFontPackages = (edition: PereiraTechDay): string[] => {
     .filter((pkg): pkg is string => Boolean(pkg));
   return [...new Set(packages)];
 };
+
+export type LightningTalkEntry =
+  PereiraTechDay['data']['lightningTalks'][number];
+
+/** Normalized lightning talk: a speaker slug plus an optional title-first payload. */
+export interface NormalizedLightningTalk {
+  speaker: string;
+  title?: string | { en?: string; es?: string };
+}
+
+/**
+ * Normalizes `lightningTalks` entries, which accept either a legacy speaker
+ * slug string or a `{ speaker, title }` object (Task 3 — title-first UI).
+ */
+export const normalizeLightningTalks = (
+  entries: LightningTalkEntry[]
+): NormalizedLightningTalk[] =>
+  entries.map((entry) =>
+    typeof entry === 'string' ? { speaker: entry } : entry
+  );

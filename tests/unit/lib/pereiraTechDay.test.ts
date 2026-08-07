@@ -7,6 +7,7 @@ import {
   getEditionStartDate,
   getEditionStartIso,
   isUpcomingEdition,
+  normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
 
 const mockEdition = (
@@ -180,5 +181,48 @@ describe('pereiraTechDay helpers', () => {
 
   it('getEditionFontPackages returns an empty array when no fontSources are declared', () => {
     expect(getEditionFontPackages(mockEdition())).toEqual([]);
+  });
+
+  it('normalizeLightningTalks accepts legacy slug-only entries', () => {
+    const result = normalizeLightningTalks([
+      'jonathan-alvarez',
+      'sary-libreros',
+    ]);
+    expect(result).toEqual([
+      { speaker: 'jonathan-alvarez' },
+      { speaker: 'sary-libreros' },
+    ]);
+  });
+
+  it('normalizeLightningTalks accepts title-first object entries', () => {
+    const result = normalizeLightningTalks([
+      {
+        speaker: 'jonathan-alvarez',
+        title: { en: 'Your first talk', es: 'Tu primera charla' },
+      },
+    ]);
+    expect(result).toEqual([
+      {
+        speaker: 'jonathan-alvarez',
+        title: { en: 'Your first talk', es: 'Tu primera charla' },
+      },
+    ]);
+  });
+
+  it('normalizeLightningTalks accepts a mix of both shapes', () => {
+    const result = normalizeLightningTalks([
+      'jonathan-alvarez',
+      {
+        speaker: 'sary-libreros',
+        title: '5 Pasos para Conquistar el Mundo Tech',
+      },
+    ]);
+    expect(result).toEqual([
+      { speaker: 'jonathan-alvarez' },
+      {
+        speaker: 'sary-libreros',
+        title: '5 Pasos para Conquistar el Mundo Tech',
+      },
+    ]);
   });
 });

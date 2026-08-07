@@ -410,7 +410,16 @@ const pereiraTechDays = defineCollection({
       )
       .default([]),
     keynotes: z.array(z.string()).default([]),
-    lightningTalks: z.array(z.string()).default([]),
+    // Legacy entries are speaker slugs only; newer entries carry a title-first
+    // payload `{ speaker, title }` to support the 2024 photocopy UI (Task 9).
+    lightningTalks: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({ speaker: z.string(), title: i18nString }),
+        ])
+      )
+      .default([]),
     sponsors: z.array(sponsorRef).default([]),
     organizers: z.array(z.string()).default([]),
     collaborators: z.array(z.string()).default([]),
