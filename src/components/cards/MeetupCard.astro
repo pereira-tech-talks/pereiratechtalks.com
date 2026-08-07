@@ -6,6 +6,7 @@
 
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 
 interface Props {
@@ -26,11 +27,7 @@ const heroSrc =
 const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
 
 const date = new Date(meetup.data.date);
-const dateLabel = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}).format(date);
+const dateLabel = formatCalendarDate(date, lang);
 
 const venueLine = meetup.data.venue
   ? [meetup.data.venue.name, meetup.data.venue.city].filter(Boolean).join(' · ')
@@ -90,7 +87,7 @@ const talksLabel =
   </div>
   <div class="flex min-w-0 flex-1 flex-col gap-3 p-5">
     <div class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
-      <time class="min-w-0 break-words" datetime={date.toISOString()}>{dateLabel}</time>
+      <time class="min-w-0 break-words" datetime={getCalendarDateString(date)}>{dateLabel}</time>
       {talksCount > 0 && <span aria-hidden="true">·</span>}
       {talksCount > 0 && <span class="shrink-0">{talksLabel}</span>}
     </div>

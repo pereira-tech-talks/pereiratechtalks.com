@@ -2,7 +2,12 @@
 import { onDestroy, onMount, tick } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import type { TimelineCardEntry } from '@/lib/blog';
-import { SITE_TIMEZONE } from '@/lib/constances';
+import {
+  formatCalendarDateLocale,
+  getCalendarYear,
+  getCalendarYearMonth,
+  isFutureCalendarDate,
+} from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -81,33 +86,23 @@ function reobserveSentinel(): void {
 }
 
 function isPostScheduled(pubDate: string): boolean {
-  const d = new Date(pubDate);
-  if (Number.isNaN(d.getTime())) return false;
-  const todayInTz = new Date().toLocaleDateString('en-CA', {
-    timeZone: SITE_TIMEZONE,
-  });
-  return pubDate.slice(0, 10) > todayInTz;
+  return isFutureCalendarDate(pubDate);
 }
 
 function formatDate(pubDate: string): string {
-  return new Date(pubDate).toLocaleDateString(t.dateLocale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+  return formatCalendarDateLocale(pubDate, t.dateLocale);
 }
 
 function getYear(pubDate: string): string {
-  return new Date(pubDate).getFullYear().toString();
+  return getCalendarYear(pubDate).toString();
 }
 
 function getYearMonth(pubDate: string): string {
-  const d = new Date(pubDate);
-  return `${d.getFullYear()}-${d.getMonth()}`;
+  return getCalendarYearMonth(pubDate);
 }
 
 function getMonthName(pubDate: string): string {
-  return new Date(pubDate).toLocaleDateString(t.dateLocale, { month: 'long' });
+  return formatCalendarDateLocale(pubDate, t.dateLocale, { month: 'long' });
 }
 
 function buildSeriesBadgeLabel(

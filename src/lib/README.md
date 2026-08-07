@@ -353,14 +353,26 @@ The alias is configured in `tsconfig.json`:
 3. Add TypeScript types in `types.ts` if needed
 
 ```typescript
-// src/lib/utils.ts
-export function formatDate(date: Date, locale: string = 'en-US'): string {
-  return date.toLocaleDateString(locale, {
+// src/lib/dates.ts — calendar dates from content collections (midnight UTC)
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+
+export function displayMeetupDate(date: Date, lang: 'en' | 'es'): string {
+  return formatCalendarDate(date, lang, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
 }
+
+export function meetupDatetimeAttr(date: Date): string {
+  return getCalendarDateString(date);
+}
+
+// Real timestamps (certificates, verification) — GMT-5
+formatInstantInSiteTimezone(issuedAt, 'es-CO');
+
+// Wall-clock PTD start → ISO with -05:00
+combineCalendarDateAndTime(editionDate, '08:00');
 ```
 
 ### Adding a New Translation

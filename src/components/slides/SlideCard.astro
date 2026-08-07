@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import TypeBadge from '@/components/slides/TypeBadge.astro';
+import { getCalendarYear } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getDeckSlug } from '@/lib/slides';
 
@@ -49,7 +50,7 @@ const { title, description, heroImage, eventName, eventDate, type } = deck.data;
       <p class="text-sm text-ptt-secondary mb-2">
         {eventName}
         {eventDate && (
-          <span> · {eventDate.getFullYear()}</span>
+          <span> · {getCalendarYear(eventDate)}</span>
         )}
       </p>
     )}

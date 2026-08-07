@@ -534,6 +534,19 @@ All page and blog post meta descriptions MUST be 130-160 characters (both EN and
 
 All documentation must be in **English**.
 
+## Dates and Timezones
+
+Pereira Tech Talks uses **America/Bogota** (`SITE_TIMEZONE`, UTC−5, no DST) as the site clock. Helpers live in `src/lib/dates.ts`.
+
+| Kind of date | Storage | Display / logic |
+|--------------|---------|-----------------|
+| Content calendar dates (`pubDate`, meetup `date`, `lastUpdated`) | `YYYY-MM-DD` → midnight UTC | `formatCalendarDate*` with `timeZone: 'UTC'` so the authored day never shifts |
+| Scheduling gates (scheduled posts, upcoming meetups/events) | Same calendar strings | Compare against **today in Bogota** via `getTodayInSiteTimezone()` |
+| Wall-clock event times (PTD `startTime`, countdowns) | Date + `HH:mm` | `combineCalendarDateAndTime()` → ISO with `SITE_TIMEZONE_OFFSET` (`-05:00`) |
+| Real timestamps (`issuedAt`, verification) | Full ISO instant | `formatInstantInSiteTimezone()` with `SITE_TIMEZONE` |
+
+**Do not** call `toLocaleDateString()` or `getFullYear()` on content dates without these helpers.
+
 ## Summary Checklist
 
 Before committing, verify:

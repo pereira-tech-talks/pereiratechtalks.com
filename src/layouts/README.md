@@ -152,6 +152,9 @@ interface Props {
   author?: string;
 }
 
+import { formatCalendarDate } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
+
 const { lang, title, description, pubDate, author } = Astro.props;
 ---
 
@@ -159,7 +162,9 @@ const { lang, title, description, pubDate, author } = Astro.props;
   <article class="main-container py-24">
     <header class="mb-8">
       <h1 class="text-4xl font-bold">{title}</h1>
-      <time>{pubDate.toLocaleDateString()}</time>
+      <time datetime={pubDate.toISOString().slice(0, 10)}>
+        {formatCalendarDate(pubDate, lang as Language)}
+      </time>
       {author && <p>By {author}</p>}
     </header>
     <slot />

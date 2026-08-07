@@ -1,7 +1,12 @@
 <script lang="ts">
 import { onDestroy, onMount, tick } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
-import { SITE_TIMEZONE } from '@/lib/constances';
+import {
+  formatCalendarDateLocale,
+  getCalendarYear,
+  getCalendarYearMonth,
+  isFutureCalendarDate,
+} from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import type { SlideTimelineCardEntry } from '@/lib/slides';
 import { getTranslations } from '@/lib/translations';
@@ -77,33 +82,23 @@ function reobserveSentinel(): void {
 }
 
 function isDeckScheduled(pubDate: string): boolean {
-  const d = new Date(pubDate);
-  if (Number.isNaN(d.getTime())) return false;
-  const todayInTz = new Date().toLocaleDateString('en-CA', {
-    timeZone: SITE_TIMEZONE,
-  });
-  return pubDate.slice(0, 10) > todayInTz;
+  return isFutureCalendarDate(pubDate);
 }
 
 function formatDate(pubDate: string): string {
-  return new Date(pubDate).toLocaleDateString(t.dateLocale, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+  return formatCalendarDateLocale(pubDate, t.dateLocale);
 }
 
 function getYear(pubDate: string): string {
-  return new Date(pubDate).getFullYear().toString();
+  return getCalendarYear(pubDate).toString();
 }
 
 function getYearMonth(pubDate: string): string {
-  const d = new Date(pubDate);
-  return `${d.getFullYear()}-${d.getMonth()}`;
+  return getCalendarYearMonth(pubDate);
 }
 
 function getMonthName(pubDate: string): string {
-  return new Date(pubDate).toLocaleDateString(t.dateLocale, { month: 'long' });
+  return formatCalendarDateLocale(pubDate, t.dateLocale, { month: 'long' });
 }
 
 function getTypeBadgeLabel(type: SlideTimelineCardEntry['type']): string {
@@ -223,7 +218,7 @@ function getTypeBadgeClasses(type: SlideTimelineCardEntry['type']): string {
                 <p class="text-sm text-ptt-secondary mb-2">
                   {deck.eventName}
                   {#if deck.eventDate}
-                    <span> · {new Date(deck.eventDate).getFullYear()}</span>
+                    <span> · {getCalendarYear(deck.eventDate)}</span>
                   {/if}
                 </p>
               {/if}

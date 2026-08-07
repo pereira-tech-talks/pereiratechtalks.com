@@ -1,7 +1,7 @@
 import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
 
 import { shouldHideDrafts } from './blog';
-import { SITE_TIMEZONE } from './constances';
+import { isFutureCalendarDate } from './dates';
 
 import type { Language } from './i18n';
 
@@ -47,11 +47,7 @@ export function isDraftDeck(deck: CollectionEntry<'slides'>): boolean {
  * mirroring the blog scheduling behaviour.
  */
 export function isScheduledDeck(deck: CollectionEntry<'slides'>): boolean {
-  const todayInTz = new Date().toLocaleDateString('en-CA', {
-    timeZone: SITE_TIMEZONE,
-  });
-  const pubDateStr = deck.data.pubDate.toISOString().slice(0, 10);
-  return pubDateStr > todayInTz;
+  return isFutureCalendarDate(deck.data.pubDate);
 }
 
 /**

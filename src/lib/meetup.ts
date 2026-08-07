@@ -1,4 +1,10 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
+
+import {
+  getCalendarYear,
+  isCalendarDateBeforeToday,
+  isCalendarDateOnOrAfterToday,
+} from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 
 export type Meetup = CollectionEntry<'meetups'>;
@@ -28,17 +34,15 @@ export const getMeetupBySlug = async (
 };
 
 export const getUpcomingMeetups = async (): Promise<Meetup[]> => {
-  const now = Date.now();
   const all = await getMeetups();
   return all
-    .filter((e) => e.data.date.getTime() >= now)
+    .filter((e) => isCalendarDateOnOrAfterToday(e.data.date))
     .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
 };
 
 export const getPastMeetups = async (): Promise<Meetup[]> => {
-  const now = Date.now();
   const all = await getMeetups();
-  return all.filter((e) => e.data.date.getTime() < now);
+  return all.filter((e) => isCalendarDateBeforeToday(e.data.date));
 };
 
 export const getMeetupsByVertical = async (
@@ -50,7 +54,7 @@ export const getMeetupsByVertical = async (
 
 export const getMeetupsByYear = async (year: number): Promise<Meetup[]> => {
   const all = await getMeetups();
-  return all.filter((e) => e.data.date.getFullYear() === year);
+  return all.filter((e) => getCalendarYear(e.data.date) === year);
 };
 
 /**
@@ -67,7 +71,7 @@ export const groupMeetupsByYear = (
 ): { year: number; meetups: Meetup[] }[] => {
   const byYear = new Map<number, Meetup[]>();
   for (const m of meetups) {
-    const y = m.data.date.getFullYear();
+    const y = getCalendarYear(m.data.date);
     if (!byYear.has(y)) byYear.set(y, []);
     byYear.get(y)?.push(m);
   }
