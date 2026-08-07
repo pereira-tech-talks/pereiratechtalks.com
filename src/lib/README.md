@@ -353,13 +353,19 @@ The alias is configured in `tsconfig.json`:
 3. Add TypeScript types in `types.ts` if needed
 
 ```typescript
-// src/lib/utils.ts
-export function formatDate(date: Date, locale: string = 'en-US'): string {
-  return date.toLocaleDateString(locale, {
+// src/lib/dates.ts — calendar dates from content collections (midnight UTC)
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+
+export function displayMeetupDate(date: Date, lang: 'en' | 'es'): string {
+  return formatCalendarDate(date, lang, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+}
+
+export function meetupDatetimeAttr(date: Date): string {
+  return getCalendarDateString(date);
 }
 ```
 
