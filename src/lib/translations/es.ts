@@ -551,15 +551,19 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   contributorsPage: {
     title: 'Equipo y comunidad',
     description:
-      'Conoce a organizadores, líderes de programa, mentores y voluntarios que sostienen Pereira Tech Talks — equipo actual y red alumni.',
+      'Conoce al equipo organizador de Pereira Tech Talks y a quienes acompañaron capítulos anteriores — personas reales detrás de los meetups y Pereira Tech Day.',
     eyebrow: 'Personas',
     intro: (count) =>
-      `${count} personas activas conforman el equipo extendido de la comunidad. Si quieres unirte, escríbenos.`,
-    currentTitle: 'Equipo actual',
+      `${count} organizadoras y organizadores activos sostienen la comunidad día a día. Si quieres sumarte, escríbenos o revisa cómo contribuir.`,
+    sinceLabel: (year) => `Construyendo comunidad en Pereira desde ${year}.`,
+    currentTitle: 'Equipo organizador',
+    currentIntro:
+      'Quienes coordinan meetups, Pereira Tech Day, programas y la operación diaria de Pereira Tech Talks.',
     pastTitle: 'Alumni y organizadores anteriores',
     pastIntro:
-      'Organizadores y contribuidores de capítulos anteriores de la comunidad. Siguen siendo parte de la red extendida.',
+      'Organizadoras, organizadores y colaboradoras de capítulos anteriores. Siguen siendo parte de la red extendida de la comunidad.',
     joinLabel: 'Únete al equipo',
+    contributeLabel: 'Cómo contribuir',
     emptyTitle: 'Aún no hay miembros registrados',
     emptyDesc: 'Estamos consolidando el directorio. Vuelve pronto.',
   },

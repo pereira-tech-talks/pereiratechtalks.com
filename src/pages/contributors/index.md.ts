@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 
-import { getContributors } from '@/lib/contributor';
+import {
+  filterCurrentTeamOrganizers,
+  filterPastTeamMembers,
+  getContributors,
+} from '@/lib/contributor';
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
 
 const SITE_URL = 'https://pereiratechtalks.org';
@@ -8,20 +12,33 @@ const SITE_URL = 'https://pereiratechtalks.org';
 export const GET: APIRoute = async () => {
   const lang = 'es';
   const contributors = await getContributors();
-  const lines = contributors.map((c) => {
-    const role = c.data.role.es;
-    const roles = c.data.roles.join(', ');
-    return `- **${c.data.name}** — ${role} (${roles})`;
-  });
+  const current = filterCurrentTeamOrganizers(contributors);
+  const past = filterPastTeamMembers(contributors);
+
+  const toLines = (list: typeof contributors): string[] =>
+    list.map((c) => {
+      const role = c.data.role.es;
+      return `- **${c.data.name}** — ${role}`;
+    });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Contribuyentes — Pereira Tech Talks',
+    title: 'Equipo — Pereira Tech Talks',
     description:
-      'Las personas de la comunidad que hacen posible Pereira Tech Talks: organizadores fundadores, organizadores, líderes de programas, mentores y equipo de conducta.',
+      'Equipo organizador activo de Pereira Tech Talks y alumni / organizadores anteriores. Directorio bilingüe en /contributors.',
     lang,
     canonical: `${SITE_URL}/contributors`,
-    metadata: [['Total de contribuyentes', String(contributors.length)]],
-    sections: [{ heading: 'Todos los contribuyentes', lines }],
+    metadata: [
+      ['Organizadores activos', String(current.length)],
+      ['Alumni y anteriores', String(past.length)],
+      ['Total en directorio', String(contributors.length)],
+    ],
+    sections: [
+      { heading: 'Equipo organizador', lines: toLines(current) },
+      {
+        heading: 'Alumni y organizadores anteriores',
+        lines: toLines(past),
+      },
+    ],
   });
 
   return new Response(markdown, {
