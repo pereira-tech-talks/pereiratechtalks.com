@@ -1,19 +1,14 @@
 # auth.md
 
-You are an agent. **Pereira Tech Talks** (`pereiratechtalks.org`) is a bilingual static community website. Almost all public surfaces are readable **without registration or credentials**.
+You are an agent. **Pereira Tech Talks** is a bilingual static community website. Public content is readable under the `public:read` scope **without privileged credentials**.
 
 ## auth.md Registration
 
-This site publishes OAuth Protected Resource Metadata and Authorization Server metadata for agent discovery. Live **agent registration that issues privileged credentials is not open** — community content is already public under the `public:read` scope.
+Discover registration metadata, then call the advertised endpoints. Live privileged account creation is not open — the endpoints below document the anonymous discovery contract and return `public_no_auth_required` / `not_applicable` for this static site.
 
-### What needs no registration
+### Audience
 
-Agents may freely:
-
-- Fetch `/.well-known/api-catalog`, `/llms.txt`, `/llms-full.txt`, and `robots.txt`
-- Read Markdown twin endpoints (`Accept: text/markdown` or `*.md` URLs)
-- Call public JSON indexes under `/api/` (posts, series, search)
-- Use in-browser WebMCP tools registered via `navigator.modelContext.registerTool()`
+AI agents and tools that need to discover how (or whether) to register before reading Pereira Tech Talks content.
 
 ### Discovery
 
@@ -23,30 +18,49 @@ Agents may freely:
 GET /.well-known/oauth-protected-resource
 ```
 
-Expect `resource` to match this origin, `authorization_servers` listing this origin, `scopes_supported: ["public:read"]`, and `bearer_methods_supported: ["header"]`.
+Required fields: `resource` (this origin), `authorization_servers`, `scopes_supported` (`public:read`), `bearer_methods_supported` (`header`).
 
-2. Fetch Authorization Server metadata:
+2. Fetch Authorization Server metadata from `authorization_servers[0]`:
 
 ```http
 GET /.well-known/oauth-authorization-server
 ```
 
-Read the `agent_auth` block. `agent_auth.skill` points at this file. `agent_auth.register_uri` is `POST|GET /agent/register` and documents that public content needs no credentials.
+Read the `agent_auth` block. It includes:
 
-### Supported identity type (discovery only)
+- `skill` — this file
+- `register_uri` / `identity_endpoint` — `POST|GET /agent/register`
+- `claim_uri` / `claim_endpoint` — `POST|GET /agent/claim`
+- `claim_complete_uri` — `POST|GET /agent/claim/complete`
+- `revocation_uri` — `POST /oauth/revoke`
+- `identity_types_supported` — includes `anonymous`
+- `anonymous.credential_types_supported` — `access_token`
 
-- **anonymous** — advertised for agent-readiness scanners. Calling `/agent/register` returns `public_no_auth_required` and does **not** create accounts or mint privileged tokens.
+### Supported method: anonymous
+
+1. **Register** — `POST /agent/register` with `{ "type": "anonymous" }`.
+2. **Response** — JSON with `status: "public_no_auth_required"`. No account is created; public Markdown/JSON endpoints need no bearer token.
+3. **Claim (optional discovery only)** — `POST /agent/claim` and `POST /agent/claim/complete` return `not_applicable`. There is no OTP ceremony for `public:read`.
+4. **Credentials** — do not invent client secrets. For public reads, call `/llms.txt`, `/.well-known/api-catalog`, `/api/*`, and Markdown twin URLs without `Authorization`.
+5. **Revocation** — `revocation_uri` is reserved; there are no issued privileged tokens to revoke today.
+
+### What needs no registration
+
+- `/.well-known/api-catalog`, `/llms.txt`, `/llms-full.txt`, `robots.txt`
+- Markdown twin endpoints (`Accept: text/markdown` or `*.md` URLs)
+- Public JSON indexes under `/api/`
+- In-browser WebMCP tools via `navigator.modelContext.registerTool()`
 
 ### Privileged / human workflows
 
-For write access (event forms, sponsorship, speaking):
+Write access (forms, sponsorship, speaking) stays human-mediated:
 
-- Contact form: `/contact/`
+- Contact: `/contact/`
 - Call for speakers: `/call-for-speakers/`
 - Sponsor us: `/sponsor-us/`
 - Email: `hello@pereiratechtalks.org`
 
-Do **not** invent OAuth client credentials, scrape private admin routes, or ask humans to paste API secrets into chat.
+Do not ask humans to paste API secrets into chat.
 
 ## Product links
 
@@ -54,7 +68,7 @@ Do **not** invent OAuth client credentials, scrape private admin routes, or ask 
 - Meetups: `/meetups/`
 - Pereira Tech Days: `/pereira-tech-days/`
 - Blog: `/blog/`
-- Agent skills index: `/.well-known/agent-skills/index.json`
+- Agent skills: `/.well-known/agent-skills/index.json`
 - MCP server card: `/.well-known/mcp/server-card.json`
 
 ## Legal
