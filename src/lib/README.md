@@ -78,7 +78,7 @@ import type { SiteTranslations } from './types';
 
 export const en: SiteTranslations = {
   siteTitle: 'Pereira Tech Talks',
-  siteDescription: 'Bilingual tech community of Pereira, Colombia',
+  siteDescription: 'Tech community of Pereira, Colombia',
   nav: { /* ... */ },
   // ... all keys
 };

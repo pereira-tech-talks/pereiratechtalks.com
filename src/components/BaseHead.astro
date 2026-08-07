@@ -132,7 +132,7 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <!-- Header logo preload (prevents alt text flash on navigation).
      Skip on pages that preload a larger LCP image (e.g. home hero). -->
 {preloadHeaderLogo && (
-  <link rel="preload" href="/images/pereira-tech-talks/logo-white.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/images/pereira-tech-talks/topbar-logo.webp" as="image" type="image/webp" />
 )}
 
 <!-- Early connection for Cloudflare Web Analytics (when injected) -->
@@ -217,7 +217,7 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
     url: Astro.site?.href,
     logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
     description:
-      'Bilingual tech community of Pereira, Risaralda, Colombia. Monthly meetups, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, and the AI Channel.',
+      'Tech community of Pereira, Risaralda, Colombia. Monthly meetups, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, and the AI Channel.',
     foundingLocation: {
       '@type': 'Place',
       address: {
@@ -237,10 +237,11 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
       'Tech Community Building',
     ],
     sameAs: [
-      'https://github.com/pereiratechtalks',
+      'https://github.com/pereira-tech-talks',
       'https://www.linkedin.com/company/pereira-tech-talks/',
       'https://x.com/pereiratechtalks',
-      'https://www.instagram.com/pereiratechtalks',
+      'https://www.instagram.com/pertechtalks',
+      'https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG',
     ],
   }}
 />

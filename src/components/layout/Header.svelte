@@ -10,6 +10,7 @@ import {
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
 import { getTranslations } from '@/lib/translations';
 import MobileMenu from './MobileMenu.svelte';
+import ThemeToggle from './ThemeToggle.svelte';
 
 export let lang: string = 'es';
 let open: boolean = false;
@@ -75,37 +76,33 @@ function closeAllDropdowns() {
   <nav class="main-container flex items-center justify-between">
     <a
       href={prefix || '/'}
-      class="flex items-center gap-2.5 font-bold tracking-tight select-none text-ptt dark:text-white"
+      class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
       aria-label="Pereira Tech Talks"
     >
       <img
         class="h-8 w-auto md:h-9 dark:hidden"
-        src="/images/pereira-tech-talks/logo-color.webp"
+        src="/images/pereira-tech-talks/topbar-logo-black.webp"
         alt=""
-        width={66}
-        height={108}
+        width={120}
+        height={48}
         loading="eager"
         decoding="async"
       />
       <img
         class="hidden h-8 w-auto md:h-9 dark:block"
-        src="/images/pereira-tech-talks/logo-white.webp"
+        src="/images/pereira-tech-talks/topbar-logo.webp"
         alt=""
-        width={66}
-        height={108}
+        width={120}
+        height={48}
         loading="eager"
         decoding="async"
       />
-      <span class="hidden min-[360px]:inline text-base md:text-lg lg:text-xl whitespace-nowrap">
-        Pereira <span class="font-extrabold">Tech Talks</span>
-      </span>
     </a>
 
     <div class="hidden lg:flex items-center gap-6">
       <a href="{prefix}/meetups" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups' })}>{t.nav.meetups}</a>
       <a href="{prefix}/pereira-tech-days" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'pereira_tech_days' })}>{t.nav.pereiraTechDays}</a>
       <a href="{prefix}/calendar" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'calendar' })}>{t.nav.calendar}</a>
-      <a href="{prefix}/speakers" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers' })}>{t.nav.speakers}</a>
       <a href="{prefix}/blog" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'blog' })}>{t.nav.blog}</a>
 
       <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
@@ -148,11 +145,11 @@ function closeAllDropdowns() {
             style="pointer-events: auto; opacity: 1; transform: translateY(12px);"
           >
             <a href="{prefix}/about" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about' })}>{t.nav.about}</a>
+            <a href="{prefix}/speakers" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers' })}>{t.nav.speakers}</a>
             <a href="{prefix}/communities" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities' })}>{t.nav.communities}</a>
             <a href="{prefix}/contributors" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors' })}>{t.nav.contributors}</a>
             <a href="{prefix}/sponsors" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors' })}>{t.nav.sponsors}</a>
             <a href="{prefix}/verticals" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals' })}>{t.nav.verticals}</a>
-            <a href="{prefix}/slides" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides' })}>{t.nav.slides}</a>
             <a href="{prefix}/channels" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels' })}>{t.nav.channels}</a>
             <a href="{prefix}/press" class="block px-4 py-2 hover:bg-ptt-primary-soft text-ptt-secondary transition" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press' })}>{t.nav.press}</a>
           </div>
@@ -214,6 +211,8 @@ function closeAllDropdowns() {
           </div>
         {/if}
       </div>
+
+      <ThemeToggle {lang} placement="header" />
     </div>
 
     <button

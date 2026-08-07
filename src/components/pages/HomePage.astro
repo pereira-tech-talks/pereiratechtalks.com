@@ -62,7 +62,7 @@ const meetupsHeading =
           'Pereira Tech Talks',
           'tech community Pereira',
           'Risaralda tech meetups',
-          'bilingual tech community Colombia',
+          'tech community Colombia',
           'Pereira Tech Day',
           'Speaker School',
           'La Biblioteca del Mañana',
@@ -71,7 +71,7 @@ const meetupsHeading =
           'Pereira Tech Talks',
           'comunidad tecnología Pereira',
           'meetups tecnología Risaralda',
-          'comunidad tecnología bilingüe Colombia',
+          'comunidad tecnología Colombia',
           'Pereira Tech Day',
           'Escuela de Speakers',
           'La Biblioteca del Mañana',
@@ -184,7 +184,9 @@ const meetupsHeading =
         surface="alt"
       >
         <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          {sponsors.map((sponsor) => (
+          {sponsors.map((sponsor) => {
+            const logoMaxH = sponsor.id === 'veritran' ? 'max-h-16' : 'max-h-12';
+            return (
             <li class="flex h-24 items-center justify-center rounded-xl bg-ptt-bg-elevated p-4 ring-1 ring-ptt-border">
               <a
                 href={sponsor.data.url}
@@ -199,7 +201,7 @@ const meetupsHeading =
                   width="160"
                   height="64"
                   loading="lazy"
-                  class="max-h-12 max-w-full object-contain dark:hidden"
+                  class={`${logoMaxH} max-w-full object-contain dark:hidden`}
                 />
                 <img
                   src={sponsor.data.logo.dark}
@@ -207,11 +209,12 @@ const meetupsHeading =
                   width="160"
                   height="64"
                   loading="lazy"
-                  class="hidden max-h-12 max-w-full object-contain dark:block"
+                  class={`hidden ${logoMaxH} max-w-full object-contain dark:block`}
                 />
               </a>
             </li>
-          ))}
+            );
+          })}
         </ul>
         <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
           <LinkArrow href={`${prefix}/sponsors/`}>{hs.sponsors.cta}</LinkArrow>

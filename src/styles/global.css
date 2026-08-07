@@ -110,7 +110,8 @@
 
 @layer components {
   .main-container {
-    @apply max-w-7xl mx-auto py-4 px-4 md:px-8;
+    /* max-w-7xl = 1280px; md:px-6 matches legacy AstroWind side padding. */
+    @apply mx-auto max-w-7xl py-4 px-4 md:px-6;
   }
 
   /* Theme-aware nav links (header + mobile). Inherit header canvas. */

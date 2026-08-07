@@ -15,5 +15,4 @@ Durante la transición a Pereira Tech Talks v3.0.0, la colección de series se e
 ## Explora el blog
 
 - [Todos los artículos](/blog)
-- [Catálogo de slides](/slides)
 - [Sobre Pereira Tech Talks](/about)

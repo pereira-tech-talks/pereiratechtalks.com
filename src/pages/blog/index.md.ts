@@ -24,7 +24,7 @@ export const GET: APIRoute = async () => {
     lang: 'es',
     title: 'Blog de Pereira Tech Talks — Art\u00EDculos e Historias',
     description:
-      'Art\u00EDculos biling\u00FCes de la comunidad Pereira Tech Talks: tecnolog\u00EDa, IA, construcci\u00F3n de productos y las personas detr\u00E1s de ellos.',
+      'Art\u00EDculos de la comunidad Pereira Tech Talks: tecnolog\u00EDa, IA, construcci\u00F3n de productos y las personas detr\u00E1s de ellos.',
   });
 
   return new Response(markdown, {

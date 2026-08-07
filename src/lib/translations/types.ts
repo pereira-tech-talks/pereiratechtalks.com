@@ -553,6 +553,9 @@ export interface SiteTranslations {
     indexCalendarEyebrow: string;
     indexHistoryEyebrow: string;
     indexPastSubtitle: string;
+    editionNavLabel: string;
+    previousEditions: string;
+    allEditions: string;
   };
 
   // Blog post engagement

@@ -77,7 +77,6 @@ const SITE_NAV_SECTIONS: NavSection[] = [
         label: { en: 'Blog Series', es: 'Series del Blog' },
         path: '/blog/series/',
       },
-      { label: { en: 'Slides', es: 'Slides' }, path: '/slides' },
     ],
   },
   {
@@ -85,7 +84,7 @@ const SITE_NAV_SECTIONS: NavSection[] = [
     links: [
       {
         label: { en: 'GitHub', es: 'GitHub' },
-        path: 'https://github.com/pereiratechtalks',
+        path: 'https://github.com/pereira-tech-talks',
         external: true,
       },
       {
@@ -100,7 +99,12 @@ const SITE_NAV_SECTIONS: NavSection[] = [
       },
       {
         label: { en: 'Instagram', es: 'Instagram' },
-        path: 'https://www.instagram.com/pereiratechtalks',
+        path: 'https://www.instagram.com/pertechtalks',
+        external: true,
+      },
+      {
+        label: { en: 'WhatsApp', es: 'WhatsApp' },
+        path: 'https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG',
         external: true,
       },
     ],

@@ -42,7 +42,7 @@ Logistics, communication, photography, recording, hosting, MC. These are the inv
 
 ### 5. Write for the blog
 
-The bilingual blog is part of how we connect Pereira to the global tech ecosystem. We publish recaps, technical deep-dives, talks turned into essays, and community reflections.
+The blog is part of how we connect Pereira to the global tech ecosystem. We publish recaps, technical deep-dives, talks turned into essays, and community reflections.
 
 - Bring a topic, an angle, and a draft. We pair-write and edit before publishing.
 - Open a discussion via the [contact form](/en/contact/?topic=collaboration) with the subject "Blog contribution".
@@ -57,7 +57,7 @@ If you work at — or have a clear line to — a company that benefits from a st
 
 This entire site is open source. Anything from a typo fix to a new page, a new content type, or a Lighthouse improvement is welcome.
 
-- **Repository:** [github.com/pereiratechtalks](https://github.com/pereiratechtalks)
+- **Repository:** [github.com/pereira-tech-talks](https://github.com/pereira-tech-talks)
 - **Stack:** Astro 5, Svelte 5, Tailwind 4, TypeScript, Biome, MDX.
 - **Local dev:** `pnpm install && pnpm run dev` (Node 22+, pnpm 10+).
 - **Before opening a PR:** run `pnpm run biome:check`, `pnpm run astro:check`, `pnpm run test`, and `pnpm run build` locally.
@@ -84,7 +84,7 @@ Contributors are listed at [Contributors](/en/contributors). Speakers appear at 
 
 ## A few principles we work by
 
-- **Bilingual by default.** Anything user-visible exists in EN and ES.
+- **Spanish and English by default.** Anything user-visible exists in both languages.
 - **Accessible by default.** WCAG AA, fast pages, agent-readable Markdown twins.
 - **Open by default.** Code, content, and decisions are public unless there is a clear reason not to be.
 - **Welcoming by default.** Beginners, first-time speakers, and people coming from non-traditional paths are core to who we are.

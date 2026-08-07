@@ -1,0 +1,112 @@
+---
+/**
+ * PtdSponsorsShowcase — legacy `/pereira-tech-day/2024/` sponsor cards:
+ * centered title, light gray rounded cards, gold row then silver row.
+ * Grid spans the full main-container width (same as Organiza below).
+ */
+import type { Language } from '@/lib/i18n';
+import type { EditionSponsor } from '@/lib/sponsor';
+
+interface Props {
+  sponsors: EditionSponsor[];
+  lang: Language;
+  title?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { sponsors, lang, title, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
+  diamond: { en: 'Diamond sponsor', es: 'Patrocinador Diamante' },
+  gold: { en: 'Gold sponsor', es: 'Patrocinador Gold' },
+  silver: { en: 'Silver sponsor', es: 'Patrocinador Silver' },
+  bronze: { en: 'Bronze sponsor', es: 'Patrocinador Bronze' },
+  community: { en: 'Community sponsor', es: 'Patrocinador Comunidad' },
+};
+
+const goldTiers = new Set(['diamond', 'gold']);
+const goldSponsors = sponsors.filter((s) => goldTiers.has(s.tier));
+const otherSponsors = sponsors.filter((s) => !goldTiers.has(s.tier));
+
+function logoSrc(entry: EditionSponsor): string {
+  // Cards are light gray — always prefer the light (dark-ink) logo.
+  return entry.sponsor.data.logo.light;
+}
+---
+
+<div class="ptd-sponsors-showcase">
+  {
+    title && (
+      <header class="mb-8 text-center md:mb-12">
+        <Heading class="ptd-sponsors-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+          {title}
+        </Heading>
+      </header>
+    )
+  }
+
+  {
+    (
+      [
+        { key: 'gold', items: goldSponsors, size: 'gold' as const },
+        { key: 'other', items: otherSponsors, size: 'silver' as const },
+      ] as const
+    )
+      .filter((row) => row.items.length > 0)
+      .map((row) => (
+        <ul
+          class:list={[
+            'grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6',
+            row.key === 'other' && goldSponsors.length > 0 && 'mt-4 sm:mt-5 lg:mt-6',
+          ]}
+        >
+          {row.items.map(({ sponsor, tier }) => {
+            const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
+            const isGold = row.size === 'gold';
+            // DailyBot wordmark is very wide/short — give it more width so it
+            // reads at a similar visual weight to the other silver logos.
+            const isDailybot = sponsor.id === 'dailybot';
+            const imgWidth = isGold ? 280 : isDailybot ? 320 : 240;
+            const imgHeight = isGold ? 110 : isDailybot ? 80 : 90;
+            const imgClass = isGold
+              ? 'max-h-24 max-w-[min(100%,17.5rem)]'
+              : isDailybot
+                ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
+                : 'max-h-20 max-w-[min(100%,15rem)]';
+            return (
+              <li
+                class="flex min-h-[8.5rem] w-full items-center justify-center rounded-md bg-gray-200 px-6 py-8 sm:min-h-[9.5rem] sm:px-8 sm:py-10"
+                data-tier={tier}
+              >
+                <a
+                  href={sponsor.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  class="flex w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+                >
+                  <img
+                    src={logoSrc({ sponsor, tier })}
+                    alt={sponsor.data.logo.alt}
+                    width={imgWidth}
+                    height={imgHeight}
+                    loading="lazy"
+                    decoding="async"
+                    class:list={['w-auto object-contain', imgClass]}
+                  />
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      ))
+  }
+</div>
+
+<style>
+  .ptd-sponsors-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

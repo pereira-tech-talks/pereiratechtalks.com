@@ -4,7 +4,7 @@ export const SITE_TIMEZONE = 'America/Bogota';
 export const SITE_TITLE: string =
   'Pereira Tech Talks — Comunidad técnica de Pereira';
 export const SITE_DESCRIPTION: string =
-  'Pereira Tech Talks v3.0.0 — comunidad técnica bilingüe de Pereira (Risaralda, Colombia). Meetups mensuales, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, AI Channel, blog y slides.';
+  'Pereira Tech Talks v3.0.0 — comunidad técnica de Pereira (Risaralda, Colombia). Meetups mensuales, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, AI Channel, blog y slides.';
 export const BLOG_PAGE_SIZE: number = 30;
 
 const umamiWebsiteId = (import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '').trim();

@@ -375,6 +375,22 @@ const pereiraTechDays = defineCollection({
       layout: heroLayout.default('banner'),
     }),
     brandKit: editionBrandKit,
+    /**
+     * Decorative background images per landing section, data-driven so the
+     * detail page never hardcodes a specific edition's asset paths. Omit a
+     * key (or the whole object) to render that section without a background.
+     */
+    sectionBackgrounds: z
+      .object({
+        about: z.string().optional(),
+        pricing: z.string().optional(),
+        sponsors: z.string().optional(),
+        team: z.string().optional(),
+        community: z.string().optional(),
+        faqs: z.string().optional(),
+        join: z.string().optional(),
+      })
+      .optional(),
     schedule: z
       .array(
         z.object({
@@ -394,7 +410,16 @@ const pereiraTechDays = defineCollection({
       )
       .default([]),
     keynotes: z.array(z.string()).default([]),
-    lightningTalks: z.array(z.string()).default([]),
+    // Legacy entries are speaker slugs only; newer entries carry a title-first
+    // payload `{ speaker, title }` to support the 2024 photocopy UI (Task 9).
+    lightningTalks: z
+      .array(
+        z.union([
+          z.string(),
+          z.object({ speaker: z.string(), title: i18nString }),
+        ])
+      )
+      .default([]),
     sponsors: z.array(sponsorRef).default([]),
     organizers: z.array(z.string()).default([]),
     collaborators: z.array(z.string()).default([]),

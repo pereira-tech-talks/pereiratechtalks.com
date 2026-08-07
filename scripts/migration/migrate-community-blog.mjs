@@ -259,7 +259,7 @@ function emitEn({ slug, post, fmSource, heroPath }) {
     '',
     '---',
     '',
-    '_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereiratechtalks/pereiratechtalks.org)._',
+    '_Help us translate this post by sending a pull request to the [pereiratechtalks.org repository](https://github.com/pereira-tech-talks/pereiratechtalks.org)._',
     '',
   ];
   ensureDir(BLOG_EN_DIR);

@@ -23,6 +23,24 @@ const {
   mediaAlt,
   sectionBg,
 } = Astro.props;
+
+/** Legacy copy ships as two paragraphs separated by a blank line. */
+const paragraphs = description
+  .split(/\n{2,}/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+
+type TopicIconKey = 'ai' | 'code' | 'shield' | 'default';
+
+function getTopicIconKey(label: string): TopicIconKey {
+  const normalized = label.toLowerCase();
+  if (/(intelig|artificial|\bai\b|\bia\b)/.test(normalized)) return 'ai';
+  if (/(desarroll|software|development|c[oó]digo|\bcode\b)/.test(normalized)) {
+    return 'code';
+  }
+  if (/(ciber|cyber|segur|security)/.test(normalized)) return 'shield';
+  return 'default';
+}
 ---
 
 <section
@@ -32,43 +50,95 @@ const {
 >
   {
     sectionBg && (
-      <div class="absolute inset-0 bg-[var(--ptt-bg)]/85" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-[var(--ptt-bg)]/45" aria-hidden="true"></div>
     )
   }
-  <div class="relative main-container grid gap-10 lg:grid-cols-2 lg:items-center">
-    <div>
-      <h2 id="ptd-about-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
-        {title}
-      </h2>
-      <p class="mt-4 text-lg leading-relaxed text-[var(--ptt-text-muted)]">{description}</p>
+  <div class="relative main-container">
+    <div class="grid gap-8 rounded-3xl bg-[var(--ptt-bg-elevated)]/95 p-6 shadow-sm ring-1 ring-[var(--ptt-border)] sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+      <div>
+        <h2 id="ptd-about-title" class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">
+          {title}
+        </h2>
+        <div class="mt-4 space-y-4 text-lg leading-relaxed text-[var(--ptt-text-muted)]">
+          {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        {
+          topics.length > 0 && (
+            <ul
+              class="mt-6 flex flex-wrap gap-3"
+              aria-label={lang === 'es' ? 'Temas principales' : 'Main topics'}
+            >
+              {topics.map((topic) => {
+                const label = tr(topic, lang);
+                const iconKey = getTopicIconKey(label);
+                return (
+                  <li class="inline-flex items-center gap-2 rounded-full bg-[var(--ptt-primary)]/10 px-4 py-2 text-sm font-semibold text-[var(--ptt-primary)]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                      class="shrink-0"
+                    >
+                      {iconKey === 'ai' && (
+                        <path
+                          d="M3 16a3 3 0 1 0 6 0a3 3 0 1 0-6 0m11 3a2 2 0 1 0 4 0a2 2 0 1 0-4 0M10 7.5a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0-9 0"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      )}
+                      {iconKey === 'code' && (
+                        <path
+                          d="m7 8l-4 4l4 4m10-8l4 4l-4 4M14 4l-4 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      )}
+                      {iconKey === 'shield' && (
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        >
+                          <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21A12 12 0 0 1 3.5 6A12 12 0 0 0 12 3" />
+                          <path d="M11 11a1 1 0 1 0 2 0a1 1 0 1 0-2 0m1 1v2.5" />
+                        </g>
+                      )}
+                      {iconKey === 'default' && (
+                        <circle cx="12" cy="12" r="4" fill="currentColor" />
+                      )}
+                    </svg>
+                    <span>{label}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        }
+      </div>
       {
-        topics.length > 0 && (
-          <ul class="mt-6 flex flex-wrap gap-2">
-            {topics.map((topic) => (
-              <li
-                class="rounded-full bg-[var(--ptt-primary)]/10 px-4 py-2 text-sm font-semibold text-[var(--ptt-primary)]"
-              >
-                {tr(topic, lang)}
-              </li>
-            ))}
-          </ul>
+        mediaSrc && (
+          <div class="overflow-hidden rounded-2xl ring-1 ring-[var(--ptt-border)]">
+            <img
+              src={mediaSrc}
+              alt={mediaAlt || ''}
+              width="640"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </div>
         )
       }
     </div>
-    {
-      mediaSrc && (
-        <div class="overflow-hidden rounded-2xl ring-1 ring-[var(--ptt-border)]">
-          <img
-            src={mediaSrc}
-            alt={mediaAlt || ''}
-            width="640"
-            height="480"
-            loading="lazy"
-            decoding="async"
-            class="h-full w-full object-cover"
-          />
-        </div>
-      )
-    }
   </div>
 </section>

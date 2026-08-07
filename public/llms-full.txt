@@ -1,10 +1,10 @@
 # Pereira Tech Talks — Full Site Description
 
-> Pereira Tech Talks v3.0.0 is the bilingual technology community of Pereira, Risaralda, Colombia.
+> Pereira Tech Talks v3.0.0 is the technology community of Pereira, Risaralda, Colombia.
 
 ## About the Community
 
-Pereira Tech Talks (PTT) is a bilingual community of builders, speakers, and learners in Pereira, Colombia, with international presence. We run monthly meetups, the annual Pereira Tech Day flagship conference, the Speaker School, La Biblioteca del Mañana, the AI channel, and a bilingual blog and slide deck library that comes out of all of it.
+Pereira Tech Talks (PTT) is a community of builders, speakers, and learners in Pereira, Colombia, with international presence. We run monthly meetups, the annual Pereira Tech Day flagship conference, the Speaker School, La Biblioteca del Mañana, the AI channel, and a blog and slide deck library that comes out of all of it. The website is available in Spanish and English.
 
 The community exists to lower the barrier to entry to technology in the Eje Cafetero region, to give first-time speakers a friendly stage, and to connect Pereira's builders with the rest of the LATAM and global tech ecosystem.
 
@@ -24,8 +24,7 @@ The community exists to lower the barrier to entry to technology in the Eje Cafe
 - **Calendar** (/calendar/) - Workshops and special events on the community calendar
 - **Verticals** (/verticals/) - Community programs (La Biblioteca del Mañana, AI channel, Speaker School, monthly meetups)
 - **Speakers** (/speakers/) - Speaker bios + talks index
-- **Blog** (/blog/) - Bilingual articles, series, tags, search
-- **Slides** (/slides/) - Reveal.js / external-embed / external-link decks library
+- **Blog** (/blog/) - Articles, series, tags, search (Spanish and English)
 - **Contributors** (/contributors/) - The people who make PTT happen
 - **Sponsors** (/sponsors/) - Current and historical sponsors
 - **Channels** (/channels/) - Inventory of official PTT channels
@@ -58,7 +57,7 @@ All slugs (filenames, series IDs, image directories) are in English even for Spa
 
 ## Content Model
 
-- Bilingual routing: Spanish base routes (`/`, `/blog/`, etc.) and English routes under `/en/`.
+- Dual-language routing: Spanish base routes (`/`, `/blog/`, etc.) and English routes under `/en/`.
 - Blog posts authored with Astro Content Collections supporting Markdown and MDX.
 - Blog pagination: `/blog/page/{n}/` and `/en/blog/page/{n}/`.
 - Tag archives: `/blog/tag/{tag}/` and `/en/blog/tag/{tag}/`.
@@ -75,7 +74,7 @@ All slugs (filenames, series IDs, image directories) are in English even for Spa
 - Security and supply chain
 - Open source and community building
 - Entrepreneurship and product building
-- Bilingual technical communication
+- Technical communication in Spanish and English
 
 ## Tech Stack
 

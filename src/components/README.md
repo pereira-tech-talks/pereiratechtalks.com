@@ -70,7 +70,8 @@ Shared page components in `pages/` handle `MainLayout`, translations, and conten
 | `Footer.astro` | Astro | Site footer with social links |
 | `FormattedDate.astro` | Astro | Formats dates consistently |
 | `HeaderLink.astro` | Astro | Navigation link with active state |
-| `ThemeToggle.astro` | Astro | Dark/light mode toggle button |
+| `ThemeToggle.astro` | Astro | Dark/light FAB (certificate pages) |
+| `layout/ThemeToggle.svelte` | Svelte | Header / mobile theme toggle |
 
 ### Blog Components
 

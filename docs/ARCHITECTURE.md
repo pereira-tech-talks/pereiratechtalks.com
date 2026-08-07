@@ -571,7 +571,7 @@ const { lang, title, description } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
     <slot name="head" />
-    <script is:inline>(function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();</script>
+    <script is:inline>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();</script>
   </head>
   <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <Header client:load lang={lang} />
@@ -654,7 +654,7 @@ export default {
 
 /* Global utilities */
 .main-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply mx-auto max-w-7xl px-4 md:px-6;
 }
 ```
 
@@ -663,9 +663,8 @@ export default {
 Class-based dark mode with theme persistence:
 
 ```javascript
-// Inlined in MainLayout.astro (no external file)
+// Inlined in MainLayout.astro (no external file) — light by default
 var t = localStorage.getItem('theme');
-if (!t) t = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
 if (t === 'dark') document.documentElement.classList.add('dark');
 else document.documentElement.classList.remove('dark');
 ```

@@ -42,7 +42,7 @@ Logística, comunicación, fotografía, grabación, hospedaje, conducción. Son 
 
 ### 5. Escribe en el blog
 
-El blog bilingüe es parte de cómo conectamos a Pereira con el ecosistema tech global. Publicamos recaps, deep-dives técnicos, charlas convertidas en ensayos y reflexiones comunitarias.
+El blog es parte de cómo conectamos a Pereira con el ecosistema tech global. Publicamos recaps, deep-dives técnicos, charlas convertidas en ensayos y reflexiones comunitarias.
 
 - Trae un tema, un ángulo y un borrador. Co-escribimos y editamos antes de publicar.
 - Abre la conversación con el [formulario de contacto](/contact/?topic=collaboration) con asunto "Contribución al blog".
@@ -57,7 +57,7 @@ Si trabajas en — o tienes línea directa con — una empresa que se beneficia 
 
 Todo este sitio es open source. Cualquier cosa, desde un typo hasta una nueva página, un nuevo tipo de contenido o una mejora de Lighthouse, es bienvenida.
 
-- **Repositorio:** [github.com/pereiratechtalks](https://github.com/pereiratechtalks)
+- **Repositorio:** [github.com/pereira-tech-talks](https://github.com/pereira-tech-talks)
 - **Stack:** Astro 5, Svelte 5, Tailwind 4, TypeScript, Biome, MDX.
 - **Dev local:** `pnpm install && pnpm run dev` (Node 22+, pnpm 10+).
 - **Antes de abrir un PR:** corre `pnpm run biome:check`, `pnpm run astro:check`, `pnpm run test` y `pnpm run build` localmente.
@@ -84,7 +84,7 @@ Los contribuyentes aparecen en [Contribuyentes](/contributors). Los ponentes en 
 
 ## Algunos principios con los que trabajamos
 
-- **Bilingüe por defecto.** Cualquier cosa visible para usuarios existe en EN y ES.
+- **Español e inglés por defecto.** Cualquier cosa visible para usuarios existe en ambos idiomas.
 - **Accesible por defecto.** WCAG AA, páginas rápidas, gemelos en Markdown legibles por agentes.
 - **Abierto por defecto.** Código, contenido y decisiones son públicos a menos que haya una razón clara para no serlo.
 - **Acogedor por defecto.** Personas principiantes, ponentes primerizos y gente que viene de caminos no tradicionales son parte central de quienes somos.

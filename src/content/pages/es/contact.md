@@ -15,7 +15,7 @@ Estamos siempre abiertas y abiertos a nuevas y nuevos ponentes, patrocinadores, 
 - **Propón una charla** — Sé ponente en un meetup mensual, una sesión lightning o una próxima edición del Pereira Tech Day.
 - **Patrocina un evento** — Apoya un meetup, una conferencia o un programa (Escuela de Speakers, La Biblioteca del Mañana) y conecta con la comunidad tecnológica local.
 - **Sé aliado de la comunidad** — Co-organiza un evento, comparte espacios o construye una colaboración entre comunidades.
-- **Súmate a La Biblioteca del Mañana** — Regístrate en el club de lectura bilingüe y conecta la tecnología con la historia humana en sentido amplio.
+- **Súmate a La Biblioteca del Mañana** — Regístrate en el club de lectura y conecta la tecnología con la historia humana en sentido amplio.
 - **Escribe para el blog** — Comparte un artículo, una recapitulación de meetup o un tutorial con la comunidad.
 
 ---
@@ -23,16 +23,16 @@ Estamos siempre abiertas y abiertos a nuevas y nuevos ponentes, patrocinadores, 
 ## Conéctate con nosotros
 
 - Correo: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
-- GitHub: [@pereiratechtalks](https://github.com/pereiratechtalks)
+- GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
-- X (Twitter): [@pereiratechtalks](https://x.com/pereiratechtalks)
-- Instagram: [@pereiratechtalks](https://www.instagram.com/pereiratechtalks)
+- X (Twitter): [@pereira-tech-talks](https://x.com/pereiratechtalks)
+- Instagram: [@pertechtalks](https://www.instagram.com/pertechtalks)
 
 ---
 
 ## Ubicación
 
-Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.
+Basados en Pereira, Risaralda, Colombia. Sitio disponible en español e inglés. Abiertos a aliados remotos y a ponentes internacionales en cualquier parte del mundo.
 
 ---
 
@@ -40,4 +40,3 @@ Basados en Pereira, Risaralda, Colombia. Bilingües EN/ES. Abiertos a aliados re
 
 - [Sobre Pereira Tech Talks](/about)
 - [Lee el blog](/blog)
-- [Explora los slides](/slides)

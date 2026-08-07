@@ -72,8 +72,8 @@ pnpm run biome:check && pnpm run astro:check && pnpm run test && pnpm run build
 
 ### 6. Share URLs
 
-Diploma: `https://www.pereiratechtalks.org/pereira-tech-days/{year}/certificates/{id}`  
-Verify (QR): `https://www.pereiratechtalks.org/certificates/verify?id={id}`
+Diploma: `https://v3.pereiratechtalks.org/pereira-tech-days/{year}/certificates/{id}`  
+Verify (QR): `https://v3.pereiratechtalks.org/certificates/verify?id={id}`
 
 ## Revocation
 

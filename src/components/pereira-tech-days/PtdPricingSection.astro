@@ -39,6 +39,41 @@ interface Props {
 }
 
 const { lang, title, plans, partnerships, sectionBg } = Astro.props;
+
+/** Tier-specific skin: icon, accent ring, and elevation (legacy Silver/Gold/Platinum look). */
+const tierSkins: Record<
+  string,
+  {
+    iconColor: string;
+    cardClass: string;
+    iconKey: 'award' | 'diamond' | 'crown';
+  }
+> = {
+  silver: {
+    iconColor: 'text-[var(--ptt-text-muted)]',
+    cardClass: 'ring-1 ring-[var(--ptt-border)]',
+    iconKey: 'award',
+  },
+  gold: {
+    iconColor: 'text-[var(--ptt-accent)]',
+    cardClass:
+      'ring-2 ring-[var(--ptt-accent)] shadow-xl shadow-[var(--ptt-accent)]/20 lg:-translate-y-2',
+    iconKey: 'diamond',
+  },
+  platinum: {
+    iconColor: 'text-[var(--ptt-primary)]',
+    cardClass:
+      'ring-2 ring-[var(--ptt-primary)] shadow-lg shadow-[var(--ptt-primary)]/10',
+    iconKey: 'crown',
+  },
+};
+
+const defaultSkin = tierSkins.silver;
+const featuredLabel = lang === 'es' ? 'Recomendado' : 'Recommended';
+const furnitureNote =
+  lang === 'es'
+    ? 'El sponsor provee su mobiliario.'
+    : 'The sponsor provides their own furniture.';
 ---
 
 <section
@@ -57,50 +92,118 @@ const { lang, title, plans, partnerships, sectionBg } = Astro.props;
     </h2>
     <ul class="mt-10 grid gap-6 lg:grid-cols-3">
       {
-        plans.map((plan) => (
-          <li
-            class:list={[
-              'flex flex-col rounded-2xl p-6 ring-1 ring-[var(--ptt-border)] bg-[var(--ptt-bg-elevated)]',
-              plan.featured && 'ring-2 ring-[var(--ptt-accent)]',
-            ]}
-          >
-            <p class="text-xs font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">
-              {plan.tier}
-            </p>
-            <h3 class="mt-2 text-xl font-bold text-[var(--ptt-text)]">{tr(plan.title, lang)}</h3>
-            {
-              plan.subtitle && (
-                <p class="mt-1 text-sm text-[var(--ptt-text-muted)]">{tr(plan.subtitle, lang)}</p>
-              )
-            }
-            <p class="mt-4 text-3xl font-bold text-[var(--ptt-primary)]">
-              ${plan.price}
+        plans.map((plan) => {
+          const skin = tierSkins[plan.tier] ?? defaultSkin;
+          return (
+            <li
+              class:list={[
+                'relative flex flex-col rounded-2xl bg-[var(--ptt-bg-elevated)] p-6',
+                skin.cardClass,
+              ]}
+            >
               {
-                plan.period && (
-                  <span class="text-sm font-normal text-[var(--ptt-text-muted)]">
-                    {tr(plan.period, lang)}
+                plan.featured && (
+                  <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[var(--ptt-accent)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--ptt-text)]">
+                    {featuredLabel}
                   </span>
                 )
               }
-            </p>
-            <ul class="mt-4 flex-1 space-y-2 text-sm text-[var(--ptt-text-muted)]">
-              {plan.benefits.map((b) => (
-                <li class="flex gap-2">
-                  <span class="text-[var(--ptt-accent)]" aria-hidden="true">✓</span>
-                  {tr(b, lang)}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={plan.ctaUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="mt-6 inline-flex justify-center rounded-full bg-[var(--ptt-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
-            >
-              {tr(plan.ctaLabel, lang)}
-            </a>
-          </li>
-        ))
+              <svg
+                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                aria-hidden="true"
+                class:list={['shrink-0', skin.iconColor]}
+              >
+                {skin.iconKey === 'award' && (
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  >
+                    <path d="M6 9a6 6 0 1 0 12 0A6 6 0 1 0 6 9" />
+                    <path d="m12 15l3.4 5.89l1.598-3.233l3.598.232l-3.4-5.889M6.802 12l-3.4 5.89L7 17.657l1.598 3.232l3.4-5.889" />
+                  </g>
+                )}
+                {skin.iconKey === 'diamond' && (
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  >
+                    <path d="M6 5h12l3 5l-8.5 9.5a.7.7 0 0 1-1 0L3 10z" />
+                    <path d="M10 12L8 9.8l.6-1" />
+                  </g>
+                )}
+                {skin.iconKey === 'crown' && (
+                  <path
+                    d="m12 6l4 6l5-4l-2 10H5L3 8l5 4z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                )}
+              </svg>
+              <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-[var(--ptt-accent)]">
+                {plan.tier}
+              </p>
+              <h3 class="mt-1 text-xl font-bold text-[var(--ptt-text)]">{tr(plan.title, lang)}</h3>
+              {
+                plan.subtitle && (
+                  <p class="mt-1 text-sm text-[var(--ptt-text-muted)]">{tr(plan.subtitle, lang)}</p>
+                )
+              }
+              <p class="mt-4 text-3xl font-bold text-[var(--ptt-primary)]">
+                ${plan.price}
+                {
+                  plan.period && (
+                    <span class="text-sm font-normal text-[var(--ptt-text-muted)]">
+                      {tr(plan.period, lang)}
+                    </span>
+                  )
+                }
+              </p>
+              <span class="mt-4 border-t border-[var(--ptt-border)]" aria-hidden="true" />
+              <ul class="mt-4 flex-1 space-y-2 text-sm text-[var(--ptt-text-muted)]">
+                {plan.benefits.map((b) => (
+                  <li class="flex gap-2">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                      class:list={['mt-0.5 shrink-0', skin.iconColor]}
+                    >
+                      <path
+                        d="m5 12l5 5L20 7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                    {tr(b, lang)}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={plan.ctaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex justify-center rounded-full bg-[var(--ptt-primary)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+              >
+                {tr(plan.ctaLabel, lang)}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
     {
@@ -123,7 +226,25 @@ const { lang, title, plans, partnerships, sectionBg } = Astro.props;
                       ) : item.subtitle ? (
                         <p class="italic">{tr(item.subtitle, lang)}</p>
                       ) : (
-                        <p>{tr(item.description, lang)}</p>
+                        <p class="flex gap-2">
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="16"
+                            height="16"
+                            aria-hidden="true"
+                            class="mt-0.5 shrink-0 text-[var(--ptt-primary)]"
+                          >
+                            <path
+                              d="m5 12l5 5L20 7"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                            />
+                          </svg>
+                          {tr(item.description, lang)}
+                        </p>
                       )
                     }
                   </li>
@@ -140,6 +261,31 @@ const { lang, title, plans, partnerships, sectionBg } = Astro.props;
             </li>
           ))}
         </ul>
+      )
+    }
+    {
+      partnerships.length > 0 && (
+        <p class="mt-8 flex items-center justify-center gap-2 text-center text-sm text-[var(--ptt-text-muted)]">
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+            class="shrink-0 text-[var(--ptt-primary)]"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M5 21c.5-4.5 2.5-8 7-10" />
+              <path d="M9 18c6.218 0 10.5-3.288 11-12V4h-4.014c-9 0-11.986 4-12 9c0 1 0 3 2 5h3z" />
+            </g>
+          </svg>
+          {furnitureNote}
+        </p>
       )
     }
   </div>

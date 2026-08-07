@@ -1,6 +1,6 @@
 # auth.md
 
-You are an agent. **Pereira Tech Talks** is a bilingual static community website. Public content is readable under the `public:read` scope **without privileged credentials**.
+You are an agent. **Pereira Tech Talks** is a static community website available in Spanish and English. Public content is readable under the `public:read` scope **without privileged credentials**.
 
 ## auth.md Registration
 

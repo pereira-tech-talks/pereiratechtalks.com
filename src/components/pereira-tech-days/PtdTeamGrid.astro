@@ -1,0 +1,60 @@
+---
+/**
+ * PtdTeamGrid — legacy photo + name team grid (organizers / collaborators).
+ * Large circular portraits in a centered flex-wrap row so incomplete last
+ * rows stay centered.
+ */
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  contributors: CollectionEntry<'contributors'>[];
+  lang: Language;
+  title?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { contributors, lang, title, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
+---
+
+<div class="ptd-team-grid">
+  {
+    title && (
+      <header class="mb-8 text-center md:mb-10">
+        <Heading class="ptd-team-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+          {title}
+        </Heading>
+      </header>
+    )
+  }
+  <ul class="flex flex-wrap justify-center gap-x-5 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8">
+    {
+      contributors.map((contributor) => (
+        <li class="flex w-[calc(50%-0.625rem)] flex-col items-center text-center sm:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.6rem)]">
+          <img
+            src={contributor.data.avatar}
+            alt={`${portraitLabel} ${contributor.data.name}`}
+            width="160"
+            height="160"
+            loading="lazy"
+            decoding="async"
+            class="mb-3 h-28 w-28 rounded-full object-cover sm:mb-3.5 sm:h-32 sm:w-32 md:h-36 md:w-36"
+          />
+          <span class="max-w-[10rem] text-sm font-medium leading-snug text-[var(--ptt-text)] sm:text-base">
+            {contributor.data.name}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .ptd-team-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

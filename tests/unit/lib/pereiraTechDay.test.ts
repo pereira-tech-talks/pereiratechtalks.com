@@ -3,9 +3,11 @@ import type { PereiraTechDay } from '@/lib/pereiraTechDay';
 import {
   buildEditionThemeCss,
   getEditionEndIso,
+  getEditionFontPackages,
   getEditionStartDate,
   getEditionStartIso,
   isUpcomingEdition,
+  normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
 
 const mockEdition = (
@@ -74,9 +76,37 @@ describe('pereiraTechDay helpers', () => {
     expect(iso).toMatch(/2026-08-22/);
   });
 
+  it('getEditionStartIso falls back to date-only ISO when startTime is unset', () => {
+    const edition = mockEdition({ startTime: undefined });
+    const iso = getEditionStartIso(edition);
+    expect(iso).toBe(new Date('2026-08-22').toISOString());
+  });
+
+  it('getEditionEndIso resolves from a date-range end when endTime is unset', () => {
+    const edition = mockEdition({
+      date: { start: new Date('2026-08-22'), end: new Date('2026-08-23') },
+      endTime: undefined,
+    });
+    const iso = getEditionEndIso(edition);
+    expect(iso).toBe(new Date('2026-08-23').toISOString());
+  });
+
+  it('getEditionEndIso returns undefined for a single-day edition with no endTime', () => {
+    const edition = mockEdition({ endTime: undefined });
+    expect(getEditionEndIso(edition)).toBeUndefined();
+  });
+
   it('isUpcomingEdition detects announced status', () => {
     expect(isUpcomingEdition(mockEdition({ status: 'announced' }))).toBe(true);
     expect(isUpcomingEdition(mockEdition({ status: 'completed' }))).toBe(false);
+  });
+
+  it('isUpcomingEdition detects rsvp-open status', () => {
+    expect(isUpcomingEdition(mockEdition({ status: 'rsvp-open' }))).toBe(true);
+  });
+
+  it('isUpcomingEdition returns false for cancelled editions', () => {
+    expect(isUpcomingEdition(mockEdition({ status: 'cancelled' }))).toBe(false);
   });
 
   it('buildEditionThemeCss scopes variables under edition year', () => {
@@ -84,6 +114,72 @@ describe('pereiraTechDay helpers', () => {
     expect(css).toContain('[data-edition-theme="2026"]');
     expect(css).toContain('--ptt-primary: #1f6f73');
     expect(css).not.toContain('body {');
+  });
+
+  it('buildEditionThemeCss emits an optional border variable for light and dark palettes', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+          border: '#d8e4e4',
+        },
+        paletteDark: {
+          primary: '#3ab9c9',
+          accent: '#e3a648',
+          bg: '#0f2a2c',
+          bgElevated: '#1a3a3d',
+          text: '#f4f9f9',
+          textMuted: '#a8bdbf',
+          border: '#2a4548',
+        },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptt-border: #d8e4e4;');
+    expect(css).toContain('--ptt-border: #2a4548;');
+  });
+
+  it('buildEditionThemeCss emits heading transform and tracking when declared', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        typography: {
+          headingFamily: 'Bebas Neue',
+          headingTransform: 'uppercase',
+          headingTracking: '0.05em',
+        },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('font-family: Bebas Neue;');
+    expect(css).toContain('text-transform: uppercase;');
+    expect(css).toContain('letter-spacing: 0.05em;');
+  });
+
+  it('buildEditionThemeCss stays valid when sectionBackgrounds is set on the edition', () => {
+    const edition = mockEdition({
+      sectionBackgrounds: {
+        about: '/images/pereira-tech-days/2026/about-bg.webp',
+        sponsors: '/images/pereira-tech-days/2026/sponsors-bg.webp',
+      },
+    } as Partial<PereiraTechDay['data']>);
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('[data-edition-theme="2026"]');
+    expect(css).toContain('--ptt-primary: #1f6f73');
+    expect(css).not.toContain('sectionBackgrounds');
+    expect(css).not.toContain('about-bg.webp');
   });
 
   it('buildEditionThemeCss includes dark palette when defined', () => {
@@ -109,5 +205,118 @@ describe('pereiraTechDay helpers', () => {
     });
     const css = buildEditionThemeCss(edition);
     expect(css).toContain('.dark [data-edition-theme="2026"]');
+  });
+
+  it('buildEditionThemeCss defaults ui shape vars when brandKit.ui is unset', () => {
+    const css = buildEditionThemeCss(mockEdition());
+    expect(css).toContain('--ptd-button-radius: 0.75rem;');
+    expect(css).toContain('--ptd-card-radius: 1rem;');
+  });
+
+  it('buildEditionThemeCss maps declared ui shapes to radius tokens', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        ui: { buttonShape: 'pill', cardShape: 'sharp' },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptd-button-radius: 9999px;');
+    expect(css).toContain('--ptd-card-radius: 0;');
+  });
+
+  it('buildEditionThemeCss maps square button shape to zero radius', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        ui: { buttonShape: 'square' },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptd-button-radius: 0;');
+  });
+
+  it('getEditionFontPackages returns declared npm font packages, deduped', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        typography: {
+          headingFamily: 'Bebas Neue',
+          fontSources: [
+            { family: 'Bebas Neue', npmPackage: '@fontsource/bebas-neue' },
+            { family: 'Bebas Neue', npmPackage: '@fontsource/bebas-neue' },
+          ],
+        },
+      },
+    });
+    expect(getEditionFontPackages(edition)).toEqual(['@fontsource/bebas-neue']);
+  });
+
+  it('getEditionFontPackages returns an empty array when no fontSources are declared', () => {
+    expect(getEditionFontPackages(mockEdition())).toEqual([]);
+  });
+
+  it('normalizeLightningTalks accepts legacy slug-only entries', () => {
+    const result = normalizeLightningTalks([
+      'jonathan-alvarez',
+      'sary-libreros',
+    ]);
+    expect(result).toEqual([
+      { speaker: 'jonathan-alvarez' },
+      { speaker: 'sary-libreros' },
+    ]);
+  });
+
+  it('normalizeLightningTalks accepts title-first object entries', () => {
+    const result = normalizeLightningTalks([
+      {
+        speaker: 'jonathan-alvarez',
+        title: { en: 'Your first talk', es: 'Tu primera charla' },
+      },
+    ]);
+    expect(result).toEqual([
+      {
+        speaker: 'jonathan-alvarez',
+        title: { en: 'Your first talk', es: 'Tu primera charla' },
+      },
+    ]);
+  });
+
+  it('normalizeLightningTalks accepts a mix of both shapes', () => {
+    const result = normalizeLightningTalks([
+      'jonathan-alvarez',
+      {
+        speaker: 'sary-libreros',
+        title: '5 Pasos para Conquistar el Mundo Tech',
+      },
+    ]);
+    expect(result).toEqual([
+      { speaker: 'jonathan-alvarez' },
+      {
+        speaker: 'sary-libreros',
+        title: '5 Pasos para Conquistar el Mundo Tech',
+      },
+    ]);
   });
 });

@@ -29,6 +29,9 @@ importers:
       '@astrojs/svelte':
         specifier: 9.0.1
         version: 9.0.1(@types/node@25.6.0)(astro@7.1.6(@astrojs/markdown-remark@7.2.2(supports-color@7.2.0))(@emnapi/core@2.0.0-alpha.3)(@emnapi/runtime@2.0.0-alpha.3)(@types/node@25.6.0)(jiti@2.7.0)(rollup@4.60.2)(tsx@4.23.1)(yaml@2.8.3))(esbuild@0.28.1)(jiti@2.7.0)(svelte@5.56.8)(tsx@4.23.1)(typescript@6.0.3)(yaml@2.8.3)
+      '@fontsource/bebas-neue':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@noble/ed25519':
         specifier: ^3.1.0
         version: 3.1.0
@@ -585,6 +588,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/bebas-neue@5.3.0':
+    resolution: {integrity: sha512-nCxMEb9Bg9sjNWm9TIOsvHKDMLRUfEZPWpLgYu6m9KavZZVSA/WoHzI5wROwqA+eNwEi/PNBAcB5Co7HA3S0Cw==}
 
   '@formatjs/ecma402-abstract@2.3.6':
     resolution: {integrity: sha512-HJnTFeRM2kVFVr5gr5kH1XP6K0JcJtE7Lzvtr3FS/so5f1kpsqqqxy5JF+FRaO6H2qmcMfAUIox7AJteieRtVw==}
@@ -4527,6 +4533,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.1':
     optional: true
+
+  '@fontsource/bebas-neue@5.3.0': {}
 
   '@formatjs/ecma402-abstract@2.3.6':
     dependencies:

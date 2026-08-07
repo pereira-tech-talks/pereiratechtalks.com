@@ -49,4 +49,4 @@ Migrando 25k páginas a Gatsby: lecciones aprendidas + Nuxt.js, SSR con Vue.js.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/R-jsu1ARagA" title="Charla optimización frontend" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Ese año demostró que la comunidad podía sobrevivir a su venue. Las Quarantine Tech Talks fueron el puente entre la era presencial de PereiraJS y el Pereira Tech Talks bilingüe e híbrido de hoy.
+Ese año demostró que la comunidad podía sobrevivir a su venue. Las Quarantine Tech Talks fueron el puente entre la era presencial de PereiraJS y el Pereira Tech Talks híbrido de hoy.

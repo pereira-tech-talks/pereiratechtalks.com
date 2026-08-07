@@ -103,10 +103,9 @@ on public chrome without updating this contract and the Brand Guide together.
 - **Dominant rhythm in practice:** `py-16` for major sections (`py-12` / `py-20`
   as the tighter/looser variants), `gap-6` for card grids, `gap-4` for inline
   clusters.
-- **Containers:** `.main-container` (`max-w-7xl mx-auto py-4 px-4 md:px-8`, defined
-  in `global.css`) is the page shell. Content widths: `max-w-3xl` for prose/reading,
-  `max-w-5xl`–`max-w-6xl` for grids and directories, `max-w-7xl` for full-bleed
-  sections.
+- **Containers:** `.main-container` (`max-w-7xl mx-auto py-4 px-4 md:px-6`, defined
+  in `global.css`) is the page shell (1280px). Content widths: `max-w-3xl` for prose/reading,
+  `max-w-5xl`–`max-w-6xl` for grids and directories; keep reading columns narrow on long-form pages.
 - **Whitespace principle:** let sections breathe vertically; the canvas is the
   separator. Reach for spacing before adding a border or a shadow.
 
@@ -185,17 +184,21 @@ theme and stays on the **global PTT palette** — never an edition kit.
 - **Theme toggle** — `ThemeToggle.astro` FAB: morphing SVG sun/moon icons only
   (no emoji), `bg-ptt-bg-elevated` + token borders. Icon/fab transitions are
   disabled under `prefers-reduced-motion: reduce` (see `global.css`).
-- **PTD edition pages** — `EditionScope` skins only the edition body; chrome
-  renders as a sibling and keeps umbrella PTT branding (see Per-edition
-  theming below).
+- **PTD edition pages** — `EditionScope` skins only the edition body. Edition
+  detail routes use `chrome="ptd-edition"` (`PtdEditionHeader`: current year +
+  previous editions) instead of the global Meetups/Blog nav; footer stays
+  global but the theme is locked (no ThemeToggle; 2024 dark / 2026 light).
+  See Per-edition theming below.
 
 ### Per-edition theming
 
 Pereira Tech Day editions ship their own `brandKit` in
 `src/content/pereiraTechDays/{year}.{json,yaml}`. `EditionScope` writes the
 overrides under `[data-edition-theme="{year}"]`, so the edition palette applies
-**only inside the edition body**. Chrome renders as a sibling of that wrapper and
-keeps the umbrella PTT brand. Editions may also override the heading family
+**only inside the edition body**. Chrome renders as a sibling of that wrapper.
+Edition detail pages swap the global header for `PtdEditionHeader` via
+`MainLayout` `chrome="ptd-edition"`; footer and theme toggle stay global.
+Editions may also override the heading family
 (2024 uses `'Bebas Neue'`, uppercase, `tracking 0.18em`) — scoped the same way.
 Every edition kit must clear WCAG AA before publishing.
 
@@ -222,8 +225,8 @@ The home hero fills the **remaining viewport below sticky chrome**, not a fixed
 
 | Chrome state | `--ptt-chrome-offset` | Mechanism |
 |---|---|---|
-| Header only (notification absent or dismissed) | `4.25rem` | Default on `.hero-viewport` |
-| Header + top notification bar | `6.75rem` | `body:has([data-testid='top-notification-bar']) .hero-viewport` |
+| Header only (notification absent) | `4.25rem` | Default on `.hero-viewport` |
+| Header + top notification bar | `6.75rem` | `body.has-top-notification` on `MainLayout` when an active notification exists. The bar collapses after ~48px scroll (hysteresis; reappears near top) — offset still accounts for presence at first paint so the hero does not jump. |
 
 Height uses `min-height: calc(100svh − offset)` (with `dvh` fallback). From
 `lg` upward the hero also locks exact `height` so the first paint is one

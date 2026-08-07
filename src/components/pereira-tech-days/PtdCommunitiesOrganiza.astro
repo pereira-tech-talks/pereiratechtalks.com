@@ -1,0 +1,88 @@
+---
+/**
+ * PtdCommunitiesOrganiza — legacy "Organiza" community logo tiles:
+ * large logo cards in a full-width row, title centered.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Community {
+  name: string;
+  logo: string;
+  url?: string;
+}
+
+interface Props {
+  communities: Community[];
+  lang: Language;
+  title: string;
+  subtitle?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { communities, lang, title, subtitle, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+
+const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
+---
+
+<div class="ptd-communities-organiza">
+  <header class="mb-8 text-center md:mb-10">
+    <Heading class="ptd-organiza-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
+      {title}
+    </Heading>
+    {
+      subtitle && (
+        <p class="mt-2 text-sm text-[var(--ptt-text-muted)]">{subtitle}</p>
+      )
+    }
+  </header>
+
+  <ul class="mx-auto grid w-full max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+    {
+      communities.map((community) => (
+        <li class="min-w-0">
+          {
+            community.url ? (
+              <a
+                href={community.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${visitLabel} ${community.name}`}
+                class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition duration-200 hover:-translate-y-1 hover:border-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] sm:min-h-44 sm:px-5 sm:py-6"
+              >
+                <img
+                  src={community.logo}
+                  alt={community.name}
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
+                />
+              </a>
+            ) : (
+              <div class="flex min-h-40 items-center justify-center rounded-2xl border border-white/10 bg-[var(--ptt-bg-elevated)]/40 px-4 py-5 sm:min-h-44 sm:px-5 sm:py-6">
+                <img
+                  src={community.logo}
+                  alt={community.name}
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
+                />
+              </div>
+            )
+          }
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .ptd-organiza-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+</style>

@@ -5,12 +5,22 @@ interface Props {
   lang: Language;
   title: string;
   subtitle: string;
-  ctaLabel: string;
-  ctaUrl: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
   illustrationSrc?: string;
+  /** Legacy Join section ships with no CTA button — default to hidden. */
+  showCta?: boolean;
 }
 
-const { title, subtitle, ctaLabel, ctaUrl, illustrationSrc } = Astro.props;
+const {
+  title,
+  subtitle,
+  ctaLabel,
+  ctaUrl,
+  illustrationSrc,
+  showCta = true,
+} = Astro.props;
+const hasCta = showCta && Boolean(ctaUrl) && Boolean(ctaLabel);
 ---
 
 <section
@@ -24,11 +34,15 @@ const { title, subtitle, ctaLabel, ctaUrl, illustrationSrc } = Astro.props;
       {title}
     </h2>
     <p class="mt-4 text-lg text-white/90">{subtitle}</p>
-    <a
-      href={ctaUrl}
-      class="mt-8 inline-flex rounded-full bg-white px-8 py-3 text-sm font-semibold text-[var(--ptt-primary)] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-    >
-      {ctaLabel}
-    </a>
+    {
+      hasCta && (
+        <a
+          href={ctaUrl}
+          class="mt-8 inline-flex rounded-full bg-white px-8 py-3 text-sm font-semibold text-[var(--ptt-primary)] transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          {ctaLabel}
+        </a>
+      )
+    }
   </div>
 </section>

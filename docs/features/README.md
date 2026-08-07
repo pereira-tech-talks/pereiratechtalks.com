@@ -14,6 +14,7 @@ This directory contains detailed documentation for specific features implemented
 | Image Optimization | [IMAGE_OPTIMIZATION.md](./IMAGE_OPTIMIZATION.md) | Sharp-based image pipeline and staging workflow |
 | Internationalization | [I18N.md](./I18N.md) | Multi-language support |
 | Pagination | [PAGINATION.md](./PAGINATION.md) | Blog post pagination |
+| Pereira Tech Days | [PEREIRA_TECH_DAYS.md](./PEREIRA_TECH_DAYS.md) | Edition routes, content schema, upcoming/past templates, `EditionScope`, component map |
 | Public Assets | [PUBLIC_ASSETS.md](./PUBLIC_ASSETS.md) | Static assets structure (`public/`) |
 | RSS Feed | [RSS_FEED.md](./RSS_FEED.md) | RSS feed generation |
 

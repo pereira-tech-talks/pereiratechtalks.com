@@ -75,4 +75,4 @@ Si corres una comunidad tech latinoamericana, considera este argumento en serio.
 
 La auto-traducción no cuenta. El spanglish no cuenta. Solo-inglés no cuenta. Contenido bilingüe real, escrito nativamente en ambos idiomas, en paralelo, es el estándar.
 
-Estamos felices de ayudar a cualquier comunidad que esté pensando esta transición. El sitio que estás leyendo es open source. Roben la estructura: [github.com/pereiratechtalks](https://github.com/pereiratechtalks).
+Estamos felices de ayudar a cualquier comunidad que esté pensando esta transición. El sitio que estás leyendo es open source. Roben la estructura: [github.com/pereira-tech-talks](https://github.com/pereira-tech-talks).

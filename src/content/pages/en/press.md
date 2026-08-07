@@ -14,7 +14,7 @@ Non-profit community in Pereira, Risaralda. Active since 2014. This page covers 
 
 - **Founded:** Pereira, Risaralda, Colombia · 2014
 - **Nature:** Non-profit, volunteer-organized
-- **Languages:** Spanish and English (fully bilingual)
+- **Languages:** Website in Spanish and English
 - **Programs:** Meetups · Pereira Tech Day · Speaker School · Library of Tomorrow · AI Channel
 - **Numbers:** 90+ meetups · 200+ talks · 6,500+ attendees · 7+ PTD editions
 - **Model:** Free events sustained by sponsorship
@@ -23,7 +23,7 @@ Non-profit community in Pereira, Risaralda. Active since 2014. This page covers 
 
 ## Boilerplate
 
-Pereira Tech Talks is a bilingual community of builders, speakers, and learners based in Pereira, Risaralda, Colombia. Since 2014 we have hosted 90+ meetups and multiple Pereira Tech Day editions, connecting local talent to the global tech ecosystem.
+Pereira Tech Talks is a community of builders, speakers, and learners based in Pereira, Risaralda, Colombia. Since 2014 we have hosted 90+ meetups and multiple Pereira Tech Day editions, connecting local talent to the global tech ecosystem.
 
 ---
 

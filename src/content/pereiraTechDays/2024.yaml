@@ -25,17 +25,25 @@ hero:
   layout: banner
 brandKit:
   paletteLight:
-    primary: "#1f3f59"
+    primary: "#ffffff"
     accent: "#f06d6d"
-    bg: "#fef7f3"
-    bgElevated: "#ffffff"
-    text: "#1f3f59"
-    textMuted: "#b66844"
-    border: "#e8e2d9"
+    bg: "#030620"
+    bgElevated: "#0a1435"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
+  paletteDark:
+    primary: "#ffffff"
+    accent: "#f06d6d"
+    bg: "#030620"
+    bgElevated: "#0a1435"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
   typography:
     headingFamily: "Bebas Neue, \"Arial Black\", sans-serif"
     headingTransform: uppercase
-    headingTracking: 0.18em
+    headingTracking: 0.08em
     fontSources:
       - family: Bebas Neue
         npmPackage: "@fontsource/bebas-neue"
@@ -77,22 +85,48 @@ keynotes:
   - jose-jaramillo
   - cesar-camacho
 lightningTalks:
-  - jonathan-alvarez
-  - juan-pablo-franco
-  - sebastian-franco
-  - juan-jose-cardona
-  - abdenago-lopez
-  - sary-libreros
+  - speaker: jonathan-alvarez
+    title:
+      en: Your first talk
+      es: Tu primera charla
+  - speaker: juan-pablo-franco
+    title:
+      en: Serverless in everyday life
+      es: Serleverless en lo cotidiano
+  - speaker: sebastian-franco
+    title:
+      en: >-
+        At what point did we stop understanding what happens inside Machine
+        Learning? An intuition about architectures and styles of modern ML
+      es: >-
+        ¿En qué momento dejamos de entender qué sucede dentro del Machine
+        Learning? Una intuición sobre arquitecturas y estilos del ML moderno
+  - speaker: juan-jose-cardona
+    title:
+      en: From 100 Django Models to a Complete GraphQL API in 1 Minute
+      es: De 100 Modelos Django a una API GraphQL Completa en 1 Minuto
+  - speaker: abdenago-lopez
+    title:
+      en: "Good communication: the key behind successful teamwork"
+      es: "Buena comunicación: la clave detrás del éxito en el trabajo en equipo"
+  - speaker: sary-libreros
+    title:
+      en: >-
+        5 Steps to Conquer the Tech World: My Journey from Chemical
+        Engineering to Data
+      es: >-
+        5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería
+        Química a los Datos
 sponsors:
+  - slug: ase-utp
+    tier: gold
   - slug: github
     tier: gold
   - slug: source-meridian
     tier: gold
-  - slug: ase-utp
-    tier: gold
-  - slug: dailybot
-    tier: silver
   - slug: gorilla-logic
+    tier: silver
+  - slug: dailybot
     tier: silver
   - slug: made-for-germany
     tier: silver
