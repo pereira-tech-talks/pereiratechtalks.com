@@ -4,9 +4,11 @@ import {
   booleanToDailyBot,
   CONTACT_FORM_UUID,
   CONTACT_TOPIC_VALUES,
+  EXPERIENCE_LEVEL_VALUES,
   LANG_VALUES,
   lookupChoice,
   normalizePagePath,
+  SPONSOR_TIER_VALUES,
   slugify,
   submitFormResponse,
 } from '../../../functions/api/_dailybot';
@@ -48,6 +50,8 @@ describe('lookupChoice (label values for PTT org)', () => {
     );
     expect(lookupChoice('es', LANG_VALUES)).toBe('Spanish');
     expect(lookupChoice('en', LANG_VALUES)).toBe('English');
+    expect(lookupChoice('beginner', EXPERIENCE_LEVEL_VALUES)).toBe('Beginner');
+    expect(lookupChoice('gold', SPONSOR_TIER_VALUES)).toBe('Gold');
   });
 
   it('returns null for unknown choices', () => {

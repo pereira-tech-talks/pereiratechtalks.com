@@ -1,6 +1,17 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { CONTACT_FORM_UUID, CONTACT_Q } from '../../../functions/api/_dailybot';
+import {
+  CALENDAR_FORM_UUID,
+  CALENDAR_Q,
+  CONDUCT_FORM_UUID,
+  CONDUCT_Q,
+  CONTACT_FORM_UUID,
+  CONTACT_Q,
+  SPEAKER_SCHOOL_FORM_UUID,
+  SPEAKER_SCHOOL_Q,
+  SPONSORS_FORM_UUID,
+  SPONSORS_Q,
+} from '../../../functions/api/_dailybot';
 import { onRequestPost } from '../../../functions/api/contact';
 
 afterEach(() => {
@@ -133,5 +144,167 @@ describe('POST /api/contact → Dailybot', () => {
     );
     expect(res.status).toBe(200);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('maps speaker-school experience level labels', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ uuid: 'resp-ss' }), { status: 201 })
+      );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await onRequestPost(
+      createContext({
+        _form: 'speaker-school',
+        name: 'Ada',
+        email: 'ada@example.com',
+        experienceLevel: 'beginner',
+        goals: 'First meetup talk',
+        topicsOfInterest: 'Rust',
+        availability: 'Weeknights',
+        lang: 'es',
+        page_path: '/verticals/speaker-school',
+        website: '',
+      })
+    );
+
+    expect(res.status).toBe(200);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain(SPEAKER_SCHOOL_FORM_UUID);
+    const body = JSON.parse(init.body as string) as {
+      content: Record<string, string>;
+    };
+    expect(body.content[SPEAKER_SCHOOL_Q.EXPERIENCE_LEVEL]).toBe('Beginner');
+    expect(body.content[SPEAKER_SCHOOL_Q.GOALS]).toBe('First meetup talk');
+  });
+
+  it('maps sponsor tier and contribution labels', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ uuid: 'resp-sp' }), { status: 201 })
+      );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await onRequestPost(
+      createContext({
+        _form: 'sponsor',
+        name: 'Ada',
+        email: 'ada@example.com',
+        company: 'Acme',
+        contactRole: 'CMO',
+        tierInterest: 'gold',
+        contributionType: 'in-kind',
+        message: 'Interested in PTD support',
+        lang: 'en',
+        website: '',
+      })
+    );
+
+    expect(res.status).toBe(200);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain(SPONSORS_FORM_UUID);
+    const body = JSON.parse(init.body as string) as {
+      content: Record<string, string>;
+    };
+    expect(body.content[SPONSORS_Q.TIER]).toBe('Gold');
+    expect(body.content[SPONSORS_Q.CONTRIBUTION]).toBe('In-kind');
+  });
+
+  it('maps calendar intake fields', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ uuid: 'resp-cal' }), { status: 201 })
+      );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await onRequestPost(
+      createContext({
+        _form: 'calendar',
+        name: 'Ada',
+        email: 'ada@example.com',
+        communityName: 'Pereira JS',
+        googleCalendarId: 'pereirajs@group.calendar.google.com',
+        shortDescription: 'Monthly JS meetups',
+        publicCalendarUrl: 'https://calendar.google.com/calendar/u/0?cid=abc',
+        communityWebsite: 'https://example.com',
+        lang: 'es',
+        website: '',
+      })
+    );
+
+    expect(res.status).toBe(200);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain(CALENDAR_FORM_UUID);
+    const body = JSON.parse(init.body as string) as {
+      content: Record<string, string>;
+    };
+    expect(body.content[CALENDAR_Q.COMMUNITY]).toBe('Pereira JS');
+    expect(body.content[CALENDAR_Q.CALENDAR_ID]).toBe(
+      'pereirajs@group.calendar.google.com'
+    );
+  });
+
+  it('maps anonymous conduct reports without identity', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ uuid: 'resp-coc' }), { status: 201 })
+      );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await onRequestPost(
+      createContext({
+        _form: 'conduct',
+        anonymous: true,
+        incidentDescription:
+          'Enough detail about a confidential incident for organizers to review.',
+        incidentDate: 'Last meetup',
+        peopleInvolved: '',
+        name: 'ShouldClear',
+        email: '',
+        lang: 'es',
+        website: '',
+      })
+    );
+
+    expect(res.status).toBe(200);
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain(CONDUCT_FORM_UUID);
+    const body = JSON.parse(init.body as string) as {
+      content: Record<string, string>;
+    };
+    expect(body.content[CONDUCT_Q.ANONYMOUS]).toBe('Yes');
+    expect(body.content[CONDUCT_Q.REPORTER_NAME]).toBe('');
+    expect(body.content[CONDUCT_Q.REPORTER_EMAIL]).toBe('');
+    expect(body.content[CONDUCT_Q.INCIDENT]).toContain('confidential incident');
+  });
+
+  it('returns 502-style client error when Dailybot rejects', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify({ detail: 'unauthorized' }), {
+        status: 401,
+      })
+    );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const res = await onRequestPost(
+      createContext({
+        _form: 'contact',
+        name: 'Ada',
+        email: 'ada@example.com',
+        topic: 'general',
+        subject: 'Hello',
+        message: 'Community question about meetups',
+        lang: 'en',
+        website: '',
+      })
+    );
+
+    expect(res.status).toBeGreaterThanOrEqual(400);
+    const json = (await res.json()) as { ok: boolean };
+    expect(json.ok).toBe(false);
   });
 });
