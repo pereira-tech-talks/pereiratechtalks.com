@@ -361,6 +361,7 @@ Custom events may include stable dimensions via `trackEventWithContext()` or `ge
 | `speaker_application_submit` | Call for speakers form | — | SpeakersApplicationForm.svelte |
 | `speaker_school_apply_submit` | Speaker School application form | — | SpeakerSchoolForm.svelte |
 | `calendar_intake_submit` | Community calendar proposal form | — | CalendarIntakeForm.svelte |
+| `conduct_report_submit` | Code of Conduct report form | `{ anonymous }` only — never incident text | ConductReportForm.svelte |
 | `sponsor_inquiry_submit` | Sponsor inquiry form | — | SponsorInquiryForm.svelte |
 | `notification_cta` | Notification CTA clicked | `{ id }` | TopNotificationBar.svelte |
 | `notification_modal_open` | Notification modal opened | `{ id }` | TopNotificationBar.svelte |

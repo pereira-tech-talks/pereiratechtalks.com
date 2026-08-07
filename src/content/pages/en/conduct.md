@@ -81,7 +81,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 If you experience or witness behavior that violates this Code of Conduct:
 
 - **In-person at an event:** Find any organizer (identified at the venue) or speak with the founding organizers directly. We will take you to a quiet space and listen.
-- **Online or after the fact:** Email **pereiratechtalks@gmail.com** with the subject "Code of Conduct report". You can also use the [contact form](/en/contact/?topic=conduct) and mark the reason as confidential.
+- **Online or after the fact:** Use the [confidential report form](/en/conduct/#conduct-report-form) on this page, or email **pereiratechtalks@gmail.com** with the subject "Code of Conduct report".
 
 All complaints will be reviewed and investigated promptly and fairly. All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 

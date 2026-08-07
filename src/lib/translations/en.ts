@@ -675,6 +675,31 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       'Thanks — we will review the public feed and follow up within 7 business days.',
   },
 
+  conductForm: {
+    formEyebrow: 'Confidential report',
+    formSectionTitle: 'Report a Code of Conduct concern',
+    privacyNote:
+      'Reports go to organizers only. They are not listed publicly and are not posted to community Slack channels. You may submit anonymously.',
+    incidentLabel: 'What happened?',
+    incidentPlaceholder:
+      'Describe the incident with as much context as you are comfortable sharing…',
+    whenLabel: 'When did it happen? (optional)',
+    whenPlaceholder: 'Date, time, or event name…',
+    peopleLabel: 'People involved (optional)',
+    peoplePlaceholder: 'Names or roles, if known…',
+    anonymousLabel: 'Submit anonymously',
+    anonymousHint:
+      'If you choose anonymity, we will not store a reporter name or email with this report.',
+    nameLabel: 'Your name (optional if anonymous)',
+    emailLabel: 'Your email (required unless anonymous)',
+    followupLabel: 'Preferred follow-up (optional)',
+    followupPlaceholder: 'Email, call, or “no follow-up needed”…',
+    submitButton: 'Submit confidential report',
+    successTitle: 'Report received',
+    successMessage:
+      'Thank you. Organizers will review this confidentially and act as quickly and fairly as possible.',
+  },
+
   contactSection: {
     title: "Let's connect",
     description:

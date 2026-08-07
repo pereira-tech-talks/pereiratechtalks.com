@@ -357,6 +357,27 @@ export interface SiteTranslations {
     successMessage: string;
   };
 
+  conductForm: {
+    formEyebrow: string;
+    formSectionTitle: string;
+    privacyNote: string;
+    incidentLabel: string;
+    incidentPlaceholder: string;
+    whenLabel: string;
+    whenPlaceholder: string;
+    peopleLabel: string;
+    peoplePlaceholder: string;
+    anonymousLabel: string;
+    anonymousHint: string;
+    nameLabel: string;
+    emailLabel: string;
+    followupLabel: string;
+    followupPlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+  };
+
   communitiesPage: {
     title: string;
     description: string;

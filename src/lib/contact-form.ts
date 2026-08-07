@@ -171,6 +171,22 @@ export interface CalendarIntakeFormErrors {
   shortDescription: string;
 }
 
+export interface ConductReportFormFields {
+  incidentDescription: string;
+  incidentDate?: string;
+  peopleInvolved?: string;
+  anonymous: boolean;
+  name?: string;
+  email?: string;
+  preferredFollowup?: string;
+  website?: string;
+}
+
+export interface ConductReportFormErrors {
+  incidentDescription: string;
+  email: string;
+}
+
 export const emptyContactFormErrors = (): ContactFormErrors => ({
   name: '',
   email: '',
@@ -449,6 +465,48 @@ export function validateCalendarIntakeForm(
     errors.shortDescription = messages.requiredField;
     valid = false;
   }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+export function validateConductReportForm(
+  fields: ConductReportFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: ConductReportFormErrors } {
+  const errors: ConductReportFormErrors = {
+    incidentDescription: '',
+    email: '',
+  };
+  let valid = true;
+
+  if (
+    !fields.incidentDescription.trim() ||
+    fields.incidentDescription.trim().length < 20
+  ) {
+    errors.incidentDescription = messages.requiredField;
+    valid = false;
+  }
+
+  if (!fields.anonymous) {
+    const email = (fields.email || '').trim();
+    if (!email) {
+      errors.email = messages.requiredField;
+      valid = false;
+    } else if (!isValidContactEmail(email)) {
+      errors.email = messages.invalidEmail;
+      valid = false;
+    }
+  } else if (
+    fields.email?.trim() &&
+    !isValidContactEmail(fields.email.trim())
+  ) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+
   if (fields.website?.trim()) {
     valid = false;
   }

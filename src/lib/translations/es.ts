@@ -676,6 +676,31 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Gracias — revisaremos el feed público y te contactaremos en un máximo de 7 días hábiles.',
   },
 
+  conductForm: {
+    formEyebrow: 'Reporte confidencial',
+    formSectionTitle: 'Reportar una preocupación del Código de Conducta',
+    privacyNote:
+      'Los reportes llegan solo a organizadores. No se listan en público ni se publican en canales de Slack de la comunidad. Puedes enviar de forma anónima.',
+    incidentLabel: '¿Qué ocurrió?',
+    incidentPlaceholder:
+      'Describe el incidente con el contexto que te sientas cómoda o cómodo compartiendo…',
+    whenLabel: '¿Cuándo ocurrió? (opcional)',
+    whenPlaceholder: 'Fecha, hora o nombre del evento…',
+    peopleLabel: 'Personas involucradas (opcional)',
+    peoplePlaceholder: 'Nombres o roles, si los conoces…',
+    anonymousLabel: 'Enviar de forma anónima',
+    anonymousHint:
+      'Si eliges anonimato, no guardaremos nombre ni correo de quien reporta con este envío.',
+    nameLabel: 'Tu nombre (opcional si es anónimo)',
+    emailLabel: 'Tu correo (obligatorio salvo anonimato)',
+    followupLabel: 'Seguimiento preferido (opcional)',
+    followupPlaceholder: 'Correo, llamada o “no necesito seguimiento”…',
+    submitButton: 'Enviar reporte confidencial',
+    successTitle: 'Reporte recibido',
+    successMessage:
+      'Gracias. Los organizadores lo revisarán de forma confidencial y actuarán con prontitud y justicia.',
+  },
+
   contactSection: {
     title: 'Conectemos',
     description:

@@ -11,6 +11,7 @@ import {
   sanitizeContactText,
   validateCalendarIntakeForm,
   validateCfsForm,
+  validateConductReportForm,
   validateContactForm,
   validateSpeakerSchoolForm,
   validateSponsorForm,
@@ -195,6 +196,31 @@ describe('contact-form', () => {
     });
     expect(composed).toContain('Talk title: Title');
     expect(composed).toContain('Additional notes:');
+  });
+
+  it('validates conduct reports with anonymity rules', () => {
+    const anonymousOk = validateConductReportForm(
+      {
+        incidentDescription:
+          'Enough detail about a confidential incident for organizers.',
+        anonymous: true,
+      },
+      messages
+    );
+    expect(anonymousOk.valid).toBe(true);
+
+    const identifiedMissingEmail = validateConductReportForm(
+      {
+        incidentDescription:
+          'Enough detail about a confidential incident for organizers.',
+        anonymous: false,
+        name: 'Ada',
+        email: '',
+      },
+      messages
+    );
+    expect(identifiedMissingEmail.valid).toBe(false);
+    expect(identifiedMissingEmail.errors.email).toBe('Required');
   });
 
   it('validates calendar intake payloads', () => {
