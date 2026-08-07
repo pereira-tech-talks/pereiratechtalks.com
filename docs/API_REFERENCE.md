@@ -160,7 +160,7 @@ XML sitemap for search engine indexing.
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://pereiratechtalks.org',
+  site: process.env.PUBLIC_SITE_URL || 'https://v3.pereiratechtalks.org',
   integrations: [sitemap()],
 });
 ```
