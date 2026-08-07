@@ -226,7 +226,7 @@ The home hero fills the **remaining viewport below sticky chrome**, not a fixed
 | Chrome state | `--ptt-chrome-offset` | Mechanism |
 |---|---|---|
 | Header only (notification absent) | `4.25rem` | Default on `.hero-viewport` |
-| Header + top notification bar | `6.75rem` | `body:has([data-testid='top-notification-bar']) .hero-viewport` (bar collapses on scroll; offset still accounts for presence at top) |
+| Header + top notification bar | `6.75rem` | `body.has-top-notification` on `MainLayout` when an active notification exists. The bar collapses after ~48px scroll (hysteresis; reappears near top) — offset still accounts for presence at first paint so the hero does not jump. |
 
 Height uses `min-height: calc(100svh − offset)` (with `dvh` fallback). From
 `lg` upward the hero also locks exact `height` so the first paint is one

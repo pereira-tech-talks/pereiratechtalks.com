@@ -1,0 +1,11 @@
+name: WhatsApp — Pereira Tech Talks
+platform: whatsapp
+url: "https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG"
+description:
+  en: Community WhatsApp group for day-to-day chat, meetup reminders, and quick announcements.
+  es: Grupo de WhatsApp de la comunidad para charla diaria, recordatorios de meetups y anuncios rápidos.
+audience:
+  en: Members who prefer WhatsApp for community coordination.
+  es: Miembros que prefieren WhatsApp para la coordinación de la comunidad.
+isPrimary: false
+order: 6

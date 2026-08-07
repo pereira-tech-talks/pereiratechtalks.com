@@ -76,9 +76,7 @@ export const getEditionSponsors = async (
       const sponsor = all.find((s) => s.id === ref.slug);
       return sponsor ? { sponsor, tier: ref.tier, index } : undefined;
     })
-    .filter(
-      (e): e is EditionSponsor & { index: number } => Boolean(e)
-    )
+    .filter((e): e is EditionSponsor & { index: number } => Boolean(e))
     .sort((a, b) => {
       const tierDiff = tierOrder[a.tier] - tierOrder[b.tier];
       if (tierDiff !== 0) return tierDiff;

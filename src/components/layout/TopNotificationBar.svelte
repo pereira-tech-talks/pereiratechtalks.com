@@ -21,12 +21,31 @@ let { lang, notifications }: Props = $props();
 
 let openModalId = $state<string | null>(null);
 let dialogEl = $state<HTMLDivElement | undefined>(undefined);
-/** Visible only while the page is scrolled to the top. */
+/** Visible only while the page is scrolled near the top. */
 let atTop = $state(true);
 let lastFocusedEl: HTMLElement | null = null;
+/** Non-reactive — read inside scroll rAF without re-subscribing the effect. */
+let modalLocked = false;
+
+/**
+ * Hysteresis prevents sticky-bar layout feedback:
+ * collapsing the bar shrinks sticky chrome → scrollY drops → bar
+ * re-expands → oscillates. Hide past HIDE_AT; re-show only ≤ SHOW_AT.
+ */
+const SHOW_AT = 8;
+const HIDE_AT = 48;
 
 const focusableSelector =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+function readScrollY(): number {
+  return Math.max(
+    window.scrollY || 0,
+    window.pageYOffset || 0,
+    document.documentElement.scrollTop || 0,
+    document.body?.scrollTop || 0
+  );
+}
 
 /** Native-like focus trap: keeps Tab/Shift+Tab cycling inside the dialog. */
 function trapFocus(e: KeyboardEvent): void {
@@ -48,11 +67,13 @@ function trapFocus(e: KeyboardEvent): void {
 
 function openModal(id: string): void {
   lastFocusedEl = document.activeElement as HTMLElement | null;
+  modalLocked = true;
   openModalId = id;
   trackEvent(EVENTS.NOTIFICATION_MODAL_OPEN, { id });
 }
 
 function closeModal(): void {
+  modalLocked = false;
   openModalId = null;
   lastFocusedEl?.focus();
   lastFocusedEl = null;
@@ -64,15 +85,67 @@ $effect(() => {
   }
 });
 
-/** Collapse the bar once the user scrolls away from the top. */
+/** Lock background scroll while the detail modal is open. */
+$effect(() => {
+  if (typeof document === 'undefined') return;
+  if (!openModalId) return;
+  const previous = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+  return () => {
+    document.body.style.overflow = previous;
+  };
+});
+
+/**
+ * Collapse / expand the bar from scroll position.
+ * Uses a local `visible` mirror so this effect does NOT re-subscribe when
+ * `atTop` flips (reading `$state` inside `$effect` would tear down listeners).
+ */
 $effect(() => {
   if (typeof window === 'undefined') return;
-  const onScroll = (): void => {
-    atTop = window.scrollY <= 4;
+
+  let raf = 0;
+  // Local mirror — never read `atTop` here (avoids effect re-entry).
+  let visible = readScrollY() <= HIDE_AT;
+  atTop = visible;
+
+  const syncAtTop = (): void => {
+    raf = 0;
+    // Ignore scroll while modal is open (body lock + iOS rubber-band noise).
+    if (modalLocked) return;
+    const y = readScrollY();
+    if (visible && y > HIDE_AT) {
+      visible = false;
+      atTop = false;
+    } else if (!visible && y <= SHOW_AT) {
+      visible = true;
+      atTop = true;
+    }
   };
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-  return () => window.removeEventListener('scroll', onScroll);
+
+  const onScroll = (): void => {
+    if (raf) return;
+    raf = requestAnimationFrame(syncAtTop);
+  };
+
+  syncAtTop();
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  document.addEventListener('scroll', onScroll, {
+    passive: true,
+    capture: true,
+  });
+  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('pageshow', onScroll);
+  document.addEventListener('visibilitychange', onScroll);
+
+  return () => {
+    if (raf) cancelAnimationFrame(raf);
+    window.removeEventListener('scroll', onScroll, { capture: true });
+    document.removeEventListener('scroll', onScroll, { capture: true });
+    window.removeEventListener('resize', onScroll);
+    window.removeEventListener('pageshow', onScroll);
+    document.removeEventListener('visibilitychange', onScroll);
+  };
 });
 
 /**
@@ -92,77 +165,86 @@ const importantLabel = lang === 'es' ? 'IMPORTANTE' : 'IMPORTANT';
 function severityClass(severity: LocalizedNotification['severity']): string {
   switch (severity) {
     case 'important':
-      return 'bg-ptt-primary text-white dark:bg-ptt-primary-dark dark:text-ptt-bg';
+      // Pin light-mode teal — `bg-ptt-primary` flips to #3FA8AD under `.dark`.
+      return 'bg-[#1f6f73] text-white';
     case 'warning':
       return 'bg-ptt-bg-elevated text-ptt border-b border-ptt-border';
     case 'success':
       return 'bg-ptt-bg-elevated text-ptt border-b border-ptt-border';
     default:
-      return 'bg-ptt-bg-elevated text-ptt border-b border-ptt-border dark:bg-ptt-bg';
+      return 'bg-ptt-bg-elevated text-ptt border-b border-ptt-border';
   }
 }
 </script>
 
 {#if visibleBar.length > 0}
+  <!--
+    grid 0fr/1fr collapses height without max-height guessing (avoids
+    mid-animation clipping when the row is taller than max-h-12/16).
+  -->
   <div
-    class="w-full overflow-hidden transition-[max-height,opacity] duration-300 ease-out motion-reduce:transition-none {atTop
-      ? 'max-h-12 opacity-100'
-      : 'max-h-0 opacity-0 pointer-events-none'}"
+    class="grid w-full transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+    style="grid-template-rows: {atTop ? '1fr' : '0fr'}"
     data-testid="top-notification-bar"
+    data-collapsed={atTop ? 'false' : 'true'}
     aria-hidden={!atTop}
   >
-    {#each visibleBar as n (n.id)}
-      <!--
-        Full-bleed surface; inner row matches Header / `.main-container`
-        width (max-w-7xl + mx-auto + px-4 md:px-6).
-        Mid-height bar (~36–40px). Touch targets stay ≥44px via
-        invisible hit-area expanders, not min-h on the row.
-        Non-dismissible — hides on scroll, returns at top.
-      -->
-      <div
-        class={severityClass(n.severity)}
-        role="region"
-        aria-label={n.title}
-      >
+    <div class="min-h-0 overflow-hidden">
+      {#each visibleBar as n (n.id)}
+        <!--
+          Full-bleed surface; inner row matches Header / `.main-container`
+          width (max-w-7xl + mx-auto + px-4 md:px-6).
+          Mid-height bar (~36–40px). Touch targets stay ≥44px via
+          invisible hit-area expanders, not min-h on the row.
+          Non-dismissible — hides on scroll, returns at top.
+        -->
         <div
-          class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
+          class="{severityClass(n.severity)} {atTop
+            ? 'opacity-100'
+            : 'opacity-0 pointer-events-none'} transition-opacity duration-200 ease-out motion-reduce:transition-none"
+          role="region"
+          aria-label={n.title}
         >
-          {#if n.severity === 'important'}
-            <span
-              class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark dark:bg-ptt-bg-dark dark:text-ptt-primary-dark"
-            >
-              {importantLabel}
-            </span>
-          {/if}
-          <p class="min-w-0 flex-1 truncate overflow-hidden">
-            <span class="font-medium">{n.title}</span>
-            <span class="mx-1 opacity-70">—</span>
-            <span class="opacity-95">{n.summary}</span>
-          </p>
-          <div class="flex shrink-0 items-center gap-0.5">
-            {#if n.modalEnabled && n.body}
-              <button
-                type="button"
-                class="relative underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-                tabindex={atTop ? 0 : -1}
-                onclick={() => openModal(n.id)}
+          <div
+            class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
+          >
+            {#if n.severity === 'important'}
+              <span
+                class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark"
               >
-                {moreLabel}
-              </button>
-            {:else if n.ctaHref && n.ctaLabel}
-              <a
-                href={n.ctaHref}
-                class="relative inline-flex items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-                tabindex={atTop ? 0 : -1}
-                onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
-              >
-                {n.ctaLabel}
-              </a>
+                {importantLabel}
+              </span>
             {/if}
+            <p class="min-w-0 flex-1 truncate overflow-hidden">
+              <span class="font-medium">{n.title}</span>
+              <span class="mx-1 opacity-70">—</span>
+              <span class="opacity-95">{n.summary}</span>
+            </p>
+            <div class="flex shrink-0 items-center gap-0.5">
+              {#if n.modalEnabled && n.body}
+                <button
+                  type="button"
+                  class="relative cursor-pointer underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                  tabindex={atTop ? 0 : -1}
+                  onclick={() => openModal(n.id)}
+                >
+                  {moreLabel}
+                </button>
+              {:else if n.ctaHref && n.ctaLabel}
+                <a
+                  href={n.ctaHref}
+                  class="relative inline-flex cursor-pointer items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
+                  tabindex={atTop ? 0 : -1}
+                  onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
+                >
+                  {n.ctaLabel}
+                </a>
+              {/if}
+            </div>
           </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   </div>
 {/if}
 
@@ -200,7 +282,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         {#if openEntry.ctaHref && openEntry.ctaLabel}
           <a
             href={openEntry.ctaHref}
-            class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-5 py-2 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
+            class="inline-flex min-h-[44px] cursor-pointer items-center rounded-full bg-ptt-primary px-5 py-2 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
             onclick={() =>
               trackEvent(EVENTS.NOTIFICATION_CTA, { id: openEntry.id })}
           >
@@ -209,7 +291,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         {/if}
         <button
           type="button"
-          class="inline-flex min-h-[44px] items-center rounded-full border border-ptt-border px-5 py-2 text-sm font-semibold"
+          class="inline-flex min-h-[44px] cursor-pointer items-center rounded-full border border-ptt-border px-5 py-2 text-sm font-semibold"
           onclick={closeModal}
         >
           {closeLabel}

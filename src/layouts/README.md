@@ -124,15 +124,14 @@ The layout integrates these components:
 
 The theme script (inlined in layout) runs before the body renders to:
 
-1. Check `localStorage` for saved theme preference
-2. Check system preference via `prefers-color-scheme`
-3. Apply `dark` class to `<html>` element
+1. Check `localStorage` for a saved theme preference
+2. Default to light when unset (ignore browser `prefers-color-scheme`)
+3. Apply `dark` class to `<html>` only when the saved preference is `dark`
 4. Prevent flash of wrong theme
 
 ```javascript
-// Simplified theme logic
-const theme = localStorage.getItem('theme') || 
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+// Simplified theme logic — light by default; dark only if explicitly saved
+const theme = localStorage.getItem('theme');
 document.documentElement.classList.toggle('dark', theme === 'dark');
 ```
 

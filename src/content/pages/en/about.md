@@ -48,7 +48,6 @@ The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made fo
 Whether you want to speak, sponsor, partner, or just attend — there's a place for you.
 
 - [Read the blog](/en/blog)
-- [Browse slides](/en/slides)
 - [Get in touch](/en/contact)
 - [Become a sponsor](/en/sponsor-us)
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)

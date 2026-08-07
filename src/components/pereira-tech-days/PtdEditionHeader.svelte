@@ -42,7 +42,7 @@ function closeEditions() {
 
 <header
   class="ptd-edition-header border-b {isDark
-    ? 'border-white/10 bg-[#0f1a2e]/65 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-[#0f1a2e]/55'
+    ? 'border-white/10 bg-[#030620]/65 text-white backdrop-blur-xl supports-[backdrop-filter]:bg-[#030620]/55'
     : 'border-black/5 bg-ptt-bg/90 text-ptt backdrop-blur-md'}"
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
@@ -101,10 +101,17 @@ function closeEditions() {
       </a>
 
       {#if otherEditions.length > 0}
-        <div class="relative">
+        <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_noninteractive_element_interactions -->
+        <div
+          role="group"
+          class="relative"
+          on:mouseenter={() => (editionsOpen = true)}
+          on:mouseleave={closeEditions}
+          on:click|stopPropagation={() => {}}
+        >
           <button
             type="button"
-            class="inline-flex items-center gap-1 rounded px-2 py-1.5 text-sm font-semibold uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 {isDark
+            class="inline-flex cursor-pointer items-center gap-1 rounded px-2 py-1.5 text-sm font-semibold uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 {isDark
               ? 'text-white/90 hover:text-white focus-visible:outline-white'
               : 'text-ptt hover:text-ptt-primary focus-visible:outline-ptt-primary'}"
             aria-expanded={editionsOpen}
@@ -129,39 +136,42 @@ function closeEditions() {
             </svg>
           </button>
           {#if editionsOpen}
-            <ul
-              id="ptd-editions-menu"
-              role="list"
-              class="absolute right-0 z-50 mt-2 min-w-[14rem] rounded-lg border py-1 shadow-xl {isDark
-                ? 'border-white/10 bg-[#1a3355]'
-                : 'border-ptt-border bg-ptt-bg-elevated'}"
-              aria-labelledby="ptd-editions-trigger"
-            >
-              {#each otherEditions as edition}
-                <li>
+            <!-- Hover bridge so the menu stays open while moving from trigger → list -->
+            <div class="absolute right-0 top-full z-50 min-w-[14rem] pt-2">
+              <ul
+                id="ptd-editions-menu"
+                role="list"
+                class="rounded-lg border py-1 shadow-xl {isDark
+                  ? 'border-white/10 bg-[#1a3355]'
+                  : 'border-ptt-border bg-ptt-bg-elevated'}"
+                aria-labelledby="ptd-editions-trigger"
+              >
+                {#each otherEditions as edition}
+                  <li>
+                    <a
+                      href={edition.href}
+                      class="block px-4 py-2.5 text-sm focus-visible:outline-none {isDark
+                        ? 'text-white/90 hover:bg-white/10 hover:text-white focus-visible:bg-white/10'
+                        : 'text-ptt hover:bg-ptt-bg focus-visible:bg-ptt-bg'}"
+                      on:click={closeEditions}
+                    >
+                      {edition.label}
+                    </a>
+                  </li>
+                {/each}
+                <li class="border-t {isDark ? 'border-white/10' : 'border-ptt-border'}">
                   <a
-                    href={edition.href}
-                    class="block px-4 py-2.5 text-sm focus-visible:outline-none {isDark
-                      ? 'text-white/90 hover:bg-white/10 hover:text-white focus-visible:bg-white/10'
-                      : 'text-ptt hover:bg-ptt-bg focus-visible:bg-ptt-bg'}"
+                    href={`${prefix}/pereira-tech-days/`}
+                    class="block px-4 py-2.5 text-sm font-medium focus-visible:outline-none {isDark
+                      ? 'text-white/70 hover:bg-white/10 hover:text-white focus-visible:bg-white/10'
+                      : 'text-ptt-secondary hover:bg-ptt-bg focus-visible:bg-ptt-bg'}"
                     on:click={closeEditions}
                   >
-                    {edition.label}
+                    {t.ptdPage.allEditions}
                   </a>
                 </li>
-              {/each}
-              <li class="border-t {isDark ? 'border-white/10' : 'border-ptt-border'}">
-                <a
-                  href={`${prefix}/pereira-tech-days/`}
-                  class="block px-4 py-2.5 text-sm font-medium focus-visible:outline-none {isDark
-                    ? 'text-white/70 hover:bg-white/10 hover:text-white focus-visible:bg-white/10'
-                    : 'text-ptt-secondary hover:bg-ptt-bg focus-visible:bg-ptt-bg'}"
-                  on:click={closeEditions}
-                >
-                  {t.ptdPage.allEditions}
-                </a>
-              </li>
-            </ul>
+              </ul>
+            </div>
           {/if}
         </div>
       {/if}

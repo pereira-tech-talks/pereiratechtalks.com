@@ -83,7 +83,6 @@ Las charlas y demos del canal se publican como parte del catálogo del sitio (es
 
 - [Blog · etiqueta AI Agents](/blog/tag/ai-agents)
 - [Meetups asociados](/meetups) — filtra por verticales: AI Channel
-- [Slides · etiqueta AI](/slides)
 
 ---
 

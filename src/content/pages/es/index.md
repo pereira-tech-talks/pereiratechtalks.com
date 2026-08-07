@@ -49,7 +49,6 @@ Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón d
 - [Comunidades aliadas](/communities)
 - [Pereira Tech Day 2026](/pereira-tech-days/2026)
 - [Lee el blog](/blog)
-- [Catálogo de slides](/slides)
 - [Escríbenos](/contact)
 - [Quiero patrocinar](/sponsor-us)
 

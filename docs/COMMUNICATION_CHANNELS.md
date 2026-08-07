@@ -23,7 +23,7 @@ This document is the **canonical inventory** of every official Pereira Tech Talk
 | Channel | Where | Purpose | Who runs it |
 |---|---|---|---|
 | **Discord** | `discord.gg/pereiratechtalks` | Primary community chat. Topical channels (`#general`, `#help`, `#meetups`, `#speaker-school`, `#la-biblioteca`, `#ai-channel`, `#jobs`, `#showcase`). | Mod team (3 organizers + Conduct team) |
-| **WhatsApp** | Invite link in newsletter and on the website footer | Real-time meetup logistics, low-noise broadcast group. | Meetups vertical lead |
+| **WhatsApp** | <https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG> | Real-time meetup logistics, low-noise community group. | Meetups vertical lead |
 | **Telegram** | `t.me/pereiratechtalks` | Optional broadcast channel mirroring WhatsApp announcements. | Meetups vertical lead |
 
 ## Internal / organizer-only channels

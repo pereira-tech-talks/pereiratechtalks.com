@@ -4,7 +4,7 @@
 
 The website supports dark and light themes with:
 - User preference persistence via `localStorage`
-- System preference detection via `prefers-color-scheme`
+- Light mode as the default when no preference is saved (browser `prefers-color-scheme` is ignored)
 - Flash-free theme application on page load
 - Manual toggle via ThemeToggle component
 
@@ -18,8 +18,8 @@ The website supports dark and light themes with:
 │  1. Page Load (Before Paint)                                 │
 │     └── Inline theme script in layout executes              │
 │         ├── Check localStorage('theme')                     │
-│         ├── OR Check prefers-color-scheme                   │
-│         └── Apply 'dark' class to <html> if needed         │
+│         ├── Default to light when unset                     │
+│         └── Apply 'dark' class to <html> only if saved     │
 │                                                              │
 │  2. User Toggles Theme                                       │
 │     └── ThemeToggle clicked                                 │
@@ -38,8 +38,9 @@ The website supports dark and light themes with:
 | Component | File | Role |
 |-----------|------|------|
 | Theme Script | Inlined in layouts | Initial theme detection (no external request) |
-| ThemeToggle | `src/components/ThemeToggle.astro` | Manual theme toggle |
-| MainLayout | `src/layouts/MainLayout.astro` | Inlines theme script in head |
+| ThemeToggle | `src/components/layout/ThemeToggle.svelte` | Header / mobile menu theme toggle |
+| ThemeToggle (FAB) | `src/components/ThemeToggle.astro` | Legacy FAB still used on certificate pages |
+| MainLayout | `src/layouts/MainLayout.astro` | Inlines theme script in head; header hosts the toggle |
 | global.css | `src/styles/global.css` | Dark mode configuration |
 
 ## Theme Script
@@ -51,33 +52,22 @@ The theme script runs inline before the page paints to prevent flash (no externa
 ```javascript
 (function() {
   var t = localStorage.getItem('theme');
-  if (!t) t = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
   if (t === 'dark') document.documentElement.classList.add('dark');
   else document.documentElement.classList.remove('dark');
 })();
 ```
 
-**Priority order:** saved `localStorage` preference > system `prefers-color-scheme` > light (default).
+**Priority order:** saved `localStorage` preference (`dark` / `light`) > light (default). Browser `prefers-color-scheme` is not used.
 
-`localStorage` is only written when the user explicitly clicks the toggle, so the site continues to follow system preference changes until the user makes a manual choice.
+`localStorage` is only written when the user explicitly clicks the toggle. Until then, every visit starts in light mode.
 
 ## ThemeToggle Component
 
-**Location:** `src/components/ThemeToggle.astro`
+**Location (site chrome):** `src/components/layout/ThemeToggle.svelte` — compact control in the header (next to Contact) and in the mobile menu.
 
-```astro
-<button id="theme-toggle" aria-label="Toggle dark mode">
-  <span class="block dark:hidden">☀️</span>
-  <span class="hidden dark:block">🌙</span>
-  <script is:inline>
-    document.getElementById("theme-toggle").onclick = function () {
-      const html = document.documentElement;
-      const isDark = html.classList.toggle("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    };
-  </script>
-</button>
-```
+**Location (certificate FAB):** `src/components/ThemeToggle.astro` — floating button still used on certificate pages.
+
+The header toggle persists to `localStorage['theme']` and fires the Umami `theme_toggle` event.
 
 ## Tailwind Configuration
 
@@ -219,11 +209,7 @@ localStorage.getItem('theme')
 localStorage.setItem('theme', 'dark')
 ```
 
-When `localStorage` has no value (`null`), the system preference is used:
-
-```javascript
-window.matchMedia('(prefers-color-scheme: dark)').matches
-```
+When `localStorage` has no value (`null`), the site stays in **light** mode. Browser `prefers-color-scheme` is not consulted.
 
 ## Transition Effects
 

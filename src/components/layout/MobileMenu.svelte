@@ -10,6 +10,7 @@ import {
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
 import { getTranslations } from '@/lib/translations';
+import ThemeToggle from './ThemeToggle.svelte';
 
 export let lang: string = 'es';
 export let open: boolean;
@@ -137,7 +138,6 @@ onDestroy(() => {
     <a href="{prefix}/meetups" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups', source: 'mobile' })}>{t.nav.meetups}</a>
     <a href="{prefix}/pereira-tech-days" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'pereira_tech_days', source: 'mobile' })}>{t.nav.pereiraTechDays}</a>
     <a href="{prefix}/calendar" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'calendar', source: 'mobile' })}>{t.nav.calendar}</a>
-    <a href="{prefix}/speakers" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers', source: 'mobile' })}>{t.nav.speakers}</a>
     <a href="{prefix}/blog" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'blog', source: 'mobile' })}>{t.nav.blog}</a>
 
     <button
@@ -167,17 +167,19 @@ onDestroy(() => {
         transition:fade={{ duration: 150 }}
       >
         <a href="{prefix}/about" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'about', source: 'mobile' })}>{t.nav.about}</a>
+        <a href="{prefix}/speakers" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'speakers', source: 'mobile' })}>{t.nav.speakers}</a>
         <a href="{prefix}/communities" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'communities', source: 'mobile' })}>{t.nav.communities}</a>
         <a href="{prefix}/contributors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contributors', source: 'mobile' })}>{t.nav.contributors}</a>
         <a href="{prefix}/sponsors" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'sponsors', source: 'mobile' })}>{t.nav.sponsors}</a>
         <a href="{prefix}/verticals" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'verticals', source: 'mobile' })}>{t.nav.verticals}</a>
-        <a href="{prefix}/slides" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'slides', source: 'mobile' })}>{t.nav.slides}</a>
         <a href="{prefix}/channels" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'channels', source: 'mobile' })}>{t.nav.channels}</a>
         <a href="{prefix}/press" class="nav-link text-base sm:text-lg text-center py-1" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'press', source: 'mobile' })}>{t.nav.press}</a>
       </div>
     {/if}
 
     <a href="{prefix}/contact" class="nav-link text-xl text-center" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'contact', source: 'mobile' })}>{t.nav.contact}</a>
+
+    <ThemeToggle {lang} placement="menu" />
 
     <button
       class="nav-link text-xl text-center flex items-center justify-center gap-2 focus:outline-none cursor-pointer"

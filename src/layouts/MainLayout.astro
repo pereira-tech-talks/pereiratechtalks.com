@@ -7,7 +7,6 @@ import LanguageRedirect from '@/components/LanguageRedirect.astro';
 import Header from '@/components/layout/Header.svelte';
 import TopNotificationBar from '@/components/layout/TopNotificationBar.svelte';
 import PtdEditionHeader from '@/components/pereira-tech-days/PtdEditionHeader.svelte';
-import ThemeToggle from '@/components/ThemeToggle.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getActiveNotifications,
@@ -128,7 +127,7 @@ const activeNotifications = isPtdEditionChrome
         )
       ) : (
         <script is:inline>
-  (function(){var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
+  (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
 </script>
       )
     }
@@ -137,7 +136,7 @@ const activeNotifications = isPtdEditionChrome
     class:list={[
       'flex flex-col min-h-screen text-ptt',
       isPtdEditionChrome && ptdChromeVariant === 'dark'
-        ? 'bg-[#0f1a2e]'
+        ? 'bg-[#030620]'
         : 'bg-ptt-bg',
       activeNotifications.length > 0 && 'has-top-notification',
     ]}
@@ -146,15 +145,16 @@ const activeNotifications = isPtdEditionChrome
       Skip to content
     </a>
     {/*
-      Sticky chrome: notification bar + header travel together so the green
-      (important) alert stays visible on small viewports after scroll.
+      Sticky chrome: notification bar + header travel together.
+      The bar collapses after scrolling past ~48px (hysteresis) and
+      reappears near the top — see TopNotificationBar.svelte.
       PTD edition pages use a dedicated minimal header (legacy photocopy).
     */}
     <div class="sticky top-0 z-50">
       {
         activeNotifications.length > 0 && (
           <TopNotificationBar
-            client:idle
+            client:load
             lang={lang}
             notifications={activeNotifications}
           />
@@ -174,28 +174,23 @@ const activeNotifications = isPtdEditionChrome
         )
       }
     </div>
-    {
-      !isPtdEditionChrome && (
-        <div
-          class="fixed z-50"
-          style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
-        >
-          <ThemeToggle />
-        </div>
-      )
-    }
     <main
       id="main-content"
       class:list={[
         'flex-1',
         isPtdEditionChrome && ptdChromeVariant === 'dark'
-          ? 'bg-[#0f1a2e]'
+          ? 'bg-[#030620]'
           : 'bg-ptt-bg',
       ]}
     >
       <slot />
     </main>
-    <Footer lang={lang} />
+    <Footer
+      lang={lang}
+      variant={
+        isPtdEditionChrome && ptdChromeVariant === 'dark' ? 'ptd-dark' : 'default'
+      }
+    />
     {/* client:load — WebMCP scanners detect tools on first paint; client:visible misses them. */}
     <WebMCPBridge client:load lang={lang as 'en' | 'es'} />
     {/*

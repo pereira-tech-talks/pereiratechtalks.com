@@ -15,5 +15,4 @@ During the Pereira Tech Talks v3.0.0 transition, the series collection is being 
 ## Explore the blog
 
 - [All posts](/en/blog)
-- [Slides catalog](/en/slides)
 - [About Pereira Tech Talks](/en/about)

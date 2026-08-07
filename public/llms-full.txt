@@ -25,7 +25,6 @@ The community exists to lower the barrier to entry to technology in the Eje Cafe
 - **Verticals** (/verticals/) - Community programs (La Biblioteca del Mañana, AI channel, Speaker School, monthly meetups)
 - **Speakers** (/speakers/) - Speaker bios + talks index
 - **Blog** (/blog/) - Articles, series, tags, search (Spanish and English)
-- **Slides** (/slides/) - Reveal.js / external-embed / external-link decks library
 - **Contributors** (/contributors/) - The people who make PTT happen
 - **Sponsors** (/sponsors/) - Current and historical sponsors
 - **Channels** (/channels/) - Inventory of official PTT channels

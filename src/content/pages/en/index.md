@@ -49,7 +49,6 @@ On a February evening in 2014, eight developers crowded into a UTP classroom for
 - [Allied communities](/en/communities)
 - [Pereira Tech Day 2026](/en/pereira-tech-days/2026)
 - [Read the blog](/en/blog)
-- [Slides catalog](/en/slides)
 - [Get in touch](/en/contact)
 - [Become a sponsor](/en/sponsor-us)
 

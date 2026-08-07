@@ -15,7 +15,6 @@ This site is the public face and operational backbone of the community. It hosts
 - [Calendar](/calendar/) (workshops and special events)
 - [Verticals](/verticals/) (Speaker School, La Biblioteca del Mañana, AI channel, monthly meetups)
 - [Blog](/blog/) (articles, series, tags, search — Spanish and English)
-- [Slides](/slides/) (Reveal.js / external decks)
 - [Speakers](/speakers/)
 - [Contributors](/contributors/)
 - [Sponsors](/sponsors/)

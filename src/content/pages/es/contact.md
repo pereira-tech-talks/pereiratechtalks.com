@@ -40,4 +40,3 @@ Basados en Pereira, Risaralda, Colombia. Sitio disponible en español e inglés.
 
 - [Sobre Pereira Tech Talks](/about)
 - [Lee el blog](/blog)
-- [Explora los slides](/slides)

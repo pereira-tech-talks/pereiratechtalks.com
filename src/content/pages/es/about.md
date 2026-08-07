@@ -48,7 +48,6 @@ El trabajo se sostiene gracias a patrocinadores (DailyBot, GitHub, ASE-UTP, Gori
 Si quieres ser ponente, patrocinador, aliado o simplemente asistir — hay un lugar para ti.
 
 - [Lee el blog](/blog)
-- [Explora los slides](/slides)
 - [Escríbenos](/contact)
 - [Quiero patrocinar](/sponsor-us)
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
