@@ -850,13 +850,25 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     gallery: 'Galería',
     galleryMemories: 'Memorias del evento',
     sponsors: 'Patrocinadores',
+    sponsorsSubtitle: 'Empresas que apoyarán esta edición del evento.',
+    sponsorsFooter:
+      'Gracias por impulsar el ecosistema tech de Pereira y la región.',
     communities: 'Comunidades aliadas',
     communitiesOrganizes: 'Organiza',
-    organizers: 'Equipo organizador',
+    communitiesOrganizesSubtitle:
+      'Junto a estas comunidades fortalecemos el ecosistema tech de Pereira y la región.',
+    communitiesOrganizesFooter:
+      'Una red de comunidades que conecta talento, aprendizaje y colaboración.',
+    organizers: 'Organizadores',
+    organizersSubtitle: 'Quienes lideran y hacen posible Pereira Tech Day.',
     collaborators: 'Colaboradores',
+    collaboratorsSubtitle:
+      'Personas y aliados que fortalecen la ejecución del evento.',
     about: 'Sobre Pereira Tech Day',
-    pricing: 'Planes de patrocinio',
-    faq: 'Preguntas frecuentes',
+    pricing: 'Planes de Patrocinio',
+    faq: 'Preguntas Frecuentes (FAQ)',
+    faqSubtitle:
+      'Algunas pequeñas preguntas que te pueden sacar algunas dudas. De cualquier forma, si hay algo que no quede claro aquí, por favor escríbenos un email y nos pondremos en contacto contigo.',
     joinTitle: 'Únete al futuro tech de la región.',
     joinSubtitle: 'Sé parte del crecimiento del ecosistema.',
     joinCta: 'Explorar Pereira Tech Talks',

@@ -1,8 +1,7 @@
 ---
 /**
- * PtdTeamGrid — legacy photo + name team grid (organizers / collaborators).
- * Large circular portraits in a centered flex-wrap row so incomplete last
- * rows stay centered.
+ * PtdTeamGrid — organizers / collaborators portraits.
+ * Square cards with optional LinkedIn (legacy 2026 photocopy).
  */
 import type { CollectionEntry } from 'astro:content';
 import type { Language } from '@/lib/i18n';
@@ -11,13 +10,25 @@ interface Props {
   contributors: CollectionEntry<'contributors'>[];
   lang: Language;
   title?: string;
+  subtitle?: string;
   headingLevel?: 'h2' | 'h3';
+  /** `circle` keeps 2024-friendly look; `square` matches legacy 2026. */
+  portraitStyle?: 'circle' | 'square';
 }
 
-const { contributors, lang, title, headingLevel = 'h2' } = Astro.props;
+const {
+  contributors,
+  lang,
+  title,
+  subtitle,
+  headingLevel = 'h2',
+  portraitStyle = 'square',
+} = Astro.props;
 const Heading = headingLevel;
+const isSquare = portraitStyle === 'square';
 
 const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
+const profileLabel = lang === 'es' ? 'Visitar perfil de' : 'Visit profile of';
 ---
 
 <div class="ptd-team-grid">
@@ -27,27 +38,58 @@ const portraitLabel = lang === 'es' ? 'Retrato de' : 'Portrait of';
         <Heading class="ptd-team-title text-3xl font-bold text-[var(--ptt-text)] md:text-4xl">
           {title}
         </Heading>
+        {subtitle && (
+          <p class="mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base">
+            {subtitle}
+          </p>
+        )}
       </header>
     )
   }
   <ul class="flex flex-wrap justify-center gap-x-5 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8">
     {
-      contributors.map((contributor) => (
-        <li class="flex w-[calc(50%-0.625rem)] flex-col items-center text-center sm:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.6rem)]">
-          <img
-            src={contributor.data.avatar}
-            alt={`${portraitLabel} ${contributor.data.name}`}
-            width="160"
-            height="160"
-            loading="lazy"
-            decoding="async"
-            class="mb-3 h-28 w-28 rounded-full object-cover sm:mb-3.5 sm:h-32 sm:w-32 md:h-36 md:w-36"
-          />
-          <span class="max-w-[10rem] text-sm font-medium leading-snug text-[var(--ptt-text)] sm:text-base">
-            {contributor.data.name}
-          </span>
-        </li>
-      ))
+      contributors.map((contributor) => {
+        const linkedin = contributor.data.social?.linkedin;
+        const imgClass = isSquare
+          ? 'mb-3 h-28 w-28 rounded-xl object-cover shadow-sm ring-1 ring-[var(--ptt-border)] sm:mb-3.5 sm:h-32 sm:w-32 md:h-36 md:w-36'
+          : 'mb-3 h-28 w-28 rounded-full object-cover sm:mb-3.5 sm:h-32 sm:w-32 md:h-36 md:w-36';
+        return (
+          <li class="flex w-[calc(50%-0.625rem)] flex-col items-center text-center sm:w-[calc(33.333%-1rem)] lg:w-[calc(20%-1.6rem)]">
+            {linkedin ? (
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${profileLabel} ${contributor.data.name}`}
+                class="rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+              >
+                <img
+                  src={contributor.data.avatar}
+                  alt={`${portraitLabel} ${contributor.data.name}`}
+                  width="160"
+                  height="160"
+                  loading="lazy"
+                  decoding="async"
+                  class={imgClass}
+                />
+              </a>
+            ) : (
+              <img
+                src={contributor.data.avatar}
+                alt={`${portraitLabel} ${contributor.data.name}`}
+                width="160"
+                height="160"
+                loading="lazy"
+                decoding="async"
+                class={imgClass}
+              />
+            )}
+            <span class="max-w-[10rem] text-sm font-medium leading-snug text-[var(--ptt-text)] sm:text-base">
+              {contributor.data.name}
+            </span>
+          </li>
+        );
+      })
     }
   </ul>
 </div>

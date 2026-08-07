@@ -199,3 +199,34 @@ export const normalizeLightningTalks = (
   entries.map((entry) =>
     typeof entry === 'string' ? { speaker: entry } : entry
   );
+
+/** Upcoming (2026 photocopy) vs past (2024 photocopy) landing chrome modes. */
+export type PtdSponsorsLayout = 'gray-cards' | 'tree-circles';
+export type PtdFaqLayout = 'accordion' | 'open-grid';
+export type PtdPortraitStyle = 'circle' | 'square';
+
+export interface UpcomingLandingChrome {
+  sponsorsLayout: PtdSponsorsLayout;
+  faqLayout: PtdFaqLayout;
+  portraitStyle: PtdPortraitStyle;
+}
+
+/**
+ * Status-based chrome for edition landings — never branch on year in callers.
+ * Upcoming → 2026-style tree circles / open FAQ / square portraits.
+ * Past → 2024-style gray cards / accordion / circular portraits.
+ */
+export const getUpcomingLandingChrome = (
+  isUpcoming: boolean
+): UpcomingLandingChrome =>
+  isUpcoming
+    ? {
+        sponsorsLayout: 'tree-circles',
+        faqLayout: 'open-grid',
+        portraitStyle: 'square',
+      }
+    : {
+        sponsorsLayout: 'gray-cards',
+        faqLayout: 'accordion',
+        portraitStyle: 'circle',
+      };
