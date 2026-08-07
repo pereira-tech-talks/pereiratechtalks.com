@@ -4,26 +4,37 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getSponsors } from '@/lib/sponsor';
+import { getActiveSponsors, getPastSponsors } from '@/lib/sponsor';
 
 const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
-  const sponsors = await getSponsors();
-  const lines = sponsors.map((s) => {
-    const description = resolveI18n(s.data.description, lang);
-    return `- [${s.data.name}](${s.data.url}) (${s.data.tier}, ${s.data.status}) — ${description}`;
-  });
+  const current = await getActiveSponsors();
+  const past = await getPastSponsors();
+
+  const toLines = (
+    list: Awaited<ReturnType<typeof getActiveSponsors>>
+  ): string[] =>
+    list.map((s) => {
+      const description = resolveI18n(s.data.description, lang);
+      return `- [${s.data.name}](${s.data.url}) — ${description}`;
+    });
 
   const markdown = serializeGenericToMarkdown({
     title: 'Sponsors — Pereira Tech Talks',
     description:
-      'Companies and organizations that have supported Pereira Tech Talks meetups, Speaker School, La Biblioteca del Mañana, and Pereira Tech Day editions.',
+      'Current and past partners of Pereira Tech Talks. Per-edition tiers (gold, silver, etc.) live on each Pereira Tech Day page — not on this community directory.',
     lang,
     canonical: `${SITE_URL}/en/sponsors`,
-    metadata: [['Total sponsors', String(sponsors.length)]],
-    sections: [{ heading: 'All sponsors', lines }],
+    metadata: [
+      ['Current partners', String(current.length)],
+      ['Past partners', String(past.length)],
+    ],
+    sections: [
+      { heading: 'Current partners', lines: toLines(current) },
+      { heading: 'Past partners', lines: toLines(past) },
+    ],
   });
 
   return new Response(markdown, {

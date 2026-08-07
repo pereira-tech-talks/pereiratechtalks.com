@@ -527,18 +527,40 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
-      'Conoce a las empresas y aliados comunitarios que hacen posibles los meetups, Pereira Tech Day y los programas de la comunidad.',
+      'Aliados actuales y anteriores de Pereira Tech Talks — empresas y organizaciones que sostienen meetups, Pereira Tech Day y los programas de la comunidad en Pereira.',
     eyebrow: 'Aliados',
     intro: (count) =>
-      `${count} aliados que sostienen la comunidad con venues, comida, becas y mentoría.`,
-    currentTitle: 'Patrocinadores actuales',
-    pastTitle: 'Patrocinadores anteriores',
+      `${count} aliados activos sostienen venues, logística y escenario. Las categorías de patrocinio por edición viven en cada Pereira Tech Day.`,
+    currentTitle: 'Aliados actuales',
+    currentIntro:
+      'Quienes acompañan a Pereira Tech Talks hoy — meetups mensuales y la conferencia anual.',
+    pastTitle: 'Aliados anteriores',
     pastIntro:
-      'Organizaciones que apoyaron ediciones previas. Agradecemos cada alianza que ayudó a la comunidad a crecer.',
-    sponsorUsLabel: 'Patrocínanos: solicita el deck',
+      'Organizaciones que apoyaron capítulos previos. Cada alianza dejó huella en la comunidad.',
+    sponsorUsLabel: 'Quiero patrocinar',
+    contactLabel: 'Escríbenos',
     emptyTitle: 'Aún no hay patrocinadores registrados',
     emptyDesc: '¿Te interesa apoyar la comunidad? Escríbenos.',
     breadcrumbHome: 'Inicio',
+    why: {
+      title: 'Por qué patrocinar',
+      intro:
+        'No vendemos un logo en una web. Construimos escenarios donde el talento local se encuentra con empresas que quieren contratar, enseñar y aprender en Pereira.',
+      items: {
+        meetups: {
+          title: 'Meetups reales',
+          body: 'Venue, snacks y continuidad mensual — la comunidad necesita aliados que hagan posible cada noche de charlas.',
+        },
+        ptd: {
+          title: 'Pereira Tech Day',
+          body: 'La conferencia anual con paquetes por edición (oro, plata, etc.). Ese menú de categorías vive en la página de cada año, no aquí.',
+        },
+        talent: {
+          title: 'Talento local',
+          body: 'Acceso a ingenieras e ingenieros, speakers y estudiantes de Risaralda que ya están construyendo en público.',
+        },
+      },
+    },
     tiers: {
       diamond: 'Patrocinadores diamante',
       gold: 'Patrocinadores oro',

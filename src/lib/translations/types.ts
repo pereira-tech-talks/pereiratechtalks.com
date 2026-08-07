@@ -336,12 +336,24 @@ export interface SiteTranslations {
     eyebrow: string;
     intro: (count: number) => string;
     currentTitle: string;
+    currentIntro: string;
     pastTitle: string;
     pastIntro: string;
     sponsorUsLabel: string;
+    contactLabel: string;
     emptyTitle: string;
     emptyDesc: string;
     breadcrumbHome: string;
+    why: {
+      title: string;
+      intro: string;
+      items: {
+        meetups: { title: string; body: string };
+        ptd: { title: string; body: string };
+        talent: { title: string; body: string };
+      };
+    };
+    /** Kept for PTD / legacy copy; community `/sponsors` page does not render these. */
     tiers: {
       diamond: string;
       gold: string;
