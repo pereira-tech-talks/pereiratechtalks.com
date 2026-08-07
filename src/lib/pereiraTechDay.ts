@@ -1,5 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
+import { combineCalendarDateAndTime } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 export type PereiraTechDay = CollectionEntry<'pereiraTechDays'>;
@@ -129,10 +130,7 @@ export const getEditionStartIso = (edition: PereiraTechDay): string => {
   const start = getEditionStartDate(edition);
   const time = edition.data.startTime;
   if (time) {
-    const [hours, minutes] = time.split(':').map(Number);
-    const local = new Date(start);
-    local.setHours(hours, minutes ?? 0, 0, 0);
-    return local.toISOString();
+    return combineCalendarDateAndTime(start, time);
   }
   return start.toISOString();
 };
@@ -145,10 +143,7 @@ export const getEditionEndIso = (
   const time = edition.data.endTime;
   const base = endDate ?? getEditionStartDate(edition);
   if (time) {
-    const [hours, minutes] = time.split(':').map(Number);
-    const local = new Date(base);
-    local.setHours(hours, minutes ?? 0, 0, 0);
-    return local.toISOString();
+    return combineCalendarDateAndTime(base, time);
   }
   if (endDate) return endDate.toISOString();
   return undefined;

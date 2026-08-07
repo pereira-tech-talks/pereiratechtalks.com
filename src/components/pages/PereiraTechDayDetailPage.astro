@@ -24,6 +24,7 @@ import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.
 import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
 import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { formatCalendarDate, formatCalendarDateParts } from '@/lib/dates';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
@@ -63,37 +64,26 @@ const startDate = getEditionStartDate(edition);
 const endIso = getEditionEndIso(edition);
 const startIso = getEditionStartIso(edition);
 
-const dateFormatter = new Intl.DateTimeFormat(
-  lang === 'es' ? 'es-CO' : 'en-US',
-  {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
-);
-const dateLabel = dateFormatter.format(startDate);
+const dateLabel = formatCalendarDate(startDate, lang);
 
 /** Legacy 2024 hero date: "SEPTIEMBRE 21, 2024." */
-const heroDateParts = new Intl.DateTimeFormat(
-  lang === 'es' ? 'es-CO' : 'en-US',
-  { year: 'numeric', month: 'long', day: 'numeric' }
-).formatToParts(startDate);
+const heroDateParts = formatCalendarDateParts(startDate, lang, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 const heroMonth =
   heroDateParts.find((p) => p.type === 'month')?.value.toUpperCase() ?? '';
 const heroDay = heroDateParts.find((p) => p.type === 'day')?.value ?? '';
 const heroYearPart = heroDateParts.find((p) => p.type === 'year')?.value ?? '';
 const heroDateLabel = `${heroMonth} ${heroDay}, ${heroYearPart}`;
 
-const longDateFormatter = new Intl.DateTimeFormat(
-  lang === 'es' ? 'es-CO' : 'en-US',
-  {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
-);
-const dateLong = longDateFormatter.format(startDate);
+const dateLong = formatCalendarDate(startDate, lang, {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 
 const allEditions = await getEditions();
 const editionPublicHref = getEditionHref(edition, lang);

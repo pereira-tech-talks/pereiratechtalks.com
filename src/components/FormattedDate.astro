@@ -1,5 +1,6 @@
 ---
-import { getDateLocale, type Language } from '@/lib/i18n';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
 
 interface Props {
   date: Date;
@@ -7,16 +8,14 @@ interface Props {
 }
 
 const { date, lang = 'es' } = Astro.props;
-const locale = getDateLocale(lang as Language);
 ---
 
-<time datetime={date.toISOString()}>
+<time datetime={getCalendarDateString(date)}>
   {
-    date.toLocaleDateString(locale, {
+    formatCalendarDate(date, lang as Language, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-      timeZone: 'UTC',
     })
   }
 </time>

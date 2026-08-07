@@ -3,8 +3,10 @@
  * Print-grade diploma document (elevated from PR #297 / feature/cert).
  * Uses PTT / edition tokens; no Roboto or emoji.
  */
+import { formatCalendarDate } from '@/lib/dates';
 import type { CertificatePayload } from '@/lib/certificates/types';
 import type { Language } from '@/lib/i18n';
+import { SITE_TIMEZONE } from '@/lib/constances';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -26,8 +28,8 @@ const {
 const t = getTranslations(lang);
 const locale = lang === 'es' ? 'es-CO' : 'en-US';
 
-const eventDate = new Date(`${certificate.event.date}T12:00:00`);
-const formattedDate = eventDate.toLocaleDateString(locale, {
+const eventDate = new Date(`${certificate.event.date}T00:00:00.000Z`);
+const formattedDate = formatCalendarDate(eventDate, lang, {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
@@ -39,6 +41,7 @@ const formattedIssued = issuedDate.toLocaleDateString(locale, {
   day: 'numeric',
   month: 'short',
   year: 'numeric',
+  timeZone: SITE_TIMEZONE,
 });
 
 const roleLabel = t.certificates.roles[certificate.subject.role];

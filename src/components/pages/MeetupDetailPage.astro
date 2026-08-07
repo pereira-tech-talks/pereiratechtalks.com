@@ -14,6 +14,7 @@ import JsonLd from '@/components/JsonLd.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { formatCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug } from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
@@ -35,12 +36,12 @@ const description = tr(meetup.data.description, lang);
 const heroSrc = meetup.data.hero?.src || meetup.data.heroImage;
 
 const date = new Date(meetup.data.date);
-const dateLabel = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
+const dateLabel = formatCalendarDate(date, lang, {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-}).format(date);
+});
 
 const venue = meetup.data.venue;
 const status = meetup.data.status ?? 'completed';

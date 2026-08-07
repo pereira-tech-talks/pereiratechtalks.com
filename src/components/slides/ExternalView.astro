@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import PostIndicator from '@/components/blog/PostIndicator.svelte';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { isDraftDeck } from '@/lib/slides';
 import { getTranslations } from '@/lib/translations';
@@ -74,12 +75,8 @@ const isDraft = isDraftDeck(deck);
         {data.eventDate && (
           <>
             <span>·</span>
-            <time datetime={data.eventDate.toISOString().split('T')[0]}>
-              {data.eventDate.toLocaleDateString(lang === 'es' ? 'es-CO' : 'en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+            <time datetime={getCalendarDateString(data.eventDate)}>
+              {formatCalendarDate(data.eventDate, lang)}
             </time>
           </>
         )}
