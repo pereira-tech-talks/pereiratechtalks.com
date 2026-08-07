@@ -1,6 +1,7 @@
 <script>
 import { EVENTS, trackEvent } from '@/lib/analytics';
-import { composeSponsorMessage, validateSponsorForm } from '@/lib/contact-form';
+import { validateSponsorForm } from '@/lib/contact-form';
+import { focusFirstInvalidField } from '@/lib/form-ui';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'es';
@@ -61,10 +62,23 @@ async function handleSubmit() {
   );
   errors = result.errors;
   if (!result.valid) {
+    const failedCount = Object.values(errors).filter(Boolean).length;
     trackEvent(EVENTS.CONTACT_FORM_ERROR, {
-      field_count: 1,
+      field_count: failedCount,
       topic: 'sponsorship',
     });
+    focusFirstInvalidField(
+      [
+        { key: 'name', id: 'sponsor-name' },
+        { key: 'email', id: 'sponsor-email' },
+        { key: 'company', id: 'sponsor-company' },
+        { key: 'contactRole', id: 'sponsor-role' },
+        { key: 'tierInterest', id: 'sponsor-tier' },
+        { key: 'contributionType', id: 'sponsor-contrib' },
+        { key: 'message', id: 'sponsor-message' },
+      ],
+      errors
+    );
     return;
   }
   if (!apiEndpoint) {
@@ -73,35 +87,26 @@ async function handleSubmit() {
   }
 
   formState = 'submitting';
-  const composed = composeSponsorMessage({
-    name,
-    email,
-    reason: 'sponsorship',
-    subject,
-    message,
-    website,
-    company,
-    contactRole,
-    tierInterest,
-    contributionType,
-  });
 
   try {
     const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        _form: 'sponsor',
         name,
         email,
         reason: 'sponsorship',
         subject,
-        message: composed,
+        message,
         lang,
         website,
         company,
         contactRole,
         tierInterest,
         contributionType,
+        page_path:
+          typeof window !== 'undefined' ? window.location.pathname : '/',
       }),
     });
     if (!response.ok) throw new Error('fail');
@@ -124,6 +129,17 @@ function resetForm() {
   contributionType = '';
   message = '';
   website = '';
+  errors = {
+    name: '',
+    email: '',
+    reason: '',
+    subject: '',
+    message: '',
+    company: '',
+    contactRole: '',
+    tierInterest: '',
+    contributionType: '',
+  };
   submitError = '';
   formState = 'idle';
 }
@@ -133,10 +149,11 @@ function resetForm() {
   <div
     bind:this={successRef}
     tabindex="-1"
-    class="text-center py-8"
+    class="text-center py-12"
     role="status"
     aria-live="polite"
   >
+    <div class="mb-4 text-5xl" aria-hidden="true">✓</div>
     <h3 class="text-2xl font-bold text-ptt mb-3">{f.successTitle}</h3>
     <p class="text-ptt-secondary mb-6">{f.successMessage}</p>
     <button
@@ -182,8 +199,10 @@ function resetForm() {
           class:border-red-500={errors.name}
           bind:value={name}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.name ? 'sponsor-name-error' : undefined}
+          aria-invalid={errors.name ? 'true' : undefined}
         />
-        {#if errors.name}<p class={errorClass}>{errors.name}</p>{/if}
+        {#if errors.name}<p id="sponsor-name-error" class={errorClass} aria-live="polite">{errors.name}</p>{/if}
       </div>
       <div>
         <label for="sponsor-email" class={labelClass}>{cp.emailLabel}</label>
@@ -195,8 +214,10 @@ function resetForm() {
           class:border-red-500={errors.email}
           bind:value={email}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.email ? 'sponsor-email-error' : undefined}
+          aria-invalid={errors.email ? 'true' : undefined}
         />
-        {#if errors.email}<p class={errorClass}>{errors.email}</p>{/if}
+        {#if errors.email}<p id="sponsor-email-error" class={errorClass} aria-live="polite">{errors.email}</p>{/if}
       </div>
     </div>
 
@@ -210,8 +231,10 @@ function resetForm() {
           placeholder={f.companyPlaceholder}
           bind:value={company}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.company ? 'sponsor-company-error' : undefined}
+          aria-invalid={errors.company ? 'true' : undefined}
         />
-        {#if errors.company}<p class={errorClass}>{errors.company}</p>{/if}
+        {#if errors.company}<p id="sponsor-company-error" class={errorClass} aria-live="polite">{errors.company}</p>{/if}
       </div>
       <div>
         <label for="sponsor-role" class={labelClass}>{f.roleLabel}</label>
@@ -222,9 +245,10 @@ function resetForm() {
           placeholder={f.rolePlaceholder}
           bind:value={contactRole}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.contactRole ? 'sponsor-role-error' : undefined}
+          aria-invalid={errors.contactRole ? 'true' : undefined}
         />
-        {#if errors.contactRole}<p class={errorClass}>{errors.contactRole}</p
-          >{/if}
+        {#if errors.contactRole}<p id="sponsor-role-error" class={errorClass} aria-live="polite">{errors.contactRole}</p>{/if}
       </div>
     </div>
 
@@ -237,13 +261,14 @@ function resetForm() {
           class:border-red-500={errors.tierInterest}
           bind:value={tierInterest}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.tierInterest ? 'sponsor-tier-error' : undefined}
+          aria-invalid={errors.tierInterest ? 'true' : undefined}
         >
           {#each f.tierOptions as opt}
             <option value={opt.value}>{opt.label}</option>
           {/each}
         </select>
-        {#if errors.tierInterest}<p class={errorClass}>{errors.tierInterest}</p
-          >{/if}
+        {#if errors.tierInterest}<p id="sponsor-tier-error" class={errorClass} aria-live="polite">{errors.tierInterest}</p>{/if}
       </div>
       <div>
         <label for="sponsor-contrib" class={labelClass}
@@ -255,14 +280,14 @@ function resetForm() {
           class:border-red-500={errors.contributionType}
           bind:value={contributionType}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.contributionType ? 'sponsor-contrib-error' : undefined}
+          aria-invalid={errors.contributionType ? 'true' : undefined}
         >
           {#each f.contributionOptions as opt}
             <option value={opt.value}>{opt.label}</option>
           {/each}
         </select>
-        {#if errors.contributionType}<p class={errorClass}
-            >{errors.contributionType}</p
-          >{/if}
+        {#if errors.contributionType}<p id="sponsor-contrib-error" class={errorClass} aria-live="polite">{errors.contributionType}</p>{/if}
       </div>
     </div>
 
@@ -276,8 +301,10 @@ function resetForm() {
         placeholder={f.messagePlaceholder}
         bind:value={message}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.message ? 'sponsor-message-error' : undefined}
+        aria-invalid={errors.message ? 'true' : undefined}
       ></textarea>
-      {#if errors.message}<p class={errorClass}>{errors.message}</p>{/if}
+      {#if errors.message}<p id="sponsor-message-error" class={errorClass} aria-live="polite">{errors.message}</p>{/if}
     </div>
 
     <div class="text-center">

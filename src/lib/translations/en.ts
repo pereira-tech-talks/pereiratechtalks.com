@@ -292,8 +292,6 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     reasonOptions: [
       { value: '', label: '— Select a topic —' },
       { value: 'general', label: 'General / Just saying hello' },
-      { value: 'tech-talk', label: 'Speaker proposal / Talk submission' },
-      { value: 'sponsorship', label: 'Sponsor / Sponsorship inquiry' },
       {
         value: 'collaboration',
         label: 'Community collaboration / Partnership',
@@ -303,7 +301,6 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
         label: 'Join La Biblioteca del Mañana',
       },
       { value: 'press', label: 'Press / Media inquiry' },
-      { value: 'conduct', label: 'Code of Conduct report' },
       { value: 'other', label: 'Other' },
     ],
     successNextSteps: {

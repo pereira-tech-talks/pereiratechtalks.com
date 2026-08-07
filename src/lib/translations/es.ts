@@ -292,8 +292,6 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     reasonOptions: [
       { value: '', label: '— Selecciona un tema —' },
       { value: 'general', label: 'General / Solo saludar' },
-      { value: 'tech-talk', label: 'Propuesta de charla / Call for Speakers' },
-      { value: 'sponsorship', label: 'Patrocinio / Sponsorship' },
       {
         value: 'collaboration',
         label: 'Colaboración comunitaria / Alianza',
@@ -303,7 +301,6 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
         label: 'Unirme a La Biblioteca del Mañana',
       },
       { value: 'press', label: 'Prensa / Medios' },
-      { value: 'conduct', label: 'Reporte de Código de Conducta' },
       { value: 'other', label: 'Otro' },
     ],
     successNextSteps: {
