@@ -58,7 +58,7 @@ Write access (forms, sponsorship, speaking) stays human-mediated:
 - Contact: `/contact/`
 - Call for speakers: `/call-for-speakers/`
 - Sponsor us: `/sponsor-us/`
-- Email: `hello@pereiratechtalks.org`
+- Email: `pereiratechtalks@gmail.com`
 
 Do not ask humans to paste API secrets into chat.
 

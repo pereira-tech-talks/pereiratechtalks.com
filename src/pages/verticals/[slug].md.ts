@@ -54,6 +54,7 @@ export const GET: APIRoute = ({ props }) => {
     lang,
     canonical: `${SITE_URL}/verticals/${entry.id}`,
     metadata,
+    body: entry.body,
     sections,
   });
 

@@ -58,6 +58,6 @@ On a February evening in 2014, eight developers crowded into a UTP classroom for
 
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
-- X (Twitter): [@pereira-tech-talks](https://x.com/pereiratechtalks)
+- X (Twitter): [@pertechtalks](https://x.com/pertechtalks)
 - Instagram: [@pertechtalks](https://www.instagram.com/pertechtalks)
-- Email: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Email: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)

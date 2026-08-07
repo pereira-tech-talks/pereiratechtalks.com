@@ -33,7 +33,7 @@ jobs:
       - name: Step 1 - ⚙️ Setup GitHub Config
         run: |
           git config user.name "Sergio Alexander Florez Galeano"
-          git config user.email "hello@pereiratechtalks.org"
+          git config user.email "pereiratechtalks@gmail.com"
           gh auth login --with-token <<< "${{ secrets.AUTOMATION_GITHUB_TOKEN }}"
 
       - name: Step 2 - 🧪 Check pr size label

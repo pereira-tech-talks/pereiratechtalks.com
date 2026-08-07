@@ -13,6 +13,6 @@ COPY-PASTE:
 
 <p>Slides at <strong>pereiratechtalks.org/slides</strong></p>
 
-<a href="https://x.com/pereiratechtalks" class="slide-cta">Follow @pereiratechtalks →</a>
+<a href="https://x.com/pertechtalks" class="slide-cta">Follow @pertechtalks →</a>
 
 <small>Questions? Find us after the talk or on X / LinkedIn.</small>

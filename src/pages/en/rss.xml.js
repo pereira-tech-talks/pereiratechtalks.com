@@ -5,10 +5,10 @@ import { SITE_TITLE } from '@/lib/constances';
 import { getTranslations } from '@/lib/translations';
 
 export async function GET(context) {
-  const t = getTranslations('es');
+  const t = getTranslations('en');
   const allPosts = await getCollection('blog');
   const posts = allPosts.filter(
-    (post) => post.id.startsWith('es/') && isPostVisibleInProduction(post)
+    (post) => post.id.startsWith('en/') && isPostVisibleInProduction(post)
   );
   return rss({
     title: SITE_TITLE,
@@ -18,7 +18,7 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
-      link: `/es/blog/${getPostSlug(post.id)}/`,
+      link: `/en/blog/${getPostSlug(post.id)}/`,
       categories: post.data.tags || [],
     })),
   });

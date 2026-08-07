@@ -185,7 +185,7 @@ Pereira Tech Talks is a community organization. Trademarks (logos, the "Pereira 
 
 ## Contact
 
-- General: <hello@pereiratechtalks.org>
+- General: <pereiratechtalks@gmail.com>
 - Speakers: <speakers@pereiratechtalks.org>
 - Sponsors: <sponsors@pereiratechtalks.org>
 - Press: <press@pereiratechtalks.org>

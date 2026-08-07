@@ -566,7 +566,7 @@ export const CONTRIBUTORS = [
     social: {
       linkedin: 'https://www.linkedin.com/in/xergioalex/',
       github: 'https://github.com/xergioalex',
-      x: 'https://x.com/pereiratechtalks',
+      x: 'https://x.com/pertechtalks',
     },
     activeSince: '2014-02-27',
     order: 0,

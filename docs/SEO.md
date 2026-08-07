@@ -216,8 +216,8 @@ All content MUST exist in both languages:
 ### Twitter Card Tags
 
 - `twitter:card` — `summary_large_image`
-- `twitter:site` — `@pereiratechtalks`
-- `twitter:creator` — `@pereiratechtalks`
+- `twitter:site` — `@pertechtalks`
+- `twitter:creator` — `@pertechtalks`
 
 ### OG Image Guidelines
 

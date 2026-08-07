@@ -7,7 +7,7 @@ tags:
   - speakers-school
   - community
 author: sergio-florez
-draft: false
+draft: true
 ---
 
 ## El problema que este programa existe para resolver
@@ -68,7 +68,7 @@ No prometemos avance de carrera. Sí prometemos que vas a salir del programa sie
 
 ## Cómo aplicar
 
-La aplicación es intencionalmente simple. Escribí a [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org) con el asunto "Speaker School" y contános:
+La aplicación es intencionalmente simple. Escribí a [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com) con el asunto "Speaker School" y contános:
 
 1. El tema de la charla que estás considerando, aunque sea rústico.
 2. Tu nivel de experiencia hablando en público (cero está bien y es común).
