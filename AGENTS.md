@@ -368,7 +368,7 @@ import AboutUsPage from '@/components/pages/AboutUsPage.astro';
 
 ### 5. i18n Routing
 
-Spanish pages at root (`src/pages/` → `/`), English in `src/pages/en/` (→ `/en`). First-time visitors are redirected to their browser's language **from the home page only**; an explicit choice is stored in `localStorage['ptt:lang']` and wins on later visits — see [I18N Guide → Browser-Language Detection](docs/I18N_GUIDE.md#browser-language-detection). Any new language switcher MUST persist the choice or the next visit reverts to the browser. Page components in `src/components/pages/` receive `lang` and handle translations internally. Spanish is the **primary language** of the community and therefore the unprefixed default; English is first-class international. Never hardcode a `/en` or `/es` prefix — derive it from `getUrlPrefix(lang)`.
+Spanish pages at root (`src/pages/` → `/`), English in `src/pages/en/` (→ `/en`). Language is **URL-first**: there is no automatic redirect from browser language or `localStorage` — see [I18N Guide → Language selection](docs/I18N_GUIDE.md#language-selection-url-first). The switcher may still write `localStorage['ptt:lang']` as a soft preference; only `?lang=` may pin/redirect. Page components in `src/components/pages/` receive `lang` and handle translations internally. Spanish is the **primary language** of the community and therefore the unprefixed default; English is first-class international. Never hardcode a `/en` or `/es` prefix — derive it from `getUrlPrefix(lang)`.
 
 ### 6. Per-Edition Theming Runtime
 
