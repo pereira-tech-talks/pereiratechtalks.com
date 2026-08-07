@@ -1,4 +1,5 @@
 ---
+import { getTodayInSiteTimezone } from '@/lib/dates';
 import { DEFAULT_LANGUAGE, getUrlPrefix } from '@/lib/i18n';
 import type { Language } from '@/lib/translations';
 import { getTranslations } from '@/lib/translations';
@@ -15,7 +16,7 @@ interface Props {
 const { lang = DEFAULT_LANGUAGE, variant = 'default' } = Astro.props;
 const t = getTranslations(lang as Language);
 const prefix = getUrlPrefix(lang as Language);
-const year = new Date().getFullYear();
+const year = Number.parseInt(getTodayInSiteTimezone().slice(0, 4), 10);
 const isPtdDark = variant === 'ptd-dark';
 
 const explore =

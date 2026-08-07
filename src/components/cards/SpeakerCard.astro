@@ -4,6 +4,7 @@
  */
 
 import type { CollectionEntry } from 'astro:content';
+import { getCalendarYear } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 
 interface Props {
@@ -29,7 +30,7 @@ const photoAlt =
   tr(speaker.data.photo.alt, lang) || `Portrait of ${speaker.data.name}`;
 const url = `${prefix}/speakers/${speaker.id}/`;
 const talkCount = talkCountProp ?? speaker.data.talks?.length ?? 0;
-const latestYear = latestTalkDate ? latestTalkDate.getFullYear() : null;
+const latestYear = latestTalkDate ? getCalendarYear(latestTalkDate) : null;
 ---
 
 <a

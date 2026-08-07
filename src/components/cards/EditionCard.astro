@@ -6,6 +6,7 @@
 
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { type Language, tr } from '@/lib/i18n';
 import { getEditionHref } from '@/lib/pereiraTechDay';
 
@@ -39,11 +40,7 @@ const date =
   typeof edition.data.date === 'object' && 'start' in edition.data.date
     ? edition.data.date.start
     : edition.data.date;
-const dateLabel = new Intl.DateTimeFormat(lang === 'es' ? 'es-CO' : 'en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-}).format(new Date(date));
+const dateLabel = formatCalendarDate(new Date(date), lang);
 
 const statusLabels: Record<string, { en: string; es: string }> = {
   announced: { en: 'Upcoming', es: 'Próximamente' },
@@ -99,7 +96,7 @@ const statusLabel = statusLabels[status]?.[lang] ?? status;
       {tagline}
     </p>
     <p class="mt-auto pt-2 text-xs text-ptt-secondary">
-      <time datetime={new Date(date).toISOString()}>{dateLabel}</time>
+      <time datetime={getCalendarDateString(new Date(date))}>{dateLabel}</time>
     </p>
   </div>
 </a>

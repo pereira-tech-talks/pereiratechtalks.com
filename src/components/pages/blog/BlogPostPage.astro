@@ -23,6 +23,7 @@ import {
   isScheduledPost,
 } from '@/lib/blog';
 import { NEWSLETTER } from '@/lib/constances';
+import { formatCalendarDate } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import { getDeckForPost, getDeckSlug } from '@/lib/slides';
@@ -175,7 +176,7 @@ const breadcrumbData = {
       )}
       {isScheduled && (
         <div class="mb-6 rounded-lg border border-ptt-warning/40 bg-ptt-warning/10 px-4 py-3 text-sm text-ptt-warning">
-          <strong>{t.scheduledBannerTitle}</strong> — {t.scheduledBannerMessage(pubDate.toLocaleDateString(t.dateLocale, { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }))}
+          <strong>{t.scheduledBannerTitle}</strong> — {t.scheduledBannerMessage(formatCalendarDate(pubDate, lang))}
         </div>
       )}
       {seriesInfo && (

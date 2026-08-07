@@ -1,9 +1,10 @@
 ---
+import type { CertificatePayload } from '@/lib/certificates/types';
 /**
  * Print-grade diploma document (elevated from PR #297 / feature/cert).
  * Uses PTT / edition tokens; no Roboto or emoji.
  */
-import type { CertificatePayload } from '@/lib/certificates/types';
+import { formatCalendarDate, formatInstantInSiteTimezone } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -26,8 +27,8 @@ const {
 const t = getTranslations(lang);
 const locale = lang === 'es' ? 'es-CO' : 'en-US';
 
-const eventDate = new Date(`${certificate.event.date}T12:00:00`);
-const formattedDate = eventDate.toLocaleDateString(locale, {
+const eventDate = new Date(`${certificate.event.date}T00:00:00.000Z`);
+const formattedDate = formatCalendarDate(eventDate, lang, {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
@@ -35,11 +36,7 @@ const formattedDate = eventDate.toLocaleDateString(locale, {
 });
 
 const issuedDate = new Date(certificate.issuedAt);
-const formattedIssued = issuedDate.toLocaleDateString(locale, {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-});
+const formattedIssued = formatInstantInSiteTimezone(issuedDate, locale);
 
 const roleLabel = t.certificates.roles[certificate.subject.role];
 const isRevoked = certificate.status === 'revoked';

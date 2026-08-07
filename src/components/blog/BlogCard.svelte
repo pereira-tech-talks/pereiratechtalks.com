@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { CollectionEntry } from 'astro:content';
 import { EVENTS, trackEvent } from '@/lib/analytics';
-import { SITE_TIMEZONE } from '@/lib/constances';
+import { formatCalendarDateLocale, isFutureCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getHighlightedField, type SearchResult } from '@/lib/search';
 import { getTranslations } from '@/lib/translations';
@@ -126,14 +126,9 @@ $: isScheduled = (() => {
   const serverVal = (post as any).isScheduled;
   const pub = postData?.pubDate;
   if (!pub) return !!serverVal;
-  const pubDate = typeof pub === 'string' ? new Date(pub) : pub;
-  if (Number.isNaN(pubDate.getTime())) return !!serverVal;
-  const todayInTz = new Date().toLocaleDateString('en-CA', {
-    timeZone: SITE_TIMEZONE,
-  });
-  // pubDate is a calendar date, not a UTC moment — extract directly
-  const pubDateStr = pubDate.toISOString().slice(0, 10);
-  return pubDateStr > todayInTz;
+  if (typeof pub === 'string') return isFutureCalendarDate(pub);
+  if (Number.isNaN(pub.getTime())) return !!serverVal;
+  return isFutureCalendarDate(pub);
 })();
 
 // Draft flag is server-computed (we pass it through the lightweight payload).
@@ -189,12 +184,7 @@ $: displayDescription = searchQuery
     <div class="relative z-10 flex flex-wrap justify-between items-center gap-2">
       <div class="flex flex-wrap items-center gap-2">
         <time class="text-sm text-ptt-secondary">
-          {postData.pubDate.toLocaleDateString(t.dateLocale, {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            timeZone: 'UTC'
-          })}
+          {formatCalendarDateLocale(postData.pubDate, t.dateLocale)}
         </time>
         {#if isScheduled}
           <span class="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">

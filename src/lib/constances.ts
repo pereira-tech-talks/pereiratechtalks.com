@@ -1,5 +1,7 @@
 /** Timezone for scheduled post detection — build and badge use this consistently */
 export const SITE_TIMEZONE = 'America/Bogota';
+/** Fixed offset for Colombia wall-clock times (UTC−5, no DST). */
+export const SITE_TIMEZONE_OFFSET = '-05:00';
 
 /**
  * Public site origin (no trailing slash).

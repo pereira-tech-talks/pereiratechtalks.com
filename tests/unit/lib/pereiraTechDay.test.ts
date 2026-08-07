@@ -71,7 +71,7 @@ describe('pereiraTechDay helpers', () => {
   it('getEditionStartIso combines date and startTime', () => {
     const edition = mockEdition();
     const iso = getEditionStartIso(edition);
-    expect(iso).toMatch(/2026-08-22/);
+    expect(iso).toBe('2026-08-22T08:00:00-05:00');
   });
 
   it('getEditionEndIso uses endTime on same day', () => {

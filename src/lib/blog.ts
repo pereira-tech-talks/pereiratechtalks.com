@@ -1,5 +1,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
-import { BLOG_PAGE_SIZE, SITE_TIMEZONE } from './constances';
+
+import { BLOG_PAGE_SIZE } from './constances';
+import { isFutureCalendarDate } from './dates';
 import type { BlogParamsType, BlogPostsResultType, SeriesInfo } from './types';
 
 const WORDS_PER_MINUTE = 240;
@@ -258,15 +260,7 @@ export function isPostVisibleInProduction(
  * Scheduled posts are excluded from production builds but visible in dev mode.
  */
 export function isScheduledPost(post: CollectionEntry<'blog'>): boolean {
-  const now = new Date();
-  const todayInTz = now.toLocaleDateString('en-CA', {
-    timeZone: SITE_TIMEZONE,
-  });
-  // pubDate is a calendar date (e.g. "2026-03-04"), not a UTC moment.
-  // Astro parses it as midnight UTC, so converting to a timezone shifts it
-  // back a day. Extract the original date string directly from the ISO format.
-  const pubDateStr = post.data.pubDate.toISOString().slice(0, 10);
-  return pubDateStr > todayInTz;
+  return isFutureCalendarDate(post.data.pubDate);
 }
 
 /**
