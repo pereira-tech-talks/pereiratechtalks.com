@@ -889,6 +889,12 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     editionNavLabel: 'Navegación de Pereira Tech Day',
     previousEditions: 'Otras ediciones',
     allEditions: 'Todas las ediciones',
+    indexStagePrimaryCta: 'Ver esta edición',
+    indexPastRowEyebrow: 'Edición anterior',
+    indexPastRowCta: 'Ver resumen de la edición',
+    indexNoUpcomingTitle: 'Un año de charlas memorables',
+    indexNoUpcomingIntro:
+      'El próximo Pereira Tech Day está en camino. Síguenos para enterarte primero.',
   },
 
   // Blog post engagement

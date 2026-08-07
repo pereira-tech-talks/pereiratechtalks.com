@@ -884,6 +884,12 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     editionNavLabel: 'Pereira Tech Day navigation',
     previousEditions: 'Other editions',
     allEditions: 'All editions',
+    indexStagePrimaryCta: 'View this edition',
+    indexPastRowEyebrow: 'Past edition',
+    indexPastRowCta: 'View edition recap',
+    indexNoUpcomingTitle: 'A year of bold talks',
+    indexNoUpcomingIntro:
+      'The next Pereira Tech Day is in the making. Follow the community to be the first to know.',
   },
 
   // Blog post engagement

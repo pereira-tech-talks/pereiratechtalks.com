@@ -556,6 +556,11 @@ export interface SiteTranslations {
     editionNavLabel: string;
     previousEditions: string;
     allEditions: string;
+    indexStagePrimaryCta: string;
+    indexPastRowEyebrow: string;
+    indexPastRowCta: string;
+    indexNoUpcomingTitle: string;
+    indexNoUpcomingIntro: string;
   };
 
   // Blog post engagement
