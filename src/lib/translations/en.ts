@@ -526,18 +526,40 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
   sponsorsPage: {
     title: 'Sponsors',
     description:
-      'Meet the companies and community partners that make Pereira Tech Talks meetups, Pereira Tech Day, and community programs possible.',
+      'Current and past partners of Pereira Tech Talks — companies and organizations that sustain meetups, Pereira Tech Day, and community programs in Pereira.',
     eyebrow: 'Partners',
     intro: (count) =>
-      `${count} partners sustaining the community with venues, food, scholarships, and mentorship.`,
-    currentTitle: 'Current sponsors',
-    pastTitle: 'Past sponsors',
+      `${count} active partners help with venues, logistics, and the stage. Per-edition sponsorship tiers live on each Pereira Tech Day page — not here.`,
+    currentTitle: 'Current partners',
+    currentIntro:
+      'Who stands with Pereira Tech Talks today — monthly meetups and the annual conference.',
+    pastTitle: 'Past partners',
     pastIntro:
-      'Organizations that supported previous editions. We are grateful for every partnership that helped the community grow.',
-    sponsorUsLabel: 'Sponsor us: request the deck',
+      'Organizations that supported earlier chapters. Every partnership left a mark on the community.',
+    sponsorUsLabel: 'Become a sponsor',
+    contactLabel: 'Contact us',
     emptyTitle: 'No sponsors yet',
     emptyDesc: 'Want to support the community? Reach out.',
     breadcrumbHome: 'Home',
+    why: {
+      title: 'Why sponsor',
+      intro:
+        'We are not selling a logo on a website. We build stages where local talent meets companies that want to hire, teach, and learn in Pereira.',
+      items: {
+        meetups: {
+          title: 'Real meetups',
+          body: 'Venue, snacks, and monthly continuity — the community needs partners who make each talk night possible.',
+        },
+        ptd: {
+          title: 'Pereira Tech Day',
+          body: 'The annual conference with per-edition packages (gold, silver, and more). Those tier menus live on each year’s page, not here.',
+        },
+        talent: {
+          title: 'Local talent',
+          body: 'Access to engineers, speakers, and students across Risaralda who already build in public.',
+        },
+      },
+    },
     tiers: {
       diamond: 'Diamond sponsors',
       gold: 'Gold sponsors',

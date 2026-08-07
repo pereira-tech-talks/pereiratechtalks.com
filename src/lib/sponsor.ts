@@ -20,6 +20,15 @@ const sortByTierThenOrder = (a: Sponsor, b: Sponsor): number => {
 export const sortSponsors = (sponsors: Sponsor[]): Sponsor[] =>
   [...sponsors].sort(sortByTierThenOrder);
 
+/** Community catalog sort — order then name (no tier grouping). */
+export const sortSponsorsByOrder = (sponsors: Sponsor[]): Sponsor[] =>
+  [...sponsors].sort((a, b) => {
+    const oa = a.data.order ?? 0;
+    const ob = b.data.order ?? 0;
+    if (oa !== ob) return oa - ob;
+    return a.data.name.localeCompare(b.data.name);
+  });
+
 export const filterSponsorsByStatus = (
   sponsors: Sponsor[],
   status: Sponsor['data']['status']
@@ -32,12 +41,12 @@ export const getSponsors = async (): Promise<Sponsor[]> => {
 
 export const getActiveSponsors = async (): Promise<Sponsor[]> => {
   const all = await getSponsors();
-  return filterSponsorsByStatus(all, 'active');
+  return sortSponsorsByOrder(filterSponsorsByStatus(all, 'active'));
 };
 
 export const getPastSponsors = async (): Promise<Sponsor[]> => {
   const all = await getSponsors();
-  return filterSponsorsByStatus(all, 'past');
+  return sortSponsorsByOrder(filterSponsorsByStatus(all, 'past'));
 };
 
 export const getSponsorsByTier = async (

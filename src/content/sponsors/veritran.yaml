@@ -5,11 +5,11 @@ logo:
   alt: Veritran logo
 url: "https://veritran.com/"
 description:
-  en: Low-code technology company for digital banking and financial applications. Confirmed gold sponsor of Pereira Tech Day 2026 — supporting the next edition of the community's flagship conference.
-  es: Compañía de tecnología low-code para banca digital y aplicaciones financieras. Patrocinador oro confirmado de Pereira Tech Day 2026 — apoya la próxima edición de la conferencia insignia de la comunidad.
+  en: Low-code technology for digital banking and financial applications. Active community partner of Pereira Tech Talks and gold sponsor of Pereira Tech Day 2026.
+  es: Tecnología low-code para banca digital y aplicaciones financieras. Aliado activo de Pereira Tech Talks y patrocinador oro de Pereira Tech Day 2026.
 tier: gold
 sponsoredEditions:
   - year: 2026
     tier: gold
 status: active
-order: 4
+order: 1

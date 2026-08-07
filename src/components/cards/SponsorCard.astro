@@ -1,7 +1,6 @@
 ---
 /**
- * PTT v3.0.0 sponsor card — preview card for a `sponsors` collection entry.
- * Tier-aware: tier label, accent ring, light/dark logo variants.
+ * Sponsor card for community catalog and (optionally) tiered PTD contexts.
  */
 
 import type { CollectionEntry } from 'astro:content';
@@ -14,13 +13,23 @@ interface Props {
   loading?: 'lazy' | 'eager';
   /**
    * Overrides the sponsor's default tier. Used when a card is rendered in the
-   * context of a specific Pereira Tech Day edition, where the tier recorded on
-   * that edition wins over the sponsor's own.
+   * context of a specific Pereira Tech Day edition.
    */
   tier?: CollectionEntry<'sponsors'>['data']['tier'];
+  /** Community catalog hides PTD-style tier badges. */
+  showTier?: boolean;
+  /** Quieter treatment for past partners. */
+  muted?: boolean;
 }
 
-const { sponsor, lang, loading = 'lazy', tier: tierProp } = Astro.props;
+const {
+  sponsor,
+  lang,
+  loading = 'lazy',
+  tier: tierProp,
+  showTier = true,
+  muted = false,
+} = Astro.props;
 
 const tier = tierProp ?? sponsor.data.tier;
 const tierLabel: Record<typeof tier, { en: string; es: string }> = {
@@ -42,40 +51,51 @@ const sameLogo = logoLight === logoDark;
   href={sponsor.data.url}
   target="_blank"
   rel="noopener noreferrer"
-  class="group flex h-full min-w-0 flex-col rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border p-4 sm:p-6 transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+  class:list={[
+    'group flex h-full min-w-0 flex-col rounded-2xl p-4 sm:p-6 transition motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
+    muted
+      ? 'bg-ptt-bg-elevated/80 shadow-none ring-1 ring-ptt-border/70 hover:ring-ptt-border dark:bg-ptt-bg-dark/40'
+      : 'bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30',
+  ]}
 >
   <div class="flex flex-wrap items-start justify-between gap-3 sm:gap-4">
-    <div class="flex h-16 w-32 max-w-full min-w-0 items-center">
+    <div class="flex h-16 w-36 max-w-full min-w-0 items-center">
       {
         sameLogo ? (
-          <img decoding="async"
+          <img
+            decoding="async"
             src={logoLight}
             alt={logoAlt}
             width="160"
             height="64"
             loading={loading}
-            class="max-h-16 max-w-full object-contain" />
+            class="max-h-16 max-w-full object-contain"
+          />
         ) : (
           <>
-            <img decoding="async"
+            <img
+              decoding="async"
               src={logoLight}
               alt={logoAlt}
               width="160"
               height="64"
               loading={loading}
-              class="max-h-16 max-w-full object-contain dark:hidden" />
-            <img decoding="async"
+              class="max-h-16 max-w-full object-contain dark:hidden"
+            />
+            <img
+              decoding="async"
               src={logoDark}
               alt={logoAlt}
               width="160"
               height="64"
               loading={loading}
-              class="hidden max-h-16 max-w-full object-contain dark:block" />
+              class="hidden max-h-16 max-w-full object-contain dark:block"
+            />
           </>
         )
       }
     </div>
-    <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>
+    {showTier && <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>}
   </div>
   <h3 class="mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary">
     {sponsor.data.name}
