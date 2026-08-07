@@ -55,13 +55,13 @@ $effect(() => {
 </script>
 
 <div
-  class="grid grid-cols-4 gap-2 sm:gap-4"
+  class="ptd-countdown-block grid grid-cols-4 divide-x divide-[var(--ptt-border)] rounded-[var(--ptd-card-radius,1rem)] bg-[var(--ptt-bg-elevated)] py-3 ring-1 ring-[var(--ptt-border)] sm:py-4"
   role="timer"
   aria-live="polite"
   aria-label={lang === 'es' ? 'Cuenta regresiva' : 'Countdown'}
 >
   {#if ended}
-    <p class="col-span-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
+    <p class="col-span-4 px-4 text-sm font-semibold text-[var(--ptt-primary)]">{t.ended}</p>
   {:else}
     {#each [
       { value: remaining.days, label: t.days },
@@ -69,7 +69,7 @@ $effect(() => {
       { value: remaining.minutes, label: t.minutes },
       { value: remaining.seconds, label: t.seconds },
     ] as unit}
-      <div class="rounded-xl bg-[var(--ptt-bg-elevated)] px-2 py-3 text-center ring-1 ring-[var(--ptt-border)] sm:px-4">
+      <div class="px-1 text-center sm:px-2">
         <span class="block text-2xl font-bold tabular-nums text-[var(--ptt-primary)] sm:text-3xl">
           {String(unit.value).padStart(2, '0')}
         </span>
