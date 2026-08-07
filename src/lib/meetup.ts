@@ -2,12 +2,30 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 
 import {
   getCalendarYear,
+  getCalendarYearMonth,
+  getTodayInSiteTimezone,
   isCalendarDateBeforeToday,
   isCalendarDateOnOrAfterToday,
 } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
+import {
+  getEditionStartDate,
+  getEditions,
+  isUpcomingEdition,
+  type PereiraTechDay,
+} from '@/lib/pereiraTechDay';
 
 export type Meetup = CollectionEntry<'meetups'>;
+
+export type MeetupLifecycleStatus =
+  | 'announced'
+  | 'rsvp-open'
+  | 'completed'
+  | 'cancelled';
+
+export type MeetupShowcaseItem =
+  | { type: 'meetup'; data: Meetup }
+  | { type: 'pereira-tech-day'; data: PereiraTechDay };
 
 const filterDrafts = (entry: Meetup): boolean => {
   if (import.meta.env.PROD) return entry.data.draft !== true;
@@ -33,11 +51,77 @@ export const getMeetupBySlug = async (
   return entries.find((e) => e.id === slug || e.id.endsWith(`/${slug}`));
 };
 
-export const getUpcomingMeetups = async (): Promise<Meetup[]> => {
-  const all = await getMeetups();
-  return all
-    .filter((e) => isCalendarDateOnOrAfterToday(e.data.date))
+/** Derive próximamente/pasado from the calendar date (SITE_TIMEZONE), not stale frontmatter. */
+export const resolveMeetupStatus = (
+  meetup: Meetup,
+  todayInTz: string = getTodayInSiteTimezone()
+): MeetupLifecycleStatus => {
+  if (meetup.data.status === 'cancelled') return 'cancelled';
+  if (!isCalendarDateOnOrAfterToday(meetup.data.date, todayInTz)) {
+    return 'completed';
+  }
+  if (meetup.data.status === 'rsvp-open') return 'rsvp-open';
+  return 'announced';
+};
+
+const getShowcaseItemDate = (item: MeetupShowcaseItem): Date =>
+  item.type === 'meetup' ? item.data.data.date : getEditionStartDate(item.data);
+
+/**
+ * Upcoming meetups plus the flagship Pereira Tech Day when it stands in for
+ * the monthly meetup of its calendar month (e.g. August 2026).
+ */
+export const buildUpcomingMeetupShowcase = (
+  meetups: Meetup[],
+  editions: PereiraTechDay[],
+  todayInTz: string = getTodayInSiteTimezone()
+): MeetupShowcaseItem[] => {
+  const upcomingMeetups = meetups
+    .filter((m) => isCalendarDateOnOrAfterToday(m.data.date, todayInTz))
     .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+  const items: MeetupShowcaseItem[] = upcomingMeetups.map((meetup) => ({
+    type: 'meetup',
+    data: meetup,
+  }));
+
+  const flagship = editions.find(
+    (edition) =>
+      isUpcomingEdition(edition) &&
+      isCalendarDateOnOrAfterToday(getEditionStartDate(edition), todayInTz)
+  );
+
+  if (flagship) {
+    const flagshipMonth = getCalendarYearMonth(getEditionStartDate(flagship));
+    const hasRegularMeetupSameMonth = upcomingMeetups.some(
+      (meetup) => getCalendarYearMonth(meetup.data.date) === flagshipMonth
+    );
+
+    if (!hasRegularMeetupSameMonth) {
+      items.push({ type: 'pereira-tech-day', data: flagship });
+    }
+  }
+
+  return items.sort(
+    (a, b) =>
+      getShowcaseItemDate(a).getTime() - getShowcaseItemDate(b).getTime()
+  );
+};
+
+export const getUpcomingMeetupShowcase = async (): Promise<
+  MeetupShowcaseItem[]
+> => {
+  const [meetups, editions] = await Promise.all([getMeetups(), getEditions()]);
+  return buildUpcomingMeetupShowcase(meetups, editions);
+};
+
+export const getUpcomingMeetups = async (): Promise<Meetup[]> => {
+  const showcase = await getUpcomingMeetupShowcase();
+  return showcase
+    .filter(
+      (item): item is { type: 'meetup'; data: Meetup } => item.type === 'meetup'
+    )
+    .map((item) => item.data);
 };
 
 export const getPastMeetups = async (): Promise<Meetup[]> => {

@@ -6,6 +6,7 @@
  */
 
 import MeetupCard from '@/components/cards/MeetupCard.astro';
+import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import EmptyState from '@/components/ui/EmptyState.astro';
@@ -15,7 +16,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getMeetups,
-  getUpcomingMeetups,
+  getUpcomingMeetupShowcase,
   groupMeetupsByYear,
 } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
@@ -27,8 +28,11 @@ interface Props {
 const { lang } = Astro.props;
 
 const all = await getMeetups();
-const upcoming = await getUpcomingMeetups();
-const past = all.filter((m) => !upcoming.some((u) => u.id === m.id));
+const upcoming = await getUpcomingMeetupShowcase();
+const upcomingMeetupIds = new Set(
+  upcoming.filter((item) => item.type === 'meetup').map((item) => item.data.id)
+);
+const past = all.filter((m) => !upcomingMeetupIds.has(m.id));
 const groups = groupMeetupsByYear(past);
 const years = groups.map((g) => g.year);
 
@@ -104,9 +108,9 @@ const breadcrumbs = [
     {
       upcoming.length > 0 ? (
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {upcoming.map((m) => (
+          {upcoming.map((item) => (
             <li>
-              <MeetupCard meetup={m} lang={lang} loading="eager" />
+              <MeetupShowcaseCard item={item} lang={lang} loading="eager" />
             </li>
           ))}
         </ul>
