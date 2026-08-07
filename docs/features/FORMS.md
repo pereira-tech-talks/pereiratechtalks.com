@@ -37,11 +37,15 @@ Newsletter signup remains on Google Forms (out of scope for this pipeline).
 | `CONTACT_RATE_LIMIT` / `CONTACT_RATE_WINDOW_MS` | Optional | Default 8 / 600000 |
 | `CONTACT_ALLOWED_ORIGINS` | Optional | CORS allowlist |
 
-Local stub: `docker/local/pertechtalks/.env.example`.
+Local stub: `docker/local/pertechtalks/.env.example`.  
+Rotation notes: [ENVIRONMENT_SETUP.md](../ENVIRONMENT_SETUP.md).
 
 **Local Functions:** plain `pnpm run dev` does **not** run Cloudflare Pages
-Functions. Use `pages:dev` / `wrangler pages dev` with `DAILYBOT_API_KEY` bound
-for end-to-end form smoke.
+Functions. Use `wrangler pages dev` (or a Preview deploy) with
+`DAILYBOT_API_KEY` bound for end-to-end form smoke. Operator checklist for
+secrets + optional labeled smokes:
+`.dwp/plans/PLAN_dailybot_forms_integration/analysis_results/ENV_SMOKE_CHECKLIST.md`
+(plan-local; not in git).
 
 ## API contract
 
