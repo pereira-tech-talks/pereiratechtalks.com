@@ -76,9 +76,37 @@ describe('pereiraTechDay helpers', () => {
     expect(iso).toMatch(/2026-08-22/);
   });
 
+  it('getEditionStartIso falls back to date-only ISO when startTime is unset', () => {
+    const edition = mockEdition({ startTime: undefined });
+    const iso = getEditionStartIso(edition);
+    expect(iso).toBe(new Date('2026-08-22').toISOString());
+  });
+
+  it('getEditionEndIso resolves from a date-range end when endTime is unset', () => {
+    const edition = mockEdition({
+      date: { start: new Date('2026-08-22'), end: new Date('2026-08-23') },
+      endTime: undefined,
+    });
+    const iso = getEditionEndIso(edition);
+    expect(iso).toBe(new Date('2026-08-23').toISOString());
+  });
+
+  it('getEditionEndIso returns undefined for a single-day edition with no endTime', () => {
+    const edition = mockEdition({ endTime: undefined });
+    expect(getEditionEndIso(edition)).toBeUndefined();
+  });
+
   it('isUpcomingEdition detects announced status', () => {
     expect(isUpcomingEdition(mockEdition({ status: 'announced' }))).toBe(true);
     expect(isUpcomingEdition(mockEdition({ status: 'completed' }))).toBe(false);
+  });
+
+  it('isUpcomingEdition detects rsvp-open status', () => {
+    expect(isUpcomingEdition(mockEdition({ status: 'rsvp-open' }))).toBe(true);
+  });
+
+  it('isUpcomingEdition returns false for cancelled editions', () => {
+    expect(isUpcomingEdition(mockEdition({ status: 'cancelled' }))).toBe(false);
   });
 
   it('buildEditionThemeCss scopes variables under edition year', () => {
@@ -86,6 +114,72 @@ describe('pereiraTechDay helpers', () => {
     expect(css).toContain('[data-edition-theme="2026"]');
     expect(css).toContain('--ptt-primary: #1f6f73');
     expect(css).not.toContain('body {');
+  });
+
+  it('buildEditionThemeCss emits an optional border variable for light and dark palettes', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+          border: '#d8e4e4',
+        },
+        paletteDark: {
+          primary: '#3ab9c9',
+          accent: '#e3a648',
+          bg: '#0f2a2c',
+          bgElevated: '#1a3a3d',
+          text: '#f4f9f9',
+          textMuted: '#a8bdbf',
+          border: '#2a4548',
+        },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('--ptt-border: #d8e4e4;');
+    expect(css).toContain('--ptt-border: #2a4548;');
+  });
+
+  it('buildEditionThemeCss emits heading transform and tracking when declared', () => {
+    const edition = mockEdition({
+      brandKit: {
+        paletteLight: {
+          primary: '#1f6f73',
+          accent: '#e3a648',
+          bg: '#f4f9f9',
+          bgElevated: '#ffffff',
+          text: '#0f2a2c',
+          textMuted: '#6e8589',
+        },
+        typography: {
+          headingFamily: 'Bebas Neue',
+          headingTransform: 'uppercase',
+          headingTracking: '0.05em',
+        },
+      },
+    });
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('font-family: Bebas Neue;');
+    expect(css).toContain('text-transform: uppercase;');
+    expect(css).toContain('letter-spacing: 0.05em;');
+  });
+
+  it('buildEditionThemeCss stays valid when sectionBackgrounds is set on the edition', () => {
+    const edition = mockEdition({
+      sectionBackgrounds: {
+        about: '/images/pereira-tech-days/2026/about-bg.webp',
+        sponsors: '/images/pereira-tech-days/2026/sponsors-bg.webp',
+      },
+    } as Partial<PereiraTechDay['data']>);
+    const css = buildEditionThemeCss(edition);
+    expect(css).toContain('[data-edition-theme="2026"]');
+    expect(css).toContain('--ptt-primary: #1f6f73');
+    expect(css).not.toContain('sectionBackgrounds');
+    expect(css).not.toContain('about-bg.webp');
   });
 
   it('buildEditionThemeCss includes dark palette when defined', () => {
