@@ -7,7 +7,7 @@ tags:
   - community
   - lessons-learned
 author: sergio-florez
-draft: false
+draft: true
 ---
 
 Pereira Tech Talks lleva corriendo meetups mensuales desde febrero de 2014. En el camino hemos cometido cada error que se puede cometer en una comunidad voluntaria: burnout, scope creep, dependencia de patrocinadores, format drift, fallas en retención de talento, guerras de formato entre organizadores. También hemos hecho algunas cosas bien. Aquí están las cinco lecciones que le daría a la versión de esta comunidad que existe hoy, si pudiera enviárselas de vuelta a febrero de 2014.

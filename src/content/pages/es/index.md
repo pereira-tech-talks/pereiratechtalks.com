@@ -58,6 +58,6 @@ Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón d
 
 - GitHub: [@pereira-tech-talks](https://github.com/pereira-tech-talks)
 - LinkedIn: [Pereira Tech Talks](https://www.linkedin.com/company/pereira-tech-talks/)
-- X (Twitter): [@pereira-tech-talks](https://x.com/pereiratechtalks)
+- X (Twitter): [@pertechtalks](https://x.com/pertechtalks)
 - Instagram: [@pertechtalks](https://www.instagram.com/pertechtalks)
-- Correo: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Correo: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)

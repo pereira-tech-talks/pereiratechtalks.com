@@ -8,11 +8,11 @@ This document is the **canonical inventory** of every official Pereira Tech Talk
 
 | Channel | URL / Handle | Purpose | Frequency |
 |---|---|---|---|
-| **Website** | <https://pereiratechtalks.org> | Source of truth: meetups, events, Pereira Tech Days, blog, slides, speakers, contributors, sponsors. | Real-time |
+| **Website** | <https://v3.pereiratechtalks.org> | Source of truth: meetups, events, Pereira Tech Days, blog, slides, speakers, contributors, sponsors. | Real-time |
 | **Newsletter** | `pereiratechtalks.org/newsletter` | Monthly digest: upcoming meetups, latest talks, blog highlights, vertical news. | Monthly |
 | **Meetup.com** | <https://www.meetup.com/pereira-tech-talks> | RSVPs and event listing for monthly meetups. | Per meetup |
 | **YouTube** | `@pereiratechtalks` | Recorded talks, livestream archives, Pereira Tech Day editions, special features. | Per event + on-demand uploads |
-| **X (Twitter)** | `@pereiratechtalks` | Real-time updates, threaded recaps, speaker spotlights, community amplification. | Daily |
+| **X (Twitter)** | `@pertechtalks` | Real-time updates, threaded recaps, speaker spotlights, community amplification. | Daily |
 | **LinkedIn** | `company/pereira-tech-talks` | Long-form professional updates, sponsor announcements, jobs, speaker spotlights. | Weekly |
 | **Instagram** | `@pereiratechtalks` | Visual recaps, behind-the-scenes, speaker portraits, PTD branding. | Per event |
 | **GitHub** | `github.com/pereira-tech-talks` | Open-source projects, the website itself, community tooling. | As needed |
@@ -38,7 +38,7 @@ These are not public; listed here so AI agents working on the codebase know they
 | Speakers' shared inbox | <speakers@pereiratechtalks.org> | All speaker inquiries / Call for Speakers. |
 | Press inbox | <press@pereiratechtalks.org> | Press inquiries, interview requests. |
 | Conduct inbox | <conduct@pereiratechtalks.org> | Code of Conduct reports — Conduct team only. |
-| General inbox | <hello@pereiratechtalks.org> | Catch-all for anything that doesn't fit above. |
+| General inbox | <pereiratechtalks@gmail.com> | Catch-all for anything that doesn't fit above. |
 
 ## Content flow
 
@@ -69,7 +69,7 @@ When publishing a meetup, blog post, or PTD edition, the rule is:
 
 | Address | What it's for | Owner |
 |---|---|---|
-| <hello@pereiratechtalks.org> | General questions, partnership, anything | Organizer rotation |
+| <pereiratechtalks@gmail.com> | General questions, partnership, anything | Organizer rotation |
 | <speakers@pereiratechtalks.org> | Call for Speakers, speaker logistics | Speakers vertical lead |
 | <sponsors@pereiratechtalks.org> | Sponsorship inquiries, contracts | Sponsorship lead |
 | <press@pereiratechtalks.org> | Press, interviews, media kit requests | Communications lead |
@@ -79,7 +79,7 @@ All addresses route to a small group; expect a reply within 5 working days. Conf
 
 ## Pending operational items
 
-> Some addresses and accounts are still being provisioned for the v3.0.0 launch. The list above represents the **target state**. Until each item ships, the website footer points to the catch-all <hello@pereiratechtalks.org>.
+> Some addresses and accounts are still being provisioned for the v3.0.0 launch. The list above represents the **target state**. Until each item ships, the website footer points to the catch-all <pereiratechtalks@gmail.com>.
 
 - DNS records for all role addresses (`speakers`, `sponsors`, `press`, `conduct`).
 - Newsletter platform decision (likely Resend contact list or Buttondown).

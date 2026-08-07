@@ -61,9 +61,9 @@ const subAfter =
     brochure ? (
       <>
         <div class="ptd-join__bg pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
-        {/* Soft right cream only — art already fades; do not wash the left. */}
+        {/* Soft right cream — dissolve into copy; art spans most of the band. */}
         <div
-          class="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-transparent from-[55%] via-[color-mix(in_srgb,var(--ptt-bg,#fef7f3)_45%,transparent)] via-[78%] to-[var(--ptt-bg,#fef7f3)]"
+          class="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-transparent from-[42%] via-[color-mix(in_srgb,var(--ptt-bg,#fef7f3)_28%,transparent)] via-[68%] to-[var(--ptt-bg,#fef7f3)] to-[88%]"
           aria-hidden="true"
         />
       </>
@@ -126,9 +126,13 @@ const subAfter =
 
 <style is:global>
   .ptd-join--brochure {
-    /* Height tracks a ~half-screen-wide illustration (1673×940) */
-    min-height: clamp(17rem, calc(62vw * 940 / 1673), 32rem);
-    padding: clamp(1.25rem, 2.8vw, 1.75rem) 0 clamp(1.35rem, 3vw, 2rem);
+    /*
+     * Tall enough that height-fill art (~1.78:1) spans most of the viewport
+     * width — ape + viaduct, not a left stub. Content may grow the section;
+     * background uses % height so it always tracks.
+     */
+    min-height: max(18rem, 48vw);
+    padding: clamp(1.1rem, 2.4vw, 1.6rem) 0 clamp(1.1rem, 2.4vw, 1.6rem);
     background: var(--ptt-bg, #fef7f3);
   }
 
@@ -136,19 +140,45 @@ const subAfter =
     background-color: var(--ptt-bg, #fef7f3);
     background-image: var(--ptd-join-bg);
     background-repeat: no-repeat;
-    /* ~half+ of the viewport so the ape reads large on the left */
-    background-size: 62vw auto;
-    background-position: left top;
+    /*
+     * Height-fill + slight overscale: branch flush on the bottom border;
+     * baked cream feather clipped by overflow. Width grows with height so
+     * the monkey reads large across the band.
+     */
+    background-size: auto 114%;
+    background-position: left bottom;
   }
 
-  @media (max-width: 900px) {
+  @media (min-width: 1440px) {
     .ptd-join--brochure {
-      min-height: clamp(15rem, calc(85vw * 940 / 1673), 26rem);
+      min-height: max(22rem, 46vw);
     }
 
     .ptd-join__bg {
-      background-size: 85vw auto;
-      background-position: left top;
+      background-size: auto 118%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .ptd-join--brochure {
+      min-height: max(16rem, 55vw);
+    }
+
+    .ptd-join__bg {
+      background-size: auto 112%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ptd-join--brochure {
+      min-height: max(15rem, 78vw);
+      padding-top: clamp(1.5rem, 5vw, 2.25rem);
+    }
+
+    .ptd-join__bg {
+      /* Stronger overscale on narrow screens so foliage meets the border. */
+      background-size: auto 122%;
+      background-position: left bottom;
     }
   }
 </style>

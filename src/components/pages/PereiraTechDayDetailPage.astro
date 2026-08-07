@@ -24,6 +24,7 @@ import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.
 import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
 import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { formatCalendarDate, formatCalendarDateParts } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
@@ -57,6 +58,7 @@ const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
+const ogImageSrc = edition.data.ogImage ?? heroSrc;
 const upcomingTemplate = isUpcomingEdition(edition);
 const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
 
@@ -129,7 +131,6 @@ const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
   closing: { en: 'Closing', es: 'Cierre' },
 };
 
-const SITE_URL = 'https://pereiratechtalks.org';
 const metaDescription = (description || tagline).slice(0, 160);
 
 const faqs = edition.data.faqs.map((faq) => ({
@@ -161,7 +162,9 @@ const eventJsonLd: Record<string, unknown> = {
         ? 'https://schema.org/MixedEventAttendanceMode'
         : 'https://schema.org/OfflineEventAttendanceMode',
   url: `${SITE_URL}${editionPublicHref}`,
-  image: heroSrc?.startsWith('http') ? heroSrc : `${SITE_URL}${heroSrc}`,
+  image: ogImageSrc?.startsWith('http')
+    ? ogImageSrc
+    : `${SITE_URL}${ogImageSrc}`,
   organizer: {
     '@type': 'Organization',
     name: 'Pereira Tech Talks',
@@ -193,7 +196,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   lang={lang}
   title={title}
   description={metaDescription}
-  image={heroSrc}
+  image={ogImageSrc}
   chrome="ptd-edition"
   ptdYear={year}
   ptdEditions={ptdEditionNav}
@@ -267,7 +270,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           communityLinks={[
             { name: 'PereiraJS', href: 'https://pereira.js.org/' },
             { name: 'Python Pereira', href: 'https://pypereira.co' },
-            { name: 'Pereira Tech Talks', href: 'https://pereiratechtalks.org' },
+            { name: 'Pereira Tech Talks', href: SITE_URL },
             { name: 'Joint Developer', href: 'https://jointdevweb.firebaseapp.com/' },
           ]}
         />

@@ -1,12 +1,11 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
 import { getSpeakers } from '@/lib/speaker';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const speakers = await getSpeakers();

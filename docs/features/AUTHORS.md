@@ -91,11 +91,11 @@ bio:
   en: Co-founder of Pereira Tech Talks. I write about building products, AI agents, and the craft of software engineering.
   es: Cofundador de Pereira Tech Talks. Escribo sobre construcci\u00F3n de productos, agentes de IA y el oficio de la ingenier\u00EDa de software.
 social:
-  x: https://x.com/pereiratechtalks
+  x: https://x.com/pertechtalks
   linkedin: https://www.linkedin.com/company/pereira-tech-talks/
   github: https://github.com/pereira-tech-talks
   instagram: https://www.instagram.com/pertechtalks
-  website: https://pereiratechtalks.org/
+  website: https://v3.pereiratechtalks.org/
 ```
 
 ## Blog Post Integration
@@ -137,8 +137,8 @@ The `author` value must match an existing author slug. Astro's content schema va
   "author": {
     "@type": "Person",
     "name": "Sergio Alexander Florez Galeano",
-    "url": "https://pereiratechtalks.org/about/",
-    "image": "https://pereiratechtalks.org/images/authors/sergio-florez.webp"
+    "url": "https://v3.pereiratechtalks.org/about/",
+    "image": "https://v3.pereiratechtalks.org/images/authors/sergio-florez.webp"
   }
 }
 ```

@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
@@ -41,7 +40,7 @@ export const GET: APIRoute = () => {
         heading: 'Contacto de prensa',
         lines: [
           `- Formulario: ${SITE_URL}/contact/?topic=press`,
-          '- Correo: hello@pereiratechtalks.org',
+          '- Correo: pereiratechtalks@gmail.com',
           '- Para entrevistas, cubrimientos en sitio, fotografía o cualquier solicitud editorial.',
         ],
       },

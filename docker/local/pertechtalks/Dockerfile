@@ -1,5 +1,5 @@
 FROM node:24.18.1-trixie-slim
-LABEL maintainer="hello@pereiratechtalks.org"
+LABEL maintainer="pereiratechtalks@gmail.com"
 
 # System packages (apt requires root)
 RUN apt-get update -y && \

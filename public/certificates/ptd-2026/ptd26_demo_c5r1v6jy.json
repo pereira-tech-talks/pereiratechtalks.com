@@ -1,9 +1,9 @@
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
-    "https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
+    "https://v3.pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
   ],
-  "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_c5r1v6jy.json",
+  "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_c5r1v6jy.json",
   "type": [
     "VerifiableCredential",
     "EventAttendanceCredential"
@@ -11,7 +11,7 @@
   "issuer": "did:web:pereiratechtalks.org",
   "validFrom": "2026-08-25T15:10:00.000Z",
   "credentialSubject": {
-    "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_c5r1v6jy",
+    "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_c5r1v6jy",
     "name": "Jordan Méndez Demo",
     "role": "volunteer",
     "event": {

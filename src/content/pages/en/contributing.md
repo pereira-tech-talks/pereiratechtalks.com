@@ -32,7 +32,7 @@ If you have given talks before, the most multiplicative thing you can do is ment
 
 The verticals (Speaker School, La Biblioteca del Mañana, AI Channel, Monthly Meetups) need stewards — people who take responsibility for their cadence, programming, and direction.
 
-- Talk to any organizer at a meetup, or write to [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org).
+- Talk to any organizer at a meetup, or write to [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com).
 
 ### 4. Help organize events
 
@@ -93,6 +93,6 @@ Contributors are listed at [Contributors](/en/contributors). Speakers appear at 
 
 ## Questions?
 
-- General contact: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- General contact: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 - Code of Conduct: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
 - Form: [Contact us](/en/contact)

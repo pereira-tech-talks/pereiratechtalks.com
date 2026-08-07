@@ -3,7 +3,7 @@ import SlideDeckPage from '@/components/pages/SlideDeckPage.astro';
 import { getDeckSlug, getSlideDecks } from '@/lib/slides';
 
 export async function getStaticPaths() {
-  const decks = await getSlideDecks('en');
+  const decks = await getSlideDecks('es');
   return decks.map((deck) => ({
     params: { slug: getDeckSlug(deck.id) },
     props: { deck },

@@ -1,8 +1,7 @@
 import type { APIRoute } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
@@ -34,7 +33,7 @@ export const GET: APIRoute = () => {
         heading: 'Cómo aplicar',
         lines: [
           `- Envía tu propuesta por el formulario de contacto: ${SITE_URL}/contact/?topic=tech-talk`,
-          '- O escribe a hello@pereiratechtalks.org con asunto "Convocatoria de ponentes"',
+          '- O escribe a pereiratechtalks@gmail.com con asunto "Convocatoria de ponentes"',
           '- Incluye: título propuesto, abstract (150–300 palabras), bio, idioma, formato deseado',
         ],
       },

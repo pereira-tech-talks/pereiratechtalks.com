@@ -14,7 +14,8 @@ import JsonLd from '@/components/JsonLd.astro';
 import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { formatCalendarDate } from '@/lib/dates';
+import { SITE_URL } from '@/lib/constances';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug } from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
@@ -83,7 +84,6 @@ const statusVariant = (
 
 const meetupComLink = (meetup.data as { linkMeetupCom?: string }).linkMeetupCom;
 
-const SITE_URL = 'https://pereiratechtalks.org';
 const eventJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Event',
@@ -147,11 +147,11 @@ if (speakers.length > 0) {
         )
       }
       <div class="relative main-container py-16 sm:py-20 text-white">
-        <Breadcrumbs items={breadcrumbs} baseUrl="https://pereiratechtalks.org" onDark />
+        <Breadcrumbs items={breadcrumbs} baseUrl={SITE_URL} onDark />
         <div class="mt-6 flex items-center gap-3">
           <Badge variant={statusVariant}>{statusLabels[status]}</Badge>
           <time
-            datetime={date.toISOString()}
+            datetime={getCalendarDateString(date)}
             class="text-sm font-semibold uppercase tracking-widest text-ptt-accent dark:text-ptt-accent-dark"
           >
             {dateLabel}

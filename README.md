@@ -9,7 +9,7 @@
 [![Tailwind](https://img.shields.io/badge/Tailwind-4.x-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[Live Site](https://pereiratechtalks.org) · [Architecture](./docs/ARCHITECTURE.md) · [Product Spec](./docs/PRODUCT_SPEC.md) · [Brand Book](./docs/BRAND_GUIDE.md)
+[Live Site](https://v3.pereiratechtalks.org) · [Architecture](./docs/ARCHITECTURE.md) · [Product Spec](./docs/PRODUCT_SPEC.md) · [Brand Book](./docs/BRAND_GUIDE.md)
 
 </div>
 
@@ -185,7 +185,7 @@ Pereira Tech Talks is a community organization. Trademarks (logos, the "Pereira 
 
 ## Contact
 
-- General: <hello@pereiratechtalks.org>
+- General: <pereiratechtalks@gmail.com>
 - Speakers: <speakers@pereiratechtalks.org>
 - Sponsors: <sponsors@pereiratechtalks.org>
 - Press: <press@pereiratechtalks.org>

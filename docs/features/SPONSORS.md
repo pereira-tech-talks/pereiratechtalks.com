@@ -33,6 +33,26 @@ YAML in `src/content/sponsors/{slug}.yaml`:
 1. Add YAML + logos under `public/images/sponsors/`
 2. Set `status: active` or `past`
 3. Keep slug stable if referenced from PTD editions
+4. Prefer a dedicated dark-mode logo (`logo.dark`) — white ink on transparent for monochrome wordmarks
+
+### Dark-mode logos (white ink)
+
+For charcoal/black wordmarks on transparent backgrounds (GitHub, Gorilla Logic):
+
+```bash
+node scripts/generate-sponsor-dark-logos.mjs
+node scripts/generate-sponsor-dark-logos.mjs --only github
+node scripts/generate-sponsor-dark-logos.mjs --src public/images/sponsors/foo.png --out public/images/sponsors/foo-dark.png
+```
+
+For brand marks that must keep accent colors, use the dedicated generators instead:
+
+```bash
+node scripts/generate-ase-utp-dark-logo.mjs
+node scripts/generate-made-for-germany-dark-logo.mjs
+node scripts/generate-aumentada-logos.mjs
+```
+
 
 ## Related
 

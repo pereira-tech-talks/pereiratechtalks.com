@@ -1,12 +1,11 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
+import { SITE_URL } from '@/lib/constances';
 
 import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
 import { getVerticals } from '@/lib/vertical';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const verticals = await getVerticals();
@@ -55,6 +54,7 @@ export const GET: APIRoute = ({ props }) => {
     lang,
     canonical: `${SITE_URL}/en/verticals/${entry.id}`,
     metadata,
+    body: entry.body,
     sections,
   });
 

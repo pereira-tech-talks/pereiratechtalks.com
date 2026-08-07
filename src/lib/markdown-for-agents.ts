@@ -1,7 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
+import { SITE_URL } from '@/lib/constances';
 import { DEFAULT_LANGUAGE, getUrlPrefix, isValidLanguage } from '@/lib/i18n';
-
-const SITE_URL = 'https://pereiratechtalks.org';
 
 /**
  * Site navigation structure shared across all agent markdown outputs.
@@ -94,7 +93,7 @@ const SITE_NAV_SECTIONS: NavSection[] = [
       },
       {
         label: { en: 'X/Twitter', es: 'X/Twitter' },
-        path: 'https://x.com/pereiratechtalks',
+        path: 'https://x.com/pertechtalks',
         external: true,
       },
       {

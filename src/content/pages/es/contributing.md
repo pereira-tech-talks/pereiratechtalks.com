@@ -32,7 +32,7 @@ Si ya has dado charlas, lo más multiplicador que puedes hacer es acompañar a a
 
 Los programas (Speaker School, La Biblioteca del Mañana, AI Channel, Monthly Meetups) necesitan custodios — personas que asuman la responsabilidad de su cadencia, programación y dirección.
 
-- Habla con cualquier organizador en un meetup, o escribe a [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org).
+- Habla con cualquier organizador en un meetup, o escribe a [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com).
 
 ### 4. Ayuda a organizar eventos
 
@@ -93,6 +93,6 @@ Los contribuyentes aparecen en [Contribuyentes](/contributors). Los ponentes en 
 
 ## ¿Preguntas?
 
-- Contacto general: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Contacto general: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 - Código de Conducta: [conduct@pereiratechtalks.org](mailto:conduct@pereiratechtalks.org)
 - Formulario: [Contáctanos](/contact)

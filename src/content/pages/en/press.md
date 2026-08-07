@@ -42,7 +42,7 @@ Need an extra asset? Reach out.
 Interviews, on-site coverage, photography, or editorial requests:
 
 - Form: [Contact — press inquiry](/en/contact/?topic=other&subject=Press%20inquiry)
-- Email: [hello@pereiratechtalks.org](mailto:hello@pereiratechtalks.org)
+- Email: [pereiratechtalks@gmail.com](mailto:pereiratechtalks@gmail.com)
 
 ---
 

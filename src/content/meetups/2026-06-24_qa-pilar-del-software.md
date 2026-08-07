@@ -30,6 +30,8 @@ speakers:
 sponsors:
   - slug: dailybot
     tier: community
+  - slug: aumentada
+    tier: community
   - slug: ase-utp
     tier: community
 status: announced

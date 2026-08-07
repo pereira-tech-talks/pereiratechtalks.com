@@ -7,7 +7,7 @@ tags:
   - community
   - lessons-learned
 author: sergio-florez
-draft: false
+draft: true
 ---
 
 Pereira Tech Talks has been running monthly meetups since February 2014. Along the way we have made every mistake you can make in a volunteer community: burnout, scope creep, sponsor dependence, format drift, talent retention failures, format wars between organizers. We have also done a few things well. Here are the five lessons I would give the version of this community that exists today, if I could send them back to February 2014.

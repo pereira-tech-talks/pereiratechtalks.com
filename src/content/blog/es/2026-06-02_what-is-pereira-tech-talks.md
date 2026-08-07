@@ -7,7 +7,7 @@ tags:
   - community
   - pereira-tech-talks
 author: sergio-florez
-draft: false
+draft: true
 ---
 
 ## Respuesta corta
@@ -64,7 +64,7 @@ El modo de falla por defecto de una comunidad tech latinoamericana es publicar s
 
 Cada recapitulación de meetup, cada slide, cada artículo, cada bio de ponente existe en español real e inglés real. El español es nuestro idioma principal porque vivimos aquí. El inglés es de primera clase porque la mitad de lo que enseñamos y aprendemos pasa en la intersección con la cultura global de ingeniería, y porque quienes se van a roles internacionales pueden seguir contribuyendo de vuelta.
 
-También publicamos endpoints de [Markdown-for-Agents](https://pereiratechtalks.org/index.md) — cada página pública tiene un gemelo `.md` que los agentes de IA pueden leer directamente sin renderizar JavaScript. Esta es una decisión de diseño, no una idea de último momento. Queremos que la comunidad sea descubrible tanto por personas como por los agentes que las personas usarán cada vez más.
+También publicamos endpoints de [Markdown-for-Agents](https://v3.pereiratechtalks.org/index.md) — cada página pública tiene un gemelo `.md` que los agentes de IA pueden leer directamente sin renderizar JavaScript. Esta es una decisión de diseño, no una idea de último momento. Queremos que la comunidad sea descubrible tanto por personas como por los agentes que las personas usarán cada vez más.
 
 ## Por qué importa (la parte que es difícil decir sin sonar a alarde)
 
