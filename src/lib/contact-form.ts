@@ -74,6 +74,13 @@ export const CONTRIBUTION_TYPES = [
 ] as const;
 export type ContributionType = (typeof CONTRIBUTION_TYPES)[number];
 
+export const SPEAKER_SCHOOL_LEVELS = [
+  'beginner',
+  'intermediate',
+  'advanced',
+] as const;
+export type SpeakerSchoolLevel = (typeof SPEAKER_SCHOOL_LEVELS)[number];
+
 export interface ContactFormFields {
   name: string;
   email: string;
@@ -121,6 +128,28 @@ export interface SponsorFormErrors extends ContactFormErrors {
   contactRole: string;
   tierInterest: string;
   contributionType: string;
+}
+
+export interface SpeakerSchoolFormFields {
+  name: string;
+  email: string;
+  experienceLevel: string;
+  goals: string;
+  topicsOfInterest: string;
+  availability: string;
+  priorSpeaking?: string;
+  socialOrLinkedin?: string;
+  message?: string;
+  website?: string;
+}
+
+export interface SpeakerSchoolFormErrors {
+  name: string;
+  email: string;
+  experienceLevel: string;
+  goals: string;
+  topicsOfInterest: string;
+  availability: string;
 }
 
 export const emptyContactFormErrors = (): ContactFormErrors => ({
@@ -291,6 +320,59 @@ export function validateSponsorForm(
     !(CONTRIBUTION_TYPES as readonly string[]).includes(fields.contributionType)
   ) {
     errors.contributionType = messages.requiredField;
+    valid = false;
+  }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+export function validateSpeakerSchoolForm(
+  fields: SpeakerSchoolFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: SpeakerSchoolFormErrors } {
+  const errors: SpeakerSchoolFormErrors = {
+    name: '',
+    email: '',
+    experienceLevel: '',
+    goals: '',
+    topicsOfInterest: '',
+    availability: '',
+  };
+  let valid = true;
+
+  if (!fields.name.trim()) {
+    errors.name = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.email.trim()) {
+    errors.email = messages.requiredField;
+    valid = false;
+  } else if (!isValidContactEmail(fields.email.trim())) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+  if (
+    !fields.experienceLevel.trim() ||
+    !(SPEAKER_SCHOOL_LEVELS as readonly string[]).includes(
+      fields.experienceLevel
+    )
+  ) {
+    errors.experienceLevel = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.goals.trim()) {
+    errors.goals = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.topicsOfInterest.trim()) {
+    errors.topicsOfInterest = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.availability.trim()) {
+    errors.availability = messages.requiredField;
     valid = false;
   }
   if (fields.website?.trim()) {

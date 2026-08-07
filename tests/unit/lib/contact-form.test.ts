@@ -10,6 +10,7 @@ import {
   sanitizeContactText,
   validateCfsForm,
   validateContactForm,
+  validateSpeakerSchoolForm,
   validateSponsorForm,
 } from '@/lib/contact-form';
 
@@ -192,6 +193,37 @@ describe('contact-form', () => {
     });
     expect(composed).toContain('Talk title: Title');
     expect(composed).toContain('Additional notes:');
+  });
+
+  it('validates Speaker School payloads', () => {
+    const ok = validateSpeakerSchoolForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        experienceLevel: 'beginner',
+        goals: 'Ship my first meetup talk',
+        topicsOfInterest: 'Rust, platforms',
+        availability: 'Weeknight evenings',
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const bad = validateSpeakerSchoolForm(
+      {
+        name: '',
+        email: 'not-an-email',
+        experienceLevel: 'expert',
+        goals: '',
+        topicsOfInterest: '',
+        availability: '',
+      },
+      messages
+    );
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.name).toBe('Required');
+    expect(bad.errors.email).toBe('Invalid email');
+    expect(bad.errors.experienceLevel).toBe('Required');
   });
 
   it('picks bilingual ack copy and rate-limits', () => {

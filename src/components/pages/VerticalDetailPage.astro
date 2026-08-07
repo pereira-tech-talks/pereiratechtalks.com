@@ -7,10 +7,11 @@
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import MeetupCard from '@/components/cards/MeetupCard.astro';
+import SpeakerSchoolForm from '@/components/contact/SpeakerSchoolForm.svelte';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
-import { SITE_URL } from '@/lib/constances';
+import { CONTACT_FORM, SITE_URL } from '@/lib/constances';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupsByVertical } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
@@ -29,6 +30,7 @@ const mission = tr(vertical.data.mission, lang);
 const description = tr(vertical.data.description, lang);
 const heroSrc = vertical.data.hero?.src;
 const schedule = tr(vertical.data.schedule, lang);
+const isSpeakerSchool = vertical.id === 'speaker-school';
 
 const meetups = (await getMeetupsByVertical(vertical.id)).slice(0, 6);
 
@@ -80,12 +82,23 @@ const breadcrumbs = [
           )
         }
         <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href={`${prefix}/contact/`}
-            class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark transition hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
-          >
-            {t.verticalsPage.contactCta}
-          </a>
+          {
+            isSpeakerSchool ? (
+              <a
+                href="#speaker-school-form"
+                class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark transition hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              >
+                {t.verticalsPage.applyCta}
+              </a>
+            ) : (
+              <a
+                href={`${prefix}/contact/`}
+                class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark transition hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              >
+                {t.verticalsPage.contactCta}
+              </a>
+            )
+          }
           <a
             href={`${prefix}/channels/`}
             class="inline-flex min-h-[44px] items-center rounded-full border border-white/70 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -126,6 +139,33 @@ const breadcrumbs = [
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      isSpeakerSchool && (
+        <section
+          id="speaker-school-form"
+          class="py-16 sm:py-20 bg-ptt-bg-elevated"
+          aria-labelledby="speaker-school-form-title"
+        >
+          <div class="main-container">
+            <Eyebrow class="mb-3">{t.speakerSchoolForm.formEyebrow}</Eyebrow>
+            <h2
+              id="speaker-school-form-title"
+              class="text-3xl font-bold tracking-tight text-ptt"
+            >
+              {t.speakerSchoolForm.formSectionTitle}
+            </h2>
+            <div class="mt-8 max-w-2xl mx-auto">
+              <SpeakerSchoolForm
+                client:visible
+                lang={lang}
+                apiEndpoint={CONTACT_FORM.apiEndpoint}
+              />
+            </div>
           </div>
         </section>
       )
