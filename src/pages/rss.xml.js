@@ -6,7 +6,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
 export async function GET(context) {
   const allPosts = await getCollection('blog');
   const posts = allPosts.filter(
-    (post) => post.id.startsWith('en/') && isPostVisibleInProduction(post)
+    (post) => post.id.startsWith('es/') && isPostVisibleInProduction(post)
   );
   return rss({
     title: SITE_TITLE,
