@@ -1,6 +1,9 @@
 ---
 /**
  * Sponsor card for community catalog and (optionally) tiered PTD contexts.
+ *
+ * `muted` = past-partner compact tile (smaller logo/name, no description) so
+ * current sponsors keep visual hierarchy on `/sponsors`.
  */
 
 import type { CollectionEntry } from 'astro:content';
@@ -18,7 +21,7 @@ interface Props {
   tier?: CollectionEntry<'sponsors'>['data']['tier'];
   /** Community catalog hides PTD-style tier badges. */
   showTier?: boolean;
-  /** Quieter treatment for past partners. */
+  /** Quieter, compact treatment for past partners. */
   muted?: boolean;
 }
 
@@ -45,6 +48,9 @@ const logoLight = sponsor.data.logo.light;
 const logoDark = sponsor.data.logo.dark;
 const logoAlt = sponsor.data.logo.alt;
 const sameLogo = logoLight === logoDark;
+
+const logoWidth = muted ? 120 : 160;
+const logoHeight = muted ? 40 : 64;
 ---
 
 <a
@@ -52,24 +58,41 @@ const sameLogo = logoLight === logoDark;
   target="_blank"
   rel="noopener noreferrer"
   class:list={[
-    'group flex h-full min-w-0 flex-col rounded-2xl p-4 sm:p-6 transition motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
+    'group flex min-w-0 transition motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
     muted
-      ? 'bg-ptt-bg-elevated/80 shadow-none ring-1 ring-ptt-border/70 hover:ring-ptt-border dark:bg-ptt-bg-dark/40'
-      : 'bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30',
+      ? 'h-full flex-col items-center justify-center gap-2 rounded-xl bg-ptt-bg-elevated/60 px-3 py-4 text-center shadow-none ring-1 ring-ptt-border/50 hover:ring-ptt-border dark:bg-ptt-bg-dark/30 sm:px-4 sm:py-5'
+      : 'h-full flex-col rounded-2xl bg-ptt-bg-elevated p-4 shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30 sm:p-6',
   ]}
 >
-  <div class="flex flex-wrap items-start justify-between gap-3 sm:gap-4">
-    <div class="flex h-16 w-36 max-w-full min-w-0 items-center">
+  <div
+    class:list={[
+      muted
+        ? 'flex h-10 w-full max-w-[7.5rem] items-center justify-center'
+        : 'flex flex-wrap items-start justify-between gap-3 sm:gap-4',
+    ]}
+  >
+    <div
+      class:list={[
+        muted
+          ? 'flex h-10 w-full items-center justify-center'
+          : 'flex h-16 w-36 max-w-full min-w-0 items-center',
+      ]}
+    >
       {
         sameLogo ? (
           <img
             decoding="async"
             src={logoLight}
             alt={logoAlt}
-            width="160"
-            height="64"
+            width={logoWidth}
+            height={logoHeight}
             loading={loading}
-            class="max-h-16 max-w-full object-contain"
+            class:list={[
+              'max-w-full object-contain',
+              muted
+                ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
+                : 'max-h-16',
+            ]}
           />
         ) : (
           <>
@@ -77,30 +100,52 @@ const sameLogo = logoLight === logoDark;
               decoding="async"
               src={logoLight}
               alt={logoAlt}
-              width="160"
-              height="64"
+              width={logoWidth}
+              height={logoHeight}
               loading={loading}
-              class="max-h-16 max-w-full object-contain dark:hidden"
+              class:list={[
+                'max-w-full object-contain dark:hidden',
+                muted
+                  ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
+                  : 'max-h-16',
+              ]}
             />
             <img
               decoding="async"
               src={logoDark}
               alt={logoAlt}
-              width="160"
-              height="64"
+              width={logoWidth}
+              height={logoHeight}
               loading={loading}
-              class="hidden max-h-16 max-w-full object-contain dark:block"
+              class:list={[
+                'hidden max-w-full object-contain dark:block',
+                muted
+                  ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
+                  : 'max-h-16',
+              ]}
             />
           </>
         )
       }
     </div>
-    {showTier && <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>}
+    {
+      !muted && showTier && (
+        <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>
+      )
+    }
   </div>
-  <h3 class="mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary">
+  <h3
+    class:list={[
+      muted
+        ? 'text-xs font-medium leading-snug text-ptt-secondary group-hover:text-ptt'
+        : 'mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary',
+    ]}
+  >
     {sponsor.data.name}
   </h3>
-  <p class="mt-2 text-sm text-ptt-secondary line-clamp-3">
-    {description}
-  </p>
+  {
+    !muted && (
+      <p class="mt-2 text-sm text-ptt-secondary line-clamp-3">{description}</p>
+    )
+  }
 </a>

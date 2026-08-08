@@ -108,11 +108,20 @@ const whyItems = [sp.why.items.meetups, sp.why.items.ptd, sp.why.items.talent];
 
   {
     pastSponsors.length > 0 && (
-      <Section surface="alt" spacing="lg" title={sp.pastTitle}>
-        <p class="mb-10 max-w-3xl text-ptt-secondary">{sp.pastIntro}</p>
-        <ul class="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <Section surface="alt" spacing="sm">
+        {/*
+          Quieter archive chrome vs current sponsors: smaller heading, denser
+          logo tiles (SponsorCard muted), less vertical mass.
+        */}
+        <header class="mb-8 max-w-2xl sm:mb-10">
+          <h2 class="text-xl font-semibold tracking-tight text-ptt sm:text-2xl">
+            {sp.pastTitle}
+          </h2>
+          <p class="mt-2 text-sm text-ptt-secondary sm:text-base">{sp.pastIntro}</p>
+        </header>
+        <ul class="grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {pastSponsors.map((sponsor) => (
-            <li class="opacity-90 transition-opacity motion-reduce:transition-none hover:opacity-100">
+            <li>
               <SponsorCard sponsor={sponsor} lang={lang} showTier={false} muted />
             </li>
           ))}
