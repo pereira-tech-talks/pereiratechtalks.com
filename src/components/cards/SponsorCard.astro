@@ -62,9 +62,7 @@ const logoBoxClass = muted
   : isWideWordmark
     ? 'flex h-16 w-48 max-w-full min-w-0 items-center justify-center'
     : 'flex h-16 w-36 max-w-full min-w-0 items-center justify-center';
-const logoImgClass = muted
-  ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
-  : 'max-h-16 w-auto';
+const logoImgClass = muted ? 'max-h-10' : 'max-h-16 w-auto';
 const logoDisplayWidth = muted ? logoWidth : isWideWordmark ? 192 : logoWidth;
 const logoDisplayHeight = muted ? logoHeight : isWideWordmark ? 46 : logoHeight;
 ---
@@ -135,7 +133,7 @@ const logoDisplayHeight = muted ? logoHeight : isWideWordmark ? 46 : logoHeight;
   <h3
     class:list={[
       muted
-        ? 'text-xs font-medium leading-snug text-ptt-secondary group-hover:text-ptt'
+        ? 'text-xs font-medium leading-snug text-ptt-secondary transition-colors group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark'
         : 'mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary',
     ]}
   >

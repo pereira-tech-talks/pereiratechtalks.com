@@ -15,8 +15,8 @@ mode: in-person
 hero:
   src: "/images/meetups/openclaw-moltys-utp/hero.webp"
   alt:
-    en: "OpenClaw Moltys meetup at Universidad Tecnológica de Pereira"
-    es: "Meetup OpenClaw Moltys en la Universidad Tecnológica de Pereira"
+    en: "Group photo of attendees and presenters at the OpenClaw Moltys meetup in the UTP hall"
+    es: "Foto grupal de asistentes y presentadores del meetup OpenClaw Moltys en el salón de la UTP"
   layout: banner
 heroImage: "/images/meetups/openclaw-moltys-utp/hero.webp"
 verticals:
@@ -59,17 +59,20 @@ gallery:
     alt:
       en: "Attendees seated, several wearing lobster-claw headbands, city visible through the windows"
       es: "Asistentes sentados, varios con diademas de tenazas de langosta, con la ciudad a través de las ventanas"
-  - src: "/images/meetups/openclaw-moltys-utp/memories/06.webp"
+  - src: "/images/meetups/openclaw-moltys-utp/memories/07.webp"
     alt:
       en: "Behind-the-scenes AV setup — two laptops, a camera on a tripod, lobster headband on the table"
       es: "Detrás de cámaras del montaje audiovisual — dos portátiles, cámara en trípode y diadema de langosta sobre la mesa"
-  - src: "/images/meetups/openclaw-moltys-utp/memories/07.webp"
-    alt:
-      en: "Group photo of attendees and presenters at the OpenClaw Moltys meetup in the UTP hall"
-      es: "Foto grupal de asistentes y presentadores del meetup Moltys en el salón de la UTP"
     caption:
-      en: "Behind the scenes, and the full Moltys crew — thanks for coming."
-      es: "Detrás de cámaras, y todo el combo Moltys — gracias por venir."
+      en: "Cables, claws, and a camera — getting the room ready."
+      es: "Cables, tenazas y una cámara — alistando el salón."
+  - src: "/images/meetups/openclaw-moltys-utp/memories/08.webp"
+    alt:
+      en: "Speaker with a lobster-claw headband presenting in front of the whiteboard and a projected chat UI"
+      es: "Ponente con diadema de tenazas de langosta presentando frente al tablero y una UI de chat proyectada"
+    caption:
+      en: "On stage with claws on — the previous cover shot, now in the memories."
+      es: "En el escenario con las tenazas puestas — la portada anterior, ahora en memorias."
 status: completed
 draft: false
 ---
