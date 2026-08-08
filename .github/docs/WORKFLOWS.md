@@ -156,7 +156,15 @@ We keep the light flow because most merges are content/docs and a patch bump is 
 2. **Bypass** the ruleset that requires PRs (or be a GitHub App with that bypass)
 3. Be allowed past any required status checks that would block the bot’s version commit
 
-Without bypass, Prepare release fails with “Changes must be made through a pull request”.
+Without bypass, Prepare release fails with “Changes must be made through a pull request” (GH013).
+
+### Failure modes already hardened
+
+| Symptom | Cause | Mitigation in repo |
+|---------|-------|--------------------|
+| `fatal: tag 'vX.Y.Z' already exists` | A previous run pushed the tag but `main` was rejected | `prepare_release.sh` picks the next free version above both `package.json` and existing `v*` tags |
+| Orphan tag after failed run | `git push --follow-tags` published the tag before/without the branch | Workflow pushes `HEAD:main` first, then the tag; deletes the local tag if the branch push fails |
+| Non-FF / wrong tip | Checkout used the PR head instead of the merge commit | Checkout uses `pull_request.merge_commit_sha` |
 
 ### Job 1: `release_and_publish`
 

@@ -40,7 +40,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # Always release from the merge commit on main — not the PR head tip.
+          # Releasing from the head tip and pushing to main is a non-FF update
+          # after GitHub creates the merge commit, and leaves orphan tags when
+          # the branch push is rejected by rulesets.
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: 0
+          fetch-tags: true
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
           # Keep the automation token for subsequent git push.
           persist-credentials: true
@@ -85,9 +91,18 @@ jobs:
           corepack pnpm run release
           TAG="$(cat .release_tag)"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          # Push the release commit + annotated tag to main.
-          # Requires ruleset bypass for the automation actor.
-          git push --follow-tags origin "HEAD:main"
+          # Push main FIRST, then the tag. `--follow-tags` can publish the tag
+          # even when the branch push is rejected (GH013 ruleset), leaving an
+          # orphan tag that blocks the next release.
+          #
+          # Requires ruleset bypass for the automation actor on main.
+          if ! git push origin "HEAD:main"; then
+            echo "::error::Failed to push release commit to main (often GH013: ruleset requires a PR)."
+            echo "::error::Grant AUTOMATION_GITHUB_TOKEN's actor bypass on the main ruleset, then re-run."
+            git tag -d "${TAG}" || true
+            exit 1
+          fi
+          git push origin "refs/tags/${TAG}"
 
       - name: Publish GitHub Release
         uses: ncipollo/release-action@v1
