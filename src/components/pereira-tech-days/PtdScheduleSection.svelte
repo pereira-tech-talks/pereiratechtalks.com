@@ -83,7 +83,6 @@ const closeModal = () => {
               type="button"
               class="ptd-agenda__card ptd-agenda__card--speaker"
               onclick={() => openSlot(slot)}
-              aria-label={`${slot.title} — ${slot.speaker.name}. ${labels.viewDetail}`}
             >
               <img
                 class="ptd-agenda__photo"

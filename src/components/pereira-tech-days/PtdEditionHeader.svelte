@@ -270,9 +270,9 @@ function closeEditions() {
           aria-haspopup="true"
           aria-controls="ptd-language-menu"
           id="ptd-language-trigger"
-          aria-label={t.ptdPage.languageSwitcher}
           on:click={toggleLanguage}
         >
+          <span class="sr-only">{t.ptdPage.languageSwitcher}</span>
           <svg
             class="hidden h-4 w-4 shrink-0 sm:block"
             viewBox="0 0 24 24"
