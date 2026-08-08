@@ -117,6 +117,33 @@ schedule:
   - time: "08:30"
     endTime: "09:10"
     type: talk
+    speaker: eliana-osorio
+    title:
+      en: "Nobody arrives in tech empty-handed"
+      es: "Nadie llega a la tecnología con las manos vacías"
+    description:
+      en: >-
+        Do you think entering tech means starting from zero? The reality is different.
+        Every profession leaves skills, experiences, and ways of solving problems that
+        also belong in technology. This talk shows how to spot those transferable skills
+        and turn prior experience into an advantage — whether you come from administration,
+        psychology, design, education, accounting, beauty, or any other field. Through real
+        stories and practical tools, we explore why tech needs more than people who can
+        code: it needs different perspectives, collaboration, communication, leadership,
+        and constant learning. Changing careers is not starting from zero — it is
+        discovering the value of everything you already bring.
+      es: >-
+        ¿Crees que para entrar a la industria tecnológica debes empezar desde cero? La
+        realidad es otra. Cada profesión deja habilidades, experiencias y formas de
+        resolver problemas que también tienen un lugar en el mundo de la tecnología. En
+        esta charla descubrirás cómo identificar esas habilidades transferibles y convertir
+        tu experiencia previa en una ventaja para construir una carrera en esta industria,
+        sin importar si vienes de administración, psicología, diseño, educación, contabilidad,
+        belleza o cualquier otra profesión. A través de historias reales y herramientas
+        prácticas, exploraremos por qué la tecnología necesita mucho más que personas que
+        sepan programar: necesita perspectivas diferentes, capaces de colaborar, comunicar,
+        liderar y aprender constantemente. Porque cambiar de carrera no significa empezar
+        de cero: significa descubrir el valor de todo lo que ya traes contigo.
   - time: "09:15"
     endTime: "09:55"
     type: talk
@@ -143,6 +170,21 @@ schedule:
   - time: "10:00"
     endTime: "10:40"
     type: talk
+    speaker: oscar-granada
+    title:
+      en: "Skills for the tech industry in the AI era"
+      es: "Habilidades para industria tech en la era de la IA"
+    description:
+      en: >-
+        Many people think coding is the only skill that matters — and that AI will
+        replace programmers because of it. That is not true: there is much more to
+        the craft. This talk outlines the skill set a web solutions architect needs
+        in the age of AI.
+      es: >-
+        Muchos piensan que codificar es la única habilidad necesaria y por esto la IA
+        va a reemplazar a los programadores, pero esto no es verdad: hay mucho más.
+        Esta charla acota el set de habilidades necesarias para un arquitecto de
+        soluciones web en la era de la IA.
   - time: "10:45"
     endTime: "10:50"
     type: sponsor-break

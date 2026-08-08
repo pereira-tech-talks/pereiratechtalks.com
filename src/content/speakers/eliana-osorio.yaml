@@ -1,0 +1,22 @@
+name: "Eliana Osorio"
+pronouns: she/her
+role:
+  en: "Entrepreneur & Events Director at Aumentada"
+  es: "Emprendedora y Directora de Eventos en Aumentada"
+bio:
+  en: "Entrepreneur and co-founder of Aumentada in Pereira, where she leads events. Computer science student, Pereira Tech Talks organizer, and Speaker School mentor. Driven by creating and learning every day — and by helping people enter tech from other paths without starting from zero."
+  es: "Emprendedora y cofundadora de Aumentada en Pereira, donde dirige eventos. Estudiante de ciencias de la computación, organizadora de Pereira Tech Talks y mentora de la Escuela de Speakers. Motivada por crear y aprender en constante —y por acompañar a quienes llegan a tech desde otras trayectorias a reconocer el valor de lo que ya traen."
+photo:
+  src: "/images/speakers/eliana-osorio.webp"
+  alt:
+    en: "Portrait of Eliana Osorio"
+    es: "Retrato de Eliana Osorio"
+social:
+  linkedin: "https://www.linkedin.com/in/monocuka/"
+  github: "https://github.com/monocuka"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

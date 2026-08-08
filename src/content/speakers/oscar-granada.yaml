@@ -1,15 +1,15 @@
-name: "Óscar Granada"
+name: "Óscar Andrés Granada Baquero"
 role:
-  en: "Web UI Engineer at Globant"
-  es: "Web UI Engineer en Globant"
+  en: "Software Architect at Slalom"
+  es: "Arquitecto de Software en Slalom"
 bio:
-  en: "Óscar is a Web UI Engineer at Globant and one of the long-running voices of the Pereira tech community. He has given foundational talks at Pereira Tech Talks since the earliest PereiraJS days, covering JavaScript fundamentals, Node.js, and the craft of frontend engineering."
-  es: "Óscar es Web UI Engineer en Globant y una de las voces recurrentes de la comunidad tech de Pereira. Ha dado charlas fundacionales en Pereira Tech Talks desde los primeros días de PereiraJS, cubriendo fundamentos de JavaScript, Node.js y el oficio de la ingeniería frontend."
+  en: "Software architect with nearly 19 years in the industry and a graduate of Universidad Tecnológica de Pereira. He has worked across industries and projects, and brings a broad view of software engineering — including the skills that matter most for tech now that LLMs are mainstream."
+  es: "Arquitecto de software con casi 19 años de experiencia en la industria y egresado de la Universidad Tecnológica de Pereira. Ha acumulado experiencia en distintas industrias y proyectos, con una perspectiva amplia de la ingeniería de software —incluidas las habilidades que se han vuelto más relevantes en tech desde la masificación de los LLM."
 photo:
-  src: "/images/speakers/_placeholder.svg"
+  src: "/images/speakers/oscar-granada.webp"
   alt:
-    en: "Portrait of Óscar Granada"
-    es: "Retrato de Óscar Granada"
+    en: "Portrait of Óscar Andrés Granada Baquero"
+    es: "Retrato de Óscar Andrés Granada Baquero"
 talks: []
 location:
   city: "Pereira"
