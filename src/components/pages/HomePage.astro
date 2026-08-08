@@ -113,8 +113,9 @@ const meetupsHeading =
     endDate={ptdCountdown?.endDate}
   />
 
+  {/* Calendar / upcoming meetups — hidden temporarily (restore: drop `false &&`). */}
   {
-    meetupsToShow.length > 0 && (
+    false && meetupsToShow.length > 0 && (
       <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {meetupsToShow.map((item) => (
