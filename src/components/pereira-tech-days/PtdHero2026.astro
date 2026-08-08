@@ -280,13 +280,13 @@ const CREAM = '#fef7f3';
 
       {
         heroIllustration && (
-          <div class="mt-8 w-full lg:hidden" aria-hidden="true">
+          <div class="mt-8 w-full sm:hidden" aria-hidden="true">
             <img
               src="/images/pereira-tech-days/2026/hero-illustration-mobile.webp"
               alt=""
               width="960"
               height="510"
-              class="mx-auto max-h-64 w-auto object-contain sm:max-h-80"
+              class="mx-auto max-h-64 w-auto object-contain"
               loading="eager"
               decoding="async"
             />
@@ -359,7 +359,8 @@ const CREAM = '#fef7f3';
   }
 
   @media (max-width: 1023px) {
-    /* Mobile/tablet use the inline <img>; hide the CSS wash so copy stays crisp. */
+    /* Below lg: no side-art wash (copy stays crisp). Narrow phones get the
+       inline monkey via `sm:hidden`; tablet widths stay illustration-free. */
     .ptd-hero-2026__art {
       display: none;
     }
