@@ -2,6 +2,24 @@
 
 See `AGENTS.md` and `/add-meetup` for the full workflow.
 
+## `/meetups` timeline
+
+One list, not two. `getAllMeetupShowcase()` (`src/lib/meetup.ts`) merges
+`getUpcomingMeetupShowcase()` and `getPastMeetupShowcase()` newest-first, and
+`MeetupsPage.astro` groups the result by year under a single **Todos los
+meetups / All meetups** heading (no eyebrow). Upcoming entries keep the status
+badge `MeetupCard` / `EditionCard` already render (`Próximamente`,
+`RSVP abierto`); completed entries render no badge.
+
+Pereira Tech Day editions are part of that timeline — a PTD is a meetup with a
+bigger stage, and `MeetupShowcaseItem` carries both shapes
+(`{ type: 'meetup' }` / `{ type: 'pereira-tech-day' }`). The upcoming flagship
+is folded in only when no regular meetup already covers its calendar month, so
+August 2026 shows the edition card instead of a duplicate. Keeping editions in
+this list is what gives every meetup — PTD included — one obvious path to its
+speakers, talks, and sponsors. See
+[Pereira Tech Days](./PEREIRA_TECH_DAYS.md).
+
 ## Speakers on flyers (mandatory mapping)
 
 Meetup cover/hero images almost always print the speaker roster. Empty `speakers: []` is a defect when the flyer names people.
