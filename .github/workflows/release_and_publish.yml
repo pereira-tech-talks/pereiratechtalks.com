@@ -1,5 +1,20 @@
 name: Release and Publish
 
+# Auto-release on every merge to main:
+# 1) bump package.json patch
+# 2) commit + tag as the Pereira Tech Talks bot
+# 3) push with AUTOMATION_GITHUB_TOKEN (must bypass rulesets on main)
+# 4) create a GitHub Release
+#
+# Why not release-please / semantic-release yet?
+# This site ships content frequently and uses a simple always-patch bump.
+# PR-based tools (release-please) are excellent when you want reviewable
+# release PRs and Conventional Commit–driven bumps; we keep the lighter
+# merge→patch flow here and document the trade-off in WORKFLOWS.md.
+#
+# Branch protection: AUTOMATION_GITHUB_TOKEN (or a GitHub App) must be
+# allowed to bypass "require pull request" on main for the version commit.
+
 on:
   pull_request:
     branches:
@@ -8,139 +23,95 @@ on:
       - closed
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Never cancel an in-flight release (mid-push / mid-tag is unsafe).
+  group: release-and-publish-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: read
 
 jobs:
-  check_pr_size_label:
-    if: github.event.pull_request.merged == true
-    name: 'Check PR Size Label'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Step 1 - Check pr size label
-        id: check_pr_size_label_step
-        env:
-          ENV_LABELS: ${{ toJSON(github.event.pull_request.labels) }}
-          SIZE_LABELS: >-
-            "Size - XS","Size - S","Size - M","Size - L","Size - XL","Size - XXL"
-        run: |
-          IFS=',' read -ra SIZE_LABELS_ARR <<< "$SIZE_LABELS"
-          # Remove the quotes from SIZE_LABELS_ARR
-          SIZE_LABELS_ARR=("${SIZE_LABELS_ARR[@]//\"}")
-
-          # Get PR Labels
-          FOUND_LABELS_JSON=$(echo "$ENV_LABELS" | jq -r '.[] | .name')
-
-          readarray -t FOUND_LABELS <<<"$FOUND_LABELS_JSON"
-
-          echo "FOUND LABELS:"
-          printf '%s\n' "${FOUND_LABELS[@]}"
-
-          # Check if any of the labels in FOUND_LABELS is in SIZE_LABELS_ARR
-          SIZE_LABEL_FOUND=''
-          for found_label in "${FOUND_LABELS[@]}"; do
-            for size_label in "${SIZE_LABELS_ARR[@]}"; do
-              if [[ "$found_label" == "$size_label" ]]; then
-                SIZE_LABEL_FOUND=$found_label
-                echo "Label 'SIZE_LABEL_FOUND' found in SIZE_LABELS"
-              fi
-            done
-          done
-
-          SIZE_LABEL_FOUND_EMOJI="❓"
-          if [ "$SIZE_LABEL_FOUND" == "Size - XS" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🟢"
-          elif [ "$SIZE_LABEL_FOUND" == "Size - S" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🟢"
-          elif [ "$SIZE_LABEL_FOUND" == "Size - M" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🟡"
-          elif [ "$SIZE_LABEL_FOUND" == "Size - L" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🟠"
-          elif [ "$SIZE_LABEL_FOUND" == "Size - XL" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🔴"
-          elif [ "$SIZE_LABEL_FOUND" == "Size - XXL" ]; then
-            SIZE_LABEL_FOUND_EMOJI="🔴"
-          fi
-          SIZE_LABEL_FOUND_RESULT="$SIZE_LABEL_FOUND_EMOJI $SIZE_LABEL_FOUND"
-          echo "size_label_found=$SIZE_LABEL_FOUND_RESULT" >> $GITHUB_OUTPUT
-
-    outputs:
-      size_label_found: ${{ steps.check_pr_size_label_step.outputs.size_label_found }}
-
   release_and_publish:
-    needs: check_pr_size_label
+    if: github.event.pull_request.merged == true
     name: 'Release and Publish'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          fetch-depth: '30'
+          fetch-depth: 0
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-      - uses: actions/setup-node@v4
+          # Keep the automation token for subsequent git push.
+          persist-credentials: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '24.15.0'
-          registry-url: https://registry.npmjs.org/
-      - name: Step 0 - 📁 Get pnpm store path
+
+      - name: Get pnpm store path
         id: pnpm-store
         run: |
           STORE_PATH=$(corepack pnpm store path --silent)
           echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
-      - name: Step 0a - 📁 Cache pnpm store
+
+      - name: Cache pnpm store
         uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Step 1 - ⚙️ Setup GitHub Config
+
+      - name: Configure git identity
+        env:
+          RELEASE_BOT_NAME: Pereira Tech Talks
+          RELEASE_BOT_EMAIL: pereiratechtalks@gmail.com
         run: |
-          git config user.name "Sergio Alexander Florez Galeano"
-          git config user.email "pereiratechtalks@gmail.com"
+          git config user.name "${RELEASE_BOT_NAME}"
+          git config user.email "${RELEASE_BOT_EMAIL}"
           git config advice.skippedCherryPicks false
-      - name: Step 2 - 📄 Set GitHub release content "BODY" env var
-        run: |
-          bash .github/scripts/get_github_release_log.sh
-          if [[ ! -f git_logs_output.txt ]]; then
-            echo "⚠️ No description found for release body content."
-            exit 1
-          fi
-      - name: Step 3 - 🔄 Prepare release
+
+      - name: Build release notes
+        run: bash .github/scripts/get_github_release_log.sh
+
+      - name: Prepare release (bump, commit, tag)
+        id: prepare
+        env:
+          RELEASE_BOT_NAME: Pereira Tech Talks
         run: |
           corepack pnpm install --frozen-lockfile
           corepack pnpm run release
-          git push --follow-tags origin main
-      - name: Step 4 - 🏷️ Set GitHub release "TAG" env vars
-        run: |
-          GITHUB_RELEASE_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          if [[ -z $GITHUB_RELEASE_TAG ]]; then
-            echo "⚠️ No release tag found."
-            exit 1
-          fi
-          echo "::set-env name=GITHUB_RELEASE_TAG::$GITHUB_RELEASE_TAG"
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      - name: Step 5 - 🚀 Publish GitHub release
+          TAG="$(cat .release_tag)"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          # Push the release commit + annotated tag to main.
+          # Requires ruleset bypass for the automation actor.
+          git push --follow-tags origin "HEAD:main"
+
+      - name: Publish GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          name: Release ${{ env.GITHUB_RELEASE_TAG }}
-          tag: ${{ env.GITHUB_RELEASE_TAG }}
+          name: Release ${{ steps.prepare.outputs.tag }}
+          tag: ${{ steps.prepare.outputs.tag }}
           bodyFile: git_logs_output.txt
           token: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
-
-    outputs:
-      package_version: ${{ steps.publish_npm_package.outputs.package_version }}
+          # Idempotent if the workflow is re-run after a partial success.
+          allowUpdates: true
+          makeLatest: true
 
   cleanup_caches:
     needs: release_and_publish
+    if: success()
     name: 'Cleanup caches'
     runs-on: ubuntu-latest
     steps:
-      - name: Step 1 - 🗑️ Trigger cleanup caches workflow
+      - name: Trigger cleanup caches workflow
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
         run: |
-          curl --location "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" \
-            --header "Authorization: token ${{ secrets.AUTOMATION_GITHUB_TOKEN }}" \
-            --header "Content-Type: application/json" \
-            --data '{
-                "event_type": "cleanup_caches",
-                "client_payload": {}
-            }'
+          gh api \
+            --method POST \
+            "repos/${GITHUB_REPOSITORY}/dispatches" \
+            -f event_type='cleanup_caches' \
+            -f 'client_payload={}'

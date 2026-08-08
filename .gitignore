@@ -58,3 +58,8 @@ spanish.png
 
 # Playwright ephemeral test output
 test-results/
+
+# CI release scratch files (written by GitHub Actions release scripts)
+.release_tag
+git_logs_output.txt
+packages_upgrades_output.txt

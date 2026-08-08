@@ -9,6 +9,8 @@
 # bump only touches package.json and is safe regardless of untracked state.
 set -euo pipefail
 
+BOT_NAME="${RELEASE_BOT_NAME:-Pereira Tech Talks}"
+
 if ! git diff --quiet HEAD -- .; then
   echo "Tracked files have uncommitted changes. Refusing to prepare a release."
   git status --short --untracked-files=no
@@ -24,7 +26,7 @@ fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
 console.log(pkg.version);
 ")
 TAG="v${VERSION}"
-RELEASE_MESSAGE="[🤖 Sergio Alexander Florez Galeano] New release to ${TAG} launched 🚀"
+RELEASE_MESSAGE="[🤖 ${BOT_NAME}] New release to ${TAG} launched 🚀"
 
 git add package.json
 if [[ -f "pnpm-lock.yaml" ]]; then
@@ -38,3 +40,6 @@ fi
 
 git commit -m "${RELEASE_MESSAGE}"
 git tag -a "${TAG}" -m "${TAG}"
+
+echo "Prepared release ${TAG}"
+echo "${TAG}" > .release_tag

@@ -1,14 +1,39 @@
-git log --pretty=oneline | sed 's/[^ ]* *//' > git_logs.txt
+#!/bin/bash
+# Build release notes from commits since the previous release tag.
+# Falls back to scanning commit subjects until the previous automation
+# release commit when no prior tag exists.
+set -euo pipefail
 
-if [[ -f "git_logs_output.txt" ]]; then
-  rm git_logs_output.txt
+OUT="git_logs_output.txt"
+rm -f "${OUT}"
+
+LAST_TAG="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+
+if [[ -n "${LAST_TAG}" ]]; then
+  RANGE="${LAST_TAG}..HEAD"
+  mapfile -t LINES < <(git log "${RANGE}" --pretty=format:'%s' --no-merges)
+else
+  mapfile -t LINES < <(git log --pretty=format:'%s' --no-merges)
 fi
 
-while read text_line; do
-  if [[ "$text_line" =~ "[🤖 Sergio Alexander Florez Galeano] New release to v" ]]; then
-    break
+count=0
+for text_line in "${LINES[@]}"; do
+  # Stop / skip automation release commits (current + legacy author names).
+  if [[ "${text_line}" =~ New\ release\ to\ v ]]; then
+    if [[ -z "${LAST_TAG}" ]]; then
+      break
+    fi
+    continue
   fi
-  if [[ ! "$text_line" =~ "Merge branch 'main'" ]] && [[ ! "$text_line" =~ "Merge pull request" ]]; then
-    echo "🚩 $text_line" >> git_logs_output.txt
+  if [[ "${text_line}" =~ ^Merge\ (branch|pull\ request) ]]; then
+    continue
   fi
-done < git_logs.txt
+  echo "- ${text_line}" >> "${OUT}"
+  count=$((count + 1))
+done
+
+if [[ "${count}" -eq 0 ]]; then
+  echo "- Maintenance release" > "${OUT}"
+fi
+
+echo "Wrote ${count} changelog entries to ${OUT}"
