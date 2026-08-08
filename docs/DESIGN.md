@@ -188,8 +188,9 @@ theme and stays on the **global PTT palette** — never an edition kit.
   (no emoji), `bg-ptt-bg-elevated` + token borders. Icon/fab transitions are
   disabled under `prefers-reduced-motion: reduce` (see `global.css`).
 - **PTD edition pages** — `EditionScope` skins only the edition body. Edition
-  detail routes use `chrome="ptd-edition"` (`PtdEditionHeader`: current year +
-  previous editions) instead of the global Meetups/Blog nav; footer stays
+  detail routes use `chrome="ptd-edition"` (`PtdEditionHeader`: `PTD {year}` +
+  in-page anchors + previous editions + language switcher) instead of the
+  global Meetups/Blog nav; footer stays
   global but the theme is locked (no ThemeToggle; 2024 dark / 2026 light).
   See Per-edition theming below.
 

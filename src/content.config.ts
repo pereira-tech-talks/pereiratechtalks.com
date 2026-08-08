@@ -414,21 +414,38 @@ const pereiraTechDays = defineCollection({
     schedule: z
       .array(
         z.object({
+          /** Slot start in 24h `HH:mm` (site timezone). Rendered as 12h AM/PM. */
           time: z.string(),
+          /** Optional slot end in 24h `HH:mm`, used for the duration pill. */
+          endTime: z.string().optional(),
           talkSlug: z.string().optional(),
           title: i18nStringOptional,
+          /** Abstract shown inside the speaker modal (falls back to the talk entry). */
+          description: i18nStringOptional,
+          /**
+           * Speaker slug for a revealed session. Session-type slots without a
+           * speaker render as a numbered "to be revealed" placeholder card.
+           */
+          speaker: z.string().optional(),
           type: z.enum([
             'talk',
             'keynote',
             'lightning',
             'panel',
             'break',
+            'sponsor-break',
             'open-doors',
+            'registration',
+            'staff',
+            'opening',
+            'raffle',
             'closing',
           ]),
         })
       )
       .default([]),
+    /** Marks the published agenda as tentative (times/speakers may still change). */
+    scheduleTentative: z.boolean().default(false),
     keynotes: z.array(z.string()).default([]),
     // Legacy entries are speaker slugs only; newer entries carry a title-first
     // payload `{ speaker, title }` to support the 2024 photocopy UI (Task 9).

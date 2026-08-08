@@ -322,7 +322,7 @@ Muted:         #6E8589 light · #8FA3A6 dark → text-ptt-muted (large text only
 - Every UI element supports light + dark via the auto-themed `--ptt-*` tokens.
 - Do not use `text-gray-400` / `text-gray-500` / dark variants for body text.
 - Per-edition styles only apply inside `[data-edition-theme]` — never globally.
-- Edition detail pages use PTD chrome (`PtdEditionHeader`: year + previous editions); theme is locked per edition (no ThemeToggle; dark for 2024, light for 2026) so the footer matches.
+- Edition detail pages use PTD chrome (`PtdEditionHeader`: `PTD {year}` + in-page anchors + previous editions + language switcher); theme is locked per edition (no ThemeToggle; dark for 2024, light for 2026) so the footer matches.
 - Content must exist in both English and Spanish.
 
 ### Checklist for new UI work

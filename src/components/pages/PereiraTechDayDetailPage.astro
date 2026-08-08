@@ -21,6 +21,8 @@ import PtdJoinSection from '@/components/pereira-tech-days/PtdJoinSection.astro'
 import PtdKeynoteQuoteCard from '@/components/pereira-tech-days/PtdKeynoteQuoteCard.astro';
 import PtdLightningSection from '@/components/pereira-tech-days/PtdLightningSection.astro';
 import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.astro';
+import PtdScheduleSection from '@/components/pereira-tech-days/PtdScheduleSection.svelte';
+import PtdSpeakersSection from '@/components/pereira-tech-days/PtdSpeakersSection.svelte';
 import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
 import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -40,6 +42,7 @@ import {
   isUpcomingEdition,
   normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
+import { buildScheduleView, getScheduleSpeakerSlugs } from '@/lib/ptdSchedule';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent } from '@/lib/talk';
@@ -125,14 +128,39 @@ const communities = edition.data.communities;
 
 const { Content } = await render(edition);
 
-const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
-  talk: { en: 'Talk', es: 'Charla' },
-  keynote: { en: 'Keynote', es: 'Keynote' },
-  lightning: { en: 'Lightning', es: 'Relámpago' },
-  panel: { en: 'Panel', es: 'Panel' },
-  break: { en: 'Break', es: 'Pausa' },
-  'open-doors': { en: 'Doors open', es: 'Apertura de puertas' },
-  closing: { en: 'Closing', es: 'Cierre' },
+/**
+ * Agenda view model. Session slots (talk/keynote/panel) drive both the
+ * timeline and the line-up grid, so a reveal only has to be authored once in
+ * the edition YAML.
+ */
+const scheduleSpeakers = await getSpeakersBySlugs(
+  getScheduleSpeakerSlugs(edition.data.schedule)
+);
+const scheduleSlots = buildScheduleView(edition.data.schedule, {
+  lang,
+  urlPrefix: prefix,
+  speakers: scheduleSpeakers,
+  pendingNameTemplate: t.schedulePendingSpeaker,
+  pendingTitleLabel: t.scheduleAbstractPending,
+});
+const sessionSlots = scheduleSlots.filter((slot) => slot.session);
+
+/** Header anchor — only offered once the edition actually has an agenda. */
+const scheduleAnchors =
+  upcomingTemplate && scheduleSlots.length > 0
+    ? [{ href: '#schedule', label: t.scheduleAnchor }]
+    : [];
+
+const scheduleLabels = {
+  tentative: t.scheduleTentativeBadge,
+  tentativeNote: t.scheduleTentativeNote,
+  toBeRevealed: t.scheduleToBeRevealed,
+  viewDetail: t.scheduleViewDetail,
+  close: t.scheduleModalClose,
+  about: t.scheduleModalAbout,
+  session: t.scheduleModalSession,
+  profile: t.scheduleModalProfile,
+  abstractPending: t.scheduleAbstractPending,
 };
 
 const metaDescription = (description || tagline).slice(0, 160);
@@ -205,6 +233,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   ptdYear={year}
   ptdEditions={ptdEditionNav}
   ptdChromeVariant={upcomingTemplate ? 'light' : 'dark'}
+  ptdAnchors={scheduleAnchors}
 >
   <JsonLd data={eventJsonLd} />
   <style is:inline set:html={themeCss}></style>
@@ -243,6 +272,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           targetDate={startIso}
           endDate={endIso}
           registrationUrl={edition.data.linkMeetupCom}
+          scheduleAnchor={scheduleAnchors[0]?.href}
         />
       ) : (
         <PtdHero2024
@@ -282,6 +312,39 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
+      /**
+       * Upcoming-only: tentative agenda + line-up. Both read the same
+       * `schedule` slots, so revealing a speaker in YAML updates the timeline
+       * and the grid at once. Past editions keep Ponentes + Lightning instead.
+       */
+    }
+    {
+      upcomingTemplate && scheduleSlots.length > 0 && (
+        <PtdScheduleSection
+          client:visible
+          title={t.schedule}
+          eyebrow={t.scheduleEyebrow}
+          slots={scheduleSlots}
+          tentative={edition.data.scheduleTentative}
+          labels={scheduleLabels}
+        />
+      )
+    }
+
+    {
+      upcomingTemplate && sessionSlots.length > 0 && (
+        <PtdSpeakersSection
+          client:visible
+          title={t.speakers}
+          eyebrow={t.speakersEyebrow}
+          subtitle={t.speakersUpcomingSubtitle}
+          slots={sessionSlots}
+          labels={{ ...scheduleLabels, revealSoon: t.speakersRevealSoon }}
+        />
+      )
+    }
+
+    {
       /* Past-only: Ponentes (keynote quote cards) */
     }
     {
@@ -310,13 +373,30 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
-      lightningSpeakers.length > 0 && (
+      /**
+       * Lightning talks: past editions only render when they actually had
+       * them; the upcoming edition always renders, falling back to ghost
+       * cards while the line-up is unannounced.
+       */
+    }
+    {
+      (lightningSpeakers.length > 0 || upcomingTemplate) && (
         <PtdLightningSection
           lang={lang}
           title={t.lightningTitle}
           tagline={t.lightningTagline}
           talks={normalizedLightningTalks}
           speakers={lightningSpeakers}
+          pending={
+            upcomingTemplate
+              ? {
+                  message: t.lightningPendingMessage,
+                  cardLabel: t.lightningPendingCard,
+                  ctaLabel: t.lightningPendingCta,
+                  ctaHref: '#pricing',
+                }
+              : undefined
+          }
         />
       )
     }
@@ -342,40 +422,6 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           partnerships={edition.data.extraPartnerships}
           sectionBg={sectionBgs.pricing}
         />
-      )
-    }
-
-    {
-      /**
-       * Upcoming-only: full agenda. Past editions soft-hide the schedule
-       * (data stays in YAML for record-keeping) — legacy 2024 has no
-       * schedule section; Ponentes + Lightning cover it instead.
-       */
-    }
-    {
-      upcomingTemplate && edition.data.schedule.length > 0 && (
-        <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]">
-          <div class="main-container">
-            <h2 class="mb-8 text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.schedule}</h2>
-            <ol class="space-y-3">
-              {edition.data.schedule.map((slot) => (
-                <li class="flex items-start gap-4 rounded-xl bg-[var(--ptt-bg)] p-4 ring-1 ring-[var(--ptt-border)]">
-                  <time class="w-16 shrink-0 font-mono text-sm font-semibold text-[var(--ptt-primary)]">
-                    {slot.time}
-                  </time>
-                  <div class="flex-1">
-                    <p class="text-xs font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)]">
-                      {scheduleTypeLabels[slot.type]?.[lang] ?? slot.type}
-                    </p>
-                    <p class="mt-0.5 text-base font-medium text-[var(--ptt-text)]">
-                      {slot.title ? tr(slot.title, lang) : slot.talkSlug}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
       )
     }
 

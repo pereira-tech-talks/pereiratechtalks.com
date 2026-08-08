@@ -6,7 +6,7 @@ The **Pereira Tech Day** (PTD) collection powers the annual flagship conference'
 
 - **Collection:** `pereiraTechDays` — one file per edition in `src/content/pereiraTechDays/{year}.{yaml,json,md,mdx}`.
 - **Orchestrator:** `src/components/pages/PereiraTechDayDetailPage.astro` — resolves the edition, decides upcoming vs. past, and composes every section.
-- **Theming:** `EditionScope` (`src/components/pereira-tech-days/EditionScope.astro`) scopes the edition's `brandKit` under `[data-edition-theme="{year}"]`. Edition pages use a **dedicated PTD chrome** (`chrome="ptd-edition"` on `MainLayout`): `PtdEditionHeader` shows the current year + “Previous editions” dropdown instead of the global Meetups/Blog nav. **No theme toggle** on edition pages — the surface is locked (`ptdChromeVariant`: 2024 dark / 2026 light), including the footer via a forced `html.dark` (or light) class. See [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days).
+- **Theming:** `EditionScope` (`src/components/pereira-tech-days/EditionScope.astro`) scopes the edition's `brandKit` under `[data-edition-theme="{year}"]`. Edition pages use a **dedicated PTD chrome** (`chrome="ptd-edition"` on `MainLayout`): `PtdEditionHeader` shows `PTD {year}`, optional in-page anchors (e.g. Cronograma), a “Previous editions” dropdown, and a language switcher instead of the global Meetups/Blog nav. **No theme toggle** on edition pages — the surface is locked (`ptdChromeVariant`: 2024 dark / 2026 light), including the footer via a forced `html.dark` (or light) class. See [Brand Guide § Per-edition brand kits](../BRAND_GUIDE.md#per-edition-brand-kits-pereira-tech-days).
 - **Legacy visual parity:** the **2026 upcoming** landing is an audited cream/coral/navy photocopy of legacy [`/pereira-tech-day/`](https://pereiratechtalks.org/pereira-tech-day/) (discrete countdown cards, tree-circle sponsors, always-open FAQ grid, illustration-forward Join). The **2024 past** landing remains the dark photocopy of `/pereira-tech-day/2024/`. Both keep v3 architecture (`EditionScope`, status-based branching via `getUpcomingLandingChrome()`, subscribe API, diploma FAQ links). Chrome (header/footer) stays global PTT.
 
 ## Routes
@@ -48,7 +48,8 @@ const pereiraTechDays = defineCollection({
       faqs: z.string().optional(),
       join: z.string().optional(),
     }).optional(),
-    schedule: z.array(scheduleSlot).default([]),
+    schedule: z.array(scheduleSlot).default([]),        // see "Agenda (`schedule`)" below
+    scheduleTentative: z.boolean().default(false),      // renders the "Tentativo" pill + note
     keynotes: z.array(z.string()).default([]),          // speaker slugs
     lightningTalks: z.array(z.union([
       z.string(),                                        // legacy: speaker slug only
@@ -70,6 +71,46 @@ const pereiraTechDays = defineCollection({
   }),
 });
 ```
+
+### Agenda (`schedule`)
+
+Each slot is one row of the timeline rendered by `PtdScheduleSection.svelte`:
+
+```typescript
+z.object({
+  time: z.string(),                 // 24h "HH:mm" — rendered as 12h AM/PM
+  endTime: z.string().optional(),   // 24h "HH:mm" — drives the duration pill
+  type: z.enum([
+    'talk', 'keynote', 'panel',                       // session slots (clickable)
+    'lightning', 'break', 'sponsor-break',
+    'open-doors', 'registration', 'staff',
+    'opening', 'raffle', 'closing',                   // logistics slots (static)
+  ]),
+  title: i18nStringOptional,        // talk title, or the logistics slot name
+  description: i18nStringOptional,  // abstract shown inside the modal
+  speaker: z.string().optional(),   // speaker slug — omit until the reveal
+  talkSlug: z.string().optional(),  // optional link to a `talks` entry
+})
+```
+
+**Reveal workflow.** `talk` / `keynote` / `panel` are *session* slots. A session
+slot **without** `speaker` renders as a numbered placeholder — `Ponente 3` /
+`Speaker 3` — in both the timeline and the line-up grid, so the whole day is
+publishable before the line-up is locked. Numbering counts session slots only,
+in chronological order, so revealing an earlier speaker never renumbers the
+later placeholders. To reveal someone: add their `src/content/speakers/{slug}.yaml`
+entry, then set `speaker`, `title`, and `description` on that slot. Nothing else
+changes.
+
+`scheduleTentative: true` adds the *Tentativo / Tentative* pill and the
+"times may still change" note above the timeline.
+
+**Derived UI.** `src/lib/ptdSchedule.ts` turns the raw slots into serializable
+view models (`buildScheduleView`) that both Svelte islands consume — the
+timeline and the speakers grid read the *same* array, so they cannot drift.
+`getScheduleSpeakerSlugs()` collects the slugs the page needs to resolve; time
+formatting (`formatSlotTime`) and durations (`getSlotDurationMinutes`) live
+there too, covered by `tests/unit/lib/ptdSchedule.test.ts`.
 
 ### `sectionBackgrounds`
 
@@ -184,10 +225,11 @@ export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
 |---|---|
 | `PtdHero2026` | `PtdHero2024` |
 | About (`PtdAboutSection`) | Ponentes — keynote quote cards (`PtdKeynoteQuoteCard`) * |
-| Lightning talks (`PtdLightningSection`) * | Lightning talks (`PtdLightningSection`) * |
+| Cronograma (`PtdScheduleSection`) * | — (soft-hidden; data stays in YAML) |
+| Ponentes (`PtdSpeakersSection`) * | — |
+| Lightning talks (`PtdLightningSection`, ghost cards when unannounced) | Lightning talks (`PtdLightningSection`) * |
 | Memories (`PtdGalleryCarousel`, `mode="carousel"`) * | Memories (`PtdGalleryCarousel`, `mode="marquee"`) * |
 | Pricing (`PtdPricingSection`) * | — |
-| Schedule (full agenda) * | — (soft-hidden; data stays in YAML) |
 | Sponsors (`PtdSponsorsShowcase`) * | Sponsors (`PtdSponsorsShowcase`) * |
 | Organiza (`PtdCommunitiesOrganiza`) * | Organiza (`PtdCommunitiesOrganiza`) * |
 | Organizadores / Colaboradores (`PtdTeamGrid` × 2) * | Organizadores / Colaboradores (`PtdTeamGrid` × 2) * |
@@ -209,7 +251,7 @@ Do not add a third template variant or branch new sections on `edition.data.year
 
 `EditionScope.astro` wraps its slot in `<div data-edition-theme={year} class="ptd-edition-scope bg-ptt-bg text-ptt">`. `buildEditionThemeCss(edition)` generates a scoped CSS block (`[data-edition-theme="{year}"] { --ptt-primary: ...; }`, plus a `.dark [data-edition-theme="{year}"] { ... }` block when `paletteDark` is set) that `PereiraTechDayDetailPage.astro` inlines via `<style is:inline set:html={themeCss}>` **before** `<EditionScope>`, so the palette is present at first paint (no FOUC).
 
-**Chrome rule:** `MainLayout` chrome renders **outside** `EditionScope` (siblings, not descendants). On edition detail routes, pass `chrome="ptd-edition"` so the global PTT header is replaced by `PtdEditionHeader` (site logo + `Pereira Tech Day {year}` + previous-editions disclosure). Footer stays global but follows the edition's locked theme (`ptdChromeVariant` forces `html.dark` for dark editions / removes it for light). Theme toggle is **omitted** on these routes. Never move chrome inside `EditionScope`, and never set `--ptt-*` tokens outside `global.css` or an `[data-edition-theme]` scope (no inline `style="--ptt-primary: ..."` on individual components).
+**Chrome rule:** `MainLayout` chrome renders **outside** `EditionScope` (siblings, not descendants). On edition detail routes, pass `chrome="ptd-edition"` so the global PTT header is replaced by `PtdEditionHeader` (site logo + `PTD {year}` + optional in-page anchors + previous-editions disclosure + language switcher). Pass in-page anchors via `MainLayout`'s `ptdAnchors` prop — the detail page uses it for `#schedule`, and only when the edition actually has an agenda. Footer stays global but follows the edition's locked theme (`ptdChromeVariant` forces `html.dark` for dark editions / removes it for light). Theme toggle is **omitted** on these routes. Never move chrome inside `EditionScope`, and never set `--ptt-*` tokens outside `global.css` or an `[data-edition-theme]` scope (no inline `style="--ptt-primary: ..."` on individual components).
 
 ## Component map
 
@@ -233,7 +275,11 @@ Removed with the hub index. Public entry is now the singular landing + year arch
 | `PtdCommunitiesOrganiza.astro` | Astro | Both | Organiza logo tiles; upcoming adds subtitle + footer dots |
 | `PtdTeamGrid.astro` | Astro | Both | Square+LinkedIn (upcoming) or circular (past); titled Organizadores sibling section |
 | `PtdKeynoteQuoteCard.astro` | Astro | Past | Bio blockquote → rule → circular photo/name/role footer (replaces `SpeakerCard` for past keynotes) |
-| `PtdLightningSection.astro` | Astro | Both | Title-first lightning talk cards with speaker footer; consumes `normalizeLightningTalks()` output |
+| `PtdLightningSection.astro` | Astro | Both | Title-first lightning talk cards with speaker footer; consumes `normalizeLightningTalks()` output. `pending` prop renders ghost cards + a "to be announced" note when the line-up is empty (upcoming only) |
+| `PtdScheduleSection.svelte` | Svelte (`client:visible`) | Upcoming | Vertical agenda timeline: time rail, logistics rows, speaker cards, tentative pill; opens `PtdSpeakerModal` |
+| `PtdSpeakersSection.svelte` | Svelte (`client:visible`) | Upcoming | Line-up grid built from the agenda's session slots; placeholder cards for unrevealed speakers; opens `PtdSpeakerModal` |
+| `PtdSpeakerModal.svelte` | Svelte (nested) | Upcoming | Native `<dialog>` session detail — time, talk title, abstract, speaker bio, socials, profile link |
+| `PtdScheduleIcon.svelte` / `PtdSocialIcon.svelte` | Svelte (nested) | Upcoming | Glyph lookups for slot types and social networks |
 | `PtdGalleryCarousel.svelte` | Svelte (`client:visible`) | Both | `mode="carousel"` (upcoming, single-frame + thumbnails) or `mode="marquee"` (past, infinite duplicated CSS track, pauses on hover/focus, static grid fallback under `prefers-reduced-motion`) |
 | `PtdFaqs.svelte` | Svelte (`client:visible`) | Both | `open-grid` (upcoming always-open) or `accordion` (past); optional section background |
 | `PtdJoinSection.astro` | Astro | Upcoming | Illustration + cream fade, split coral title; detail page passes `showCta={false}` |
@@ -247,6 +293,15 @@ Shared, non-PTD-specific components also used on the detail page: `TalkCard` (`s
 `src/lib/pereiraTechDay.ts` — `getEditions()`, `getEditionByYear()`, `getUpcomingEdition()`, `getLatestEdition()`, `buildEditionThemeCss()`, `getEditionStartDate()` / `getEditionEndDate()` / `getEditionStartIso()` / `getEditionEndIso()`, `getEditionCountdownTargets()`, `isUpcomingEdition()`, `getEditionHref()` / `getPtdLandingHref()` / `PTD_LANDING_SLUG`, `getEditionFontPackages()`, `normalizeLightningTalks()`.
 
 Cross-collection lookups used by the orchestrator: `getSpeakersBySlugs()` (`src/lib/speaker.ts`) for keynotes/lightning speakers, `getEditionSponsors()` (`src/lib/sponsor.ts`) for tiered sponsors, `getContributorsBySlugs()` (`src/lib/contributor.ts`) for organizers/collaborators, `getTalksByEvent('pereiraTechDays', edition.id)` (`src/lib/talk.ts`) for the talks directory.
+
+`src/lib/ptdSchedule.ts` — agenda view models: `buildScheduleView()`, `getScheduleSpeakerSlugs()`, `countPendingSessions()`, `isSessionSlot()`, `getScheduleTypeLabel()`, `formatSlotTime()`, `getSlotDurationMinutes()`, `toSpeakerView()`.
+
+### Feeding the speakers directory
+
+A Pereira Tech Day is a special kind of meetup, so `getSpeakersSortedByLatestTalk()` (`src/lib/speaker.ts`) also reads editions — `schedule[].speaker`, `keynotes[]`, and `lightningTalks[]`. Revealing a speaker in the edition YAML is therefore enough to surface them at `/speakers` (and `/en/speakers`); no extra step is needed.
+
+- **Recency:** the edition's start date bumps `latestTalkDate`, so a revealed speaker for an upcoming edition sorts to the top of the directory. `SpeakerCard` renders that future date as *Próxima charla* / *Next talk* instead of *Última charla*.
+- **Counting:** an agenda session counts toward `talkCount` only when the slot has **no** `talkSlug` — a linked `talks` entry was already counted by the talks pass. Legacy `keynotes[]` / `lightningTalks[]` never increment the count (2024 has a `talks` entry per session); they only fill in the date.
 
 ## How to add a new edition
 

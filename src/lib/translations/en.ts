@@ -141,6 +141,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
     upcoming: 'Upcoming meetups',
     past: 'Past meetups',
+    allMeetups: 'All meetups',
     emptyUpcomingTitle: 'No upcoming meetups announced yet',
     emptyUpcomingDescription:
       "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
@@ -1037,6 +1038,29 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     joinCta: 'Explore Pereira Tech Talks',
     lightningTitle: 'Lightning talks',
     lightningTagline: 'Short talks',
+    scheduleEyebrow: 'Agenda',
+    scheduleTentativeBadge: 'Tentative',
+    scheduleTentativeNote:
+      'Times and speakers may still change. We will reveal the full line-up over the coming days.',
+    scheduleToBeRevealed: 'To be revealed',
+    scheduleViewDetail: 'View details',
+    scheduleModalClose: 'Close',
+    scheduleModalAbout: 'About the speaker',
+    scheduleModalSession: 'Talk',
+    scheduleModalProfile: 'View full profile',
+    scheduleAbstractPending: 'We will share the abstract for this talk soon.',
+    schedulePendingSpeaker: 'Speaker {n}',
+    scheduleAnchor: 'Schedule',
+    scheduleAnchorCta: 'View schedule',
+    languageSwitcher: 'Change language',
+    speakersEyebrow: 'Line-up',
+    speakersUpcomingSubtitle:
+      'A full day of talks to get you inspired, with speakers from the regional tech ecosystem and beyond.',
+    speakersRevealSoon:
+      'We are still confirming speakers. The remaining names will be announced this week.',
+    lightningPendingMessage: 'To be announced soon.',
+    lightningPendingCard: 'Lightning talk',
+    lightningPendingCta: 'See sponsorship plans',
     registerCta: 'Register',
     subscribe: {
       copy: 'Get notified when registration opens for the event. Do not miss it!',

@@ -91,7 +91,109 @@ sectionBackgrounds:
   community: /images/pereira-tech-days/2026/sections/community-bg.png
   faqs: /images/pereira-tech-days/2026/sections/faqs-bg.png
   join: /images/pereira-tech-days/2026/sections/join-illustration.webp
-schedule: []
+# Tentative agenda (published 2026-08-08). Times are 24h in site timezone and
+# render as 12h AM/PM. Session slots without `speaker` show a numbered
+# "to be revealed" placeholder until the line-up is announced.
+scheduleTentative: true
+schedule:
+  - time: "07:00"
+    endTime: "07:30"
+    type: staff
+    title:
+      en: Staff arrival
+      es: Llegada del staff
+  - time: "07:30"
+    endTime: "08:00"
+    type: registration
+    title:
+      en: Pre-registration
+      es: Pre-registro
+    description:
+      en: Check in, pick up your badge, and grab a coffee before we start.
+      es: Registra tu llegada, recoge tu escarapela y toma un café antes de comenzar.
+  - time: "08:00"
+    endTime: "08:30"
+    type: opening
+    title:
+      en: Event kickoff
+      es: Inicio del evento
+    description:
+      en: Welcome from the organizing communities and how the day will run.
+      es: Bienvenida de las comunidades organizadoras y cómo será la jornada.
+  - time: "08:30"
+    endTime: "09:10"
+    type: talk
+  - time: "09:15"
+    endTime: "09:55"
+    type: talk
+    speaker: debbie-arredondo
+    title:
+      en: "Complex projects in a couple of hours — building complex things has never been this accessible"
+      es: "Proyectos complejos en un par de horas — construir lo complejo nunca fue tan accesible"
+    description:
+      en: >-
+        Turning an idea into a project has always been slow and expensive, and that
+        barrier made us think twice before starting something new. With emerging
+        technologies, costs that used to be steep — like acquiring specific, hidden
+        knowledge — have flattened out. This talk shows how I built my projects
+        before, how I build them now, and how the cost of work such as research has
+        dropped to a level that opens the door to entirely new possibilities.
+      es: >-
+        Convertir una idea en un proyecto siempre ha sido un proceso lento y costoso,
+        y esa barrera hacía que pensáramos dos veces si valía la pena empezar una
+        nueva idea. Con las tecnologías emergentes, costos antaño tan altos como
+        obtener conocimiento específico y oculto se han aplanado. Esta charla mostrará
+        cómo he desarrollado mis proyectos en el pasado, cómo lo hago ahora, y cómo el
+        costo de tareas como la investigación ha bajado a niveles que abren la puerta
+        a nuevas posibilidades.
+  - time: "10:00"
+    endTime: "10:40"
+    type: talk
+  - time: "10:45"
+    endTime: "10:50"
+    type: sponsor-break
+    title:
+      en: Sponsor break
+      es: Sponsor break
+  - time: "10:50"
+    endTime: "11:20"
+    type: break
+    title:
+      en: Break and networking
+      es: Descanso y networking
+    description:
+      en: Refreshments, coffee station, and time to meet the rest of the community.
+      es: Refrigerio, estación de café y tiempo para conocer al resto de la comunidad.
+  - time: "11:25"
+    endTime: "12:05"
+    type: talk
+  - time: "12:10"
+    endTime: "12:50"
+    type: talk
+  - time: "12:55"
+    endTime: "13:00"
+    type: sponsor-break
+    title:
+      en: "Sponsor break #2"
+      es: "Sponsor break #2"
+  - time: "13:00"
+    endTime: "13:30"
+    type: lightning
+    title:
+      en: Lightning talks
+      es: Charlas relámpago
+    description:
+      en: Short, high-energy talks from our sponsors and the community.
+      es: Charlas cortas y de alta energía de nuestros patrocinadores y la comunidad.
+  - time: "13:35"
+    endTime: "13:50"
+    type: closing
+    title:
+      en: Raffles and closing
+      es: Sorteos y cierre
+    description:
+      en: Sponsor raffles, thank-yous, and the group photo that closes the day.
+      es: Sorteos de los patrocinadores, agradecimientos y la foto grupal que cierra la jornada.
 keynotes: []
 lightningTalks: []
 sponsors:

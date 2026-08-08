@@ -40,6 +40,14 @@ const lastTalkLabel = (() => {
     year: 'numeric',
     timeZone: 'UTC',
   }).format(latestTalkDate);
+  // Upcoming editions (e.g. a revealed Pereira Tech Day speaker) produce a
+  // future date — "last talk" would read wrong there.
+  const upcoming = latestTalkDate.getTime() > Date.now();
+  if (upcoming) {
+    return lang === 'es'
+      ? `Próxima charla: ${formatted}`
+      : `Next talk: ${formatted}`;
+  }
   return lang === 'es'
     ? `Última charla: ${formatted}`
     : `Last talk: ${formatted}`;
