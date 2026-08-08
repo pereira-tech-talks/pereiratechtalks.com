@@ -175,6 +175,8 @@ theme and stays on the **global PTT palette** — never an edition kit.
   `logo-white.png` / `logo-vertical-white.webp` (`dark:block`). Nav links inherit via `.nav-link` in
   `global.css` (`text-ptt-secondary` → `dark:text-white/85`).
   Vertical marks: regenerate with `node scripts/generate-ptt-logo-variants.mjs`.
+  Light chrome wordmarks (`topbar-logo-primary`, `logo-horizontal-primary`):
+  `node scripts/generate-ptt-light-logos.mjs` (from archived `*-black.webp`).
 - **Hero CTAs on dark canvases** — white pill buttons use
   `text-ptt-bg-dark`, **not** `text-ptt` — `text-ptt` auto-flips light in
   dark mode and becomes illegible on white. Accent pills pair

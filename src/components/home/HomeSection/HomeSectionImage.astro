@@ -4,9 +4,23 @@ import { join, resolve } from 'node:path';
 
 interface Props {
   image: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  /**
+   * Photo crop: below `lg` uses a wide landscape frame; from `lg` up a taller
+   * portrait frame. `auto` keeps intrinsic ratio (illustrations).
+   */
+  crop?: 'auto' | 'portrait';
 }
 
-const { image } = Astro.props;
+const {
+  image,
+  alt = '',
+  width = 480,
+  height = 480,
+  crop = 'auto',
+} = Astro.props;
 const isRaster = /\.(png|jpe?g)$/i.test(image);
 const basePath = image.replace(/\.(png|jpe?g)$/i, '').replace(/^\//, '');
 const publicDir = resolve(process.cwd(), 'public');
@@ -26,34 +40,56 @@ const webpExists = webpPath ? existsSync(webpPath) : false;
 
 const useWebp = isRaster && (hasResponsive || webpExists);
 const srcset = hasResponsive ? responsiveSrcset.join(', ') : null;
-const sizes = '(max-width: 640px) 280px, (max-width: 768px) 360px, 480px';
+const sizes =
+  '(max-width: 1023px) min(100vw - 2rem, 42rem), 460px';
+
+/* Wide on mobile/tablet; taller portrait only from lg. No zoom scale. */
+const frameClass =
+  crop === 'portrait'
+    ? 'relative mx-auto w-full max-w-xl sm:max-w-2xl aspect-[16/10] shrink-0 overflow-hidden rounded-2xl shadow-sm ring-1 ring-ptt-border/60 lg:w-[460px] lg:max-w-none lg:aspect-[5/6]'
+    : 'relative mx-auto max-w-[280px] sm:max-w-[360px] md:max-w-[480px]';
+
+const pictureClass =
+  crop === 'portrait' ? 'absolute inset-0 block h-full w-full' : 'contents';
+
+const imgClass =
+  crop === 'portrait'
+    ? 'h-full w-full object-cover object-center lg:object-[center_44%]'
+    : 'max-w-full block rounded-2xl object-cover';
+
+const imgPositionClass =
+  crop === 'portrait' ? `absolute inset-0 ${imgClass}` : imgClass;
 ---
 
-<div class="relative">
-  {useWebp ? (
-    <picture>
-      <source
-        srcset={srcset ?? webpSrc}
-        type="image/webp"
-        sizes={srcset ? sizes : undefined}
-      />
+<div class={frameClass}>
+  {
+    useWebp ? (
+      <picture class={pictureClass}>
+        <source
+          srcset={srcset ?? webpSrc}
+          type="image/webp"
+          sizes={srcset ? sizes : undefined}
+        />
+        <img
+          src={image}
+          alt={alt}
+          width={width}
+          height={height}
+          class={imgPositionClass}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
+    ) : (
       <img
         src={image}
-        alt=""
-        width={480}
-        height={480}
-        class="max-w-full block max-w-[280px] sm:max-w-[360px] md:max-w-[480px]"
+        alt={alt}
+        width={width}
+        height={height}
+        class={imgPositionClass}
         loading="lazy"
+        decoding="async"
       />
-    </picture>
-  ) : (
-    <img
-      src={image}
-      alt=""
-      width={480}
-      height={480}
-      class="max-w-full block max-w-[280px] sm:max-w-[360px] md:max-w-[480px]"
-      loading="lazy"
-    />
-  )}
+    )
+  }
 </div>

@@ -181,7 +181,7 @@ function navClick(item: string) {
       >
         <img
           class="h-8 w-auto dark:hidden"
-          src="/images/pereira-tech-talks/topbar-logo-black.webp"
+          src="/images/pereira-tech-talks/topbar-logo-primary.webp"
           alt=""
           width={120}
           height={48}

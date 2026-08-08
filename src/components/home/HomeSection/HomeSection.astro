@@ -12,6 +12,10 @@ interface Props {
   cta2Text?: string;
   cta2Link?: string;
   image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageCrop?: 'auto' | 'portrait';
   contentAlignment?: HomeSectionContentAlignmentEType;
   variant?: 'default' | 'alt';
   grouped?: boolean;
@@ -26,6 +30,10 @@ const {
   cta2Text,
   cta2Link,
   image,
+  imageAlt = '',
+  imageWidth = 480,
+  imageHeight = 480,
+  imageCrop = 'auto',
   contentAlignment = 'left',
   variant = 'default',
   grouped = false,
@@ -86,8 +94,14 @@ if (!title || !description) {
   >
     {
       image && (
-        <div class="section-image">
-          <HomeSectionImage image={image} />
+        <div class="section-image flex w-full justify-center lg:w-auto lg:shrink-0">
+          <HomeSectionImage
+            image={image}
+            alt={imageAlt}
+            width={imageWidth}
+            height={imageHeight}
+            crop={imageCrop}
+          />
         </div>
       )
     }
