@@ -105,7 +105,7 @@ onMount(() => {
 
   let shouldOpen = false;
   try {
-    shouldOpen = consumeNotificationAutoOpen({ id: n.id });
+    shouldOpen = consumeNotificationAutoOpen({ id: n.id, lang });
   } catch {
     // Private mode / blocked storage — skip auto-open, bar still works.
     return;
@@ -115,7 +115,7 @@ onMount(() => {
   const cancel = scheduleAfterLargestContentfulPaint(() => {
     if (openModalId != null) return;
     try {
-      markNotificationAutoOpenShown(n.id);
+      markNotificationAutoOpenShown(n.id, lang);
     } catch {
       // ignore storage failures — still show the modal
     }

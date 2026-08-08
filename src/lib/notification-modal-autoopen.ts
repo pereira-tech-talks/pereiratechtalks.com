@@ -1,11 +1,14 @@
 /**
  * Auto-open policy for the top-notification detail modal.
  *
- * Rules (per notification id):
- * 1. First `navigate` in a browser tab session → open once.
- * 2. Later navigations in that session → do not auto-open.
- * 3. Full reloads → open every Nth reload (default 3).
+ * Rules (per notification id **and language**):
+ * 1. First `navigate` in a browser tab session for that lang → open once.
+ * 2. Later navigations in that lang/session → do not auto-open.
+ * 3. Full reloads (per lang) → open every Nth reload (default 3).
  * 4. `back_forward` / `prerender` → never auto-open.
+ *
+ * Language is part of the storage key so `/` (es) and `/en` each get a
+ * first-visit auto-open instead of sharing one session flag.
  *
  * Distinguishes reload vs link navigation via PerformanceNavigationTiming.
  */
@@ -18,11 +21,11 @@ export type NavigationType =
 
 export const NOTIFY_AUTO_RELOAD_EVERY = 3;
 
-export const notifyAutoSessionKey = (id: string): string =>
-  `ptt:notify-auto:${id}`;
+export const notifyAutoSessionKey = (id: string, lang = 'es'): string =>
+  `ptt:notify-auto:${id}:${lang}`;
 
-export const notifyAutoReloadKey = (id: string): string =>
-  `ptt:notify-reloads:${id}`;
+export const notifyAutoReloadKey = (id: string, lang = 'es'): string =>
+  `ptt:notify-reloads:${id}:${lang}`;
 
 export type AutoOpenPlan = {
   shouldOpen: boolean;
@@ -104,8 +107,12 @@ export type AutoOpenStorage = {
   local: Pick<Storage, 'getItem' | 'setItem'>;
 };
 
-function readReloadCount(local: AutoOpenStorage['local'], id: string): number {
-  const raw = local.getItem(notifyAutoReloadKey(id));
+function readReloadCount(
+  local: AutoOpenStorage['local'],
+  id: string,
+  lang: string
+): number {
+  const raw = local.getItem(notifyAutoReloadKey(id, lang));
   const n = raw == null ? 0 : Number.parseInt(raw, 10);
   return Number.isFinite(n) && n >= 0 ? n : 0;
 }
@@ -118,18 +125,21 @@ function readReloadCount(local: AutoOpenStorage['local'], id: string): number {
  */
 export function consumeNotificationAutoOpen(options: {
   id: string;
+  /** Page language — scopes session/reload keys (es vs en). */
+  lang?: string;
   reloadEvery?: number;
   navType?: NavigationType;
   storage?: AutoOpenStorage;
 }): boolean {
+  const lang = options.lang || 'es';
   const storage: AutoOpenStorage = options.storage ?? {
     session: sessionStorage,
     local: localStorage,
   };
   const navType = options.navType ?? getNavigationType();
-  const sessionKey = notifyAutoSessionKey(options.id);
+  const sessionKey = notifyAutoSessionKey(options.id, lang);
   const sessionAlreadyShown = storage.session.getItem(sessionKey) === '1';
-  const reloadCount = readReloadCount(storage.local, options.id);
+  const reloadCount = readReloadCount(storage.local, options.id, lang);
 
   const plan = planNotificationAutoOpen({
     navType,
@@ -140,7 +150,7 @@ export function consumeNotificationAutoOpen(options: {
 
   if (plan.nextReloadCount !== reloadCount) {
     storage.local.setItem(
-      notifyAutoReloadKey(options.id),
+      notifyAutoReloadKey(options.id, lang),
       String(plan.nextReloadCount)
     );
   }
@@ -148,12 +158,13 @@ export function consumeNotificationAutoOpen(options: {
   return plan.shouldOpen;
 }
 
-/** Persist "already auto-opened this tab session" after a successful open. */
+/** Persist "already auto-opened this tab session + language" after a successful open. */
 export function markNotificationAutoOpenShown(
   id: string,
+  lang = 'es',
   storage: Pick<AutoOpenStorage, 'session'> = { session: sessionStorage }
 ): void {
-  storage.session.setItem(notifyAutoSessionKey(id), '1');
+  storage.session.setItem(notifyAutoSessionKey(id, lang), '1');
 }
 
 /**
