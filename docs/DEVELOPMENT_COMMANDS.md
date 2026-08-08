@@ -166,7 +166,7 @@ pnpm run release
 
 - Bumps patch version
 - Creates commit with release message
-- Format: `[🤖 Sergio Alexander Florez Galeano] New release to v{version} launched 🚀`
+- Format: `[🤖 Pereira Tech Talks] New release to v{version} launched 🚀`
 
 ## Astro CLI
 

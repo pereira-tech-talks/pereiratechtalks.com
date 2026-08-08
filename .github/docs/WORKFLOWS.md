@@ -47,7 +47,7 @@ Complete reference for all GitHub Actions workflows in this repository.
 | Step | Name | What it does |
 |------|------|-------------|
 | — | Checkout | `actions/checkout@v4` with `AUTOMATION_GITHUB_TOKEN`, fetch-depth: 2 |
-| 1 | Setup GitHub Config | Git config + `gh auth login` |
+| 1 | Setup GitHub Config | Git identity `Pereira Tech Talks` + `gh auth login` |
 | 2 | Check PR size label | Reads existing size label from PR |
 | 3 | Calculate PR Size | `git diff --shortstat` → apply size label |
 | 4 | Check title length | Minimum 5 characters |
@@ -130,47 +130,60 @@ For L/XL/XXL PRs, a warning comment is automatically posted.
 | Property | Value |
 |----------|-------|
 | **Trigger** | `pull_request` to `main`, type: `closed` (only when merged) |
-| **Concurrency** | Per-workflow + PR number, cancel in-progress |
+| **Concurrency** | Single group `release-and-publish-main`, **never** cancels in-flight releases |
+| **Permissions** | `contents: write`, `pull-requests: read` |
+| **Git identity** | `Pereira Tech Talks <pereiratechtalks@gmail.com>` |
 
-**Deployment:** Cloudflare Pages deploys automatically on push to `main`. This workflow does **not** deploy. It has **3 chained jobs**:
+**Deployment:** Cloudflare Pages deploys automatically on push to `main`. This workflow does **not** deploy.
 
-### Job 1: `check_pr_size_label`
+### Strategy (and why)
 
-Extracts the PR's size label and maps to emoji for the workflow summary.
+This repo uses a **merge → always patch bump** flow: every merged PR to `main` bumps `package.json` patch, commits/tags as the community bot, pushes to `main`, and opens a GitHub Release.
 
-### Job 2: `release_and_publish` (depends on: Job 1)
+| Approach | Fit for this site | Notes |
+|----------|-------------------|-------|
+| **Current: merge → patch** | Good | Simple for a content-heavy static site; frequent small releases |
+| [release-please](https://github.com/googleapis/release-please) | Strong alternative | Opens a Release PR; tag on merge — works cleanly with “require PR” rulesets without bypass |
+| [semantic-release](https://semantic-release.gitbook.io/) | Overkill here | Needs npm publish + Conventional Commit–driven bumps; heavier for SSG |
 
-| Step | Name | What it does |
-|------|------|-------------|
-| 0-0a | Cache | pnpm store, keyed on `pnpm-lock.yaml` |
-| 2 | Setup GitHub Config | Git config |
-| 3 | Release notes | Runs `scripts/get_github_release_log.sh` |
-| 4 | Prepare release | `corepack pnpm install --frozen-lockfile && corepack pnpm run release` + push tags to main |
-| 5 | Get release tag | Extract latest tag |
-| 6 | Publish release | `ncipollo/release-action@v1` |
+We keep the light flow because most merges are content/docs and a patch bump is enough. If branch-protection bypass for the automation user becomes painful, migrate to **release-please** (PR-based) instead of pushing version commits directly to `main`.
 
-**Helper script:** `scripts/get_github_release_log.sh`
-- Reads `git log --pretty=oneline`
-- Stops at the previous release commit
-- Skips merge commits
-- Prefixes each entry with `🚩`
-- Creates `git_logs_output.txt` as release body
+### Requirements for the automation actor
 
-### Job 3: `cleanup_caches` (depends on: Job 2)
+`AUTOMATION_GITHUB_TOKEN` must:
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare Pages setup.
+1. Have permission to push commits + tags to `main`
+2. **Bypass** the ruleset that requires PRs (or be a GitHub App with that bypass)
+3. Be allowed past any required status checks that would block the bot’s version commit
 
-Dispatches a `cleanup_caches` event via GitHub API.
+Without bypass, Prepare release fails with “Changes must be made through a pull request”.
+
+### Job 1: `release_and_publish`
+
+| Step | What it does |
+|------|-------------|
+| Checkout | Full history (`fetch-depth: 0`), `AUTOMATION_GITHUB_TOKEN`, credentials persisted for push |
+| Setup Node / pnpm cache | Node 24.15.0 + pnpm store cache |
+| Configure git identity | Pereira Tech Talks bot |
+| Build release notes | `.github/scripts/get_github_release_log.sh` — commits since last tag |
+| Prepare release | `pnpm run release` (bump/commit/tag) → `git push --follow-tags origin HEAD:main` |
+| Publish GitHub Release | `ncipollo/release-action@v1` with `allowUpdates: true` |
+
+**Helper scripts:**
+
+- `prepare_release.sh` — patch bump via Node, commit `[🤖 Pereira Tech Talks] New release to vX.Y.Z launched 🚀`, annotated tag
+- `get_github_release_log.sh` — changelog from last tag (skips merge + prior release commits)
+
+### Job 2: `cleanup_caches` (depends on: Job 1)
+
+Dispatches a `cleanup_caches` repository event via GitHub API. See [DEPLOYMENT.md](./DEPLOYMENT.md) for Cloudflare Pages setup.
 
 ---
 
 ## Workflow Dependencies
 
 ```
-check_pr_size_label
-         │
-         ▼
-  release_and_publish
+release_and_publish
          │
          ▼
   cleanup_caches
