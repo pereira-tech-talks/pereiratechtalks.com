@@ -7,6 +7,9 @@ import {
 } from '@/lib/markdown-for-agents';
 import { getEditions } from '@/lib/pereiraTechDay';
 
+/** Slot types that carry a speaker; mirrors `isSessionSlot` in `@/lib/ptdSchedule`. */
+const SESSION_TYPES = new Set(['talk', 'keynote', 'panel']);
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const editions = await getEditions();
   return editions.map((entry) => ({
@@ -51,13 +54,25 @@ export const GET: APIRoute = ({ props }) => {
 
   const sections = [];
   if (entry.data.schedule.length > 0) {
+    if (entry.data.scheduleTentative) {
+      metadata.push([
+        'Cronograma',
+        'Tentativo — horarios y ponentes sujetos a cambios.',
+      ]);
+    }
     sections.push({
       heading: 'Programación',
       lines: entry.data.schedule.map((slot) => {
+        const range = slot.endTime ? `${slot.time}–${slot.endTime}` : slot.time;
         const slotTitle = slot.title
           ? resolveI18n(slot.title, lang)
           : (slot.talkSlug ?? slot.type);
-        return `- ${slot.time} — ${slotTitle} (${slot.type})`;
+        const speaker = slot.speaker
+          ? ` — [${slot.speaker}](/speakers/${slot.speaker}.md)`
+          : SESSION_TYPES.has(slot.type)
+            ? ` — _Por revelar_`
+            : '';
+        return `- ${range} — ${slotTitle} (${slot.type})${speaker}`;
       }),
     });
   }

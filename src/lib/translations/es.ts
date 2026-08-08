@@ -141,6 +141,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.',
     upcoming: 'Próximos meetups',
     past: 'Meetups pasados',
+    allMeetups: 'Todos los meetups',
     emptyUpcomingTitle: 'No hay meetups anunciados todavía',
     emptyUpcomingDescription:
       'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.',
@@ -1041,6 +1042,30 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     joinCta: 'Explorar Pereira Tech Talks',
     lightningTitle: 'Lightning talks',
     lightningTagline: 'Charlas cortas',
+    scheduleEyebrow: 'Agenda del día',
+    scheduleTentativeBadge: 'Tentativo',
+    scheduleTentativeNote:
+      'Los horarios y los ponentes pueden cambiar. Iremos revelando el line-up completo en los próximos días.',
+    scheduleToBeRevealed: 'Por revelar',
+    scheduleViewDetail: 'Ver detalle',
+    scheduleModalClose: 'Cerrar',
+    scheduleModalAbout: 'Sobre el ponente',
+    scheduleModalSession: 'Charla',
+    scheduleModalProfile: 'Ver perfil completo',
+    scheduleAbstractPending:
+      'Pronto compartiremos la descripción de esta charla.',
+    schedulePendingSpeaker: 'Ponente {n}',
+    scheduleAnchor: 'Cronograma',
+    scheduleAnchorCta: 'Ver cronograma',
+    languageSwitcher: 'Cambiar idioma',
+    speakersEyebrow: 'Line-up',
+    speakersUpcomingSubtitle:
+      'Un día completo de charlas para inspirarte, con ponentes del ecosistema tech de la región y de fuera.',
+    speakersRevealSoon:
+      'Seguimos confirmando ponentes. Anunciaremos los que faltan durante esta semana.',
+    lightningPendingMessage: 'Se anunciarán pronto.',
+    lightningPendingCard: 'Lightning talk',
+    lightningPendingCta: 'Ver planes de patrocinio',
     registerCta: 'Inscribirse',
     subscribe: {
       copy: 'Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!',

@@ -131,6 +131,8 @@ export interface SiteTranslations {
     intro: string;
     upcoming: string;
     past: string;
+    /** Unified timeline heading — upcoming + archive in one list. */
+    allMeetups: string;
     emptyUpcomingTitle: string;
     emptyUpcomingDescription: string;
     ctaLuma: string;
@@ -683,6 +685,28 @@ export interface SiteTranslations {
     joinCta: string;
     lightningTitle: string;
     lightningTagline: string;
+    /** Agenda timeline (upcoming editions) — see `PtdScheduleSection.svelte`. */
+    scheduleEyebrow: string;
+    scheduleTentativeBadge: string;
+    scheduleTentativeNote: string;
+    scheduleToBeRevealed: string;
+    scheduleViewDetail: string;
+    scheduleModalClose: string;
+    scheduleModalAbout: string;
+    scheduleModalSession: string;
+    scheduleModalProfile: string;
+    scheduleAbstractPending: string;
+    /** `{n}` is replaced with the session number, e.g. `Ponente 3`. */
+    schedulePendingSpeaker: string;
+    scheduleAnchor: string;
+    scheduleAnchorCta: string;
+    languageSwitcher: string;
+    speakersEyebrow: string;
+    speakersUpcomingSubtitle: string;
+    speakersRevealSoon: string;
+    lightningPendingMessage: string;
+    lightningPendingCard: string;
+    lightningPendingCta: string;
     /** Primary hero CTA when registration is open (e.g. Luma). */
     registerCta: string;
     subscribe: {

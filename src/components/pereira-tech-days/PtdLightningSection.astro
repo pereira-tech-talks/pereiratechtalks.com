@@ -13,10 +13,33 @@ interface Props {
   tagline?: string;
   talks: NormalizedLightningTalk[];
   speakers: CollectionEntry<'speakers'>[];
+  /**
+   * Placeholder copy for upcoming editions whose lightning line-up is not
+   * announced yet. When set and `talks` is empty the section still renders,
+   * showing ghost cards instead of hiding the whole block.
+   */
+  pending?: {
+    message: string;
+    cardLabel: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
+  /** Number of ghost cards drawn in the pending state. */
+  pendingSlots?: number;
 }
 
-const { lang, title, tagline, talks, speakers } = Astro.props;
+const {
+  lang,
+  title,
+  tagline,
+  talks,
+  speakers,
+  pending,
+  pendingSlots = 3,
+} = Astro.props;
 const speakerBySlug = new Map(speakers.map((speaker) => [speaker.id, speaker]));
+const showPending = talks.length === 0 && Boolean(pending);
+const ghostSlots = Array.from({ length: pendingSlots }, (_, i) => i);
 
 function socialLinksFor(speaker: CollectionEntry<'speakers'>) {
   const social = speaker.data.social ?? {};
@@ -52,7 +75,8 @@ function socialLinksFor(speaker: CollectionEntry<'speakers'>) {
 ---
 
 <section
-  class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+  id="lightning"
+  class="scroll-mt-[4.5rem] bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
   aria-labelledby="ptd-lightning-title"
 >
   <div class="main-container">
@@ -70,9 +94,58 @@ function socialLinksFor(speaker: CollectionEntry<'speakers'>) {
       >
         {title}
       </h2>
+      {
+        showPending && pending && (
+          <p class="mt-4 text-base leading-relaxed text-[var(--ptt-text)]">
+            {pending.message}
+          </p>
+        )
+      }
     </header>
 
-    <ul class="grid gap-4 sm:grid-cols-2 sm:gap-y-8 md:gap-6 lg:grid-cols-3">
+    {
+      showPending && pending && (
+        <>
+          <ul class="grid gap-4 sm:grid-cols-2 sm:gap-y-8 md:gap-6 lg:grid-cols-3">
+            {ghostSlots.map((index) => (
+              <li class="min-w-0">
+                <article class="flex h-full flex-col items-center rounded-lg border border-dashed border-[color-mix(in_srgb,var(--ptt-text)_26%,transparent)] bg-[color-mix(in_srgb,var(--ptt-bg-elevated)_55%,transparent)] p-6 text-center">
+                  <span
+                    class="grid h-16 w-16 place-items-center rounded-full border border-dashed border-[color-mix(in_srgb,var(--ptt-text)_26%,transparent)] bg-[color-mix(in_srgb,var(--ptt-text)_7%,transparent)] text-[color-mix(in_srgb,var(--ptt-text)_40%,transparent)]"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+                    </svg>
+                  </span>
+                  <p class="mt-4 text-lg font-bold leading-snug text-[var(--ptt-text)]">
+                    {`${pending.cardLabel} ${index + 1}`}
+                  </p>
+                  <p class="mt-1 text-sm italic text-[var(--ptt-text-muted)]">
+                    {pending.message}
+                  </p>
+                </article>
+              </li>
+            ))}
+          </ul>
+          {pending.ctaLabel && pending.ctaHref && (
+            <p class="mt-8 text-center">
+              <a
+                href={pending.ctaHref}
+                class="inline-flex items-center gap-1.5 rounded-full border border-[color-mix(in_srgb,var(--ptt-text)_22%,transparent)] px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-[var(--ptt-text)] transition hover:border-[var(--ptt-primary)] hover:bg-[var(--ptt-primary)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+              >
+                {pending.ctaLabel}
+              </a>
+            </p>
+          )}
+        </>
+      )
+    }
+
+    <ul
+      class="grid gap-4 sm:grid-cols-2 sm:gap-y-8 md:gap-6 lg:grid-cols-3"
+      hidden={talks.length === 0}
+    >
       {
         talks.map((entry) => {
           const speaker = speakerBySlug.get(entry.speaker);
