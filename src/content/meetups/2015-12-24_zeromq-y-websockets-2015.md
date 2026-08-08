@@ -3,8 +3,8 @@ title:
   en: "ZeroMQ + Node.js && WebSockets y Socket.io"
   es: "ZeroMQ + Node.js && WebSockets y Socket.io"
 description:
-  en: "Pereira Tech Talks meetup (2015-12-24). Decimotercer Meetup de PereiraJs hablando sobre:."
-  es: "Decimotercer Meetup de PereiraJs hablando sobre:."
+  en: "Pereira Tech Talks meetup — ZeroMQ + Node.js && WebSockets y Socket.io. Community archive page with the night’s program and context."
+  es: "Decimotercer Meetup de PereiraJs hablando sobre:"
 pubDate: 2015-12-24
 date: 2015-12-24
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/zeromq-y-websockets-2015/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - zeromq-y-websockets-2015--1-zeromq-node-js
+  - zeromq-y-websockets-2015--2-websockets-y-socket-io
+speakers:
+  - manuel-pineda
+  - jhonber-jimenez
 sponsors: []
 status: completed
 draft: false

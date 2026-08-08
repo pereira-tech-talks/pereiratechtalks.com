@@ -1,0 +1,22 @@
+name: "Damián Schenkelman"
+pronouns: he/him
+role:
+  en: "Engineering leader at Auth0"
+  es: "Líder de ingeniería en Auth0"
+bio:
+  en: "Damián Schenkelman spoke at Pereira Tech Talks on how Auth0 evolved its identity-as-a-service systems over five years at scale."
+  es: "Damián Schenkelman participó en Pereira Tech Talks sobre cómo Auth0 evolucionó sus sistemas de identidad como servicio a escala durante cinco años."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Damián Schenkelman"
+    es: "Retrato de Damián Schenkelman"
+social:
+  twitter: "https://twitter.com/dschenkelman"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

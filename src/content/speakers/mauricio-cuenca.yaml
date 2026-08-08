@@ -1,0 +1,21 @@
+name: "Mauricio Cuenca"
+pronouns: he/him
+role:
+  en: "Google Cloud engineer"
+  es: "Ingeniero Google Cloud"
+bio:
+  en: "Mauricio Cuenca spoke at Pereira Tech Talks on Kubernetes, serverless, and Google Cloud Platform from zero to production."
+  es: "Mauricio Cuenca participó en Pereira Tech Talks sobre Kubernetes, serverless y Google Cloud Platform de cero a producción."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Mauricio Cuenca"
+    es: "Retrato de Mauricio Cuenca"
+social:
+  twitter: "https://twitter.com/macuenka"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

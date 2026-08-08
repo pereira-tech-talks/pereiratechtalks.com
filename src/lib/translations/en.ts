@@ -136,7 +136,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   meetupsPage: {
     title: 'Pereira Tech Talks Meetups',
     description:
-      'Over 90 meetups since 2014. Monthly talks, lightning rounds, panels, and workshops from the Eje Cafetero tech community in Risaralda.',
+      '{meetups} meetups, {talks} talks, and {speakers} speakers since {sinceYear}. Monthly archive from the Eje Cafetero tech community in Pereira, Risaralda.',
     intro:
       'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
     upcoming: 'Upcoming meetups',
@@ -145,7 +145,13 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     emptyUpcomingDescription:
       "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
     ctaLuma: 'Follow us on Luma',
-    archiveCount: '{n} meetups in the archive',
+    eyebrow: 'Community archive',
+    statMeetups: 'Meetups',
+    statTalks: 'Talks',
+    statSpeakers: 'Speakers',
+    statSince: 'Since',
+    nextUpLabel: 'Up next',
+    nextUpCta: "See what's coming",
     yearLabel: '{year} — Meetups',
     yearNav: 'Jump to year',
     calendarEyebrow: 'Calendar',
@@ -156,8 +162,14 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   meetupDetail: {
     talks: 'Talks',
     speakers: 'Speakers',
+    sponsors: 'Sponsors',
+    sponsorsSubtitle: 'Companies that supported this meetup.',
     venue: 'Venue',
     originalEvent: 'Original event',
+    recording: 'Recording',
+    watchRecording: 'Watch recording',
+    photosExternal: 'Photo album',
+    galleryMemories: 'Event memories',
     statusAnnounced: 'Upcoming',
     statusRsvpOpen: 'RSVP open',
     statusCompleted: 'Past meetup',
@@ -166,13 +178,24 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     breadcrumbMeetups: 'Meetups',
   },
 
+  speakerDetail: {
+    talkHistory: 'Talk history',
+    talkHistorySubtitle: 'Most recent first.',
+    relatedEvents: 'Related events',
+    relatedEventsSubtitle:
+      'Meetups and Pereira Tech Days linked to these talks.',
+    breadcrumbHome: 'Home',
+    breadcrumbSpeakers: 'Speakers',
+    website: 'Website',
+  },
+
   aboutPage: {
     title: 'About Pereira Tech Talks',
     subtitle: 'A technology community from Pereira to the world',
     description:
       'Meet Pereira Tech Talks — tech community in Pereira, Risaralda since 2014. Monthly meetups, Pereira Tech Day, Speaker School, and La Biblioteca del Mañana.',
     heroDescription:
-      'The technology community of Pereira (Risaralda, Colombia). Founded 2014. 90+ monthly meetups, Pereira Tech Day, an active Speaker School and a content library in Spanish and English. Volunteer-run. Open to everyone.',
+      'The technology community of Pereira (Risaralda, Colombia). Founded 2014. Monthly meetups, Pereira Tech Day, an active Speaker School and a content library in Spanish and English. Volunteer-run. Open to everyone.',
     bioTitle: 'Who we are',
     bioText:
       'Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual <strong>Pereira Tech Day</strong> conference (2024 archive, 2026 upcoming), the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All open.<br /><br />The work is sponsor-supported (DailyBot, GitHub, ASE-UTP, Gorilla Logic, Made for Germany, Source Meridian, and more) and open by default. The site you are reading is a catalog of meetups, talks, slides, speakers, contributors, and sponsors — available in Spanish and English — structured to be just as useful to AI agents as it is to humans.<br /><br />We believe technology grows faster when we share what we learn — that is why every meetup recap is published the same week. We believe Pereira has world-class talent that deserves world-class stages — that is why the Speaker School exists and why community alumni now keynote in Bogotá, Medellín, Mexico City, and at YC-backed startups. And we believe a tech community should look like the city it lives in — open, warm, mixed, and unpretentious. That is why our events are free, our channels are public, and our content is published in Spanish and English.',

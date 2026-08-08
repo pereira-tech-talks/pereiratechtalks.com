@@ -3,8 +3,8 @@ title:
   en: "💻 Hablemos de automatización de infraestructura y linux "
   es: "💻 Hablemos de automatización de infraestructura y linux "
 description:
-  en: "Pereira Tech Talks meetup (2019-04-25). 📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:."
-  es: "📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:."
+  en: "Pereira Tech Talks meetup — 💻 Hablemos de automatización de infraestructura y linux . Community archive page with the night’s program and context."
+  es: "📣 ¡No se pierdan nuestro meetup de abril! Tendremos unas charlas buenísimas sobre linux y automatización de infraestructura:"
 pubDate: 2019-04-25
 date: 2019-04-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/automatizacion-de-infraestructura-y-linux/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - automatizacion-de-infraestructura-y-linux--1-iac-automatizando-nuestra-infraestructura
+  - automatizacion-de-infraestructura-y-linux--2-hablemos-de-linux
+speakers:
+  - luis-uribe
+  - harold-sanchez-ospina
 sponsors: []
 status: completed
 draft: false

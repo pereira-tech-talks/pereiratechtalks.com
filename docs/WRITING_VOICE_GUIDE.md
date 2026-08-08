@@ -9,7 +9,7 @@ Pereira Tech Talks publishes content from **multiple authors** — community org
 This guide captures three things:
 
 1. **The PTT community voice** — what every PTT post should sound like, regardless of author.
-2. **Author-mode patterns** — how the voice flexes for meetup recaps, technical deep-dives, event coverage, and personal essays.
+2. **Author-mode patterns** — how the voice flexes for meetup pages, meetup recaps, technical deep-dives, event coverage, and personal essays.
 3. **Anti-AI-slop discipline** — the patterns that signal AI-generated writing and how to avoid them. The voice rules win when they collide with the slop list.
 
 Editors enforce this guide before publishing. The `content-writer` agent uses it as its operating manual. The `i18n-guardian` agent enforces the bilingual parity rules.
@@ -18,7 +18,7 @@ Editors enforce this guide before publishing. The `content-writer` agent uses it
 
 ## 2. The PTT Community Voice
 
-The brand voice from Task 1 (`analysis_results/BRAND_PALETTE.md` §8) is the source of truth. This section translates that into writing rules.
+The brand voice in [Brand Guide § Brand voice](./BRAND_GUIDE.md#brand-voice) is the source of truth for tone anchors. This section translates that into writing rules.
 
 ### 2.1 The four anchors
 
@@ -54,7 +54,8 @@ Multiple authors publish on PTT. The voice anchors stay constant, but the regist
 
 | Mode | Subject | Voice flex | Example opening |
 |---|---|---|---|
-| **Meetup recap** | "What happened at the March 2026 meetup" | Plural, scene-setting, attendee-quoted | "On March 14 we packed Sala 3 of UTP — 60 builders, four talks, one full hour of impromptu pair-debugging at the back tables." |
+| **Meetup page (collection)** | Canonical event page in `src/content/meetups/` (`/meetups/{slug}`) | Organization plural ("we"); short archive/program copy; no invented people or counts | "On April 11 we filled a UTP hall with red lobster claws and working demos — an OpenClaw Moltys morning of configs, experiments, and questions from the floor." |
+| **Meetup recap (blog)** | Reflective blog post about a past meetup (`src/content/blog/{en,es}/`) | Plural or first-person by byline; scene-setting; speaker- and attendee-quoted; longer than the collection page | "On March 14 we packed Sala 3 of UTP — 60 builders, four talks, one full hour of impromptu pair-debugging at the back tables." |
 | **Speaker deep-dive** | A speaker's technical talk, expanded into prose | First-person if speaker is the author; third-person if an editor is writing the recap | "I gave a talk at PTT in February on agentic web standards. Here's the longer version of what I couldn't fit in 25 minutes." |
 | **Event coverage** | Pereira Tech Day, hackathons | Plural, journalistic, timestamped | "Pereira Tech Day 2024 ran for one full day at UTP — 11 talks, 240 attendees, four sponsors, and a closing panel that ran 30 minutes over." |
 | **Vertical update** | Speaker School, La Biblioteca del Mañana, AI Channel | Plural, status-of-the-program | "Speaker School cohort 03 wrapped in April. Eight speakers shipped a talk; six of them landed it at PTT or another community within 60 days." |
@@ -136,8 +137,8 @@ Expected: zero matches. If any match is found, fix before committing.
 [ ] Spanish content uses tuteo (tú), not voseo (vos)?
 [ ] If byline is "Pereira Tech Talks" (org voice), does the post avoid first-person-singular sentences that require an embodied "I"?
 [ ] If byline is a single author, are community-attributed claims clearly marked as theirs?
+[ ] Meetup collection pages: body is not only an import stub; no invented attendance/talks/people; sponsors vs allies wording correct?
 ```
-
 ---
 
 ## 7. AI Vocabulary Blocklist
@@ -258,13 +259,67 @@ The goal is not to remove technical substance. It's to make sure a reader who do
 
 PTT publishes more than blog posts. The voice rules apply across collections, with these adaptations:
 
-### 9.1 Meetup recaps (`src/content/meetups/`)
+### 9.1 Meetup pages (`src/content/meetups/`)
 
-- Open with a scene, not a roster. "We packed Sala 3" beats "The March meetup featured the following talks."
-- Name attendees and speakers by full name on first reference, by first name afterwards.
-- Quote at least one speaker and one attendee. Short quotes — a sentence, maybe two.
-- End with a forward-looking line for next month's meetup, with a concrete date if known.
-- Length: 600–1,200 words. Recaps are not feature articles.
+Meetup **collection pages** are the canonical public record of each monthly event (`/meetups/{slug}`, `/en/meetups/{slug}`). They are **not** blog meetup recaps. Recaps live under `src/content/blog/` and follow the **Meetup recap (blog)** row in §2.4 — longer, reflective, quote-heavy. Collection pages stay shorter, factual, and organization-voiced.
+
+#### Voice
+
+- Default to **plural organization voice**: "we" / "nos" / "la comunidad." The byline is Pereira Tech Talks.
+- Use first-person singular **only** when quoting or attributing a **named organizer** (or speaker) who owns that sentence — e.g. a short attributed line from Sergio Flórez, not an embodied "I" in the org narrative.
+- Warm, specific, professional. No press-release hype, no corporate community-speak.
+
+#### Structure
+
+Keep bodies lean and scannable:
+
+1. **Short scene-setting opener** — place, vibe, or why this night mattered (1–3 sentences).
+2. **What we ran** — themes, talks, or format, using only evidenced titles and people (frontmatter, flyer, audit).
+3. **Practical details** — when, where, mode, how to join (or that it already happened).
+4. **Optional resources** — slides, recordings, external docs, related links.
+
+Honest archive blurbs are fine when evidence is thin (title + date + venue only). Prefer a short true paragraph over a fake roster.
+
+#### Never leave import stubs
+
+- **Do not** leave a body that is only: `Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.`
+- Import links may stay in frontmatter or Resources; the markdown body must still read as a PTT page.
+- Placeholders (`[TODO:]`, `[TBD]`, etc.) are forbidden — see §5.
+
+#### Language & frontmatter quality
+
+- **Spanish orthography is mandatory** — ñ, áéíóú, ¿¡. No missing accents.
+- **Tuteo only** — never voseo (`tenés`, `podés`, `sabés`).
+- Bilingual `title.en` / `title.es` and `description.en` / `description.es` required.
+- **Descriptions: 130–160 characters** per language (meta-quality). Specific and concrete; not a keyword dump.
+- Write Spanish first when possible; English is a first-class international rendition, not an afterthought.
+
+#### Sponsors vs allies wording
+
+Flyer labels decide the collection — never guess:
+
+| Flyer / copy cue | Treat as | Wording |
+|------------------|----------|---------|
+| **Sponsored by** / **Patrocinado por** | Sponsor (`sponsors` / `meetup.sponsors`) | Thank sponsors as sponsors; match frontmatter slugs |
+| Peer meetup / community logos, “comunidad aliada” | Allied community (`communities`) | “comunidades aliadas” / “allied communities” — **never** call them sponsors |
+| **Organized by** / PTT logo | Organizer | Do not list Pereira Tech Talks as a sponsor |
+
+Venue (e.g. UTP as location) is not a sponsor unless it appears under Sponsored by. Ambiguous logos stay out of prose claims until classified.
+
+#### Meetup-specific anti-slop
+
+- **No fake attendance** — do not invent headcounts, “sala llena,” or “record turnout” without a source.
+- **No invented talk titles or people** — if the flyer/audit/frontmatter does not evidence a talk or speaker, omit them or say names are still being confirmed.
+- Do not contradict frontmatter `speakers` / `talks` / `sponsors` in the body.
+- Do not paste a personal blog recap wholesale; rewrite in PTT org voice (see `openclaw-moltys-utp` as a recent collection-page example).
+- Keep the general AI-slop blocklist (§3, §7); collection pages especially avoid length explosion and marketing CTAs.
+
+#### Length & naming
+
+- Typical body: a few short sections — enough for a visitor to understand the night, not a 1,000-word essay.
+- Name speakers by full name on first reference when they appear; keep claims aligned with linked talk/speaker entries.
+
+**Blog meetup recaps** (separate content type): when publishing a reflective post in `src/content/blog/`, use the **Meetup recap (blog)** mode in §2.4 — scene-setting, speaker- and attendee-quoted, roughly 600–1,200 words, with a forward-looking line for the next meetup when the date is known. Do not treat the collection page as a substitute for that post, or the post as a dump of the collection body.
 
 ### 9.2 Pereira Tech Day editions (`src/content/pereiraTechDays/`)
 
@@ -304,5 +359,5 @@ PTT publishes more than blog posts. The voice rules apply across collections, wi
 
 ---
 
-**Last updated:** 2026-05-31
-**Origin:** Distilled from Task 1 brand voice & tone, the previous personal-blog refinement library, and PTT v3.0.0 multi-author requirements.
+**Last updated:** 2026-08-08
+**Origin:** Distilled from PTT brand voice & tone, the previous personal-blog refinement library, PTT v3.0.0 multi-author requirements, and meetup collection voice rules (organization pages vs blog recaps).

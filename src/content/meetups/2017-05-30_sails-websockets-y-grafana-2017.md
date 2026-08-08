@@ -3,8 +3,8 @@ title:
   en: "APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
   es: "APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
 description:
-  en: "Pereira Tech Talks meetup (2017-05-30). En PereiraJs nuestros Speakers se lucieron hablando sobre contrucción de APIs con SailsJs y Monitoreo con StatsD y Grafana:."
-  es: "En PereiraJs nuestros Speakers se lucieron hablando sobre contrucción de APIs con SailsJs y Monitoreo con StatsD y Grafana:."
+  en: "Pereira Tech Talks meetup — APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana. Community archive page with the…"
+  es: "En PereiraJs nuestros Speakers se lucieron hablando sobre contrucción de APIs con SailsJs y Monitoreo con StatsD y Grafana:"
 pubDate: 2017-05-30
 date: 2017-05-30
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - sails-websockets-y-grafana-2017--1-apis-y-websockets-con-sailsjs
+  - sails-websockets-y-grafana-2017--2-monitoreo-y-visualizacion-de-datos-con-statsd-y-grafana
+speakers:
+  - john-darwin-morales
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

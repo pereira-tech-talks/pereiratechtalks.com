@@ -1,0 +1,21 @@
+name: "Luis Uribe"
+pronouns: he/him
+role:
+  en: "Infrastructure automation engineer"
+  es: "Ingeniero de automatización de infraestructura"
+bio:
+  en: "Luis Uribe spoke at Pereira Tech Talks on infrastructure as code and automating IT infrastructure."
+  es: "Luis Uribe participó en Pereira Tech Talks con una charla sobre infraestructura como código y automatización de infraestructura."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Luis Uribe"
+    es: "Retrato de Luis Uribe"
+social:
+  twitter: "https://twitter.com/luisuribe"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

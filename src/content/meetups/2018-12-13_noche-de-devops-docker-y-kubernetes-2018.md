@@ -3,8 +3,8 @@ title:
   en: "DevOps Night - Introducción a Docker y Kubernetes"
   es: "Noche de DevOps - Introducción a Docker y Kubernetes"
 description:
-  en: "Pereira Tech Talks meetup (2018-12-13). 📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y arquitecturas orientadas a microservicios."
-  es: "📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y arquitecturas orientadas a microservicios."
+  en: "Pereira Tech Talks meetup — DevOps Night - Introducción a Docker y Kubernetes. Community archive page with the night’s program and context."
+  es: "📣 ¡Anunciamos nuestro gran meetup de cierre! Acompáñanos a despedir el 2018 compartiendo con la comunidad y aprendiendo mucho sobre infraestructura y…"
 pubDate: 2018-12-13
 date: 2018-12-13
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/noche-de-devops-docker-y-kubernetes-2018/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - noche-de-devops-docker-y-kubernetes-2018--1-introduccion-a-docker
+  - noche-de-devops-docker-y-kubernetes-2018--2-hector-jimenez-session
+speakers:
+  - sergio-florez
+  - hector-jimenez
 sponsors: []
 status: completed
 draft: false

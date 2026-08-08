@@ -27,7 +27,15 @@ talks:
 speakers:
   - melissa-escobar-gutierrez
   - mayra-valentina-velasquez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: aumentada
+    tier: community
+  - slug: ase-utp
+    tier: community
+  - slug: vuetify
+    tier: community
 linkMeetupCom: https://luma.com/4a8c1ypc
 status: announced
 draft: false
@@ -35,5 +43,12 @@ draft: false
 
 ## Mujeres en Tecnología
 
+El 8 de marzo de 2026 nos reunimos en **Universidad Tecnológica de Pereira** para **Mujeres en Tecnología**. En el programa: Melissa Escobar Gutiérrez, Mayra Valentina Velásquez.
+
 Meetup del mes de la mujer en tecnología — celebramos el impacto de las mujeres en tech con conversaciones sobre creatividad, IA y comunidad.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/4a8c1ypc

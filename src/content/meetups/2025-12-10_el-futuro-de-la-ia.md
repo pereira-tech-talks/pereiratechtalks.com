@@ -35,5 +35,12 @@ draft: false
 
 ## El Futuro de la IA: Código, Hardware y Agentes
 
+El 10 de diciembre de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **El Futuro de la IA: Código, Hardware y Agentes**. En el programa: Sergio Alexander Flórez, Sebastián Mora.
+
 Meetup de cierre de año sobre cómo la IA está transformando la ingeniería de software — agentes, LLMs, RAG y la IA conversando con hardware real.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/e0qp2vux

@@ -3,7 +3,7 @@ title:
   en: "Reactive Programming && EcmaScript 6"
   es: "Reactive Programming && EcmaScript 6"
 description:
-  en: "Pereira Tech Talks meetup (2016-01-31). Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
+  en: "Pereira Tech Talks meetup — Reactive Programming && EcmaScript 6. Community archive page with the night’s program and context."
   es: "Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
 pubDate: 2016-01-31
 date: 2016-01-31
@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/reactive-programming-y-es6/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - reactive-programming-y-es6--1-reactive-programming-ecmascript-6
+speakers:
+  - jonathan-alvarez
 sponsors: []
 status: completed
 draft: false

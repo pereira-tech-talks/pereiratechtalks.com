@@ -1,0 +1,18 @@
+name: "Mauricio Morales"
+role:
+  en: "CEO at DailyBot"
+  es: "CEO en DailyBot"
+bio:
+  en: "Mauricio Morales spoke at Pereira Tech Talks. CEO at DailyBot."
+  es: "Mauricio Morales participó como ponente en Pereira Tech Talks. CEO en DailyBot."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Mauricio Morales
+    es: Retrato de Mauricio Morales
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -27,7 +27,11 @@ talks:
 speakers:
   - sebastian-agudelo-morales
   - juan-de-jesus-fernandez-graciano
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307796521/
 status: completed
 draft: false
@@ -35,5 +39,12 @@ draft: false
 
 ## Continuous Testing: Paralelización de Pruebas y Observabilidad
 
+El 21 de mayo de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Continuous Testing: Paralelización de Pruebas y Observabilidad**. En el programa: Sebastián Agudelo Morales, Juan de Jesús Fernández Graciano.
+
 Meetup sobre continuous testing — escalar la automatización de pruebas sin escalar el equipo y convertir la suite en una herramienta de observabilidad en tiempo real.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/307796521/

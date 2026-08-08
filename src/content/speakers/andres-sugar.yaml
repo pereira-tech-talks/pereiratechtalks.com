@@ -1,0 +1,20 @@
+name: "Andrés Sugar"
+role:
+  en: "Speaker — conversational interfaces"
+  es: "Ponente — interfaces conversacionales"
+bio:
+  en: "Andrés Sugar spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Andrés Sugar participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Andrés Sugar"
+    es: "Retrato de Andrés Sugar"
+social:
+  twitter: "https://twitter.com/alsug4"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

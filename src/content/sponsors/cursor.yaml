@@ -1,0 +1,12 @@
+name: Cursor
+logo:
+  light: /images/sponsors/cursor.png
+  dark: /images/sponsors/cursor-dark.png
+  alt: Cursor logo
+url: "https://cursor.com/"
+description:
+  en: AI code editor. Past community partner of Pereira Tech Talks — supported the OpenClaw Moltys meetup at UTP (April 2026).
+  es: Editor de código con IA. Aliado comunitario pasado de Pereira Tech Talks — apoyó el meetup OpenClaw Moltys en la UTP (abril 2026).
+tier: community
+status: past
+order: 21

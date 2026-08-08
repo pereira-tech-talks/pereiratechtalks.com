@@ -3,8 +3,8 @@ title:
   en: "Serverless Night && Seguridad Informática"
   es: "Noche de Serverless && Seguridad Informática"
 description:
-  en: "Pereira Tech Talks meetup (2019-03-13). 📣 ¡Anunciamos nuestro primer meetup del año con dos fantásticas charlas de parte de nuestros organizadores!."
-  es: "📣 ¡Anunciamos nuestro primer meetup del año con dos fantásticas charlas de parte de nuestros organizadores!."
+  en: "Pereira Tech Talks meetup — Serverless Night && Seguridad Informática. Community archive page with the night’s program and context."
+  es: "📣 ¡Anunciamos nuestro primer meetup del año con dos fantásticas charlas de parte de nuestros organizadores!"
 pubDate: 2019-03-13
 date: 2019-03-13
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/noche-de-serverless-y-seguridad-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - noche-de-serverless-y-seguridad-2019--1-aprendiendo-serverless-con-enfasis-en-iot
+  - noche-de-serverless-y-seguridad-2019--2-seguridad-informatica-en-instituciones-del-eje-cafetero
+speakers:
+  - sergio-florez
+  - santiago-bernal
 sponsors: []
 status: completed
 draft: false

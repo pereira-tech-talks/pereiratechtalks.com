@@ -4,9 +4,9 @@ This is the **single source of truth** for the Pereira Tech Talks (PTT) visual
 identity. All AI agents, designers, and developers reference this document when
 making UI, color, typography, content, or brand decisions.
 
-> The canonical, machine-readable color/spacing/motion source is
-> [`analysis_results/BRAND_PALETTE.md`](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md).
-> This guide is the human-friendly companion mirroring its content.
+> **Palette & tokens:** this guide (§ Color Palette) plus `src/styles/global.css`
+> (`@theme` `--ptt-*` tokens) are canonical. For **voice & tone** (including
+> meetup page copy), see [`docs/WRITING_VOICE_GUIDE.md`](WRITING_VOICE_GUIDE.md).
 
 ## Brand Identity
 
@@ -270,22 +270,34 @@ Implemented at runtime by `<EditionScope edition={edition}>` (Task 5).
 
 ## Brand voice
 
+Voice must stay consistent with the **[Writing Voice Guide](WRITING_VOICE_GUIDE.md)** —
+four anchors (warm, professional, plurally inclusive, community-driven), anti-AI-slop
+rules, and author-mode flex. Summary for brand and UI copy:
+
 ### English (international)
 
-- Warm, professional, plurally-inclusive, community-driven.
-- Direct addresses (we / you), concrete examples, real numbers, real names.
-- Avoid: corporate jargon, slogans, hype, exclamation marks, emoji-only headlines.
+- Warm, professional, plurally inclusive, community-driven.
+- Direct address (we / you), concrete examples, real numbers, real names — only when evidenced.
+- Avoid: corporate jargon, slogans, hype, stacked exclamation marks, emoji-only headlines.
 
 ### Spanish (regional Colombian, accessible to LATAM)
 
 - Cercano, profesional, comunitario, plural e inclusivo.
-- Voz activa, segunda persona, ejemplos concretos.
-- Ortografía completa: ñ, áéíóú, ¿¡ — sin excepción.
+- Voz activa, tuteo (`tú`), ejemplos concretos.
+- Ortografía completa: ñ, áéíóú, ¿¡ — sin excepción. Nunca voseo (`tenés`, `podés`).
 - Evitar: jerga corporativa, anglicismos innecesarios, signos de admiración acumulados.
 
-For full do/don't tables and the orthography hard rule, see
-[`analysis_results/BRAND_PALETTE.md` §8](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md#8-voice--tone)
-and [`docs/WRITING_VOICE_GUIDE.md`](WRITING_VOICE_GUIDE.md).
+### Meetup pages (collection)
+
+Canonical event copy lives in `src/content/meetups/` (not the blog). Organization
+**“we”**; short scene → what we ran → practical details → optional resources. Never
+ship bodies that are only “Originally published on Meetup.com / Luma…”. Descriptions
+130–160 characters per language. **Sponsored by** / **Patrocinado por** → sponsors;
+allied communities stay “comunidades aliadas” / “allied communities”; PTT as organizer
+is never a sponsor. No fake attendance or invented talk titles/people.
+
+Full do/don't tables, meetup vs blog-recap modes, and the orthography hard rule:
+[`docs/WRITING_VOICE_GUIDE.md`](WRITING_VOICE_GUIDE.md) (§2, §3, §9.1).
 
 ---
 
@@ -331,7 +343,7 @@ Muted:         #6E8589 light · #8FA3A6 dark → text-ptt-muted (large text only
 - [Pereira Tech Days feature](features/PEREIRA_TECH_DAYS.md) — Per-edition theming runtime + content model (Tasks 4 + 5 + 12).
 - [Slides feature](features/SLIDES.md) — Slides system + per-edition opt-in palette (Task 13).
 - [Accessibility](ACCESSIBILITY.md) — WCAG AA rules.
-- [Writing Voice Guide](WRITING_VOICE_GUIDE.md) — Voice & tone in EN + ES.
+- [Writing Voice Guide](WRITING_VOICE_GUIDE.md) — Voice & tone in EN + ES (meetup pages, blog, anti-slop).
+- [Design System](DESIGN.md) — Agent-facing UI contract for `--ptt-*` tokens.
 - [Standards](STANDARDS.md) — Coding conventions including styling.
 - [Public Assets](features/PUBLIC_ASSETS.md) — Static asset inventory.
-- [`analysis_results/BRAND_PALETTE.md`](../.dwp/plans/PLAN_rewrite_to_pereira_tech_talks/analysis_results/BRAND_PALETTE.md) — Source-of-truth machine-readable palette.

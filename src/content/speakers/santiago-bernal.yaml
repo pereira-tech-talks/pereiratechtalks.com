@@ -1,0 +1,22 @@
+name: "Santiago Bernal"
+pronouns: he/him
+role:
+  en: "Organizer · OWASP and information security"
+  es: "Organizador · OWASP y seguridad informática"
+bio:
+  en: "Santiago Bernal is a Pereira Tech Talks organizer and recurring speaker on information security, OWASP, and software craft in the Eje Cafetero."
+  es: "Santiago Bernal es organizador de Pereira Tech Talks y ponente recurrente sobre seguridad informática, OWASP y oficio de software en el Eje Cafetero."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Santiago Bernal"
+    es: "Retrato de Santiago Bernal"
+social:
+  twitter: "https://twitter.com/santiaguf"
+  linkedin: "https://www.linkedin.com/in/santiaguf/"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

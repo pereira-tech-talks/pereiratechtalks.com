@@ -3,8 +3,8 @@ title:
   en: "Machine Learning, Automatizaciones, Videojuegos y Más."
   es: "Machine Learning, Automatizaciones, Videojuegos y Más."
 description:
-  en: "Pereira Tech Talks meetup (2024-09-26). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más."
-  es: "¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más."
+  en: "Pereira Tech Talks meetup — Machine Learning, Automatizaciones, Videojuegos y Más.. Community archive page with the night’s program and context."
+  es: "Archivo del meetup «Machine Learning, Automatizaciones, Videojuegos y Más.»: programa, ponentes y contexto de la noche con Pereira Tech Talks."
 pubDate: 2024-09-26
 date: 2024-09-26
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/machine-learning-y-automatizaciones/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - machine-learning-y-automatizaciones--1-leonardo-quinones-session
+  - machine-learning-y-automatizaciones--2-nicolas-narvaez-session
+speakers:
+  - leonardo-quinones
+  - nicolas-narvaez
 sponsors: []
 status: completed
 draft: false
@@ -30,11 +34,7 @@ draft: false
 
 ## Machine Learning, Automatizaciones, Videojuegos y Más.
 
-¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 26 de Septiembre a las 6:30 p.m. para sobre Machine Learning, automatizaciones, videojuegos y más.
-
-¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
-
-Ubicación y cómo encontrarnos: Nos reuniremos en la Universidad Católica de Pereira.
+El 26 de septiembre de 2024 nos reunimos en **Catholic University of Pereira** para **Machine Learning, Automatizaciones, Videojuegos y Más.**.
 
 **CHARLA #1**
 

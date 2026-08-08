@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks"
   es: "Quarantine Tech Talks"
 description:
-  en: "Pereira Tech Talks meetup (2020-12-25). las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo:."
-  es: "las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo:."
+  en: "Pereira Tech Talks meetup — Quarantine Tech Talks. Community archive page with the night’s program and context."
+  es: "las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los…"
 pubDate: 2020-12-25
 date: 2020-12-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-overview/hero.png"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - quarantine-tech-talks-2020-overview--1-andres-rodriguez-session
+  - quarantine-tech-talks-2020-overview--2-stiven-cardona-monsalve-session
+speakers:
+  - andres-rodriguez
+  - stiven-cardona-monsalve
 sponsors: []
 status: completed
 draft: false

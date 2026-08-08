@@ -1,0 +1,18 @@
+name: "Héctor Julián Cardona"
+role:
+  en: "Test Automation Engineer SSR at Globant"
+  es: "Test Automation Engineer SSR en Globant"
+bio:
+  en: "Héctor Julián Cardona spoke at Pereira Tech Talks. Test Automation Engineer SSR at Globant."
+  es: "Héctor Julián Cardona participó como ponente en Pereira Tech Talks. Test Automation Engineer SSR en Globant."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Héctor Julián Cardona
+    es: Retrato de Héctor Julián Cardona
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

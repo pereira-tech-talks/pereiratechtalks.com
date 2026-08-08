@@ -3,8 +3,8 @@ title:
   en: "Technology con Propósito: Conexiones Humanas y Colaboración Inteligente"
   es: "Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente"
 description:
-  en: "Pereira Tech Talks meetup (2024-11-28). Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente."
-  es: "Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente."
+  en: "Pereira Tech Talks meetup — Technology con Propósito: Conexiones Humanas y Colaboración Inteligente. Community archive page with the night’s program and…"
+  es: "Archivo del meetup «Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente»: programa, ponentes y contexto de la noche con Pereira Tech…"
 pubDate: 2024-11-28
 date: 2024-11-28
 venue:
@@ -21,8 +21,14 @@ hero:
 heroImage: "/images/meetups/tecnologia-con-proposito/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - tecnologia-con-proposito--1-maria-lizeth-duarte-coronado-session
+  - tecnologia-con-proposito--2-catalina-uribe-jaramillo-session
+  - tecnologia-con-proposito--3-ana-lopez-session
+speakers:
+  - maria-lizeth-duarte-coronado
+  - catalina-uribe-jaramillo
+  - ana-lopez
 sponsors: []
 status: completed
 draft: false
@@ -30,11 +36,9 @@ draft: false
 
 ## Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente
 
+El 28 de noviembre de 2024 nos reunimos en **Universidad Tecnológica de Pereira** para **Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente**.
+
 Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas sobre uso de tecnología con propósito y colaboración inteligente.
-
-¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestras invitadas expertos. ¡Nosotros nos encargamos del resto!
-
-Ubicación y cómo encontrarnos: Nos reuniremos en la Universidad Tecnológica de Pereira en el Auditorio de Ciencias de la Salud.
 
 **CHARLA 1**
 

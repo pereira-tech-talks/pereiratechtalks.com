@@ -117,6 +117,7 @@ talks:
 speakers:
   - juan-jose-cardona
 sponsors: []
+gallery: []  # optional memories — public/images/meetups/{slug}/memories/
 status: announced
 draft: false
 ---

@@ -27,7 +27,13 @@ talks:
 speakers:
   - german-grandas
   - jorge-martinez-gomez
-sponsors: []
+sponsors:
+  - slug: aumentada
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/308000000/
 status: completed
 draft: false
@@ -35,5 +41,12 @@ draft: false
 
 ## Noche de Python 2025
 
+El 13 de agosto de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Noche de Python 2025**. En el programa: Germán Grandas, Jorge Martínez Gómez.
+
 Inmersión en Python — desde ingeniería de datos hasta frameworks web y herramientas de IA. La comunidad Python de Pereira dice presente.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/308000000/

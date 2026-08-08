@@ -3,8 +3,8 @@ title:
   en: "NodeSchool Day Pereira 2018"
   es: "NodeSchool Day Pereira 2018"
 description:
-  en: "Pereira Tech Talks meetup (2018-06-23). El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y participación, contando con mentores expertos compartiendo su conocimiento y experiencia."
-  es: "El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y participación, contando con mentores expertos compartiendo su conocimiento y experiencia."
+  en: "Pereira Tech Talks meetup — NodeSchool Day Pereira 2018. Community archive page with the night’s program and context."
+  es: "El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por la comunidad **PereiraJs**, donde tuvimos una gran acogida y…"
 pubDate: 2018-06-23
 date: 2018-06-23
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/nodeschool-day-pereira-2018/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - nodeschool-day-pereira-2018--1-bienvenida-al-nodeschool-pereira-y-a-la-comunidad-perei
+  - nodeschool-day-pereira-2018--2-creando-redes-peer-to-peer-en-nodejs
+speakers:
+  - sergio-florez
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

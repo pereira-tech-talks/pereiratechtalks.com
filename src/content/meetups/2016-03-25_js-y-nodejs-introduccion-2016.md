@@ -3,7 +3,7 @@ title:
   en: "Introduction a Javascript && Introducción a NodeJs"
   es: "Introducción a Javascript && Introducción a NodeJs"
 description:
-  en: "Pereira Tech Talks meetup (2016-03-25). Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
+  en: "Pereira Tech Talks meetup — Introduction a Javascript && Introducción a NodeJs. Community archive page with the night’s program and context."
   es: "Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
 pubDate: 2016-03-25
 date: 2016-03-25
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - js-y-nodejs-introduccion-2016--1-introduccion-a-javascript
+  - js-y-nodejs-introduccion-2016--2-introduccion-a-nodejs
+speakers:
+  - jonathan-alvarez
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

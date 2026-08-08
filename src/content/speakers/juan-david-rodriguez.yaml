@@ -1,0 +1,18 @@
+name: "Juan David Rodríguez"
+role:
+  en: "CEO de English Code.AI y Teilur Talent"
+  es: "CEO de English Code.AI y Teilur Talent"
+bio:
+  en: "Juan David Rodríguez spoke at Pereira Tech Talks. CEO de English Code.AI y Teilur Talent."
+  es: "Juan David Rodríguez participó como ponente en Pereira Tech Talks. CEO de English Code.AI y Teilur Talent."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Juan David Rodríguez
+    es: Retrato de Juan David Rodríguez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

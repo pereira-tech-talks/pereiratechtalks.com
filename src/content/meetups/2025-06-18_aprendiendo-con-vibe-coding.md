@@ -28,7 +28,13 @@ talks:
 speakers:
   - jesus-david-mena-rivera
   - jose-felipe-duarte
-sponsors: []
+sponsors:
+  - slug: aumentada
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307800000/
 status: completed
 draft: false
@@ -36,5 +42,12 @@ draft: false
 
 ## Aprendiendo con Vibe Coding
 
+El 18 de junio de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Aprendiendo con Vibe Coding**. En el programa: Jesús David Mena Rivera, Jose Felipe Duarte.
+
 Meetup sobre vibe coding — pair-programming con agentes de IA para entregar software real más rápido sin salir del flow.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/307800000/

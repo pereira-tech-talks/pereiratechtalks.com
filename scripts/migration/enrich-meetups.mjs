@@ -117,8 +117,6 @@ const SLUG_TO_SOURCE = {
     'creando-un-servidor-web-desde-cero-con-nodejs.mdx',
   'que-es-el-blockchain-2017':
     'que-es-el-blockchain-y-como-transformara-radicalmente-la-economia.mdx',
-  'hackaton-planificacion-2018':
-    'hackaton-de-planificacion-de-actividades-2018.mdx',
   'realidad-virtual-y-ramda-2018':
     'realidad-virtual-para-la-web-con-a-frame-y-point-free-javascript-con-ramdajs.mdx',
   'redes-neuronales-keras-2018':

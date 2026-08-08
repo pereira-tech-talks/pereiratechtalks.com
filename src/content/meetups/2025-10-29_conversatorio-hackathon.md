@@ -21,9 +21,19 @@ hero:
 heroImage: "/images/meetups/conversatorio-hackathon/hero.png"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
-sponsors: []
+talks:
+  - conversatorio-hackathon--1-que-es-una-hackathon
+speakers:
+  - jose-felipe-duarte
+  - sergio-estrella
+  - sebastian-franco
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: aumentada
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://luma.com/0xil6wus
 status: completed
 draft: false
@@ -31,5 +41,14 @@ draft: false
 
 ## Conversatorio PerTT: ¿Qué es una Hackathon?
 
+El 29 de octubre de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Conversatorio PerTT: ¿Qué es una Hackathon?**.
+
 Conversatorio sobre la cultura de hackathons, qué esperar y cómo organizar la primera en Pereira.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/0xil6wus

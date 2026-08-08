@@ -3,8 +3,8 @@ title:
   en: "Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
   es: "Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
 description:
-  en: "Pereira Tech Talks meetup (2017-09-14). Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento tecnológico y conectar con el talento local y regional."
-  es: "Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento tecnológico y conectar con el talento local y regional."
+  en: "Pereira Tech Talks meetup — Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow. Community archive page with the night’s…"
+  es: "Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento…"
 pubDate: 2017-09-14
 date: 2017-09-14
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - airflow-y-tensorflow-2017--1-monitoreo-y-control-de-flujos-de-trabajo-con-airflow
+  - airflow-y-tensorflow-2017--2-introduccion-a-la-inteligencia-artificial-con-tensorflo
+speakers:
+  - manuel-pineda
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

@@ -3,8 +3,8 @@ title:
   en: "Introduction a MV* && Node.js v4"
   es: "Introducción a MV* && Node.js v4"
 description:
-  en: "Pereira Tech Talks meetup (2016-01-25). Decimocuarto Meetup de PereiraJs hablando sobre:."
-  es: "Decimocuarto Meetup de PereiraJs hablando sobre:."
+  en: "Pereira Tech Talks meetup — Introduction a MV* && Node.js v4. Community archive page with the night’s program and context."
+  es: "Decimocuarto Meetup de PereiraJs hablando sobre:"
 pubDate: 2016-01-25
 date: 2016-01-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/introduccion-a-mvc-y-node-v4/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - introduccion-a-mvc-y-node-v4--1-introduccion-a-mv
+  - introduccion-a-mvc-y-node-v4--2-node-js-v4
+speakers:
+  - oscar-granada
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

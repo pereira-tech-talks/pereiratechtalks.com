@@ -3,8 +3,8 @@ title:
   en: "History, aplicaciones y programación orientada a objetos con Javascript"
   es: "Historia, aplicaciones y programación orientada a objetos con Javascript"
 description:
-  en: "Pereira Tech Talks meetup (2014-03-25). Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
-  es: "Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  en: "Pereira Tech Talks meetup — History, aplicaciones y programación orientada a objetos con Javascript. Community archive page with the night’s program and…"
+  es: "Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:"
 pubDate: 2014-03-25
 date: 2014-03-25
 venue:
@@ -21,8 +21,13 @@ hero:
 heroImage: "/images/meetups/historia-y-oop-en-javascript-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - historia-y-oop-en-javascript-2014--1-javascript-historia-y-aplicaciones
+  - historia-y-oop-en-javascript-2014--2-programacion-orientada-a-objetos-con-javascript
+speakers:
+  - manuel-pineda
+  - jhonber-jimenez
+  - oscar-granada
 sponsors: []
 status: completed
 draft: false

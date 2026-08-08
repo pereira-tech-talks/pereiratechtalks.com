@@ -1,0 +1,20 @@
+name: "Facundo Nahuel Garcia"
+pronouns: he/him
+role:
+  en: "Software engineer · Argentina"
+  es: "Ingeniero de software · Argentina"
+bio:
+  en: "Facundo Nahuel Garcia spoke at Pereira Tech Talks on Test Driven Development, comparing the Chicago and London schools of TDD."
+  es: "Facundo Nahuel Garcia participó en Pereira Tech Talks sobre Test Driven Development, comparando las escuelas Chicago y London de TDD."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Facundo Nahuel Garcia"
+    es: "Retrato de Facundo Nahuel Garcia"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

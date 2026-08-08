@@ -1,0 +1,21 @@
+name: "Carlos Mesa"
+pronouns: he/him
+role:
+  en: "Director general at Fundación Bitcoin Colombia"
+  es: "Director general de la Fundación Bitcoin Colombia"
+bio:
+  en: "Carlos Mesa is director general of Fundación Bitcoin Colombia. He presented at Pereira Tech Talks on Bitcoin fundamentals and blockchain beyond cryptocurrency."
+  es: "Carlos Mesa es director general de la Fundación Bitcoin Colombia. Presentó en Pereira Tech Talks sobre fundamentos de Bitcoin y blockchain más allá de las criptomonedas."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Carlos Mesa"
+    es: "Retrato de Carlos Mesa"
+social:
+  twitter: "https://twitter.com/MonoMesa"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

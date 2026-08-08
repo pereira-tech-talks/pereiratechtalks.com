@@ -3,8 +3,8 @@ title:
   en: "First meeting of PereiraJs"
   es: "Primera reunión PereiraJs"
 description:
-  en: "Pereira Tech Talks meetup (2014-02-27). Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
-  es: "Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
+  en: "Pereira Tech Talks meetup — First meeting of PereiraJs. Community archive page with the night’s program and context."
+  es: "Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y…"
 pubDate: 2014-02-27
 date: 2014-02-27
 venue:
@@ -21,8 +21,13 @@ hero:
 heroImage: "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - primera-reunion-pereirajs-2014--1-bienvenida-a-pereirajs
+  - primera-reunion-pereirajs-2014--2-javascript-historia-y-aplicaciones
+speakers:
+  - daniel-aristizabal
+  - jhonber-jimenez
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

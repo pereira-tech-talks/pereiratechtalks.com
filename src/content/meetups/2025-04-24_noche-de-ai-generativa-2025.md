@@ -28,7 +28,11 @@ talks:
 speakers:
   - cristhian-andres-grajales-perez
   - frederick-johan-castaneda-perez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307304023/
 status: completed
 draft: false
@@ -36,5 +40,12 @@ draft: false
 
 ## Noche de AI Generativa: generación procedural y descubrimiento de fármacos
 
+El 24 de abril de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Noche de AI Generativa: generación procedural y descubrimiento de fármacos**. En el programa: Cristhian Andrés Grajales Pérez, Frederick Johan Castañeda Pérez.
+
 Dos charlas sobre IA generativa — generación procedural en videojuegos (mundos al estilo Minecraft) y LLMs aplicados a la investigación en biotecnología.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/307304023/

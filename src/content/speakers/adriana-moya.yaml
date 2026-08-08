@@ -1,0 +1,19 @@
+name: "Adriana Moya"
+pronouns: she/her
+role:
+  en: "Software engineer · Globant"
+  es: "Ingeniera de software · Globant"
+bio:
+  en: "Adriana Moya spoke at Pereira Tech Talks on deploying websites to Google Cloud Run."
+  es: "Adriana Moya participó en Pereira Tech Talks con una charla sobre desplegar sitios web en Google Cloud Run."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Adriana Moya"
+    es: "Retrato de Adriana Moya"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

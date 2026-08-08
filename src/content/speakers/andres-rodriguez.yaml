@@ -1,0 +1,23 @@
+name: "Andrés Rodríguez"
+pronouns: he/him
+role:
+  en: "Alumni organizer · Full-stack developer"
+  es: "Organizador alumni · Desarrollador full-stack"
+bio:
+  en: "Andrés Rodríguez is a former Pereira Tech Talks organizer and speaker on Next.js server-side rendering, JavaScript trends, and careers in web development."
+  es: "Andrés Rodríguez es organizador alumni de Pereira Tech Talks y ponente sobre server-side rendering con Next.js, tendencias de JavaScript y carreras en desarrollo web."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Andrés Rodríguez"
+    es: "Retrato de Andrés Rodríguez"
+social:
+  twitter: "https://twitter.com/arodrigueze_"
+  linkedin: "https://www.linkedin.com/in/arodrigueze0215/"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

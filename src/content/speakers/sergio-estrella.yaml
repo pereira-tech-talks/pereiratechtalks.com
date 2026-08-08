@@ -1,0 +1,19 @@
+name: Sergio Estrella
+pronouns: he/him
+role:
+  en: Hackathon winner (Platzi Hackathon 2024)
+  es: Ganador de Platzi Hackathon 2024
+bio:
+  en: Speaker at Pereira Tech Talks. Joined the October 2025 conversatorio on hackathon culture as a Platzi Hackathon 2024 winner.
+  es: Ponente en Pereira Tech Talks. Participó en el conversatorio de octubre 2025 sobre cultura de hackathons como ganador de Platzi Hackathon 2024.
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Sergio Estrella
+    es: Retrato de Sergio Estrella
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

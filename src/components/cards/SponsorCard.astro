@@ -51,6 +51,20 @@ const sameLogo = logoLight === logoDark;
 
 const logoWidth = muted ? 120 : 160;
 const logoHeight = muted ? 40 : 64;
+/**
+ * Wide wordmarks optically shrink in a narrow box. Keep the same h-16 row as
+ * peers (so titles align) but allow a wider mark for perceived weight.
+ */
+const wideWordmarkIds = new Set(['veritran', 'dailybot', 'aumentada']);
+const isWideWordmark = !muted && wideWordmarkIds.has(sponsor.id);
+const logoBoxClass = muted
+  ? 'flex h-10 w-full items-center justify-center'
+  : isWideWordmark
+    ? 'flex h-16 w-48 max-w-full min-w-0 items-center justify-center'
+    : 'flex h-16 w-36 max-w-full min-w-0 items-center justify-center';
+const logoImgClass = muted ? 'max-h-10' : 'max-h-16 w-auto';
+const logoDisplayWidth = muted ? logoWidth : isWideWordmark ? 192 : logoWidth;
+const logoDisplayHeight = muted ? logoHeight : isWideWordmark ? 46 : logoHeight;
 ---
 
 <a
@@ -61,38 +75,27 @@ const logoHeight = muted ? 40 : 64;
     'group flex min-w-0 transition motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
     muted
       ? 'h-full flex-col items-center justify-center gap-2 rounded-xl bg-ptt-bg-elevated/60 px-3 py-4 text-center shadow-none ring-1 ring-ptt-border/50 hover:ring-ptt-border dark:bg-ptt-bg-dark/30 sm:px-4 sm:py-5'
-      : 'h-full flex-col rounded-2xl bg-ptt-bg-elevated p-4 shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30 sm:p-6',
+      : 'h-full flex-col items-center rounded-2xl bg-ptt-bg-elevated p-4 text-center shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30 sm:p-6',
   ]}
 >
   <div
     class:list={[
       muted
         ? 'flex h-10 w-full max-w-[7.5rem] items-center justify-center'
-        : 'flex flex-wrap items-start justify-between gap-3 sm:gap-4',
+        : 'flex w-full flex-col items-center gap-3',
     ]}
   >
-    <div
-      class:list={[
-        muted
-          ? 'flex h-10 w-full items-center justify-center'
-          : 'flex h-16 w-36 max-w-full min-w-0 items-center',
-      ]}
-    >
+    <div class={logoBoxClass}>
       {
         sameLogo ? (
           <img
             decoding="async"
             src={logoLight}
             alt={logoAlt}
-            width={logoWidth}
-            height={logoHeight}
+            width={logoDisplayWidth}
+            height={logoDisplayHeight}
             loading={loading}
-            class:list={[
-              'max-w-full object-contain',
-              muted
-                ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
-                : 'max-h-16',
-            ]}
+            class:list={['max-w-full object-contain', logoImgClass]}
           />
         ) : (
           <>
@@ -100,28 +103,21 @@ const logoHeight = muted ? 40 : 64;
               decoding="async"
               src={logoLight}
               alt={logoAlt}
-              width={logoWidth}
-              height={logoHeight}
+              width={logoDisplayWidth}
+              height={logoDisplayHeight}
               loading={loading}
-              class:list={[
-                'max-w-full object-contain dark:hidden',
-                muted
-                  ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
-                  : 'max-h-16',
-              ]}
+              class:list={['max-w-full object-contain dark:hidden', logoImgClass]}
             />
             <img
               decoding="async"
               src={logoDark}
               alt={logoAlt}
-              width={logoWidth}
-              height={logoHeight}
+              width={logoDisplayWidth}
+              height={logoDisplayHeight}
               loading={loading}
               class:list={[
                 'hidden max-w-full object-contain dark:block',
-                muted
-                  ? 'max-h-10 opacity-80 grayscale-[35%] transition group-hover:opacity-100 group-hover:grayscale-0'
-                  : 'max-h-16',
+                logoImgClass,
               ]}
             />
           </>
@@ -137,7 +133,7 @@ const logoHeight = muted ? 40 : 64;
   <h3
     class:list={[
       muted
-        ? 'text-xs font-medium leading-snug text-ptt-secondary group-hover:text-ptt'
+        ? 'text-xs font-medium leading-snug text-ptt-secondary transition-colors group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark'
         : 'mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary',
     ]}
   >

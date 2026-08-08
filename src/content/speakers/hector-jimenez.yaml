@@ -1,0 +1,19 @@
+name: Hector Jimenez
+pronouns: he/him
+role:
+  en: Site Reliability Engineer at GoDaddy
+  es: Site Reliability Engineer en GoDaddy
+bio:
+  en: Speaker at Pereira Tech Talks. Site Reliability Engineer at GoDaddy; joined the September 2025 “Conociendo la nube” meetup.
+  es: Ponente en Pereira Tech Talks. Site Reliability Engineer en GoDaddy; participó en el meetup «Conociendo la nube» de septiembre 2025.
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Hector Jimenez
+    es: Retrato de Hector Jimenez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -3,8 +3,8 @@ title:
   en: "Technologies de Vanguardia: Svelte y Blockchain al descubierto."
   es: "Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
 description:
-  en: "Pereira Tech Talks meetup (2024-04-25). ¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…"
-  es: "¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y…"
+  en: "Pereira Tech Talks meetup — Technologies de Vanguardia: Svelte y Blockchain al descubierto.. Community archive page with the night’s program and context."
+  es: "Archivo del meetup «Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.»: programa, ponentes y contexto de la noche con Pereira Tech Talks."
 pubDate: 2024-04-25
 date: 2024-04-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - tecnologias-de-vanguardia-svelte-y-blockchain--1-julian-lamprea-session
+  - tecnologias-de-vanguardia-svelte-y-blockchain--2-steven-pineda-session
+speakers:
+  - julian-lamprea
+  - steven-pineda
 sponsors: []
 status: completed
 draft: false
@@ -30,9 +34,9 @@ draft: false
 
 ## Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.
 
-¡Prepárate para una tarde de aprendizaje y networking en nuestras próximas charlas sobre tecnologías de vanguardia! Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y blockchain con dos temas fascinantes que no querrás perderte.
-**¿Qué necesitas traer?** Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender sobre las últimas tendencias en tecnología. ¡Nosotros nos encargamos del resto!
-**Ubicación y cómo encontrarnos:** Nos reuniremos en Universidad Tecnológica de Pereira Sala Magistral 1 Bloque *Y.* Un espacio ideal para la interacción y el aprendizaje.
+El 25 de abril de 2024 nos reunimos en **Sala Magistral 1 (Edificio 13)** para **Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.**.
+
+Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los horizontes del desarrollo web y….
 
 **Charlas:**
 

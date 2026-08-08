@@ -1,0 +1,19 @@
+name: "Gabriel Mejía Amortegui"
+pronouns: he/him
+role:
+  en: "Mobile developer · VeriTran"
+  es: "Desarrollador móvil · VeriTran"
+bio:
+  en: "Gabriel Mejía Amortegui spoke at Pereira Tech Talks on automating mobile development workflows with Fastlane."
+  es: "Gabriel Mejía Amortegui participó en Pereira Tech Talks sobre automatización de procesos en desarrollo móvil con Fastlane."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Gabriel Mejía Amortegui"
+    es: "Retrato de Gabriel Mejía Amortegui"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -3,8 +3,8 @@ title:
   en: "Revolutionizing el Deep Learning: Potenciando modelos con datos limitados"
   es: "Revolucionando el Deep Learning: Potenciando modelos con datos limitados"
 description:
-  en: "Pereira Tech Talks meetup (2024-05-30). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial."
-  es: "¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial."
+  en: "Pereira Tech Talks meetup — Revolutionizing el Deep Learning: Potenciando modelos con datos limitados. Community archive page with the night’s program…"
+  es: "Archivo del meetup «Revolucionando el Deep Learning: Potenciando modelos con datos limitados»: programa, ponentes y contexto de la noche con Pereira Tech…"
 pubDate: 2024-05-30
 date: 2024-05-30
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/revolucionando-el-deep-learning/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - revolucionando-el-deep-learning--1-leiver-campeon-session
+  - revolucionando-el-deep-learning--2-sebastian-franco-session
+speakers:
+  - leiver-campeon
+  - sebastian-franco
 sponsors: []
 status: completed
 draft: false
@@ -30,10 +34,7 @@ draft: false
 
 ## Revolucionando el Deep Learning: Potenciando modelos con datos limitados
 
-¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 30 de mayo a las 6:30 p.m. para descubrir los paradigmas emergentes en la revolución del deep learning y la inteligencia artificial.
-
-**¿Qué necesitas traer?** Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender sobre las últimas tendencias en tecnología. ¡Nosotros nos encargamos del resto!
-**Ubicación y cómo encontrarnos:** Nos reuniremos en Universidad Católica de Pereira en la Sala de estudiantes. Un espacio ideal para la interacción y el aprendizaje.
+El 30 de mayo de 2024 nos reunimos en **Catholic University of Pereira** para **Revolucionando el Deep Learning: Potenciando modelos con datos limitados**.
 
 **Charlas:**
 

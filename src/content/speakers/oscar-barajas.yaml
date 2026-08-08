@@ -1,0 +1,22 @@
+name: "Óscar Barajas"
+pronouns: he/him
+role:
+  en: "Platzi educator (@gndx)"
+  es: "Educador en Platzi (@gndx)"
+bio:
+  en: "Óscar Barajas is a Platzi educator who spoke at Pereira Tech Talks on career paths in tech and the state of JavaScript."
+  es: "Óscar Barajas es educador en Platzi que participó en Pereira Tech Talks sobre rutas de carrera en tecnología y el estado de JavaScript."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Óscar Barajas"
+    es: "Retrato de Óscar Barajas"
+social:
+  twitter: "https://twitter.com/gndx"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

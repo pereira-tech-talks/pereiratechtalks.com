@@ -3,8 +3,8 @@ title:
   en: "Virtual Meetup: Noche de Code Review y IDaaS at Scale en Auth0"
   es: "MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0"
 description:
-  en: "Pereira Tech Talks meetup (2019-09-19). 📣 No se pierdan estas poderosas charlas tech este jueves en la noche:."
-  es: "📣 No se pierdan estas poderosas charlas tech este jueves en la noche:."
+  en: "Pereira Tech Talks meetup — Virtual Meetup: Noche de Code Review y IDaaS at Scale en Auth0. Community archive page with the night’s program and context."
+  es: "📣 No se pierdan estas poderosas charlas tech este jueves en la noche:"
 pubDate: 2019-09-19
 date: 2019-09-19
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/meetup-virtual-code-review-y-auth0/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - meetup-virtual-code-review-y-auth0--1-code-review-engineering-practices
+  - meetup-virtual-code-review-y-auth0--2-damian-schenkelman-session
+speakers:
+  - manuel-pineda
+  - damian-schenkelman
 sponsors: []
 status: completed
 draft: false

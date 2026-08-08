@@ -161,9 +161,24 @@
   }
 }
 
+/*
+ * Sticky chrome height — MainLayout ResizeObserver overwrites this at runtime.
+ * Declared on :root (not only via inline JS) so Tailwind/Lightning CSS keep
+ * scroll-padding-top / scroll-margin-top that reference the custom property.
+ */
+:root {
+  --ptt-chrome-height: 4.25rem;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    /*
+     * Sticky chrome ([data-ptt-chrome]) covers the top of the viewport.
+     * Offset in-page anchors (#main-after-hero, year jumps, etc.) so the
+     * target sits just below the measured header (± notification bar).
+     */
+    scroll-padding-top: var(--ptt-chrome-height);
   }
 
   body {

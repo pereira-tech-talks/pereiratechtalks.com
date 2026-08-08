@@ -1,0 +1,21 @@
+name: "Zorayda Gutiérrez"
+pronouns: she/her
+role:
+  en: "Android developer · Ceiba Software"
+  es: "Desarrolladora Android · Ceiba Software"
+bio:
+  en: "Zorayda Gutiérrez is an Android developer passionate about mobile security and OWASP. She spoke at Pereira Tech Talks on Android architecture patterns, product flavors, and OWASP fundamentals."
+  es: "Zorayda Gutiérrez es desarrolladora Android apasionada por seguridad móvil y OWASP. Participó en Pereira Tech Talks sobre patrones de arquitectura Android, product flavors y fundamentos de OWASP."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Zorayda Gutiérrez"
+    es: "Retrato de Zorayda Gutiérrez"
+social:
+  twitter: "https://twitter.com/Zorayda"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

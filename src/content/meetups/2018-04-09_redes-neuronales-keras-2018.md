@@ -3,8 +3,8 @@ title:
   en: "Introduction a las redes neuronales con Keras + Random Forest"
   es: "Introducción a las redes neuronales con Keras + Random Forest"
 description:
-  en: "Pereira Tech Talks meetup (2018-04-09). En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter."
-  es: "En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter."
+  en: "Pereira Tech Talks meetup — Introduction a las redes neuronales con Keras + Random Forest. Community archive page with the night’s program and context."
+  es: "En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián…"
 pubDate: 2018-04-09
 date: 2018-04-09
 venue:
@@ -21,8 +21,11 @@ hero:
 heroImage: "/images/meetups/redes-neuronales-keras-2018/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - redes-neuronales-keras-2018--1-introduccion-a-las-redes-neuronales-con-keras-random-fo
+speakers:
+  - juan-sebastian-vega
+  - leiver-campeon
 sponsors: []
 status: completed
 draft: false

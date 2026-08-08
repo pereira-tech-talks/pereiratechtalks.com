@@ -1,0 +1,19 @@
+name: Steven Mejia
+pronouns: he/him
+role:
+  en: CEO at Pulsatrix
+  es: CEO en Pulsatrix
+bio:
+  en: Speaker at Pereira Tech Talks. Presented at the September 2025 “Conociendo la nube” meetup as CEO of Pulsatrix.
+  es: Ponente en Pereira Tech Talks. Participó en el meetup «Conociendo la nube» de septiembre 2025 como CEO de Pulsatrix.
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Steven Mejia
+    es: Retrato de Steven Mejia
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

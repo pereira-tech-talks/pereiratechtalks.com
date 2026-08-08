@@ -31,5 +31,14 @@ draft: false
 
 ## Inauguración GDG Pereira
 
+El 22 de febrero de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Inauguración GDG Pereira**.
+
 Las comunidades tech de Pereira — Pereira Tech Talks, CINCO, Pereira JS, JointDeveloper y Python Pereira — se unieron para inaugurar el capítulo local de Google Developer Groups.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/306256947/

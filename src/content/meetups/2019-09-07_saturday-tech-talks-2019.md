@@ -3,8 +3,8 @@ title:
   en: "Pereira - Saturday Tech Talks"
   es: "Pereira - Saturday Tech Talks"
 description:
-  en: "Pereira Tech Talks meetup (2019-09-07). 📣 ¡Un gran evento organizado por todas las comunidades de tecnología en Pereira nos espera! Tendremos unas charlas buenísimas que no te puedes perder:."
-  es: "📣 ¡Un gran evento organizado por todas las comunidades de tecnología en Pereira nos espera! Tendremos unas charlas buenísimas que no te puedes perder:."
+  en: "Pereira Tech Talks meetup — Pereira - Saturday Tech Talks. Community archive page with the night’s program and context."
+  es: "📣 ¡Un gran evento organizado por todas las comunidades de tecnología en Pereira nos espera! Tendremos unas charlas buenísimas que no te puedes perder:"
 pubDate: 2019-09-07
 date: 2019-09-07
 venue:
@@ -21,8 +21,16 @@ hero:
 heroImage: "/images/meetups/saturday-tech-talks-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - saturday-tech-talks-2019--1-desarrollo-serverless-de-interfaces-conversacionales-en
+  - saturday-tech-talks-2019--2-andres-rodriguez-session
+  - saturday-tech-talks-2019--3-introduccion-a-amazon-web-services-aws
+  - saturday-tech-talks-2019--4-patrones-de-arquitectura-android
+speakers:
+  - andres-rodriguez
+  - steven-pineda
+  - zorayda-gutierrez
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

@@ -3,8 +3,8 @@ title:
   en: "React Native && Seguridad en npm"
   es: "React native && Seguridad en npm"
 description:
-  en: "Pereira Tech Talks meetup (2017-08-01). Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:."
-  es: "Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:."
+  en: "Pereira Tech Talks meetup — React Native && Seguridad en npm. Community archive page with the night’s program and context."
+  es: "Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:"
 pubDate: 2017-08-01
 date: 2017-08-01
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/react-native-y-npm-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - react-native-y-npm-2017--1-introduccion-a-react-native
+  - react-native-y-npm-2017--2-exponiendo-credenciales-de-npm-sin-ningun-fallo
+speakers:
+  - carlos-alvaro
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

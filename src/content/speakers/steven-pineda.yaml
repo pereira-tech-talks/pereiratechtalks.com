@@ -1,0 +1,18 @@
+name: "Steven Pineda"
+role:
+  en: "Lead EVM Developer at RMRK"
+  es: "Lead EVM Developer en RMRK"
+bio:
+  en: "Steven Pineda spoke at Pereira Tech Talks. Lead EVM Developer at RMRK."
+  es: "Steven Pineda participó como ponente en Pereira Tech Talks. Lead EVM Developer en RMRK."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Steven Pineda
+    es: Retrato de Steven Pineda
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

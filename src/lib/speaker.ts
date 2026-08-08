@@ -1,4 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
+
+import { getMeetups } from '@/lib/meetup';
 import { getTalks } from '@/lib/talk';
 
 export type Speaker = CollectionEntry<'speakers'>;
@@ -39,8 +41,8 @@ export const getSpeakersBySlugs = async (
 
 /**
  * Pure sort for directory ordering:
- * 1. Speakers with talks first, by latestTalkDate descending
- * 2. Speakers without talks after, by name ascending
+ * 1. Speakers with activity first, by latestTalkDate descending
+ * 2. Speakers without dates after, by name ascending
  * 3. Name ascending as tie-break when dates equal
  */
 export const sortSpeakersByLatestTalk = (
@@ -58,19 +60,35 @@ export const sortSpeakersByLatestTalk = (
   });
 };
 
+type Stats = { talkCount: number; latestTalkDate: Date | null };
+
+function bumpLatest(current: Stats, date: Date | null | undefined): void {
+  if (
+    date &&
+    (!current.latestTalkDate ||
+      date.getTime() > current.latestTalkDate.getTime())
+  ) {
+    current.latestTalkDate = date;
+  }
+}
+
 /**
- * Enrich every speaker with talkCount + latestTalkDate from the talks
- * collection (membership via `talk.data.speakers`), then sort chronologically.
+ * Enrich every speaker with talkCount + latestTalkDate, then sort.
+ *
+ * Activity date priority:
+ * 1. Latest talk.data.date where the speaker is listed
+ * 2. Else latest meetup.data.date where meetup.speakers includes the slug
  */
 export const getSpeakersSortedByLatestTalk = async (): Promise<
   SpeakerWithTalkStats[]
 > => {
-  const [speakers, talks] = await Promise.all([getSpeakers(), getTalks()]);
+  const [speakers, talks, meetups] = await Promise.all([
+    getSpeakers(),
+    getTalks(),
+    getMeetups(),
+  ]);
 
-  const stats = new Map<
-    string,
-    { talkCount: number; latestTalkDate: Date | null }
-  >();
+  const stats = new Map<string, Stats>();
   for (const speaker of speakers) {
     stats.set(speaker.id, { talkCount: 0, latestTalkDate: null });
   }
@@ -83,13 +101,21 @@ export const getSpeakersSortedByLatestTalk = async (): Promise<
         latestTalkDate: null,
       };
       current.talkCount += 1;
-      if (
-        talkDate &&
-        (!current.latestTalkDate ||
-          talkDate.getTime() > current.latestTalkDate.getTime())
-      ) {
-        current.latestTalkDate = talkDate;
-      }
+      bumpLatest(current, talkDate);
+      stats.set(slug, current);
+    }
+  }
+
+  for (const meetup of meetups) {
+    if (meetup.data.draft) continue;
+    const meetupDate = meetup.data.date;
+    for (const slug of meetup.data.speakers ?? []) {
+      const current = stats.get(slug) ?? {
+        talkCount: 0,
+        latestTalkDate: null,
+      };
+      // Meetup date only fills gaps / updates when newer — never reduces talkCount
+      bumpLatest(current, meetupDate);
       stats.set(slug, current);
     }
   }

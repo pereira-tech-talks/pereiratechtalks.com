@@ -1,0 +1,23 @@
+---
+title:
+  en: "Session at Noche de seguridad y  Testing"
+  es: "Participación en Noche de seguridad y  Testing"
+abstract:
+  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Noche de seguridad y  Testing”."
+  es: "Charla de Andrés Torres en el meetup «Noche de seguridad y  Testing» de Pereira Tech Talks."
+speakers:
+  - andres-torres
+date: 2022-06-23
+event:
+  collection: meetups
+  slug: "noche-de-seguridad-y-testing-2022"
+language: es
+duration: 25
+type: talk
+tags: []
+status: recorded
+---
+
+## Participación en Noche de seguridad y  Testing
+
+Charla de Andrés Torres en el meetup «Noche de seguridad y  Testing» de Pereira Tech Talks.

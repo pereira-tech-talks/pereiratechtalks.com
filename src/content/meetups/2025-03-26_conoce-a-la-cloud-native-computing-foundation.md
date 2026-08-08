@@ -27,7 +27,11 @@ talks:
 speakers:
   - andres-torres
   - daniel-david-marcano-hernandez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/306731274/
 status: completed
 draft: false
@@ -35,5 +39,12 @@ draft: false
 
 ## Conoce a la Cloud Native Computing Foundation
 
+El 26 de marzo de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Conoce a la Cloud Native Computing Foundation**. En el programa: Andrés Torres, Daniel David Marcano Hernández.
+
 Introducción a la CNCF, sus proyectos insignia (Kubernetes, Prometheus) y el momento adecuado para migrar tus cargas de trabajo a Kubernetes.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://www.meetup.com/pereira-tech-talks/events/306731274/

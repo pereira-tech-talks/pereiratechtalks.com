@@ -1,0 +1,18 @@
+name: "Ana Lopez"
+role:
+  en: "Ingeniera Electrónica, MSc en Gestión Informática y Telecomunicaciones"
+  es: "Ingeniera Electrónica, MSc en Gestión Informática y Telecomunicaciones"
+bio:
+  en: "Ana Lopez spoke at Pereira Tech Talks. Ingeniera Electrónica, MSc en Gestión Informática y Telecomunicaciones."
+  es: "Ana Lopez participó como ponente en Pereira Tech Talks. Ingeniera Electrónica, MSc en Gestión Informática y Telecomunicaciones."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Ana Lopez
+    es: Retrato de Ana Lopez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

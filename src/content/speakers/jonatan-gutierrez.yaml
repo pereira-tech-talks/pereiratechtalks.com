@@ -1,0 +1,21 @@
+name: "Jonatan Gutiérrez"
+pronouns: he/him
+role:
+  en: "Ruby on Rails developer"
+  es: "Desarrollador Ruby on Rails"
+bio:
+  en: "Jonatan Gutiérrez spoke at Pereira Tech Talks on Ruby on Rails and expanding development possibilities with the framework."
+  es: "Jonatan Gutiérrez participó en Pereira Tech Talks con una charla sobre Ruby on Rails y las posibilidades de desarrollo con el framework."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Jonatan Gutiérrez"
+    es: "Retrato de Jonatan Gutiérrez"
+social:
+  twitter: "https://twitter.com/jotangutierrez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

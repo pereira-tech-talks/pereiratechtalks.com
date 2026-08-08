@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
+import { getCommunityStats } from '@/lib/community-stats';
 import { SITE_URL } from '@/lib/constances';
-
 import {
   resolveI18n,
   serializeGenericToMarkdown,
@@ -9,7 +9,10 @@ import { getMeetupSlug, getMeetups, groupMeetupsByYear } from '@/lib/meetup';
 
 export const GET: APIRoute = async () => {
   const lang = 'es';
-  const meetups = await getMeetups();
+  const [meetups, stats] = await Promise.all([
+    getMeetups(),
+    getCommunityStats(),
+  ]);
   const grouped = groupMeetupsByYear(meetups);
 
   const sections = grouped.map((group) => ({
@@ -25,11 +28,15 @@ export const GET: APIRoute = async () => {
 
   const markdown = serializeGenericToMarkdown({
     title: 'Meetups — Pereira Tech Talks',
-    description:
-      'Archivo completo de los meetups mensuales de Pereira Tech Talks desde 2014: web, IA, devops, mobile, seguridad y oficio del software, en Pereira, Risaralda, Colombia.',
+    description: `${stats.meetups} meetups, ${stats.talks} charlas y ${stats.speakers} ponentes desde ${stats.sinceYear}. Archivo mensual de Pereira Tech Talks en Pereira, Risaralda, Colombia.`,
     lang,
     canonical: `${SITE_URL}/meetups`,
-    metadata: [['Total meetups', String(meetups.length)]],
+    metadata: [
+      ['Total meetups', stats.display.meetups],
+      ['Total charlas', stats.display.talks],
+      ['Total ponentes', stats.display.speakers],
+      ['Desde', stats.display.sinceYear],
+    ],
     sections,
   });
 

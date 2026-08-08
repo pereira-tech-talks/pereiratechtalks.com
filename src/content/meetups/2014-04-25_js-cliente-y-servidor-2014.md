@@ -3,8 +3,8 @@ title:
   en: "Introduction a Javascript del lado del cliente y del servidor"
   es: "Introducción a Javascript del lado del cliente y del servidor"
 description:
-  en: "Pereira Tech Talks meetup (2014-04-25). Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
-  es: "Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  en: "Pereira Tech Talks meetup — Introduction a Javascript del lado del cliente y del servidor. Community archive page with the night’s program and context."
+  es: "Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:"
 pubDate: 2014-04-25
 date: 2014-04-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - js-cliente-y-servidor-2014--1-introduccion-a-javascript-del-lado-del-cliente
+  - js-cliente-y-servidor-2014--2-introduccion-a-javascript-del-lado-del-servidor
+speakers:
+  - jhonber-jimenez
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

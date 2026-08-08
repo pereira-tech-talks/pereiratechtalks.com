@@ -3,7 +3,7 @@ title:
   en: "Learning node && Streams - Event Emitter"
   es: "Aprendiendo node && Streams - Event Emitter"
 description:
-  en: "Pereira Tech Talks meetup (2015-03-25). Décimo Meetup de Pereirajs sobre node y streams en Javascript."
+  en: "Pereira Tech Talks meetup — Learning node && Streams - Event Emitter. Community archive page with the night’s program and context."
   es: "Décimo Meetup de Pereirajs sobre node y streams en Javascript."
 pubDate: 2015-03-25
 date: 2015-03-25
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/aprendiendo-node-streams-2015/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - aprendiendo-node-streams-2015--1-aprendiendo-node
+  - aprendiendo-node-streams-2015--2-streams-event-emitter
+speakers:
+  - daniel-aristizabal
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

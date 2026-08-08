@@ -3,8 +3,8 @@ title:
   en: "Open Source y Automatización"
   es: "Software libre y Automatización"
 description:
-  en: "Pereira Tech Talks meetup (2021-07-28). ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la ."
-  es: "¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la ."
+  en: "Pereira Tech Talks meetup — Open Source y Automatización. Community archive page with the night’s program and context."
+  es: "¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir…"
 pubDate: 2021-07-28
 date: 2021-07-28
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - software-libre-y-automatizacion-2021--1-steven-mejia-session
+  - software-libre-y-automatizacion-2021--2-gabriel-mejia-amortegui-session
+speakers:
+  - steven-mejia
+  - gabriel-mejia-amortegui
 sponsors: []
 status: completed
 draft: false

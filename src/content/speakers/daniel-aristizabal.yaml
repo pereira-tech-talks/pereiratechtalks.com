@@ -1,0 +1,20 @@
+name: "Daniel Aristizábal"
+role:
+  en: "Founding PereiraJS organizer"
+  es: "Organizador fundador de PereiraJS"
+bio:
+  en: "Daniel Aristizábal spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Daniel Aristizábal participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Daniel Aristizábal"
+    es: "Retrato de Daniel Aristizábal"
+social:
+  twitter: "https://twitter.com/cronopio2"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -3,7 +3,7 @@ title:
   en: "Security Night y  Testing"
   es: "Noche de seguridad y  Testing"
 description:
-  en: "Pereira Tech Talks meetup (2022-06-23). Tenemos meetUp presencial. Con dos charlas mega increibles."
+  en: "Pereira Tech Talks meetup — Security Night y Testing. Community archive page with the night’s program and context."
   es: "Tenemos meetUp presencial. Con dos charlas mega increibles."
 pubDate: 2022-06-23
 date: 2022-06-23
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - noche-de-seguridad-y-testing-2022--1-andres-torres-session
+  - noche-de-seguridad-y-testing-2022--2-harold-sanchez-ospina-session
+speakers:
+  - andres-torres
+  - harold-sanchez-ospina
 sponsors: []
 status: completed
 draft: false

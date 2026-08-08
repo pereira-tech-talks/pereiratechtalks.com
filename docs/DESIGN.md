@@ -231,7 +231,9 @@ that measures `[data-ptt-chrome]` (notification bar + header) via
 `ResizeObserver`. When the top notification bar collapses on scroll (or is
 absent), the measured height updates and the hero grows/shrinks by the same
 amount — chrome shrink and hero grow cancel, so content below the hero does
-not jump.
+not jump. The same variable drives `html { scroll-padding-top }` (and
+`scroll-mt-*` on `#main-after-hero`) so in-page anchors clear the sticky
+chrome instead of landing underneath it.
 
 | Chrome state | SSR fallback | Live value |
 |---|---|---|

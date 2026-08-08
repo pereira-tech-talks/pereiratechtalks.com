@@ -1,0 +1,18 @@
+name: "Ricardo Barrios"
+role:
+  en: "Software Engineer, Features Support, Unity Technologies"
+  es: "Ingeniero de software, Features Support, Unity Technologies"
+bio:
+  en: "Ricardo Barrios spoke at Pereira Tech Talks. Software Engineer, Features Support, Unity Technologies."
+  es: "Ricardo Barrios participó como ponente en Pereira Tech Talks. Ingeniero de software, Features Support, Unity Technologies."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Ricardo Barrios
+    es: Retrato de Ricardo Barrios
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

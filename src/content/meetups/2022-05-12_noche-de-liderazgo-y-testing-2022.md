@@ -3,8 +3,8 @@ title:
   en: "Leadership Night y testing"
   es: "Noche de liderazgo y testing"
 description:
-  en: "Pereira Tech Talks meetup (2022-05-12). Introducción a Load Testing y Observability con K6 y New Relic."
-  es: "Introducción a Load Testing y Observability con K6 y New Relic."
+  en: "Pereira Tech Talks meetup — Leadership Night y testing. Community archive page with the night’s program and context."
+  es: "Introducción a Load Testing y Observability con K6 y New Relic"
 pubDate: 2022-05-12
 date: 2022-05-12
 venue:
@@ -21,8 +21,14 @@ hero:
 heroImage: "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - noche-de-liderazgo-y-testing-2022--1-sergio-estrella-session
+  - noche-de-liderazgo-y-testing-2022--2-juan-guillermo-gomez-session
+  - noche-de-liderazgo-y-testing-2022--3-noe-branagan-session
+speakers:
+  - sergio-estrella
+  - juan-guillermo-gomez
+  - noe-branagan
 sponsors: []
 status: completed
 draft: false

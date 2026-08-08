@@ -3,8 +3,8 @@ title:
   en: "Special Edition desde la UTP"
   es: "Edición Especial desde la UTP"
 description:
-  en: "Pereira Tech Talks meetup (2014-12-25). En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:."
-  es: "En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:."
+  en: "Pereira Tech Talks meetup — Special Edition desde la UTP. Community archive page with the night’s program and context."
+  es: "En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:"
 pubDate: 2014-12-25
 date: 2014-12-25
 venue:
@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/edicion-especial-utp-2014/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - edicion-especial-utp-2014--1-buenas-practicas-en-javascript
+  - edicion-especial-utp-2014--2-tdd-bdd-javascript-y-el-buen-sabor-de-las-pruebas
+speakers:
+  - jonathan-alvarez
+  - oscar-granada
 sponsors: []
 status: completed
 draft: false

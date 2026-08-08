@@ -126,6 +126,7 @@ export interface SiteTranslations {
   // Meetups listing page
   meetupsPage: {
     title: string;
+    /** SEO description — placeholders: {meetups}, {talks}, {speakers}, {sinceYear} */
     description: string;
     intro: string;
     upcoming: string;
@@ -133,7 +134,15 @@ export interface SiteTranslations {
     emptyUpcomingTitle: string;
     emptyUpcomingDescription: string;
     ctaLuma: string;
-    archiveCount: string; // use {n} placeholder
+    /** Hero eyebrow above the H1 (not the numeric stats). */
+    eyebrow: string;
+    statMeetups: string;
+    statTalks: string;
+    statSpeakers: string;
+    statSince: string;
+    /** Bridge label above the upcoming strip (PTD / next gathering). */
+    nextUpLabel: string;
+    nextUpCta: string;
     yearLabel: string; // use {year} placeholder
     yearNav: string;
     calendarEyebrow: string;
@@ -144,14 +153,30 @@ export interface SiteTranslations {
   meetupDetail: {
     talks: string;
     speakers: string;
+    sponsors: string;
+    sponsorsSubtitle: string;
     venue: string;
     originalEvent: string;
+    recording: string;
+    watchRecording: string;
+    photosExternal: string;
+    galleryMemories: string;
     statusAnnounced: string;
     statusRsvpOpen: string;
     statusCompleted: string;
     statusCancelled: string;
     breadcrumbHome: string;
     breadcrumbMeetups: string;
+  };
+
+  speakerDetail: {
+    talkHistory: string;
+    talkHistorySubtitle: string;
+    relatedEvents: string;
+    relatedEventsSubtitle: string;
+    breadcrumbHome: string;
+    breadcrumbSpeakers: string;
+    website: string;
   };
 
   // About page

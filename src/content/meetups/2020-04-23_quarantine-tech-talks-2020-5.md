@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks - Meetup 5"
   es: "Quarantine Tech Talks - Meetup 5"
 description:
-  en: "Pereira Tech Talks meetup (2020-04-23). Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)."
-  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)."
+  en: "Pereira Tech Talks meetup — Quarantine Tech Talks - Meetup 5. Community archive page with the night’s program and context."
+  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)"
 pubDate: 2020-04-23
 date: 2020-04-23
 venue:
@@ -21,9 +21,12 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-5/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - quarantine-tech-talks-2020-5--1-marian-villa-session
+speakers:
+  - marian-villa
 sponsors: []
+linkRecording: https://www.youtube.com/watch?v=SNE_MbXAQQU
 status: completed
 draft: false
 ---

@@ -3,8 +3,8 @@ title:
   en: "Pereira Girls Day"
   es: "Pereira Girls Day"
 description:
-  en: "Pereira Tech Talks meetup (2019-03-16). 📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología!."
-  es: "📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes charlas de desarrollo y tecnología!."
+  en: "Pereira Tech Talks meetup — Pereira Girls Day. Community archive page with the night’s program and context."
+  es: "📣 ¡En conmemoración del día de la mujer y en colaboración de las comunidades de tecnología en Pereira, les compartimos un gran meetup con excelentes…"
 pubDate: 2019-03-16
 date: 2019-03-16
 venue:
@@ -21,8 +21,16 @@ hero:
 heroImage: "/images/meetups/pereira-girls-day-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - pereira-girls-day-2019--1-natalia-moncada-suarez-session
+  - pereira-girls-day-2019--2-zorayda-gutierrez-session
+  - pereira-girls-day-2019--3-hector-jimenez-session
+  - pereira-girls-day-2019--4-john-darwin-morales-session
+speakers:
+  - natalia-moncada-suarez
+  - zorayda-gutierrez
+  - hector-jimenez
+  - john-darwin-morales
 sponsors: []
 status: completed
 draft: false

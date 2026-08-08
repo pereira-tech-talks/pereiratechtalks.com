@@ -1,0 +1,18 @@
+name: "Leonardo Quiñones"
+role:
+  en: "Technologies Software Engineer en Unity"
+  es: "Technologies Ingeniero de software en Unity"
+bio:
+  en: "Leonardo Quiñones spoke at Pereira Tech Talks. Technologies Software Engineer en Unity."
+  es: "Leonardo Quiñones participó como ponente en Pereira Tech Talks. Technologies Ingeniero de software en Unity."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Leonardo Quiñones
+    es: Retrato de Leonardo Quiñones
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es
