@@ -93,10 +93,11 @@ function closeModal(): void {
 }
 
 /**
- * Auto-open policy (once per mount):
- * first session navigate → open; later navigates quiet; reloads every 3rd.
+ * Auto-open policy (once per mount on any non-PTD page that renders this bar):
+ * first session navigate per lang → open; later navigates quiet; reloads every 3rd.
  * Deferred until after LCP settles so the modal hero does not steal LCP.
- * Skipped entirely in Lighthouse / lab UAs (bar still works on click).
+ * Skipped in Lighthouse / lab UAs (bar still works on click).
+ * MainLayout omits this island on all /pereira-tech-day(s) routes.
  */
 onMount(() => {
   const n = notifications[0];

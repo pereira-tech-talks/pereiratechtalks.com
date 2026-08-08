@@ -10,6 +10,7 @@ import {
   getEditionStartIso,
   getPtdLandingHref,
   getUpcomingLandingChrome,
+  isPereiraTechDayPath,
   isUpcomingEdition,
   normalizeLightningTalks,
   PTD_LANDING_SLUG,
@@ -397,5 +398,34 @@ describe('getUpcomingLandingChrome', () => {
       faqLayout: 'accordion',
       portraitStyle: 'circle',
     });
+  });
+});
+
+describe('isPereiraTechDayPath', () => {
+  it('matches PTD hub and edition routes in ES and EN', () => {
+    for (const path of [
+      '/pereira-tech-day',
+      '/pereira-tech-day/',
+      '/pereira-tech-days',
+      '/pereira-tech-days/2026',
+      '/pereira-tech-days/2026/certificates/abc',
+      '/en/pereira-tech-day',
+      '/en/pereira-tech-days/2026',
+    ]) {
+      expect(isPereiraTechDayPath(path)).toBe(true);
+    }
+  });
+
+  it('does not match the rest of the site', () => {
+    for (const path of [
+      '/',
+      '/en',
+      '/en/',
+      '/blog',
+      '/en/sponsors',
+      '/meetups',
+    ]) {
+      expect(isPereiraTechDayPath(path)).toBe(false);
+    }
   });
 });
