@@ -1,63 +1,36 @@
 # Contact & community intake (v3)
 
-The site uses a **shared Cloudflare Pages Function** at `POST /api/contact`
-(`functions/api/contact.ts`) for:
+> **Canonical guide:** [FORMS.md](./FORMS.md) — Dailybot Forms architecture,
+> `_form` discriminator, UUIDs, env vars, CoC privacy, and local testing.
 
-| Surface | Route | Topic (`reason`) |
-|---------|-------|------------------|
-| General contact | `/contact` | any allowlisted topic |
-| Call for Speakers | `/call-for-speakers` (embedded form) | `tech-talk` |
-| Sponsor us | `/sponsor-us` (embedded form) | `sponsorship` |
+`POST /api/contact` (`functions/api/contact.ts`) is the shared edge endpoint for
+all community intakes. **Dailybot is the system of record.** Optional Resend
+auto-ack may run after a successful Dailybot response.
 
-Prefill on `/contact` uses **`?topic=`** (legacy `?reason=` still accepted as an
-alias). Sponsor/CFS deep links should use `topic`.
+| Surface | Route | `_form` |
+|---------|-------|---------|
+| General contact | `/contact` | `contact` |
+| Call for Speakers | `/call-for-speakers` | `cfs` |
+| Speaker School | `/verticals/speaker-school` | `speaker-school` |
+| Sponsor us | `/sponsor-us` | `sponsor` |
+| Community calendar | `/calendar#calendar-intake` | `calendar` |
+| Code of Conduct | `/conduct#conduct-report-form` | `conduct` |
 
-## Architecture
-
-### Resend (preferred)
-
-Env (Cloudflare secrets / vars):
-
-| Variable | Notes |
-|----------|-------|
-| `PUBLIC_CONTACT_API_ENDPOINT` | Build-time, e.g. `/api/contact` |
-| `RESEND_API_KEY` | Server secret |
-| `CONTACT_TO_EMAIL` | Default inbox |
-| `CONTACT_FROM_EMAIL` | Verified Resend sender |
-| `CONTACT_TO_SPEAKERS` | Optional override for `tech-talk` |
-| `CONTACT_TO_SPONSORS` | Optional override for `sponsorship` |
-| `CONTACT_TO_PRESS` / `CONTACT_TO_CONDUCT` | Optional overrides |
-| `CONTACT_ALLOWED_ORIGINS` | Optional CORS allowlist |
-| `CONTACT_RATE_LIMIT` | Default `8` per window |
-| `CONTACT_RATE_WINDOW_MS` | Default `600000` (10 min) |
-| `CONTACT_TURNSTILE_SECRET` | Reserved — Turnstile deferred until wired |
-
-After a successful inbox send, the function **best-effort** sends a bilingual
-auto-ack to the submitter (`pickAckCopy`). Ack failure does not fail the request.
+Contact topics (UI): `general` · `collaboration` · `the-library-of-tomorrow` ·
+`press` · `other`. CFS / sponsorship / conduct use dedicated pages.
 
 ### Google Forms fallback
 
-If `PUBLIC_CONTACT_API_ENDPOINT` is empty, the general `ContactForm` can POST to
-Google Forms (`src/lib/constances.ts`). Structured CFS/Sponsor fields are
-**Resend-path only**.
+If `PUBLIC_CONTACT_API_ENDPOINT` is empty, the general `ContactForm` may POST to
+Google Forms (`src/lib/constances.ts`). Structured Dailybot intakes require the
+Functions endpoint.
 
-## Anti-spam
-
-1. Honeypot `website` (contact, CFS, sponsor, newsletter, PTD)
-2. Allowlisted topics + length caps + URL heuristic
-3. Isolate-local rate limit on `/api/contact` (best-effort per Worker isolate)
-4. Turnstile: **deferred** until `CONTACT_TURNSTILE_SECRET` is configured
-
-## Topics allowlist
-
-`general` · `tech-talk` · `sponsorship` · `collaboration` ·
-`the-library-of-tomorrow` · `press` · `conduct` · `other`
-
-Aliases: `project`/`sponsor` → `sponsorship`; `speaker`/`cfs` → `tech-talk`.
-
-## Client modules
+### Client modules
 
 - Validators: `src/lib/contact-form.ts`
+- Focus helper: `src/lib/form-ui.ts`
 - UI: `ContactForm.svelte`, `SpeakersApplicationForm.svelte`,
-  `SponsorInquiryForm.svelte`
-- Tests: `tests/unit/lib/contact-form.test.ts`
+  `SponsorInquiryForm.svelte`, `SpeakerSchoolForm.svelte`,
+  `CalendarIntakeForm.svelte`, `ConductReportForm.svelte`
+- Tests: `tests/unit/lib/contact-form.test.ts`,
+  `tests/unit/functions/contact-dailybot.test.ts`

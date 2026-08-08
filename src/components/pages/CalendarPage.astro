@@ -1,5 +1,6 @@
 ---
 import CalendarHub from '@/components/calendar/CalendarHub.svelte';
+import CalendarIntakeForm from '@/components/contact/CalendarIntakeForm.svelte';
 import JsonLd from '@/components/JsonLd.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
@@ -9,6 +10,7 @@ import {
   getCommunityCalendars,
   localizeCommunityCalendar,
 } from '@/lib/calendar';
+import { CONTACT_FORM } from '@/lib/constances';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 
@@ -36,10 +38,6 @@ const breadcrumbs = [
   { label: t.calendarPage.breadcrumbHome, href: `${prefix}/` },
   { label: t.calendarPage.title },
 ];
-
-const contributeHref = `${prefix}/contact?topic=collaboration&subject=${encodeURIComponent(
-  lang === 'es' ? 'Calendario comunitario aliado' : 'Allied community calendar'
-)}`;
 
 const calendarPageSchema = {
   '@context': 'https://schema.org',
@@ -162,15 +160,17 @@ const hubCopy = {
   </Section>
 
   <Section
+    id="calendar-intake"
     eyebrow={t.calendarPage.contributeEyebrow}
     title={t.calendarPage.contributeTitle}
   >
     <p class="text-ptt-secondary max-w-2xl">{t.calendarPage.contributeDescription}</p>
-    <a
-      href={contributeHref}
-      class="mt-6 inline-flex items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
-    >
-      {t.calendarPage.contributeCta}
-    </a>
+    <div class="mt-8 max-w-2xl mx-auto">
+      <CalendarIntakeForm
+        client:visible
+        lang={lang}
+        apiEndpoint={CONTACT_FORM.apiEndpoint}
+      />
+    </div>
   </Section>
 </MainLayout>

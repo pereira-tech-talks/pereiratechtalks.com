@@ -9,13 +9,14 @@ import {
   sanitizeContactText,
   validateContactForm,
 } from '@/lib/contact-form';
+import { focusFirstInvalidField } from '@/lib/form-ui';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'es';
 /**
- * Cloudflare Pages Function endpoint (e.g. `/api/contact`) that proxies the
- * submission to Resend. When empty, the form falls back to the Google Forms
- * direct POST configured in `entries` / `formUrl`.
+ * Cloudflare Pages Function endpoint (e.g. `/api/contact`) that submits to
+ * Dailybot (optional Resend ack server-side). When empty, falls back to the
+ * Google Forms direct POST configured in `entries` / `formUrl`.
  */
 export let apiEndpoint = '';
 export let formUrl = '';
@@ -92,20 +93,17 @@ onMount(() => {
   applyPrefillFromQueryParams();
 });
 
-function focusFirstInvalidField() {
-  const fieldOrder = [
-    { key: 'name', id: 'contact-name' },
-    { key: 'email', id: 'contact-email' },
-    { key: 'reason', id: 'contact-reason' },
-    { key: 'subject', id: 'contact-subject' },
-    { key: 'message', id: 'contact-message' },
-  ];
-
-  const firstInvalid = fieldOrder.find((field) => errors[field.key]);
-  if (firstInvalid) {
-    const el = document.getElementById(firstInvalid.id);
-    el?.focus();
-  }
+function focusInvalid() {
+  focusFirstInvalidField(
+    [
+      { key: 'name', id: 'contact-name' },
+      { key: 'email', id: 'contact-email' },
+      { key: 'reason', id: 'contact-reason' },
+      { key: 'subject', id: 'contact-subject' },
+      { key: 'message', id: 'contact-message' },
+    ],
+    errors
+  );
 }
 
 function validate() {
@@ -136,13 +134,16 @@ async function submitToApi(endpoint) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
+      _form: 'contact',
       name,
       email,
       reason,
+      topic: reason,
       subject,
       message,
       lang,
       website,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '/',
     }),
   });
 
@@ -182,7 +183,7 @@ async function handleSubmit() {
   if (!validate()) {
     const failedCount = Object.values(errors).filter(Boolean).length;
     trackEvent(EVENTS.CONTACT_FORM_ERROR, { field_count: failedCount });
-    focusFirstInvalidField();
+    focusInvalid();
     return;
   }
   formState = 'submitting';

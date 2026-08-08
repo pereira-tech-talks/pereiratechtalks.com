@@ -1,7 +1,7 @@
 ---
 title: Community calendar
 description: Shared calendar for Pereira's tech community — Pereira Tech Talks meetups and allied community events across Risaralda.
-lastUpdated: 2026-08-01
+lastUpdated: 2026-08-07
 ---
 
 ## Community calendar hub
@@ -14,7 +14,7 @@ The `/calendar` page aggregates **public Google Calendar** feeds from Pereira Te
 - **Community filters** to show or hide individual calendar feeds
 - **ICS subscribe links** per active community
 - **Luma RSVP** for Pereira Tech Talks primary events (`https://luma.com/pertechtalks`)
-- **Contribute CTA** for allied organizers to propose a public calendar ID
+- **Proposal form** on the same page (`#calendar-intake`) for allied organizers to submit a public Google Calendar ID
 
 ### Routes
 

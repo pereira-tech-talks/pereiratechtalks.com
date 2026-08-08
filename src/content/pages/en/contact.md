@@ -1,21 +1,29 @@
 ---
 title: "Contact — Pereira Tech Talks"
 description: "Get in touch with Pereira Tech Talks. We are open to speakers, sponsors, partners, and members of the community who want to participate, propose ideas, or collaborate."
-lastUpdated: 2026-05-30
+lastUpdated: 2026-08-07
 ---
 
 ## Get in touch
 
 We are always open to new speakers, sponsors, partners, and community members. Whether you have a talk to propose, want to sponsor a meetup, or just want to say hi — we'd love to hear from you.
 
+The contact form at [/en/contact](/en/contact/) covers general inquiries, collaboration, La Biblioteca del Mañana, press, and other. Dedicated routes:
+
+- Talks: [/en/call-for-speakers](/en/call-for-speakers/)
+- Sponsorship: [/en/sponsor-us](/en/sponsor-us/)
+- Speaker School: [/en/verticals/speaker-school/#speaker-school-form](/en/verticals/speaker-school/#speaker-school-form)
+- Community calendar: [/en/calendar/#calendar-intake](/en/calendar/#calendar-intake)
+- Code of Conduct: [/en/conduct/#conduct-report-form](/en/conduct/#conduct-report-form)
+
 ---
 
 ## How you can get involved
 
-- **Propose a talk** — Speak at a monthly meetup, lightning session, or a future Pereira Tech Day edition.
-- **Sponsor an event** — Support a meetup, conference, or program (Speaker School, La Biblioteca del Mañana) and reach the local tech community.
-- **Partner with the community** — Co-organize an event, share venues, or build a multi-community collaboration.
-- **Join La Biblioteca del Mañana** — Sign up for the reading club and connect technology with the broader human story.
+- **Propose a talk** — Use the [Call for Speakers](/en/call-for-speakers/) page.
+- **Sponsor an event** — Use the sponsorship inquiry form.
+- **Partner with the community** — Co-organize an event, share venues, or build a multi-community collaboration (contact form → Collaboration).
+- **Join La Biblioteca del Mañana** — Choose “La Biblioteca del Mañana” on the contact form.
 - **Write for the blog** — Share an article, a meetup recap, or a tutorial with the community.
 
 ---

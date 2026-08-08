@@ -91,10 +91,10 @@ La meta no es solo "dar una charla en PerTT". La meta es construir un speaker qu
 
 ## Cómo aplicar
 
-Escríbenos al [formulario de contacto](/contact/?topic=collaboration) con el asunto **"Speaker School"** y cuéntanos:
+Usa el [formulario de aplicación a Speaker School](/verticals/speaker-school/#speaker-school-form) en esta página (también en [/en/verticals/speaker-school/#speaker-school-form](/en/verticals/speaker-school/#speaker-school-form)). Cuéntanos:
 
 - En qué tema o charla estás pensando
 - Tu nivel de experiencia hablando en público
-- La próxima cohorte a la que quieres aplicar
+- Tu disponibilidad para la próxima cohorte
 
 Te respondemos con la fecha del próximo arranque y los detalles logísticos.

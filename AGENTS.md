@@ -13,6 +13,8 @@
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Vision, audiences, verticals, success metrics |
 | Blog | [Blog Posts](docs/features/BLOG_POSTS.md) | Tags, series, hero layouts, images, content lifecycle |
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
+| Forms | [Forms](docs/features/FORMS.md) | Dailybot intakes — Contact, CFS, Speaker School, Sponsors, Calendar, CoC |
+| Forms | [Forms](docs/features/FORMS.md) | Dailybot intakes — Contact, CFS, Speaker School, Sponsors, Calendar, CoC |
 | Certificates | [Certificates](docs/features/CERTIFICATES.md) | Individual diploma pages, print/PDF, verify UX, fixtures |
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
 | Contributors | [Contributors](docs/features/CONTRIBUTORS.md) | Equipo directory — flat organizers + unified alumni |

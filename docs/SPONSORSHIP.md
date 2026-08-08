@@ -162,4 +162,4 @@ We'll respond within 5 working days.
 **Last reviewed:** 2026.
 **Owner:** Sponsorship lead.
 
-A user-facing public version lives at `/sponsor-us` (Spanish primary) and `/en/sponsor-us` (English). The structured form posts to `/api/contact` with topic `sponsorship` (Resend → `CONTACT_TO_SPONSORS` or `CONTACT_TO_EMAIL`). You can still email <sponsors@pereiratechtalks.org> directly.
+A user-facing public version lives at `/sponsor-us` (Spanish primary) and `/en/sponsor-us` (English). The structured form posts to `/api/contact` with `_form: "sponsor"` (Dailybot **PTT Sponsors**; optional Resend ack). See [FORMS.md](./features/FORMS.md). You can still email <sponsors@pereiratechtalks.org> directly.

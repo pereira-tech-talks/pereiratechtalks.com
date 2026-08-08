@@ -161,25 +161,26 @@ The `/calendar` page embeds **public** Google Calendar IDs from the `communityCa
 - **ICS subscribe links** are built server-side from validated IDs; users leave the site only to `calendar.google.com`.
 - **iframe** loads Google-hosted content only; no `sandbox` attribute (breaks Google Calendar UI). Rely on Google origin isolation.
 
-To add a calendar, organizers must make the Google Calendar public and share the ID via the contact form — never share service-account credentials.
+To add a calendar, organizers must make the Google Calendar public and submit the ID via the [calendar intake form](/calendar/#calendar-intake) — never share service-account credentials.
 
-### Contact form (`/contact`)
+### Community intakes (`/api/contact` → Dailybot)
 
-The contact form (`ContactForm.svelte` + optional Cloudflare Pages Function at `/api/contact`) follows this threat model:
+All community forms (`ContactForm`, CFS, Speaker School, Sponsors, Calendar, Conduct) post to `POST /api/contact`, which forwards to **Dailybot Forms** (`DAILYBOT_API_KEY`, server-only). See [FORMS.md](./features/FORMS.md).
 
 | Control | Implementation |
 |---------|----------------|
-| Honeypot | Hidden `website` field — submissions with any value are rejected client-side (`validateContactForm`) and should be dropped server-side |
-| Reason allowlist | Only values from `t.contactPage.reasonOptions` are accepted |
-| Input bounds | Subject ≤ 140 chars, message ≤ 2000 chars (`sanitizeContactText`) |
-| Email format | Basic pattern check before submit |
-| No secrets in client | API keys for Resend live only in Cloudflare env vars, never in the Astro bundle |
-| Rate limiting | Isolate-local sliding window on `functions/api/contact.ts` (default 8 / 10 min via `CONTACT_RATE_LIMIT` / `CONTACT_RATE_WINDOW_MS`). Not a global Durable Object — best-effort per isolate. |
-| Turnstile | Deferred — `CONTACT_TURNSTILE_SECRET` reserved; not enforced until wired |
-| Auto-ack | Resend best-effort to submitter after inbox send; ack failure does not fail the request |
-| Validation tests | `tests/unit/lib/contact-form.test.ts` covers topics, CFS/sponsor, honeypot, rate-limit helper, ack copy |
+| Honeypot | Hidden `website` field — filled values get a fake `200` and are never sent to Dailybot |
+| Form discriminator | `_form` allowlist; legacy `reason`/`topic` mapped server-side |
+| Input bounds | Length caps + sanitizers in `functions/api/contact.ts` / `src/lib/contact-form.ts` |
+| Email format | Required except anonymous CoC reports |
+| No secrets in client | `DAILYBOT_API_KEY` and Resend keys stay in Cloudflare / local Functions env — never `PUBLIC_*` |
+| Rate limiting | Isolate-local sliding window (default 8 / 10 min) |
+| Turnstile | Deferred — `CONTACT_TURNSTILE_SECRET` reserved |
+| Optional Resend ack | Best-effort after Dailybot `201`; ack failure does not fail the request |
+| CoC privacy | Restricted Dailybot form (`owner_and_admins`, no public link, no Slack report channel). Anonymous mode clears reporter identity. Analytics must not include incident text |
+| Validation tests | `tests/unit/lib/contact-form.test.ts`, `tests/unit/functions/dailybot.test.ts`, `tests/unit/functions/contact-dailybot.test.ts` |
 
-Prefill query params (`topic` preferred, legacy `reason` alias, plus `subject`, `message`) are sanitized on mount; never render raw query strings as HTML.
+Prefill query params on Contact (`topic` preferred, legacy `reason`, plus `subject`, `message`) are sanitized on mount; never render raw query strings as HTML.
 
 ### External Links
 

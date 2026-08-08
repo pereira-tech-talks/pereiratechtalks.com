@@ -15,6 +15,7 @@ services:
       - codex_data:/home/node/.codex_data
       - cursor_data:/home/node/.cursor_data
       - gh_data:/home/node/.gh_data
+      - dailybot_data:/home/node/.dailybot_data
       - ${HOME}/.ssh:/home/node/.ssh_host:ro
       - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
     ports:
@@ -35,3 +36,4 @@ volumes:
   codex_data: {}         # Codex CLI session/auth (symlinked to ~/.codex)
   cursor_data: {}        # Cursor CLI session/auth (symlinked to ~/.cursor)
   gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)
+  dailybot_data: {}      # Dailybot CLI session/auth (symlinked to ~/.config/dailybot)

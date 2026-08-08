@@ -4,12 +4,16 @@ import {
   checkRateLimit,
   composeCfsMessage,
   isValidContactEmail,
+  looksLikeGoogleCalendarId,
   normalizeTopic,
   pickAckCopy,
   resolveTopicFromSearchParams,
   sanitizeContactText,
+  validateCalendarIntakeForm,
   validateCfsForm,
+  validateConductReportForm,
   validateContactForm,
+  validateSpeakerSchoolForm,
   validateSponsorForm,
 } from '@/lib/contact-form';
 
@@ -192,6 +196,94 @@ describe('contact-form', () => {
     });
     expect(composed).toContain('Talk title: Title');
     expect(composed).toContain('Additional notes:');
+  });
+
+  it('validates conduct reports with anonymity rules', () => {
+    const anonymousOk = validateConductReportForm(
+      {
+        incidentDescription:
+          'Enough detail about a confidential incident for organizers.',
+        anonymous: true,
+      },
+      messages
+    );
+    expect(anonymousOk.valid).toBe(true);
+
+    const identifiedMissingEmail = validateConductReportForm(
+      {
+        incidentDescription:
+          'Enough detail about a confidential incident for organizers.',
+        anonymous: false,
+        name: 'Ada',
+        email: '',
+      },
+      messages
+    );
+    expect(identifiedMissingEmail.valid).toBe(false);
+    expect(identifiedMissingEmail.errors.email).toBe('Required');
+  });
+
+  it('validates calendar intake payloads', () => {
+    expect(
+      looksLikeGoogleCalendarId('community@group.calendar.google.com')
+    ).toBe(true);
+    expect(looksLikeGoogleCalendarId('short')).toBe(false);
+
+    const ok = validateCalendarIntakeForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        communityName: 'Pereira JS',
+        googleCalendarId: 'pereirajs@group.calendar.google.com',
+        shortDescription: 'Monthly JS meetups in Pereira',
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const bad = validateCalendarIntakeForm(
+      {
+        name: '',
+        email: 'bad',
+        communityName: '',
+        googleCalendarId: 'x',
+        shortDescription: '',
+      },
+      messages
+    );
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.googleCalendarId).toBe('Required');
+  });
+
+  it('validates Speaker School payloads', () => {
+    const ok = validateSpeakerSchoolForm(
+      {
+        name: 'Ada',
+        email: 'ada@example.com',
+        experienceLevel: 'beginner',
+        goals: 'Ship my first meetup talk',
+        topicsOfInterest: 'Rust, platforms',
+        availability: 'Weeknight evenings',
+      },
+      messages
+    );
+    expect(ok.valid).toBe(true);
+
+    const bad = validateSpeakerSchoolForm(
+      {
+        name: '',
+        email: 'not-an-email',
+        experienceLevel: 'expert',
+        goals: '',
+        topicsOfInterest: '',
+        availability: '',
+      },
+      messages
+    );
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.name).toBe('Required');
+    expect(bad.errors.email).toBe('Invalid email');
+    expect(bad.errors.experienceLevel).toBe('Required');
   });
 
   it('picks bilingual ack copy and rate-limits', () => {

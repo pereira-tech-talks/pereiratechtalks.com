@@ -258,6 +258,30 @@ export interface SiteTranslations {
     defaultSubject: string;
   };
 
+  speakerSchoolForm: {
+    formTitle: string;
+    formEyebrow: string;
+    formSectionTitle: string;
+    experienceLabel: string;
+    experienceOptions: { value: string; label: string }[];
+    goalsLabel: string;
+    goalsPlaceholder: string;
+    topicsLabel: string;
+    topicsPlaceholder: string;
+    availabilityLabel: string;
+    availabilityPlaceholder: string;
+    priorSpeakingLabel: string;
+    priorSpeakingPlaceholder: string;
+    socialLabel: string;
+    socialPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+    applyCta: string;
+  };
+
   cfsPage: {
     title: string;
     description: string;
@@ -313,6 +337,45 @@ export interface SiteTranslations {
     contributeDescription: string;
     contributeCta: string;
     breadcrumbHome: string;
+  };
+
+  calendarForm: {
+    formTitle: string;
+    communityLabel: string;
+    communityPlaceholder: string;
+    calendarIdLabel: string;
+    calendarIdPlaceholder: string;
+    calendarIdHint: string;
+    publicUrlLabel: string;
+    publicUrlPlaceholder: string;
+    websiteLabel: string;
+    websitePlaceholder: string;
+    descriptionLabel: string;
+    descriptionPlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
+  };
+
+  conductForm: {
+    formEyebrow: string;
+    formSectionTitle: string;
+    privacyNote: string;
+    incidentLabel: string;
+    incidentPlaceholder: string;
+    whenLabel: string;
+    whenPlaceholder: string;
+    peopleLabel: string;
+    peoplePlaceholder: string;
+    anonymousLabel: string;
+    anonymousHint: string;
+    nameLabel: string;
+    emailLabel: string;
+    followupLabel: string;
+    followupPlaceholder: string;
+    submitButton: string;
+    successTitle: string;
+    successMessage: string;
   };
 
   communitiesPage: {
@@ -520,6 +583,8 @@ export interface SiteTranslations {
     relatedMeetups: string;
     contactCta: string;
     joinCta: string;
+    /** Speaker School vertical — scroll to dedicated application form */
+    applyCta: string;
     emptyTitle: string;
     emptyDesc: string;
     statusActive: string;

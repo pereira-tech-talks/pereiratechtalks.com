@@ -74,6 +74,13 @@ export const CONTRIBUTION_TYPES = [
 ] as const;
 export type ContributionType = (typeof CONTRIBUTION_TYPES)[number];
 
+export const SPEAKER_SCHOOL_LEVELS = [
+  'beginner',
+  'intermediate',
+  'advanced',
+] as const;
+export type SpeakerSchoolLevel = (typeof SPEAKER_SCHOOL_LEVELS)[number];
+
 export interface ContactFormFields {
   name: string;
   email: string;
@@ -121,6 +128,63 @@ export interface SponsorFormErrors extends ContactFormErrors {
   contactRole: string;
   tierInterest: string;
   contributionType: string;
+}
+
+export interface SpeakerSchoolFormFields {
+  name: string;
+  email: string;
+  experienceLevel: string;
+  goals: string;
+  topicsOfInterest: string;
+  availability: string;
+  priorSpeaking?: string;
+  socialOrLinkedin?: string;
+  message?: string;
+  website?: string;
+}
+
+export interface SpeakerSchoolFormErrors {
+  name: string;
+  email: string;
+  experienceLevel: string;
+  goals: string;
+  topicsOfInterest: string;
+  availability: string;
+}
+
+export interface CalendarIntakeFormFields {
+  name: string;
+  email: string;
+  communityName: string;
+  googleCalendarId: string;
+  shortDescription: string;
+  publicCalendarUrl?: string;
+  communityWebsite?: string;
+  website?: string;
+}
+
+export interface CalendarIntakeFormErrors {
+  name: string;
+  email: string;
+  communityName: string;
+  googleCalendarId: string;
+  shortDescription: string;
+}
+
+export interface ConductReportFormFields {
+  incidentDescription: string;
+  incidentDate?: string;
+  peopleInvolved?: string;
+  anonymous: boolean;
+  name?: string;
+  email?: string;
+  preferredFollowup?: string;
+  website?: string;
+}
+
+export interface ConductReportFormErrors {
+  incidentDescription: string;
+  email: string;
 }
 
 export const emptyContactFormErrors = (): ContactFormErrors => ({
@@ -293,6 +357,156 @@ export function validateSponsorForm(
     errors.contributionType = messages.requiredField;
     valid = false;
   }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+export function validateSpeakerSchoolForm(
+  fields: SpeakerSchoolFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: SpeakerSchoolFormErrors } {
+  const errors: SpeakerSchoolFormErrors = {
+    name: '',
+    email: '',
+    experienceLevel: '',
+    goals: '',
+    topicsOfInterest: '',
+    availability: '',
+  };
+  let valid = true;
+
+  if (!fields.name.trim()) {
+    errors.name = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.email.trim()) {
+    errors.email = messages.requiredField;
+    valid = false;
+  } else if (!isValidContactEmail(fields.email.trim())) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+  if (
+    !fields.experienceLevel.trim() ||
+    !(SPEAKER_SCHOOL_LEVELS as readonly string[]).includes(
+      fields.experienceLevel
+    )
+  ) {
+    errors.experienceLevel = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.goals.trim()) {
+    errors.goals = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.topicsOfInterest.trim()) {
+    errors.topicsOfInterest = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.availability.trim()) {
+    errors.availability = messages.requiredField;
+    valid = false;
+  }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+/** Light check: non-empty calendar ID; prefer email-like Google Calendar IDs. */
+export function looksLikeGoogleCalendarId(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (trimmed.includes('@')) return isValidContactEmail(trimmed);
+  // Public calendar IDs are usually email-shaped; allow short opaque tokens too.
+  return trimmed.length >= 8 && !/\s/.test(trimmed);
+}
+
+export function validateCalendarIntakeForm(
+  fields: CalendarIntakeFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: CalendarIntakeFormErrors } {
+  const errors: CalendarIntakeFormErrors = {
+    name: '',
+    email: '',
+    communityName: '',
+    googleCalendarId: '',
+    shortDescription: '',
+  };
+  let valid = true;
+
+  if (!fields.name.trim()) {
+    errors.name = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.email.trim()) {
+    errors.email = messages.requiredField;
+    valid = false;
+  } else if (!isValidContactEmail(fields.email.trim())) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+  if (!fields.communityName.trim()) {
+    errors.communityName = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.googleCalendarId.trim()) {
+    errors.googleCalendarId = messages.requiredField;
+    valid = false;
+  } else if (!looksLikeGoogleCalendarId(fields.googleCalendarId)) {
+    errors.googleCalendarId = messages.requiredField;
+    valid = false;
+  }
+  if (!fields.shortDescription.trim()) {
+    errors.shortDescription = messages.requiredField;
+    valid = false;
+  }
+  if (fields.website?.trim()) {
+    valid = false;
+  }
+
+  return { valid, errors };
+}
+
+export function validateConductReportForm(
+  fields: ConductReportFormFields,
+  messages: { requiredField: string; invalidEmail: string }
+): { valid: boolean; errors: ConductReportFormErrors } {
+  const errors: ConductReportFormErrors = {
+    incidentDescription: '',
+    email: '',
+  };
+  let valid = true;
+
+  if (
+    !fields.incidentDescription.trim() ||
+    fields.incidentDescription.trim().length < 20
+  ) {
+    errors.incidentDescription = messages.requiredField;
+    valid = false;
+  }
+
+  if (!fields.anonymous) {
+    const email = (fields.email || '').trim();
+    if (!email) {
+      errors.email = messages.requiredField;
+      valid = false;
+    } else if (!isValidContactEmail(email)) {
+      errors.email = messages.invalidEmail;
+      valid = false;
+    }
+  } else if (
+    fields.email?.trim() &&
+    !isValidContactEmail(fields.email.trim())
+  ) {
+    errors.email = messages.invalidEmail;
+    valid = false;
+  }
+
   if (fields.website?.trim()) {
     valid = false;
   }

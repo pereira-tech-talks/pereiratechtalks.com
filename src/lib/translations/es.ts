@@ -292,8 +292,6 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     reasonOptions: [
       { value: '', label: '— Selecciona un tema —' },
       { value: 'general', label: 'General / Solo saludar' },
-      { value: 'tech-talk', label: 'Propuesta de charla / Call for Speakers' },
-      { value: 'sponsorship', label: 'Patrocinio / Sponsorship' },
       {
         value: 'collaboration',
         label: 'Colaboración comunitaria / Alianza',
@@ -303,7 +301,6 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
         label: 'Unirme a La Biblioteca del Mañana',
       },
       { value: 'press', label: 'Prensa / Medios' },
-      { value: 'conduct', label: 'Reporte de Código de Conducta' },
       { value: 'other', label: 'Otro' },
     ],
     successNextSteps: {
@@ -468,6 +465,35 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Gracias — un organizador te contactará en máximo 5 días hábiles.',
     defaultSubject: 'Consulta de patrocinio',
   },
+  speakerSchoolForm: {
+    formTitle: 'Aplicación a Speaker School',
+    formEyebrow: 'Aplicar',
+    formSectionTitle: 'Únete a la próxima cohorte de Speaker School',
+    experienceLabel: 'Nivel de experiencia',
+    experienceOptions: [
+      { value: '', label: '— Selecciona un nivel —' },
+      { value: 'beginner', label: 'Principiante' },
+      { value: 'intermediate', label: 'Intermedio' },
+      { value: 'advanced', label: 'Avanzado' },
+    ],
+    goalsLabel: 'Objetivos para Speaker School',
+    goalsPlaceholder: '¿Qué quieres lograr con la mentoría?',
+    topicsLabel: 'Temas de interés',
+    topicsPlaceholder: 'p. ej. plataformas web, IA, devops, producto…',
+    availabilityLabel: 'Disponibilidad',
+    availabilityPlaceholder: 'Noches, fines de semana, meses preferidos…',
+    priorSpeakingLabel: 'Experiencia previa hablando (opcional)',
+    priorSpeakingPlaceholder: 'Meetups, clases, charlas internas…',
+    socialLabel: 'LinkedIn, blog o GitHub (opcional)',
+    socialPlaceholder: 'https://…',
+    messageLabel: '¿Algo más? (opcional)',
+    messagePlaceholder: 'Restricciones, co-mentees, idioma preferido…',
+    submitButton: 'Enviar aplicación',
+    successTitle: '¡Aplicación recibida!',
+    successMessage:
+      'Gracias — te responderemos en un máximo de 7 días hábiles con los siguientes pasos de Speaker School.',
+    applyCta: 'Aplicar a Speaker School',
+  },
   cfsPage: {
     title: 'Call for Speakers',
     description:
@@ -616,7 +642,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       'Aún no hay calendarios públicos activos. Revisa nuestro archivo de meetups o escríbenos para sumar tu comunidad.',
     comingSoon: 'Más comunidades muy pronto',
     inactiveNote:
-      'Estos grupos aliados se están sumando al hub. Las organizaciones pueden compartir un ID público de Google Calendar mediante el formulario de contacto.',
+      'Estos grupos aliados se están sumando al hub. Las organizaciones pueden compartir un ID público de Google Calendar con el formulario de abajo.',
     quickLinksEyebrow: 'Enlaces rápidos',
     quickLinksTitle: 'RSVP y archivos',
     meetupsLink: 'Archivo de meetups',
@@ -624,9 +650,55 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     contributeEyebrow: 'Contribuir',
     contributeTitle: 'Publica el calendario de tu comunidad',
     contributeDescription:
-      'Si organizas un meetup o grupo de usuarios tech en Pereira, haz público tu Google Calendar y envíanos el ID. Añadiremos un feed con color propio después de una revisión rápida.',
+      'Si organizas un meetup o grupo de usuarios tech en Pereira, haz público tu Google Calendar y envía el ID en el formulario. Añadiremos un feed con color propio después de una revisión rápida.',
     contributeCta: 'Proponer tu calendario',
     breadcrumbHome: 'Inicio',
+  },
+
+  calendarForm: {
+    formTitle: 'Propuesta de calendario comunitario',
+    communityLabel: 'Nombre de la comunidad / meetup',
+    communityPlaceholder: 'p. ej. Pereira JS, Women Who Code Pereira',
+    calendarIdLabel: 'ID de Google Calendar',
+    calendarIdPlaceholder: 'tu-calendario@group.calendar.google.com',
+    calendarIdHint:
+      'En Google Calendar → Configuración → Integrar calendario → ID del calendario (debe ser público).',
+    publicUrlLabel: 'URL pública del calendario (opcional)',
+    publicUrlPlaceholder: 'https://calendar.google.com/calendar/…',
+    websiteLabel: 'Sitio web de la comunidad (opcional)',
+    websitePlaceholder: 'https://…',
+    descriptionLabel: 'Descripción corta',
+    descriptionPlaceholder:
+      'Quiénes son, cadencia y tipos de eventos que organizan…',
+    submitButton: 'Enviar propuesta de calendario',
+    successTitle: '¡Propuesta recibida!',
+    successMessage:
+      'Gracias — revisaremos el feed público y te contactaremos en un máximo de 7 días hábiles.',
+  },
+
+  conductForm: {
+    formEyebrow: 'Reporte confidencial',
+    formSectionTitle: 'Reportar una preocupación del Código de Conducta',
+    privacyNote:
+      'Los reportes llegan solo a organizadores. No se listan en público ni se publican en canales de Slack de la comunidad. Puedes enviar de forma anónima.',
+    incidentLabel: '¿Qué ocurrió?',
+    incidentPlaceholder:
+      'Describe el incidente con el contexto que te sientas cómoda o cómodo compartiendo…',
+    whenLabel: '¿Cuándo ocurrió? (opcional)',
+    whenPlaceholder: 'Fecha, hora o nombre del evento…',
+    peopleLabel: 'Personas involucradas (opcional)',
+    peoplePlaceholder: 'Nombres o roles, si los conoces…',
+    anonymousLabel: 'Enviar de forma anónima',
+    anonymousHint:
+      'Si eliges anonimato, no guardaremos nombre ni correo de quien reporta con este envío.',
+    nameLabel: 'Tu nombre (opcional si es anónimo)',
+    emailLabel: 'Tu correo (obligatorio salvo anonimato)',
+    followupLabel: 'Seguimiento preferido (opcional)',
+    followupPlaceholder: 'Correo, llamada o “no necesito seguimiento”…',
+    submitButton: 'Enviar reporte confidencial',
+    successTitle: 'Reporte recibido',
+    successMessage:
+      'Gracias. Los organizadores lo revisarán de forma confidencial y actuarán con prontitud y justicia.',
   },
 
   contactSection: {
@@ -862,6 +934,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     relatedMeetups: 'Meetups asociados',
     contactCta: 'Escríbenos',
     joinCta: 'Cómo participar',
+    applyCta: 'Aplicar a Speaker School',
     emptyTitle: 'Aún no hay programas registrados',
     emptyDesc: 'Estamos consolidando los programas. Vuelve pronto.',
     statusActive: 'Activo',

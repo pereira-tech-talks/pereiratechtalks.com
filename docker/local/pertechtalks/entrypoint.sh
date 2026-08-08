@@ -202,6 +202,41 @@ setup_gh_persistence_for_user() {
 setup_gh_persistence_for_user "/home/node"
 chown -R node:node /home/node/.gh_data /home/node/.config 2>/dev/null || true
 
+# Setup Dailybot CLI persistence with symlinks for a given user.
+# The CLI stores credentials/config under ~/.config/dailybot (see dailybot_cli.config.CONFIG_DIR).
+# We symlink that path into the named volume at ~/.dailybot_data so login/API keys survive rebuilds.
+setup_dailybot_persistence_for_user() {
+    USER_HOME="$1"
+    DAILYBOT_DATA_DIR="${USER_HOME}/.dailybot_data"
+    DAILYBOT_CONFIG_DIR="${USER_HOME}/.config/dailybot"
+
+    mkdir -p "${DAILYBOT_DATA_DIR}"
+    mkdir -p "${USER_HOME}/.config"
+
+    if [ ! -L "${DAILYBOT_CONFIG_DIR}" ]; then
+        if [ -d "${DAILYBOT_CONFIG_DIR}" ]; then
+            # Only seed from image if the volume has no existing data (preserve login)
+            if [ ! -d "${DAILYBOT_DATA_DIR}/config_dailybot" ] || [ -z "$(ls -A "${DAILYBOT_DATA_DIR}/config_dailybot" 2>/dev/null)" ]; then
+                echo "  → First run: copying fresh Dailybot config to persistent volume"
+                cp -r "${DAILYBOT_CONFIG_DIR}" "${DAILYBOT_DATA_DIR}/config_dailybot"
+            else
+                echo "  → Preserving existing Dailybot config from persistent volume"
+            fi
+            rm -rf "${DAILYBOT_CONFIG_DIR}"
+        else
+            mkdir -p "${DAILYBOT_DATA_DIR}/config_dailybot"
+        fi
+        ln -sf "${DAILYBOT_DATA_DIR}/config_dailybot" "${DAILYBOT_CONFIG_DIR}"
+        echo "  → Created symlink for ~/.config/dailybot"
+    fi
+
+    echo "Dailybot CLI persistence setup complete for ${USER_HOME}"
+}
+
+# Setup Dailybot persistence for node user
+setup_dailybot_persistence_for_user "/home/node"
+chown -R node:node /home/node/.dailybot_data /home/node/.config/dailybot 2>/dev/null || true
+
 # Setup SSH keys from host with correct permissions for a given user
 # This allows git operations with GitHub/GitLab
 setup_ssh_keys_for_user() {
@@ -285,6 +320,18 @@ setup_git() {
     fi
 }
 
+# Upgrade Dailybot CLI to latest version (non-blocking, best-effort).
+# Uses pipx --global (same as Dockerfile) so the node user keeps access.
+upgrade_dailybot_cli() {
+    if command -v pipx >/dev/null 2>&1; then
+        pipx upgrade --global dailybot-cli 2>/dev/null || true
+    fi
+
+    local version
+    version=$(dailybot --version 2>/dev/null || echo "unknown")
+    echo "Dailybot CLI: $version"
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -292,6 +339,7 @@ main() {
     # Run all setup functions
     setup_nodejs
     setup_git
+    upgrade_dailybot_cli
 
     echo "Container setup completed"
 

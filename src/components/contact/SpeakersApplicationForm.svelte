@@ -1,6 +1,7 @@
 <script>
 import { EVENTS, trackEvent } from '@/lib/analytics';
-import { composeCfsMessage, validateCfsForm } from '@/lib/contact-form';
+import { validateCfsForm } from '@/lib/contact-form';
+import { focusFirstInvalidField } from '@/lib/form-ui';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'es';
@@ -68,10 +69,23 @@ async function handleSubmit() {
   );
   errors = result.errors;
   if (!result.valid) {
+    const failedCount = Object.values(errors).filter(Boolean).length;
     trackEvent(EVENTS.CONTACT_FORM_ERROR, {
-      field_count: 1,
+      field_count: failedCount,
       topic: 'tech-talk',
     });
+    focusFirstInvalidField(
+      [
+        { key: 'name', id: 'cfs-name' },
+        { key: 'email', id: 'cfs-email' },
+        { key: 'talkTitle', id: 'cfs-title' },
+        { key: 'format', id: 'cfs-format' },
+        { key: 'abstract', id: 'cfs-abstract' },
+        { key: 'takeaways', id: 'cfs-takeaways' },
+        { key: 'socialUrl', id: 'cfs-social' },
+      ],
+      errors
+    );
     return;
   }
   if (!apiEndpoint) {
@@ -80,32 +94,18 @@ async function handleSubmit() {
   }
 
   formState = 'submitting';
-  const composed = composeCfsMessage({
-    name,
-    email,
-    reason: 'tech-talk',
-    subject,
-    message,
-    website,
-    talkTitle,
-    format,
-    abstract,
-    takeaways,
-    socialUrl,
-    firstTime,
-    speakerSchool,
-  });
 
   try {
     const response = await fetch(apiEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        _form: 'cfs',
         name,
         email,
         reason: 'tech-talk',
         subject,
-        message: composed,
+        message: message || '',
         lang,
         website,
         talkTitle,
@@ -115,6 +115,8 @@ async function handleSubmit() {
         socialUrl,
         firstTime,
         speakerSchool,
+        page_path:
+          typeof window !== 'undefined' ? window.location.pathname : '/',
       }),
     });
     if (!response.ok) throw new Error('fail');
@@ -140,6 +142,18 @@ function resetForm() {
   speakerSchool = false;
   message = '';
   website = '';
+  errors = {
+    name: '',
+    email: '',
+    reason: '',
+    subject: '',
+    message: '',
+    talkTitle: '',
+    format: '',
+    abstract: '',
+    takeaways: '',
+    socialUrl: '',
+  };
   submitError = '';
   formState = 'idle';
 }
@@ -149,10 +163,11 @@ function resetForm() {
   <div
     bind:this={successRef}
     tabindex="-1"
-    class="text-center py-8"
+    class="text-center py-12"
     role="status"
     aria-live="polite"
   >
+    <div class="mb-4 text-5xl" aria-hidden="true">✓</div>
     <h3 class="text-2xl font-bold text-ptt mb-3">{f.successTitle}</h3>
     <p class="text-ptt-secondary mb-6">{f.successMessage}</p>
     <button
@@ -198,9 +213,10 @@ function resetForm() {
           class:border-red-500={errors.name}
           bind:value={name}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.name ? 'cfs-name-error' : undefined}
           aria-invalid={errors.name ? 'true' : undefined}
         />
-        {#if errors.name}<p class={errorClass}>{errors.name}</p>{/if}
+        {#if errors.name}<p id="cfs-name-error" class={errorClass} aria-live="polite">{errors.name}</p>{/if}
       </div>
       <div>
         <label for="cfs-email" class={labelClass}>{cp.emailLabel}</label>
@@ -212,9 +228,10 @@ function resetForm() {
           class:border-red-500={errors.email}
           bind:value={email}
           disabled={formState === 'submitting'}
+          aria-describedby={errors.email ? 'cfs-email-error' : undefined}
           aria-invalid={errors.email ? 'true' : undefined}
         />
-        {#if errors.email}<p class={errorClass}>{errors.email}</p>{/if}
+        {#if errors.email}<p id="cfs-email-error" class={errorClass} aria-live="polite">{errors.email}</p>{/if}
       </div>
     </div>
 
@@ -227,8 +244,10 @@ function resetForm() {
         placeholder={f.talkTitlePlaceholder}
         bind:value={talkTitle}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.talkTitle ? 'cfs-title-error' : undefined}
+        aria-invalid={errors.talkTitle ? 'true' : undefined}
       />
-      {#if errors.talkTitle}<p class={errorClass}>{errors.talkTitle}</p>{/if}
+      {#if errors.talkTitle}<p id="cfs-title-error" class={errorClass} aria-live="polite">{errors.talkTitle}</p>{/if}
     </div>
 
     <div>
@@ -239,12 +258,14 @@ function resetForm() {
         class:border-red-500={errors.format}
         bind:value={format}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.format ? 'cfs-format-error' : undefined}
+        aria-invalid={errors.format ? 'true' : undefined}
       >
         {#each f.formatOptions as opt}
           <option value={opt.value}>{opt.label}</option>
         {/each}
       </select>
-      {#if errors.format}<p class={errorClass}>{errors.format}</p>{/if}
+      {#if errors.format}<p id="cfs-format-error" class={errorClass} aria-live="polite">{errors.format}</p>{/if}
     </div>
 
     <div>
@@ -257,8 +278,10 @@ function resetForm() {
         placeholder={f.abstractPlaceholder}
         bind:value={abstract}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.abstract ? 'cfs-abstract-error' : undefined}
+        aria-invalid={errors.abstract ? 'true' : undefined}
       ></textarea>
-      {#if errors.abstract}<p class={errorClass}>{errors.abstract}</p>{/if}
+      {#if errors.abstract}<p id="cfs-abstract-error" class={errorClass} aria-live="polite">{errors.abstract}</p>{/if}
     </div>
 
     <div>
@@ -271,8 +294,10 @@ function resetForm() {
         placeholder={f.takeawaysPlaceholder}
         bind:value={takeaways}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.takeaways ? 'cfs-takeaways-error' : undefined}
+        aria-invalid={errors.takeaways ? 'true' : undefined}
       ></textarea>
-      {#if errors.takeaways}<p class={errorClass}>{errors.takeaways}</p>{/if}
+      {#if errors.takeaways}<p id="cfs-takeaways-error" class={errorClass} aria-live="polite">{errors.takeaways}</p>{/if}
     </div>
 
     <div>
@@ -285,8 +310,10 @@ function resetForm() {
         placeholder={f.socialPlaceholder}
         bind:value={socialUrl}
         disabled={formState === 'submitting'}
+        aria-describedby={errors.socialUrl ? 'cfs-social-error' : undefined}
+        aria-invalid={errors.socialUrl ? 'true' : undefined}
       />
-      {#if errors.socialUrl}<p class={errorClass}>{errors.socialUrl}</p>{/if}
+      {#if errors.socialUrl}<p id="cfs-social-error" class={errorClass} aria-live="polite">{errors.socialUrl}</p>{/if}
     </div>
 
     <div class="space-y-3">

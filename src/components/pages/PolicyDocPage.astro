@@ -6,12 +6,15 @@
 
 import { getEntry, render } from 'astro:content';
 
+import ConductReportForm from '@/components/contact/ConductReportForm.svelte';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import DocTableOfContents from '@/components/ui/DocTableOfContents.svelte';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { CONTACT_FORM } from '@/lib/constances';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   lang: Language;
@@ -21,6 +24,8 @@ interface Props {
 }
 
 const { lang, slug, eyebrow, showToc = true } = Astro.props;
+const t = getTranslations(lang);
+const isConduct = slug === 'conduct';
 
 const entry = await getEntry('pages', `${lang}/${slug}`);
 if (!entry) {
@@ -95,6 +100,31 @@ const tocLabel = lang === 'es' ? 'En esta página' : 'On this page';
           )
         }
       </div>
+
+      {
+        isConduct && (
+          <section
+            id="conduct-report-form"
+            class="mt-16 sm:mt-20 max-w-2xl"
+            aria-labelledby="conduct-report-form-title"
+          >
+            <Eyebrow class="mb-3">{t.conductForm.formEyebrow}</Eyebrow>
+            <h2
+              id="conduct-report-form-title"
+              class="text-3xl font-bold tracking-tight text-ptt"
+            >
+              {t.conductForm.formSectionTitle}
+            </h2>
+            <div class="mt-8">
+              <ConductReportForm
+                client:visible
+                lang={lang}
+                apiEndpoint={CONTACT_FORM.apiEndpoint}
+              />
+            </div>
+          </section>
+        )
+      }
     </div>
   </div>
 </MainLayout>

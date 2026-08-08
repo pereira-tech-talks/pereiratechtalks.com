@@ -4,7 +4,6 @@ import { getCollection, render } from 'astro:content';
 import BlogImageLightbox from '@/components/blog/BlogImageLightbox.svelte';
 import BlogPostFooter from '@/components/blog/BlogPostFooter.astro';
 import BlogPostHeader from '@/components/blog/BlogPostHeader.astro';
-import NewsletterForm from '@/components/blog/NewsletterForm.svelte';
 import RelatedArticles from '@/components/blog/RelatedArticles.astro';
 import SeriesIndicator from '@/components/blog/SeriesIndicator.svelte';
 import SeriesNavigation from '@/components/blog/SeriesNavigation.astro';
@@ -22,7 +21,6 @@ import {
   isDraftPost,
   isScheduledPost,
 } from '@/lib/blog';
-import { NEWSLETTER } from '@/lib/constances';
 import { formatCalendarDate } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
@@ -217,14 +215,8 @@ const breadcrumbData = {
           title={title}
           url={canonicalURL.href}
         />
-        <section class="mx-auto max-w-4xl" aria-label={t.engagement.ctaTitle}>
-          <NewsletterForm
-            client:visible
-            lang={lang}
-            formUrl={NEWSLETTER.googleForms.formUrl}
-            entries={NEWSLETTER.googleForms.entries}
-          />
-        </section>
+        {/* Newsletter CTA hidden until the list backend is live again.
+            Re-enable: NewsletterForm + NEWSLETTER from @/lib/constances */}
       </div>
       {seriesInfo && <SeriesNavigation seriesInfo={seriesInfo} lang={lang} />}
       <RelatedArticles posts={relatedPosts} lang={lang} />
