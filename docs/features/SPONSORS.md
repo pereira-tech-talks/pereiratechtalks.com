@@ -6,8 +6,8 @@ Community partners directory at `/sponsors` (EN: `/en/sponsors`).
 
 1. **Hero** — partnership framing + dual CTAs (`/sponsor-us`, `/contact`)
 2. **Why sponsor** — three concrete value props
-3. **Current partners** — flat grid of `status: active` (no PTD tier headings)
-4. **Past partners** — flat grid of `status: past`
+3. **Current partners** — rich cards for `status: active` (logo + name + description; no PTD tier headings)
+4. **Past partners** — compact logo tiles for `status: past` (smaller logos, denser grid, no description) so current partners keep hierarchy
 
 **Per-edition tiers** (diamond/gold/silver/bronze/community) belong on **Pereira Tech Day** edition pages via `sponsoredEditions` / `getEditionSponsors` — not on this catalog.
 
@@ -25,7 +25,7 @@ YAML in `src/content/sponsors/{slug}.yaml`:
 ## Components
 
 - `SponsorsPage.astro` — community catalog
-- `SponsorCard.astro` — `showTier={false}` on community page
+- `SponsorCard.astro` — `showTier={false}` on community page; `muted` for past compact tiles
 - `src/lib/sponsor.ts` — `getActiveSponsors` / `getPastSponsors` sort by order; `sortSponsors` still tier-aware for PTD
 
 ## Adding a partner
