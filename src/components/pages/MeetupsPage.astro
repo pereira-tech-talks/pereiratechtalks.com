@@ -6,6 +6,7 @@
  */
 
 import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
+import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import EmptyState from '@/components/ui/EmptyState.astro';
@@ -18,6 +19,10 @@ import {
   getUpcomingMeetupShowcase,
   groupMeetupShowcaseByYear,
 } from '@/lib/meetup';
+import {
+  getEditionCountdownTargets,
+  getEditions,
+} from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -31,8 +36,17 @@ const pastShowcase = await getPastMeetupShowcase();
 const groups = groupMeetupShowcaseByYear(pastShowcase);
 const years = groups.map((g) => g.year);
 
+const editions = await getEditions();
+const upcomingEdition = editions.find(
+  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
+);
+const ptdCountdown = upcomingEdition
+  ? getEditionCountdownTargets(upcomingEdition)
+  : null;
+
 const tr = getTranslations(lang);
 const mp = tr.meetupsPage;
+const hs = tr.homeSections;
 
 const t = {
   title: mp.title,
@@ -95,30 +109,47 @@ const breadcrumbs = [
     </div>
   </div>
 
-  <Section
-    eyebrow={t.calendarEyebrow}
-    title={t.upcoming}
-    surface="alt"
-  >
-    {
-      upcoming.length > 0 ? (
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {upcoming.map((item) => (
-            <li>
-              <MeetupShowcaseCard item={item} lang={lang} loading="eager" />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <EmptyState
-          title={t.emptyUpcomingTitle}
-          description={t.emptyUpcomingDescription}
-          ctaLabel={t.ctaLabel}
-          ctaHref={t.ctaHref}
-        />
-      )
-    }
-  </Section>
+  {/* Same PTD strip as the homepage (after-hero). Calendar/upcoming cards hidden temporarily. */}
+  <PtdAnnouncementStrip
+    lang={lang}
+    eyebrow={hs.ptdStrip.eyebrow}
+    title={hs.ptdStrip.title}
+    subtitle={hs.ptdStrip.subtitle}
+    ctaLabel={hs.ptdStrip.cta}
+    dateLabel={hs.ptdStrip.date}
+    venueLabel={hs.ptdStrip.venue}
+    attendanceLabel={hs.ptdStrip.attendance}
+    targetDate={ptdCountdown?.targetDate}
+    endDate={ptdCountdown?.endDate}
+  />
+
+  {/* Upcoming meetups calendar — hidden temporarily (restore: drop `false &&`). */}
+  {
+    false && (
+      <Section
+        eyebrow={t.calendarEyebrow}
+        title={t.upcoming}
+        surface="alt"
+      >
+        {upcoming.length > 0 ? (
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {upcoming.map((item) => (
+              <li>
+                <MeetupShowcaseCard item={item} lang={lang} loading="eager" />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyState
+            title={t.emptyUpcomingTitle}
+            description={t.emptyUpcomingDescription}
+            ctaLabel={t.ctaLabel}
+            ctaHref={t.ctaHref}
+          />
+        )}
+      </Section>
+    )
+  }
 
   <Section eyebrow={t.archiveEyebrow} title={t.past}>
     <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">
