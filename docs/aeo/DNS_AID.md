@@ -6,7 +6,7 @@ Publish HTTPS/SVCB records under the `_agents` namespace so AI agents can discov
 
 ## Why both apex and `v3`
 
-The scanner queries `_index._agents.<scanned-host>`. Scanning `https://v3.pereiratechtalks.org` looks up `_index._agents.v3.pereiratechtalks.org`. Scanning the apex looks up `_index._agents.pereiratechtalks.org`. Publish both while `v3` is the public preview hostname.
+The scanner queries `_index._agents.<scanned-host>`. Scanning `https://pereiratechtalks.org` looks up `_index._agents.pereiratechtalks.org`. Scanning the apex looks up `_index._agents.pereiratechtalks.org`. Publish both while `v3` is the public preview hostname.
 
 ## Cloudflare DNS UI (manual)
 
@@ -16,8 +16,8 @@ In the **pereiratechtalks.org** zone → DNS → Records → Add record:
 |------|------|----------|--------|-------------------|
 | HTTPS | `_index._agents` | 1 | `pereiratechtalks.org` | `alpn="h2,h3" port=443` |
 | HTTPS | `_mcp._agents` | 1 | `pereiratechtalks.org` | `alpn="h2,h3" port=443` |
-| HTTPS | `_index._agents.v3` | 1 | `v3.pereiratechtalks.org` | `alpn="h2,h3" port=443` |
-| HTTPS | `_mcp._agents.v3` | 1 | `v3.pereiratechtalks.org` | `alpn="h2,h3" port=443` |
+| HTTPS | `_index._agents.v3` | 1 | `pereiratechtalks.org` | `alpn="h2,h3" port=443` |
+| HTTPS | `_mcp._agents.v3` | 1 | `pereiratechtalks.org` | `alpn="h2,h3" port=443` |
 
 Use **ServiceMode** (priority ≥ 1), not AliasMode (priority 0).
 
@@ -43,15 +43,15 @@ node scripts/publish-dns-aid.mjs
 ## Verify
 
 ```bash
-dig +short HTTPS _index._agents.v3.pereiratechtalks.org
+dig +short HTTPS _index._agents.pereiratechtalks.org
 dig +short HTTPS _index._agents.pereiratechtalks.org
 
-curl -s 'https://cloudflare-dns.com/dns-query?name=_index._agents.v3.pereiratechtalks.org&type=HTTPS' \
+curl -s 'https://cloudflare-dns.com/dns-query?name=_index._agents.pereiratechtalks.org&type=HTTPS' \
   -H 'accept: application/dns-json' | jq .
 
 curl -s https://isitagentready.com/api/scan \
   -H 'content-type: application/json' \
-  -d '{"url":"https://v3.pereiratechtalks.org"}' | jq '.checks.discoverability.dnsAid'
+  -d '{"url":"https://pereiratechtalks.org"}' | jq '.checks.discoverability.dnsAid'
 ```
 
 Expect `status: "pass"` and at least one ServiceMode HTTPS/SVCB answer.

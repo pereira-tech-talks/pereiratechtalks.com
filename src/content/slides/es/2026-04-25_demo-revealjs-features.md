@@ -466,6 +466,6 @@ Note: Las notas del presentador son visibles solo en la vista del presentador. �
 
 <p>Todos los snippets y helpers viven en <strong>src/styles/slides.css</strong> y <strong>src/content/slides/_layouts/</strong></p>
 
-<a href="https://v3.pereiratechtalks.org/slides" class="slide-cta">Ver todas las presentaciones →</a>
+<a href="https://pereiratechtalks.org/slides" class="slide-cta">Ver todas las presentaciones →</a>
 
 <small>Hecho con Reveal.js dentro de Astro · pereiratechtalks.org</small>

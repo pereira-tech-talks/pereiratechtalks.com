@@ -205,32 +205,48 @@ const writingRules = [
 ];
 ---
 
-<InternalLayout title="Blog System" description="Blog authoring workflow and conventions" section="guide" subsection="blog">
-
+<InternalLayout
+  title="Blog System"
+  description="Blog authoring workflow and conventions"
+  section="guide"
+  subsection="blog"
+>
   <!-- Post Lifecycle -->
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Post Lifecycle</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      {lifecycle.map((l) => (
-        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <div class="flex items-baseline justify-between mb-2">
-            <h3 class="font-semibold">{l.status}</h3>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{l.indicator}</span>
+      {
+        lifecycle.map((l) => (
+          <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+            <div class="flex items-baseline justify-between mb-2">
+              <h3 class="font-semibold">{l.status}</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">
+                {l.indicator}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              {l.description}
+            </p>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-300">{l.description}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </section>
 
   <!-- Frontmatter Quick Reference -->
   <section class="mb-12">
-    <h2 class="text-xl md:text-2xl font-bold mb-4">Frontmatter Quick Reference</h2>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">
+      Frontmatter Quick Reference
+    </h2>
+    <div
+      class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    >
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <tr
+              class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+            >
               <th class="text-left py-3 px-4 font-semibold">Field</th>
               <th class="text-left py-3 px-4 font-semibold">Type</th>
               <th class="text-left py-3 px-4 font-semibold">Required</th>
@@ -238,14 +254,24 @@ const writingRules = [
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {frontmatterFields.map((f) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{f.field}</code></td>
-                <td class="py-3 px-4"><code class="text-xs">{f.type}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.required ? 'Yes' : 'No'}</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
-              </tr>
-            ))}
+            {
+              frontmatterFields.map((f) => (
+                <tr>
+                  <td class="py-3 px-4">
+                    <code class="text-xs font-medium">{f.field}</code>
+                  </td>
+                  <td class="py-3 px-4">
+                    <code class="text-xs">{f.type}</code>
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {f.required ? "Yes" : "No"}
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {f.description}
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -256,16 +282,24 @@ const writingRules = [
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Hero Layouts</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {heroLayouts.map((h) => (
-        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <div class="flex items-baseline justify-between mb-2">
-            <h3 class="font-semibold">{h.layout}</h3>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{h.aspect}</span>
+      {
+        heroLayouts.map((h) => (
+          <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+            <div class="flex items-baseline justify-between mb-2">
+              <h3 class="font-semibold">{h.layout}</h3>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">
+                {h.aspect}
+              </span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">
+              {h.description}
+            </p>
+            <p class="text-xs text-gray-600 dark:text-gray-300">
+              <strong>Use for:</strong> {h.usage}
+            </p>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">{h.description}</p>
-          <p class="text-xs text-gray-600 dark:text-gray-300"><strong>Use for:</strong> {h.usage}</p>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </section>
 
@@ -273,43 +307,63 @@ const writingRules = [
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Tags</h2>
     <h3 class="font-semibold mb-3">Primary Tags</h3>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+    <div
+      class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6"
+    >
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <tr
+              class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+            >
               <th class="text-left py-3 px-4 font-semibold">Slug</th>
               <th class="text-left py-3 px-4 font-semibold">Description</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {primaryTags.map((t) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{t.slug}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{t.description}</td>
-              </tr>
-            ))}
+            {
+              primaryTags.map((t) => (
+                <tr>
+                  <td class="py-3 px-4">
+                    <code class="text-xs font-medium">{t.slug}</code>
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {t.description}
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
     </div>
     <h3 class="font-semibold mb-3">Secondary Tags</h3>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div
+      class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    >
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <tr
+              class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+            >
               <th class="text-left py-3 px-4 font-semibold">Slug</th>
               <th class="text-left py-3 px-4 font-semibold">Description</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {secondaryTags.map((t) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{t.slug}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{t.description}</td>
-              </tr>
-            ))}
+            {
+              secondaryTags.map((t) => (
+                <tr>
+                  <td class="py-3 px-4">
+                    <code class="text-xs font-medium">{t.slug}</code>
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {t.description}
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -323,19 +377,27 @@ const writingRules = [
       <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
         <h3 class="font-semibold mb-1">Adding a Post to a Series</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-          Add <code class="text-xs">series: "series-slug"</code> and <code class="text-xs">seriesOrder: N</code> to the post's frontmatter. The series navigation renders automatically below the post content.
+          Add <code class="text-xs">series: "series-slug"</code> and <code
+            class="text-xs">seriesOrder: N</code
+          > to the post's frontmatter. The series navigation renders automatically
+          below the post content.
         </p>
         <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
-          <code class="text-xs">series: "the-library-of-tomorrow"<br/>seriesOrder: 3</code>
+          <code class="text-xs"
+            >series: "the-library-of-tomorrow"<br />seriesOrder: 3</code
+          >
         </div>
       </div>
       <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
         <h3 class="font-semibold mb-1">Series Definition</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-          Series are defined in <code class="text-xs">src/content/series/</code>. Slugs MUST be in English, even for Spanish content.
+          Series are defined in <code class="text-xs">src/content/series/</code
+          >. Slugs MUST be in English, even for Spanish content.
         </p>
         <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
-          <code class="text-xs">src/content/series/the-library-of-tomorrow.md</code>
+          <code class="text-xs"
+            >src/content/series/the-library-of-tomorrow.md</code
+          >
         </div>
       </div>
     </div>
@@ -348,16 +410,25 @@ const writingRules = [
       <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
         <h3 class="font-semibold mb-1">Path Convention</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-          Blog images live in <code class="text-xs">public/images/blog/posts/{'{slug}'}/ </code>. Hero images are named <code class="text-xs">hero.{'{ext}'}</code>.
+          Blog images live in <code class="text-xs"
+            >public/images/blog/posts/{"{slug}"}/
+          </code>. Hero images are named <code class="text-xs"
+            >hero.{"{ext}"}</code
+          >.
         </p>
         <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
-          <code class="text-xs">public/images/blog/posts/my-first-post/hero.webp</code>
+          <code class="text-xs"
+            >public/images/blog/posts/my-first-post/hero.webp</code
+          >
         </div>
       </div>
       <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
         <h3 class="font-semibold mb-1">Staging Workflow</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-          Drop raw images in <code class="text-xs">public/images/blog/_staging/</code>, then run <code class="text-xs">npm run images:optimize</code> to resize and convert to WebP.
+          Drop raw images in <code class="text-xs"
+            >public/images/blog/_staging/</code
+          >, then run <code class="text-xs">npm run images:optimize</code> to resize
+          and convert to WebP.
         </p>
       </div>
     </div>
@@ -366,22 +437,32 @@ const writingRules = [
   <!-- Commands -->
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Commands</h2>
-    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div
+      class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    >
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
-            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+            <tr
+              class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+            >
               <th class="text-left py-3 px-4 font-semibold">Command</th>
               <th class="text-left py-3 px-4 font-semibold">Description</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-            {commands.map((c) => (
-              <tr>
-                <td class="py-3 px-4"><code class="text-xs font-medium">{c.command}</code></td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{c.description}</td>
-              </tr>
-            ))}
+            {
+              commands.map((c) => (
+                <tr>
+                  <td class="py-3 px-4">
+                    <code class="text-xs font-medium">{c.command}</code>
+                  </td>
+                  <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+                    {c.description}
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
@@ -392,39 +473,69 @@ const writingRules = [
   <section class="mb-12">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Writing Rules</h2>
     <div class="space-y-4">
-      {writingRules.map((r) => (
-        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-          <h3 class="font-semibold mb-1">{r.rule}</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-300">{r.description}</p>
-        </div>
-      ))}
+      {
+        writingRules.map((r) => (
+          <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+            <h3 class="font-semibold mb-1">{r.rule}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              {r.description}
+            </p>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <section class="mb-8">
     <h2 class="text-xl md:text-2xl font-bold mb-4">Authors</h2>
     <div class="space-y-4">
-      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+      <div
+        class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2"
+      >
         <h3 class="font-semibold">Overview</h3>
         <p class="text-sm text-gray-600 dark:text-gray-300">
           Authors are stored as YAML files in
-          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">src/content/authors/</code>
-          and resolved at build time via the <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">authors</code> content collection.
-          Each post references an author by slug; when omitted, it defaults to
-          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">sergio-florez</code>.
+          <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >src/content/authors/</code
+          >
+          and resolved at build time via the <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >authors</code
+          > content collection. Each post references an author by slug; when omitted,
+          it defaults to
+          <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >sergio-florez</code
+          >.
         </p>
         <p class="text-sm text-gray-600 dark:text-gray-300">
-          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">BlogPostFooter.astro</code>
-          renders the <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">AuthorCard</code>
+          <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >BlogPostFooter.astro</code
+          >
+          renders the <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >AuthorCard</code
+          >
           at the bottom of every post; the resolved author also drives the
-          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">BlogPosting</code>
-          JSON-LD <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">author</code> field.
+          <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >BlogPosting</code
+          >
+          JSON-LD <code
+            class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+            >author</code
+          > field.
         </p>
       </div>
 
-      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+      <div
+        class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2"
+      >
         <h3 class="font-semibold">YAML Schema Preview</h3>
-        <pre class="overflow-x-auto rounded-lg bg-gray-100 p-3 text-xs dark:bg-gray-900"><code>name: Sergio Alexander Florez Galeano
+        <pre
+          class="overflow-x-auto rounded-lg bg-gray-100 p-3 text-xs dark:bg-gray-900"><code>name: Sergio Alexander Florez Galeano
 slug: sergio-florez
 avatar: /images/authors/sergio-florez.webp
 role:
@@ -438,45 +549,127 @@ social:
   linkedin: https://www.linkedin.com/company/pereira-tech-talks/
   github: https://github.com/pereira-tech-talks
   instagram: https://www.instagram.com/pertechtalks
-  website: https://v3.pereiratechtalks.org/</code></pre>
+  website: https://pereiratechtalks.org/</code></pre>
         <p class="text-xs text-gray-600 dark:text-gray-300">
-          Required: <code class="text-xs">name</code>, <code class="text-xs">slug</code>,
-          <code class="text-xs">avatar</code>, <code class="text-xs">role.{'{'}en,es{'}'}</code>,
-          <code class="text-xs">bio.{'{'}en,es{'}'}</code>. All social fields optional.
+          Required: <code class="text-xs">name</code>, <code class="text-xs"
+            >slug</code
+          >,
+          <code class="text-xs">avatar</code>, <code class="text-xs"
+            >role.{"{"}en,es{"}"}</code
+          >,
+          <code class="text-xs">bio.{"{"}en,es{"}"}</code>. All social fields
+          optional.
         </p>
       </div>
 
-      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+      <div
+        class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2"
+      >
         <h3 class="font-semibold">Adding a New Author</h3>
-        <ol class="list-decimal pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
-          <li>Create <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">src/content/authors/{'{'}slug{'}'}.yaml</code></li>
-          <li>Add avatar at <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">public/images/authors/{'{'}slug{'}'}.webp</code> (160x160 px, WebP)</li>
-          <li>Fill both <code class="text-xs">role.en</code>/<code class="text-xs">role.es</code> and <code class="text-xs">bio.en</code>/<code class="text-xs">bio.es</code> (Zod-enforced)</li>
-          <li>Reference by slug in post frontmatter: <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">author: '{'{'}slug{'}'}'</code> (same slug in EN and ES)</li>
-          <li>Run <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">npm run astro:check</code> to validate the schema</li>
-          <li>Preview at <a href="/internal/authors" class="text-blue-600 hover:underline dark:text-blue-400">/internal/authors</a></li>
+        <ol
+          class="list-decimal pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1"
+        >
+          <li>
+            Create <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >src/content/authors/{"{"}slug{"}"}.yaml</code>
+          </li>
+          <li>
+            Add avatar at <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >public/images/authors/{"{"}slug{"}"}.webp</code
+            > (160x160 px, WebP)
+          </li>
+          <li>
+            Fill both <code class="text-xs">role.en</code>/<code class="text-xs"
+              >role.es</code
+            > and <code class="text-xs">bio.en</code>/<code class="text-xs"
+              >bio.es</code
+            > (Zod-enforced)
+          </li>
+          <li>
+            Reference by slug in post frontmatter: <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >author: '{"{"}slug{"}"}'</code
+            > (same slug in EN and ES)
+          </li>
+          <li>
+            Run <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >npm run astro:check</code
+            > to validate the schema
+          </li>
+          <li>
+            Preview at <a
+              href="/internal/authors"
+              class="text-blue-600 hover:underline dark:text-blue-400"
+              >/internal/authors</a>
+          </li>
         </ol>
       </div>
 
-      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+      <div
+        class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2"
+      >
         <h3 class="font-semibold">i18n & Validation</h3>
-        <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
-          <li>Author slug is identical in EN and ES versions of a post — authorship doesn't translate.</li>
-          <li>Spanish <code class="text-xs">role</code>/<code class="text-xs">bio</code> must use proper diacritics (e.g., <em>Cofundador</em>, <em>años</em>) and tuteo (no voseo).</li>
-          <li>Missing <code class="text-xs">role.en</code>, <code class="text-xs">role.es</code>, <code class="text-xs">bio.en</code>, or <code class="text-xs">bio.es</code> fails build via Zod validation.</li>
-          <li>Unknown slug in <code class="text-xs">author</code>: AuthorCard is silently omitted (JSON-LD falls back). Always verify <code class="text-xs">astro:check</code> passes.</li>
+        <ul
+          class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1"
+        >
+          <li>
+            Author slug is identical in EN and ES versions of a post —
+            authorship doesn't translate.
+          </li>
+          <li>
+            Spanish <code class="text-xs">role</code>/<code class="text-xs"
+              >bio</code
+            > must use proper diacritics (e.g., <em>Cofundador</em>, <em
+              >años</em
+            >) and tuteo (no voseo).
+          </li>
+          <li>
+            Missing <code class="text-xs">role.en</code>, <code class="text-xs"
+              >role.es</code
+            >, <code class="text-xs">bio.en</code>, or <code class="text-xs"
+              >bio.es</code
+            > fails build via Zod validation.
+          </li>
+          <li>
+            Unknown slug in <code class="text-xs">author</code>: AuthorCard is
+            silently omitted (JSON-LD falls back). Always verify <code
+              class="text-xs">astro:check</code
+            > passes.
+          </li>
         </ul>
       </div>
 
-      <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2">
+      <div
+        class="rounded-xl border border-gray-200 dark:border-gray-700 p-4 space-y-2"
+      >
         <h3 class="font-semibold">References</h3>
-        <ul class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1">
-          <li><a href="/internal/authors" class="text-blue-600 hover:underline dark:text-blue-400">/internal/authors</a> — Browse all registered authors with live preview</li>
-          <li><code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">docs/features/AUTHORS.md</code> — Full schema, components, JSON-LD, validation checklist</li>
-          <li><code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">docs/features/BLOG_POSTS.md#authors</code> — Author field in blog frontmatter</li>
+        <ul
+          class="list-disc pl-5 text-sm text-gray-600 dark:text-gray-300 space-y-1"
+        >
+          <li>
+            <a
+              href="/internal/authors"
+              class="text-blue-600 hover:underline dark:text-blue-400"
+              >/internal/authors</a
+            > — Browse all registered authors with live preview
+          </li>
+          <li>
+            <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >docs/features/AUTHORS.md</code
+            > — Full schema, components, JSON-LD, validation checklist
+          </li>
+          <li>
+            <code
+              class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800"
+              >docs/features/BLOG_POSTS.md#authors</code
+            > — Author field in blog frontmatter
+          </li>
         </ul>
       </div>
     </div>
   </section>
-
 </InternalLayout>

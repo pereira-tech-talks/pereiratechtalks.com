@@ -95,7 +95,7 @@ social:
   linkedin: https://www.linkedin.com/company/pereira-tech-talks/
   github: https://github.com/pereira-tech-talks
   instagram: https://www.instagram.com/pertechtalks
-  website: https://v3.pereiratechtalks.org/
+  website: https://pereiratechtalks.org/
 ```
 
 ## Blog Post Integration
@@ -137,8 +137,8 @@ The `author` value must match an existing author slug. Astro's content schema va
   "author": {
     "@type": "Person",
     "name": "Sergio Alexander Florez Galeano",
-    "url": "https://v3.pereiratechtalks.org/about/",
-    "image": "https://v3.pereiratechtalks.org/images/authors/sergio-florez.webp"
+    "url": "https://pereiratechtalks.org/about/",
+    "image": "https://pereiratechtalks.org/images/authors/sergio-florez.webp"
   }
 }
 ```

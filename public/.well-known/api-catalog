@@ -1,16 +1,16 @@
 {
   "linkset": [
     {
-      "anchor": "https://v3.pereiratechtalks.org/api/",
+      "anchor": "https://pereiratechtalks.org/api/",
       "links": [
         {
           "rel": "service-desc",
-          "href": "https://v3.pereiratechtalks.org/openapi.json",
+          "href": "https://pereiratechtalks.org/openapi.json",
           "type": "application/json"
         },
         {
           "rel": "service-doc",
-          "href": "https://v3.pereiratechtalks.org/llms.txt",
+          "href": "https://pereiratechtalks.org/llms.txt",
           "type": "text/plain"
         }
       ]

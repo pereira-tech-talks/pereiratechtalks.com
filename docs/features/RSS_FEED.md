@@ -57,7 +57,7 @@ Site URL is configured in `astro.config.mjs`:
 
 ```javascript
 export default defineConfig({
-  site: 'https://v3.pereiratechtalks.org',
+  site: 'https://pereiratechtalks.org',
   // ...
 });
 ```
@@ -72,12 +72,12 @@ The generated RSS feed follows the RSS 2.0 specification:
   <channel>
     <title>Astro Blog</title>
     <description>Welcome to my website!</description>
-    <link>https://v3.pereiratechtalks.org</link>
+    <link>https://pereiratechtalks.org</link>
     <item>
       <title>Post Title</title>
       <description>Post description</description>
       <pubDate>Mon, 31 Jan 2026 00:00:00 GMT</pubDate>
-      <link>https://v3.pereiratechtalks.org/blog/post-slug/</link>
+      <link>https://pereiratechtalks.org/blog/post-slug/</link>
     </item>
     <!-- More items... -->
   </channel>

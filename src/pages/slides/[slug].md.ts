@@ -38,7 +38,7 @@ export const GET: APIRoute = ({ props }) => {
     markdown += `- **Artículo relacionado:** /blog/${data.relatedPost}\n`;
   }
   markdown +=
-    '- **Fuente:** Pereira Tech Talks (https://v3.pereiratechtalks.org)\n';
+    '- **Fuente:** Pereira Tech Talks (https://pereiratechtalks.org)\n';
   markdown += '\n';
 
   if (data.type === 'external') {

@@ -2,7 +2,7 @@
 
 Pereira Tech Talks runs an **always-open** Call for Speakers. We accept proposals year-round for monthly meetups, special events, and the annual Pereira Tech Day.
 
-> **Apply now:** [`/call-for-speakers`](https://v3.pereiratechtalks.org/call-for-speakers) (Spanish primary) · [`/en/call-for-speakers`](https://v3.pereiratechtalks.org/en/call-for-speakers) (English).
+> **Apply now:** [`/call-for-speakers`](https://pereiratechtalks.org/call-for-speakers) (Spanish primary) · [`/en/call-for-speakers`](https://pereiratechtalks.org/en/call-for-speakers) (English).
 
 ## What we look for
 
@@ -60,8 +60,8 @@ As a confirmed speaker:
 - A recording uploaded to YouTube (if you consent)
 - A speaker spotlight post on the blog, with social amplification
 - A free physical copy of any PTT swag of the year
-- An entry in the public [Speakers directory](https://v3.pereiratechtalks.org/speakers)
-- An entry in the [Contributors directory](https://v3.pereiratechtalks.org/contributors)
+- An entry in the public [Speakers directory](https://pereiratechtalks.org/speakers)
+- An entry in the [Contributors directory](https://pereiratechtalks.org/contributors)
 
 For Pereira Tech Day specifically, we cover:
 
@@ -94,7 +94,7 @@ If your talk references confidential employer data, sensitive client work, or pe
 
 ## How to submit
 
-Use the form at [`/call-for-speakers`](https://v3.pereiratechtalks.org/call-for-speakers) (English: `/en/call-for-speakers`). Submissions go to Dailybot via `POST /api/contact` (`_form: "cfs"`) — see [FORMS.md](./features/FORMS.md). The form asks for:
+Use the form at [`/call-for-speakers`](https://pereiratechtalks.org/call-for-speakers) (English: `/en/call-for-speakers`). Submissions go to Dailybot via `POST /api/contact` (`_form: "cfs"`) — see [FORMS.md](./features/FORMS.md). The form asks for:
 
 - Your name and email
 - Talk title and format (regular / lightning / panel / workshop)

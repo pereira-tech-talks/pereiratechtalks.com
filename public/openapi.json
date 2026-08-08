@@ -6,7 +6,7 @@
     "description": "Read-only JSON endpoints exposed by pereiratechtalks.org for agent discovery. Pereira Tech Talks v3.0.0 is a static community website; the API surface covers blog posts, series, meetups, events, Pereira Tech Days, speakers, talks, sponsors, contributors, and channels metadata, plus the language-sharded search index."
   },
   "servers": [
-    { "url": "https://v3.pereiratechtalks.org", "description": "Production" }
+    { "url": "https://pereiratechtalks.org", "description": "Production" }
   ],
   "paths": {
     "/api/posts.json": {

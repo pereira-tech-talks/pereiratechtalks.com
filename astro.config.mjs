@@ -32,7 +32,7 @@ const __dirname = dirname(__filename);
 const site =
   process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
   process.env.SITE?.replace(/\/$/, '') ||
-  'https://v3.pereiratechtalks.org';
+  'https://pereiratechtalks.org';
 
 // https://astro.build/config
 export default defineConfig({

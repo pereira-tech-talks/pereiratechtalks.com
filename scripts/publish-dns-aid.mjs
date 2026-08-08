@@ -25,7 +25,7 @@ const DRY_RUN = process.env.DNS_AID_DRY_RUN === '1';
 
 /** Hostnames that agents / scanners resolve (FQDN without trailing dot). */
 const TARGET_HOSTS = (
-  process.env.DNS_AID_HOSTS || 'pereiratechtalks.org,v3.pereiratechtalks.org'
+  process.env.DNS_AID_HOSTS || 'pereiratechtalks.org,pereiratechtalks.org'
 )
   .split(',')
   .map((h) => h.trim())
@@ -223,7 +223,7 @@ async function main() {
     );
   }
   console.log(
-    '\nRe-scan: POST https://isitagentready.com/api/scan {"url":"https://v3.pereiratechtalks.org"}'
+    '\nRe-scan: POST https://isitagentready.com/api/scan {"url":"https://pereiratechtalks.org"}'
   );
 }
 

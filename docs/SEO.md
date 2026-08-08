@@ -209,7 +209,7 @@ All content MUST exist in both languages:
 
 > **Host must match the URL you share.** Absolute OG URLs are built from
 > `astro.config.mjs` → `site` (override with `PUBLIC_SITE_URL` / `SITE`).
-> While sharing `https://v3.pereiratechtalks.org/`, `site` must be that
+> While sharing `https://pereiratechtalks.org/`, `site` must be that
 > origin. Pointing `og:image` at apex `pereiratechtalks.org` today follows
 > redirects into the legacy stack and 404s — Facebook then shows the favicon.
 

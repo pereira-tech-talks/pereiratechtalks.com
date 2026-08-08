@@ -286,7 +286,7 @@ Run regular Lighthouse audits:
 # 3. Run audit for Performance
 
 # Or use CLI
-pnpm exec lighthouse https://v3.pereiratechtalks.org --view
+pnpm exec lighthouse https://pereiratechtalks.org --view
 ```
 
 ### Key Metrics to Track
