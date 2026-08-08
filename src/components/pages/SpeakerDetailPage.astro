@@ -1,6 +1,6 @@
 ---
 /**
- * PTT v3.0.0 single speaker detail page — bio + their talks.
+ * PTT v3.0.0 single speaker detail page — bio + their talks + related events.
  */
 
 import type { CollectionEntry } from 'astro:content';
@@ -12,6 +12,7 @@ import { SITE_URL } from '@/lib/constances';
 import { getCalendarYear } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getTalksBySpeaker } from '@/lib/talk';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   speaker: CollectionEntry<'speakers'>;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const { speaker, lang } = Astro.props;
+const sd = getTranslations(lang).speakerDetail;
 
 const prefix = getUrlPrefix(lang);
 const name = speaker.data.name;
@@ -37,13 +39,43 @@ const social = (speaker.data.social ?? {}) as {
   bluesky?: string;
 };
 
+const relatedEvents = Array.from(
+  talks
+    .filter((t) => t.data.event)
+    .reduce((map, t) => {
+      const event = t.data.event!;
+      const key = `${event.collection}:${event.slug}`;
+      if (!map.has(key)) {
+        map.set(key, {
+          collection: event.collection,
+          slug: event.slug,
+          href:
+            event.collection === 'meetups'
+              ? `${prefix}/meetups/${event.slug}/`
+              : event.collection === 'pereiraTechDays'
+                ? `${prefix}/pereira-tech-days/${event.slug}/`
+                : `${prefix}/events/${event.slug}/`,
+          label:
+            event.collection === 'pereiraTechDays'
+              ? `Pereira Tech Day ${event.slug}`
+              : event.slug.replace(/-/g, ' '),
+        });
+      }
+      return map;
+    }, new Map<
+      string,
+      { collection: string; slug: string; href: string; label: string }
+    >())
+    .values()
+);
+
 const breadcrumbs = [
   {
-    label: lang === 'es' ? 'Inicio' : 'Home',
+    label: sd.breadcrumbHome,
     href: prefix === '' ? '/' : `${prefix}/`,
   },
   {
-    label: lang === 'es' ? 'Ponentes' : 'Speakers',
+    label: sd.breadcrumbSpeakers,
     href: `${prefix}/speakers/`,
   },
   { label: name },
@@ -147,7 +179,7 @@ const personJsonLd: Record<string, unknown> = {
                       rel="noopener noreferrer"
                       class="inline-flex items-center min-h-[44px] gap-1.5 rounded-full bg-ptt-primary-soft dark:bg-ptt-bg-elevated px-3 py-2 text-ptt-secondary hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
                     >
-                      {lang === 'es' ? 'Sitio web' : 'Website'}
+                      {sd.website}
                     </a>
                   </li>
                 )}
@@ -159,19 +191,36 @@ const personJsonLd: Record<string, unknown> = {
     </div>
 
     {
+      relatedEvents.length > 0 && (
+        <section class="main-container pb-8">
+          <h2 class="text-2xl font-bold tracking-tight text-ptt">
+            {sd.relatedEvents}
+          </h2>
+          <p class="mt-2 text-ptt-secondary">{sd.relatedEventsSubtitle}</p>
+          <ul class="mt-4 flex flex-wrap gap-3">
+            {relatedEvents.map((event) => (
+              <li>
+                <a
+                  href={event.href}
+                  class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary-soft px-4 py-2 text-sm font-medium capitalize text-ptt hover:bg-ptt-primary hover:text-white dark:bg-ptt-bg-elevated dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950"
+                >
+                  {event.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
       talks.length > 0 && (
         <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
           <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-ptt">
-              {lang === 'es'
-                ? `Historial de charlas de ${name}`
-                : `${name}'s talk history`}
+              {`${sd.talkHistory} — ${name}`}
             </h2>
-            <p class="mt-2 text-ptt-secondary">
-              {lang === 'es'
-                ? 'De la más reciente a la más antigua.'
-                : 'Most recent first.'}
-            </p>
+            <p class="mt-2 text-ptt-secondary">{sd.talkHistorySubtitle}</p>
             <ol class="mt-8 relative space-y-8 border-l border-ptt-border pl-6">
               {talks.map((talk) => {
                 const year = talk.data.date

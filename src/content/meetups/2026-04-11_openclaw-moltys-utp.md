@@ -29,6 +29,15 @@ speakers:
 sponsors:
   - slug: cursor
     tier: community
+gallery:
+  - src: /images/meetups/openclaw-moltys-utp/memories/01.webp
+    alt:
+      en: OpenClaw Moltys meetup at UTP
+      es: Meetup OpenClaw Moltys en la UTP
+  - src: /images/meetups/openclaw-moltys-utp/memories/03.webp
+    alt:
+      en: Community demos at OpenClaw Moltys
+      es: Demos de la comunidad en OpenClaw Moltys
 status: completed
 draft: false
 ---

@@ -24,6 +24,7 @@ verticals:
 talks: []
 speakers: []
 sponsors: []
+linkRecording: https://www.youtube.com/watch?v=SNE_MbXAQQU
 status: completed
 draft: false
 ---

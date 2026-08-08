@@ -144,14 +144,30 @@ export interface SiteTranslations {
   meetupDetail: {
     talks: string;
     speakers: string;
+    sponsors: string;
+    sponsorsSubtitle: string;
     venue: string;
     originalEvent: string;
+    recording: string;
+    watchRecording: string;
+    photosExternal: string;
+    galleryMemories: string;
     statusAnnounced: string;
     statusRsvpOpen: string;
     statusCompleted: string;
     statusCancelled: string;
     breadcrumbHome: string;
     breadcrumbMeetups: string;
+  };
+
+  speakerDetail: {
+    talkHistory: string;
+    talkHistorySubtitle: string;
+    relatedEvents: string;
+    relatedEventsSubtitle: string;
+    breadcrumbHome: string;
+    breadcrumbSpeakers: string;
+    website: string;
   };
 
   // About page

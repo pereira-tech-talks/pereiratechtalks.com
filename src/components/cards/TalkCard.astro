@@ -45,6 +45,7 @@ const typeLabels: Record<string, { en: string; es: string }> = {
   talk: { en: 'Talk', es: 'Charla' },
 };
 const typeLabel = typeLabels[talk.data.type ?? 'talk'][lang];
+const hasRecording = Boolean(talk.data.recording?.url);
 ---
 
 <a
@@ -56,6 +57,11 @@ const typeLabel = typeLabels[talk.data.type ?? 'talk'][lang];
   <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-secondary">
     <Badge variant="neutral">{typeLabel}</Badge>
     <Badge variant="neutral">{langLabel}</Badge>
+    {hasRecording && (
+      <Badge variant="neutral">
+        {lang === 'es' ? 'Grabación' : 'Recording'}
+      </Badge>
+    )}
     {dateLabel && <time datetime={date?.toISOString()}>{dateLabel}</time>}
   </div>
   <h3 class="text-lg font-semibold text-ptt group-hover:text-ptt-primary line-clamp-2">

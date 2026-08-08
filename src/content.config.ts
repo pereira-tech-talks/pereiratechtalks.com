@@ -302,6 +302,15 @@ const meetups = defineCollection({
     linkMeetupCom: z.string().optional(),
     linkRecording: z.string().optional(),
     linkPhotos: z.string().optional(),
+    gallery: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: i18nStringOptional,
+          caption: i18nStringOptional,
+        })
+      )
+      .default([]),
     status: eventStatus.default('announced'),
     draft: z.boolean().default(false),
   }),

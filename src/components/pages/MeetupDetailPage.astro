@@ -10,8 +10,10 @@ import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import BlogHeroImage from '@/components/blog/BlogHeroImage.astro';
 import SpeakerCard from '@/components/cards/SpeakerCard.astro';
+import SponsorCard from '@/components/cards/SponsorCard.astro';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
+import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarousel.svelte';
 import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -20,8 +22,10 @@ import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug, resolveMeetupStatus } from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
+import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';
+import { extractYouTubeId } from '@/lib/youtube';
 
 interface Props {
   meetup: CollectionEntry<'meetups'>;
@@ -60,6 +64,15 @@ const speakerSlugs = [
 ];
 const speakers = await getSpeakersBySlugs(speakerSlugs);
 const speakerNameBySlug = new Map(speakers.map((s) => [s.id, s.data.name]));
+const editionSponsors = await getEditionSponsors(meetup.data.sponsors ?? []);
+const gallery = meetup.data.gallery ?? [];
+const linkRecording = meetup.data.linkRecording;
+const linkPhotos = meetup.data.linkPhotos;
+const youtubeId = linkRecording ? extractYouTubeId(linkRecording) : null;
+const talkRecording = talks.find((t) => t.data.recording?.url)?.data.recording;
+const recordingUrl = linkRecording || talkRecording?.url;
+const recordingYoutubeId =
+  youtubeId || (recordingUrl ? extractYouTubeId(recordingUrl) : null);
 
 const { Content } = await render(meetup);
 
@@ -263,8 +276,77 @@ if (speakers.length > 0) {
             </div>
           )
         }
+        {
+          recordingUrl && !recordingYoutubeId && (
+            <div>
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
+                {md.recording}
+              </h3>
+              <a
+                href={recordingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm font-medium text-ptt hover:text-ptt-primary dark:hover:text-ptt-primary-dark"
+              >
+                {md.watchRecording}
+              </a>
+            </div>
+          )
+        }
+        {
+          linkPhotos && (
+            <div>
+              <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
+                {md.photosExternal}
+              </h3>
+              <a
+                href={linkPhotos}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm font-medium text-ptt hover:text-ptt-primary dark:hover:text-ptt-primary-dark"
+              >
+                {md.photosExternal}
+              </a>
+            </div>
+          )
+        }
       </aside>
     </div>
+
+    {
+      recordingYoutubeId && (
+        <section class="main-container pb-12 sm:pb-16">
+          <h2 class="text-2xl font-bold tracking-tight text-ptt mb-4">
+            {md.recording}
+          </h2>
+          <div
+            class="youtube-facade relative aspect-video w-full overflow-hidden rounded-2xl bg-ptt-bg-dark ring-1 ring-ptt-border"
+            data-youtube-id={recordingYoutubeId}
+            data-title={title}
+          >
+            <img
+              src={`https://i.ytimg.com/vi/${recordingYoutubeId}/hqdefault.jpg`}
+              alt=""
+              width="1280"
+              height="720"
+              class="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <button
+              type="button"
+              class="absolute inset-0 flex items-center justify-center bg-black/35 text-white transition hover:bg-black/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              aria-label={md.watchRecording}
+            >
+              <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-ptt-primary text-white shadow-lg dark:bg-ptt-primary-dark dark:text-gray-950">
+                <svg aria-hidden="true" class="h-7 w-7 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </button>
+          </div>
+        </section>
+      )
+    }
 
     {
       talks.length > 0 && (
@@ -309,5 +391,70 @@ if (speakers.length > 0) {
         </section>
       )
     }
+
+    {
+      editionSponsors.length > 0 && (
+        <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
+          <div class="main-container">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
+              {md.sponsors}
+            </h2>
+            <p class="mt-2 text-ptt-secondary">{md.sponsorsSubtitle}</p>
+            <ul class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {editionSponsors.map(({ sponsor, tier }) => (
+                <li>
+                  <SponsorCard
+                    sponsor={sponsor}
+                    lang={lang}
+                    tier={tier}
+                    showTier={false}
+                    muted
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      gallery.length > 0 && (
+        <section class="py-16 sm:py-20">
+          <div class="main-container">
+            <PtdGalleryCarousel
+              client:visible
+              lang={lang}
+              title={md.galleryMemories}
+              images={gallery}
+            />
+          </div>
+        </section>
+      )
+    }
   </article>
 </MainLayout>
+
+<script>
+  function activateFacade(facade: Element): void {
+    const videoId = facade.getAttribute('data-youtube-id');
+    const title = facade.getAttribute('data-title') || 'YouTube video';
+    if (!videoId) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+    iframe.title = title;
+    iframe.allow =
+      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    iframe.className = 'absolute inset-0 h-full w-full';
+    facade.replaceChildren(iframe);
+  }
+
+  document.querySelectorAll('.youtube-facade').forEach((facade) => {
+    const button = facade.querySelector('button');
+    if (!button) return;
+    button.addEventListener('click', () => activateFacade(facade), {
+      once: true,
+    });
+  });
+</script>
