@@ -8,7 +8,7 @@ This document is the **canonical inventory** of every official Pereira Tech Talk
 
 | Channel | URL / Handle | Purpose | Frequency |
 |---|---|---|---|
-| **Website** | <https://v3.pereiratechtalks.org> | Source of truth: meetups, events, Pereira Tech Days, blog, slides, speakers, contributors, sponsors. | Real-time |
+| **Website** | <https://pereiratechtalks.org> | Source of truth: meetups, events, Pereira Tech Days, blog, slides, speakers, contributors, sponsors. | Real-time |
 | **Newsletter** | `pereiratechtalks.org/newsletter` | Monthly digest: upcoming meetups, latest talks, blog highlights, vertical news. | Monthly |
 | **Luma** | <https://luma.com/pertechtalks> | RSVPs and event listing for monthly meetups. | Per meetup |
 | **YouTube** | `@pereiratechtalks` | Recorded talks, livestream archives, Pereira Tech Day editions, special features. | Per event + on-demand uploads |

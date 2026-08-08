@@ -33,7 +33,7 @@ draft: false
 📣 No se pierdan estas poderosas charlas tech este jueves en la noche:
 
 Esten atentos a este link para entrar a la charla virtual a las 6:30pm:
-👉👉👉 [https://v3.pereiratechtalks.org/live/](https://v3.pereiratechtalks.org/live/)
+👉👉👉 [https://pereiratechtalks.org/live/](https://pereiratechtalks.org/live/)
 
 ### Charlas
 

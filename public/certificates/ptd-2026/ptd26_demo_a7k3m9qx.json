@@ -1,9 +1,9 @@
 {
   "@context": [
     "https://www.w3.org/ns/credentials/v2",
-    "https://v3.pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
+    "https://pereiratechtalks.org/schemas/event-attendance/v1.jsonld"
   ],
-  "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx.json",
+  "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx.json",
   "type": [
     "VerifiableCredential",
     "EventAttendanceCredential"
@@ -11,7 +11,7 @@
   "issuer": "did:web:pereiratechtalks.org",
   "validFrom": "2026-08-25T15:00:00.000Z",
   "credentialSubject": {
-    "id": "https://v3.pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx",
+    "id": "https://pereiratechtalks.org/certificates/ptd-2026/ptd26_demo_a7k3m9qx",
     "name": "Alex Rivera Demo",
     "role": "attendee",
     "event": {

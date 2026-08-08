@@ -22,7 +22,7 @@ Anyone who attends a meetup, joins a channel, or watches our content is a commun
 
 ### 2. Contributors
 
-Anyone who has contributed at least once in any form (talk, blog post, code PR, mentorship, volunteer hour, sponsorship). Contributors are recognized in the public [Contributors directory](https://v3.pereiratechtalks.org/contributors).
+Anyone who has contributed at least once in any form (talk, blog post, code PR, mentorship, volunteer hour, sponsorship). Contributors are recognized in the public [Contributors directory](https://pereiratechtalks.org/contributors).
 
 ### 3. Vertical Leads
 
@@ -107,7 +107,7 @@ Conflicts between organizers:
 
 PTT operates on a **public ledger basis**:
 
-- Annual budget is published at <https://v3.pereiratechtalks.org/sponsors#budget> at the start of each fiscal year (January).
+- Annual budget is published at <https://pereiratechtalks.org/sponsors#budget> at the start of each fiscal year (January).
 - A summary of inflows (sponsorships, donations) and outflows (venues, swag, food, recording, travel) is published quarterly.
 - Sponsors who request anonymity are listed by tier without name; named sponsors are listed publicly.
 - All bank accounts are jointly held by at least two organizers.

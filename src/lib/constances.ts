@@ -6,11 +6,9 @@ export const SITE_TIMEZONE_OFFSET = '-05:00';
 /**
  * Public site origin (no trailing slash).
  * Must match `astro.config.mjs` → `site` / `PUBLIC_SITE_URL`.
- * While the shared surface is the v3 preview host, default to that;
- * switch back to https://pereiratechtalks.org at DNS cutover.
  */
 export const SITE_URL: string = (
-  import.meta.env.SITE || 'https://v3.pereiratechtalks.org'
+  import.meta.env.SITE || 'https://pereiratechtalks.org'
 ).replace(/\/$/, '');
 
 export const SITE_TITLE: string =

@@ -10,8 +10,8 @@ The community exists to lower the barrier to entry to technology in the Eje Cafe
 
 ### Official Channels
 
-- Website: https://v3.pereiratechtalks.org/
-- Channels inventory: https://v3.pereiratechtalks.org/channels/
+- Website: https://pereiratechtalks.org/
+- Channels inventory: https://pereiratechtalks.org/channels/
 
 ## Site Structure
 
@@ -122,7 +122,7 @@ Content-Type: `text/markdown; charset=utf-8`
 Agents can request Markdown without changing URLs by sending `Accept: text/markdown`:
 
 ```
-curl -H "Accept: text/markdown" https://v3.pereiratechtalks.org/about
+curl -H "Accept: text/markdown" https://pereiratechtalks.org/about
 → Returns Markdown with Content-Type: text/markdown; charset=utf-8
 → Response includes Vary: Accept header for proper caching
 ```

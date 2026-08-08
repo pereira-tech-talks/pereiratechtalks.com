@@ -99,7 +99,7 @@ export const externalEnglishDeck: MockSlideDeck = {
     provider: 'Google Slides',
     eventName: 'Pereira Tech Talks 2025',
     eventDate: new Date('2025-11-15'),
-    eventUrl: 'https://v3.pereiratechtalks.org/',
+    eventUrl: 'https://pereiratechtalks.org/',
   },
 };
 
@@ -115,7 +115,7 @@ export const externalSpanishDeck: MockSlideDeck = {
     provider: 'Google Slides',
     eventName: 'Pereira Tech Talks 2025',
     eventDate: new Date('2025-11-15'),
-    eventUrl: 'https://v3.pereiratechtalks.org/',
+    eventUrl: 'https://pereiratechtalks.org/',
   },
 };
 

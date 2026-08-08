@@ -466,6 +466,6 @@ Note: Speaker notes are visible only in speaker view. Use them for talking point
 
 <p>All snippets and helpers live in <strong>src/styles/slides.css</strong> and <strong>src/content/slides/_layouts/</strong></p>
 
-<a href="https://v3.pereiratechtalks.org/en/slides" class="slide-cta">Browse all decks →</a>
+<a href="https://pereiratechtalks.org/en/slides" class="slide-cta">Browse all decks →</a>
 
 <small>Built with Reveal.js inside Astro · pereiratechtalks.org</small>

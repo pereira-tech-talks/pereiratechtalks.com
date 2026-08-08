@@ -75,7 +75,7 @@ describe('serializePostToAgentMarkdown', () => {
     expect(result).toContain('Updated: 2024-04-01');
     expect(result).toContain('Language: en');
     expect(result).toContain(
-      'Canonical: https://v3.pereiratechtalks.org/en/blog/my-awesome-post'
+      'Canonical: https://pereiratechtalks.org/en/blog/my-awesome-post'
     );
     expect(result).toContain('Tags: tech, astro');
     expect(result).toContain('---');
@@ -113,7 +113,7 @@ describe('serializePostToAgentMarkdown', () => {
 
     expect(result).toContain('Language: es');
     expect(result).toContain(
-      'Canonical: https://v3.pereiratechtalks.org/blog/empty-body'
+      'Canonical: https://pereiratechtalks.org/blog/empty-body'
     );
   });
 
@@ -178,7 +178,7 @@ describe('serializeBlogIndexToMarkdown', () => {
     expect(result).toContain('> A technical blog.');
     expect(result).toContain('Language: en');
     expect(result).toContain(
-      'Canonical: https://v3.pereiratechtalks.org/en/blog'
+      'Canonical: https://pereiratechtalks.org/en/blog'
     );
     expect(result).toContain('Total posts: 2');
     expect(result).toContain('## Posts');
@@ -203,7 +203,7 @@ describe('serializeBlogIndexToMarkdown', () => {
     });
 
     expect(result).toContain('Language: es');
-    expect(result).toContain('Canonical: https://v3.pereiratechtalks.org/blog');
+    expect(result).toContain('Canonical: https://pereiratechtalks.org/blog');
     expect(result).toContain('/blog/first-post.md');
   });
 
@@ -234,7 +234,7 @@ describe('serializePageToAgentMarkdown', () => {
     );
     expect(result).toContain('Language: en');
     expect(result).toContain(
-      'Canonical: https://v3.pereiratechtalks.org/en/about'
+      'Canonical: https://pereiratechtalks.org/en/about'
     );
     expect(result).toContain('Last Updated: 2026-03-09');
     expect(result).toContain('## Who We Are');
@@ -251,8 +251,8 @@ describe('serializePageToAgentMarkdown', () => {
       lang: 'en',
     });
 
-    expect(result).toContain('Canonical: https://v3.pereiratechtalks.org');
-    // Should not be https://v3.pereiratechtalks.org/en/index
+    expect(result).toContain('Canonical: https://pereiratechtalks.org');
+    // Should not be https://pereiratechtalks.org/en/index
     expect(result).not.toContain('/index');
   });
 
@@ -264,7 +264,7 @@ describe('serializePageToAgentMarkdown', () => {
 
     expect(result).toContain('Language: es');
     expect(result).toContain(
-      'Canonical: https://v3.pereiratechtalks.org/contact'
+      'Canonical: https://pereiratechtalks.org/contact'
     );
     expect(result).not.toContain('Last Updated:');
   });

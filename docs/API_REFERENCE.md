@@ -126,11 +126,11 @@ Standard RSS 2.0 feed for blog subscriptions.
 <rss version="2.0">
   <channel>
     <title>Pereira Tech Talks Blog</title>
-    <link>https://v3.pereiratechtalks.org</link>
+    <link>https://pereiratechtalks.org</link>
     <description>Bilingual articles from the Pereira Tech Talks community</description>
     <item>
       <title>Post Title</title>
-      <link>https://v3.pereiratechtalks.org/blog/post-slug/</link>
+      <link>https://pereiratechtalks.org/blog/post-slug/</link>
       <description>Post description</description>
       <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
     </item>
@@ -144,7 +144,7 @@ Standard RSS 2.0 feed for blog subscriptions.
 Subscribe with any RSS reader using:
 
 ```
-https://v3.pereiratechtalks.org/rss.xml
+https://pereiratechtalks.org/rss.xml
 ```
 
 ### Sitemap
@@ -160,7 +160,7 @@ XML sitemap for search engine indexing.
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL || 'https://v3.pereiratechtalks.org',
+  site: process.env.PUBLIC_SITE_URL || 'https://pereiratechtalks.org',
   integrations: [sitemap()],
 });
 ```

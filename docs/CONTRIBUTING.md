@@ -19,7 +19,7 @@ The community is fueled by people sharing what they have learned. We accept talk
 
 **Formats:** lightning talk (5–10 min), regular talk (20–30 min), workshop (60–90 min), panel (45 min).
 
-Apply through the **Call for Speakers**: [`/cfs`](https://v3.pereiratechtalks.org/cfs) or read [docs/CALL_FOR_SPEAKERS.md](./CALL_FOR_SPEAKERS.md).
+Apply through the **Call for Speakers**: [`/cfs`](https://pereiratechtalks.org/cfs) or read [docs/CALL_FOR_SPEAKERS.md](./CALL_FOR_SPEAKERS.md).
 
 ### 2. Write a community blog post
 
@@ -130,7 +130,7 @@ Examples:
 
 ## Recognizing Contributors
 
-We maintain a public **[Contributors directory](https://v3.pereiratechtalks.org/contributors)** built from `src/content/contributors/`. Every contributor — code, content, mentor, volunteer, sponsor — gets recognized there.
+We maintain a public **[Contributors directory](https://pereiratechtalks.org/contributors)** built from `src/content/contributors/`. Every contributor — code, content, mentor, volunteer, sponsor — gets recognized there.
 
 If you've contributed in any form and don't see yourself listed within two weeks of your first contribution, please email <pereiratechtalks@gmail.com> with your name, role, and a 1-paragraph bio.
 
