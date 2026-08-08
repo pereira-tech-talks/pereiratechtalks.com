@@ -3,8 +3,8 @@ title:
   en: "Accessibility Night, diseño y desarrollo iOS"
   es: "Noche de Accesibilidad, diseño y desarrollo iOS"
 description:
-  en: "Pereira Tech Talks meetup (2022-09-29). **Cómo comenzar en el desarrollo de iOS** Yennifer Hurtado Arce."
-  es: "**Cómo comenzar en el desarrollo de iOS** Yennifer Hurtado Arce."
+  en: "Pereira Tech Talks meetup — Accessibility Night, diseño y desarrollo iOS. Community archive page with the night’s program and context."
+  es: "yo comencé como programadora hace como 3 años comencé con web (html Js CSS React) en un bootcamp de programación llamado Laboratoria en Perú que busca…"
 pubDate: 2022-09-29
 date: 2022-09-29
 venue:

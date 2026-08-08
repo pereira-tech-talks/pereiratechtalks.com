@@ -3,8 +3,8 @@ title:
   en: "Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch"
   es: "Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch"
 description:
-  en: "Pereira Tech Talks meetup (2017-12-11). Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes."
-  es: "Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes."
+  en: "Pereira Tech Talks meetup — Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch. Community archive page with the night’s program…"
+  es: "Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas muy interesantes"
 pubDate: 2017-12-11
 date: 2017-12-11
 venue:

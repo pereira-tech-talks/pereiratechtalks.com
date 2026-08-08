@@ -3,8 +3,8 @@ title:
   en: "Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro"
   es: "Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro"
 description:
-  en: "Pereira Tech Talks meetup (2024-08-01). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 1 de Agosto a las 6:30 p.m. para conocer sobre desarrollo web moderno con Astro."
-  es: "¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 1 de Agosto a las 6:30 p.m. para conocer sobre desarrollo web moderno con Astro."
+  en: "Pereira Tech Talks meetup — Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro. Community archive page with the night’s…"
+  es: "Archivo del meetup «Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro»: programa, ponentes y contexto de la noche con…"
 pubDate: 2024-08-01
 date: 2024-08-01
 venue:
@@ -30,11 +30,7 @@ draft: false
 
 ## Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro
 
-¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 1 de Agosto a las 6:30 p.m. para conocer sobre desarrollo web moderno con Astro.
-
-¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender sobre desarrollo web de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
-
-**Ubicación y cómo encontrarnos:** Nos reuniremos en Camellando Coworking sede Pinares.
+El 1 de agosto de 2024 nos reunimos en **Camellando H+W** para **Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro**.
 
 **Charlas:**
 
@@ -52,8 +48,6 @@ En esta charla introductoria, exploraremos Astro, una herramienta revolucionaria
 **Rol:** CTO at DailyBot
 
 **Astro en Acción: Aplicaciones Prácticas y Curiosidades**
-Descubre cómo Astro está transformando el desarrollo web con ejemplos prácticos y curiosidades intrigantes. En esta charla, exploraremos casos reales donde Astro, combinado con TailwindCSS, acelera significativamente la creación de sitios web. Sumérgete en las características únicas de Astro y aprende cómo su enfoque innovador puede optimizar tus proyectos. Prepárate para una sesión llena de insights valiosos que te equiparán para aprovechar al máximo esta poderosa herramienta. ¡No te pierdas la oportunidad de elevar tus habilidades de desarrollo con Astro!
-
 > Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376/)
 
 ---

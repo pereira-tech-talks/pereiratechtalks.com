@@ -31,5 +31,14 @@ draft: false
 
 ## Conociendo la nube
 
+El 24 de septiembre de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Conociendo la nube**.
+
 Una jornada de charlas sobre Rust y cloud-native — desarrollo moderno, seguro y de alto rendimiento para la próxima década.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/ttd1exr8

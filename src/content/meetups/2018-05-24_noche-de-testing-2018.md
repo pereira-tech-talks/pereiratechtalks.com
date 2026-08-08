@@ -3,8 +3,8 @@ title:
   en: "Testing Night - Pruebas Unitarias en Python y Javascript"
   es: "Noche de testing - Pruebas Unitarias en Python y Javascript"
 description:
-  en: "Pereira Tech Talks meetup (2018-05-24). Las pruebas unitarias están hechas para realizar un trabajo de desarrollo confiable, ágil y eficiente. Es por esto, que esta práctica de incluir pruebas unitarias durante el desarrollo, son adoptadas para incrementar la confiabili."
-  es: "Las pruebas unitarias están hechas para realizar un trabajo de desarrollo confiable, ágil y eficiente. Es por esto, que esta práctica de incluir pruebas unitarias durante el desarrollo, son adoptadas para incrementar la confiabili."
+  en: "Pereira Tech Talks meetup — Testing Night - Pruebas Unitarias en Python y Javascript. Community archive page with the night’s program and context."
+  es: "Las pruebas unitarias están hechas para realizar un trabajo de desarrollo confiable, ágil y eficiente. Es por esto, que esta práctica de incluir pruebas…"
 pubDate: 2018-05-24
 date: 2018-05-24
 venue:

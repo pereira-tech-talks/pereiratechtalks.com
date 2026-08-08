@@ -3,8 +3,8 @@ title:
   en: "Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil"
   es: "Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil"
 description:
-  en: "Pereira Tech Talks meetup (2024-08-29). ¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas."
-  es: "¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas."
+  en: "Pereira Tech Talks meetup — Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil. Community archive page with the night’s program and context."
+  es: "Archivo del meetup «Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil»: programa, ponentes y contexto de la noche con Pereira Tech Talks."
 pubDate: 2024-08-29
 date: 2024-08-29
 venue:
@@ -30,10 +30,7 @@ draft: false
 
 ## Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil
 
-¡No te pierdas nuestra próxima reunión de networking y aprendizaje! Únete a nosotros el 29 de Agosto a las 6:30 p.m. para sobre IA, trabajo remoto y aprendizaje ágil de habilidades blandas.
-
-¿Qué necesitas traer? Solo tus ganas de devorar algunos snacks, conocer gente interesante y aprender de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
-Ubicación y cómo encontrarnos: Nos reuniremos en la Universidad Católica de Pereira.
+El 29 de agosto de 2024 nos reunimos en **Catholic University of Pereira** para **Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil**.
 
 **Charlas:**
 

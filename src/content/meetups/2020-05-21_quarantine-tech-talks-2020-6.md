@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks - Meetup 6"
   es: "Quarantine Tech Talks - Meetup 6"
 description:
-  en: "Pereira Tech Talks meetup (2020-05-21). Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)."
-  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)."
+  en: "Pereira Tech Talks meetup — Quarantine Tech Talks - Meetup 6. Community archive page with the night’s program and context."
+  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)"
 pubDate: 2020-05-21
 date: 2020-05-21
 venue:

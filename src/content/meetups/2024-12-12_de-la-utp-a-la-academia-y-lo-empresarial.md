@@ -3,8 +3,8 @@ title:
   en: "From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
   es: "De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
 description:
-  en: "Pereira Tech Talks meetup (2024-12-12). ¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más."
-  es: "¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más."
+  en: "Pereira Tech Talks meetup — From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional. Community archive page with the night’s…"
+  es: "Archivo del meetup «De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional»: programa, ponentes y contexto de la noche con…"
 pubDate: 2024-12-12
 date: 2024-12-12
 venue:
@@ -30,13 +30,9 @@ draft: false
 
 ## De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional
 
+El 12 de diciembre de 2024 nos reunimos en **Universidad Tecnológica de Pereira** para **De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional**.
+
 ¡No se pueden perder nuestro último meetup del año! Tendremos natilla, buñuelos y muchas sorpresas más.
-
-En esta ocasión tendremos unos ponentes muy top que nos contaran sus historias de crecimiento y éxito profesional.
-
-¿Qué necesitas traer? Solo tus ganas de devorar un delicioso snack navideño, conocer gente interesante y aprender de la mano de nuestros invitados expertos. ¡Nosotros nos encargamos del resto!
-
-Ubicación y cómo encontrarnos: Nos reuniremos en la Universidad Tecnológica de Pereira en la Sala Magistral 1, Edificio 13 (Bloque Y).
 
 **CHARLA 1**
 

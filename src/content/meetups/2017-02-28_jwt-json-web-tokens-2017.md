@@ -3,8 +3,8 @@ title:
   en: "Learning sobre JWT (JSON web Tokens)"
   es: "Aprendiendo sobre JWT (JSON web Tokens)"
 description:
-  en: "Pereira Tech Talks meetup (2017-02-28). En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados del programa de Ingeniería de Sistemas de la seccional y de otras universidad."
-  es: "En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados del programa de Ingeniería de Sistemas de la seccional y de otras universidad."
+  en: "Pereira Tech Talks meetup — Learning sobre JWT (JSON web Tokens). Community archive page with the night’s program and context."
+  es: "En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados…"
 pubDate: 2017-02-28
 date: 2017-02-28
 venue:

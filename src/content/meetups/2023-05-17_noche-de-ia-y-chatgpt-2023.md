@@ -3,8 +3,8 @@ title:
   en: "AI Night & ChatGPT: Tendencias y Posibilidades"
   es: "Noche de IA & ChatGPT: Tendencias y Posibilidades"
 description:
-  en: "Pereira Tech Talks meetup (2023-05-17). ¡Descubre el poder de la inteligencia artificial! Únete a charlas fascinantes y explora cómo la IA está moldeando el futuro. ¡No te lo pierdas!."
-  es: "¡Descubre el poder de la inteligencia artificial! Únete a charlas fascinantes y explora cómo la IA está moldeando el futuro. ¡No te lo pierdas!."
+  en: "Pereira Tech Talks meetup — AI Night & ChatGPT: Tendencias y Posibilidades. Community archive page with the night’s program and context."
+  es: "¡Descubre el poder de la inteligencia artificial! Únete a charlas fascinantes y explora cómo la IA está moldeando el futuro. ¡No te lo pierdas!"
 pubDate: 2023-05-17
 date: 2023-05-17
 venue:

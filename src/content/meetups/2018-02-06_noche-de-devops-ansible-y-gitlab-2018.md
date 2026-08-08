@@ -3,7 +3,7 @@ title:
   en: "DevOps Night: Intro a la automatización en Ansible && CI con GitLab y Docker"
   es: "Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker"
 description:
-  en: "Pereira Tech Talks meetup (2018-02-06). Tenemos el gusto de invitarlos a nuestro primer Meetup del año, en esta ocasión tendremos una noche dedicada a las operaciones DevOps."
+  en: "Pereira Tech Talks meetup — DevOps Night: Intro a la automatización en Ansible && CI con GitLab y Docker. Community archive page with the night’s program…"
   es: "Tenemos el gusto de invitarlos a nuestro primer Meetup del año, en esta ocasión tendremos una noche dedicada a las operaciones DevOps."
 pubDate: 2018-02-06
 date: 2018-02-06

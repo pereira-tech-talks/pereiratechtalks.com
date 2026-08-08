@@ -31,5 +31,14 @@ draft: false
 
 ## Conversatorio PerTT: ¿Qué es una Hackathon?
 
+El 29 de octubre de 2025 nos reunimos en **Universidad Tecnológica de Pereira** para **Conversatorio PerTT: ¿Qué es una Hackathon?**.
+
 Conversatorio sobre la cultura de hackathons, qué esperar y cómo organizar la primera en Pereira.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/0xil6wus

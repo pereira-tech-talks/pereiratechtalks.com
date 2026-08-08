@@ -3,8 +3,8 @@ title:
   en: "Leadership Night y testing"
   es: "Noche de liderazgo y testing"
 description:
-  en: "Pereira Tech Talks meetup (2022-05-12). Introducción a Load Testing y Observability con K6 y New Relic."
-  es: "Introducción a Load Testing y Observability con K6 y New Relic."
+  en: "Pereira Tech Talks meetup — Leadership Night y testing. Community archive page with the night’s program and context."
+  es: "Introducción a Load Testing y Observability con K6 y New Relic"
 pubDate: 2022-05-12
 date: 2022-05-12
 venue:

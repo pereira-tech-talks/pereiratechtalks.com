@@ -3,8 +3,8 @@ title:
   en: "Building a web server web desde cero con NodeJs"
   es: "Creando un servidor web desde cero con NodeJs"
 description:
-  en: "Pereira Tech Talks meetup (2017-09-19). Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin ."
-  es: "Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde cero, sin frameworks, utilizando módulos de nodeJS. A cargo de [John Darwin ."
+  en: "Pereira Tech Talks meetup — Building a web server web desde cero con NodeJs. Community archive page with the night’s program and context."
+  es: "Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde…"
 pubDate: 2017-09-19
 date: 2017-09-19
 venue:

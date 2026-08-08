@@ -3,8 +3,8 @@ title:
   en: "Exploring CI/CD: Tekton en Kubernetes y GitHub Actions "
   es: "Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
 description:
-  en: "Pereira Tech Talks meetup (2024-03-07). Charla 1: Introducción a Tekton CI/CD"
-  es: "Charla 1: Introducción a Tekton CI/CD"
+  en: "Pereira Tech Talks meetup — Exploring CI/CD: Tekton en Kubernetes y GitHub Actions . Community archive page with the night’s program and context."
+  es: "En esta charla se hará una introducción a los conceptos básicos de Tekton, una solución de código abierto para CI/CD en Kubernetes."
 pubDate: 2024-03-07
 date: 2024-03-07
 venue:

@@ -3,8 +3,8 @@ title:
   en: "Quarantine Tech Talks 💻 - Meetup 2"
   es: "Quarantine Tech Talks 💻 - Meetup 2"
 description:
-  en: "Pereira Tech Talks meetup (2020-04-02). ===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wz."
-  es: "===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wz."
+  en: "Pereira Tech Talks meetup — Quarantine Tech Talks 💻 - Meetup 2. Community archive page with the night’s program and context."
+  es: "===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión…"
 pubDate: 2020-04-02
 date: 2020-04-02
 venue:

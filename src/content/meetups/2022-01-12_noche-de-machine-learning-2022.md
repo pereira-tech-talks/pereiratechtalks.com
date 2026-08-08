@@ -3,7 +3,7 @@ title:
   en: "Machine Learning Night y Google Interview"
   es: "Noche de Machine Learning y Google Interview"
 description:
-  en: "Pereira Tech Talks meetup (2022-01-12). Noche de Machine Learning y Google Interview."
+  en: "Pereira Tech Talks meetup — Machine Learning Night y Google Interview. Community archive page with the night’s program and context."
   es: "Noche de Machine Learning y Google Interview."
 pubDate: 2022-01-12
 date: 2022-01-12

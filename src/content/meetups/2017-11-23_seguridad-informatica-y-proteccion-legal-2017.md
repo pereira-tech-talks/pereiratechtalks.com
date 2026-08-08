@@ -3,8 +3,8 @@ title:
   en: "Getting Started en seguridad informática && Protección legal de la innovación"
   es: "Como empezar en seguridad informática && Protección legal de la innovación"
 description:
-  en: "Pereira Tech Talks meetup (2017-11-23). En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, con dos charlas muy interesantes:."
-  es: "En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, con dos charlas muy interesantes:."
+  en: "Pereira Tech Talks meetup — Getting Started en seguridad informática && Protección legal de la innovación. Community archive page with the night’s…"
+  es: "En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, con dos charlas muy interesantes:"
 pubDate: 2017-11-23
 date: 2017-11-23
 venue:

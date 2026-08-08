@@ -3,8 +3,8 @@ title:
   en: "Introduction a Javascript del lado del cliente y del servidor"
   es: "Introducción a Javascript del lado del cliente y del servidor"
 description:
-  en: "Pereira Tech Talks meetup (2014-04-25). Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
-  es: "Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:."
+  en: "Pereira Tech Talks meetup — Introduction a Javascript del lado del cliente y del servidor. Community archive page with the night’s program and context."
+  es: "Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:"
 pubDate: 2014-04-25
 date: 2014-04-25
 venue:

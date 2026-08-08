@@ -35,5 +35,12 @@ draft: false
 
 ## Desde Vuetify hasta el Edge Computing — Meetup de Apertura 2026
 
+El 17 de febrero de 2026 nos reunimos en **Universidad Católica de Pereira** para **Desde Vuetify hasta el Edge Computing — Meetup de Apertura 2026**. En el programa: Juan José Cardona, David Ricardo Rivera Arbeláez.
+
 Meetup de apertura de 2026 — reflexiones sobre el ecosistema Vuetify más una inmersión en edge computing. Charlas, snacks y networking.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/xjga6v67

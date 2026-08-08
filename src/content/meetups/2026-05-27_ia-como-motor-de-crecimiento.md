@@ -36,5 +36,12 @@ draft: false
 
 ## IA como motor de crecimiento
 
+El 27 de mayo de 2026 nos reunimos en **Universidad Tecnológica de Pereira, Sala Magistral 2** para **IA como motor de crecimiento**. En el programa: Sebastian Franco Gomez, Henry Bravo.
+
 Meetup sobre AI Engineering, IA como infraestructura y cómo escalar sistemas de IA en entornos empresariales. Charlas con Sebastián Franco Gomez y Henry Bravo.
-Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
+
+---
+
+### Fuentes / Sources
+
+- Evento original: https://luma.com/8uige1ke
