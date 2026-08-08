@@ -148,7 +148,7 @@ function resolveFormType(data: Record<string, unknown>): FormType {
 interface ContentBuildResult {
   ok: true;
   formUuid: string;
-  content: Record<string, string>;
+  content: Record<string, string | boolean>;
   ackTopic: string;
 }
 
