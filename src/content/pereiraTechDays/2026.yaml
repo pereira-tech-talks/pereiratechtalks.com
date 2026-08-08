@@ -44,6 +44,10 @@ hero:
     en: Pereira Tech Day 2026 mascot — a howler monkey with a laptop at UTP
     es: Mascota de Pereira Tech Day 2026 — un mono aullador con laptop en la UTP
   layout: banner
+# Localized 16:9 card art (same bilingual artwork as ogImage, WebP for listings)
+cardImage:
+  es: /images/pereira-tech-days/2026/mascot/card-hero-sm.webp
+  en: /images/pereira-tech-days/2026/mascot/card-hero-sm-en.webp
 # Dedicated 1200×630 share cards (event title, date, venue, sponsors + mascot)
 ogImage:
   es: /images/pereira-tech-days/2026/og.jpg

@@ -375,9 +375,14 @@ const pereiraTechDays = defineCollection({
       layout: heroLayout.default('banner'),
     }),
     /**
+     * Optional 16:9 card / listing art (string or `{ en, es }`).
+     * Used by EditionCard and similar previews; falls back to `hero.src`.
+     */
+    cardImage: i18nString.optional(),
+    /**
      * Optional Open Graph / Twitter share image (prefer 1200×630 JPEG).
      * String = both languages; `{ en, es }` for per-locale cards.
-     * Falls back to `hero.src` when omitted.
+     * Falls back to `cardImage` then `hero.src` when omitted.
      */
     ogImage: i18nString.optional(),
     brandKit: editionBrandKit,
@@ -794,7 +799,8 @@ const notifications = defineCollection({
     /** Optional modal hero (e.g. PTD card art). Prefer landscape ~16:9. */
     image: z
       .object({
-        src: z.string(),
+        /** String = both languages; `{ en, es }` when the art is localized. */
+        src: i18nString,
         alt: z.object({ en: z.string(), es: z.string() }),
       })
       .optional(),

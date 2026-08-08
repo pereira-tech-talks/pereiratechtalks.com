@@ -274,3 +274,25 @@ export const getUpcomingLandingChrome = (
         faqLayout: 'accordion',
         portraitStyle: 'circle',
       };
+
+/**
+ * True for Pereira Tech Day hub + edition routes (ES root or `/en` prefix).
+ * Used to suppress the sitewide PTD announcement bar/modal on those pages —
+ * visitors are already in the PTD surface.
+ */
+export const isPereiraTechDayPath = (pathname: string): boolean => {
+  const raw = pathname.split('?')[0]?.split('#')[0] ?? '/';
+  const normalized = raw.replace(/\/+$/, '') || '/';
+  const withoutLang =
+    normalized === '/en'
+      ? '/'
+      : normalized.startsWith('/en/')
+        ? normalized.slice(3) || '/'
+        : normalized;
+  return (
+    withoutLang === '/pereira-tech-day' ||
+    withoutLang.startsWith('/pereira-tech-day/') ||
+    withoutLang === '/pereira-tech-days' ||
+    withoutLang.startsWith('/pereira-tech-days/')
+  );
+};

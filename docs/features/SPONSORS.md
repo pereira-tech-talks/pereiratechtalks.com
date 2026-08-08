@@ -51,6 +51,8 @@ For brand marks that must keep accent colors, use the dedicated generators inste
 node scripts/generate-ase-utp-dark-logo.mjs
 node scripts/generate-made-for-germany-dark-logo.mjs
 node scripts/generate-aumentada-logos.mjs
+node scripts/generate-codely-logos.mjs
+node scripts/generate-factored-logos.mjs
 ```
 
 

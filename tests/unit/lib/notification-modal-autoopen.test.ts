@@ -3,9 +3,11 @@ import type { NavigationType } from '@/lib/notification-modal-autoopen';
 import {
   consumeNotificationAutoOpen,
   getNavigationType,
+  isAutomatedLabBrowser,
   markNotificationAutoOpenShown,
   NOTIFY_AUTO_RELOAD_EVERY,
   planNotificationAutoOpen,
+  scheduleAfterLargestContentfulPaint,
 } from '@/lib/notification-modal-autoopen';
 
 describe('planNotificationAutoOpen', () => {
@@ -109,36 +111,139 @@ describe('consumeNotificationAutoOpen', () => {
     const local = memoryStorage();
     const open = consumeNotificationAutoOpen({
       id: 'ptd-2026',
+      lang: 'en',
       navType: 'navigate',
       storage: { session, local },
     });
     expect(open).toBe(true);
-    expect(session.getItem('ptt:notify-auto:ptd-2026')).toBeNull();
+    expect(session.getItem('ptt:notify-auto:ptd-2026:en')).toBeNull();
   });
 
   it('stays quiet on the next navigate after the session is marked', () => {
     const session = memoryStorage();
     const local = memoryStorage();
-    markNotificationAutoOpenShown('ptd-2026', { session });
+    markNotificationAutoOpenShown('ptd-2026', 'en', { session });
     expect(
       consumeNotificationAutoOpen({
         id: 'ptd-2026',
+        lang: 'en',
         navType: 'navigate',
         storage: { session, local },
       })
     ).toBe(false);
   });
 
-  it('opens on the 3rd reload and persists the counter', () => {
-    const session = memoryStorage({ 'ptt:notify-auto:ptd-2026': '1' });
-    const local = memoryStorage({ 'ptt:notify-reloads:ptd-2026': '2' });
+  it('still auto-opens EN after ES was already shown in the same tab', () => {
+    const session = memoryStorage({ 'ptt:notify-auto:ptd-2026:es': '1' });
+    const local = memoryStorage();
     expect(
       consumeNotificationAutoOpen({
         id: 'ptd-2026',
+        lang: 'en',
+        navType: 'navigate',
+        storage: { session, local },
+      })
+    ).toBe(true);
+  });
+
+  it('opens on the 3rd reload and persists the counter', () => {
+    const session = memoryStorage({ 'ptt:notify-auto:ptd-2026:en': '1' });
+    const local = memoryStorage({ 'ptt:notify-reloads:ptd-2026:en': '2' });
+    expect(
+      consumeNotificationAutoOpen({
+        id: 'ptd-2026',
+        lang: 'en',
         navType: 'reload',
         storage: { session, local },
       })
     ).toBe(true);
-    expect(local.getItem('ptt:notify-reloads:ptd-2026')).toBe('3');
+    expect(local.getItem('ptt:notify-reloads:ptd-2026:en')).toBe('3');
+  });
+});
+
+describe('isAutomatedLabBrowser', () => {
+  it('detects Lighthouse and PageSpeed user agents', () => {
+    expect(
+      isAutomatedLabBrowser(
+        'Mozilla/5.0 (...) Chrome/120.0.0.0 Mobile Safari/537.36 Chrome-Lighthouse'
+      )
+    ).toBe(true);
+    expect(
+      isAutomatedLabBrowser(
+        'Mozilla/5.0 (X11; Linux x86_64) PageSpeed Insights'
+      )
+    ).toBe(true);
+  });
+
+  it('allows normal browsers', () => {
+    expect(
+      isAutomatedLabBrowser(
+        'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36'
+      )
+    ).toBe(false);
+  });
+});
+
+describe('scheduleAfterLargestContentfulPaint', () => {
+  it('invokes the callback after the settle window when LCP is unsupported', () => {
+    const timers = new Map<number, () => void>();
+    let nextId = 1;
+    const setTimeoutFn = ((fn: () => void, _ms?: number) => {
+      const id = nextId++;
+      timers.set(id, fn);
+      return id as unknown as ReturnType<typeof setTimeout>;
+    }) as typeof setTimeout;
+    const clearTimeoutFn = ((id: ReturnType<typeof setTimeout>) => {
+      timers.delete(id as unknown as number);
+    }) as typeof clearTimeout;
+
+    let called = false;
+    scheduleAfterLargestContentfulPaint(
+      () => {
+        called = true;
+      },
+      {
+        settleMs: 10,
+        maxWaitMs: 1000,
+        setTimeoutFn,
+        clearTimeoutFn,
+        PerformanceObserverCtor: null,
+      }
+    );
+
+    expect(called).toBe(false);
+    // Flush all pending timers (max wait + settle / load fallback).
+    for (const fn of [...timers.values()]) fn();
+    expect(called).toBe(true);
+  });
+
+  it('cancel prevents the callback', () => {
+    const timers = new Map<number, () => void>();
+    let nextId = 1;
+    const setTimeoutFn = ((fn: () => void) => {
+      const id = nextId++;
+      timers.set(id, fn);
+      return id as unknown as ReturnType<typeof setTimeout>;
+    }) as typeof setTimeout;
+    const clearTimeoutFn = ((id: ReturnType<typeof setTimeout>) => {
+      timers.delete(id as unknown as number);
+    }) as typeof clearTimeout;
+
+    let called = false;
+    const cancel = scheduleAfterLargestContentfulPaint(
+      () => {
+        called = true;
+      },
+      {
+        settleMs: 10,
+        maxWaitMs: 1000,
+        setTimeoutFn,
+        clearTimeoutFn,
+        PerformanceObserverCtor: null,
+      }
+    );
+    cancel();
+    for (const fn of [...timers.values()]) fn();
+    expect(called).toBe(false);
   });
 });

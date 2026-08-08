@@ -12,6 +12,7 @@ import {
   getActiveNotifications,
   localizeNotification,
 } from '@/lib/notifications';
+import { isPereiraTechDayPath } from '@/lib/pereiraTechDay';
 
 interface PtdEditionNavItem {
   year: number;
@@ -74,7 +75,10 @@ const isPtdEditionChrome =
 
 const language = lang as Language;
 const prefix = getUrlPrefix(language);
-const activeNotifications = isPtdEditionChrome
+/** No announcement chrome on any PTD URL (hub, editions, certificates). */
+const suppressTopNotifications =
+  isPtdEditionChrome || isPereiraTechDayPath(Astro.url.pathname);
+const activeNotifications = suppressTopNotifications
   ? []
   : (await getActiveNotifications()).map((entry) => {
       const localized = localizeNotification(entry, language);

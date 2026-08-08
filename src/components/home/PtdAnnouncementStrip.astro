@@ -51,11 +51,13 @@ const TEAL = '#3a7f7c';
 
 /**
  * Same hero art as PtdHero2026 (WebP). Desktop paints it on the right half;
- * cream fade covers the left void. Mobile uses the pre-cropped card crop.
+ * cream fade covers the left void. Mobile uses the localized promo card crop.
  */
 const ILLUSTRATION = '/images/pereira-tech-days/2026/hero-illustration.webp';
 const ILLUSTRATION_MOBILE =
-  '/images/pereira-tech-days/2026/mascot/card-hero.webp';
+  lang === 'en'
+    ? '/images/pereira-tech-days/2026/mascot/card-hero-en.webp'
+    : '/images/pereira-tech-days/2026/mascot/card-hero.webp';
 const LOGO = '/images/pereira-tech-days/2026/logo.png';
 
 /** "Pereira Tech" / "Day" (coral) + "2026" (cyan) — same split as PtdHero2026. */
