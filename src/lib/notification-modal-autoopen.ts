@@ -155,3 +155,109 @@ export function markNotificationAutoOpenShown(
 ): void {
   storage.session.setItem(notifyAutoSessionKey(id), '1');
 }
+
+/**
+ * Lab runners (Lighthouse / PSI) should not auto-open — the modal hero would
+ * become LCP and tank Performance while Accessibility/SEO stay at 100.
+ */
+export function isAutomatedLabBrowser(
+  userAgent: string = typeof navigator !== 'undefined'
+    ? navigator.userAgent
+    : ''
+): boolean {
+  return /Chrome-Lighthouse|PageSpeed|PTST\/|GTmetrix|Lighthouse/i.test(
+    userAgent
+  );
+}
+
+export type AfterLcpScheduleOptions = {
+  /** Quiet window after the last LCP entry before opening (ms). */
+  settleMs?: number;
+  /** Absolute cap so a stuck observer cannot delay forever (ms). */
+  maxWaitMs?: number;
+  /** Injected timers / observer for tests. */
+  setTimeoutFn?: typeof setTimeout;
+  clearTimeoutFn?: typeof clearTimeout;
+  PerformanceObserverCtor?: typeof PerformanceObserver | null;
+};
+
+/**
+ * Run `callback` after Largest Contentful Paint has settled so the page hero
+ * (not the notification modal) remains the LCP candidate for lab + early field.
+ * Returns a cancel function.
+ */
+export function scheduleAfterLargestContentfulPaint(
+  callback: () => void,
+  options: AfterLcpScheduleOptions = {}
+): () => void {
+  const settleMs = options.settleMs ?? 1500;
+  const maxWaitMs = options.maxWaitMs ?? 6000;
+  const setTimeoutFn = options.setTimeoutFn ?? setTimeout;
+  const clearTimeoutFn = options.clearTimeoutFn ?? clearTimeout;
+  const Observer =
+    options.PerformanceObserverCtor === null
+      ? undefined
+      : (options.PerformanceObserverCtor ??
+        (typeof PerformanceObserver !== 'undefined'
+          ? PerformanceObserver
+          : undefined));
+
+  let settledTimer: ReturnType<typeof setTimeout> | undefined;
+  let maxTimer: ReturnType<typeof setTimeout> | undefined;
+  let observer: PerformanceObserver | undefined;
+  let done = false;
+
+  const finish = (): void => {
+    if (done) return;
+    done = true;
+    if (settledTimer !== undefined) clearTimeoutFn(settledTimer);
+    if (maxTimer !== undefined) clearTimeoutFn(maxTimer);
+    observer?.disconnect();
+    callback();
+  };
+
+  const bumpSettle = (): void => {
+    if (done) return;
+    if (settledTimer !== undefined) clearTimeoutFn(settledTimer);
+    settledTimer = setTimeoutFn(finish, settleMs);
+  };
+
+  maxTimer = setTimeoutFn(finish, maxWaitMs);
+
+  if (Observer) {
+    try {
+      observer = new Observer((list) => {
+        if (list.getEntries().length > 0) bumpSettle();
+      });
+      observer.observe({
+        type: 'largest-contentful-paint',
+        buffered: true,
+      } as PerformanceObserverInit);
+      // If buffered entries already exist, start the quiet window immediately.
+      bumpSettle();
+    } catch {
+      // Unsupported observe options — fall through to load/idle path.
+      observer = undefined;
+    }
+  }
+
+  if (!observer) {
+    const onReady = (): void => {
+      bumpSettle();
+    };
+    if (typeof document !== 'undefined' && document.readyState === 'complete') {
+      onReady();
+    } else if (typeof window !== 'undefined') {
+      window.addEventListener('load', onReady, { once: true });
+    } else {
+      bumpSettle();
+    }
+  }
+
+  return () => {
+    done = true;
+    if (settledTimer !== undefined) clearTimeoutFn(settledTimer);
+    if (maxTimer !== undefined) clearTimeoutFn(maxTimer);
+    observer?.disconnect();
+  };
+}

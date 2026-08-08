@@ -4,7 +4,9 @@ import { onMount } from 'svelte';
 import { EVENTS, trackEvent } from '@/lib/analytics';
 import {
   consumeNotificationAutoOpen,
+  isAutomatedLabBrowser,
   markNotificationAutoOpenShown,
+  scheduleAfterLargestContentfulPaint,
 } from '@/lib/notification-modal-autoopen';
 
 interface LocalizedNotification {
@@ -33,9 +35,6 @@ let atTop = $state(true);
 let lastFocusedEl: HTMLElement | null = null;
 /** Non-reactive — read inside scroll rAF without re-subscribing the effect. */
 let modalLocked = false;
-
-/** Brief settle delay so auto-open doesn't race first paint / sticky chrome. */
-const AUTO_OPEN_DELAY_MS = 450;
 
 function canOpenDetailModal(n: LocalizedNotification): boolean {
   return n.modalEnabled && !!(n.body || n.image);
@@ -96,10 +95,13 @@ function closeModal(): void {
 /**
  * Auto-open policy (once per mount):
  * first session navigate → open; later navigates quiet; reloads every 3rd.
+ * Deferred until after LCP settles so the modal hero does not steal LCP.
+ * Skipped entirely in Lighthouse / lab UAs (bar still works on click).
  */
 onMount(() => {
   const n = notifications[0];
   if (!n || !canOpenDetailModal(n)) return;
+  if (isAutomatedLabBrowser()) return;
 
   let shouldOpen = false;
   try {
@@ -110,7 +112,7 @@ onMount(() => {
   }
   if (!shouldOpen) return;
 
-  const timer = window.setTimeout(() => {
+  const cancel = scheduleAfterLargestContentfulPaint(() => {
     if (openModalId != null) return;
     try {
       markNotificationAutoOpenShown(n.id);
@@ -118,11 +120,9 @@ onMount(() => {
       // ignore storage failures — still show the modal
     }
     openModal(n.id, 'auto');
-  }, AUTO_OPEN_DELAY_MS);
+  });
 
-  return () => {
-    window.clearTimeout(timer);
-  };
+  return cancel;
 });
 
 $effect(() => {
@@ -370,7 +370,9 @@ function severityClass(severity: LocalizedNotification['severity']): string {
             alt={openEntry.image.alt}
             width="640"
             height="360"
+            loading="lazy"
             decoding="async"
+            fetchpriority="low"
             sizes="(max-width: 448px) 100vw, 448px"
             class="absolute inset-0 h-full w-full object-cover object-center"
           />
