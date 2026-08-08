@@ -19,6 +19,7 @@
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
 | Contributors | [Contributors](docs/features/CONTRIBUTORS.md) | Equipo directory — flat organizers + unified alumni |
 | Sponsors | [Sponsors](docs/features/SPONSORS.md) | Community partners — current/past (tiers on PTD only) |
+| Community stats | [Community Stats](docs/features/COMMUNITY_STATS.md) | Derived About counters via `getCommunityStats()` |
 | Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, PTT voice, vocabulary blocklist |
 | Content QA | [Content QA Checklist](docs/features/CONTENT_QA_CHECKLIST.md) | Bilingual parity, orthography, SEO/AEO, automated gates |
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
