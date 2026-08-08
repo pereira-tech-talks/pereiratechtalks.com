@@ -60,11 +60,11 @@ describe('lookupChoice (label values for PTT org)', () => {
 });
 
 describe('booleanToDailyBot', () => {
-  it('maps booleans and common strings to Yes/No', () => {
-    expect(booleanToDailyBot(true)).toBe('Yes');
-    expect(booleanToDailyBot(false)).toBe('No');
-    expect(booleanToDailyBot('sí')).toBe('Yes');
-    expect(booleanToDailyBot('no')).toBe('No');
+  it('maps booleans and common strings to JSON true/false', () => {
+    expect(booleanToDailyBot(true)).toBe(true);
+    expect(booleanToDailyBot(false)).toBe(false);
+    expect(booleanToDailyBot('sí')).toBe(true);
+    expect(booleanToDailyBot('no')).toBe(false);
   });
 });
 

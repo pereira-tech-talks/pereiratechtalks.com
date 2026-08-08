@@ -46,47 +46,24 @@ export const ANALYTICS = {
   },
 } as const;
 
-// Newsletter configuration — Google Forms direct POST
+/**
+ * Newsletter signup — currently disabled in UI (BlogPostPage).
+ * No Google Forms backend. Re-enable only with a Dailybot (or other) API path.
+ */
 export const NEWSLETTER = {
-  googleForms: {
-    formUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLSedegaN0_5eZWLIuizdKPCV1pAUm8vTatHo_ny07IXd8_xIfw/formResponse',
-    entries: {
-      email: 'entry.903587259',
-    },
-  },
+  apiEndpoint: '',
 } as const;
 
 /**
- * Contact form configuration.
+ * Community intake forms → Cloudflare Pages Function → Dailybot Forms.
  *
- * Two backends are supported:
- *
- * 1. **Cloudflare Pages Function + Resend (preferred for production).**
- *    Set `PUBLIC_CONTACT_API_ENDPOINT` (e.g. `/api/contact`) and configure
- *    the server-side `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and
- *    `CONTACT_FROM_EMAIL` secrets on the Cloudflare Pages project.
- *    The Svelte form POSTs a JSON payload that `functions/api/contact.ts`
- *    validates, spam-checks, and forwards via Resend.
- *
- * 2. **Google Forms fallback (legacy / static-only deployments).** When
- *    `PUBLIC_CONTACT_API_ENDPOINT` is empty, the Svelte form posts the
- *    submission directly to the Google Forms endpoint below using the
- *    same entry IDs configured in Google Forms.
- *
- * Both flows can coexist — the env-driven endpoint always wins.
+ * Default endpoint is `/api/contact` so production never silently falls back
+ * to a third-party form host. Override with `PUBLIC_CONTACT_API_ENDPOINT` when
+ * needed. Server secrets: `DAILYBOT_API_KEY` (required); optional Resend ack
+ * via `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`.
  */
 export const CONTACT_FORM = {
-  apiEndpoint: (import.meta.env.PUBLIC_CONTACT_API_ENDPOINT || '').trim(),
-  googleForms: {
-    formUrl:
-      'https://docs.google.com/forms/d/e/1FAIpQLScuGSujpXLKF5eS4Z_6ZGAYf6j1iPrOIHwtJ-3i1_7MGk466Q/formResponse',
-    entries: {
-      name: 'entry.1008715654',
-      email: 'entry.903587259',
-      reason: 'entry.677814908',
-      subject: 'entry.1738397177',
-      message: 'entry.110815800',
-    },
-  },
+  apiEndpoint: (
+    import.meta.env.PUBLIC_CONTACT_API_ENDPOINT || '/api/contact'
+  ).trim(),
 } as const;

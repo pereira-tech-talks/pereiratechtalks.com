@@ -6,8 +6,8 @@ import { getTranslations } from '@/lib/translations';
 const STORAGE_KEY = 'newsletter-subscribed';
 
 export let lang = 'es';
-export let formUrl = '';
-export let entries = { email: '' };
+/** Reserved for a future API path. No Google Forms backend. */
+export let apiEndpoint = '';
 
 $: t = getTranslations(lang);
 
@@ -15,6 +15,7 @@ $: t = getTranslations(lang);
 let formState = 'idle';
 let email = '';
 let emailError = '';
+let submitError = '';
 let website = '';
 let successRef;
 
@@ -30,6 +31,7 @@ function validateEmail(value) {
 
 async function handleSubmit() {
   emailError = '';
+  submitError = '';
 
   if (website.trim()) {
     // Honeypot — pretend success
@@ -42,30 +44,28 @@ async function handleSubmit() {
     return;
   }
 
+  if (!apiEndpoint) {
+    submitError = t.contactPage.submitError;
+    return;
+  }
+
   formState = 'submitting';
 
   try {
-    const formData = new FormData();
-    formData.append(entries.email, email);
-
-    await fetch(formUrl, {
+    const response = await fetch(apiEndpoint, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, lang, website }),
     });
+    if (!response.ok) throw new Error('fail');
 
     localStorage.setItem(STORAGE_KEY, 'true');
     formState = 'success';
     trackEvent(EVENTS.NEWSLETTER_SUBSCRIBE);
     setTimeout(() => successRef?.focus(), 100);
   } catch {
-    // With no-cors, fetch only throws on network errors
-    // Still show success since we can't confirm either way
-    localStorage.setItem(STORAGE_KEY, 'true');
-    formState = 'success';
-    trackEvent(EVENTS.NEWSLETTER_SUBSCRIBE);
-    setTimeout(() => successRef?.focus(), 100);
+    submitError = t.contactPage.submitError;
+    formState = 'idle';
   }
 }
 </script>
@@ -152,6 +152,11 @@ async function handleSubmit() {
         {#if emailError}
           <p id="newsletter-email-error" class="mt-1 text-sm text-ptt-danger" aria-live="polite">
             {emailError}
+          </p>
+        {/if}
+        {#if submitError}
+          <p class="mt-1 text-sm text-ptt-danger" role="alert">
+            {submitError}
           </p>
         {/if}
       </div>

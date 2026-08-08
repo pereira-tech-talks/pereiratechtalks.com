@@ -277,7 +277,7 @@ describe('POST /api/contact → Dailybot', () => {
     const body = JSON.parse(init.body as string) as {
       content: Record<string, string>;
     };
-    expect(body.content[CONDUCT_Q.ANONYMOUS]).toBe('Yes');
+    expect(body.content[CONDUCT_Q.ANONYMOUS]).toBe(true);
     expect(body.content[CONDUCT_Q.REPORTER_NAME]).toBe('');
     expect(body.content[CONDUCT_Q.REPORTER_EMAIL]).toBe('');
     expect(body.content[CONDUCT_Q.INCIDENT]).toContain('confidential incident');

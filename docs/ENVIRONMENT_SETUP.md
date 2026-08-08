@@ -11,7 +11,7 @@ Copy `docker/local/pertechtalks/.env.example` → `.env` inside the same directo
 | Variable | Required | Notes |
 |----------|----------|-------|
 | `DAILYBOT_API_KEY` | Yes (Functions) | Personal API key from Dailybot user settings. Server-only. See [FORMS.md](./features/FORMS.md). |
-| `PUBLIC_CONTACT_API_ENDPOINT` | Recommended | e.g. `/api/contact` so Svelte forms hit the Pages Function |
+| `PUBLIC_CONTACT_API_ENDPOINT` | Optional | Defaults to `/api/contact` in code. Override only if the Function is mounted elsewhere. |
 | `RESEND_API_KEY` | Optional | Submitter ack after Dailybot success |
 | `CONTACT_FROM_EMAIL` | Optional with Resend | Verified sender |
 | `CONTACT_RATE_LIMIT` / `CONTACT_RATE_WINDOW_MS` | Optional | Defaults 8 / 600000 |

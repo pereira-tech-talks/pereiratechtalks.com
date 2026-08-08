@@ -148,7 +148,7 @@ function resolveFormType(data: Record<string, unknown>): FormType {
 interface ContentBuildResult {
   ok: true;
   formUuid: string;
-  content: Record<string, string>;
+  content: Record<string, string | boolean>;
   ackTopic: string;
 }
 
@@ -348,7 +348,7 @@ function buildContent(
   const missing = requireNonEmpty(fields, ['incidentDescription']);
   if (missing) return missing;
   const anonymous = flags.anonymous;
-  const content: Record<string, string> = {
+  const content: Record<string, string | boolean> = {
     [CONDUCT_Q.INCIDENT]: fields.incidentDescription,
     [CONDUCT_Q.WHEN]: fields.incidentDate || '',
     [CONDUCT_Q.PEOPLE]: fields.peopleInvolved || '',

@@ -514,7 +514,7 @@ export function validateConductReportForm(
   return { valid, errors };
 }
 
-/** Compose a CFS message body for the inbox (and Google Forms fallback). */
+/** Compose a CFS message body for legacy inbox / ack helpers. */
 export function composeCfsMessage(fields: CfsFormFields): string {
   return [
     `Talk title: ${fields.talkTitle.trim()}`,
