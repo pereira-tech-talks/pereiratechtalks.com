@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - angelica-parra
+  - yennifer-hurtado-arce
 sponsors: []
 status: completed
 draft: false

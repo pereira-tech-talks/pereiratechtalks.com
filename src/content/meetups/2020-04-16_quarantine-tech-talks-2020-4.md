@@ -22,7 +22,8 @@ heroImage: "/images/meetups/quarantine-tech-talks-2020-4/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - yeison-cruz
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=9D_PGb03Ov0
 status: completed

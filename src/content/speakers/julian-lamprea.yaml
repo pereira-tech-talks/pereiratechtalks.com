@@ -1,0 +1,18 @@
+name: "Julian Lamprea"
+role:
+  en: "Principal Tech Lead at ODLABS.IO"
+  es: "Principal Tech Lead en ODLABS.IO"
+bio:
+  en: "Julian Lamprea spoke at Pereira Tech Talks. Principal Tech Lead at ODLABS.IO."
+  es: "Julian Lamprea participó como ponente en Pereira Tech Talks. Principal Tech Lead en ODLABS.IO."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Julian Lamprea
+    es: Retrato de Julian Lamprea
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-serverless-y-seguridad-2019/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sergio-florez
+  - santiago-bernal
 sponsors: []
 status: completed
 draft: false

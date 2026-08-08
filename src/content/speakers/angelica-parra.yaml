@@ -1,0 +1,19 @@
+name: "Angélica Parra"
+pronouns: she/her
+role:
+  en: "Accessibility and design · Bancolombia"
+  es: "Accesibilidad y diseño · Bancolombia"
+bio:
+  en: "Angélica Parra spoke at Pereira Tech Talks on accessibility and design as the art of inclusion."
+  es: "Angélica Parra participó en Pereira Tech Talks sobre accesibilidad y diseño como el arte de la inclusión."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Angélica Parra"
+    es: "Retrato de Angélica Parra"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

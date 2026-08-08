@@ -1,0 +1,21 @@
+name: "Harold Sánchez Ospina"
+pronouns: he/him
+role:
+  en: "Master programmer at Gryffin Media"
+  es: "Master programmer en Gryffin Media"
+bio:
+  en: "Harold Sánchez Ospina spoke at Pereira Tech Talks on Linux fundamentals, infrastructure automation, and front-end testing with ReactJS."
+  es: "Harold Sánchez Ospina participó en Pereira Tech Talks sobre fundamentos de Linux, automatización de infraestructura y testing de front-end con ReactJS."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Harold Sánchez Ospina"
+    es: "Retrato de Harold Sánchez Ospina"
+social:
+  twitter: "https://twitter.com/sancospi"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

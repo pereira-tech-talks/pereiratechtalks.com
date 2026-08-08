@@ -1,0 +1,21 @@
+name: "Natalia Moncada Suárez"
+pronouns: she/her
+role:
+  en: "Public speaking coach"
+  es: "Coach de oratoria"
+bio:
+  en: "Natalia Moncada Suárez spoke at Pereira Girls Day on tips for delivering talks and public presentations."
+  es: "Natalia Moncada Suárez participó en Pereira Girls Day con tips para dar charlas y presentaciones públicas."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Natalia Moncada Suárez"
+    es: "Retrato de Natalia Moncada Suárez"
+social:
+  twitter: "https://twitter.com/natamonkada"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -1,0 +1,18 @@
+name: "Catalina Uribe Jaramillo"
+role:
+  en: "Diseñadora UX/UI Castor"
+  es: "Diseñadora UX/UI Castor"
+bio:
+  en: "Catalina Uribe Jaramillo spoke at Pereira Tech Talks. Diseñadora UX/UI Castor."
+  es: "Catalina Uribe Jaramillo participó como ponente en Pereira Tech Talks. Diseñadora UX/UI Castor."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Catalina Uribe Jaramillo
+    es: Retrato de Catalina Uribe Jaramillo
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

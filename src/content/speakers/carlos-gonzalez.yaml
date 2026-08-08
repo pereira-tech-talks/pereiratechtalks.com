@@ -1,0 +1,21 @@
+name: "Carlos González"
+pronouns: he/him
+role:
+  en: "Software developer"
+  es: "Desarrollador de software"
+bio:
+  en: "Carlos González spoke at Pereira Tech Talks on continuous integration with GitLab and Docker, Python unittest, and JSON Web Tokens in Node.js."
+  es: "Carlos González participó en Pereira Tech Talks con charlas sobre integración continua con GitLab y Docker, pruebas unitarias en Python y JSON Web Tokens en Node.js."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Carlos González"
+    es: "Retrato de Carlos González"
+social:
+  github: "https://caal-15.github.io/"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

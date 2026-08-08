@@ -22,7 +22,9 @@ heroImage: "/images/meetups/quarantine-tech-talks-2020-2/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - andres-rodriguez
+  - stiven-cardona-monsalve
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=Uc7Wzc7EX9s
 status: completed

@@ -22,7 +22,8 @@ heroImage: "/images/meetups/quarantine-tech-talks-2020-5/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - marian-villa
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=SNE_MbXAQQU
 status: completed

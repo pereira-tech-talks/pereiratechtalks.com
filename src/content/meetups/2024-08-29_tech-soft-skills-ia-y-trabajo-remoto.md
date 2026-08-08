@@ -22,7 +22,9 @@ heroImage: "/images/meetups/tech-soft-skills-ia-y-trabajo-remoto/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - juan-pablo-ortiz-villegas
+  - juan-david-rodriguez
 sponsors: []
 status: completed
 draft: false

@@ -1,0 +1,18 @@
+name: "Leiver Campeón"
+role:
+  en: "Machine Learning Engineer y Tech Expert Intelligence"
+  es: "Ingeniero de machine learning y Tech Expert Intelligence"
+bio:
+  en: "Leiver Campeón spoke at Pereira Tech Talks. Machine Learning Engineer y Tech Expert Intelligence."
+  es: "Leiver Campeón participó como ponente en Pereira Tech Talks. Ingeniero de machine learning y Tech Expert Intelligence."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Leiver Campeón
+    es: Retrato de Leiver Campeón
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

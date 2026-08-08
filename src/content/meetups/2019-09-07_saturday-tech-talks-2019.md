@@ -22,7 +22,11 @@ heroImage: "/images/meetups/saturday-tech-talks-2019/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - andres-rodriguez
+  - steven-pineda
+  - zorayda-gutierrez
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

@@ -1,0 +1,18 @@
+name: "Nicolás Narváez"
+role:
+  en: "Ingeniero en Machine Learning"
+  es: "Ingeniero en Machine Learning"
+bio:
+  en: "Nicolás Narváez spoke at Pereira Tech Talks. Ingeniero en Machine Learning."
+  es: "Nicolás Narváez participó como ponente en Pereira Tech Talks. Ingeniero en Machine Learning."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Nicolás Narváez
+    es: Retrato de Nicolás Narváez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -1,0 +1,18 @@
+name: "Sebastian Gomez"
+role:
+  en: "Software Engineer en Google Zurich"
+  es: "Ingeniero de software en Google Zurich"
+bio:
+  en: "Sebastian Gomez spoke at Pereira Tech Talks. Software Engineer en Google Zurich."
+  es: "Sebastian Gomez participó como ponente en Pereira Tech Talks. Ingeniero de software en Google Zurich."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Sebastian Gomez
+    es: Retrato de Sebastian Gomez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -1,0 +1,21 @@
+name: "John Darwin Morales"
+pronouns: he/him
+role:
+  en: "Software developer"
+  es: "Desarrollador de software"
+bio:
+  en: "John Darwin Morales spoke at Pereira Tech Talks on JavaScript unit testing with Jasmine, CSS, and building web servers with Node.js."
+  es: "John Darwin Morales participó en Pereira Tech Talks con charlas sobre pruebas unitarias en JavaScript con Jasmine, CSS y servidores web con Node.js."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of John Darwin Morales"
+    es: "Retrato de John Darwin Morales"
+social:
+  twitter: "https://twitter.com/jdmorales092"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

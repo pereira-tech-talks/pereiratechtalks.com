@@ -1,0 +1,19 @@
+name: "Juan Guillermo Gómez"
+pronouns: he/him
+role:
+  en: "Technical leadership · Globant / Nubank"
+  es: "Liderazgo técnico · Globant / Nubank"
+bio:
+  en: "Juan Guillermo Gómez spoke at Pereira Tech Talks on creating and developing technical leadership alongside Noe Branagan."
+  es: "Juan Guillermo Gómez participó en Pereira Tech Talks sobre cómo crear y desarrollar el liderazgo técnico junto con Noe Branagan."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Juan Guillermo Gómez"
+    es: "Retrato de Juan Guillermo Gómez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

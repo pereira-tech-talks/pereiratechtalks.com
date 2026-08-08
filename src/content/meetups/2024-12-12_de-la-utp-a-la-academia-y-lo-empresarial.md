@@ -22,7 +22,9 @@ heroImage: "/images/meetups/de-la-utp-a-la-academia-y-lo-empresarial/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sebastian-gomez
+  - juan-david-gil
 sponsors: []
 status: completed
 draft: false

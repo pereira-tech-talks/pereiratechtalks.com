@@ -22,7 +22,9 @@ heroImage: "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sergio-florez
+  - mauricio-cuenca
 sponsors: []
 status: completed
 draft: false

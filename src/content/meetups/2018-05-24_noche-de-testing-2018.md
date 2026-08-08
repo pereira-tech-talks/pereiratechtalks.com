@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-testing-2018/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - john-darwin-morales
+  - carlos-gonzalez
 sponsors: []
 status: completed
 draft: false

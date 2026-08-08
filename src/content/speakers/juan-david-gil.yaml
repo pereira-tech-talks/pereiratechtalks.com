@@ -1,0 +1,18 @@
+name: "Juan David Gil"
+role:
+  en: "Director of Machine Learning en Factored"
+  es: "Director of Machine Learning en Factored"
+bio:
+  en: "Juan David Gil spoke at Pereira Tech Talks. Director of Machine Learning en Factored."
+  es: "Juan David Gil participó como ponente en Pereira Tech Talks. Director of Machine Learning en Factored."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Juan David Gil
+    es: Retrato de Juan David Gil
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

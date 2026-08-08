@@ -22,7 +22,9 @@ heroImage: "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - carlos-mesa
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

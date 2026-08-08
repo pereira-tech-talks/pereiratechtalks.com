@@ -22,7 +22,9 @@ heroImage: "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - german-grandas
+  - jonatan-gutierrez
 sponsors: []
 status: completed
 draft: false

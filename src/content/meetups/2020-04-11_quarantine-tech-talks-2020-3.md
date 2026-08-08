@@ -22,7 +22,9 @@ heroImage: "/images/meetups/quarantine-tech-talks-2020-3/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - oscar-barajas
+  - yury-nino-roa
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=rRfrq7WZDk8
 status: completed

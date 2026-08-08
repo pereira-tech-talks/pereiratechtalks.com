@@ -1,0 +1,22 @@
+name: "Manuel Pineda"
+pronouns: he/him
+role:
+  en: "Software engineer · Google"
+  es: "Ingeniero de software · Google"
+bio:
+  en: "Manuel Pineda is a software engineer and a long-running Pereira Tech Talks speaker on Node.js, DevOps, Ansible, GitLab CI, gRPC, and engineering practices such as code review."
+  es: "Manuel Pineda es ingeniero de software y ponente recurrente en Pereira Tech Talks sobre Node.js, DevOps, Ansible, GitLab CI, gRPC y prácticas de ingeniería como code review."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Manuel Pineda"
+    es: "Retrato de Manuel Pineda"
+social:
+  twitter: "https://twitter.com/pin3da_"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

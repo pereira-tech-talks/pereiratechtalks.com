@@ -1,0 +1,18 @@
+name: "Alex Cardona"
+role:
+  en: "Senior Software Engineer, Platforms Support, Unity Technologies"
+  es: "Senior Ingeniero de software, Platforms Support, Unity Technologies"
+bio:
+  en: "Alex Cardona spoke at Pereira Tech Talks. Senior Software Engineer, Platforms Support, Unity Technologies."
+  es: "Alex Cardona participó como ponente en Pereira Tech Talks. Senior Ingeniero de software, Platforms Support, Unity Technologies."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Alex Cardona
+    es: Retrato de Alex Cardona
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

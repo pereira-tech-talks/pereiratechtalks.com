@@ -1,0 +1,19 @@
+name: "Marian Villa"
+pronouns: she/her
+role:
+  en: "Entrepreneur · PionerasDev"
+  es: "Emprendedora · PionerasDev"
+bio:
+  en: "Marian Villa spoke at Quarantine Tech Talks on turning an idea into action for aspiring entrepreneurs."
+  es: "Marian Villa participó en Quarantine Tech Talks sobre cómo pasar de la idea a la acción para aspirantes a emprendedores."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Marian Villa"
+    es: "Retrato de Marian Villa"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

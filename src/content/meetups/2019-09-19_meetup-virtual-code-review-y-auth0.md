@@ -22,7 +22,9 @@ heroImage: "/images/meetups/meetup-virtual-code-review-y-auth0/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - manuel-pineda
+  - damian-schenkelman
 sponsors: []
 status: completed
 draft: false

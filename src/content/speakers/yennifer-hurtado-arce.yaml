@@ -1,0 +1,19 @@
+name: "Yennifer Hurtado Arce"
+pronouns: she/her
+role:
+  en: "iOS developer · Platzi"
+  es: "Desarrolladora iOS · Platzi"
+bio:
+  en: "Yennifer Hurtado Arce spoke at Pereira Tech Talks on how to get started in iOS development after a web development background."
+  es: "Yennifer Hurtado Arce participó en Pereira Tech Talks sobre cómo comenzar en el desarrollo de iOS con experiencia previa en desarrollo web."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Yennifer Hurtado Arce"
+    es: "Retrato de Yennifer Hurtado Arce"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

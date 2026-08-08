@@ -22,7 +22,9 @@ heroImage: "/images/meetups/machine-learning-y-automatizaciones/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - leonardo-quinones
+  - nicolas-narvaez
 sponsors: []
 status: completed
 draft: false

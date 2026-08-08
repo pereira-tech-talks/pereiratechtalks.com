@@ -1,0 +1,20 @@
+name: "Santiago Gutiérrez"
+pronouns: he/him
+role:
+  en: "Software engineer at Google"
+  es: "Ingeniero de software en Google"
+bio:
+  en: "Santiago Gutiérrez is a Google software engineer who spoke at Pereira Tech Talks on what a real Google interview looks like."
+  es: "Santiago Gutiérrez es ingeniero de software en Google que participó en Pereira Tech Talks sobre cómo es una entrevista real en Google."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Santiago Gutiérrez"
+    es: "Retrato de Santiago Gutiérrez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

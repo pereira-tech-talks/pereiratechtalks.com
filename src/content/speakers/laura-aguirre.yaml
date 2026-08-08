@@ -1,0 +1,21 @@
+name: "Laura Aguirre"
+pronouns: she/her
+role:
+  en: "Product designer"
+  es: "Diseñadora de producto"
+bio:
+  en: "Laura Aguirre is a product designer who spoke at Pereira Tech Talks Design Night on design fundamentals for developers."
+  es: "Laura Aguirre es diseñadora de producto que participó en la Noche de Diseño de Pereira Tech Talks sobre fundamentos de diseño para desarrolladores."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Laura Aguirre"
+    es: "Retrato de Laura Aguirre"
+social:
+  twitter: "https://twitter.com/lauraguirre011"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

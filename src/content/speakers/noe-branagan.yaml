@@ -1,0 +1,20 @@
+name: "Noe Branagan"
+pronouns: he/him
+role:
+  en: "Technical leadership · Globant / Nubank"
+  es: "Liderazgo técnico · Globant / Nubank"
+bio:
+  en: "Noe Branagan spoke at Pereira Tech Talks on creating and developing technical leadership alongside Juan Guillermo Gómez."
+  es: "Noe Branagan participó en Pereira Tech Talks sobre cómo crear y desarrollar el liderazgo técnico junto con Juan Guillermo Gómez."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Noe Branagan"
+    es: "Retrato de Noe Branagan"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

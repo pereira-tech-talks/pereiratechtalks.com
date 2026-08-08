@@ -1,0 +1,21 @@
+name: "Stiven Cardona Monsalve"
+pronouns: he/him
+role:
+  en: "Pereira Tech Day co-organizer · Software engineer"
+  es: "Co-organizador de Pereira Tech Day · Ingeniero de software"
+bio:
+  en: "Stiven Cardona Monsalve co-organizes Pereira Tech Day and spoke at Quarantine Tech Talks on SOLID principles and testing applied to JavaScript."
+  es: "Stiven Cardona Monsalve co-organiza Pereira Tech Day y participó en Quarantine Tech Talks sobre principios SOLID y testing aplicado a JavaScript."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Stiven Cardona Monsalve"
+    es: "Retrato de Stiven Cardona Monsalve"
+social:
+  linkedin: "https://www.linkedin.com/in/stiven-cardona-monsalve"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

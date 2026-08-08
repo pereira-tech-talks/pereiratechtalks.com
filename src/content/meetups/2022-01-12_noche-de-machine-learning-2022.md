@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-machine-learning-2022/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sebastian-gomez
+  - santiago-gutierrez
 sponsors: []
 status: completed
 draft: false

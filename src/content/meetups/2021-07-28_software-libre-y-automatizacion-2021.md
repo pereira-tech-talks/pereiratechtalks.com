@@ -22,7 +22,9 @@ heroImage: "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - steven-mejia
+  - gabriel-mejia-amortegui
 sponsors: []
 status: completed
 draft: false

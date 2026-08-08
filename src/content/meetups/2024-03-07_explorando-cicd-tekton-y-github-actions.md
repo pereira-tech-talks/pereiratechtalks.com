@@ -22,7 +22,9 @@ heroImage: "/images/meetups/explorando-cicd-tekton-y-github-actions/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - andres-torres
+  - hector-jimenez
 sponsors: []
 status: completed
 draft: false

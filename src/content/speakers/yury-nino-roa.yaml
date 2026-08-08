@@ -1,0 +1,20 @@
+name: "Yury Niño Roa"
+pronouns: she/her
+role:
+  en: "Chaos engineering practitioner"
+  es: "Practicante de chaos engineering"
+bio:
+  en: "Yury Niño Roa spoke at Quarantine Tech Talks on using chaos engineering to build reliable systems productively."
+  es: "Yury Niño Roa participó en Quarantine Tech Talks sobre cómo usar chaos engineering para construir sistemas confiables con productividad."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Yury Niño Roa"
+    es: "Retrato de Yury Niño Roa"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

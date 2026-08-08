@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-ia-y-chatgpt-2023/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sergio-florez
+  - mauricio-morales
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=u-pSII46BJQ
 status: completed

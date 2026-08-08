@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-devops-docker-y-kubernetes-2018/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sergio-florez
+  - hector-jimenez
 sponsors: []
 status: completed
 draft: false

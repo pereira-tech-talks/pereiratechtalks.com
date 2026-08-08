@@ -1,0 +1,21 @@
+name: "Daniel Vásquez"
+pronouns: he/him
+role:
+  en: "Visual designer and digital illustrator"
+  es: "Diseñador visual e ilustrador digital"
+bio:
+  en: "Daniel Vásquez is a visual designer and digital illustrator who spoke at Pereira Tech Talks Design Night on web design trends."
+  es: "Daniel Vásquez es diseñador visual e ilustrador digital que participó en la Noche de Diseño de Pereira Tech Talks sobre tendencias de diseño web."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Daniel Vásquez"
+    es: "Retrato de Daniel Vásquez"
+social:
+  website: "https://www.instagram.com/koruproject/"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

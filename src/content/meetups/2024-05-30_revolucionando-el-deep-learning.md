@@ -22,7 +22,9 @@ heroImage: "/images/meetups/revolucionando-el-deep-learning/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - leiver-campeon
+  - sebastian-franco
 sponsors: []
 status: completed
 draft: false

@@ -22,7 +22,8 @@ heroImage: "/images/meetups/quarantine-tech-talks-2020-6/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - oscar-granada
 sponsors: []
 linkRecording: https://www.youtube.com/watch?v=CtcAT56Rj_o
 status: completed

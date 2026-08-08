@@ -22,7 +22,9 @@ heroImage: "/images/meetups/automatizacion-de-infraestructura-y-linux/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - luis-uribe
+  - harold-sanchez-ospina
 sponsors: []
 status: completed
 draft: false

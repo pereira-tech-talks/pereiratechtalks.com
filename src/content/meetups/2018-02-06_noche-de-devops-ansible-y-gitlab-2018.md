@@ -22,7 +22,9 @@ heroImage: "/images/meetups/noche-de-devops-ansible-y-gitlab-2018/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - manuel-pineda
+  - carlos-gonzalez
 sponsors: []
 status: completed
 draft: false

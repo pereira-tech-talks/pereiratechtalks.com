@@ -22,7 +22,9 @@ heroImage: "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - hector-julian-cardona
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

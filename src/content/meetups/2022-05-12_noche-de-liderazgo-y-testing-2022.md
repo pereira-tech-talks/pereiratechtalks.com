@@ -22,7 +22,10 @@ heroImage: "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg"
 verticals:
   - monthly-meetups
 talks: []
-speakers: []
+speakers:
+  - sergio-estrella
+  - juan-guillermo-gomez
+  - noe-branagan
 sponsors: []
 status: completed
 draft: false

@@ -1,0 +1,19 @@
+name: "Yeison Cruz"
+pronouns: he/him
+role:
+  en: "PHP Colombia community speaker"
+  es: "Ponente de la comunidad PHP Colombia"
+bio:
+  en: "Yeison Cruz spoke at Quarantine Tech Talks on software design patterns in PHP and software development."
+  es: "Yeison Cruz participó en Quarantine Tech Talks sobre patrones de diseño en PHP y patrones de desarrollo de software."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Yeison Cruz"
+    es: "Retrato de Yeison Cruz"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
