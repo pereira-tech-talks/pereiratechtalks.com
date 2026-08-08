@@ -40,8 +40,7 @@ const webpExists = webpPath ? existsSync(webpPath) : false;
 
 const useWebp = isRaster && (hasResponsive || webpExists);
 const srcset = hasResponsive ? responsiveSrcset.join(', ') : null;
-const sizes =
-  '(max-width: 1023px) min(100vw - 2rem, 42rem), 460px';
+const sizes = '(max-width: 1023px) min(100vw - 2rem, 42rem), 460px';
 
 /* Wide on mobile/tablet; taller portrait only from lg. No zoom scale. */
 const frameClass =

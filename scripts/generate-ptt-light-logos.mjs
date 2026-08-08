@@ -55,10 +55,7 @@ const { values } = parseArgs({
  * Parse #RGB / #RRGGBB / RRGGBB into { r, g, b }.
  */
 function parseHexColor(input) {
-  const hex = String(input)
-    .trim()
-    .replace(/^#/, '')
-    .toUpperCase();
+  const hex = String(input).trim().replace(/^#/, '').toUpperCase();
   if (/^[0-9A-F]{3}$/.test(hex)) {
     return {
       r: Number.parseInt(hex[0] + hex[0], 16),
