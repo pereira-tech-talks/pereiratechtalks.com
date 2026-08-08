@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+/**
+ * Generate Unity sponsor logos from the black-wordmark + grey-cube source.
+ *
+ * Source is already on transparency (black "unity" + grey cube). Crop to
+ * content, keep brand greys for light mode, and invert luminance for dark
+ * mode so the wordmark reads white on dark cards.
+ *
+ * Usage:
+ *   node scripts/generate-unity-logos.mjs
+ *   node scripts/generate-unity-logos.mjs --src path/in.png
+ */
+import { parseArgs } from 'node:util';
+
+import sharp from 'sharp';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
+
+const { values } = parseArgs({
+  options: {
+    src: { type: 'string' },
+  },
+});
+
+const SRC = path.resolve(
+  ROOT,
+  values.src ?? 'public/images/sponsors/_source/unity-original.png'
+);
+const LIGHT_OUT = path.resolve(ROOT, 'public/images/sponsors/unity.png');
+const DARK_OUT = path.resolve(ROOT, 'public/images/sponsors/unity-dark.png');
+
+const PAD = 8;
+
+function contentBBox(data, width, height) {
+  let minX = width;
+  let minY = height;
+  let maxX = 0;
+  let maxY = 0;
+  let any = 0;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const a = data[(y * width + x) * 4 + 3];
+      if (a <= 10) continue;
+      any += 1;
+      if (x < minX) minX = x;
+      if (y < minY) minY = y;
+      if (x > maxX) maxX = x;
+      if (y > maxY) maxY = y;
+    }
+  }
+  if (!any) return null;
+  return { minX, minY, maxX, maxY };
+}
+
+function cropRgba(data, width, height, box) {
+  const left = Math.max(0, box.minX - PAD);
+  const top = Math.max(0, box.minY - PAD);
+  const right = Math.min(width - 1, box.maxX + PAD);
+  const bottom = Math.min(height - 1, box.maxY + PAD);
+  const w = right - left + 1;
+  const h = bottom - top + 1;
+  const out = Buffer.alloc(w * h * 4);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const srcI = ((top + y) * width + (left + x)) * 4;
+      const destI = (y * w + x) * 4;
+      out[destI] = data[srcI];
+      out[destI + 1] = data[srcI + 1];
+      out[destI + 2] = data[srcI + 2];
+      out[destI + 3] = data[srcI + 3];
+    }
+  }
+  return { out, width: w, height: h };
+}
+
+/** Invert RGB so black wordmark → white; mid greys stay readable on dark. */
+function invertInk(data) {
+  const out = Buffer.from(data);
+  for (let i = 0; i < out.length; i += 4) {
+    if (out[i + 3] === 0) continue;
+    out[i] = 255 - out[i];
+    out[i + 1] = 255 - out[i + 1];
+    out[i + 2] = 255 - out[i + 2];
+  }
+  return out;
+}
+
+async function writePng(outPath, buf, width, height) {
+  await fs.promises.mkdir(path.dirname(outPath), { recursive: true });
+  await sharp(buf, {
+    raw: { width, height, channels: 4 },
+  })
+    .png({ compressionLevel: 9 })
+    .toFile(outPath);
+  const kb = (fs.statSync(outPath).size / 1024).toFixed(1);
+  console.log(`Wrote ${path.relative(ROOT, outPath)} (${kb} KB)`);
+}
+
+async function main() {
+  if (!fs.existsSync(SRC)) {
+    console.error(`Source not found: ${SRC}`);
+    process.exit(1);
+  }
+
+  const { data, info } = await sharp(SRC)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const box = contentBBox(data, info.width, info.height);
+  if (!box) {
+    console.error('No opaque content found in source');
+    process.exit(1);
+  }
+
+  const cropped = cropRgba(data, info.width, info.height, box);
+  const dark = invertInk(cropped.out);
+
+  await writePng(LIGHT_OUT, cropped.out, cropped.width, cropped.height);
+  await writePng(DARK_OUT, dark, cropped.width, cropped.height);
+
+  console.log(
+    `crop ${info.width}×${info.height} → ${cropped.width}×${cropped.height} (pad ${PAD})`
+  );
+}
+
+await main();

@@ -53,6 +53,8 @@ node scripts/generate-made-for-germany-dark-logo.mjs
 node scripts/generate-aumentada-logos.mjs
 node scripts/generate-codely-logos.mjs
 node scripts/generate-factored-logos.mjs
+node scripts/generate-rocka-logos.mjs
+node scripts/generate-unity-logos.mjs
 ```
 
 
