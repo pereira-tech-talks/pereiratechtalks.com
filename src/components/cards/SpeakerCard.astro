@@ -97,18 +97,11 @@ const latestYear = latestTalkDate ? getCalendarYear(latestTalkDate) : null;
     (lastTalkLabel || talkCountNoun) && (
       <div class="mt-4 flex flex-col items-center gap-2">
         {talkCountNoun && (
-          <p class="flex flex-col items-center leading-none">
-            <span
-              class="text-3xl font-bold tabular-nums tracking-tight text-ptt-primary dark:text-ptt-primary-dark"
-            >
-              {talkCount}
-            </span>
-            <span
-              class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-ptt-secondary"
-            >
-              {talkCountNoun}
-              {latestYear && !lastTalkLabel ? ` · ${latestYear}` : ''}
-            </span>
+          <p
+            class="text-xs font-semibold uppercase tracking-[0.14em] text-ptt-primary dark:text-ptt-primary-dark"
+          >
+            {talkCount} {talkCountNoun}
+            {latestYear && !lastTalkLabel ? ` · ${latestYear}` : ''}
           </p>
         )}
         {lastTalkLabel && (
