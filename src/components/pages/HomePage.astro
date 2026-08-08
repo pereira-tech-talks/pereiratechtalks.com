@@ -11,6 +11,7 @@ import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import LinkArrow from '@/components/ui/LinkArrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getDefaultOgImage } from '@/lib/constances';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import type { MeetupShowcaseItem } from '@/lib/meetup';
@@ -57,7 +58,7 @@ const meetupsHeading =
   lang={lang}
   title={t.siteTitleFull}
   description={t.siteDescription}
-  image="/images/og-default.jpg"
+  image={getDefaultOgImage(lang)}
   preloadHeaderLogo={false}
   preloadFonts={false}
   lcpImageHref="/images/home/hero-dark-480.webp"

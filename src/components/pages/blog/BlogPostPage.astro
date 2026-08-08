@@ -21,6 +21,7 @@ import {
   isDraftPost,
   isScheduledPost,
 } from '@/lib/blog';
+import { getDefaultOgImage } from '@/lib/constances';
 import { formatCalendarDate } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
@@ -98,7 +99,7 @@ const blogPostingData = {
     '@type': 'Person',
     name: authorData?.name ?? 'Sergio Alexander Florez Galeano',
     url: new URL('/about/', Astro.site).href,
-    image: new URL(authorData?.avatar ?? '/images/og-default.jpg', Astro.site)
+    image: new URL(authorData?.avatar ?? getDefaultOgImage(lang), Astro.site)
       .href,
   },
   publisher: {

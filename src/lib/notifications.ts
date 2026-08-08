@@ -32,19 +32,22 @@ export const getActiveNotifications = async (
   return filterActiveNotifications(all, now);
 };
 
-export const localizeNotification = (
-  entry: Notification,
-  lang: Language
-): {
+export type LocalizedNotification = {
   id: string;
   severity: NotificationData['severity'];
   title: string;
   summary: string;
   body?: string;
+  image?: { src: string; alt: string };
   ctaLabel?: string;
   ctaHref?: string;
   modalEnabled: boolean;
-} => {
+};
+
+export const localizeNotification = (
+  entry: Notification,
+  lang: Language
+): LocalizedNotification => {
   const { data } = entry;
   return {
     id: entry.id,
@@ -52,6 +55,9 @@ export const localizeNotification = (
     title: data.title[lang],
     summary: data.summary[lang],
     body: data.body?.[lang],
+    image: data.image
+      ? { src: data.image.src, alt: data.image.alt[lang] }
+      : undefined,
     ctaLabel: data.ctaLabel?.[lang],
     ctaHref: data.ctaHref,
     modalEnabled: data.modalEnabled,

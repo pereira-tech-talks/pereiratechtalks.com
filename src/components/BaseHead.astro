@@ -3,7 +3,12 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import JsonLd from '@/components/JsonLd.astro';
-import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
+import {
+  ANALYTICS,
+  getDefaultOgImage,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from '@/lib/constances';
 import {
   DEFAULT_LANGUAGE,
   getAlternateUrls,
@@ -38,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
   title,
   description,
-  image = '/images/og-default.jpg',
+  image: imageProp,
   lang = 'es',
   keywords,
   prevPage,
@@ -51,6 +56,7 @@ const {
   lcpImageHref,
   lcpImageMedia,
 } = Astro.props;
+const image = imageProp || getDefaultOgImage(lang);
 const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
 const imageExtension = image.split('.').pop()?.toLowerCase();
 const imageMimeType =
