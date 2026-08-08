@@ -169,6 +169,29 @@ export const getPastMeetupShowcase = async (): Promise<
   return buildPastMeetupShowcase(meetups, editions, upcomingMeetupIds);
 };
 
+/**
+ * Full timeline: upcoming (including the flagship Pereira Tech Day) followed
+ * by the archive, newest first. Powers the single "all meetups" list — an
+ * edition is a meetup like any other, so it shares the grid, the year rail,
+ * and the status badge.
+ */
+export const buildAllMeetupShowcase = (
+  upcoming: MeetupShowcaseItem[],
+  past: MeetupShowcaseItem[]
+): MeetupShowcaseItem[] =>
+  [...upcoming, ...past].sort(
+    (a, b) =>
+      getShowcaseItemDate(b).getTime() - getShowcaseItemDate(a).getTime()
+  );
+
+export const getAllMeetupShowcase = async (): Promise<MeetupShowcaseItem[]> => {
+  const [upcoming, past] = await Promise.all([
+    getUpcomingMeetupShowcase(),
+    getPastMeetupShowcase(),
+  ]);
+  return buildAllMeetupShowcase(upcoming, past);
+};
+
 export const getPastMeetups = async (): Promise<Meetup[]> => {
   const showcase = await getPastMeetupShowcase();
   return showcase

@@ -9,17 +9,12 @@ import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.svelte';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
-import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCommunityStats } from '@/lib/community-stats';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import {
-  getPastMeetupShowcase,
-  getUpcomingMeetupShowcase,
-  groupMeetupShowcaseByYear,
-} from '@/lib/meetup';
+import { getAllMeetupShowcase, groupMeetupShowcaseByYear } from '@/lib/meetup';
 import { getEditionCountdownTargets, getEditions } from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 
@@ -29,9 +24,13 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const upcoming = await getUpcomingMeetupShowcase();
-const pastShowcase = await getPastMeetupShowcase();
-const groups = groupMeetupShowcaseByYear(pastShowcase);
+/**
+ * One timeline for everything. Upcoming entries (including the flagship
+ * Pereira Tech Day) sit at the top of their year and carry the
+ * "Próximamente" badge that `MeetupCard` / `EditionCard` already render.
+ */
+const allShowcase = await getAllMeetupShowcase();
+const groups = groupMeetupShowcaseByYear(allShowcase);
 const years = groups.map((g) => g.year);
 const communityStats = await getCommunityStats();
 
@@ -59,18 +58,11 @@ const t = {
   description: fillStats(mp.description),
   intro: mp.intro,
   eyebrow: mp.eyebrow,
-  upcoming: mp.upcoming,
-  past: mp.past,
-  emptyUpcomingTitle: mp.emptyUpcomingTitle,
-  emptyUpcomingDescription: mp.emptyUpcomingDescription,
-  ctaLabel: mp.ctaLuma,
-  ctaHref: 'https://luma.com/pertechtalks',
+  all: mp.allMeetups,
   nextUpLabel: mp.nextUpLabel,
   nextUpCta: mp.nextUpCta,
   yearLabel: (n: number) => mp.yearLabel.replace('{year}', String(n)),
   yearNav: mp.yearNav,
-  calendarEyebrow: mp.calendarEyebrow,
-  archiveEyebrow: mp.archiveEyebrow,
 };
 
 const heroStats = [
@@ -207,35 +199,7 @@ const breadcrumbs = [
     endDate={ptdCountdown?.endDate}
   />
 
-  {/* Upcoming meetups calendar — hidden temporarily (restore: drop `false &&`). */}
-  {
-    false && (
-      <Section
-        eyebrow={t.calendarEyebrow}
-        title={t.upcoming}
-        surface="alt"
-      >
-        {upcoming.length > 0 ? (
-          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {upcoming.map((item) => (
-              <li>
-                <MeetupShowcaseCard item={item} lang={lang} loading="eager" />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState
-            title={t.emptyUpcomingTitle}
-            description={t.emptyUpcomingDescription}
-            ctaLabel={t.ctaLabel}
-            ctaHref={t.ctaHref}
-          />
-        )}
-      </Section>
-    )
-  }
-
-  <Section eyebrow={t.archiveEyebrow} title={t.past}>
+  <Section title={t.all}>
     <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">
       {
         years.length > 0 && (
