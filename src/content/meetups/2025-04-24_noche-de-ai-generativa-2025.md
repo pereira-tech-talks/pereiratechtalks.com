@@ -29,8 +29,6 @@ speakers:
   - cristhian-andres-grajales-perez
   - frederick-johan-castaneda-perez
 sponsors:
-  - slug: cinco
-    tier: community
   - slug: dailybot
     tier: community
   - slug: ase-utp

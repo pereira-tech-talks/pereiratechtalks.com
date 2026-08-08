@@ -28,8 +28,6 @@ speakers:
   - sebastian-agudelo-morales
   - juan-de-jesus-fernandez-graciano
 sponsors:
-  - slug: cinco
-    tier: community
   - slug: dailybot
     tier: community
   - slug: ase-utp

@@ -30,8 +30,6 @@ speakers:
 sponsors:
   - slug: aumentada
     tier: community
-  - slug: cinco
-    tier: community
   - slug: dailybot
     tier: community
   - slug: ase-utp

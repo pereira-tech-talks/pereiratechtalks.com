@@ -1,9 +1,12 @@
 ---
 /**
- * Homepage strip promoting Pereira Tech Day 2026.
+ * Homepage / meetups strip promoting Pereira Tech Day 2026.
  * Compact echo of PtdHero2026 — cream ground, Bebas title, coral accents,
  * countdown, and a full-bleed howler-monkey illustration on the right half
  * (soft cream dissolve into copy — subject stays whole, never hard-cropped).
+ *
+ * Always renders in the PTD 2026 light kit regardless of site theme —
+ * this is a special edition promo surface, not chrome.
  */
 import '@fontsource/bebas-neue';
 
@@ -40,14 +43,15 @@ const {
 const prefix = getUrlPrefix(lang);
 const href = `${prefix}/pereira-tech-days/2026/`;
 
-/** Matches PTD 2026 brandKit / PtdHero2026. */
+/** Matches PTD 2026 brandKit / PtdHero2026 (light only). */
 const CREAM = '#fef7f3';
-const CREAM_DARK = '#1a2a38';
 /** Text-safe on cream (≥4.5:1) — matches 2026 light brandKit accent. */
 const YEAR_CYAN = '#127a82';
 const CORAL = '#c93c3c';
 const NAVY = '#1f3f59';
 const TEAL = '#3a7f7c';
+const MUTED = '#6b5e58';
+const BORDER = '#eadcd4';
 
 /**
  * Same hero art as PtdHero2026 (WebP). From md up, paint it on the right half;
@@ -75,8 +79,8 @@ const logoAlt =
 
 <section
   id="main-after-hero"
-  class="ptd-home-strip relative isolate overflow-hidden border-y border-[#eadcd4] dark:border-[#3a4a5a]"
-  style={`--ptd-strip-cream: ${CREAM}; --ptd-strip-cream-dark: ${CREAM_DARK}; --ptd-strip-coral: ${CORAL}; --ptd-strip-cyan: ${YEAR_CYAN}; --ptd-strip-navy: ${NAVY}; --ptd-strip-teal: ${TEAL}; background-color: var(--ptd-strip-cream);`}
+  class="ptd-home-strip relative isolate overflow-hidden border-y"
+  style={`--ptd-strip-cream: ${CREAM}; --ptd-strip-coral: ${CORAL}; --ptd-strip-cyan: ${YEAR_CYAN}; --ptd-strip-navy: ${NAVY}; --ptd-strip-teal: ${TEAL}; --ptd-strip-muted: ${MUTED}; --ptd-strip-border: ${BORDER}; background-color: var(--ptd-strip-cream); border-color: var(--ptd-strip-border); color-scheme: light;`}
 >
   {/*
     md+: art owns the right ~50vw of the SECTION (not the padded grid),
@@ -115,9 +119,9 @@ const logoAlt =
           decoding="async"
         />
         <h2
-          class="ptd-home-strip__title m-0 min-w-0 text-[clamp(1.85rem,4.8vw,3.4rem)] font-normal uppercase leading-[0.92] tracking-[0.04em] dark:text-[#fef7f3]"
+          class="ptd-home-strip__title m-0 min-w-0 text-[clamp(1.85rem,4.8vw,3.4rem)] font-normal uppercase leading-[0.92] tracking-[0.04em]"
         >
-          <span class="block text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3]">{titleLineTech}</span>
+          <span class="block text-[color:var(--ptd-strip-navy)]">{titleLineTech}</span>
           {
             dayWord && (
               <span class="block">
@@ -134,16 +138,16 @@ const logoAlt =
         </h2>
       </div>
 
-      <p class="mb-5 w-full text-[clamp(1rem,2.2vw,1.2rem)] leading-snug text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3] sm:mb-6">
+      <p class="mb-5 w-full text-[clamp(1rem,2.2vw,1.2rem)] leading-snug text-[color:var(--ptd-strip-navy)] sm:mb-6">
         {taglineLead ? `${taglineLead} ` : ''}
         <strong class="font-bold text-[color:var(--ptd-strip-coral)]">{taglineEmphasis}</strong>
       </p>
 
-      <ul class="mb-5 flex max-w-full flex-col gap-2 text-base leading-snug text-[#6b5e58] dark:text-[#c4b8b0] sm:mb-6 sm:gap-2.5 sm:text-lg">
+      <ul class="mb-5 flex max-w-full flex-col gap-2 text-base leading-snug text-[color:var(--ptd-strip-muted)] sm:mb-6 sm:gap-2.5 sm:text-lg">
         <li class="flex min-w-0 items-start gap-2.5">
           <svg
             aria-hidden="true"
-            class="mt-0.5 h-5 w-5 shrink-0 text-[#6b5e58] dark:text-[#c4b8b0] sm:h-6 sm:w-6"
+            class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -160,7 +164,7 @@ const logoAlt =
         <li class="flex min-w-0 items-start gap-2.5">
           <svg
             aria-hidden="true"
-            class="mt-0.5 h-5 w-5 shrink-0 text-[#6b5e58] dark:text-[#c4b8b0] sm:h-6 sm:w-6"
+            class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
@@ -183,7 +187,7 @@ const logoAlt =
         </li>
         {
           attendanceLabel && (
-            <li class="flex min-w-0 items-center gap-2.5 text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3]">
+            <li class="flex min-w-0 items-center gap-2.5 text-[color:var(--ptd-strip-navy)]">
               <svg
                 aria-hidden="true"
                 class="h-5 w-5 shrink-0 text-[color:var(--ptd-strip-coral)] sm:h-6 sm:w-6"
@@ -206,7 +210,7 @@ const logoAlt =
 
       <a
         href={href}
-        class="ptd-home-strip__cta inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ptd-strip-teal)] px-8 py-3.5 text-base font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ptd-strip-teal)] active:scale-[0.98] sm:w-auto sm:px-10 sm:text-lg dark:bg-[color:var(--ptd-strip-cyan)] dark:text-[#1a2a38]"
+        class="ptd-home-strip__cta inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ptd-strip-teal)] px-8 py-3.5 text-base font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ptd-strip-teal)] active:scale-[0.98] sm:w-auto sm:px-10 sm:text-lg"
       >
         {ctaLabel}
         <svg
@@ -229,7 +233,7 @@ const logoAlt =
         targetDate && (
           <div
             class="ptd-home-strip__countdown mt-6 w-full max-w-xl"
-            style={`--ptt-primary: ${TEAL}; --ptt-bg-elevated: #ffffff; --ptt-border: #eadcd4; --ptt-text-muted: #6b5e58;`}
+            style={`--ptt-primary: ${TEAL}; --ptt-bg-elevated: #ffffff; --ptt-border: ${BORDER}; --ptt-text-muted: ${MUTED};`}
           >
             <PtdCountdown
               client:visible
@@ -246,15 +250,13 @@ const logoAlt =
 </section>
 
 <style is:global>
-  .dark .ptd-home-strip {
-    background-color: var(--ptd-strip-cream-dark);
-  }
-
-  .dark .ptd-home-strip__countdown {
-    --ptt-primary: var(--ptd-strip-cyan);
-    --ptt-bg-elevated: #243447;
-    --ptt-border: #3a4a5a;
-    --ptt-text-muted: #c4b8b0;
+  /*
+   * Force light kit inside the strip even when <html class="dark"> is on.
+   * Do not add .dark overrides here — this surface is edition-branded, not chrome.
+   */
+  .ptd-home-strip,
+  .ptd-home-strip * {
+    color-scheme: light;
   }
 
   .ptd-home-strip__title {
@@ -321,31 +323,6 @@ const logoAlt =
         to top,
         var(--ptd-strip-cream) 0%,
         color-mix(in srgb, var(--ptd-strip-cream) 80%, transparent) 6%,
-        transparent 16%
-      );
-  }
-
-  .dark .ptd-home-strip__fade {
-    background:
-      linear-gradient(
-        to right,
-        var(--ptd-strip-cream-dark) 0%,
-        var(--ptd-strip-cream-dark) 36%,
-        color-mix(in srgb, var(--ptd-strip-cream-dark) 96%, transparent) 42%,
-        color-mix(in srgb, var(--ptd-strip-cream-dark) 70%, transparent) 48%,
-        color-mix(in srgb, var(--ptd-strip-cream-dark) 32%, transparent) 54%,
-        transparent 62%
-      ),
-      linear-gradient(
-        to bottom,
-        var(--ptd-strip-cream-dark) 0%,
-        color-mix(in srgb, var(--ptd-strip-cream-dark) 75%, transparent) 6%,
-        transparent 16%
-      ),
-      linear-gradient(
-        to top,
-        var(--ptd-strip-cream-dark) 0%,
-        color-mix(in srgb, var(--ptd-strip-cream-dark) 80%, transparent) 6%,
         transparent 16%
       );
   }

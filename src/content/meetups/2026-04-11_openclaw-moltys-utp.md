@@ -30,17 +30,50 @@ sponsors:
   - slug: cursor
     tier: community
 gallery:
-  - src: /images/meetups/openclaw-moltys-utp/memories/01.webp
+  - src: "/images/meetups/openclaw-moltys-utp/memories/03.webp"
     alt:
-      en: OpenClaw Moltys meetup at UTP
-      es: Meetup OpenClaw Moltys en la UTP
-  - src: /images/meetups/openclaw-moltys-utp/memories/03.webp
+      en: "Hand holding a red lobster-claw headband — the Moltys mascot — with the audience seated behind"
+      es: "Mano sosteniendo una diadema con tenazas rojas de langosta, la mascota Moltys, con el público sentado detrás"
+    caption:
+      en: "The lobster is OpenClaw's mascot — so the room shows up with claws."
+      es: "La langosta es la mascota de OpenClaw — el salón llega con tenazas."
+  - src: "/images/meetups/openclaw-moltys-utp/memories/01.webp"
     alt:
-      en: Community demos at OpenClaw Moltys
-      es: Demos de la comunidad en OpenClaw Moltys
+      en: "Two presenters at a whiteboard with a hand-drawn OpenClaw architecture diagram"
+      es: "Dos presentadores en un tablero con un diagrama de arquitectura de OpenClaw dibujado a mano"
+    caption:
+      en: "Architecture on the board — agent, gateway, messaging apps, and tools."
+      es: "La arquitectura en el tablero — agente, gateway, mensajería y herramientas."
+  - src: "/images/meetups/openclaw-moltys-utp/memories/04.webp"
+    alt:
+      en: "Audience seated in the UTP hall following the workshop"
+      es: "Público sentado en el salón de la UTP siguiendo el taller"
+    caption:
+      en: "The room the morning is about — a community that shows up."
+      es: "El salón del que se trata la mañana — una comunidad que dice presente."
+  - src: "/images/meetups/openclaw-moltys-utp/memories/02.webp"
+    alt:
+      en: "Presenter in a green shirt explaining while another writes on the OpenClaw diagram, lobster headband in the foreground"
+      es: "Presentador con camiseta verde explicando mientras otra persona escribe en el diagrama, con diadema de langosta en primer plano"
+  - src: "/images/meetups/openclaw-moltys-utp/memories/05.webp"
+    alt:
+      en: "Attendees seated, several wearing lobster-claw headbands, city visible through the windows"
+      es: "Asistentes sentados, varios con diademas de tenazas de langosta, con la ciudad a través de las ventanas"
+  - src: "/images/meetups/openclaw-moltys-utp/memories/06.webp"
+    alt:
+      en: "Behind-the-scenes AV setup — two laptops, a camera on a tripod, lobster headband on the table"
+      es: "Detrás de cámaras del montaje audiovisual — dos portátiles, cámara en trípode y diadema de langosta sobre la mesa"
+  - src: "/images/meetups/openclaw-moltys-utp/memories/07.webp"
+    alt:
+      en: "Group photo of attendees and presenters at the OpenClaw Moltys meetup in the UTP hall"
+      es: "Foto grupal de asistentes y presentadores del meetup Moltys en el salón de la UTP"
+    caption:
+      en: "Behind the scenes, and the full Moltys crew — thanks for coming."
+      es: "Detrás de cámaras, y todo el combo Moltys — gracias por venir."
 status: completed
 draft: false
 ---
+
 
 ## OpenClaw Moltys en la UTP
 

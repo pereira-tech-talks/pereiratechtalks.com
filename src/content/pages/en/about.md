@@ -8,7 +8,7 @@ lastUpdated: 2026-08-07
 
 Pereira Tech Talks (PTT) is the technology community of Pereira, Risaralda, Colombia. The story starts in February 2014: eight developers in a UTP classroom for the first PereiraJS meetup. Twelve years on, that small circle is a four-program community — monthly meetups (84 and counting), the annual **Pereira Tech Day** conference (2024 archive, 2026 upcoming), the **Speaker School**, and the **La Biblioteca del Mañana** reading club. All volunteer-built. All open.
 
-The work is sponsor-supported (Veritran, GitHub, ASE-UTP, DailyBot, Aumentada, and past partners such as Gorilla Logic, Made for Germany, and Source Meridian) and open by default. The site you are reading is a catalog of meetups, talks, slides, speakers, contributors, and sponsors — available in Spanish and English — structured to be just as useful to AI agents as it is to humans.
+The work is sponsor-supported (Veritran, GitHub, ASE-UTP, DailyBot, Aumentada, and past partners such as Gorilla Logic, Made for Germany, Source Meridian, and Cursor) and open by default. The site you are reading is a catalog of meetups, talks, slides, speakers, contributors, and sponsors — available in Spanish and English — structured to be just as useful to AI agents as it is to humans.
 
 ---
 
