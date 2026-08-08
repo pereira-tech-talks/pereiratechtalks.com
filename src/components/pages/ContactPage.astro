@@ -101,27 +101,11 @@ const quickLinks = t.contactPage.quickLinks.map((link) => ({
           {t.contactPage.formTitle}
         </h2>
         <p class="mb-8 text-ptt-secondary">{t.contactPage.formNote}</p>
-        {
-          CONTACT_FORM.apiEndpoint || CONTACT_FORM.googleForms.formUrl ? (
-            <ContactForm
-              client:visible
-              lang={lang}
-              apiEndpoint={CONTACT_FORM.apiEndpoint}
-              formUrl={CONTACT_FORM.googleForms.formUrl}
-              entries={CONTACT_FORM.googleForms.entries}
-            />
-          ) : (
-            <div class="rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-8 text-center">
-              <p class="text-ptt-secondary mb-4">{t.contactPage.fallbackMessage}</p>
-              <a
-                href="mailto:pereiratechtalks@gmail.com"
-                class="font-semibold text-ptt-primary dark:text-ptt-primary-dark hover:underline"
-              >
-                {t.contactPage.fallbackEmailText} pereiratechtalks@gmail.com
-              </a>
-            </div>
-          )
-        }
+        <ContactForm
+          client:visible
+          lang={lang}
+          apiEndpoint={CONTACT_FORM.apiEndpoint}
+        />
       </div>
 
       <aside class="space-y-8">

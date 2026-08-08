@@ -24,14 +24,15 @@ Canonical UUIDs and choice lookups live in `functions/api/_dailybot.ts`.
 | Community calendar | `CalendarIntakeForm.svelte` | `/calendar#calendar-intake` | `calendar` | PTT Community Calendar |
 | Code of Conduct | `ConductReportForm.svelte` | `/conduct#conduct-report-form` | `conduct` | PTT Code of Conduct |
 
-Newsletter signup remains on Google Forms (out of scope for this pipeline).
+Newsletter signup is disabled in the UI and has **no** Google Forms (or other)
+backend until a Dailybot form is added for it.
 
 ## Environment
 
 | Variable | Where | Notes |
 |----------|-------|-------|
 | `DAILYBOT_API_KEY` | Cloudflare / local Functions only | **Never** `PUBLIC_*`. Header `X-API-KEY`. |
-| `PUBLIC_CONTACT_API_ENDPOINT` | Build | Usually `/api/contact`. Empty → ContactForm Google Forms fallback only. |
+| `PUBLIC_CONTACT_API_ENDPOINT` | Build | Optional override. Defaults to `/api/contact` in `CONTACT_FORM`. |
 | `RESEND_API_KEY` + `CONTACT_FROM_EMAIL` | Optional | Submitter ack after Dailybot success |
 | `CONTACT_TO_*` | Optional | Legacy org-mirror inboxes if Resend mirror is enabled |
 | `CONTACT_RATE_LIMIT` / `CONTACT_RATE_WINDOW_MS` | Optional | Default 8 / 600000 |
@@ -71,7 +72,7 @@ This org’s Dailybot forms use **choice value === label** (e.g. `"General"`).
 Server helpers map site slugs (`general`, `lightning`, `gold`) → labels via
 `lookupChoice` in `_dailybot.ts`. Do not invent a parallel slugify POST contract.
 
-Booleans send Dailybot labels `Yes` / `No`.
+Booleans send JSON `true` / `false` (Dailybot `boolean` question type).
 
 ## Form UUIDs
 

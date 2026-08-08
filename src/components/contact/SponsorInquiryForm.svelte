@@ -5,7 +5,7 @@ import { focusFirstInvalidField } from '@/lib/form-ui';
 import { getTranslations } from '@/lib/translations';
 
 export let lang = 'es';
-export let apiEndpoint = '';
+export let apiEndpoint = '/api/contact';
 
 $: t = getTranslations(lang);
 $: f = t.sponsorForm;

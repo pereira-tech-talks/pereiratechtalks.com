@@ -221,13 +221,18 @@ export const CONTRIBUTION_TYPE_VALUES = buildChoiceLookup([
   { aliases: ['Unsure', 'unsure'] },
 ]);
 
-/** Boolean DailyBot questions — probe confirmed labels may vary; send Yes/No. */
-export function booleanToDailyBot(value: boolean | string | undefined): string {
-  if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+/**
+ * Boolean Dailybot questions require JSON `true` / `false` (not "Yes"/"No").
+ * Verified against PTT CFS + CoC forms (2026-08 audit).
+ */
+export function booleanToDailyBot(
+  value: boolean | string | undefined
+): boolean {
+  if (typeof value === 'boolean') return value;
   const n = normalizeLabel(String(value ?? ''));
-  if (['yes', 'true', '1', 'si', 'sí'].includes(n)) return 'Yes';
-  if (['no', 'false', '0'].includes(n)) return 'No';
-  return 'No';
+  if (['yes', 'true', '1', 'si', 'sí'].includes(n)) return true;
+  if (['no', 'false', '0'].includes(n)) return false;
+  return false;
 }
 
 // ────────────────────────────────────────────────────────────────────────────

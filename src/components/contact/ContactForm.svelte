@@ -15,18 +15,10 @@ import { getTranslations } from '@/lib/translations';
 export let lang = 'es';
 /**
  * Cloudflare Pages Function endpoint (e.g. `/api/contact`) that submits to
- * Dailybot (optional Resend ack server-side). When empty, falls back to the
- * Google Forms direct POST configured in `entries` / `formUrl`.
+ * Dailybot Forms (optional Resend ack server-side). Required — no third-party
+ * form fallback.
  */
-export let apiEndpoint = '';
-export let formUrl = '';
-export let entries = {
-  name: '',
-  email: '',
-  reason: '',
-  subject: '',
-  message: '',
-};
+export let apiEndpoint = '/api/contact';
 
 $: t = getTranslations(lang);
 
@@ -161,22 +153,6 @@ async function submitToApi(endpoint) {
   }
 }
 
-async function submitToGoogleForms() {
-  const formData = new FormData();
-  formData.append(entries.name, name);
-  formData.append(entries.email, email);
-  formData.append(entries.reason, reason);
-  formData.append(entries.subject, subject);
-  formData.append(entries.message, message);
-
-  await fetch(formUrl, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(formData),
-  });
-}
-
 async function handleSubmit() {
   submitError = '';
 
@@ -186,32 +162,24 @@ async function handleSubmit() {
     focusInvalid();
     return;
   }
+
+  if (!apiEndpoint) {
+    submitError = t.contactPage.submitError;
+    trackEvent(EVENTS.CONTACT_FORM_ERROR, { reason: 'no_backend_configured' });
+    return;
+  }
+
   formState = 'submitting';
 
   try {
-    if (apiEndpoint) {
-      await submitToApi(apiEndpoint);
-    } else if (formUrl) {
-      await submitToGoogleForms();
-    } else {
-      throw new Error('no_backend_configured');
-    }
-
+    await submitToApi(apiEndpoint);
     formState = 'success';
     trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { reason: reason || 'unspecified' });
     setTimeout(() => successRef?.focus(), 100);
-  } catch (error) {
-    if (apiEndpoint) {
-      submitError = t.contactPage.submitError;
-      formState = 'idle';
-      trackEvent(EVENTS.CONTACT_FORM_ERROR, { reason: 'submit_failed' });
-      return;
-    }
-    // Google Forms uses no-cors so fetch only throws on hard network errors;
-    // treat as success since we cannot confirm either way.
-    formState = 'success';
-    trackEvent(EVENTS.CONTACT_FORM_SUBMIT, { reason: reason || 'unspecified' });
-    setTimeout(() => successRef?.focus(), 100);
+  } catch {
+    submitError = t.contactPage.submitError;
+    formState = 'idle';
+    trackEvent(EVENTS.CONTACT_FORM_ERROR, { reason: 'submit_failed' });
   }
 }
 

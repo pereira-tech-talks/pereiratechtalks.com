@@ -19,11 +19,8 @@ auto-ack may run after a successful Dailybot response.
 Contact topics (UI): `general` · `collaboration` · `the-library-of-tomorrow` ·
 `press` · `other`. CFS / sponsorship / conduct use dedicated pages.
 
-### Google Forms fallback
-
-If `PUBLIC_CONTACT_API_ENDPOINT` is empty, the general `ContactForm` may POST to
-Google Forms (`src/lib/constances.ts`). Structured Dailybot intakes require the
-Functions endpoint.
+All intakes POST JSON to `CONTACT_FORM.apiEndpoint` (default `/api/contact`).
+There is **no** Google Forms fallback.
 
 ### Client modules
 
