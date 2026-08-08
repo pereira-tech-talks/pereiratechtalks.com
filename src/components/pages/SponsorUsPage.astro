@@ -57,7 +57,9 @@ const t = {
       tier: 'diamond' as const,
       name: lang === 'es' ? 'Diamante' : 'Diamond',
       headline:
-        lang === 'es' ? 'Aliado estratégico anual' : 'Strategic annual partner',
+        lang === 'es'
+          ? 'Patrocinador estratégico anual'
+          : 'Strategic annual partner',
       perks:
         lang === 'es'
           ? [
@@ -78,7 +80,7 @@ const t = {
     {
       tier: 'gold' as const,
       name: lang === 'es' ? 'Oro' : 'Gold',
-      headline: lang === 'es' ? 'Aliado anual' : 'Annual partner',
+      headline: lang === 'es' ? 'Patrocinador anual' : 'Annual partner',
       perks:
         lang === 'es'
           ? [
@@ -116,7 +118,7 @@ const t = {
       name: lang === 'es' ? 'Comunidad' : 'Community',
       headline:
         lang === 'es'
-          ? 'Aliado comunitario sin contraprestación monetaria'
+          ? 'Patrocinador comunitario sin contraprestación monetaria'
           : 'Community ally with non-monetary contribution',
       perks:
         lang === 'es'
@@ -236,7 +238,7 @@ const ctaHref = '#sponsor-form';
   {
     sponsors.length > 0 && (
       <Section
-        eyebrow={lang === 'es' ? 'Aliados actuales' : 'Current partners'}
+        eyebrow={lang === 'es' ? 'Patrocinadores actuales' : 'Current partners'}
         title={t.currentSponsorsTitle}
       >
         <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 list-none">

@@ -451,6 +451,44 @@ export interface SiteTranslations {
       bronze: string;
       community: string;
     };
+    /** Sponsor card affordances. */
+    card: {
+      /** Also used as the per-year counter on the sponsor profile timeline. */
+      meetupsCount: (count: number) => string;
+      viewSponsoredMeetups: string;
+      website: string;
+    };
+  };
+
+  // Sponsor detail page (/sponsors/{slug})
+  sponsorDetail: {
+    breadcrumbHome: string;
+    breadcrumbSponsors: string;
+    metaDescription: (name: string, meetups: number) => string;
+    statusActive: string;
+    statusPast: string;
+    sinceLabel: (year: number) => string;
+    websiteLabel: string;
+    allSponsorsLabel: string;
+    sponsorUsLabel: string;
+    stats: {
+      meetups: string;
+      editions: string;
+      talks: string;
+      speakers: string;
+    };
+    upcomingTitle: string;
+    upcomingSubtitle: string;
+    meetupsTitle: string;
+    meetupsSubtitle: (name: string) => string;
+    editionsTitle: string;
+    editionsSubtitle: string;
+    editionUpcomingLabel: string;
+    editionTierLabel: (tier: string) => string;
+    emptyTitle: string;
+    emptyDesc: string;
+    ctaTitle: string;
+    ctaBody: string;
   };
 
   contributorsPage: {

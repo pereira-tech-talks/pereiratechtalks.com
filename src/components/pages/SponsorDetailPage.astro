@@ -1,0 +1,374 @@
+---
+/**
+ * PTT v3.0.0 sponsor detail page — the partner profile.
+ *
+ * Product intent: turn a logo into evidence. Everything below the header is
+ * derived from the event side of the graph (`meetups[].sponsors`,
+ * `pereiraTechDays[].sponsors`), so the history is always in sync with the
+ * archive and never hand-maintained on the sponsor entry.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import EditionCard from '@/components/cards/EditionCard.astro';
+import MeetupCard from '@/components/cards/MeetupCard.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import Badge from '@/components/ui/Badge.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import EmptyState from '@/components/ui/EmptyState.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE_URL } from '@/lib/constances';
+import { getCalendarDateString } from '@/lib/dates';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getMeetupSlug } from '@/lib/meetup';
+import { isUpcomingEdition } from '@/lib/pereiraTechDay';
+import {
+  getSponsorActivity,
+  SPONSOR_TIER_LABELS,
+  type SponsoredMeetup,
+} from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  sponsor: CollectionEntry<'sponsors'>;
+  lang: Language;
+}
+
+const { sponsor, lang } = Astro.props;
+const t = getTranslations(lang);
+const sd = t.sponsorDetail;
+const prefix = getUrlPrefix(lang);
+
+const name = sponsor.data.name;
+const description = tr(sponsor.data.description, lang);
+const logoLight = sponsor.data.logo.light;
+const logoDark = sponsor.data.logo.dark;
+const sameLogo = logoLight === logoDark;
+const isActive = sponsor.data.status === 'active';
+
+const activity = await getSponsorActivity(sponsor);
+
+/** Past meetups grouped by year (descending) for the archive timeline. */
+const pastByYear = ((): { year: number; items: SponsoredMeetup[] }[] => {
+  const byYear = new Map<number, SponsoredMeetup[]>();
+  for (const item of activity.pastMeetups) {
+    if (!byYear.has(item.year)) byYear.set(item.year, []);
+    byYear.get(item.year)?.push(item);
+  }
+  return [...byYear.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([year, items]) => ({ year, items }));
+})();
+
+const stats = [
+  { value: activity.meetupCount, label: sd.stats.meetups },
+  { value: activity.editionCount, label: sd.stats.editions },
+  { value: activity.talkCount, label: sd.stats.talks },
+  { value: activity.speakerCount, label: sd.stats.speakers },
+].filter((s) => s.value > 0);
+
+const breadcrumbs = [
+  { label: sd.breadcrumbHome, href: prefix === '' ? '/' : `${prefix}/` },
+  { label: sd.breadcrumbSponsors, href: `${prefix}/sponsors/` },
+  { label: name },
+];
+
+const metaDescription = sd.metaDescription(name, activity.meetupCount);
+
+const organizationJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name,
+  description,
+  url: sponsor.data.url,
+  logo: logoLight.startsWith('http') ? logoLight : `${SITE_URL}${logoLight}`,
+  mainEntityOfPage: `${SITE_URL}${prefix}/sponsors/${sponsor.id}/`,
+  ...(activity.meetups.length > 0
+    ? {
+        subjectOf: activity.meetups.slice(0, 20).map(({ meetup }) => ({
+          '@type': 'Event',
+          name: tr(meetup.data.title, lang),
+          startDate: getCalendarDateString(meetup.data.date),
+          url: `${SITE_URL}${prefix}/meetups/${getMeetupSlug(meetup)}/`,
+        })),
+      }
+    : {}),
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={`${name} — ${t.sponsorsPage.title}`}
+  description={metaDescription}
+  image={logoLight}
+>
+  <JsonLd data={organizationJsonLd} />
+
+  <article class="bg-ptt-bg">
+    <div class="relative overflow-hidden">
+      <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--ptt-primary)_0%,_transparent_55%)] opacity-[0.07] dark:opacity-[0.12]"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="main-container relative pt-12 sm:pt-16 pb-4">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
+
+      <div class="main-container relative pt-6 pb-12 sm:pb-16">
+        <div class="flex flex-col gap-8 sm:flex-row sm:items-start">
+          <div
+            class="flex h-32 w-full max-w-[16rem] shrink-0 items-center justify-center rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:w-64"
+          >
+            {
+              sameLogo ? (
+                <img
+                  decoding="async"
+                  src={logoLight}
+                  alt={sponsor.data.logo.alt}
+                  width="208"
+                  height="80"
+                  loading="eager"
+                  class="max-h-20 max-w-full object-contain"
+                />
+              ) : (
+                <>
+                  <img
+                    decoding="async"
+                    src={logoLight}
+                    alt={sponsor.data.logo.alt}
+                    width="208"
+                    height="80"
+                    loading="eager"
+                    class="max-h-20 max-w-full object-contain dark:hidden"
+                  />
+                  <img
+                    decoding="async"
+                    src={logoDark}
+                    alt={sponsor.data.logo.alt}
+                    width="208"
+                    height="80"
+                    loading="eager"
+                    class="hidden max-h-20 max-w-full object-contain dark:block"
+                  />
+                </>
+              )
+            }
+          </div>
+
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-3">
+              <Badge variant={isActive ? 'announced' : 'completed'}>
+                {isActive ? sd.statusActive : sd.statusPast}
+              </Badge>
+              {
+                activity.firstYear && (
+                  <span class="text-sm text-ptt-secondary">
+                    {sd.sinceLabel(activity.firstYear)}
+                  </span>
+                )
+              }
+            </div>
+            <h1
+              class="mt-3 text-4xl font-bold tracking-tight text-ptt sm:text-5xl"
+            >
+              {name}
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ptt-secondary">
+              {description}
+            </p>
+
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href={sponsor.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-umami-event="sponsor_website_click"
+                data-umami-event-slug={sponsor.id}
+                class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
+              >
+                {sd.websiteLabel}
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                href={`${prefix}/sponsors/`}
+                class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-ptt-border bg-ptt-bg-elevated px-5 py-2.5 text-sm font-semibold text-ptt transition-colors hover:border-ptt-primary/40 hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-white/15 dark:bg-ptt-bg-dark dark:text-white dark:hover:bg-white/10"
+              >
+                {sd.allSponsorsLabel}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {
+          stats.length > 0 && (
+            <dl class="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+              {stats.map((stat) => (
+                <div class="rounded-2xl bg-ptt-bg-elevated p-5 ring-1 ring-ptt-border">
+                  <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-ptt-secondary">
+                    {stat.label}
+                  </dt>
+                  <dd class="mt-2 text-3xl font-bold tracking-tight text-ptt-primary dark:text-ptt-primary-dark">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
+      </div>
+    </div>
+
+    {
+      activity.upcomingMeetups.length > 0 && (
+        <section class="bg-ptt-primary-soft/40 py-16 dark:bg-ptt-bg-elevated sm:py-20">
+          <div class="main-container">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
+              {sd.upcomingTitle}
+            </h2>
+            <p class="mt-2 text-ptt-secondary">{sd.upcomingSubtitle}</p>
+            <ul class="mt-8 grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {activity.upcomingMeetups.map(({ meetup }, index) => (
+                <li>
+                  <MeetupCard
+                    meetup={meetup}
+                    lang={lang}
+                    loading={index < 3 ? 'eager' : 'lazy'}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      pastByYear.length > 0 && (
+        <section class="py-16 sm:py-20">
+          <div class="main-container">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
+              {sd.meetupsTitle}
+            </h2>
+            <p class="mt-2 text-ptt-secondary">{sd.meetupsSubtitle(name)}</p>
+
+            <div class="mt-10 space-y-12">
+              {pastByYear.map(({ year, items }) => (
+                <section aria-labelledby={`sponsored-${year}`}>
+                  <div class="mb-6 flex items-center gap-4">
+                    <h3
+                      id={`sponsored-${year}`}
+                      class="text-xl font-bold tracking-tight text-ptt-primary dark:text-ptt-primary-dark"
+                    >
+                      {year}
+                    </h3>
+                    <span
+                      class="h-px flex-1 bg-ptt-border"
+                      aria-hidden="true"
+                    />
+                    <span class="text-xs font-semibold uppercase tracking-[0.14em] text-ptt-secondary">
+                      {t.sponsorsPage.card.meetupsCount(items.length)}
+                    </span>
+                  </div>
+                  <ul class="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {items.map(({ meetup }) => (
+                      <li>
+                        <MeetupCard meetup={meetup} lang={lang} />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      activity.editions.length > 0 && (
+        <section class="bg-ptt-primary-soft/40 py-16 dark:bg-ptt-bg-elevated sm:py-20">
+          <div class="main-container">
+            <h2 class="text-3xl font-bold tracking-tight text-ptt">
+              {sd.editionsTitle}
+            </h2>
+            <p class="mt-2 text-ptt-secondary">{sd.editionsSubtitle}</p>
+            <ul class="mt-8 grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {activity.editions.map(({ year, tier, edition }) => (
+                <li class="flex flex-col gap-3">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <Badge variant={tier}>
+                      {sd.editionTierLabel(SPONSOR_TIER_LABELS[tier][lang])}
+                    </Badge>
+                    {edition && isUpcomingEdition(edition) && (
+                      <Badge variant="announced">
+                        {sd.editionUpcomingLabel}
+                      </Badge>
+                    )}
+                  </div>
+                  {edition ? (
+                    <EditionCard edition={edition} lang={lang} />
+                  ) : (
+                    <a
+                      href={`${prefix}/pereira-tech-days/${year}/`}
+                      class="flex h-full flex-col justify-center rounded-2xl bg-ptt-bg-elevated p-6 shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+                    >
+                      <span class="text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+                        {year}
+                      </span>
+                      <span class="mt-2 text-xl font-bold text-ptt">
+                        Pereira Tech Day {year}
+                      </span>
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      activity.isEmpty && (
+        <section class="py-16 sm:py-20">
+          <div class="main-container">
+            <EmptyState
+              title={sd.emptyTitle}
+              description={sd.emptyDesc}
+              ctaLabel={sd.allSponsorsLabel}
+              ctaHref={`${prefix}/sponsors/`}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    <section class="border-t border-ptt-border bg-ptt-bg py-16 sm:py-20">
+      <div class="main-container">
+        <div
+          class="rounded-2xl bg-ptt-bg-elevated p-8 ring-1 ring-ptt-border sm:p-10"
+        >
+          <h2 class="text-2xl font-bold tracking-tight text-ptt sm:text-3xl">
+            {sd.ctaTitle}
+          </h2>
+          <p class="mt-3 max-w-2xl text-ptt-secondary">{sd.ctaBody}</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={`${prefix}/sponsor-us/`}
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark dark:hover:bg-ptt-primary-dark/90"
+            >
+              {sd.sponsorUsLabel}
+            </a>
+            <a
+              href={`${prefix}/contact/`}
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-ptt-border bg-ptt-bg px-5 py-2.5 text-sm font-semibold text-ptt transition-colors hover:border-ptt-primary/40 hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-white/15 dark:text-white dark:hover:bg-white/10"
+            >
+              {t.sponsorsPage.contactLabel}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</MainLayout>

@@ -10,7 +10,11 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getActiveSponsors, getPastSponsors } from '@/lib/sponsor';
+import {
+  getActiveSponsors,
+  getPastSponsors,
+  getSponsorActivityMap,
+} from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -24,6 +28,15 @@ const prefix = getUrlPrefix(lang);
 
 const currentSponsors = await getActiveSponsors();
 const pastSponsors = await getPastSponsors();
+
+/**
+ * One pass over meetups + editions for every sponsor, so each card can prove
+ * what the partnership actually funded instead of showing a bare logo.
+ */
+const activityBySponsor = await getSponsorActivityMap([
+  ...currentSponsors,
+  ...pastSponsors,
+]);
 
 const breadcrumbs = [
   { label: sp.breadcrumbHome, href: `${prefix}/` },
@@ -93,6 +106,7 @@ const whyItems = [sp.why.items.meetups, sp.why.items.ptd, sp.why.items.talent];
                 sponsor={sponsor}
                 lang={lang}
                 showTier={false}
+                activity={activityBySponsor.get(sponsor.id)}
                 loading={index < 3 ? 'eager' : 'lazy'}
               />
             </li>
@@ -122,7 +136,13 @@ const whyItems = [sp.why.items.meetups, sp.why.items.ptd, sp.why.items.talent];
         <ul class="grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {pastSponsors.map((sponsor) => (
             <li>
-              <SponsorCard sponsor={sponsor} lang={lang} showTier={false} muted />
+              <SponsorCard
+                sponsor={sponsor}
+                lang={lang}
+                showTier={false}
+                activity={activityBySponsor.get(sponsor.id)}
+                muted
+              />
             </li>
           ))}
         </ul>

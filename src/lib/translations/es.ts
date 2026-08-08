@@ -577,10 +577,10 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
   sponsorsPage: {
     title: 'Patrocinadores',
     description:
-      'Aliados actuales y anteriores de Pereira Tech Talks — empresas y organizaciones que sostienen meetups, Pereira Tech Day y los programas de la comunidad en Pereira.',
+      'Patrocinadores actuales y anteriores de Pereira Tech Talks — empresas y organizaciones que sostienen meetups, Pereira Tech Day y los programas de la comunidad en Pereira.',
     eyebrow: 'Patrocinadores Actuales',
     intro: (count) =>
-      `${count} aliados activos sostienen venues, logística y escenario. Las categorías de patrocinio por edición viven en cada Pereira Tech Day.`,
+      `${count} patrocinadores activos sostienen venues, logística y escenario. Las categorías de patrocinio por edición viven en cada Pereira Tech Day.`,
     currentTitle: 'Patrocinadores actuales',
     currentIntro:
       'Quienes acompañan a Pereira Tech Talks hoy — meetups mensuales y la conferencia anual.',
@@ -599,7 +599,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       items: {
         meetups: {
           title: 'Meetups reales',
-          body: 'Venue, snacks y continuidad mensual — la comunidad necesita aliados que hagan posible cada noche de charlas.',
+          body: 'Venue, snacks y continuidad mensual — la comunidad necesita patrocinadores que hagan posible cada noche de charlas.',
         },
         ptd: {
           title: 'Pereira Tech Day',
@@ -616,8 +616,52 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       gold: 'Patrocinadores oro',
       silver: 'Patrocinadores plata',
       bronze: 'Patrocinadores bronce',
-      community: 'Aliados comunitarios',
+      community: 'Patrocinadores comunitarios',
     },
+    card: {
+      meetupsCount: (count) =>
+        count === 1 ? '1 meetup patrocinado' : `${count} meetups patrocinados`,
+      viewSponsoredMeetups: 'Ver meetups patrocinados',
+      website: 'Sitio web',
+    },
+  },
+
+  sponsorDetail: {
+    breadcrumbHome: 'Inicio',
+    breadcrumbSponsors: 'Patrocinadores',
+    metaDescription: (name, meetups) =>
+      meetups > 0
+        ? `${name} ha patrocinado ${meetups} ${meetups === 1 ? 'meetup' : 'meetups'} de Pereira Tech Talks. Revisa el historial completo de encuentros y ediciones que hizo posibles.`
+        : `${name} es patrocinador de Pereira Tech Talks. Conoce su rol en la comunidad tecnológica de Pereira y los encuentros que acompaña.`,
+    statusActive: 'Patrocinador actual',
+    statusPast: 'Patrocinador anterior',
+    sinceLabel: (year) => `Acompañando a la comunidad desde ${year}`,
+    websiteLabel: 'Visitar sitio web',
+    allSponsorsLabel: 'Todos los patrocinadores',
+    sponsorUsLabel: 'Quiero patrocinar',
+    stats: {
+      meetups: 'Meetups patrocinados',
+      editions: 'Ediciones de PTD',
+      talks: 'Charlas impulsadas',
+      speakers: 'Ponentes en escena',
+    },
+    upcomingTitle: 'Próximos meetups patrocinados',
+    upcomingSubtitle:
+      'Encuentros ya agendados que cuentan con este patrocinador. Te esperamos.',
+    meetupsTitle: 'Meetups patrocinados',
+    meetupsSubtitle: (name) =>
+      `Cada noche de charlas que ${name} ayudó a sostener, del más reciente al primero.`,
+    editionsTitle: 'Ediciones de Pereira Tech Day',
+    editionsSubtitle:
+      'La conferencia anual de la comunidad y la categoría de patrocinio en cada edición.',
+    editionUpcomingLabel: 'Próxima edición',
+    editionTierLabel: (tier) => `Patrocinador ${tier}`,
+    emptyTitle: 'Aún no hay encuentros enlazados',
+    emptyDesc:
+      'Este patrocinador todavía no tiene meetups ni ediciones registradas en el archivo. Estamos completando la historia de la comunidad poco a poco.',
+    ctaTitle: '¿Quieres aparecer aquí?',
+    ctaBody:
+      'Patrocinar Pereira Tech Talks es sostener venue, logística y escenario para la comunidad tech de Risaralda. Cuéntanos qué tienes en mente.',
   },
 
   contributorsPage: {
