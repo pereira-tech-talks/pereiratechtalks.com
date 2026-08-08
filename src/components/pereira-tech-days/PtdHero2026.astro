@@ -25,6 +25,8 @@ interface Props {
   endDate?: string;
   /** External registration URL (Luma). When set, shows the primary register CTA. */
   registrationUrl?: string;
+  /** In-page anchor for the secondary "view schedule" CTA (e.g. `#schedule`). */
+  scheduleAnchor?: string;
 }
 
 const {
@@ -41,6 +43,7 @@ const {
   targetDate,
   endDate,
   registrationUrl,
+  scheduleAnchor,
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -221,29 +224,53 @@ const CREAM = '#fef7f3';
       }
 
       {
-        registrationUrl && (
-          <a
-            href={registrationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ptd-hero-2026__cta mb-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--ptt-primary)] px-9 py-3.5 text-lg font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:mb-7 sm:w-auto sm:px-11 sm:py-4 sm:text-xl"
-          >
-            {t.ptdPage.registerCta}
-            <svg
-              aria-hidden="true"
-              class="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.25"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M5 12h14M13 6l6 6-6 6"
-              />
-            </svg>
-          </a>
+        (registrationUrl || scheduleAnchor) && (
+          <div class="mb-6 flex w-full flex-col items-stretch justify-center gap-3 sm:mb-7 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
+            {registrationUrl && (
+              <a
+                href={registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ptd-hero-2026__cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--ptt-primary)] px-9 py-3.5 text-lg font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:w-auto sm:px-11 sm:py-4 sm:text-xl"
+              >
+                {t.ptdPage.registerCta}
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 12h14M13 6l6 6-6 6"
+                  />
+                </svg>
+              </a>
+            )}
+            {scheduleAnchor && (
+              <a
+                href={scheduleAnchor}
+                class="ptd-hero-2026__cta-secondary inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[var(--ptt-primary)] px-9 py-3.5 text-lg font-bold tracking-wide text-[var(--ptt-primary)] transition-[transform,background-color,color] hover:bg-[var(--ptt-primary)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:w-auto sm:px-9 sm:py-4 sm:text-xl"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                </svg>
+                {t.ptdPage.scheduleAnchorCta}
+              </a>
+            )}
+          </div>
         )
       }
 

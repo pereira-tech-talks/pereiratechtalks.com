@@ -47,6 +47,8 @@ interface Props {
   ptdEditions?: PtdEditionNavItem[];
   /** PTD header surface: dark navy (2024) or light (2026). */
   ptdChromeVariant?: 'dark' | 'light';
+  /** In-page anchors shown in the PTD header (e.g. the agenda). */
+  ptdAnchors?: Array<{ href: string; label: string }>;
 }
 
 const {
@@ -68,6 +70,7 @@ const {
   ptdYear,
   ptdEditions = [],
   ptdChromeVariant = 'dark',
+  ptdAnchors = [],
 } = Astro.props;
 
 const isPtdEditionChrome =
@@ -182,6 +185,7 @@ const activeNotifications = suppressTopNotifications
             lang={lang}
             year={ptdYear}
             editions={ptdEditions}
+            anchors={ptdAnchors}
             variant={ptdChromeVariant}
           />
         ) : (
