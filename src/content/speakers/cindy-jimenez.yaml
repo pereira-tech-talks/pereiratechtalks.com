@@ -1,0 +1,19 @@
+name: Cindy Jimenez
+pronouns: she/her
+role:
+  en: Software Developer at Tecnolab
+  es: Software Developer en Tecnolab
+bio:
+  en: Speaker at Pereira Tech Talks. Software developer at Tecnolab; joined the September 2025 “Conociendo la nube” meetup.
+  es: Ponente en Pereira Tech Talks. Desarrolladora de software en Tecnolab; participó en el meetup «Conociendo la nube» de septiembre 2025.
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Cindy Jimenez
+    es: Retrato de Cindy Jimenez
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es
