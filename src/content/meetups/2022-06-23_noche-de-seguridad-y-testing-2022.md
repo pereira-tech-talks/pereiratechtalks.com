@@ -41,12 +41,6 @@ Revisaremos las ventajas, técnicas e importancia del testing para el desarrollo
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2022-06-23: Security Night y  Testing. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/286473532)

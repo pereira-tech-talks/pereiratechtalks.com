@@ -40,19 +40,6 @@ Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-pract
 
 ---
 
-### Summary in English
-
-A 2014 Pereira Tech Talks meetup featuring **Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
-Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices · **TDD && BDD, Javascript y el buen sabor de las pruebas. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
-Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices**
-1. ****TDD && BDD, Javascript y el buen sabor de las pruebas** — **
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -38,12 +38,6 @@ En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meet
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2017-10-19: Computer Vision con OpenCV && Programación funcional en Haskell. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243860589)

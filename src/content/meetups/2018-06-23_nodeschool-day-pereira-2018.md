@@ -43,19 +43,6 @@ El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring:
-
-1. **Welcome to NodeSchool Pereira and the PereiraJs community** — Sergio Alexander Florez _(slides no longer available)_
-2. [**JavaScript Fundamentals**](https://gitlab.com/caal-15/custom-javascripting)
-3. [**Learn You Node (Node.js workshop)**](https://github.com/jointDeveloper/learnyounode)
-4. [**Peer-to-peer networks in Node.js**](https://gitlab.com/pin3da/p2p-talk)
-
-The community gathered for talks, networking, and snacks.
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

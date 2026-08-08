@@ -38,12 +38,6 @@ Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2017-12-11: Introduction a servidores web NGINX && Motores de busqueda con Elasticsearch. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/245689908)

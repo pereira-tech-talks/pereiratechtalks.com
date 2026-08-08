@@ -38,12 +38,6 @@ Las comunidades del eje cafetero se unen para realizar durante esta cuarentena e
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2020-05-21: Quarantine Tech Talks - Meetup 6. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/270745121)

@@ -36,7 +36,4 @@ draft: false
 ## Continuous Testing: Paralelización de Pruebas y Observabilidad
 
 Meetup sobre continuous testing — escalar la automatización de pruebas sin escalar el equipo y convertir la suite en una herramienta de observabilidad en tiempo real.
-
-> **EN:** A meetup on continuous testing — scaling automated test suites without scaling headcount, and turning your tests into a real-time observability tool.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

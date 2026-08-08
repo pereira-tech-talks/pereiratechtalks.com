@@ -57,12 +57,6 @@ Resumen: El Deep Learning ha supuesto una revolución en el campo del Machine Le
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2024-05-30: Revolutionizing el Deep Learning: Potenciando modelos con datos limitados. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)

@@ -36,12 +36,6 @@ En esta charla Óscar nos compartirá su experiencia, nos hablará de su career 
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2022-02-03: Career Path Night con Óscar Barajas de Platzi. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283655889)

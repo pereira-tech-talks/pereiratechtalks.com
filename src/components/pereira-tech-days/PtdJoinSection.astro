@@ -141,12 +141,11 @@ const subAfter =
     background-image: var(--ptd-join-bg);
     background-repeat: no-repeat;
     /*
-     * Height-fill + slight overscale: branch flush on the bottom border;
-     * baked cream feather clipped by overflow. Width grows with height so
-     * the monkey reads large across the band.
+     * Height-fill + slight overscale, anchored to the top so the ape’s
+     * head/upper body stay in frame; any overflow clips at the bottom.
      */
     background-size: auto 114%;
-    background-position: left bottom;
+    background-position: left top;
   }
 
   @media (min-width: 1440px) {
@@ -176,9 +175,9 @@ const subAfter =
     }
 
     .ptd-join__bg {
-      /* Stronger overscale on narrow screens so foliage meets the border. */
+      /* Stronger overscale on narrow screens; still crop bottom, not head. */
       background-size: auto 122%;
-      background-position: left bottom;
+      background-position: left top;
     }
   }
 </style>

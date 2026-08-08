@@ -36,12 +36,6 @@ Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel Pineda](h
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2014-02-27: First meeting of PereiraJs. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

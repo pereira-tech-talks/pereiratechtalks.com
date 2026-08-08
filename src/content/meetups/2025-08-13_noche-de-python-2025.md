@@ -36,7 +36,4 @@ draft: false
 ## Noche de Python 2025
 
 Inmersión en Python — desde ingeniería de datos hasta frameworks web y herramientas de IA. La comunidad Python de Pereira dice presente.
-
-> **EN:** Python deep-dives — from data engineering to web frameworks to AI tooling. The Python community in Pereira shows up.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

@@ -41,21 +41,6 @@ Slides disponibles en: http://pin3da.github.io/slides** ([perfil](https://twitte
 
 ---
 
-### Summary in English
-
-A 2015 Pereira Tech Talks meetup featuring **Aprendiendo node by [Daniel Aristizabal](https://twitter.com/cronopio2)**
-Slides disponibles en: https://github.com/workshopper/learnyounode · **Streams - Event Emitter by [Manuel Felipe Pineda](https://twitter.com/pin3da_)**
-Slides disponibles en: http://pin3da.github.io/slides. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Aprendiendo node by [Daniel Aristizabal](https://twitter.com/cronopio2)**
-Slides disponibles en: https://github.com/workshopper/learnyounode**
-1. ****Streams - Event Emitter by [Manuel Felipe Pineda](https://twitter.com/pin3da_)**
-Slides disponibles en: http://pin3da.github.io/slides**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

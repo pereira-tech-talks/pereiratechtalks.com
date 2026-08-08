@@ -36,12 +36,6 @@ Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad T
 
 ---
 
-### Summary in English
-
-A 2022 Pereira Tech Talks meetup. Introducción a Load Testing y Observability con K6 y New Relic Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad Tecnológica de Pereira y Platzi Master, mentor en ProTalento.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/285770133)

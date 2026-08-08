@@ -41,17 +41,6 @@ En nuestro próximo Meetup, tendremos dos conferencias donde hablaremos de maner
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring Pruebas unitarias en Javascript · Pruebas unitarias en Python. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Pruebas unitarias en Javascript** — John Darwin Morales
-2. **Pruebas unitarias en Python** — Carlos Álvaro
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/250815878)

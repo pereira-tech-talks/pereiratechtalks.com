@@ -36,7 +36,4 @@ draft: false
 ## Mujeres en Tecnología
 
 Meetup del mes de la mujer en tecnología — celebramos el impacto de las mujeres en tech con conversaciones sobre creatividad, IA y comunidad.
-
-> **EN:** Women in Tech month meetup — celebrating the impact of women in technology with conversations on creativity, AI, and community.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

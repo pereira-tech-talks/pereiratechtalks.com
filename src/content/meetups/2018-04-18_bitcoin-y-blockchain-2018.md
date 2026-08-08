@@ -43,17 +43,6 @@ Contacto: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring Qué es el Bitcoin y cómo funciona, origen e historia · Blockchain: La revolución industrial de internet más allá del Bitcoin. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Qué es el Bitcoin y cómo funciona, origen e historia**
-2. **Blockchain: La revolución industrial de internet más allá del Bitcoin**
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)

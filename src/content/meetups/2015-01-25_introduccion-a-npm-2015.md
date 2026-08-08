@@ -39,18 +39,6 @@ Slides disponibles en: http://cronopio.github.io/slides-intro-npm/** ([perfil](h
 
 ---
 
-### Summary in English
-
-A 2015 Pereira Tech Talks meetup featuring **Introducción a npm by [Daniel Aristizabal](https://twitter.com/cronopio2)**
-Slides disponibles en: http://cronopio.github.io/slides-intro-npm/. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Introducción a npm by [Daniel Aristizabal](https://twitter.com/cronopio2)**
-Slides disponibles en: http://cronopio.github.io/slides-intro-npm/**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

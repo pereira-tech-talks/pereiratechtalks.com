@@ -36,12 +36,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2023-05-17: AI Night & ChatGPT: Tendencias y Posibilidades. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/293065563)

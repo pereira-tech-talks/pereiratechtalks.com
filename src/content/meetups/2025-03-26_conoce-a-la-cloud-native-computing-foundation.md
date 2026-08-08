@@ -36,7 +36,4 @@ draft: false
 ## Conoce a la Cloud Native Computing Foundation
 
 Introducción a la CNCF, sus proyectos insignia (Kubernetes, Prometheus) y el momento adecuado para migrar tus cargas de trabajo a Kubernetes.
-
-> **EN:** An introduction to the CNCF, its flagship projects (Kubernetes, Prometheus), and the right moment to migrate your workloads to Kubernetes.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

@@ -37,7 +37,4 @@ draft: false
 ## IA como motor de crecimiento
 
 Meetup sobre AI Engineering, IA como infraestructura y cómo escalar sistemas de IA en entornos empresariales. Charlas con Sebastián Franco Gomez y Henry Bravo.
-
-> **EN:** A meetup on AI Engineering, AI as infrastructure, and how to scale AI systems in enterprise environments. Talks by Sebastián Franco Gomez and Henry Bravo.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

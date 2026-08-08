@@ -36,12 +36,6 @@ En colaboración con [científicas de datos](https://www.facebook.com/cientifica
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup. En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián Vega](https://twitter.com/sebasvega95) y [Leiver Andres Campeón](https://twitter.com/leiverandres), dos destacados estudiantes de…
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

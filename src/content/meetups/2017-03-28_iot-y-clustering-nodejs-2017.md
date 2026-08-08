@@ -41,17 +41,6 @@ Aprenderas que es el internet de las cosas (IoT) y porque es considerado como un
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup featuring **Introducción al Internet de las cosas usando Javascript · **Administración de un pequeño cluster con #nodeJS, aplicado en laboratorio de Sirius de la UTP. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Introducción al Internet de las cosas usando Javascript** — **
-2. ****Administración de un pequeño cluster con #nodeJS, aplicado en laboratorio de Sirius de la UTP** — **
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

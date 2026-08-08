@@ -37,7 +37,4 @@ draft: false
 ## Noche de AI Generativa: generación procedural y descubrimiento de fármacos
 
 Dos charlas sobre IA generativa — generación procedural en videojuegos (mundos al estilo Minecraft) y LLMs aplicados a la investigación en biotecnología.
-
-> **EN:** Two talks on generative AI — procedural generation in games (Minecraft-style worlds) and applied LLMs in biotech research.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

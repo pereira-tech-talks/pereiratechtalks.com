@@ -122,7 +122,7 @@ draft: false
 ---
 ```
 
-Body content is freeform Markdown (program description, schedule, callouts). Keep it bilingual by interleaving short EN and ES sections, or by writing a primary-language body with a `Summary in English` / `Resumen en español` companion section — see the existing meetup files for established patterns.
+Body content is freeform Markdown (program description, schedule, callouts). Write the body in the community primary language (Spanish). Do **not** append a `Summary in English`, `Resumen en español`, or `> **EN:**` companion block — bilingual coverage for listings/SEO comes from frontmatter `title` / `description` (`en` + `es`).
 
 ## Steps
 
@@ -147,7 +147,7 @@ ls src/content/meetups/ | grep "$DATE" || true
 
 Create `src/content/meetups/YYYY-MM-DD_{slug}.md` using the frontmatter template. Translate the title and description into Spanish (informal-professional tuteo). Always include both `en` and `es` keys for `title`, `description`, and `hero.alt`.
 
-**Body** — write a short program description in the primary language (typically Spanish for local meetups), followed by a `### Summary in English` / `### Resumen en español` block summarising the key points in the other language.
+**Body** — write a short program description in Spanish (primary). Rely on bilingual `title` / `description` for the English locale; do not embed an English summary section in the shared body.
 
 ### Step 3: Image Setup (Optional but Recommended)
 
@@ -225,7 +225,7 @@ content: add meetup "{title.en}"
 ## Definition of Done
 
 - [ ] File created at `src/content/meetups/YYYY-MM-DD_{slug}.md`
-- [ ] Both EN and ES content populated (frontmatter + body)
+- [ ] Both EN and ES frontmatter populated (`title`, `description`, `hero.alt`); body in Spanish without an embedded English summary
 - [ ] All references resolve to existing collection entries
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
@@ -244,4 +244,5 @@ content: add meetup "{title.en}"
 
 | Version | Date       | Changes |
 | ------- | ---------- | ------- |
+| 1.1.0   | 2026-08-08 | Drop `Summary in English` / `> **EN:**` body companions; bilingual coverage is frontmatter-only for the shared body. |
 | 1.0.0   | 2026-06-01 | Initial skill: bilingual meetup creation with vertical/talk/speaker/sponsor references and AEO twin auto-generation via build. |

@@ -41,17 +41,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring Aprendiendo Serverless con enfásis en IoT · Seguridad Informática en instituciones del eje cafetero y OWASP. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Aprendiendo Serverless con enfásis en IoT** — Sergio Florez
-2. **Seguridad Informática en instituciones del eje cafetero y OWASP** — Santiago Bernal
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259446080)

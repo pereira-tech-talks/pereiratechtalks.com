@@ -41,17 +41,6 @@ Hoy en día el tráfico en la red a través de dispositivo móviles supera en gr
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup featuring **Introduccion a React Native · **Exponiendo credenciales de npm sin ningún fallo. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Introduccion a React Native** — **
-2. ****Exponiendo credenciales de npm sin ningún fallo** — **
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

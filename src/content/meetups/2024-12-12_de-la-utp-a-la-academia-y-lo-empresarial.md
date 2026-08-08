@@ -66,12 +66,6 @@ Parte de la conversación incluye compartir algunos de los tips que me mantuvier
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2024-12-12: From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)

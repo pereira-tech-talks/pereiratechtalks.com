@@ -39,18 +39,6 @@ Sexto Meetup de PereiraJs en el cual se conto con dos charla muy interesantes so
 
 ---
 
-### Summary in English
-
-A 2014 Pereira Tech Talks meetup featuring **MV, el camino a las web apps del futuro by [Oscar Granada](https://twitter.com/oagranada)**
-2. **Express.js y Flatiron.js juntos pero no revueltos by [Daniel Aristizabal](https://twitter.com/cronopio2)**. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****MV, el camino a las web apps del futuro by [Oscar Granada](https://twitter.com/oagranada)**
-2. **Express.js y Flatiron.js juntos pero no revueltos by [Daniel Aristizabal](https://twitter.com/cronopio2)****
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

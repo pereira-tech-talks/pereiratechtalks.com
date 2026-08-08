@@ -32,7 +32,4 @@ draft: false
 ## Inauguración GDG Pereira
 
 Las comunidades tech de Pereira — Pereira Tech Talks, CINCO, Pereira JS, JointDeveloper y Python Pereira — se unieron para inaugurar el capítulo local de Google Developer Groups.
-
-> **EN:** Pereira tech communities — Pereira Tech Talks, CINCO, Pereira JS, JointDeveloper, and Python Pereira — joined forces to launch the local Google Developer Groups chapter.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

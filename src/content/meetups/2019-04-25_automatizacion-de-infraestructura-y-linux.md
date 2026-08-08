@@ -41,17 +41,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring IaC: Automatizando nuestra infraestructura · Hablemos de Linux. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **IaC: Automatizando nuestra infraestructura** — Luis Uribe
-2. **Hablemos de Linux** — Harold Sánchez Ospina
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260589719)

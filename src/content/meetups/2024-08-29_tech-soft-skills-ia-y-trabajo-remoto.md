@@ -57,12 +57,6 @@ En un mundo globalizado, las oportunidades laborales no tienen fronteras. Descub
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2024-08-29: Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302972719)

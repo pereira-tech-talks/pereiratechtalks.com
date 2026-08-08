@@ -38,12 +38,6 @@ Luego me interese por el desarrollo especializado en iOS para productos de apple
 
 ---
 
-### Summary in English
-
-A 2022 Pereira Tech Talks meetup. **Cómo comenzar en el desarrollo de iOS** Yennifer Hurtado Arce. yo comencé como programadora hace como 3 años comencé con web (html Js CSS React) en un bootcamp de programación llamado Laboratoria en Perú que busca impulsar a mujeres en tecnología. Luego me interese por el…
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/288702513)

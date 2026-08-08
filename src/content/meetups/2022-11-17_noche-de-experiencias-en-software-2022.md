@@ -37,12 +37,6 @@ Esta es una charla más orientada a las personas que tienen curiosidad en la ind
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2022-11-17: Industry Experiences Night en la industria del Software. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/289498758)

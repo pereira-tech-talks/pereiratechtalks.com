@@ -32,7 +32,4 @@ draft: false
 ## Conversatorio PerTT: ¿Qué es una Hackathon?
 
 Conversatorio sobre la cultura de hackathons, qué esperar y cómo organizar la primera en Pereira.
-
-> **EN:** A panel-style conversation about hackathon culture, what to expect, and how to organize your first one in Pereira.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.
