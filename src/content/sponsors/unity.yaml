@@ -1,0 +1,12 @@
+name: Unity
+logo:
+  light: /images/sponsors/unity.png
+  dark: /images/sponsors/unity-dark.png
+  alt: Unity logo
+url: "https://unity.com/"
+description:
+  en: Real-time 3D platform for games and interactive experiences. Past community partner of Pereira Tech Talks — supported meetups and the local developer ecosystem.
+  es: Plataforma 3D en tiempo real para juegos y experiencias interactivas. Aliado comunitario pasado de Pereira Tech Talks — apoyó los meetups y el ecosistema local de developers.
+tier: community
+status: past
+order: 9
