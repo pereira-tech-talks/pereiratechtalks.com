@@ -28,7 +28,15 @@ talks:
 speakers:
   - jesus-david-mena-rivera
   - jose-felipe-duarte
-sponsors: []
+sponsors:
+  - slug: aumentada
+    tier: community
+  - slug: cinco
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307800000/
 status: completed
 draft: false

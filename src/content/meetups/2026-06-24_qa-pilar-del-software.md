@@ -34,6 +34,8 @@ sponsors:
     tier: community
   - slug: ase-utp
     tier: community
+  - slug: vuetify
+    tier: community
 status: announced
 draft: false
 ---

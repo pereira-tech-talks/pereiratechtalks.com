@@ -55,11 +55,13 @@ schedule:
     title:
       en: Opening keynote — Vanessa Aristizabal
       es: Keynote de apertura — Vanessa Aristizabal
+    talkSlug: ptd-2024--1-web-apps-ai-future
   - time: "09:30"
     type: panel
     title:
       en: Product, Python, and community
       es: Producto, Python y comunidad
+    talkSlug: ptd-2024--2-how-many-trees-to-deploy
   - time: "10:30"
     type: break
   - time: "11:00"
@@ -67,11 +69,13 @@ schedule:
     title:
       en: Applied research keynote — Dr. Jose Jaramillo
       es: Keynote de investigación aplicada — Dr. Jose Jaramillo
+    talkSlug: ptd-2024--3-ai-future-or-non-future
   - time: "12:00"
     type: keynote
     title:
       en: AI-driven entrepreneurship — César Camacho
       es: Emprendimiento con IA — César Camacho
+    talkSlug: ptd-2024--4-narrow-path-against-the-odds
   - time: "13:00"
     type: lightning
     title:
@@ -92,7 +96,7 @@ lightningTalks:
   - speaker: juan-pablo-franco
     title:
       en: Serverless in everyday life
-      es: Serleverless en lo cotidiano
+      es: Serverless en lo cotidiano
   - speaker: sebastian-franco
     title:
       en: >-

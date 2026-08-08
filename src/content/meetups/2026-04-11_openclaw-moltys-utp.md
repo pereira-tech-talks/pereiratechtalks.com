@@ -26,7 +26,9 @@ talks: []
 speakers:
   - sergio-florez
   - sebastian-franco
-sponsors: []
+sponsors:
+  - slug: cursor
+    tier: community
 status: completed
 draft: false
 ---

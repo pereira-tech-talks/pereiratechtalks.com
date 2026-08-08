@@ -27,7 +27,15 @@ talks:
 speakers:
   - german-grandas
   - jorge-martinez-gomez
-sponsors: []
+sponsors:
+  - slug: aumentada
+    tier: community
+  - slug: cinco
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/308000000/
 status: completed
 draft: false

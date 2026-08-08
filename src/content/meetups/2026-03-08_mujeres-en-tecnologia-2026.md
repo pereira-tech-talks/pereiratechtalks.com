@@ -27,7 +27,15 @@ talks:
 speakers:
   - melissa-escobar-gutierrez
   - mayra-valentina-velasquez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: aumentada
+    tier: community
+  - slug: ase-utp
+    tier: community
+  - slug: vuetify
+    tier: community
 linkMeetupCom: https://luma.com/4a8c1ypc
 status: announced
 draft: false

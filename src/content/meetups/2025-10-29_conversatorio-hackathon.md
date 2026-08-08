@@ -21,9 +21,19 @@ hero:
 heroImage: "/images/meetups/conversatorio-hackathon/hero.png"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
-sponsors: []
+talks:
+  - conversatorio-hackathon--1-que-es-una-hackathon
+speakers:
+  - jose-felipe-duarte
+  - sergio-estrella
+  - sebastian-franco
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: aumentada
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://luma.com/0xil6wus
 status: completed
 draft: false

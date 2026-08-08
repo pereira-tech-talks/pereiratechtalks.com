@@ -27,7 +27,13 @@ talks:
 speakers:
   - sebastian-agudelo-morales
   - juan-de-jesus-fernandez-graciano
-sponsors: []
+sponsors:
+  - slug: cinco
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307796521/
 status: completed
 draft: false

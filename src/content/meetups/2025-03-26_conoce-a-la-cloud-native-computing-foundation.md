@@ -27,7 +27,11 @@ talks:
 speakers:
   - andres-torres
   - daniel-david-marcano-hernandez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/306731274/
 status: completed
 draft: false

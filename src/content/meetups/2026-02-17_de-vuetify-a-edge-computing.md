@@ -27,7 +27,15 @@ talks:
 speakers:
   - juan-jose-cardona
   - david-ricardo-rivera-arbelaez
-sponsors: []
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: aumentada
+    tier: community
+  - slug: universidad-catolica-de-pereira
+    tier: community
+  - slug: vuetify
+    tier: community
 linkMeetupCom: https://luma.com/xjga6v67
 status: completed
 draft: false

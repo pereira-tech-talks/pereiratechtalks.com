@@ -21,9 +21,19 @@ hero:
 heroImage: "/images/meetups/conociendo-la-nube/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
-sponsors: []
+talks:
+  - conociendo-la-nube--1-conociendo-la-nube
+speakers:
+  - steven-mejia
+  - hector-jimenez
+  - cindy-jimenez
+sponsors:
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
+  - slug: aumentada
+    tier: community
 linkMeetupCom: https://luma.com/ttd1exr8
 status: completed
 draft: false

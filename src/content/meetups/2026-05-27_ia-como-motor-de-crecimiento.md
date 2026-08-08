@@ -28,7 +28,15 @@ talks:
 speakers:
   - sebastian-franco
   - henry-bravo
-sponsors: []
+sponsors:
+  - slug: aumentada
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: vuetify
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://luma.com/8uige1ke
 status: announced
 draft: false

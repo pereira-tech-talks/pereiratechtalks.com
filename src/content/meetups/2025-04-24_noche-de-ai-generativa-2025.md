@@ -28,7 +28,13 @@ talks:
 speakers:
   - cristhian-andres-grajales-perez
   - frederick-johan-castaneda-perez
-sponsors: []
+sponsors:
+  - slug: cinco
+    tier: community
+  - slug: dailybot
+    tier: community
+  - slug: ase-utp
+    tier: community
 linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307304023/
 status: completed
 draft: false
