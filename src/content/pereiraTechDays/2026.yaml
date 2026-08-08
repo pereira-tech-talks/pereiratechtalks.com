@@ -96,12 +96,6 @@ sectionBackgrounds:
 # "to be revealed" placeholder until the line-up is announced.
 scheduleTentative: true
 schedule:
-  - time: "07:00"
-    endTime: "07:30"
-    type: staff
-    title:
-      en: Staff arrival
-      es: Llegada del staff
   - time: "07:30"
     endTime: "08:00"
     type: registration
@@ -135,17 +129,17 @@ schedule:
         Turning an idea into a project has always been slow and expensive, and that
         barrier made us think twice before starting something new. With emerging
         technologies, costs that used to be steep — like acquiring specific, hidden
-        knowledge — have flattened out. This talk shows how I built my projects
-        before, how I build them now, and how the cost of work such as research has
-        dropped to a level that opens the door to entirely new possibilities.
+        knowledge — have flattened out. This talk shows how Debbie built projects
+        before, how they get built now, and how the cost of work such as research
+        has dropped to a level that opens the door to entirely new possibilities.
       es: >-
         Convertir una idea en un proyecto siempre ha sido un proceso lento y costoso,
         y esa barrera hacía que pensáramos dos veces si valía la pena empezar una
         nueva idea. Con las tecnologías emergentes, costos antaño tan altos como
-        obtener conocimiento específico y oculto se han aplanado. Esta charla mostrará
-        cómo he desarrollado mis proyectos en el pasado, cómo lo hago ahora, y cómo el
-        costo de tareas como la investigación ha bajado a niveles que abren la puerta
-        a nuevas posibilidades.
+        obtener conocimiento específico y oculto se han aplanado. Esta charla muestra
+        cómo Debbie ha desarrollado proyectos en el pasado, cómo lo hace ahora, y cómo
+        el costo de tareas como la investigación ha bajado a niveles que abren la
+        puerta a nuevas posibilidades.
   - time: "10:00"
     endTime: "10:40"
     type: talk
