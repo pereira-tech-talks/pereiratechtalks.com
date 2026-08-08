@@ -67,9 +67,3 @@ Por **Laura Daniela Santa**, Software Testing Analyst en Evertec.
 - **Entrada libre.** Habrá snacks y sorteos.
 
 Agradecemos a DailyBot, Aumentada, ASE-UTP y Vuetify por hacer posible este encuentro.
-
-### Summary in English
-
-June's meetup puts software quality at the centre. Two complementary talks: **Juan Alejandro Pérez Bermúdez** (DailyBot) traces more than 40 years of open-source history to show how code review, testing, documentation, and governance became the quality practices holding up much of the internet — from Linux and PostgreSQL to Kubernetes and AI. Then **Laura Daniela Santa** (Evertec) makes the case that QA is worth far more than end-of-process bug hunting: involved early, it anticipates risk and shapes business decisions.
-
-Wednesday 24 June 2026, 6:30 PM (Colombia time), at UTP Block 13, Sala Magistral 1, Pereira. Free entry, with snacks and giveaways. Thanks to DailyBot, Aumentada, ASE-UTP, and Vuetify for supporting the meetup.

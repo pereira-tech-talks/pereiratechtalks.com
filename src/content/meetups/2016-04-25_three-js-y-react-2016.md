@@ -40,19 +40,6 @@ Slides disponibles en: http://jonalvarezz.github.io/react-talk/** ([perfil](http
 
 ---
 
-### Summary in English
-
-A 2016 Pereira Tech Talks meetup featuring **Three JS · **Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
-Slides disponibles en: http://jonalvarezz.github.io/react-talk/. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Three JS** — Gabriel Muñoz**
-2. ****Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
-Slides disponibles en: http://jonalvarezz.github.io/react-talk/**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

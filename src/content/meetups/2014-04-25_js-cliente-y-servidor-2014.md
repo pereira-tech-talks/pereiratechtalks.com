@@ -41,21 +41,6 @@ Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes s
 
 ---
 
-### Summary in English
-
-A 2014 Pereira Tech Talks meetup featuring **Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
- Slides disponibles en: · **Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
- Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
- Slides disponibles en:**
-2. ****Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
- Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

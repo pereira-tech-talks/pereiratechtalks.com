@@ -41,17 +41,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring Introducción a las bases de datos NoSQL · Desarrolla posibilidades con Rails. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Introducción a las bases de datos NoSQL** — Germán Grandas
-2. **Desarrolla posibilidades con Rails** — Jonatan Gutiérrez
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261814865)

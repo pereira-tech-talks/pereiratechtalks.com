@@ -36,12 +36,6 @@ las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaro
 
 ---
 
-### Summary in English
-
-A 2020 Pereira Tech Talks meetup. las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaron durante la cuarentena en el año 2020. A continuación se listan los eventos realizados durante este periodo: ### 2 de abril - [Quarantine Tech Talks 💻 - Meetup…
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269942102)

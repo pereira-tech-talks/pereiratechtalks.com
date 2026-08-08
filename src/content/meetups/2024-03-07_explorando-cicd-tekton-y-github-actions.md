@@ -48,12 +48,6 @@ En esta charla se hará una introducción a los conceptos básicos de Tekton, un
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2024-03-07: Exploring CI/CD: Tekton en Kubernetes y GitHub Actions . Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)

@@ -41,17 +41,6 @@ Conoceras cómo puedes contruir de manera casí automatizada APIs reactivas medi
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup featuring **APIs y WebSockets con SailsJs · **Monitoreo y visualización de datos con StatsD y Grafana. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****APIs y WebSockets con SailsJs** — **
-2. ****Monitoreo y visualización de datos con StatsD y Grafana** — **
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

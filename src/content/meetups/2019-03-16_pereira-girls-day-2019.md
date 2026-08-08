@@ -36,12 +36,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2019-03-16: Pereira Girls Day. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)

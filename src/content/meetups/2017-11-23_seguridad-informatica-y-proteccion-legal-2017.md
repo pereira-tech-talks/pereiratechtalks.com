@@ -38,12 +38,6 @@ En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, 
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2017-11-23: Getting Started en seguridad informática && Protección legal de la innovación. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/244859180)

@@ -36,12 +36,6 @@ En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](http
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup. En enero nos reunimos en conjunto las comunidades de **[Pereira Tech Talks](https://pereiratechtalks.org)** y **[Pereira Js](https://pereira.js.org/)** a pasar un buen rato, con el propósito de planificar el nuevo año y como buenos geeks que somos a ¡codear hasta el amanecer!;…
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

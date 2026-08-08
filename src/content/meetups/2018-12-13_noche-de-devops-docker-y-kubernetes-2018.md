@@ -41,17 +41,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring Introducción a Docker · Introducción a Kubernetes. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Introducción a Docker** — Sergio Florez
-2. **Introducción a Kubernetes** — Héctor F. Jiménez
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/257037605)

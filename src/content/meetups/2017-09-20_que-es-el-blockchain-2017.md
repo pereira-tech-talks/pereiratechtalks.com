@@ -36,12 +36,6 @@ _Slides no longer available._
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup. Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con la historia del dinero y la economía, hasta sus aplicaciones potenciales como la gran…
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

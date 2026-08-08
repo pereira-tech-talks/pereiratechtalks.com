@@ -36,7 +36,4 @@ draft: false
 ## El Futuro de la IA: Código, Hardware y Agentes
 
 Meetup de cierre de año sobre cómo la IA está transformando la ingeniería de software — agentes, LLMs, RAG y la IA conversando con hardware real.
-
-> **EN:** Year-end meetup on how AI is transforming software engineering — agents, LLMs, RAG, and AI talking to real-world hardware.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

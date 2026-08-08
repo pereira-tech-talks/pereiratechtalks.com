@@ -36,12 +36,6 @@ Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre:
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup. Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre: **Desarrollo móvil con Ionic + Angular by [Julian Patiño](https://www.meetup.com/es-ES/PereiraJs_/members/230813066/)**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

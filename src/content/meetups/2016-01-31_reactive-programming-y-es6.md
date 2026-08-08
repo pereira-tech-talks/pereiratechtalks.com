@@ -36,12 +36,6 @@ Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-progra
 
 ---
 
-### Summary in English
-
-A 2016 Pereira Tech Talks meetup. Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz). Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

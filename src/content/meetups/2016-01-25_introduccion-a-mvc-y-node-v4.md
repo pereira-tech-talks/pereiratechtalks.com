@@ -39,18 +39,6 @@ Decimocuarto Meetup de PereiraJs hablando sobre:
 
 ---
 
-### Summary in English
-
-A 2016 Pereira Tech Talks meetup featuring **Introducción a MV by [Oscar Granada](https://twitter.com/oagranada)**
-1. **Node.js v4 by [Daniel Aristizabal](https://twitter.com/cronopio2)**. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****Introducción a MV by [Oscar Granada](https://twitter.com/oagranada)**
-1. **Node.js v4 by [Daniel Aristizabal](https://twitter.com/cronopio2)****
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

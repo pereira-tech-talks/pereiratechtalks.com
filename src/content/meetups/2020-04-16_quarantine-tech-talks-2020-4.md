@@ -39,12 +39,6 @@ Las comunidades del eje cafetero se unen para realizar durante esta cuarentena e
 
 ---
 
-### Summary in English
-
-A 2020 Pereira Tech Talks meetup. Detalles ===== LINK DE REGISTRO ======== [https://quarantinetechtalks4.eventbrite.com](https://quarantinetechtalks4.eventbrite.com) Link Youtube: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.com/watch?v=9D_PGb03Ov0) Las comunidades del eje cafetero se unen…
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/270081031)

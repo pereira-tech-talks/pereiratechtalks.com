@@ -42,17 +42,6 @@ Esten atentos a este link para entrar a la charla virtual a las 6:30pm:
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring Code Review, engineering practices · IDaaS at Scale, Cómo evolucionamos los sistemas en @auth0 los últimos 5 años. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Code Review, engineering practices** — Manuel Pineda
-2. **IDaaS at Scale, Cómo evolucionamos los sistemas en @auth0 los últimos 5 años** — Damián Schenkelman
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264973350)

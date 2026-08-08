@@ -36,12 +36,6 @@ En nuestra apertura presentaremos dos charlas muy interesantes:
 
 ---
 
-### Summary in English
-
-A 2017 Pereira Tech Talks meetup. Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento tecnológico y conectar con el talento local y regional. En nuestra apertura presentaremos dos charlas muy interesantes:
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)

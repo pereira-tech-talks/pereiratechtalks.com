@@ -36,12 +36,6 @@ Slides disponibles en: http://slides.com/rockalabs/creando-un-servidor-web-con-n
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2017-09-19: Building a web server web desde cero con NodeJs. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

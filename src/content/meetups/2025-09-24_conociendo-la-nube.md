@@ -32,7 +32,4 @@ draft: false
 ## Conociendo la nube
 
 Una jornada de charlas sobre Rust y cloud-native — desarrollo moderno, seguro y de alto rendimiento para la próxima década.
-
-> **EN:** A day of Rust and cloud-native talks — modern, safe, high-performance development for the next decade.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

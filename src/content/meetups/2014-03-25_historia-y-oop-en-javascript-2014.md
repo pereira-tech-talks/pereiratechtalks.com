@@ -42,24 +42,6 @@ Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes 
 
 ---
 
-### Summary in English
-
-A 2014 Pereira Tech Talks meetup featuring **JavaScript Historia y aplicaciones by [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
- Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
- 
-2. **Programación Orientada a Objetos con JavaScript by [Oscar Granada](https://twitter.com/oagranada)** 
- Slides disponibles en:. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. ****JavaScript Historia y aplicaciones by [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
- Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
- 
-2. **Programación Orientada a Objetos con JavaScript by [Oscar Granada](https://twitter.com/oagranada)** 
- Slides disponibles en:**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -36,12 +36,6 @@ Para esta oportunidad Facundo García nos hablara sobre Test Driven Development 
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2021-03-13: TDD y Microservicios. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/276757820)

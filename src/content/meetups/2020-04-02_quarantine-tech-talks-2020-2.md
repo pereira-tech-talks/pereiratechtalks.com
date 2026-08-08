@@ -39,12 +39,6 @@ En colaboración con las comunidades del eje cafetero les traemos un meetup carg
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2020-04-02: Quarantine Tech Talks 💻 - Meetup 2. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)

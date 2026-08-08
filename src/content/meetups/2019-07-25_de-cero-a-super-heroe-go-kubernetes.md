@@ -41,17 +41,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring Introducción al desarrollo de aplicaciones modernas en Go · Kubernetes && Serverless en Google Cloud de Cero a Super Heroe. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Introducción al desarrollo de aplicaciones modernas en Go** — Sergio Alexander Florez
-2. **Kubernetes && Serverless en Google Cloud de Cero a Super Heroe** — Mauricio Cuenca
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)

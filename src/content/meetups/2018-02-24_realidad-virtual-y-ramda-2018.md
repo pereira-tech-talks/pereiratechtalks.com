@@ -41,17 +41,6 @@ Hoy en día, la web es la plataforma de distribución masiva más importante, es
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring Realidad Virtual para la web con A-Frame · Point-free Javascript con RamdaJS. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Realidad Virtual para la web con A-Frame**
-2. **Point-free Javascript con RamdaJS**
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

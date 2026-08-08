@@ -36,12 +36,6 @@ Comenzamos el año cargado de valiosa información. Y con estos dos titanes de G
 
 ---
 
-### Summary in English
-
-A 2022 Pereira Tech Talks meetup. Noche de Machine Learning y Google Interview. Comenzamos el año cargado de valiosa información. Y con estos dos titanes de Google que quieren compartirnos su conocimiento. Sean todos bienvenidos a este primer meetUp del año.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283129605)

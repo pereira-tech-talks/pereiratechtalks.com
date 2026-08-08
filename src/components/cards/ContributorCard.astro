@@ -20,7 +20,6 @@ const role = tr(contributor.data.role, lang);
 const bio = tr(contributor.data.bio, lang);
 const avatar = contributor.data.avatar;
 const social = contributor.data.social ?? {};
-const pronouns = contributor.data.pronouns;
 
 const roleLabels: Record<string, { en: string; es: string }> = {
   'founding-organizer': {
@@ -73,11 +72,6 @@ const portraitAlt =
   <h3 class="mt-4 text-base font-semibold text-ptt">
     {contributor.data.name}
   </h3>
-  {
-    pronouns && (
-      <p class="mt-0.5 text-xs text-ptt-secondary">{pronouns}</p>
-    )
-  }
   <p class="mt-1 text-sm font-medium text-ptt-primary dark:text-ptt-primary-dark">
     {role}
   </p>

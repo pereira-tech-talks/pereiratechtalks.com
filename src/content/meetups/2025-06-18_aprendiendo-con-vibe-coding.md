@@ -37,7 +37,4 @@ draft: false
 ## Aprendiendo con Vibe Coding
 
 Meetup sobre vibe coding — pair-programming con agentes de IA para entregar software real más rápido sin salir del flow.
-
-> **EN:** A meetup on vibe coding — pair-programming with AI agents to ship real software faster while staying in flow.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

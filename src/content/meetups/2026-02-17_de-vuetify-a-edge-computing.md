@@ -36,7 +36,4 @@ draft: false
 ## Desde Vuetify hasta el Edge Computing — Meetup de Apertura 2026
 
 Meetup de apertura de 2026 — reflexiones sobre el ecosistema Vuetify más una inmersión en edge computing. Charlas, snacks y networking.
-
-> **EN:** Opening meetup of 2026 — Vuetify ecosystem reflections plus an edge-computing deep dive. Talks, snacks, and networking.
-
 Originally published on Meetup.com / Luma — see the link in the frontmatter for full details.

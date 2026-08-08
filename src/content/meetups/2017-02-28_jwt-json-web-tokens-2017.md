@@ -36,12 +36,6 @@ En esta oportunidad [Carlos González](https://www.facebook.com/CarloS.GonzaleZ.
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2017-02-28: Learning sobre JWT (JSON web Tokens). Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

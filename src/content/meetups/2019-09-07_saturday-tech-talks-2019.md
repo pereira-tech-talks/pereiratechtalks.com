@@ -43,19 +43,6 @@ draft: false
 
 ---
 
-### Summary in English
-
-A 2019 Pereira Tech Talks meetup featuring Next.js: Server-side rendering your React App · Introducción a Amazon Web Services (AWS) · Patrones de arquitectura - Android · Desarrollo serverless de interfaces conversacionales en Amazon Alexa y Google Home. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Next.js: Server-side rendering your React App** — Andrés Rodriguez Escudero
-2. **Introducción a Amazon Web Services (AWS)** — Steven Pineda Cortes
-3. **Patrones de arquitectura - Android** — Zorayda Gutiérrez Montes
-4. **Desarrollo serverless de interfaces conversacionales en Amazon Alexa y Google Home** — Sergio Alexander Florez Galeano
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264304830)

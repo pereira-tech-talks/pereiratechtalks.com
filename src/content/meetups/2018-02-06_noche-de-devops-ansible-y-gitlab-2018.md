@@ -41,17 +41,6 @@ Hoy en día el número de servidores que los sysadmin deben administrar crece a 
 
 ---
 
-### Summary in English
-
-A 2018 Pereira Tech Talks meetup featuring Introducción a la automatización en Ansible · Aprendiendo Integración continua (CI) con GitLab y Docker. The community gathered for talks, networking, and snacks.
-
-**Talks:**
-
-1. **Introducción a la automatización en Ansible** — Manuel Pineda
-2. **Aprendiendo Integración continua (CI) con GitLab y Docker** — Carlos Gónzales
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247349603)

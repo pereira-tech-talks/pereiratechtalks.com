@@ -39,12 +39,6 @@ Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingenie
 
 ---
 
-### Summary in English
-
-A Pereira Tech Talks meetup on 2021-07-28: Open Source y Automatización. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
-
----
-
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/279620621)
