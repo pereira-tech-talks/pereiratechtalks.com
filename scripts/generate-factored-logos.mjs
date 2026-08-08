@@ -31,10 +31,7 @@ const SRC = path.resolve(
   values.src ?? 'public/images/sponsors/_source/factored-original.png'
 );
 const LIGHT_OUT = path.resolve(ROOT, 'public/images/sponsors/factored.png');
-const DARK_OUT = path.resolve(
-  ROOT,
-  'public/images/sponsors/factored-dark.png'
-);
+const DARK_OUT = path.resolve(ROOT, 'public/images/sponsors/factored-dark.png');
 
 const PAD = 6;
 const LIGHT_INK = [8, 8, 8];
