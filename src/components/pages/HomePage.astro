@@ -1,6 +1,6 @@
 ---
 import EditionCard from '@/components/cards/EditionCard.astro';
-import MeetupCard from '@/components/cards/MeetupCard.astro';
+import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import VerticalCard from '@/components/cards/VerticalCard.astro';
 import BlogPreviewSection from '@/components/home/BlogPreviewSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
@@ -13,7 +13,8 @@ import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
-import { getMeetups, getUpcomingMeetups } from '@/lib/meetup';
+import type { MeetupShowcaseItem } from '@/lib/meetup';
+import { getMeetups, getUpcomingMeetupShowcase } from '@/lib/meetup';
 import { getEditionCountdownTargets, getEditions } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
@@ -28,7 +29,7 @@ const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const hs = t.homeSections;
 
-const upcomingMeetups = await getUpcomingMeetups();
+const upcomingShowcase = await getUpcomingMeetupShowcase();
 const latestMeetups = (await getMeetups()).slice(0, 3);
 const editions = await getEditions();
 const upcomingEdition = editions.find(
@@ -42,10 +43,12 @@ const ptdCountdown = upcomingEdition
 const verticals = await getActiveVerticals();
 const sponsors = (await getActiveSponsors()).slice(0, 12);
 
-const meetupsToShow =
-  upcomingMeetups.length > 0 ? upcomingMeetups.slice(0, 3) : latestMeetups;
+const meetupsToShow: MeetupShowcaseItem[] =
+  upcomingShowcase.length > 0
+    ? upcomingShowcase.slice(0, 3)
+    : latestMeetups.map((meetup) => ({ type: 'meetup', data: meetup }));
 const meetupsHeading =
-  upcomingMeetups.length > 0
+  upcomingShowcase.length > 0
     ? hs.meetups.upcomingTitle
     : hs.meetups.latestTitle;
 ---
@@ -113,9 +116,9 @@ const meetupsHeading =
     meetupsToShow.length > 0 && (
       <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
         <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {meetupsToShow.map((meetup) => (
+          {meetupsToShow.map((item) => (
             <li>
-              <MeetupCard meetup={meetup} lang={lang} />
+              <MeetupShowcaseCard item={item} lang={lang} />
             </li>
           ))}
         </ul>

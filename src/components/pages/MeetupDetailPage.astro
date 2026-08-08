@@ -8,6 +8,7 @@
 
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
+import BlogHeroImage from '@/components/blog/BlogHeroImage.astro';
 import SpeakerCard from '@/components/cards/SpeakerCard.astro';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
@@ -17,7 +18,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
-import { getMeetupSlug } from '@/lib/meetup';
+import { getMeetupSlug, resolveMeetupStatus } from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getTalksByEvent } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';
@@ -35,6 +36,9 @@ const slug = getMeetupSlug(meetup);
 const title = tr(meetup.data.title, lang);
 const description = tr(meetup.data.description, lang);
 const heroSrc = meetup.data.hero?.src || meetup.data.heroImage;
+const heroLayout = meetup.data.hero?.layout ?? (heroSrc ? 'banner' : 'none');
+const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
+const bannerHeroSrc = heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
 
 const date = new Date(meetup.data.date);
 const dateLabel = formatCalendarDate(date, lang, {
@@ -45,7 +49,7 @@ const dateLabel = formatCalendarDate(date, lang, {
 });
 
 const venue = meetup.data.venue;
-const status = meetup.data.status ?? 'completed';
+const status = resolveMeetupStatus(meetup);
 
 const talks = await getTalksByEvent('meetups', slug);
 const speakerSlugs = [
@@ -137,7 +141,7 @@ if (speakers.length > 0) {
     {/* Hero */}
     <header class="relative overflow-hidden bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/90">
       {
-        heroSrc && (
+        heroSrc && !bannerHeroSrc && (
           <div class="absolute inset-0 opacity-30">
             <img
               src={heroSrc}
@@ -198,6 +202,23 @@ if (speakers.length > 0) {
         }
       </div>
     </header>
+
+    {
+      bannerHeroSrc && (
+        <div class="main-container py-8 sm:py-10">
+          <div class="overflow-hidden rounded-2xl ring-1 ring-ptt-border">
+            <BlogHeroImage
+              src={bannerHeroSrc}
+              alt={heroAlt}
+              width={1200}
+              height={675}
+              class="block h-auto w-full object-cover"
+              loading="eager"
+            />
+          </div>
+        </div>
+      )
+    }
 
     <div class="main-container py-12 sm:py-16 grid gap-12 lg:grid-cols-[1fr_280px]">
       {/* Body */}
