@@ -50,14 +50,10 @@ const NAVY = '#1f3f59';
 const TEAL = '#3a7f7c';
 
 /**
- * Same hero art as PtdHero2026 (WebP). Desktop paints it on the right half;
- * cream fade covers the left void. Mobile uses the localized promo card crop.
+ * Same hero art as PtdHero2026 (WebP). From md up, paint it on the right half;
+ * cream fade covers the left void. No separate mobile card under the copy.
  */
 const ILLUSTRATION = '/images/pereira-tech-days/2026/hero-illustration.webp';
-const ILLUSTRATION_MOBILE =
-  lang === 'en'
-    ? '/images/pereira-tech-days/2026/mascot/card-hero-en.webp'
-    : '/images/pereira-tech-days/2026/mascot/card-hero.webp';
 const LOGO = '/images/pereira-tech-days/2026/logo.png';
 
 /** "Pereira Tech" / "Day" (coral) + "2026" (cyan) — same split as PtdHero2026. */
@@ -83,21 +79,21 @@ const logoAlt =
   style={`--ptd-strip-cream: ${CREAM}; --ptd-strip-cream-dark: ${CREAM_DARK}; --ptd-strip-coral: ${CORAL}; --ptd-strip-cyan: ${YEAR_CYAN}; --ptd-strip-navy: ${NAVY}; --ptd-strip-teal: ${TEAL}; background-color: var(--ptd-strip-cream);`}
 >
   {/*
-    Desktop: art owns the right ~50vw of the SECTION (not the padded grid),
+    md+: art owns the right ~50vw of the SECTION (not the padded grid),
     sized to fill that panel without cropping the monkey — only soft edge fade.
   */}
   <div
-    class="ptd-home-strip__art pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    class="ptd-home-strip__art pointer-events-none absolute inset-0 z-0 hidden md:block"
     style={`background-image: url('${ILLUSTRATION}');`}
     aria-hidden="true"
   ></div>
   <div
-    class="ptd-home-strip__fade pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    class="ptd-home-strip__fade pointer-events-none absolute inset-0 z-0 hidden md:block"
     aria-hidden="true"
   ></div>
 
   <div class="relative z-10 main-container py-10 sm:py-12 lg:py-14">
-    <div class="flex w-full max-w-xl flex-col justify-center lg:max-w-[min(36rem,48%)]">
+    <div class="flex w-full max-w-xl flex-col justify-center md:max-w-[min(36rem,48%)]">
       {
         eyebrow && (
           <p
@@ -246,20 +242,6 @@ const logoAlt =
         )
       }
     </div>
-
-    {/* Mobile / tablet: full-width art under copy — same asset, soft edge only. */}
-    <div class="ptd-home-strip__mobile-art mt-8 w-full lg:hidden" aria-hidden="true">
-      <img
-        src={ILLUSTRATION_MOBILE}
-        alt=""
-        width="1280"
-        height="720"
-        class="ptd-home-strip__mobile-img mx-auto h-auto w-full max-w-lg object-contain sm:max-w-xl"
-        loading="lazy"
-        decoding="async"
-        draggable="false"
-      />
-    </div>
   </div>
 </section>
 
@@ -294,9 +276,15 @@ const logoAlt =
     min-height: 28rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     .ptd-home-strip {
       /* Tall enough that auto-height art can sit ~half-width without clipping the head. */
+      min-height: max(32rem, 52vw * 9 / 16);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ptd-home-strip {
       min-height: max(36rem, 48vw * 9 / 16);
     }
   }
@@ -360,17 +348,6 @@ const logoAlt =
         color-mix(in srgb, var(--ptd-strip-cream-dark) 80%, transparent) 6%,
         transparent 16%
       );
-  }
-
-  .ptd-home-strip__mobile-img {
-    -webkit-mask-image:
-      linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
-      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
-      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
-    mask-composite: intersect;
   }
 
   .ptd-home-strip__cta {

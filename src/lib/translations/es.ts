@@ -65,9 +65,9 @@ export const es: SiteTranslations = {
     about: {
       title:
         "Somos <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
-      description: `Una noche de febrero de 2014, ocho desarrolladores se apretujaron en un salón de la UTP para el primer meetup de PereiraJS. Doce años y 90+ meetups después, ese círculo pequeño se convirtió en Pereira Tech Talks — cuatro programas insignia operando en paralelo: meetups mensuales, la conferencia anual <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y el club de lectura <strong>La Biblioteca del Mañana</strong>. Todo construido por voluntarias y voluntarios. Todo abierto.<br /><br />
-Cada recapitulación, slide y artículo se publica en español e inglés, estructurado para ser tan útil a agentes de IA como a personas. Speakers que empezaron en este salón hoy dan keynotes en Bogotá, Medellín y Ciudad de México; sus colegas trabajan en startups YC, proyectos patrocinados por GitHub y equipos de ingeniería internacionales.<br /><br />
-Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser ponente, patrocinar o sumarte.`,
+      description: `Somos una comunidad interdisciplinar que conecta el talento local y regional — quienes programan, diseñan, emprenden, estudian o simplemente tienen curiosidad — alrededor de la tecnología que estamos construyendo juntos.<br /><br />
+Nos reunimos para compartir lo que aprendemos, abrir escenarios a nuevas voces y tejer redes que cruzan Pereira, Risaralda y el resto de LATAM. Meetups, <strong>Pereira Tech Day</strong>, la <strong>Escuela de Speakers</strong> y más: espacios voluntarios, abiertos y hechos para que cualquiera pueda sumarse.<br /><br />
+Si buscas gente con quien crecer, un escenario para tu primera charla o una comunidad que te reciba de verdad — aquí hay un lugar para ti. Explora, ven al próximo encuentro o escríbenos.`,
       cta: 'Sobre la comunidad',
       cta2: 'Escríbenos',
     },
@@ -108,7 +108,7 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
       attendance: '300+ asistentes esperados',
     },
     sponsors: {
-      eyebrow: 'Aliados',
+      eyebrow: 'Patrocinadores Actuales',
       title: 'La comunidad existe gracias a',
       subtitle:
         'Empresas y aliados comunitarios que aportan venues, catering, becas y mentoría.',
@@ -555,13 +555,13 @@ Explora el catálogo, asiste al próximo meetup o escríbenos si quieres ser pon
     title: 'Patrocinadores',
     description:
       'Aliados actuales y anteriores de Pereira Tech Talks — empresas y organizaciones que sostienen meetups, Pereira Tech Day y los programas de la comunidad en Pereira.',
-    eyebrow: 'Aliados',
+    eyebrow: 'Patrocinadores Actuales',
     intro: (count) =>
       `${count} aliados activos sostienen venues, logística y escenario. Las categorías de patrocinio por edición viven en cada Pereira Tech Day.`,
-    currentTitle: 'Aliados actuales',
+    currentTitle: 'Patrocinadores actuales',
     currentIntro:
       'Quienes acompañan a Pereira Tech Talks hoy — meetups mensuales y la conferencia anual.',
-    pastTitle: 'Aliados anteriores',
+    pastTitle: 'Patrocinadores anteriores',
     pastIntro:
       'Organizaciones que apoyaron capítulos previos. Cada alianza dejó huella en la comunidad.',
     sponsorUsLabel: 'Quiero patrocinar',

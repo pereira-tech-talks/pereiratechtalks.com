@@ -65,9 +65,9 @@ export const en: SiteTranslations = {
     about: {
       title:
         "We are <span class='text-ptt-primary dark:text-ptt-primary-dark'>Pereira Tech Talks</span>",
-      description: `On a February evening in 2014, eight developers crowded into a UTP classroom for the first PereiraJS meetup. Twelve years and 90+ meetups later, that small circle became Pereira Tech Talks — four flagship programs running in parallel: monthly meetups, the annual <strong>Pereira Tech Day</strong> conference, the <strong>Speaker School</strong>, and the <strong>La Biblioteca del Mañana</strong> reading club. All volunteer-built. All open.<br /><br />
-Every recap, slide deck, and blog post is published in Spanish and English, structured to be just as useful to AI agents as to humans. Speakers who started in this room now keynote in Bogotá, Medellín, and Mexico City; alumni work at YC startups, GitHub-sponsored projects, and international engineering teams.<br /><br />
-Browse the catalog, attend the next meetup, or get in touch if you want to speak, sponsor, or join us.`,
+      description: `We are an interdisciplinary community that connects local and regional talent — people who code, design, build companies, study, or are simply curious — around the technology we are building together.<br /><br />
+We gather to share what we learn, open stages to new voices, and weave networks across Pereira, Risaralda, and the rest of LATAM. Meetups, <strong>Pereira Tech Day</strong>, the <strong>Speaker School</strong>, and more: volunteer-run, open spaces anyone can join.<br /><br />
+If you are looking for people to grow with, a stage for your first talk, or a community that actually welcomes you — there is a place for you here. Explore, come to the next meetup, or write to us.`,
       cta: 'About the community',
       cta2: 'Get in touch',
     },
@@ -108,7 +108,7 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
       attendance: '300+ expected attendees',
     },
     sponsors: {
-      eyebrow: 'Partners',
+      eyebrow: 'Current sponsors',
       title: 'The community is powered by',
       subtitle:
         'Companies and community partners providing venues, catering, scholarships, and mentorship.',
@@ -554,13 +554,13 @@ Browse the catalog, attend the next meetup, or get in touch if you want to speak
     title: 'Sponsors',
     description:
       'Current and past partners of Pereira Tech Talks — companies and organizations that sustain meetups, Pereira Tech Day, and community programs in Pereira.',
-    eyebrow: 'Partners',
+    eyebrow: 'Current sponsors',
     intro: (count) =>
       `${count} active partners help with venues, logistics, and the stage. Per-edition sponsorship tiers live on each Pereira Tech Day page — not here.`,
-    currentTitle: 'Current partners',
+    currentTitle: 'Current sponsors',
     currentIntro:
       'Who stands with Pereira Tech Talks today — monthly meetups and the annual conference.',
-    pastTitle: 'Past partners',
+    pastTitle: 'Past sponsors',
     pastIntro:
       'Organizations that supported earlier chapters. Every partnership left a mark on the community.',
     sponsorUsLabel: 'Become a sponsor',

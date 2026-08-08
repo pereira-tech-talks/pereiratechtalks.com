@@ -171,7 +171,10 @@ All animations gated by `prefers-reduced-motion: reduce`.
 > Vertical and horizontal raster marks live in
 > `public/images/pereira-tech-talks/`. Regenerate light/dark vertical variants
 > with `node scripts/generate-ptt-logo-variants.mjs` (forces ink to white while
-> preserving alpha). Prefer SVG sources when available under `public/images/brand/`.
+> preserving alpha). Regenerate light-mode chrome wordmarks (header/footer) in
+> `--ptt-primary-strong` green with `node scripts/generate-ptt-light-logos.mjs` (keeps
+> `*-black.webp` as archived sources). Prefer SVG sources when available under
+> `public/images/brand/`.
 
 ### Variants
 
@@ -180,17 +183,22 @@ All animations gated by `prefers-reduced-motion: reduce`.
 | `logo-vertical-color` | `logo-vertical-color.{png,webp}` | Light backgrounds |
 | `logo-vertical-white` | `logo-vertical-white.{png,webp}` | Dark backgrounds / photo heroes |
 | `logo-color` / `logo-white` | legacy aliases of the vertical pair | Existing components |
-| `logo-horizontal` / `logo-horizontal-black` | `logo-horizontal*.webp` | Footer wordmark |
-| `topbar-logo` / `topbar-logo-black` | `topbar-logo*.webp` | Header / mobile menu |
+| `logo-horizontal-primary` | `logo-horizontal-primary.webp` | Footer wordmark (light) — `#155054` |
+| `logo-horizontal` | `logo-horizontal.webp` | Footer wordmark (dark / white ink) |
+| `logo-horizontal-black` | `logo-horizontal-black.webp` | Archived black source (do not use in chrome) |
+| `topbar-logo-primary` | `topbar-logo-primary.webp` | Header / mobile menu (light) — `#155054` |
+| `topbar-logo` | `topbar-logo.webp` | Header / mobile menu (dark / white ink) |
+| `topbar-logo-black` | `topbar-logo-black.webp` | Archived black source (do not use in chrome) |
 | `icon-color` / `icon-white` | square mark only | Favicons, avatars, social cards |
 
 ### Usage rules
 
 **Do:**
-- Use `logo-vertical-color` / horizontal color marks on light backgrounds.
+- Use `logo-vertical-color` / `*-primary` horizontal marks on light backgrounds.
 - Use `logo-vertical-white` / white marks on dark backgrounds (incl. `--ptt-bg` dark).
 - Use `icon-color` / `icon-white` for favicons, avatars, social cards.
 - Maintain aspect ratio.
+- Keep `*-black.webp` assets for regeneration — regenerate primary with the script above.
 
 **Don't:**
 - Stretch, distort, recolor, or apply effects (drop shadow, bevel) to the logo.

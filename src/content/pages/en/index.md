@@ -14,7 +14,7 @@ lastUpdated: 2026-08-07
 
 ## Where we started
 
-On a February evening in 2014, eight developers crowded into a UTP classroom for the first PereiraJS meetup. Twelve years and 90+ meetups later, PereiraJS became Pereira Tech Talks — four flagship programs running in parallel, every recap and slide deck published in Spanish and English, every page structured to be just as useful to AI agents as to humans.
+We are an interdisciplinary community that connects local and regional talent — people who code, design, build companies, study, or are simply curious — around the technology we are building together. We gather to share what we learn, open stages to new voices, and weave networks across Pereira, Risaralda, and the rest of LATAM.
 
 ---
 

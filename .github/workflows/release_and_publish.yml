@@ -125,8 +125,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_GITHUB_TOKEN }}
         run: |
+          # Do not pass client_payload via -f '{}': gh sends a string and the
+          # API returns 422 ("{}" is not an object). Omit it — the field is optional.
           gh api \
             --method POST \
             "repos/${GITHUB_REPOSITORY}/dispatches" \
-            -f event_type='cleanup_caches' \
-            -f 'client_payload={}'
+            -f event_type='cleanup_caches'
