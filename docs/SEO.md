@@ -200,7 +200,7 @@ All content MUST exist in both languages:
 - `og:url` — current page URL (absolute, from `Astro.site`)
 - `og:title` — page title
 - `og:description` — page description
-- `og:image` — defaults to `/images/og-default.jpg`, customizable via `image` prop
+- `og:image` — language default (`/images/og-default.jpg` for `es`, `/images/og-default-en.jpg` for `en`), customizable via `image` prop
 - `og:image:width` — `1200`
 - `og:image:height` — `630`
 - `og:site_name` — from SITE_TITLE
@@ -222,9 +222,9 @@ All content MUST exist in both languages:
 ### OG Image Guidelines
 
 - Recommended: 1200x630px JPEG (widest crawler support)
-- Default fallback: `/images/og-default.jpg` (home + pages without a custom `image`)
+- Default fallback: `/images/og-default.jpg` (Spanish) and `/images/og-default-en.jpg` (English) via `getDefaultOgImage(lang)` — home + pages without a custom `image`
 - For blog posts: can set `heroImage` in frontmatter
-- For Pereira Tech Day editions: optional `ogImage` in the edition YAML (falls back to `hero.src`)
+- For Pereira Tech Day editions: optional `ogImage` in the edition YAML — string or `{ en, es }` (falls back to `hero.src`)
 
 ## AI Engine Optimization (AEO)
 

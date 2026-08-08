@@ -1,5 +1,11 @@
 <script lang="ts">
+import { onMount } from 'svelte';
+
 import { EVENTS, trackEvent } from '@/lib/analytics';
+import {
+  consumeNotificationAutoOpen,
+  markNotificationAutoOpenShown,
+} from '@/lib/notification-modal-autoopen';
 
 interface LocalizedNotification {
   id: string;
@@ -7,6 +13,7 @@ interface LocalizedNotification {
   title: string;
   summary: string;
   body?: string;
+  image?: { src: string; alt: string };
   ctaLabel?: string;
   ctaHref?: string;
   modalEnabled: boolean;
@@ -26,6 +33,13 @@ let atTop = $state(true);
 let lastFocusedEl: HTMLElement | null = null;
 /** Non-reactive — read inside scroll rAF without re-subscribing the effect. */
 let modalLocked = false;
+
+/** Brief settle delay so auto-open doesn't race first paint / sticky chrome. */
+const AUTO_OPEN_DELAY_MS = 450;
+
+function canOpenDetailModal(n: LocalizedNotification): boolean {
+  return n.modalEnabled && !!(n.body || n.image);
+}
 
 /**
  * Hysteresis prevents sticky-bar layout feedback:
@@ -65,11 +79,11 @@ function trapFocus(e: KeyboardEvent): void {
   }
 }
 
-function openModal(id: string): void {
+function openModal(id: string, source: 'click' | 'auto' = 'click'): void {
   lastFocusedEl = document.activeElement as HTMLElement | null;
   modalLocked = true;
   openModalId = id;
-  trackEvent(EVENTS.NOTIFICATION_MODAL_OPEN, { id });
+  trackEvent(EVENTS.NOTIFICATION_MODAL_OPEN, { id, source });
 }
 
 function closeModal(): void {
@@ -78,6 +92,38 @@ function closeModal(): void {
   lastFocusedEl?.focus();
   lastFocusedEl = null;
 }
+
+/**
+ * Auto-open policy (once per mount):
+ * first session navigate → open; later navigates quiet; reloads every 3rd.
+ */
+onMount(() => {
+  const n = notifications[0];
+  if (!n || !canOpenDetailModal(n)) return;
+
+  let shouldOpen = false;
+  try {
+    shouldOpen = consumeNotificationAutoOpen({ id: n.id });
+  } catch {
+    // Private mode / blocked storage — skip auto-open, bar still works.
+    return;
+  }
+  if (!shouldOpen) return;
+
+  const timer = window.setTimeout(() => {
+    if (openModalId != null) return;
+    try {
+      markNotificationAutoOpenShown(n.id);
+    } catch {
+      // ignore storage failures — still show the modal
+    }
+    openModal(n.id, 'auto');
+  }, AUTO_OPEN_DELAY_MS);
+
+  return () => {
+    window.clearTimeout(timer);
+  };
+});
 
 $effect(() => {
   if (openModalId && dialogEl) {
@@ -205,44 +251,64 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           No opacity fade: collapsing a transparent row would flash the
           dark sticky/hero behind; the grid height animation alone hides it.
         -->
+        {@const opensModal = n.modalEnabled && !!(n.body || n.image)}
+        {@const opensCta = !opensModal && !!(n.ctaHref && n.ctaLabel)}
+        {@const actionLabel = opensModal
+          ? moreLabel
+          : opensCta
+            ? n.ctaLabel
+            : undefined}
+        <!--
+          Whole bar is the hit target (cursor:pointer) when it opens a
+          modal or CTA — avoids a tiny "Ver más" target on mobile.
+        -->
         <div class="pointer-events-auto" role="region" aria-label={n.title}>
-          <div
-            class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
-          >
-            {#if n.severity === 'important'}
-              <span
-                class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark"
-              >
-                {importantLabel}
-              </span>
-            {/if}
-            <p class="min-w-0 flex-1 truncate overflow-hidden">
-              <span class="font-medium">{n.title}</span>
-              <span class="mx-1 opacity-70">—</span>
-              <span class="opacity-95">{n.summary}</span>
-            </p>
-            <div class="flex shrink-0 items-center gap-0.5">
-              {#if n.modalEnabled && n.body}
-                <button
-                  type="button"
-                  class="relative cursor-pointer underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-                  tabindex={atTop ? 0 : -1}
-                  onclick={() => openModal(n.id)}
+          {#snippet barInner(label: string | undefined)}
+            <div
+              class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
+            >
+              {#if n.severity === 'important'}
+                <span
+                  class="hidden min-[360px]:inline shrink-0 rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide leading-none bg-white text-ptt-bg-dark"
                 >
-                  {moreLabel}
-                </button>
-              {:else if n.ctaHref && n.ctaLabel}
-                <a
-                  href={n.ctaHref}
-                  class="relative inline-flex cursor-pointer items-center underline underline-offset-2 font-medium px-1.5 py-0.5 text-xs before:absolute before:content-[''] before:inset-y-[-8px] before:inset-x-[-4px]"
-                  tabindex={atTop ? 0 : -1}
-                  onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
+                  {importantLabel}
+                </span>
+              {/if}
+              <p class="min-w-0 flex-1 truncate overflow-hidden">
+                <span class="font-medium">{n.title}</span>
+                <span class="mx-1 opacity-70">—</span>
+                <span class="opacity-95">{n.summary}</span>
+              </p>
+              {#if label}
+                <span
+                  class="shrink-0 underline underline-offset-2 font-medium px-1.5 py-0.5 transition-[text-decoration-color,opacity] duration-200 group-hover:opacity-100 group-hover:decoration-2 opacity-90 motion-reduce:transition-none"
                 >
-                  {n.ctaLabel}
-                </a>
+                  {label}
+                </span>
               {/if}
             </div>
-          </div>
+          {/snippet}
+          {#if opensModal}
+            <button
+              type="button"
+              class="group block w-full cursor-pointer border-0 bg-transparent p-0 text-inherit appearance-none transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
+              tabindex={atTop ? 0 : -1}
+              onclick={() => openModal(n.id)}
+            >
+              {@render barInner(actionLabel)}
+            </button>
+          {:else if opensCta}
+            <a
+              href={n.ctaHref}
+              class="group block w-full cursor-pointer text-inherit no-underline transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
+              tabindex={atTop ? 0 : -1}
+              onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
+            >
+              {@render barInner(actionLabel)}
+            </a>
+          {:else}
+            {@render barInner(undefined)}
+          {/if}
         </div>
       {/each}
     </div>
@@ -250,8 +316,15 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 {/if}
 
 {#if openEntry}
+  <!--
+    Responsive modal shell:
+    - max-h + internal scroll for short / landscape viewports
+    - safe-area padding for notched phones
+    - sticky actions so CTA stays reachable while content scrolls
+    - hero capped with max-h so image doesn't dominate short screens
+  -->
   <div
-    class="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/50"
+    class="fixed inset-0 z-[80] flex items-end justify-center bg-black/60 backdrop-blur-[2px] sm:items-center p-[max(0.75rem,env(safe-area-inset-top))] pb-[max(0.75rem,env(safe-area-inset-bottom))] pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))]"
     role="presentation"
     onclick={(e) => {
       if (e.target === e.currentTarget) closeModal();
@@ -266,37 +339,99 @@ function severityClass(severity: LocalizedNotification['severity']): string {
       role="dialog"
       aria-modal="true"
       aria-labelledby={`notify-title-${openEntry.id}`}
+      aria-describedby={`notify-desc-${openEntry.id}`}
       tabindex="-1"
-      class="w-full max-w-lg rounded-xl bg-ptt-bg-elevated text-ptt border border-ptt-border p-6 shadow-xl focus:outline-none"
+      class="relative flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-t-2xl rounded-b-2xl bg-ptt-bg-elevated text-ptt shadow-2xl ring-1 ring-ptt-border focus:outline-none sm:max-h-[calc(100dvh-2rem)]"
     >
-      <h2
-        id={`notify-title-${openEntry.id}`}
-        class="text-xl font-bold tracking-tight"
+      <button
+        type="button"
+        class="absolute right-2.5 top-2.5 z-20 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-3 sm:top-3"
+        aria-label={closeLabel}
+        onclick={closeModal}
       >
-        {openEntry.title}
-      </h2>
-      <p class="mt-2 text-ptt-secondary">{openEntry.summary}</p>
-      {#if openEntry.body}
-        <p class="mt-4 whitespace-pre-line leading-relaxed">{openEntry.body}</p>
-      {/if}
-      <div class="mt-6 flex flex-wrap gap-3 justify-end">
-        {#if openEntry.ctaHref && openEntry.ctaLabel}
-          <a
-            href={openEntry.ctaHref}
-            class="inline-flex min-h-[44px] cursor-pointer items-center rounded-full bg-ptt-primary px-5 py-2 text-sm font-semibold text-white dark:bg-ptt-primary-dark dark:text-ptt-bg"
-            onclick={() =>
-              trackEvent(EVENTS.NOTIFICATION_CTA, { id: openEntry.id })}
-          >
-            {openEntry.ctaLabel}
-          </a>
-        {/if}
-        <button
-          type="button"
-          class="inline-flex min-h-[44px] cursor-pointer items-center rounded-full border border-ptt-border px-5 py-2 text-sm font-semibold"
-          onclick={closeModal}
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
         >
-          {closeLabel}
-        </button>
+          <path
+            d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+          />
+        </svg>
+      </button>
+
+      {#if openEntry.image}
+        <div
+          class="relative w-full shrink-0 overflow-hidden bg-[#F6EFE4] aspect-[16/9] max-h-[min(36dvh,12.5rem)] sm:max-h-[min(40dvh,14rem)]"
+        >
+          <img
+            src={openEntry.image.src}
+            alt={openEntry.image.alt}
+            width="640"
+            height="360"
+            decoding="async"
+            sizes="(max-width: 448px) 100vw, 448px"
+            class="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        </div>
+      {/if}
+
+      <div
+        class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 sm:px-6 {openEntry.image
+          ? 'pt-2'
+          : 'pt-5 sm:pt-6'}"
+      >
+        {#if openEntry.severity === 'important'}
+          <p
+            class="text-[11px] font-bold uppercase tracking-[0.16em] text-ptt-primary dark:text-ptt-primary-dark"
+          >
+            {importantLabel}
+          </p>
+        {/if}
+        <h2
+          id={`notify-title-${openEntry.id}`}
+          class="mt-1.5 text-xl font-bold tracking-tight text-balance sm:text-2xl"
+        >
+          {openEntry.title}
+        </h2>
+        <p
+          id={`notify-desc-${openEntry.id}`}
+          class="mt-2 text-sm font-medium leading-snug text-ptt-secondary sm:text-base"
+        >
+          {openEntry.summary}
+        </p>
+        {#if openEntry.body}
+          <p
+            class="mt-2.5 text-sm leading-relaxed text-ptt-secondary whitespace-pre-line sm:mt-3"
+          >
+            {openEntry.body}
+          </p>
+        {/if}
+      </div>
+
+      <div
+        class="shrink-0 border-t border-ptt-border/70 bg-ptt-bg-elevated px-4 py-3 sm:px-6 sm:py-4"
+      >
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          {#if openEntry.ctaHref && openEntry.ctaLabel}
+            <a
+              href={openEntry.ctaHref}
+              class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong sm:flex-1 dark:bg-ptt-primary-dark dark:text-ptt-bg dark:hover:opacity-90"
+              onclick={() =>
+                trackEvent(EVENTS.NOTIFICATION_CTA, { id: openEntry.id })}
+            >
+              {openEntry.ctaLabel}
+            </a>
+          {/if}
+          <button
+            type="button"
+            class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full border border-ptt-border px-5 py-2.5 text-sm font-semibold text-ptt-secondary transition hover:border-ptt-primary hover:text-ptt sm:w-auto"
+            onclick={closeModal}
+          >
+            {closeLabel}
+          </button>
+        </div>
       </div>
     </div>
   </div>

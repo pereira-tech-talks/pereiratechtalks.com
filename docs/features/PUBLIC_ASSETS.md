@@ -93,7 +93,8 @@ Site images for branding, sections, and profile. Located directly in `public/ima
 
 | Image | Size | Purpose | Referenced By |
 |-------|-----:|---------|---------------|
-| `og-default.jpg` | ~98 KB | Default Open Graph / Twitter share image (1200×630) | BaseHead, HomePage |
+| `og-default.jpg` | ~98 KB | Default Open Graph / Twitter share image (1200×630), Spanish | BaseHead, HomePage |
+| `og-default-en.jpg` | ~109 KB | Default Open Graph / Twitter share image (1200×630), English | BaseHead, HomePage |
 | `trading.png` | 416 KB | Trading section | HomePage |
 | `techtalks.png` | 296 KB | Tech talks section | HomePage |
 | `dailybotyc.png` | 252 KB | DailyBot YC image | HomePage, DailybotPage |
@@ -223,6 +224,7 @@ Files in `public/` are served from the site root:
 | `public/favicon.svg` | `/favicon.svg` |
 | `public/icons/apple-touch-icon.png` | `/icons/apple-touch-icon.png` |
 | `public/images/og-default.jpg` | `/images/og-default.jpg` |
+| `public/images/og-default-en.jpg` | `/images/og-default-en.jpg` |
 | `public/images/blog/posts/my-post/hero.jpg` | `/images/blog/posts/my-post/hero.jpg` |
 
 ## Related Documentation

@@ -1,0 +1,144 @@
+import { describe, expect, it } from 'vitest';
+import type { NavigationType } from '@/lib/notification-modal-autoopen';
+import {
+  consumeNotificationAutoOpen,
+  getNavigationType,
+  markNotificationAutoOpenShown,
+  NOTIFY_AUTO_RELOAD_EVERY,
+  planNotificationAutoOpen,
+} from '@/lib/notification-modal-autoopen';
+
+describe('planNotificationAutoOpen', () => {
+  it('opens on first navigate in a session', () => {
+    expect(
+      planNotificationAutoOpen({
+        navType: 'navigate',
+        sessionAlreadyShown: false,
+        reloadCount: 0,
+      })
+    ).toEqual({
+      shouldOpen: true,
+      nextReloadCount: 0,
+      markSessionShown: true,
+    });
+  });
+
+  it('does not open on later navigates in the same session', () => {
+    expect(
+      planNotificationAutoOpen({
+        navType: 'navigate',
+        sessionAlreadyShown: true,
+        reloadCount: 2,
+      })
+    ).toEqual({
+      shouldOpen: false,
+      nextReloadCount: 2,
+      markSessionShown: false,
+    });
+  });
+
+  it('opens every Nth reload and bumps the counter', () => {
+    for (let count = 0; count < NOTIFY_AUTO_RELOAD_EVERY * 2; count += 1) {
+      const plan = planNotificationAutoOpen({
+        navType: 'reload',
+        sessionAlreadyShown: true,
+        reloadCount: count,
+      });
+      expect(plan.nextReloadCount).toBe(count + 1);
+      expect(plan.shouldOpen).toBe(
+        (count + 1) % NOTIFY_AUTO_RELOAD_EVERY === 0
+      );
+    }
+  });
+
+  it('honors a custom reloadEvery', () => {
+    expect(
+      planNotificationAutoOpen({
+        navType: 'reload',
+        sessionAlreadyShown: false,
+        reloadCount: 2,
+        reloadEvery: 3,
+      })
+    ).toEqual({
+      shouldOpen: true,
+      nextReloadCount: 3,
+      markSessionShown: true,
+    });
+  });
+
+  it('never auto-opens on back_forward or prerender', () => {
+    for (const navType of ['back_forward', 'prerender'] as NavigationType[]) {
+      expect(
+        planNotificationAutoOpen({
+          navType,
+          sessionAlreadyShown: false,
+          reloadCount: 4,
+        }).shouldOpen
+      ).toBe(false);
+    }
+  });
+});
+
+describe('getNavigationType', () => {
+  it('returns navigate when Performance API is missing', () => {
+    expect(getNavigationType(undefined)).toBe('navigate');
+  });
+
+  it('reads PerformanceNavigationTiming.type', () => {
+    const perf = {
+      getEntriesByType: () => [{ type: 'reload' }],
+    } as unknown as Performance;
+    expect(getNavigationType(perf)).toBe('reload');
+  });
+});
+
+describe('consumeNotificationAutoOpen', () => {
+  function memoryStorage(initial: Record<string, string> = {}) {
+    const map = new Map(Object.entries(initial));
+    return {
+      getItem: (k: string) => map.get(k) ?? null,
+      setItem: (k: string, v: string) => {
+        map.set(k, v);
+      },
+      map,
+    };
+  }
+
+  it('opens on first navigate without marking the session yet', () => {
+    const session = memoryStorage();
+    const local = memoryStorage();
+    const open = consumeNotificationAutoOpen({
+      id: 'ptd-2026',
+      navType: 'navigate',
+      storage: { session, local },
+    });
+    expect(open).toBe(true);
+    expect(session.getItem('ptt:notify-auto:ptd-2026')).toBeNull();
+  });
+
+  it('stays quiet on the next navigate after the session is marked', () => {
+    const session = memoryStorage();
+    const local = memoryStorage();
+    markNotificationAutoOpenShown('ptd-2026', { session });
+    expect(
+      consumeNotificationAutoOpen({
+        id: 'ptd-2026',
+        navType: 'navigate',
+        storage: { session, local },
+      })
+    ).toBe(false);
+  });
+
+  it('opens on the 3rd reload and persists the counter', () => {
+    const session = memoryStorage({ 'ptt:notify-auto:ptd-2026': '1' });
+    const local = memoryStorage({ 'ptt:notify-reloads:ptd-2026': '2' });
+    expect(
+      consumeNotificationAutoOpen({
+        id: 'ptd-2026',
+        navType: 'reload',
+        storage: { session, local },
+      })
+    ).toBe(true);
+    expect(local.getItem('ptt:notify-reloads:ptd-2026')).toBe('3');
+  });
+});

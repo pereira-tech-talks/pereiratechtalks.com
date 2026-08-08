@@ -376,9 +376,10 @@ const pereiraTechDays = defineCollection({
     }),
     /**
      * Optional Open Graph / Twitter share image (prefer 1200×630 JPEG).
+     * String = both languages; `{ en, es }` for per-locale cards.
      * Falls back to `hero.src` when omitted.
      */
-    ogImage: z.string().optional(),
+    ogImage: i18nString.optional(),
     brandKit: editionBrandKit,
     /**
      * Decorative background images per landing section, data-driven so the
@@ -789,6 +790,13 @@ const notifications = defineCollection({
     summary: z.object({ en: z.string(), es: z.string() }),
     body: z
       .object({ en: z.string().optional(), es: z.string().optional() })
+      .optional(),
+    /** Optional modal hero (e.g. PTD card art). Prefer landscape ~16:9. */
+    image: z
+      .object({
+        src: z.string(),
+        alt: z.object({ en: z.string(), es: z.string() }),
+      })
       .optional(),
     ctaLabel: z.object({ en: z.string(), es: z.string() }).optional(),
     ctaHref: notificationSafeHref.optional(),

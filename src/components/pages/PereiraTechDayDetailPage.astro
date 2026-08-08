@@ -58,7 +58,9 @@ const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
-const ogImageSrc = edition.data.ogImage ?? heroSrc;
+const ogImageSrc = edition.data.ogImage
+  ? tr(edition.data.ogImage, lang)
+  : heroSrc;
 const upcomingTemplate = isUpcomingEdition(edition);
 const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
 

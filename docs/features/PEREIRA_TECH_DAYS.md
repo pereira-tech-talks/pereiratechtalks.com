@@ -36,7 +36,7 @@ const pereiraTechDays = defineCollection({
     venue: venue,                // { name, addressLine?, city, country, mapUrl? }
     mode: z.enum(['in-person', 'virtual', 'hybrid']),
     hero: z.object({ src: z.string(), alt: i18nStringOptional, layout: heroLayout }),
-    ogImage: z.string().optional(), // 1200×630 share card; falls back to hero.src
+    ogImage: i18nString.optional(), // 1200×630 share card (string or {en,es}); falls back to hero.src
     brandKit: editionBrandKit,   // see below
     sectionBackgrounds: z.object({
       about: z.string().optional(),

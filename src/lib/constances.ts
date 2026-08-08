@@ -17,6 +17,14 @@ export const SITE_DESCRIPTION: string =
   'Pereira Tech Talks v3.0.0 — comunidad técnica de Pereira (Risaralda, Colombia). Meetups mensuales, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, AI Channel, blog y slides.';
 export const BLOG_PAGE_SIZE: number = 30;
 
+/** Default Open Graph / Twitter share image (1200×630), by language. */
+export const DEFAULT_OG_IMAGE_ES = '/images/og-default.jpg';
+export const DEFAULT_OG_IMAGE_EN = '/images/og-default-en.jpg';
+
+export function getDefaultOgImage(lang: string | undefined): string {
+  return lang === 'en' ? DEFAULT_OG_IMAGE_EN : DEFAULT_OG_IMAGE_ES;
+}
+
 const umamiWebsiteId = (import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '').trim();
 const umamiScriptOverride = (
   import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || ''
