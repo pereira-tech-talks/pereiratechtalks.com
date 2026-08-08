@@ -1,0 +1,12 @@
+name: Cursor
+logo:
+  light: /images/sponsors/cursor.svg
+  dark: /images/sponsors/cursor-dark.svg
+  alt: Cursor logo
+url: "https://cursor.com/"
+description:
+  en: AI code editor. Supported the OpenClaw Moltys meetup at UTP (April 2026).
+  es: Editor de código con IA. Apoyó el meetup OpenClaw Moltys en la UTP (abril 2026).
+tier: community
+status: active
+order: 21
