@@ -1,0 +1,84 @@
+---
+/**
+ * PTT v3.0.0 verticals catalog page (shared between EN and ES).
+ * Lists all four community programs.
+ */
+
+import VerticalCard from '@/components/cards/VerticalCard.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import EmptyState from '@/components/ui/EmptyState.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+import { getVerticals } from '@/lib/vertical';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const verticals = await getVerticals();
+
+const breadcrumbs = [
+  { label: t.nav.home, href: `${prefix}/` },
+  { label: t.verticalsPage.title },
+];
+---
+
+<MainLayout lang={lang} title={t.verticalsPage.title} description={t.verticalsPage.description}>
+  <div class="bg-ptt-bg">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container pt-6 pb-12">
+      <Eyebrow>{t.verticalsPage.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {t.verticalsPage.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.verticalsPage.intro}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={`${prefix}/contact/`}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg-dark"
+        >
+          {t.verticalsPage.contactCta}
+        </a>
+        <a
+          href={`${prefix}/channels/`}
+          class="inline-flex min-h-[44px] items-center rounded-full border border-ptt-border px-6 py-2.5 text-sm font-semibold text-ptt transition hover:bg-ptt-bg-elevated"
+        >
+          {t.verticalsPage.joinCta}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {
+    verticals.length > 0 ? (
+      <Section
+        eyebrow={t.verticalsPage.sectionEyebrow}
+        title={t.verticalsPage.sectionTitle}
+        surface="alt"
+        spacing="lg"
+      >
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {verticals.map((vertical) => (
+            <li>
+              <VerticalCard vertical={vertical} lang={lang} />
+            </li>
+          ))}
+        </ul>
+      </Section>
+    ) : (
+      <Section surface="alt">
+        <EmptyState title={t.verticalsPage.emptyTitle} description={t.verticalsPage.emptyDesc} />
+      </Section>
+    )
+  }
+</MainLayout>

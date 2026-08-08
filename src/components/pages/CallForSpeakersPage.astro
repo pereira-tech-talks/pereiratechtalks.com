@@ -1,0 +1,107 @@
+---
+/**
+ * Call for Speakers — process copy + structured application form.
+ */
+
+import SpeakersApplicationForm from '@/components/contact/SpeakersApplicationForm.svelte';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { CONTACT_FORM } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const tr = getTranslations(lang);
+const t = tr.cfsPage;
+const prefix = getUrlPrefix(lang);
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: `${prefix}/`,
+  },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/85 text-white">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} onDark />
+    </div>
+    <div class="main-container pt-6 pb-16">
+      <Eyebrow variant="accent">{t.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-6xl font-bold tracking-tight">
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-white/85">{t.intro}</p>
+      <a
+        href="#cfs-form"
+        class="mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+      >
+        {tr.cfsForm.submitButton}
+      </a>
+    </div>
+  </div>
+
+  <Section eyebrow={t.criteriaEyebrow} title={t.whatWeLookForTitle}>
+    <ul class="grid gap-4 sm:grid-cols-2 list-none">
+      {
+        t.whatWeLookFor.map((item) => (
+          <li class="flex items-start gap-3 rounded-xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-5">
+            <svg
+              aria-hidden="true"
+              class="h-5 w-5 shrink-0 text-ptt-primary dark:text-ptt-primary-dark mt-0.5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <p class="text-ptt-secondary">{item}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section eyebrow={t.formatsEyebrow} title={t.formatsTitle} surface="alt">
+    <ul class="grid gap-6 sm:grid-cols-2 list-none">
+      {
+        t.formats.map((format) => (
+          <li class="rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-6">
+            <h3 class="text-lg font-semibold text-ptt">{format.name}</h3>
+            <p class="mt-2 text-ptt-secondary">{format.description}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section eyebrow={t.processEyebrow} title={t.processTitle}>
+    <ol
+      class="space-y-4 list-decimal list-inside text-ptt-secondary marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold"
+    >
+      {t.process.map((step) => <li class="text-base leading-relaxed">{step}</li>)}
+    </ol>
+  </Section>
+
+  <Section id="cfs-form" eyebrow={t.formEyebrow} title={tr.cfsForm.formTitle}>
+    <div class="max-w-2xl mx-auto">
+      <SpeakersApplicationForm
+        client:visible
+        lang={lang}
+        apiEndpoint={CONTACT_FORM.apiEndpoint}
+      />
+    </div>
+  </Section>
+</MainLayout>

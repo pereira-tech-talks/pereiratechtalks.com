@@ -1,0 +1,255 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+interface Token {
+  role: string;
+  cssVar: string;
+  light: string;
+  dark: string;
+  usage: string;
+}
+
+const tokens: Token[] = [
+  {
+    role: 'Primary',
+    cssVar: '--ptt-primary',
+    light: '#1F6F73',
+    dark: '#3FA8AD',
+    usage: 'CTAs · links · focus rings · brand color',
+  },
+  {
+    role: 'Primary strong',
+    cssVar: '--ptt-primary-strong',
+    light: '#155054',
+    dark: '#5BBFC4',
+    usage: 'Hover · active · pressed',
+  },
+  {
+    role: 'Primary soft',
+    cssVar: '--ptt-primary-soft',
+    light: '#E1F2F1',
+    dark: '#0F2A2C',
+    usage: 'Tints · badges · subtle backgrounds',
+  },
+  {
+    role: 'Accent',
+    cssVar: '--ptt-accent',
+    light: '#E8A33D',
+    dark: '#F4B95C',
+    usage: 'Warm complement · highlights · pills',
+  },
+  {
+    role: 'Bg',
+    cssVar: '--ptt-bg',
+    light: '#FAFBFB',
+    dark: '#08191A',
+    usage: 'Page background (deep green-teal in dark)',
+  },
+  {
+    role: 'Bg elevated',
+    cssVar: '--ptt-bg-elevated',
+    light: '#FFFFFF',
+    dark: '#0F2A2C',
+    usage: 'Cards · modals',
+  },
+  {
+    role: 'Border',
+    cssVar: '--ptt-border',
+    light: '#E2E8E8',
+    dark: '#1E3D40',
+    usage: 'Dividers · card outlines',
+  },
+  {
+    role: 'Text',
+    cssVar: '--ptt-text',
+    light: '#0F2A2C',
+    dark: '#E8F0EF',
+    usage: 'Primary body · headings',
+  },
+  {
+    role: 'Text secondary',
+    cssVar: '--ptt-text-secondary',
+    light: '#4A6164',
+    dark: '#B5C7C9',
+    usage: 'Secondary body',
+  },
+  {
+    role: 'Text muted',
+    cssVar: '--ptt-text-muted',
+    light: '#6E8589',
+    dark: '#8FA3A6',
+    usage: 'Metadata · large text only',
+  },
+  {
+    role: 'Success',
+    cssVar: '--ptt-state-success',
+    light: '#2E8757',
+    dark: '#4FB07F',
+    usage: 'Confirmation · positive',
+  },
+  {
+    role: 'Warning',
+    cssVar: '--ptt-state-warning',
+    light: '#C68417',
+    dark: '#E2A848',
+    usage: 'Caution · pending',
+  },
+  {
+    role: 'Danger',
+    cssVar: '--ptt-state-danger',
+    light: '#B83A3A',
+    dark: '#E0635F',
+    usage: 'Errors · destructive',
+  },
+  {
+    role: 'Info',
+    cssVar: '--ptt-state-info',
+    light: '#1F6F73',
+    dark: '#3FA8AD',
+    usage: 'Informational (alias of primary)',
+  },
+];
+
+interface Pair {
+  pair: string;
+  ratio: string;
+  status: string;
+}
+const pairs: Pair[] = [
+  {
+    pair: 'Light: text #0F2A2C on bg #FAFBFB',
+    ratio: '~16.5:1',
+    status: 'AAA',
+  },
+  {
+    pair: 'Light: text-secondary #4A6164 on bg',
+    ratio: '~6.8:1',
+    status: 'AA',
+  },
+  {
+    pair: 'Light: text-muted #6E8589 on bg',
+    ratio: '~4.0:1',
+    status: 'AA Large only',
+  },
+  { pair: 'Light: primary #1F6F73 on bg', ratio: '~5.5:1', status: 'AA' },
+  { pair: 'Light: white on primary #1F6F73', ratio: '~5.0:1', status: 'AA' },
+  {
+    pair: 'Light: accent #E8A33D on bg',
+    ratio: '~2.4:1',
+    status: 'NOT AA body — large text / icons only',
+  },
+  { pair: 'Dark: text #E8F0EF on bg #08191A', ratio: '~14:1', status: 'AAA' },
+  { pair: 'Dark: text-secondary #B5C7C9 on bg', ratio: '~9:1', status: 'AAA' },
+  { pair: 'Dark: text-muted #8FA3A6 on bg', ratio: '~5.5:1', status: 'AA' },
+  { pair: 'Dark: primary #3FA8AD on bg', ratio: '~7.5:1', status: 'AAA' },
+  { pair: 'Dark: accent #F4B95C on bg', ratio: '~10:1', status: 'AAA' },
+];
+---
+
+<InternalLayout
+  title="Brand Book — Colors"
+  description="PTT v3.0.0 color tokens, light + dark, with WCAG contrast ratios."
+  section="brand"
+  subsection="colors"
+>
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        <a href="/internal/brand" class="hover:underline">Brand</a> / Colors
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">Color tokens</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        The global PTT palette is the default identity of <code>pereiratechtalks.org</code>.
+        Every public page that is not a Pereira Tech Day edition consumes these
+        tokens via CSS variables. Per-edition overrides are scoped to their
+        routes and live under <a href="/internal/brand/per-edition-kits" class="underline">Per-edition kits</a>.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Token table</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Role</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">CSS var</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Light</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Dark</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {tokens.map((t) => (
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{t.role}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-600 dark:text-gray-300">{t.cssVar}</td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-block w-6 h-6 rounded border border-gray-200 dark:border-gray-700" style={`background:${t.light}`} aria-hidden="true"></span>
+                    <code class="text-xs text-gray-600 dark:text-gray-300">{t.light}</code>
+                  </div>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-block w-6 h-6 rounded border border-gray-200 dark:border-gray-700" style={`background:${t.dark}`} aria-hidden="true"></span>
+                    <code class="text-xs text-gray-600 dark:text-gray-300">{t.dark}</code>
+                  </div>
+                </td>
+                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{t.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">WCAG contrast (estimated)</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Final ratios are verified by an automated contrast script in Task 5
+        (deferred until <code>pnpm</code> is available). Estimates below
+        derive from standard WCAG calculations.
+      </p>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Pair</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Ratio</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {pairs.map((p) => (
+              <tr>
+                <td class="px-4 py-3 text-gray-700 dark:text-gray-200">{p.pair}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-600 dark:text-gray-300">{p.ratio}</td>
+                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{p.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Forbidden combinations</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li><code>text-gray-400</code> / <code>text-gray-500</code> for body text in light mode (fails WCAG AA per <code>AGENTS.md</code>).</li>
+        <li><code>dark:text-gray-400</code> / <code>dark:text-gray-500</code> for body text in dark mode.</li>
+        <li><code>--ptt-accent</code> for body text on <code>--ptt-bg</code> light mode (~2.4:1). Reserve for large text, icons, or pills with alternate background.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Source of truth</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        See
+        <code>analysis_results/BRAND_PALETTE.md</code>
+        for the machine-readable canonical version, including the Tailwind 4
+        token mapping that <strong>Task 5</strong> will register.
+      </p>
+    </section>
+  </main>
+</InternalLayout>

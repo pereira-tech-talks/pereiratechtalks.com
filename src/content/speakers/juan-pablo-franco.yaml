@@ -1,0 +1,21 @@
+name: Juan Pablo Franco Sanchez
+pronouns: he/him
+role:
+  en: Student at Universidad Tecnológica de Pereira
+  es: Estudiante de la Universidad Tecnológica de Pereira
+bio:
+  en: Lightning-talk presenter at Pereira Tech Day 2024 on serverless in everyday development.
+  es: Ponente lightning de Pereira Tech Day 2024 sobre serverless en lo cotidiano.
+photo:
+  src: /images/speakers/juan-pablo-franco.jpg
+  alt:
+    en: Portrait of Juan Pablo Franco Sanchez
+    es: Retrato de Juan Pablo Franco Sanchez
+social:
+  github: "https://github.com/juanpfrancoS"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

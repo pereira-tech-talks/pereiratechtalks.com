@@ -1,0 +1,18 @@
+name: "Cristhian Andrés Grajales Pérez"
+role:
+  en: "Game Developer at Alternova Inc"
+  es: "Game Developer en Alternova Inc"
+bio:
+  en: "Cristhian is a Game Developer at Alternova Inc, working on real-time graphics and interactive systems. He brought a game-development perspective to a Pereira Tech Talks meetup, covering the craft trade-offs unique to shipping games."
+  es: "Cristhian es Game Developer en Alternova Inc, trabajando en gráficos en tiempo real y sistemas interactivos. Llevó una perspectiva de desarrollo de videojuegos a un meetup de Pereira Tech Talks, cubriendo los trade-offs propios del oficio de publicar juegos."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Cristhian Andrés Grajales Pérez"
+    es: "Retrato de Cristhian Andrés Grajales Pérez"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -1,0 +1,354 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BlogImageLightbox from '@/components/blog/BlogImageLightbox.svelte';
+import BlogPostFooter from '@/components/blog/BlogPostFooter.astro';
+import BlogPostHeader from '@/components/blog/BlogPostHeader.astro';
+import RelatedArticles from '@/components/blog/RelatedArticles.astro';
+import SeriesIndicator from '@/components/blog/SeriesIndicator.svelte';
+import SeriesNavigation from '@/components/blog/SeriesNavigation.astro';
+import SlideIndicator from '@/components/blog/SlideIndicator.svelte';
+import TypewriterDemo from '@/components/blog/TypewriterDemo.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import {
+  getPostSlug,
+  getReadingTimeFromContent,
+  getRelatedPosts,
+  getSeriesNavigation,
+  getWordCount,
+  groupPostTags,
+  isDraftPost,
+  isScheduledPost,
+} from '@/lib/blog';
+import { formatCalendarDate } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getDeckForPost, getDeckSlug } from '@/lib/slides';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  post: CollectionEntry<'blog'>;
+}
+
+const { lang, post } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const {
+  heroImage,
+  pubDate,
+  updatedDate,
+  title,
+  description,
+  tags,
+  keywords,
+  author: authorSlug,
+} = post.data;
+const { Content } = await render(post);
+const readingTimeMinutes = getReadingTimeFromContent(post.body ?? '');
+const wordCount = getWordCount(post.body ?? '');
+const { primaryTags, secondaryTags, subtopicTags } = await groupPostTags(
+  tags ?? []
+);
+const isScheduled = isScheduledPost(post);
+const isDraft = isDraftPost(post);
+const seriesInfo = post.data.series
+  ? await getSeriesNavigation(post.data.series, post.id, lang)
+  : null;
+
+// Companion slide deck for this post (if any). Drives the floating SlideIndicator.
+const postSlug = getPostSlug(post.id);
+const relatedDeck = await getDeckForPost(
+  postSlug,
+  lang,
+  post.data.relatedSlide
+);
+const relatedDeckHref = relatedDeck
+  ? `${prefix}/slides/${getDeckSlug(relatedDeck.id)}`
+  : null;
+const relatedPosts = await getRelatedPosts({
+  currentPostId: post.id,
+  tags: tags ?? [],
+  lang,
+  limit: 3,
+});
+
+let authorData: { name: string; avatar: string } | undefined;
+if (authorSlug) {
+  const authors = await getCollection('authors');
+  const match = authors.find((a) => a.data.slug === authorSlug);
+  if (match) {
+    authorData = match.data;
+  }
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const articleSection = tags?.[0] ? t.tagNames[tags[0]] || tags[0] : 'Blog';
+const blogPostingData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  image: heroImage ? new URL(heroImage, Astro.site).href : undefined,
+  datePublished: pubDate.toISOString(),
+  dateModified: updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: authorData?.name ?? 'Sergio Alexander Florez Galeano',
+    url: new URL('/about/', Astro.site).href,
+    image: new URL(authorData?.avatar ?? '/images/og-default.jpg', Astro.site)
+      .href,
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Sergio Alexander Florez Galeano',
+    url: new URL('/about/', Astro.site).href,
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalURL.href,
+  },
+  keywords: keywords && keywords.length > 0 ? keywords : tags || [],
+  wordCount,
+  timeRequired: `PT${readingTimeMinutes}M`,
+  inLanguage: lang,
+  articleSection,
+  url: canonicalURL.href,
+};
+
+const homeUrl = prefix || '/';
+const blogUrl = `${prefix}/blog/`;
+
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: t.nav.home,
+      item: new URL(homeUrl, Astro.site).href,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t.nav.blog,
+      item: new URL(blogUrl, Astro.site).href,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: title,
+      item: canonicalURL.href,
+    },
+  ],
+};
+---
+
+<MainLayout lang={lang} title={title} description={description} image={heroImage} keywords={keywords} ogType="article">
+  <Fragment slot="head">
+    <JsonLd data={blogPostingData} />
+    <JsonLd data={breadcrumbData} />
+    <meta property="article:published_time" content={pubDate.toISOString()} />
+    <meta property="article:modified_time" content={(updatedDate ?? pubDate).toISOString()} />
+    <meta property="article:author" content={new URL('/about/', Astro.site).href} />
+    <meta property="article:section" content={articleSection} />
+    {tags?.map((tag) => <meta property="article:tag" content={tag} />)}
+  </Fragment>
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+  <main class="main-container py-10 sm:py-12 lg:py-16">
+    <article>
+      <nav aria-label="Breadcrumb" class="mb-6 flex flex-wrap items-center gap-x-2 text-sm">
+        <a href={homeUrl} class="font-semibold text-ptt-secondary transition-colors hover:text-ptt-primary">{t.nav.home}</a>
+        <span class="font-semibold text-ptt-secondary select-none" aria-hidden="true">/</span>
+        <a href={blogUrl} class="font-semibold text-ptt-secondary transition-colors hover:text-ptt-primary">{t.nav.blog}</a>
+        <span class="font-semibold text-ptt-secondary select-none" aria-hidden="true">/</span>
+        <span class="truncate font-normal text-ptt-secondary" aria-current="page">{title}</span>
+      </nav>
+      {isDraft && (
+        <div class="mb-6 rounded-lg border border-ptt-danger/40 bg-ptt-danger/10 px-4 py-3 text-sm text-ptt-danger">
+          <strong>{t.draftBannerTitle}</strong> — {t.draftBannerMessage}
+        </div>
+      )}
+      {isScheduled && (
+        <div class="mb-6 rounded-lg border border-ptt-warning/40 bg-ptt-warning/10 px-4 py-3 text-sm text-ptt-warning">
+          <strong>{t.scheduledBannerTitle}</strong> — {t.scheduledBannerMessage(formatCalendarDate(pubDate, lang))}
+        </div>
+      )}
+      {seriesInfo && (
+        <a
+          href={`${prefix}/blog/series/${seriesInfo.name}/`}
+          class="mb-4 flex items-center gap-3 rounded-lg border border-ptt-primary/25 bg-ptt-primary-soft px-4 py-2.5 text-sm transition-colors hover:bg-ptt-primary/15 hover:border-ptt-primary/40"
+        >
+          <span
+            class="inline-flex shrink-0 items-center rounded-full border-2 border-ptt-primary/40 bg-ptt-bg-elevated px-2 py-0.5 text-xs font-semibold text-ptt-primary"
+          >
+            {seriesInfo.currentIndex + 1}/{seriesInfo.posts.length}
+          </span>
+          <span class="text-ptt-secondary">
+            <span class="font-medium text-ptt">{t.seriesPartOf}:</span>{' '}
+            {t.seriesNames[seriesInfo.name] || seriesInfo.title}
+          </span>
+        </a>
+      )}
+      <BlogPostHeader
+        title={title}
+        pubDate={pubDate}
+        updatedDate={updatedDate}
+        heroImage={heroImage}
+        heroLayout={post.data.heroLayout}
+        tags={primaryTags}
+        topics={secondaryTags}
+        subtopics={subtopicTags}
+        lang={lang}
+        readingTimeMinutes={readingTimeMinutes}
+      />
+      <div class="prose prose-lg prose-slate mx-auto max-w-4xl dark:prose-invert prose-headings:scroll-mt-24 prose-a:text-ptt-primary prose-img:block prose-img:mx-auto">
+        <Content components={{ TypewriterDemo }} />
+      </div>
+      <div class="mt-12 space-y-8">
+        <BlogPostFooter
+          authorSlug={authorSlug}
+          lang={lang}
+          title={title}
+          url={canonicalURL.href}
+        />
+        {/* Newsletter CTA hidden until the list backend is live again.
+            Re-enable: NewsletterForm + NEWSLETTER from @/lib/constances */}
+      </div>
+      {seriesInfo && <SeriesNavigation seriesInfo={seriesInfo} lang={lang} />}
+      <RelatedArticles posts={relatedPosts} lang={lang} />
+    </article>
+    {(seriesInfo || relatedDeck) && (
+      <div class="fixed bottom-4 right-18 sm:right-20 z-40 flex flex-row-reverse items-center gap-2 pointer-events-none">
+        <div class="pointer-events-auto contents">
+          {seriesInfo && (
+            <SeriesIndicator
+              client:idle
+              lang={lang}
+              currentChapter={seriesInfo.currentIndex + 1}
+              totalChapters={seriesInfo.posts.length}
+              seriesTitle={t.seriesNames[seriesInfo.name] || seriesInfo.title}
+            />
+          )}
+          {relatedDeck && relatedDeckHref && (
+            <SlideIndicator
+              client:idle
+              lang={lang}
+              href={relatedDeckHref}
+              deckTitle={relatedDeck.data.title}
+            />
+          )}
+        </div>
+      </div>
+    )}
+    <BlogImageLightbox client:idle />
+  </main>
+</MainLayout>
+
+<script is:inline>
+  (() => {
+    const progressEl = document.querySelector('[data-reading-progress]');
+    if (!(progressEl instanceof HTMLElement)) return;
+
+    const supportsScrollTimeline =
+      typeof CSS !== 'undefined' && CSS.supports('animation-timeline: scroll()');
+
+    if (supportsScrollTimeline) return;
+
+    progressEl.classList.add('reading-progress--js');
+
+    let ticking = false;
+    let frameId = 0;
+    const maxScale = 1;
+
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+    const updateProgress = () => {
+      const root = document.documentElement;
+      const scrollRange = root.scrollHeight - root.clientHeight;
+      const ratio = scrollRange > 0 ? root.scrollTop / scrollRange : 0;
+      progressEl.style.transform = `scaleX(${clamp(ratio, 0, maxScale)})`;
+      ticking = false;
+    };
+
+    const scheduleUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      frameId = window.requestAnimationFrame(updateProgress);
+    };
+
+    scheduleUpdate();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+    window.addEventListener('pagehide', () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    });
+  })();
+</script>
+
+<script is:inline>
+  (() => {
+    const activate = (facade) => {
+      const videoId = facade.dataset.videoId;
+      if (!videoId) return;
+      const title = facade.dataset.title || 'YouTube video';
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+      iframe.title = title;
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.className = 'absolute inset-0 h-full w-full border-0';
+      facade.replaceChildren(iframe);
+    };
+
+    document.querySelectorAll('.youtube-facade').forEach((facade) => {
+      const button = facade.querySelector('button');
+      if (!button) return;
+      button.addEventListener('click', () => activate(facade), { once: true });
+    });
+  })();
+</script>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(
+      to right,
+      var(--color-ptt-primary),
+      color-mix(in srgb, var(--color-ptt-primary) 70%, var(--color-ptt-accent))
+    );
+    z-index: 60;
+    pointer-events: none;
+    animation: reading-progress-fill linear;
+    animation-timeline: scroll();
+  }
+
+  .reading-progress--js {
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+    animation: none;
+  }
+
+  @keyframes reading-progress-fill {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+</style>

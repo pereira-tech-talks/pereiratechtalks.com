@@ -1,0 +1,51 @@
+---
+/**
+ * Slim layout for individual diploma pages.
+ * Site chrome is minimal on screen; print CSS hides chrome entirely.
+ */
+import '@/styles/global.css';
+import '@/styles/certificates.css';
+import BaseHead from '@/components/BaseHead.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} lang={lang} />
+    <meta name="robots" content="noindex, nofollow" />
+    <script is:inline>
+      (function () {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      })();
+    </script>
+  </head>
+  <body class="ptt-cert-page bg-ptt-bg text-ptt">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-ptt-bg-elevated focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:text-ptt-primary"
+    >
+      Skip to content
+    </a>
+    <div
+      class="ptt-cert-chrome fixed z-50"
+      style="right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom));"
+      data-testid="theme-toggle"
+    >
+      <ThemeToggle />
+    </div>
+    <main id="main-content" class="w-full flex flex-col items-center">
+      <slot />
+    </main>
+  </body>
+</html>

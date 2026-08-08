@@ -1,0 +1,13 @@
+name: JointDev
+logo:
+  src: /images/communities/jointdev.png
+  alt: JointDev logo
+url: "https://jointdevweb.firebaseapp.com/"
+focus:
+  en: Cross-stack developers and co-hosted community events
+  es: Desarrolladores multi-stack y eventos comunitarios co-organizados
+description:
+  en: A cross-discipline developer community that co-organizes thematic meetups and shares venues with Pereira Tech Talks across the Coffee Region.
+  es: Comunidad de desarrolladores multidisciplinaria que co-organiza meetups temáticos y comparte venues con Pereira Tech Talks en el Eje Cafetero.
+status: active
+order: 3

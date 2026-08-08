@@ -1,0 +1,18 @@
+name: "Héctor Pulido"
+role:
+  en: "AI Engineer at Besage.ai"
+  es: "AI Engineer en Besage.ai"
+bio:
+  en: "Héctor Pulido is an AI Engineer at Besage.ai and a well-known voice in the Spanish-speaking technical YouTube scene, where he publishes deep-dives on machine learning, neural networks, and applied AI. He has shared his work with the Pereira Tech Talks community in sessions focused on practical AI engineering."
+  es: "Héctor Pulido es AI Engineer en Besage.ai y una voz reconocida en la escena técnica hispanohablante de YouTube, donde publica análisis profundos sobre machine learning, redes neuronales e IA aplicada. Ha compartido su trabajo con la comunidad de Pereira Tech Talks en sesiones enfocadas en AI engineering práctico."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Héctor Pulido"
+    es: "Retrato de Héctor Pulido"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

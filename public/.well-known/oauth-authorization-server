@@ -1,0 +1,30 @@
+{
+  "issuer": "https://pereiratechtalks.org",
+  "authorization_endpoint": "https://pereiratechtalks.org/oauth/authorize",
+  "token_endpoint": "https://pereiratechtalks.org/oauth/token",
+  "revocation_endpoint": "https://pereiratechtalks.org/oauth/revoke",
+  "registration_endpoint": "https://pereiratechtalks.org/agent/register",
+  "jwks_uri": "https://pereiratechtalks.org/.well-known/jwks.json",
+  "grant_types_supported": ["authorization_code", "client_credentials"],
+  "response_types_supported": ["code"],
+  "scopes_supported": ["public:read"],
+  "token_endpoint_auth_methods_supported": ["none"],
+  "bearer_methods_supported": ["header"],
+  "agent_auth": {
+    "skill": "https://pereiratechtalks.org/auth.md",
+    "register_uri": "https://pereiratechtalks.org/agent/register",
+    "identity_endpoint": "https://pereiratechtalks.org/agent/register",
+    "claim_uri": "https://pereiratechtalks.org/agent/claim",
+    "claim_endpoint": "https://pereiratechtalks.org/agent/claim",
+    "claim_complete_uri": "https://pereiratechtalks.org/agent/claim/complete",
+    "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": ["access_token"],
+      "claim_uri": "https://pereiratechtalks.org/agent/claim"
+    },
+    "events_supported": [
+      "https://schemas.openid.net/secevent/oauth/event-type/token-revoked"
+    ],
+    "revocation_uri": "https://pereiratechtalks.org/oauth/revoke"
+  }
+}

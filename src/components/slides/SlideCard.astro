@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TypeBadge from '@/components/slides/TypeBadge.astro';
+import { getCalendarYear } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getDeckSlug } from '@/lib/slides';
+
+interface Props {
+  deck: CollectionEntry<'slides'>;
+  lang: Language;
+}
+
+const { deck, lang } = Astro.props;
+const prefix = getUrlPrefix(lang);
+const slug = getDeckSlug(deck.id);
+const href = `${prefix}/slides/${slug}`;
+const { title, description, heroImage, eventName, eventDate, type } = deck.data;
+---
+
+<article class="group flex flex-col bg-ptt-bg-elevated rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden border border-ptt-border">
+  <a href={href} class="block relative aspect-video bg-gradient-to-br from-ptt-primary-soft to-ptt-bg-elevated overflow-hidden">
+    {heroImage ? (
+      <img decoding="async"
+        src={heroImage}
+        alt={title}
+        width={640}
+        height={360}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy" />
+    ) : (
+      <div class="flex items-center justify-center w-full h-full">
+        <svg class="w-12 h-12 text-ptt-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
+        </svg>
+      </div>
+    )}
+    <div class="absolute top-2 right-2">
+      <TypeBadge type={type} lang={lang} />
+    </div>
+  </a>
+
+  <div class="flex flex-col flex-1 p-4">
+    <h3 class="text-lg font-semibold text-ptt mb-1">
+      <a href={href} class="hover:text-ptt-primary transition-colors">
+        {title}
+      </a>
+    </h3>
+
+    {eventName && (
+      <p class="text-sm text-ptt-secondary mb-2">
+        {eventName}
+        {eventDate && (
+          <span> · {getCalendarYear(eventDate)}</span>
+        )}
+      </p>
+    )}
+
+    <p class="text-sm text-ptt-secondary line-clamp-2 flex-1">
+      {description}
+    </p>
+  </div>
+</article>

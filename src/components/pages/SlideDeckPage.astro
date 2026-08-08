@@ -1,0 +1,131 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import JsonLd from '@/components/JsonLd.astro';
+import ExternalView from '@/components/slides/ExternalView.astro';
+import RevealDeck from '@/components/slides/RevealDeck.svelte';
+import SlideLayout from '@/layouts/SlideLayout.astro';
+import { getPostBySlug } from '@/lib/blog';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getDeckSlug, isDraftDeck } from '@/lib/slides';
+
+interface Props {
+  lang: Language;
+  deck: CollectionEntry<'slides'>;
+}
+
+const { lang, deck } = Astro.props;
+const slug = getDeckSlug(deck.id);
+const { type } = deck.data;
+const isDraft = isDraftDeck(deck);
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+const canonicalUrl = `${siteUrl}${prefix}/slides/${slug}`;
+
+// Companion blog post (if any). Only resolve when the post exists in the same
+// language — otherwise we'd render a CTA that 404s. Drives the floating
+// PostIndicator on external decks and the toolbar entry on native decks.
+let relatedPostHref: string | undefined;
+let relatedPostTitle: string | undefined;
+if (deck.data.relatedPost) {
+  const post = await getPostBySlug(deck.data.relatedPost, lang);
+  if (post) {
+    relatedPostHref = `${prefix}/blog/${deck.data.relatedPost}`;
+    relatedPostTitle = post.data.title;
+  }
+}
+
+const keywords =
+  lang === 'en'
+    ? ['slides', 'tech talk', 'presentation', 'Reveal.js', 'Sergio Florez']
+    : [
+        'diapositivas',
+        'charla técnica',
+        'presentación',
+        'Reveal.js',
+        'Sergio Florez',
+      ];
+
+const jsonLdBase = {
+  '@context': 'https://schema.org' as const,
+  name: deck.data.title,
+  description: deck.data.description,
+  datePublished: deck.data.pubDate.toISOString(),
+  ...(deck.data.updatedDate && {
+    dateModified: deck.data.updatedDate.toISOString(),
+  }),
+  inLanguage: lang,
+  ...(deck.data.heroImage && {
+    image: new URL(deck.data.heroImage, Astro.site ?? Astro.url).href,
+  }),
+  author: {
+    '@type': 'Person' as const,
+    name: 'Sergio Alexander Florez Galeano',
+    url: siteUrl,
+  },
+};
+
+const eventMeta = deck.data.eventName
+  ? {
+      about: {
+        '@type': 'Event' as const,
+        name: deck.data.eventName,
+        ...(deck.data.eventDate && {
+          startDate: deck.data.eventDate.toISOString(),
+        }),
+        ...(deck.data.eventUrl && { url: deck.data.eventUrl }),
+      },
+    }
+  : {};
+
+const jsonLd =
+  type === 'external'
+    ? {
+        ...jsonLdBase,
+        '@type': 'CreativeWork' as const,
+        url: deck.data.externalUrl,
+        ...eventMeta,
+      }
+    : {
+        ...jsonLdBase,
+        '@type': 'PresentationDigitalDocument' as const,
+        url: canonicalUrl,
+        ...eventMeta,
+      };
+---
+
+{type === 'native' && (
+  <SlideLayout
+    lang={lang}
+    title={deck.data.title}
+    description={deck.data.description}
+    image={deck.data.heroImage}
+    deckSlug={slug}
+    isDraft={isDraft}
+    keywords={keywords}
+    relatedPostHref={relatedPostHref}
+    relatedPostTitle={relatedPostTitle}
+  >
+    <Fragment slot="head">
+      <JsonLd data={jsonLd} />
+    </Fragment>
+    <RevealDeck
+      client:only="svelte"
+      theme={deck.data.theme}
+      transition={deck.data.transition}
+      syntaxHighlight={deck.data.syntaxHighlight}
+      math={deck.data.math}
+      bodyMarkdown={deck.body || ''}
+    />
+  </SlideLayout>
+)}
+
+{type === 'external' && (
+  <ExternalView
+    deck={deck}
+    lang={lang}
+    jsonLd={jsonLd}
+    relatedPostHref={relatedPostHref}
+    relatedPostTitle={relatedPostTitle}
+  />
+)}

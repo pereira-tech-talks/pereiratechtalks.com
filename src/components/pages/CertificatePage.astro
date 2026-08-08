@@ -1,0 +1,69 @@
+---
+import CertificateActions from '@/components/certificates/CertificateActions.svelte';
+import DiplomaDocument from '@/components/certificates/DiplomaDocument.astro';
+import EditionScope from '@/components/pereira-tech-days/EditionScope.astro';
+import CertificateLayout from '@/layouts/CertificateLayout.astro';
+import {
+  buildVerifyQrDataUrl,
+  certificateVerifyPath,
+  toCertificatePayload,
+} from '@/lib/certificates';
+import type { CertificateFixture } from '@/lib/certificates/types';
+import { SITE_URL } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  fixture: CertificateFixture;
+}
+
+const { lang, fixture } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const payload = toCertificatePayload(fixture, lang);
+const siteBase = Astro.site ?? new URL(SITE_URL);
+const pagePath = `${prefix}/pereira-tech-days/${fixture.eventYear}/certificates/${fixture.id}`;
+const pageUrl = new URL(pagePath.replace(/^\//, ''), siteBase).href;
+const verifyPath = certificateVerifyPath(fixture.id, lang);
+const verifyUrl = new URL(verifyPath.replace(/^\//, ''), siteBase).href;
+const qrDataUrl = await buildVerifyQrDataUrl(verifyUrl);
+
+const title = `${t.certificates.pageTitle} — ${payload.subject.name}`;
+const description = t.certificates.pageDescription
+  .replace('{name}', payload.subject.name)
+  .replace('{event}', payload.event.name);
+---
+
+<CertificateLayout lang={lang} title={title} description={description}>
+  <EditionScope year={fixture.eventYear} class="w-full flex flex-col items-center">
+    <p class="ptt-cert-page__banner" data-testid="demo-banner">
+      {t.certificates.demoBanner}
+    </p>
+    <p class="ptt-cert-page__back">
+      <a href={`${prefix}/pereira-tech-days/${fixture.eventYear}`}>
+        {t.certificates.backToEvent}
+      </a>
+    </p>
+    <DiplomaDocument
+      certificate={payload}
+      verificationUrl={verifyPath}
+      qrDataUrl={qrDataUrl}
+      lang={lang}
+    />
+    <CertificateActions
+      client:visible
+      payload={payload}
+      pageUrl={pageUrl}
+      labels={{
+        print: t.certificates.actions.print,
+        downloadJson: t.certificates.actions.downloadJson,
+        copyLink: t.certificates.actions.copyLink,
+        share: t.certificates.actions.share,
+        copied: t.certificates.actions.copied,
+        shared: t.certificates.actions.shared,
+        shareFailed: t.certificates.actions.shareFailed,
+      }}
+    />
+  </EditionScope>
+</CertificateLayout>

@@ -1,0 +1,146 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const astroPages = import.meta.glob('/src/pages/**/*.astro', { eager: false });
+const tsPages = import.meta.glob('/src/pages/**/*.ts', { eager: false });
+const jsPages = import.meta.glob('/src/pages/**/*.js', { eager: false });
+
+function filePathToUrl(filePath: string): string {
+  return filePath
+    .replace('/src/pages', '')
+    .replace('/index.astro', '/')
+    .replace('.astro', '')
+    .replace('.ts', '')
+    .replace('.js', '');
+}
+
+function getPageType(url: string): 'internal' | 'api' | 'dynamic' | 'page' {
+  if (url.includes('/internal')) return 'internal';
+  if (url.includes('/api/') || url.includes('.json') || url.includes('.xml'))
+    return 'api';
+  if (url.includes('[')) return 'dynamic';
+  return 'page';
+}
+
+function getSection(url: string): string {
+  if (url === '/') return 'Home';
+  if (url.startsWith('/internal')) return 'Internal';
+  if (url.startsWith('/es/blog') || url.startsWith('/blog')) return 'Blog';
+  if (url.startsWith('/es/')) return 'Spanish';
+  if (url.startsWith('/api') || url.endsWith('.json') || url.endsWith('.xml'))
+    return 'API & Feeds';
+  return 'Pages';
+}
+
+interface PageEntry {
+  url: string;
+  type: 'internal' | 'api' | 'dynamic' | 'page';
+  section: string;
+}
+
+const allFiles = { ...astroPages, ...tsPages, ...jsPages };
+
+const pages: PageEntry[] = Object.keys(allFiles)
+  .map((filePath) => {
+    const url = filePathToUrl(filePath);
+    return { url, type: getPageType(url), section: getSection(url) };
+  })
+  .sort((a, b) => a.url.localeCompare(b.url));
+
+const sections = new Map<string, PageEntry[]>();
+for (const page of pages) {
+  const existing = sections.get(page.section) || [];
+  existing.push(page);
+  sections.set(page.section, existing);
+}
+
+const sectionOrder = [
+  'Home',
+  'Pages',
+  'Blog',
+  'Spanish',
+  'Internal',
+  'API & Feeds',
+];
+const orderedSections = sectionOrder
+  .filter((s) => sections.has(s))
+  .map((s) => [s, sections.get(s) ?? []] as const);
+
+const totalPages = pages.length;
+const dynamicRoutes = pages.filter((p) => p.type === 'dynamic').length;
+const apiEndpoints = pages.filter((p) => p.type === 'api').length;
+const internalPages = pages.filter((p) => p.type === 'internal').length;
+---
+
+<InternalLayout
+  title="Sitemap"
+  description="Auto-generated map of every URL on the site"
+  section="sitemap"
+>
+  <!-- Stats Grid -->
+  <section class="mb-10">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div class="text-2xl font-bold">{totalPages}</div>
+        <div class="text-xs text-gray-600 dark:text-gray-300">Total Pages</div>
+      </div>
+      <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div class="text-2xl font-bold">{dynamicRoutes}</div>
+        <div class="text-xs text-gray-600 dark:text-gray-300">Dynamic Routes</div>
+      </div>
+      <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div class="text-2xl font-bold">{apiEndpoints}</div>
+        <div class="text-xs text-gray-600 dark:text-gray-300">API Endpoints</div>
+      </div>
+      <div class="rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div class="text-2xl font-bold">{internalPages}</div>
+        <div class="text-xs text-gray-600 dark:text-gray-300">Internal Pages</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Tree -->
+  <section class="mb-10">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">All Pages by Section</h2>
+    <div class="space-y-6">
+      {orderedSections.map(([sectionName, sectionPages]) => (
+        <div class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-semibold">{sectionName}</h3>
+            <span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">{sectionPages.length}</span>
+          </div>
+          <ul class="space-y-1">
+            {sectionPages.map((page) => (
+              <li class="flex items-center gap-2 text-sm">
+                {page.type === 'dynamic' && (
+                  <span class="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-1.5 py-0 rounded leading-tight">dynamic</span>
+                )}
+                {page.type === 'api' && (
+                  <span class="text-xs bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 px-1.5 py-0 rounded leading-tight">api</span>
+                )}
+                {page.type === 'internal' && (
+                  <span class="text-xs bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-1.5 py-0 rounded leading-tight">internal</span>
+                )}
+                {page.type === 'page' && (
+                  <span class="w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600 shrink-0" />
+                )}
+                {page.type === 'dynamic' || page.type === 'api' ? (
+                  <code class="text-xs text-gray-600 dark:text-gray-300 font-mono">{page.url}</code>
+                ) : (
+                  <a href={page.url} class="text-gray-700 dark:text-gray-300 hover:underline font-mono text-xs">{page.url}</a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Footer note -->
+  <div class="text-center text-xs text-gray-600 dark:text-gray-300 py-4 border-t border-gray-200 dark:border-gray-700">
+    This sitemap is auto-generated at build time using
+    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">import.meta.glob</code>.
+    No manual updates needed — new pages appear automatically.
+  </div>
+</InternalLayout>

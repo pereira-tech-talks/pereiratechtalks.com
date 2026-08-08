@@ -1,0 +1,13 @@
+name: Python Pereira
+logo:
+  src: /images/communities/pypereira.png
+  alt: Python Pereira logo
+url: "https://pypereira.co/"
+focus:
+  en: Python workshops, PyDays, and data community
+  es: Talleres de Python, PyDays y comunidad de datos
+description:
+  en: Pereira's Python user group — workshops, study groups, and PyDay events. A recurring ally on Pereira Tech Day panels and lightning talks.
+  es: El grupo de usuarios Python de Pereira — talleres, grupos de estudio y eventos PyDay. Aliado recurrente en paneles y lightning talks de Pereira Tech Day.
+status: active
+order: 2

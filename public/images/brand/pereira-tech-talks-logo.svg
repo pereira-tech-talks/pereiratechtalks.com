@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Pereira Tech Talks">
+  <title>Pereira Tech Talks</title>
+  <rect width="64" height="64" rx="12" fill="#0E5E60"/>
+  <g fill="#F5F1EA" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" text-anchor="middle">
+    <text x="32" y="30" font-size="22" letter-spacing="-1">PTT</text>
+    <text x="32" y="48" font-size="9" letter-spacing="1.5" font-weight="600" opacity="0.85">PEREIRA</text>
+  </g>
+</svg>

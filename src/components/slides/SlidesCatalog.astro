@@ -1,0 +1,22 @@
+---
+import SlideCard from '@/components/slides/SlideCard.astro';
+import type { Language } from '@/lib/i18n';
+import { getSlideDecks } from '@/lib/slides';
+
+interface Props {
+  lang: Language;
+  limit?: number;
+}
+
+const { lang, limit } = Astro.props;
+const allDecks = await getSlideDecks(lang);
+const decks = limit ? allDecks.slice(0, limit) : allDecks;
+---
+
+{decks.length > 0 && (
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {decks.map((deck) => (
+      <SlideCard deck={deck} lang={lang} />
+    ))}
+  </div>
+)}

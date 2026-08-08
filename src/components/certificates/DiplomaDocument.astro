@@ -1,0 +1,109 @@
+---
+import type { CertificatePayload } from '@/lib/certificates/types';
+/**
+ * Print-grade diploma document (elevated from PR #297 / feature/cert).
+ * Uses PTT / edition tokens; no Roboto or emoji.
+ */
+import { formatCalendarDate, formatInstantInSiteTimezone } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  certificate: CertificatePayload;
+  verificationUrl: string;
+  qrDataUrl: string;
+  lang: Language;
+  logoSrc?: string;
+}
+
+const {
+  certificate,
+  verificationUrl,
+  qrDataUrl,
+  lang,
+  logoSrc = '/images/pereira-tech-days/2026/mascot/hero.webp',
+} = Astro.props;
+
+const t = getTranslations(lang);
+const locale = lang === 'es' ? 'es-CO' : 'en-US';
+
+const eventDate = new Date(`${certificate.event.date}T00:00:00.000Z`);
+const formattedDate = formatCalendarDate(eventDate, lang, {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const issuedDate = new Date(certificate.issuedAt);
+const formattedIssued = formatInstantInSiteTimezone(issuedDate, locale);
+
+const roleLabel = t.certificates.roles[certificate.subject.role];
+const isRevoked = certificate.status === 'revoked';
+const watermark = isRevoked ? t.certificates.watermarkRevoked : undefined;
+---
+
+<div
+  class:list={['ptt-cert', isRevoked && 'ptt-cert--revoked']}
+  data-testid="diploma-document"
+  data-cert-id={certificate.id}
+  data-watermark={watermark}
+>
+  <div class="ptt-cert__motif" aria-hidden="true"></div>
+  <div class="ptt-cert__border-top" aria-hidden="true"></div>
+  <div class="ptt-cert__body">
+    <header class="ptt-cert__header">
+      <img
+        src={logoSrc}
+        alt=""
+        width="120"
+        height="80"
+        class="ptt-cert__logo"
+        loading="eager"
+        decoding="async"
+      />
+      <h1 class="ptt-cert__title">{t.certificates.diplomaTitle}</h1>
+    </header>
+
+    <hr class="ptt-cert__divider" />
+
+    <div class="ptt-cert__content">
+      <p class="ptt-cert__preamble">{t.certificates.preamble}</p>
+      <p class="ptt-cert__subject-name">{certificate.subject.name}</p>
+      <p class="ptt-cert__event-line">
+        {t.certificates.attendedPrefix}
+        {' '}
+        <span class="ptt-cert__event-name">{certificate.event.name}</span>
+      </p>
+      <p class="ptt-cert__event-line">
+        {formattedDate}{certificate.event.location ? ` · ${certificate.event.location}` : ''}
+      </p>
+      <span class="ptt-cert__role">{roleLabel}</span>
+    </div>
+
+    <footer class="ptt-cert__footer">
+      <div class="ptt-cert__footer-left">
+        <div class="ptt-cert__seal" aria-hidden="true">
+          <span class="ptt-cert__seal-label">{t.certificates.sealLabel}</span>
+        </div>
+        <span class="ptt-cert__issuer">
+          {t.certificates.issuedBy} {certificate.issuer.name}
+        </span>
+        <span class="ptt-cert__issued-date">{formattedIssued}</span>
+      </div>
+      <div class="ptt-cert__footer-right">
+        <a href={verificationUrl} class="ptt-cert__qr-link">
+          <img
+            src={qrDataUrl}
+            alt={t.certificates.qrAlt}
+            width="72"
+            height="72"
+            class="ptt-cert__qr"
+          />
+        </a>
+        <span class="ptt-cert__verify-label">{t.certificates.verifyLabel}</span>
+        <span class="ptt-cert__cert-id" title={certificate.id}>{certificate.id}</span>
+      </div>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+  "name": "Pereira Tech Talks — Technology community of Pereira, Colombia",
+  "short_name": "Pereira Tech Talks",
+  "description": "Community of builders, speakers, and learners shaping the future of technology from Pereira, Colombia to the world.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFBFB",
+  "theme_color": "#1F6F73",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

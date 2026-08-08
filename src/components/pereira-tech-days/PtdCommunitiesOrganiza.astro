@@ -1,0 +1,280 @@
+---
+/**
+ * PtdCommunitiesOrganiza — "Organiza" community logos.
+ * Upcoming editions: brochure layout over community-bg (circuit tree + flowers)
+ * with soft circular logo discs. Archived editions: elevated tile grid.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Community {
+  name: string;
+  logo: string;
+  url?: string;
+}
+
+interface Props {
+  communities: Community[];
+  lang: Language;
+  title: string;
+  subtitle?: string;
+  footerNote?: string;
+  /** When true, use brochure tree layout (circular discs + section BG art). */
+  brochure?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const {
+  communities,
+  lang,
+  title,
+  subtitle,
+  footerNote,
+  brochure = false,
+  headingLevel = 'h2',
+} = Astro.props;
+const Heading = headingLevel;
+
+const visitLabel = lang === 'es' ? 'Visitar' : 'Visit';
+
+/** Light-mode vertical PTT mark (transparent) for cream brochure discs. */
+const PTT_LIGHT_LOGO = '/images/pereira-tech-talks/logo-vertical-color.webp';
+
+function resolveLogo(community: Community): string {
+  if (/pereira tech talks/i.test(community.name)) {
+    return PTT_LIGHT_LOGO;
+  }
+  return community.logo;
+}
+
+function isPtt(community: Community): boolean {
+  return /pereira tech talks/i.test(community.name);
+}
+---
+
+<div
+  class="ptd-communities-organiza"
+  data-layout={brochure ? 'brochure' : 'tiles'}
+>
+  <header
+    class:list={[
+      brochure
+        ? 'mb-[clamp(1.5rem,4vw,2.5rem)]'
+        : 'mb-8 text-center md:mb-10',
+    ]}
+  >
+    <Heading
+      class:list={[
+        'ptd-organiza-title m-0 font-bold uppercase leading-[1.05]',
+        brochure
+          ? 'text-[clamp(2rem,5.5vw,3.15rem)] tracking-[0.01em] text-[#3a7f7c]'
+          : 'text-3xl text-[var(--ptt-text)] md:text-4xl',
+      ]}
+    >
+      {title}
+    </Heading>
+    {
+      subtitle && (
+        <p
+          class:list={[
+            'm-0',
+            brochure
+              ? 'mt-2 max-w-[36rem] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-[1.55] text-[color-mix(in_srgb,var(--ptt-text)_82%,transparent)]'
+              : 'mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base',
+          ]}
+        >
+          {subtitle}
+        </p>
+      )
+    }
+  </header>
+
+  {
+    brochure ? (
+      <ul
+        class="ptd-organiza-grid mx-auto flex list-none flex-wrap justify-center gap-[clamp(0.9rem,2.8vw,1.35rem)] p-0"
+        role="list"
+        aria-label={title}
+      >
+        {communities.map((community) => {
+          const logo = resolveLogo(community);
+          const label = `${visitLabel} ${community.name}`;
+          const ptt = isPtt(community);
+          const cardClass =
+            'ptd-organiza-card flex h-[clamp(7.75rem,19vw,11rem)] w-[clamp(7.75rem,19vw,11rem)] items-center justify-center rounded-full border border-[color-mix(in_srgb,var(--ptt-text)_9%,white_91%)] p-[clamp(0.65rem,2vw,1rem)] transition duration-200 hover:-translate-y-[3px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)] motion-reduce:transition-none motion-reduce:hover:translate-y-0';
+          const imgClass = ptt
+            ? 'mx-auto block h-auto max-h-[clamp(5.25rem,12vw,7rem)] w-auto max-w-full object-contain'
+            : 'mx-auto block h-auto max-h-[clamp(5.75rem,13vw,7.5rem)] w-auto max-w-full object-contain';
+          return (
+            <li class="ptd-organiza-item flex w-[calc((100%-clamp(0.9rem,2.8vw,1.35rem))/2)] max-w-full grow-0 basis-[calc((100%-clamp(0.9rem,2.8vw,1.35rem))/2)] items-center justify-center">
+              {community.url ? (
+                <a
+                  href={community.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  class={cardClass}
+                  data-community={community.name}
+                >
+                  <img
+                    src={logo}
+                    alt={community.name}
+                    width={ptt ? 160 : 200}
+                    height={ptt ? 260 : 200}
+                    loading="lazy"
+                    decoding="async"
+                    class={imgClass}
+                  />
+                </a>
+              ) : (
+                <div class={cardClass} data-community={community.name}>
+                  <img
+                    src={logo}
+                    alt={community.name}
+                    width={ptt ? 160 : 200}
+                    height={ptt ? 260 : 200}
+                    loading="lazy"
+                    decoding="async"
+                    class={imgClass}
+                  />
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    ) : (
+      <ul class="mx-auto grid w-full max-w-5xl grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+        {communities.map((community) => (
+          <li class="min-w-0">
+            {community.url ? (
+              <a
+                href={community.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${visitLabel} ${community.name}`}
+                class="flex min-h-40 items-center justify-center rounded-2xl bg-[var(--ptt-bg-elevated)] px-4 py-5 shadow-sm ring-1 ring-[var(--ptt-border)] transition duration-200 hover:-translate-y-1 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:min-h-44 sm:px-5 sm:py-6"
+              >
+                <img
+                  src={resolveLogo(community)}
+                  alt={community.name}
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
+                />
+              </a>
+            ) : (
+              <div class="flex min-h-40 items-center justify-center rounded-2xl bg-[var(--ptt-bg-elevated)] px-4 py-5 shadow-sm ring-1 ring-[var(--ptt-border)] sm:min-h-44 sm:px-5 sm:py-6">
+                <img
+                  src={resolveLogo(community)}
+                  alt={community.name}
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                  class="max-h-28 w-auto max-w-full object-contain sm:max-h-32"
+                />
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    brochure && footerNote && (
+      <p class="mx-auto mt-[clamp(1.4rem,4vw,2rem)] flex w-[min(100%,36rem)] items-center justify-center gap-[0.45rem] rounded-full border border-[color-mix(in_srgb,var(--ptt-text)_24%,transparent)] bg-[color-mix(in_srgb,white_80%,transparent)] px-4 py-2.5 text-center">
+        <span class="inline-flex shrink-0 items-center gap-[0.35rem]" aria-hidden="true">
+          <span class="h-[0.52rem] w-[0.52rem] rounded-full bg-[var(--ptt-accent)]" />
+          <span class="h-[0.52rem] w-[0.52rem] rounded-full bg-[#3ab9c9]" />
+          <span class="h-[0.52rem] w-[0.52rem] rounded-full bg-[var(--ptt-text)]" />
+        </span>
+        <span class="ml-1 text-[clamp(0.78rem,1.8vw,0.95rem)] font-medium italic leading-snug text-[color-mix(in_srgb,var(--ptt-text)_88%,transparent)]">
+          {footerNote}
+        </span>
+      </p>
+    )
+  }
+
+  {
+    !brochure && footerNote && (
+      <p class="mt-10 flex justify-center">
+        <span class="inline-flex items-center gap-2 rounded-full bg-[var(--ptt-bg-elevated)] px-4 py-2 text-sm text-[var(--ptt-text-muted)] ring-1 ring-[var(--ptt-border)]">
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-accent)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-primary)]" aria-hidden="true" />
+          <span class="h-2 w-2 rounded-full bg-[var(--ptt-text)]" aria-hidden="true" />
+          <span class="ml-1">{footerNote}</span>
+        </span>
+      </p>
+    )
+  }
+</div>
+
+<style is:global>
+  .ptd-organiza-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  .ptd-organiza-item {
+    flex: 0 1 calc((100% - clamp(0.9rem, 2.8vw, 1.35rem)) / 2);
+  }
+
+  .ptd-organiza-card {
+    margin-inline: auto;
+    background: radial-gradient(
+      circle,
+      #ffffff 0%,
+      color-mix(in srgb, #ffffff 88%, transparent) 56%,
+      transparent 72%
+    );
+    box-shadow:
+      0 0 36px color-mix(in srgb, #ffffff 95%, transparent),
+      0 14px 30px color-mix(in srgb, var(--ptt-text) 8%, transparent);
+  }
+
+  .ptd-organiza-card:hover {
+    box-shadow:
+      0 0 44px color-mix(in srgb, #ffffff 100%, transparent),
+      0 18px 34px color-mix(in srgb, var(--ptt-text) 11%, transparent);
+  }
+
+  .ptd-community-section {
+    --ptd-community-bg-height: calc(100vw * 576 / 1024);
+    isolation: isolate;
+    overflow: hidden;
+    min-height: var(--ptd-community-bg-height);
+    padding: clamp(2.25rem, 7vw, 4rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+    background: var(--ptt-bg, #fef7f3);
+  }
+
+  .ptd-community-section__bg {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-community-bg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  .ptd-community-section__fade {
+    background:
+      linear-gradient(
+        to bottom,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 8%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 78%, transparent) 16%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 24%,
+        transparent 34%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 8%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 78%, transparent) 16%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 24%,
+        transparent 34%
+      );
+  }
+</style>

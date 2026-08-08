@@ -1,0 +1,11 @@
+{
+  "serverInfo": {
+    "name": "pereira-tech-talks-site",
+    "version": "1.0.0",
+    "description": "pereiratechtalks.org — Pereira Tech Talks v3.0.0 community website. Read-only agent surface: search posts, list meetups, list events, list Pereira Tech Day editions, list speakers, list talks, list sponsors, list contributors, list channels, list series, list timeline. Exposed via WebMCP in the browser and documented via Agent Skills at /.well-known/agent-skills/index.json."
+  },
+  "transport": {
+    "endpoint": "https://pereiratechtalks.org/"
+  },
+  "capabilities": ["tools", "resources"]
+}

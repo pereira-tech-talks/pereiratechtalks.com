@@ -1,0 +1,16 @@
+---
+import SlideDeckPage from '@/components/pages/SlideDeckPage.astro';
+import { getDeckSlug, getSlideDecks } from '@/lib/slides';
+
+export async function getStaticPaths() {
+  const decks = await getSlideDecks('es');
+  return decks.map((deck) => ({
+    params: { slug: getDeckSlug(deck.id) },
+    props: { deck },
+  }));
+}
+
+const { deck } = Astro.props;
+---
+
+<SlideDeckPage lang="es" deck={deck} />

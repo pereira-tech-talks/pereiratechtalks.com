@@ -1,0 +1,873 @@
+/**
+ * slides.css — Pereira Tech Talks slide system stylesheet (v3.0.0)
+ *
+ * Loaded ONLY by src/layouts/SlideLayout.astro to keep Reveal.js styles isolated
+ * from the rest of the site. Drives both the deck chrome (toolbar, back link)
+ * and Reveal.js theme variables in light + dark mode using PTT brand tokens.
+ *
+ * Brand mapping: every chrome-and-deck color derives from the PTT global
+ * @theme tokens declared in src/styles/global.css (--color-ptt-*). Per-edition
+ * Pereira Tech Day kits override --color-ptt-primary/-accent inside
+ * [data-edition-theme="{year}"] and the slides system inherits those overrides
+ * automatically through the var() chain — no hard-coded brand HEX should ever
+ * appear in this file.
+ */
+
+/* ---------- 1. Token system ---------- */
+
+:root {
+  /* Chrome — derived from PTT @theme (light defaults) */
+  --slide-bg: var(--color-ptt-bg-elevated, #ffffff);
+  --slide-surface: var(--color-ptt-primary-soft, #e1f2f1);
+  --slide-text: var(--color-ptt-text, #0f2a2c);
+  --slide-text-muted: var(--color-ptt-text-muted, #6e8589);
+  --slide-accent: var(--color-ptt-primary, #1f6f73);
+  --slide-accent-strong: var(--color-ptt-primary-strong, #155054);
+  --slide-border: var(--color-ptt-border, #e2e8e8);
+  --slide-toolbar-bg: rgba(255, 255, 255, 0.78);
+  --slide-toolbar-fg: rgba(0, 0, 0, 0.55);
+  --slide-toolbar-fg-hover: rgba(0, 0, 0, 0.9);
+  --slide-toolbar-border: rgba(0, 0, 0, 0.1);
+  /* Back-link is fixed-dark across both modes (it sits over arbitrary slide
+     backgrounds). Uses PTT dark canvas #08191a + a slightly lighter hover. */
+  --slide-backlink-bg: #08191a;
+  --slide-backlink-bg-hover: #0f2a2c;
+
+  /* Reveal.js variable overrides — drive Reveal directly via its public API */
+  --r-background-color: var(--slide-bg);
+  --r-main-font:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --r-main-font-size: 32px;
+  --r-main-color: var(--slide-text);
+  --r-block-margin: 20px;
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-font: var(--r-main-font);
+  --r-heading-color: var(--slide-text);
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 700;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 2.5em;
+  --r-heading2-size: 1.6em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-code-font:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --r-link-color: var(--slide-accent);
+  --r-link-color-dark: var(--slide-accent-strong);
+  --r-link-color-hover: var(--slide-accent-strong);
+  --r-selection-background-color: var(--slide-accent);
+  --r-selection-color: #ffffff;
+  --r-overlay-element-bg-color: 0, 0, 0;
+  --r-overlay-element-fg-color: 240, 240, 240;
+  --r-controls-color: var(--slide-accent);
+  --r-progress-color: var(--slide-accent);
+}
+
+.dark {
+  /* Chrome — dark mode brand palette (derived from PTT @theme dark) */
+  --slide-bg: var(--color-ptt-bg, #08191a);
+  --slide-surface: var(--color-ptt-bg-elevated, #0f2a2c);
+  --slide-text: var(--color-ptt-text, #e8f0ef);
+  --slide-text-muted: var(--color-ptt-text-muted, #8fa3a6);
+  /* --slide-accent and --slide-accent-strong inherit from :root and
+     auto-flip because --color-ptt-primary flips in .dark in global.css */
+  --slide-border: var(--color-ptt-border, #1e3d40);
+  --slide-toolbar-bg: rgba(0, 0, 0, 0.65);
+  --slide-toolbar-fg: rgba(255, 255, 255, 0.65);
+  --slide-toolbar-fg-hover: rgba(255, 255, 255, 0.95);
+  --slide-toolbar-border: rgba(255, 255, 255, 0.1);
+
+  /* Reveal overrides */
+  --r-background-color: var(--slide-bg);
+  --r-main-color: var(--slide-text);
+  --r-heading-color: var(--slide-text);
+  --r-link-color: var(--slide-accent);
+  --r-link-color-dark: var(--slide-accent-strong);
+  --r-link-color-hover: var(--slide-accent-strong);
+  --r-selection-background-color: var(--slide-accent);
+  --r-selection-color: #ffffff;
+  --r-overlay-element-bg-color: 255, 255, 255;
+  --r-overlay-element-fg-color: 15, 15, 15;
+  --r-controls-color: var(--slide-accent);
+  --r-progress-color: var(--slide-accent);
+}
+
+/* Body background follows the active theme */
+body.reveal-theme-light,
+body.reveal-theme-dark {
+  background: var(--slide-bg);
+}
+
+/* ---------- 2. Reveal text — explicit cascade so theme variables actually win ---------- */
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  color: var(--slide-text);
+}
+
+.reveal .slides section {
+  padding: 40px 48px;
+}
+
+.reveal p {
+  margin: 0.6em 0;
+}
+
+.reveal li {
+  margin: 0.4em 0;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6,
+.reveal p,
+.reveal li,
+.reveal ol,
+.reveal ul,
+.reveal small,
+.reveal blockquote,
+.reveal table,
+.reveal th,
+.reveal td,
+.reveal cite {
+  color: var(--slide-text);
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: var(--slide-text);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  letter-spacing: var(--r-heading-letter-spacing);
+  margin: var(--r-heading-margin);
+}
+
+.reveal h1 {
+  font-size: var(--r-heading1-size);
+}
+.reveal h2 {
+  font-size: var(--r-heading2-size);
+}
+.reveal h3 {
+  font-size: var(--r-heading3-size);
+}
+.reveal h4 {
+  font-size: var(--r-heading4-size);
+}
+
+.reveal a {
+  color: var(--slide-accent);
+  text-decoration: none;
+}
+
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  text-decoration: underline;
+}
+
+.reveal blockquote {
+  border-left: 4px solid var(--slide-accent);
+  padding: 0.5em 1em;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.25em;
+  font-style: italic;
+}
+
+.reveal small {
+  color: var(--slide-text-muted);
+}
+
+.reveal code,
+.reveal pre {
+  font-family: var(--r-code-font);
+}
+
+.reveal pre {
+  position: relative;
+  background: var(--slide-surface);
+  border: 1px solid var(--slide-border);
+  border-radius: 0.5em;
+  padding: 0;
+  width: 100%;
+  margin: 1em auto;
+  font-size: 0.6em;
+  line-height: 1.4;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.reveal pre code {
+  display: block;
+  padding: 0.8em 1em;
+  overflow: auto;
+  max-height: 60vh;
+  word-wrap: normal;
+}
+
+.reveal table {
+  border-collapse: collapse;
+  width: auto;
+  margin: 1em auto;
+}
+
+.reveal th,
+.reveal td {
+  padding: 0.4em 0.8em;
+  border-bottom: 1px solid var(--slide-border);
+}
+
+.reveal th {
+  background: var(--slide-surface);
+  font-weight: 700;
+}
+
+/* ---------- 3. Forced-readable on slides with explicit dark backgrounds ---------- */
+
+.reveal .slides section.has-dark-background,
+.reveal .slides section.has-dark-background h1,
+.reveal .slides section.has-dark-background h2,
+.reveal .slides section.has-dark-background h3,
+.reveal .slides section.has-dark-background h4,
+.reveal .slides section.has-dark-background h5,
+.reveal .slides section.has-dark-background h6,
+.reveal .slides section.has-dark-background p,
+.reveal .slides section.has-dark-background li,
+.reveal .slides section.has-dark-background small,
+.reveal .slides section.has-dark-background blockquote,
+.reveal .slides section.has-dark-background th,
+.reveal .slides section.has-dark-background td,
+.reveal .slides section.has-dark-background cite,
+.reveal .slides section[data-background-gradient],
+.reveal .slides section[data-background-gradient] h1,
+.reveal .slides section[data-background-gradient] h2,
+.reveal .slides section[data-background-gradient] h3,
+.reveal .slides section[data-background-gradient] h4,
+.reveal .slides section[data-background-gradient] p,
+.reveal .slides section[data-background-gradient] li,
+.reveal .slides section[data-background-gradient] small,
+.reveal .slides section[data-background-gradient] blockquote,
+.reveal .slides section[data-background-gradient] cite,
+.reveal .slides section[data-background-image],
+.reveal .slides section[data-background-image] h1,
+.reveal .slides section[data-background-image] h2,
+.reveal .slides section[data-background-image] h3,
+.reveal .slides section[data-background-image] h4,
+.reveal .slides section[data-background-image] p,
+.reveal .slides section[data-background-image] li,
+.reveal .slides section[data-background-image] small,
+.reveal .slides section[data-background-image] blockquote,
+.reveal .slides section[data-background-image] cite,
+.reveal .slides section.slide-bg-overlay--dark,
+.reveal .slides section.slide-bg-overlay--dark h1,
+.reveal .slides section.slide-bg-overlay--dark h2,
+.reveal .slides section.slide-bg-overlay--dark h3,
+.reveal .slides section.slide-bg-overlay--dark h4,
+.reveal .slides section.slide-bg-overlay--dark p,
+.reveal .slides section.slide-bg-overlay--dark li,
+.reveal .slides section.slide-bg-overlay--dark small,
+.reveal .slides section.slide-bg-overlay--dark blockquote,
+.reveal .slides section.slide-bg-overlay--dark cite {
+  color: #ffffff;
+}
+
+/* Light background helper — drop on a section to ensure dark text */
+.reveal .slides section.has-light-background,
+.reveal .slides section.has-light-background h1,
+.reveal .slides section.has-light-background h2,
+.reveal .slides section.has-light-background h3,
+.reveal .slides section.has-light-background h4,
+.reveal .slides section.has-light-background p,
+.reveal .slides section.has-light-background li,
+.reveal .slides section.has-light-background small,
+.reveal .slides section.has-light-background blockquote,
+.reveal .slides section.has-light-background cite {
+  color: #111111;
+}
+
+/* Reveal controls + progress: reveal.css hardcodes .controls{color:#000}.
+   Without a theme loaded, we must override that explicitly. */
+
+.reveal .controls {
+  color: var(--r-controls-color);
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.4));
+}
+
+.reveal .slide-number {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+}
+
+.reveal .slide-number a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.reveal .progress span {
+  background: var(--r-progress-color);
+}
+
+/* Overview thumbnails fix.
+ * Reveal hardcodes viewDistance=10/6 inside updateSlidesVisibility() during
+ * overview, so every slide outside that radius gets slideContent.unload(),
+ * which sets inline `style="display:none"` on both the <section> and its
+ * matching `.slide-background`. Reveal's own overview CSS only forces
+ * opacity/visibility — it never touches display. The rules below override
+ * the inline display:none (author !important beats inline non-important).
+ * The JS hook in RevealDeck.svelte additionally re-loads lazy media and
+ * background-image styles, but the CSS alone keeps thumbnails visible. */
+.reveal.overview .slides section,
+.reveal.overview .slides section.past,
+.reveal.overview .slides section.future {
+  /* biome-ignore lint/complexity/noImportantStyles: must beat Reveal's inline `style="display:none"` on past/future slides during overview — author !important beats inline non-important per CSS spec */
+  display: block !important;
+}
+
+/* During overview Reveal moves `.backgrounds` inside `.slides`; the
+ * descendant selector still matches before and after the move. */
+.reveal.overview .backgrounds .slide-background,
+.reveal.overview .backgrounds .slide-background-content {
+  /* biome-ignore lint/complexity/noImportantStyles: must beat Reveal's inline `style="display:none"` on background containers during overview */
+  display: block !important;
+}
+
+/* ---------- 4. Chrome — toolbar + back link ---------- */
+
+.slide-back-link {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--slide-backlink-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font:
+    600 13px / 1 ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.65);
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.slide-back-link:hover,
+.slide-back-link:focus-visible {
+  color: rgba(255, 255, 255, 0.95);
+  background: var(--slide-backlink-bg-hover);
+}
+
+.slide-back-link:focus-visible {
+  outline: 2px solid var(--slide-accent);
+  outline-offset: 2px;
+}
+
+.slide-back-link__logo {
+  height: 18px;
+  width: auto;
+  display: block;
+  margin-left: 4px;
+  filter: brightness(1.6) contrast(0.9);
+}
+
+@media (max-width: 480px) {
+  .slide-back-link__logo {
+    display: none;
+  }
+}
+
+.slide-toolbar {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background: var(--slide-toolbar-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--slide-toolbar-border);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.slide-toolbar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--slide-toolbar-fg);
+  text-decoration: none;
+  font:
+    700 11px / 1 ui-sans-serif,
+    system-ui,
+    sans-serif;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.slide-toolbar__btn--lang {
+  width: auto;
+  padding: 0 10px;
+}
+
+.slide-toolbar__btn:hover {
+  color: var(--slide-toolbar-fg-hover);
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.slide-toolbar__btn:focus-visible {
+  outline: 2px solid var(--slide-accent);
+  outline-offset: 2px;
+  color: var(--slide-toolbar-fg-hover);
+}
+
+.slide-toolbar__divider {
+  width: 1px;
+  height: 18px;
+  background: var(--slide-toolbar-border);
+  margin: 0 2px;
+}
+
+.slide-toolbar__draft-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #9333ea;
+  color: #ffffff;
+}
+
+/* Hidden when fullscreen — applied via JS toggling [hidden] */
+.slide-toolbar[hidden],
+.slide-back-link[hidden] {
+  /* biome-ignore lint/complexity/noImportantStyles: must beat the `.slide-toolbar`/`.slide-back-link` `display:flex` positioning rules above when JS toggles the [hidden] attribute */
+  display: none !important;
+}
+
+/* ---------- 5. Layout primitives — helper classes for slide content ---------- */
+
+.slide-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.slide-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.slide-grid--align-center {
+  align-items: center;
+}
+
+/* Image + text: left column shrinks to image width so text sits closer */
+.slide-grid-2.slide-grid-2--compact-media {
+  grid-template-columns: auto 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Top-align slide body — Reveal vertically centers sections by default */
+.reveal .slides section.slide-content-top {
+  /* biome-ignore lint/complexity/noImportantStyles: must beat Reveal's JS-applied inline `top` used for vertical centering */
+  top: 0 !important;
+}
+
+.reveal .slides section.slide-content-top > h2:first-of-type {
+  margin-top: 0;
+  margin-bottom: 0.65em;
+}
+
+@media (max-width: 768px) {
+  .slide-grid-2,
+  .slide-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .slide-grid-2.slide-grid-2--compact-media {
+    grid-template-columns: 1fr;
+  }
+}
+
+.slide-card {
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--slide-border);
+  background: var(--slide-surface);
+}
+
+.slide-card__icon {
+  font-size: 2.5em;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--slide-accent);
+}
+
+.slide-quote {
+  font-size: 1.5em;
+  line-height: 1.4;
+  font-style: italic;
+  max-width: 80%;
+  margin: 0 auto 1rem;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.slide-quote + cite,
+.slide-quote-cite {
+  display: block;
+  margin-top: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--slide-text-muted);
+  font-size: 0.7em;
+}
+
+.slide-stat {
+  text-align: center;
+}
+
+.slide-stat__number {
+  display: block;
+  font-size: 5em;
+  font-weight: 800;
+  color: var(--slide-accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.slide-stat__label {
+  display: block;
+  font-size: 1.1em;
+  color: var(--slide-text-muted);
+  margin-top: 0.5rem;
+}
+
+.slide-stat__context {
+  font-size: 0.7em;
+  margin-top: 1rem;
+  color: var(--slide-text-muted);
+}
+
+.slide-table {
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.7em;
+}
+
+.slide-table th,
+.slide-table td {
+  padding: 0.5em 0.75em;
+  text-align: left;
+  border-bottom: 1px solid var(--slide-border);
+}
+
+.slide-table th {
+  background: var(--slide-surface);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .slide-table {
+    font-size: 0.55em;
+  }
+}
+
+.slide-steps {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  counter-reset: step;
+}
+
+.slide-steps li {
+  flex: 1;
+  counter-increment: step;
+  text-align: left;
+  font-size: 0.7em;
+}
+
+.slide-steps li::before {
+  content: counter(step);
+  display: block;
+  font-size: 2em;
+  font-weight: 800;
+  color: var(--slide-accent);
+  line-height: 1;
+  margin-bottom: 0.25em;
+}
+
+@media (max-width: 768px) {
+  .slide-steps {
+    flex-direction: column;
+  }
+}
+
+.slide-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide-timeline li {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  font-size: 0.7em;
+  align-items: baseline;
+  border-left: 2px solid var(--slide-accent);
+  padding-left: 1rem;
+}
+
+.slide-timeline time {
+  font-weight: 700;
+  color: var(--slide-accent);
+}
+
+.slide-team {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 90%;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+}
+
+.slide-team figure {
+  text-align: center;
+  margin: 0;
+}
+
+.slide-team img {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--slide-accent);
+}
+
+.slide-team figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.6em;
+}
+
+.slide-team figcaption strong {
+  display: block;
+  color: var(--slide-text);
+}
+
+/* biome-ignore lint/style/noDescendingSpecificity: targets `.slide-team figcaption span` only; the earlier `.reveal .progress span` selector matches a different element and never overlaps */
+.slide-team figcaption span {
+  color: var(--slide-text-muted);
+  font-size: 0.85em;
+}
+
+.slide-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: 0.8em;
+  padding: 0.8em 1.6em;
+  background: var(--slide-accent);
+  /* biome-ignore lint/complexity/noImportantStyles: must beat Reveal's prose link-color reset (`a { color: ... }`) applied via deck-wide selectors */
+  color: #ffffff !important;
+  border-radius: 0.5em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.slide-cta:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.slide-image-full {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.slide-video {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.slide-media-contained {
+  display: block;
+  margin: 0 auto;
+  max-width: 75%;
+  max-height: 55vh;
+  border-radius: 0.75rem;
+}
+
+.slide-caption-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0.5em 1em;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 0.6em;
+}
+
+.slide-caption-overlay--bottom {
+  bottom: 0;
+}
+
+.slide-caption-overlay--top {
+  top: 0;
+}
+
+/* Background overlays — drop on a section with an image/video background to guarantee text readability.
+   The ::after layer adds a solid black base so that data-background-opacity
+   composites over black, not the theme color — ensuring identical look in light and dark mode. */
+.reveal .slides section.slide-bg-overlay--dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reveal .slides section.slide-bg-overlay--light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reveal .slides section.slide-bg-overlay--dark > *,
+.reveal .slides section.slide-bg-overlay--light > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* CSS-only background patterns */
+.reveal .slides section.slide-bg-pattern--dots {
+  background-image: radial-gradient(
+    circle,
+    var(--slide-text-muted) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+.reveal .slides section.slide-bg-pattern--grid {
+  background-image:
+    linear-gradient(var(--slide-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--slide-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Section-divider helper */
+.slide-section-divider {
+  text-align: center;
+}
+
+.slide-section-divider .eyebrow {
+  display: block;
+  font-size: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.slide-section-divider h2 {
+  font-size: 2.4em;
+  margin: 0;
+}
+
+/* ---------- 6. Reduced-motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-toolbar,
+  .slide-toolbar__btn,
+  .slide-back-link,
+  .reveal .slides section,
+  .reveal .progress,
+  .reveal .controls path,
+  .reveal .fragment {
+    /* biome-ignore lint/complexity/noImportantStyles: accessibility — prefers-reduced-motion must beat every transition/animation declared elsewhere (Reveal's own + ours), regardless of specificity */
+    transition: none !important;
+    /* biome-ignore lint/complexity/noImportantStyles: accessibility — prefers-reduced-motion must beat every animation declared elsewhere, regardless of specificity */
+    animation: none !important;
+  }
+}

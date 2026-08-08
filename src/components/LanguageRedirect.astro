@@ -1,0 +1,81 @@
+---
+/**
+ * Optional explicit `?lang=` pin — no automatic language negotiation.
+ *
+ * Language is URL-first (Spanish at `/`, English at `/en/`), matching
+ * xergioalex.com. Browser detection and localStorage never force a redirect
+ * (that triggered PageSpeed's "Clientside Redirect!" modal).
+ *
+ * The only redirect this script may issue is when the visitor (or LHCI)
+ * passes `?lang=es|en` and the current page language differs. Lab UAs are
+ * still skipped as belt-and-suspenders when combined with other tooling.
+ *
+ * Pure rules: `src/lib/language-preference.ts` (unit-tested). Keep in sync.
+ */
+
+import {
+  DEFAULT_LANGUAGE,
+  getSupportedLanguages,
+  getUrlPrefix,
+  isValidLanguage,
+} from '@/lib/i18n';
+import {
+  LANGUAGE_QUERY_PARAM,
+  LANGUAGE_STORAGE_KEY,
+} from '@/lib/language-preference';
+
+interface Props {
+  /** Accepts a plain string because `MainLayout` types its own prop that way. */
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const currentLang = isValidLanguage(lang) ? lang : DEFAULT_LANGUAGE;
+
+const homeUrls: Record<string, string> = {};
+for (const l of getSupportedLanguages()) {
+  const prefix = getUrlPrefix(l);
+  homeUrls[l] = prefix === '' ? '/' : `${prefix}/`;
+}
+
+const config = JSON.stringify({
+  current: currentLang,
+  homeUrls,
+  supported: getSupportedLanguages(),
+  storageKey: LANGUAGE_STORAGE_KEY,
+  queryParam: LANGUAGE_QUERY_PARAM,
+});
+---
+
+<script is:inline define:vars={{ config }}>
+  (() => {
+    try {
+      const c = JSON.parse(config);
+      const isSupported = (v) => typeof v === 'string' && c.supported.includes(v);
+
+      const ua = navigator.userAgent || '';
+      if (
+        navigator.webdriver ||
+        /Chrome-Lighthouse|PageSpeed|Lighthouse|HeadlessChrome/i.test(ua)
+      ) {
+        return;
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const forced = params.get(c.queryParam);
+      if (!isSupported(forced)) return;
+
+      try {
+        window.localStorage.setItem(c.storageKey, forced);
+      } catch {
+        /* non-fatal */
+      }
+
+      if (forced !== c.current) {
+        window.location.replace(c.homeUrls[forced]);
+      }
+    } catch {
+      // Never let language handling break the page.
+    }
+  })();
+</script>

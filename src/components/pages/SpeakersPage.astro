@@ -1,0 +1,112 @@
+---
+/**
+ * PTT v3.0.0 speakers directory page (shared between EN and ES).
+ * Sorted by most recent talk date (descending).
+ */
+
+import SpeakerCard from '@/components/cards/SpeakerCard.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import EmptyState from '@/components/ui/EmptyState.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getSpeakersSortedByLatestTalk } from '@/lib/speaker';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const speakers = await getSpeakersSortedByLatestTalk();
+
+const t = {
+  title: lang === 'es' ? 'Ponentes' : 'Speakers',
+  description:
+    lang === 'es'
+      ? 'Personas que han compartido su trabajo en Pereira Tech Talks: ingenieras, ingenieros, fundadores e investigadores de la industria tech local e internacional.'
+      : 'People who have shared their work on the Pereira Tech Talks stage: engineers, founders, researchers, and communicators from across the tech industry.',
+  intro:
+    lang === 'es'
+      ? `${speakers.length} ponentes han subido al escenario desde 2014. Ordenados por participación más reciente.`
+      : `${speakers.length} speakers have taken the stage since 2014. Sorted by most recent talk.`,
+  sortHint:
+    lang === 'es'
+      ? 'Ordenados por participación más reciente'
+      : 'Sorted by most recent talk',
+  cfsLabel:
+    lang === 'es'
+      ? '¿Quieres ser ponente? Postúlate'
+      : 'Want to speak? Submit your talk',
+  cfsHref: `${getUrlPrefix(lang)}/call-for-speakers/`,
+  emptyTitle:
+    lang === 'es'
+      ? 'Aún no hay ponentes registrados'
+      : 'No speakers registered yet',
+  emptyDesc:
+    lang === 'es'
+      ? 'Estamos consolidando el directorio histórico. Vuelve pronto.'
+      : "We're consolidating the historical directory. Check back soon.",
+};
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: `${getUrlPrefix(lang)}/`,
+  },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <div class="bg-ptt-bg">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container pt-6 pb-12">
+      <Eyebrow>{lang === 'es' ? 'Comunidad' : 'Community'}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.intro}
+      </p>
+      <p class="mt-2 text-sm font-medium text-ptt-primary dark:text-ptt-primary-dark">
+        {t.sortHint}
+      </p>
+      <a
+        href={t.cfsHref}
+        class="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:bg-ptt-primary-dark dark:text-ptt-bg dark:hover:bg-ptt-primary-dark/90"
+      >
+        {t.cfsLabel}
+      </a>
+    </div>
+  </div>
+
+  <Section
+    eyebrow={lang === 'es' ? 'Directorio' : 'Directory'}
+    title={lang === 'es' ? 'Todas las personas' : 'All speakers'}
+    surface="alt"
+    spacing="lg"
+  >
+    {
+      speakers.length > 0 ? (
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {speakers.map(({ speaker, talkCount, latestTalkDate }) => (
+            <li>
+              <SpeakerCard
+                speaker={speaker}
+                lang={lang}
+                talkCount={talkCount}
+                latestTalkDate={latestTalkDate}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyState title={t.emptyTitle} description={t.emptyDesc} />
+      )
+    }
+  </Section>
+</MainLayout>

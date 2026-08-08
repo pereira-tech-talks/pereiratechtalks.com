@@ -1,0 +1,282 @@
+year: 2024
+title:
+  en: Pereira Tech Day 2024
+  es: Pereira Tech Day 2024
+tagline:
+  en: A day of technology, software development, data science, machine learning, infrastructure, and more!
+  es: Un día de Tecnología, Desarrollo de software, Data Science, Machine Learning, Infraestructura y más!
+description:
+  en: Pereira Tech Day 2024 brought together hundreds of builders, students, and community members at the Universidad Tecnológica de Pereira for a free full-day program of keynotes, lightning talks, and networking. Four keynotes covered frontend engineering, product management and Python community, applied research, and AI-driven entrepreneurship; the lightning talks gave first-time speakers a stage to share what they are building.
+  es: Pereira Tech Day 2024 reunió a cientos de personas constructoras, estudiantes y miembros de la comunidad en la Universidad Tecnológica de Pereira para una jornada gratuita de keynotes, lightning talks y networking. Cuatro keynotes cubrieron ingeniería frontend, product management y comunidad Python, investigación aplicada y emprendimiento con IA; las lightning talks dieron escenario a ponentes debutantes para compartir lo que están construyendo.
+date: 2024-09-21
+startTime: "08:00"
+endTime: "14:00"
+venue:
+  name: Auditorio Jorge Roa Martínez, Universidad Tecnológica de Pereira
+  city: Pereira
+  country: Colombia
+  mapUrl: "https://maps.app.goo.gl/XBexd1kkRm4kbsdt6"
+mode: in-person
+hero:
+  src: /images/pereira-tech-days/2024/hero.webp
+  alt:
+    en: Pereira Tech Day 2024 attendees gathered in the Auditorio Jorge Roa Martínez
+    es: Asistentes de Pereira Tech Day 2024 reunidos en el Auditorio Jorge Roa Martínez
+  layout: banner
+brandKit:
+  paletteLight:
+    primary: "#ffffff"
+    accent: "#f06d6d"
+    bg: "#030620"
+    bgElevated: "#0a1435"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
+  paletteDark:
+    primary: "#ffffff"
+    accent: "#f06d6d"
+    bg: "#030620"
+    bgElevated: "#0a1435"
+    text: "#ffffff"
+    textMuted: "#b8c5d1"
+    border: "#3a5478"
+  typography:
+    headingFamily: "Bebas Neue, \"Arial Black\", sans-serif"
+    headingTransform: uppercase
+    headingTracking: 0.08em
+    fontSources:
+      - family: Bebas Neue
+        npmPackage: "@fontsource/bebas-neue"
+schedule:
+  - time: "08:00"
+    type: open-doors
+  - time: "08:30"
+    type: keynote
+    title:
+      en: Opening keynote — Vanessa Aristizabal
+      es: Keynote de apertura — Vanessa Aristizabal
+  - time: "09:30"
+    type: panel
+    title:
+      en: Product, Python, and community
+      es: Producto, Python y comunidad
+  - time: "10:30"
+    type: break
+  - time: "11:00"
+    type: keynote
+    title:
+      en: Applied research keynote — Dr. Jose Jaramillo
+      es: Keynote de investigación aplicada — Dr. Jose Jaramillo
+  - time: "12:00"
+    type: keynote
+    title:
+      en: AI-driven entrepreneurship — César Camacho
+      es: Emprendimiento con IA — César Camacho
+  - time: "13:00"
+    type: lightning
+    title:
+      en: Lightning talks block
+      es: Bloque de lightning talks
+  - time: "14:00"
+    type: closing
+keynotes:
+  - vanessa-aristizabal
+  - karolina-ladino
+  - jose-jaramillo
+  - cesar-camacho
+lightningTalks:
+  - speaker: jonathan-alvarez
+    title:
+      en: Your first talk
+      es: Tu primera charla
+  - speaker: juan-pablo-franco
+    title:
+      en: Serverless in everyday life
+      es: Serleverless en lo cotidiano
+  - speaker: sebastian-franco
+    title:
+      en: >-
+        At what point did we stop understanding what happens inside Machine
+        Learning? An intuition about architectures and styles of modern ML
+      es: >-
+        ¿En qué momento dejamos de entender qué sucede dentro del Machine
+        Learning? Una intuición sobre arquitecturas y estilos del ML moderno
+  - speaker: juan-jose-cardona
+    title:
+      en: From 100 Django Models to a Complete GraphQL API in 1 Minute
+      es: De 100 Modelos Django a una API GraphQL Completa en 1 Minuto
+  - speaker: abdenago-lopez
+    title:
+      en: "Good communication: the key behind successful teamwork"
+      es: "Buena comunicación: la clave detrás del éxito en el trabajo en equipo"
+  - speaker: sary-libreros
+    title:
+      en: >-
+        5 Steps to Conquer the Tech World: My Journey from Chemical
+        Engineering to Data
+      es: >-
+        5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería
+        Química a los Datos
+sponsors:
+  - slug: ase-utp
+    tier: gold
+  - slug: github
+    tier: gold
+  - slug: source-meridian
+    tier: gold
+  - slug: gorilla-logic
+    tier: silver
+  - slug: dailybot
+    tier: silver
+  - slug: made-for-germany
+    tier: silver
+organizers:
+  - carolina-gomez-trejos
+  - jose-felipe-duarte
+  - stiven-cardona-monsalve
+  - sergio-florez
+  - alejandro-rendon
+  - angelica-aguirre
+  - melisa-escobar
+collaborators:
+  - santiago-bernal
+  - eliana-osorio
+  - andres-rodriguez
+  - katherine-lopez
+  - lizeth-franco
+  - leiver-campeon
+  - cindy-jimenez
+communities:
+  - name: Python Pereira
+    logo: /images/communities/pypereira.png
+    url: "https://pypereira.co/"
+  - name: JointDev
+    logo: /images/communities/jointdev.png
+    url: "https://jointdevweb.firebaseapp.com/"
+  - name: PereiraJS
+    logo: /images/communities/perjs.jpeg
+    url: "https://perjs.org/"
+  - name: Pereira Tech Talks
+    logo: /images/communities/ptt.png
+    url: "https://pereiratechtalks.org/"
+gallery:
+  - src: /images/pereira-tech-days/2024/memories/recepcion.png
+    alt:
+      en: Attendees arriving and registering at the welcome desk
+      es: Asistentes llegando y registrándose en la recepción
+  - src: /images/pereira-tech-days/2024/memories/previa.png
+    alt:
+      en: Pre-event setup at the Auditorio Jorge Roa Martínez
+      es: Preparativos en el Auditorio Jorge Roa Martínez
+  - src: /images/pereira-tech-days/2024/memories/badge.png
+    alt:
+      en: PTD 2024 attendee badge
+      es: Credencial de asistente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/massive.png
+    alt:
+      en: Packed auditorium during the opening keynote
+      es: Auditorio lleno durante el keynote de apertura
+  - src: /images/pereira-tech-days/2024/memories/ponente.png
+    alt:
+      en: A speaker presenting on stage
+      es: Un ponente presentando en escenario
+  - src: /images/pereira-tech-days/2024/memories/ponentes.png
+    alt:
+      en: The PTD 2024 speakers' line-up
+      es: La línea de ponentes de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/relampago.png
+    alt:
+      en: Lightning talks block in progress
+      es: Bloque de lightning talks en curso
+  - src: /images/pereira-tech-days/2024/memories/jon.png
+    alt:
+      en: Jonathan Alvarez delivering a lightning talk
+      es: Jonathan Alvarez en una lightning talk
+  - src: /images/pereira-tech-days/2024/memories/jose.png
+    alt:
+      en: Dr. Jose Jaramillo on the applied-research keynote
+      es: Dr. Jose Jaramillo en el keynote de investigación aplicada
+  - src: /images/pereira-tech-days/2024/memories/franco.png
+    alt:
+      en: Sebastián Franco presenting at PTD 2024
+      es: Sebastián Franco presentando en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/break.png
+    alt:
+      en: Coffee break and networking moment
+      es: Pausa de café y networking
+  - src: /images/pereira-tech-days/2024/memories/aseutp.png
+    alt:
+      en: ASE-UTP sponsor presence at PTD 2024
+      es: Presencia del patrocinador ASE-UTP en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/github.png
+    alt:
+      en: GitHub sponsor booth at PTD 2024
+      es: Stand del patrocinador GitHub en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/gorila.png
+    alt:
+      en: Gorilla Logic sponsor presence at PTD 2024
+      es: Presencia del patrocinador Gorilla Logic en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/patrocinadores.png
+    alt:
+      en: PTD 2024 sponsors banner
+      es: Banner de patrocinadores de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/patrocinadores2.png
+    alt:
+      en: Sponsor logos display
+      es: Panel con logos de los patrocinadores
+  - src: /images/pereira-tech-days/2024/memories/organizadores.png
+    alt:
+      en: PTD 2024 organizing crew portrait
+      es: Retrato del equipo organizador de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/premios.png
+    alt:
+      en: Closing prize moment at PTD 2024
+      es: Momento de premios al cierre de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/stickers.png
+    alt:
+      en: PTD 2024 stickers and swag
+      es: Stickers y merchandising de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/cierre.png
+    alt:
+      en: Closing photo with the community
+      es: Foto de cierre con la comunidad
+  - src: /images/pereira-tech-days/2024/memories/abde.png
+    alt:
+      en: PTD 2024 atmosphere
+      es: Ambiente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/aja.png
+    alt:
+      en: PTD 2024 atmosphere
+      es: Ambiente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/activo.png
+    alt:
+      en: An active PTD 2024 networking moment
+      es: Un momento activo de networking en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/chica.png
+    alt:
+      en: A PTD 2024 attendee
+      es: Una asistente de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/epic.png
+    alt:
+      en: A defining PTD 2024 moment
+      es: Un momento icónico de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/kw.png
+    alt:
+      en: PTD 2024 venue detail
+      es: Detalle del venue de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/mafioso.png
+    alt:
+      en: PTD 2024 portrait
+      es: Retrato en PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/master.png
+    alt:
+      en: PTD 2024 master shot
+      es: Toma maestra de PTD 2024
+  - src: /images/pereira-tech-days/2024/memories/1.png
+    alt:
+      en: PTD 2024 photo memory
+      es: Foto memoria de PTD 2024
+linkMeetupCom: "https://www.meetup.com/pereira-tech-talks/events/302603058/"
+linkRecording: "https://www.youtube.com/watch?v=5BWnHA-vBvg"
+status: completed
+draft: false

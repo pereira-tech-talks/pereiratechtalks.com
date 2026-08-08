@@ -1,0 +1,25 @@
+severity: info
+title:
+  en: Free monthly meetups in Pereira
+  es: Meetups mensuales y gratuitos en Pereira
+summary:
+  en: We have met every month since 2017 — talks, demos, and community.
+  es: Nos reunimos cada mes desde 2017 — charlas, demos y comunidad.
+body:
+  en: |
+    Pereira Tech Talks runs a free, in-person meetup every month, with technical talks,
+    live demos, and time to connect with the local tech community. Check the calendar
+    for the next date, venue, and speaker lineup.
+  es: |
+    Pereira Tech Talks organiza un meetup presencial y gratuito cada mes, con charlas
+    técnicas, demostraciones en vivo y espacio para conectar con la comunidad tech local.
+    Revisa el calendario para conocer la próxima fecha, el lugar y quiénes presentan.
+ctaLabel:
+  en: See upcoming meetups
+  es: Ver próximos meetups
+ctaHref: /meetups
+modalEnabled: true
+startsAt: 2026-01-01T00:00:00.000Z
+endsAt: 2026-12-31T23:59:59.000Z
+priority: 50
+active: true

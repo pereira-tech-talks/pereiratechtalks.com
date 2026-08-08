@@ -1,0 +1,53 @@
+---
+title:
+  en: "Security Night y  Testing"
+  es: "Noche de seguridad y  Testing"
+description:
+  en: "Pereira Tech Talks meetup (2022-06-23). Tenemos meetUp presencial. Con dos charlas mega increibles."
+  es: "Tenemos meetUp presencial. Con dos charlas mega increibles."
+pubDate: 2022-06-23
+date: 2022-06-23
+venue:
+  name: "Sala Magistral 1 (Edificio 13)"
+  city: "Pereira"
+  country: "Colombia"
+mode: in-person
+hero:
+  src: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
+  alt:
+    en: "Security Night y  Testing"
+    es: "Noche de seguridad y  Testing"
+  layout: banner
+heroImage: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
+verticals:
+  - monthly-meetups
+talks: []
+speakers: []
+sponsors: []
+status: completed
+draft: false
+---
+
+## Noche de seguridad y  Testing
+
+Tenemos meetUp presencial. Con dos charlas mega increibles.
+
+Seguridad en cadenas de suministro de software
+Por Andrés Torres. Software Engineer VMware, Entrepreneur, Backend Ruby On Rails Developer, Data Scientist
+Desde hace un par de años los ataques informáticos a través de la cadena de suministro de software se han incrementado considerablemente. Un ejemplo muy visible es el ataque a SolarWinds que afectó a 18,000 de sus clientes, incluyendo gobiernos, agencias de defensa y empresas de seguridad informática. Esta charla es una introducción a este tipo de ataques, las herramientas que se están desarrollando actualmente en la industria para mitigarlos y un pequeño demo de una de las herramientas en Kubernetes. Está dirigida a cualquier persona involucrada en la industria del software.
+Probando el front-end. Testing con ReactJS
+Por Harold Sánchez Ospina Master Programmer en Gryffin Media
+Revisaremos las ventajas, técnicas e importancia del testing para el desarrollo profesional de software, aplicándolo al front-end y usando ejemplos aplicados en ReactJS.
+
+---
+
+### Summary in English
+
+A Pereira Tech Talks meetup on 2022-06-23: Security Night y  Testing. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
+
+---
+
+### Fuentes / Sources
+
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/286473532)
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

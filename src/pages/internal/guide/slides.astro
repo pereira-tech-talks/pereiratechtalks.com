@@ -1,0 +1,545 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const deckTypes = [
+  {
+    type: 'native',
+    renders: 'Full Reveal.js presentation hosted on-site',
+    content: 'Markdown slides in content file',
+    example: 'Conference talks, workshops',
+  },
+  {
+    type: 'external',
+    renders: 'Stub info page with link to external slides',
+    content: 'externalUrl with metadata',
+    example: 'Slides hosted on third-party platforms',
+  },
+];
+
+const revealConfig = [
+  {
+    option: 'width',
+    value: '1280',
+    description: 'Virtual canvas width (16:9)',
+  },
+  {
+    option: 'height',
+    value: '720',
+    description: 'Virtual canvas height (16:9)',
+  },
+  {
+    option: 'hash',
+    value: 'true',
+    description: 'URL hash navigation for deep-linking',
+  },
+  {
+    option: 'slideNumber',
+    value: 'true',
+    description: 'Shows current slide number',
+  },
+  {
+    option: 'controls',
+    value: 'true',
+    description: 'Arrow navigation controls',
+  },
+  { option: 'progress', value: 'true', description: 'Progress bar at bottom' },
+  {
+    option: 'transition',
+    value: 'slide',
+    description: 'Default slide transition effect',
+  },
+];
+
+const fontSizing = [
+  { element: 'h1', size: '2.5em', pixels: '80px', usage: 'Slide titles' },
+  { element: 'h2', size: '1.6em', pixels: '51px', usage: 'Section headings' },
+  {
+    element: 'h3',
+    size: '1.3em',
+    pixels: '42px',
+    usage: 'Subsection headings',
+  },
+  { element: 'h4', size: '1em', pixels: '32px', usage: 'Minor headings' },
+  {
+    element: 'base',
+    size: '32px',
+    pixels: '32px',
+    usage: 'Body text, paragraphs',
+  },
+];
+
+const layouts = [
+  {
+    name: 'title-hero',
+    description: 'Full-screen title with optional subtitle and background',
+  },
+  {
+    name: 'section-divider',
+    description: 'Section break with large centered heading',
+  },
+  {
+    name: 'two-column-split',
+    description: 'Content split into two equal columns',
+  },
+  {
+    name: 'three-column-cards',
+    description: 'Three card columns for comparisons',
+  },
+  { name: 'image-left', description: 'Image on left, text content on right' },
+  { name: 'image-right', description: 'Text content on left, image on right' },
+  {
+    name: 'image-full-bleed',
+    description: 'Full-screen image with optional overlay text',
+  },
+  { name: 'image-centered', description: 'Centered image with caption below' },
+  { name: 'video-centered', description: 'Centered video player with caption' },
+  { name: 'video-left', description: 'Video on left, text content on right' },
+  { name: 'video-right', description: 'Text content on left, video on right' },
+  { name: 'quote', description: 'Large blockquote with attribution' },
+  {
+    name: 'code-with-callout',
+    description: 'Code block with highlighted callout annotation',
+  },
+  {
+    name: 'big-stat',
+    description: 'Single large statistic with label and context',
+  },
+  {
+    name: 'comparison-table',
+    description: 'Side-by-side comparison in table format',
+  },
+  { name: 'process-steps', description: 'Numbered steps in a process flow' },
+  { name: 'timeline', description: 'Chronological events in timeline format' },
+  {
+    name: 'team-avatars',
+    description: 'Grid of team member photos with names',
+  },
+  {
+    name: 'closing-cta',
+    description: 'Closing slide with call-to-action and links',
+  },
+];
+
+const backgrounds = [
+  {
+    mode: 'solid-color',
+    syntax: 'data-background-color="#0f1124"',
+    description: 'Single solid background color',
+  },
+  {
+    mode: 'gradient',
+    syntax: 'data-background-gradient="linear-gradient(...)"',
+    description: 'CSS gradient background',
+  },
+  {
+    mode: 'image+text',
+    syntax: 'data-background-image + slide-bg-overlay--dark',
+    description: 'Background image with text overlay',
+  },
+  {
+    mode: 'image-fullscreen',
+    syntax: 'data-background-image + data-background-size="cover"',
+    description: 'Full-bleed background image, no overlay',
+  },
+  {
+    mode: 'video+text',
+    syntax: 'data-background-video + slide-bg-overlay--dark',
+    description: 'Background video with text overlay',
+  },
+  {
+    mode: 'video-fullscreen',
+    syntax: 'data-background-video + data-background-size="cover"',
+    description: 'Full-bleed background video',
+  },
+  {
+    mode: 'pattern',
+    syntax: 'slide-bg-pattern--dots or slide-bg-pattern--grid',
+    description: 'Repeating CSS pattern background',
+  },
+  {
+    mode: 'iframe',
+    syntax: 'data-background-iframe="url"',
+    description: 'Live webpage as background',
+  },
+];
+
+const chromeUI = [
+  {
+    element: 'Back-link',
+    description:
+      'Site logo on #0f1124 background, top-left corner. Links back to deck listing.',
+    position: 'Top-left',
+  },
+  {
+    element: 'Toolbar',
+    description:
+      'Language toggle, theme toggle (sun=light, moon=dark), fullscreen button.',
+    position: 'Top-right',
+  },
+  {
+    element: 'Slide Number',
+    description:
+      'Dark pill overlay, readable on any background. Shows current/total.',
+    position: 'Bottom-right',
+  },
+];
+
+const cssClasses = [
+  { class: 'slide-grid-2', description: 'Two-column grid layout' },
+  { class: 'slide-grid-3', description: 'Three-column grid layout' },
+  {
+    class: 'slide-card',
+    description: 'Card container with border and padding',
+  },
+  { class: 'slide-video', description: 'Responsive video container' },
+  {
+    class: 'slide-media-contained',
+    description: 'Media with contained sizing',
+  },
+  { class: 'slide-image-full', description: 'Full-width image display' },
+  { class: 'slide-cta', description: 'Call-to-action button styling' },
+  { class: 'slide-quote', description: 'Blockquote with attribution styling' },
+  { class: 'slide-stat', description: 'Large statistic number display' },
+  { class: 'slide-table', description: 'Styled table within slides' },
+  { class: 'slide-steps', description: 'Process steps layout' },
+  { class: 'slide-timeline', description: 'Timeline vertical layout' },
+  { class: 'slide-team', description: 'Team avatar grid' },
+  {
+    class: 'slide-section-divider',
+    description: 'Section divider full-screen',
+  },
+  { class: 'slide-caption-overlay', description: 'Caption overlay on media' },
+  {
+    class: 'slide-bg-overlay--dark',
+    description: 'Dark semi-transparent overlay for text legibility',
+  },
+  {
+    class: 'slide-bg-overlay--light',
+    description: 'Light semi-transparent overlay for text legibility',
+  },
+  {
+    class: 'slide-bg-pattern--dots',
+    description: 'Dotted repeating pattern background',
+  },
+  {
+    class: 'slide-bg-pattern--grid',
+    description: 'Grid repeating pattern background',
+  },
+];
+
+const themeTokens = [
+  {
+    token: '--slide-bg',
+    light: '#ffffff',
+    dark: '#0f1124 (Void Black)',
+    usage: 'Slide background',
+  },
+  {
+    token: '--slide-surface',
+    light: '#f3f4f6',
+    dark: '#152e45 (Ninja Navy)',
+    usage: 'Card/surface backgrounds',
+  },
+  {
+    token: '--slide-text',
+    light: '#111827',
+    dark: '#f9fafb',
+    usage: 'Primary text color',
+  },
+  {
+    token: '--slide-text-muted',
+    light: '#637996 (Shadow Steel)',
+    dark: '#9ca3af',
+    usage: 'Secondary/muted text',
+  },
+  {
+    token: '--slide-accent',
+    light: '#d81540 (Crimson Strike)',
+    dark: '#cd3553 (Crimson Strike)',
+    usage: 'Accent color, links, highlights',
+  },
+  {
+    token: '--slide-border',
+    light: '#e5e7eb',
+    dark: '#374151',
+    usage: 'Border color for cards/tables',
+  },
+];
+
+const keyFiles = [
+  {
+    path: 'src/styles/slides.css',
+    description: 'All slide-specific CSS, layouts, themes, helper classes',
+  },
+  {
+    path: 'src/layouts/SlideLayout.astro',
+    description:
+      'Layout wrapper that loads Reveal.js CSS/JS (isolated from MainLayout)',
+  },
+  {
+    path: 'src/components/slides/RevealDeck.svelte',
+    description:
+      'Svelte component that initializes Reveal.js (client:only="svelte")',
+  },
+  {
+    path: 'src/components/pages/SlideDeckPage.astro',
+    description: 'Page component for individual deck detail pages',
+  },
+  {
+    path: 'src/lib/slides.ts',
+    description: 'Utility functions for slide data fetching and processing',
+  },
+  {
+    path: 'src/content.config.ts',
+    description: 'Zod schemas for the slides discriminated union collection',
+  },
+  {
+    path: 'src/content/slides/_layouts/',
+    description: 'Layout reference/demo markdown files',
+  },
+];
+---
+
+<InternalLayout title="Slide System" description="Presentation deck system with Reveal.js" section="guide" subsection="slides">
+
+  <!-- Overview -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Overview</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Three deck types share a single <code class="text-xs">slides</code> collection with a Zod discriminated union on the <code class="text-xs">type</code> field.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Type</th>
+              <th class="text-left py-3 px-4 font-semibold">Renders As</th>
+              <th class="text-left py-3 px-4 font-semibold">Content Source</th>
+              <th class="text-left py-3 px-4 font-semibold">Example</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {deckTypes.map((d) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{d.type}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{d.renders}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{d.content}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{d.example}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reveal.js Configuration -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Reveal.js Configuration</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mb-6">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Option</th>
+              <th class="text-left py-3 px-4 font-semibold">Value</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {revealConfig.map((c) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{c.option}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{c.value}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{c.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h3 class="font-semibold mb-3">Font Sizing</h3>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Element</th>
+              <th class="text-left py-3 px-4 font-semibold">Size</th>
+              <th class="text-left py-3 px-4 font-semibold">Pixels</th>
+              <th class="text-left py-3 px-4 font-semibold">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {fontSizing.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.element}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{f.size}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.pixels}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layout Primitives -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Layout Primitives</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      19 reusable layout patterns defined in <code class="text-xs">src/content/slides/_layouts/</code>. Apply via <code class="text-xs">data-layout</code> attribute on slide sections.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Layout</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {layouts.map((l) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{l.name}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{l.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Backgrounds -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Backgrounds</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Mode</th>
+              <th class="text-left py-3 px-4 font-semibold">Syntax</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {backgrounds.map((b) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{b.mode}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{b.syntax}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{b.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chrome UI -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Chrome UI</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {chromeUI.map((c) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{c.element}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{c.position}</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300">{c.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CSS Helper Classes -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">CSS Helper Classes</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Defined in <code class="text-xs">src/styles/slides.css</code>. Use these inside slide Markdown for consistent styling.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Class</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {cssClasses.map((c) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{c.class}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{c.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Theme Tokens -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Theme Tokens</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      CSS custom properties that adapt to light/dark mode. Brand colors: Crimson Strike, Void Black, Ninja Navy, Shadow Steel.
+    </p>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Token</th>
+              <th class="text-left py-3 px-4 font-semibold">Light</th>
+              <th class="text-left py-3 px-4 font-semibold">Dark</th>
+              <th class="text-left py-3 px-4 font-semibold">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {themeTokens.map((t) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{t.token}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{t.light}</code></td>
+                <td class="py-3 px-4"><code class="text-xs">{t.dark}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{t.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Files -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Files</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Path</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {keyFiles.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.path}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</InternalLayout>

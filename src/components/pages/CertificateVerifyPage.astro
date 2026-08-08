@@ -1,0 +1,74 @@
+---
+import CertificateVerify from '@/components/certificates/CertificateVerify.svelte';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const initialId = Astro.url.searchParams.get('id') ?? '';
+
+const breadcrumbs = [
+  { label: t.nav.home, href: `${prefix}/` },
+  { label: t.certificates.verify.title },
+];
+---
+
+<MainLayout
+  lang={lang}
+  title={t.certificates.verify.title}
+  description={t.certificates.verify.description}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <section class="bg-ptt-bg" data-testid="certificate-verify">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container max-w-2xl pb-16 pt-6">
+      <Eyebrow>{t.certificates.verify.title}</Eyebrow>
+      <h1 class="mt-3 text-3xl font-bold tracking-tight text-ptt sm:text-4xl">
+        {t.certificates.verify.title}
+      </h1>
+      <p class="mt-4 text-base leading-relaxed text-ptt-secondary">
+        {t.certificates.verify.intro}
+      </p>
+      <div class="mt-8">
+        <CertificateVerify
+          client:visible
+          lang={lang}
+          formAction={`${prefix}/certificates/verify`}
+          initialId={initialId}
+          labels={{
+            idLabel: t.certificates.verify.idLabel,
+            idPlaceholder: t.certificates.verify.idPlaceholder,
+            submit: t.certificates.verify.submit,
+            statusLabel: t.certificates.verify.statusLabel,
+            subject: t.certificates.verify.subject,
+            event: t.certificates.verify.event,
+            certId: t.certificates.verify.certId,
+            viewDiploma: t.certificates.verify.viewDiploma,
+            emptyHint: t.certificates.verify.emptyHint,
+            cryptoLabel: t.certificates.verify.cryptoLabel,
+            cryptoSigned: t.certificates.verify.cryptoSigned,
+            cryptoDemo: t.certificates.verify.cryptoDemo,
+            cryptoUnsigned: t.certificates.verify.cryptoUnsigned,
+            cryptoFailed: t.certificates.verify.cryptoFailed,
+            cryptoRevokedSigned: t.certificates.verify.cryptoRevokedSigned,
+            statuses: t.certificates.verify.statuses,
+            reasons: t.certificates.verify.reasons,
+          }}
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

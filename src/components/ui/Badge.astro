@@ -1,0 +1,49 @@
+---
+/**
+ * PTT v3.0.0 badge — tier-aware status indicator. Use for sponsor tiers
+ * (diamond/gold/silver/bronze/community), event status (announced/completed
+ * /cancelled), and other categorical labels where color encodes meaning.
+ */
+
+interface Props {
+  variant?:
+    | 'diamond'
+    | 'gold'
+    | 'silver'
+    | 'bronze'
+    | 'community'
+    | 'announced'
+    | 'completed'
+    | 'cancelled'
+    | 'live'
+    | 'neutral';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const { variant = 'neutral', size = 'sm', class: className = '' } = Astro.props;
+
+const sizeClass = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-2.5 py-1 text-sm';
+
+const variantClass: Record<string, string> = {
+  diamond:
+    'bg-gradient-to-r from-cyan-100 to-sky-100 text-cyan-900 dark:from-cyan-900/40 dark:to-sky-900/40 dark:text-cyan-200',
+  gold: 'bg-amber-100 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200',
+  silver: 'bg-ptt-border text-ptt dark:bg-ptt-border-strong',
+  bronze:
+    'bg-orange-100 text-orange-900 dark:bg-orange-900/30 dark:text-orange-200',
+  community:
+    'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-200',
+  announced: 'bg-ptt-primary-soft text-ptt-primary',
+  completed: 'bg-ptt-bg-elevated text-ptt-secondary border border-ptt-border',
+  cancelled: 'bg-ptt-danger/10 text-ptt-danger',
+  live: 'bg-ptt-danger text-white animate-pulse',
+  neutral: 'bg-ptt-bg-elevated text-ptt-secondary border border-ptt-border',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1 rounded-md font-semibold ${sizeClass} ${variantClass[variant]} ${className}`}
+>
+  <slot />
+</span>

@@ -1,0 +1,285 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const importantFiles = [
+  {
+    file: 'astro.config.mjs',
+    purpose: 'Astro configuration, integrations, sitemap filter',
+  },
+  {
+    file: 'src/content.config.ts',
+    purpose: 'Content Collection schemas (blog, slides, tags, series, pages)',
+  },
+  {
+    file: 'src/styles/global.css',
+    purpose: 'Design tokens, custom properties, global styles',
+  },
+  {
+    file: 'src/styles/slides.css',
+    purpose: 'Slide system tokens, Reveal.js theme, layout helpers',
+  },
+  { file: 'src/lib/i18n.ts', purpose: 'Language configuration, URL helpers' },
+  {
+    file: 'src/lib/translations/index.ts',
+    purpose: 'Translation system public API',
+  },
+  {
+    file: 'src/lib/blog.ts',
+    purpose: 'Post fetching, pagination, slug helpers',
+  },
+  {
+    file: 'src/lib/slides.ts',
+    purpose: 'Deck fetching, type guards, slug helpers',
+  },
+  {
+    file: 'src/lib/constances.ts',
+    purpose: 'Site constants (title, description, URLs)',
+  },
+  {
+    file: 'src/middleware.ts',
+    purpose: 'Route allowlist (KNOWN_ROOT_PATHS / KNOWN_ES_PATHS)',
+  },
+  { file: 'biome.json', purpose: 'Biome linter and formatter configuration' },
+  {
+    file: 'tsconfig.json',
+    purpose: 'TypeScript configuration with @ path alias',
+  },
+  {
+    file: 'AGENTS.md',
+    purpose: 'Single source of truth for all AI agent instructions',
+  },
+];
+
+const namingConventions = [
+  {
+    context: 'Blog posts',
+    pattern: 'YYYY-MM-DD_slug.md',
+    example: '2024-03-15_my-awesome-post.md',
+  },
+  {
+    context: 'Slide decks',
+    pattern: 'YYYY-MM-DD_slug.md',
+    example: '2026-04-25_demo-revealjs-features.md',
+  },
+  {
+    context: 'Blog images',
+    pattern: '/images/blog/posts/{slug}/hero.ext',
+    example: '/images/blog/posts/my-post/hero.webp',
+  },
+  {
+    context: 'Slide images',
+    pattern: '/images/slides/{slug}/hero.ext',
+    example: '/images/slides/my-deck/hero.webp',
+  },
+  {
+    context: 'Components',
+    pattern: 'PascalCase.astro / PascalCase.svelte',
+    example: 'BlogCard.svelte',
+  },
+  {
+    context: 'Page components',
+    pattern: '*Page.astro',
+    example: 'SlideDeckPage.astro',
+  },
+  {
+    context: 'Pages (routes)',
+    pattern: 'kebab-case.astro',
+    example: 'tech-talks.astro',
+  },
+  { context: 'Utilities', pattern: 'camelCase.ts', example: 'slides.ts' },
+  {
+    context: 'Test files',
+    pattern: '*.test.ts',
+    example: 'slides.test.ts',
+  },
+];
+---
+
+<InternalLayout title="File Structure" description="Repository layout, key directories, and naming conventions" section="guide" subsection="file-structure">
+
+  <!-- Repository Overview -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Repository Overview</h2>
+    <pre class="rounded-2xl border border-gray-200 dark:border-gray-700 p-5 text-sm overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>src/
+├── components/              # Reusable UI components
+│   ├── BaseHead.astro       # SEO meta tags, Open Graph
+│   ├── Footer.astro         # Site footer
+│   ├── JsonLd.astro         # Structured data injection
+│   ├── blog/                # Blog components (BlogCard, BlogGrid, Search)
+│   ├── home/                # Homepage sections (Hero, Blog Preview, Projects)
+│   ├── layout/              # Header.svelte, MobileMenu.svelte
+│   ├── pages/               # Shared page components (*Page.astro)
+│   └── slides/              # Slide components (RevealDeck, SlideCard, TypeBadge)
+├── content/                 # Content Collections
+│   ├── blog/{'{en,es}'}/         # Blog posts by language
+│   ├── slides/{'{en,es}'}/       # Slide decks by language
+│   ├── slides/_layouts/     # 19 reusable layout snippets
+│   ├── tags/                # Tag definitions (tier, order)
+│   ├── series/              # Series definitions
+│   └── pages/{'{en,es}'}/        # Markdown twins for AI agents
+├── layouts/                 # MainLayout, SlideLayout, InternalLayout
+├── lib/                     # Utility functions
+│   ├── blog.ts              # Post fetching, pagination
+│   ├── slides.ts            # Deck fetching, type guards
+│   ├── i18n.ts              # Language config, URL helpers
+│   ├── constances.ts        # Site constants
+│   └── translations/        # en.ts, es.ts, types.ts, index.ts
+├── pages/                   # File-based routing
+│   ├── index.astro          # Homepage (EN)
+│   ├── es/                  # Spanish page wrappers
+│   ├── blog/                # Blog routes
+│   ├── slides/              # Slide deck routes + .md twins
+│   ├── internal/            # Internal Hub (dev-only)
+│   │   ├── ui/              # Design System Showcase (10 pages)
+│   │   └── guide/           # Staff Guide (9 pages)
+│   └── api/                 # JSON endpoints (posts, slides-timeline)
+├── styles/
+│   ├── global.css           # Global styles, design tokens
+│   └── slides.css           # Slide system tokens + Reveal.js theme
+└── middleware.ts             # Route allowlist
+
+public/                      # Static assets
+├── images/
+│   ├── blog/posts/{'{slug}'}/   # Per-post image folders
+│   ├── slides/{'{slug}'}/       # Per-deck image folders
+│   └── blog/_staging/       # Incoming images for optimization
+├── icons/                   # Social icons (light/dark pairs)
+├── fonts/                   # Atkinson Hyperlegible
+.claude/                     # AI Skills & Agents
+├── skills/                  # 20 reusable skill procedures
+├── agents/                  # 6 specialized agent personas
+└── docs/                    # Skills catalog, commands reference</code></pre>
+  </section>
+
+  <!-- Key Directories -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Key Directories</h2>
+    <div class="space-y-3">
+      <details class="rounded-xl border border-gray-200 dark:border-gray-700">
+        <summary class="px-4 py-3 cursor-pointer text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800">
+          src/components/
+        </summary>
+        <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+          <p><code class="text-xs">blog/</code> — BlogCard.svelte, BlogGrid.svelte, BlogPagination.svelte, StaticBlogSearch.svelte</p>
+          <p><code class="text-xs">slides/</code> — RevealDeck.svelte, SlideCard.astro, SlidesCatalog.astro, TypeBadge.astro, ExternalView.astro</p>
+          <p><code class="text-xs">home/</code> — HeroSection/, BlogPreviewSection, ContactSection, ProjectsSection, and other homepage sections</p>
+          <p><code class="text-xs">layout/</code> — Header.svelte (main nav, interactive), MobileMenu.svelte</p>
+          <p><code class="text-xs">pages/</code> — Shared *Page.astro components (HomePage, AboutPage, SlideDeckPage, SlidesPage, etc.)</p>
+          <p>Root files: BaseHead.astro (SEO), Footer.astro, JsonLd.astro (structured data)</p>
+        </div>
+      </details>
+
+      <details class="rounded-xl border border-gray-200 dark:border-gray-700">
+        <summary class="px-4 py-3 cursor-pointer text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800">
+          src/content/
+        </summary>
+        <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+          <p><code class="text-xs">blog/{'{en,es}'}/</code> — Blog posts by language, date-prefix naming (YYYY-MM-DD_slug.md)</p>
+          <p><code class="text-xs">blog/{'{lang}'}/_demo/</code> — Demo posts (dev-only, never in production)</p>
+          <p><code class="text-xs">slides/{'{en,es}'}/</code> — Slide decks by language, same naming convention</p>
+          <p><code class="text-xs">slides/_layouts/</code> — 19 reusable layout snippets + 8 background modes</p>
+          <p><code class="text-xs">tags/</code> — Tag definitions with tier (primary/secondary) and order</p>
+          <p><code class="text-xs">series/</code> — Series definitions (name, title, description, order)</p>
+          <p><code class="text-xs">pages/{'{en,es}'}/</code> — Markdown twins for AI agents (AEO)</p>
+          <p>Schema in <code class="text-xs">src/content.config.ts</code> — Zod validation (blog, slides discriminated union, tags, series)</p>
+        </div>
+      </details>
+
+      <details class="rounded-xl border border-gray-200 dark:border-gray-700">
+        <summary class="px-4 py-3 cursor-pointer text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800">
+          src/pages/
+        </summary>
+        <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+          <p>Root: EN page wrappers (index.astro, about.astro, contact.astro, etc.)</p>
+          <p><code class="text-xs">es/</code> — Spanish page wrappers (same structure, <code class="text-xs">lang="es"</code>)</p>
+          <p><code class="text-xs">blog/</code> — Blog listing, dynamic [...slug].astro, pagination, tag routes</p>
+          <p><code class="text-xs">slides/</code> — Slide catalog, dynamic [...slug].astro, .md twins for AEO</p>
+          <p><code class="text-xs">internal/</code> — Internal Hub pages (excluded from production builds)</p>
+          <p><code class="text-xs">api/</code> — JSON endpoints (posts.json.ts, slides-timeline/[lang].json.ts)</p>
+          <p>rss.xml.js — RSS feed generation</p>
+        </div>
+      </details>
+
+      <details class="rounded-xl border border-gray-200 dark:border-gray-700">
+        <summary class="px-4 py-3 cursor-pointer text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800">
+          src/lib/
+        </summary>
+        <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+          <p><code class="text-xs">blog.ts</code> — getBlogPosts(), getPostSlug(), pagination utilities</p>
+          <p><code class="text-xs">slides.ts</code> — getSlideDecks(), getDeckSlug(), type guards (isNativeDeck, isExternalDeck)</p>
+          <p><code class="text-xs">i18n.ts</code> — Language type, LANGUAGES registry, getUrlPrefix()</p>
+          <p><code class="text-xs">translations/</code> — Modular system: en.ts, es.ts, types.ts, index.ts</p>
+          <p><code class="text-xs">constances.ts</code> — SITE_TITLE, SITE_DESCRIPTION, social URLs</p>
+          <p><code class="text-xs">analytics.ts</code> — Event tracking, analytics helpers</p>
+        </div>
+      </details>
+
+      <details class="rounded-xl border border-gray-200 dark:border-gray-700">
+        <summary class="px-4 py-3 cursor-pointer text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800">
+          public/
+        </summary>
+        <div class="px-4 pb-4 text-sm text-gray-600 dark:text-gray-300 space-y-2">
+          <p><code class="text-xs">images/blog/posts/{'{slug}'}/</code> — Per-post image folders (hero.webp, inline images)</p>
+          <p><code class="text-xs">images/blog/_staging/</code> — Incoming blog images for optimization</p>
+          <p><code class="text-xs">images/slides/{'{slug}'}/</code> — Per-deck image folders (hero.webp)</p>
+          <p><code class="text-xs">images/slides/_staging/</code> — Incoming slide images for optimization</p>
+          <p><code class="text-xs">icons/</code> — Social icons in light/dark pairs (github.svg, github_white.svg)</p>
+          <p><code class="text-xs">fonts/</code> — Atkinson Hyperlegible (Regular 400, Bold 700)</p>
+          <p>Root: favicon.svg, robots.txt, llms.txt, manifest.webmanifest</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Important Files -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Important Files</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">File</th>
+              <th class="text-left py-3 px-4 font-semibold">Purpose</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {importantFiles.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.file}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.purpose}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Naming Conventions -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Naming Conventions</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Context</th>
+              <th class="text-left py-3 px-4 font-semibold">Pattern</th>
+              <th class="text-left py-3 px-4 font-semibold">Example</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {namingConventions.map((n) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{n.context}</td>
+                <td class="py-3 px-4"><code class="text-xs">{n.pattern}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300"><code class="text-xs">{n.example}</code></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</InternalLayout>

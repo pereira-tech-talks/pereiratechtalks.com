@@ -1,0 +1,16 @@
+---
+import VerticalDetailPage from '@/components/pages/VerticalDetailPage.astro';
+import { getVerticals } from '@/lib/vertical';
+
+export async function getStaticPaths() {
+  const verticals = await getVerticals();
+  return verticals.map((vertical) => ({
+    params: { slug: vertical.id },
+    props: { vertical },
+  }));
+}
+
+const { vertical } = Astro.props;
+---
+
+<VerticalDetailPage vertical={vertical} lang="en" />

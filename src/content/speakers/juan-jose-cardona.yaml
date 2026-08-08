@@ -1,0 +1,18 @@
+name: "Juan José Cardona"
+role:
+  en: "Creator of the Official Vuetify UI Kit for Figma and CRUDDALS · Full-stack software developer"
+  es: "Creador del Official Vuetify UI Kit for Figma y CRUDDALS · Software Developer full-stack"
+bio:
+  en: "Juan José Cardona created the Official Vuetify UI Kit for Figma and CRUDDALS. A full-stack software developer who, out of curiosity, ended up building the kit and connecting with the Vuetify project. He spoke at the 2026 Pereira Tech Talks opening meetup on the Vuetify ecosystem and why it matters."
+  es: "Juan José Cardona creó el Official Vuetify UI Kit for Figma y CRUDDALS. Es software developer full-stack y, por curiosidad, terminó construyendo el kit y conectándose con el proyecto Vuetify. En el meetup de apertura 2026 de Pereira Tech Talks habló del ecosistema Vuetify y de por qué importa."
+photo:
+  src: "/images/speakers/juan-jose-cardona.png"
+  alt:
+    en: "Portrait of Juan José Cardona"
+    es: "Retrato de Juan José Cardona"
+social:
+  github: "https://github.com/juanjcardona13"
+  linkedin: "https://www.linkedin.com/in/juanjcardona/"
+talks: []
+languages:
+  - es

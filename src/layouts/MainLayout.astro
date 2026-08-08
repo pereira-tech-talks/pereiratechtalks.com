@@ -1,0 +1,276 @@
+---
+import '@/styles/global.css';
+import WebMCPBridge from '@/components/agent/WebMCPBridge.svelte';
+import BaseHead from '@/components/BaseHead.astro';
+import Footer from '@/components/Footer.astro';
+import LanguageRedirect from '@/components/LanguageRedirect.astro';
+import Header from '@/components/layout/Header.svelte';
+import TopNotificationBar from '@/components/layout/TopNotificationBar.svelte';
+import PtdEditionHeader from '@/components/pereira-tech-days/PtdEditionHeader.svelte';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  getActiveNotifications,
+  localizeNotification,
+} from '@/lib/notifications';
+
+interface PtdEditionNavItem {
+  year: number;
+  href: string;
+  label: string;
+}
+
+interface Props {
+  lang: string;
+  title: string;
+  description: string;
+  image?: string;
+  keywords?: string[];
+  prevPage?: string;
+  nextPage?: string;
+  ogType?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  /** Forwarded to BaseHead — disable on pages with a dedicated LCP preload. */
+  preloadHeaderLogo?: boolean;
+  preloadFonts?: boolean;
+  lcpImageHref?: string;
+  lcpImageMedia?: string;
+  /**
+   * Site chrome variant. `ptd-edition` swaps the global PTT header for the
+   * minimal Pereira Tech Day nav (current edition + previous editions).
+   */
+  chrome?: 'default' | 'ptd-edition';
+  /** Required when chrome is `ptd-edition`. */
+  ptdYear?: number;
+  /** Other editions for the PTD header dropdown. */
+  ptdEditions?: PtdEditionNavItem[];
+  /** PTD header surface: dark navy (2024) or light (2026). */
+  ptdChromeVariant?: 'dark' | 'light';
+}
+
+const {
+  lang,
+  title,
+  description,
+  image,
+  keywords,
+  prevPage,
+  nextPage,
+  ogType,
+  ogImageWidth,
+  ogImageHeight,
+  preloadHeaderLogo = true,
+  preloadFonts = true,
+  lcpImageHref,
+  lcpImageMedia,
+  chrome = 'default',
+  ptdYear,
+  ptdEditions = [],
+  ptdChromeVariant = 'dark',
+} = Astro.props;
+
+const isPtdEditionChrome =
+  chrome === 'ptd-edition' && typeof ptdYear === 'number';
+
+const language = lang as Language;
+const prefix = getUrlPrefix(language);
+const activeNotifications = isPtdEditionChrome
+  ? []
+  : (await getActiveNotifications()).map((entry) => {
+      const localized = localizeNotification(entry, language);
+      const href = localized.ctaHref;
+      if (
+        href?.startsWith('/') &&
+        !href.startsWith('//') &&
+        prefix &&
+        !href.startsWith(`${prefix}/`)
+      ) {
+        return { ...localized, ctaHref: `${prefix}${href}` };
+      }
+      return localized;
+    });
+---
+
+<html
+  lang={lang}
+  class:list={[isPtdEditionChrome && ptdChromeVariant === 'dark' && 'dark']}
+>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      lang={lang}
+      keywords={keywords}
+      prevPage={prevPage}
+      nextPage={nextPage}
+      ogType={ogType}
+      ogImageWidth={ogImageWidth}
+      ogImageHeight={ogImageHeight}
+      preloadHeaderLogo={preloadHeaderLogo}
+      preloadFonts={preloadFonts}
+      lcpImageHref={lcpImageHref}
+      lcpImageMedia={lcpImageMedia}
+    />
+    <slot name="head" />
+    <LanguageRedirect lang={lang} />
+    {
+      isPtdEditionChrome ? (
+        ptdChromeVariant === 'dark' ? (
+          <script is:inline>
+            document.documentElement.classList.add('dark');
+          </script>
+        ) : (
+          <script is:inline>
+            document.documentElement.classList.remove('dark');
+          </script>
+        )
+      ) : (
+        <script is:inline>
+  (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
+</script>
+      )
+    }
+  </head>
+  <body
+    class:list={[
+      'flex flex-col min-h-screen text-ptt',
+      isPtdEditionChrome && ptdChromeVariant === 'dark'
+        ? 'bg-[#030620]'
+        : isPtdEditionChrome && ptdChromeVariant === 'light'
+          ? 'bg-[#fef7f3]'
+          : 'bg-ptt-bg',
+      activeNotifications.length > 0 && 'has-top-notification',
+    ]}
+  >
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-ptt-bg-elevated focus:px-4 focus:py-2 focus:rounded focus:shadow-lg focus:text-ptt-primary">
+      Skip to content
+    </a>
+    {/*
+      Sticky chrome: notification bar + header travel together.
+      The bar collapses after scrolling past ~48px (hysteresis) and
+      reappears near the top — see TopNotificationBar.svelte.
+      PTD edition pages use a dedicated minimal header (legacy photocopy).
+    */}
+    <div
+      data-ptt-chrome
+      class:list={[
+        'sticky top-0 z-50',
+        /* Light PTD: keep chrome transparent so the hero illustration
+           fades under the glass header (2024-style), not a solid cream bar. */
+        isPtdEditionChrome && ptdChromeVariant === 'light' && 'overflow-visible bg-transparent',
+        isPtdEditionChrome && ptdChromeVariant === 'dark' && 'bg-[#030620]',
+      ]}
+    >
+      {
+        activeNotifications.length > 0 && (
+          <TopNotificationBar
+            client:load
+            lang={lang}
+            notifications={activeNotifications}
+          />
+        )
+      }
+      {
+        isPtdEditionChrome ? (
+          <PtdEditionHeader
+            client:idle
+            lang={lang}
+            year={ptdYear}
+            editions={ptdEditions}
+            variant={ptdChromeVariant}
+          />
+        ) : (
+          <Header client:load lang={lang} />
+        )
+      }
+    </div>
+    {/*
+      Keep --ptt-chrome-height in sync with sticky chrome (header ±
+      notification bar). Hero uses it for 100dvh fill; ResizeObserver
+      covers bar collapse/expand and header reflow without layout jump
+      below the hero (chrome shrink and hero grow cancel).
+      Also re-sync on transitionend + trailing rAF — grid 0fr/1fr
+      animations can skip the final ResizeObserver callback.
+    */}
+    <script is:inline>
+      (function () {
+        var el = document.querySelector('[data-ptt-chrome]');
+        if (!el) return;
+        var root = document.documentElement;
+        var raf = 0;
+        var sync = function () {
+          root.style.setProperty(
+            '--ptt-chrome-height',
+            el.getBoundingClientRect().height + 'px'
+          );
+        };
+        var syncSoon = function () {
+          sync();
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(function () {
+            raf = 0;
+            sync();
+          });
+        };
+        sync();
+        if (typeof ResizeObserver !== 'undefined') {
+          new ResizeObserver(syncSoon).observe(el);
+        } else {
+          window.addEventListener('resize', syncSoon);
+        }
+        el.addEventListener('transitionend', syncSoon);
+      })();
+    </script>
+    <main
+      id="main-content"
+      class:list={[
+        'flex-1',
+        isPtdEditionChrome && ptdChromeVariant === 'dark'
+          ? 'bg-[#030620]'
+          : isPtdEditionChrome && ptdChromeVariant === 'light'
+            ? 'bg-[#fef7f3]'
+            : 'bg-ptt-bg',
+      ]}
+    >
+      <slot />
+    </main>
+    <Footer
+      lang={lang}
+      variant={
+        isPtdEditionChrome && ptdChromeVariant === 'dark' ? 'ptd-dark' : 'default'
+      }
+    />
+    {/* client:load — WebMCP scanners detect tools on first paint; client:visible misses them. */}
+    <WebMCPBridge client:load lang={lang as 'en' | 'es'} />
+    {/*
+      Do NOT use define:vars here — Astro wraps define:vars scripts in an IIFE,
+      which breaks ES module `import` and causes:
+      "SyntaxError: Cannot use import statement outside a module" (Best Practices).
+      Defer setup until idle so analytics does not contend with LCP/TBT.
+    */}
+    <script>
+      const bootAnalytics = () => {
+        void import('@/lib/analytics').then(
+          ({
+            setupOutboundTracking,
+            shouldTrackScrollDepth,
+            trackScrollDepth,
+          }) => {
+            setupOutboundTracking();
+            if (shouldTrackScrollDepth(window.location.pathname)) {
+              trackScrollDepth();
+            }
+          }
+        );
+      };
+      if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(bootAnalytics, { timeout: 4000 });
+      } else {
+        window.addEventListener('load', () => setTimeout(bootAnalytics, 1), {
+          once: true,
+        });
+      }
+    </script>
+  </body>
+</html>

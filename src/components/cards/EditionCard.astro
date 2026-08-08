@@ -1,0 +1,102 @@
+---
+/**
+ * PTT v3.0.0 edition card — preview for a single Pereira Tech Day edition
+ * (year-keyed). Uses brandKit accent for visual differentiation.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import { type Language, tr } from '@/lib/i18n';
+import { getEditionHref, resolveEditionStatus } from '@/lib/pereiraTechDay';
+
+interface Props {
+  edition: CollectionEntry<'pereiraTechDays'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { edition, lang, loading = 'lazy' } = Astro.props;
+
+const year = edition.data.year;
+const title = tr(edition.data.title, lang);
+const tagline = tr(edition.data.tagline, lang);
+
+/**
+ * 2026 mascot hero is compositionally right-weighted with a sparse left half.
+ * Use a pre-cropped card asset so the mascot fills the 16:9 frame edge-to-edge.
+ */
+const heroSrc =
+  year === 2026
+    ? '/images/pereira-tech-days/2026/mascot/card-hero-sm.webp'
+    : edition.data.hero.src;
+const heroAlt = tr(edition.data.hero.alt, lang) || title;
+const url = getEditionHref(edition, lang);
+const accent =
+  edition.data.brandKit?.paletteLight?.accent || 'var(--color-ptt-accent)';
+const status = resolveEditionStatus(edition);
+
+const date =
+  typeof edition.data.date === 'object' && 'start' in edition.data.date
+    ? edition.data.date.start
+    : edition.data.date;
+const dateLabel = formatCalendarDate(new Date(date), lang);
+
+const statusLabels: Record<string, { en: string; es: string }> = {
+  announced: { en: 'Upcoming', es: 'Próximamente' },
+  'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
+  completed: { en: 'Past edition', es: 'Edición pasada' },
+  cancelled: { en: 'Cancelled', es: 'Cancelada' },
+};
+const statusVariant = (
+  status === 'announced' || status === 'rsvp-open'
+    ? 'announced'
+    : status === 'cancelled'
+      ? 'cancelled'
+      : 'completed'
+) as 'announced' | 'cancelled' | 'completed';
+const statusLabel = statusLabels[status]?.[lang] ?? status;
+---
+
+<a
+  href={url}
+  class="group flex h-full flex-col overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div
+    class={`relative aspect-[16/9] overflow-hidden ${year === 2026 ? 'bg-[#F6EFE4]' : 'bg-ptt-bg'}`}
+  >
+    <img decoding="async"
+      src={heroSrc}
+      alt={heroAlt}
+      width="640"
+      height="360"
+      loading={loading}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+      class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" />
+    <div
+      class="absolute inset-x-0 bottom-0 h-2"
+      style={`background-color: ${accent}`}
+      aria-hidden="true"
+    >
+    </div>
+    <div class="absolute left-3 top-3">
+      <Badge variant={statusVariant}>{statusLabel}</Badge>
+    </div>
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <div class="flex items-baseline gap-2 text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+      <span>{year}</span>
+      <span aria-hidden="true">·</span>
+      <span>Pereira Tech Day</span>
+    </div>
+    <h3 class="text-xl font-bold text-ptt group-hover:text-ptt-primary line-clamp-2">
+      {title}
+    </h3>
+    <p class="text-sm text-ptt-secondary line-clamp-2">
+      {tagline}
+    </p>
+    <p class="mt-auto pt-2 text-xs text-ptt-secondary">
+      <time datetime={getCalendarDateString(new Date(date))}>{dateLabel}</time>
+    </p>
+  </div>
+</a>

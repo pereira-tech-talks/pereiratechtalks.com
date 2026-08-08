@@ -1,0 +1,15 @@
+name: Gorilla Logic
+logo:
+  light: /images/sponsors/gorilla-logic.png
+  dark: /images/sponsors/gorilla-logic-dark.png
+  alt: Gorilla Logic logo
+url: "https://gorillalogic.com/"
+description:
+  en: Custom software development for ambitious products. Sponsor of Pereira Tech Day 2024 (silver tier).
+  es: Desarrollo de software a la medida para productos ambiciosos. Patrocinador de Pereira Tech Day 2024 (plata).
+tier: silver
+sponsoredEditions:
+  - year: 2024
+    tier: silver
+status: past
+order: 5

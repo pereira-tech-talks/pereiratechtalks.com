@@ -1,0 +1,5966 @@
+{
+  "total": 1534,
+  "missingWidth": 66,
+  "missingHeight": 66,
+  "missingLoading": 220,
+  "missingDecoding": 754,
+  "missingAlt": 0,
+  "perPage": {
+    "404.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2026/mascot/mug.webp",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "about/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/memories/massive.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/applying-for-software-engineering-at-google/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/events-2019-recap/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/events-2019-recap/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/first-pereirajs-meetup/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/first-pereirajs-meetup/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/first-pereirajs-meetup/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/happy-new-year-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/happy-new-year-2018/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/happy-new-year-2018/logo-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "blog/how-the-speaker-school-works/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/moved-to-luma/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/moved-to-luma/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/my-experience-at-digital-product-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-1.png",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-6.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-7.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-8.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-9.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-10.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-11.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/nodeschool-international-day-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2015/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/nodeschool-international-day-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-banner.png",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-people.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "blog/page/1/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/pereira-tech-talks-recognized-by-aseutp-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "blog/pereirajs-at-jsconf-colombia-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-6.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-7.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-8.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-9.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-10.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-11.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-12.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-13.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-14.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "blog/pereirajs-joins-pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-joins-pereira-tech-talks/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/quarantine-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/quarantine-tech-talks/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/series/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/career/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/i18n/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/javascript/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/lessons-learned/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/tag/speakers-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/telegram-community-channel/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/telegram-community-channel/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/ten-years-running-a-volunteer-tech-community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/the-bilingual-library-model/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/what-is-pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/why-competitive-programming-matters/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "blog/why-pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "calendar/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "call-for-speakers/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "channels/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "communities/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/perjs.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/pypereira.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/jointdev.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/qaconf.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/backbone-utp.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "conduct/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "contact/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "contributing/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "contributors/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/about/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/memories/massive.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/applying-for-software-engineering-at-google/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/events-2019-recap/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/events-2019-recap/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/first-pereirajs-meetup/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/first-pereirajs-meetup/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/first-pereirajs-meetup/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/happy-new-year-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/happy-new-year-2018/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/happy-new-year-2018/logo-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "en/blog/how-the-speaker-school-works/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/moved-to-luma/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/moved-to-luma/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/my-experience-at-digital-product-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-1.png",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-6.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-7.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-8.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-9.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-10.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/dps-11.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/nodeschool-international-day-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2015/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/nodeschool-international-day-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-banner.png",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/nodeschool-international-day-2016/nodeschoolday-2016-people.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "en/blog/page/1/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/pereira-tech-talks-recognized-by-aseutp-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereira-tech-talks-recognized-by-aseutp-2018/pereiratechtalks-articulo-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "en/blog/pereirajs-at-jsconf-colombia-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-1.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-2.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-3.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-4.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-5.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-6.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-7.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-8.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-9.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-10.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-11.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-12.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-13.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-at-jsconf-colombia-2017/jsconf2017-14.jpg",
+        "missing": [
+          "width",
+          "height"
+        ]
+      }
+    ],
+    "en/blog/pereirajs-joins-pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/pereirajs-joins-pereira-tech-talks/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/quarantine-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/quarantine-tech-talks/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/series/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/career/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/i18n/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/javascript/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/lessons-learned/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/tag/speakers-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/telegram-community-channel/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/telegram-community-channel/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/ten-years-running-a-volunteer-tech-community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/the-bilingual-library-model/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/what-is-pereira-tech-talks/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/why-competitive-programming-matters/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/my-experience-at-digital-product-school/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/applying-for-software-engineering-at-google/hero.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/blog/posts/why-competitive-programming-matters/hero.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/blog/why-pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/calendar/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/call-for-speakers/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/channels/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/communities/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/perjs.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/pypereira.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/jointdev.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/qaconf.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/communities/backbone-utp.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/community/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/conduct/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/contact/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/contributing/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/contributors/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/governance/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-light.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-dark.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/github_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/linkedin_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/x_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/instagram_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-light.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/github_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/linkedin_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/x_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/instagram_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/abril-mobile-2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/abril-mobile-2026/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/airflow-y-tensorflow-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/aprendiendo-bases-de-datos-nosql-y-rails/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/aprendiendo-con-vibe-coding/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-con-vibe-coding/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/aprendiendo-node-streams-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-node-streams-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/automatizacion-de-infraestructura-y-linux/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/automatizacion-de-infraestructura-y-linux/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/bitcoin-y-blockchain-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/buenas-practicas-js-y-tdd-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/buenas-practicas-js-y-tdd-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/chatbots-y-es6-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/chatbots-y-es6-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/conoce-a-la-cloud-native-computing-foundation/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conoce-a-la-cloud-native-computing-foundation/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/conociendo-la-nube/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conociendo-la-nube/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/continuous-testing-paralelizacion-y-observabilidad/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/continuous-testing-paralelizacion-y-observabilidad/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/conversatorio-hackathon/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conversatorio-hackathon/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/d3-y-mean-stack-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/d3-y-mean-stack-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/de-cero-a-super-heroe-go-kubernetes/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/de-la-utp-a-la-academia-y-lo-empresarial/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-la-utp-a-la-academia-y-lo-empresarial/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/de-vuetify-a-edge-computing/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-vuetify-a-edge-computing/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/desarrollo-web-moderno-con-astro/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/design-night-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/design-night-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/dom-y-git-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/dom-y-git-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/edicion-especial-utp-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/edicion-especial-utp-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/el-futuro-de-la-ia/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/el-futuro-de-la-ia/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/explorando-cicd-tekton-y-github-actions/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/explorando-cicd-tekton-y-github-actions/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/gcp-y-owasp-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/gcp-y-owasp-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/hackaton-planificacion-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/hackaton-planificacion-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/historia-y-oop-en-javascript-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/historia-y-oop-en-javascript-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/ia-como-motor-de-crecimiento/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ia-como-motor-de-crecimiento/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/ia-en-accion-2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ia-en-accion-2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/inauguracion-gdg-pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/inauguracion-gdg-pereira/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/introduccion-a-mvc-y-node-v4/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/introduccion-a-mvc-y-node-v4/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/introduccion-a-npm-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/introduccion-a-npm-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/ionic-angular-y-solidity-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ionic-angular-y-solidity-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/iot-y-clustering-nodejs-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/iot-y-clustering-nodejs-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/jasmine-y-iojs-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/jasmine-y-iojs-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/js-cliente-y-servidor-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/js-y-nodejs-i-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-i-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/js-y-nodejs-ii-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-ii-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/js-y-nodejs-introduccion-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/jwt-json-web-tokens-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/jwt-json-web-tokens-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/lightning-talks-2025-11/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/lightning-talks-2025-11/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/machine-learning-y-automatizaciones/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/machine-learning-y-automatizaciones/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/maraton-utp-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/maraton-utp-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/meetup-virtual-code-review-y-auth0/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/meetup-virtual-code-review-y-auth0/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/mujeres-en-tecnologia-2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/mujeres-en-tecnologia-2026/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/mvc-y-express-flatiron-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/mvc-y-express-flatiron-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/nginx-y-elasticsearch-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-accesibilidad-y-ios-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-ai-generativa-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-ai-generativa-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-career-path-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-career-path-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-devops-ansible-y-gitlab-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-devops-ansible-y-gitlab-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-devops-docker-y-kubernetes-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-devops-docker-y-kubernetes-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-experiencias-en-software-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-experiencias-en-software-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-ia-y-chatgpt-2023/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-ia-y-chatgpt-2023/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-liderazgo-y-testing-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-machine-learning-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-machine-learning-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-python-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-python-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-rust-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-rust-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-seguridad-y-testing-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-serverless-y-seguridad-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-serverless-y-seguridad-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-testing-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-testing-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/noche-de-unity-2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-unity-2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/nodeschool-day-pereira-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/nodeschool-day-pereira-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/p2p-y-meteorjs-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/p2p-y-meteorjs-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/pereira-girls-day-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/pereira-girls-day-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/primera-reunion-pereirajs-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/qa-pilar-del-software/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/qa-pilar-del-software/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-2/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-2/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-3/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-3/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-4/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-4/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-5/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-5/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-6/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-6/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/quarantine-tech-talks-2020-overview/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-overview/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/que-es-el-blockchain-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/que-es-el-blockchain-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/react-native-y-npm-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/react-native-y-npm-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/reactive-programming-y-es6/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/reactive-programming-y-es6/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/realidad-virtual-y-ramda-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/realidad-virtual-y-ramda-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/redes-neuronales-keras-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/redes-neuronales-keras-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/revolucionando-el-deep-learning/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/revolucionando-el-deep-learning/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/sails-websockets-y-grafana-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/saturday-tech-talks-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/saturday-tech-talks-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/seguridad-informatica-y-proteccion-legal-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/servidor-web-nodejs-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/servidor-web-nodejs-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/software-libre-y-automatizacion-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/tdd-y-microservicios-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tdd-y-microservicios-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/tech-soft-skills-ia-y-trabajo-remoto/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tech-soft-skills-ia-y-trabajo-remoto/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/tecnologia-con-proposito/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tecnologia-con-proposito/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/three-js-y-react-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/three-js-y-react-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/vision-artificial-y-haskell-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/webassembly-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/webassembly-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/meetups/zeromq-y-websockets-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/zeromq-y-websockets-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2020/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2023/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2026/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "en/pereira-tech-days/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/press/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/slides/demo-revealjs-features/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/slides/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/slides.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/slides/demo-revealjs-features/hero.webp",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/abdenago-lopez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/abdenago-lopez.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/andres-torres/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/cesar-camacho/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/cesar-camacho.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/cristhian-andres-grajales-perez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/daniel-david-marcano-hernandez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/david-ricardo-rivera-arbelaez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/frederick-johan-castaneda-perez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/german-grandas/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/hector-pulido/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/henry-bravo/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/jesus-david-mena-rivera/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/jonathan-alvarez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/jonathan-alvarez.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/jorge-martinez-gomez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/jose-felipe-duarte/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/jose-jaramillo/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/jose-jaramillo.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/juan-de-jesus-fernandez-graciano/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/juan-diego-campuzano/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/juan-jose-cardona/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/juan-jose-cardona.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/juan-pablo-franco/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/juan-pablo-franco.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/karolina-ladino/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/karolina-ladino.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/laura-daniela-santa/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/mayra-valentina-velasquez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/mega-barto/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/mega-barto.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/melissa-escobar-gutierrez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/oscar-granada/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/sary-libreros/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/sary-libreros.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/sebastian-agudelo-morales/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/sebastian-franco/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/sebastian-franco.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/sebastian-mora/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/sergio-florez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/authors/sergio-florez.webp",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/speakers/vanessa-aristizabal/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/vanessa-aristizabal.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/sponsor-us/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/sponsors/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/verticals/ai-channel/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/verticals/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/verticals/library-of-tomorrow/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/verticals/monthly-meetups/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "en/verticals/speaker-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "governance/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-light.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-dark.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/github_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/linkedin_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/x_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/instagram_white.svg",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/home/hero-light.webp",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/github_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/linkedin_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/x_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/icons/instagram_white.svg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/abril-mobile-2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/abril-mobile-2026/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/airflow-y-tensorflow-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/aprendiendo-bases-de-datos-nosql-y-rails/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/aprendiendo-con-vibe-coding/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-con-vibe-coding/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/aprendiendo-node-streams-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/aprendiendo-node-streams-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/automatizacion-de-infraestructura-y-linux/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/automatizacion-de-infraestructura-y-linux/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/bitcoin-y-blockchain-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/buenas-practicas-js-y-tdd-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/buenas-practicas-js-y-tdd-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/chatbots-y-es6-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/chatbots-y-es6-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/conoce-a-la-cloud-native-computing-foundation/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conoce-a-la-cloud-native-computing-foundation/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/conociendo-la-nube/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conociendo-la-nube/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/continuous-testing-paralelizacion-y-observabilidad/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/continuous-testing-paralelizacion-y-observabilidad/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/conversatorio-hackathon/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/conversatorio-hackathon/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/d3-y-mean-stack-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/d3-y-mean-stack-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/de-cero-a-super-heroe-go-kubernetes/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/de-la-utp-a-la-academia-y-lo-empresarial/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-la-utp-a-la-academia-y-lo-empresarial/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/de-vuetify-a-edge-computing/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/de-vuetify-a-edge-computing/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/desarrollo-web-moderno-con-astro/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/design-night-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/design-night-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/dom-y-git-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/dom-y-git-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/edicion-especial-utp-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/edicion-especial-utp-2014/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/el-futuro-de-la-ia/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/el-futuro-de-la-ia/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/explorando-cicd-tekton-y-github-actions/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/explorando-cicd-tekton-y-github-actions/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/gcp-y-owasp-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/gcp-y-owasp-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/hackaton-planificacion-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/hackaton-planificacion-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/historia-y-oop-en-javascript-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/historia-y-oop-en-javascript-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/ia-como-motor-de-crecimiento/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ia-como-motor-de-crecimiento/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/ia-en-accion-2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ia-en-accion-2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/inauguracion-gdg-pereira/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/inauguracion-gdg-pereira/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/introduccion-a-mvc-y-node-v4/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/introduccion-a-mvc-y-node-v4/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/introduccion-a-npm-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/introduccion-a-npm-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/ionic-angular-y-solidity-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/ionic-angular-y-solidity-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/iot-y-clustering-nodejs-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/iot-y-clustering-nodejs-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/jasmine-y-iojs-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/jasmine-y-iojs-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/js-cliente-y-servidor-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/js-y-nodejs-i-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-i-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/js-y-nodejs-ii-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-ii-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/js-y-nodejs-introduccion-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/jwt-json-web-tokens-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/jwt-json-web-tokens-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/lightning-talks-2025-11/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/lightning-talks-2025-11/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/machine-learning-y-automatizaciones/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/machine-learning-y-automatizaciones/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/maraton-utp-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/maraton-utp-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/meetup-virtual-code-review-y-auth0/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/meetup-virtual-code-review-y-auth0/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/mujeres-en-tecnologia-2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/mujeres-en-tecnologia-2026/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/mvc-y-express-flatiron-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/mvc-y-express-flatiron-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/nginx-y-elasticsearch-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-accesibilidad-y-ios-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-ai-generativa-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-ai-generativa-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-career-path-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-career-path-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-devops-ansible-y-gitlab-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-devops-ansible-y-gitlab-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-devops-docker-y-kubernetes-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-devops-docker-y-kubernetes-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-experiencias-en-software-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-experiencias-en-software-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-ia-y-chatgpt-2023/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-ia-y-chatgpt-2023/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-liderazgo-y-testing-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-machine-learning-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-machine-learning-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-python-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-python-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-rust-2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-rust-2025/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-seguridad-y-testing-2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-serverless-y-seguridad-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-serverless-y-seguridad-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-testing-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-testing-2018/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/noche-de-unity-2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/noche-de-unity-2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/nodeschool-day-pereira-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/nodeschool-day-pereira-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/p2p-y-meteorjs-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/p2p-y-meteorjs-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/pereira-girls-day-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/pereira-girls-day-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/primera-reunion-pereirajs-2014/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/qa-pilar-del-software/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/qa-pilar-del-software/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-2/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-2/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-3/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-3/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-4/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-4/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-5/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-5/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-6/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-6/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/quarantine-tech-talks-2020-overview/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/quarantine-tech-talks-2020-overview/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/que-es-el-blockchain-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/que-es-el-blockchain-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/react-native-y-npm-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/react-native-y-npm-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/reactive-programming-y-es6/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/reactive-programming-y-es6/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/realidad-virtual-y-ramda-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/realidad-virtual-y-ramda-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/redes-neuronales-keras-2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/redes-neuronales-keras-2018/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/revolucionando-el-deep-learning/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/revolucionando-el-deep-learning/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/sails-websockets-y-grafana-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/saturday-tech-talks-2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/saturday-tech-talks-2019/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/seguridad-informatica-y-proteccion-legal-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/servidor-web-nodejs-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/servidor-web-nodejs-2017/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/software-libre-y-automatizacion-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/tdd-y-microservicios-2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tdd-y-microservicios-2021/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/tech-soft-skills-ia-y-trabajo-remoto/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tech-soft-skills-ia-y-trabajo-remoto/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/tecnologia-con-proposito/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tecnologia-con-proposito/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/tecnologias-de-vanguardia-svelte-y-blockchain/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/three-js-y-react-2016/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/three-js-y-react-2016/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/vision-artificial-y-haskell-2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/webassembly-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/webassembly-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "meetups/zeromq-y-websockets-2015/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/meetups/zeromq-y-websockets-2015/hero.jpg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2017/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2018/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2019/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2020/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2021/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2022/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2023/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2024/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/hero.jpeg",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2025/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/_placeholder/hero.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2024/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/2026/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/pereira-tech-days/2026/logo.png",
+        "missing": [
+          "loading",
+          "decoding"
+        ]
+      }
+    ],
+    "pereira-tech-days/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "press/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "slides/demo-revealjs-features/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "slides/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/slides.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/slides/demo-revealjs-features/hero-es.webp",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/abdenago-lopez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/abdenago-lopez.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/andres-torres/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/cesar-camacho/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/cesar-camacho.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/cristhian-andres-grajales-perez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/daniel-david-marcano-hernandez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/david-ricardo-rivera-arbelaez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/frederick-johan-castaneda-perez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/german-grandas/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/hector-pulido/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/henry-bravo/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/jesus-david-mena-rivera/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/jonathan-alvarez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/jonathan-alvarez.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/jorge-martinez-gomez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/jose-felipe-duarte/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/jose-jaramillo/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/jose-jaramillo.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/juan-de-jesus-fernandez-graciano/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/juan-diego-campuzano/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/juan-jose-cardona/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/juan-jose-cardona.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/juan-pablo-franco/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/juan-pablo-franco.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/karolina-ladino/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/karolina-ladino.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/laura-daniela-santa/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/mayra-valentina-velasquez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/mega-barto/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/mega-barto.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/melissa-escobar-gutierrez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/oscar-granada/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/sary-libreros/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/sary-libreros.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/sebastian-agudelo-morales/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/sebastian-franco/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/sebastian-franco.jpeg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/sebastian-mora/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/_placeholder.svg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/sergio-florez/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/authors/sergio-florez.webp",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "speakers/vanessa-aristizabal/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/speakers/vanessa-aristizabal.jpg",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "sponsor-us/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/veritran.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      },
+      {
+        "src": "/images/sponsors/dailybot.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "sponsors/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "verticals/ai-channel/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "verticals/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "verticals/library-of-tomorrow/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "verticals/monthly-meetups/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ],
+    "verticals/speaker-school/index.html": [
+      {
+        "src": "/images/pereira-tech-talks/logo-white.png",
+        "missing": [
+          "decoding"
+        ]
+      }
+    ]
+  }
+}

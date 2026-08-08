@@ -1,0 +1,174 @@
+---
+/**
+ * PtdHero2024 — dark navy centered intro matching legacy `/pereira-tech-day/2024/`.
+ * Full-viewport on desktop; fluid type/logo scale from mobile → large desktop.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  year: number;
+  title: string;
+  tagline: string;
+  dateLabel: string;
+  startDate: string;
+  venueName: string;
+  venueMapUrl?: string;
+  logoSrc?: string;
+  recordingUrl?: string;
+  recordingCta: string;
+}
+
+const {
+  title,
+  tagline,
+  dateLabel,
+  startDate,
+  venueName,
+  venueMapUrl,
+  logoSrc,
+  recordingUrl,
+  recordingCta,
+} = Astro.props;
+
+/** Short venue line like legacy "UTP: Auditorio Jorge Roa Martínez". */
+const venueShort = venueName
+  .replace(/,\s*Universidad Tecnológica de Pereira/i, '')
+  .replace(/^Auditorio/i, 'UTP: Auditorio')
+  .trim();
+---
+
+<section
+  class="ptd-hero-2024 relative flex overflow-hidden text-white lg:min-h-[calc(100dvh-3.75rem)] lg:items-center lg:justify-center"
+  aria-labelledby="ptd-2024-title"
+>
+  <div
+    class="pointer-events-none absolute inset-0"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse 85% 75% at 50% 28%, #12203c 0%, #0a1430 42%, #030620 78%, #030620 100%);"
+  >
+  </div>
+  <div
+    class="relative mx-auto flex w-full max-w-2xl flex-col items-center px-4 py-10 text-center sm:max-w-3xl sm:px-6 sm:py-12 md:max-w-4xl md:py-14 lg:pb-6 lg:pt-10 xl:max-w-5xl"
+  >
+    {
+      logoSrc && (
+        <img
+          src={logoSrc}
+          alt=""
+          width="200"
+          height="260"
+          class="ptd-hero-2024__logo mb-4 h-auto w-auto sm:mb-5 md:mb-6"
+          style="mix-blend-mode: lighten;"
+          loading="eager"
+          decoding="async"
+        />
+      )
+    }
+    <time
+      datetime={startDate}
+      class="ptd-hero-2024__date font-semibold uppercase text-white/90"
+    >
+      {dateLabel}.
+    </time>
+    <h1
+      id="ptd-2024-title"
+      class="ptd-hero-2024__title mt-3 font-bold uppercase leading-none text-white sm:mt-4"
+    >
+      <span class="sr-only">{title}</span>
+      <span aria-hidden="true">Pereira • Tech • Day</span>
+    </h1>
+    {
+      venueName && (
+        <p class="ptd-hero-2024__venue mt-3 flex max-w-full items-center justify-center gap-1.5 font-bold uppercase tracking-wide text-[#f06d6d] sm:mt-4 md:mt-5">
+          <svg
+            aria-hidden="true"
+            class="h-4 w-4 shrink-0 sm:h-5 sm:w-5 md:h-6 md:w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0" />
+            <path d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0" />
+          </svg>
+          {
+            venueMapUrl ? (
+              <a
+                href={venueMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="min-w-0 break-words hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                {venueShort}
+              </a>
+            ) : (
+              <span class="min-w-0 break-words">{venueShort}</span>
+            )
+          }
+        </p>
+      )
+    }
+    <p class="ptd-hero-2024__tagline mt-4 max-w-xl leading-relaxed text-white/90 sm:mt-5 md:mt-6 md:max-w-2xl">
+      {tagline}
+    </p>
+    {
+      recordingUrl && (
+        <div class="mt-6 sm:mt-8 md:mt-10">
+          <a
+            href={recordingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-full border border-white bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-7 sm:py-3 md:px-8 md:text-base"
+          >
+            {recordingCta}
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  /* Fluid scale: mobile compact → large desktop presence */
+  .ptd-hero-2024__logo {
+    max-height: clamp(6.5rem, 14vh + 2rem, 14rem);
+  }
+
+  .ptd-hero-2024__date {
+    font-size: clamp(0.7rem, 0.35vw + 0.65rem, 0.95rem);
+    letter-spacing: 0.18em;
+  }
+
+  .ptd-hero-2024__title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    font-size: clamp(1.75rem, 3.2vw + 1rem, 3.75rem);
+    letter-spacing: 0.06em;
+  }
+
+  .ptd-hero-2024__venue {
+    font-size: clamp(0.7rem, 0.4vw + 0.65rem, 1.05rem);
+  }
+
+  .ptd-hero-2024__tagline {
+    font-size: clamp(0.875rem, 0.45vw + 0.75rem, 1.2rem);
+  }
+
+  @media (min-width: 1024px) {
+    .ptd-hero-2024__logo {
+      max-height: clamp(10rem, 22vh, 16rem);
+    }
+
+    .ptd-hero-2024__title {
+      font-size: clamp(2.75rem, 2.5vw + 1.5rem, 4.25rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .ptd-hero-2024__logo {
+      max-height: clamp(12rem, 24vh, 18rem);
+    }
+  }
+</style>

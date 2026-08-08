@@ -1,0 +1,68 @@
+---
+/**
+ * PTT v3.0.0 vertical card — preview for a `verticals` collection entry.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import Badge from '@/components/ui/Badge.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  vertical: CollectionEntry<'verticals'>;
+  lang: Language;
+}
+
+const { vertical, lang } = Astro.props;
+const t = getTranslations(lang);
+
+const prefix = getUrlPrefix(lang);
+const title = tr(vertical.data.title, lang);
+const mission = tr(vertical.data.mission, lang);
+const url = `${prefix}/verticals/${vertical.id}/`;
+const status = vertical.data.status;
+const statusVariant = status === 'archived' ? 'completed' : 'community';
+const statusLabel =
+  status === 'paused'
+    ? t.verticalsPage.statusPaused
+    : status === 'archived'
+      ? t.verticalsPage.statusArchived
+      : t.verticalsPage.statusActive;
+---
+
+<a
+  href={url}
+  class="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-6 ring-1 ring-ptt-border transition hover:ring-ptt-primary/40 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div
+    class="absolute inset-0 -z-10 bg-gradient-to-br from-ptt-primary/10 via-ptt-bg-elevated to-ptt-accent/10 dark:from-ptt-primary-dark/15 dark:via-ptt-bg dark:to-ptt-accent-dark/15"
+  >
+  </div>
+  <div class="flex items-center justify-between">
+    <span class="text-xs font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+      {t.verticalsPage.programLabel}
+    </span>
+    <Badge variant={statusVariant}>{statusLabel}</Badge>
+  </div>
+  <h3 class="text-2xl font-bold text-ptt group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
+    {title}
+  </h3>
+  <p class="text-ptt-secondary">
+    {mission}
+  </p>
+  <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark">
+    {t.verticalsPage.learnMore}
+    <svg
+      aria-hidden="true"
+      class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H4a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 010-1.414z"
+        clip-rule="evenodd"
+      ></path>
+    </svg>
+  </span>
+</a>

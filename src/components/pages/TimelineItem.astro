@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  period: string;
+  description?: string;
+  highlights?: string[];
+  isLast?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  period,
+  description,
+  highlights,
+  isLast = false,
+} = Astro.props;
+---
+
+<li class={`relative pl-6 sm:pl-8 ${isLast ? '' : 'pb-10'}`}>
+  <div class={`absolute left-0 top-0 w-px bg-ptt-border ${isLast ? 'h-3' : 'h-full'}`}></div>
+  <div class="absolute left-0 top-1 w-2.5 h-2.5 -translate-x-[5px] rounded-full bg-ptt-primary border-2 border-white dark:border-ptt-bg ring-4 ring-ptt-primary/20"></div>
+  <div>
+    <div class="flex flex-wrap items-center gap-3 mb-1">
+      <h3 class="text-lg font-bold text-ptt">{title}</h3>
+      <span class="inline-block text-xs font-medium px-2.5 py-1 rounded-full bg-ptt-primary-soft text-ptt-primary">
+        {period}
+      </span>
+    </div>
+    {subtitle && (
+      <p class="text-base font-medium text-ptt-secondary mb-2">{subtitle}</p>
+    )}
+    {description && (
+      <p class="text-ptt-secondary mb-3 leading-relaxed">{description}</p>
+    )}
+    {highlights && highlights.length > 0 && (
+      <ul class="space-y-1.5">
+        {highlights.map((item) => (
+          <li class="flex items-start gap-2 text-sm text-ptt-secondary">
+            <span class="text-ptt-primary mt-0.5 flex-shrink-0">&#8226;</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</li>

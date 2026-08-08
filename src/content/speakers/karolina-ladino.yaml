@@ -1,0 +1,21 @@
+name: Karolina Ladino
+pronouns: she/her
+role:
+  en: Product Manager · PyLadies Bogotá · PyConCo co-organizer
+  es: Product Manager · PyLadies Bogotá · co-organizadora de PyConCo
+bio:
+  en: Karo is a Product Manager, robotics engineer, maker, and jeweler. She leads PyLadies Bogotá and Colombia, is part of Python Colombia, and co-organizes PyConCo. With more than ten years building hardware and software across industries, she is passionate about creating opportunities and spaces for the personal and professional growth of others.
+  es: Karo es Product Manager, ingeniera en robótica, maker y joyera. Lidera PyLadies Bogotá y Colombia, forma parte de Python Colombia y es co-organizadora de PyConCo. Con más de diez años creando hardware y software para diversas industrias, le apasiona generar oportunidades y espacios para el crecimiento personal y profesional de las personas.
+photo:
+  src: /images/speakers/karolina-ladino.jpeg
+  alt:
+    en: Portrait of Karolina Ladino
+    es: Retrato de Karolina Ladino
+social:
+  linkedin: "https://www.linkedin.com/in/karobotco/"
+talks: []
+location:
+  city: Bogotá
+  country: Colombia
+languages:
+  - es

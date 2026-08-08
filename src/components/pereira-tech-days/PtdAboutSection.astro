@@ -1,0 +1,301 @@
+---
+import { type Language, tr } from '@/lib/i18n';
+
+/** Matches content-collection `i18nString` (plain string or {en,es}). */
+type I18nText = string | { en?: string; es?: string };
+
+interface CommunityLink {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  topics?: I18nText[];
+  mediaSrc?: string;
+  mediaAlt?: string;
+  sectionBg?: string;
+  /** Organizer communities linked in the first paragraph (legacy photocopy). */
+  communityLinks?: CommunityLink[];
+}
+
+const {
+  lang,
+  title,
+  description,
+  topics = [],
+  mediaSrc,
+  mediaAlt,
+  sectionBg,
+  communityLinks = [],
+} = Astro.props;
+
+/** Legacy copy ships as two paragraphs separated by a blank line. */
+const paragraphs = description
+  .split(/\n{2,}/)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
+
+type TopicIconKey = 'ai' | 'code' | 'shield' | 'default';
+
+function getTopicIconKey(label: string): TopicIconKey {
+  const normalized = label.toLowerCase();
+  if (/(intelig|artificial|\bai\b|\bia\b)/.test(normalized)) return 'ai';
+  if (/(desarroll|software|development|c[oó]digo|\bcode\b)/.test(normalized)) {
+    return 'code';
+  }
+  if (/(ciber|cyber|segur|security)/.test(normalized)) return 'shield';
+  return 'default';
+}
+
+type TextPart =
+  | { type: 'text'; value: string }
+  | { type: 'bold'; value: string }
+  | { type: 'link'; value: string; href: string };
+
+/**
+ * Bold every "Pereira Tech Day" and wrap known community names as italic links
+ * (legacy /pereira-tech-day/ about card).
+ */
+function parseAboutParagraph(text: string, links: CommunityLink[]): TextPart[] {
+  const patterns: { kind: 'bold' | 'link'; value: string; href?: string }[] = [
+    { kind: 'bold', value: 'Pereira Tech Day' },
+    ...links
+      .slice()
+      .sort((a, b) => b.name.length - a.name.length)
+      .map((link) => ({
+        kind: 'link' as const,
+        value: link.name,
+        href: link.href,
+      })),
+  ];
+
+  const escaped = patterns.map((p) =>
+    p.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  );
+  if (escaped.length === 0) {
+    return [{ type: 'text', value: text }];
+  }
+
+  const re = new RegExp(`(${escaped.join('|')})`, 'g');
+  const parts: TextPart[] = [];
+  let last = 0;
+  let match: RegExpExecArray | null = re.exec(text);
+  while (match) {
+    if (match.index > last) {
+      parts.push({ type: 'text', value: text.slice(last, match.index) });
+    }
+    const token = match[1];
+    const hit = patterns.find(
+      (p) => p.value.toLowerCase() === token.toLowerCase()
+    );
+    if (hit?.kind === 'link' && hit.href) {
+      parts.push({ type: 'link', value: token, href: hit.href });
+    } else {
+      parts.push({ type: 'bold', value: token });
+    }
+    last = match.index + token.length;
+    match = re.exec(text);
+  }
+  if (last < text.length) {
+    parts.push({ type: 'text', value: text.slice(last) });
+  }
+  return parts;
+}
+---
+
+<section
+  id="about"
+  class="ptd-about relative overflow-hidden py-[var(--ptd-section-pad)]"
+  style={sectionBg ? `--ptd-about-bg: url('${sectionBg}')` : undefined}
+  aria-labelledby="ptd-about-title"
+>
+  {
+    sectionBg && (
+      <>
+        <div class="ptd-about__bg pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+        <div class="ptd-about__bg-fade pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+      </>
+    )
+  }
+  <div class="relative z-10 main-container">
+    <article
+      class="ptd-about__card grid gap-5 overflow-hidden rounded-[clamp(1.15rem,2.3vw,1.75rem)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-stretch lg:gap-0"
+    >
+      <div class="ptd-about__copy relative flex flex-col gap-[1.1rem] p-[clamp(1.35rem,3.8vw,2.4rem)]">
+        <h2
+          id="ptd-about-title"
+          class="ptd-about__title m-0 pl-[0.95rem] text-[clamp(2.25rem,4.6vw,3.6rem)] font-normal uppercase leading-[0.95] tracking-[0.04em] text-[var(--ptt-text)]"
+          style='font-family: "Bebas Neue", "Arial Black", sans-serif;'
+        >
+          {title}
+        </h2>
+
+        <div class="space-y-[1.1rem] text-[clamp(1rem,1.8vw,1.08rem)] leading-[1.62] text-[color-mix(in_srgb,var(--ptt-text)_84%,transparent)]">
+          {
+            paragraphs.map((paragraph, index) => {
+              const parts = parseAboutParagraph(
+                paragraph,
+                index === 0 ? communityLinks : [],
+              );
+              return (
+                <p class="m-0">
+                  {parts.map((part) => {
+                    if (part.type === 'bold') {
+                      return <strong class="font-bold text-[var(--ptt-text)]">{part.value}</strong>;
+                    }
+                    if (part.type === 'link') {
+                      return (
+                        <a
+                          href={part.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="italic text-[var(--ptt-primary)] underline-offset-2 hover:text-[var(--ptt-accent)] hover:underline"
+                        >
+                          {part.value}
+                        </a>
+                      );
+                    }
+                    return part.value;
+                  })}
+                </p>
+              );
+            })
+          }
+        </div>
+
+        {
+          topics.length > 0 && (
+            <ul
+              class="m-0 mt-1 grid list-none gap-3 p-0"
+              aria-label={lang === 'es' ? 'Temas principales' : 'Main topics'}
+            >
+              {topics.map((topic) => {
+                const label = tr(topic, lang);
+                const iconKey = getTopicIconKey(label);
+                return (
+                  <li class="flex w-full items-center gap-2.5 text-[clamp(0.95rem,1.7vw,1.05rem)] text-[var(--ptt-text)]">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      aria-hidden="true"
+                      class="shrink-0 text-[var(--ptt-accent)]"
+                    >
+                      {iconKey === 'ai' && (
+                        <path
+                          d="M3 16a3 3 0 1 0 6 0a3 3 0 1 0-6 0m11 3a2 2 0 1 0 4 0a2 2 0 1 0-4 0M10 7.5a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0-9 0"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      )}
+                      {iconKey === 'code' && (
+                        <path
+                          d="m7 8l-4 4l4 4m10-8l4 4l-4 4M14 4l-4 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        />
+                      )}
+                      {iconKey === 'shield' && (
+                        <g
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                        >
+                          <path d="M12 3a12 12 0 0 0 8.5 3A12 12 0 0 1 12 21A12 12 0 0 1 3.5 6A12 12 0 0 0 12 3" />
+                          <path d="M9 12l2 2l4-4" />
+                        </g>
+                      )}
+                      {iconKey === 'default' && (
+                        <circle cx="12" cy="12" r="4" fill="currentColor" />
+                      )}
+                    </svg>
+                    <span>{label}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        }
+      </div>
+
+      {
+        mediaSrc && (
+          <div class="ptd-about__media relative min-h-[18rem] p-[clamp(0.85rem,2.5vw,1.15rem)] lg:min-h-0">
+            <img
+              src={mediaSrc}
+              alt={mediaAlt || ''}
+              width="1280"
+              height="849"
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full rounded-2xl object-cover shadow-[0_14px_34px_color-mix(in_srgb,var(--ptt-text)_18%,transparent)]"
+            />
+          </div>
+        )
+      }
+    </article>
+  </div>
+</section>
+
+<style>
+  .ptd-about__bg {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-about-bg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  /* Soft cream washes so botanical art fades into the section edges (legacy). */
+  .ptd-about__bg-fade {
+    filter: blur(1px);
+    background:
+      linear-gradient(
+        to bottom,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 8%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 86%, transparent) 15%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 44%, transparent) 24%,
+        transparent 34%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 98%, transparent) 8%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 86%, transparent) 15%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 44%, transparent) 24%,
+        transparent 34%
+      );
+  }
+
+  /* Coral accent bar beside the Bebas title (legacy photocopy). */
+  .ptd-about__copy::before {
+    content: '';
+    position: absolute;
+    left: clamp(1.35rem, 3.8vw, 2.4rem);
+    top: clamp(1.5rem, 4vw, 2.55rem);
+    width: 3px;
+    height: clamp(2.9rem, 7vw, 4.1rem);
+    border-radius: 999px;
+    background: var(--ptt-accent, #f06d6d);
+  }
+
+  .ptd-about__card {
+    background: color-mix(in srgb, var(--ptt-bg-elevated, #fff) 94%, var(--ptt-bg, #fef7f3) 6%);
+    border: 1px solid color-mix(in srgb, var(--ptt-text) 9%, #ffffff 91%);
+    box-shadow:
+      0 24px 54px color-mix(in srgb, var(--ptt-text) 10%, transparent),
+      inset 0 1px 0 color-mix(in srgb, white 80%, transparent);
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import { existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+
+interface Props {
+  image: string;
+}
+
+const { image } = Astro.props;
+const isRaster = /\.(png|jpe?g)$/i.test(image);
+const basePath = image.replace(/\.(png|jpe?g)$/i, '').replace(/^\//, '');
+const publicDir = resolve(process.cwd(), 'public');
+const imagesDir = join(publicDir, 'images');
+
+const RESPONSIVE_SIZES = [280, 360, 480];
+const responsiveSrcset = RESPONSIVE_SIZES.map((w) => {
+  const base = basePath.split('/').pop();
+  const p = join(imagesDir, `${base}-${w}.webp`);
+  return existsSync(p) ? `/images/${base}-${w}.webp ${w}w` : null;
+}).filter(Boolean);
+const hasResponsive = responsiveSrcset.length === RESPONSIVE_SIZES.length;
+
+const webpSrc = isRaster ? image.replace(/\.(png|jpe?g)$/i, '.webp') : null;
+const webpPath = webpSrc ? join(publicDir, webpSrc.replace(/^\//, '')) : null;
+const webpExists = webpPath ? existsSync(webpPath) : false;
+
+const useWebp = isRaster && (hasResponsive || webpExists);
+const srcset = hasResponsive ? responsiveSrcset.join(', ') : null;
+const sizes = '(max-width: 640px) 280px, (max-width: 768px) 360px, 480px';
+---
+
+<div class="relative">
+  {useWebp ? (
+    <picture>
+      <source
+        srcset={srcset ?? webpSrc}
+        type="image/webp"
+        sizes={srcset ? sizes : undefined}
+      />
+      <img
+        src={image}
+        alt=""
+        width={480}
+        height={480}
+        class="max-w-full block max-w-[280px] sm:max-w-[360px] md:max-w-[480px]"
+        loading="lazy"
+      />
+    </picture>
+  ) : (
+    <img
+      src={image}
+      alt=""
+      width={480}
+      height={480}
+      class="max-w-full block max-w-[280px] sm:max-w-[360px] md:max-w-[480px]"
+      loading="lazy"
+    />
+  )}
+</div>

@@ -1,0 +1,130 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostIndicator from '@/components/blog/PostIndicator.svelte';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { isDraftDeck } from '@/lib/slides';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  deck: CollectionEntry<'slides'>;
+  lang: Language;
+  jsonLd?: Record<string, unknown>;
+  relatedPostHref?: string;
+  relatedPostTitle?: string;
+}
+
+const { deck, lang, jsonLd, relatedPostHref, relatedPostTitle } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const data = deck.data as CollectionEntry<'slides'>['data'] & {
+  type: 'external';
+  externalUrl: string;
+  provider?: string;
+};
+
+const provider = data.provider || 'external';
+const providerLabel =
+  provider.charAt(0).toUpperCase() + provider.slice(1).replace(/-/g, ' ');
+const ctaText = t.slides.external.openCta.replace('{provider}', providerLabel);
+const isDraft = isDraftDeck(deck);
+---
+
+<MainLayout lang={lang} title={data.title} description={data.description} image={data.heroImage}>
+  {jsonLd && (
+    <Fragment slot="head">
+      <JsonLd data={jsonLd} />
+    </Fragment>
+  )}
+  <div class="main-container py-12">
+    {data.heroImage && (
+      <div class="mb-8 rounded-xl overflow-hidden">
+        <img
+          src={data.heroImage}
+          alt={data.title}
+          width={1200}
+          height={675}
+          class="w-full h-auto object-cover"
+          loading="eager"
+        />
+      </div>
+    )}
+
+    {isDraft && (
+      <div class="mb-4">
+        <span class="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
+          {t.draftBadge}
+        </span>
+      </div>
+    )}
+
+    <h1 class="text-3xl sm:text-4xl font-bold text-ptt mb-4">
+      {data.title}
+    </h1>
+
+    <p class="text-lg text-ptt-secondary mb-6">
+      {data.description}
+    </p>
+
+    {data.eventName && (
+      <div class="flex items-center gap-2 text-sm text-ptt-secondary mb-8">
+        <span>{data.eventName}</span>
+        {data.eventDate && (
+          <>
+            <span>·</span>
+            <time datetime={getCalendarDateString(data.eventDate)}>
+              {formatCalendarDate(data.eventDate, lang)}
+            </time>
+          </>
+        )}
+        {data.eventUrl && (
+          <>
+            <span>·</span>
+            <a
+              href={data.eventUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-ptt-primary hover:underline"
+            >
+              Event page ↗
+            </a>
+          </>
+        )}
+      </div>
+    )}
+
+    {deck.body && deck.body.trim() && (
+      <div class="prose dark:prose-invert max-w-none mb-8">
+        <Fragment set:html={deck.body} />
+      </div>
+    )}
+
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a
+        href={data.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-ptt-primary text-white font-medium hover:opacity-90 transition-opacity"
+      >
+        {ctaText} →
+      </a>
+      <a
+        href={`${prefix}/slides`}
+        class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-ptt-border text-ptt-secondary font-medium hover:bg-ptt-bg-elevated transition-colors"
+      >
+        {t.slides.external.backToCatalog}
+      </a>
+    </div>
+  </div>
+
+  {relatedPostHref && relatedPostTitle && (
+    <div class="fixed bottom-4 right-18 sm:right-20 z-40 flex flex-row-reverse items-center gap-2 pointer-events-none">
+      <div class="pointer-events-auto contents">
+        <PostIndicator client:idle lang={lang} href={relatedPostHref} postTitle={relatedPostTitle} />
+      </div>
+    </div>
+  )}
+</MainLayout>

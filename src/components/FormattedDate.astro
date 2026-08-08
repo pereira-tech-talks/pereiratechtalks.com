@@ -1,0 +1,21 @@
+---
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  date: Date;
+  lang?: string;
+}
+
+const { date, lang = 'es' } = Astro.props;
+---
+
+<time datetime={getCalendarDateString(date)}>
+  {
+    formatCalendarDate(date, lang as Language, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  }
+</time>

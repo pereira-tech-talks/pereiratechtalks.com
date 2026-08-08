@@ -1,0 +1,151 @@
+---
+import type { Language } from '@/lib/translations';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<section
+  id="contacto"
+  class="relative overflow-hidden py-20 sm:py-24 bg-ptt-bg-dark text-white"
+>
+  <div aria-hidden="true" class="absolute inset-0">
+    <img
+      src="/images/home/hero-dark.webp"
+      alt=""
+      width={1920}
+      height={768}
+      class="h-full w-full object-cover opacity-30"
+      loading="lazy"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-ptt-bg-dark via-ptt-bg-dark/85 to-ptt-bg-dark/70"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-3xl px-4 text-center">
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.2em] text-ptt-accent"
+    >
+      {lang === 'es' ? 'Comunidad' : 'Community'}
+    </p>
+    <h2
+      class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white"
+    >
+      {t.contactSection.title}
+    </h2>
+    <p
+      class="mt-4 text-base sm:text-lg text-white/85 max-w-xl mx-auto leading-relaxed"
+    >
+      {t.contactSection.description}
+    </p>
+
+    <div class="mt-8 flex justify-center gap-3 sm:gap-4">
+      <a
+        href="https://github.com/pereira-tech-talks"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="github"
+      >
+        <img
+          src="/icons/github_white.svg"
+          alt=""
+          width={22}
+          height={22}
+          class="w-5 h-5"
+        />
+      </a>
+      <a
+        href="https://www.linkedin.com/company/pereira-tech-talks/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="linkedin"
+      >
+        <img
+          src="/icons/linkedin_white.svg"
+          alt=""
+          width={22}
+          height={22}
+          class="w-5 h-5"
+        />
+      </a>
+      <a
+        href="https://x.com/pertechtalks"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="X (Twitter)"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="twitter"
+      >
+        <img src="/icons/x_white.svg" alt="" width={22} height={22} class="w-5 h-5" />
+      </a>
+      <a
+        href="https://www.instagram.com/pertechtalks"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="instagram"
+      >
+        <img
+          src="/icons/instagram_white.svg"
+          alt=""
+          width={22}
+          height={22}
+          class="w-5 h-5"
+        />
+      </a>
+      <a
+        href="https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp"
+        class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/25 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+        data-umami-event="social_click"
+        data-umami-event-platform="whatsapp"
+      >
+        <img
+          src="/icons/whatsapp_white.svg"
+          alt=""
+          width={22}
+          height={22}
+          class="w-5 h-5"
+        />
+      </a>
+    </div>
+
+    <a
+      href={t.contactSection.ctaLink}
+      class="mt-10 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-8 py-3.5 text-sm sm:text-base font-semibold text-ptt-bg-dark shadow-lg shadow-black/30 hover:bg-ptt-accent-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+    >
+      {t.contactSection.ctaText}
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</section>

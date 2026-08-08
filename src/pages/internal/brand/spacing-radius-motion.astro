@@ -1,0 +1,215 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+interface Row {
+  token: string;
+  value: string;
+  usage: string;
+}
+
+const spacing: Row[] = [
+  { token: 'space-0', value: '0', usage: 'Reset · flush layouts' },
+  { token: 'space-1', value: '0.25rem (4px)', usage: 'Hairline gaps' },
+  {
+    token: 'space-2',
+    value: '0.5rem (8px)',
+    usage: 'Tight gaps · icon padding',
+  },
+  { token: 'space-3', value: '0.75rem (12px)', usage: 'Small gaps · pills' },
+  { token: 'space-4', value: '1rem (16px)', usage: 'Default gap unit' },
+  {
+    token: 'space-6',
+    value: '1.5rem (24px)',
+    usage: 'Card inner padding · section gaps',
+  },
+  {
+    token: 'space-8',
+    value: '2rem (32px)',
+    usage: 'Card outer · section spacing',
+  },
+  {
+    token: 'space-12',
+    value: '3rem (48px)',
+    usage: 'Block padding · large gaps',
+  },
+  {
+    token: 'space-16',
+    value: '4rem (64px)',
+    usage: 'Section block · page spacing',
+  },
+  { token: 'space-20', value: '5rem (80px)', usage: 'Large section block' },
+  { token: 'space-24', value: '6rem (96px)', usage: 'Hero · page top/bottom' },
+  {
+    token: 'space-32',
+    value: '8rem (128px)',
+    usage: 'Hero margin · landing pages',
+  },
+];
+
+const radius: Row[] = [
+  { token: 'radius-none', value: '0', usage: 'Pure block · admin tables' },
+  { token: 'radius-sm', value: '0.25rem', usage: 'Inputs · small chips' },
+  { token: 'radius-md', value: '0.5rem', usage: 'Buttons · default cards' },
+  {
+    token: 'radius-lg',
+    value: '0.75rem',
+    usage: 'Hero cards · feature blocks',
+  },
+  { token: 'radius-xl', value: '1rem', usage: 'Modals · drawers' },
+  { token: 'radius-2xl', value: '1.5rem', usage: 'Large hero panels' },
+  {
+    token: 'radius-full',
+    value: '9999px',
+    usage: 'Avatars · pills · status dots',
+  },
+];
+
+const motion: Row[] = [
+  {
+    token: 'duration-fast',
+    value: '120ms',
+    usage: 'Hover · pill toggle · icon tint',
+  },
+  {
+    token: 'duration-base',
+    value: '200ms',
+    usage: 'Default UI transitions · button press',
+  },
+  {
+    token: 'duration-slow',
+    value: '320ms',
+    usage: 'Modal open · drawer · page transition',
+  },
+  {
+    token: 'ease-out',
+    value: 'cubic-bezier(0, 0, 0.2, 1)',
+    usage: 'Default easing for entry/state changes',
+  },
+  {
+    token: 'ease-in-out',
+    value: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    usage: 'Reversible / scrubbing motion',
+  },
+];
+---
+
+<InternalLayout
+  title="Brand Book — Spacing · Radius · Motion"
+  description="PTT v3.0.0 spacing scale, radius tokens, and motion durations."
+  section="brand"
+  subsection="spacing-radius-motion"
+>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-12">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        <a href="/internal/brand" class="hover:underline">Brand</a> / Spacing · Radius · Motion
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">Spacing · Radius · Motion</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        Layout primitives that keep PTT pages calm and predictable. Built on a
+        4-pixel base, the scale is intentionally short so designers and AI
+        agents reach the same composition decisions.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Spacing scale</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Token</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Value</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {spacing.map((row) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-xs text-gray-700 dark:text-gray-200">{row.token}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-600 dark:text-gray-300">{row.value}</td>
+                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{row.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Radius tokens</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Token</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Value</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {radius.map((row) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-xs text-gray-700 dark:text-gray-200">{row.token}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-600 dark:text-gray-300">{row.value}</td>
+                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{row.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Motion tokens</h2>
+      <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <table class="min-w-full text-sm">
+          <thead class="bg-gray-50 dark:bg-gray-800">
+            <tr class="text-left">
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Token</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Value</th>
+              <th class="px-4 py-2 font-semibold text-gray-700 dark:text-gray-200">Usage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            {motion.map((row) => (
+              <tr>
+                <td class="px-4 py-3 font-mono text-xs text-gray-700 dark:text-gray-200">{row.token}</td>
+                <td class="px-4 py-3 font-mono text-xs text-gray-600 dark:text-gray-300">{row.value}</td>
+                <td class="px-4 py-3 text-gray-600 dark:text-gray-300">{row.usage}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Reduced-motion contract</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        All animations and non-essential transitions MUST honor
+        <code>@media (prefers-reduced-motion: reduce)</code> and degrade to
+        instant changes. This is enforced by Task 19's a11y audit and by the
+        global stylesheet:
+      </p>
+      <pre class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4 overflow-x-auto text-xs text-gray-800 dark:text-gray-100"><code>{`@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`}</code></pre>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Layout shells</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li><code>max-w-5xl mx-auto px-4 sm:px-6</code> — content pages.</li>
+        <li><code>max-w-6xl mx-auto px-4 sm:px-6</code> — listings (blog, meetups).</li>
+        <li><code>max-w-7xl mx-auto px-4 md:px-6</code> — site shell (`.main-container`).</li>
+        <li>Vertical rhythm between major sections: <code>py-16</code> mobile / <code>py-24</code> desktop.</li>
+      </ul>
+    </section>
+  </main>
+</InternalLayout>

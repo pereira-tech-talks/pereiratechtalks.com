@@ -1,0 +1,14 @@
+name: Backbone UTP
+logo:
+  src: /images/communities/backbone-utp.png
+  dark: /images/communities/backbone-utp-dark.png
+  alt: Backbone UTP logo
+url: "https://backboneutp.com"
+focus:
+  en: Entrepreneurship and innovation at Universidad Tecnológica de Pereira
+  es: Emprendimiento e innovación en la Universidad Tecnológica de Pereira
+description:
+  en: The entrepreneurship community at UTP — startup culture, innovation labs, and student builders. Shares campus venues and talent pipelines with Pereira Tech Talks.
+  es: La comunidad de emprendimiento en la UTP — cultura startup, laboratorios de innovación y constructores estudiantiles. Comparte venues del campus y talento con Pereira Tech Talks.
+status: active
+order: 5

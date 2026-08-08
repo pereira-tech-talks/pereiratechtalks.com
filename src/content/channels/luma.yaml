@@ -1,0 +1,11 @@
+name: Luma — Pereira Tech Talks
+platform: luma
+url: "https://luma.com/pertechtalks"
+description:
+  en: Primary RSVP channel for in-person and hybrid Pereira Tech Talks meetups.
+  es: Canal principal de RSVP para los meetups presenciales e híbridos de Pereira Tech Talks.
+audience:
+  en: Anyone who wants to attend a meetup.
+  es: Cualquiera que quiera asistir a un meetup.
+isPrimary: true
+order: 1

@@ -1,0 +1,18 @@
+name: "Jose Felipe Duarte"
+role:
+  en: "Engineer & TechOps Manager"
+  es: "Engineer & TechOps Manager"
+bio:
+  en: "Jose Felipe Duarte is an engineer and TechOps Manager. He co-organizes Pereira Tech Day and has spoken at Pereira Tech Talks meetups on infrastructure, operations, and the engineering management craft."
+  es: "Jose Felipe Duarte es ingeniero y TechOps Manager. Co-organiza Pereira Tech Day y ha dado charlas en Pereira Tech Talks sobre infraestructura, operaciones y el oficio del management de ingeniería."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Jose Felipe Duarte"
+    es: "Retrato de Jose Felipe Duarte"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

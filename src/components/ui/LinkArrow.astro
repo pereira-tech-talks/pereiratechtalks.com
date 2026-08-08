@@ -1,0 +1,48 @@
+---
+/**
+ * PTT v3.0.0 link with arrow — "Read more →" call-to-action link.
+ */
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'muted';
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  external = false,
+  class: className = '',
+} = Astro.props;
+
+const colorClass =
+  variant === 'muted'
+    ? 'text-ptt-secondary hover:text-ptt-primary'
+    : 'text-ptt-primary hover:text-ptt-primary-strong';
+
+const target = external ? '_blank' : undefined;
+const rel = external ? 'noopener noreferrer' : undefined;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class={`group inline-flex items-center gap-1.5 font-medium transition-colors ${colorClass} ${className}`}
+>
+  <slot />
+  <svg
+    aria-hidden="true"
+    class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H4a1 1 0 110-2h8.586l-2.293-2.293a1 1 0 010-1.414z"
+      clip-rule="evenodd"
+    ></path>
+  </svg>
+</a>

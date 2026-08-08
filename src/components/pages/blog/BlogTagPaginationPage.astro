@@ -1,0 +1,26 @@
+---
+import BlogContainer from '@/components/blog/BlogContainer.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+import type { BlogPostsResultType } from '@/lib/types';
+
+interface Props {
+  lang: Language;
+  blogPostsResult: BlogPostsResultType;
+  currentTag: string;
+  tag: string;
+  page: string;
+}
+
+const { lang, blogPostsResult, currentTag, tag, page } = Astro.props;
+const t = getTranslations(lang);
+---
+
+<MainLayout
+  lang={lang}
+  title={`${t.postsTagged(t.tagNames[tag] || tag)} - ${t.pageOf(Number(page), blogPostsResult.totalPages)}`}
+  description={t.tagDescriptions[tag] || t.postsTagged(t.tagNames[tag] || tag)}
+>
+  <BlogContainer blogPostsResult={blogPostsResult} currentTag={currentTag} lang={lang} />
+</MainLayout>

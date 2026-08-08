@@ -1,0 +1,116 @@
+---
+import JsonLd from '@/components/JsonLd.astro';
+import ScrollToTimeline from '@/components/pages/ScrollToTimeline.svelte';
+import SlidesTimelineInfiniteScroll from '@/components/slides/SlidesTimelineInfiniteScroll.svelte';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { BLOG_PAGE_SIZE } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getSlidesTimelineIndex } from '@/lib/slides';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const allDecks = await getSlidesTimelineIndex(lang);
+const initialDecks = allDecks.slice(0, BLOG_PAGE_SIZE);
+const totalCount = allDecks.length;
+const timelineApiEndpoint = `/api/slides-timeline/${lang}.json`;
+
+const breadcrumbs = [
+  { label: t.nav.home, href: `${prefix}/` },
+  { label: t.slidesPage.title },
+];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: t.nav.home,
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t.slidesPage.title,
+      item: `${siteUrl}${prefix}/slides`,
+    },
+  ],
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={t.slidesPage.title}
+  description={t.slidesPage.description}
+  keywords={lang === 'en'
+    ? ['slides', 'presentation decks', 'tech talks slides', 'Reveal.js presentations', 'developer slides', 'conference talks']
+    : ['diapositivas', 'presentaciones técnicas', 'slides de charlas tech', 'presentaciones Reveal.js', 'slides para desarrolladores', 'charlas de conferencias']}
+>
+  <Fragment slot="head">
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <section
+    class="relative overflow-hidden bg-ptt-bg-dark text-white"
+    aria-label={t.slidesPage.title}
+  >
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+      <img
+        src="/images/home/hero-dark-1280.webp"
+        alt=""
+        width={1280}
+        height={512}
+        class="h-full w-full object-cover opacity-35"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-ptt-bg-dark via-ptt-bg-dark/85 to-ptt-bg-dark/45"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-ptt-bg-dark via-transparent to-ptt-bg-dark/50"></div>
+    </div>
+
+    <div class="relative main-container pt-10 pb-4 sm:pt-14">
+      <Breadcrumbs items={breadcrumbs} onDark />
+    </div>
+
+    <div class="relative main-container pb-16 pt-6 sm:pb-20 sm:pt-8">
+      <Eyebrow variant="accent">{t.slidesPage.subtitle}</Eyebrow>
+      <h1 class="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
+        {t.slidesPage.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">
+        {t.slidesPage.heroDescription}
+      </p>
+    </div>
+  </section>
+
+  <section id="timeline" class="py-12 md:py-16 bg-ptt-bg transition-colors duration-300">
+    <div class="main-container">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-ptt mb-8">
+        {t.slidesPage.timelineTitle}
+      </h2>
+      <SlidesTimelineInfiniteScroll
+        client:visible
+        {initialDecks}
+        {totalCount}
+        apiEndpoint={timelineApiEndpoint}
+        {lang}
+        pageSize={BLOG_PAGE_SIZE}
+        pageName="slides"
+        emptyStateMessage={t.slidesPage.emptyState}
+      />
+    </div>
+  </section>
+
+  <ScrollToTimeline client:visible lang={lang} targetLabel={t.slidesPage.timelineTitle} />
+</MainLayout>

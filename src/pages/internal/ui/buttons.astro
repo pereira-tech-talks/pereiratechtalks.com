@@ -1,0 +1,180 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const variants = [
+  {
+    name: 'Primary',
+    classes: 'bg-main text-white hover:bg-main/80',
+    usage: 'Main actions, form submit',
+  },
+  {
+    name: 'Secondary',
+    classes: 'bg-secondary text-white hover:bg-secondary/90',
+    usage: 'CTAs, accent actions',
+  },
+  {
+    name: 'Outline',
+    classes:
+      'border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800',
+    usage: 'Secondary actions, cancel',
+  },
+  {
+    name: 'Ghost',
+    classes:
+      'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800',
+    usage: 'Tertiary actions, icon buttons',
+  },
+];
+
+const sizes = [
+  { name: 'Small', classes: 'px-3 py-1.5 text-xs' },
+  { name: 'Medium', classes: 'px-4 py-2 text-sm' },
+  { name: 'Large', classes: 'px-8 py-3 text-base' },
+];
+
+const states = [
+  { name: 'Default', extra: '' },
+  { name: 'Disabled', extra: 'opacity-50 cursor-not-allowed' },
+  {
+    name: 'Focus',
+    extra: 'ring-2 ring-secondary ring-offset-2 dark:ring-offset-gray-900',
+  },
+];
+---
+
+<ShowcaseLayout title="Buttons" description="Button variants, sizes, and states" section="buttons">
+
+  <!-- Variants -->
+  <section class="mb-12" data-component="button-variants">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Button Variants</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {variants.map((v) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-5 text-center">
+          <button type="button" class:list={['rounded-lg font-medium px-4 py-2 text-sm transition-colors duration-200', v.classes]}>
+            {v.name}
+          </button>
+          <div class="mt-3 text-xs text-gray-600 dark:text-gray-300">{v.usage}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sizes -->
+  <section class="mb-12" data-component="button-sizes">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Sizes</h2>
+    <div class="flex items-end gap-4 flex-wrap">
+      {sizes.map((s) => (
+        <div class="text-center">
+          <button type="button" class:list={['rounded-lg font-medium bg-main text-white hover:bg-main/80 transition-colors duration-200', s.classes]}>
+            {s.name}
+          </button>
+          <div class="mt-2 text-xs text-gray-600 dark:text-gray-300">{s.classes}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- States -->
+  <section class="mb-12" data-component="button-states">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">States</h2>
+    <div class="flex items-center gap-4 flex-wrap">
+      {states.map((s) => (
+        <div class="text-center">
+          <button
+            type="button"
+            disabled={s.name === 'Disabled'}
+            class:list={['rounded-lg font-medium px-4 py-2 text-sm bg-main text-white transition-colors duration-200', s.extra]}
+          >
+            {s.name}
+          </button>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Link Buttons -->
+  <section class="mb-12" data-component="link-buttons">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Link Buttons</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Navigation actions use <code class="text-xs">&lt;a&gt;</code> styled as buttons.
+    </p>
+    <div class="flex gap-4 flex-wrap">
+      <a href="#" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary text-white text-sm font-medium hover:bg-secondary/90 transition-colors duration-200">
+        Link Button
+      </a>
+      <a href="#" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-secondary text-white font-semibold hover:bg-secondary/90 transition-colors shadow-lg hover:shadow-xl">
+        CTA Pill Button
+      </a>
+    </div>
+    <p class="mt-3 text-xs text-gray-600 dark:text-gray-300">
+      The pill-shaped CTA (<code class="text-xs">rounded-full</code>) is used for contact form submit and prominent calls-to-action.
+    </p>
+  </section>
+
+  <!-- Icon Buttons -->
+  <section class="mb-12" data-component="icon-buttons">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Icon Buttons</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Used for social links and compact actions. Icon circles from ContactPage pattern.
+    </p>
+    <div class="flex gap-3">
+      <button type="button" class="w-10 h-10 rounded-full bg-gray-900 dark:bg-white flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="GitHub">
+        <svg class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg>
+      </button>
+      <button type="button" class="w-10 h-10 rounded-full bg-gray-900 dark:bg-white flex items-center justify-center hover:opacity-80 transition-opacity" aria-label="LinkedIn">
+        <svg class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </button>
+      <button type="button" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Settings">
+        <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><circle cx="12" cy="12" r="3" /></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12">
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;!-- Primary button --&gt;
+&lt;button class="rounded-lg font-medium px-4 py-2 text-sm bg-main text-white hover:bg-main/80 transition-colors"&gt;
+  Save
+&lt;/button&gt;
+
+&lt;!-- CTA pill button (link) --&gt;
+&lt;a href="/contact" class="px-8 py-3 rounded-full bg-secondary text-white font-semibold hover:bg-secondary/90 shadow-lg hover:shadow-xl transition-colors"&gt;
+  Get in Touch
+&lt;/a&gt;
+
+&lt;!-- Icon button --&gt;
+&lt;button class="w-10 h-10 rounded-full bg-gray-900 dark:bg-white flex items-center justify-center" aria-label="GitHub"&gt;
+  &lt;svg class="w-5 h-5 text-white dark:text-gray-900" ...&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Variant</th>
+            <th class="py-2 pr-4 font-semibold">Classes</th>
+            <th class="py-2 font-semibold">Usage</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {variants.map((v) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{v.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{v.classes}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">{v.usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

@@ -6,13 +6,13 @@ if [[ -f "packages_upgrades_output.txt" ]]; then
   rm packages_upgrades_output.txt
 fi
 
-npm run ncu:upgrade > packages_upgrades.txt
+corepack pnpm run ncu:upgrade > packages_upgrades.txt
 
 NO_UPGRADES_AVAILABLE_MESSAGE="All dependencies match the latest package versions :)"
 if grep -q "$NO_UPGRADES_AVAILABLE_MESSAGE" packages_upgrades.txt; then
   echo $NO_UPGRADES_AVAILABLE_MESSAGE
 else
-  echo "Npm packages upgrades available:" >> packages_upgrades_output.txt
+  echo "Package upgrades available:" >> packages_upgrades_output.txt
   echo "" >> packages_upgrades_output.txt
   while read text_line; do
     if [[ "$text_line" =~ "→" ]]; then
@@ -20,5 +20,3 @@ else
     fi
   done < packages_upgrades.txt
 fi
-
-

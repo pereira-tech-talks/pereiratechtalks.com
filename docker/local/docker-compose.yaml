@@ -1,20 +1,39 @@
-version: '3.8'
+name: pertechtalkslocal
 
 services:
-  pereiratechtalks: &pereiratechtalks
+  pertechtalksvscode:
+    container_name: pertechtalks
+    init: true
     build:
       context: .
-      dockerfile: ./pereiratechtalks/Dockerfile
+      dockerfile: ./pertechtalks/Dockerfile
     working_dir: /app
     volumes:
       - ../..:/app
+      # Persistent data volumes for the node user (the only user that runs the AI CLIs)
+      - claude_data:/home/node/.claude_data
+      - codex_data:/home/node/.codex_data
+      - cursor_data:/home/node/.cursor_data
+      - gh_data:/home/node/.gh_data
+      - dailybot_data:/home/node/.dailybot_data
+      - ${HOME}/.ssh:/home/node/.ssh_host:ro
+      - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
     ports:
-      - '4333:4321'
-      - '8999:8969'
+      # Use 8888 on host to avoid conflict with macOS AirPlay Receiver (port 8888)
+      - '8888:8888'
     env_file:
-      - pereiratechtalks/.env
+      - pertechtalks/.env
+    environment:
+      - DOCKER_DEV_ENV=vscode
     command:
       - /bin/sh
       - -c
       - |
         sleep infinity
+
+volumes:
+  claude_data: {}        # Claude CLI session/auth (symlinked to ~/.claude)
+  codex_data: {}         # Codex CLI session/auth (symlinked to ~/.codex)
+  cursor_data: {}        # Cursor CLI session/auth (symlinked to ~/.cursor)
+  gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)
+  dailybot_data: {}      # Dailybot CLI session/auth (symlinked to ~/.config/dailybot)

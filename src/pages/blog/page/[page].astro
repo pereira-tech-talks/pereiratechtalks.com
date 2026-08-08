@@ -1,0 +1,31 @@
+---
+import BlogPaginationPage from '@/components/pages/blog/BlogPaginationPage.astro';
+import { getBlogPosts } from '@/lib/blog';
+import type { Language } from '@/lib/i18n';
+import type { BlogPostsResultType } from '@/lib/types';
+
+const lang: Language = 'es';
+
+export async function getStaticPaths() {
+  const lang: Language = 'es';
+  const blogPostsResult: BlogPostsResultType = await getBlogPosts({ lang });
+  const totalPages = blogPostsResult.totalPages;
+
+  const paths = [];
+  for (let i = 1; i <= totalPages; i++) {
+    const pagePosts = await getBlogPosts({
+      lang,
+      page: i,
+    });
+    paths.push({
+      params: { page: String(i) },
+      props: { blogPostsResult: pagePosts },
+    });
+  }
+  return paths;
+}
+
+const { blogPostsResult } = Astro.props;
+---
+
+<BlogPaginationPage lang={lang} blogPostsResult={blogPostsResult} />

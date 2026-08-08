@@ -1,0 +1,71 @@
+---
+import '@/styles/certificates.css';
+import DiplomaDocument from '@/components/certificates/DiplomaDocument.astro';
+import EditionScope from '@/components/pereira-tech-days/EditionScope.astro';
+import InternalLayout from '@/layouts/InternalLayout.astro';
+import {
+  buildVerifyQrDataUrl,
+  certificateVerifyPath,
+  getAllCertificateFixtures,
+  toCertificatePayload,
+} from '@/lib/certificates';
+
+const siteBase = Astro.site ?? new URL(SITE_URL);
+const showcases = await Promise.all(
+  getAllCertificateFixtures().map(async (fixture) => {
+    const payload = toCertificatePayload(fixture, 'en');
+    const verifyPath = certificateVerifyPath(fixture.id, 'en');
+    const verifyUrl = new URL(verifyPath.replace(/^\//, ''), siteBase).href;
+    const qrDataUrl = await buildVerifyQrDataUrl(verifyUrl);
+    return { fixture, payload, verifyPath, qrDataUrl };
+  })
+);
+
+import { SITE_URL } from '@/lib/constances';
+---
+
+<InternalLayout
+  title="Certificates — Diploma Showcase"
+  description="Dev-only showcase of diploma variants (roles and statuses)."
+  section="certificates"
+>
+  <section class="mb-10">
+    <h1 class="text-3xl font-bold mb-3">Certificate diploma showcase</h1>
+    <p class="text-gray-600 dark:text-gray-300 max-w-3xl">
+      Demo fixtures only — fictional names, opaque IDs. Public routes under
+      <code>/pereira-tech-days/&#123;year&#125;/certificates/&#123;id&#125;</code>.
+    </p>
+  </section>
+
+  <div class="flex flex-col gap-16">
+    {
+      showcases.map(({ fixture, payload, verifyPath, qrDataUrl }) => (
+        <section>
+          <h2 class="text-xl font-semibold mb-2">
+            {fixture.role} · {fixture.status} · <code>{fixture.id}</code>
+          </h2>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            <a
+              class="underline"
+              href={`/pereira-tech-days/${fixture.eventYear}/certificates/${fixture.id}`}
+            >
+              Open public ES page
+            </a>
+            {' · '}
+            <a class="underline" href={verifyPath}>
+              Verify
+            </a>
+          </p>
+          <EditionScope year={fixture.eventYear}>
+            <DiplomaDocument
+              certificate={payload}
+              verificationUrl={verifyPath}
+              qrDataUrl={qrDataUrl}
+              lang="en"
+            />
+          </EditionScope>
+        </section>
+      ))
+    }
+  </div>
+</InternalLayout>

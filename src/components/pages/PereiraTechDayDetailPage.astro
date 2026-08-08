@@ -1,0 +1,627 @@
+---
+/**
+ * PTT v3.0.0 single Pereira Tech Day edition detail page.
+ * Per-edition theming via EditionScope; PTD pages use dedicated edition chrome
+ * (minimal header: current edition + previous editions) instead of global PTT nav.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import TalkCard from '@/components/cards/TalkCard.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import EditionScope from '@/components/pereira-tech-days/EditionScope.astro';
+import PtdAboutSection from '@/components/pereira-tech-days/PtdAboutSection.astro';
+import PtdCommunitiesOrganiza from '@/components/pereira-tech-days/PtdCommunitiesOrganiza.astro';
+import PtdEditionFonts from '@/components/pereira-tech-days/PtdEditionFonts.astro';
+import PtdFaqs from '@/components/pereira-tech-days/PtdFaqs.svelte';
+import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarousel.svelte';
+import PtdHero2024 from '@/components/pereira-tech-days/PtdHero2024.astro';
+import PtdHero2026 from '@/components/pereira-tech-days/PtdHero2026.astro';
+import PtdJoinSection from '@/components/pereira-tech-days/PtdJoinSection.astro';
+import PtdKeynoteQuoteCard from '@/components/pereira-tech-days/PtdKeynoteQuoteCard.astro';
+import PtdLightningSection from '@/components/pereira-tech-days/PtdLightningSection.astro';
+import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.astro';
+import PtdSponsorsShowcase from '@/components/pereira-tech-days/PtdSponsorsShowcase.astro';
+import PtdTeamGrid from '@/components/pereira-tech-days/PtdTeamGrid.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE_URL } from '@/lib/constances';
+import { getContributorsBySlugs } from '@/lib/contributor';
+import { formatCalendarDate, formatCalendarDateParts } from '@/lib/dates';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import {
+  buildEditionThemeCss,
+  getEditionEndIso,
+  getEditionFontPackages,
+  getEditionHref,
+  getEditionStartDate,
+  getEditionStartIso,
+  getEditions,
+  getUpcomingLandingChrome,
+  isUpcomingEdition,
+  normalizeLightningTalks,
+} from '@/lib/pereiraTechDay';
+import { getSpeakersBySlugs } from '@/lib/speaker';
+import { getEditionSponsors } from '@/lib/sponsor';
+import { getTalksByEvent } from '@/lib/talk';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  edition: CollectionEntry<'pereiraTechDays'>;
+  lang: Language;
+}
+
+const { edition, lang } = Astro.props;
+const t = getTranslations(lang).ptdPage;
+const prefix = getUrlPrefix(lang);
+const year = edition.data.year;
+const title = tr(edition.data.title, lang);
+const tagline = tr(edition.data.tagline, lang);
+const description = tr(edition.data.description, lang);
+const heroSrc = edition.data.hero.src;
+const ogImageSrc = edition.data.ogImage ?? heroSrc;
+const upcomingTemplate = isUpcomingEdition(edition);
+const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
+
+const startDate = getEditionStartDate(edition);
+const endIso = getEditionEndIso(edition);
+const startIso = getEditionStartIso(edition);
+
+const dateLabel = formatCalendarDate(startDate, lang);
+
+/** Legacy 2024 hero date: "SEPTIEMBRE 21, 2024." */
+const heroDateParts = formatCalendarDateParts(startDate, lang, {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+const heroMonth =
+  heroDateParts.find((p) => p.type === 'month')?.value.toUpperCase() ?? '';
+const heroDay = heroDateParts.find((p) => p.type === 'day')?.value ?? '';
+const heroYearPart = heroDateParts.find((p) => p.type === 'year')?.value ?? '';
+const heroDateLabel = `${heroMonth} ${heroDay}, ${heroYearPart}`;
+
+const dateLong = formatCalendarDate(startDate, lang, {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const allEditions = await getEditions();
+const editionPublicHref = getEditionHref(edition, lang);
+const ptdEditionNav = allEditions.map((entry) => ({
+  year: entry.data.year,
+  href: getEditionHref(entry, lang),
+  label: `Pereira Tech Day ${entry.data.year}`,
+}));
+
+const venue = edition.data.venue;
+const status = edition.data.status;
+const themeCss = buildEditionThemeCss(edition);
+const fontPackages = getEditionFontPackages(edition);
+
+const talks = await getTalksByEvent('pereiraTechDays', edition.id);
+const keynoteSpeakers = await getSpeakersBySlugs(edition.data.keynotes ?? []);
+const normalizedLightningTalks = normalizeLightningTalks(
+  edition.data.lightningTalks ?? []
+);
+const lightningSpeakers = await getSpeakersBySlugs(
+  normalizedLightningTalks.map((entry) => entry.speaker)
+);
+const speakerNameById = new Map(
+  [...keynoteSpeakers, ...lightningSpeakers].map((s) => [s.id, s.data.name])
+);
+
+const editionSponsors = await getEditionSponsors(edition.data.sponsors);
+const organizers = await getContributorsBySlugs(edition.data.organizers);
+const collaborators = await getContributorsBySlugs(
+  edition.data.collaborators ?? []
+);
+const communities = edition.data.communities;
+
+const { Content } = await render(edition);
+
+const scheduleTypeLabels: Record<string, { en: string; es: string }> = {
+  talk: { en: 'Talk', es: 'Charla' },
+  keynote: { en: 'Keynote', es: 'Keynote' },
+  lightning: { en: 'Lightning', es: 'Relámpago' },
+  panel: { en: 'Panel', es: 'Panel' },
+  break: { en: 'Break', es: 'Pausa' },
+  'open-doors': { en: 'Doors open', es: 'Apertura de puertas' },
+  closing: { en: 'Closing', es: 'Cierre' },
+};
+
+const metaDescription = (description || tagline).slice(0, 160);
+
+const faqs = edition.data.faqs.map((faq) => ({
+  ...faq,
+  linkUrl: faq.linkUrl
+    ? faq.linkUrl.startsWith('http')
+      ? faq.linkUrl
+      : `${prefix}${faq.linkUrl.startsWith('/') ? faq.linkUrl : `/${faq.linkUrl}`}`
+    : undefined,
+}));
+
+const eventJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: title,
+  description: metaDescription,
+  startDate: startIso,
+  endDate: endIso,
+  eventStatus:
+    status === 'cancelled'
+      ? 'https://schema.org/EventCancelled'
+      : status === 'completed'
+        ? 'https://schema.org/EventScheduled'
+        : 'https://schema.org/EventScheduled',
+  eventAttendanceMode:
+    edition.data.mode === 'virtual'
+      ? 'https://schema.org/OnlineEventAttendanceMode'
+      : edition.data.mode === 'hybrid'
+        ? 'https://schema.org/MixedEventAttendanceMode'
+        : 'https://schema.org/OfflineEventAttendanceMode',
+  url: `${SITE_URL}${editionPublicHref}`,
+  image: ogImageSrc?.startsWith('http')
+    ? ogImageSrc
+    : `${SITE_URL}${ogImageSrc}`,
+  organizer: {
+    '@type': 'Organization',
+    name: 'Pereira Tech Talks',
+    url: SITE_URL,
+  },
+  location: {
+    '@type': 'Place',
+    name: venue.name,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: venue.city,
+      addressCountry: venue.country,
+    },
+  },
+};
+
+if (keynoteSpeakers.length > 0) {
+  eventJsonLd.performer = keynoteSpeakers.map((s) => ({
+    '@type': 'Person',
+    name: s.data.name,
+    url: `${SITE_URL}${prefix}/speakers/${s.id}/`,
+  }));
+}
+
+const sectionBgs = edition.data.sectionBackgrounds ?? {};
+---
+
+<MainLayout
+  lang={lang}
+  title={title}
+  description={metaDescription}
+  image={ogImageSrc}
+  chrome="ptd-edition"
+  ptdYear={year}
+  ptdEditions={ptdEditionNav}
+  ptdChromeVariant={upcomingTemplate ? 'light' : 'dark'}
+>
+  <JsonLd data={eventJsonLd} />
+  <style is:inline set:html={themeCss}></style>
+  {fontPackages.length > 0 && <PtdEditionFonts packages={fontPackages} />}
+
+  <EditionScope year={year}>
+    {
+      /**
+       * Section order contract (legacy parity — see plan tasks 7 & 11):
+       * Upcoming (2026): Hero -> About -> Lightning* -> Memories* -> Pricing
+       *   -> Schedule* -> Sponsors -> Organiza -> Organizadores -> Colaboradores
+       *   -> Talks* -> FAQ* -> Join
+       * Past (2024): Hero -> Ponentes -> Lightning* -> Memories* -> Sponsors
+       *   -> Organiza -> Organizadores -> Colaboradores -> Talks* -> FAQ*
+       * (* only renders when that edition actually has matching data)
+       */
+    }
+    {
+      upcomingTemplate ? (
+        <PtdHero2026
+          lang={lang}
+          year={year}
+          title={title}
+          tagline={tagline}
+          eyebrow={
+            edition.data.startTime
+              ? `${heroDateLabel} — ${/AM|PM/i.test(edition.data.startTime) ? edition.data.startTime : `${edition.data.startTime} AM`}`
+              : heroDateLabel
+          }
+          dateLong={dateLong}
+          venueName={venue.name}
+          venueMapUrl={venue.mapUrl}
+          expectedAttendance={tr(edition.data.expectedAttendance, lang)}
+          heroIllustration={edition.data.brandKit.hero?.backgroundImage}
+          logoSrc="/images/pereira-tech-days/2026/logo.png"
+          targetDate={startIso}
+          endDate={endIso}
+          registrationUrl={edition.data.linkMeetupCom}
+        />
+      ) : (
+        <PtdHero2024
+          lang={lang}
+          year={year}
+          title={title}
+          tagline={tagline}
+          dateLabel={heroDateLabel}
+          startDate={startIso}
+          venueName={venue.name}
+          venueMapUrl={venue.mapUrl}
+          logoSrc="/images/pereira-tech-days/2024/logo.png"
+          recordingUrl={edition.data.linkRecording}
+          recordingCta={t.recordingCta}
+        />
+      )
+    }
+
+    {
+      upcomingTemplate && (
+        <PtdAboutSection
+          lang={lang}
+          title={t.about}
+          description={description}
+          topics={edition.data.aboutTopics}
+          mediaSrc={edition.data.aboutMedia?.src}
+          mediaAlt={tr(edition.data.aboutMedia?.alt, lang)}
+          sectionBg={sectionBgs.about}
+          communityLinks={[
+            { name: 'PereiraJS', href: 'https://pereira.js.org/' },
+            { name: 'Python Pereira', href: 'https://pypereira.co' },
+            { name: 'Pereira Tech Talks', href: SITE_URL },
+            { name: 'Joint Developer', href: 'https://jointdevweb.firebaseapp.com/' },
+          ]}
+        />
+      )
+    }
+
+    {
+      /* Past-only: Ponentes (keynote quote cards) */
+    }
+    {
+      !upcomingTemplate && keynoteSpeakers.length > 0 && (
+        <section
+          class="bg-[var(--ptt-bg)] pb-[var(--ptd-section-pad)] pt-4 sm:pt-6"
+          aria-labelledby="ptd-speakers-title"
+        >
+          <div class="main-container">
+            <h2
+              id="ptd-speakers-title"
+              class="text-center text-2xl font-bold tracking-tight text-[var(--ptt-text)] sm:text-3xl md:text-4xl"
+            >
+              {t.speakers}
+            </h2>
+            <ul class="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+              {keynoteSpeakers.map((speaker) => (
+                <li class="min-w-0">
+                  <PtdKeynoteQuoteCard speaker={speaker} lang={lang} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      lightningSpeakers.length > 0 && (
+        <PtdLightningSection
+          lang={lang}
+          title={t.lightningTitle}
+          tagline={t.lightningTagline}
+          talks={normalizedLightningTalks}
+          speakers={lightningSpeakers}
+        />
+      )
+    }
+
+    {
+      edition.data.gallery.length > 0 && (
+        <PtdGalleryCarousel
+          client:visible
+          lang={lang}
+          title={t.galleryMemories}
+          images={edition.data.gallery}
+          mode={upcomingTemplate ? 'carousel' : 'marquee'}
+        />
+      )
+    }
+
+    {
+      upcomingTemplate && edition.data.sponsorshipPlans.length > 0 && (
+        <PtdPricingSection
+          lang={lang}
+          title={t.pricing}
+          plans={edition.data.sponsorshipPlans}
+          partnerships={edition.data.extraPartnerships}
+          sectionBg={sectionBgs.pricing}
+        />
+      )
+    }
+
+    {
+      /**
+       * Upcoming-only: full agenda. Past editions soft-hide the schedule
+       * (data stays in YAML for record-keeping) — legacy 2024 has no
+       * schedule section; Ponentes + Lightning cover it instead.
+       */
+    }
+    {
+      upcomingTemplate && edition.data.schedule.length > 0 && (
+        <section class="bg-[var(--ptt-bg-elevated)] py-[var(--ptd-section-pad)]">
+          <div class="main-container">
+            <h2 class="mb-8 text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.schedule}</h2>
+            <ol class="space-y-3">
+              {edition.data.schedule.map((slot) => (
+                <li class="flex items-start gap-4 rounded-xl bg-[var(--ptt-bg)] p-4 ring-1 ring-[var(--ptt-border)]">
+                  <time class="w-16 shrink-0 font-mono text-sm font-semibold text-[var(--ptt-primary)]">
+                    {slot.time}
+                  </time>
+                  <div class="flex-1">
+                    <p class="text-xs font-semibold uppercase tracking-widest text-[var(--ptt-text-muted)]">
+                      {scheduleTypeLabels[slot.type]?.[lang] ?? slot.type}
+                    </p>
+                    <p class="mt-0.5 text-base font-medium text-[var(--ptt-text)]">
+                      {slot.title ? tr(slot.title, lang) : slot.talkSlug}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      /* Shared (both templates): logo-only sponsors, Organiza, and team grids */
+    }
+    {
+      editionSponsors.length > 0 && (
+        <section
+          id="sponsors"
+          class:list={[
+            'relative',
+            upcomingTemplate
+              ? 'ptd-sponsors-section'
+              : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
+          ]}
+          style={
+            upcomingTemplate && sectionBgs.sponsors
+              ? `--ptd-sponsors-bg: url('${sectionBgs.sponsors}')`
+              : undefined
+          }
+          aria-label={t.sponsors}
+        >
+          {
+            upcomingTemplate && sectionBgs.sponsors && (
+              <>
+                <div
+                  class="ptd-sponsors-section__bg pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+                <div
+                  class="ptd-sponsors-section__fade pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+              </>
+            )
+          }
+          <div class="relative z-10 main-container">
+            <PtdSponsorsShowcase
+              sponsors={editionSponsors}
+              lang={lang}
+              title={t.sponsors}
+              subtitle={upcomingTemplate ? t.sponsorsSubtitle : undefined}
+              footerNote={upcomingTemplate ? t.sponsorsFooter : undefined}
+              layout={landingChrome.sponsorsLayout}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      communities.length > 0 && (
+        <section
+          id="community"
+          class:list={[
+            'relative',
+            upcomingTemplate
+              ? 'ptd-community-section'
+              : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
+          ]}
+          style={
+            upcomingTemplate && sectionBgs.community
+              ? `--ptd-community-bg: url('${sectionBgs.community}')`
+              : undefined
+          }
+          aria-label={t.communitiesOrganizes}
+        >
+          {
+            upcomingTemplate && sectionBgs.community && (
+              <>
+                <div
+                  class="ptd-community-section__bg pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+                <div
+                  class="ptd-community-section__fade pointer-events-none absolute inset-0 z-0"
+                  aria-hidden="true"
+                />
+              </>
+            )
+          }
+          <div class="relative z-10 main-container">
+            <PtdCommunitiesOrganiza
+              communities={communities}
+              lang={lang}
+              title={t.communitiesOrganizes}
+              subtitle={upcomingTemplate ? t.communitiesOrganizesSubtitle : undefined}
+              footerNote={upcomingTemplate ? t.communitiesOrganizesFooter : undefined}
+              brochure={upcomingTemplate}
+            />
+          </div>
+        </section>
+      )
+    }
+
+    {
+      (organizers.length > 0 || collaborators.length > 0) &&
+        (upcomingTemplate ? (
+          <section
+            id="team"
+            class="relative isolate min-h-[calc(100vw*576/1024)] overflow-hidden bg-[var(--ptt-bg,#fef7f3)] py-[clamp(2.25rem,7vw,4rem)]"
+            style={
+              sectionBgs.team
+                ? `--ptd-team-bg: url('${sectionBgs.team}')`
+                : undefined
+            }
+            aria-label={t.organizers}
+          >
+            {
+              sectionBgs.team && (
+                <>
+                  <div
+                    class="ptd-team-section__bg pointer-events-none absolute inset-0 z-0 bg-[var(--ptt-bg,#fef7f3)] bg-[length:100%_auto] bg-[position:center_top] bg-no-repeat"
+                    style="background-image: var(--ptd-team-bg)"
+                    aria-hidden="true"
+                  />
+                  <div
+                    class="ptd-team-section__fade pointer-events-none absolute inset-0 z-0"
+                    aria-hidden="true"
+                  />
+                </>
+              )
+            }
+            <div class="relative z-10 main-container flex flex-col gap-[clamp(5rem,12vw,8rem)]">
+              {
+                organizers.length > 0 && (
+                  <PtdTeamGrid
+                    contributors={organizers}
+                    lang={lang}
+                    title={t.organizers}
+                    subtitle={t.organizersSubtitle}
+                    brochure
+                  />
+                )
+              }
+              {
+                collaborators.length > 0 && (
+                  <PtdTeamGrid
+                    contributors={collaborators}
+                    lang={lang}
+                    title={t.collaborators}
+                    subtitle={t.collaboratorsSubtitle}
+                    headingLevel="h3"
+                    brochure
+                  />
+                )
+              }
+            </div>
+          </section>
+        ) : (
+          <>
+            {
+              organizers.length > 0 && (
+                <section
+                  class="relative overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+                  aria-label={t.organizers}
+                >
+                  <div class="relative main-container">
+                    <PtdTeamGrid
+                      contributors={organizers}
+                      lang={lang}
+                      title={t.organizers}
+                      portraitStyle={landingChrome.portraitStyle}
+                    />
+                  </div>
+                </section>
+              )
+            }
+            {
+              collaborators.length > 0 && (
+                <section
+                  class="relative overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]"
+                  aria-label={t.collaborators}
+                >
+                  <div class="relative main-container">
+                    <PtdTeamGrid
+                      contributors={collaborators}
+                      lang={lang}
+                      title={t.collaborators}
+                      headingLevel="h3"
+                      portraitStyle={landingChrome.portraitStyle}
+                    />
+                  </div>
+                </section>
+              )
+            }
+          </>
+        ))
+    }
+
+    {
+      talks.length > 0 && (
+        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]">
+          <div class="main-container">
+            <h2 class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.talks}</h2>
+            <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+              {talks.map((talk) => (
+                <li>
+                  <TalkCard
+                    talk={talk}
+                    lang={lang}
+                    speakerNames={talk.data.speakers
+                      .map((s) => speakerNameById.get(s) ?? s)
+                      .filter(Boolean)}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    {
+      faqs.length > 0 && (
+        <PtdFaqs
+          client:visible
+          lang={lang}
+          title={t.faq}
+          subtitle={upcomingTemplate ? t.faqSubtitle : undefined}
+          items={faqs}
+          sectionBg={sectionBgs.faqs}
+          layout={landingChrome.faqLayout}
+        />
+      )
+    }
+
+    {
+      upcomingTemplate && (
+        <PtdJoinSection
+          lang={lang}
+          title={t.joinTitle}
+          subtitle={t.joinSubtitle}
+          showCta={false}
+          illustrationSrc={sectionBgs.join}
+        />
+      )
+    }
+
+    {
+      description && !upcomingTemplate && (
+        <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]">
+          <div class="main-container">
+            <div class="prose prose-lg max-w-3xl prose-headings:text-[var(--ptt-text)] prose-a:text-[var(--ptt-primary)]">
+              <Content />
+            </div>
+          </div>
+        </section>
+      )
+    }
+  </EditionScope>
+</MainLayout>

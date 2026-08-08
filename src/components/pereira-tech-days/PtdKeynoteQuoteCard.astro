@@ -1,0 +1,120 @@
+---
+/**
+ * PtdKeynoteQuoteCard — legacy `/pereira-tech-day/2024/` "Ponentes" quote card:
+ * blockquote bio, rule, then photo + name + role + social icons.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  speaker: CollectionEntry<'speakers'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { speaker, lang, loading = 'lazy' } = Astro.props;
+
+const bio = tr(speaker.data.bio, lang);
+const role = tr(speaker.data.role, lang);
+const photoSrc = speaker.data.photo.src;
+const photoAlt =
+  tr(speaker.data.photo.alt, lang) || `Portrait of ${speaker.data.name}`;
+const social = speaker.data.social ?? {};
+const socialLinks = (
+  [
+    {
+      key: 'linkedin',
+      href: social.linkedin,
+      label: `${speaker.data.name} on LinkedIn`,
+      path: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.852 3.37-1.852 3.601 0 4.267 2.37 4.267 5.455v6.288zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
+    },
+    {
+      key: 'twitter',
+      href: social.twitter,
+      label: `${speaker.data.name} on X`,
+      path: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
+    },
+    {
+      key: 'github',
+      href: social.github,
+      label: `${speaker.data.name} on GitHub`,
+      path: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12',
+    },
+    {
+      key: 'website',
+      href: social.website,
+      label: `${speaker.data.name} website`,
+      path: null,
+    },
+  ] as const
+).filter((link) => Boolean(link.href));
+---
+
+<figure
+  class="flex h-full flex-col rounded-xl border border-white/25 bg-transparent p-5 sm:p-6"
+>
+  <blockquote class="flex-1 text-sm leading-relaxed text-[var(--ptt-text-muted)] sm:text-[0.95rem] sm:leading-relaxed">
+    <p>&ldquo;{bio}&rdquo;</p>
+  </blockquote>
+  <hr class="my-5 border-0 border-t border-white/20" />
+  <figcaption class="flex items-center gap-4 sm:gap-5">
+    <img
+      decoding="async"
+      src={photoSrc}
+      alt={photoAlt}
+      width="96"
+      height="96"
+      loading={loading}
+      class="h-20 w-20 shrink-0 rounded-full object-cover sm:h-24 sm:w-24"
+    />
+    <div class="min-w-0 flex-1">
+      <p class="text-base font-semibold text-[var(--ptt-text)] sm:text-lg">
+        {speaker.data.name}
+      </p>
+      <p class="mt-0.5 text-sm text-[var(--ptt-text-muted)]">{role}</p>
+      {
+        socialLinks.length > 0 && (
+          <ul class="mt-2.5 flex flex-wrap gap-2.5">
+            {socialLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex text-[var(--ptt-text-muted)] transition hover:text-[var(--ptt-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                  aria-label={link.label}
+                >
+                  {link.path ? (
+                    <svg
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d={link.path} />
+                    </svg>
+                  ) : (
+                    <svg
+                      aria-hidden="true"
+                      class="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 010 18M12 3a14.5 14.5 0 000 18"
+                      />
+                    </svg>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </figcaption>
+</figure>

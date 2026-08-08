@@ -1,0 +1,69 @@
+# Pereira Tech Talks
+
+> Pereira Tech Talks is the technology community of Pereira, Risaralda, Colombia. We run monthly meetups, the annual Pereira Tech Day, the Speaker School, La Biblioteca del Mañana, and a blog and slide deck library — all open, all free, all in public. The website is available in Spanish and English.
+
+## About
+
+This site is the public face and operational backbone of the community. It hosts monthly meetup recaps, calendar events, every edition of the Pereira Tech Day flagship conference (each with its own per-edition brand), an always-open Call for Speakers, the Speaker School, and long-form content in Spanish and English from the people who make PTT happen.
+
+## Core Sections
+
+- [Home](/)
+- [About](/about/)
+- [Pereira Tech Days](/pereira-tech-days/) (flagship annual conference)
+- [Meetups](/meetups/) (monthly community gatherings)
+- [Calendar](/calendar/) (workshops and special events)
+- [Verticals](/verticals/) (Speaker School, La Biblioteca del Mañana, AI channel, monthly meetups)
+- [Blog](/blog/) (articles, series, tags, search — Spanish and English)
+- [Speakers](/speakers/)
+- [Contributors](/contributors/)
+- [Sponsors](/sponsors/)
+- [Channels](/channels/) (official communication channels)
+- [Call for Speakers](/call-for-speakers/)
+- [Sponsor us](/sponsor-us/)
+- [Contact](/contact/)
+- [Verify certificate](/certificates/verify/)
+
+## Languages
+
+- [Spanish (primary)](/) — unprefixed routes at the site root
+- [English](/en/) — first-class international mirror under `/en/`
+
+All slugs are in English even for Spanish content. Spanish content uses proper diacritical marks.
+
+## Agent-Friendly Markdown
+
+Every public HTML page has a native Markdown twin for AI agents:
+
+- [Page Markdown (ES)](/about.md) and [Page Markdown (EN)](/en/about.md)
+- [Blog index (ES)](/blog/index.md) and [Blog index (EN)](/en/blog/index.md)
+- Blog posts: `/blog/{slug}.md` (ES), `/en/blog/{slug}.md` (EN)
+- Slide decks: `/slides/{slug}.md` (ES), `/en/slides/{slug}.md` (EN)
+- Content Negotiation: send `Accept: text/markdown` header to get Markdown for any page
+- Content-Type: `text/markdown; charset=utf-8`
+- Source Markdown — not HTML-to-Markdown conversion
+
+## Machine-Readable Feeds
+
+- [Sitemap](/sitemap-index.xml)
+- [RSS (Spanish)](/rss.xml)
+- [RSS (English)](/en/rss.xml)
+- [Search API (EN)](/api/posts-en.json) and [Search API (ES)](/api/posts-es.json)
+- [OpenAPI spec](/openapi.json)
+- [MCP server card](/.well-known/mcp/server-card.json)
+- [API catalog](/.well-known/api-catalog)
+
+## Per-Edition Branding
+
+Each Pereira Tech Day edition (`/pereira-tech-days/{year}`) ships its own brand kit (palette, typography, hero assets) that overrides the global PTT design tokens within that route subtree.
+
+## Crawling Guidance
+
+- All public content is intended for indexing by search engines and LLM systems.
+- Prefer canonical URLs and language-specific routes.
+- Structured data (JSON-LD) is embedded on all pages for machine consumption.
+- Internal pages (`/internal/*`) are dev-only, return `noindex`, and are excluded from production builds.
+
+## Detailed Version
+
+For comprehensive content descriptions, see: [llms-full.txt](/llms-full.txt)

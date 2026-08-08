@@ -1,0 +1,50 @@
+---
+/**
+ * PTT v3.0.0 small status/category pill (filter pills, tag chips).
+ *
+ * For tier-aware sponsor badges or sponsor levels, use `<Badge variant="...">`
+ * instead.
+ */
+
+interface Props {
+  href?: string;
+  active?: boolean;
+  variant?: 'default' | 'primary' | 'accent' | 'outline';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  href,
+  active = false,
+  variant = 'default',
+  size = 'md',
+  class: className = '',
+} = Astro.props;
+
+const sizeClass = size === 'sm' ? 'px-2.5 py-1 text-xs' : 'px-3 py-1.5 text-sm';
+
+const variantBase = {
+  default: 'bg-ptt-bg-elevated text-ptt-secondary hover:bg-ptt-primary-soft',
+  primary: 'bg-ptt-primary text-white hover:bg-ptt-primary-strong',
+  accent: 'bg-ptt-accent text-ptt-bg-dark hover:bg-ptt-accent-strong',
+  outline:
+    'border border-ptt-border text-ptt-secondary hover:bg-ptt-primary-soft',
+};
+const activeClass = active
+  ? 'ring-2 ring-ptt-primary ring-offset-2 ring-offset-ptt-bg'
+  : '';
+const base = `inline-flex items-center gap-1 rounded-full font-medium transition-colors ${sizeClass} ${variantBase[variant]} ${activeClass} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={base}>
+      <slot />
+    </a>
+  ) : (
+    <span class={base}>
+      <slot />
+    </span>
+  )
+}

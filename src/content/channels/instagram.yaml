@@ -1,0 +1,11 @@
+name: Instagram — Pereira Tech Talks
+platform: instagram
+url: "https://www.instagram.com/pertechtalks"
+description:
+  en: Behind-the-scenes photos, event highlights, and speaker spotlights.
+  es: Fotos de detrás de cámara, resúmenes de eventos y reflectores sobre los ponentes.
+audience:
+  en: Visual followers of the community.
+  es: Seguidores visuales de la comunidad.
+isPrimary: false
+order: 5

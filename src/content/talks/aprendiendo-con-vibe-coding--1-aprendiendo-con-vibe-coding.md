@@ -1,0 +1,23 @@
+---
+title:
+  en: "Aprendiendo con Vibe Coding"
+  es: "Aprendiendo con Vibe Coding"
+abstract:
+  en: "Talk: Aprendiendo con Vibe Coding. See the Spanish abstract for the full description."
+  es: "¿Y si programar se sintiera más como tocar música que como resolver ecuaciones? En esta charla exploraremos cómo el enfoque de vibe coding transforma la experiencia de aprendizaje en algo más fluido, intuitivo y personalizado. Ideal para quienes quieren aprender a programar conectando con su creatividad y a su propio ritmo."
+speakers:
+  - jesus-david-mena-rivera
+date: 2025-06-18
+event:
+  collection: meetups
+  slug: "aprendiendo-con-vibe-coding"
+language: es
+duration: 25
+type: talk
+tags: []
+status: recorded
+---
+
+## Aprendiendo con Vibe Coding
+
+¿Y si programar se sintiera más como tocar música que como resolver ecuaciones? En esta charla exploraremos cómo el enfoque de vibe coding transforma la experiencia de aprendizaje en algo más fluido, intuitivo y personalizado. Ideal para quienes quieren aprender a programar conectando con su creatividad y a su propio ritmo.

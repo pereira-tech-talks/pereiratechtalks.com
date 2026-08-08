@@ -1,0 +1,15 @@
+name: Made for Germany
+logo:
+  light: /images/sponsors/made-for-germany.png
+  dark: /images/sponsors/made-for-germany-dark.png
+  alt: Made for Germany logo
+url: "https://www.made-for-germany.eu/apply/"
+description:
+  en: Tech career bridge to Germany. Community sponsor of Pereira Tech Day 2024.
+  es: Puente para carreras tech hacia Alemania. Patrocinador comunidad de Pereira Tech Day 2024.
+tier: community
+sponsoredEditions:
+  - year: 2024
+    tier: community
+status: past
+order: 6

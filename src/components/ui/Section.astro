@@ -1,0 +1,72 @@
+---
+/**
+ * PTT v3.0.0 section wrapper.
+ *
+ * Use this for every top-level page section to enforce consistent vertical
+ * rhythm, max-width, and dark-mode surfaces. Compose with `Eyebrow` for
+ * uppercase labels above the heading.
+ */
+
+interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  eyebrow?: string;
+  surface?: 'default' | 'alt';
+  spacing?: 'sm' | 'md' | 'lg';
+  /** Center-align the heading block (default false). */
+  centered?: boolean;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  subtitle,
+  eyebrow,
+  surface = 'default',
+  spacing = 'md',
+  centered = false,
+  class: className = '',
+} = Astro.props;
+
+const surfaceClass =
+  surface === 'alt'
+    ? 'bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated'
+    : 'bg-ptt-bg';
+const spacingClass =
+  spacing === 'sm'
+    ? 'py-12 sm:py-16'
+    : spacing === 'lg'
+      ? 'py-20 sm:py-28'
+      : 'py-16 sm:py-20';
+---
+
+<section id={id} class={`${surfaceClass} ${spacingClass} ${className}`}>
+  <div class="main-container py-0">
+    {
+      (eyebrow || title || subtitle) && (
+        <header
+          class={`mb-10 sm:mb-14 ${centered ? 'text-center max-w-3xl mx-auto' : 'max-w-3xl'}`}
+        >
+          {eyebrow && (
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+              {eyebrow}
+            </p>
+          )}
+          {title && (
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-ptt">
+              {title}
+            </h2>
+          )}
+          {subtitle && (
+            <p class="mt-4 text-lg text-ptt-secondary">
+              {subtitle}
+            </p>
+          )}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>

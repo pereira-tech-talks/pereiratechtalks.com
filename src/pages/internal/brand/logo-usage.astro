@@ -1,0 +1,123 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+---
+
+<InternalLayout
+  title="Brand Book — Logo usage"
+  description="PTT v3.0.0 logo variants, clear-space, downloads, and do/don't rules."
+  section="brand"
+  subsection="logo-usage"
+>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        <a href="/internal/brand" class="hover:underline">Brand</a> / Logo usage
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">Logo usage</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        Pereira Tech Talks v3.0.0 ships a single mark with two horizontal
+        lockups (full and compact) and one isolated badge. The mark renders
+        cleanly on the petroleum-teal background of the dark theme and on the
+        ivory background of the light theme.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Variants</h2>
+      <div class="grid sm:grid-cols-3 gap-4 text-sm">
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-2">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100">Full lockup</h3>
+          <p class="text-gray-600 dark:text-gray-300">Mark + "Pereira Tech Talks" wordmark. Use in headers, hero areas, footers, social cards.</p>
+          <code class="text-xs text-gray-500 dark:text-gray-400 block">/public/images/brand/logo-full.svg</code>
+        </div>
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-2">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100">Compact lockup</h3>
+          <p class="text-gray-600 dark:text-gray-300">Mark + "PTT" abbreviation. Use in narrow chrome (mobile header, dense lists).</p>
+          <code class="text-xs text-gray-500 dark:text-gray-400 block">/public/images/brand/logo-compact.svg</code>
+        </div>
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-2">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100">Mark</h3>
+          <p class="text-gray-600 dark:text-gray-300">Isolated symbol. Use in favicons, app icons, avatars, watermarks.</p>
+          <code class="text-xs text-gray-500 dark:text-gray-400 block">/public/images/brand/mark.svg</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Sizes</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Header (desktop): <strong>height 32px</strong> — full lockup.</li>
+        <li>Header (mobile): <strong>height 28px</strong> — compact lockup or mark.</li>
+        <li>Footer: <strong>height 24px</strong> — full lockup, low contrast text.</li>
+        <li>Social card: <strong>height 64px</strong> — full lockup.</li>
+        <li>Favicon: <strong>32×32, 16×16</strong> + <strong>180×180 apple-touch-icon</strong>, <strong>192/512 maskable</strong>.</li>
+        <li>Minimum size: full lockup <strong>120px</strong> wide; mark <strong>20px</strong>.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Clear space</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Maintain at least <strong>X = the height of the mark</strong> as
+        margin around any logo lockup. Nothing else may enter the clear-space
+        rectangle (text, other logos, dividers, decorations).
+      </p>
+      <div class="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 p-8 bg-gray-50 dark:bg-gray-800">
+        <div class="mx-auto w-fit p-6 border border-gray-300 dark:border-gray-600 rounded-md">
+          <span class="text-gray-700 dark:text-gray-200 font-bold tracking-wide">Pereira Tech Talks</span>
+        </div>
+        <p class="text-xs text-center text-gray-500 dark:text-gray-400 mt-3">Reserved padding around lockup = X</p>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Backgrounds</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Light backgrounds (<code>#FAFBFB</code>, <code>#FFFFFF</code>): use the dark mark.</li>
+        <li>Dark backgrounds (<code>#08191A</code>, <code>#0F2A2C</code>): use the light mark.</li>
+        <li>Brand color background (<code>--ptt-primary</code>): use the white mark.</li>
+        <li>Photographs / busy backgrounds: place a 16-radius shape with <code>--ptt-bg</code> behind the lockup, or use the white mark on a dark gradient overlay.</li>
+        <li>Per-edition pages: prefer the global PTT mark in chrome (header/footer) so the umbrella brand stays visible regardless of the edition's identity.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Don't</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Recolor the mark outside the approved palette (<code>--ptt-primary</code>, white, ivory, deep teal).</li>
+        <li>Add drop shadows, gradients, glows, or strokes.</li>
+        <li>Rotate, skew, or warp.</li>
+        <li>Place on insufficient-contrast backgrounds (less than 3:1 to the mark).</li>
+        <li>Recreate the wordmark in a different typeface.</li>
+        <li>Combine with another logo on a single background without dividers.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Downloads</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Optimized SVGs ship with the build under
+        <code>/public/images/brand/</code>. Source files (Figma, Illustrator)
+        live in the <code>tmp/assets_brand/</code> directory and are not
+        deployed. PNG fallbacks are generated on demand by the
+        <code>images:optimize</code> script.
+      </p>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li><code>/public/images/brand/logo-full.svg</code></li>
+        <li><code>/public/images/brand/logo-compact.svg</code></li>
+        <li><code>/public/images/brand/mark.svg</code></li>
+        <li><code>/public/images/brand/favicon.ico</code> · <code>/public/images/brand/apple-touch-icon.png</code></li>
+        <li><code>/public/images/og-default.jpg</code> (open-graph 1200×630)</li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Pending</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Final SVG masters from <code>tmp/assets_brand/</code> are pending user upload (see <code>PROGRESS.md</code> open questions).</li>
+        <li>Per-edition (PTD {`{year}`}) lockups are tracked separately under
+          <a href="/internal/brand/per-edition-kits" class="underline">Per-edition kits</a>.</li>
+      </ul>
+    </section>
+  </main>
+</InternalLayout>

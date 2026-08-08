@@ -1,0 +1,158 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const brandBookSections = [
+  {
+    title: 'Colors',
+    href: '/internal/brand/colors',
+    description:
+      'Full PTT palette — primary, accent, surfaces, text, state — with WCAG ratios.',
+    icon: 'C',
+  },
+  {
+    title: 'Typography',
+    href: '/internal/brand/typography',
+    description:
+      'Atkinson Hyperlegible scale, weights, and bilingual hierarchy patterns.',
+    icon: 'T',
+  },
+  {
+    title: 'Logo usage',
+    href: '/internal/brand/logo-usage',
+    description:
+      'Logo variants, clear-space, do/don\u2019t, dark/light backgrounds.',
+    icon: 'L',
+  },
+  {
+    title: 'Iconography',
+    href: '/internal/brand/iconography',
+    description: 'Lucide icon system, sizing, semantic mapping.',
+    icon: 'I',
+  },
+  {
+    title: 'Spacing, radius, motion',
+    href: '/internal/brand/spacing-radius-motion',
+    description: 'Spatial scale, radius tokens, motion durations and easings.',
+    icon: 'S',
+  },
+  {
+    title: 'Voice & tone',
+    href: '/internal/brand/voice-and-tone',
+    description:
+      'Bilingual voice rules, vocabulary, and the anti-AI-slop checklist.',
+    icon: 'V',
+  },
+  {
+    title: 'Per-edition kits',
+    href: '/internal/brand/per-edition-kits',
+    description:
+      'Pereira Tech Day editions ship their own scoped brand. How they\u2019re defined and applied.',
+    icon: 'E',
+  },
+];
+---
+
+<ShowcaseLayout
+  title="Brand"
+  description="The PTT brand contract lives in the Brand Book. This page is a pointer."
+  section="brand"
+>
+  <section class="mb-10" data-component="brand-pointer">
+    <div class="rounded-2xl border border-ptt-border bg-ptt-primary-soft p-6 sm:p-8">
+      <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-primary mb-2">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-ptt-primary"></span>
+        Brand Book is canonical
+      </p>
+      <h2 class="text-2xl sm:text-3xl font-bold text-ptt-text mb-3">Pereira Tech Talks v3.0.0</h2>
+      <p class="text-sm sm:text-base text-ptt-text-secondary max-w-2xl">
+        Logo, palette, typography, voice, and per-edition kits are documented in the
+        <a href="/internal/brand" class="underline text-ptt-primary font-semibold">Brand Book</a>. The
+        UI Design System (this section) renders <em>working examples</em> of those tokens. When
+        the two disagree, the Brand Book wins.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <a href="/internal/brand" class="inline-flex items-center gap-2 rounded-full bg-ptt-primary text-white px-4 py-2 text-sm font-semibold hover:bg-ptt-primary-strong transition-colors">
+          Open Brand Book
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="/internal/ui/colors" class="inline-flex items-center gap-2 rounded-full border border-ptt-border bg-ptt-bg-elevated text-ptt-text px-4 py-2 text-sm font-semibold hover:border-ptt-primary transition-colors">
+          See live tokens
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12" data-component="brand-book-sections">
+    <h2 class="text-xl md:text-2xl font-bold mb-4 text-ptt-text">Brand Book sections</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {brandBookSections.map((s) => (
+        <a
+          href={s.href}
+          class="group block rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-5 transition-all hover:border-ptt-primary hover:shadow-md"
+        >
+          <div class="flex items-start gap-3">
+            <span class="inline-flex items-center justify-center w-9 h-9 shrink-0 rounded-full bg-ptt-primary text-white font-bold">{s.icon}</span>
+            <div class="flex-1">
+              <h3 class="text-base font-semibold text-ptt-text group-hover:underline">{s.title}</h3>
+              <p class="text-sm text-ptt-text-secondary mt-1">{s.description}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-12" data-component="palette-quick-preview">
+    <h2 class="text-xl md:text-2xl font-bold mb-4 text-ptt-text">Quick palette preview</h2>
+    <p class="text-sm text-ptt-text-secondary mb-4">
+      Top-level brand swatches — the full table with hex, contrast, and usage lives in the
+      <a href="/internal/brand/colors" class="underline text-ptt-primary">Brand Book \u2192 Colors</a>.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+      <div class="rounded-xl overflow-hidden border border-ptt-border">
+        <div class="h-16 bg-ptt-primary"></div>
+        <div class="p-2 text-center">
+          <div class="text-xs font-semibold text-ptt-text">Primary</div>
+          <code class="text-xs text-ptt-text-secondary">bg-ptt-primary</code>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-ptt-border">
+        <div class="h-16 bg-ptt-primary-strong"></div>
+        <div class="p-2 text-center">
+          <div class="text-xs font-semibold text-ptt-text">Primary strong</div>
+          <code class="text-xs text-ptt-text-secondary">bg-ptt-primary-strong</code>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-ptt-border">
+        <div class="h-16 bg-ptt-primary-soft"></div>
+        <div class="p-2 text-center">
+          <div class="text-xs font-semibold text-ptt-text">Primary soft</div>
+          <code class="text-xs text-ptt-text-secondary">bg-ptt-primary-soft</code>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-ptt-border">
+        <div class="h-16 bg-ptt-accent"></div>
+        <div class="p-2 text-center">
+          <div class="text-xs font-semibold text-ptt-text">Accent</div>
+          <code class="text-xs text-ptt-text-secondary">bg-ptt-accent</code>
+        </div>
+      </div>
+      <div class="rounded-xl overflow-hidden border border-ptt-border">
+        <div class="h-16 bg-ptt-bg"></div>
+        <div class="p-2 text-center">
+          <div class="text-xs font-semibold text-ptt-text">Background</div>
+          <code class="text-xs text-ptt-text-secondary">bg-ptt-bg</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-agent-reference="true" class="mt-16 border-t border-ptt-border pt-8">
+    <h2 class="text-lg font-bold mb-3 text-ptt-text">Agent reference</h2>
+    <p class="text-sm text-ptt-text-secondary">
+      Source of truth: <code class="text-xs">docs/BRAND_GUIDE.md</code> ·
+      <code class="text-xs">analysis_results/BRAND_PALETTE.md</code> ·
+      <a href="/internal/brand" class="underline text-ptt-primary">Brand Book</a>.
+    </p>
+  </section>
+</ShowcaseLayout>

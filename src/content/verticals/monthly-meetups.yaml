@@ -1,0 +1,22 @@
+title:
+  en: Monthly Meetups
+  es: Meetups Mensuales
+shortName:
+  en: Meetups
+  es: Meetups
+mission:
+  en: Run consistent, high-quality monthly meetups in Pereira.
+  es: Hacer meetups mensuales consistentes y de alta calidad en Pereira.
+description:
+  en: "The flagship of the community: a monthly meetup in Pereira, on the third week of the month, with two technical talks and an open mic for lightning talks."
+  es: "El programa insignia de la comunidad: un meetup mensual en Pereira, en la tercera semana del mes, con dos charlas técnicas y un micrófono abierto para lightning talks."
+leaders:
+  - sergio-florez
+channels:
+  - luma
+  - linktree
+schedule:
+  en: "Third week of every month, 6:30 PM Pereira time."
+  es: "Tercera semana de cada mes, 6:30 PM hora Pereira."
+status: active
+order: 4

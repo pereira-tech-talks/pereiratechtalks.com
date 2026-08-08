@@ -1,0 +1,16 @@
+---
+import PereiraTechDayDetailPage from '@/components/pages/PereiraTechDayDetailPage.astro';
+import { getEditions } from '@/lib/pereiraTechDay';
+
+export async function getStaticPaths() {
+  const editions = await getEditions();
+  return editions.map((edition) => ({
+    params: { year: String(edition.data.year) },
+    props: { edition },
+  }));
+}
+
+const { edition } = Astro.props;
+---
+
+<PereiraTechDayDetailPage edition={edition} lang="en" />

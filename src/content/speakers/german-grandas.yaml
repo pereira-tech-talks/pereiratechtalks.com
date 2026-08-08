@@ -1,0 +1,15 @@
+name: "Germán Grandas"
+role:
+  en: "Python and AI engineer"
+  es: "Ingeniero Python y de IA"
+bio:
+  en: "Germán Grandas is a Python developer with a solid foundation in AI solutions. Passionate about data science and machine learning, he applies those tools to challenges where AI techniques are central."
+  es: "Germán Grandas es desarrollador Python con una sólida base en soluciones de Inteligencia Artificial. Apasionado por la ciencia de datos y el machine learning, busca aplicar sus conocimientos a retos donde las técnicas de IA juegan un papel central."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Germán Grandas"
+    es: "Retrato de Germán Grandas"
+talks: []
+languages:
+  - es

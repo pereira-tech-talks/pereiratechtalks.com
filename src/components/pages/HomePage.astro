@@ -1,0 +1,253 @@
+---
+import EditionCard from '@/components/cards/EditionCard.astro';
+import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
+import VerticalCard from '@/components/cards/VerticalCard.astro';
+import BlogPreviewSection from '@/components/home/BlogPreviewSection.astro';
+import ContactSection from '@/components/home/ContactSection.astro';
+import HeroSection from '@/components/home/HeroSection/HeroSection.astro';
+import { HomeSectionContentAlignmentEType } from '@/components/home/HomeSection/enum';
+import HomeSection from '@/components/home/HomeSection/HomeSection.astro';
+import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
+import LinkArrow from '@/components/ui/LinkArrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import type { MeetupShowcaseItem } from '@/lib/meetup';
+import { getMeetups, getUpcomingMeetupShowcase } from '@/lib/meetup';
+import { getEditionCountdownTargets, getEditions } from '@/lib/pereiraTechDay';
+import { getActiveSponsors } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
+import { getActiveVerticals } from '@/lib/vertical';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const hs = t.homeSections;
+
+const upcomingShowcase = await getUpcomingMeetupShowcase();
+const latestMeetups = (await getMeetups()).slice(0, 3);
+const editions = await getEditions();
+const upcomingEdition = editions.find(
+  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
+);
+const lastEdition =
+  upcomingEdition ?? editions.find((e) => e.data.status === 'completed');
+const ptdCountdown = upcomingEdition
+  ? getEditionCountdownTargets(upcomingEdition)
+  : null;
+const verticals = await getActiveVerticals();
+const sponsors = (await getActiveSponsors()).slice(0, 12);
+
+const meetupsToShow: MeetupShowcaseItem[] =
+  upcomingShowcase.length > 0
+    ? upcomingShowcase.slice(0, 3)
+    : latestMeetups.map((meetup) => ({ type: 'meetup', data: meetup }));
+const meetupsHeading =
+  upcomingShowcase.length > 0
+    ? hs.meetups.upcomingTitle
+    : hs.meetups.latestTitle;
+---
+
+<MainLayout
+  lang={lang}
+  title={t.siteTitleFull}
+  description={t.siteDescription}
+  image="/images/og-default.jpg"
+  preloadHeaderLogo={false}
+  preloadFonts={false}
+  lcpImageHref="/images/home/hero-dark-480.webp"
+  lcpImageMedia="(max-width: 1023px)"
+  keywords={
+    lang === 'en'
+      ? [
+          'Pereira Tech Talks',
+          'tech community Pereira',
+          'Risaralda tech meetups',
+          'tech community Colombia',
+          'Pereira Tech Day',
+          'Speaker School',
+          'La Biblioteca del Mañana',
+        ]
+      : [
+          'Pereira Tech Talks',
+          'comunidad tecnología Pereira',
+          'meetups tecnología Risaralda',
+          'comunidad tecnología Colombia',
+          'Pereira Tech Day',
+          'Escuela de Speakers',
+          'La Biblioteca del Mañana',
+        ]
+  }
+>
+  <HeroSection
+    name={t.siteTitle}
+    tagline={t.hero.tagline}
+    description={t.hero.description}
+    typewriterWords={t.hero.typewriterWords}
+    meetupsLabel={t.hero.ctaMeetups}
+    meetupsHref={`${prefix}/meetups/`}
+    ptdLabel={t.hero.ctaPtd}
+    ptdHref={`${prefix}/pereira-tech-day/`}
+    contactLabel={t.hero.ctaContact}
+    contactHref={`${prefix}/contact/`}
+    scrollLabel={t.hero.scrollLabel}
+  />
+
+  <div class="home-below-fold">
+  <PtdAnnouncementStrip
+    lang={lang}
+    eyebrow={hs.ptdStrip.eyebrow}
+    title={hs.ptdStrip.title}
+    subtitle={hs.ptdStrip.subtitle}
+    ctaLabel={hs.ptdStrip.cta}
+    dateLabel={hs.ptdStrip.date}
+    venueLabel={hs.ptdStrip.venue}
+    attendanceLabel={hs.ptdStrip.attendance}
+    targetDate={ptdCountdown?.targetDate}
+    endDate={ptdCountdown?.endDate}
+  />
+
+  {
+    meetupsToShow.length > 0 && (
+      <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {meetupsToShow.map((item) => (
+            <li>
+              <MeetupShowcaseCard item={item} lang={lang} />
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/meetups/`}>{hs.meetups.cta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    lastEdition && (
+      <Section
+        eyebrow={hs.ptd.eyebrow}
+        title={hs.ptd.title}
+        subtitle={hs.ptd.subtitle}
+      >
+        <div class="grid gap-6 lg:grid-cols-2">
+          <EditionCard edition={lastEdition} lang={lang} />
+          {editions
+            .filter((e) => e.id !== lastEdition.id)
+            .slice(0, 1)
+            .map((edition) => (
+              <EditionCard edition={edition} lang={lang} />
+            ))}
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    verticals.length > 0 && (
+      <Section
+        eyebrow={hs.verticals.eyebrow}
+        title={hs.verticals.title}
+        subtitle={hs.verticals.subtitle}
+        surface="alt"
+      >
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {verticals.map((vertical) => (
+            <li>
+              <VerticalCard vertical={vertical} lang={lang} />
+            </li>
+          ))}
+        </ul>
+        <div class="mt-10">
+          <LinkArrow href={`${prefix}/verticals/`}>{hs.verticals.cta}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  <HomeSection
+    title={hs.about.title}
+    description={hs.about.description}
+    ctaText={hs.about.cta}
+    ctaLink={`${prefix}/about`}
+    cta2Text={hs.about.cta2}
+    cta2Link={`${prefix}/contact`}
+    image="/images/home/hero-light.webp"
+    contentAlignment={HomeSectionContentAlignmentEType.RIGHT}
+  />
+
+  {
+    sponsors.length > 0 && (
+      <Section
+        eyebrow={hs.sponsors.eyebrow}
+        title={hs.sponsors.title}
+        subtitle={hs.sponsors.subtitle}
+        surface="alt"
+      >
+        <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          {sponsors.map((sponsor) => {
+            /**
+             * Same card + height-led sizing so wide wordmarks match.
+             * Squarer marks (ASE) need a taller cap to match perceived weight.
+             */
+            const logoSize =
+              sponsor.id === 'ase-utp'
+                ? 'h-[4.25rem] w-auto max-w-full object-contain'
+                : 'h-14 w-auto max-w-full object-contain';
+            return (
+            <li class="flex h-28 items-center justify-center rounded-xl bg-ptt-bg-elevated p-5 ring-1 ring-ptt-border">
+              <a
+                href={sponsor.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex h-16 w-full max-w-[13rem] items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+                aria-label={sponsor.data.name}
+              >
+                <img
+                  src={sponsor.data.logo.light}
+                  alt={sponsor.data.logo.alt}
+                  width="240"
+                  height="64"
+                  loading="lazy"
+                  class={`${logoSize} dark:hidden`}
+                />
+                <img
+                  src={sponsor.data.logo.dark}
+                  alt={sponsor.data.logo.alt}
+                  width="240"
+                  height="64"
+                  loading="lazy"
+                  class={`hidden ${logoSize} dark:block`}
+                />
+              </a>
+            </li>
+            );
+          })}
+        </ul>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+          <LinkArrow href={`${prefix}/sponsors/`}>{hs.sponsors.cta}</LinkArrow>
+          <LinkArrow href={`${prefix}/sponsor-us/`}>{hs.sponsors.ctaJoin}</LinkArrow>
+        </div>
+      </Section>
+    )
+  }
+
+  <BlogPreviewSection lang={lang} grouped surface="default" />
+
+  <ContactSection lang={lang} />
+  </div>
+</MainLayout>
+
+<style>
+  /* Skip style/layout for below-fold blocks until needed — cuts LCP render delay. */
+  .home-below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 2400px;
+  }
+</style>

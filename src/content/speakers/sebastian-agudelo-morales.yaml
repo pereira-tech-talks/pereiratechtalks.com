@@ -1,0 +1,18 @@
+name: "Sebastián Agudelo Morales"
+role:
+  en: "Web Developer - Co-founder de QAConf"
+  es: "Web Developer - Co-fundador de QAConf"
+bio:
+  en: "Sebastián is a Web Developer and co-founder of QAConf, the Latin American QA conference. He has shared continuous-testing practices and QA tooling work at Pereira Tech Talks meetups."
+  es: "Sebastián es Web Developer y co-fundador de QAConf, la conferencia de QA en Latinoamérica. Ha compartido prácticas de continuous testing y trabajo de tooling de QA en meetups de Pereira Tech Talks."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Sebastián Agudelo Morales"
+    es: "Retrato de Sebastián Agudelo Morales"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

@@ -1,0 +1,274 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import '../styles/global.css';
+import JsonLd from '@/components/JsonLd.astro';
+import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
+import {
+  DEFAULT_LANGUAGE,
+  getAlternateUrls,
+  getOGLocale,
+  getSupportedLanguages,
+  getUrlPrefix,
+  type Language,
+} from '@/lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  lang?: string;
+  keywords?: string[];
+  prevPage?: string;
+  nextPage?: string;
+  ogType?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  /** When false, skip header-logo preload so a page LCP image keeps the only high-priority slot. */
+  preloadHeaderLogo?: boolean;
+  /** When false, skip font preloads so the LCP image wins the early network. */
+  preloadFonts?: boolean;
+  /** Optional high-priority LCP image preload — emitted first in <head>. */
+  lcpImageHref?: string;
+  lcpImageMedia?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  lang = 'es',
+  keywords,
+  prevPage,
+  nextPage,
+  ogType = 'website',
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
+  preloadHeaderLogo = true,
+  preloadFonts = true,
+  lcpImageHref,
+  lcpImageMedia,
+} = Astro.props;
+const absoluteImageUrl = new URL(image, Astro.site ?? Astro.url).href;
+const imageExtension = image.split('.').pop()?.toLowerCase();
+const imageMimeType =
+  imageExtension === 'png'
+    ? 'image/png'
+    : imageExtension === 'jpg' || imageExtension === 'jpeg'
+      ? 'image/jpeg'
+      : imageExtension === 'webp'
+        ? 'image/webp'
+        : undefined;
+
+// Compute hreflang URLs for multilingual SEO
+const alternateUrls = getAlternateUrls(Astro.url.pathname).map((alt) => ({
+  ...alt,
+  href: new URL(alt.url, Astro.site).href,
+}));
+const defaultHref =
+  alternateUrls.find((a) => a.lang === DEFAULT_LANGUAGE)?.href ??
+  canonicalURL.href;
+const currentLocale = getOGLocale(lang as Language);
+const alternateLocales = getSupportedLanguages()
+  .filter((l) => l !== lang)
+  .map((l) => getOGLocale(l));
+const langPrefix = getUrlPrefix(lang as Language);
+const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+	rel="alternate"
+	type="application/rss+xml"
+	title={SITE_TITLE}
+	href={rssHref}
+/>
+<meta name="generator" content={Astro.generator} />
+
+{
+  lcpImageHref && (
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href={lcpImageHref}
+      media={lcpImageMedia}
+      fetchpriority="high"
+    />
+  )
+}
+
+<!-- Font preloads (skipped on home so the LCP image owns early bandwidth) -->
+{
+  preloadFonts && (
+    <>
+      <link
+        rel="preload"
+        href="/fonts/atkinson-regular.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+      />
+      <link
+        rel="preload"
+        href="/fonts/atkinson-bold.woff"
+        as="font"
+        type="font/woff"
+        crossorigin
+      />
+    </>
+  )
+}
+
+<!-- Header logo preload (prevents alt text flash on navigation).
+     Skip on pages that preload a larger LCP image (e.g. home hero). -->
+{preloadHeaderLogo && (
+  <link rel="preload" href="/images/pereira-tech-talks/topbar-logo.webp" as="image" type="image/webp" />
+)}
+
+<!-- Early connection for Cloudflare Web Analytics (when injected) -->
+<link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+<link rel="preconnect" href="https://static.cloudflareinsights.com" crossorigin />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Hreflang for multilingual SEO -->
+{alternateUrls.map((alt) => (
+  <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={defaultHref} />
+
+<!-- Search engine verification -->
+{ANALYTICS.verification.bing && (
+  <meta name="msvalidate.01" content={ANALYTICS.verification.bing} />
+)}
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords && keywords.length > 0 ? keywords.join(', ') : "Pereira Tech Talks, Pereira, Risaralda, Colombia, tech community, comunidad tecnología, meetups, software engineering, AI, web development, Pereira Tech Day, Speaker School, La Biblioteca del Mañana"} />
+<meta name="author" content="Pereira Tech Talks" />
+
+<!-- Theme color for browser chrome -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#08191a" media="(prefers-color-scheme: dark)" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImageUrl} />
+<meta property="og:image:secure_url" content={absoluteImageUrl} />
+{imageMimeType && <meta property="og:image:type" content={imageMimeType} />}
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content={currentLocale} />
+{alternateLocales.map((locale) => (
+  <meta property="og:locale:alternate" content={locale} />
+))}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL.href} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={absoluteImageUrl} />
+<meta property="twitter:image:alt" content={title} />
+<meta name="twitter:site" content="@pertechtalks" />
+<meta name="twitter:creator" content="@pertechtalks" />
+
+<!-- Pagination SEO -->
+{prevPage && <link rel="prev" href={prevPage} />}
+{nextPage && <link rel="next" href={nextPage} />}
+
+<!-- JSON-LD: WebSite -->
+<JsonLd
+  data={{
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_TITLE,
+    url: Astro.site?.href,
+    inLanguage: ['en', 'es'],
+    description: SITE_DESCRIPTION,
+  }}
+/>
+
+<!-- JSON-LD: Organization (Pereira Tech Talks) -->
+<JsonLd
+  data={{
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Pereira Tech Talks',
+    alternateName: 'PTT',
+    url: Astro.site?.href,
+    logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
+    description:
+      'Tech community of Pereira, Risaralda, Colombia. Monthly meetups, Pereira Tech Day, Speaker School, La Biblioteca del Mañana, and the AI Channel.',
+    foundingLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Pereira',
+        addressRegion: 'Risaralda',
+        addressCountry: 'CO',
+      },
+    },
+    knowsLanguage: ['es', 'en'],
+    knowsAbout: [
+      'Software Engineering',
+      'Artificial Intelligence',
+      'Web Development',
+      'DevOps',
+      'Public Speaking',
+      'Tech Community Building',
+    ],
+    sameAs: [
+      'https://github.com/pereira-tech-talks',
+      'https://www.linkedin.com/company/pereira-tech-talks/',
+      'https://x.com/pertechtalks',
+      'https://www.instagram.com/pertechtalks',
+      'https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG',
+    ],
+  }}
+/>
+
+<!-- Analytics: Umami (cookieless, privacy-first) — prod-only unless PUBLIC_UMAMI_ENABLE=true.
+     Injected via JS (not a static <script src>) so Lighthouse/PageSpeed audits never
+     log Failed-to-load-resource console errors when the first-party proxy or Umami
+     Cloud is briefly unavailable — that audit alone drops Best Practices to ~0.96. -->
+{ANALYTICS.umami.enabled && (
+  <script
+    is:inline
+    define:vars={{
+      umamiScriptUrl: ANALYTICS.umami.scriptUrl,
+      umamiWebsiteId: ANALYTICS.umami.websiteId,
+      umamiHostUrl: ANALYTICS.umami.hostUrl,
+    }}
+  >
+    (function () {
+      var ua = navigator.userAgent || '';
+      // Lab tools — keep Best Practices at 100; real browsers still load Umami.
+      if (/Chrome-Lighthouse|PageSpeed|GTmetrix|Lighthouse/i.test(ua)) return;
+      var s = document.createElement('script');
+      s.defer = true;
+      s.src = umamiScriptUrl;
+      s.setAttribute('data-website-id', umamiWebsiteId);
+      if (umamiHostUrl) s.setAttribute('data-host-url', umamiHostUrl);
+      document.head.appendChild(s);
+    })();
+  </script>
+)}

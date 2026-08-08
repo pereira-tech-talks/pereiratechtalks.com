@@ -1,0 +1,184 @@
+---
+/**
+ * PtdJoinSection — closing CTA band for PTD editions.
+ * Upcoming brochure: full-bleed join illustration (ape + viaduct) with copy on the right.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  subtitle: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+  illustrationSrc?: string;
+  /** Legacy Join section ships with no CTA button — default to hidden. */
+  showCta?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  ctaLabel,
+  ctaUrl,
+  illustrationSrc,
+  showCta = true,
+} = Astro.props;
+const hasCta = showCta && Boolean(ctaUrl) && Boolean(ctaLabel);
+const brochure = Boolean(illustrationSrc);
+
+/**
+ * Legacy split: last phrase of the title in coral (e.g. "DE LA REGIÓN.").
+ * Subtitle emphasizes the penultimate strong word (crecimiento / growth).
+ */
+const titleWords = title.trim().split(/\s+/);
+const titleLead = titleWords.slice(0, -3).join(' ');
+const titleAccent = titleWords.slice(-3).join(' ');
+
+const subtitleWords = subtitle.trim().split(/\s+/);
+const emphasisIndex = subtitleWords.findIndex((w) =>
+  /crecimiento|growth/i.test(w.replace(/[^\p{L}]/gu, ''))
+);
+const subBefore =
+  emphasisIndex >= 0
+    ? subtitleWords.slice(0, emphasisIndex).join(' ')
+    : subtitle;
+const subEmphasis = emphasisIndex >= 0 ? subtitleWords[emphasisIndex] : '';
+const subAfter =
+  emphasisIndex >= 0 ? subtitleWords.slice(emphasisIndex + 1).join(' ') : '';
+---
+
+<section
+  id="join"
+  class:list={[
+    'ptd-join relative isolate overflow-hidden',
+    brochure ? 'ptd-join--brochure' : 'py-[var(--ptd-section-pad)]',
+  ]}
+  style={brochure ? `--ptd-join-bg: url('${illustrationSrc}')` : undefined}
+  aria-labelledby="ptd-join-title"
+>
+  {
+    brochure ? (
+      <>
+        <div class="ptd-join__bg pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+        {/* Soft right cream — dissolve into copy; art spans most of the band. */}
+        <div
+          class="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-transparent from-[42%] via-[color-mix(in_srgb,var(--ptt-bg,#fef7f3)_28%,transparent)] via-[68%] to-[var(--ptt-bg,#fef7f3)] to-[88%]"
+          aria-hidden="true"
+        />
+      </>
+    ) : null
+  }
+
+  <div
+    class:list={[
+      'relative z-10',
+      brochure
+        ? 'main-container flex min-h-[inherit] items-start justify-end pt-[clamp(1.25rem,3.5vw,2.25rem)]'
+        : 'mx-auto max-w-4xl px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:px-8',
+    ]}
+  >
+    <div class:list={[brochure ? 'w-full max-w-[min(100%,28rem)] lg:max-w-[32rem]' : 'max-w-xl']}>
+      <h2
+        id="ptd-join-title"
+        class:list={[
+          'm-0 font-bold uppercase leading-[1.05]',
+          brochure
+            ? 'text-[clamp(2.1rem,5.2vw,3.35rem)] tracking-[0.04em] text-[var(--ptt-text)]'
+            : 'text-3xl tracking-tight text-[var(--ptt-text)] sm:text-4xl md:text-5xl',
+        ]}
+        style="font-family: Bebas Neue, 'Arial Black', sans-serif;"
+      >
+        {titleLead ? <span class="block">{titleLead}</span> : null}
+        <span class="block text-[var(--ptt-accent)]">{titleAccent || title}</span>
+      </h2>
+      <p
+        class:list={[
+          brochure
+            ? 'mt-3 text-[clamp(1rem,2.1vw,1.2rem)] leading-snug text-[var(--ptt-text)]'
+            : 'mt-4 text-lg text-[var(--ptt-text)]',
+        ]}
+      >
+        {subBefore}
+        {
+          subEmphasis && (
+            <>
+              {' '}
+              <strong class="font-semibold text-[var(--ptt-accent)]">{subEmphasis}</strong>
+              {subAfter ? ` ${subAfter}` : ''}
+            </>
+          )
+        }
+      </p>
+      {
+        hasCta && (
+          <a
+            href={ctaUrl}
+            class="mt-8 inline-flex rounded-full bg-[var(--ptt-primary)] px-8 py-3 text-sm font-semibold text-white transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+          >
+            {ctaLabel}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .ptd-join--brochure {
+    /*
+     * Tall enough that height-fill art (~1.78:1) spans most of the viewport
+     * width — ape + viaduct, not a left stub. Content may grow the section;
+     * background uses % height so it always tracks.
+     */
+    min-height: max(18rem, 48vw);
+    padding: clamp(1.1rem, 2.4vw, 1.6rem) 0 clamp(1.1rem, 2.4vw, 1.6rem);
+    background: var(--ptt-bg, #fef7f3);
+  }
+
+  .ptd-join__bg {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-join-bg);
+    background-repeat: no-repeat;
+    /*
+     * Height-fill + slight overscale: branch flush on the bottom border;
+     * baked cream feather clipped by overflow. Width grows with height so
+     * the monkey reads large across the band.
+     */
+    background-size: auto 114%;
+    background-position: left bottom;
+  }
+
+  @media (min-width: 1440px) {
+    .ptd-join--brochure {
+      min-height: max(22rem, 46vw);
+    }
+
+    .ptd-join__bg {
+      background-size: auto 118%;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .ptd-join--brochure {
+      min-height: max(16rem, 55vw);
+    }
+
+    .ptd-join__bg {
+      background-size: auto 112%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ptd-join--brochure {
+      min-height: max(15rem, 78vw);
+      padding-top: clamp(1.5rem, 5vw, 2.25rem);
+    }
+
+    .ptd-join__bg {
+      /* Stronger overscale on narrow screens so foliage meets the border. */
+      background-size: auto 122%;
+      background-position: left bottom;
+    }
+  }
+</style>

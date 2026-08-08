@@ -1,0 +1,7 @@
+{
+  "resource": "https://pereiratechtalks.org",
+  "resource_name": "Pereira Tech Talks",
+  "authorization_servers": ["https://pereiratechtalks.org"],
+  "scopes_supported": ["public:read"],
+  "bearer_methods_supported": ["header"]
+}

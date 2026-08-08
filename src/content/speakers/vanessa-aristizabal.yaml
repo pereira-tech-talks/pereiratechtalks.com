@@ -1,0 +1,23 @@
+name: Vanessa Aristizabal
+pronouns: she/her
+role:
+  en: Frontend Developer · Google Developer Expert · GitHub Star
+  es: Frontend Developer · Google Developer Expert · GitHub Star
+bio:
+  en: Vanessa is a Systems Engineer with deep web-development experience. She is a Google Developer Expert in Angular and web technologies and a GitHub Star recognized for her contributions to the community. As a content creator she shares her passion for tech, books, design, illustration, and especially code with a JavaScript focus, championing personal and professional growth through technology.
+  es: Vanessa es Ingeniera de Sistemas con experiencia profunda en desarrollo web. Es Google Developer Expert en Angular y tecnologías web y GitHub Star, reconocida por sus contribuciones a la comunidad. Como creadora de contenido, comparte su pasión por la tecnología, los libros, el diseño, la ilustración y, especialmente, el código con un enfoque en JavaScript, impulsando el crecimiento personal y profesional a través de la tecnología.
+photo:
+  src: /images/speakers/vanessa-aristizabal.jpg
+  alt:
+    en: Portrait of Vanessa Aristizabal
+    es: Retrato de Vanessa Aristizabal
+social:
+  linkedin: "https://www.linkedin.com/in/vanessa-marely-aristizabal-angel/"
+  twitter: "https://twitter.com/vanessamarely"
+talks: []
+location:
+  city: Bogotá
+  country: Colombia
+languages:
+  - es
+  - en

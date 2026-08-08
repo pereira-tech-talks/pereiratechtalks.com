@@ -36,10 +36,3 @@ function utils.load_environment {
 function utils.current_folder_name {
   echo $(pwd | grep -o '[^/]*$') | tr "[:upper:]" "[:lower:]"
 }
-
-# Load environment vars in root directory
-function utils.load_environment_permissions {
-  PERMISSIONS="$(id -u):$(id -g)"
-  sed -i.bak "s/.*SERVICE_PERMISSIONS.*/SERVICE_PERMISSIONS=$PERMISSIONS/" .env
-  rm  .env.bak
-}

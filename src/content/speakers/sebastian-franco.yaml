@@ -1,0 +1,21 @@
+name: Sebastian Franco Gomez
+pronouns: he/him
+role:
+  en: ML Engineer at Expert Intelligence
+  es: ML Engineer en Expert Intelligence
+bio:
+  en: Machine-learning engineer turned AI engineer. Lightning-talk presenter at Pereira Tech Day 2024 on understanding modern ML architectures and styles.
+  es: Ingeniero de machine learning, ahora AI engineer. Ponente lightning de Pereira Tech Day 2024 sobre comprender las arquitecturas y estilos del ML moderno.
+photo:
+  src: /images/speakers/sebastian-franco.jpeg
+  alt:
+    en: Portrait of Sebastian Franco
+    es: Retrato de Sebastian Franco
+social:
+  github: "https://github.com/thefrancho"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

@@ -1,0 +1,301 @@
+---
+/**
+ * PTT press / media page — editorial hero + media kit layout.
+ */
+
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const prefix = getUrlPrefix(lang);
+
+const t = {
+  title: lang === 'es' ? 'Prensa' : 'Press',
+  description:
+    lang === 'es'
+      ? 'Kit de prensa de Pereira Tech Talks: hechos clave, boilerplate, descargas de marca y contacto para periodistas y medios.'
+      : 'Pereira Tech Talks press kit: key facts, boilerplate, brand downloads, and contact for journalists and media.',
+  eyebrow: lang === 'es' ? 'Para medios' : 'For media',
+  intro:
+    lang === 'es'
+      ? 'Comunidad sin fines de lucro en Pereira, Risaralda. Activa desde 2014. Todo lo que necesitas para cubrirnos con precisión.'
+      : 'Non-profit community in Pereira, Risaralda. Active since 2014. Everything you need to cover us accurately.',
+  factsTitle: lang === 'es' ? 'Hechos clave' : 'Key facts',
+  facts:
+    lang === 'es'
+      ? ([
+          ['Fundación', 'Pereira, Risaralda, Colombia · 2014'],
+          ['Naturaleza', 'Comunidad sin fines de lucro, voluntariado'],
+          ['Idiomas', 'Sitio en español e inglés'],
+          [
+            'Programas',
+            'Meetups · Pereira Tech Day · Speaker School · Biblioteca del Mañana · AI Channel',
+          ],
+          [
+            'Cifras',
+            '90+ meetups · 200+ charlas · 6.500+ asistencias · 7+ ediciones PTD',
+          ],
+          ['Modelo', 'Eventos gratuitos sostenidos por patrocinio'],
+        ] as [string, string][])
+      : ([
+          ['Founded', 'Pereira, Risaralda, Colombia · 2014'],
+          ['Nature', 'Non-profit, volunteer-organized'],
+          ['Languages', 'Website in Spanish and English'],
+          [
+            'Programs',
+            'Meetups · Pereira Tech Day · Speaker School · Library of Tomorrow · AI Channel',
+          ],
+          [
+            'Numbers',
+            '90+ meetups · 200+ talks · 6,500+ attendees · 7+ PTD editions',
+          ],
+          ['Model', 'Free events sustained by sponsorship'],
+        ] as [string, string][]),
+  boilerplateTitle: lang === 'es' ? 'Boilerplate' : 'Boilerplate',
+  boilerplate:
+    lang === 'es'
+      ? 'Pereira Tech Talks es una comunidad de constructores, ponentes y aprendices con sede en Pereira, Risaralda, Colombia. Desde 2014 hemos organizado más de 90 meetups y varias ediciones de Pereira Tech Day, conectando el talento local con el ecosistema tech global.'
+      : 'Pereira Tech Talks is a community of builders, speakers, and learners based in Pereira, Risaralda, Colombia. Since 2014 we have hosted 90+ meetups and multiple Pereira Tech Day editions, connecting local talent to the global tech ecosystem.',
+  brandTitle: lang === 'es' ? 'Descargas de marca' : 'Brand downloads',
+  brand:
+    lang === 'es'
+      ? [
+          {
+            label: 'Logotipo principal (SVG)',
+            href: '/images/brand/pereira-tech-talks-logo.svg',
+            note: 'Vector — fondo claro/oscuro',
+          },
+          {
+            label: 'Avatar cuadrado (PNG, 512×512)',
+            href: '/icons/icon-512x512.png',
+            note: 'Perfiles y portadas',
+          },
+          {
+            label: 'Apple touch icon (PNG, 180×180)',
+            href: '/icons/apple-touch-icon.png',
+            note: 'Integraciones móviles',
+          },
+        ]
+      : [
+          {
+            label: 'Primary logotype (SVG)',
+            href: '/images/brand/pereira-tech-talks-logo.svg',
+            note: 'Vector — light/dark backgrounds',
+          },
+          {
+            label: 'Square avatar (PNG, 512×512)',
+            href: '/icons/icon-512x512.png',
+            note: 'Profiles and covers',
+          },
+          {
+            label: 'Apple touch icon (PNG, 180×180)',
+            href: '/icons/apple-touch-icon.png',
+            note: 'Mobile integrations',
+          },
+        ],
+  brandFootnote:
+    lang === 'es'
+      ? '¿Necesitas un activo adicional? Escríbenos.'
+      : 'Need an extra asset? Reach out.',
+  contactTitle: lang === 'es' ? 'Contacto de prensa' : 'Press contact',
+  contactIntro:
+    lang === 'es'
+      ? 'Entrevistas, cobertura en sitio, fotografía o solicitudes editoriales:'
+      : 'Interviews, on-site coverage, photography, or editorial requests:',
+  contactCta:
+    lang === 'es' ? 'Escríbenos al formulario' : 'Reach out via the form',
+  contactEmail: 'pereiratechtalks@gmail.com',
+  linksTitle: lang === 'es' ? 'Páginas útiles' : 'Useful pages',
+  links: (lang === 'es'
+    ? [
+        { label: 'Sobre la comunidad', path: '/about/' },
+        { label: 'Programas', path: '/verticals/' },
+        { label: 'Pereira Tech Day', path: '/pereira-tech-day/' },
+        { label: 'Patrocinadores', path: '/sponsors/' },
+        { label: 'Contribuyentes', path: '/contributors/' },
+      ]
+    : [
+        { label: 'About the community', path: '/about/' },
+        { label: 'Programs', path: '/verticals/' },
+        { label: 'Pereira Tech Day', path: '/pereira-tech-day/' },
+        { label: 'Sponsors', path: '/sponsors/' },
+        { label: 'Contributors', path: '/contributors/' },
+      ]
+  ).map(({ label, path }) => ({ label, href: `${prefix}${path}` })),
+  download: lang === 'es' ? 'Descargar' : 'Download',
+};
+
+const contactHref = `${prefix}/contact/?topic=other&subject=${encodeURIComponent(
+  lang === 'es' ? 'Consulta de prensa' : 'Press inquiry'
+)}`;
+
+const breadcrumbs = [
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <!-- Editorial hero -->
+  <section class="relative overflow-hidden bg-ptt-bg-dark text-white">
+    <div aria-hidden="true" class="absolute inset-0">
+      <img
+        src="/images/home/hero-dark.webp"
+        alt=""
+        width={1920}
+        height={768}
+        class="h-full w-full object-cover opacity-40"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-ptt-bg-dark via-ptt-bg-dark/90 to-ptt-bg-dark/55"
+      >
+      </div>
+    </div>
+    <div class="relative z-10 main-container pt-10 pb-16 sm:pb-20">
+      <Breadcrumbs items={breadcrumbs} onDark />
+      <p
+        class="mt-8 text-sm font-semibold uppercase tracking-widest text-ptt-accent"
+      >
+        {t.eyebrow}
+      </p>
+      <h1
+        class="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-2xl"
+      >
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-white/85 leading-relaxed">
+        {t.intro}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={contactHref}
+          class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-6 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-ptt-accent-dark transition-colors"
+        >
+          {t.contactCta}
+        </a>
+        <a
+          href="#brand-kit"
+          class="inline-flex min-h-[44px] items-center rounded-full border border-white/70 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+        >
+          {t.brandTitle}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ptt-bg py-16">
+    <div class="main-container">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ptt">
+        {t.factsTitle}
+      </h2>
+      <dl class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {
+          t.facts.map(([key, value]) => (
+            <div class="rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-5">
+              <dt class="text-sm font-semibold uppercase tracking-widest text-ptt-primary">
+                {key}
+              </dt>
+              <dd class="mt-2 text-base text-ptt-secondary leading-relaxed">
+                {value}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ptt">
+        {t.boilerplateTitle}
+      </h2>
+      <blockquote
+        class="mt-6 border-l-4 border-ptt-accent pl-6 text-lg leading-relaxed text-ptt italic"
+      >
+        {t.boilerplate}
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="brand-kit" class="bg-ptt-bg py-16">
+    <div class="main-container">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ptt">
+        {t.brandTitle}
+      </h2>
+      <ul class="mt-8 grid gap-4 sm:grid-cols-3 list-none">
+        {
+          t.brand.map((asset) => (
+            <li class="flex h-full flex-col rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-5 transition-shadow hover:shadow-md">
+              <p class="text-sm font-semibold text-ptt">{asset.label}</p>
+              <p class="mt-1 text-xs text-ptt-secondary">{asset.note}</p>
+              <a
+                href={asset.href}
+                download
+                class="mt-auto pt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary hover:underline"
+              >
+                {t.download}
+                <span aria-hidden="true">↓</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-4 text-sm italic text-ptt-secondary">{t.brandFootnote}</p>
+    </div>
+  </section>
+
+  <section class="bg-ptt-bg-dark text-white py-16">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {t.contactTitle}
+      </h2>
+      <p class="mt-3 text-white/85">{t.contactIntro}</p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href={contactHref}
+          class="inline-flex items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+        >
+          {t.contactCta}
+        </a>
+        <a
+          href={`mailto:${t.contactEmail}`}
+          class="inline-flex max-w-full items-center gap-2 break-all text-center rounded-full bg-white/10 px-4 sm:px-6 py-3 text-sm sm:text-base font-semibold text-white ring-1 ring-white/30 hover:bg-white/15"
+        >
+          {t.contactEmail}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ptt-bg py-16">
+    <div class="main-container">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ptt">
+        {t.linksTitle}
+      </h2>
+      <ul class="mt-8 grid gap-3 sm:grid-cols-2 list-none">
+        {
+          t.links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block rounded-xl border border-ptt-border bg-ptt-bg-elevated p-4 text-sm font-semibold text-ptt hover:border-ptt-primary/50 transition-colors"
+              >
+                <span class="text-ptt-primary">→</span>
+                {' '}
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</MainLayout>

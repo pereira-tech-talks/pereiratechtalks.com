@@ -1,0 +1,269 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson";
+  src: url("/fonts/atkinson-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Pereira Tech Talks v3.0.0 design tokens.
+ * Single source of truth: docs/BRAND_GUIDE.md and
+ * analysis_results/BRAND_PALETTE.md (Task 1).
+ *
+ * Tailwind 4 generates utility classes for every --color-ptt-* token:
+ *   bg-ptt-primary, text-ptt-primary, border-ptt-primary, etc.
+ *
+ * Per-edition Pereira Tech Day kits (Task 12) override these tokens
+ * inside [data-edition-theme="{year}"] only — never globally.
+ */
+@theme {
+  /* Shipped body font — Atkinson Hyperlegible (already @font-face above).
+   * Brand Guide previously claimed Inter; that was never loaded. */
+  --font-sans:
+    "Atkinson", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  /* PTT global palette — light mode (defaults) */
+  --color-ptt-primary: #1f6f73;
+  --color-ptt-primary-strong: #155054;
+  --color-ptt-primary-soft: #e1f2f1;
+  /* Dark-mode variants exposed as utility classes so components can opt-in
+   * to the dark-mode primary/accent in any context (e.g. against a dark
+   * hero canvas in light mode). These never change between modes. */
+  --color-ptt-primary-dark: #3fa8ad;
+  --color-ptt-accent: #e8a33d;
+  --color-ptt-accent-strong: #b87c1f;
+  --color-ptt-accent-dark: #f4b95c;
+  --color-ptt-bg: #fafbfb;
+  --color-ptt-bg-elevated: #ffffff;
+  /* Always-dark hero canvas (same in light and dark mode). Used by hero
+   * sections that intentionally remain dark regardless of theme so the
+   * brand keeps its night identity above the fold. */
+  --color-ptt-bg-dark: #08191a;
+  --color-ptt-border: #e2e8e8;
+  --color-ptt-border-strong: #c9d4d5;
+  --color-ptt-text: #0f2a2c;
+  --color-ptt-text-secondary: #4a6164;
+  --color-ptt-text-muted: #6e8589;
+  /* Short aliases for the two most-used text tokens. Dozens of components
+   * across the codebase (and AGENTS.md itself) reference `text-ptt` /
+   * `text-ptt-secondary` as shorthand for `text-ptt-text` /
+   * `text-ptt-text-secondary`. These re-export via var() so they inherit
+   * the same automatic light/dark flip — no separate .dark declaration
+   * needed. */
+  --color-ptt: var(--color-ptt-text);
+  --color-ptt-secondary: var(--color-ptt-text-secondary);
+  --color-ptt-success: #2e8757;
+  --color-ptt-warning: #c68417;
+  --color-ptt-danger: #b83a3a;
+  --color-ptt-info: #1f6f73;
+
+  /*
+   * Legacy aliases kept for transitional compatibility with components
+   * that still reference --color-main and --color-secondary while the
+   * v3.0.0 migration progresses. These re-map to the PTT brand so old
+   * usages immediately re-skin to the new identity instead of clashing.
+   * NEW components MUST use --color-ptt-* tokens (or the bg-ptt-*,
+   * text-ptt-*, border-ptt-* utility classes Tailwind 4 generates).
+   */
+  --color-main: #08191a; /* legacy → PTT dark canvas */
+  --color-secondary: #1f6f73; /* legacy → PTT primary */
+  --color-gray-50: #f1f5f9;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* PTT global palette — dark mode override */
+.dark {
+  --color-ptt-primary: #3fa8ad;
+  --color-ptt-primary-strong: #5bbfc4;
+  --color-ptt-primary-soft: #0f2a2c;
+  --color-ptt-accent: #f4b95c;
+  --color-ptt-accent-strong: #ffd27a;
+  --color-ptt-bg: #08191a;
+  --color-ptt-bg-elevated: #0f2a2c;
+  --color-ptt-border: #1e3d40;
+  --color-ptt-border-strong: #2a5256;
+  --color-ptt-text: #e8f0ef;
+  --color-ptt-text-secondary: #b5c7c9;
+  --color-ptt-text-muted: #8fa3a6;
+  --color-ptt-success: #4fb07f;
+  --color-ptt-warning: #e2a848;
+  --color-ptt-danger: #e0635f;
+  --color-ptt-info: #3fa8ad;
+
+  /* Legacy aliases — softer petroleum on dark to reduce visual intensity */
+  --color-secondary: #3fa8ad;
+}
+
+@layer components {
+  .main-container {
+    /* max-w-7xl = 1280px; md:px-6 matches legacy AstroWind side padding. */
+    @apply mx-auto max-w-7xl py-4 px-4 md:px-6;
+  }
+
+  /* Theme-aware nav links (header + mobile). Inherit header canvas. */
+  .nav-link {
+    @apply text-ptt-secondary hover:text-ptt-primary transition-colors duration-200;
+  }
+  .dark .nav-link {
+    @apply text-white/85 hover:text-white;
+  }
+
+  /* Theme toggle morph — respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle-icon,
+    .theme-toggle-fab {
+      /* biome-ignore lint/complexity/noImportantStyles: must win over utility transition-* on the FAB */
+      transition: none !important;
+    }
+  }
+
+  /* step-2-get-started.png: half width on desktop */
+  .prose .prose-img-narrow {
+    @apply md:max-w-[50%];
+  }
+
+  /* Image captions inside blog posts */
+  .prose figcaption {
+    @apply text-sm text-center text-gray-600 dark:text-gray-300 mt-3;
+  }
+
+  /* Mobile horizontal scroll for wide tables.
+   * The !important rules below override Tailwind Typography's `.prose table`
+   * styles, which have equal or higher specificity than `.table-responsive`
+   * once nested inside a prose container. Without !important, prose wins. */
+  @media (max-width: 768px) {
+    .table-responsive {
+      /* biome-ignore lint/complexity/noImportantStyles: overrides equal-specificity Tailwind Typography `.prose table` rules nested inside prose containers */
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
+    .table-responsive > table,
+    .table-responsive > :where(table) {
+      /* biome-ignore lint/complexity/noImportantStyles: overrides equal-specificity Tailwind Typography `.prose table` rules nested inside prose containers */
+      width: max-content !important;
+      min-width: 100%;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  /*
+   * Defensive wrap-anywhere for long unbreakable strings (emails, URLs,
+   * code identifiers) inside long-form prose. Without this, strings like
+   * `conduct@pereiratechtalks.org` overflow the viewport at 280–320px
+   * narrow phones (Galaxy Z Fold folded, iPhone SE original).
+   */
+  :where(.prose) :is(p, li, dd, td, blockquote, strong, em, code, a) {
+    overflow-wrap: anywhere;
+  }
+
+  /* Always allow code blocks to scroll horizontally rather than break the page. */
+  :where(.prose) pre {
+    overflow-x: auto;
+  }
+
+  /*
+   * Responsive iframe defense: any raw <iframe width=560 height=315 ...>
+   * authored inside markdown (YouTube embeds, slide embeds, etc.) becomes
+   * fluid + 16:9 by default. Prevents the 256–297px horizontal overflow
+   * observed on /blog/quarantine-tech-talks (7 embeds) and other recap
+   * posts at narrow phone viewports.
+   */
+  :where(.prose) iframe {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ptt-primary focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900;
+  }
+}
+
+@keyframes chevron-bounce {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(32px);
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+}
+
+.animate-chevron-bounce {
+  animation: chevron-bounce 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
+  }
+
+  .animate-chevron-bounce {
+    animation: none;
+  }
+}
+
+/* Constrained centered figures for blog post diagrams.
+ * Mobile: image fills full content width.
+ * Desktop (>= 768px): image is constrained for breathing room.
+ */
+.fig-narrow img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .fig-narrow-70 img {
+    max-width: 70%;
+  }
+  .fig-narrow-60 img {
+    max-width: 60%;
+  }
+}

@@ -1,9 +1,7 @@
 # build output
 dist/
-.output/
-
-# docs
-docs/
+# generated types
+.astro/
 
 # dependencies
 node_modules/
@@ -14,6 +12,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# pnpm
+.pnpm-store/
+
+
+# test coverage
+coverage/
+
+# Lighthouse CI local results
+.lighthouseci/
 
 # environment variables
 .env
@@ -22,10 +29,32 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-pnpm-lock.yaml
+# jetbrains setting folder
+.idea/
 
-.astro
-.env
-.devcontainer
-src/data/*
-notification_release_script.sh
+# VSCode (local editor settings)
+.vscode/
+
+# devcontainer (local dev setup)
+.devcontainer/
+
+# Deep Work Plan outputs (plans + drafts are working artifacts, not tracked source)
+.dwp/
+
+# Temporary workspace (agent outputs, scratch files, ephemeral content)
+tmp/*
+!tmp/.gitkeep
+
+# Certificate signing secrets and raw attendee CSV drops (never commit)
+.secrets/
+tmp/certs/
+*.pem
+*-private*
+*-private.key
+attendees*.csv
+
+english.png
+spanish.png
+
+# Playwright ephemeral test output
+test-results/

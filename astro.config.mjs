@@ -1,137 +1,117 @@
-import fs from 'node:fs';
-import { cpus } from 'node:os';
-import path from 'node:path';
+import EventEmitter from 'node:events';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+EventEmitter.defaultMaxListeners = 20;
+import { satteri } from '@astrojs/markdown-satteri';
 import mdx from '@astrojs/mdx';
-import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
-import tailwind from '@astrojs/tailwind';
-import compress from 'astro-compress';
-import icon from 'astro-icon';
+import tailwindcss from '@tailwindcss/vite';
+// @ts-check
 import { defineConfig } from 'astro/config';
-import astrowind from './src/integration';
 
+import excludeInternal from './src/integrations/exclude-internal';
 import {
-  lazyImagesRehypePlugin,
-  readingTimeRemarkPlugin,
-  responsiveTablesRehypePlugin,
-} from './src/utils/frontmatter.mjs';
+  satteriExternalLinks,
+  satteriImageDefaults,
+} from './src/lib/satteri-plugins';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CPU_COUNT = cpus().length;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const hasExternalScripts = true;
+/**
+ * Absolute origin baked into canonical / og:url / og:image / sitemap.
+ *
+ * Must match the hostname people actually share. The apex
+ * `pereiratechtalks.org` currently 301s asset URLs toward the legacy
+ * `.com` / `www` stack (and the OG image ends in 404), so Facebook falls
+ * back to the favicon. While the public surface is the v3 preview host,
+ * default to that; override with PUBLIC_SITE_URL (or SITE) at cutover.
+ */
+const site =
+  process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') ||
+  process.env.SITE?.replace(/\/$/, '') ||
+  'https://pereiratechtalks.org';
 
-const whenExternalScripts = (items = []) => {
-  const eachItem = Array.isArray(items)
-    ? items.map((item) => item())
-    : [items()];
-  return hasExternalScripts ? eachItem : [];
-};
-
-// Log the build configuration
-console.log(
-  `🎯 Astro Build Target: ${process.env.BUILD_TARGET || 'production'}`,
-);
-console.log(`💻 CPU Count: ${CPU_COUNT}`);
-
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://pereiratechtalks.org',
-  output: 'static',
+  // Astro 7 ships the Rust Markdown/Astro compiler as the default — the former
+  // `experimental.rustCompiler` flag was removed, so there is nothing to opt into.
+  site,
   build: {
-    concurrency: CPU_COUNT,
-    rollupOptions: {
-      // Maximum parallel file operations
-      maxParallelFileOps: CPU_COUNT * 2, // 2x CPU cores for I/O bound operations
-      output: {
-        // Fewer, larger chunks = less overhead
-        manualChunks: undefined,
-      },
-    },
-    assets: 'assets',
+    // 'always' inlined ~156KB of Tailwind into every HTML document, which
+    // delayed LCP paint (render-delay ~1.8s) under LHCI Slow-4G. 'auto' keeps
+    // tiny scoped sheets inline and emits the shared bundle as a cacheable
+    // /_astro/*.css file discovered in parallel with the LCP preload.
+    inlineStylesheets: 'auto',
   },
-  base: '/',
-  telemetry: false,
-  server: {
-    port: 4321,
-    host: true,
+  markdown: {
+    // Astro 7 ships Sätteri (the Rust Markdown/MDX compiler) as the default
+    // compiler. It does not run remark/rehype plugins, so our former rehype
+    // plugins are ported to Sätteri HAST plugins. `@astrojs/mdx` inherits this
+    // processor automatically, so `.md` and `.mdx` share the same pipeline.
+    processor: satteri({
+      hastPlugins: [satteriExternalLinks(), satteriImageDefaults()],
+    }),
   },
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
+    mdx(),
+    sitemap({
+      lastmod: new Date(),
+      // '/talks' and '/talks/{slug}' are 301 redirect stubs (Task 22 of
+      // PLAN_world_class_site_upgrade) — meetups is the canonical surface,
+      // so the redirected URLs must not appear in the sitemap.
+      filter: (page) =>
+        !page.includes('/internal/') &&
+        !page.endsWith('/internal') &&
+        !page.includes('/certificates/') &&
+        !/\/talks(\/|$)/.test(page),
     }),
-    sitemap(),
-    mdx({
-      remarkPlugins: [readingTimeRemarkPlugin],
-    }),
-    icon({
-      include: {
-        tabler: ['*'],
-        'flat-color-icons': [
-          'template',
-          'gallery',
-          'approval',
-          'document',
-          'advertising',
-          'currency-exchange',
-          'voice-presentation',
-          'business-contact',
-          'database',
-        ],
-      },
-    }),
-
-    ...whenExternalScripts(() =>
-      partytown({
-        config: { forward: ['dataLayer.push'] },
-      }),
-    ),
-
-    compress({
-      CSS: true,
-      HTML: {
-        'html-minifier-terser': {
-          removeAttributeQuotes: false,
+    svelte(),
+    excludeInternal(),
+  ],
+  server: {
+    host: true,
+    port: 8888,
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
+            (warning.exporter?.includes('svelte/') || warning.exporter?.includes('@astrojs/internal-helpers'))) {
+            return;
+          }
+          defaultHandler(warning);
+        },
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/svelte/')) {
+              return 'svelte';
+            }
+          },
         },
       },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
-      Logger: 1,
-    }),
-
-    astrowind(),
-    svelte(),
-  ],
-
-  redirects: {
-    '/pereira-tech-day/codigo-conducta': '/codigo-conducta',
-  },
-
-  markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin, lazyImagesRehypePlugin],
-  },
-
-  vite: {
+    },
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '~': path.resolve(__dirname, './src'),
+        '@': resolve(__dirname, './src'),
       },
     },
-    build: {
-      // Allow larger chunks for speed
-      chunkSizeWarningLimit: 10000,
-      // Fastest minifier
-      minify: 'esbuild',
-      // Utilize all cores
-      rollupOptions: {
-        maxParallelFileOps: CPU_COUNT * 3,
+    optimizeDeps: {
+      force: false,
+      holdUntilCrawlEnd: false,
+    },
+    server: {
+      hmr: {
+        overlay: true,
+      },
+      port: 8888,
+      watch: {
+        ignored: ['**/.lighthouseci/**'],
       },
     },
   },
-
-  compressHTML: false,
 });

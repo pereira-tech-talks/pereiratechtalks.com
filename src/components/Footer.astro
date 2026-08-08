@@ -1,0 +1,358 @@
+---
+import { getTodayInSiteTimezone } from '@/lib/dates';
+import { DEFAULT_LANGUAGE, getUrlPrefix } from '@/lib/i18n';
+import type { Language } from '@/lib/translations';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: string;
+  /**
+   * `ptd-dark` — matches navy PTD edition pages (2024): solid page bg, hairline
+   * border, white copy. `default` keeps the global PTT footer.
+   */
+  variant?: 'default' | 'ptd-dark';
+}
+
+const { lang = DEFAULT_LANGUAGE, variant = 'default' } = Astro.props;
+const t = getTranslations(lang as Language);
+const prefix = getUrlPrefix(lang as Language);
+const year = Number.parseInt(getTodayInSiteTimezone().slice(0, 4), 10);
+const isPtdDark = variant === 'ptd-dark';
+
+const explore =
+  lang === 'es'
+    ? [
+        { label: 'Meetups', href: `${prefix}/meetups` },
+        { label: 'Pereira Tech Day', href: `${prefix}/pereira-tech-day` },
+        // Calendar link hidden temporarily — page still at /calendar
+        { label: 'Ponentes', href: `${prefix}/speakers` },
+        { label: 'Blog', href: `${prefix}/blog` },
+        { label: 'Patrocinadores', href: `${prefix}/sponsors` },
+      ]
+    : [
+        { label: 'Meetups', href: `${prefix}/meetups` },
+        { label: 'Pereira Tech Day', href: `${prefix}/pereira-tech-day` },
+        // Calendar link hidden temporarily — page still at /calendar
+        { label: 'Speakers', href: `${prefix}/speakers` },
+        { label: 'Blog', href: `${prefix}/blog` },
+        { label: 'Sponsors', href: `${prefix}/sponsors` },
+      ];
+
+const utilityLinks =
+  lang === 'es'
+    ? [{ label: 'Contacto', href: `${prefix}/contact`, item: 'contact' }]
+    : [{ label: 'Contact', href: `${prefix}/contact`, item: 'contact' }];
+
+const community =
+  lang === 'es'
+    ? [
+        { label: 'Sobre nosotros', href: `${prefix}/about` },
+        { label: 'Comunidades', href: `${prefix}/communities` },
+        { label: 'Cómo contribuir', href: `${prefix}/contributing` },
+        { label: 'Gobernanza', href: `${prefix}/governance` },
+        { label: 'Código de Conducta', href: `${prefix}/conduct` },
+        { label: 'Canales', href: `${prefix}/channels` },
+        { label: 'Prensa', href: `${prefix}/press` },
+      ]
+    : [
+        { label: 'About', href: `${prefix}/about` },
+        { label: 'Communities', href: `${prefix}/communities` },
+        { label: 'Contributing', href: `${prefix}/contributing` },
+        { label: 'Governance', href: `${prefix}/governance` },
+        { label: 'Code of Conduct', href: `${prefix}/conduct` },
+        { label: 'Channels', href: `${prefix}/channels` },
+        { label: 'Press', href: `${prefix}/press` },
+      ];
+
+const iconClass = 'w-5 h-5';
+const tagline =
+  lang === 'es'
+    ? 'Comunidad tech en Pereira, Risaralda — desde 2014.'
+    : 'Tech community in Pereira, Risaralda — since 2014.';
+---
+
+<footer
+  class:list={[
+    'relative border-t',
+    isPtdDark
+      ? 'border-white/10 bg-[#030620] text-white'
+      : 'border-ptt-border bg-ptt-bg text-ptt-secondary',
+  ]}
+  style="padding-bottom: max(2rem, env(safe-area-inset-bottom)); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
+>
+  {
+    !isPtdDark && (
+      <div
+        class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-ptt-primary via-ptt-accent to-ptt-primary"
+        aria-hidden="true"
+      />
+    )
+  }
+
+  <div class="main-container pt-14 pb-10">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5 text-left">
+        <a
+          href={prefix || '/'}
+          class="inline-flex items-center"
+          aria-label="Pereira Tech Talks"
+        >
+          {
+            isPtdDark ? (
+              <img
+                src="/images/pereira-tech-talks/logo-horizontal.webp"
+                alt=""
+                width={200}
+                height={66}
+                class="h-12 w-auto sm:h-14"
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <>
+                <img
+                  src="/images/pereira-tech-talks/logo-horizontal-black.webp"
+                  alt=""
+                  width={200}
+                  height={66}
+                  class="h-12 w-auto dark:hidden sm:h-14"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src="/images/pereira-tech-talks/logo-horizontal.webp"
+                  alt=""
+                  width={200}
+                  height={66}
+                  class="hidden h-12 w-auto dark:block sm:h-14"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </>
+            )
+          }
+        </a>
+        <p
+          class:list={[
+            'mt-4 max-w-sm text-sm leading-relaxed',
+            isPtdDark ? 'text-white/85' : 'text-ptt-secondary',
+          ]}
+        >
+          {tagline}
+        </p>
+        <div class="mt-6 flex gap-2">
+          <a
+            href="https://github.com/pereira-tech-talks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-colors',
+              isPtdDark
+                ? 'border-white/20 text-white hover:border-white/50 hover:text-white'
+                : 'border-ptt-border text-ptt-secondary hover:border-ptt-primary hover:text-ptt',
+            ]}
+            aria-label="GitHub"
+            data-umami-event="social_click"
+            data-umami-event-platform="github"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://www.linkedin.com/company/pereira-tech-talks/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-colors',
+              isPtdDark
+                ? 'border-white/20 text-white hover:border-white/50 hover:text-white'
+                : 'border-ptt-border text-ptt-secondary hover:border-ptt-primary hover:text-ptt',
+            ]}
+            aria-label="LinkedIn"
+            data-umami-event="social_click"
+            data-umami-event-platform="linkedin"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://x.com/pertechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-colors',
+              isPtdDark
+                ? 'border-white/20 text-white hover:border-white/50 hover:text-white'
+                : 'border-ptt-border text-ptt-secondary hover:border-ptt-primary hover:text-ptt',
+            ]}
+            aria-label="X (Twitter)"
+            data-umami-event="social_click"
+            data-umami-event-platform="twitter"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://www.instagram.com/pertechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-colors',
+              isPtdDark
+                ? 'border-white/20 text-white hover:border-white/50 hover:text-white'
+                : 'border-ptt-border text-ptt-secondary hover:border-ptt-primary hover:text-ptt',
+            ]}
+            aria-label="Instagram"
+            data-umami-event="social_click"
+            data-umami-event-platform="instagram"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+              ></path></svg
+            >
+          </a>
+          <a
+            href="https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG"
+            target="_blank"
+            rel="noopener noreferrer"
+            class:list={[
+              'inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-colors',
+              isPtdDark
+                ? 'border-white/20 text-white hover:border-white/50 hover:text-white'
+                : 'border-ptt-border text-ptt-secondary hover:border-ptt-primary hover:text-ptt',
+            ]}
+            aria-label="WhatsApp"
+            data-umami-event="social_click"
+            data-umami-event-platform="whatsapp"
+          >
+            <svg class={iconClass} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.889 9.888-9.889 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path></svg
+            >
+          </a>
+        </div>
+      </div>
+
+      <nav
+        aria-label={lang === 'es' ? 'Explorar' : 'Explore'}
+        class="lg:col-span-3 text-left"
+      >
+        <p
+          class:list={[
+            'text-xs uppercase tracking-widest',
+            isPtdDark ? 'font-bold text-white' : 'font-semibold text-ptt-primary',
+          ]}
+        >
+          {lang === 'es' ? 'Explorar' : 'Explore'}
+        </p>
+        <ul class="mt-4 space-y-1">
+          {
+            explore.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    'inline-flex min-h-[44px] items-center text-sm transition-colors',
+                    isPtdDark
+                      ? 'text-white/85 hover:text-white'
+                      : 'text-ptt-secondary hover:text-ptt-primary',
+                  ]}
+                  data-umami-event="nav_click"
+                  data-umami-event-item={link.href.split('/').filter(Boolean).pop() ?? 'home'}
+                  data-umami-event-source="footer"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav
+        aria-label={lang === 'es' ? 'Comunidad' : 'Community'}
+        class="lg:col-span-4 text-left"
+      >
+        <p
+          class:list={[
+            'text-xs uppercase tracking-widest',
+            isPtdDark ? 'font-bold text-white' : 'font-semibold text-ptt-primary',
+          ]}
+        >
+          {lang === 'es' ? 'Comunidad' : 'Community'}
+        </p>
+        <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+          {
+            community.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    'inline-flex min-h-[44px] items-center text-sm transition-colors',
+                    isPtdDark
+                      ? 'text-white/85 hover:text-white'
+                      : 'text-ptt-secondary hover:text-ptt-primary',
+                  ]}
+                  data-umami-event="nav_click"
+                  data-umami-event-item={link.href.split('/').filter(Boolean).pop() ?? 'home'}
+                  data-umami-event-source="footer"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class:list={[
+        'mt-12 flex flex-col gap-5 border-t pt-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8',
+        isPtdDark ? 'border-white/10' : 'border-ptt-border',
+      ]}
+    >
+      <p
+        class:list={[
+          'text-sm leading-relaxed',
+          isPtdDark ? 'text-white/70' : 'text-ptt-secondary',
+        ]}
+      >
+        &copy; {year}{' '}
+        {t.footer.copyright}. {t.footer.allRightsReserved}
+      </p>
+      <nav
+        aria-label={lang === 'es' ? 'Enlaces rápidos' : 'Quick links'}
+        class="flex flex-wrap items-center gap-x-6 gap-y-2"
+      >
+        {
+          utilityLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'inline-flex min-h-[44px] items-center text-sm font-bold tracking-wide hover:underline',
+                isPtdDark ? 'text-white' : 'text-ptt-primary',
+              ]}
+              data-umami-event="nav_click"
+              data-umami-event-item={link.item}
+              data-umami-event-source="footer"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+  </div>
+</footer>

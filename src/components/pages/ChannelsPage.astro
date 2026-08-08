@@ -1,0 +1,157 @@
+---
+/**
+ * PTT v3.0.0 channels directory page (shared between EN and ES).
+ * Lists every official Pereira Tech Talks channel — Luma, social,
+ * GitHub, Linktree — with a "Where do I start?" guidance.
+ */
+
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getChannels } from '@/lib/channel';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+
+const channels = await getChannels();
+const primary = channels.filter((c) => c.data.isPrimary);
+const secondary = channels.filter((c) => !c.data.isPrimary);
+
+const platformLabel: Record<string, string> = {
+  'meetup-com': 'Meetup.com',
+  luma: 'Luma',
+  github: 'GitHub',
+  linkedin: 'LinkedIn',
+  x: 'X (Twitter)',
+  instagram: 'Instagram',
+  youtube: 'YouTube',
+  discord: 'Discord',
+  whatsapp: 'WhatsApp',
+  telegram: 'Telegram',
+  newsletter: 'Newsletter',
+  linktree: 'Linktree',
+  website: 'Website',
+  other: 'Other',
+};
+
+const t = {
+  title: lang === 'es' ? 'Canales' : 'Channels',
+  description:
+    lang === 'es'
+      ? 'Todos los canales oficiales de Pereira Tech Talks: Luma, redes sociales, GitHub y Linktree, con orientación clara sobre por dónde empezar.'
+      : 'All official Pereira Tech Talks channels — Luma, social networks, GitHub, and Linktree — with clear guidance on where newcomers should start.',
+  intro:
+    lang === 'es'
+      ? 'Conecta con la comunidad desde donde más te acomode. Marcamos como “principal” el canal donde recomendamos empezar a cualquier persona nueva.'
+      : 'Connect with the community from whichever channel fits you. We mark "primary" the channel we recommend any newcomer to start with.',
+  primaryHeading: lang === 'es' ? 'Canal principal' : 'Primary channel',
+  otherHeading: lang === 'es' ? 'Otros canales' : 'Other channels',
+  primaryBadge: lang === 'es' ? 'Recomendado' : 'Recommended',
+  visitLabel: lang === 'es' ? 'Visitar canal' : 'Visit channel',
+};
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: `${getUrlPrefix(lang)}/`,
+  },
+  { label: t.title },
+];
+---
+
+<MainLayout lang={lang} title={t.title} description={t.description}>
+  <div class="bg-ptt-bg">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container pt-6 pb-12">
+      <Eyebrow>{lang === 'es' ? 'Conecta' : 'Connect'}</Eyebrow>
+      <h1
+        class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt"
+      >
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.intro}
+      </p>
+    </div>
+  </div>
+
+  {
+    primary.length > 0 && (
+      <Section title={t.primaryHeading}>
+        <ul class="grid gap-6 sm:grid-cols-2 list-none">
+          {primary.map((c) => (
+            <li class="flex h-full min-w-0 flex-col rounded-2xl bg-ptt-bg-elevated ring-2 ring-ptt-primary dark:ring-ptt-primary-dark p-4 sm:p-6 shadow-sm">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <h3 class="text-xl font-bold text-ptt">
+                  {c.data.name}
+                </h3>
+                <span class="inline-flex items-center rounded-full bg-ptt-primary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white dark:bg-ptt-primary-dark dark:text-ptt-bg-dark">
+                  {t.primaryBadge}
+                </span>
+              </div>
+              <p class="mt-1 text-sm font-medium text-ptt-primary dark:text-ptt-primary-dark">
+                {platformLabel[c.data.platform] ?? c.data.platform}
+              </p>
+              <p class="mt-3 text-sm text-ptt-secondary">
+                {tr(c.data.description, lang)}
+              </p>
+              <p class="mt-2 text-sm italic text-ptt-secondary">
+                {tr(c.data.audience, lang)}
+              </p>
+              <a
+                href={c.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark hover:underline"
+              >
+                {t.visitLabel}
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+
+  {
+    secondary.length > 0 && (
+      <Section title={t.otherHeading} surface="alt">
+        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none">
+          {secondary.map((c) => (
+            <li class="flex h-full min-w-0 flex-col rounded-2xl bg-ptt-bg-elevated ring-1 ring-ptt-border p-4 sm:p-6">
+              <h3 class="text-lg font-semibold text-ptt">
+                {c.data.name}
+              </h3>
+              <p class="mt-1 text-sm font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
+                {platformLabel[c.data.platform] ?? c.data.platform}
+              </p>
+              <p class="mt-3 text-sm text-ptt-secondary">
+                {tr(c.data.description, lang)}
+              </p>
+              <p class="mt-2 text-sm italic text-ptt-secondary">
+                {tr(c.data.audience, lang)}
+              </p>
+              <a
+                href={c.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark hover:underline"
+              >
+                {t.visitLabel}
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    )
+  }
+</MainLayout>

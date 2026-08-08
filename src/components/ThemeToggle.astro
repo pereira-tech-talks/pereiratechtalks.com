@@ -1,0 +1,55 @@
+---
+/**
+ * Theme toggle FAB — SVG sun/moon morph, PTT tokens, no emoji.
+ * Persists to localStorage['theme'] and tracks Umami theme_toggle.
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="theme-toggle-fab group relative w-12 h-12 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full bg-ptt-bg-elevated text-ptt border border-ptt-border shadow-lg shadow-ptt-primary/10 backdrop-blur-md transition-all duration-300 hover:border-ptt-primary hover:shadow-ptt-primary/25 motion-safe:hover:scale-105 motion-safe:active:scale-95 dark:bg-ptt-bg-elevated dark:border-ptt-border-strong dark:shadow-black/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+  aria-label="Toggle dark mode"
+>
+  <span class="sr-only">Toggle color theme</span>
+  <!-- Sun (visible in dark mode — click to go light) -->
+  <svg
+    class="theme-toggle-icon absolute h-6 w-6 text-ptt-accent opacity-0 scale-75 rotate-90 transition-all duration-500 ease-out dark:opacity-100 dark:scale-100 dark:rotate-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.75"
+    stroke-linecap="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+    ></path>
+  </svg>
+  <!-- Moon (visible in light mode — click to go dark) -->
+  <svg
+    class="theme-toggle-icon absolute h-6 w-6 text-ptt-primary opacity-100 scale-100 rotate-0 transition-all duration-500 ease-out dark:opacity-0 dark:scale-75 dark:-rotate-90"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      d="M21 14.3A9 9 0 1 1 9.7 3a7 7 0 1 0 11.3 11.3z"
+      opacity="0.95"></path>
+  </svg>
+  <!-- Ambient ring -->
+  <span
+    class="pointer-events-none absolute inset-0 rounded-full ring-2 ring-ptt-primary/0 transition duration-300 group-hover:ring-ptt-primary/40 dark:group-hover:ring-ptt-accent/40"
+    aria-hidden="true"></span>
+</button>
+<script is:inline>
+  document.getElementById('theme-toggle').onclick = function () {
+    const html = document.documentElement;
+    const isDark = html.classList.toggle('dark');
+    const newTheme = isDark ? 'dark' : 'light';
+    localStorage.setItem('theme', newTheme);
+    if (window.umami) {
+      window.umami.track('theme_toggle', { theme: newTheme });
+    }
+  };
+</script>

@@ -1,0 +1,21 @@
+name: César Camacho
+pronouns: he/him
+role:
+  en: Co-founder at Hubu
+  es: Cofundador en Hubu
+bio:
+  en: César has a background in Finance from Universidad Sergio Arboleda. He started in mass-transit, then helped a Spanish software factory expand into Colombia, opening doors into tech and innovation. He founded Osyva, a B2B veterinary marketplace selected by 500 Startups, and now co-founded Hubu, a company offering AI-driven data analytics for businesses.
+  es: César es financista de la Universidad Sergio Arboleda. Comenzó en la industria del transporte masivo, luego trajo a Colombia una fábrica de software española y abrió las puertas al mundo tech e innovación. Fundó Osyva, marketplace B2B en la industria veterinaria seleccionado por 500 Startups, y actualmente cofundó Hubu, empresa que ofrece analítica de datos con IA para negocios.
+photo:
+  src: /images/speakers/cesar-camacho.jpg
+  alt:
+    en: Portrait of César Camacho
+    es: Retrato de César Camacho
+social:
+  linkedin: "https://www.linkedin.com/in/c%C3%A9sar-camacho-92bb5a21a/"
+talks: []
+location:
+  city: Bogotá
+  country: Colombia
+languages:
+  - es

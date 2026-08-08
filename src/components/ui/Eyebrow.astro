@@ -1,0 +1,24 @@
+---
+/**
+ * PTT v3.0.0 eyebrow label — small uppercase tracking-widest text used above
+ * section titles or in hero banners.
+ */
+
+interface Props {
+  variant?: 'primary' | 'accent' | 'muted';
+  class?: string;
+}
+
+const { variant = 'primary', class: className = '' } = Astro.props;
+
+const colorClass =
+  variant === 'accent'
+    ? 'text-ptt-accent dark:text-ptt-accent-dark'
+    : variant === 'muted'
+      ? 'text-ptt-secondary'
+      : 'text-ptt-primary dark:text-ptt-primary-dark';
+---
+
+<p class={`text-sm font-semibold uppercase tracking-widest ${colorClass} ${className}`}>
+  <slot />
+</p>

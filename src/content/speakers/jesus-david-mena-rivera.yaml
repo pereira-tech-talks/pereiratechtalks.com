@@ -1,0 +1,18 @@
+name: "Jesús David Mena Rivera"
+role:
+  en: "Tech Lead FullStack at DailyBot"
+  es: "Tech Lead FullStack en DailyBot"
+bio:
+  en: "Jesús David is Tech Lead FullStack at DailyBot, working on AI-powered productivity for distributed teams. He shared his work on building production AI features at a Pereira Tech Talks meetup."
+  es: "Jesús David es Tech Lead FullStack en DailyBot, trabajando en productividad con IA para equipos distribuidos. Compartió su trabajo construyendo funcionalidades de IA en producción en un meetup de Pereira Tech Talks."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Jesús David Mena Rivera"
+    es: "Retrato de Jesús David Mena Rivera"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

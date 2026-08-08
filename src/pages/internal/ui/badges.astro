@@ -1,0 +1,197 @@
+---
+import ShowcaseLayout from '@/layouts/ShowcaseLayout.astro';
+
+const semanticBadges = [
+  {
+    name: 'Success',
+    classes:
+      'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
+  },
+  {
+    name: 'Warning',
+    classes:
+      'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
+  },
+  {
+    name: 'Error',
+    classes: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
+  },
+  {
+    name: 'Info',
+    classes: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
+  },
+  {
+    name: 'Neutral',
+    classes: 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+  },
+  { name: 'Brand', classes: 'bg-secondary/10 text-secondary' },
+];
+
+const skillVariants = [
+  { name: 'Primary', classes: 'bg-main text-white hover:bg-main/80' },
+  {
+    name: 'Secondary',
+    classes: 'bg-secondary/10 text-secondary hover:bg-secondary/20',
+  },
+  {
+    name: 'Neutral',
+    classes:
+      'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+  },
+];
+
+const statusBadges = [
+  {
+    name: 'Draft',
+    classes:
+      'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
+  },
+  {
+    name: 'Scheduled',
+    classes: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+  },
+  {
+    name: 'Demo',
+    classes:
+      'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
+  },
+  {
+    name: 'Published',
+    classes:
+      'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
+  },
+];
+---
+
+<ShowcaseLayout title="Badges" description="Badge and chip styles across semantic colors" section="badges">
+
+  <!-- Semantic Badges -->
+  <section class="mb-12" data-component="semantic-badges">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Semantic Badges</h2>
+    <div class="flex flex-wrap gap-3">
+      {semanticBadges.map((b) => (
+        <span class:list={['inline-block px-3 py-1 rounded-full text-xs font-medium', b.classes]}>
+          {b.name}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Sizes -->
+  <section class="mb-12" data-component="badge-sizes">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Sizes</h2>
+    <div class="flex items-center gap-3">
+      <span class="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+        Small (text-xs)
+      </span>
+      <span class="inline-block px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+        Regular (text-sm)
+      </span>
+    </div>
+  </section>
+
+  <!-- Skill Badges -->
+  <section class="mb-12" data-component="skill-badges">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Skill Badges</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      From <code class="text-xs">SkillBadge.astro</code> — interactive pills with hover states.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      {skillVariants.map((v) => (
+        <span class:list={['inline-block px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 cursor-default', v.classes]}>
+          {v.name} Skill
+        </span>
+      ))}
+    </div>
+    <div class="mt-4 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div class="text-sm font-medium mb-2">Common classes</div>
+      <code class="text-xs text-gray-600 dark:text-gray-300">inline-block px-3 py-1.5 rounded-full text-sm font-medium transition-colors duration-200</code>
+    </div>
+  </section>
+
+  <!-- Blog Tag Badges -->
+  <section class="mb-12" data-component="tag-badges">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Blog Tag Badges</h2>
+    <div class="flex flex-wrap gap-2">
+      <a href="#" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        tech
+      </a>
+      <a href="#" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        personal
+      </a>
+      <a href="#" class="text-xs px-3 py-1 rounded-full bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors">
+        active tag
+      </a>
+    </div>
+  </section>
+
+  <!-- Status Badges -->
+  <section class="mb-12" data-component="status-badges">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Content Status Badges</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Used in blog content lifecycle to show post status.
+    </p>
+    <div class="flex flex-wrap gap-3">
+      {statusBadges.map((b) => (
+        <span class:list={['inline-block px-3 py-1 rounded-full text-xs font-medium', b.classes]}>
+          {b.name}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="mb-12">
+    <details class="rounded-lg border border-gray-200 dark:border-gray-700">
+      <summary class="px-4 py-3 cursor-pointer text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+        Show code
+      </summary>
+      <pre class="p-4 text-xs overflow-x-auto bg-gray-50 dark:bg-gray-800"><code>&lt;!-- Semantic badge --&gt;
+&lt;span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"&gt;
+  Success
+&lt;/span&gt;
+
+&lt;!-- Skill badge (interactive) --&gt;
+&lt;span class="px-3 py-1.5 rounded-full text-sm font-medium bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors"&gt;
+  Skill Name
+&lt;/span&gt;
+
+&lt;!-- Tag badge (link) --&gt;
+&lt;a href="/blog/tag/tech" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"&gt;
+  tech
+&lt;/a&gt;</code></pre>
+    </details>
+  </section>
+
+  <!-- Agent Reference -->
+  <section class="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8" data-agent-reference="true">
+    <h2 class="text-lg font-bold mb-4">Agent Reference</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-gray-200 dark:border-gray-700 text-left">
+            <th class="py-2 pr-4 font-semibold">Type</th>
+            <th class="py-2 pr-4 font-semibold">Classes</th>
+            <th class="py-2 font-semibold">Context</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+          {semanticBadges.map((b) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">{b.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{b.classes}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">Semantic</td>
+            </tr>
+          ))}
+          {skillVariants.map((v) => (
+            <tr>
+              <td class="py-2 pr-4 font-medium">Skill: {v.name}</td>
+              <td class="py-2 pr-4"><code class="text-xs">{v.classes}</code></td>
+              <td class="py-2 text-gray-600 dark:text-gray-300">SkillBadge</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</ShowcaseLayout>

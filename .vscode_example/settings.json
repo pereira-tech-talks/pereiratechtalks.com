@@ -1,0 +1,22 @@
+{
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#d94f00",
+    "titleBar.activeForeground": "#e2e8f0",
+    "activityBar.background": "#d94f00",
+    "statusBar.background": "#d94f00",
+    "statusBar.foreground": "#e2e8f0",
+    "sideBar.background": "#7a2d00",
+    "sideBar.foreground": "#e2e8f0"
+  },
+  "css.customData": ["./vscode.tailwind.json"],
+  "files.associations": {
+    "*.mdx": "markdown",
+    "*.md": "markdown",
+    "*.astro": "astro",
+    "*.css": "tailwindcss"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode",
+    "editor.formatOnSave": true
+  }
+}

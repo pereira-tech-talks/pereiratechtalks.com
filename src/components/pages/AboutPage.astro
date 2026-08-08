@@ -1,0 +1,211 @@
+---
+import JsonLd from '@/components/JsonLd.astro';
+import HighlightCard from '@/components/pages/HighlightCard.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const contactCtaHref = `${prefix}/contact?${new URLSearchParams({
+  topic: 'collaboration',
+  subject: t.contactPage.prefillSubjects.collaboration,
+}).toString()}`;
+
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const organizationData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Pereira Tech Talks',
+  alternateName: 'PTT',
+  url: Astro.site?.href,
+  logo: new URL('/images/brand/logo-horizontal-color.svg', Astro.site).href,
+  description:
+    'Pereira Tech Talks — technology community of Pereira, Risaralda, Colombia. Since 2014: 90+ monthly meetups, 10 Pereira Tech Day editions, an active Speaker School, and La Biblioteca del Mañana reading club.',
+  foundingDate: '2014-02-27',
+  foundingLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Pereira',
+      addressRegion: 'Risaralda',
+      addressCountry: 'CO',
+    },
+  },
+  knowsLanguage: ['es', 'en'],
+  knowsAbout: [
+    'Software Engineering',
+    'Artificial Intelligence',
+    'Web Development',
+    'DevOps',
+    'Public Speaking',
+    'Tech Community Building',
+  ],
+  sameAs: [
+    'https://github.com/pereira-tech-talks',
+    'https://www.linkedin.com/company/pereira-tech-talks/',
+    'https://x.com/pertechtalks',
+    'https://www.instagram.com/pertechtalks',
+    'https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG',
+  ],
+};
+
+const aboutPageData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  mainEntity: { '@id': Astro.site?.href },
+  dateCreated: '2014-02-27',
+  dateModified: new Date().toISOString().split('T')[0],
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t.aboutPage.title,
+      item: `${siteUrl}${prefix}/about`,
+    },
+  ],
+};
+
+const stats = [
+  { value: '90+', label: lang === 'es' ? 'meetups' : 'meetups' },
+  { value: '200+', label: lang === 'es' ? 'charlas' : 'talks' },
+  { value: '6.5K+', label: lang === 'es' ? 'asistencias' : 'attendees' },
+  { value: '2014', label: lang === 'es' ? 'desde' : 'since' },
+];
+
+const breadcrumbs = [
+  { label: lang === 'es' ? 'Inicio' : 'Home', href: `${prefix}/` },
+  { label: t.aboutPage.title },
+];
+---
+
+<MainLayout
+  lang={lang}
+  title={t.aboutPage.title}
+  description={t.aboutPage.description}
+  keywords={lang === 'en'
+    ? ['about Pereira Tech Talks', 'PTT community', 'tech community Pereira', 'Risaralda tech ecosystem', 'tech community Colombia', 'Pereira Tech Day organizers']
+    : ['sobre Pereira Tech Talks', 'comunidad PTT', 'comunidad tecnología Pereira', 'ecosistema tecnología Risaralda', 'comunidad tecnología Colombia', 'organizadores Pereira Tech Day']}
+>
+  <Fragment slot="head">
+    <JsonLd data={organizationData} />
+    <JsonLd data={aboutPageData} />
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <div class="bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/90 text-white">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} onDark />
+    </div>
+    <div class="main-container pt-6 pb-12 sm:pb-16">
+      <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
+        <div>
+          <Eyebrow variant="accent">{t.aboutPage.subtitle}</Eyebrow>
+          <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight">
+            {t.aboutPage.title}
+          </h1>
+          <p class="mt-4 text-lg text-white/85">{t.aboutPage.heroDescription}</p>
+        </div>
+        <div class="mt-10 lg:mt-0">
+          <img
+            src="/images/pereira-tech-days/2024/memories/massive.png"
+            alt={lang === 'es'
+              ? 'Auditorio lleno durante Pereira Tech Day 2024'
+              : 'Packed auditorium during Pereira Tech Day 2024'}
+            width="640"
+            height="360"
+            loading="eager"
+            class="w-full rounded-2xl shadow-2xl ring-1 ring-white/20 object-cover aspect-video"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-ptt-bg-dark text-white border-t border-white/10">
+    <div class="main-container py-10 sm:py-12">
+      <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4 list-none">
+        {
+          stats.map((stat) => (
+            <li class="rounded-xl bg-white/10 px-4 py-5 text-center ring-1 ring-white/20">
+              <p class="text-3xl sm:text-4xl font-bold text-ptt-accent">{stat.value}</p>
+              <p class="mt-1 text-sm text-white/85">{stat.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <Section title={t.aboutPage.bioTitle}>
+    <div class="prose prose-lg dark:prose-invert max-w-3xl prose-p:text-ptt-secondary" set:html={t.aboutPage.bioText} />
+  </Section>
+
+  <Section title={t.aboutPage.passionsTitle} surface="alt">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {t.aboutPage.passions.map((passion) => (
+        <HighlightCard
+          title={passion.title}
+          description={passion.description}
+          icon={passion.icon}
+          link={passion.link}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section title={t.aboutPage.quickFactsTitle}>
+    <ul class="space-y-3 max-w-2xl list-none">
+      {t.aboutPage.quickFacts.map((fact) => (
+        <li class="flex items-start gap-3 text-ptt-secondary">
+          <span class="text-ptt-primary dark:text-ptt-primary-dark mt-0.5 shrink-0" aria-hidden="true">✓</span>
+          <span>{fact}</span>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <div class="bg-ptt-bg-dark text-white py-16">
+    <div class="main-container text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">
+        {t.aboutPage.ctaTitle}
+      </h2>
+      <p class="mt-3 text-white/85">{t.aboutPage.ctaDescription}</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a
+          href={`${prefix}/blog`}
+          class="inline-flex items-center px-6 py-3 rounded-full bg-ptt-accent text-ptt-bg-dark font-semibold hover:bg-ptt-accent/90 transition-colors"
+        >
+          {t.aboutPage.ctaCv}
+        </a>
+        <a
+          href={contactCtaHref}
+          class="inline-flex items-center px-6 py-3 rounded-full bg-white/10 text-white font-semibold ring-1 ring-white/30 hover:bg-white/15 transition-colors"
+        >
+          {t.aboutPage.ctaContact}
+        </a>
+      </div>
+    </div>
+  </div>
+</MainLayout>

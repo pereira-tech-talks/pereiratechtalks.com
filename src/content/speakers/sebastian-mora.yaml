@@ -1,0 +1,17 @@
+name: "Sebastián Mora"
+role:
+  en: "Software engineer"
+  es: "Ingeniero de software"
+bio:
+  en: "Sebastián Mora is a software engineer who joined Sergio Alexander Flórez to host the year-closing 'El Futuro de la IA' panel at Pereira Tech Talks in December 2025, covering AI engineering, agents, RAGs, and the hardware-software boundary."
+  es: "Sebastián Mora es ingeniero de software y acompañó a Sergio Alexander Flórez en el panel de cierre de año 'El Futuro de la IA' de Pereira Tech Talks en diciembre de 2025, hablando de AI engineering, agentes, RAGs y la frontera entre hardware y software."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Sebastián Mora"
+    es: "Retrato de Sebastián Mora"
+social:
+  linkedin: "https://www.linkedin.com/in/sebastianmorac/"
+talks: []
+languages:
+  - es

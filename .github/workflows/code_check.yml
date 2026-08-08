@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - 'main'
+      - 'v3'
+      - 'dev'
     types:
       - opened
       - synchronize
@@ -14,76 +16,43 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  setup:
-    name: 'Setup Application'
+  code_check:
+    name: 'Code Check'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24.13.0'
-      - name: Step 0 - 📁 Cache node modules
-        id: cache-npm
+          node-version: '24.15.0'
+      - name: Step 0 - ⚙️ Enable Corepack (pnpm on PATH for Playwright webServer)
+        run: corepack enable
+      - name: Step 0b - 📁 Get pnpm store path
+        id: pnpm-store
+        run: |
+          STORE_PATH=$(pnpm store path --silent)
+          echo "STORE_PATH=${STORE_PATH}" >> "$GITHUB_OUTPUT"
+      - name: Step 0c - 📁 Cache pnpm store
         uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
         with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Step 1 - ⚙️ Install Dependencies
-        run: npm install
-
-  validate_linters_and_code_format:
-    needs: setup
-    name: 'Validate Linters and Code Format'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24.13.0'
-      - name: Step 0 - 📁 Cache node modules
-        id: cache-npm
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-      - name: Step 1 - 🧪 Run astro check
-        run: npm run astro:check
-      - name: Step 2 - 🧪 Run biome linter
-        run: npm run biome:check
-
-  validate_tests:
-    needs: validate_linters_and_code_format
-    name: 'Run tests'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24.13.0'
-      - name: Step 0 - 📁 Cache node modules
-        id: cache-npm
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-      - name: Step 1 - 🧪 Run tests
-        run: npm run test
+            ${{ runner.os }}-pnpm-store-
+      - name: Step 1 - ⚙️ Install Dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Step 2 - 🧪 Run astro checks
+        run: pnpm run astro:check
+      - name: Step 3 - 🧪🧪 Run biome checks
+        run: pnpm run biome:check
+      - name: Step 4 - 🧪🧪🧪 Run tests
+        run: pnpm run test
+      - name: Step 5 - 🏗️ Build site
+        run: pnpm run build
+      - name: Step 6 - 📏 Check search performance budgets
+        run: pnpm run search:budgets
+      - name: Step 7 - 🖥️ Install Playwright Chromium for responsive suite
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Step 8 - 📱 Run responsive regression suite
+        run: pnpm run test:responsive
+      - name: Step 9 - 🔦 Run Lighthouse audit
+        run: pnpm run lighthouse

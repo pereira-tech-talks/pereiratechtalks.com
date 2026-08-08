@@ -1,0 +1,176 @@
+---
+import CalendarHub from '@/components/calendar/CalendarHub.svelte';
+import CalendarIntakeForm from '@/components/contact/CalendarIntakeForm.svelte';
+import JsonLd from '@/components/JsonLd.astro';
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import Section from '@/components/ui/Section.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import {
+  getCommunityCalendars,
+  localizeCommunityCalendar,
+} from '@/lib/calendar';
+import { CONTACT_FORM } from '@/lib/constances';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+
+const allCalendars = await getCommunityCalendars();
+const activeCalendars = allCalendars.filter((entry) => entry.data.active);
+const inactiveCalendars = allCalendars.filter((entry) => !entry.data.active);
+
+const serializedActive = activeCalendars.map((entry) =>
+  localizeCommunityCalendar(entry, lang)
+);
+const serializedInactive = inactiveCalendars.map((entry) =>
+  localizeCommunityCalendar(entry, lang)
+);
+
+const breadcrumbs = [
+  { label: t.calendarPage.breadcrumbHome, href: `${prefix}/` },
+  { label: t.calendarPage.title },
+];
+
+const calendarPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: t.calendarPage.title,
+  description: t.calendarPage.description,
+  url: `${siteUrl}${prefix}/calendar`,
+  inLanguage: lang === 'es' ? 'es-CO' : 'en',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: t.calendarPage.breadcrumbHome,
+      item: `${siteUrl}${prefix}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t.calendarPage.title,
+      item: `${siteUrl}${prefix}/calendar`,
+    },
+  ],
+};
+
+const hubCopy = {
+  filterLabel: t.calendarPage.filterLabel,
+  filterAll: t.calendarPage.filterAll,
+  viewMonth: t.calendarPage.viewMonth,
+  viewAgenda: t.calendarPage.viewAgenda,
+  legendLabel: t.calendarPage.legendLabel,
+  embedTitle: t.calendarPage.embedTitle,
+  embedFallback: t.calendarPage.embedFallback,
+  openExternal: t.calendarPage.openExternal,
+  subscribeIcs: t.calendarPage.subscribeIcs,
+  lumaRsvp: t.calendarPage.lumaRsvp,
+  websiteLink: t.calendarPage.websiteLink,
+  noActiveCalendars: t.calendarPage.noActiveCalendars,
+  comingSoon: t.calendarPage.comingSoon,
+  inactiveNote: t.calendarPage.inactiveNote,
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={t.calendarPage.title}
+  description={t.calendarPage.description}
+  keywords={lang === 'en'
+    ? [
+        'Pereira tech calendar',
+        'Pereira Tech Talks events',
+        'Pereira meetups calendar',
+        'Risaralda tech events',
+        'Colombia developer community calendar',
+      ]
+    : [
+        'calendario tech Pereira',
+        'eventos Pereira Tech Talks',
+        'calendario meetups Pereira',
+        'eventos tecnología Risaralda',
+        'calendario comunidad desarrolladores Colombia',
+      ]}
+>
+  <Fragment slot="head">
+    <JsonLd data={calendarPageSchema} />
+    <JsonLd data={breadcrumbSchema} />
+  </Fragment>
+
+  <div class="bg-gradient-to-b from-ptt-primary-soft/50 to-ptt-bg dark:from-ptt-bg-elevated dark:to-ptt-bg">
+    <div class="main-container pt-12 sm:pt-16 pb-4">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container pt-6 pb-12">
+      <Eyebrow>{t.calendarPage.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {t.calendarPage.title}
+      </h1>
+      <p class="mt-2 text-xl text-ptt-secondary">{t.calendarPage.subtitle}</p>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.calendarPage.heroDescription}
+      </p>
+    </div>
+  </div>
+
+  <Section eyebrow={t.calendarPage.hubEyebrow}>
+    <CalendarHub
+      client:visible
+      lang={lang}
+      calendars={serializedActive}
+      inactiveCalendars={serializedInactive}
+      copy={hubCopy}
+    />
+  </Section>
+
+  <Section
+    eyebrow={t.calendarPage.quickLinksEyebrow}
+    title={t.calendarPage.quickLinksTitle}
+    surface="alt"
+  >
+    <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+      <a
+        href={`${prefix}/meetups/`}
+        class="inline-flex items-center justify-center rounded-full border border-ptt-border bg-ptt-bg-elevated px-5 py-2.5 text-sm font-semibold text-ptt hover:border-ptt-primary transition-colors"
+      >
+        {t.calendarPage.meetupsLink}
+      </a>
+      <a
+        href="https://luma.com/pertechtalks"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center rounded-full border border-ptt-border bg-ptt-bg-elevated px-5 py-2.5 text-sm font-semibold text-ptt hover:border-ptt-primary transition-colors"
+      >
+        {t.calendarPage.lumaLink}
+      </a>
+    </div>
+  </Section>
+
+  <Section
+    id="calendar-intake"
+    eyebrow={t.calendarPage.contributeEyebrow}
+    title={t.calendarPage.contributeTitle}
+  >
+    <p class="text-ptt-secondary max-w-2xl">{t.calendarPage.contributeDescription}</p>
+    <div class="mt-8 max-w-2xl mx-auto">
+      <CalendarIntakeForm
+        client:visible
+        lang={lang}
+        apiEndpoint={CONTACT_FORM.apiEndpoint}
+      />
+    </div>
+  </Section>
+</MainLayout>

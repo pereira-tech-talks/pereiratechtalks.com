@@ -1,0 +1,162 @@
+# Pereira Tech Talks — Full Site Description
+
+> Pereira Tech Talks v3.0.0 is the technology community of Pereira, Risaralda, Colombia.
+
+## About the Community
+
+Pereira Tech Talks (PTT) is a community of builders, speakers, and learners in Pereira, Colombia, with international presence. We run monthly meetups, the annual Pereira Tech Day flagship conference, the Speaker School, La Biblioteca del Mañana, the AI channel, and a blog and slide deck library that comes out of all of it. The website is available in Spanish and English.
+
+The community exists to lower the barrier to entry to technology in the Eje Cafetero region, to give first-time speakers a friendly stage, and to connect Pereira's builders with the rest of the LATAM and global tech ecosystem.
+
+### Official Channels
+
+- Website: https://pereiratechtalks.org/
+- Channels inventory: https://pereiratechtalks.org/channels/
+
+## Site Structure
+
+### Pages
+
+- **Home** (/) - Value proposition, what PTT is, verticals, upcoming events, recent meetups, blog preview, sponsors strip, contact
+- **About** (/about/) - Who we are, mission, history, team
+- **Pereira Tech Days** (/pereira-tech-days/) - Flagship annual conference; per-edition microsites with their own brand kits at /pereira-tech-days/{year}
+- **Meetups** (/meetups/) - Monthly community gatherings: theme, recap, photos, talks, slide decks
+- **Calendar** (/calendar/) - Workshops and special events on the community calendar
+- **Verticals** (/verticals/) - Community programs (La Biblioteca del Mañana, AI channel, Speaker School, monthly meetups)
+- **Speakers** (/speakers/) - Speaker bios + talks index
+- **Blog** (/blog/) - Articles, series, tags, search (Spanish and English)
+- **Contributors** (/contributors/) - The people who make PTT happen
+- **Sponsors** (/sponsors/) - Current and historical sponsors
+- **Channels** (/channels/) - Inventory of official PTT channels
+- **Call for Speakers** (/call-for-speakers/) - Always-open speaker submission form
+- **Sponsor us** (/sponsor-us/) - Sponsorship inquiry
+- **Contact** (/contact/)
+- **Verify certificate** (/certificates/verify/)
+
+### Content Collections
+
+PTT is built on Astro Content Collections. Every collection has a strict Zod schema (see `src/content.config.ts`) and a typed helper module under `src/lib/`:
+
+- **blog** — `title`, `description`, `pubDate`, `heroImage`, `tags`, `series`, `seriesOrder`, `author`. Date-prefixed filenames, English slugs.
+- **slides** — discriminated union: `internal` (Reveal.js Markdown), `external-embed` (iframe), `external-link` (stub info page).
+- **meetups** — separate from blog posts; structured monthly recap entries.
+- **events** — one-off special events.
+- **pereiraTechDays** — annual flagship; embeds a `brandKit` field with palette, typography, and hero assets that override the global PTT theme via `[data-edition-theme="{year}"]`.
+- **verticals** — community programs.
+- **speakers / talks / contributors / sponsors / channels** — supporting collections.
+- **tags / series / authors** — taxonomy and authorship.
+
+### Languages
+
+All pages and content are available in:
+
+- [Spanish (primary)](/) — unprefixed routes at the site root
+- [English](/en/) — first-class international mirror under `/en/`
+
+All slugs (filenames, series IDs, image directories) are in English even for Spanish content. Spanish content uses proper diacritical marks (ñ, á, é, í, ó, ú, ü).
+
+## Content Model
+
+- Dual-language routing: Spanish base routes (`/`, `/blog/`, etc.) and English routes under `/en/`.
+- Blog posts authored with Astro Content Collections supporting Markdown and MDX.
+- Blog pagination: `/blog/page/{n}/` and `/en/blog/page/{n}/`.
+- Tag archives: `/blog/tag/{tag}/` and `/en/blog/tag/{tag}/`.
+- Three-tier tag taxonomy (primary / secondary / subtopic), max 5 tags per post.
+- All pages use structured data (JSON-LD) for machine readability.
+- All public pages have a Markdown twin for AI agents (see below).
+
+## Topic Areas
+
+- AI agents, LLMs, and answer engine optimization
+- Software engineering and architecture patterns
+- Frontend, backend, mobile, and infrastructure
+- DevOps, CI/CD, and platform engineering
+- Security and supply chain
+- Open source and community building
+- Entrepreneurship and product building
+- Technical communication in Spanish and English
+
+## Tech Stack
+
+- Astro (static site generator with islands architecture)
+- Svelte (interactive components)
+- TypeScript
+- Tailwind CSS 4 with PTT design tokens (`--color-ptt-*`) registered via `@theme`
+- MDX (enhanced Markdown for blog posts)
+- Reveal.js (Reveal-based slide decks)
+- Biome (linter and formatter)
+- Deployed on Cloudflare Pages
+
+## Per-Edition Branding
+
+Pereira Tech Day editions ship their own brand kit. Each `/pereira-tech-days/{year}` page applies a scoped CSS contract (`[data-edition-theme="{year}"]`) that overrides PTT design tokens with the edition's palette, typography, and hero assets. The system is documented at `/internal/brand/per-edition-kits` (dev only).
+
+## Agent-Friendly Markdown Endpoints
+
+Every public HTML page on PTT has a native Markdown twin for AI agents. Content is served directly from the original source Markdown — not converted from rendered HTML — preserving full fidelity of code blocks, links, and formatting.
+
+### URL Patterns
+
+- **Pages**: `/{page}.md` (ES primary), `/en/{page}.md` (EN)
+  - Examples: `/about.md`, `/contact.md`, `/sponsors.md`, `/en/about.md`
+- **Blog index**: `/blog/index.md` (ES), `/en/blog/index.md` (EN)
+- **Blog posts**: `/blog/{slug}.md` (ES), `/en/blog/{slug}.md` (EN)
+- **Slide decks**: `/slides/{slug}.md` (ES), `/en/slides/{slug}.md` (EN)
+- **Meetups**: `/meetups/{slug}.md` (ES), `/en/meetups/{slug}.md` (EN)
+- **Pereira Tech Days**: `/pereira-tech-days/{year}.md`
+
+### Response Format
+
+Each Markdown response includes:
+
+- H1 title
+- Description (blockquote)
+- Metadata: Published date, Language, Canonical URL (HTML version), Tags
+- Separator
+- Original Markdown body content
+
+Content-Type: `text/markdown; charset=utf-8`
+
+### Content Negotiation
+
+Agents can request Markdown without changing URLs by sending `Accept: text/markdown`:
+
+```
+curl -H "Accept: text/markdown" https://pereiratechtalks.org/about
+→ Returns Markdown with Content-Type: text/markdown; charset=utf-8
+→ Response includes Vary: Accept header for proper caching
+```
+
+### Why Native Markdown
+
+- Content is served from the original source files, not HTML→Markdown conversion.
+- More token-efficient for AI consumption (no HTML tag residue).
+- Code blocks, links, and formatting preserved exactly as authored.
+- Canonical URL always points to the HTML version for human readers.
+- Internal cross-links between pages enable agents to discover the full site structure.
+
+## Feeds & Discovery
+
+- [RSS Feed (Spanish)](/rss.xml)
+- [RSS Feed (English)](/en/rss.xml)
+- [Sitemap](/sitemap-index.xml)
+- [Search API](/api/posts-en.json) · [Search API (ES)](/api/posts-es.json)
+- [OpenAPI spec](/openapi.json)
+- [MCP server card](/.well-known/mcp/server-card.json)
+- [API catalog](/.well-known/api-catalog)
+- [robots.txt](/robots.txt)
+- [This file](/llms-full.txt)
+- [Short version](/llms.txt)
+
+## Structured Data
+
+The site includes JSON-LD structured data on all pages:
+
+- Organization schema (Pereira Tech Talks)
+- WebSite schema (site-level identity)
+- Event schema (meetups, Pereira Tech Days, special events)
+- BlogPosting schema (blog posts)
+- BreadcrumbList schema (navigation hierarchy)
+- CollectionPage schema (blog listing, slides catalog, etc.)
+- Person schema (speakers and contributors)
+- ContactPage schema (contact page)

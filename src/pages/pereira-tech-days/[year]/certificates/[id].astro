@@ -1,0 +1,18 @@
+---
+import CertificatePage from '@/components/pages/CertificatePage.astro';
+import { getCertificatesByYear } from '@/lib/certificates';
+
+export async function getStaticPaths() {
+  const years = [2026];
+  return years.flatMap((year) =>
+    getCertificatesByYear(year).map((fixture) => ({
+      params: { year: String(year), id: fixture.id },
+      props: { fixture },
+    }))
+  );
+}
+
+const { fixture } = Astro.props;
+---
+
+<CertificatePage lang="es" fixture={fixture} />

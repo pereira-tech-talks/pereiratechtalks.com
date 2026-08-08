@@ -1,0 +1,18 @@
+name: "Juan de Jesús Fernández Graciano"
+role:
+  en: "Software Development Engineer in Test - Co-founder de QAConf"
+  es: "Software Development Engineer in Test - Co-fundador de QAConf"
+bio:
+  en: "Juan is a Software Development Engineer in Test and co-founder of QAConf, the Latin American QA conference. He shared his work on continuous testing and parallelization at Pereira Tech Talks, drawing on years of building QA practices for delivery teams."
+  es: "Juan es Software Development Engineer in Test y co-fundador de QAConf, la conferencia de QA en Latinoamérica. Compartió su trabajo sobre continuous testing y paralelización en Pereira Tech Talks, apoyándose en años construyendo prácticas de QA para equipos de delivery."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Juan de Jesús Fernández Graciano"
+    es: "Retrato de Juan de Jesús Fernández Graciano"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

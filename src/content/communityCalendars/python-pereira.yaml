@@ -1,0 +1,12 @@
+name:
+  en: Python Pereira
+  es: Python Pereira
+description:
+  en: Python user group for developers and data practitioners in Risaralda.
+  es: Grupo de usuarios de Python para desarrolladores y practicantes de datos en Risaralda.
+googleCalendarId: placeholder@group.calendar.google.com
+color: "#3776AB"
+website: https://pypereira.dev
+active: false
+order: 20
+primary: false

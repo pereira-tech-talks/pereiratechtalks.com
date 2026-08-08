@@ -1,0 +1,17 @@
+name: "Juan Diego Campuzano"
+role:
+  en: "Senior Software Engineer at Bancolombia"
+  es: "Senior Software Engineer en Bancolombia"
+bio:
+  en: "Juan Diego Campuzano is a Senior Software Engineer at Bancolombia. At the April 2026 Pereira Tech Talks mobile night he showed how Flutter's GenUI lets Gemini orchestrate native widgets in real time to build liquid interfaces that adapt to each user's preferences."
+  es: "Juan Diego Campuzano es Senior Software Engineer en Bancolombia. En la edición Abril Mobile 2026 de Pereira Tech Talks mostró cómo el paquete flutter_genui permite que Gemini orqueste widgets nativos en tiempo real para construir interfaces líquidas que se adaptan a las preferencias de cada usuario."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Juan Diego Campuzano"
+    es: "Retrato de Juan Diego Campuzano"
+social:
+  linkedin: "https://www.linkedin.com/in/jcampuza2/"
+talks: []
+languages:
+  - es

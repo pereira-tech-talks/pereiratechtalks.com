@@ -1,0 +1,236 @@
+{
+  "$comment": "Representative URL subset for responsive audit. Curated to cover every template × language × content variant. Routes are relative to the base URL. Per project convention, slugs are English-only on both EN and ES routes.",
+  "baseUrl": "http://localhost:4321",
+  "routes": [
+    {
+      "url": "/en/",
+      "template": "home",
+      "lang": "en"
+    },
+    {
+      "url": "/",
+      "template": "home",
+      "lang": "es"
+    },
+    {
+      "url": "/en/about",
+      "template": "narrative-about",
+      "lang": "en"
+    },
+    {
+      "url": "/about",
+      "template": "narrative-about",
+      "lang": "es"
+    },
+    {
+      "url": "/en/community",
+      "template": "narrative-community",
+      "lang": "en"
+    },
+    {
+      "url": "/community",
+      "template": "narrative-community",
+      "lang": "es"
+    },
+    {
+      "url": "/en/conduct",
+      "template": "narrative-conduct",
+      "lang": "en"
+    },
+    {
+      "url": "/conduct",
+      "template": "narrative-conduct",
+      "lang": "es"
+    },
+    {
+      "url": "/en/contributing",
+      "template": "narrative-contributing",
+      "lang": "en"
+    },
+    {
+      "url": "/en/governance",
+      "template": "narrative-governance",
+      "lang": "en"
+    },
+    {
+      "url": "/en/contact",
+      "template": "form-contact",
+      "lang": "en"
+    },
+    {
+      "url": "/contact",
+      "template": "form-contact",
+      "lang": "es"
+    },
+    {
+      "url": "/en/call-for-speakers",
+      "template": "form-call-for-speakers",
+      "lang": "en"
+    },
+    {
+      "url": "/en/sponsor-us",
+      "template": "form-sponsor-us",
+      "lang": "en"
+    },
+    {
+      "url": "/en/channels",
+      "template": "channels",
+      "lang": "en"
+    },
+    {
+      "url": "/en/press",
+      "template": "press",
+      "lang": "en"
+    },
+    {
+      "url": "/en/sponsors",
+      "template": "sponsors",
+      "lang": "en"
+    },
+    {
+      "url": "/en/contributors",
+      "template": "contributors",
+      "lang": "en"
+    },
+    {
+      "url": "/en/verticals",
+      "template": "verticals-list",
+      "lang": "en"
+    },
+    {
+      "url": "/en/verticals/speaker-school",
+      "template": "verticals-detail",
+      "lang": "en"
+    },
+    {
+      "url": "/en/verticals/library-of-tomorrow",
+      "template": "verticals-detail",
+      "lang": "en"
+    },
+    {
+      "url": "/en/verticals/ai-channel",
+      "template": "verticals-detail",
+      "lang": "en"
+    },
+    {
+      "url": "/en/blog",
+      "template": "blog-listing",
+      "lang": "en"
+    },
+    {
+      "url": "/blog",
+      "template": "blog-listing",
+      "lang": "es"
+    },
+    {
+      "url": "/en/blog/what-is-pereira-tech-talks",
+      "template": "blog-post-banner",
+      "lang": "en"
+    },
+    {
+      "url": "/blog/what-is-pereira-tech-talks",
+      "template": "blog-post-banner",
+      "lang": "es"
+    },
+    {
+      "url": "/en/blog/my-experience-at-digital-product-school",
+      "template": "blog-post-banner",
+      "lang": "en"
+    },
+    {
+      "url": "/blog/my-experience-at-digital-product-school",
+      "template": "blog-post-banner",
+      "lang": "es"
+    },
+    {
+      "url": "/en/blog/quarantine-tech-talks",
+      "template": "blog-post-embeds",
+      "lang": "en"
+    },
+    {
+      "url": "/en/meetups",
+      "template": "meetups-list",
+      "lang": "en"
+    },
+    {
+      "url": "/meetups",
+      "template": "meetups-list",
+      "lang": "es"
+    },
+    {
+      "url": "/en/pereira-tech-day",
+      "template": "ptd-landing",
+      "lang": "en"
+    },
+    {
+      "url": "/pereira-tech-day",
+      "template": "ptd-landing",
+      "lang": "es"
+    },
+    {
+      "url": "/en/pereira-tech-days/2024",
+      "template": "ptd-edition",
+      "lang": "en"
+    },
+    {
+      "url": "/pereira-tech-days/2024",
+      "template": "ptd-edition",
+      "lang": "es"
+    },
+    {
+      "url": "/en/pereira-tech-days/2026",
+      "template": "ptd-edition",
+      "lang": "en"
+    },
+    {
+      "url": "/en/speakers",
+      "template": "speakers-list",
+      "lang": "en"
+    },
+    {
+      "url": "/speakers",
+      "template": "speakers-list",
+      "lang": "es"
+    },
+    {
+      "url": "/en/verticals",
+      "template": "verticals-list",
+      "lang": "en"
+    },
+    {
+      "url": "/verticals",
+      "template": "verticals-list",
+      "lang": "es"
+    },
+    {
+      "url": "/en/slides",
+      "template": "slides-catalog",
+      "lang": "en"
+    },
+    {
+      "url": "/slides",
+      "template": "slides-catalog",
+      "lang": "es"
+    },
+    {
+      "url": "/en/blog/series",
+      "template": "blog-series-listing",
+      "lang": "en"
+    },
+    {
+      "url": "/blog/series",
+      "template": "blog-series-listing",
+      "lang": "es"
+    },
+    {
+      "url": "/en/certificates/verify",
+      "template": "certificate-verify",
+      "lang": "en"
+    },
+    {
+      "url": "/certificates/verify",
+      "template": "certificate-verify",
+      "lang": "es"
+    }
+  ]
+}

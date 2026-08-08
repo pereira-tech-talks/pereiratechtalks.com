@@ -1,0 +1,395 @@
+---
+/**
+ * Homepage strip promoting Pereira Tech Day 2026.
+ * Compact echo of PtdHero2026 — cream ground, Bebas title, coral accents,
+ * countdown, and a full-bleed howler-monkey illustration on the right half
+ * (soft cream dissolve into copy — subject stays whole, never hard-cropped).
+ */
+import '@fontsource/bebas-neue';
+
+import PtdCountdown from '@/components/pereira-tech-days/PtdCountdown.svelte';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  title: string;
+  subtitle: string;
+  ctaLabel: string;
+  dateLabel: string;
+  venueLabel: string;
+  eyebrow?: string;
+  attendanceLabel?: string;
+  /** ISO datetime for the countdown (edition start). */
+  targetDate?: string;
+  endDate?: string;
+}
+
+const {
+  lang,
+  title,
+  subtitle,
+  ctaLabel,
+  dateLabel,
+  venueLabel,
+  eyebrow,
+  attendanceLabel,
+  targetDate,
+  endDate,
+} = Astro.props;
+const prefix = getUrlPrefix(lang);
+const href = `${prefix}/pereira-tech-days/2026/`;
+
+/** Matches PTD 2026 brandKit / PtdHero2026. */
+const CREAM = '#fef7f3';
+const CREAM_DARK = '#1a2a38';
+/** Text-safe on cream (≥4.5:1) — matches 2026 light brandKit accent. */
+const YEAR_CYAN = '#127a82';
+const CORAL = '#c93c3c';
+const NAVY = '#1f3f59';
+const TEAL = '#3a7f7c';
+
+/**
+ * Same hero art as PtdHero2026 (WebP). Desktop paints it on the right half;
+ * cream fade covers the left void. Mobile uses the pre-cropped card crop.
+ */
+const ILLUSTRATION = '/images/pereira-tech-days/2026/hero-illustration.webp';
+const ILLUSTRATION_MOBILE =
+  '/images/pereira-tech-days/2026/mascot/card-hero.webp';
+const LOGO = '/images/pereira-tech-days/2026/logo.png';
+
+/** "Pereira Tech" / "Day" (coral) + "2026" (cyan) — same split as PtdHero2026. */
+const titleWords = title.trim().split(/\s+/);
+const dayWordIndex = titleWords.findIndex((word) => /^day$/i.test(word));
+const titleLineTech =
+  dayWordIndex > 0 ? titleWords.slice(0, dayWordIndex).join(' ') : title;
+const dayWord = dayWordIndex >= 0 ? titleWords[dayWordIndex] : '';
+const yearWord =
+  dayWordIndex >= 0 ? titleWords.slice(dayWordIndex + 1).join(' ') : '';
+
+const taglineWords = subtitle.trim().split(/\s+/);
+const taglineLead = taglineWords.slice(0, -2).join(' ');
+const taglineEmphasis = taglineWords.slice(-2).join(' ');
+
+const logoAlt =
+  lang === 'es' ? 'Logotipo de Pereira Tech Day' : 'Pereira Tech Day logo';
+---
+
+<section
+  id="main-after-hero"
+  class="ptd-home-strip relative isolate overflow-hidden border-y border-[#eadcd4] dark:border-[#3a4a5a]"
+  style={`--ptd-strip-cream: ${CREAM}; --ptd-strip-cream-dark: ${CREAM_DARK}; --ptd-strip-coral: ${CORAL}; --ptd-strip-cyan: ${YEAR_CYAN}; --ptd-strip-navy: ${NAVY}; --ptd-strip-teal: ${TEAL}; background-color: var(--ptd-strip-cream);`}
+>
+  {/*
+    Desktop: art owns the right ~50vw of the SECTION (not the padded grid),
+    sized to fill that panel without cropping the monkey — only soft edge fade.
+  */}
+  <div
+    class="ptd-home-strip__art pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    style={`background-image: url('${ILLUSTRATION}');`}
+    aria-hidden="true"
+  ></div>
+  <div
+    class="ptd-home-strip__fade pointer-events-none absolute inset-0 z-0 hidden lg:block"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 main-container py-10 sm:py-12 lg:py-14">
+    <div class="flex w-full max-w-xl flex-col justify-center lg:max-w-[min(36rem,48%)]">
+      {
+        eyebrow && (
+          <p
+            class="m-0 mb-2.5 text-[clamp(0.72rem,1.2vw,0.85rem)] font-bold uppercase tracking-[0.14em] text-[color:var(--ptd-strip-coral)]"
+          >
+            {eyebrow}
+          </p>
+        )
+      }
+
+      <div class="mb-3.5 flex w-full items-start gap-3 sm:mb-4 sm:gap-4">
+        <img
+          src={LOGO}
+          alt={logoAlt}
+          width="64"
+          height="78"
+          class="ptd-home-strip__logo mt-0.5 h-auto w-auto max-h-[4.5rem] shrink-0 object-contain object-left-top sm:max-h-[5.5rem]"
+          loading="lazy"
+          decoding="async"
+        />
+        <h2
+          class="ptd-home-strip__title m-0 min-w-0 text-[clamp(1.85rem,4.8vw,3.4rem)] font-normal uppercase leading-[0.92] tracking-[0.04em] dark:text-[#fef7f3]"
+        >
+          <span class="block text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3]">{titleLineTech}</span>
+          {
+            dayWord && (
+              <span class="block">
+                <span class="text-[color:var(--ptd-strip-coral)]">{dayWord}</span>
+                {yearWord ? (
+                  <>
+                    {' '}
+                    <span class="text-[color:var(--ptd-strip-cyan)]">{yearWord}</span>
+                  </>
+                ) : null}
+              </span>
+            )
+          }
+        </h2>
+      </div>
+
+      <p class="mb-5 w-full text-[clamp(1rem,2.2vw,1.2rem)] leading-snug text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3] sm:mb-6">
+        {taglineLead ? `${taglineLead} ` : ''}
+        <strong class="font-bold text-[color:var(--ptd-strip-coral)]">{taglineEmphasis}</strong>
+      </p>
+
+      <ul class="mb-5 flex max-w-full flex-col gap-2 text-base leading-snug text-[#6b5e58] dark:text-[#c4b8b0] sm:mb-6 sm:gap-2.5 sm:text-lg">
+        <li class="flex min-w-0 items-start gap-2.5">
+          <svg
+            aria-hidden="true"
+            class="mt-0.5 h-5 w-5 shrink-0 text-[#6b5e58] dark:text-[#c4b8b0] sm:h-6 sm:w-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"
+            ></path>
+          </svg>
+          <span class="min-w-0 break-words">{dateLabel}</span>
+        </li>
+        <li class="flex min-w-0 items-start gap-2.5">
+          <svg
+            aria-hidden="true"
+            class="mt-0.5 h-5 w-5 shrink-0 text-[#6b5e58] dark:text-[#c4b8b0] sm:h-6 sm:w-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 21s7-6.19 7-11.5A7 7 0 105 9.5C5 14.81 12 21 12 21z"
+            ></path>
+            <circle
+              cx="12"
+              cy="9.5"
+              r="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></circle>
+          </svg>
+          <span class="min-w-0 break-words">{venueLabel}</span>
+        </li>
+        {
+          attendanceLabel && (
+            <li class="flex min-w-0 items-center gap-2.5 text-[color:var(--ptd-strip-navy)] dark:text-[#fef7f3]">
+              <svg
+                aria-hidden="true"
+                class="h-5 w-5 shrink-0 text-[color:var(--ptd-strip-coral)] sm:h-6 sm:w-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9 11a4 4 0 100-8 4 4 0 000 8zM23 20v-1a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+                ></path>
+              </svg>
+              <span class="font-bold">{attendanceLabel}</span>
+            </li>
+          )
+        }
+      </ul>
+
+      <a
+        href={href}
+        class="ptd-home-strip__cta inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ptd-strip-teal)] px-8 py-3.5 text-base font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ptd-strip-teal)] active:scale-[0.98] sm:w-auto sm:px-10 sm:text-lg dark:bg-[color:var(--ptd-strip-cyan)] dark:text-[#1a2a38]"
+      >
+        {ctaLabel}
+        <svg
+          aria-hidden="true"
+          class="h-5 w-5 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.25"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 12h14M13 6l6 6-6 6"
+          ></path>
+        </svg>
+      </a>
+
+      {
+        targetDate && (
+          <div
+            class="ptd-home-strip__countdown mt-6 w-full max-w-xl"
+            style={`--ptt-primary: ${TEAL}; --ptt-bg-elevated: #ffffff; --ptt-border: #eadcd4; --ptt-text-muted: #6b5e58;`}
+          >
+            <PtdCountdown
+              client:visible
+              lang={lang}
+              targetDate={targetDate}
+              endDate={endDate}
+              variant="edition"
+            />
+          </div>
+        )
+      }
+    </div>
+
+    {/* Mobile / tablet: full-width art under copy — same asset, soft edge only. */}
+    <div class="ptd-home-strip__mobile-art mt-8 w-full lg:hidden" aria-hidden="true">
+      <img
+        src={ILLUSTRATION_MOBILE}
+        alt=""
+        width="1280"
+        height="720"
+        class="ptd-home-strip__mobile-img mx-auto h-auto w-full max-w-lg object-contain sm:max-w-xl"
+        loading="lazy"
+        decoding="async"
+        draggable="false"
+      />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .dark .ptd-home-strip {
+    background-color: var(--ptd-strip-cream-dark);
+  }
+
+  .dark .ptd-home-strip__countdown {
+    --ptt-primary: var(--ptd-strip-cyan);
+    --ptt-bg-elevated: #243447;
+    --ptt-border: #3a4a5a;
+    --ptt-text-muted: #c4b8b0;
+  }
+
+  .ptd-home-strip__title {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+  }
+
+  /* Coral cup mark — same filter as PtdHero2026. */
+  .ptd-home-strip__logo {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(68%) saturate(1269%)
+      hue-rotate(309deg) brightness(95%) contrast(98%);
+  }
+
+  /*
+   * Same treatment as PtdHero2026: paint the full-bleed illustration anchored
+   * to the right, sized by section height so the monkey reads ~half the strip.
+   * Soft PNG feathers + cream fade handle edges — no hard object-cover crop.
+   */
+  .ptd-home-strip {
+    min-height: 28rem;
+  }
+
+  @media (min-width: 1024px) {
+    .ptd-home-strip {
+      /* Tall enough that auto-height art can sit ~half-width without clipping the head. */
+      min-height: max(36rem, 48vw * 9 / 16);
+    }
+  }
+
+  .ptd-home-strip__art {
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+    /* Match PtdHero2026 — leave margin so soft PNG edges dissolve, not hard-clip. */
+    background-size: auto 90%;
+  }
+
+  /*
+   * Cream wash covers the illustration’s left black void and dissolves into
+   * the monkey — soft border only; face/body stay clear on the right half.
+   */
+  .ptd-home-strip__fade {
+    background:
+      linear-gradient(
+        to right,
+        var(--ptd-strip-cream) 0%,
+        var(--ptd-strip-cream) 36%,
+        color-mix(in srgb, var(--ptd-strip-cream) 96%, transparent) 42%,
+        color-mix(in srgb, var(--ptd-strip-cream) 70%, transparent) 48%,
+        color-mix(in srgb, var(--ptd-strip-cream) 32%, transparent) 54%,
+        transparent 62%
+      ),
+      linear-gradient(
+        to bottom,
+        var(--ptd-strip-cream) 0%,
+        color-mix(in srgb, var(--ptd-strip-cream) 75%, transparent) 6%,
+        transparent 16%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptd-strip-cream) 0%,
+        color-mix(in srgb, var(--ptd-strip-cream) 80%, transparent) 6%,
+        transparent 16%
+      );
+  }
+
+  .dark .ptd-home-strip__fade {
+    background:
+      linear-gradient(
+        to right,
+        var(--ptd-strip-cream-dark) 0%,
+        var(--ptd-strip-cream-dark) 36%,
+        color-mix(in srgb, var(--ptd-strip-cream-dark) 96%, transparent) 42%,
+        color-mix(in srgb, var(--ptd-strip-cream-dark) 70%, transparent) 48%,
+        color-mix(in srgb, var(--ptd-strip-cream-dark) 32%, transparent) 54%,
+        transparent 62%
+      ),
+      linear-gradient(
+        to bottom,
+        var(--ptd-strip-cream-dark) 0%,
+        color-mix(in srgb, var(--ptd-strip-cream-dark) 75%, transparent) 6%,
+        transparent 16%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptd-strip-cream-dark) 0%,
+        color-mix(in srgb, var(--ptd-strip-cream-dark) 80%, transparent) 6%,
+        transparent 16%
+      );
+  }
+
+  .ptd-home-strip__mobile-img {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .ptd-home-strip__cta {
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--ptd-strip-cyan) 35%, transparent),
+      0 10px 28px -6px color-mix(in srgb, var(--ptd-strip-teal) 55%, transparent);
+  }
+
+  .ptd-home-strip__cta:hover {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--ptd-strip-cyan) 45%, transparent),
+      0 14px 32px -6px color-mix(in srgb, var(--ptd-strip-teal) 65%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ptd-home-strip__cta {
+      transition: none;
+    }
+
+    .ptd-home-strip__cta:active {
+      transform: none;
+    }
+  }
+</style>

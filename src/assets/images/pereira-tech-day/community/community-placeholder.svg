@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="320" viewBox="0 0 512 320" role="img" aria-labelledby="title desc">
-  <title id="title">Community logo placeholder</title>
-  <desc id="desc">Temporary placeholder for a community logo pending final artwork.</desc>
-  <rect width="512" height="320" rx="40" fill="#F4F7F6" />
-  <circle cx="176" cy="160" r="64" fill="#3A7F7C" opacity="0.9" />
-  <circle cx="256" cy="160" r="64" fill="#F26D5B" opacity="0.85" />
-  <circle cx="336" cy="160" r="64" fill="#183B56" opacity="0.85" />
-</svg>

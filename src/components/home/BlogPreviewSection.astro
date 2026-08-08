@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BlogCard from '@/components/blog/BlogCard.svelte';
+import { getBlogPosts, getSubtopicAccentMap } from '@/lib/blog';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang?: string;
+  grouped?: boolean;
+  surface?: 'default' | 'alt';
+}
+
+const { lang = 'es', grouped = false, surface = 'alt' } = Astro.props;
+const t = getTranslations(lang as Language);
+const sectionSpacing = grouped
+  ? 'pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20'
+  : 'py-16';
+const sectionSurface =
+  surface === 'alt'
+    ? 'bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated'
+    : 'bg-ptt-bg';
+
+const prefix = getUrlPrefix(lang as Language);
+const viewAllText = t.homeSections.viewAllPosts;
+
+const blogResult = await getBlogPosts({ lang: lang as Language, pageSize: 2 });
+const posts = blogResult.postsResult;
+
+const allTags = await getCollection('tags');
+const topicTagNames = allTags
+  .filter(
+    (tag) => tag.data.tier === 'secondary' || tag.data.tier === 'subtopic'
+  )
+  .map((tag) => tag.data.name);
+const subtopicTagNames = allTags
+  .filter((tag) => tag.data.tier === 'subtopic')
+  .map((tag) => tag.data.name);
+const subtopicAccentByName = await getSubtopicAccentMap();
+---
+
+<section class={`${sectionSpacing} ${sectionSurface} transition-colors duration-300`}>
+  <div class="main-container">
+    <h2
+      class="text-2xl sm:text-3xl md:text-4xl font-bold text-ptt mb-8"
+    >
+      {t.homeSections.latestArticles}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        posts.map((post) => (
+          <BlogCard
+            client:visible
+            {post}
+            lang={lang as Language}
+            {topicTagNames}
+            {subtopicTagNames}
+            {subtopicAccentByName}
+          />
+        ))
+      }
+    </div>
+    <div class="mt-8 text-center">
+      <a
+        href={`${prefix}/blog`}
+        class="inline-block border-b-2 border-ptt-primary text-ptt font-bold text-base sm:text-lg hover:text-ptt-primary transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+      >
+        {viewAllText} &rarr;
+      </a>
+    </div>
+  </div>
+</section>

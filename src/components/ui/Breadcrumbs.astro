@@ -1,0 +1,83 @@
+---
+/**
+ * PTT v3.0.0 breadcrumbs — emits visual breadcrumb trail and a corresponding
+ * `BreadcrumbList` JSON-LD block for SEO/AEO.
+ *
+ * Use `onDark={true}` when rendering inside a dark hero (e.g., meetup or
+ * Pereira Tech Day detail). The component switches to light-on-dark colors
+ * for WCAG AA contrast.
+ */
+
+import { SITE_URL } from '@/lib/constances';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  baseUrl?: string;
+  onDark?: boolean;
+}
+
+const { items, baseUrl = SITE_URL, onDark = false } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    ...(item.href ? { item: `${baseUrl}${item.href}` } : {}),
+  })),
+};
+
+const baseTextClass = onDark ? 'text-white/70' : 'text-ptt-secondary';
+const linkHoverClass = onDark ? 'hover:text-white' : 'hover:text-ptt-primary';
+const currentClass = onDark ? 'text-white' : 'text-ptt';
+const separatorClass = onDark ? 'text-white/50' : 'text-ptt-secondary';
+---
+
+<nav aria-label="Breadcrumb" class="text-sm">
+  <ol class={`flex flex-wrap items-center gap-1.5 ${baseTextClass}`}>
+    {
+      items.map((item, index) => (
+        <li class="flex items-center gap-1.5">
+          {index > 0 && (
+            <svg
+              aria-hidden="true"
+              class={`h-3.5 w-3.5 ${separatorClass}`}
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
+          {item.href && index < items.length - 1 ? (
+            <a
+              href={item.href}
+              class={`${linkHoverClass} transition-colors`}
+            >
+              {item.label}
+            </a>
+          ) : (
+            <span
+              class={`font-medium ${currentClass}`}
+              aria-current={index === items.length - 1 ? 'page' : undefined}
+            >
+              {item.label}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

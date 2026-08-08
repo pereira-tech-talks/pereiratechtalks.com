@@ -1,0 +1,47 @@
+---
+title:
+  en: "First meeting of PereiraJs"
+  es: "Primera reunión PereiraJs"
+description:
+  en: "Pereira Tech Talks meetup (2014-02-27). Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
+  es: "Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo."
+pubDate: 2014-02-27
+date: 2014-02-27
+venue:
+  name: "Pereira, Colombia"
+  city: "Pereira"
+  country: "Colombia"
+mode: in-person
+hero:
+  src: "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg"
+  alt:
+    en: "First meeting of PereiraJs"
+    es: "Primera reunión PereiraJs"
+  layout: banner
+heroImage: "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg"
+verticals:
+  - monthly-meetups
+talks: []
+speakers: []
+sponsors: []
+status: completed
+draft: false
+---
+
+## Primera reunión PereiraJs
+
+Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la bienvenida a la comunidad de PereiraJs y se presentaron las metas y objetivos de la del grupo.
+
+Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel Pineda](https://twitter.com/pin3da) presentaron una charla titulada **[JavaScript Historia y aplicaciones](http://jhonber.github.io/slides)**.
+
+---
+
+### Summary in English
+
+A Pereira Tech Talks meetup on 2014-02-27: First meeting of PereiraJs. Full program notes are in the Spanish section above; community archives and original Meetup/Luma links are listed under Sources.
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

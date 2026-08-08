@@ -1,0 +1,18 @@
+name: "Andrés Torres"
+role:
+  en: "Cloud Native Computing Foundation ambassador"
+  es: "Embajador de la Cloud Native Computing Foundation"
+bio:
+  en: "Andrés Torres is a Cloud Native Computing Foundation ambassador. He introduced the CNCF and its flagship projects (Kubernetes, Prometheus, Envoy, and the rest of the graduated landscape) at the March 2025 Pereira Tech Talks meetup, framing the cloud-native ecosystem from a regional perspective."
+  es: "Andrés Torres es embajador de la Cloud Native Computing Foundation. Presentó la CNCF y sus proyectos insignia (Kubernetes, Prometheus, Envoy y el resto del paisaje graduado) en el meetup de marzo de 2025 de Pereira Tech Talks, encuadrando el ecosistema cloud-native desde una perspectiva regional."
+photo:
+  src: "/images/speakers/_placeholder.svg"
+  alt:
+    en: "Portrait of Andrés Torres"
+    es: "Retrato de Andrés Torres"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es

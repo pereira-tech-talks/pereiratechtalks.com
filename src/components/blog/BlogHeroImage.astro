@@ -1,0 +1,33 @@
+---
+/**
+ * Blog hero image component.
+ * All blog images are now natively WebP — no <picture> fallback needed.
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  src,
+  alt,
+  width = 600,
+  height = 160,
+  class: className = '',
+  loading = 'lazy',
+} = Astro.props;
+---
+
+<img
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={loading}
+/>

@@ -1,0 +1,432 @@
+---
+import TypewriterWords from './TypewriterWords.astro';
+
+export interface Props {
+  name: string;
+  tagline?: string;
+  description: string;
+  typewriterWords: string[];
+  meetupsLabel: string;
+  meetupsHref: string;
+  ptdLabel: string;
+  ptdHref: string;
+  contactLabel: string;
+  contactHref: string;
+  scrollLabel: string;
+}
+
+const {
+  name,
+  tagline,
+  description,
+  typewriterWords,
+  meetupsLabel,
+  meetupsHref,
+  ptdLabel,
+  ptdHref,
+  contactLabel,
+  contactHref,
+  scrollLabel,
+} = Astro.props;
+---
+
+<section
+  class="hero-viewport relative flex flex-col justify-end sm:justify-center overflow-hidden"
+  aria-label={name}
+>
+  <!-- Full-bleed auditorium — picture so mobile never negotiates a 1280w LCP candidate -->
+  <div aria-hidden="true" class="absolute inset-0 z-0">
+    <picture>
+      <source
+        media="(max-width: 1023px)"
+        srcset="/images/home/hero-dark-480.webp"
+        type="image/webp"
+      />
+      <source
+        media="(min-width: 1024px)"
+        srcset="/images/home/hero-dark-1280.webp 1280w, /images/home/hero-dark.webp 1600w"
+        sizes="100vw"
+        type="image/webp"
+      />
+      <img
+        src="/images/home/hero-dark-480.webp"
+        alt=""
+        width={480}
+        height={192}
+        class="hero-photo absolute inset-0 h-full w-full object-cover object-center"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+    <!-- Cinematic scrim: strong left for type, soft right for photo -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black/88 via-black/60 to-black/25"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35"
+    >
+    </div>
+    <!-- Amber accent hairline -->
+    <div
+      class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-ptt-primary via-ptt-accent to-transparent opacity-90"
+    >
+    </div>
+  </div>
+
+  <div
+    class="hero-content relative z-10 w-full main-container"
+  >
+    <div
+      class="hero-layout flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-10 xl:gap-16"
+    >
+      <div class="max-w-2xl text-left flex-1 min-w-0">
+        {
+          tagline && (
+            <p class="hero-tagline text-white/80 font-medium tracking-[0.08em] uppercase">
+              {tagline}
+            </p>
+          )
+        }
+        <h1
+          class="hero-title mt-2 sm:mt-3 font-extrabold text-white tracking-tight drop-shadow-lg"
+        >
+          {name}
+        </h1>
+        <div class="hero-typewriter mt-2 sm:mt-3 w-full max-w-xl">
+          <TypewriterWords words={typewriterWords} align="left" />
+        </div>
+        <p
+          class="hero-desc mt-3 sm:mt-4 text-white/90 max-w-xl leading-relaxed text-pretty"
+          set:html={description}
+        />
+        <div class="hero-ctas mt-6 sm:mt-8 flex flex-wrap gap-2.5 sm:gap-3">
+          <a
+            href={meetupsHref}
+            class="inline-flex min-h-[44px] items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-white/90 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {meetupsLabel}
+          </a>
+          <a
+            href={ptdHref}
+            class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-5 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-ptt-accent-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+          >
+            {ptdLabel}
+          </a>
+          <a
+            href={contactHref}
+            class="inline-flex min-h-[44px] items-center rounded-full border border-white/80 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {contactLabel}
+          </a>
+        </div>
+        <div class="hero-social mt-5 sm:mt-6 hidden gap-2 lg:flex">
+          <a
+            href="https://github.com/pereira-tech-talks"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <img
+              src="/icons/github_white.svg"
+              alt=""
+              width={22}
+              height={22}
+              loading="lazy"
+              class="w-5 h-5"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/pereira-tech-talks/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <img
+              src="/icons/linkedin_white.svg"
+              alt=""
+              width={22}
+              height={22}
+              loading="lazy"
+              class="w-5 h-5"
+            />
+          </a>
+          <a
+            href="https://x.com/pertechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (Twitter)"
+            class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <img
+              src="/icons/x_white.svg"
+              alt=""
+              width={22}
+              height={22}
+              loading="lazy"
+              class="w-5 h-5"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/pertechtalks"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <img
+              src="/icons/instagram_white.svg"
+              alt=""
+              width={22}
+              height={22}
+              loading="lazy"
+              class="w-5 h-5"
+            />
+          </a>
+          <a
+            href="https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            class="inline-flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <img
+              src="/icons/whatsapp_white.svg"
+              alt=""
+              width={22}
+              height={22}
+              loading="lazy"
+              class="w-5 h-5"
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- Large brand mark — right on desktop, modest above CTAs on mobile via order -->
+      <div
+        class="hero-logo-wrap order-first lg:order-none shrink-0 flex justify-start lg:justify-end lg:self-center pointer-events-none"
+        aria-hidden="true"
+      >
+        <img
+          src="/images/pereira-tech-talks/logo-vertical-white.webp"
+          alt=""
+          width={542}
+          height={886}
+          loading="eager"
+          decoding="async"
+          class="hero-logo w-auto drop-shadow-2xl select-none"
+          draggable="false"
+        />
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="#main-after-hero"
+    class="hero-scroll absolute bottom-4 left-1/2 z-10 -translate-x-1/2 hidden sm:inline-flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    aria-label={scrollLabel}
+  >
+    <span class="text-[10px] uppercase tracking-[0.2em] font-semibold"
+      >{scrollLabel}</span
+    >
+    <span
+      class="hero-scroll-chevron block h-5 w-5 border-r-2 border-b-2 border-current rotate-45 opacity-80"
+      aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  /*
+   * Fill remaining viewport below sticky chrome.
+   * --ptt-chrome-height is measured live in MainLayout (ResizeObserver on
+   * [data-ptt-chrome]). SSR fallbacks: header-only ~4.25rem; with an active
+   * notification bar ~6.3rem (body.has-top-notification). Avoid :has().
+   * Prefer 100dvh last so the hero tracks the dynamic viewport.
+   */
+  .hero-viewport {
+    min-height: calc(100svh - var(--ptt-chrome-height, 4.25rem));
+    min-height: calc(100dvh - var(--ptt-chrome-height, 4.25rem));
+  }
+
+  :global(body.has-top-notification) .hero-viewport {
+    min-height: calc(100svh - var(--ptt-chrome-height, 6.3rem));
+    min-height: calc(100dvh - var(--ptt-chrome-height, 6.3rem));
+  }
+
+  @media (min-width: 1024px) {
+    .hero-viewport {
+      height: calc(100svh - var(--ptt-chrome-height, 4.25rem));
+      height: calc(100dvh - var(--ptt-chrome-height, 4.25rem));
+      min-height: calc(100dvh - var(--ptt-chrome-height, 4.25rem));
+    }
+
+    :global(body.has-top-notification) .hero-viewport {
+      height: calc(100svh - var(--ptt-chrome-height, 6.3rem));
+      height: calc(100dvh - var(--ptt-chrome-height, 6.3rem));
+      min-height: calc(100dvh - var(--ptt-chrome-height, 6.3rem));
+    }
+  }
+
+  .hero-content {
+    padding-block: clamp(1.25rem, 4vh, 5rem);
+    padding-bottom: clamp(1.5rem, 5vh, 5rem);
+  }
+
+  /* Mobile: brand signal above copy. Desktop: large mark balancing the right half. */
+  .hero-logo {
+    height: clamp(4.25rem, 12vh, 6.5rem);
+    opacity: 0.95;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-logo {
+      height: clamp(16rem, 48vh, 26rem);
+      opacity: 0.92;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-logo {
+      animation: hero-logo-in 0.9s ease-out both;
+    }
+  }
+
+  @keyframes hero-logo-in {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.96);
+    }
+    to {
+      opacity: 0.95;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    @keyframes hero-logo-in {
+      from {
+        opacity: 0;
+        transform: translateY(0.75rem) scale(0.96);
+      }
+      to {
+        opacity: 0.92;
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.65rem, 1.4vh, 0.8rem);
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 5.5vh + 1vw, 3.75rem);
+    line-height: 1.05;
+  }
+
+  .hero-desc {
+    font-size: clamp(0.875rem, 2vh + 0.2vw, 1.125rem);
+  }
+
+  .hero-photo {
+    /* Keep LCP static — ken-burns on the LCP node delays paint / tanks SI. */
+    transform: scale(1.02);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-scroll-chevron {
+      animation: hero-chevron 1.6s ease-in-out infinite;
+    }
+  }
+
+  @keyframes hero-chevron {
+    0%,
+    100% {
+      transform: rotate(45deg) translate(0, 0);
+      opacity: 0.55;
+    }
+    50% {
+      transform: rotate(45deg) translate(3px, 3px);
+      opacity: 1;
+    }
+  }
+
+  /* Narrow phones — keep CTAs usable, hide scroll cue */
+  @media (max-width: 379px) {
+    .hero-scroll {
+      display: none;
+    }
+    .hero-ctas a {
+      width: 100%;
+      justify-content: center;
+    }
+    .hero-logo {
+      height: clamp(3.75rem, 11vh, 5.5rem);
+    }
+  }
+
+  /* Tablet portrait — keep copy readable beside a modest mark */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-logo {
+      height: clamp(5.5rem, 14vh, 8rem);
+    }
+  }
+
+  /* Short laptops / landscape phones — compress stack */
+  @media (max-height: 720px) {
+    .hero-social {
+      display: none;
+    }
+    .hero-scroll {
+      display: none;
+    }
+    .hero-content {
+      padding-block: 1rem;
+    }
+    .hero-ctas {
+      margin-top: 1rem;
+    }
+    .hero-logo {
+      height: clamp(4.5rem, 14vh, 7rem);
+    }
+    .hero-desc {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-height: 720px) {
+    .hero-logo {
+      height: clamp(11rem, 38vh, 18rem);
+    }
+  }
+
+  @media (max-height: 560px) {
+    .hero-tagline {
+      display: none;
+    }
+    .hero-desc {
+      -webkit-line-clamp: 2;
+    }
+    .hero-logo-wrap {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-chevron {
+      animation: none;
+    }
+    .hero-photo {
+      animation: none;
+    }
+    .hero-logo {
+      animation: none;
+    }
+  }
+</style>

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">Person image placeholder</title>
-  <desc id="desc">Temporary placeholder for a profile image pending final artwork.</desc>
-  <rect width="512" height="512" rx="256" fill="#F4F7F6" />
-  <circle cx="256" cy="188" r="86" fill="#3A7F7C" opacity="0.9" />
-  <path d="M104 432c22-86 79-132 152-132s130 46 152 132" fill="#183B56" opacity="0.88" />
-</svg>

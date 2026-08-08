@@ -1,0 +1,12 @@
+---
+import { getTalks } from '@/lib/talk';
+
+export async function getStaticPaths() {
+  const talks = await getTalks();
+  return talks.map((talk) => ({
+    params: { slug: talk.id },
+  }));
+}
+
+return Astro.redirect('/en/meetups/', 301);
+---

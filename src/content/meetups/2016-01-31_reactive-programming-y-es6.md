@@ -1,0 +1,47 @@
+---
+title:
+  en: "Reactive Programming && EcmaScript 6"
+  es: "Reactive Programming && EcmaScript 6"
+description:
+  en: "Pereira Tech Talks meetup (2016-01-31). Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
+  es: "Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz)."
+pubDate: 2016-01-31
+date: 2016-01-31
+venue:
+  name: "Pereira, Colombia"
+  city: "Pereira"
+  country: "Colombia"
+mode: in-person
+hero:
+  src: "/images/meetups/reactive-programming-y-es6/hero.jpg"
+  alt:
+    en: "Reactive Programming && EcmaScript 6"
+    es: "Reactive Programming && EcmaScript 6"
+  layout: banner
+heroImage: "/images/meetups/reactive-programming-y-es6/hero.jpg"
+verticals:
+  - monthly-meetups
+talks: []
+speakers: []
+sponsors: []
+status: completed
+draft: false
+---
+
+## Reactive Programming && EcmaScript 6
+
+Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz).
+
+Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
+
+---
+
+### Summary in English
+
+A 2016 Pereira Tech Talks meetup. Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScript 6 a cargo de [Jonathan Alvarez](https://twitter.com/jonalvarezz). Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
+
+---
+
+### Fuentes / Sources
+
+- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

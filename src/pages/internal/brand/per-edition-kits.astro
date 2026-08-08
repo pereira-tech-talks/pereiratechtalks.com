@@ -1,0 +1,174 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+interface KitToken {
+  name: string;
+  value: string;
+}
+const ptd2024Light: KitToken[] = [
+  { name: 'paletteLight.primary', value: '#1F3F59' },
+  { name: 'paletteLight.accent', value: '#F06D6D' },
+  { name: 'paletteLight.bg', value: '#FEF7F3' },
+  { name: 'paletteLight.bgElevated', value: '#FFFFFF' },
+  { name: 'paletteLight.text', value: '#1F3F59' },
+  { name: 'paletteLight.textMuted', value: '#B66844' },
+  { name: 'paletteLight.border', value: '#E8E2D9' },
+];
+const ptd2024Typography: KitToken[] = [
+  {
+    name: 'typography.headingFamily',
+    value: '"Bebas Neue", "Arial Black", sans-serif',
+  },
+  { name: 'typography.headingTransform', value: 'uppercase' },
+  { name: 'typography.headingTracking', value: '0.18em' },
+  { name: 'fontSources[0]', value: '@fontsource/bebas-neue (npm)' },
+];
+---
+
+<InternalLayout
+  title="Brand Book — Per-edition kits"
+  description="Per-edition brand kit contract for Pereira Tech Days, with PTD 2024 reference."
+  section="brand"
+  subsection="per-edition-kits"
+>
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <header class="space-y-3">
+      <p class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400">
+        <a href="/internal/brand" class="hover:underline">Brand</a> / Per-edition kits
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">Per-edition brand kits</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300 max-w-3xl">
+        Each Pereira Tech Day edition has its own visual identity, scoped only
+        to <code>/pereira-tech-days/&#123;year&#125;/*</code>. The header,
+        footer, language switcher, and theme toggle keep the global PTT brand
+        even on edition pages.
+      </p>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Why per-edition?</h2>
+      <ul class="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Each edition is a distinct yearly story; visual differentiation reinforces the narrative.</li>
+        <li>Pre-existing convention: PTT's previous site already shipped the 2024 kit (<code>#1F3F59</code> deep blue + <code>#F06D6D</code> coral + Bebas Neue uppercase).</li>
+        <li>The umbrella PTT brand stays cohesive — only the edition body re-skins via scoped CSS variables.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Typed contract</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Defined in the <code>pereiraTechDays</code> content collection schema (Task 4),
+        consumed by <code>EditionScope</code> at runtime (Task 5).
+      </p>
+      <pre class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4 overflow-x-auto text-xs text-gray-800 dark:text-gray-100"><code>{`export interface EditionBrandKit {
+  paletteLight: {
+    primary: string;       // HEX
+    accent: string;        // HEX
+    bg: string;            // HEX (page background)
+    bgElevated: string;    // HEX (cards)
+    text: string;          // HEX
+    textMuted: string;     // HEX
+    border?: string;       // HEX (optional)
+  };
+  paletteDark?: { /* same shape, optional fallback to global PTT dark */ };
+  typography?: {
+    headingFamily?: string;
+    bodyFamily?: string;
+    headingTransform?: 'uppercase' | 'none';
+    headingTracking?: string;
+    fontSources?: Array<{
+      family: string;
+      npmPackage?: string;
+      url?: string;
+      weights?: number[];
+      display?: 'swap' | 'block' | 'fallback' | 'optional';
+    }>;
+  };
+  hero?: {
+    backgroundImage?: string;
+    gradient?: string;
+    accentDots?: string[];
+  };
+}`}</code></pre>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Scoping rule</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Apply the kit via a CSS attribute scope on a wrapper element. Only the
+        descendants of that wrapper see the override; chrome (header, footer,
+        switcher, toggle) is rendered as a sibling and keeps the global brand.
+      </p>
+      <pre class="rounded-lg bg-gray-50 dark:bg-gray-800 p-4 overflow-x-auto text-xs text-gray-800 dark:text-gray-100"><code>{`[data-edition-theme="2024"] {
+  --ptt-primary:        #1F3F59;
+  --ptt-accent:         #F06D6D;
+  --ptt-bg:             #FEF7F3;
+  --ptt-bg-elevated:    #FFFFFF;
+  --ptt-text:           #1F3F59;
+  --ptt-text-muted:     #B66844;
+  --ptt-border:         #E8E2D9;
+}
+
+[data-edition-theme="2024"] :is(h1, h2, h3, h4, h5, h6) {
+  font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}`}</code></pre>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Reference kit — PTD 2024</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        Derived from <code>tmp/pereiratechtalks.com/src/assets/styles/pereira-tech-day.css</code>.
+        Used as the seed entry in Task 17 content migration.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Palette light</h3>
+          <ul class="space-y-1.5 text-xs">
+            {ptd2024Light.map((t) => (
+              <li class="flex items-center gap-3">
+                <span class="inline-block w-5 h-5 rounded border border-gray-200 dark:border-gray-700" style={`background:${t.value}`} aria-hidden="true"></span>
+                <code class="text-gray-700 dark:text-gray-200 font-mono">{t.name}</code>
+                <code class="text-gray-500 dark:text-gray-400 ml-auto">{t.value}</code>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Typography</h3>
+          <ul class="space-y-1.5 text-xs text-gray-700 dark:text-gray-200">
+            {ptd2024Typography.map((t) => (
+              <li class="flex flex-col">
+                <code class="font-mono">{t.name}</code>
+                <code class="text-gray-500 dark:text-gray-400">{t.value}</code>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Adding a new edition</h2>
+      <ol class="list-decimal list-inside text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <li>Author the content entry at <code>src/content/pereiraTechDays/&#123;year&#125;.&#123;json,yaml&#125;</code> per Task 4 schema.</li>
+        <li>Set <code>brandKit.paletteLight</code> (required); add <code>brandKit.paletteDark</code> only if the edition has a dark variant.</li>
+        <li>Set <code>brandKit.typography.fontSources</code> if a custom heading font is needed.</li>
+        <li>Add hero / poster art under <code>public/images/pereira-tech-days/&#123;year&#125;/</code>.</li>
+        <li>Visit <code>/pereira-tech-days/&#123;year&#125;</code> in dev. Confirm the kit applies.</li>
+        <li>Verify isolation: visit <code>/</code>, <code>/blog</code>, <code>/about-us</code> — header/footer/non-edition content keeps the global PTT brand.</li>
+      </ol>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Slides palette opt-in</h2>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        The slides system (Reveal.js) honors the global PTT palette by default.
+        An edition can opt-in by also setting <code>--slide-accent</code> inside
+        <code>[data-edition-theme]</code> when a deck is embedded inside an
+        edition page. See Task 5 step 9 + Task 13 <code>SlideEmbed</code>.
+      </p>
+    </section>
+  </main>
+</InternalLayout>

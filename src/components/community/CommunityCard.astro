@@ -1,0 +1,80 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import { type Language, tr } from '@/lib/i18n';
+
+interface Props {
+  community: CollectionEntry<'communities'>;
+  lang: Language;
+  visitLabel: string;
+}
+
+const { community, lang, visitLabel } = Astro.props;
+const { name, logo, url, focus, description } = community.data;
+const focusText = focus ? tr(focus, lang) : undefined;
+const descriptionText = tr(description, lang);
+const logoDark = logo.dark;
+const logoClass = 'max-h-16 max-w-full object-contain object-left';
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-umami-event="community_click"
+  data-umami-event-slug={community.id}
+  class="group flex h-full min-w-0 flex-col rounded-2xl border border-ptt-border bg-ptt-bg-elevated p-5 sm:p-6 shadow-sm transition hover:border-ptt-primary/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+>
+  <div class="flex h-16 w-full min-w-0 items-center">
+    {
+      logoDark ? (
+        <>
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            width="160"
+            height="64"
+            loading="lazy"
+            class:list={[logoClass, 'dark:hidden']}
+          />
+          <img
+            src={logoDark}
+            alt={logo.alt}
+            width="160"
+            height="64"
+            loading="lazy"
+            class:list={[logoClass, 'hidden dark:block']}
+          />
+        </>
+      ) : (
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          width="160"
+          height="64"
+          loading="lazy"
+          class={logoClass}
+        />
+      )
+    }
+  </div>
+  <div class="min-w-0">
+    <h3 class="mt-4 text-lg font-bold text-ptt group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark">
+      {name}
+    </h3>
+    {
+      focusText && (
+        <p class="mt-1 text-xs font-semibold uppercase tracking-wide text-ptt-primary dark:text-ptt-primary-dark">
+          {focusText}
+        </p>
+      )
+    }
+  </div>
+  <p class="mt-4 flex-1 text-sm text-ptt-secondary line-clamp-4">
+    {descriptionText}
+  </p>
+  <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ptt-primary dark:text-ptt-primary-dark">
+    {visitLabel}
+    <span aria-hidden="true">→</span>
+  </span>
+</a>

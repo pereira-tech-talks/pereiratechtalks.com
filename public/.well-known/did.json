@@ -1,0 +1,22 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:pereiratechtalks.org",
+  "verificationMethod": [
+    {
+      "id": "did:web:pereiratechtalks.org#key-1",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:web:pereiratechtalks.org",
+      "publicKeyJwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "8a_yA86temAPSklMOFyEg_fUw-Vg1VEWujdK4i4gT-I"
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:pereiratechtalks.org#key-1"
+  ],
+  "assertionMethod": [
+    "did:web:pereiratechtalks.org#key-1"
+  ]
+}

@@ -1,0 +1,104 @@
+---
+/**
+ * PTT v3.0.0 generic collection-driven page (shared between EN and ES).
+ *
+ * Renders any entry from the `pages` content collection (community,
+ * conduct, contributing, governance, etc.) as a long-form, readable
+ * document — title, optional eyebrow, last-updated timestamp, and the
+ * Markdown body via Astro's <Content />.
+ *
+ * Usage:
+ *   <CollectionDocPage lang="en" slug="conduct" eyebrow="Policy" />
+ */
+
+import { getEntry, render } from 'astro:content';
+
+import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+
+interface Props {
+  lang: Language;
+  /** Page slug inside `src/content/pages/{lang}/{slug}.md` */
+  slug: string;
+  /** Optional uppercase label rendered above the H1 */
+  eyebrow?: string;
+}
+
+const { lang, slug, eyebrow } = Astro.props;
+
+const entry = await getEntry('pages', `${lang}/${slug}`);
+if (!entry) {
+  throw new Error(`Missing pages collection entry: ${lang}/${slug}`);
+}
+
+const { Content } = await render(entry);
+const { title, description, lastUpdated } = entry.data;
+
+const lastUpdatedLabel = lastUpdated
+  ? formatCalendarDate(lastUpdated, lang)
+  : null;
+const lastUpdatedDatetime = lastUpdated
+  ? getCalendarDateString(lastUpdated)
+  : null;
+
+const breadcrumbs = [
+  {
+    label: lang === 'es' ? 'Inicio' : 'Home',
+    href: `${getUrlPrefix(lang)}/`,
+  },
+  { label: title },
+];
+
+const lastUpdatedPrefix = lang === 'es' ? 'Actualizado el' : 'Last updated';
+---
+
+<MainLayout lang={lang} title={title} description={description}>
+  <div class="bg-ptt-bg">
+    <div
+      class="main-container pt-12 sm:pt-16 pb-4"
+    >
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <div class="main-container pt-6 pb-10">
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      <h1
+        class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt"
+      >
+        {title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {description}
+      </p>
+      {
+        lastUpdatedLabel && (
+          <p class="mt-3 text-sm text-ptt-secondary">
+            {lastUpdatedPrefix} <time datetime={lastUpdatedDatetime}>{lastUpdatedLabel}</time>
+          </p>
+        )
+      }
+    </div>
+  </div>
+
+  <article class="bg-ptt-bg pb-16 sm:pb-24">
+    <div class="main-container">
+      <div
+        class="prose prose-lg dark:prose-invert max-w-4xl
+        prose-headings:scroll-mt-24 prose-headings:text-ptt prose-headings:font-bold
+        prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-3xl
+        prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl
+        prose-p:text-ptt-secondary prose-p:leading-relaxed
+        prose-a:text-ptt-primary prose-a:font-medium dark:prose-a:text-ptt-primary-dark
+        prose-strong:text-ptt prose-strong:font-semibold
+        prose-ul:my-5 prose-ol:my-5 prose-li:text-ptt-secondary prose-li:leading-relaxed prose-li:my-1.5
+        prose-hr:my-10 prose-hr:border-ptt-border
+        prose-table:text-sm prose-table:my-6 prose-th:text-ptt prose-th:font-semibold prose-td:text-ptt-secondary
+        prose-code:text-ptt prose-code:before:content-none prose-code:after:content-none"
+      >
+        <Content />
+      </div>
+    </div>
+  </article>
+</MainLayout>

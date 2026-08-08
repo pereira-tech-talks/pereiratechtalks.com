@@ -1,0 +1,58 @@
+# Cloudflare Pages redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Order matters: the FIRST matching rule wins, and Cloudflare does not chain
+# redirects. Any specific `/es/...` rule must therefore appear before the
+# `/es/*` catch-all at the bottom AND point straight at its final URL.
+
+# ---------------------------------------------------------------------------
+# Legacy slug — AEO chapter 5
+# ---------------------------------------------------------------------------
+# The slug changed after publication to match the retitled post ("What It
+# Actually Takes to Score 100 on isitagentready.com"). Covers both languages
+# and the Markdown-for-Agents `.md` twins.
+
+# Spanish (now served at the root)
+/blog/aeo-from-33-to-100          /blog/aeo-score-100-on-isitagentready/          301
+/blog/aeo-from-33-to-100/         /blog/aeo-score-100-on-isitagentready/          301
+/blog/aeo-from-33-to-100.md       /blog/aeo-score-100-on-isitagentready.md        301
+
+# English (now served under /en)
+/en/blog/aeo-from-33-to-100       /en/blog/aeo-score-100-on-isitagentready/       301
+/en/blog/aeo-from-33-to-100/      /en/blog/aeo-score-100-on-isitagentready/       301
+/en/blog/aeo-from-33-to-100.md    /en/blog/aeo-score-100-on-isitagentready.md     301
+
+# Pre-swap Spanish URLs for the same post — straight to the final root URL,
+# because these must not fall through to the /es/* catch-all below.
+/es/blog/aeo-from-33-to-100       /blog/aeo-score-100-on-isitagentready/          301
+/es/blog/aeo-from-33-to-100/      /blog/aeo-score-100-on-isitagentready/          301
+/es/blog/aeo-from-33-to-100.md    /blog/aeo-score-100-on-isitagentready.md        301
+/es/blog/aeo-score-100-on-isitagentready     /blog/aeo-score-100-on-isitagentready/     301
+/es/blog/aeo-score-100-on-isitagentready/    /blog/aeo-score-100-on-isitagentready/     301
+
+# ---------------------------------------------------------------------------
+# Pereira Tech Day — hub index removed; singular landing is canonical
+# ---------------------------------------------------------------------------
+# `/pereira-tech-days` (no year) permanently redirects to `/pereira-tech-day`.
+# Year archives stay at `/pereira-tech-days/{year}/` (exact paths below do not
+# match those deeper URLs).
+
+/pereira-tech-days            /pereira-tech-day/            301
+/pereira-tech-days/           /pereira-tech-day/            301
+/pereira-tech-days.md         /pereira-tech-day.md          301
+/en/pereira-tech-days         /en/pereira-tech-day/         301
+/en/pereira-tech-days/        /en/pereira-tech-day/         301
+/en/pereira-tech-days.md      /en/pereira-tech-day.md       301
+
+# ---------------------------------------------------------------------------
+# Language swap: Spanish moved from /es to the site root
+# ---------------------------------------------------------------------------
+# Spanish is the community's primary language and is now served at `/`, with
+# English under `/en`. Every previously published `/es/...` URL keeps working
+# via a permanent redirect to its new root URL.
+#
+# Note: the old English URLs (`/about`, `/blog/...`) cannot be redirected to
+# `/en/...` — those paths now legitimately serve Spanish. English content is
+# re-announced through the updated sitemap and hreflang tags instead.
+/es                               /                                               301
+/es/*                             /:splat                                         301

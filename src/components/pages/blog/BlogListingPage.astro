@@ -1,0 +1,43 @@
+---
+import BlogContainer from '@/components/blog/BlogContainer.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getBlogPosts } from '@/lib/blog';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+import type { BlogPostsResultType } from '@/lib/types';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const blogPostsResult: BlogPostsResultType = await getBlogPosts({ lang });
+
+const collectionPageData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t.blogTitle,
+  description: t.blogDescription,
+  inLanguage: lang,
+  url: new URL(`${prefix}/blog/`, Astro.site).href,
+};
+---
+
+<MainLayout
+  lang={lang}
+  title={t.blogTitle}
+  description={t.blogDescription}
+  keywords={lang === 'en'
+    ? ['Pereira Tech Talks blog', 'community tech articles', 'Pereira tech tutorials', 'Risaralda software engineering', 'tech blog Colombia', 'meetup recaps Pereira']
+    : ['blog Pereira Tech Talks', 'artículos comunidad tecnología', 'tutoriales tecnología Pereira', 'ingeniería de software Risaralda', 'blog tecnología Colombia', 'resúmenes meetup Pereira']}
+>
+  <Fragment slot="head">
+    <JsonLd data={collectionPageData} />
+  </Fragment>
+  <BlogContainer blogPostsResult={blogPostsResult} lang={lang} />
+</MainLayout>

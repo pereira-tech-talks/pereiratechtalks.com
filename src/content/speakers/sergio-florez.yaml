@@ -1,0 +1,23 @@
+name: "Sergio Alexander Flórez"
+pronouns: he/him
+role:
+  en: "Co-founder & CTO at DailyBot (YC S21)"
+  es: "Co-founder & CTO en DailyBot (YC S21)"
+bio:
+  en: "Sergio Alexander Flórez is co-founder and CTO of DailyBot (Y Combinator S21) and a founding organizer of Pereira Tech Talks. Frequent speaker on the agentic web, AI engineering, and modern mobile platforms (Kotlin Multiplatform), connecting the global tech ecosystem to the talent of the Eje Cafetero."
+  es: "Sergio Alexander Flórez es co-fundador y CTO de DailyBot (Y Combinator S21) y organizador fundador de Pereira Tech Talks. Ponente habitual sobre la web agéntica, AI engineering y plataformas mobile modernas (Kotlin Multiplatform), conectando el ecosistema tech global con el talento del Eje Cafetero."
+photo:
+  src: "/images/authors/sergio-florez.webp"
+  alt:
+    en: "Portrait of Sergio Alexander Flórez"
+    es: "Retrato de Sergio Alexander Flórez"
+social:
+  linkedin: "https://www.linkedin.com/company/pereira-tech-talks/"
+  website: "https://dailybot.com"
+talks: []
+location:
+  city: "Pereira"
+  country: "Colombia"
+languages:
+  - es
+  - en

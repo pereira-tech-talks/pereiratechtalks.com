@@ -1,0 +1,222 @@
+---
+import '@/styles/global.css';
+
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  icon: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  section?: string;
+}
+
+const { title, description, section } = Astro.props;
+const fullTitle = `${title} — Pereira Tech Talks Design System`;
+
+const navItems: NavItem[] = [
+  { id: 'hub', label: 'Hub', href: '/internal/ui', icon: '⬡' },
+  { id: 'colors', label: 'Colors', href: '/internal/ui/colors', icon: '🎨' },
+  {
+    id: 'typography',
+    label: 'Typography',
+    href: '/internal/ui/typography',
+    icon: 'Aa',
+  },
+  { id: 'spacing', label: 'Spacing', href: '/internal/ui/spacing', icon: '↔' },
+  { id: 'radius', label: 'Radius', href: '/internal/ui/radius', icon: '◯' },
+  { id: 'buttons', label: 'Buttons', href: '/internal/ui/buttons', icon: '●' },
+  { id: 'badges', label: 'Badges', href: '/internal/ui/badges', icon: '🏷' },
+  { id: 'cards', label: 'Cards', href: '/internal/ui/cards', icon: '☐' },
+  { id: 'forms', label: 'Forms', href: '/internal/ui/forms', icon: '✎' },
+  { id: 'layouts', label: 'Layouts', href: '/internal/ui/layouts', icon: '▦' },
+  { id: 'brand', label: 'Brand', href: '/internal/ui/brand', icon: '◉' },
+];
+
+const activeId = section;
+const currentIndex = navItems.findIndex((item) => item.id === activeId);
+const prevItem = currentIndex > 0 ? navItems[currentIndex - 1] : null;
+const nextItem =
+  currentIndex < navItems.length - 1 ? navItems[currentIndex + 1] : null;
+---
+
+<html lang="en" data-showcase="true">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <script is:inline>
+  (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');})();
+</script>
+  </head>
+  <body class="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+
+    <!-- Sticky amber warning banner with breadcrumb -->
+    <div class="sticky top-0 z-50 flex items-center justify-between gap-3 px-3 sm:px-4 py-2 text-sm font-semibold bg-amber-100 dark:bg-amber-900/60 text-amber-900 dark:text-amber-100 border-b border-amber-300 dark:border-amber-700">
+      <div class="flex items-center gap-2 min-w-0">
+        <a href="/internal" class="text-xs hover:underline text-amber-700 dark:text-amber-300 shrink-0">Internal Hub</a>
+        <span class="text-amber-400 dark:text-amber-600 shrink-0" aria-hidden="true">/</span>
+        <span class="inline-flex items-center rounded-full bg-amber-500 px-2 py-0.5 text-xs font-bold text-white uppercase tracking-wide shrink-0">
+          DEV
+        </span>
+        <span class="text-xs sm:text-sm truncate">PTT Design System</span>
+      </div>
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <span class="hidden md:inline text-xs text-amber-700 dark:text-amber-300">
+          Not included in production
+        </span>
+        <button
+          id="showcase-theme-toggle"
+          type="button"
+          class="group inline-flex items-center gap-2 rounded-full pl-1 pr-3 py-1 bg-white dark:bg-ptt-bg-elevated text-ptt-text dark:text-ptt-text border border-amber-300 dark:border-amber-700 hover:border-ptt-primary dark:hover:border-ptt-primary hover:shadow-sm transition-all"
+          aria-label="Toggle light/dark mode"
+          title="Toggle light/dark mode"
+        >
+          <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-ptt-primary text-white">
+            <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+          <span class="hidden sm:inline text-xs font-semibold">
+            <span class="dark:hidden">Light</span>
+            <span class="hidden dark:inline">Dark</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile horizontal navigation -->
+    <div class="lg:hidden sticky top-[41px] z-40 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-1 px-2 py-2 overflow-x-auto scrollbar-hide">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors whitespace-nowrap',
+              activeId === item.id
+                ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+            ]}
+            aria-current={activeId === item.id ? 'page' : undefined}
+          >
+            <span class="text-sm" aria-hidden="true">{item.icon}</span>
+            <span>{item.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex min-h-[calc(100vh-40px)]">
+
+      <!-- Desktop sidebar -->
+      <nav
+        class="hidden lg:flex flex-col w-60 shrink-0 border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 sticky top-[41px] h-[calc(100vh-41px)]"
+      >
+        <div class="flex-1 overflow-y-auto py-4 px-3">
+          <a href="/internal" class="flex items-center gap-2 px-3 py-2 mb-3 text-xs font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+            <span aria-hidden="true">&larr;</span>
+            <span>Back to Internal Hub</span>
+          </a>
+          <div class="mb-4 px-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+              Design System
+            </span>
+          </div>
+          <ul class="space-y-0.5">
+            {navItems.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={[
+                    'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                    activeId === item.id
+                      ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                      : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700',
+                  ]}
+                  aria-current={activeId === item.id ? 'page' : undefined}
+                >
+                  <span class="w-6 text-center text-base" aria-hidden="true">{item.icon}</span>
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main content area -->
+      <main class="flex-1 min-w-0 overflow-x-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <div class="mb-8 sm:mb-10">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">{title}</h1>
+            {description && (
+              <p class="mt-2 text-base sm:text-lg text-gray-600 dark:text-gray-300">{description}</p>
+            )}
+          </div>
+
+          <slot />
+
+          <!-- Mobile prev/next navigation -->
+          <div class="lg:hidden flex items-center justify-between mt-12 pt-6 border-t border-gray-200 dark:border-gray-700">
+            {prevItem ? (
+              <a href={prevItem.href} class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <span aria-hidden="true">&larr;</span>
+                <span>{prevItem.label}</span>
+              </a>
+            ) : <span />}
+            {nextItem && (
+              <a href={nextItem.href} class="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <span>{nextItem.label}</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            )}
+          </div>
+        </div>
+
+        <footer class="border-t border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-4 text-center text-xs text-gray-600 dark:text-gray-300">
+          Pereira Tech Talks Design System &middot; v3.0.0 &middot; Dev Only
+        </footer>
+      </main>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var active = document.querySelector('[aria-current="page"]');
+        if (active) {
+          var nav = active.closest('.scrollbar-hide');
+          if (nav) {
+            var offset = active.offsetLeft - nav.offsetWidth / 2 + active.offsetWidth / 2;
+            nav.scrollLeft = Math.max(0, offset);
+          }
+        }
+      })();
+    </script>
+
+    <script is:inline>
+      (function() {
+        var btn = document.getElementById('showcase-theme-toggle');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            var isDark = document.documentElement.classList.contains('dark');
+            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e) {}
+          });
+        }
+      })();
+    </script>
+
+    <style>
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+    </style>
+  </body>
+</html>

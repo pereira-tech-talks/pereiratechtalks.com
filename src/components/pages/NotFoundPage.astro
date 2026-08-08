@@ -1,0 +1,102 @@
+---
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = getUrlPrefix(lang);
+
+const ctas = [
+  {
+    href: `${prefix}/`,
+    label: t.notFoundPage.backHome,
+    variant: 'primary' as const,
+  },
+  {
+    href: `${prefix}/meetups`,
+    label: t.notFoundPage.meetupsCta,
+    variant: 'secondary' as const,
+  },
+  {
+    href: `${prefix}/pereira-tech-day`,
+    label: t.notFoundPage.ptdCta,
+    variant: 'secondary' as const,
+  },
+  {
+    href: `${prefix}/blog`,
+    label: t.notFoundPage.searchBlog,
+    variant: 'ghost' as const,
+  },
+];
+---
+
+<MainLayout lang={lang} title={t.notFoundPage.title} description={t.notFoundPage.description}>
+  <section class="relative overflow-hidden bg-ptt-bg py-16 sm:py-24">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-40"
+      aria-hidden="true"
+    >
+      <div class="absolute -left-24 top-0 h-72 w-72 rounded-full bg-ptt-primary/10 blur-3xl"></div>
+      <div class="absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-ptt-accent/15 blur-3xl"></div>
+    </div>
+
+    <div class="main-container relative">
+      <div class="mx-auto max-w-2xl text-center">
+        <Eyebrow>{t.notFoundPage.eyebrow}</Eyebrow>
+        <p class="mt-6 text-sm font-semibold uppercase tracking-widest text-ptt-primary">
+          Pereira Tech Talks
+        </p>
+        <h1 class="mt-3 text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-ptt">
+          {t.notFoundPage.heading}
+        </h1>
+        <p
+          class="mt-4 text-6xl sm:text-7xl font-bold tracking-tight text-ptt-primary/25 dark:text-ptt-primary-dark/30"
+          aria-hidden="true"
+        >
+          404
+        </p>
+        <p class="mt-4 text-base leading-relaxed text-ptt-secondary sm:text-lg">
+          {t.notFoundPage.message}
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
+          {
+            ctas.map((cta) => (
+              <a
+                href={cta.href}
+                class:list={[
+                  'inline-flex min-h-[44px] items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
+                  cta.variant === 'primary' &&
+                    'bg-ptt-primary px-7 text-base text-white hover:bg-ptt-primary/90',
+                  cta.variant === 'secondary' &&
+                    'border-2 border-ptt-primary text-ptt-primary hover:bg-ptt-primary-soft',
+                  cta.variant === 'ghost' &&
+                    'border border-ptt-border text-ptt-secondary hover:bg-ptt-bg-elevated hover:text-ptt',
+                ]}
+              >
+                {cta.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="mt-12 flex justify-center" aria-hidden="true">
+        <img
+          src="/images/pereira-tech-days/2026/mascot/mug.webp"
+          alt=""
+          width="160"
+          height="160"
+          class="h-28 w-28 sm:h-36 sm:w-36 opacity-90 dark:opacity-80"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+</MainLayout>

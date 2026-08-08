@@ -1,0 +1,283 @@
+---
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const architecture = [
+  {
+    concept: 'EN routes',
+    description: 'English pages live at root: /about, /blog, /tech-talks',
+    path: 'src/pages/',
+  },
+  {
+    concept: 'ES routes',
+    description:
+      'Spanish pages nest under /es/: /es/about, /es/blog, /es/tech-talks',
+    path: 'src/pages/es/',
+  },
+  {
+    concept: 'getTranslations(lang)',
+    description:
+      'Returns the full translation object for the given language. All UI strings come from here.',
+    path: 'src/lib/translations/index.ts',
+  },
+  {
+    concept: 'getUrlPrefix(lang)',
+    description:
+      'Returns "" for EN, "/es" for ES. Prepend to all internal URLs for correct routing.',
+    path: 'src/lib/i18n.ts',
+  },
+  {
+    concept: 'Language type',
+    description:
+      'Union type "en" | "es" used across all components that accept a lang prop.',
+    path: 'src/lib/i18n.ts',
+  },
+];
+
+const translationFiles = [
+  {
+    file: 'src/lib/translations/en.ts',
+    description: 'English translation strings — all UI text for EN pages',
+  },
+  {
+    file: 'src/lib/translations/es.ts',
+    description: 'Spanish translation strings — all UI text for ES pages',
+  },
+  {
+    file: 'src/lib/translations/types.ts',
+    description:
+      'TypeScript interface defining all translation keys (source of truth)',
+  },
+  {
+    file: 'src/lib/translations/index.ts',
+    description: 'Exports getTranslations() function and re-exports types',
+  },
+];
+
+const parityRules = [
+  {
+    area: 'Pages',
+    rule: 'Every page needs both an EN wrapper (src/pages/) and an ES wrapper (src/pages/es/) importing the same *Page.astro component',
+    example: 'src/pages/about.astro + src/pages/es/about.astro',
+  },
+  {
+    area: 'Blog Posts',
+    rule: 'Every post must exist in both src/content/blog/en/ and src/content/blog/es/ with identical slugs',
+    example: 'en/2026-04-20_my-post.md + es/2026-04-20_my-post.md',
+  },
+  {
+    area: 'UI Strings',
+    rule: 'Every key in en.ts must also exist in es.ts. New keys must be added to types.ts first.',
+    example: 'aboutPage.title in en.ts and es.ts',
+  },
+  {
+    area: 'Slide Decks',
+    rule: 'Every slide deck must exist in both src/content/slides/en/ and src/content/slides/es/',
+    example: 'en/2026-04-25_demo.md + es/2026-04-25_demo.md',
+  },
+  {
+    area: 'Agent Markdown',
+    rule: 'Every HTML page has a .md twin in src/content/pages/{en,es}/ for AI agents',
+    example: 'pages/en/about.md + pages/es/about.md',
+  },
+];
+
+const wrapperPattern = [
+  {
+    file: 'Thin wrapper (EN)',
+    code: '---\nimport AboutPage from \'@/components/pages/AboutPage.astro\';\n---\n<AboutPage lang="en" />',
+    notes: '3-line file in src/pages/about.astro',
+  },
+  {
+    file: 'Thin wrapper (ES)',
+    code: '---\nimport AboutPage from \'@/components/pages/AboutPage.astro\';\n---\n<AboutPage lang="es" />',
+    notes: '3-line file in src/pages/es/about.astro',
+  },
+  {
+    file: '*Page.astro',
+    code: 'Receives lang prop, imports MainLayout, uses getTranslations(lang) and getUrlPrefix(lang)',
+    notes: 'Single shared component with all logic',
+  },
+];
+
+const spanishRules = [
+  {
+    rule: 'Tuteo',
+    description:
+      'Always use "tú" form. Never "vos" (voseo). Example: "puedes" not "podés".',
+    severity: 'Mandatory',
+  },
+  {
+    rule: 'Diacritical marks',
+    description:
+      'Proper accents on all Spanish text: á, é, í, ó, ú, ñ, ü. Missing accents = spelling error.',
+    severity: 'Mandatory',
+  },
+  {
+    rule: 'Colombian phrasing',
+    description:
+      'Follow Colombian Spanish conventions. Author is Colombian — phrasing should feel natural.',
+    severity: 'Preferred',
+  },
+  {
+    rule: 'English slugs',
+    description:
+      'All filenames, series slugs, and image dirs use English slugs, even for ES content.',
+    severity: 'Mandatory',
+  },
+];
+
+const validationCommands = [
+  {
+    command:
+      "grep -rn 'pequeno\\|tamano\\|diseno\\|espanol\\|manana' src/content/blog/es/ src/lib/translations/es.ts",
+    description: 'Check for missing ñ in common words',
+  },
+  {
+    command:
+      "grep -rn 'analisis\\|numero\\|codigo\\|ejecucion\\|version\\|pagina\\|titulo' src/content/blog/es/ src/lib/translations/es.ts",
+    description: 'Check for missing accent marks',
+  },
+];
+---
+
+<InternalLayout title="Internationalization" description="Multilingual content system (EN/ES)" section="guide" subsection="i18n">
+
+  <!-- Architecture -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Architecture</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Concept</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+              <th class="text-left py-3 px-4 font-semibold">Path</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {architecture.map((a) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{a.concept}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{a.description}</td>
+                <td class="py-3 px-4"><code class="text-xs">{a.path}</code></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Translation Files -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Translation Files</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">File</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {translationFiles.map((f) => (
+              <tr>
+                <td class="py-3 px-4"><code class="text-xs font-medium">{f.file}</code></td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{f.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Parity Rules -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Content Parity Rules</h2>
+    <div class="space-y-4">
+      {parityRules.map((p) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{p.area}</h3>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{p.rule}</p>
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
+            <code class="text-xs">{p.example}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Page Wrapper Pattern -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Page Wrapper Pattern</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Pages use ultra-minimal 3-line wrappers. All logic lives in the shared <code class="text-xs">*Page.astro</code> component. MainLayout is imported inside the page component, never in the wrapper.
+    </p>
+    <div class="space-y-4">
+      {wrapperPattern.map((w) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <div class="flex items-baseline justify-between mb-2">
+            <h3 class="font-semibold">{w.file}</h3>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary font-medium">{w.notes}</span>
+          </div>
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
+            <code class="text-xs whitespace-pre-wrap">{w.code}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Spanish Rules -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Spanish Rules</h2>
+    <div class="rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+              <th class="text-left py-3 px-4 font-semibold">Rule</th>
+              <th class="text-left py-3 px-4 font-semibold">Description</th>
+              <th class="text-left py-3 px-4 font-semibold">Severity</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+            {spanishRules.map((r) => (
+              <tr>
+                <td class="py-3 px-4 font-medium">{r.rule}</td>
+                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">{r.description}</td>
+                <td class="py-3 px-4">
+                  <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${r.severity === 'Mandatory' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : 'bg-secondary/10 text-secondary'}`}>{r.severity}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Validation Commands -->
+  <section class="mb-12">
+    <h2 class="text-xl md:text-2xl font-bold mb-4">Validation Commands</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+      Run these before committing Spanish content. Any match indicates a missing diacritical mark.
+    </p>
+    <div class="space-y-4">
+      {validationCommands.map((v) => (
+        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{v.description}</p>
+          <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-2">
+            <code class="text-xs break-all">{v.command}</code>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</InternalLayout>

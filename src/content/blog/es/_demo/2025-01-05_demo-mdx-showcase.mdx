@@ -1,0 +1,133 @@
+---
+title: 'Componentes Web Interactivos con MDX'
+description: 'Demostrando el poder de MDX para crear contenido interactivo en blogs con componentes embebidos'
+pubDate: '2025-01-05'
+heroImage: '/images/blog/shared/blog-placeholder-4.webp'
+heroLayout: 'banner'
+tags: ['tech', 'demo']
+keywords: ['blog interactivo con MDX', 'tutorial componentes MDX', 'configuración MDX en Astro', 'contenido interactivo markdown', 'componentes embebidos en markdown']
+---
+
+MDX te permite escribir JSX directamente en tus archivos Markdown. Esto significa que puedes importar componentes, usar variables y crear contenido interactivo — todo dentro de un post de blog.
+
+## Por qué MDX?
+
+El Markdown tradicional es excelente para contenido estático, pero a veces necesitas más. MDX conecta la simplicidad del Markdown con todo el poder de los frameworks de componentes:
+
+- **Componentes reutilizables** embebidos directamente en el contenido
+- **Datos dinámicos** renderizados en tiempo de build
+- **Elementos interactivos** que mejoran la experiencia de lectura
+- **Contenido con tipos seguros** con soporte completo del IDE
+
+## Embebiendo Componentes
+
+Una de las fortalezas de MDX es la capacidad de embeber componentes directamente en tu escritura. Esto es especialmente útil para documentación técnica donde quieres mostrar ejemplos interactivos junto a las explicaciones.
+
+export const Aviso = ({ tipo = 'info', children }) => (
+  <div style={{
+    padding: '1rem 1.5rem',
+    borderRadius: '0.5rem',
+    marginBottom: '1.5rem',
+    backgroundColor: tipo === 'advertencia' ? '#fef3c7' : tipo === 'error' ? '#fee2e2' : '#dbeafe',
+    borderLeft: `4px solid ${tipo === 'advertencia' ? '#f59e0b' : tipo === 'error' ? '#ef8888' : '#3b82f6'}`,
+    color: '#1e293b'
+  }}>
+    <strong>{tipo === 'advertencia' ? 'Advertencia' : tipo === 'error' ? 'Error' : 'Info'}:</strong> {children}
+  </div>
+);
+
+<Aviso tipo="info">
+  Este componente de aviso está definido y renderizado directamente dentro del archivo MDX. No se necesita un archivo de componente separado!
+</Aviso>
+
+<Aviso tipo="advertencia">
+  Los componentes MDX se renderizan en tiempo de build en el modo de salida estática de Astro. Para interactividad del lado del cliente, necesitarás usar componentes de framework con directivas client.
+</Aviso>
+
+## Usando Variables y Expresiones
+
+MDX soporta expresiones JavaScript en línea. Puedes calcular valores y renderizarlos directamente:
+
+export const estadisticas = {
+  lenguajes: 12,
+  frameworks: 8,
+  herramientas: 25,
+  anio: new Date().getFullYear()
+};
+
+Aquí hay algunas estadísticas para {estadisticas.anio}:
+
+- **Lenguajes soportados:** {estadisticas.lenguajes}
+- **Integraciones de framework:** {estadisticas.frameworks}
+- **Herramientas de desarrollo:** {estadisticas.herramientas}
+- **Tamaño total del ecosistema:** {estadisticas.lenguajes + estadisticas.frameworks + estadisticas.herramientas} tecnologías
+
+## Tablas Dinámicas
+
+export const caracteristicas = [
+  { nombre: 'Renderizado Estático', astro: true, next: true, gatsby: true },
+  { nombre: 'Arquitectura de Islas', astro: true, next: false, gatsby: false },
+  { nombre: 'Cero JS por Defecto', astro: true, next: false, gatsby: false },
+  { nombre: 'Soporte MDX', astro: true, next: true, gatsby: true },
+  { nombre: 'Colecciones de Contenido', astro: true, next: false, gatsby: true },
+];
+
+### Comparación de Características de Frameworks
+
+| Característica | Astro | Next.js | Gatsby |
+|----------------|:-----:|:-------:|:------:|
+{caracteristicas.map(f => `| ${f.nombre} | ${f.astro ? '✅' : '❌'} | ${f.next ? '✅' : '❌'} | ${f.gatsby ? '✅' : '❌'} |`).join('\n')}
+
+## Código con Contexto
+
+MDX hace natural intercalar explicaciones con código. Aquí tienes una ruta API paso a paso:
+
+**Paso 1:** Definir el manejador de ruta
+
+```typescript
+import type { APIRoute } from 'astro';
+
+export const GET: APIRoute = async ({ params, request }) => {
+  const { id } = params;
+  // Obtener datos basados en el parametro de ruta
+  const data = await fetchItem(id);
+
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+```
+
+**Paso 2:** Agregar manejo de errores
+
+```typescript
+export const GET: APIRoute = async ({ params }) => {
+  try {
+    const data = await fetchItem(params.id);
+    if (!data) {
+      return new Response('No Encontrado', { status: 404 });
+    }
+    return new Response(JSON.stringify(data), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response('Error Interno del Servidor', { status: 500 });
+  }
+};
+```
+
+<Aviso tipo="info">
+  MDX es particularmente poderoso para tutoriales y guías técnicas donde necesitas mezclar explicación con ejemplos interactivos. Todo el post de blog que estás leyendo ahora mismo está escrito en MDX!
+</Aviso>
+
+## Cuando Usar MDX
+
+MDX es excelente para:
+
+1. **Tutoriales técnicos** que se benefician de ejemplos interactivos
+2. **Documentación** con patrones de componentes reutilizables
+3. **Contenido basado en datos** donde los valores cambian con el tiempo
+4. **Posts con layouts personalizados** que van más allá del Markdown estándar
+
+Para posts de blog simples con mayormente texto e imágenes, el Markdown estándar (`.md`) es perfectamente adecuado y tiene menos sobrecarga. Elige la herramienta correcta para el contenido.

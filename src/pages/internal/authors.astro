@@ -1,0 +1,279 @@
+---
+import { getCollection } from 'astro:content';
+import AuthorCard from '@/components/blog/AuthorCard.astro';
+import InternalLayout from '@/layouts/InternalLayout.astro';
+
+const authorsRaw = await getCollection('authors');
+const authors = authorsRaw
+  .sort((a, b) => a.data.name.localeCompare(b.data.name))
+  .map((a) => a.data);
+
+const langs = [
+  { value: 'en', label: 'English' },
+  { value: 'es', label: 'Español' },
+] as const;
+---
+
+<InternalLayout
+  title="Authors Directory"
+  description="All available blog post authors and their metadata"
+  section="authors"
+>
+  <section class="mb-8">
+    <h2 class="mb-2 text-2xl font-bold md:text-3xl">Authors Directory</h2>
+    <p class="mb-2 text-base leading-relaxed text-gray-600 dark:text-gray-300">
+      All registered authors available for blog posts. Use the
+      <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">author</code>
+      frontmatter field with the slug value.
+    </p>
+    <p class="mb-6 text-sm text-gray-600 dark:text-gray-300">
+      {authors.length} authors registered &middot; YAML files in
+      <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">src/content/authors/</code>
+    </p>
+
+    <div class="mb-6 flex items-center gap-3" id="lang-switcher">
+      <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Preview language:</span>
+      <div class="inline-flex overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
+        {langs.map((lang) => (
+          <button
+            type="button"
+            data-lang-btn={lang.value}
+            class:list={[
+              'px-3 py-1.5 text-sm font-medium transition-colors',
+              lang.value === 'en'
+                ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                : 'bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700',
+            ]}
+          >
+            {lang.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {langs.map((lang) => (
+      <div
+        data-lang-group={lang.value}
+        class:list={['space-y-6', lang.value !== 'en' && 'hidden']}
+      >
+        {authors.map((author) => (
+          <AuthorCard author={author} lang={lang.value}>
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+              <code class="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-300">
+                {author.slug}
+              </code>
+              <span class="text-xs text-gray-600 dark:text-gray-300">
+                {author.avatar}
+              </span>
+            </div>
+          </AuthorCard>
+        ))}
+      </div>
+    ))}
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-4 text-2xl font-bold md:text-3xl">Usage in Blog Posts</h2>
+    <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
+      <p class="mb-3 text-sm text-gray-600 dark:text-gray-300">
+        To assign an author to a blog post, add the
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">author</code>
+        field to the frontmatter with the author's slug:
+      </p>
+      <pre class="overflow-x-auto rounded-lg bg-gray-100 p-4 text-sm dark:bg-gray-900"><code>---
+title: "My blog post"
+description: "A great article"
+pubDate: "2026-04-16"
+author: "sergio-florez"
+---</code></pre>
+      <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">
+        Available slugs: {authors.map((a) => a.slug).join(', ')}
+      </p>
+      <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+        Default (when omitted):
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">sergio-florez</code>
+      </p>
+      <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">
+        Both <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">en/</code>
+        and <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">es/</code>
+        versions of a post <strong>must</strong> use the same slug — authorship doesn't translate.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-4 text-2xl font-bold md:text-3xl">YAML Schema</h2>
+    <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+      Each author is a YAML file in
+      <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">src/content/authors/{'{'}slug{'}'}.yaml</code>.
+      The filename (without extension) must match the <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-800">slug</code>
+      field. Localization lives inside the YAML — both English and Spanish role/bio are required.
+    </p>
+    <div class="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th class="px-4 py-2 text-left font-semibold text-gray-900 dark:text-gray-100">Field</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-900 dark:text-gray-100">Required</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-900 dark:text-gray-100">Description</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">name</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Yes</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full display name. Same string in all languages.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">slug</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Yes</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Must match the YAML filename (without extension).</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">avatar</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Yes</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Absolute path. Convention: <code class="text-xs">/images/authors/{'{'}slug{'}'}.webp</code></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">role.en / role.es</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Yes</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Localized job title. Spanish requires proper diacritics.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">bio.en / bio.es</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Yes</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Localized short bio (1-2 sentences). Spanish uses tuteo (no voseo).</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">social.x</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">No</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full URL to X / Twitter profile.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">social.linkedin</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">No</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full URL to LinkedIn profile.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">social.github</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">No</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full URL to GitHub profile.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">social.instagram</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">No</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full URL to Instagram profile.</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">social.website</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">No</td>
+            <td class="px-4 py-2 text-gray-600 dark:text-gray-300">Full URL to personal website.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-4 text-2xl font-bold md:text-3xl">How to Add a New Author</h2>
+    <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
+      <ol class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">1. Create the YAML file</strong> at
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">src/content/authors/{'{'}slug{'}'}.yaml</code>.
+          The slug is kebab-case and must match the filename.
+        </li>
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">2. Add the avatar</strong> at
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">public/images/authors/{'{'}slug{'}'}.webp</code>
+          (recommended: 160x160 px WebP).
+        </li>
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">3. Fill all required fields</strong>:
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">name</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">slug</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">avatar</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">role.en</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">role.es</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">bio.en</code>,
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">bio.es</code>.
+        </li>
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">4. Add social links (optional)</strong>.
+          Only include the platforms the author actually uses.
+        </li>
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">5. Reference in blog posts</strong> by setting
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">author: "{'{'}slug{'}'}"</code>
+          in the post frontmatter (both EN and ES).
+        </li>
+        <li>
+          <strong class="text-gray-900 dark:text-gray-100">6. Validate</strong>: run
+          <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">npm run astro:check</code>
+          and reload this page to confirm the card renders correctly in both languages.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-4 text-2xl font-bold md:text-3xl">Rendering</h2>
+    <div class="space-y-3 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        The
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">BlogPostFooter.astro</code>
+        component looks up the author by slug from the
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">authors</code>
+        collection and renders an
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">AuthorCard</code>
+        + <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">ShareButtons</code>
+        at the bottom of every blog post.
+      </p>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        The resolved author also populates the
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">BlogPosting</code>
+        JSON-LD <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">author</code>
+        field for SEO.
+      </p>
+      <p class="text-sm text-gray-600 dark:text-gray-300">
+        If the slug doesn't resolve, the card is silently omitted and the JSON-LD falls back to a hardcoded author.
+        This is intentional — avoids build failures from typos but means agents should always verify
+        <code class="rounded bg-gray-100 px-1.5 py-0.5 text-xs dark:bg-gray-900">astro:check</code> passes.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="mb-4 text-2xl font-bold md:text-3xl">Full Reference</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-300">
+      Schema, components, JSON-LD impact, and validation checklist:
+      <a href="/docs/features/AUTHORS.md" class="text-blue-600 hover:underline dark:text-blue-400">docs/features/AUTHORS.md</a>
+    </p>
+  </section>
+</InternalLayout>
+
+<script>
+  const ACTIVE = 'bg-gray-900 text-white dark:bg-white dark:text-gray-900';
+  const INACTIVE =
+    'bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700';
+
+  function setup() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-lang-btn]');
+    const groups = document.querySelectorAll<HTMLElement>('[data-lang-group]');
+
+    for (const btn of buttons) {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.langBtn;
+
+        for (const b of buttons) {
+          b.className = `px-3 py-1.5 text-sm font-medium transition-colors ${b.dataset.langBtn === lang ? ACTIVE : INACTIVE}`;
+        }
+        for (const g of groups) {
+          g.classList.toggle('hidden', g.dataset.langGroup !== lang);
+        }
+      });
+    }
+  }
+
+  setup();
+</script>

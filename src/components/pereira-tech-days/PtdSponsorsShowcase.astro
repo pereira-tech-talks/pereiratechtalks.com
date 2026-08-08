@@ -1,0 +1,311 @@
+---
+/**
+ * PtdSponsorsShowcase — edition-aware sponsor chrome.
+ * - `gray-cards` (default): legacy 2024 gray rounded rectangles
+ * - `tree-circles`: 2026 brochure layout — logos over section BG art (tree + flowers),
+ *   no radial “bola” discs behind logos
+ */
+import type { Language } from '@/lib/i18n';
+import type { EditionSponsor } from '@/lib/sponsor';
+
+interface Props {
+  sponsors: EditionSponsor[];
+  lang: Language;
+  title?: string;
+  subtitle?: string;
+  footerNote?: string;
+  headingLevel?: 'h2' | 'h3';
+  layout?: 'gray-cards' | 'tree-circles';
+}
+
+const {
+  sponsors,
+  lang,
+  title,
+  subtitle,
+  footerNote,
+  headingLevel = 'h2',
+  layout = 'gray-cards',
+} = Astro.props;
+const Heading = headingLevel;
+const isTree = layout === 'tree-circles';
+
+const tierLabel: Record<EditionSponsor['tier'], { en: string; es: string }> = {
+  diamond: { en: 'Diamond sponsor', es: 'Patrocinador Diamante' },
+  gold: { en: 'Gold sponsor', es: 'Patrocinador Gold' },
+  silver: { en: 'Silver sponsor', es: 'Patrocinador Silver' },
+  bronze: { en: 'Bronze sponsor', es: 'Patrocinador Bronze' },
+  community: { en: 'Community sponsor', es: 'Patrocinador Comunidad' },
+};
+
+const goldTiers = new Set(['diamond', 'gold']);
+const goldSponsors = sponsors.filter((s) => goldTiers.has(s.tier));
+const otherSponsors = sponsors.filter((s) => !goldTiers.has(s.tier));
+
+/** Highlight **word** spans in the subtitle (coral emphasis, legacy photocopy). */
+function splitSubtitle(
+  text: string
+): Array<{ type: 'text' | 'em'; value: string }> {
+  const parts: Array<{ type: 'text' | 'em'; value: string }> = [];
+  const re = /\*\*([^*]+)\*\*/g;
+  let last = 0;
+  let match: RegExpExecArray | null = re.exec(text);
+  while (match) {
+    if (match.index > last) {
+      parts.push({ type: 'text', value: text.slice(last, match.index) });
+    }
+    parts.push({ type: 'em', value: match[1] });
+    last = match.index + match[0].length;
+    match = re.exec(text);
+  }
+  if (last < text.length) {
+    parts.push({ type: 'text', value: text.slice(last) });
+  }
+  return parts.length > 0 ? parts : [{ type: 'text', value: text }];
+}
+
+const subtitleParts = subtitle ? splitSubtitle(subtitle) : [];
+
+/** Flat order preserves content order (ASE → GitHub → Veritran → DailyBot). */
+const treeSponsors = sponsors;
+---
+
+<div class="ptd-sponsors-showcase" data-layout={layout}>
+  {
+    title && (
+      <header
+        class:list={[
+          isTree
+            ? 'mb-[clamp(2rem,5vw,2.75rem)]'
+            : 'mb-8 text-center md:mb-12',
+        ]}
+      >
+        <Heading
+          class:list={[
+            'ptd-sponsors-title m-0 font-bold uppercase leading-[1.05]',
+            isTree
+              ? 'mb-2.5 text-[clamp(2rem,5.5vw,3.15rem)] tracking-[0.01em] text-[#3a7f7c]'
+              : 'text-3xl text-[var(--ptt-text)] md:text-4xl',
+          ]}
+        >
+          {title}
+        </Heading>
+        {subtitle && (
+          <p
+            class:list={[
+              'm-0',
+              isTree
+                ? 'max-w-[36rem] text-[clamp(0.95rem,2.2vw,1.1rem)] leading-[1.55] text-[color-mix(in_srgb,var(--ptt-text)_82%,transparent)]'
+                : 'mx-auto mt-3 max-w-2xl text-sm text-[var(--ptt-text-muted)] md:text-base',
+            ]}
+          >
+            {subtitleParts.map((part) =>
+              part.type === 'em' ? (
+                <strong class="font-bold text-[var(--ptt-accent)]">{part.value}</strong>
+              ) : (
+                part.value
+              )
+            )}
+          </p>
+        )}
+      </header>
+    )
+  }
+
+  {
+    isTree ? (
+      <div class="ptd-sponsors-showcase__stage relative mb-[clamp(2rem,5vw,2.75rem)]">
+        {/*
+          Circuit tree + botanical corners live in the section background image
+          (sponsors-bg.png). No overlay SVG and no radial “bola” discs.
+        */}
+        <ul
+          class="ptd-sponsors-showcase__logos relative z-10 mx-auto grid max-w-[58rem] list-none grid-cols-2 gap-[clamp(1.25rem,3.5vw,2rem)] p-0 sm:grid-cols-3 sm:gap-[clamp(1.5rem,4vw,2.25rem)]"
+          role="list"
+        >
+          {treeSponsors.map(({ sponsor, tier }) => {
+            const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
+            const isGold = goldTiers.has(tier);
+            const logoLight = sponsor.data.logo.light;
+            const logoDark = sponsor.data.logo.dark;
+            const useThemeLogos = logoLight !== logoDark;
+            const imgWidth = isGold ? 280 : 220;
+            const imgHeight = isGold ? 110 : 90;
+            const imgClass = isGold
+              ? 'max-h-[6.5rem] max-w-full'
+              : 'max-h-[5.75rem] max-w-full';
+            return (
+              <li class="flex justify-center" data-tier={tier}>
+                <a
+                  href={sponsor.data.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  title={sponsor.data.name}
+                  class:list={[
+                    'group flex aspect-square items-center justify-center bg-transparent p-[clamp(1.15rem,3vw,1.65rem)] shadow-none transition-transform hover:-translate-y-[3px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]',
+                    isGold
+                      ? 'w-[min(100%,16.5rem)]'
+                      : 'w-[min(100%,14.5rem)]',
+                  ]}
+                >
+                  {useThemeLogos ? (
+                    <>
+                      <img
+                        src={logoLight}
+                        alt={sponsor.data.logo.alt}
+                        width={imgWidth}
+                        height={imgHeight}
+                        loading="lazy"
+                        decoding="async"
+                        class:list={['h-auto w-auto object-contain dark:hidden', imgClass]}
+                      />
+                      <img
+                        src={logoDark}
+                        alt={sponsor.data.logo.alt}
+                        width={imgWidth}
+                        height={imgHeight}
+                        loading="lazy"
+                        decoding="async"
+                        class:list={['hidden h-auto w-auto object-contain dark:block', imgClass]}
+                      />
+                    </>
+                  ) : (
+                    <img
+                      src={logoLight}
+                      alt={sponsor.data.logo.alt}
+                      width={imgWidth}
+                      height={imgHeight}
+                      loading="lazy"
+                      decoding="async"
+                      class:list={['h-auto w-auto object-contain', imgClass]}
+                    />
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ) : (
+      (
+        [
+          { key: 'gold', items: goldSponsors, size: 'gold' as const },
+          { key: 'other', items: otherSponsors, size: 'silver' as const },
+        ] as const
+      )
+        .filter((row) => row.items.length > 0)
+        .map((row) => (
+          <ul
+            class:list={[
+              'grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6',
+              row.key === 'other' &&
+                goldSponsors.length > 0 &&
+                'mt-4 sm:mt-5 lg:mt-6',
+            ]}
+          >
+            {row.items.map(({ sponsor, tier }) => {
+              const label = `${sponsor.data.name} — ${tierLabel[tier][lang]}`;
+              const isGold = row.size === 'gold';
+              const isDailybot = sponsor.id === 'dailybot';
+              const imgWidth = isGold ? 280 : isDailybot ? 320 : 240;
+              const imgHeight = isGold ? 110 : isDailybot ? 80 : 90;
+              const imgClass = isGold
+                ? 'max-h-24 max-w-[min(100%,17.5rem)]'
+                : isDailybot
+                  ? 'max-h-20 max-w-[min(100%,20rem)] w-full'
+                  : 'max-h-20 max-w-[min(100%,15rem)]';
+              return (
+                <li
+                  class="flex min-h-[8.5rem] w-full max-w-full items-center justify-center rounded-md bg-gray-200 px-6 py-8 sm:min-h-[9.5rem] sm:px-8 sm:py-10"
+                  data-tier={tier}
+                >
+                  <a
+                    href={sponsor.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    class="flex h-full w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ptt-primary)]"
+                  >
+                    <img
+                      src={sponsor.data.logo.light}
+                      alt={sponsor.data.logo.alt}
+                      width={imgWidth}
+                      height={imgHeight}
+                      loading="lazy"
+                      decoding="async"
+                      class:list={['w-auto object-contain', imgClass]}
+                    />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ))
+    )
+  }
+
+  {
+    isTree && footerNote && (
+      <p class="ptd-sponsors-showcase__footer mx-auto flex w-[min(100%,40rem)] items-center justify-center gap-[0.85rem] rounded-full border border-[color-mix(in_srgb,#3a7f7c_35%,transparent)] bg-[color-mix(in_srgb,white_72%,transparent)] px-5 py-[0.85rem] text-center">
+        <span class="inline-flex shrink-0 items-center gap-[0.35rem]" aria-hidden="true">
+          <span class="h-[0.45rem] w-[0.45rem] rounded-full bg-[var(--ptt-accent)]" />
+          <span class="h-[0.45rem] w-[0.45rem] rounded-full bg-[#3a7f7c]" />
+          <span class="h-[0.45rem] w-[0.45rem] rounded-full bg-[var(--ptt-text)]" />
+        </span>
+        <span class="text-[clamp(0.82rem,2vw,0.95rem)] font-medium italic leading-snug text-[#3a7f7c]">
+          {footerNote}
+        </span>
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .ptd-sponsors-title {
+    font-family: Bebas Neue, 'Arial Black', sans-serif;
+    letter-spacing: 0.04em;
+  }
+
+  /*
+   * Section chrome (parent in PereiraTechDayDetailPage).
+   * min-height matches sponsors-bg.png aspect (≈1024×576) so botanical
+   * corners at the bottom of the art are not cropped.
+   */
+  :global(.ptd-sponsors-section) {
+    --ptd-sponsors-bg-height: calc(100vw * 576 / 1024);
+    isolation: isolate;
+    overflow: hidden;
+    min-height: var(--ptd-sponsors-bg-height);
+    padding: clamp(2.5rem, 6vw, 3.5rem) 0 clamp(2rem, 5vw, 3rem);
+    background: var(--ptt-bg, #fef7f3);
+  }
+
+  :global(.ptd-sponsors-section__bg) {
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image: var(--ptd-sponsors-bg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  /* Soft edge washes only — keep side flowers visible (legacy photocopy). */
+  :global(.ptd-sponsors-section__fade) {
+    background:
+      linear-gradient(
+        to bottom,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 94%, transparent) 6%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 72%, transparent) 12%,
+        transparent 20%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 94%, transparent) 5%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 72%, transparent) 10%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 15%,
+        transparent 22%
+      );
+  }
+</style>

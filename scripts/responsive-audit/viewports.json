@@ -1,0 +1,107 @@
+[
+  {
+    "name": "phone-narrow",
+    "width": 320,
+    "height": 568,
+    "deviceScaleFactor": 2,
+    "isMobile": true
+  },
+  {
+    "name": "phone-standard",
+    "width": 375,
+    "height": 667,
+    "deviceScaleFactor": 2,
+    "isMobile": true
+  },
+  {
+    "name": "phone-large",
+    "width": 414,
+    "height": 896,
+    "deviceScaleFactor": 3,
+    "isMobile": true
+  },
+  {
+    "name": "phone-xl",
+    "width": 430,
+    "height": 932,
+    "deviceScaleFactor": 3,
+    "isMobile": true
+  },
+  {
+    "name": "phone-landscape",
+    "width": 667,
+    "height": 375,
+    "deviceScaleFactor": 2,
+    "isMobile": true
+  },
+  {
+    "name": "phablet",
+    "width": 480,
+    "height": 853,
+    "deviceScaleFactor": 2,
+    "isMobile": true
+  },
+  {
+    "name": "tablet-portrait",
+    "width": 768,
+    "height": 1024,
+    "deviceScaleFactor": 2,
+    "isMobile": false
+  },
+  {
+    "name": "tablet-landscape",
+    "width": 1024,
+    "height": 768,
+    "deviceScaleFactor": 2,
+    "isMobile": false
+  },
+  {
+    "name": "laptop-small",
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1,
+    "isMobile": false
+  },
+  {
+    "name": "laptop-standard",
+    "width": 1440,
+    "height": 900,
+    "deviceScaleFactor": 2,
+    "isMobile": false
+  },
+  {
+    "name": "desktop-fhd",
+    "width": 1920,
+    "height": 1080,
+    "deviceScaleFactor": 1,
+    "isMobile": false
+  },
+  {
+    "name": "desktop-ultrawide",
+    "width": 2560,
+    "height": 1080,
+    "deviceScaleFactor": 1,
+    "isMobile": false
+  },
+  {
+    "name": "desktop-4k",
+    "width": 3840,
+    "height": 2160,
+    "deviceScaleFactor": 1,
+    "isMobile": false
+  },
+  {
+    "name": "foldable-folded",
+    "width": 280,
+    "height": 653,
+    "deviceScaleFactor": 2,
+    "isMobile": true
+  },
+  {
+    "name": "foldable-open",
+    "width": 717,
+    "height": 512,
+    "deviceScaleFactor": 2,
+    "isMobile": false
+  }
+]

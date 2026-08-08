@@ -1,2 +1,53 @@
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+
+/es/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+
+# Agent-readiness .well-known endpoints (RFC 9727, RFC 8414, RFC 9728, SEP-1649, agent-skills v0.2.0)
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json
+  Cache-Control: public, max-age=300, must-revalidate
+
+# auth.md — WorkOS auth.md / isitagentready scanner expects text/markdown
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=300, must-revalidate
+
+/.well-known/mcp/server-card.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/.well-known/agent-skills/index.json
+  Cache-Control: public, max-age=300, must-revalidate
+
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/icons/*
+  Cache-Control: public, max-age=2592000
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+/site.webmanifest
+  Cache-Control: public, max-age=86400, must-revalidate

@@ -1,0 +1,410 @@
+---
+import { type Language, tr } from '@/lib/i18n';
+
+/** Matches content-collection `i18nString` (plain string or {en,es}). */
+type I18nText = string | { en?: string; es?: string };
+
+interface Plan {
+  tier: string;
+  title: I18nText;
+  subtitle?: I18nText;
+  price: string;
+  period?: I18nText;
+  featured?: boolean;
+  benefits: I18nText[];
+  ctaLabel: I18nText;
+  ctaUrl: string;
+}
+
+interface PartnershipItem {
+  title?: I18nText;
+  description?: I18nText;
+  subtitle?: I18nText;
+}
+
+interface Partnership {
+  title: I18nText;
+  subtitle?: I18nText;
+  items: PartnershipItem[];
+  ctaLabel: I18nText;
+  ctaUrl: string;
+}
+
+interface Props {
+  lang: Language;
+  title: string;
+  plans: Plan[];
+  partnerships: Partnership[];
+  sectionBg?: string;
+}
+
+const { lang, title, plans, partnerships, sectionBg } = Astro.props;
+
+type IconKey = 'award' | 'diamond' | 'crown';
+
+const tierIcon: Record<string, IconKey> = {
+  silver: 'award',
+  gold: 'diamond',
+  platinum: 'crown',
+};
+
+const furnitureNote =
+  lang === 'es'
+    ? 'El sponsor provee su mobiliario.'
+    : 'The sponsor provides their own furniture.';
+---
+
+<section
+  id="pricing"
+  class="ptd-pricing relative overflow-hidden py-[var(--ptd-section-pad)]"
+  style={sectionBg ? `--ptd-pricing-bg: url('${sectionBg}')` : undefined}
+  aria-labelledby="ptd-pricing-title"
+>
+  {
+    sectionBg && (
+      <div class="ptd-pricing__backdrop pointer-events-none absolute inset-x-0 top-0 z-0" aria-hidden="true" />
+    )
+  }
+
+  <div class="ptd-pricing__inner relative z-10 main-container">
+    <header class="mb-[clamp(2rem,5vw,3rem)]">
+      <h2
+        id="ptd-pricing-title"
+        class="m-0 text-[clamp(2rem,5.5vw,3.15rem)] font-normal uppercase leading-[1.05] tracking-[0.04em] text-[var(--ptt-text)]"
+        style='font-family: "Bebas Neue", "Arial Black", sans-serif;'
+      >
+        {title}
+      </h2>
+      <span class="ptd-pricing__title-accent mt-2.5 block" aria-hidden="true" />
+    </header>
+
+    <ul class="grid list-none grid-cols-1 items-stretch gap-7 p-0 min-[900px]:grid-cols-3 min-[900px]:gap-5">
+      {
+        plans.map((plan) => {
+          const iconKey = tierIcon[plan.tier] ?? 'award';
+          const featured = Boolean(plan.featured) || plan.tier === 'gold';
+          return (
+            <li
+              class:list={[
+                'ptd-pricing-card relative flex flex-col',
+                `ptd-pricing-card--${plan.tier}`,
+                featured && 'ptd-pricing-card--featured',
+              ]}
+            >
+              <span class="ptd-pricing-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                  {iconKey === 'award' && (
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path d="M6 9a6 6 0 1 0 12 0A6 6 0 1 0 6 9" />
+                      <path d="m12 15l3.4 5.89l1.598-3.233l3.598.232l-3.4-5.889M6.802 12l-3.4 5.89L7 17.657l1.598 3.232l3.4-5.889" />
+                    </g>
+                  )}
+                  {iconKey === 'diamond' && (
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                      <path d="M6 5h12l3 5l-8.5 9.5a.7.7 0 0 1-1 0L3 10z" />
+                      <path d="M10 12L8 9.8l.6-1" />
+                    </g>
+                  )}
+                  {iconKey === 'crown' && (
+                    <path
+                      d="m12 6l4 6l5-4l-2 10H5L3 8l5 4z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    />
+                  )}
+                </svg>
+              </span>
+
+              <h3 class="ptd-pricing-card__name m-0 text-center uppercase">
+                {tr(plan.title, lang)}
+              </h3>
+
+              <p class="ptd-pricing-card__price m-0 flex items-baseline justify-center gap-0.5 font-bold leading-none text-[var(--ptt-text)]">
+                <span class="text-2xl">$</span>
+                <span class="text-[clamp(2.6rem,5.5vw,3.15rem)]">{plan.price}</span>
+                {plan.period && (
+                  <span class="ml-1 text-lg font-semibold">{tr(plan.period, lang)}</span>
+                )}
+              </p>
+
+              {plan.subtitle && (
+                <p class="ptd-pricing-card__tagline m-0 mb-3.5 text-center text-[1.05rem] font-medium text-[var(--ptt-text)]">
+                  {tr(plan.subtitle, lang)}
+                </p>
+              )}
+
+              <span class="ptd-pricing-card__divider mx-auto mb-4 block" aria-hidden="true" />
+
+              <ul class="m-0 mb-5 flex-1 list-none space-y-2.5 p-0" role="list">
+                {plan.benefits.map((b) => (
+                  <li class="flex items-start gap-2.5 text-base leading-snug text-[var(--ptt-text)]">
+                    <span class="ptd-pricing-card__check mt-0.5 shrink-0" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                        <path
+                          d="m5 12l5 5L20 7"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="3"
+                        />
+                      </svg>
+                    </span>
+                    <span>{tr(b, lang)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-auto flex justify-center">
+                <a
+                  href={plan.ctaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ptd-pricing-card__button inline-flex min-w-[8.5rem] items-center justify-center rounded-full border bg-white px-5 py-2.5 text-base font-semibold transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                >
+                  {tr(plan.ctaLabel, lang)}
+                </a>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      partnerships.length > 0 && (
+        <ul class="ptd-pricing__extra mt-8 grid list-none grid-cols-1 gap-7 p-0 min-[900px]:flex min-[900px]:flex-wrap min-[900px]:justify-center min-[900px]:gap-5">
+          {partnerships.map((p) => (
+            <li class="ptd-pricing-card ptd-pricing-card--extra relative flex flex-col min-[900px]:w-[calc((100%-2.5rem)/3)] min-[900px]:max-w-[calc((100%-2.5rem)/3)] min-[900px]:flex-[0_1_calc((100%-2.5rem)/3)]">
+              <h3 class="ptd-pricing-card__name m-0 text-center">{tr(p.title, lang)}</h3>
+              {p.subtitle && (
+                <p class="ptd-pricing-card__tagline m-0 mb-3.5 text-center text-[1.05rem] font-medium text-[var(--ptt-text)]">
+                  {tr(p.subtitle, lang)}
+                </p>
+              )}
+              <ul class="m-0 mb-5 flex-1 list-none space-y-2.5 p-0" role="list">
+                {p.items.map((item) => {
+                  if (item.title) {
+                    return (
+                      <li class="ptd-pricing-card__list-heading pt-2.5 text-sm font-bold uppercase tracking-[0.08em] text-[var(--ptt-accent)]">
+                        {tr(item.title, lang)}
+                      </li>
+                    );
+                  }
+                  if (item.subtitle) {
+                    return (
+                      <li class="text-base italic leading-snug text-[color-mix(in_srgb,var(--ptt-text)_78%,transparent)]">
+                        {tr(item.subtitle, lang)}
+                      </li>
+                    );
+                  }
+                  return (
+                    <li class="flex items-start gap-2.5 text-base leading-snug text-[var(--ptt-text)]">
+                      <span class="ptd-pricing-card__check mt-0.5 shrink-0" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+                          <path
+                            d="m5 12l5 5L20 7"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                          />
+                        </svg>
+                      </span>
+                      <span>{tr(item.description, lang)}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div class="mt-auto flex justify-center">
+                <a
+                  href={p.ctaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="ptd-pricing-card__button inline-flex min-w-[8.5rem] items-center justify-center rounded-full border bg-white px-5 py-2.5 text-base font-semibold transition hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)]"
+                >
+                  {tr(p.ctaLabel, lang)}
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      partnerships.length > 0 && (
+        <p class="mt-8 flex items-center justify-center gap-1.5 text-center text-[0.82rem] font-medium text-[var(--ptt-text)]">
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            aria-hidden="true"
+            class="shrink-0 text-[color:var(--ptd-tier-teal,#3ab9c9)]"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M5 21c.5-4.5 2.5-8 7-10" />
+              <path d="M9 18c6.218 0 10.5-3.288 11-12V4h-4.014c-9 0-11.986 4-12 9c0 1 0 3 2 5h3z" />
+            </g>
+          </svg>
+          <svg
+            viewBox="0 0 24 24"
+            width="15"
+            height="15"
+            aria-hidden="true"
+            class="-scale-x-100 shrink-0 text-[var(--ptt-accent)]"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M5 21c.5-4.5 2.5-8 7-10" />
+              <path d="M9 18c6.218 0 10.5-3.288 11-12V4h-4.014c-9 0-11.986 4-12 9c0 1 0 3 2 5h3z" />
+            </g>
+          </svg>
+          <span>{furnitureNote}</span>
+        </p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .ptd-pricing {
+    --ptd-tier-teal: #3ab9c9;
+  }
+
+  .ptd-pricing__backdrop {
+    aspect-ratio: 1024 / 576;
+    width: 100%;
+    height: auto;
+    background-color: var(--ptt-bg, #fef7f3);
+    background-image:
+      linear-gradient(
+        to bottom,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 92%, transparent) 10%,
+        transparent 24%
+      ),
+      linear-gradient(
+        to top,
+        var(--ptt-bg, #fef7f3) 0%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 94%, transparent) 5%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 72%, transparent) 10%,
+        color-mix(in srgb, var(--ptt-bg, #fef7f3) 42%, transparent) 15%,
+        transparent 22%
+      ),
+      var(--ptd-pricing-bg);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+  .ptd-pricing__title-accent {
+    width: min(100%, 14rem);
+    height: 3px;
+    border-radius: 999px;
+    background: var(--ptt-accent, #f06d6d);
+  }
+
+  .ptd-pricing-card {
+    padding: 2.75rem 1.35rem 1.5rem;
+    border-radius: 1.35rem;
+    background: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--ptt-text) 8%, transparent);
+    box-shadow: 0 14px 36px color-mix(in srgb, var(--ptt-text) 7%, transparent);
+  }
+
+  .ptd-pricing-card--featured {
+    background: linear-gradient(180deg, #fffaf8 0%, #fef7f3 100%);
+    border: 2px solid var(--ptt-accent, #f06d6d);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--ptt-accent, #f06d6d) 14%, transparent);
+  }
+
+  .ptd-pricing-card__icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 3.35rem;
+    height: 3.35rem;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    box-shadow: 0 8px 20px color-mix(in srgb, var(--ptt-text) 16%, transparent);
+  }
+
+  .ptd-pricing-card--silver .ptd-pricing-card__icon,
+  .ptd-pricing-card--platinum .ptd-pricing-card__icon {
+    background: var(--ptd-tier-teal, #3ab9c9);
+  }
+
+  .ptd-pricing-card--gold .ptd-pricing-card__icon {
+    background: var(--ptt-accent, #f06d6d);
+  }
+
+  .ptd-pricing-card__name {
+    margin: 0.35rem 0 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--ptt-text);
+  }
+
+  .ptd-pricing-card__divider {
+    width: 2.5rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--ptt-accent, #f06d6d);
+  }
+
+  .ptd-pricing-card__check {
+    display: grid;
+    place-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 999px;
+    color: #ffffff;
+    background: var(--ptt-text);
+  }
+
+  .ptd-pricing-card--gold .ptd-pricing-card__check {
+    background: var(--ptt-accent, #f06d6d);
+  }
+
+  .ptd-pricing-card__button {
+    border-color: color-mix(in srgb, var(--ptt-text) 22%, transparent);
+    color: var(--ptt-text);
+  }
+
+  .ptd-pricing-card--featured .ptd-pricing-card__button {
+    border-color: color-mix(in srgb, var(--ptt-accent, #f06d6d) 45%, transparent);
+    color: var(--ptt-accent, #f06d6d);
+  }
+</style>
