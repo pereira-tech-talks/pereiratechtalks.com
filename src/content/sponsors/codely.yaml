@@ -1,0 +1,12 @@
+name: Codely
+logo:
+  light: /images/sponsors/codely.png
+  dark: /images/sponsors/codely-dark.png
+  alt: Codely logo
+url: "https://codely.com/"
+description:
+  en: Training for maintainable, scalable, and testable software. Past community partner of Pereira Tech Talks — supported meetups and the local developer ecosystem.
+  es: Formación para escribir código mantenible, escalable y testable. Aliado comunitario pasado de Pereira Tech Talks — apoyó los meetups y el ecosistema local de developers.
+tier: community
+status: past
+order: 7

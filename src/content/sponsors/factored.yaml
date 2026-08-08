@@ -1,0 +1,12 @@
+name: Factored
+logo:
+  light: /images/sponsors/factored.png
+  dark: /images/sponsors/factored-dark.png
+  alt: Factored logo
+url: "https://www.factored.ai/"
+description:
+  en: Specialized AI, ML, and data engineering teams. Past community partner of Pereira Tech Talks — supported meetups and the local developer ecosystem.
+  es: Equipos especializados en IA, ML e ingeniería de datos. Aliado comunitario pasado de Pereira Tech Talks — apoyó los meetups y el ecosistema local de developers.
+tier: community
+status: past
+order: 8
