@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/aprendiendo-node-streams-2015/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - aprendiendo-node-streams-2015--1-aprendiendo-node
+  - aprendiendo-node-streams-2015--2-streams-event-emitter
+speakers:
+  - daniel-aristizabal
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

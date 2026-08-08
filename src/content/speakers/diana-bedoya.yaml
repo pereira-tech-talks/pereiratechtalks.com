@@ -1,0 +1,20 @@
+name: "Diana M. Bedoya"
+role:
+  en: "Early PereiraJS speaker"
+  es: "Ponente temprana de PereiraJS"
+bio:
+  en: "Diana M. Bedoya spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Diana M. Bedoya participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Diana M. Bedoya"
+    es: "Retrato de Diana M. Bedoya"
+social:
+  twitter: "https://twitter.com/dimabera"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

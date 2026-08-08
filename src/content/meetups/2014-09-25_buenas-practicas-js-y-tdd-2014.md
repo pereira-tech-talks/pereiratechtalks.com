@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/buenas-practicas-js-y-tdd-2014/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - buenas-practicas-js-y-tdd-2014--1-buenas-practicas-en-javascript
+  - buenas-practicas-js-y-tdd-2014--2-tdd-bdd-javascript-y-el-buen-sabor-de-las-pruebas
+speakers:
+  - jonathan-alvarez
+  - oscar-granada
 sponsors: []
 status: completed
 draft: false

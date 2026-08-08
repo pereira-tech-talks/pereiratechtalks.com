@@ -21,8 +21,11 @@ hero:
 heroImage: "/images/meetups/redes-neuronales-keras-2018/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - redes-neuronales-keras-2018--1-introduccion-a-las-redes-neuronales-con-keras-random-fo
+speakers:
+  - juan-sebastian-vega
+  - leiver-campeon
 sponsors: []
 status: completed
 draft: false

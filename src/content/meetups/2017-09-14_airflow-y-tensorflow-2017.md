@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - airflow-y-tensorflow-2017--1-monitoreo-y-control-de-flujos-de-trabajo-con-airflow
+  - airflow-y-tensorflow-2017--2-introduccion-a-la-inteligencia-artificial-con-tensorflo
+speakers:
+  - manuel-pineda
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

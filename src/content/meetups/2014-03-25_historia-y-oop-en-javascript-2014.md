@@ -21,8 +21,13 @@ hero:
 heroImage: "/images/meetups/historia-y-oop-en-javascript-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - historia-y-oop-en-javascript-2014--1-javascript-historia-y-aplicaciones
+  - historia-y-oop-en-javascript-2014--2-programacion-orientada-a-objetos-con-javascript
+speakers:
+  - manuel-pineda
+  - jhonber-jimenez
+  - oscar-granada
 sponsors: []
 status: completed
 draft: false

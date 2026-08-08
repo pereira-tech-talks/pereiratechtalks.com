@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/que-es-el-blockchain-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - que-es-el-blockchain-2017--1-que-es-el-blockchain-y-como-transformara-radicalmente-l
+speakers:
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

@@ -12,14 +12,12 @@ location:
   country: "Colombia"
   online: false
 hero:
-  src: "/images/meetups/hackaton-planificacion-2018/hero.jpg"
+  src: "/images/blog/posts/planning-hackathon-2018/hero.webp"
   alt:
     en: "Pereira Tech Talks + Pereira JS 2018 planning hackathon"
     es: "Hackaton de planificación Pereira Tech Talks + Pereira JS 2018"
-  layout: banner
+  layout: side-by-side
 verticals:
   - monthly-meetups
-related:
-  - collection: meetups
-    slug: "2018-01-14_hackaton-planificacion-2018"
+related: []
 status: completed

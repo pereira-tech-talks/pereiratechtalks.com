@@ -21,8 +21,13 @@ hero:
 heroImage: "/images/meetups/primera-reunion-pereirajs-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - primera-reunion-pereirajs-2014--1-bienvenida-a-pereirajs
+  - primera-reunion-pereirajs-2014--2-javascript-historia-y-aplicaciones
+speakers:
+  - daniel-aristizabal
+  - jhonber-jimenez
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

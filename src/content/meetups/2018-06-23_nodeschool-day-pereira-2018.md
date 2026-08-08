@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/nodeschool-day-pereira-2018/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - nodeschool-day-pereira-2018--1-bienvenida-al-nodeschool-pereira-y-a-la-comunidad-perei
+  - nodeschool-day-pereira-2018--2-creando-redes-peer-to-peer-en-nodejs
+speakers:
+  - sergio-florez
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

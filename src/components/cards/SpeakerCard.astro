@@ -45,11 +45,15 @@ const lastTalkLabel = (() => {
     : `Last talk: ${formatted}`;
 })();
 
-const talkCountLabel =
+const talkCountNoun =
   talkCount > 0
     ? lang === 'es'
-      ? `${talkCount} ${talkCount === 1 ? 'charla' : 'charlas'}`
-      : `${talkCount} ${talkCount === 1 ? 'talk' : 'talks'}`
+      ? talkCount === 1
+        ? 'charla'
+        : 'charlas'
+      : talkCount === 1
+        ? 'talk'
+        : 'talks'
     : null;
 
 const latestYear = latestTalkDate ? getCalendarYear(latestTalkDate) : null;
@@ -90,18 +94,25 @@ const latestYear = latestTalkDate ? getCalendarYear(latestTalkDate) : null;
   </a>
 
   {
-    (lastTalkLabel || talkCountLabel) && (
-      <div class="mt-3 space-y-1">
-        {lastTalkLabel && (
-          <p class="text-xs font-semibold tracking-wide text-ptt-primary dark:text-ptt-primary-dark">
-            {lastTalkLabel}
+    (lastTalkLabel || talkCountNoun) && (
+      <div class="mt-4 flex flex-col items-center gap-2">
+        {talkCountNoun && (
+          <p class="flex flex-col items-center leading-none">
+            <span
+              class="text-3xl font-bold tabular-nums tracking-tight text-ptt-primary dark:text-ptt-primary-dark"
+            >
+              {talkCount}
+            </span>
+            <span
+              class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-ptt-secondary"
+            >
+              {talkCountNoun}
+              {latestYear && !lastTalkLabel ? ` · ${latestYear}` : ''}
+            </span>
           </p>
         )}
-        {talkCountLabel && (
-          <p class="text-xs text-ptt-secondary">
-            {talkCountLabel}
-            {latestYear && !lastTalkLabel ? ` · ${latestYear}` : ''}
-          </p>
+        {lastTalkLabel && (
+          <p class="text-xs text-ptt-secondary">{lastTalkLabel}</p>
         )}
       </div>
     )

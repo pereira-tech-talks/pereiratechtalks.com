@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/zeromq-y-websockets-2015/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - zeromq-y-websockets-2015--1-zeromq-node-js
+  - zeromq-y-websockets-2015--2-websockets-y-socket-io
+speakers:
+  - manuel-pineda
+  - jhonber-jimenez
 sponsors: []
 status: completed
 draft: false

@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/mvc-y-express-flatiron-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - mvc-y-express-flatiron-2014--1-mv-el-camino-a-las-web-apps-del-futuro
+  - mvc-y-express-flatiron-2014--2-express-js-y-flatiron-js-juntos-pero-no-revueltos
+speakers:
+  - oscar-granada
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

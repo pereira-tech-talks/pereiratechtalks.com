@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/ionic-angular-y-solidity-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - ionic-angular-y-solidity-2017--1-desarrollo-movil-con-ionic-angular
+speakers:
+  - julian-patino
 sponsors: []
 status: completed
 draft: false

@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - js-y-nodejs-introduccion-2016--1-introduccion-a-javascript
+  - js-y-nodejs-introduccion-2016--2-introduccion-a-nodejs
+speakers:
+  - jonathan-alvarez
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

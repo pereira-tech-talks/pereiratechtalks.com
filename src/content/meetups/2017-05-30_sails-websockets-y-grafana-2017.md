@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - sails-websockets-y-grafana-2017--1-apis-y-websockets-con-sailsjs
+  - sails-websockets-y-grafana-2017--2-monitoreo-y-visualizacion-de-datos-con-statsd-y-grafana
+speakers:
+  - john-darwin-morales
+  - manuel-pineda
 sponsors: []
 status: completed
 draft: false

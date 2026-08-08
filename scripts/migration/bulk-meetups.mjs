@@ -172,8 +172,6 @@ const SLUG_OVERRIDES = {
     'servidor-web-nodejs-2017',
   'que-es-el-blockchain-y-como-transformara-radicalmente-la-economia.mdx':
     'que-es-el-blockchain-2017',
-  'hackaton-de-planificacion-de-actividades-2018.mdx':
-    'hackaton-planificacion-2018',
   'realidad-virtual-para-la-web-con-a-frame-y-point-free-javascript-con-ramdajs.mdx':
     'realidad-virtual-y-ramda-2018',
   'introduccion-a-las-redes-neuronales-con-keras-y-random-forest.mdx':

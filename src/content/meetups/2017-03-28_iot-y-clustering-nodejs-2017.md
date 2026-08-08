@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/iot-y-clustering-nodejs-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - iot-y-clustering-nodejs-2017--1-administracion-de-un-pequeno-cluster-con-nodejs-aplicad
+speakers:
+  - alejandro-rendon
 sponsors: []
 status: completed
 draft: false

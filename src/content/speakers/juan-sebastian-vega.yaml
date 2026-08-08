@@ -1,0 +1,20 @@
+name: "Juan Sebastián Vega"
+role:
+  en: "Speaker — d3.js / ML"
+  es: "Ponente — d3.js / ML"
+bio:
+  en: "Juan Sebastián Vega spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Juan Sebastián Vega participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Juan Sebastián Vega"
+    es: "Retrato de Juan Sebastián Vega"
+social:
+  twitter: "https://twitter.com/sebasvega95"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

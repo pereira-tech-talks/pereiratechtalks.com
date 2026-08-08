@@ -74,11 +74,11 @@ describe('speaker / meetup / talk linkage invariants', () => {
     expect(count).toBeGreaterThanOrEqual(80);
   });
 
-  it('talk collection floor after exhaustive talk mapping (≥110)', () => {
+  it('talk collection floor after exhaustive talk mapping (≥160)', () => {
     const count = readdirSync(TALKS).filter((f) =>
       /\.(md|mdx|yaml)$/.test(f)
     ).length;
-    expect(count).toBeGreaterThanOrEqual(110);
+    expect(count).toBeGreaterThanOrEqual(160);
   });
 
   it('every meetup speakers[] slug has a talk for that meetup', () => {

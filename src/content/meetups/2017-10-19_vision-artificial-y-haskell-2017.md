@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/vision-artificial-y-haskell-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - vision-artificial-y-haskell-2017--1-image-stitching-una-introduccion-a-opencv
+speakers:
+  - carlos-alvaro
 sponsors: []
 status: completed
 draft: false

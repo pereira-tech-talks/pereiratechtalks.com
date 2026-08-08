@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/introduccion-a-npm-2015/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - introduccion-a-npm-2015--1-introduccion-a-npm
+speakers:
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

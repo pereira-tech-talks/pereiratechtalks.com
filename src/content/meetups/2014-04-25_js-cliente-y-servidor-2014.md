@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - js-cliente-y-servidor-2014--1-introduccion-a-javascript-del-lado-del-cliente
+  - js-cliente-y-servidor-2014--2-introduccion-a-javascript-del-lado-del-servidor
+speakers:
+  - jhonber-jimenez
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

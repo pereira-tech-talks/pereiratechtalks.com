@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/realidad-virtual-y-ramda-2018/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - realidad-virtual-y-ramda-2018--1-point-free-javascript-con-ramdajs
+speakers:
+  - andres-sugar
 sponsors: []
 status: completed
 draft: false

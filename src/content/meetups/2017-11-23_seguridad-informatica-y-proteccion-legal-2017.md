@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/seguridad-informatica-y-proteccion-legal-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - seguridad-informatica-y-proteccion-legal-2017--1-como-empezar-en-seguridad-informatica
+speakers:
+  - santiago-bernal
 sponsors: []
 status: completed
 draft: false

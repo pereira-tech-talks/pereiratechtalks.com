@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/reactive-programming-y-es6/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - reactive-programming-y-es6--1-reactive-programming-ecmascript-6
+speakers:
+  - jonathan-alvarez
 sponsors: []
 status: completed
 draft: false

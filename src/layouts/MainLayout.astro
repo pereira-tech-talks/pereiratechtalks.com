@@ -226,6 +226,37 @@ const activeNotifications = suppressTopNotifications
         el.addEventListener('transitionend', syncSoon);
       })();
     </script>
+    {/*
+      In-page jump to #main-after-hero must clear sticky chrome. Native
+      scroll-padding can lag the ResizeObserver; re-measure on click.
+    */}
+    <script is:inline>
+      (function () {
+        document.addEventListener('click', function (event) {
+          var link = event.target && event.target.closest
+            ? event.target.closest('[data-scroll-to-after-hero]')
+            : null;
+          if (!link) return;
+          var target = document.getElementById('main-after-hero');
+          if (!target) return;
+          event.preventDefault();
+          var chrome = document.querySelector('[data-ptt-chrome]');
+          var offset = chrome ? chrome.getBoundingClientRect().height : 68;
+          var top =
+            target.getBoundingClientRect().top + window.scrollY - offset;
+          var reduce = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+          ).matches;
+          window.scrollTo({
+            top: Math.max(0, top),
+            behavior: reduce ? 'auto' : 'smooth',
+          });
+          if (history.replaceState) {
+            history.replaceState(null, '', '#main-after-hero');
+          }
+        });
+      })();
+    </script>
     <main
       id="main-content"
       class:list={[

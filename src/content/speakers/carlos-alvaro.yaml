@@ -1,0 +1,20 @@
+name: "Carlos Álvaro"
+role:
+  en: "Speaker — OpenCV / computer vision"
+  es: "Ponente — OpenCV / visión por computador"
+bio:
+  en: "Carlos Álvaro spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Carlos Álvaro participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Carlos Álvaro"
+    es: "Retrato de Carlos Álvaro"
+social:
+  website: "http://caal-15.github.io/"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

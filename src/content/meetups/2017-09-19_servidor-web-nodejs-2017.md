@@ -21,8 +21,11 @@ hero:
 heroImage: "/images/meetups/servidor-web-nodejs-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - servidor-web-nodejs-2017--1-creando-un-servidor-web-desde-cero-con-nodejs
+speakers:
+  - john-darwin-morales
+  - sergio-florez
 sponsors: []
 status: completed
 draft: false

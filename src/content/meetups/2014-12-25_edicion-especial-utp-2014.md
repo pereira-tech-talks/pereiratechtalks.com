@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/edicion-especial-utp-2014/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - edicion-especial-utp-2014--1-buenas-practicas-en-javascript
+  - edicion-especial-utp-2014--2-tdd-bdd-javascript-y-el-buen-sabor-de-las-pruebas
+speakers:
+  - jonathan-alvarez
+  - oscar-granada
 sponsors: []
 status: completed
 draft: false

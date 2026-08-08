@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/jwt-json-web-tokens-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - jwt-json-web-tokens-2017--1-aprendiendo-sobre-jwt-json-web-tokens
+speakers:
+  - carlos-gonzalez
 sponsors: []
 status: completed
 draft: false

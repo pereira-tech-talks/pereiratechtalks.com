@@ -21,8 +21,10 @@ hero:
 heroImage: "/images/meetups/nginx-y-elasticsearch-2017/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - nginx-y-elasticsearch-2017--1-entendiendo-y-configurando-servidores-web-nginx
+speakers:
+  - hector-jimenez
 sponsors: []
 status: completed
 draft: false

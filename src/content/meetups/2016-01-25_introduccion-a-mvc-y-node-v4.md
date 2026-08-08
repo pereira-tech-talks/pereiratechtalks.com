@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/introduccion-a-mvc-y-node-v4/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - introduccion-a-mvc-y-node-v4--1-introduccion-a-mv
+  - introduccion-a-mvc-y-node-v4--2-node-js-v4
+speakers:
+  - oscar-granada
+  - daniel-aristizabal
 sponsors: []
 status: completed
 draft: false

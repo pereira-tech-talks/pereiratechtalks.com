@@ -1,0 +1,20 @@
+name: "Giovanny Góngora"
+role:
+  en: "Speaker — Pereira Tech Talks / PereiraJS archive"
+  es: "Ponente — archivo Pereira Tech Talks / PereiraJS"
+bio:
+  en: "Giovanny Góngora spoke at Pereira Tech Talks / PereiraJS community meetups."
+  es: "Giovanny Góngora participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: "Portrait of Giovanny Góngora"
+    es: "Retrato de Giovanny Góngora"
+social:
+  twitter: "https://twitter.com/Gioyik"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

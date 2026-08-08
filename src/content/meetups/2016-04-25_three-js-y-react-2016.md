@@ -21,8 +21,12 @@ hero:
 heroImage: "/images/meetups/three-js-y-react-2016/hero.jpg"
 verticals:
   - monthly-meetups
-talks: []
-speakers: []
+talks:
+  - three-js-y-react-2016--1-three-js
+  - three-js-y-react-2016--2-introduccion-a-react
+speakers:
+  - gabriel-munoz
+  - jonathan-alvarez
 sponsors: []
 status: completed
 draft: false
