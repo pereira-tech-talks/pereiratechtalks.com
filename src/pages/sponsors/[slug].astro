@@ -1,0 +1,16 @@
+---
+import SponsorDetailPage from '@/components/pages/SponsorDetailPage.astro';
+import { getSponsors } from '@/lib/sponsor';
+
+export async function getStaticPaths() {
+  const sponsors = await getSponsors();
+  return sponsors.map((sponsor) => ({
+    params: { slug: sponsor.id },
+    props: { sponsor },
+  }));
+}
+
+const { sponsor } = Astro.props;
+---
+
+<SponsorDetailPage sponsor={sponsor} lang="es" />

@@ -1,14 +1,21 @@
 ---
 /**
- * Sponsor card for community catalog and (optionally) tiered PTD contexts.
+ * Sponsor card for the community catalog and (optionally) tiered PTD contexts.
  *
- * `muted` = past-partner compact tile (smaller logo/name, no description) so
+ * UX contract: the card's primary action is the *internal* sponsor profile
+ * (`/sponsors/{slug}`), where the sponsored-meetup history lives. The sponsor's
+ * own website stays available as an explicit, clearly-marked external link so
+ * the outbound click is a deliberate choice, not a surprise.
+ *
+ * `muted` = past-sponsor compact tile (smaller logo/name, no description) so
  * current sponsors keep visual hierarchy on `/sponsors`.
  */
 
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
-import { type Language, tr } from '@/lib/i18n';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { SPONSOR_TIER_LABELS, type SponsorActivity } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 interface Props {
   sponsor: CollectionEntry<'sponsors'>;
@@ -21,8 +28,10 @@ interface Props {
   tier?: CollectionEntry<'sponsors'>['data']['tier'];
   /** Community catalog hides PTD-style tier badges. */
   showTier?: boolean;
-  /** Quieter, compact treatment for past partners. */
+  /** Quieter, compact treatment for past sponsors. */
   muted?: boolean;
+  /** Derived sponsorship history; its presence enables the profile link. */
+  activity?: SponsorActivity;
 }
 
 const {
@@ -32,22 +41,28 @@ const {
   tier: tierProp,
   showTier = true,
   muted = false,
+  activity,
 } = Astro.props;
 
+const t = getTranslations(lang);
+const card = t.sponsorsPage.card;
+const prefix = getUrlPrefix(lang);
+const profileUrl = `${prefix}/sponsors/${sponsor.id}/`;
+
 const tier = tierProp ?? sponsor.data.tier;
-const tierLabel: Record<typeof tier, { en: string; es: string }> = {
-  diamond: { en: 'Diamond', es: 'Diamante' },
-  gold: { en: 'Gold', es: 'Oro' },
-  silver: { en: 'Silver', es: 'Plata' },
-  bronze: { en: 'Bronze', es: 'Bronce' },
-  community: { en: 'Community', es: 'Comunidad' },
-};
 
 const description = tr(sponsor.data.description, lang);
 const logoLight = sponsor.data.logo.light;
 const logoDark = sponsor.data.logo.dark;
 const logoAlt = sponsor.data.logo.alt;
 const sameLogo = logoLight === logoDark;
+
+/**
+ * The card stays a logo + pitch; the sponsorship numbers live on the profile.
+ * One label for every sponsor, current or past — "sponsored meetups" reads as
+ * the reason to click, which a neutral "view profile" does not.
+ */
+const profileLabel = card.viewSponsoredMeetups;
 
 const logoWidth = muted ? 120 : 160;
 const logoHeight = muted ? 40 : 64;
@@ -67,38 +82,35 @@ const logoDisplayWidth = muted ? logoWidth : isWideWordmark ? 192 : logoWidth;
 const logoDisplayHeight = muted ? logoHeight : isWideWordmark ? 46 : logoHeight;
 ---
 
-<a
-  href={sponsor.data.url}
-  target="_blank"
-  rel="noopener noreferrer"
+<article
   class:list={[
-    'group flex min-w-0 transition motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
+    'group flex min-w-0 h-full flex-col transition motion-reduce:transition-none',
     muted
-      ? 'h-full flex-col items-center justify-center gap-2 rounded-xl bg-ptt-bg-elevated/60 px-3 py-4 text-center shadow-none ring-1 ring-ptt-border/50 hover:ring-ptt-border dark:bg-ptt-bg-dark/30 sm:px-4 sm:py-5'
-      : 'h-full flex-col items-center rounded-2xl bg-ptt-bg-elevated p-4 text-center shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30 sm:p-6',
+      ? 'items-center justify-center gap-2 rounded-xl bg-ptt-bg-elevated/60 px-3 py-4 text-center shadow-none ring-1 ring-ptt-border/50 hover:ring-ptt-border dark:bg-ptt-bg-dark/30 sm:px-4 sm:py-5'
+      : 'items-center rounded-2xl bg-ptt-bg-elevated p-4 text-center shadow-sm ring-1 ring-ptt-border hover:shadow-lg hover:ring-ptt-primary/30 sm:p-6',
   ]}
+  data-umami-event="sponsor_card_view"
+  data-umami-event-slug={sponsor.id}
 >
-  <div
+  <a
+    href={profileUrl}
+    data-umami-event="sponsor_card_click"
+    data-umami-event-slug={sponsor.id}
     class:list={[
-      muted
-        ? 'flex h-10 w-full max-w-[7.5rem] items-center justify-center'
-        : 'flex w-full flex-col items-center gap-3',
+      'flex min-w-0 max-w-full flex-col items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary',
+      muted ? 'gap-2' : 'w-full gap-3',
     ]}
   >
-    <div class={logoBoxClass}>
-      {
-        sameLogo ? (
-          <img
-            decoding="async"
-            src={logoLight}
-            alt={logoAlt}
-            width={logoDisplayWidth}
-            height={logoDisplayHeight}
-            loading={loading}
-            class:list={['max-w-full object-contain', logoImgClass]}
-          />
-        ) : (
-          <>
+    <div
+      class:list={[
+        muted
+          ? 'flex h-10 w-full max-w-[7.5rem] items-center justify-center'
+          : 'flex w-full flex-col items-center gap-3',
+      ]}
+    >
+      <div class={logoBoxClass}>
+        {
+          sameLogo ? (
             <img
               decoding="async"
               src={logoLight}
@@ -106,42 +118,105 @@ const logoDisplayHeight = muted ? logoHeight : isWideWordmark ? 46 : logoHeight;
               width={logoDisplayWidth}
               height={logoDisplayHeight}
               loading={loading}
-              class:list={['max-w-full object-contain dark:hidden', logoImgClass]}
+              class:list={['max-w-full object-contain', logoImgClass]}
             />
-            <img
-              decoding="async"
-              src={logoDark}
-              alt={logoAlt}
-              width={logoDisplayWidth}
-              height={logoDisplayHeight}
-              loading={loading}
-              class:list={[
-                'hidden max-w-full object-contain dark:block',
-                logoImgClass,
-              ]}
-            />
-          </>
+          ) : (
+            <>
+              <img
+                decoding="async"
+                src={logoLight}
+                alt={logoAlt}
+                width={logoDisplayWidth}
+                height={logoDisplayHeight}
+                loading={loading}
+                class:list={[
+                  'max-w-full object-contain dark:hidden',
+                  logoImgClass,
+                ]}
+              />
+              <img
+                decoding="async"
+                src={logoDark}
+                alt={logoAlt}
+                width={logoDisplayWidth}
+                height={logoDisplayHeight}
+                loading={loading}
+                class:list={[
+                  'hidden max-w-full object-contain dark:block',
+                  logoImgClass,
+                ]}
+              />
+            </>
+          )
+        }
+      </div>
+      {
+        !muted && showTier && (
+          <Badge variant={tier}>{SPONSOR_TIER_LABELS[tier][lang]}</Badge>
         )
       }
     </div>
-    {
-      !muted && showTier && (
-        <Badge variant={tier}>{tierLabel[tier][lang]}</Badge>
-      )
-    }
-  </div>
-  <h3
-    class:list={[
-      muted
-        ? 'text-xs font-medium leading-snug text-ptt-secondary transition-colors group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark'
-        : 'mt-4 text-lg font-semibold text-ptt group-hover:text-ptt-primary',
-    ]}
-  >
-    {sponsor.data.name}
-  </h3>
+    <h3
+      class:list={[
+        muted
+          ? 'text-xs font-medium leading-snug text-ptt-secondary transition-colors group-hover:text-ptt-primary dark:group-hover:text-ptt-primary-dark'
+          : 'mt-1 text-lg font-semibold text-ptt group-hover:text-ptt-primary',
+      ]}
+    >
+      {sponsor.data.name}
+    </h3>
+  </a>
+
   {
-    !muted && (
-      <p class="mt-2 text-sm text-ptt-secondary line-clamp-3">{description}</p>
+    /*
+      Past sponsors get the same "see what they funded" affordance as current
+      ones — just the link, no counter: the archive grid is dense and the count
+      is already on the profile. Only on surfaces that pass `activity` (the
+      /sponsors archive); inside a meetup detail the tile stays a plain logo link.
+    */
+    muted && activity && (
+      <a
+        href={profileUrl}
+        aria-label={`${profileLabel} — ${sponsor.data.name}`}
+        data-umami-event="sponsor_meetups_click"
+        data-umami-event-slug={sponsor.id}
+        class="mt-auto inline-flex min-h-[44px] items-center justify-center gap-1 text-center text-[0.6875rem] font-semibold leading-snug text-ptt-primary hover:underline dark:text-ptt-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+      >
+        {profileLabel}
+        <span aria-hidden="true">→</span>
+      </a>
     )
   }
-</a>
+
+  {
+    !muted && (
+      <>
+        <p class="mt-3 text-sm text-ptt-secondary line-clamp-3">{description}</p>
+        <div class="mt-auto flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-ptt-border/60 pt-4 text-sm font-semibold">
+          <a
+            href={profileUrl}
+            aria-label={`${profileLabel} — ${sponsor.data.name}`}
+            data-umami-event="sponsor_meetups_click"
+            data-umami-event-slug={sponsor.id}
+            class="inline-flex min-h-[44px] items-center gap-1 text-ptt-primary hover:underline dark:text-ptt-primary-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          >
+            {profileLabel}
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href={sponsor.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${card.website} — ${sponsor.data.name}`}
+            data-umami-event="sponsor_website_click"
+            data-umami-event-slug={sponsor.id}
+            class="inline-flex min-h-[44px] items-center gap-1 text-ptt-secondary hover:text-ptt hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          >
+            {card.website}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </>
+    )
+  }
+</article>

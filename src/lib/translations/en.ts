@@ -576,10 +576,10 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   sponsorsPage: {
     title: 'Sponsors',
     description:
-      'Current and past partners of Pereira Tech Talks — companies and organizations that sustain meetups, Pereira Tech Day, and community programs in Pereira.',
+      'Current and past sponsors of Pereira Tech Talks — companies and organizations that sustain meetups, Pereira Tech Day, and community programs in Pereira.',
     eyebrow: 'Current sponsors',
     intro: (count) =>
-      `${count} active partners help with venues, logistics, and the stage. Per-edition sponsorship tiers live on each Pereira Tech Day page — not here.`,
+      `${count} active sponsors help with venues, logistics, and the stage. Per-edition sponsorship tiers live on each Pereira Tech Day page — not here.`,
     currentTitle: 'Current sponsors',
     currentIntro:
       'Who stands with Pereira Tech Talks today — monthly meetups and the annual conference.',
@@ -598,7 +598,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       items: {
         meetups: {
           title: 'Real meetups',
-          body: 'Venue, snacks, and monthly continuity — the community needs partners who make each talk night possible.',
+          body: 'Venue, snacks, and monthly continuity — the community needs sponsors who make each talk night possible.',
         },
         ptd: {
           title: 'Pereira Tech Day',
@@ -615,8 +615,52 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       gold: 'Gold sponsors',
       silver: 'Silver sponsors',
       bronze: 'Bronze sponsors',
-      community: 'Community partners',
+      community: 'Community sponsors',
     },
+    card: {
+      meetupsCount: (count) =>
+        count === 1 ? '1 sponsored meetup' : `${count} sponsored meetups`,
+      viewSponsoredMeetups: 'View sponsored meetups',
+      website: 'Website',
+    },
+  },
+
+  sponsorDetail: {
+    breadcrumbHome: 'Home',
+    breadcrumbSponsors: 'Sponsors',
+    metaDescription: (name, meetups) =>
+      meetups > 0
+        ? `${name} has sponsored ${meetups} Pereira Tech Talks ${meetups === 1 ? 'meetup' : 'meetups'}. Browse the full history of gatherings and editions they made possible.`
+        : `${name} is a Pereira Tech Talks sponsor. See their role in the Pereira tech community and the gatherings they support.`,
+    statusActive: 'Current sponsor',
+    statusPast: 'Past sponsor',
+    sinceLabel: (year) => `Backing the community since ${year}`,
+    websiteLabel: 'Visit website',
+    allSponsorsLabel: 'All sponsors',
+    sponsorUsLabel: 'Become a sponsor',
+    stats: {
+      meetups: 'Sponsored meetups',
+      editions: 'PTD editions',
+      talks: 'Talks enabled',
+      speakers: 'Speakers on stage',
+    },
+    upcomingTitle: 'Upcoming sponsored meetups',
+    upcomingSubtitle:
+      'Already-scheduled gatherings backed by this sponsor. Come join us.',
+    meetupsTitle: 'Sponsored meetups',
+    meetupsSubtitle: (name) =>
+      `Every talk night ${name} helped sustain, from the most recent to the first.`,
+    editionsTitle: 'Pereira Tech Day editions',
+    editionsSubtitle:
+      'The annual community conference and each sponsor’s tier in that edition.',
+    editionUpcomingLabel: 'Upcoming edition',
+    editionTierLabel: (tier) => `${tier} sponsor`,
+    emptyTitle: 'No linked gatherings yet',
+    emptyDesc:
+      'This sponsor has no meetups or editions on record yet. We are still filling in the community archive, one chapter at a time.',
+    ctaTitle: 'Want to show up here?',
+    ctaBody:
+      'Sponsoring Pereira Tech Talks means funding venue, logistics, and stage for the Risaralda tech community. Tell us what you have in mind.',
   },
 
   contributorsPage: {

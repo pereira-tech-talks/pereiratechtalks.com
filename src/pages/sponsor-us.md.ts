@@ -30,8 +30,8 @@ export const GET: APIRoute = () => {
       {
         heading: 'Niveles de patrocinio',
         lines: [
-          '- **Diamante** — Aliado estratégico anual. Co-branding en PTD y meetups del año, spot de keynote, menciones mensuales, acceso al hiring pool, logo en banner principal.',
-          '- **Oro** — Aliado anual. Logo en el programa de PTD, una charla técnica patrocinada al año, menciones en 6+ meetups, acceso al hiring pool.',
+          '- **Diamante** — Patrocinador estratégico anual. Co-branding en PTD y meetups del año, spot de keynote, menciones mensuales, acceso al hiring pool, logo en banner principal.',
+          '- **Oro** — Patrocinador anual. Logo en el programa de PTD, una charla técnica patrocinada al año, menciones en 6+ meetups, acceso al hiring pool.',
           '- **Plata** — Patrocinador puntual. Logo en el evento patrocinado, menciones pre y post, stand opcional.',
           '- **Comunidad** — Aporte no monetario (venues, comida, transporte, becas). Logo en el evento apoyado y reconocimiento en la página de patrocinadores.',
         ],
