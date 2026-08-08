@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getCommunityStats } from '@/lib/community-stats';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -16,6 +17,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
+const communityStats = await getCommunityStats();
 const contactCtaHref = `${prefix}/contact?${new URLSearchParams({
   topic: 'collaboration',
   subject: t.contactPage.prefillSubjects.collaboration,
@@ -88,10 +90,22 @@ const breadcrumbSchema = {
 };
 
 const stats = [
-  { value: '90+', label: lang === 'es' ? 'meetups' : 'meetups' },
-  { value: '200+', label: lang === 'es' ? 'charlas' : 'talks' },
-  { value: '6.5K+', label: lang === 'es' ? 'asistencias' : 'attendees' },
-  { value: '2014', label: lang === 'es' ? 'desde' : 'since' },
+  {
+    value: communityStats.display.meetups,
+    label: lang === 'es' ? 'meetups' : 'meetups',
+  },
+  {
+    value: communityStats.display.talks,
+    label: lang === 'es' ? 'charlas' : 'talks',
+  },
+  {
+    value: communityStats.display.attendees,
+    label: lang === 'es' ? 'asistencias' : 'attendees',
+  },
+  {
+    value: communityStats.display.sinceYear,
+    label: lang === 'es' ? 'desde' : 'since',
+  },
 ];
 
 const breadcrumbs = [
