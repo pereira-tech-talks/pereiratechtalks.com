@@ -21,7 +21,8 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-6/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - quarantine-tech-talks-2020-6--1-oscar-granada-session
 speakers:
   - oscar-granada
 sponsors: []

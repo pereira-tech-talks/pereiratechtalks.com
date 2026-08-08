@@ -21,7 +21,11 @@ hero:
 heroImage: "/images/meetups/pereira-girls-day-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - pereira-girls-day-2019--1-natalia-moncada-suarez-session
+  - pereira-girls-day-2019--2-zorayda-gutierrez-session
+  - pereira-girls-day-2019--3-hector-jimenez-session
+  - pereira-girls-day-2019--4-john-darwin-morales-session
 speakers:
   - natalia-moncada-suarez
   - zorayda-gutierrez

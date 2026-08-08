@@ -21,7 +21,11 @@ hero:
 heroImage: "/images/meetups/saturday-tech-talks-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - saturday-tech-talks-2019--1-desarrollo-serverless-de-interfaces-conversacionales-en
+  - saturday-tech-talks-2019--2-andres-rodriguez-session
+  - saturday-tech-talks-2019--3-introduccion-a-amazon-web-services-aws
+  - saturday-tech-talks-2019--4-patrones-de-arquitectura-android
 speakers:
   - andres-rodriguez
   - steven-pineda

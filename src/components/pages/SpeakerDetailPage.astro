@@ -6,6 +6,7 @@
 import type { CollectionEntry } from 'astro:content';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
+import SpeakerSocialLinks from '@/components/speakers/SpeakerSocialLinks.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
@@ -30,14 +31,7 @@ const photoSrc = speaker.data.photo.src;
 const photoAlt = tr(speaker.data.photo.alt, lang) || `Portrait of ${name}`;
 
 const talks = await getTalksBySpeaker(speaker.id);
-const social = (speaker.data.social ?? {}) as {
-  twitter?: string;
-  linkedin?: string;
-  github?: string;
-  website?: string;
-  mastodon?: string;
-  bluesky?: string;
-};
+const social = speaker.data.social ?? {};
 
 const relatedEvents = Array.from(
   talks
@@ -86,6 +80,7 @@ const sameAs = [
   social.linkedin,
   social.github,
   social.website,
+  social.instagram,
   social.mastodon,
   social.bluesky,
 ].filter((s): s is string => Boolean(s));
@@ -132,60 +127,11 @@ const personJsonLd: Record<string, unknown> = {
           <p class="mt-4 text-ptt-secondary max-w-3xl leading-relaxed">
             {bio}
           </p>
-          {
-            Object.keys(social).length > 0 && (
-              <ul class="mt-6 flex flex-wrap gap-3 text-sm">
-                {social.github && (
-                  <li>
-                    <a
-                      href={social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center min-h-[44px] gap-1.5 rounded-full bg-ptt-primary-soft dark:bg-ptt-bg-elevated px-3 py-2 text-ptt-secondary hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
-                    >
-                      GitHub
-                    </a>
-                  </li>
-                )}
-                {social.linkedin && (
-                  <li>
-                    <a
-                      href={social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center min-h-[44px] gap-1.5 rounded-full bg-ptt-primary-soft dark:bg-ptt-bg-elevated px-3 py-2 text-ptt-secondary hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
-                    >
-                      LinkedIn
-                    </a>
-                  </li>
-                )}
-                {social.twitter && (
-                  <li>
-                    <a
-                      href={social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center min-h-[44px] gap-1.5 rounded-full bg-ptt-primary-soft dark:bg-ptt-bg-elevated px-3 py-2 text-ptt-secondary hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
-                    >
-                      X
-                    </a>
-                  </li>
-                )}
-                {social.website && (
-                  <li>
-                    <a
-                      href={social.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center min-h-[44px] gap-1.5 rounded-full bg-ptt-primary-soft dark:bg-ptt-bg-elevated px-3 py-2 text-ptt-secondary hover:bg-ptt-primary hover:text-white dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950 transition-colors"
-                    >
-                      {sd.website}
-                    </a>
-                  </li>
-                )}
-              </ul>
-            )
-          }
+          <SpeakerSocialLinks
+            speaker={speaker}
+            variant="pills"
+            class="mt-6"
+          />
         </div>
       </div>
     </div>

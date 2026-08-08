@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-accesibilidad-y-ios-2022--1-angelica-parra-session
+  - noche-de-accesibilidad-y-ios-2022--2-yennifer-hurtado-arce-session
 speakers:
   - angelica-parra
   - yennifer-hurtado-arce

@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-machine-learning-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-machine-learning-2022--1-sebastian-gomez-session
+  - noche-de-machine-learning-2022--2-santiago-gutierrez-session
 speakers:
   - sebastian-gomez
   - santiago-gutierrez

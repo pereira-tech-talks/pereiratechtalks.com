@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-overview/hero.png"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - quarantine-tech-talks-2020-overview--1-andres-rodriguez-session
+  - quarantine-tech-talks-2020-overview--2-stiven-cardona-monsalve-session
 speakers:
   - andres-rodriguez
   - stiven-cardona-monsalve

@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/tech-soft-skills-ia-y-trabajo-remoto/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - tech-soft-skills-ia-y-trabajo-remoto--1-juan-pablo-ortiz-villegas-session
+  - tech-soft-skills-ia-y-trabajo-remoto--2-juan-david-rodriguez-session
 speakers:
   - juan-pablo-ortiz-villegas
   - juan-david-rodriguez

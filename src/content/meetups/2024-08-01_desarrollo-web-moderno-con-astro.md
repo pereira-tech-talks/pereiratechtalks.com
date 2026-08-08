@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - desarrollo-web-moderno-con-astro--1-sergio-florez-session
+  - desarrollo-web-moderno-con-astro--2-hector-julian-cardona-session
 speakers:
   - hector-julian-cardona
   - sergio-florez

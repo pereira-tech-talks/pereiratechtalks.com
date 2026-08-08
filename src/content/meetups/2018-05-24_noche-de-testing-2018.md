@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-testing-2018/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-testing-2018--1-pruebas-unitarias-en-javascript
+  - noche-de-testing-2018--2-pruebas-unitarias-en-python
 speakers:
   - john-darwin-morales
   - carlos-gonzalez

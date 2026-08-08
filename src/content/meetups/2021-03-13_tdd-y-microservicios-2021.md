@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/tdd-y-microservicios-2021/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - tdd-y-microservicios-2021--1-manuel-pineda-session
+  - tdd-y-microservicios-2021--2-facundo-nahuel-garcia-session
 speakers:
   - manuel-pineda
   - facundo-nahuel-garcia

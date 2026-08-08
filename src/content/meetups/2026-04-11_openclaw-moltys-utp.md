@@ -22,7 +22,9 @@ heroImage: "/images/meetups/openclaw-moltys-utp/hero.webp"
 verticals:
   - monthly-meetups
   - ai-channel
-talks: []
+talks:
+  - openclaw-moltys-utp--1-sergio-florez-session
+  - openclaw-moltys-utp--2-sebastian-franco-session
 speakers:
   - sergio-florez
   - sebastian-franco

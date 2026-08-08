@@ -20,6 +20,7 @@
 | Contributors | [Contributors](docs/features/CONTRIBUTORS.md) | Equipo directory — flat organizers + unified alumni |
 | Sponsors | [Sponsors](docs/features/SPONSORS.md) | Community partners — current/past (tiers on PTD only) |
 | Community stats | [Community Stats](docs/features/COMMUNITY_STATS.md) | Derived About counters via `getCommunityStats()` |
+| Talks | [Talks](docs/features/TALKS.md) | Talk entries, speaker history, meetup/PTD linkage |
 | Writing Voice | [Writing Voice Guide](docs/WRITING_VOICE_GUIDE.md) | Anti-AI-slop checklist, PTT voice, vocabulary blocklist |
 | Content QA | [Content QA Checklist](docs/features/CONTENT_QA_CHECKLIST.md) | Bilingual parity, orthography, SEO/AEO, automated gates |
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
@@ -536,9 +537,9 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 
 ## Skills & Agents
 
-- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-slide-deck`, `add-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`
+- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-talk`, `add-slide-deck`, `add-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`
 - **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`, `content-writer`
-- **Critical policy:** New blog posts MUST use `/add-blog-post`; new meetups MUST use `/add-meetup`; new slide decks MUST use `/add-slide-deck`; new PTD editions MUST use `/add-ptd-edition`
+- **Critical policy:** New blog posts MUST use `/add-blog-post`; new meetups MUST use `/add-meetup`; new talks MUST use `/add-talk`; new slide decks MUST use `/add-slide-deck`; new PTD editions MUST use `/add-ptd-edition`
 - **Management:** `/skill-list`, `/agent-list`, `/skill-create`, `/agent-create`
 - **Full catalog:** [Skills & Agents Catalog](.agents/docs/skills_agents_catalog.md)
 

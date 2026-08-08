@@ -136,7 +136,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   meetupsPage: {
     title: 'Pereira Tech Talks Meetups',
     description:
-      'Over 90 meetups since 2014. Monthly talks, lightning rounds, panels, and workshops from the Eje Cafetero tech community in Risaralda.',
+      '{meetups} meetups, {talks} talks, and {speakers} speakers since {sinceYear}. Monthly archive from the Eje Cafetero tech community in Pereira, Risaralda.',
     intro:
       'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
     upcoming: 'Upcoming meetups',
@@ -145,7 +145,13 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     emptyUpcomingDescription:
       "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
     ctaLuma: 'Follow us on Luma',
-    archiveCount: '{n} meetups in the archive',
+    eyebrow: 'Community archive',
+    statMeetups: 'Meetups',
+    statTalks: 'Talks',
+    statSpeakers: 'Speakers',
+    statSince: 'Since',
+    nextUpLabel: 'Up next',
+    nextUpCta: "See what's coming",
     yearLabel: '{year} — Meetups',
     yearNav: 'Jump to year',
     calendarEyebrow: 'Calendar',

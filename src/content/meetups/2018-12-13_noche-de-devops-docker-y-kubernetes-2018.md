@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-devops-docker-y-kubernetes-2018/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-devops-docker-y-kubernetes-2018--1-introduccion-a-docker
+  - noche-de-devops-docker-y-kubernetes-2018--2-hector-jimenez-session
 speakers:
   - sergio-florez
   - hector-jimenez

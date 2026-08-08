@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/automatizacion-de-infraestructura-y-linux/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - automatizacion-de-infraestructura-y-linux--1-iac-automatizando-nuestra-infraestructura
+  - automatizacion-de-infraestructura-y-linux--2-hablemos-de-linux
 speakers:
   - luis-uribe
   - harold-sanchez-ospina

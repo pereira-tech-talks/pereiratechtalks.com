@@ -21,7 +21,10 @@ hero:
 heroImage: "/images/meetups/tecnologia-con-proposito/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - tecnologia-con-proposito--1-maria-lizeth-duarte-coronado-session
+  - tecnologia-con-proposito--2-catalina-uribe-jaramillo-session
+  - tecnologia-con-proposito--3-ana-lopez-session
 speakers:
   - maria-lizeth-duarte-coronado
   - catalina-uribe-jaramillo

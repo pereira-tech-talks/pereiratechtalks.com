@@ -73,4 +73,79 @@ describe('speaker / meetup / talk linkage invariants', () => {
     ).length;
     expect(count).toBeGreaterThanOrEqual(80);
   });
+
+  it('talk collection floor after exhaustive talk mapping (≥110)', () => {
+    const count = readdirSync(TALKS).filter((f) =>
+      /\.(md|mdx|yaml)$/.test(f)
+    ).length;
+    expect(count).toBeGreaterThanOrEqual(110);
+  });
+
+  it('every meetup speakers[] slug has a talk for that meetup', () => {
+    const talkMeta = readdirSync(TALKS)
+      .filter((f) => /\.(md|mdx|yaml)$/.test(f))
+      .map((file) => {
+        const id = file.replace(/\.(md|mdx|yaml)$/i, '');
+        const text = readFileSync(join(TALKS, file), 'utf8');
+        const fm = frontmatter(text) || text;
+        const slug =
+          fm.match(/slug:\s*"([^"]+)"/)?.[1] ||
+          fm.match(/slug:\s*([^\n]+)/)?.[1]?.trim();
+        return { id, speakers: listBlock(fm, 'speakers'), slug };
+      });
+    const gaps: string[] = [];
+    for (const file of readdirSync(MEETUPS).filter((f) => f.endsWith('.md'))) {
+      const fm = frontmatter(readFileSync(join(MEETUPS, file), 'utf8'));
+      if (/^draft:\s*true/m.test(fm)) continue;
+      const meetupSlug = file
+        .replace(/^\d{4}-\d{2}-\d{2}_/, '')
+        .replace(/\.md$/, '');
+      for (const speaker of listBlock(fm, 'speakers')) {
+        const ok = talkMeta.some(
+          (t) =>
+            t.speakers.includes(speaker) &&
+            (t.id.startsWith(`${meetupSlug}--`) || t.slug === meetupSlug)
+        );
+        if (!ok) gaps.push(`${file} → ${speaker}`);
+      }
+    }
+    expect(gaps, gaps.join('\n')).toEqual([]);
+  });
+
+  it('sergio-florez has at least 8 talk files', () => {
+    let count = 0;
+    for (const file of readdirSync(TALKS).filter((f) =>
+      /\.(md|mdx|yaml)$/.test(f)
+    )) {
+      const text = readFileSync(join(TALKS, file), 'utf8');
+      const fm = frontmatter(text) || text;
+      if (listBlock(fm, 'speakers').includes('sergio-florez')) count += 1;
+    }
+    expect(count).toBeGreaterThanOrEqual(8);
+  });
+
+  it('PTD 2024 has 10 talk files linked to pereiraTechDays/2024', () => {
+    let count = 0;
+    for (const file of readdirSync(TALKS).filter((f) =>
+      f.startsWith('ptd-2024--')
+    )) {
+      const text = readFileSync(join(TALKS, file), 'utf8');
+      const fm = frontmatter(text) || text;
+      if (
+        /collection:\s*pereiraTechDays/.test(fm) &&
+        /slug:\s*"?2024"?/.test(fm)
+      ) {
+        count += 1;
+      }
+    }
+    expect(count).toBe(10);
+  });
+
+  it('sergio-florez speaker YAML uses personal xergioalex social URLs', () => {
+    const text = readFileSync(join(SPEAKERS, 'sergio-florez.yaml'), 'utf8');
+    expect(text).toContain('https://xergioalex.com/');
+    expect(text).toContain('https://www.linkedin.com/in/xergioalex/');
+    expect(text).toContain('https://x.com/XergioAleX');
+    expect(text).not.toContain('linkedin.com/company/pereira-tech-talks');
+  });
 });

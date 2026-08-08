@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - software-libre-y-automatizacion-2021--1-steven-mejia-session
+  - software-libre-y-automatizacion-2021--2-gabriel-mejia-amortegui-session
 speakers:
   - steven-mejia
   - gabriel-mejia-amortegui

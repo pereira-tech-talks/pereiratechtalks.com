@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-ia-y-chatgpt-2023/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-ia-y-chatgpt-2023--1-sergio-florez-session
+  - noche-de-ia-y-chatgpt-2023--2-mauricio-morales-session
 speakers:
   - sergio-florez
   - mauricio-morales

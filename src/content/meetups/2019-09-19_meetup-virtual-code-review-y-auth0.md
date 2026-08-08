@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/meetup-virtual-code-review-y-auth0/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - meetup-virtual-code-review-y-auth0--1-code-review-engineering-practices
+  - meetup-virtual-code-review-y-auth0--2-damian-schenkelman-session
 speakers:
   - manuel-pineda
   - damian-schenkelman

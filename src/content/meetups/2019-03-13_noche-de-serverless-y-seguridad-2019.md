@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-serverless-y-seguridad-2019/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-serverless-y-seguridad-2019--1-aprendiendo-serverless-con-enfasis-en-iot
+  - noche-de-serverless-y-seguridad-2019--2-seguridad-informatica-en-instituciones-del-eje-cafetero
 speakers:
   - sergio-florez
   - santiago-bernal

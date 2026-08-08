@@ -1,0 +1,23 @@
+---
+title:
+  en: "Session at IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa"
+  es: "Participación en IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa"
+abstract:
+  en: "Talk by Sebastián Mora at the Pereira Tech Talks meetup “IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa”."
+  es: "Charla de Sebastián Mora en el meetup «IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa» de Pereira Tech Talks."
+speakers:
+  - sebastian-mora
+date: 2024-10-30
+event:
+  collection: meetups
+  slug: "ia-en-accion-2024"
+language: es
+duration: 25
+type: talk
+tags: []
+status: recorded
+---
+
+## Participación en IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa
+
+Charla de Sebastián Mora en el meetup «IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa» de Pereira Tech Talks.

@@ -136,7 +136,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
   meetupsPage: {
     title: 'Meetups de Pereira Tech Talks',
     description:
-      'Más de 90 meetups desde 2014. Charlas mensuales, lightning talks, paneles y workshops de la comunidad tech del Eje Cafetero, Risaralda.',
+      '{meetups} meetups, {talks} charlas y {speakers} ponentes desde {sinceYear}. Archivo mensual de la comunidad tech del Eje Cafetero en Pereira, Risaralda.',
     intro:
       'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.',
     upcoming: 'Próximos meetups',
@@ -145,7 +145,13 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     emptyUpcomingDescription:
       'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.',
     ctaLuma: 'Síguenos en Luma',
-    archiveCount: '{n} meetups en el archivo',
+    eyebrow: 'Archivo de la comunidad',
+    statMeetups: 'Meetups',
+    statTalks: 'Charlas',
+    statSpeakers: 'Ponentes',
+    statSince: 'Desde',
+    nextUpLabel: 'Próximo encuentro',
+    nextUpCta: 'Mira lo que sigue',
     yearLabel: '{year} — Meetups del año',
     yearNav: 'Saltar al año',
     calendarEyebrow: 'Calendario',

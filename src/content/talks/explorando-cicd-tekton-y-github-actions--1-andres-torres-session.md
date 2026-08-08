@@ -1,0 +1,23 @@
+---
+title:
+  en: "Session at Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
+  es: "Participación en Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
+abstract:
+  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Explorando CI/CD: Tekton en Kubernetes y GitHub Actions ”."
+  es: "Charla de Andrés Torres en el meetup «Explorando CI/CD: Tekton en Kubernetes y GitHub Actions » de Pereira Tech Talks."
+speakers:
+  - andres-torres
+date: 2024-03-07
+event:
+  collection: meetups
+  slug: "explorando-cicd-tekton-y-github-actions"
+language: es
+duration: 25
+type: talk
+tags: []
+status: recorded
+---
+
+## Participación en Explorando CI/CD: Tekton en Kubernetes y GitHub Actions 
+
+Charla de Andrés Torres en el meetup «Explorando CI/CD: Tekton en Kubernetes y GitHub Actions » de Pereira Tech Talks.

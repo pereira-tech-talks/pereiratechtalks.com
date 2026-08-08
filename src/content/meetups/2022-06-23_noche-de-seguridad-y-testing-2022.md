@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-seguridad-y-testing-2022--1-andres-torres-session
+  - noche-de-seguridad-y-testing-2022--2-harold-sanchez-ospina-session
 speakers:
   - andres-torres
   - harold-sanchez-ospina

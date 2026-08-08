@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - tecnologias-de-vanguardia-svelte-y-blockchain--1-julian-lamprea-session
+  - tecnologias-de-vanguardia-svelte-y-blockchain--2-steven-pineda-session
 speakers:
   - julian-lamprea
   - steven-pineda

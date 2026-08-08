@@ -21,7 +21,8 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-4/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - quarantine-tech-talks-2020-4--1-yeison-cruz-session
 speakers:
   - yeison-cruz
 sponsors: []

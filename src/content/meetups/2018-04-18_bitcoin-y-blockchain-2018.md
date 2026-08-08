@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - bitcoin-y-blockchain-2018--1-sergio-florez-session
+  - bitcoin-y-blockchain-2018--2-carlos-mesa-session
 speakers:
   - carlos-mesa
   - sergio-florez

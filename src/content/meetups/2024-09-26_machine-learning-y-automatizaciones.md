@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/machine-learning-y-automatizaciones/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - machine-learning-y-automatizaciones--1-leonardo-quinones-session
+  - machine-learning-y-automatizaciones--2-nicolas-narvaez-session
 speakers:
   - leonardo-quinones
   - nicolas-narvaez

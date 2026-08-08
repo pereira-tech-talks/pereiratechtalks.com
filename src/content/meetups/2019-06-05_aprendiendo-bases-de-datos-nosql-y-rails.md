@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - aprendiendo-bases-de-datos-nosql-y-rails--1-introduccion-a-las-bases-de-datos-nosql
+  - aprendiendo-bases-de-datos-nosql-y-rails--2-desarrolla-posibilidades-con-rails
 speakers:
   - german-grandas
   - jonatan-gutierrez

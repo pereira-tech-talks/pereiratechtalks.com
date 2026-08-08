@@ -7,12 +7,13 @@
 
 import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
-import MeetupYearRail from '@/components/meetups/MeetupYearRail.astro';
+import MeetupYearRail from '@/components/meetups/MeetupYearRail.svelte';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import EmptyState from '@/components/ui/EmptyState.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import { getCommunityStats } from '@/lib/community-stats';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getPastMeetupShowcase,
@@ -32,6 +33,7 @@ const upcoming = await getUpcomingMeetupShowcase();
 const pastShowcase = await getPastMeetupShowcase();
 const groups = groupMeetupShowcaseByYear(pastShowcase);
 const years = groups.map((g) => g.year);
+const communityStats = await getCommunityStats();
 
 const editions = await getEditions();
 const upcomingEdition = editions.find(
@@ -45,22 +47,50 @@ const tr = getTranslations(lang);
 const mp = tr.meetupsPage;
 const hs = tr.homeSections;
 
+const fillStats = (template: string): string =>
+  template
+    .replaceAll('{meetups}', communityStats.display.meetups)
+    .replaceAll('{talks}', communityStats.display.talks)
+    .replaceAll('{speakers}', communityStats.display.speakers)
+    .replaceAll('{sinceYear}', communityStats.display.sinceYear);
+
 const t = {
   title: mp.title,
-  description: mp.description,
+  description: fillStats(mp.description),
   intro: mp.intro,
+  eyebrow: mp.eyebrow,
   upcoming: mp.upcoming,
   past: mp.past,
   emptyUpcomingTitle: mp.emptyUpcomingTitle,
   emptyUpcomingDescription: mp.emptyUpcomingDescription,
   ctaLabel: mp.ctaLuma,
   ctaHref: 'https://luma.com/pertechtalks',
-  meetupsCount: mp.archiveCount.replace('{n}', String(pastShowcase.length)),
+  nextUpLabel: mp.nextUpLabel,
+  nextUpCta: mp.nextUpCta,
   yearLabel: (n: number) => mp.yearLabel.replace('{year}', String(n)),
   yearNav: mp.yearNav,
   calendarEyebrow: mp.calendarEyebrow,
   archiveEyebrow: mp.archiveEyebrow,
 };
+
+const heroStats = [
+  {
+    value: communityStats.display.meetups,
+    label: mp.statMeetups,
+  },
+  {
+    value: communityStats.display.talks,
+    label: mp.statTalks,
+  },
+  {
+    value: communityStats.display.speakers,
+    label: mp.statSpeakers,
+  },
+  {
+    value: communityStats.display.sinceYear,
+    label: mp.statSince,
+  },
+];
 
 const breadcrumbs = [
   {
@@ -95,14 +125,71 @@ const breadcrumbs = [
     <div class="main-container pt-12 sm:pt-16 pb-4">
       <Breadcrumbs items={breadcrumbs} />
     </div>
-    <div class="main-container pt-6 pb-12">
-      <Eyebrow>{t.meetupsCount}</Eyebrow>
+    <div class="main-container pt-6 pb-6 sm:pb-8">
+      <Eyebrow>{t.eyebrow}</Eyebrow>
       <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
         {t.title}
       </h1>
       <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
         {t.intro}
       </p>
+      <ul class="mt-8 grid max-w-2xl list-none grid-cols-2 gap-3 sm:grid-cols-4">
+        {
+          heroStats.map((stat) => (
+            <li class="rounded-xl bg-ptt-bg-elevated px-3 py-4 text-center ring-1 ring-ptt-border sm:px-4">
+              <p class="text-2xl font-bold tabular-nums tracking-tight text-ptt-primary sm:text-3xl dark:text-ptt-primary-dark">
+                {stat.value}
+              </p>
+              <p class="mt-1 text-xs font-medium text-ptt-secondary sm:text-sm">
+                {stat.label}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {/*
+      Bridge into the upcoming strip below — lives in the hero chrome only.
+      Does not modify PtdAnnouncementStrip; points at #main-after-hero.
+    */}
+    <div class="main-container pb-6 sm:pb-8">
+      <a
+        href="#main-after-hero"
+        data-scroll-to-after-hero
+        class="group mx-auto flex w-fit max-w-full flex-col items-center gap-2 rounded-full px-3 py-2 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+      >
+        <span class="flex items-center gap-3 text-ptt-secondary">
+          <span
+            class="hidden h-px w-8 bg-ptt-border sm:block"
+            aria-hidden="true"
+          ></span>
+          <span class="text-xs font-semibold uppercase tracking-[0.18em] text-ptt-primary dark:text-ptt-primary-dark">
+            {t.nextUpLabel}
+          </span>
+          <span
+            class="hidden h-px w-8 bg-ptt-border sm:block"
+            aria-hidden="true"
+          ></span>
+        </span>
+        <span class="inline-flex items-center gap-1.5 text-sm font-medium text-ptt-secondary transition-colors group-hover:text-ptt">
+          {t.nextUpCta}
+          <svg
+            aria-hidden="true"
+            class="h-4 w-4 shrink-0 motion-safe:animate-bounce"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </span>
+      </a>
     </div>
   </div>
 
@@ -152,7 +239,7 @@ const breadcrumbs = [
     <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">
       {
         years.length > 0 && (
-          <MeetupYearRail years={years} label={t.yearNav} />
+          <MeetupYearRail client:idle years={years} label={t.yearNav} />
         )
       }
       <div class="space-y-16 min-w-0">

@@ -21,7 +21,10 @@ hero:
 heroImage: "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-liderazgo-y-testing-2022--1-sergio-estrella-session
+  - noche-de-liderazgo-y-testing-2022--2-juan-guillermo-gomez-session
+  - noche-de-liderazgo-y-testing-2022--3-noe-branagan-session
 speakers:
   - sergio-estrella
   - juan-guillermo-gomez

@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-experiencias-en-software-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-experiencias-en-software-2022--1-andres-rodriguez-session
+  - noche-de-experiencias-en-software-2022--2-santiago-bernal-session
 speakers:
   - andres-rodriguez
   - santiago-bernal

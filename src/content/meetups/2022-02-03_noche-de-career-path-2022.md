@@ -21,7 +21,8 @@ hero:
 heroImage: "/images/meetups/noche-de-career-path-2022/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-career-path-2022--1-oscar-barajas-session
 speakers:
   - oscar-barajas
 sponsors: []

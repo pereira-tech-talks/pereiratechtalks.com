@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/noche-de-devops-ansible-y-gitlab-2018/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - noche-de-devops-ansible-y-gitlab-2018--1-introduccion-a-la-automatizacion-en-ansible
+  - noche-de-devops-ansible-y-gitlab-2018--2-aprendiendo-integracion-continua-ci-con-gitlab-y-docker
 speakers:
   - manuel-pineda
   - carlos-gonzalez

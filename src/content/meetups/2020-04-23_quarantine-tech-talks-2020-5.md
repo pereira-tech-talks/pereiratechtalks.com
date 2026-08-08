@@ -21,7 +21,8 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-5/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - quarantine-tech-talks-2020-5--1-marian-villa-session
 speakers:
   - marian-villa
 sponsors: []

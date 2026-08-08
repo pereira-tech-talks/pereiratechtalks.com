@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - de-cero-a-super-heroe-go-kubernetes--1-introduccion-al-desarrollo-de-aplicaciones-modernas-en-
+  - de-cero-a-super-heroe-go-kubernetes--2-kubernetes-serverless-en-google-cloud-de-cero-a-super-h
 speakers:
   - sergio-florez
   - mauricio-cuenca

@@ -21,7 +21,9 @@ hero:
 heroImage: "/images/meetups/quarantine-tech-talks-2020-3/hero.jpeg"
 verticals:
   - monthly-meetups
-talks: []
+talks:
+  - quarantine-tech-talks-2020-3--1-oscar-barajas-session
+  - quarantine-tech-talks-2020-3--2-yury-nino-roa-session
 speakers:
   - oscar-barajas
   - yury-nino-roa
