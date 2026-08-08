@@ -9,10 +9,12 @@ body:
   en: "One day. 300+ builders. Talks that move the community forward."
   es: "Un día. 300+ personas. Charlas que impulsan a la comunidad."
 image:
-  src: /images/pereira-tech-days/2026/mascot/card-hero-sm.webp
+  src:
+    es: /images/pereira-tech-days/2026/mascot/card-hero-sm.webp
+    en: /images/pereira-tech-days/2026/mascot/card-hero-sm-en.webp
   alt:
-    en: Pereira Tech Day 2026 mascot — a howler monkey with a laptop at UTP
-    es: Mascota de Pereira Tech Day 2026 — un mono aullador con laptop en la UTP
+    en: Pereira Tech Day 2026 promotional card — howler monkey mascot, date, venue, and sponsors
+    es: Tarjeta promocional de Pereira Tech Day 2026 — mascota mono aullador, fecha, sede y patrocinadores
 ctaLabel:
   en: Explore the edition
   es: Explorar la edición

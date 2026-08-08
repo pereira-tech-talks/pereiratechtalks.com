@@ -1,6 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
-
 import type { Language } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
 
 export type Notification = CollectionEntry<'notifications'>;
 
@@ -56,7 +56,7 @@ export const localizeNotification = (
     summary: data.summary[lang],
     body: data.body?.[lang],
     image: data.image
-      ? { src: data.image.src, alt: data.image.alt[lang] }
+      ? { src: tr(data.image.src, lang), alt: data.image.alt[lang] }
       : undefined,
     ctaLabel: data.ctaLabel?.[lang],
     ctaHref: data.ctaHref,

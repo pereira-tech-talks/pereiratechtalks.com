@@ -23,13 +23,12 @@ const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 
 /**
- * 2026 mascot hero is compositionally right-weighted with a sparse left half.
- * Use a pre-cropped card asset so the mascot fills the 16:9 frame edge-to-edge.
+ * Prefer localized `cardImage` (e.g. PTD 2026 bilingual promo cards).
+ * Fall back to hero.src for editions without a dedicated card crop.
  */
-const heroSrc =
-  year === 2026
-    ? '/images/pereira-tech-days/2026/mascot/card-hero-sm.webp'
-    : edition.data.hero.src;
+const heroSrc = edition.data.cardImage
+  ? tr(edition.data.cardImage, lang)
+  : edition.data.hero.src;
 const heroAlt = tr(edition.data.hero.alt, lang) || title;
 const url = getEditionHref(edition, lang);
 const accent =

@@ -60,7 +60,9 @@ const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
 const ogImageSrc = edition.data.ogImage
   ? tr(edition.data.ogImage, lang)
-  : heroSrc;
+  : edition.data.cardImage
+    ? tr(edition.data.cardImage, lang)
+    : heroSrc;
 const upcomingTemplate = isUpcomingEdition(edition);
 const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
 
