@@ -20,6 +20,14 @@ A multilingual content specialist who ensures that every piece of user-facing co
 
 **Adapted for this Astro repository:** Enforces multilingual rules from AGENTS.md Section 6. Uses `src/lib/i18n.ts` as the source of truth for supported languages. Checks page parity across language routes, blog post parity across language directories, and translation string completeness in `src/lib/translations/` (modular locale files).
 
+> **Measuring language integrity.** This agent has `disallowedTools: Bash` by
+> design — it reviews, it does not run builds. The sitewide language-integrity
+> scanner therefore cannot be invoked from here. Run
+> [`/audit-language-integrity`](../skills/audit-language-integrity/SKILL.md)
+> first (or `pnpm run lang:check --report tmp/lang-audit`) and hand this agent
+> the generated `LANGUAGE_AUDIT.md` to interpret. The scanner measures; this
+> agent judges what the measurement means for translation quality.
+
 This agent is a specialized **i18n expert** that focuses on:
 
 - Multilingual content completeness (parity across all active languages)

@@ -51,6 +51,7 @@ Everyday development work.
 | audit-series  | review   | `/audit-series`  | sonnet | Pre-publication audit for blog series — series definition, post ordering, cross-post consistency, navigation, and individual post summary checks. |
 | audit-taxonomy | review  | `/audit-taxonomy` | sonnet | Read-only audit of the blog tag taxonomy — frequency, orphans, hierarchy, and proposals for new subtopic tags. Writes report to `tmp/audit-taxonomy/`. See [Blog Posts → Tags](../../docs/features/BLOG_POSTS.md). |
 | audit-analytics | review | `#audit-analytics` | sonnet | Audit Umami event coverage, first-party proxy wiring, and privacy-safe payloads against `src/lib/analytics.ts` + `docs/ANALYTICS.md`. |
+| audit-language-integrity | review | `/audit-language-integrity` | sonnet | Audit sitewide language integrity — Spanish URLs render Spanish, English URLs English, in HTML **and** in the `.md` twin. Triages the scanner's two confidence tiers and orders the fixes. See [I18N Guide](../../docs/I18N_GUIDE.md). |
 | promote-post  | create   | `/promote-post`  | sonnet | Generate social media content for any blog post (Twitter/X, LinkedIn, HN, dev.to, Reddit, Facebook) |
 | write-tests   | tests    | `/write-tests`   | sonnet | Add or expand tests (*.test.ts) - Vitest/Playwright when configured      |
 | refactor-safe | execute  | `/refactor-safe` | sonnet | Safe refactor in bounded scope (1-10 files, no behavior change)          |

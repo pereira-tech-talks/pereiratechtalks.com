@@ -72,6 +72,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/add-ptd-edition` | `.agents/skills/add-ptd-edition/SKILL.md` | Create a Pereira Tech Day annual edition (schedule, keynotes, brand kit, organizers, gallery) |
 | `/issue-certificates` | `.agents/skills/issue-certificates/SKILL.md` | Batch-issue signed attendance certificates from CSV (import → sign → verify → build) |
 | `/audit-analytics` | `.agents/skills/audit-analytics/SKILL.md` | Audit Umami event coverage, first-party proxy, and privacy-safe payloads |
+| `/audit-language-integrity` | `.agents/skills/audit-language-integrity/SKILL.md` | Audit sitewide language integrity and triage the scanner's two confidence tiers |
 | `/promote-post` | `.agents/skills/promote-post/SKILL.md` | Generate social media content for blog posts across multiple platforms |
 | `/optimize-image` | `.agents/skills/optimize-image/SKILL.md` | Convert and optimize images to WebP for blog posts |
 | `/audit-post` | `.agents/skills/audit-post/SKILL.md` | Pre-publication audit for blog posts (SEO, AEO, accessibility, images, content quality, i18n) |
