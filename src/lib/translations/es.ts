@@ -136,7 +136,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
   meetupsPage: {
     title: 'Meetups de Pereira Tech Talks',
     description:
-      '{meetups} meetups, {talks} charlas y {speakers} ponentes desde {sinceYear}. Archivo mensual de la comunidad tech del Eje Cafetero en Pereira, Risaralda.',
+      '{meetups} meetups, {talks} charlas y {speakers} ponentes desde {sinceYear}. El archivo mensual completo de la comunidad tech del Eje Cafetero en Pereira, Risaralda.',
     intro:
       'Cada mes nos reunimos para compartir charlas, romper el hielo entre comunidades y mantener viva la curiosidad técnica. Aquí está el archivo completo.',
     upcoming: 'Próximos meetups',
@@ -162,6 +162,8 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
 
   meetupDetail: {
     talks: 'Charlas',
+    untranslatedBody:
+      'Esta reseña aún no está traducida — mostramos el texto original en español.',
     speakers: 'Ponentes',
     sponsors: 'Patrocinadores',
     sponsorsSubtitle: 'Empresas que apoyaron este meetup.',
@@ -521,7 +523,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
   cfsPage: {
     title: 'Call for Speakers',
     description:
-      '¿Quieres compartir lo que sabes en Pereira Tech Talks? Postula tu charla a meetups, Pereira Tech Days o nuestros programas.',
+      '¿Quieres compartir lo que sabes en Pereira Tech Talks? Postula tu charla, panel, workshop o lightning a los meetups mensuales o a Pereira Tech Day.',
     intro:
       'Buscamos voces nuevas y experimentadas, locales e internacionales. Si tienes algo que aporte a la comunidad —una charla técnica, un panel, un workshop, una lightning— queremos escucharte.',
     eyebrow: 'Comparte lo que sabes',

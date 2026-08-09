@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Three JS"
+  en: "Three.js"
   es: "Three JS"
 abstract:
-  en: "Talk by Gabriel Muñoz at the Pereira Tech Talks meetup “Three JS && Introducción a React”."
+  en: "Talk by Gabriel Muñoz at the Pereira Tech Talks meetup “Three.js && Introduction to React”."
   es: "Charla de Gabriel Muñoz en el meetup «Three JS && Introducción a React» de Pereira Tech Talks."
 speakers:
   - gabriel-munoz

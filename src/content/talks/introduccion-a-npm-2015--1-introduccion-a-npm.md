@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a npm"
+  en: "Introduction to npm"
   es: "Introducción a npm"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introducción a npm”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introduction to npm”."
   es: "Charla de Daniel Aristizábal en el meetup «Introducción a npm» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

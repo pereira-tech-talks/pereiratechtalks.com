@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
+  en: "Session at From UTP to academia and business: stories of professional growth"
   es: "Participación en De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
 abstract:
-  en: "Talk by Juan David Gil at the Pereira Tech Talks meetup “De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional”."
+  en: "Talk by Juan David Gil at the Pereira Tech Talks meetup “From UTP to academia and business: stories of professional growth”."
   es: "Charla de Juan David Gil en el meetup «De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional» de Pereira Tech Talks."
 speakers:
   - juan-david-gil

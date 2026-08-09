@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Creando redes Peer-to-peer en NodeJs"
+  en: "Building peer-to-peer networks in Node.js"
   es: "Creando redes Peer-to-peer en NodeJs"
 abstract:
   en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “NodeSchool Day Pereira 2018”."

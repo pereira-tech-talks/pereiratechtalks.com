@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de Experiencias en la industria del Software"
+  en: "Session at Experiences Night in the software industry"
   es: "Participación en Noche de Experiencias en la industria del Software"
 abstract:
-  en: "Talk by Andrés Rodríguez at the Pereira Tech Talks meetup “Noche de Experiencias en la industria del Software”."
+  en: "Talk by Andrés Rodríguez at the Pereira Tech Talks meetup “Experiences Night in the software industry”."
   es: "Charla de Andrés Rodríguez en el meetup «Noche de Experiencias en la industria del Software» de Pereira Tech Talks."
 speakers:
   - andres-rodriguez

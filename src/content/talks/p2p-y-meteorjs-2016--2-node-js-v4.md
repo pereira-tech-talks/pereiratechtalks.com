@@ -3,7 +3,7 @@ title:
   en: "Node.js v4"
   es: "Node.js v4"
 abstract:
-  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “P2P + webtorrent && Introducción a MeteorJS”."
+  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “P2P + webtorrent && Introduction to MeteorJS”."
   es: "Charla de Sergio Alexander Flórez en el meetup «P2P + webtorrent && Introducción a MeteorJS» de Pereira Tech Talks."
 speakers:
   - sergio-florez

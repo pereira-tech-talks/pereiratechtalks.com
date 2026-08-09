@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs"
+  en: "Welcome to NodeSchool Pereira and the PereiraJs community"
   es: "Bienvenida al NodeSchool Pereira y a la comunidad PereiraJs"
 abstract:
   en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “NodeSchool Day Pereira 2018”."

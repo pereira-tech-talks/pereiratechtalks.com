@@ -14,6 +14,7 @@ venue:
 mode: in-person
 hero:
   src: "/images/meetups/qa-pilar-del-software/hero.webp"
+  srcEn: "/images/meetups/qa-pilar-del-software/hero.en.webp"
   alt:
     en: "QA: the pillar of software"
     es: "QA: Pilar del software"
@@ -36,6 +37,7 @@ sponsors:
     tier: community
   - slug: vuetify
     tier: community
+linkRecording: https://www.youtube.com/watch?v=Ubhgp591yKQ
 status: announced
 draft: false
 ---

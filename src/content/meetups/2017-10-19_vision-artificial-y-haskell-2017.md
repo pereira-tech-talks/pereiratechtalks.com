@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Computer Vision con OpenCV && Programación funcional en Haskell"
+  en: "Computer vision with OpenCV && Functional programming in Haskell"
   es: "Visión artificial con OpenCV && Programación funcional en Haskell"
 description:
-  en: "Pereira Tech Talks meetup — Computer Vision con OpenCV && Programación funcional en Haskell. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Computer vision with OpenCV && Functional programming in Haskell. Community archive page with the night’s program and context."
   es: "En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meetup, con dos charlas muy interesantes:"
 pubDate: 2017-10-19
 date: 2017-10-19
@@ -36,11 +36,11 @@ En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meet
 
 ![Asistentes en el salón 15C-S108 de la UTP durante el meetup de octubre de 2017](/images/meetups/vision-artificial-y-haskell-2017/archive-photo.jpg)
 
-**"Image Stitching", una introducción a OpenCV  by [Carlos Álvaro](http://caal-15.github.io/#programming) **
+**"Image Stitching", una introducción a OpenCV  por [Carlos Álvaro](http://caal-15.github.io/#programming) **
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243860589)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243860589)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

@@ -1,47 +1,63 @@
 import type { APIRoute } from 'astro';
+
 import { SITE_URL } from '@/lib/constances';
+import {
+  entityLine,
+  mdHref,
+  resolveI18n,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
+import { getActiveSponsors } from '@/lib/sponsor';
+import { getSponsorUsContent } from '@/lib/sponsor-us-content';
 
-import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
+/**
+ * `/sponsor-us.md` — reads the same content module the HTML page renders, so
+ * the reach stats and the complete tier/perk menu are present. They previously
+ * lived only inside the page component and never reached the `.md`.
+ */
+export const GET: APIRoute = async () => {
+  const lang = 'en';
+  const t = getSponsorUsContent(lang);
+  const sponsors = await getActiveSponsors();
 
-export const GET: APIRoute = () => {
   const markdown = serializeGenericToMarkdown({
-    title: 'Sponsor us — Pereira Tech Talks',
-    description:
-      'Connect your brand with the most active technical community in the Eje Cafetero. Since 2014 we have run 90+ meetups and 7 Pereira Tech Day editions.',
-    lang: 'en',
+    title: `${t.title} — Pereira Tech Talks`,
+    description: t.description,
+    lang,
     canonical: `${SITE_URL}/en/sponsor-us`,
+    body: t.intro,
     sections: [
       {
-        heading: 'Why sponsor',
-        lines: [
-          "Sponsoring Pereira Tech Talks is not advertising — it's building community.",
-          'Every contribution funds accessible venues, food for attendees, Speaker School scholarships, travel for invited speakers, and events open to the whole region.',
-        ],
+        heading: t.reachTitle,
+        lines: t.reachStats.map((s) => `- **${s.value}** — ${s.label}`),
       },
       {
-        heading: 'Estimated reach',
-        lines: [
-          '- 90+ meetups since 2014',
-          '- 200+ talks delivered',
-          '- 6,500+ cumulative attendees',
-          '- 12 active years',
-        ],
+        heading: t.tiersTitle,
+        lines: t.tiers.flatMap((tier) => [
+          `### ${tier.name}`,
+          '',
+          tier.headline,
+          '',
+          ...tier.perks.map((perk) => `- ${perk}`),
+          '',
+        ]),
       },
       {
-        heading: 'Sponsorship tiers',
-        lines: [
-          '- **Diamond** — Strategic annual partner. Co-branding on PTD and full-year meetups, keynote slot, monthly social mentions, hiring pool access, main site banner.',
-          '- **Gold** — Annual partner. Logo on PTD program, one sponsored technical talk per year, mentions at 6+ meetups, hiring pool access.',
-          '- **Silver** — One-off sponsor. Logo on the sponsored event, pre/post social mentions, optional booth.',
-          '- **Community** — Non-monetary contribution (venues, food, transportation, scholarships). Logo on the supported event and recognition on the sponsors page.',
-        ],
+        heading: t.currentSponsorsTitle,
+        lines: sponsors.map((s) =>
+          entityLine(
+            s.data.name,
+            mdHref(lang, `sponsors/${s.id}`),
+            resolveI18n(s.data.description, lang)
+          )
+        ),
       },
       {
-        heading: 'How to start a conversation',
+        heading: t.ctaTitle,
         lines: [
-          `- Form: ${SITE_URL}/en/contact/?topic=collaboration`,
-          '- Email: pereiratechtalks@gmail.com',
-          '- Tell us what you want to support (a meetup, a program, Pereira Tech Day, scholarships) and we will send a tailored sponsor deck.',
+          t.ctaDescription,
+          '',
+          `- [${t.ctaButton}](${SITE_URL}/en/sponsor-us/#sponsor-form)`,
         ],
       },
     ],
@@ -50,6 +66,7 @@ export const GET: APIRoute = () => {
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

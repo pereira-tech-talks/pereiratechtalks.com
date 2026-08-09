@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
+  en: "Workflow control with AirFlow & Artificial intelligence with TensorFlow"
   es: "Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
 description:
-  en: "Pereira Tech Talks meetup — Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow. Community archive page with the night’s…"
+  en: "Pereira Tech Talks meetup — Workflow control with AirFlow & Artificial intelligence with TensorFlow. Community archive page with the night’s…"
   es: "Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad impulsada por talento Pereirano en busqueda de compartir conocimiento…"
 pubDate: 2017-09-14
 date: 2017-09-14
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
   alt:
-    en: "Workflow Control de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
+    en: "Workflow control with AirFlow & Artificial intelligence with TensorFlow"
     es: "Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow"
   layout: banner
 heroImage: "/images/meetups/airflow-y-tensorflow-2017/hero.jpg"
@@ -40,7 +40,7 @@ En nuestra apertura presentaremos dos charlas muy interesantes:
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

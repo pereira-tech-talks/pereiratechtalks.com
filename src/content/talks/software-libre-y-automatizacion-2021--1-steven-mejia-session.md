@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Software libre y Automatización"
+  en: "Session at Open source and automation"
   es: "Participación en Software libre y Automatización"
 abstract:
-  en: "Talk by Steven Mejia at the Pereira Tech Talks meetup “Software libre y Automatización”."
+  en: "Talk by Steven Mejia at the Pereira Tech Talks meetup “Open source and automation”."
   es: "Charla de Steven Mejia en el meetup «Software libre y Automatización» de Pereira Tech Talks."
 speakers:
   - steven-mejia

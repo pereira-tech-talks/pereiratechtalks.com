@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
+  en: "Session at From UTP to academia and business: stories of professional growth"
   es: "Participación en De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
 abstract:
-  en: "Talk by Sebastian Gomez at the Pereira Tech Talks meetup “De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional”."
+  en: "Talk by Sebastian Gomez at the Pereira Tech Talks meetup “From UTP to academia and business: stories of professional growth”."
   es: "Charla de Sebastian Gomez en el meetup «De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional» de Pereira Tech Talks."
 speakers:
   - sebastian-gomez

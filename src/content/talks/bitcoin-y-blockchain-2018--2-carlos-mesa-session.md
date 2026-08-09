@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
+  en: "Session at Introduction to Bitcoin and blockchain: meet the new technological revolution."
   es: "Participación en Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
 abstract:
-  en: "Talk by Carlos Mesa at the Pereira Tech Talks meetup “Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.”."
+  en: "Talk by Carlos Mesa at the Pereira Tech Talks meetup “Introduction to Bitcoin and blockchain: meet the new technological revolution.”."
   es: "Charla de Carlos Mesa en el meetup «Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.» de Pereira Tech Talks."
 speakers:
   - carlos-mesa

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Pruebas unitarias en Javascript"
+  en: "Unit testing in JavaScript"
   es: "Pruebas unitarias en Javascript"
 abstract:
-  en: "Talk by John Darwin Morales at the Pereira Tech Talks meetup “Noche de testing - Pruebas Unitarias en Python y Javascript”."
+  en: "Talk by John Darwin Morales at the Pereira Tech Talks meetup “Testing Night - unit testing in Python and JavaScript”."
   es: "Charla de John Darwin Morales en el meetup «Noche de testing - Pruebas Unitarias en Python y Javascript» de Pereira Tech Talks."
 speakers:
   - john-darwin-morales

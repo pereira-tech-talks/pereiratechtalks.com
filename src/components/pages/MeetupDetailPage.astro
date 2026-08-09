@@ -20,7 +20,12 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
-import { getMeetupSlug, resolveMeetupStatus } from '@/lib/meetup';
+import {
+  getMeetupBodyEntry,
+  getMeetupSlug,
+  resolveMeetupStatus,
+} from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent } from '@/lib/talk';
@@ -39,7 +44,10 @@ const prefix = getUrlPrefix(lang);
 const slug = getMeetupSlug(meetup);
 const title = tr(meetup.data.title, lang);
 const description = tr(meetup.data.description, lang);
-const heroSrc = meetup.data.hero?.src || meetup.data.heroImage;
+const heroSrc =
+  (lang === 'en' && meetup.data.hero?.srcEn) ||
+  meetup.data.hero?.src ||
+  meetup.data.heroImage;
 const heroLayout = meetup.data.hero?.layout ?? (heroSrc ? 'banner' : 'none');
 const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
 const bannerHeroSrc = heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
@@ -74,7 +82,14 @@ const recordingUrl = linkRecording || talkRecording?.url;
 const recordingYoutubeId =
   youtubeId || (recordingUrl ? extractYouTubeId(recordingUrl) : null);
 
-const { Content } = await render(meetup);
+// A meetup's Spanish body lives on the entry; its English body lives in a
+// `{slug}.en.md` sibling. Falling back to Spanish is allowed, but it must be
+// labeled — a silent fallback is the defect this replaces.
+const { entry: bodyEntry, untranslated } = await getMeetupBodyEntry(
+  meetup,
+  lang
+);
+const { Content } = await render(bodyEntry);
 
 const breadcrumbs = [
   {
@@ -141,12 +156,32 @@ if (speakers.length > 0) {
     url: `${SITE_URL}${prefix}/speakers/${s.id}/`,
   }));
 }
+/**
+ * Archive stubs carry a two-line note and recent meetups a full abstract, so
+ * the authored description sits on both sides of the 130-160 band. Composed
+ * from the night's own facts, then trimmed at a word boundary.
+ */
+const metaPhrase = metaPhrases(lang);
+const metaDescription = buildMetaDescription({
+  lead: description,
+  // Ordered shortest-first: a long lead can still reach the band on a compact
+  // clause, where a long one would be skipped for overshooting.
+  clauses: [
+    talks.length > 0 ? metaPhrase.talkCount(talks.length) : null,
+    metaPhrase.meetupContext(
+      dateLabel,
+      [venue?.name, venue?.city].filter(Boolean).join(', ')
+    ),
+    metaPhrase.community,
+  ],
+  lang,
+});
 ---
 
 <MainLayout
   lang={lang}
   title={title}
-  description={description}
+  description={metaDescription}
   image={heroSrc}
 >
   <JsonLd data={eventJsonLd} />
@@ -236,7 +271,32 @@ if (speakers.length > 0) {
     <div class="main-container py-12 sm:py-16 grid gap-12 lg:grid-cols-[1fr_280px]">
       {/* Body */}
       <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark prose-img:rounded-xl">
-        <Content />
+        {
+          untranslated && (
+            <p
+              class="not-prose mb-8 flex items-start gap-2.5 rounded-xl border border-ptt-border bg-ptt-bg-elevated px-4 py-3 text-sm text-ptt-secondary"
+              lang="en"
+            >
+              <svg
+                class="mt-0.5 h-4 w-4 shrink-0 text-ptt-primary dark:text-ptt-primary-dark"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              <span>{md.untranslatedBody}</span>
+            </p>
+          )
+        }
+        <div lang={untranslated ? 'es' : lang}>
+          <Content />
+        </div>
       </div>
 
       {/* Sidebar */}
@@ -316,16 +376,24 @@ if (speakers.length > 0) {
     {
       recordingYoutubeId && (
         <section class="main-container pb-12 sm:pb-16">
-          <h2 class="text-2xl font-bold tracking-tight text-ptt mb-4">
-            {md.recording}
-          </h2>
+          <div class="mb-4 flex flex-wrap items-end justify-between gap-2">
+            <h2 class="text-2xl font-bold tracking-tight text-ptt">
+              {md.recording}
+            </h2>
+            <p class="text-sm font-medium text-ptt-secondary">
+              {md.watchRecording}
+            </p>
+          </div>
           <div
-            class="youtube-facade relative aspect-video w-full overflow-hidden rounded-2xl bg-ptt-bg-dark ring-1 ring-ptt-border"
+            class="youtube-facade group relative aspect-video w-full overflow-hidden rounded-2xl bg-ptt-bg-dark ring-1 ring-ptt-border shadow-sm"
             data-youtube-id={recordingYoutubeId}
             data-title={title}
           >
             <img
-              src={`https://i.ytimg.com/vi/${recordingYoutubeId}/hqdefault.jpg`}
+              src={
+                heroSrc ||
+                `https://i.ytimg.com/vi/${recordingYoutubeId}/hqdefault.jpg`
+              }
               alt=""
               width="1280"
               height="720"
@@ -334,13 +402,26 @@ if (speakers.length > 0) {
             />
             <button
               type="button"
-              class="absolute inset-0 flex items-center justify-center bg-black/35 text-white transition hover:bg-black/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/40 text-white transition hover:bg-black/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF0000]"
               aria-label={md.watchRecording}
             >
-              <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-ptt-primary text-white shadow-lg dark:bg-ptt-primary-dark dark:text-gray-950">
-                <svg aria-hidden="true" class="h-7 w-7 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
+              {/* YouTube-style red play control — reads clearly as a video player. */}
+              <span
+                class="inline-flex h-[4.25rem] w-[6rem] items-center justify-center rounded-[1.15rem] bg-[#FF0000] text-white shadow-[0_8px_28px_rgba(0,0,0,0.45)] transition group-hover:scale-105 group-hover:bg-[#E00000] sm:h-[4.75rem] sm:w-[7.25rem]"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-9 w-9 translate-x-0.5 sm:h-10 sm:w-10"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z"></path>
                 </svg>
+              </span>
+              <span
+                class="rounded-full bg-black/55 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white backdrop-blur-sm sm:text-sm"
+              >
+                YouTube · {md.watchRecording}
               </span>
             </button>
           </div>

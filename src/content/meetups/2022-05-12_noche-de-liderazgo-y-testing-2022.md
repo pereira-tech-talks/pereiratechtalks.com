@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Leadership Night y testing"
+  en: "Leadership Night and testing"
   es: "Noche de liderazgo y testing"
 description:
-  en: "Pereira Tech Talks meetup — Leadership Night y testing. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Leadership Night and testing. Community archive page with the night’s program and context."
   es: "Introducción a Load Testing y Observability con K6 y New Relic"
 pubDate: 2022-05-12
 date: 2022-05-12
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg"
   alt:
-    en: "Leadership Night y testing"
+    en: "Leadership Night and testing"
     es: "Noche de liderazgo y testing"
   layout: banner
 heroImage: "/images/meetups/noche-de-liderazgo-y-testing-2022/hero.jpeg"
@@ -42,7 +42,7 @@ Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad T
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/285770133)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/285770133)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

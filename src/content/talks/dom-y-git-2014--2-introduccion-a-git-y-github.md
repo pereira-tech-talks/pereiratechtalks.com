@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a git y github"
+  en: "Introduction to git and GitHub"
   es: "Introducción a git y github"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Librerías para manipulación del DOM && Introducción a git y github”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Libraries for DOM manipulation && Introduction to git and GitHub”."
   es: "Charla de Manuel Pineda en el meetup «Librerías para manipulación del DOM && Introducción a git y github» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

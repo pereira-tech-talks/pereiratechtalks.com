@@ -22,13 +22,13 @@ status: active
 order: 3
 ---
 
-## Por qué existe / Why it exists
+## Por qué existe
 
 En 2024 la conversación de la comunidad cambió. Cada meetup terminaba con preguntas sobre LLMs, agentes, RAG, evals. Algunas personas estaban probando, otras dudando, casi nadie compartiendo lo que ya tenía en producción.
 
 El Canal de IA y Agentes nació para cambiar esa dinámica: **un espacio dedicado donde la gente comparte lo que funciona, lo que rompió, y lo que descubrió que era humo**. La regla no escrita: si vas a contar algo, trae el demo o el código.
 
-> The bet: the people in Pereira shipping AI to production are mostly invisible to each other. Make the channel exist and they will find each other.
+> La apuesta: en Pereira, quienes llevan IA a producción son casi invisibles entre sí. Si el canal existe, se encuentran.
 
 ---
 
@@ -86,7 +86,7 @@ Las charlas y demos del canal se publican como parte del catálogo del sitio (es
 
 ---
 
-## Preguntas frecuentes / FAQs
+## Preguntas frecuentes
 
 **¿Tengo que ser senior?** — No. La barra es traer algo concreto: un demo, un código, una pregunta específica.
 

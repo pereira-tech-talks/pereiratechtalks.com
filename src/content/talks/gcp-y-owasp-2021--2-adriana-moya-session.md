@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at GCP y OWASP"
+  en: "Session at GCP and OWASP"
   es: "Participación en GCP y OWASP"
 abstract:
-  en: "Talk by Adriana Moya at the Pereira Tech Talks meetup “GCP y OWASP”."
+  en: "Talk by Adriana Moya at the Pereira Tech Talks meetup “GCP and OWASP”."
   es: "Charla de Adriana Moya en el meetup «GCP y OWASP» de Pereira Tech Talks."
 speakers:
   - adriana-moya

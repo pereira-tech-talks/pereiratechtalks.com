@@ -22,13 +22,13 @@ status: active
 order: 2
 ---
 
-## Por qué existe / Why it exists
+## Por qué existe
 
 La industria tech lee artículos cortos, threads y release notes. Casi nadie lee libros completos sobre el oficio. La Biblioteca del Mañana es la apuesta opuesta: una vez al mes, un libro entero, una conversación de 90 minutos.
 
 No es un club académico. No es una lectura por puro placer. Es **lectura técnica con propósito**: cada libro se elige porque ilumina una decisión que tomamos como ingenieras, fundadores, líderes o ciudadanos en una sociedad que la tecnología está reescribiendo.
 
-> The bet: deep reading is rare, undervalued, and exactly what makes engineering judgement compound over years instead of staying stuck in the 6-month cycle of the next framework.
+> La apuesta: la lectura profunda es rara y está subvalorada, y es justo lo que hace que el criterio de ingeniería se acumule durante años en vez de quedarse atrapado en el ciclo de seis meses del siguiente framework.
 
 ---
 
@@ -71,7 +71,7 @@ El próximo libro se decide al final de cada sesión, con tres reglas:
 
 ---
 
-## Preguntas frecuentes / FAQs
+## Preguntas frecuentes
 
 **¿Tengo que terminar el libro?** — No. Llega con lo que alcanzaste. La conversación es la mitad del aprendizaje.
 

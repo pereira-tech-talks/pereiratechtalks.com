@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Programación Orientada a Objetos con JavaScript"
+  en: "Object-oriented programming with JavaScript"
   es: "Programación Orientada a Objetos con JavaScript"
 abstract:
-  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Historia, aplicaciones y programación orientada a objetos con Javascript”."
+  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “History, applications and object-oriented programming with JavaScript”."
   es: "Charla de Óscar Granada en el meetup «Historia, aplicaciones y programación orientada a objetos con Javascript» de Pereira Tech Talks."
 speakers:
   - oscar-granada

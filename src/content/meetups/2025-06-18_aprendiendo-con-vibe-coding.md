@@ -48,6 +48,6 @@ Meetup sobre vibe coding — pair-programming con agentes de IA para entregar so
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/307800000/

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
+  en: "APIs and WebSockets with SailsJS && Data monitoring and visualization with StatsD and Grafana"
   es: "APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
 description:
-  en: "Pereira Tech Talks meetup — APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana. Community archive page with the…"
+  en: "Pereira Tech Talks meetup — APIs and WebSockets with SailsJS && Data monitoring and visualization with StatsD and Grafana. Community archive page with the…"
   es: "En PereiraJs nuestros Speakers se lucieron hablando sobre contrucción de APIs con SailsJs y Monitoreo con StatsD y Grafana:"
 pubDate: 2017-05-30
 date: 2017-05-30
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg"
   alt:
-    en: "APIs and WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
+    en: "APIs and WebSockets with SailsJS && Data monitoring and visualization with StatsD and Grafana"
     es: "APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana"
   layout: banner
 heroImage: "/images/meetups/sails-websockets-y-grafana-2017/hero.jpg"
@@ -45,6 +45,6 @@ Conoceras cómo puedes contruir de manera casí automatizada APIs reactivas medi
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

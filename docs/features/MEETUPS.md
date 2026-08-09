@@ -2,6 +2,69 @@
 
 See `AGENTS.md` and `/add-meetup` for the full workflow.
 
+## The body model — two files per meetup
+
+A meetup is **one entry plus one body sibling**:
+
+```
+src/content/meetups/
+├── 2026-06-24_qa-pilar-del-software.md      ← frontmatter + Spanish body
+└── 2026-06-24_qa-pilar-del-software.en.md   ← English body only
+```
+
+The entry holds every piece of structured data — date, venue, speakers, talks,
+sponsors, gallery — because none of it has a language dimension and duplicating
+it would let the two copies drift. The sibling holds **only** English prose: no
+frontmatter, no restated data. The loader's `generateId` strips `.en`, so both
+share an id.
+
+Worked example. `2026-06-24_qa-pilar-del-software.md`:
+
+```markdown
+---
+title:
+  en: "QA: the pillar of software"
+  es: "QA: Pilar del software"
+description:
+  en: "Time to talk about quality. Two talks on the lessons open source left us…"
+  es: "Llegó el momento de hablar de calidad. Dos charlas sobre las lecciones…"
+date: 2026-06-24
+venue: { name: "Universidad Tecnológica de Pereira", city: "Pereira", country: "Colombia" }
+speakers: [juan-alejandro-perez-bermudez]
+talks: [qa-pilar-del-software--1-qa-first-open-source]
+---
+
+## Llegó el momento de hablar de calidad
+
+La calidad de software ha evolucionado mucho más allá de la detección de errores…
+```
+
+And `2026-06-24_qa-pilar-del-software.en.md` — nothing but the body:
+
+```markdown
+## Time to talk about quality
+
+Software quality has moved well beyond catching bugs…
+```
+
+**Rendering.** `getMeetupBodyEntry(meetup, lang)` returns the entry to render
+and an `untranslated` flag. When English is requested and no sibling exists it
+serves the Spanish body **behind a visible notice** — never silently. Omitting
+the body would hide real content; serving it unlabelled is the defect the
+mechanism exists to remove.
+
+**Section labels belong to one language.** A Spanish body writes `### Fuentes`,
+`**Charlas:**`, `**Ponente:**` and `por`; an English body writes `### Sources`,
+`**Talks:**`, `**Speaker:**` and `by`. `tests/unit/lib/bilingual-body-parity.test.ts`
+fails on a body carrying the other language's boilerplate.
+
+**`title.en` must be real English.** Not the Spanish title with one word
+swapped — "Web Development Moderno" and "Revolutionizing el Deep Learning" were
+both real, and both failed the reader. The same test asserts this.
+
+Verticals use the identical mechanism (`{slug}.en.md`, `verticalBodiesEn`). See
+[I18N Guide](../I18N_GUIDE.md).
+
 ## `/meetups` timeline
 
 One list, not two. `getAllMeetupShowcase()` (`src/lib/meetup.ts`) merges

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Image Stitching\", una introducción a OpenCV"
+  en: "Image stitching: an introduction to OpenCV"
   es: "Image Stitching\", una introducción a OpenCV"
 abstract:
-  en: "Talk by Carlos Álvaro at the Pereira Tech Talks meetup “Visión artificial con OpenCV && Programación funcional en Haskell”."
+  en: "Talk by Carlos Álvaro at the Pereira Tech Talks meetup “Computer vision with OpenCV && Functional programming in Haskell”."
   es: "Charla de Carlos Álvaro en el meetup «Visión artificial con OpenCV && Programación funcional en Haskell» de Pereira Tech Talks."
 speakers:
   - carlos-alvaro

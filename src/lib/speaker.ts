@@ -21,8 +21,10 @@ const sortByName = (a: Speaker, b: Speaker): number =>
  * public directory. Keep this for deterministic joins (getSpeakersBySlugs).
  */
 export const getSpeakers = async (): Promise<Speaker[]> => {
+  // Sort a copy: `sort` mutates in place, and the array `getCollection`
+  // returns is not ours to reorder.
   const all = await getCollection('speakers');
-  return all.sort(sortByName);
+  return [...all].sort(sortByName);
 };
 
 export const getSpeakerBySlug = async (

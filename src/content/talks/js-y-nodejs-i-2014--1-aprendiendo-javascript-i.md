@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Aprendiendo Javascript I"
+  en: "Learning JavaScript I"
   es: "Aprendiendo Javascript I"
 abstract:
-  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Aprendiendo Javascript I && Inmersión en Node.js I”."
+  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Learning JavaScript I && Diving into Node.js I”."
   es: "Charla de Óscar Granada en el meetup «Aprendiendo Javascript I && Inmersión en Node.js I» de Pereira Tech Talks."
 speakers:
   - oscar-granada

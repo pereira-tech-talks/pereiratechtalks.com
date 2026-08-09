@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Bienvenida a PereiraJS"
+  en: "Welcome to PereiraJS"
   es: "Bienvenida a PereiraJS"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Primera reunión PereiraJs”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “First meeting of PereiraJs”."
   es: "Charla de Daniel Aristizábal en el meetup «Primera reunión PereiraJs» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

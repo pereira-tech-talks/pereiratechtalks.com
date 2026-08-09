@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Administración de un pequeño cluster con #nodeJS, aplicado en laboratorio de Sirius de la UTP"
+  en: "Managing a small cluster with #nodeJS, applied in UTP's Sirius lab"
   es: "Administración de un pequeño cluster con #nodeJS, aplicado en laboratorio de Sirius de la UTP"
 abstract:
-  en: "Talk by Alejandro E. Rendón at the Pereira Tech Talks meetup “Introducción al IoT && Administración de un pequeño cluster con nodeJS”."
+  en: "Talk by Alejandro E. Rendón at the Pereira Tech Talks meetup “Introduction to IoT && Managing a small cluster with Node.js”."
   es: "Charla de Alejandro E. Rendón en el meetup «Introducción al IoT && Administración de un pequeño cluster con nodeJS» de Pereira Tech Talks."
 speakers:
   - alejandro-rendon

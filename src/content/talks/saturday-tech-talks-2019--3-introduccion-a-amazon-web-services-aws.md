@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Introducción a Amazon Web Services (AWS)"
+  en: "Introduction to Amazon Web Services (AWS)"
   es: "Introducción a Amazon Web Services (AWS)"
 abstract:
   en: "Talk by Steven Pineda at the Pereira Tech Talks meetup “Pereira - Saturday Tech Talks”."

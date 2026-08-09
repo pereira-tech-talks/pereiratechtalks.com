@@ -49,6 +49,6 @@ Estamos completando el detalle de ponentes y títulos a partir del archivo de la
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://luma.com/0xil6wus

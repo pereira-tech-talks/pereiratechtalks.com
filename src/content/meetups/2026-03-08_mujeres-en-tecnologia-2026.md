@@ -49,6 +49,6 @@ Meetup del mes de la mujer en tecnología — celebramos el impacto de las mujer
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://luma.com/4a8c1ypc

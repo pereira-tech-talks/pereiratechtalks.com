@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at OpenClaw Moltys en la UTP"
+  en: "Session at OpenClaw Moltys at UTP"
   es: "Participación en OpenClaw Moltys en la UTP"
 abstract:
-  en: "Talk by Sebastian Franco Gomez at the Pereira Tech Talks meetup “OpenClaw Moltys en la UTP”."
+  en: "Talk by Sebastian Franco Gomez at the Pereira Tech Talks meetup “OpenClaw Moltys at UTP”."
   es: "Charla de Sebastian Franco Gomez en el meetup «OpenClaw Moltys en la UTP» de Pereira Tech Talks."
 speakers:
   - sebastian-franco

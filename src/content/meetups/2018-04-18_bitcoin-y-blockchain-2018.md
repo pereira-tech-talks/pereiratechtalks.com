@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduction a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
+  en: "Introduction to Bitcoin and blockchain: meet the new technological revolution."
   es: "Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
 description:
-  en: "Pereira Tech Talks meetup — Introduction a Bitcoin y Blockchain, conoce la nueva revolución tecnológica.. Community archive page with the night’s program…"
+  en: "Pereira Tech Talks meetup — Introduction to Bitcoin and blockchain: meet the new technological revolution.. Community archive page with the night’s program…"
   es: "Tenemos el gusto de invitarlos a una gran noche dedicada a hablar sobre Bitcoin y su base tecnológica Blockchain, una de las tecnologías emergentes más…"
 pubDate: 2018-04-18
 date: 2018-04-18
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg"
   alt:
-    en: "Introduction a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
+    en: "Introduction to Bitcoin and blockchain: meet the new technological revolution."
     es: "Introducción a Bitcoin y Blockchain, conoce la nueva revolución tecnológica."
   layout: banner
 heroImage: "/images/meetups/bitcoin-y-blockchain-2018/hero.jpeg"
@@ -47,7 +47,7 @@ Contacto: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

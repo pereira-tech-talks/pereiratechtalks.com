@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Introducción a Rust ¿Por qué es importante?"
+  en: "Introduction to Rust: why does it matter?"
   es: "Introducción a Rust ¿Por qué es importante?"
 abstract:
   en: "Talk: Introducción a Rust ¿Por qué es importante?. See the Spanish abstract for the full description."

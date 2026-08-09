@@ -1,9 +1,9 @@
 ---
 title:
-  en: "From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
+  en: "From UTP to academia and business: stories of professional growth"
   es: "De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
 description:
-  en: "Pereira Tech Talks meetup — From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional. Community archive page with the night’s…"
+  en: "Pereira Tech Talks meetup — From UTP to academia and business: stories of professional growth. Community archive page with the night’s…"
   es: "Archivo del meetup «De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional»: programa, ponentes y contexto de la noche con…"
 pubDate: 2024-12-12
 date: 2024-12-12
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/de-la-utp-a-la-academia-y-lo-empresarial/hero.jpeg"
   alt:
-    en: "From UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
+    en: "From UTP to academia and business: stories of professional growth"
     es: "De la UTP a la Academia y lo Empresarial: Historias de Crecimiento Profesional"
   layout: banner
 heroImage: "/images/meetups/de-la-utp-a-la-academia-y-lo-empresarial/hero.jpeg"
@@ -40,8 +40,8 @@ El 12 de diciembre de 2024 nos reunimos en **Universidad Tecnológica de Pereira
 
 **CHARLA 1**
 
-**Speaker:** Sebastian Gomez
-**Role:** Software Engineer in Google Zurich
+**Ponente:** Sebastian Gomez
+**Rol:** Software Engineer in Google Zurich
 
 **Mi trayectoria profesional: De la UTP a Machine Learning Engineer en Google**
 Si sientes que la universidad no te preparó bien para la vida profesional, no estas solo. En mi experiencia, la calidad de los cursos en nuestras universidades depende mucho de quien la enseñe, y en general es de calidad relativamente baja. Pero quienes pagan las consecuencias son los estudiantes, no la universidad.
@@ -52,8 +52,8 @@ Nunca es tarde para comenzar a hacer las cosas diferentes, pero entre más tempr
 
 **CHARLA 2**
 
-**Speaker:** Juan David Gil López
-**Role:** Director of Machine Learning at Factored
+**Ponente:** Juan David Gil López
+**Rol:** Director of Machine Learning at Factored
 
 **Altibajos y Resiliencia, mi camino profesional en tech**
 Has sentido alguna vez que las cosas no se te están dando en el terreno profesional en tecnología?, sientes que quieres aplicar lo que sabes pero no se te dan las oportunidades?, te has sentido estancado como profesional y te han rechazado de mil partes?. Créeme no eres el primero ni el último, una carrera en tech puede tener muchos altibajos, pero con disciplina, resiliencia y paciencia el camino se va haciendo más claro.
@@ -66,7 +66,7 @@ Parte de la conversación incluye compartir algunos de los tips que me mantuvier
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

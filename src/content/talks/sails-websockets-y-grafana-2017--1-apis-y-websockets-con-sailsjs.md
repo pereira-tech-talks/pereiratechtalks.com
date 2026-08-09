@@ -1,9 +1,9 @@
 ---
 title:
-  en: "APIs y WebSockets con SailsJs"
+  en: "APIs and WebSockets with SailsJS"
   es: "APIs y WebSockets con SailsJs"
 abstract:
-  en: "Talk by John Darwin Morales at the Pereira Tech Talks meetup “APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana”."
+  en: "Talk by John Darwin Morales at the Pereira Tech Talks meetup “APIs and WebSockets with SailsJS && Data monitoring and visualization with StatsD and Grafana”."
   es: "Charla de John Darwin Morales en el meetup «APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana» de Pereira Tech Talks."
 speakers:
   - john-darwin-morales

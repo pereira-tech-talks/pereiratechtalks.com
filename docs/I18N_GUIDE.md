@@ -223,6 +223,54 @@ No component changes are needed — the tag will automatically appear with its l
 
 ## Bilingual Content
 
+### Bodies: the `{slug}.en.md` sibling
+
+Some collections keep **one** entry per item — meetups, verticals — because
+their structured data (date, venue, speakers, talks, sponsors) has no language
+dimension and duplicating it would let the two copies drift. Only the prose
+needs a language. That prose lives in a sibling file:
+
+```
+src/content/meetups/
+├── 2026-06-24_qa-pilar-del-software.md      ← frontmatter + Spanish body
+└── 2026-06-24_qa-pilar-del-software.en.md   ← English body only, no frontmatter
+
+src/content/verticals/
+├── speaker-school.md
+└── speaker-school.en.md
+```
+
+The loader's `generateId` strips `.en`, so both files share an id and the join
+needs no mapping table. The sibling is a **body-only** collection
+(`meetupBodiesEn`, `verticalBodiesEn`) with a `z.object({}).loose()` schema —
+it must never restate structured data.
+
+**Selecting a body:**
+
+```typescript
+import { getMeetupBodyEntry } from '@/lib/meetup';
+
+const { entry, untranslated } = await getMeetupBodyEntry(meetup, lang);
+const { Content } = await render(entry);
+```
+
+`getVerticalBodyEntry` is the same shape for verticals.
+
+**The fallback is labelled, never silent.** When English is requested and no
+sibling exists, the Spanish body is served with `untranslated: true`, and the
+page renders a visible notice above it. Omitting the body instead would hide
+real content; serving it unlabelled is the defect this mechanism exists to
+remove. The language audit keeps flagging such a page until it is translated.
+
+**To add a translation:** create `{slug}.en.md` next to the entry containing
+only the English body. Nothing else changes — no frontmatter edit, no schema
+change, no rebuild of the structured data.
+
+> Frontmatter stays bilingual separately: `title`, `description` and
+> `hero.alt` use the `{ en, es }` shape. `title.en` must be **real English**,
+> not the Spanish title with one word swapped — `tests/unit/lib/bilingual-body-parity.test.ts`
+> fails on the latter.
+
 ### Blog Posts
 
 Blog posts are organized in language-specific folders:
@@ -468,6 +516,8 @@ Before committing any content change, verify:
 - [ ] The `lang` prop is passed through the full component hierarchy
 - [ ] Page Markdown files exist in both `src/content/pages/en/` and `src/content/pages/es/`
 - [ ] When page content or translations change, corresponding `.md` files updated (both languages)
+- [ ] Every meetup and vertical has a `{slug}.en.md` body sibling
+- [ ] `pnpm run lang:check` reports **0 flagged pages**
 
 ## Known Limitations
 

@@ -350,6 +350,66 @@ Structure:
 
 **When to update**: Only when adding new AI crawler entries or changing crawl rules.
 
+## Per-URL audit
+
+Template review says nothing about whether all 482 URLs end up right. During
+the 2026-08-09 audit a dev-server 404 fallback served the 404 page's title and
+description under a real URL — exactly the class of defect a template read
+cannot see. `scripts/audit-seo.mjs` reads the built HTML instead, one URL at a
+time.
+
+```bash
+pnpm run seo:check                                 # summary + defects by class
+pnpm run seo:check:strict                          # exits 1 on any defect (CI gate)
+node scripts/audit-seo.mjs --report <dir>          # writes SEO_AUDIT.md
+```
+
+It asserts, per URL:
+
+| Assertion | Detail |
+|---|---|
+| `<html lang>` | matches the language the URL promises |
+| Title | present, unique **within its language**, and not the 404 title |
+| Description | present, unique within its language, **130–160 characters** |
+| Canonical | present and absolute; self-referential unless the page is a declared alias |
+| `hreflang` | `es`, `en` and `x-default` present, and the alternate page exists in the build |
+| OG + Twitter | title, description, image and URL all populated |
+| JSON-LD | parses, and the type matches the page (`Event` for meetups and PTD editions, `Person` for speakers, `BlogPosting` for posts) |
+| `robots` | `noindex` only on the certificate and verify surfaces |
+| Verification | **no** `google-site-verification` tag anywhere (`CLAUDE.md` §11 — GSC is DNS-only) |
+
+Uniqueness is scoped **per language** on purpose: a Spanish page and its English
+twin sharing a proper-noun title ("Quarantine Tech Talks") are alternates, not
+competitors, and `hreflang` already says so.
+
+### Descriptions are composed, not hand-tuned
+
+284 of 482 URLs once sat outside the 130–160 band. The cause was structural —
+pages handed the layout a field authored for another job (a speaker page passed
+the bio; a meetup archive stub passed a two-line note). `src/lib/meta-description.ts`
+composes instead:
+
+```typescript
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
+
+const metaDescription = buildMetaDescription({
+  lead: bio,                       // the authored text, always first
+  clauses: [role, phrases.community], // true statements about this page
+  lang,
+});
+```
+
+It extends a short lead with facts the page already states and trims a long one
+at a sentence boundary. **It never pads** — a page with nothing more to say
+truthfully stays short, and a test enforces that. `MainLayout` clamps to the
+maximum as a last line of defence, so no page can exceed it whatever it passes in.
+
+### Alias canonicals
+
+`/pereira-tech-day` and `/pereira-tech-days/{currentYear}` serve the same
+edition. The year URL passes `canonicalPath` through `MainLayout` → `BaseHead`
+so it canonicalizes to the promoted URL; past editions stay self-canonical.
+
 ## Checklists
 
 ### New Page SEO Checklist
@@ -377,6 +437,7 @@ Structure:
 
 ### Pre-Deploy SEO Checklist
 
+- [ ] `pnpm run seo:check` reports **0 flagged URLs**
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
 - [ ] `pnpm run build` succeeds

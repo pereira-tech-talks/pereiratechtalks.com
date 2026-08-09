@@ -154,6 +154,8 @@ export interface SiteTranslations {
 
   meetupDetail: {
     talks: string;
+    /** Shown above a Spanish body on an English page that has no translation yet. */
+    untranslatedBody: string;
     speakers: string;
     sponsors: string;
     sponsorsSubtitle: string;

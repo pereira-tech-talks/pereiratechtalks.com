@@ -1,9 +1,9 @@
 ---
 title:
-  en: "¿Qué es el blockchain y cómo transformará radicalmente la economía?"
+  en: "What is blockchain and how will it radically transform the economy?"
   es: "¿Qué es el blockchain y cómo transformará radicalmente la economía?"
 abstract:
-  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “¿Qué es el blockchain y cómo transformará radicalmente la economía?”."
+  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “What is blockchain and how will it radically transform the economy?”."
   es: "Charla de Sergio Alexander Flórez en el meetup «¿Qué es el blockchain y cómo transformará radicalmente la economía?» de Pereira Tech Talks."
 speakers:
   - sergio-florez

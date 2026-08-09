@@ -1,6 +1,6 @@
 ---
 title:
-  en: "IA y biotecnología: descubriendo medicamentos con modelos de lenguaje"
+  en: "AI and biotechnology: discovering drugs with language models"
   es: "IA y biotecnología: descubriendo medicamentos con modelos de lenguaje"
 abstract:
   en: "Talk: IA y biotecnología: descubriendo medicamentos con modelos de lenguaje. See the Spanish abstract for the full description."

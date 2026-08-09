@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Revolutionizing el Deep Learning: Potenciando modelos con datos limitados"
+  en: "Revolutionizing deep learning: powering models with limited data"
   es: "Revolucionando el Deep Learning: Potenciando modelos con datos limitados"
 description:
-  en: "Pereira Tech Talks meetup — Revolutionizing el Deep Learning: Potenciando modelos con datos limitados. Community archive page with the night’s program…"
+  en: "Pereira Tech Talks meetup — Revolutionizing deep learning: powering models with limited data. Community archive page with the night’s program…"
   es: "Archivo del meetup «Revolucionando el Deep Learning: Potenciando modelos con datos limitados»: programa, ponentes y contexto de la noche con Pereira Tech…"
 pubDate: 2024-05-30
 date: 2024-05-30
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/revolucionando-el-deep-learning/hero.jpeg"
   alt:
-    en: "Revolutionizing el Deep Learning: Potenciando modelos con datos limitados"
+    en: "Revolutionizing deep learning: powering models with limited data"
     es: "Revolucionando el Deep Learning: Potenciando modelos con datos limitados"
   layout: banner
 heroImage: "/images/meetups/revolucionando-el-deep-learning/hero.jpeg"
@@ -40,7 +40,7 @@ El 30 de mayo de 2024 nos reunimos en **Catholic University of Pereira** para **
 
 **Charla 1:**
 
-**Speaker:** Leiver Campeon
+**Ponente:** Leiver Campeon
 **Rol:** Expert Intelligence cómo Machine learning engineer y Tech Lead
 
 **Continual Learning and Catastrophic Forgetting in Modern AI Systems**
@@ -48,7 +48,7 @@ Después de desplegar un modelo de Deep Learning, nos encontramos con el desafí
 
 **Charla 2:**
 
-**Speaker:** Sebastián Franco Gómez
+**Ponente:** Sebastián Franco Gómez
 **Rol:** ML Engineer en Expert Intelligence
 
 **Optimizando modelos de Deep Learning: Cuando la data no es tan abundante**
@@ -58,7 +58,7 @@ Resumen: El Deep Learning ha supuesto una revolución en el campo del Machine Le
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

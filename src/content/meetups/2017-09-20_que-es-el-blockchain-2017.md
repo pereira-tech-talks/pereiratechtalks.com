@@ -1,9 +1,9 @@
 ---
 title:
-  en: "What is Blockchain? y cómo transformará radicalmente la economía?"
+  en: "What is blockchain and how will it radically transform the economy?"
   es: "¿Qué es el blockchain y cómo transformará radicalmente la economía?"
 description:
-  en: "Pereira Tech Talks meetup — What is Blockchain? y cómo transformará radicalmente la economía?. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — What is blockchain and how will it radically transform the economy?. Community archive page with the night’s program and context."
   es: "Estuvimos presentes en Universidad de Caldas con una ponencia sobre Blockchain a cargo de Sergio Alexander Florez, contando sus origenes en relación con…"
 pubDate: 2017-09-20
 date: 2017-09-20
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/que-es-el-blockchain-2017/hero.jpg"
   alt:
-    en: "What is Blockchain? y cómo transformará radicalmente la economía?"
+    en: "What is blockchain and how will it radically transform the economy?"
     es: "¿Qué es el blockchain y cómo transformará radicalmente la economía?"
   layout: banner
 heroImage: "/images/meetups/que-es-el-blockchain-2017/hero.jpg"
@@ -38,6 +38,6 @@ _Slides no longer available._
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

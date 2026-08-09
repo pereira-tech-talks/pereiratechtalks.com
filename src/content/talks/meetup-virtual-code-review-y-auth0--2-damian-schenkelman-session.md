@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0"
+  en: "Session at Virtual meetup: Code Review Night and IDaaS at Scale with Auth0"
   es: "Participación en MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0"
 abstract:
-  en: "Talk by Damián Schenkelman at the Pereira Tech Talks meetup “MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0”."
+  en: "Talk by Damián Schenkelman at the Pereira Tech Talks meetup “Virtual meetup: Code Review Night and IDaaS at Scale with Auth0”."
   es: "Charla de Damián Schenkelman en el meetup «MEETUP VIRTUAL: Noche de Code Review y IDaaS at Scale en Auth0» de Pereira Tech Talks."
 speakers:
   - damian-schenkelman

@@ -51,9 +51,14 @@ import { getTranslations } from '@/lib/translations';
 interface Props {
   edition: CollectionEntry<'pereiraTechDays'>;
   lang: Language;
+  /**
+   * Set on `/pereira-tech-days/{year}` for the edition that `/pereira-tech-day`
+   * also serves, so the two URLs do not compete for the same content.
+   */
+  canonicalPath?: string;
 }
 
-const { edition, lang } = Astro.props;
+const { edition, lang, canonicalPath } = Astro.props;
 const t = getTranslations(lang).ptdPage;
 const prefix = getUrlPrefix(lang);
 const year = edition.data.year;
@@ -228,6 +233,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   lang={lang}
   title={title}
   description={metaDescription}
+  canonicalPath={canonicalPath}
   image={ogImageSrc}
   chrome="ptd-edition"
   ptdYear={year}
@@ -387,6 +393,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           tagline={t.lightningTagline}
           talks={normalizedLightningTalks}
           speakers={lightningSpeakers}
+          pendingSlots={6}
           pending={
             upcomingTemplate
               ? {

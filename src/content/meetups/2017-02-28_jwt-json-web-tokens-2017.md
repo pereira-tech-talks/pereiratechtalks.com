@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Learning sobre JWT (JSON web Tokens)"
+  en: "Learning about JWT (JSON Web Tokens)"
   es: "Aprendiendo sobre JWT (JSON web Tokens)"
 description:
-  en: "Pereira Tech Talks meetup — Learning sobre JWT (JSON web Tokens). Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Learning about JWT (JSON Web Tokens). Community archive page with the night’s program and context."
   es: "En la primera reunión 2017, tuvimos el gusto de estar en la sede Belmonte el día 28 de febrero con la participación de estudiantes, docentes y egresados…"
 pubDate: 2017-02-28
 date: 2017-02-28
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/jwt-json-web-tokens-2017/hero.jpg"
   alt:
-    en: "Learning sobre JWT (JSON web Tokens)"
+    en: "Learning about JWT (JSON Web Tokens)"
     es: "Aprendiendo sobre JWT (JSON web Tokens)"
   layout: banner
 heroImage: "/images/meetups/jwt-json-web-tokens-2017/hero.jpg"
@@ -38,6 +38,6 @@ En esta oportunidad [Carlos González](https://www.facebook.com/CarloS.GonzaleZ.
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

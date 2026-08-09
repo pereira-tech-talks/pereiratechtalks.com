@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
+  en: "Session at Exploring CI/CD: Tekton on Kubernetes and GitHub Actions "
   es: "Participación en Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
 abstract:
-  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Explorando CI/CD: Tekton en Kubernetes y GitHub Actions ”."
+  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Exploring CI/CD: Tekton on Kubernetes and GitHub Actions ”."
   es: "Charla de Andrés Torres en el meetup «Explorando CI/CD: Tekton en Kubernetes y GitHub Actions » de Pereira Tech Talks."
 speakers:
   - andres-torres

@@ -1,7 +1,23 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import { SITE_URL } from '@/lib/constances';
+import {
+  linkLine,
+  mdHref,
+  mdLabel,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
 import { getDeckSlug, getSlideDecks } from '@/lib/slides';
 
+/**
+ * `/slides/{slug}.md` — a slide deck.
+ *
+ * Rebuilt on `serializeGenericToMarkdown` in Task 9 of
+ * PLAN_sitewide_language_seo_aeo_audit: the hand-rolled version had no front
+ * block (`Language:` and `Canonical:` were bullet points inside a Metadata
+ * section, not parseable lines) and no Site Navigation block at all — the only
+ * page type in the build that violated both universal rules.
+ */
 export const getStaticPaths: GetStaticPaths = async () => {
   const decks = await getSlideDecks('es');
   return decks.map((deck) => ({
@@ -11,51 +27,69 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const { deck } = props;
+  const lang = 'es';
+  const { deck } = props as {
+    deck: Awaited<ReturnType<typeof getSlideDecks>>[number];
+  };
   const data = deck.data;
-  let markdown = '';
+  const slug = getDeckSlug(deck.id);
+  const L = (key: Parameters<typeof mdLabel>[1]) => mdLabel(lang, key);
 
-  markdown += `# ${data.title}\n\n`;
-  markdown += `> ${data.description}\n\n`;
-
-  // Bloque de metadatos (legible por agentes)
-  markdown += '## Metadatos\n\n';
-  markdown += `- **Tipo:** ${data.type}\n`;
-  markdown += `- **Idioma:** es\n`;
-  markdown += `- **Publicado:** ${data.pubDate.toISOString().split('T')[0]}\n`;
+  const metadata: Array<[string, string]> = [
+    [L('type'), data.type],
+    ['Publicado', data.pubDate.toISOString().split('T')[0]],
+  ];
   if (data.updatedDate) {
-    markdown += `- **Actualizado:** ${data.updatedDate.toISOString().split('T')[0]}\n`;
+    metadata.push([
+      'Actualizado',
+      data.updatedDate.toISOString().split('T')[0],
+    ]);
   }
   if (data.eventName) {
-    markdown += `- **Evento:** ${data.eventName}`;
-    if (data.eventDate) {
-      markdown += ` (${data.eventDate.toISOString().split('T')[0]})`;
-    }
-    if (data.eventUrl) markdown += ` — ${data.eventUrl}`;
-    markdown += '\n';
+    const when = data.eventDate
+      ? ` (${data.eventDate.toISOString().split('T')[0]})`
+      : '';
+    metadata.push(['Evento', `${data.eventName}${when}`]);
+  }
+
+  const sections = [];
+  if (data.eventUrl) {
+    sections.push({
+      heading: 'Evento',
+      lines: [linkLine(data.eventName ?? data.eventUrl, data.eventUrl)],
+    });
+  }
+  if (data.type === 'external') {
+    sections.push({
+      heading: 'Presentación externa',
+      lines: [linkLine(data.provider ?? 'Abrir el deck', data.externalUrl)],
+    });
   }
   if (data.relatedPost) {
-    markdown += `- **Artículo relacionado:** /blog/${data.relatedPost}\n`;
-  }
-  markdown +=
-    '- **Fuente:** Pereira Tech Talks (https://pereiratechtalks.org)\n';
-  markdown += '\n';
-
-  if (data.type === 'external') {
-    markdown += '## Presentación Externa\n\n';
-    markdown += `- **URL:** ${data.externalUrl}\n`;
-    if (data.provider) markdown += `- **Proveedor:** ${data.provider}\n`;
-    markdown += '\n';
+    sections.push({
+      heading: 'Publicación relacionada',
+      lines: [
+        linkLine(data.relatedPost, mdHref(lang, `blog/${data.relatedPost}`)),
+      ],
+    });
   }
 
-  if (deck.body?.trim()) {
-    markdown += '## Contenido\n\n';
-    markdown += deck.body;
-  }
+  const markdown = serializeGenericToMarkdown({
+    title: data.title,
+    description: data.description,
+    lang,
+    canonical: `${SITE_URL}/slides/${slug}`,
+    metadata,
+    // The full deck source for internal decks; the supplementary copy for
+    // external ones. Either way it is the page's substance.
+    body: deck.body ?? '',
+    sections,
+  });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

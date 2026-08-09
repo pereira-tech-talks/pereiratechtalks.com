@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Conectando la IA con el Mundo Real: Potenciando Agentes con el Model Context Protocol (MCP)"
+  en: "Connecting AI to the real world: powering agents with the Model Context Protocol (MCP)"
   es: "Conectando la IA con el Mundo Real: Potenciando Agentes con el Model Context Protocol (MCP)"
 abstract:
   en: "Talk: Conectando la IA con el Mundo Real: Potenciando Agentes con el Model Context Protocol (MCP). See the Spanish abstract for the full description."

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil"
+  en: "Session at Tech & Soft Skills: AI, remote work and agile learning"
   es: "Participación en Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil"
 abstract:
-  en: "Talk by Juan Pablo Ortiz Villegas at the Pereira Tech Talks meetup “Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil”."
+  en: "Talk by Juan Pablo Ortiz Villegas at the Pereira Tech Talks meetup “Tech & Soft Skills: AI, remote work and agile learning”."
   es: "Charla de Juan Pablo Ortiz Villegas en el meetup «Tech & Soft Skills: IA, Trabajo Remoto y Apredizaje Ágil» de Pereira Tech Talks."
 speakers:
   - juan-pablo-ortiz-villegas

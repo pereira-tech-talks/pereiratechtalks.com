@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Best Practices en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
+  en: "Best practices in JavaScript && TDD, BDD, JavaScript and the good taste of testing"
   es: "Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
 description:
-  en: "Pereira Tech Talks meetup — Best Practices en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas. Community archive page with the night’s…"
+  en: "Pereira Tech Talks meetup — Best practices in JavaScript && TDD, BDD, JavaScript and the good taste of testing. Community archive page with the night’s…"
   es: "Octavo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:"
 pubDate: 2014-09-25
 date: 2014-09-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/buenas-practicas-js-y-tdd-2014/hero.jpg"
   alt:
-    en: "Best Practices en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
+    en: "Best practices in JavaScript && TDD, BDD, JavaScript and the good taste of testing"
     es: "Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas"
   layout: banner
 heroImage: "/images/meetups/buenas-practicas-js-y-tdd-2014/hero.jpg"
@@ -38,12 +38,12 @@ Octavo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes s
 
 ### Charlas
 
-1. ****Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+1. ****Buenas Prácticas en Javascript por [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
 Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices** ([perfil](https://twitter.com/jonalvarezz))
 1. ****TDD && BDD, Javascript y el buen sabor de las pruebas** — ** ([perfil](https://twitter.com/oagranada))
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

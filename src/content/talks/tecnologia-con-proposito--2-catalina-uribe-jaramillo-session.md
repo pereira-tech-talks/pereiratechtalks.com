@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente"
+  en: "Session at Technology with purpose: human connections and intelligent collaboration"
   es: "Participación en Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente"
 abstract:
-  en: "Talk by Catalina Uribe Jaramillo at the Pereira Tech Talks meetup “Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente”."
+  en: "Talk by Catalina Uribe Jaramillo at the Pereira Tech Talks meetup “Technology with purpose: human connections and intelligent collaboration”."
   es: "Charla de Catalina Uribe Jaramillo en el meetup «Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente» de Pereira Tech Talks."
 speakers:
   - catalina-uribe-jaramillo

@@ -276,7 +276,9 @@ const authors = defineCollection({
 const meetups = defineCollection({
   loader: glob({
     base: './src/content/meetups',
-    pattern: '**/*.{md,mdx}',
+    // `*.en.md` siblings carry only the English body (see `meetupBodiesEn`);
+    // they are not meetups in their own right.
+    pattern: ['**/*.{md,mdx}', '!**/*.en.{md,mdx}'],
     generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/i, ''),
   }),
   schema: z.object({
@@ -290,6 +292,8 @@ const meetups = defineCollection({
     hero: z
       .object({
         src: z.string(),
+        /** Optional English flyer when it differs from the Spanish `src`. */
+        srcEn: z.string().optional(),
         alt: i18nStringOptional,
         layout: heroLayout,
       })
@@ -314,6 +318,27 @@ const meetups = defineCollection({
     status: eventStatus.default('announced'),
     draft: z.boolean().default(false),
   }),
+});
+
+/**
+ * English bodies for meetups, as `{slug}.en.md` siblings.
+ *
+ * A meetup keeps ONE source of truth for its structured data (date, venue,
+ * speakers, talks, sponsors); only the prose needs a language dimension. Both
+ * bodies stay real Markdown files so they render through the same Sätteri
+ * pipeline — see `analysis_results/BILINGUAL_BODY_DECISION.md`.
+ *
+ * `generateId` strips `.en`, so an entry's id equals its meetup's id and the
+ * join needs no mapping table.
+ */
+const meetupBodiesEn = defineCollection({
+  loader: glob({
+    base: './src/content/meetups',
+    pattern: '**/*.en.{md,mdx}',
+    generateId: ({ entry }) => entry.replace(/\.en\.(md|mdx)$/i, ''),
+  }),
+  // Body-only: never restate structured data that lives on the meetup itself.
+  schema: z.object({}).loose(),
 });
 
 const events = defineCollection({
@@ -538,7 +563,12 @@ const pereiraTechDays = defineCollection({
 });
 
 const verticals = defineCollection({
-  loader: glob({ base: './src/content/verticals', pattern: '**/*.{yaml,md}' }),
+  loader: glob({
+    base: './src/content/verticals',
+    // `*.en.md` siblings carry only the English body (see `verticalBodiesEn`);
+    // they are not verticals in their own right.
+    pattern: ['**/*.{yaml,md}', '!**/*.en.md'],
+  }),
   schema: z.object({
     title: i18nString,
     shortName: i18nString,
@@ -557,6 +587,23 @@ const verticals = defineCollection({
     status: z.enum(['active', 'paused', 'archived']).default('active'),
     order: z.number().default(0),
   }),
+});
+
+/**
+ * English bodies for verticals, as `{slug}.en.md` siblings.
+ *
+ * Same mechanism as `meetupBodiesEn`: the vertical keeps ONE source of truth
+ * for its structured data (title, mission, leaders, schedule) and only the
+ * prose gets a language dimension.
+ */
+const verticalBodiesEn = defineCollection({
+  loader: glob({
+    base: './src/content/verticals',
+    pattern: '**/*.en.md',
+    generateId: ({ entry }) => entry.replace(/\.en\.md$/i, ''),
+  }),
+  // Body-only: never restate structured data that lives on the vertical itself.
+  schema: z.object({}).loose(),
 });
 
 const speakers = defineCollection({
@@ -851,9 +898,11 @@ export const collections = {
   authors,
   // v3.0.0 — community website model
   meetups,
+  meetupBodiesEn,
   events,
   pereiraTechDays,
   verticals,
+  verticalBodiesEn,
   speakers,
   talks,
   sponsors,

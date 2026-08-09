@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro"
+  en: "Modern web development: building faster, lighter sites with Astro"
   es: "Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro"
 description:
-  en: "Pereira Tech Talks meetup — Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro. Community archive page with the night’s…"
+  en: "Pereira Tech Talks meetup — Modern web development: building faster, lighter sites with Astro. Community archive page with the night’s…"
   es: "Archivo del meetup «Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro»: programa, ponentes y contexto de la noche con…"
 pubDate: 2024-08-01
 date: 2024-08-01
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg"
   alt:
-    en: "Web Development Moderno: Construyendo sitios web más rápido y ligeros con Astro"
+    en: "Modern web development: building faster, lighter sites with Astro"
     es: "Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro"
   layout: banner
 heroImage: "/images/meetups/desarrollo-web-moderno-con-astro/hero.jpeg"
@@ -40,7 +40,7 @@ El 1 de agosto de 2024 nos reunimos en **Camellando H+W** para **Desarrollo Web 
 
 **Charla 1:**
 
-**Speaker:** Héctor Julián Cardona
+**Ponente:** Héctor Julián Cardona
 **Rol:** Test automation Engineer SSR at Globant
 
 **Construyendo sitios web ultrarapidos y ultrarápido con Astro y TailwindCSS**
@@ -48,7 +48,7 @@ En esta charla introductoria, exploraremos Astro, una herramienta revolucionaria
 
 **Charla 2:**
 
-**Speaker:** Sergio Alexander Florez Galeano
+**Ponente:** Sergio Alexander Florez Galeano
 **Rol:** CTO at DailyBot
 
 **Astro en Acción: Aplicaciones Prácticas y Curiosidades**
@@ -56,7 +56,7 @@ En esta charla introductoria, exploraremos Astro, una herramienta revolucionaria
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376)
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

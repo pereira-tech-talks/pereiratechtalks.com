@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Monitoreo y control de flujos de trabajo con AirFlow"
+  en: "Monitoring and controlling workflows with AirFlow"
   es: "Monitoreo y control de flujos de trabajo con AirFlow"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Workflow control with AirFlow & Artificial intelligence with TensorFlow”."
   es: "Charla de Manuel Pineda en el meetup «Control de flujos de trabajo en AirFlow & Inteligencia artificial con TensorFlow» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

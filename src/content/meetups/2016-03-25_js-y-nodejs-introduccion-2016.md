@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduction a Javascript && Introducción a NodeJs"
+  en: "Introduction to JavaScript && Introduction to Node.js"
   es: "Introducción a Javascript && Introducción a NodeJs"
 description:
-  en: "Pereira Tech Talks meetup — Introduction a Javascript && Introducción a NodeJs. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Introduction to JavaScript && Introduction to Node.js. Community archive page with the night’s program and context."
   es: "Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
 pubDate: 2016-03-25
 date: 2016-03-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg"
   alt:
-    en: "Introduction a Javascript && Introducción a NodeJs"
+    en: "Introduction to JavaScript && Introduction to Node.js"
     es: "Introducción a Javascript && Introducción a NodeJs"
   layout: banner
 heroImage: "/images/meetups/js-y-nodejs-introduccion-2016/hero.jpg"
@@ -38,12 +38,12 @@ Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y
 
 ### Charlas
 
-1. ****Introducción a Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+1. ****Introducción a Javascript por [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
 Slides disponibles en: http://jonalvarezz.github.io/intro-js/** ([perfil](https://twitter.com/jonalvarezz))
 2. ****Introducción a NodeJs** — ** ([perfil](https://twitter.com/cronopio2))
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

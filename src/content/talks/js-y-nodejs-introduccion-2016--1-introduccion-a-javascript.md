@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a Javascript"
+  en: "Introduction to JavaScript"
   es: "Introducción a Javascript"
 abstract:
-  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Introducción a Javascript && Introducción a NodeJs”."
+  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Introduction to JavaScript && Introduction to Node.js”."
   es: "Charla de Jonathan Alvarez en el meetup «Introducción a Javascript && Introducción a NodeJs» de Pereira Tech Talks."
 speakers:
   - jonathan-alvarez

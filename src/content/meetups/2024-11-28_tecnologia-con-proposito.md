@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Technology con Propósito: Conexiones Humanas y Colaboración Inteligente"
+  en: "Technology with purpose: human connections and intelligent collaboration"
   es: "Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente"
 description:
-  en: "Pereira Tech Talks meetup — Technology con Propósito: Conexiones Humanas y Colaboración Inteligente. Community archive page with the night’s program and…"
+  en: "Pereira Tech Talks meetup — Technology with purpose: human connections and intelligent collaboration. Community archive page with the night’s program and…"
   es: "Archivo del meetup «Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente»: programa, ponentes y contexto de la noche con Pereira Tech…"
 pubDate: 2024-11-28
 date: 2024-11-28
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/tecnologia-con-proposito/hero.jpeg"
   alt:
-    en: "Technology con Propósito: Conexiones Humanas y Colaboración Inteligente"
+    en: "Technology with purpose: human connections and intelligent collaboration"
     es: "Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente"
   layout: banner
 heroImage: "/images/meetups/tecnologia-con-proposito/hero.jpeg"
@@ -42,19 +42,19 @@ Nos vemos este próximo 28 de Noviembre para recibir unas charlas buenísimas so
 
 **CHARLA 1**
 
-**Speaker:** Ana Lopez
-**Role:** Ingeniera Electronica, Magister en Gestión Informática y Telecomunicaciones, con especializaciones en Inteligencia de Negocios y Finanzas
+**Ponente:** Ana Lopez
+**Rol:** Ingeniera Electronica, Magister en Gestión Informática y Telecomunicaciones, con especializaciones en Inteligencia de Negocios y Finanzas
 
 **Más Allá del LLM: El Poder de los Multiagentes**
 Descubre cómo los sistemas multiagente superan las limitaciones de un solo LLM, potenciando la colaboración entre inteligencias para resolver problemas complejos de forma más eficiente y escalable.
 
 **CHARLA 2**
 
-**Speaker 1:** Catalina Uribe Jaramillo
-**Role 1:** Diseñadora UX/UI, apasionada por crear experiencias digitales conscientes y accesibles, alineadas con las necesidades de todas las personas.
+**Ponente 1:** Catalina Uribe Jaramillo
+**Rol 1:** Diseñadora UX/UI, apasionada por crear experiencias digitales conscientes y accesibles, alineadas con las necesidades de todas las personas.
 
-**Speaker 2:** María Lizeth
-**Role 2:** Diseñadora UX/UI apasionada, enfocada en impulsar el crecimiento exponencial mediante la colaboración con startups tecnológicas y empresas con propósito.
+**Ponente 2:** María Lizeth
+**Rol 2:** Diseñadora UX/UI apasionada, enfocada en impulsar el crecimiento exponencial mediante la colaboración con startups tecnológicas y empresas con propósito.
 
 **Software desde el lado humano**
 Charla sobre cómo crear tecnología consciente con las personas, accesible, funcional, empática, ética, incluyente y diversa. Liz y Cata compartirán, desde su experiencia, de qué manera los equipos de diseño y desarrollo pueden crear productos digitales que se enfoquen en las necesidades de las personas, la ética y el cuidado de nuestro entorno.
@@ -63,7 +63,7 @@ Charla sobre cómo crear tecnología consciente con las personas, accesible, fun
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

@@ -45,6 +45,6 @@ Introducción a la CNCF, sus proyectos insignia (Kubernetes, Prometheus) y el mo
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/306731274/

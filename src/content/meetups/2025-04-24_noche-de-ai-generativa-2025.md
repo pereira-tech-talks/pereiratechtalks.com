@@ -46,6 +46,6 @@ Dos charlas sobre IA generativa — generación procedural en videojuegos (mundo
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/307304023/

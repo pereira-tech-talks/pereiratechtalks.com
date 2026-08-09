@@ -136,7 +136,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   meetupsPage: {
     title: 'Pereira Tech Talks Meetups',
     description:
-      '{meetups} meetups, {talks} talks, and {speakers} speakers since {sinceYear}. Monthly archive from the Eje Cafetero tech community in Pereira, Risaralda.',
+      '{meetups} meetups, {talks} talks, and {speakers} speakers since {sinceYear}. The complete monthly archive of the Eje Cafetero tech community in Pereira, Risaralda.',
     intro:
       'Every month the community comes together to share talks, connect across communities, and keep technical curiosity alive. Here is the full archive.',
     upcoming: 'Upcoming meetups',
@@ -162,6 +162,8 @@ If you are looking for people to grow with, a stage for your first talk, or a co
 
   meetupDetail: {
     talks: 'Talks',
+    untranslatedBody:
+      'This recap has not been translated yet — showing the Spanish original.',
     speakers: 'Speakers',
     sponsors: 'Sponsors',
     sponsorsSubtitle: 'Companies that supported this meetup.',
@@ -520,7 +522,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   cfsPage: {
     title: 'Call for Speakers',
     description:
-      'Want to share what you know at Pereira Tech Talks? Submit your talk for meetups, Pereira Tech Days, or our programs.',
+      'Want to share what you know at Pereira Tech Talks? Submit a talk, panel, workshop or lightning for the monthly meetups or for Pereira Tech Day.',
     intro:
       'We look for new and seasoned voices, local and international. If you have something to bring to the community — a technical talk, a panel, a workshop, a lightning — we want to hear from you.',
     eyebrow: 'Share what you know',
@@ -800,7 +802,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
   blogTitle: 'Blog',
   blogHeading: 'Articles & Stories',
   blogDescription:
-    'Articles, meetup recaps, and tutorials from Pereira Tech Talks — community writing from Risaralda’s tech scene since 2014.',
+    'Articles, meetup recaps, and tutorials from Pereira Tech Talks — community writing from the Risaralda tech scene in Pereira, Colombia, since 2014.',
   allPosts: 'All Posts',
   showingArticles: (showing, total) =>
     `Showing ${showing} of ${total} articles`,

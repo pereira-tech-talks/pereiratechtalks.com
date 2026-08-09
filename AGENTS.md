@@ -204,7 +204,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 - **Pages:** Create 1 shared `*Page.astro` in `src/components/pages/` + thin 3-line wrappers in `src/pages/` (Spanish primary, served at `/`) and `src/pages/en/` (English, served at `/en`) passing `lang` as string literal.
 - **Blog Posts:** Both `src/content/blog/en/` and `src/content/blog/es/` MUST have the equivalent post. Translate `title`, `description`, body. Preserve `pubDate`, `heroImage`, `tags`, `author`, code blocks. **Use `/add-blog-post` skill for new posts.**
-- **Meetups:** One bilingual file per meetup in `src/content/meetups/` (`title`/`description` with `en`/`es`). **Use `/add-meetup` skill.**
+- **Meetups:** One entry per meetup in `src/content/meetups/` holding the structured data (`title`/`description` with `en`/`es`), **plus a `{slug}.en.md` sibling carrying the English body**. The entry's own body is Spanish. A missing sibling falls back to Spanish behind a visible notice — it is not silent. **Use `/add-meetup` skill.** Same shape for `verticals`.
 - **Events / PTD editions:** Define in single source-of-truth collection (`events`, `pereiraTechDays`); translatable fields use `{ en, es }` shape per the Zod schema (Task 4).
 - **Authors / Contributors:** Defined as YAML with localized `role`/`bio` (`en`/`es` keys required by schema). Posts and talks reference by slug.
 - **Translation Strings:** Add to BOTH `src/lib/translations/en.ts` and `es.ts`. Update `types.ts` with any new interface keys.
@@ -215,7 +215,8 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 
 - [ ] Pages exist in both `src/pages/` (ES, root) and `src/pages/en/` (EN)
 - [ ] Blog posts exist in both `src/content/blog/en/` and `src/content/blog/es/`
-- [ ] Meetup entries exist in `src/content/meetups/` with both `en` and `es` fields filled
+- [ ] Meetup entries have both `en` and `es` frontmatter fields **and** a `{slug}.en.md` body sibling (same for `verticals`)
+- [ ] `title.en` is real English, not the Spanish title with a word swapped
 - [ ] Same `author` slug used in EN and ES versions of a post
 - [ ] New/updated authors and contributors have both `role.en`/`role.es` and `bio.en`/`bio.es` filled in
 - [ ] UI strings in both `en.ts` and `es.ts`
@@ -293,8 +294,12 @@ pnpm run astro:check        # TypeScript type checking
 pnpm run test               # Run unit tests
 pnpm run test:coverage      # Tests with coverage
 pnpm run images:optimize    # Process staged images
-pnpm run md:check           # Verify every HTML page has a matching .md for agents
-pnpm run md:check:strict    # Same as above; exits 1 on missing (for CI)
+pnpm run md:check           # Verify every page has a COMPLETE .md twin, in the right language
+pnpm run md:check:strict    # Same as above; exits 1 on failure (CI gate)
+pnpm run lang:check         # Sitewide language-integrity audit (ES at /, EN at /en)
+pnpm run lang:check:strict  # Same as above; exits 1 on failure (CI gate)
+pnpm run seo:check          # Per-URL SEO + structured-data audit
+pnpm run seo:check:strict   # Same as above; exits 1 on failure (CI gate)
 pnpm run search:budgets     # Search payload budgets
 pnpm run lighthouse         # Lighthouse audit
 pnpm run release            # Bump version and release commit
@@ -412,7 +417,16 @@ The blog hosts **community blog posts** (recaps, deep-dives, vertical announceme
 
 > Full reference: **[Meetups Guide](docs/features/MEETUPS.md)** (created in Task 4 onwards)
 
-**File naming:** `YYYY-MM-DD_slug.md` in `src/content/meetups/`. **Slugs MUST be in English.**
+**File naming:** `YYYY-MM-DD_slug.md` in `src/content/meetups/`, plus
+`YYYY-MM-DD_slug.en.md` holding the English body. **Slugs MUST be in English.**
+
+**Bodies are bilingual by sibling file.** The entry carries the structured data
+and the **Spanish** body; the `.en.md` sibling carries **only** the English body
+(no frontmatter). `generateId` strips `.en`, so the two share an id and need no
+mapping table. `getMeetupBodyEntry(meetup, lang)` picks the right one and
+reports `untranslated` when it had to fall back, which the page renders as a
+visible notice. Same mechanism for `verticals` (`verticalBodiesEn`). See
+**[I18N Guide](docs/I18N_GUIDE.md)**.
 
 **Frontmatter:** `title`, `description`, `date`, `vertical` (Speaker School / La Biblioteca del Mañana / AI Channel / general), `format` (online / in-person / hybrid), `venue` (optional), `speakers` (array of slugs), `talks` (array of slugs, optional), `recordingUrl` (optional), `slidesUrl` (optional), `coverImage`.
 
@@ -522,7 +536,9 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
 - [ ] `pnpm run build` succeeds
-- [ ] `pnpm run md:check` passes
+- [ ] `pnpm run md:check` passes — every page has a **complete** `.md` twin, not a summary
+- [ ] `pnpm run lang:check` reports 0 flagged pages
+- [ ] `pnpm run seo:check` reports 0 flagged URLs
 - [ ] Dark mode works in new components
 - [ ] Content in both Spanish (primary) and English
 - [ ] Translation strings in both locale files
@@ -537,7 +553,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 
 ## Skills & Agents
 
-- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-talk`, `add-slide-deck`, `add-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`
+- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-talk`, `add-slide-deck`, `add-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`, `audit-language-integrity`
 - **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`, `content-writer`
 - **Critical policy:** New blog posts MUST use `/add-blog-post`; new meetups MUST use `/add-meetup`; new talks MUST use `/add-talk`; new slide decks MUST use `/add-slide-deck`; new PTD editions MUST use `/add-ptd-edition`
 - **Management:** `/skill-list`, `/agent-list`, `/skill-create`, `/agent-create`

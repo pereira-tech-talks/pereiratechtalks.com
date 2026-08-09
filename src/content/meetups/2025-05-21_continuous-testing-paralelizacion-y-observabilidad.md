@@ -45,6 +45,6 @@ Meetup sobre continuous testing — escalar la automatización de pruebas sin es
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/307796521/

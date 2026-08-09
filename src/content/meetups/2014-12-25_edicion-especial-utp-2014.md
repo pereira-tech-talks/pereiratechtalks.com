@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Special Edition desde la UTP"
+  en: "Special edition from UTP"
   es: "Edición Especial desde la UTP"
 description:
-  en: "Pereira Tech Talks meetup — Special Edition desde la UTP. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Special edition from UTP. Community archive page with the night’s program and context."
   es: "En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar nuestro primer Meetup allí sobre:"
 pubDate: 2014-12-25
 date: 2014-12-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/edicion-especial-utp-2014/hero.jpg"
   alt:
-    en: "Special Edition desde la UTP"
+    en: "Special edition from UTP"
     es: "Edición Especial desde la UTP"
   layout: banner
 heroImage: "/images/meetups/edicion-especial-utp-2014/hero.jpg"
@@ -38,12 +38,12 @@ En esta edición especial, tuvimos la oportunidad de acercarnos a la UTP y dar n
 
 ### Charlas
 
-1. ****Buenas Prácticas en Javascript by [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
+1. ****Buenas Prácticas en Javascript por [Jonathan Alvarez](https://twitter.com/jonalvarezz)**
 Slides disponibles en: https://speakerdeck.com/jonalvarezz/javascript-best-practices** ([perfil](https://twitter.com/jonalvarezz))
 1. ****TDD && BDD, Javascript y el buen sabor de las pruebas** — ** ([perfil](https://twitter.com/oagranada))
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

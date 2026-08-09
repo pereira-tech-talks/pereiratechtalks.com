@@ -3,7 +3,7 @@ title:
   en: "OpenClaw and agents in practice"
   es: "OpenClaw y agentes en la práctica"
 abstract:
-  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “OpenClaw Moltys en la UTP”."
+  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “OpenClaw Moltys at UTP”."
   es: "Charla de Sergio Alexander Flórez en el meetup «OpenClaw Moltys en la UTP» de Pereira Tech Talks."
 speakers:
   - sergio-florez

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Point-free Javascript con RamdaJS"
+  en: "Point-free JavaScript with RamdaJS"
   es: "Point-free Javascript con RamdaJS"
 abstract:
-  en: "Talk by Andrés Sugar at the Pereira Tech Talks meetup “Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS”."
+  en: "Talk by Andrés Sugar at the Pereira Tech Talks meetup “Virtual reality for the web with A-Frame && Point-free JavaScript with RamdaJS”."
   es: "Charla de Andrés Sugar en el meetup «Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS» de Pereira Tech Talks."
 speakers:
   - andres-sugar

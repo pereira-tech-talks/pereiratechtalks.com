@@ -1,9 +1,9 @@
 ---
 title:
-  en: "React Native && Seguridad en npm"
+  en: "React Native && Security in npm"
   es: "React native && Seguridad en npm"
 description:
-  en: "Pereira Tech Talks meetup — React Native && Seguridad en npm. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — React Native && Security in npm. Community archive page with the night’s program and context."
   es: "Nuevamente nuestros speakers nos descrestaron en una gran noche de mucho Javascript, compartiendo conocimientos sobre:"
 pubDate: 2017-08-01
 date: 2017-08-01
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/react-native-y-npm-2017/hero.jpg"
   alt:
-    en: "React Native && Seguridad en npm"
+    en: "React Native && Security in npm"
     es: "React native && Seguridad en npm"
   layout: banner
 heroImage: "/images/meetups/react-native-y-npm-2017/hero.jpg"
@@ -45,6 +45,6 @@ Hoy en día el tráfico en la red a través de dispositivo móviles supera en gr
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

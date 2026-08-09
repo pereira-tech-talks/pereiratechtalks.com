@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Industry Experiences Night en la industria del Software"
+  en: "Experiences Night in the software industry"
   es: "Noche de Experiencias en la industria del Software"
 description:
-  en: "Pereira Tech Talks meetup — Industry Experiences Night en la industria del Software. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Experiences Night in the software industry. Community archive page with the night’s program and context."
   es: "Speaker: Andrés Rodriguez Charla: Conviértete en desarrollador web, estos son los beneficios."
 pubDate: 2022-11-17
 date: 2022-11-17
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/noche-de-experiencias-en-software-2022/hero.jpeg"
   alt:
-    en: "Industry Experiences Night en la industria del Software"
+    en: "Experiences Night in the software industry"
     es: "Noche de Experiencias en la industria del Software"
   layout: banner
 heroImage: "/images/meetups/noche-de-experiencias-en-software-2022/hero.jpeg"
@@ -41,7 +41,7 @@ Esta es una charla más orientada a las personas que tienen curiosidad en la ind
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/289498758)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/289498758)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

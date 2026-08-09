@@ -193,6 +193,47 @@ When linking to external sites:
 </a>
 ```
 
+## Agent-markdown surface
+
+Every public page also publishes a `.md` twin at `{url}.md` for AI agents
+(**[Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)**). Since these are a
+second public rendering of the same content, they are a second place content can
+leak from.
+
+**The invariant: a `.md` twin publishes exactly what its HTML page publishes —
+no more.**
+
+- Twins are generated **only for pages the build emits**. Draft and scheduled
+  content never reaches a page, so it never reaches a twin — verified against
+  the build: 10 draft blog posts, 0 twins.
+- Pages marked `noindex` (certificates, verify) have **no** `.md` twin.
+  Asserted against `dist/` during the Task 13 review.
+- Serializers read the same filtered helpers the pages read (`getMeetups`,
+  `getEditions`, `getSlideDecks`), so a draft filter added in one place applies
+  to both surfaces.
+- Twins resolve entity references to names and links. They must not introduce
+  fields the page does not render — reviewers should treat a new field in a
+  serializer as a publication decision, not a formatting one.
+
+`pnpm run md:check:strict` enforces completeness and language on every build;
+`pnpm run seo:check:strict` asserts, among other things, that `noindex` appears
+only on the intended surfaces and that no `google-site-verification` tag exists
+anywhere (see **[Analytics Verification Policy](../CLAUDE.md)**).
+
+### `Content-Disposition: inline` on `/*.md`
+
+`public/_headers` serves the twins as `text/markdown` with
+`Content-Disposition: inline`. The content type is deliberate — the WorkOS
+`auth.md` / isitagentready scanner expects it — and browsers have no renderer
+for it, so without the disposition they download the file or show a blank
+viewport.
+
+`inline` is safe **because** the type is `text/markdown`: browsers do not
+execute it, so the usual "inline disposition on user-supplied content" concern
+(HTML/SVG rendered in origin context) does not apply. If the content type of
+these routes ever changes to something a browser executes, the disposition must
+be revisited at the same time.
+
 ## API Route Security
 
 ### Current Endpoints

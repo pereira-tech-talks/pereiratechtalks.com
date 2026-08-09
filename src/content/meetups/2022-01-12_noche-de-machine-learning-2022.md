@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Machine Learning Night y Google Interview"
+  en: "Machine Learning Night and Google interviews"
   es: "Noche de Machine Learning y Google Interview"
 description:
-  en: "Pereira Tech Talks meetup — Machine Learning Night y Google Interview. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Machine Learning Night and Google interviews. Community archive page with the night’s program and context."
   es: "Noche de Machine Learning y Google Interview."
 pubDate: 2022-01-12
 date: 2022-01-12
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/noche-de-machine-learning-2022/hero.jpeg"
   alt:
-    en: "Machine Learning Night y Google Interview"
+    en: "Machine Learning Night and Google interviews"
     es: "Noche de Machine Learning y Google Interview"
   layout: banner
 heroImage: "/images/meetups/noche-de-machine-learning-2022/hero.jpeg"
@@ -40,7 +40,7 @@ Comenzamos el año cargado de valiosa información. Y con estos dos titanes de G
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283129605)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283129605)
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

@@ -3,7 +3,7 @@ title:
   en: "WebAssembly"
   es: "WebAssembly"
 abstract:
-  en: "Talk by Giovanny Góngora at the Pereira Tech Talks meetup “WebAssambly”."
+  en: "Talk by Giovanny Góngora at the Pereira Tech Talks meetup “WebAssembly”."
   es: "Charla de Giovanny Góngora en el meetup «WebAssambly» de Pereira Tech Talks."
 speakers:
   - giovanny-gongora

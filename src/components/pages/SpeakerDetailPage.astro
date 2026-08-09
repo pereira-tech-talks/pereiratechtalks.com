@@ -11,7 +11,11 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
 import { getCalendarYear } from '@/lib/dates';
+import { getEventBySlug } from '@/lib/event';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { getMeetupBySlug } from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
+import { getEditionByYear } from '@/lib/pereiraTechDay';
 import { getTalksBySpeaker } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';
 
@@ -33,34 +37,65 @@ const photoAlt = tr(speaker.data.photo.alt, lang) || `Portrait of ${name}`;
 const talks = await getTalksBySpeaker(speaker.id);
 const social = speaker.data.social ?? {};
 
+/**
+ * Label for a related event: the entry's own title in the reader's language.
+ * Humanizing the slug (the old behaviour) leaked Spanish slugs onto `/en`
+ * pages and read as a slug dump on both.
+ */
+const resolveEventLabel = async (
+  collection: 'meetups' | 'events' | 'pereiraTechDays',
+  slug: string
+): Promise<string> => {
+  if (collection === 'pereiraTechDays') {
+    const edition = await getEditionByYear(Number(slug));
+    return edition ? tr(edition.data.title, lang) : `Pereira Tech Day ${slug}`;
+  }
+  const entry =
+    collection === 'meetups'
+      ? await getMeetupBySlug(slug)
+      : await getEventBySlug(slug);
+  return entry ? tr(entry.data.title, lang) : slug.replace(/-/g, ' ');
+};
+
 const relatedEvents = Array.from(
   talks
-    .filter((t) => t.data.event)
-    .reduce((map, t) => {
-      const event = t.data.event!;
-      const key = `${event.collection}:${event.slug}`;
-      if (!map.has(key)) {
-        map.set(key, {
-          collection: event.collection,
-          slug: event.slug,
-          href:
-            event.collection === 'meetups'
-              ? `${prefix}/meetups/${event.slug}/`
-              : event.collection === 'pereiraTechDays'
-                ? `${prefix}/pereira-tech-days/${event.slug}/`
-                : `${prefix}/events/${event.slug}/`,
-          label:
-            event.collection === 'pereiraTechDays'
-              ? `Pereira Tech Day ${event.slug}`
-              : event.slug.replace(/-/g, ' '),
-        });
-      }
-      return map;
-    }, new Map<
-      string,
-      { collection: string; slug: string; href: string; label: string }
-    >())
+    // `flatMap` narrows `event` for TypeScript; `filter` alone leaves it
+    // optional and forces a non-null assertion.
+    .flatMap((t) => (t.data.event ? [t.data.event] : []))
+    .reduce(
+      (map, event) => {
+        const key = `${event.collection}:${event.slug}`;
+        if (!map.has(key)) {
+          map.set(key, {
+            collection: event.collection,
+            slug: event.slug,
+            href:
+              event.collection === 'meetups'
+                ? `${prefix}/meetups/${event.slug}/`
+                : event.collection === 'pereiraTechDays'
+                  ? `${prefix}/pereira-tech-days/${event.slug}/`
+                  : `${prefix}/events/${event.slug}/`,
+          });
+        }
+        return map;
+      },
+      new Map<
+        string,
+        {
+          collection: 'meetups' | 'events' | 'pereiraTechDays';
+          slug: string;
+          href: string;
+        }
+      >()
+    )
     .values()
+);
+
+const relatedEventLinks = await Promise.all(
+  relatedEvents.map(async (event) => ({
+    ...event,
+    label: await resolveEventLabel(event.collection, event.slug),
+  }))
 );
 
 const breadcrumbs = [
@@ -74,6 +109,22 @@ const breadcrumbs = [
   },
   { label: name },
 ];
+
+/**
+ * The bio is a one-line credit, so on its own it lands far under the 130-char
+ * band. Extended with facts the page already states — the role, how many talks
+ * are in the archive, and where the community is.
+ */
+const phrases = metaPhrases(lang);
+const metaDescription = buildMetaDescription({
+  lead: bio,
+  clauses: [
+    role && !bio.includes(role) ? phrases.speakerRole(role) : null,
+    talks.length > 0 ? phrases.speakerTalks(talks.length) : null,
+    phrases.community,
+  ].filter(Boolean),
+  lang,
+});
 
 const sameAs = [
   social.twitter,
@@ -99,7 +150,7 @@ const personJsonLd: Record<string, unknown> = {
 <MainLayout
   lang={lang}
   title={`${name} — ${role}`}
-  description={bio}
+  description={metaDescription}
   image={photoSrc}
 >
   <JsonLd data={personJsonLd} />
@@ -137,18 +188,18 @@ const personJsonLd: Record<string, unknown> = {
     </div>
 
     {
-      relatedEvents.length > 0 && (
+      relatedEventLinks.length > 0 && (
         <section class="main-container pb-8">
           <h2 class="text-2xl font-bold tracking-tight text-ptt">
             {sd.relatedEvents}
           </h2>
           <p class="mt-2 text-ptt-secondary">{sd.relatedEventsSubtitle}</p>
           <ul class="mt-4 flex flex-wrap gap-3">
-            {relatedEvents.map((event) => (
+            {relatedEventLinks.map((event) => (
               <li>
                 <a
                   href={event.href}
-                  class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary-soft px-4 py-2 text-sm font-medium capitalize text-ptt hover:bg-ptt-primary hover:text-white dark:bg-ptt-bg-elevated dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950"
+                  class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-primary-soft px-4 py-2 text-sm font-medium text-ptt hover:bg-ptt-primary hover:text-white dark:bg-ptt-bg-elevated dark:hover:bg-ptt-primary-dark dark:hover:text-gray-950"
                 >
                   {event.label}
                 </a>

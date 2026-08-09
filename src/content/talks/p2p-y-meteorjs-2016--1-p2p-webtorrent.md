@@ -3,7 +3,7 @@ title:
   en: "P2P + webtorrent"
   es: "P2P + webtorrent"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “P2P + webtorrent && Introducción a MeteorJS”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “P2P + webtorrent && Introduction to MeteorJS”."
   es: "Charla de Manuel Pineda en el meetup «P2P + webtorrent && Introducción a MeteorJS» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

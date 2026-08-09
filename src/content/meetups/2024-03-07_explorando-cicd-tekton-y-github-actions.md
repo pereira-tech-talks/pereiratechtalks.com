@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Exploring CI/CD: Tekton en Kubernetes y GitHub Actions "
+  en: "Exploring CI/CD: Tekton on Kubernetes and GitHub Actions"
   es: "Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
 description:
-  en: "Pereira Tech Talks meetup — Exploring CI/CD: Tekton en Kubernetes y GitHub Actions . Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Exploring CI/CD: Tekton on Kubernetes and GitHub Actions. Community archive page with the night’s program and context."
   es: "En esta charla se hará una introducción a los conceptos básicos de Tekton, una solución de código abierto para CI/CD en Kubernetes."
 pubDate: 2024-03-07
 date: 2024-03-07
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/explorando-cicd-tekton-y-github-actions/hero.jpeg"
   alt:
-    en: "Exploring CI/CD: Tekton en Kubernetes y GitHub Actions "
+    en: "Exploring CI/CD: Tekton on Kubernetes and GitHub Actions"
     es: "Explorando CI/CD: Tekton en Kubernetes y GitHub Actions "
   layout: banner
 heroImage: "/images/meetups/explorando-cicd-tekton-y-github-actions/hero.jpeg"
@@ -52,7 +52,7 @@ En esta charla se hará una introducción a los conceptos básicos de Tekton, un
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

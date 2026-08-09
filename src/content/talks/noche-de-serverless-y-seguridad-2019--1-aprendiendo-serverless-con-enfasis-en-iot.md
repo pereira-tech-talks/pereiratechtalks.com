@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Aprendiendo Serverless con énfasis en IoT"
+  en: "Learning serverless with a focus on IoT"
   es: "Aprendiendo Serverless con énfasis en IoT"
 abstract:
-  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “Noche de Serverless && Seguridad Informática”."
+  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “Serverless Night && Information security”."
   es: "Charla de Sergio Alexander Flórez en el meetup «Noche de Serverless && Seguridad Informática» de Pereira Tech Talks."
 speakers:
   - sergio-florez

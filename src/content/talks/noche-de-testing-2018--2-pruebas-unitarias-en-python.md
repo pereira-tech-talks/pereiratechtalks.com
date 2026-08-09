@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Pruebas unitarias en Python"
+  en: "Unit testing in Python"
   es: "Pruebas unitarias en Python"
 abstract:
-  en: "Talk by Carlos González at the Pereira Tech Talks meetup “Noche de testing - Pruebas Unitarias en Python y Javascript”."
+  en: "Talk by Carlos González at the Pereira Tech Talks meetup “Testing Night - unit testing in Python and JavaScript”."
   es: "Charla de Carlos González en el meetup «Noche de testing - Pruebas Unitarias en Python y Javascript» de Pereira Tech Talks."
 speakers:
   - carlos-gonzalez
