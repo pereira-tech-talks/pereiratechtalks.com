@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Aprendiendo sobre JWT (JSON Web Tokens)"
+  en: "Learning about JWT (JSON Web Tokens)"
   es: "Aprendiendo sobre JWT (JSON Web Tokens)"
 abstract:
-  en: "Talk by Carlos González at the Pereira Tech Talks meetup “Aprendiendo sobre JWT (JSON web Tokens)”."
+  en: "Talk by Carlos González at the Pereira Tech Talks meetup “Learning about JWT (JSON Web Tokens)”."
   es: "Charla de Carlos González en el meetup «Aprendiendo sobre JWT (JSON web Tokens)» de Pereira Tech Talks."
 speakers:
   - carlos-gonzalez

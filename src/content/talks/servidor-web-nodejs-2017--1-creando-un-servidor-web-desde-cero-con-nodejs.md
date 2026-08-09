@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Creando un servidor web desde cero con NodeJs"
+  en: "Building a web server from scratch with Node.js"
   es: "Creando un servidor web desde cero con NodeJs"
 abstract:
-  en: "Talk by John Darwin Morales y Sergio Alexander Flórez at the Pereira Tech Talks meetup “Creando un servidor web desde cero con NodeJs”."
+  en: "Talk by John Darwin Morales y Sergio Alexander Flórez at the Pereira Tech Talks meetup “Building a web server from scratch with Node.js”."
   es: "Charla de John Darwin Morales y Sergio Alexander Flórez en el meetup «Creando un servidor web desde cero con NodeJs» de Pereira Tech Talks."
 speakers:
   - john-darwin-morales

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de liderazgo y testing"
+  en: "Session at Leadership Night and testing"
   es: "Participación en Noche de liderazgo y testing"
 abstract:
-  en: "Talk by Sergio Estrella at the Pereira Tech Talks meetup “Noche de liderazgo y testing”."
+  en: "Talk by Sergio Estrella at the Pereira Tech Talks meetup “Leadership Night and testing”."
   es: "Charla de Sergio Estrella en el meetup «Noche de liderazgo y testing» de Pereira Tech Talks."
 speakers:
   - sergio-estrella

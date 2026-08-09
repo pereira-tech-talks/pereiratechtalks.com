@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Buenas Prácticas en Javascript"
+  en: "Best practices in JavaScript"
   es: "Buenas Prácticas en Javascript"
 abstract:
-  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas”."
+  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Best practices in JavaScript && TDD, BDD, JavaScript and the good taste of testing”."
   es: "Charla de Jonathan Alvarez en el meetup «Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas» de Pereira Tech Talks."
 speakers:
   - jonathan-alvarez

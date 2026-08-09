@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de Machine Learning y Google Interview"
+  en: "Session at Machine Learning Night and Google interviews"
   es: "Participación en Noche de Machine Learning y Google Interview"
 abstract:
-  en: "Talk by Santiago Gutiérrez at the Pereira Tech Talks meetup “Noche de Machine Learning y Google Interview”."
+  en: "Talk by Santiago Gutiérrez at the Pereira Tech Talks meetup “Machine Learning Night and Google interviews”."
   es: "Charla de Santiago Gutiérrez en el meetup «Noche de Machine Learning y Google Interview» de Pereira Tech Talks."
 speakers:
   - santiago-gutierrez

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de Accesibilidad, diseño y desarrollo iOS"
+  en: "Session at Accessibility Night: iOS design and development"
   es: "Participación en Noche de Accesibilidad, diseño y desarrollo iOS"
 abstract:
-  en: "Talk by Angélica Parra at the Pereira Tech Talks meetup “Noche de Accesibilidad, diseño y desarrollo iOS”."
+  en: "Talk by Angélica Parra at the Pereira Tech Talks meetup “Accessibility Night: iOS design and development”."
   es: "Charla de Angélica Parra en el meetup «Noche de Accesibilidad, diseño y desarrollo iOS» de Pereira Tech Talks."
 speakers:
   - angelica-parra

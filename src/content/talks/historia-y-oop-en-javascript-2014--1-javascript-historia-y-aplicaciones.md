@@ -1,9 +1,9 @@
 ---
 title:
-  en: "JavaScript Historia y aplicaciones"
+  en: "JavaScript: history and applications"
   es: "JavaScript Historia y aplicaciones"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Historia, aplicaciones y programación orientada a objetos con Javascript”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “History, applications and object-oriented programming with JavaScript”."
   es: "Charla de Manuel Pineda en el meetup «Historia, aplicaciones y programación orientada a objetos con Javascript» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

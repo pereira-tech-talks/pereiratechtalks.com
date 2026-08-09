@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
+  en: "Session at Cutting-edge technologies: Svelte and blockchain uncovered."
   es: "Participación en Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
 abstract:
-  en: "Talk by Julian Lamprea at the Pereira Tech Talks meetup “Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.”."
+  en: "Talk by Julian Lamprea at the Pereira Tech Talks meetup “Cutting-edge technologies: Svelte and blockchain uncovered.”."
   es: "Charla de Julian Lamprea en el meetup «Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.» de Pereira Tech Talks."
 speakers:
   - julian-lamprea

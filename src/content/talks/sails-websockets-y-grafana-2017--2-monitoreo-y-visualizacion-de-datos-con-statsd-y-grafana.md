@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Monitoreo y visualización de datos con StatsD y Grafana"
+  en: "Data monitoring and visualization with StatsD and Grafana"
   es: "Monitoreo y visualización de datos con StatsD y Grafana"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “APIs and WebSockets with SailsJS && Data monitoring and visualization with StatsD and Grafana”."
   es: "Charla de Manuel Pineda en el meetup «APIs y WebSockets con SailsJs && Monitoreo y visualización de datos con StatsD y Grafana» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

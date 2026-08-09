@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a MV"
+  en: "Introduction to MV*"
   es: "Introducción a MV"
 abstract:
-  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Introducción a MV* && Node.js v4”."
+  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Introduction to MV* && Node.js v4”."
   es: "Charla de Óscar Granada en el meetup «Introducción a MV* && Node.js v4» de Pereira Tech Talks."
 speakers:
   - oscar-granada

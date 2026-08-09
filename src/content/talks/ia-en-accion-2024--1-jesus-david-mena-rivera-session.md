@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa"
+  en: "Session at AI in action: learn to train and customize your own model from home"
   es: "Participación en IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa"
 abstract:
-  en: "Talk by Jesús David Mena Rivera at the Pereira Tech Talks meetup “IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa”."
+  en: "Talk by Jesús David Mena Rivera at the Pereira Tech Talks meetup “AI in action: learn to train and customize your own model from home”."
   es: "Charla de Jesús David Mena Rivera en el meetup «IA en acción: Aprende a entrenar y personalizar tu propio modelo desde casa» de Pereira Tech Talks."
 speakers:
   - jesus-david-mena-rivera

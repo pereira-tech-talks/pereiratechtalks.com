@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de Unity: Primeros pasos, Shaders & Build Profiles"
+  en: "Session at Unity Night: first steps, shaders & build profiles"
   es: "Participación en Noche de Unity: Primeros pasos, Shaders & Build Profiles"
 abstract:
-  en: "Talk by Ricardo Barrios at the Pereira Tech Talks meetup “Noche de Unity: Primeros pasos, Shaders & Build Profiles”."
+  en: "Talk by Ricardo Barrios at the Pereira Tech Talks meetup “Unity Night: first steps, shaders & build profiles”."
   es: "Charla de Ricardo Barrios en el meetup «Noche de Unity: Primeros pasos, Shaders & Build Profiles» de Pereira Tech Talks."
 speakers:
   - ricardo-barrios

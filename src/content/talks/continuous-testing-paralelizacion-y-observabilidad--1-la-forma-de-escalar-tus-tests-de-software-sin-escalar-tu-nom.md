@@ -1,6 +1,6 @@
 ---
 title:
-  en: "La forma de escalar tus tests de software sin escalar tu nómina"
+  en: "How to scale your software tests without scaling your payroll"
   es: "La forma de escalar tus tests de software sin escalar tu nómina"
 abstract:
   en: "Talk: La forma de escalar tus tests de software sin escalar tu nómina. See the Spanish abstract for the full description."

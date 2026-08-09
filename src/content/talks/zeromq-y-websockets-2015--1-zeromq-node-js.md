@@ -3,7 +3,7 @@ title:
   en: "ZeroMQ + Node.js"
   es: "ZeroMQ + Node.js"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “ZeroMQ + Node.js && WebSockets y Socket.io”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “ZeroMQ + Node.js && WebSockets and Socket.io”."
   es: "Charla de Manuel Pineda en el meetup «ZeroMQ + Node.js && WebSockets y Socket.io» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

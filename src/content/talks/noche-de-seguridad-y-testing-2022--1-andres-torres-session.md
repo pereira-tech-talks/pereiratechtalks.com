@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de seguridad y  Testing"
+  en: "Session at Security Night and testing"
   es: "Participación en Noche de seguridad y  Testing"
 abstract:
-  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Noche de seguridad y  Testing”."
+  en: "Talk by Andrés Torres at the Pereira Tech Talks meetup “Security Night and testing”."
   es: "Charla de Andrés Torres en el meetup «Noche de seguridad y  Testing» de Pereira Tech Talks."
 speakers:
   - andres-torres

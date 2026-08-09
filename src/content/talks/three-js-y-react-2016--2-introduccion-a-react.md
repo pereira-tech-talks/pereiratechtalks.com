@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a React"
+  en: "Introduction to React"
   es: "Introducción a React"
 abstract:
-  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Three JS && Introducción a React”."
+  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Three.js && Introduction to React”."
   es: "Charla de Jonathan Alvarez en el meetup «Three JS && Introducción a React» de Pereira Tech Talks."
 speakers:
   - jonathan-alvarez

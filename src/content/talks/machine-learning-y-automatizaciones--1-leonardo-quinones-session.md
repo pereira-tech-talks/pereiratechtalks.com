@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Machine Learning, Automatizaciones, Videojuegos y Más."
+  en: "Session at Machine learning, automation, video games and more."
   es: "Participación en Machine Learning, Automatizaciones, Videojuegos y Más."
 abstract:
-  en: "Talk by Leonardo Quiñones at the Pereira Tech Talks meetup “Machine Learning, Automatizaciones, Videojuegos y Más.”."
+  en: "Talk by Leonardo Quiñones at the Pereira Tech Talks meetup “Machine learning, automation, video games and more.”."
   es: "Charla de Leonardo Quiñones en el meetup «Machine Learning, Automatizaciones, Videojuegos y Más.» de Pereira Tech Talks."
 speakers:
   - leonardo-quinones

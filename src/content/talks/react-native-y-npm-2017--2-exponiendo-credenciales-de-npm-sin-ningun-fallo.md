@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Exponiendo credenciales de npm sin ningún fallo"
+  en: "Exposing npm credentials without a single flaw"
   es: "Exponiendo credenciales de npm sin ningún fallo"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “React native && Seguridad en npm”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “React Native && Security in npm”."
   es: "Charla de Daniel Aristizábal en el meetup «React native && Seguridad en npm» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

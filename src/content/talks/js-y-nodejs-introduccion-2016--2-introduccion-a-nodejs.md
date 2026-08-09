@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a NodeJs"
+  en: "Introduction to Node.js"
   es: "Introducción a NodeJs"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introducción a Javascript && Introducción a NodeJs”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introduction to JavaScript && Introduction to Node.js”."
   es: "Charla de Daniel Aristizábal en el meetup «Introducción a Javascript && Introducción a NodeJs» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

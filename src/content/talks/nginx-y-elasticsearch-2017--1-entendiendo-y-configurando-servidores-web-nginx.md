@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Entendiendo y configurando servidores web NGINX"
+  en: "Understanding and configuring NGINX web servers"
   es: "Entendiendo y configurando servidores web NGINX"
 abstract:
-  en: "Talk by Hector Jimenez at the Pereira Tech Talks meetup “Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch”."
+  en: "Talk by Hector Jimenez at the Pereira Tech Talks meetup “Introduction to NGINX web servers && Search engines with Elasticsearch”."
   es: "Charla de Hector Jimenez en el meetup «Introducción a servidores web NGINX && Motores de busqueda con Elasticsearch» de Pereira Tech Talks."
 speakers:
   - hector-jimenez

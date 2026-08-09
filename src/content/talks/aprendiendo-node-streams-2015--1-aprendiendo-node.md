@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Aprendiendo node"
+  en: "Learning node"
   es: "Aprendiendo node"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Aprendiendo node && Streams - Event Emitter”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Learning node && Streams - Event Emitter”."
   es: "Charla de Daniel Aristizábal en el meetup «Aprendiendo node && Streams - Event Emitter» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

@@ -1,6 +1,6 @@
 ---
 title:
-  en: "QA en streaming: Dale vida a tu suite de pruebas automatizadas"
+  en: "QA on stream: bring your automated test suite to life"
   es: "QA en streaming: Dale vida a tu suite de pruebas automatizadas"
 abstract:
   en: "Talk: QA en streaming: Dale vida a tu suite de pruebas automatizadas. See the Spanish abstract for the full description."

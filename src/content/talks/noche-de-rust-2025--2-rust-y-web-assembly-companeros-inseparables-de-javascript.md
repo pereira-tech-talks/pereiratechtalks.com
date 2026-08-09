@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Rust y Web Assembly, compañeros inseparables de Javascript"
+  en: "Rust and WebAssembly, JavaScript's inseparable companions"
   es: "Rust y Web Assembly, compañeros inseparables de Javascript"
 abstract:
   en: "Talk: Rust y Web Assembly, compañeros inseparables de Javascript. See the Spanish abstract for the full description."

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Desarrollo móvil con Ionic + Angular"
+  en: "Mobile development with Ionic + Angular"
   es: "Desarrollo móvil con Ionic + Angular"
 abstract:
-  en: "Talk by Julián Patiño at the Pereira Tech Talks meetup “Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)”."
+  en: "Talk by Julián Patiño at the Pereira Tech Talks meetup “Ionic + Angular && Blockchain (Bitcoin, Ethereum and Solidity)”."
   es: "Charla de Julián Patiño en el meetup «Ionic + Angular && Blockchain (Bitcoin, Ethereum y Solidity)» de Pereira Tech Talks."
 speakers:
   - julian-patino

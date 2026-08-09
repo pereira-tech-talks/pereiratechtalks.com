@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at TDD y Microservicios"
+  en: "Session at TDD and microservices"
   es: "Participación en TDD y Microservicios"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “TDD y Microservicios”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “TDD and microservices”."
   es: "Charla de Manuel Pineda en el meetup «TDD y Microservicios» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

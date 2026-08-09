@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Seguridad Informática en instituciones del eje cafetero y OWASP"
+  en: "Information security in Eje Cafetero institutions, and OWASP"
   es: "Seguridad Informática en instituciones del eje cafetero y OWASP"
 abstract:
-  en: "Talk by Santiago Bernal at the Pereira Tech Talks meetup “Noche de Serverless && Seguridad Informática”."
+  en: "Talk by Santiago Bernal at the Pereira Tech Talks meetup “Serverless Night && Information security”."
   es: "Charla de Santiago Bernal en el meetup «Noche de Serverless && Seguridad Informática» de Pereira Tech Talks."
 speakers:
   - santiago-bernal

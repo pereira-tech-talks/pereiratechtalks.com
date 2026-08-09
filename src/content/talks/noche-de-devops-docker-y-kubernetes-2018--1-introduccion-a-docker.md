@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a Docker"
+  en: "Introduction to Docker"
   es: "Introducción a Docker"
 abstract:
-  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “Noche de DevOps - Introducción a Docker y Kubernetes”."
+  en: "Talk by Sergio Alexander Flórez at the Pereira Tech Talks meetup “DevOps Night - Introduction to Docker and Kubernetes”."
   es: "Charla de Sergio Alexander Flórez en el meetup «Noche de DevOps - Introducción a Docker y Kubernetes» de Pereira Tech Talks."
 speakers:
   - sergio-florez

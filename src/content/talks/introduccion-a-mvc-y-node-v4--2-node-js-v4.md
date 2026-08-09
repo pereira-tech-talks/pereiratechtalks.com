@@ -3,7 +3,7 @@ title:
   en: "Node.js v4"
   es: "Node.js v4"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introducción a MV* && Node.js v4”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Introduction to MV* && Node.js v4”."
   es: "Charla de Daniel Aristizábal en el meetup «Introducción a MV* && Node.js v4» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

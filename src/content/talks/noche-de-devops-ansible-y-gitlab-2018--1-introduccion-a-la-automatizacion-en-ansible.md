@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a la automatización en Ansible"
+  en: "Introduction to automation with Ansible"
   es: "Introducción a la automatización en Ansible"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “DevOps Night: intro to automation with Ansible && CI with GitLab and Docker”."
   es: "Charla de Manuel Pineda en el meetup «Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

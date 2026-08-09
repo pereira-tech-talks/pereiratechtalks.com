@@ -3,7 +3,7 @@ title:
   en: "Streams - Event Emitter"
   es: "Streams - Event Emitter"
 abstract:
-  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Aprendiendo node && Streams - Event Emitter”."
+  en: "Talk by Manuel Pineda at the Pereira Tech Talks meetup “Learning node && Streams - Event Emitter”."
   es: "Charla de Manuel Pineda en el meetup «Aprendiendo node && Streams - Event Emitter» de Pereira Tech Talks."
 speakers:
   - manuel-pineda

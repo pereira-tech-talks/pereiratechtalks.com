@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Inmersión en Node.js II"
+  en: "Diving into Node.js II"
   es: "Inmersión en Node.js II"
 abstract:
-  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Aprendiendo Javascript II && Inmersión a Node.js II”."
+  en: "Talk by Daniel Aristizábal at the Pereira Tech Talks meetup “Learning JavaScript II && Diving into Node.js II”."
   es: "Charla de Daniel Aristizábal en el meetup «Aprendiendo Javascript II && Inmersión a Node.js II» de Pereira Tech Talks."
 speakers:
   - daniel-aristizabal

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Emacscript 6 y Webpack"
+  en: "ECMAScript 6 and Webpack"
   es: "Emacscript 6 y Webpack"
 abstract:
-  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “ChatBots en NodeJs && Emacscript 6 y Webpack”."
+  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Chatbots in Node.js && ECMAScript 6 and Webpack”."
   es: "Charla de Jonathan Alvarez en el meetup «ChatBots en NodeJs && Emacscript 6 y Webpack» de Pereira Tech Talks."
 speakers:
   - jonathan-alvarez

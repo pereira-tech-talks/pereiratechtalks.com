@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Buenas Prácticas en Javascript"
+  en: "Best practices in JavaScript"
   es: "Buenas Prácticas en Javascript"
 abstract:
-  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Edición Especial desde la UTP”."
+  en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Special edition from UTP”."
   es: "Charla de Jonathan Alvarez en el meetup «Edición Especial desde la UTP» de Pereira Tech Talks."
 speakers:
   - jonathan-alvarez

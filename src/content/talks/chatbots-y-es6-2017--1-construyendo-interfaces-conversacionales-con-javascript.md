@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Construyendo interfaces conversacionales con Javascript"
+  en: "Building conversational interfaces with JavaScript"
   es: "Construyendo interfaces conversacionales con Javascript"
 abstract:
-  en: "Talk by Andrés Sugar at the Pereira Tech Talks meetup “ChatBots en NodeJs && Emacscript 6 y Webpack”."
+  en: "Talk by Andrés Sugar at the Pereira Tech Talks meetup “Chatbots in Node.js && ECMAScript 6 and Webpack”."
   es: "Charla de Andrés Sugar en el meetup «ChatBots en NodeJs && Emacscript 6 y Webpack» de Pereira Tech Talks."
 speakers:
   - andres-sugar

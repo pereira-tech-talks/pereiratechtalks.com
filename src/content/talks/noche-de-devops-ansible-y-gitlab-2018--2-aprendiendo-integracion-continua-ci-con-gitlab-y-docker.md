@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Aprendiendo Integración continua (CI) con GitLab y Docker"
+  en: "Learning continuous integration (CI) with GitLab and Docker"
   es: "Aprendiendo Integración continua (CI) con GitLab y Docker"
 abstract:
-  en: "Talk by Carlos González at the Pereira Tech Talks meetup “Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker”."
+  en: "Talk by Carlos González at the Pereira Tech Talks meetup “DevOps Night: intro to automation with Ansible && CI with GitLab and Docker”."
   es: "Charla de Carlos González en el meetup «Noche de DevOps: Intro a la automatización en Ansible && CI con GitLab y Docker» de Pereira Tech Talks."
 speakers:
   - carlos-gonzalez

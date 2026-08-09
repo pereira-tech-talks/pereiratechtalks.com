@@ -1,9 +1,9 @@
 ---
 title:
-  en: "TDD && BDD, Javascript y el buen sabor de las pruebas"
+  en: "TDD && BDD, JavaScript and the good taste of testing"
   es: "TDD && BDD, Javascript y el buen sabor de las pruebas"
 abstract:
-  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas”."
+  en: "Talk by Óscar Granada at the Pereira Tech Talks meetup “Best practices in JavaScript && TDD, BDD, JavaScript and the good taste of testing”."
   es: "Charla de Óscar Granada en el meetup «Buenas Prácticas en Javascript && TDD, BDD, Javascript y el buen sabor de las pruebas» de Pereira Tech Talks."
 speakers:
   - oscar-granada

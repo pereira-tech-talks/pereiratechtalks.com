@@ -1,9 +1,9 @@
 ---
 title:
-  en: "IaC: Automatizando nuestra infraestructura"
+  en: "IaC: automating our infrastructure"
   es: "IaC: Automatizando nuestra infraestructura"
 abstract:
-  en: "Talk by Luis Uribe at the Pereira Tech Talks meetup “💻 Hablemos de automatización de infraestructura y linux ”."
+  en: "Talk by Luis Uribe at the Pereira Tech Talks meetup “💻 Let's talk about infrastructure automation and Linux ”."
   es: "Charla de Luis Uribe en el meetup «💻 Hablemos de automatización de infraestructura y linux » de Pereira Tech Talks."
 speakers:
   - luis-uribe

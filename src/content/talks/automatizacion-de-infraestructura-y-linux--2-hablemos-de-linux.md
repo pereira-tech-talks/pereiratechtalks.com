@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Hablemos de Linux"
+  en: "Let's talk about Linux"
   es: "Hablemos de Linux"
 abstract:
-  en: "Talk by Harold Sánchez Ospina at the Pereira Tech Talks meetup “💻 Hablemos de automatización de infraestructura y linux ”."
+  en: "Talk by Harold Sánchez Ospina at the Pereira Tech Talks meetup “💻 Let's talk about infrastructure automation and Linux ”."
   es: "Charla de Harold Sánchez Ospina en el meetup «💻 Hablemos de automatización de infraestructura y linux » de Pereira Tech Talks."
 speakers:
   - harold-sanchez-ospina

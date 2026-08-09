@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Generación procedural en videojuegos: creando mundos infinitos"
+  en: "Procedural generation in video games: building infinite worlds"
   es: "Generación procedural en videojuegos: creando mundos infinitos"
 abstract:
   en: "Talk: Generación procedural en videojuegos: creando mundos infinitos. See the Spanish abstract for the full description."

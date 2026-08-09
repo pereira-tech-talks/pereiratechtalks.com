@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Patrones de arquitectura - Android"
+  en: "Architecture patterns - Android"
   es: "Patrones de arquitectura - Android"
 abstract:
   en: "Talk by Zorayda Gutiérrez at the Pereira Tech Talks meetup “Pereira - Saturday Tech Talks”."

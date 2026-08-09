@@ -1,9 +1,9 @@
 ---
 title:
-  en: "JavaScript Historia y aplicaciones"
+  en: "JavaScript: history and applications"
   es: "JavaScript Historia y aplicaciones"
 abstract:
-  en: "Talk by Jhonber Jiménez y Manuel Pineda at the Pereira Tech Talks meetup “Primera reunión PereiraJs”."
+  en: "Talk by Jhonber Jiménez y Manuel Pineda at the Pereira Tech Talks meetup “First meeting of PereiraJs”."
   es: "Charla de Jhonber Jiménez y Manuel Pineda en el meetup «Primera reunión PereiraJs» de Pereira Tech Talks."
 speakers:
   - jhonber-jimenez

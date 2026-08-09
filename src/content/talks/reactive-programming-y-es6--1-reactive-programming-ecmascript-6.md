@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Reactive Programming && EcmaScript 6"
+  en: "Reactive Programming && ECMAScript 6"
   es: "Reactive Programming && EcmaScript 6"
 abstract:
   en: "Talk by Jonathan Alvarez at the Pereira Tech Talks meetup “Reactive Programming && EcmaScript 6”."

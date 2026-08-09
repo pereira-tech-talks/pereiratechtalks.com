@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro"
+  en: "Session at Modern web development: building faster, lighter sites with Astro"
   es: "Participación en Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro"
 abstract:
-  en: "Talk by Héctor Julián Cardona at the Pereira Tech Talks meetup “Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro”."
+  en: "Talk by Héctor Julián Cardona at the Pereira Tech Talks meetup “Modern web development: building faster, lighter sites with Astro”."
   es: "Charla de Héctor Julián Cardona en el meetup «Desarrollo Web Moderno: Construyendo sitios web más rápido y ligeros con Astro» de Pereira Tech Talks."
 speakers:
   - hector-julian-cardona

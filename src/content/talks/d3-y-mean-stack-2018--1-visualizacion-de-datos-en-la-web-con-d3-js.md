@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Visualización de datos en la web con d3.js"
+  en: "Data visualization on the web with d3.js"
   es: "Visualización de datos en la web con d3.js"
 abstract:
-  en: "Talk by Juan Sebastián Vega at the Pereira Tech Talks meetup “Visualización de datos con d3.js && Desarrollo de aplicaciones usando MEAN Stack”."
+  en: "Talk by Juan Sebastián Vega at the Pereira Tech Talks meetup “Data visualization with d3.js && Building applications with the MEAN stack”."
   es: "Charla de Juan Sebastián Vega en el meetup «Visualización de datos con d3.js && Desarrollo de aplicaciones usando MEAN Stack» de Pereira Tech Talks."
 speakers:
   - juan-sebastian-vega

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introducción a las redes neuronales con Keras + Random Forest"
+  en: "Introduction to neural networks with Keras + Random Forest"
   es: "Introducción a las redes neuronales con Keras + Random Forest"
 abstract:
-  en: "Talk by Juan Sebastián Vega y Leiver Campeón at the Pereira Tech Talks meetup “Introducción a las redes neuronales con Keras + Random Forest”."
+  en: "Talk by Juan Sebastián Vega y Leiver Campeón at the Pereira Tech Talks meetup “Introduction to neural networks with Keras + Random Forest”."
   es: "Charla de Juan Sebastián Vega y Leiver Campeón en el meetup «Introducción a las redes neuronales con Keras + Random Forest» de Pereira Tech Talks."
 speakers:
   - juan-sebastian-vega

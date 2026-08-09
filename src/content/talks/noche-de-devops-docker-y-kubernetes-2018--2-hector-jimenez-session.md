@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Session at Noche de DevOps - Introducción a Docker y Kubernetes"
+  en: "Session at DevOps Night - Introduction to Docker and Kubernetes"
   es: "Participación en Noche de DevOps - Introducción a Docker y Kubernetes"
 abstract:
-  en: "Talk by Hector Jimenez at the Pereira Tech Talks meetup “Noche de DevOps - Introducción a Docker y Kubernetes”."
+  en: "Talk by Hector Jimenez at the Pereira Tech Talks meetup “DevOps Night - Introduction to Docker and Kubernetes”."
   es: "Charla de Hector Jimenez en el meetup «Noche de DevOps - Introducción a Docker y Kubernetes» de Pereira Tech Talks."
 speakers:
   - hector-jimenez

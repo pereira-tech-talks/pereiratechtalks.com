@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduccion a React Native"
+  en: "Introduction to React Native"
   es: "Introduccion a React Native"
 abstract:
-  en: "Talk by Carlos Álvaro at the Pereira Tech Talks meetup “React native && Seguridad en npm”."
+  en: "Talk by Carlos Álvaro at the Pereira Tech Talks meetup “React Native && Security in npm”."
   es: "Charla de Carlos Álvaro en el meetup «React native && Seguridad en npm» de Pereira Tech Talks."
 speakers:
   - carlos-alvaro
