@@ -137,6 +137,16 @@ for (const r of results) {
   byCollection.set(r.collection, entry);
 }
 
+/** Confidence split quoted in the report, computed rather than restated. */
+const allMismatchBlocks = results.flatMap((r) => [
+  ...r.html.mismatches,
+  ...(r.mdVerdict?.mismatches ?? []),
+]);
+const bimodal = {
+  top: allMismatchBlocks.filter((m) => m.score.confidence >= 1).length,
+  tail: allMismatchBlocks.filter((m) => m.score.confidence < 1).length,
+};
+
 const summary = {
   totalHtmlFiles: all.length,
   audited: checkable.length,
@@ -257,9 +267,9 @@ Detection is two-tier, and the split was chosen from the data rather than taste:
   untranslated proper noun (\`Session at Noche de DevOps\`). Reported, never
   failed on.
 
-On this build the mismatched blocks are sharply bimodal: 579 at confidence 1.00,
-131 spread across 0.3–0.9. Hand-labeling a stratified sample of 24 flagged pages
-plus 10 unflagged ones measured:
+On this build the mismatched blocks stay sharply bimodal: ${bimodal.top} at
+confidence 1.00 against ${bimodal.tail} spread across 0.3–0.9. Hand-labeling a
+stratified sample of 24 flagged pages plus 10 unflagged ones measured:
 
 | Tier | Labeled | True defects | Precision |
 |---|---|---|---|

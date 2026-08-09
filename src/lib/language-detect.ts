@@ -301,6 +301,19 @@ export const CONFIDENT_MISMATCH_CONFIDENCE = 0.9;
 /** Weight for a word carrying Spanish-only orthography. */
 const DIACRITIC_WEIGHT = 1.5;
 
+/**
+ * Share of capitalized words above which a block is treated as a name rather
+ * than prose.
+ *
+ * Found while verifying Task 3: an English meetup page rendered its venue,
+ * `Universidad Tecnológica de Pereira, Bloque 13, Sala Magistral 1`, as its own
+ * block and scored a confident Spanish mismatch. Institution and room names are
+ * proper nouns that must not be translated, and every venue on the site would
+ * have produced the same false positive — enough to make Task 9's gate
+ * unusable. Prose runs mostly lowercase; a name string runs mostly capitalized.
+ */
+const PROPER_NOUN_CAPITALIZATION_SHARE = 0.6;
+
 export interface LanguageScore {
   lang: DetectedLanguage;
   /** Weighted Spanish evidence. */
@@ -312,6 +325,21 @@ export interface LanguageScore {
   /** Share of tokens that produced evidence either way. */
   density: number;
   tokenCount: number;
+}
+
+/**
+ * Share of words after the first that begin with an uppercase letter.
+ * Sentence-initial capitalization is excluded so ordinary prose scores ~0.
+ */
+export function capitalizedShare(text: string): number {
+  const words = text
+    .replace(/[^\p{L}\p{N}\s'-]+/gu, ' ')
+    .split(/\s+/)
+    .filter((word) => /\p{L}/u.test(word));
+  if (words.length < 2) return 0;
+  const rest = words.slice(1);
+  const capitalized = rest.filter((word) => /^\p{Lu}/u.test(word)).length;
+  return capitalized / rest.length;
 }
 
 /** Split text into comparable lowercase word tokens. */
@@ -358,7 +386,10 @@ export function detectLanguage(text: string): LanguageScore {
     tokenCount < MIN_BLOCK_TOKENS ||
     total === 0 ||
     density < MIN_SIGNAL_DENSITY ||
-    confidence < MIN_CONFIDENCE;
+    confidence < MIN_CONFIDENCE ||
+    // A venue, an institution, or a person's name is not text in the wrong
+    // language — it is a name, and names are not translated.
+    capitalizedShare(text) >= PROPER_NOUN_CAPITALIZATION_SHARE;
 
   return {
     lang: undecidable ? 'unknown' : esScore > enScore ? 'es' : 'en',

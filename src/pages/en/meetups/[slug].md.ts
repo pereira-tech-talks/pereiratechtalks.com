@@ -5,7 +5,8 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getMeetupSlug, getMeetups } from '@/lib/meetup';
+import { getMeetupBodyMarkdown, getMeetupSlug, getMeetups } from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const meetups = await getMeetups();
@@ -15,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-export const GET: APIRoute = ({ props }) => {
+export const GET: APIRoute = async ({ props }) => {
   const lang = 'en';
   const { entry } = props as {
     entry: Awaited<ReturnType<typeof getMeetups>>[number];
@@ -70,13 +71,27 @@ export const GET: APIRoute = ({ props }) => {
     });
   }
 
+  // English body lives in a `{slug}.en.md` sibling; fall back to the
+
+  // Spanish original with an explicit note rather than leaking it silently.
+
+  const { body: rawBody, untranslated } = await getMeetupBodyMarkdown(
+    entry,
+
+    lang
+  );
+
+  const bodyMarkdown = untranslated
+    ? `> ${getTranslations(lang).meetupDetail.untranslatedBody}\n\n${rawBody}`
+    : rawBody;
+
   const markdown = serializeGenericToMarkdown({
     title,
     description,
     lang,
     canonical: `${SITE_URL}/en/meetups/${slug}`,
     metadata,
-    body: entry.body,
+    body: bodyMarkdown,
     sections,
   });
 

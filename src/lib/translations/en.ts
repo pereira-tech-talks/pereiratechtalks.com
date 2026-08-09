@@ -162,6 +162,8 @@ If you are looking for people to grow with, a stage for your first talk, or a co
 
   meetupDetail: {
     talks: 'Talks',
+    untranslatedBody:
+      'This recap has not been translated yet — showing the Spanish original.',
     speakers: 'Speakers',
     sponsors: 'Sponsors',
     sponsorsSubtitle: 'Companies that supported this meetup.',

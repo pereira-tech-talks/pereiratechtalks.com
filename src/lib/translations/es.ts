@@ -162,6 +162,8 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
 
   meetupDetail: {
     talks: 'Charlas',
+    untranslatedBody:
+      'Esta reseña aún no está traducida — mostramos el texto original en español.',
     speakers: 'Ponentes',
     sponsors: 'Patrocinadores',
     sponsorsSubtitle: 'Empresas que apoyaron este meetup.',

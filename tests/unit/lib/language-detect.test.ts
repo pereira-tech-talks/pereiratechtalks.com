@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   analyzeDocument,
   CONFIDENT_MISMATCH_CONFIDENCE,
+  capitalizedShare,
   detectLanguage,
   htmlToText,
   markdownToText,
@@ -74,6 +75,24 @@ describe('detectLanguage', () => {
     ).not.toBe('es');
   });
 
+  it('treats a venue or institution name as a name, not a language leak', () => {
+    // Found while verifying Task 3: every English meetup page rendered its
+    // venue as a standalone block and scored a confident Spanish mismatch.
+    expect(
+      detectLanguage(
+        'Universidad Tecnológica de Pereira, Bloque 13, Sala Magistral 1, Pereira, Colombia'
+      ).lang
+    ).toBe('unknown');
+  });
+
+  it('still classifies prose that merely mentions a proper noun', () => {
+    expect(
+      detectLanguage(
+        'El meetup se realizó en la Universidad Tecnológica de Pereira y reunió a la comunidad durante toda la tarde.'
+      ).lang
+    ).toBe('es');
+  });
+
   it('reports low confidence for genuinely mixed text', () => {
     const score = detectLanguage(
       'Talk by Diana at the Pereira Tech Talks meetup Librerías para manipulación del DOM'
@@ -83,6 +102,22 @@ describe('detectLanguage', () => {
 
   it('reports maximum confidence for single-language text', () => {
     expect(detectLanguage(SPANISH_PARAGRAPH).confidence).toBe(1);
+  });
+});
+
+describe('capitalizedShare', () => {
+  it('scores prose near zero, ignoring the sentence-initial capital', () => {
+    expect(capitalizedShare('En este meetup exploramos la calidad')).toBe(0);
+  });
+
+  it('scores a name string high', () => {
+    expect(
+      capitalizedShare('Universidad Tecnológica de Pereira, Sala Magistral')
+    ).toBeGreaterThan(0.6);
+  });
+
+  it('returns 0 for a single word', () => {
+    expect(capitalizedShare('Pereira')).toBe(0);
   });
 });
 

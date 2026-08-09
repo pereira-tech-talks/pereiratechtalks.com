@@ -250,3 +250,46 @@ export const groupMeetupShowcaseByYear = (
     .sort((a, b) => b[0] - a[0])
     .map(([year, items]) => ({ year, items }));
 };
+
+/**
+ * Which body a meetup page should render, for a given language.
+ *
+ * A meetup keeps its Spanish body in the entry itself and its English body in a
+ * `{slug}.en.md` sibling. When the English translation does not exist yet the
+ * page falls back to the Spanish body — but the caller must label it, because a
+ * silent fallback is the defect this whole mechanism replaces.
+ *
+ * See `analysis_results/BILINGUAL_BODY_DECISION.md` in
+ * PLAN_sitewide_language_seo_aeo_audit.
+ */
+export interface MeetupBodySelection {
+  /** The entry whose body to render — the translation, or the meetup itself. */
+  entry: Meetup | CollectionEntry<'meetupBodiesEn'>;
+  /** True when English was requested and no translation exists. */
+  untranslated: boolean;
+}
+
+export const getMeetupBodyEntry = async (
+  meetup: Meetup,
+  lang: Language
+): Promise<MeetupBodySelection> => {
+  if (lang !== 'en') {
+    return { entry: meetup, untranslated: false };
+  }
+
+  const translations = await getCollection('meetupBodiesEn');
+  const translated = translations.find((entry) => entry.id === meetup.id);
+
+  return translated
+    ? { entry: translated, untranslated: false }
+    : { entry: meetup, untranslated: true };
+};
+
+/** Raw English body for a meetup, or null when it has not been translated. */
+export const getMeetupBodyMarkdown = async (
+  meetup: Meetup,
+  lang: Language
+): Promise<{ body: string; untranslated: boolean }> => {
+  const { entry, untranslated } = await getMeetupBodyEntry(meetup, lang);
+  return { body: entry.body ?? '', untranslated };
+};

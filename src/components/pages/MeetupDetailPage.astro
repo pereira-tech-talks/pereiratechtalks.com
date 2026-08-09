@@ -20,7 +20,11 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
-import { getMeetupSlug, resolveMeetupStatus } from '@/lib/meetup';
+import {
+  getMeetupBodyEntry,
+  getMeetupSlug,
+  resolveMeetupStatus,
+} from '@/lib/meetup';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent } from '@/lib/talk';
@@ -77,7 +81,14 @@ const recordingUrl = linkRecording || talkRecording?.url;
 const recordingYoutubeId =
   youtubeId || (recordingUrl ? extractYouTubeId(recordingUrl) : null);
 
-const { Content } = await render(meetup);
+// A meetup's Spanish body lives on the entry; its English body lives in a
+// `{slug}.en.md` sibling. Falling back to Spanish is allowed, but it must be
+// labeled — a silent fallback is the defect this replaces.
+const { entry: bodyEntry, untranslated } = await getMeetupBodyEntry(
+  meetup,
+  lang
+);
+const { Content } = await render(bodyEntry);
 
 const breadcrumbs = [
   {
@@ -239,7 +250,32 @@ if (speakers.length > 0) {
     <div class="main-container py-12 sm:py-16 grid gap-12 lg:grid-cols-[1fr_280px]">
       {/* Body */}
       <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:tracking-tight prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark prose-img:rounded-xl">
-        <Content />
+        {
+          untranslated && (
+            <p
+              class="not-prose mb-8 flex items-start gap-2.5 rounded-xl border border-ptt-border bg-ptt-bg-elevated px-4 py-3 text-sm text-ptt-secondary"
+              lang="en"
+            >
+              <svg
+                class="mt-0.5 h-4 w-4 shrink-0 text-ptt-primary dark:text-ptt-primary-dark"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              <span>{md.untranslatedBody}</span>
+            </p>
+          )
+        }
+        <div lang={untranslated ? 'es' : lang}>
+          <Content />
+        </div>
       </div>
 
       {/* Sidebar */}
