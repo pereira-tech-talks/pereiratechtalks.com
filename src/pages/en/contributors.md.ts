@@ -1,12 +1,16 @@
 import type { APIRoute } from 'astro';
-import { SITE_URL } from '@/lib/constances';
 
+import { SITE_URL } from '@/lib/constances';
 import {
   filterCurrentTeamOrganizers,
   filterPastTeamMembers,
   getContributors,
 } from '@/lib/contributor';
-import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
+import {
+  entityLine,
+  resolveI18n,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -14,10 +18,17 @@ export const GET: APIRoute = async () => {
   const current = filterCurrentTeamOrganizers(contributors);
   const past = filterPastTeamMembers(contributors);
 
+  // The HTML renders each person's bio, not just their role. A name-and-role
+  // list read as a summary of the directory rather than its twin.
   const toLines = (list: typeof contributors): string[] =>
-    list.map((c) => {
-      const role = c.data.role.en;
-      return `- **${c.data.name}** — ${role}`;
+    list.flatMap((c) => {
+      const bio = resolveI18n(c.data.bio, lang);
+      const row = entityLine(
+        c.data.name,
+        `/en/contributors`,
+        resolveI18n(c.data.role, lang)
+      );
+      return bio ? [row, `  ${bio}`] : [row];
     });
 
   const markdown = serializeGenericToMarkdown({
@@ -31,12 +42,10 @@ export const GET: APIRoute = async () => {
       ['Alumni and past', String(past.length)],
       ['Total in directory', String(contributors.length)],
     ],
+    body: 'The people who coordinate meetups, Pereira Tech Day, the community programs and day-to-day operations. Building community in Pereira since 2014.',
     sections: [
       { heading: 'Organizing team', lines: toLines(current) },
-      {
-        heading: 'Alumni and past organizers',
-        lines: toLines(past),
-      },
+      { heading: 'Alumni and past organizers', lines: toLines(past) },
     ],
   });
 
