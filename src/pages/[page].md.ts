@@ -27,6 +27,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
       // `/communities.md` is served by its own endpoint, sourced from the
       // `communities` collection so it cannot drift from the HTML.
       .filter((page) => getPageSlug(page.id) !== 'communities')
+      // `/calendar.md` is served by its own endpoint, sourced from the
+      // `communityCalendars` collection.
+      .filter((page) => getPageSlug(page.id) !== 'calendar')
+      // `/contact.md` is served by its own endpoint so the form's topic
+      // options come from the same strings the HTML renders.
+      .filter((page) => getPageSlug(page.id) !== 'contact')
       .map((page) => ({
         params: { page: getPageSlug(page.id) },
         props: { page },

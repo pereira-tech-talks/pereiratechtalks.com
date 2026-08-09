@@ -48,6 +48,8 @@ export interface ResolvedSpeakerRef {
   slug: string;
   name: string;
   role: string;
+  /** Present where the page renders a speaker card with prose. */
+  bio?: string;
 }
 
 export interface ResolvedSponsorRef {
@@ -110,6 +112,7 @@ const toResolvedSpeakerRef = (
   slug: speaker.id,
   name: speaker.data.name,
   role: resolveI18n(speaker.data.role, lang),
+  bio: resolveI18n(speaker.data.bio, lang),
 });
 
 /**
@@ -440,6 +443,13 @@ export interface ResolvedEditionDetail {
     ctaLabel: string;
     ctaUrl: string;
   }>;
+  extraPartnerships: Array<{
+    title: string;
+    subtitle: string;
+    items: string[];
+    ctaLabel: string;
+    ctaUrl: string;
+  }>;
   faqs: Array<{ question: string; answer: string; linkUrl?: string }>;
   gallery: Array<{ src: string; alt: string; caption: string }>;
   links: Array<{ label: string; url: string }>;
@@ -566,6 +576,22 @@ export const resolveEditionDetail = async (
       benefits: plan.benefits.map((b) => resolveI18n(b, lang)),
       ctaLabel: resolveI18n(plan.ctaLabel, lang),
       ctaUrl: plan.ctaUrl,
+    })),
+    extraPartnerships: d.extraPartnerships.map((group) => ({
+      title: resolveI18n(group.title, lang),
+      subtitle: resolveI18n(group.subtitle, lang),
+      items: group.items.map((item) =>
+        resolveI18n(
+          'title' in item
+            ? item.title
+            : 'description' in item
+              ? item.description
+              : item.subtitle,
+          lang
+        )
+      ),
+      ctaLabel: resolveI18n(group.ctaLabel, lang),
+      ctaUrl: group.ctaUrl,
     })),
     faqs: d.faqs.map((faq) => ({
       question: resolveI18n(faq.question, lang),

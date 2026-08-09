@@ -10,6 +10,7 @@ import {
   getPastSponsors,
   getSponsorActivityMap,
 } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 export const GET: APIRoute = async () => {
   const lang = 'es';
@@ -35,19 +36,41 @@ export const GET: APIRoute = async () => {
       return `- [${s.data.name}](${profile}) — ${description}${counters ? ` (${counters})` : ''} · [sitio web](${s.data.url})`;
     });
 
+  const t = getTranslations('es').sponsorsPage;
+
   const markdown = serializeGenericToMarkdown({
-    title: 'Patrocinadores — Pereira Tech Talks',
-    description:
-      'Patrocinadores actuales y anteriores de Pereira Tech Talks. Las categorías por edición (oro, plata, etc.) viven en cada Pereira Tech Day, no en este directorio comunitario.',
+    title: `${t.title} — Pereira Tech Talks`,
+    description: t.description,
     lang,
     canonical: `${SITE_URL}/sponsors`,
     metadata: [
-      ['Patrocinadores actuales', String(current.length)],
-      ['Patrocinadores anteriores', String(past.length)],
+      [t.currentTitle, String(current.length)],
+      [t.pastTitle, String(past.length)],
     ],
+    body: t.intro(current.length),
     sections: [
-      { heading: 'Patrocinadores actuales', lines: toLines(current) },
-      { heading: 'Patrocinadores anteriores', lines: toLines(past) },
+      {
+        heading: t.why.title,
+        lines: [
+          t.why.intro,
+          '',
+          `- **${t.why.items.meetups.title}** — ${t.why.items.meetups.body}`,
+          `- **${t.why.items.ptd.title}** — ${t.why.items.ptd.body}`,
+          `- **${t.why.items.talent.title}** — ${t.why.items.talent.body}`,
+        ],
+      },
+      {
+        heading: t.currentTitle,
+        lines: [t.currentIntro, '', ...toLines(current)],
+      },
+      { heading: t.pastTitle, lines: [t.pastIntro, '', ...toLines(past)] },
+      {
+        heading: t.sponsorUsLabel,
+        lines: [
+          `- [${t.sponsorUsLabel}](${SITE_URL}/sponsor-us)`,
+          `- [${t.contactLabel}](${SITE_URL}/contact)`,
+        ],
+      },
     ],
   });
 

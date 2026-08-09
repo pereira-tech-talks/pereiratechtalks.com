@@ -14,6 +14,7 @@ import {
 import { getMeetupSlug, getUpcomingMeetups } from '@/lib/meetup';
 import { getUpcomingEdition } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 import { getActiveVerticals } from '@/lib/vertical';
 
 /**
@@ -25,7 +26,8 @@ import { getActiveVerticals } from '@/lib/vertical';
  * renders, so they cannot go stale.
  *
  * Served by its own endpoint rather than the pages-collection route, which is
- * filtered to skip `index`.
+ * filtered to skip `index`. The path is flat (`/en` + `.md`), matching the
+ * canonical rule Task 2 established for every other page.
  */
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -136,12 +138,37 @@ export const GET: APIRoute = async () => {
     });
   }
 
+  // The hero, "who we are" and closing blocks are the page's prose and live in
+  // the translation files the HTML renders from. Stripping the inline markup
+  // keeps the .md free of presentation chrome.
+  const t = getTranslations(lang);
+  const stripMarkup = (html: string): string =>
+    html
+      .replace(/<br\s*\/?>/gi, '\n\n')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+
+  const prose = [
+    t.hero.tagline,
+    t.hero.description,
+    stripMarkup(t.homeSections.about.title),
+    stripMarkup(t.homeSections.about.description),
+    t.homeSections.community.title,
+    t.homeSections.community.description,
+    t.contactSection.title,
+    t.contactSection.description,
+    page?.body?.trim() ?? '',
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+
   const markdown = serializeGenericToMarkdown({
     title: page?.data.title ?? 'Pereira Tech Talks',
     description: page?.data.description ?? '',
     lang,
     canonical: `${SITE_URL}/en`,
-    body: page?.body ?? '',
+    body: prose,
     sections,
   });
 

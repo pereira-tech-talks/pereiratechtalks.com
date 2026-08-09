@@ -63,15 +63,24 @@ describe('agent-markdown endpoint delivery', () => {
   });
 
   it('mirrors every Spanish endpoint with an English one', () => {
+    // The home pages are the one asymmetric pair, and deliberately so: Spanish
+    // is served unprefixed, so its twin is `/index.md`, while `/en` is itself a
+    // page path whose flat twin is `/en.md` — not `/en/index.md`.
+    const HOME_ES = 'index.md.ts';
+    const HOME_EN = 'en.md.ts';
+
     const es = endpoints
-      .filter((p) => !p.startsWith('en/'))
+      .filter((p) => !p.startsWith('en/') && p !== HOME_EN && p !== HOME_ES)
       .map((p) => p.replace(/\.md\.ts$/, ''));
     const en = new Set(
       endpoints
         .filter((p) => p.startsWith('en/'))
         .map((p) => p.slice(3).replace(/\.md\.ts$/, ''))
     );
+
     expect(es.filter((route) => !en.has(route))).toEqual([]);
+    expect(endpoints).toContain(HOME_ES);
+    expect(endpoints).toContain(HOME_EN);
   });
 });
 

@@ -1013,9 +1013,15 @@ export function serializeEditionToMarkdown(
   if (data.speakers.length > 0) {
     sections.push({
       heading: L('speakers'),
-      lines: data.speakers.map((s) =>
-        entityLine(s.name, mdHref(lang, `speakers/${s.slug}`), s.role)
-      ),
+      // Bios included: the edition page renders a speaker card per person.
+      lines: data.speakers.flatMap((s) => {
+        const row = entityLine(
+          s.name,
+          mdHref(lang, `speakers/${s.slug}`),
+          s.role
+        );
+        return s.bio ? [row, `  ${s.bio}`] : [row];
+      }),
     });
   }
 
@@ -1072,6 +1078,22 @@ export function serializeEditionToMarkdown(
         ...plan.benefits.map((b) => `- ${b}`),
         '',
         linkLine(plan.ctaLabel, plan.ctaUrl),
+        '',
+      ]),
+    });
+  }
+
+  if (data.extraPartnerships.length > 0) {
+    sections.push({
+      heading: es ? 'Otras alianzas' : 'Other partnerships',
+      lines: data.extraPartnerships.flatMap((group) => [
+        `### ${group.title}`,
+        '',
+        group.subtitle,
+        '',
+        ...group.items.map((item) => `- ${item}`),
+        '',
+        linkLine(group.ctaLabel, group.ctaUrl),
         '',
       ]),
     });

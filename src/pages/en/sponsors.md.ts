@@ -10,6 +10,7 @@ import {
   getPastSponsors,
   getSponsorActivityMap,
 } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -35,19 +36,41 @@ export const GET: APIRoute = async () => {
       return `- [${s.data.name}](${profile}) — ${description}${counters ? ` (${counters})` : ''} · [website](${s.data.url})`;
     });
 
+  const t = getTranslations('en').sponsorsPage;
+
   const markdown = serializeGenericToMarkdown({
-    title: 'Sponsors — Pereira Tech Talks',
-    description:
-      'Current and past sponsors of Pereira Tech Talks. Per-edition tiers (gold, silver, etc.) live on each Pereira Tech Day page — not on this community directory.',
+    title: `${t.title} — Pereira Tech Talks`,
+    description: t.description,
     lang,
     canonical: `${SITE_URL}/en/sponsors`,
     metadata: [
-      ['Current sponsors', String(current.length)],
-      ['Past sponsors', String(past.length)],
+      [t.currentTitle, String(current.length)],
+      [t.pastTitle, String(past.length)],
     ],
+    body: t.intro(current.length),
     sections: [
-      { heading: 'Current sponsors', lines: toLines(current) },
-      { heading: 'Past sponsors', lines: toLines(past) },
+      {
+        heading: t.why.title,
+        lines: [
+          t.why.intro,
+          '',
+          `- **${t.why.items.meetups.title}** — ${t.why.items.meetups.body}`,
+          `- **${t.why.items.ptd.title}** — ${t.why.items.ptd.body}`,
+          `- **${t.why.items.talent.title}** — ${t.why.items.talent.body}`,
+        ],
+      },
+      {
+        heading: t.currentTitle,
+        lines: [t.currentIntro, '', ...toLines(current)],
+      },
+      { heading: t.pastTitle, lines: [t.pastIntro, '', ...toLines(past)] },
+      {
+        heading: t.sponsorUsLabel,
+        lines: [
+          `- [${t.sponsorUsLabel}](${SITE_URL}/en/sponsor-us)`,
+          `- [${t.contactLabel}](${SITE_URL}/en/contact)`,
+        ],
+      },
     ],
   });
 

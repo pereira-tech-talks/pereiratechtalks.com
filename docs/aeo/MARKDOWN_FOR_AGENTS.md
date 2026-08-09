@@ -98,12 +98,20 @@ Words are lowercased, diacritics folded, 3+ characters, deduplicated; compared
 as sets so a `.md` may reorder sections. `Language:`/`Canonical:` lines and link
 targets are stripped from the `.md` side so a URL cannot inflate the score.
 
-**Threshold: `coverage ≥ 0.85`** — derived from the build, not from taste.
+**Threshold: `coverage ≥ 0.85`, on pages with ≥ 60 content words** — derived
+from the build, not from taste.
 Measured across 480 pages, results fall into two clusters with an empty band
 between them: pages whose `.md` genuinely mirrors the HTML score **0.90–1.00**
 (the residual is button labels and form controls, which have no Markdown
 equivalent), while every summary page scores **≤ 0.67**. 0.85 sits inside that
 empty band, biased toward the mirror cluster.
+
+The size floor exists because every page carries a fixed amount of text with no
+Markdown equivalent — button labels, date formatting, timeline affordances. On a
+29-word speaker profile that fixed cost is 27% of the page; on a 300-word one it
+is 3%. Below ~60 content words the ratio measures page size rather than
+completeness. **Required-section presence applies to every page regardless of
+size** — that is the binding half of the contract.
 
 Two documented exemptions carry a lower floor: `/calendar` (0.70 — the calendar
 island renders event text with no build-time source) and

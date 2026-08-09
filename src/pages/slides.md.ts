@@ -1,24 +1,46 @@
 import type { APIRoute } from 'astro';
 
+import { SITE_URL } from '@/lib/constances';
+import {
+  entityLine,
+  mdHref,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
 import { getDeckSlug, getSlideDecks } from '@/lib/slides';
+import { getTranslations } from '@/lib/translations';
 
+/**
+ * `/slides.md` — sourced from the same translation strings the HTML renders,
+ * so the page's own prose is present rather than a bare deck list.
+ */
 export const GET: APIRoute = async () => {
-  const decks = await getSlideDecks('es');
+  const lang = 'es';
+  const t = getTranslations(lang).slidesPage;
+  const decks = await getSlideDecks(lang);
 
-  let markdown = '# Diapositivas — Presentaciones\n\n';
-  markdown +=
-    '> Una colección de presentaciones de Sergio Alexander — charlas de conferencias, slides de meetups y deep dives técnicos.\n\n';
-
-  for (const deck of decks) {
-    const slug = getDeckSlug(deck.id);
-    markdown += `## [${deck.data.title}](/slides/${slug})\n\n`;
-    markdown += `> ${deck.data.description}\n\n`;
-    markdown += `- **Tipo:** ${deck.data.type}\n`;
-    markdown += `- **Fecha:** ${deck.data.pubDate.toISOString().split('T')[0]}\n`;
-    if (deck.data.eventName)
-      markdown += `- **Evento:** ${deck.data.eventName}\n`;
-    markdown += '\n---\n\n';
-  }
+  const markdown = serializeGenericToMarkdown({
+    title: `${t.title} — ${t.subtitle}`,
+    description: t.description,
+    lang,
+    canonical: `${SITE_URL}/slides`,
+    metadata: [['Total de decks', String(decks.length)]],
+    body: t.heroDescription,
+    sections: [
+      {
+        heading: t.timelineTitle,
+        lines: decks.map((deck) =>
+          entityLine(
+            deck.data.title,
+            mdHref(lang, `slides/${getDeckSlug(deck.id)}`),
+            deck.data.pubDate.toISOString().split('T')[0],
+            deck.data.type,
+            deck.data.eventName,
+            deck.data.description
+          )
+        ),
+      },
+    ],
+  });
 
   return new Response(markdown, {
     headers: {

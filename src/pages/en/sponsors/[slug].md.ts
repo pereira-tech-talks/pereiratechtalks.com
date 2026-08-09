@@ -17,6 +17,7 @@ import {
   SPONSOR_TIER_LABELS,
   type Sponsor,
 } from '@/lib/sponsor';
+import { getTranslations } from '@/lib/translations';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const sponsors = await getSponsors();
@@ -32,6 +33,8 @@ export const GET: APIRoute = async ({ props }) => {
   const description = resolveI18n(entry.data.description, lang);
   const activity = await getSponsorActivity(entry);
   const L = (key: Parameters<typeof mdLabel>[1]) => mdLabel(lang, key);
+  // Section headings and copy come from the same strings the HTML renders.
+  const sd = getTranslations(lang).sponsorDetail;
 
   const metadata: Array<[string, string]> = [
     [
@@ -40,14 +43,14 @@ export const GET: APIRoute = async ({ props }) => {
     ],
     [L('website'), entry.data.url],
     [L('tier'), SPONSOR_TIER_LABELS[entry.data.tier].en],
-    ['Sponsored meetups', String(activity.meetupCount)],
-    ['Pereira Tech Day editions', String(activity.editionCount)],
-    ['Talks enabled', String(activity.talkCount)],
-    ['Speakers on stage', String(activity.speakerCount)],
+    [sd.stats.meetups, String(activity.meetupCount)],
+    [sd.stats.editions, String(activity.editionCount)],
+    [sd.stats.talks, String(activity.talkCount)],
+    [sd.stats.speakers, String(activity.speakerCount)],
   ];
   if (activity.firstYear && activity.lastYear) {
     metadata.push([
-      'Years of support',
+      sd.sinceLabel(activity.firstYear),
       activity.firstYear === activity.lastYear
         ? String(activity.firstYear)
         : `${activity.firstYear}\u2013${activity.lastYear}`,
@@ -65,46 +68,64 @@ export const GET: APIRoute = async ({ props }) => {
   // HTML shows — a title-only list read as a summary of the page, not a twin.
   if (activity.meetups.length > 0) {
     sections.push({
-      heading: 'Sponsored meetups',
-      lines: activity.meetups.map(({ meetup, year }) =>
-        entityLine(
-          resolveI18n(meetup.data.title, lang),
-          mdHref(lang, `meetups/${getMeetupSlug(meetup)}`),
-          meetup.data.date.toISOString().split('T')[0],
-          [meetup.data.venue.name, meetup.data.venue.city]
-            .filter(Boolean)
-            .join(', '),
-          String(year),
-          resolveI18n(meetup.data.description, lang)
-        )
-      ),
+      heading: sd.meetupsTitle,
+      lines: [
+        sd.meetupsSubtitle(entry.data.name),
+        '',
+        ...activity.meetups.map(({ meetup, year }) =>
+          entityLine(
+            resolveI18n(meetup.data.title, lang),
+            mdHref(lang, `meetups/${getMeetupSlug(meetup)}`),
+            meetup.data.date.toISOString().split('T')[0],
+            [meetup.data.venue.name, meetup.data.venue.city]
+              .filter(Boolean)
+              .join(', '),
+            String(year),
+            resolveI18n(meetup.data.description, lang)
+          )
+        ),
+      ],
     });
   }
 
   if (activity.editions.length > 0) {
     sections.push({
-      heading: 'Pereira Tech Day editions',
-      lines: activity.editions.map(({ year, tier, edition }) =>
-        entityLine(
-          edition
-            ? `Pereira Tech Day ${year} — ${resolveI18n(edition.data.title, lang)}`
-            : `Pereira Tech Day ${year}`,
-          mdHref(lang, `pereira-tech-days/${year}`),
-          `${SPONSOR_TIER_LABELS[tier].en} sponsor`,
-          edition ? resolveI18n(edition.data.tagline, lang) : undefined,
-          edition ? resolveI18n(edition.data.description, lang) : undefined
-        )
-      ),
+      heading: sd.editionsTitle,
+      lines: [
+        sd.editionsSubtitle,
+        '',
+        ...activity.editions.map(({ year, tier, edition }) =>
+          entityLine(
+            edition
+              ? `Pereira Tech Day ${year} — ${resolveI18n(edition.data.title, lang)}`
+              : `Pereira Tech Day ${year}`,
+            mdHref(lang, `pereira-tech-days/${year}`),
+            `${SPONSOR_TIER_LABELS[tier].en} sponsor`,
+            edition ? resolveI18n(edition.data.tagline, lang) : undefined,
+            edition ? resolveI18n(edition.data.description, lang) : undefined
+          )
+        ),
+      ],
+    });
+  }
+
+  if (activity.isEmpty) {
+    sections.push({
+      heading: 'Activity',
+      lines: [
+        'This sponsor has no linked meetups registered yet. We are completing the community archive little by little.',
+      ],
     });
   }
 
   sections.push({
-    heading: 'Want to appear here?',
+    heading: sd.ctaTitle,
     lines: [
-      'Sponsoring Pereira Tech Talks sustains the venue, the logistics and the stage for the tech community of Risaralda.',
+      sd.ctaBody,
       '',
-      linkLine('Sponsor us', mdHref(lang, 'sponsor-us')),
-      linkLine('All sponsors', mdHref(lang, 'sponsors')),
+      linkLine(sd.sponsorUsLabel, mdHref(lang, 'sponsor-us')),
+      linkLine(sd.allSponsorsLabel, mdHref(lang, 'sponsors')),
+      linkLine(sd.websiteLabel, entry.data.url),
     ],
   });
 
