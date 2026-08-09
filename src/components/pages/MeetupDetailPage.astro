@@ -25,6 +25,7 @@ import {
   getMeetupSlug,
   resolveMeetupStatus,
 } from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
 import { getSpeakersBySlugs } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent } from '@/lib/talk';
@@ -155,12 +156,32 @@ if (speakers.length > 0) {
     url: `${SITE_URL}${prefix}/speakers/${s.id}/`,
   }));
 }
+/**
+ * Archive stubs carry a two-line note and recent meetups a full abstract, so
+ * the authored description sits on both sides of the 130-160 band. Composed
+ * from the night's own facts, then trimmed at a word boundary.
+ */
+const metaPhrase = metaPhrases(lang);
+const metaDescription = buildMetaDescription({
+  lead: description,
+  // Ordered shortest-first: a long lead can still reach the band on a compact
+  // clause, where a long one would be skipped for overshooting.
+  clauses: [
+    talks.length > 0 ? metaPhrase.talkCount(talks.length) : null,
+    metaPhrase.meetupContext(
+      dateLabel,
+      [venue?.name, venue?.city].filter(Boolean).join(', ')
+    ),
+    metaPhrase.community,
+  ],
+  lang,
+});
 ---
 
 <MainLayout
   lang={lang}
   title={title}
-  description={description}
+  description={metaDescription}
   image={heroSrc}
 >
   <JsonLd data={eventJsonLd} />

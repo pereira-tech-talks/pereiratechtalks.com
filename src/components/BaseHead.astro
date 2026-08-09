@@ -36,14 +36,18 @@ interface Props {
   /** Optional high-priority LCP image preload — emitted first in <head>. */
   lcpImageHref?: string;
   lcpImageMedia?: string;
+  /**
+   * Site-root-relative path to canonicalize to, when this URL is an alias for
+   * another. Defaults to the page's own URL.
+   */
+  canonicalPath?: string;
 }
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const {
   title,
   description,
   image: imageProp,
+  canonicalPath,
   lang = 'es',
   keywords,
   prevPage,
@@ -67,6 +71,13 @@ const imageMimeType =
       : imageExtension === 'webp'
         ? 'image/webp'
         : undefined;
+
+/**
+ * Self-referential unless the page is an alias for another URL. Two indexable
+ * URLs serving the same content compete with each other; `canonicalPath` names
+ * the one that should win.
+ */
+const canonicalURL = new URL(canonicalPath ?? Astro.url.pathname, Astro.site);
 
 // Compute hreflang URLs for multilingual SEO
 const alternateUrls = getAlternateUrls(Astro.url.pathname).map((alt) => ({
@@ -187,13 +198,15 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
   <meta property="og:locale:alternate" content={locale} />
 ))}
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalURL.href} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={absoluteImageUrl} />
-<meta property="twitter:image:alt" content={title} />
+<!-- Twitter. The card spec uses `name`, not the Open Graph `property`
+     attribute; `twitter:site` and `twitter:creator` were already correct while
+     the rest of the block was not. -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL.href} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImageUrl} />
+<meta name="twitter:image:alt" content={title} />
 <meta name="twitter:site" content="@pertechtalks" />
 <meta name="twitter:creator" content="@pertechtalks" />
 

@@ -14,6 +14,7 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { CONTACT_FORM, SITE_URL } from '@/lib/constances';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupsByVertical } from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
 import { getTranslations } from '@/lib/translations';
 import { getVerticalBodyEntry } from '@/lib/vertical';
 
@@ -41,6 +42,14 @@ const { entry: bodyEntry, untranslated } = await getVerticalBodyEntry(
 );
 const { Content } = await render(bodyEntry);
 
+// `mission` is a single line, well under the 130-char band. Extended with the
+// program's own description and the community context.
+const metaDescription = buildMetaDescription({
+  lead: mission,
+  clauses: [description, metaPhrases(lang).community],
+  lang,
+});
+
 const breadcrumbs = [
   {
     label: t.nav.home,
@@ -54,7 +63,7 @@ const breadcrumbs = [
 ];
 ---
 
-<MainLayout lang={lang} title={title} description={mission} image={heroSrc}>
+<MainLayout lang={lang} title={title} description={metaDescription} image={heroSrc}>
   <article class="bg-ptt-bg">
     <header class="relative overflow-hidden bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/90 text-white">
       {

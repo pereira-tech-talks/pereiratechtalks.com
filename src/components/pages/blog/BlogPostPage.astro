@@ -25,6 +25,7 @@ import { getDefaultOgImage } from '@/lib/constances';
 import { formatCalendarDate } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
+import { buildMetaDescription } from '@/lib/meta-description';
 import { getDeckForPost, getDeckSlug } from '@/lib/slides';
 import { getTranslations } from '@/lib/translations';
 
@@ -146,9 +147,13 @@ const breadcrumbData = {
     },
   ],
 };
+// Post descriptions are authored for the listing card, so deep dives run past
+// the 160-char band. Trimmed at a sentence boundary rather than rewritten — the
+// authored copy stays the authored copy.
+const metaDescription = buildMetaDescription({ lead: description, lang });
 ---
 
-<MainLayout lang={lang} title={title} description={description} image={heroImage} keywords={keywords} ogType="article">
+<MainLayout lang={lang} title={title} description={metaDescription} image={heroImage} keywords={keywords} ogType="article">
   <Fragment slot="head">
     <JsonLd data={blogPostingData} />
     <JsonLd data={breadcrumbData} />

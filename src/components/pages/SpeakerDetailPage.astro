@@ -14,6 +14,7 @@ import { getCalendarYear } from '@/lib/dates';
 import { getEventBySlug } from '@/lib/event';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupBySlug } from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
 import { getEditionByYear } from '@/lib/pereiraTechDay';
 import { getTalksBySpeaker } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';
@@ -109,6 +110,22 @@ const breadcrumbs = [
   { label: name },
 ];
 
+/**
+ * The bio is a one-line credit, so on its own it lands far under the 130-char
+ * band. Extended with facts the page already states — the role, how many talks
+ * are in the archive, and where the community is.
+ */
+const phrases = metaPhrases(lang);
+const metaDescription = buildMetaDescription({
+  lead: bio,
+  clauses: [
+    role && !bio.includes(role) ? phrases.speakerRole(role) : null,
+    talks.length > 0 ? phrases.speakerTalks(talks.length) : null,
+    phrases.community,
+  ].filter(Boolean),
+  lang,
+});
+
 const sameAs = [
   social.twitter,
   social.linkedin,
@@ -133,7 +150,7 @@ const personJsonLd: Record<string, unknown> = {
 <MainLayout
   lang={lang}
   title={`${name} — ${role}`}
-  description={bio}
+  description={metaDescription}
   image={photoSrc}
 >
   <JsonLd data={personJsonLd} />

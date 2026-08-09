@@ -8,6 +8,7 @@ import Header from '@/components/layout/Header.svelte';
 import TopNotificationBar from '@/components/layout/TopNotificationBar.svelte';
 import PtdEditionHeader from '@/components/pereira-tech-days/PtdEditionHeader.svelte';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { DESCRIPTION_MAX, truncateToBand } from '@/lib/meta-description';
 import {
   getActiveNotifications,
   localizeNotification,
@@ -24,6 +25,8 @@ interface Props {
   lang: string;
   title: string;
   description: string;
+  /** Canonicalize to another URL when this one is an alias. */
+  canonicalPath?: string;
   image?: string;
   keywords?: string[];
   prevPage?: string;
@@ -55,6 +58,7 @@ const {
   lang,
   title,
   description,
+  canonicalPath,
   image,
   keywords,
   prevPage,
@@ -96,6 +100,14 @@ const activeNotifications = suppressTopNotifications
       }
       return localized;
     });
+
+/**
+ * Last line of defence for the 130-160 band `CLAUDE.md` requires: no page may
+ * emit a description past the maximum, whatever it passes in. Page components
+ * compose theirs with `buildMetaDescription`; this catches anything that does
+ * not, and cuts at a sentence or word boundary rather than mid-word.
+ */
+const metaDescription = truncateToBand(description, DESCRIPTION_MAX);
 ---
 
 <html
@@ -105,7 +117,8 @@ const activeNotifications = suppressTopNotifications
   <head>
     <BaseHead
       title={title}
-      description={description}
+      description={metaDescription}
+      canonicalPath={canonicalPath}
       image={image}
       lang={lang}
       keywords={keywords}

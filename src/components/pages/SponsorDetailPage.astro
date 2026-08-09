@@ -20,6 +20,7 @@ import { SITE_URL } from '@/lib/constances';
 import { getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug } from '@/lib/meetup';
+import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
 import { isUpcomingEdition } from '@/lib/pereiraTechDay';
 import {
   getSponsorActivity,
@@ -72,7 +73,13 @@ const breadcrumbs = [
   { label: name },
 ];
 
-const metaDescription = sd.metaDescription(name, activity.meetupCount);
+// The composed sentence lands just under the band for short sponsor names, so
+// the community context is appended when there is room for it whole.
+const metaDescription = buildMetaDescription({
+  lead: sd.metaDescription(name, activity.meetupCount),
+  clauses: [metaPhrases(lang).community],
+  lang,
+});
 
 const organizationJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',

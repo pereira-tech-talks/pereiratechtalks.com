@@ -41,6 +41,8 @@
     "md:check:existence": "node scripts/check-md-parity.mjs --existence-only",
     "lang:check": "node scripts/audit-language-integrity.mjs",
     "lang:check:strict": "node scripts/audit-language-integrity.mjs --strict",
+    "seo:check": "node scripts/audit-seo.mjs",
+    "seo:check:strict": "node scripts/audit-seo.mjs --strict",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
     "responsive:inventory": "node scripts/responsive-audit/build-url-list.mjs",

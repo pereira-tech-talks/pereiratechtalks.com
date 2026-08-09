@@ -1,6 +1,6 @@
 ---
 title: "Contributing to Pereira Tech Talks"
-description: "How to contribute to Pereira Tech Talks — from giving a talk to writing for the blog to maintaining the open-source website. Every kind of contribution has a clear path and a real impact."
+description: "How to contribute to Pereira Tech Talks: give a talk, write for the blog, mentor, or maintain the open-source website. Every path is clear and has real impact."
 lastUpdated: 2026-05-30
 ---
 
