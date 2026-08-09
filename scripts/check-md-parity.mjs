@@ -14,6 +14,9 @@
  *   2. For each page, checks if a .md file exists at the expected path
  *   3. Reports missing .md files and coverage statistics
  *
+ * Page discovery, redirect detection, and the exclusion list live in
+ * ./lib/dist-pages.mjs, shared with scripts/audit-language-integrity.mjs.
+ *
  * Excluded paths (intentionally have no .md counterpart):
  *   - /internal/*    — dev-only pages, already excluded from prod build
  *   - /404           — error page
@@ -26,88 +29,11 @@
  *   - /images/*      — static image assets
  */
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync } from 'node:fs';
 
-const DIST_DIR = join(process.cwd(), 'dist');
+import { checkMdExists, collectPages, DIST_DIR } from './lib/dist-pages.mjs';
+
 const STRICT = process.argv.includes('--strict');
-
-const EXCLUDED_PATTERNS = [
-  /^internal(\/|$)/,
-  /^404/,
-  /^api\//,
-  /^rss\.xml/,
-  /^README$/,
-  /^\.well-known(\/|$)/,
-  /^_astro(\/|$)/,
-  /^images(\/|$)/,
-  /\/page\/\d+/,
-  /\/tag\//,
-  // Personal diplomas + verify — noindex, opaque IDs (see CERTIFICATES.md)
-  /\/certificates(\/|$)/,
-  /^certificates(\/|$)/,
-  /^en\/certificates(\/|$)/,
-];
-
-/**
- * Detect redirect pages in the build output.
- * Astro generates tiny HTML files with <meta http-equiv="refresh"> for redirects.
- * These pages intentionally have no .md counterpart because they point elsewhere.
- */
-function isRedirectPage(pagePath) {
-  const htmlPath = join(DIST_DIR, pagePath, 'index.html');
-  if (!existsSync(htmlPath)) return false;
-  try {
-    const content = readFileSync(htmlPath, 'utf-8');
-    return content.length < 2000 && content.includes('http-equiv="refresh"');
-  } catch {
-    return false;
-  }
-}
-
-function shouldExclude(pagePath) {
-  return EXCLUDED_PATTERNS.some((pattern) => pattern.test(pagePath));
-}
-
-function findHtmlPages(dir, base = '') {
-  const pages = [];
-  const entries = readdirSync(dir, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const fullPath = join(dir, entry.name);
-    const relPath = base ? `${base}/${entry.name}` : entry.name;
-
-    if (entry.isDirectory()) {
-      pages.push(...findHtmlPages(fullPath, relPath));
-    } else if (entry.name === 'index.html') {
-      const pagePath = base || 'index';
-      pages.push(pagePath);
-    }
-  }
-
-  return pages;
-}
-
-function findExpectedMdPath(pagePath) {
-  if (pagePath === 'index') return 'index.md';
-  return `${pagePath}.md`;
-}
-
-function checkMdExists(pagePath) {
-  const primaryMd = findExpectedMdPath(pagePath);
-  const primaryPath = join(DIST_DIR, primaryMd);
-  if (existsSync(primaryPath)) {
-    return { found: true, mdPath: primaryMd };
-  }
-
-  const indexMd = `${pagePath}/index.md`;
-  const indexPath = join(DIST_DIR, indexMd);
-  if (existsSync(indexPath)) {
-    return { found: true, mdPath: indexMd };
-  }
-
-  return { found: false, mdPath: primaryMd };
-}
 
 // ── Main ──────────────────────────────────────────────────
 
@@ -118,14 +44,12 @@ if (!existsSync(DIST_DIR)) {
 
 console.log('🔍 Markdown-for-Agents Parity Check\n');
 
-const allPages = findHtmlPages(DIST_DIR);
-const redirectPages = allPages.filter(
-  (p) => !shouldExclude(p) && isRedirectPage(p)
-);
-const checkablePages = allPages.filter(
-  (p) => !shouldExclude(p) && !isRedirectPage(p)
-);
-const excludedPages = allPages.filter((p) => shouldExclude(p));
+const {
+  all: allPages,
+  excluded: excludedPages,
+  redirects: redirectPages,
+  checkable: checkablePages,
+} = collectPages();
 
 const results = checkablePages.map((pagePath) => ({
   pagePath,
