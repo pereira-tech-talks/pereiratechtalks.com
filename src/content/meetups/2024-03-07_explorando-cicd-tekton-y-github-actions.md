@@ -55,4 +55,4 @@ En esta charla se hará una introducción a los conceptos básicos de Tekton, un
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

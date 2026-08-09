@@ -53,4 +53,4 @@ Tal vez pienses que el blockchain es solo para actividades ilegales o una apuest
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

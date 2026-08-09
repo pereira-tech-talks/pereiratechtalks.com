@@ -59,4 +59,4 @@ En esta charla introductoria, exploraremos Astro, una herramienta revolucionaria
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

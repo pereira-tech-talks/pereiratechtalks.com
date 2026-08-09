@@ -66,4 +66,4 @@ Charla sobre cómo crear tecnología consciente con las personas, accesible, fun
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)
-- Content migrated from the production archive (`main` branch) for date/content parity.
+- Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.
