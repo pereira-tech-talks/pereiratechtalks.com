@@ -3,10 +3,10 @@ role:
   en: "Pereira Tech Day co-organizer & speaker"
   es: "Co-organizador de Pereira Tech Day y ponente"
 bio:
-  en: "Alejandro E. Rendón spoke at Pereira Tech Talks / PereiraJS community meetups."
-  es: "Alejandro E. Rendón participó como ponente en meetups de Pereira Tech Talks / PereiraJS."
+  en: "Co-organizer of Pereira Tech Day and community speaker. At the OpenClaw Moltys meetup at UTP he shared how he uses OpenClaw in personal day-to-day workflows — beyond demos, into setups that actually stick."
+  es: "Co-organizador de Pereira Tech Day y ponente de la comunidad. En el meetup OpenClaw Moltys en la UTP compartió cómo usa OpenClaw en flujos personales del día a día: más allá de las demos, en configuraciones que de verdad se quedan."
 photo:
-  src: /images/speakers/_placeholder.svg
+  src: /images/speakers/alejandro-rendon.webp
   alt:
     en: "Portrait of Alejandro E. Rendón"
     es: "Retrato de Alejandro E. Rendón"

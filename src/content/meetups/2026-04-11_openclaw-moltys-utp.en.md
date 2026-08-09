@@ -11,14 +11,17 @@ room for the community to share configurations, experiments, and the odd — and
 useful — connections between agents, messaging, and tooling. Ten real projects in
 the room teach you more than the best slide.
 
-### What we put on the table
+### Talks
 
-Sergio Flórez framed the morning: where OpenClaw comes from, what people actually
-use it for, and how it fits together underneath. The whiteboard ended up with the
-drawing that captures most of the system — agent, OpenClaw, a gateway out to
-Telegram, WhatsApp, and Slack, and the tooling side (APIs, skills, MCP, shells).
-Sebastián Franco was also among those who presented; other people from the room
-will keep being documented in this record as we confirm names and talks.
+1. **OpenClaw from scratch: history, how it works, and use cases** — Sergio Flórez.
+   What OpenClaw is, where it comes from, how the agent + gateway + tools model
+   fits together, and what people actually use it for.
+2. **Inside OpenClaw: technical details, field testing, and lessons learned** —
+   Sebastián Franco. Under-the-hood architecture, what showed up in real tests,
+   and the friction that only appears off the happy path.
+3. **OpenClaw in personal life: real workflows from day-to-day use** —
+   Alejandro E. Rendón. How he has used OpenClaw personally: setups that stuck
+   and workflows that are no longer a demo.
 
 The architecture matters, but the point of the meetup is the room: questions that
 only come from someone who has already hit the wall, tricks that never make it
