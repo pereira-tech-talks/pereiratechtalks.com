@@ -50,9 +50,13 @@ jobs:
         run: pnpm run build
       - name: Step 6 - 📏 Check search performance budgets
         run: pnpm run search:budgets
-      - name: Step 7 - 🖥️ Install Playwright Chromium for responsive suite
+      - name: Step 7 - 🤖 Check agent-markdown completeness and language
+        run: pnpm run md:check:strict
+      - name: Step 8 - 🌐 Audit sitewide language integrity
+        run: pnpm run lang:check:strict
+      - name: Step 9 - 🖥️ Install Playwright Chromium for responsive suite
         run: pnpm exec playwright install --with-deps chromium
-      - name: Step 8 - 📱 Run responsive regression suite
+      - name: Step 10 - 📱 Run responsive regression suite
         run: pnpm run test:responsive
-      - name: Step 9 - 🔦 Run Lighthouse audit
+      - name: Step 11 - 🔦 Run Lighthouse audit
         run: pnpm run lighthouse

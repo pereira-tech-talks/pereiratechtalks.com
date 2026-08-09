@@ -298,6 +298,22 @@ const MIN_CONFIDENCE = 0.34;
  */
 export const CONFIDENT_MISMATCH_CONFIDENCE = 0.9;
 
+/**
+ * Minimum *evidence* — not just one-sidedness — before a mismatch is a defect.
+ *
+ * `confidence` measures how lopsided the score is, so a block with a single
+ * marker and nothing opposing it scores 1.00. That is how
+ * `“Cracking the Coding Interview”: http://goo.gl/nBUkl` — an English book
+ * title cited in a Spanish post — became a "confident" English mismatch on
+ * `/blog/applying-for-software-engineering-at-google` off one stopword ("the")
+ * in eight tokens.
+ *
+ * A paragraph genuinely written in the other language carries many markers. One
+ * marker is a citation, a product name, or a borrowed term; it belongs in the
+ * review tier, which is exactly what that tier is for.
+ */
+export const MIN_CONFIDENT_EVIDENCE = 2;
+
 /** Weight for a word carrying Spanish-only orthography. */
 const DIACRITIC_WEIGHT = 1.5;
 
@@ -343,8 +359,21 @@ export function capitalizedShare(text: string): number {
 }
 
 /** Split text into comparable lowercase word tokens. */
+/**
+ * Uppercase language-code parentheticals — `(EN/ES)`, `(ES)`, `(EN, PT)`.
+ *
+ * These are metadata about language, not prose in one. Left in, `EN` and `ES`
+ * lowercase into two of the strongest Spanish stopwords ("en", "es"), which is
+ * enough to score a short English sentence as confidently Spanish: the
+ * sentence "Diverse perspectives: gender, city, level, language (EN/ES),
+ * industry." on `/en/call-for-speakers` scored es=2, en=0, confidence 1.00.
+ */
+const LANGUAGE_CODE_PARENTHETICAL =
+  /\(\s*[A-Z]{2}(?:\s*[/,]\s*[A-Z]{2})*\s*\)/g;
+
 export function tokenize(text: string): string[] {
   return text
+    .replace(LANGUAGE_CODE_PARENTHETICAL, ' ')
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s'-]+/gu, ' ')
     .split(/\s+/)
@@ -432,16 +461,24 @@ export function htmlToText(html: string): string {
  * removed because they are language-neutral and skew the token counts.
  */
 export function markdownToText(markdown: string): string {
-  return markdown
-    .replace(/```[\s\S]*?```/g, '\n')
-    .replace(/~~~[\s\S]*?~~~/g, '\n')
-    .replace(/`[^`\n]*`/g, ' ')
-    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/^\s{0,3}(?:#{1,6}|[>*+-])\s+/gm, '')
-    .replace(/https?:\/\/\S+/g, ' ')
-    .replace(/[*_~]/g, '')
-    .replace(/[ \t]+/g, ' ');
+  return (
+    markdown
+      .replace(/```[\s\S]*?```/g, '\n')
+      .replace(/~~~[\s\S]*?~~~/g, '\n')
+      .replace(/`[^`\n]*`/g, ' ')
+      // Markdown may embed raw HTML — Reveal decks do so heavily, including
+      // `<!-- .slide: ... -->` directives. Markup is not prose: classifying a
+      // `<figcaption>` or a CSS gradient as a language block produced a confident
+      // mismatch on `/slides/demo-revealjs-features`. Inner text is kept.
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<\/?[a-z][^>]*>/gi, ' ')
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/^\s{0,3}(?:#{1,6}|[>*+-])\s+/gm, '')
+      .replace(/https?:\/\/\S+/g, ' ')
+      .replace(/[*_~]/g, '')
+      .replace(/[ \t]+/g, ' ')
+  );
 }
 
 /** Split extracted text into blocks worth classifying independently. */
@@ -509,12 +546,12 @@ export function analyzeDocument(
     }
   }
 
-  const confident = mismatches.filter(
-    (m) => m.score.confidence >= CONFIDENT_MISMATCH_CONFIDENCE
-  );
-  const review = mismatches.filter(
-    (m) => m.score.confidence < CONFIDENT_MISMATCH_CONFIDENCE
-  );
+  const isConfident = (m: BlockVerdict): boolean =>
+    m.score.confidence >= CONFIDENT_MISMATCH_CONFIDENCE &&
+    Math.max(m.score.esScore, m.score.enScore) >= MIN_CONFIDENT_EVIDENCE;
+
+  const confident = mismatches.filter(isConfident);
+  const review = mismatches.filter((m) => !isConfident(m));
 
   return {
     expected,

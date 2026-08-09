@@ -1,7 +1,23 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import { SITE_URL } from '@/lib/constances';
+import {
+  linkLine,
+  mdHref,
+  mdLabel,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
 import { getDeckSlug, getSlideDecks } from '@/lib/slides';
 
+/**
+ * `/slides/{slug}.md` — a slide deck.
+ *
+ * Rebuilt on `serializeGenericToMarkdown` in Task 9 of
+ * PLAN_sitewide_language_seo_aeo_audit: the hand-rolled version had no front
+ * block (`Language:` and `Canonical:` were bullet points inside a Metadata
+ * section, not parseable lines) and no Site Navigation block at all — the only
+ * page type in the build that violated both universal rules.
+ */
 export const getStaticPaths: GetStaticPaths = async () => {
   const decks = await getSlideDecks('en');
   return decks.map((deck) => ({
@@ -11,50 +27,61 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const { deck } = props;
+  const lang = 'en';
+  const { deck } = props as {
+    deck: Awaited<ReturnType<typeof getSlideDecks>>[number];
+  };
   const data = deck.data;
-  let markdown = '';
+  const slug = getDeckSlug(deck.id);
+  const L = (key: Parameters<typeof mdLabel>[1]) => mdLabel(lang, key);
 
-  // Title and description
-  markdown += `# ${data.title}\n\n`;
-  markdown += `> ${data.description}\n\n`;
-
-  // Metadata block (machine-readable for AI agents)
-  markdown += '## Metadata\n\n';
-  markdown += `- **Type:** ${data.type}\n`;
-  markdown += `- **Language:** en\n`;
-  markdown += `- **Published:** ${data.pubDate.toISOString().split('T')[0]}\n`;
+  const metadata: Array<[string, string]> = [
+    [L('type'), data.type],
+    ['Published', data.pubDate.toISOString().split('T')[0]],
+  ];
   if (data.updatedDate) {
-    markdown += `- **Updated:** ${data.updatedDate.toISOString().split('T')[0]}\n`;
+    metadata.push(['Updated', data.updatedDate.toISOString().split('T')[0]]);
   }
   if (data.eventName) {
-    markdown += `- **Event:** ${data.eventName}`;
-    if (data.eventDate) {
-      markdown += ` (${data.eventDate.toISOString().split('T')[0]})`;
-    }
-    if (data.eventUrl) markdown += ` — ${data.eventUrl}`;
-    markdown += '\n';
+    const when = data.eventDate
+      ? ` (${data.eventDate.toISOString().split('T')[0]})`
+      : '';
+    metadata.push(['Event', `${data.eventName}${when}`]);
+  }
+
+  const sections = [];
+  if (data.eventUrl) {
+    sections.push({
+      heading: 'Event',
+      lines: [linkLine(data.eventName ?? data.eventUrl, data.eventUrl)],
+    });
+  }
+  if (data.type === 'external') {
+    sections.push({
+      heading: 'External presentation',
+      lines: [linkLine(data.provider ?? 'Open the deck', data.externalUrl)],
+    });
   }
   if (data.relatedPost) {
-    markdown += `- **Related post:** /en/blog/${data.relatedPost}\n`;
-  }
-  markdown +=
-    '- **Source:** Pereira Tech Talks (https://pereiratechtalks.org)\n';
-  markdown += '\n';
-
-  // Type-specific fields
-  if (data.type === 'external') {
-    markdown += '## External Presentation\n\n';
-    markdown += `- **URL:** ${data.externalUrl}\n`;
-    if (data.provider) markdown += `- **Provider:** ${data.provider}\n`;
-    markdown += '\n';
+    sections.push({
+      heading: 'Related post',
+      lines: [
+        linkLine(data.relatedPost, mdHref(lang, `blog/${data.relatedPost}`)),
+      ],
+    });
   }
 
-  // Body — full slide content for internal decks, supplementary copy for externals
-  if (deck.body?.trim()) {
-    markdown += '## Content\n\n';
-    markdown += deck.body;
-  }
+  const markdown = serializeGenericToMarkdown({
+    title: data.title,
+    description: data.description,
+    lang,
+    canonical: `${SITE_URL}/en/slides/${slug}`,
+    metadata,
+    // The full deck source for internal decks; the supplementary copy for
+    // external ones. Either way it is the page's substance.
+    body: deck.body ?? '',
+    sections,
+  });
 
   return new Response(markdown, {
     headers: {

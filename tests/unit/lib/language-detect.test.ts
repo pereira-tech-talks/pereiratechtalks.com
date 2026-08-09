@@ -218,3 +218,58 @@ describe('analyzeDocument', () => {
     expect(verdict.confident.length).toBeGreaterThan(0);
   });
 });
+
+/**
+ * Three false positives the Task 9 gate surfaced. Each was a classifier bug,
+ * fixed rather than allowlisted — an allowlist would have hidden the next one.
+ */
+describe('false positives found while gating the build (Task 9)', () => {
+  it('does not read a language-code parenthetical as Spanish', () => {
+    // `(EN/ES)` lowercases into "en" and "es" — two of the strongest Spanish
+    // stopwords — which scored this English sentence es=2/en=0, confidence 1.00
+    // on /en/call-for-speakers.
+    const sentence =
+      'Diverse perspectives: gender, city, level, language (EN/ES), industry.';
+    expect(tokenize(sentence)).not.toContain('es');
+    expect(detectLanguage(sentence).lang).not.toBe('es');
+  });
+
+  it.each([
+    ['(ES)', 'Sessions are delivered in Spanish (ES) for the local community.'],
+    [
+      '(EN, PT)',
+      'Slides are published in both languages (EN, PT) after the event.',
+    ],
+  ])('strips the %s form too', (_form, sentence) => {
+    expect(detectLanguage(sentence).lang).not.toBe('es');
+  });
+
+  it('treats embedded HTML in Markdown as markup, not prose', () => {
+    // Reveal decks embed raw HTML and `<!-- .slide: -->` directives; a
+    // `<figcaption>` scored a confident English mismatch on a Spanish deck.
+    const markdown =
+      '<!-- .slide: data-background-gradient="radial-gradient(circle at top, #d81540 0%)" -->\n' +
+      '<figcaption><strong>Alex Doe</strong><br/><span>Head of Product</span></figcaption>';
+    const text = markdownToText(markdown);
+    expect(text).not.toContain('<figcaption>');
+    expect(text).not.toContain('data-background-gradient');
+    expect(analyzeDocument(text, 'es').flagged).toBe(false);
+  });
+
+  it('needs more than one marker to call a block a defect', () => {
+    // `confidence` measures one-sidedness, so a single stopword with nothing
+    // opposing it scores 1.00. An English book title cited in a Spanish post
+    // is not a Spanish page leaking English.
+    const citation = '“Cracking the Coding Interview”: http://goo.gl/nBUkl';
+    const verdict = analyzeDocument(citation, 'es');
+    expect(verdict.flagged).toBe(false);
+    expect(verdict.confident).toHaveLength(0);
+  });
+
+  it('still flags a paragraph that carries real evidence', () => {
+    // The evidence floor must not blunt the detector it protects.
+    const verdict = analyzeDocument(SPANISH_PARAGRAPH, 'en');
+    expect(verdict.flagged).toBe(true);
+    expect(verdict.confident.length).toBeGreaterThan(0);
+  });
+});
