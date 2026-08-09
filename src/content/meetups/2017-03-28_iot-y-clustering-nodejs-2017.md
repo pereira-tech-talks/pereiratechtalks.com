@@ -45,4 +45,4 @@ Aprenderas que es el internet de las cosas (IoT) y porque es considerado como un
 
 ### Fuentes / Sources
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

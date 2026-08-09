@@ -45,4 +45,4 @@ Luego me interese por el desarrollo especializado en iOS para productos de apple
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/288702513)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

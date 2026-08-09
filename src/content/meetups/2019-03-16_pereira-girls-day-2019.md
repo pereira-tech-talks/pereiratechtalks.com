@@ -47,4 +47,4 @@ draft: false
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

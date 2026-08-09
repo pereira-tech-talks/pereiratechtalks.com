@@ -45,4 +45,4 @@ Decimocuarto Meetup de PereiraJs hablando sobre:
 
 ### Fuentes / Sources
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

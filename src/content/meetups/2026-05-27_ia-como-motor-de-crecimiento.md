@@ -14,6 +14,7 @@ venue:
 mode: in-person
 hero:
   src: "/images/meetups/ia-como-motor-de-crecimiento/hero.webp"
+  srcEn: "/images/meetups/ia-como-motor-de-crecimiento/hero.en.webp"
   alt:
     en: "AI as a growth engine"
     es: "IA como motor de crecimiento"
@@ -38,6 +39,7 @@ sponsors:
   - slug: ase-utp
     tier: community
 linkMeetupCom: https://luma.com/8uige1ke
+linkRecording: https://www.youtube.com/watch?v=IgMkFUMCUVU
 status: announced
 draft: false
 ---

@@ -48,4 +48,4 @@ Hoy en día el número de servidores que los sysadmin deben administrar crece a 
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247349603)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

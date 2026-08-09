@@ -47,4 +47,4 @@ Conoceras cómo puedes contruir de manera casí automatizada APIs reactivas medi
 
 ### Fuentes / Sources
 
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

@@ -41,4 +41,4 @@ En esta charla Óscar nos compartirá su experiencia, nos hablará de su career 
 ### Fuentes / Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283655889)
-- Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
+- Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.
