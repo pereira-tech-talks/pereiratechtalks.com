@@ -24,6 +24,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       // `/index.md` is served by its own endpoint, which appends the home
       // page's dynamic blocks (next event, programs, sponsors, latest posts).
       .filter((page) => getPageSlug(page.id) !== 'index')
+      // `/communities.md` is served by its own endpoint, sourced from the
+      // `communities` collection so it cannot drift from the HTML.
+      .filter((page) => getPageSlug(page.id) !== 'communities')
       .map((page) => ({
         params: { page: getPageSlug(page.id) },
         props: { page },

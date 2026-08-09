@@ -3,6 +3,7 @@ import type { APIRoute } from 'astro';
 
 import { getSeriesTimelineIndex } from '@/lib/blog';
 import { serializeSeriesListingToMarkdown } from '@/lib/markdown-for-agents';
+import { getTranslations } from '@/lib/translations';
 
 export const GET: APIRoute = async () => {
   const allSeries = await getCollection('series');
@@ -23,11 +24,11 @@ export const GET: APIRoute = async () => {
     )
   ).filter((e): e is NonNullable<typeof e> => e !== null);
 
+  const t = getTranslations('es').seriesListingPage;
   const markdown = serializeSeriesListingToMarkdown(entries, {
     lang: 'es',
-    title: 'Pereira Tech Talks — Series del Blog',
-    description:
-      'Series multi-parte del blog de Pereira Tech Talks — recorridos sobre IA, agentes, m\u00F3vil, frontend, infraestructura y m\u00E1s.',
+    title: `Pereira Tech Talks — ${t.title}`,
+    description: t.description,
   });
 
   return new Response(markdown, {

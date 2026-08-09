@@ -425,11 +425,17 @@ export function serializeSeriesListingToMarkdown(
   lines.push('');
   lines.push(`Language: ${lang}`);
   lines.push(`Canonical: ${canonicalUrl}`);
-  lines.push(`Total series: ${entries.length}`);
+  lines.push(
+    `${lang === 'es' ? 'Total de series' : 'Total series'}: ${entries.length}`
+  );
   lines.push('');
   lines.push('---');
   lines.push('');
-  lines.push('## Series');
+  // The listing page's own prose. Without it the .md was a bare link list
+  // against a page that explains what a series is — 0.29 coverage.
+  lines.push(description);
+  lines.push('');
+  lines.push(`## ${lang === 'es' ? 'Series' : 'Series'}`);
   lines.push('');
 
   const sorted = [...entries].sort((a, b) => a.order - b.order);
