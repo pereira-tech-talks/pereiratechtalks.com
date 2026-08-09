@@ -65,6 +65,54 @@ both real, and both failed the reader. The same test asserts this.
 Verticals use the identical mechanism (`{slug}.en.md`, `verticalBodiesEn`). See
 [I18N Guide](../I18N_GUIDE.md).
 
+## Body shape and bilingual parity
+
+The two bodies are the **same content in two languages** — not a Spanish recap
+and an English summary of it. All 94 ES/EN pairs in the repository now follow one
+shape, and `pnpm run parity:check` fails the build when a change breaks it.
+
+```markdown
+## {title in this body's language}
+
+{intro — date, venue, who is on the programme}
+
+{context paragraphs}
+
+### Charlas                          ← `### Talks` in the sibling
+
+**{talk title}**
+
+**Ponente:** {speaker name}          ← `**Speaker:**`
+
+{the talk's abstract, in this body's language}
+
+---
+
+### Fuentes                          ← `### Sources`
+
+- Página original del evento: [Meetup.com]({url})   ← `Original event page:`
+- Grabación: {url}                                  ← `Recording:`
+```
+
+Only the section **labels** differ per language. Everything else — headings, list
+items, paragraph breaks, the `---` rule before Sources, and every URL — is
+identical on both sides.
+
+### The rules, and why each exists
+
+| Rule | Why |
+|---|---|
+| Every URL in one body exists in the other | Otherwise one set of readers silently loses a source. This is the class that fails CI. |
+| Same headings, list items and paragraph counts | Two languages that render differently are not the same page. |
+| Real paragraph breaks, never soft line breaks | Markdown renders a single newline as a space, so `**Ponente:** Ana⏎**Rol:** CTO` renders run together on one line. 22 Spanish bodies read that way. |
+| Pull each linked talk's `abstract` into the body, in that body's language | The material is already authored and already bilingual — use `abstract.es` for the Spanish file and `abstract.en` for the English one. Never translate one into the other when both exist. |
+| Skip a boilerplate abstract | 133 of 171 talks carry a generated *"Charla de {speaker} en el meetup {title} de Pereira Tech Talks"*. It restates the body. Title and speaker alone are still worth adding. |
+| Verify a link resolves **to what it claims** | 47 archive event links returned HTTP 200 and rendered unrelated public events — *Paleopalooza*, *Yoga for Teens*, a French NLP workshop. Meetup resolves an event by ID and ignores the group slug in the path. |
+| Never invent facts about a past event | If the repository holds nothing, the body stays short **in both languages**. See [WRITING_CRAFT_GUIDE](../WRITING_CRAFT_GUIDE.md). |
+
+Two meetups — `maraton-utp-2018` and `inauguracion-gdg-pereira` — have no linked
+talks and no recoverable sources. They are short on purpose, in both languages.
+
 ## `/meetups` timeline
 
 One list, not two. `getAllMeetupShowcase()` (`src/lib/meetup.ts`) merges

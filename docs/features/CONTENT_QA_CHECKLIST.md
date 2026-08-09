@@ -13,6 +13,25 @@ Agent-facing gates before shipping content or closing a content DWP.
       `por`, an English body `### Sources` and `by`
 - [ ] YAML entities (`speakers`, `sponsors`, …): `en`/`es` fields filled — no Spanish pasted into `en`
 
+## Content parity — same content, not just the same language
+
+Being in the right language is [language integrity](#language-integrity). This
+is the separate question of whether the two versions say the **same thing**.
+
+- [ ] Every URL in one body exists in the other — no source reaches only one
+      set of readers
+- [ ] Same structure: same headings, list items and paragraph breaks, and the
+      `---` rule before the Sources block in both
+- [ ] Real paragraph breaks, not soft line breaks — a single newline renders as
+      a space, so `**Ponente:** Ana\n**Rol:** CTO` runs together on one line
+- [ ] Linked talks' abstracts appear in both bodies, each in its own language,
+      taken as authored — not translated from the other when both exist
+- [ ] Generated boilerplate abstracts (*"Charla de {speaker} en el meetup …"*)
+      left out; they restate what the body already says
+- [ ] Every external link verified to resolve **to what it claims** — an event
+      ID returning 200 may still be somebody else's event
+- [ ] `pnpm run parity:check` reports 0 `content-loss` and 0 `structural`
+
 ## Orthography
 
 - [ ] Spanish user-facing text uses ñ and accented vowels
@@ -60,7 +79,10 @@ pnpm run build                # the three gates below read dist/
 pnpm run md:check             # completeness + language of every .md twin
 pnpm run lang:check           # sitewide language integrity
 pnpm run seo:check            # per-URL SEO and structured data
+pnpm run parity:check         # ES/EN carry the same content (reads src/content/)
 ```
 
-Each has a `:strict` variant that exits non-zero; all three run in CI after the
-build (`.github/workflows/code_check.yml`).
+Each has a `:strict` variant that exits non-zero; all four run in CI after the
+build (`.github/workflows/code_check.yml`). `parity:check` is the exception that
+reads `src/content/` rather than `dist/` — parity is a property of the authored
+files, so it can be caught before a build.

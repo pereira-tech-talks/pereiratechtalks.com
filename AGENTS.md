@@ -222,6 +222,7 @@ Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib
 - [ ] UI strings in both `en.ts` and `es.ts`
 - [ ] No hardcoded user-visible text
 - [ ] Page Markdown files updated in both `src/content/pages/en/` and `src/content/pages/es/`
+- [ ] `pnpm run parity:check` clean — the two languages carry the **same content**, not merely correct content in each. Same sources, same structure, same talks; only section labels differ
 
 **Tools:** `/translate-sync` skill, `i18n-guardian` agent. Adding a new language: see **[I18N Guide](docs/I18N_GUIDE.md)**.
 
@@ -300,6 +301,8 @@ pnpm run lang:check         # Sitewide language-integrity audit (ES at /, EN at 
 pnpm run lang:check:strict  # Same as above; exits 1 on failure (CI gate)
 pnpm run seo:check          # Per-URL SEO + structured-data audit
 pnpm run seo:check:strict   # Same as above; exits 1 on failure (CI gate)
+pnpm run parity:check       # ES and EN carry the SAME content, not just correct content
+pnpm run parity:check:strict # Same as above; exits 1 on failure (CI gate)
 pnpm run search:budgets     # Search payload budgets
 pnpm run lighthouse         # Lighthouse audit
 pnpm run release            # Bump version and release commit
@@ -539,6 +542,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 - [ ] `pnpm run md:check` passes — every page has a **complete** `.md` twin, not a summary
 - [ ] `pnpm run lang:check` reports 0 flagged pages
 - [ ] `pnpm run seo:check` reports 0 flagged URLs
+- [ ] `pnpm run parity:check` reports 0 content-loss and 0 structural findings
 - [ ] Dark mode works in new components
 - [ ] Content in both Spanish (primary) and English
 - [ ] Translation strings in both locale files
