@@ -4,7 +4,7 @@ title:
   es: "Noche de Experiencias en la industria del Software"
 description:
   en: "Pereira Tech Talks meetup — Experiences Night in the software industry. Community archive page with the night’s program and context."
-  es: "Speaker: Andrés Rodriguez Charla: Conviértete en desarrollador web, estos son los beneficios."
+  es: "Meetup de Pereira Tech Talks — Noche de Experiencias en la industria del Software. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2022-11-17
 date: 2022-11-17
 venue:

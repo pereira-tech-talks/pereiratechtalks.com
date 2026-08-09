@@ -4,7 +4,7 @@ title:
   es: "Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS"
 description:
   en: "Pereira Tech Talks meetup — Virtual reality for the web with A-Frame && Point-free JavaScript with RamdaJS. Community archive page with the night’s program…"
-  es: "Reanudamos actividades con una gran asistencia y dos charlas geniales sobre tecnologías Javascript:"
+  es: "Meetup de Pereira Tech Talks — Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS. Página del archivo de la comunidad con el…"
 pubDate: 2018-02-24
 date: 2018-02-24
 venue:

@@ -12,8 +12,12 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  bilingualFields,
   bodyOf,
+  compareField,
   comparePair,
+  FIELD_MIN_WORDS,
+  FIELD_RATIO,
   isEquivalentLabel,
   shapeOf,
   summarize,
@@ -217,5 +221,77 @@ describe('summarize', () => {
       }),
     ];
     expect(summarize(results).identical).toBe(0);
+  });
+});
+
+describe('bilingualFields', () => {
+  it('finds an { en, es } pair at any depth, with its path', () => {
+    const found = [
+      ...bilingualFields({
+        title: { en: 'T', es: 'T' },
+        faqs: [{ answer: { en: 'a', es: 'b' } }],
+      }),
+    ];
+    expect(found.map((f) => f.path).sort()).toEqual(['faqs.0.answer', 'title']);
+  });
+
+  it('does not mistake a non-string pair for a bilingual field', () => {
+    // `{ en: [...], es: [...] }` shows up for list-valued config; comparing word
+    // counts on it is meaningless.
+    expect([...bilingualFields({ nav: { en: ['a'], es: ['b'] } })]).toEqual([]);
+  });
+});
+
+describe('compareField', () => {
+  const f = (en: string | undefined, es: string | undefined) =>
+    compareField({ id: 'x', path: 'p', en, es });
+
+  it('reports a field empty in one language', () => {
+    expect(f('', 'algo')).toMatchObject({ class: 'field-missing' });
+    expect(f('something', undefined)).toMatchObject({ class: 'field-missing' });
+  });
+
+  it('reports English that points at the Spanish text instead of translating', () => {
+    // This exact shape shipped in 18 talk abstracts.
+    expect(
+      f(
+        'Talk: Noche de Rust. See the Spanish abstract for the full description.',
+        'Una guía introductoria a Rust.'
+      )
+    ).toMatchObject({ class: 'field-pointer' });
+  });
+
+  it('reports a summary standing in for a translation', () => {
+    const es = 'palabra '.repeat(40);
+    const en = 'word '.repeat(12);
+    expect(f(en, es)).toMatchObject({ class: 'field-skew' });
+  });
+
+  it('MUST NOT fire on ordinary Spanish expansion', () => {
+    // Spanish runs ~15-25% longer for the same content. Reporting that would
+    // flag every correctly translated field in the repository. The first draft
+    // of this fixture was itself 1.67x and the scanner was right to report it —
+    // which is the reason `field-skew` is a review signal and never blocks:
+    // above 1.5x, a faithful translation and a summary look the same.
+    expect(
+      f(
+        'Thanks to the organizing team and our sponsors, we plan morning and afternoon refreshments for everyone attending.',
+        'Gracias al equipo organizador y a los patrocinadores, tendremos refrigerios en la mañana y en la tarde para todos los asistentes.'
+      )
+    ).toBeNull();
+  });
+
+  it('MUST NOT fire on short strings, where ratios are noise', () => {
+    // A 4-word title against a 7-word one is 1.75x and perfectly translated.
+    expect(f('Your first talk', 'Tu primera charla')).toBeNull();
+    expect(FIELD_MIN_WORDS).toBe(12);
+  });
+
+  it('says nothing when both sides are absent', () => {
+    expect(f(undefined, undefined)).toBeNull();
+  });
+
+  it('uses the documented ratio', () => {
+    expect(FIELD_RATIO).toBe(1.5);
   });
 });

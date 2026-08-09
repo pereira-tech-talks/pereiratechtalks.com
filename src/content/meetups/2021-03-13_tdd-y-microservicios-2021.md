@@ -4,7 +4,7 @@ title:
   es: "TDD y Microservicios"
 description:
   en: "Pereira Tech Talks meetup — TDD and microservices. Community archive page with the night’s program and context."
-  es: "Tenemos Meetup!!!"
+  es: "Meetup de Pereira Tech Talks — TDD y Microservicios. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2021-03-13
 date: 2021-03-13
 venue:

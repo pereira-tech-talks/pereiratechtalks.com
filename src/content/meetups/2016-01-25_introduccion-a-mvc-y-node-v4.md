@@ -4,7 +4,7 @@ title:
   es: "Introducción a MV* && Node.js v4"
 description:
   en: "Pereira Tech Talks meetup — Introduction to MV* && Node.js v4. Community archive page with the night’s program and context."
-  es: "Decimocuarto Meetup de PereiraJs hablando sobre:"
+  es: "Meetup de Pereira Tech Talks — Introducción a MV* && Node.js v4. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2016-01-25
 date: 2016-01-25
 venue:

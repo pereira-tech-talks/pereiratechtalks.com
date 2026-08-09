@@ -29,8 +29,14 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
+import YAML from 'yaml';
+
 import {
+  bilingualFields,
+  compareField,
   comparePair,
+  FIELD_MIN_WORDS,
+  FIELD_RATIO,
   summarize,
   THIN_WORD_FLOOR,
 } from './lib/content-parity.mjs';
@@ -81,6 +87,51 @@ for (const collection of PAIRED_COLLECTIONS) {
 
 const s = summarize(results);
 
+/**
+ * Bodies are only half the surface. `talks.abstract`, `speakers.bio`,
+ * `sponsors.description` and the rest are `{ en, es }` fields, and one of them
+ * can be a summary of the other with every body still at parity — which is
+ * exactly what 18 talk abstracts were.
+ */
+function scanFields() {
+  const findings = [];
+  const walk = (dir, collection) => {
+    for (const name of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, name.name);
+      if (name.isDirectory()) {
+        walk(full, collection);
+        continue;
+      }
+      if (!/\.(md|mdx|ya?ml|json)$/.test(name.name)) continue;
+      const raw = readFileSync(full, 'utf-8');
+      let data;
+      try {
+        if (/\.ya?ml$/.test(name.name)) data = YAML.parse(raw);
+        else if (name.name.endsWith('.json')) data = JSON.parse(raw);
+        else {
+          const parts = raw.split(/^---[ \t]*$/m);
+          if (parts.length < 3) continue;
+          data = YAML.parse(parts[1]);
+        }
+      } catch {
+        continue; // a parse failure is astro:check's job to report, not this gate's
+      }
+      const id = `${collection}/${name.name}`;
+      for (const field of bilingualFields(data)) {
+        const f = compareField({ id, ...field });
+        if (f) findings.push(f);
+      }
+    }
+  };
+  for (const c of readdirSync(CONTENT, { withFileTypes: true })) {
+    if (c.isDirectory()) walk(join(CONTENT, c.name), c.name);
+  }
+  return findings;
+}
+
+const fieldFindings = scanFields();
+const fieldBy = (cls) => fieldFindings.filter((f) => f.class === cls);
+
 console.log(`   Pairs audited:           ${s.pairs}`);
 console.log(`   At parity:               ${s.identical}`);
 console.log('');
@@ -94,6 +145,27 @@ console.log(
   `   👀 thin-both:            ${s.files['thin-both']} pair(s) under ${THIN_WORD_FLOOR} words on both sides`
 );
 console.log('');
+console.log('   Bilingual fields across every collection:');
+console.log(
+  `   ❌ field-missing:        ${fieldBy('field-missing').length} field(s) empty in one language`
+);
+console.log(
+  `   ❌ field-pointer:        ${fieldBy('field-pointer').length} field(s) referring the reader to the other language`
+);
+console.log(
+  `   ⚠️  field-skew:           ${fieldBy('field-skew').length} field(s) beyond ${FIELD_RATIO}x (min ${FIELD_MIN_WORDS} words)`
+);
+console.log('');
+for (const f of [
+  ...fieldBy('field-missing'),
+  ...fieldBy('field-pointer'),
+].slice(0, 10)) {
+  console.log(`     ✗ ${f.id} → ${f.path}: ${f.detail}`);
+}
+for (const f of fieldBy('field-skew').slice(0, 10)) {
+  console.log(`     · ${f.id} → ${f.path}: ${f.detail}`);
+}
+if (fieldFindings.length > 0) console.log('');
 
 const withLoss = results.filter((r) =>
   r.findings.some((f) => f.class === 'content-loss')
@@ -176,12 +248,21 @@ if (REPORT_DIR) {
   console.log(`   Report written to ${REPORT_DIR}\n`);
 }
 
-if (STRICT && s.byClass['content-loss'] > 0) {
+if (
+  STRICT &&
+  (s.byClass['content-loss'] > 0 ||
+    fieldBy('field-missing').length > 0 ||
+    fieldBy('field-pointer').length > 0)
+) {
   console.log('💡 Content parity is documented in docs/I18N_GUIDE.md.');
   console.log('   Every URL in one language must exist in the other.\n');
   process.exit(1);
 }
 
-if (s.byClass['content-loss'] === 0 && s.byClass.structural === 0) {
+if (
+  s.byClass['content-loss'] === 0 &&
+  s.byClass.structural === 0 &&
+  fieldFindings.length === 0
+) {
   console.log('✅ Every pair carries the same content in both languages.\n');
 }

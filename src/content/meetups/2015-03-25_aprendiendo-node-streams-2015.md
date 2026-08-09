@@ -4,7 +4,7 @@ title:
   es: "Aprendiendo node && Streams - Event Emitter"
 description:
   en: "Pereira Tech Talks meetup — Learning node && Streams - Event Emitter. Community archive page with the night’s program and context."
-  es: "Décimo Meetup de Pereirajs sobre node y streams en Javascript."
+  es: "Meetup de Pereira Tech Talks — Aprendiendo node && Streams - Event Emitter. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2015-03-25
 date: 2015-03-25
 venue:

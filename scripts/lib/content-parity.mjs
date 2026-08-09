@@ -188,3 +188,89 @@ export function summarize(results) {
   }
   return { pairs: results.length, identical, byClass, files };
 }
+
+// ── Bilingual fields ──────────────────────────────────────
+
+/**
+ * Spanish runs longer than English for the same content — articles, prepositions
+ * and compound verbs add roughly 15–25%. A symmetric 1.5x ratio therefore sits
+ * above normal translation expansion in either direction, so what it catches is
+ * a summary standing in for a translation rather than ordinary language drift.
+ */
+export const FIELD_RATIO = 1.5;
+
+/**
+ * Short strings make ratios meaningless: a four-word title against a seven-word
+ * one is 1.75x and perfectly translated. Only compare once the longer side
+ * carries enough words for the ratio to mean something.
+ */
+export const FIELD_MIN_WORDS = 12;
+
+/**
+ * An English field that tells the reader to go and read the Spanish one is not a
+ * translation, however long it is. This shape shipped in 18 talk abstracts.
+ */
+const POINTER =
+  /\b(?:see|consulta|ver)\b[^.]{0,40}\b(?:spanish|english|español|inglés)\b[^.]{0,40}\b(?:abstract|description|resumen|descripción)/i;
+
+const words = (s) =>
+  typeof s === 'string' ? s.trim().split(/\s+/).filter(Boolean).length : 0;
+
+/**
+ * Walk a parsed entry and yield every `{ en, es }` string pair with its path.
+ * Bilingual fields are shaped this way throughout `src/content.config.ts`.
+ */
+export function* bilingualFields(node, path = []) {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    for (const [i, v] of node.entries())
+      yield* bilingualFields(v, [...path, i]);
+    return;
+  }
+  const hasPair =
+    ('en' in node || 'es' in node) &&
+    [node.en, node.es].every((v) => v === undefined || typeof v === 'string');
+  if (hasPair && (node.en !== undefined || node.es !== undefined)) {
+    yield { path: path.join('.') || '(root)', en: node.en, es: node.es };
+  }
+  for (const [k, v] of Object.entries(node)) {
+    if (k === 'en' || k === 'es') continue;
+    yield* bilingualFields(v, [...path, k]);
+  }
+}
+
+/** Compare one bilingual field. Returns a finding, or null when it is sound. */
+export function compareField({ id, path, en, es }) {
+  const at = { id, path };
+  const missing = (v) => v === undefined || v === null || v.trim() === '';
+  if (missing(en) && missing(es)) return null;
+  if (missing(en))
+    return { ...at, class: 'field-missing', detail: 'English is empty' };
+  if (missing(es))
+    return { ...at, class: 'field-missing', detail: 'Spanish is empty' };
+  if (POINTER.test(en))
+    return {
+      ...at,
+      class: 'field-pointer',
+      detail:
+        'English refers the reader to the Spanish text instead of translating it',
+    };
+  if (POINTER.test(es))
+    return {
+      ...at,
+      class: 'field-pointer',
+      detail:
+        'Spanish refers the reader to the English text instead of translating it',
+    };
+  const we = words(en);
+  const ws = words(es);
+  if (Math.max(we, ws) < FIELD_MIN_WORDS) return null;
+  const ratio = we > ws ? we / ws : ws / we;
+  if (ratio >= FIELD_RATIO)
+    return {
+      ...at,
+      class: 'field-skew',
+      detail: `ES ${ws}w vs EN ${we}w (${ratio.toFixed(2)}x)`,
+    };
+  return null;
+}

@@ -4,7 +4,7 @@ title:
   es: "Noche de seguridad y  Testing"
 description:
   en: "Pereira Tech Talks meetup — Security Night y Testing. Community archive page with the night’s program and context."
-  es: "Tenemos meetUp presencial. Con dos charlas mega increibles."
+  es: "Meetup de Pereira Tech Talks — Noche de seguridad y Testing. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2022-06-23
 date: 2022-06-23
 venue:
