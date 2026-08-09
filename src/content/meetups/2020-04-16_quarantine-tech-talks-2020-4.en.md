@@ -11,6 +11,12 @@ YouTube link: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.
 The communities of the Eje Cafetero are joining forces to run events for everyone
 through this quarantine.
 
+### Talks
+
+**Session at Quarantine Tech Talks 💻 - Meetup 4**
+
+**Speaker:** Yeison Cruz
+
 ---
 
 ### Sources

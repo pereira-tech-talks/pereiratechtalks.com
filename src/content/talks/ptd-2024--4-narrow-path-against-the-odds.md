@@ -3,7 +3,7 @@ title:
   en: "The narrow path: winning against the odds"
   es: "El camino estrecho: ganar en contra de la probabilidad"
 abstract:
-  en: "Talk: The narrow path: winning against the odds. See the Spanish abstract for the community description."
+  en: "The narrow path: winning against the odds"
   es: "El camino estrecho: ganar en contra de la probabilidad"
 speakers:
   - cesar-camacho

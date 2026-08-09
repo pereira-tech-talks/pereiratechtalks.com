@@ -3,7 +3,7 @@ title:
   en: "5 Steps to Conquer the Tech World: My Journey from Chemical Engineering to Data"
   es: "5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos"
 abstract:
-  en: "Talk: 5 Steps to Conquer the Tech World: My Journey from Chemical Engineering to Data. See the Spanish abstract for the community description."
+  en: "5 Steps to Conquer the Tech World: My Journey from Chemical Engineering to Data"
   es: "5 Pasos para Conquistar el Mundo Tech: Mi Viaje de la Ingeniería Química a los Datos"
 speakers:
   - sary-libreros

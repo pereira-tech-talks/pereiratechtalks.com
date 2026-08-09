@@ -9,6 +9,16 @@ Stream link: [https://www.youtube.com/watch?v=rRfrq7WZDk8](https://www.youtube.c
 The communities of the Eje Cafetero are joining forces to run events for everyone
 through this quarantine:
 
+### Talks
+
+**Session at Quarantine Tech Talks 💻 - Meetup 3**
+
+**Speaker:** Óscar Barajas
+
+**Session at Quarantine Tech Talks 💻 - Meetup 3**
+
+**Speaker:** Yury Niño Roa
+
 ---
 
 ### Sources

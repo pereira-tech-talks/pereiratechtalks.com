@@ -38,6 +38,16 @@ Tenemos Meetup!!!
 
 Para esta oportunidad Facundo García nos hablara sobre Test Driven Development (TDD) Pros y Contras de dos escuelas diferentes, Chicago vs London
 
+### Charlas
+
+**Participación en TDD y Microservicios**
+
+**Ponente:** Manuel Pineda
+
+**Participación en TDD y Microservicios**
+
+**Ponente:** Facundo Nahuel Garcia
+
 ---
 
 ### Fuentes

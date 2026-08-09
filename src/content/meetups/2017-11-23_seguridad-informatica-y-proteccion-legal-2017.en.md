@@ -7,6 +7,12 @@ interesting talks:
 
 **How to get started in information security by [Santiago Bernal](https://twitter.com/santiaguf)**
 
+### Talks
+
+**How to get started in information security**
+
+**Speaker:** Santiago Bernal
+
 ---
 
 ### Sources

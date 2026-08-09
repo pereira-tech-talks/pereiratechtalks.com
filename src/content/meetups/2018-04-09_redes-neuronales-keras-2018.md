@@ -37,6 +37,12 @@ En colaboración con [científicas de datos](https://www.facebook.com/cientifica
 
 **Más memorias del evento:**
 
+### Charlas
+
+**Introducción a las redes neuronales con Keras + Random Forest**
+
+**Ponente:** Juan Sebastián Vega, Leiver Campeón
+
 ---
 
 ### Fuentes

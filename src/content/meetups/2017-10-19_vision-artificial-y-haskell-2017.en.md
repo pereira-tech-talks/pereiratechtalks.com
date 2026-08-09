@@ -7,6 +7,12 @@ very interesting talks:
 
 **"Image Stitching", an introduction to OpenCV by [Carlos Álvaro](http://caal-15.github.io/#programming)**
 
+### Talks
+
+**Image stitching: an introduction to OpenCV**
+
+**Speaker:** Carlos Álvaro
+
 ---
 
 ### Sources

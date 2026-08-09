@@ -38,6 +38,16 @@ Noche de Machine Learning y Google Interview.
 
 Comenzamos el año cargado de valiosa información. Y con estos dos titanes de Google que quieren compartirnos su conocimiento. Sean todos bienvenidos a este primer meetUp del año.
 
+### Charlas
+
+**Participación en Noche de Machine Learning y Google Interview**
+
+**Ponente:** Sebastian Gomez
+
+**Participación en Noche de Machine Learning y Google Interview**
+
+**Ponente:** Santiago Gutiérrez
+
 ---
 
 ### Fuentes

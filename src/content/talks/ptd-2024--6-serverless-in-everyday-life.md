@@ -3,7 +3,7 @@ title:
   en: "Serverless in everyday life"
   es: "Serverless en lo cotidiano"
 abstract:
-  en: "Talk: Serverless in everyday life. See the Spanish abstract for the community description."
+  en: "Serverless in everyday life"
   es: "Serverless en lo cotidiano"
 speakers:
   - juan-pablo-franco

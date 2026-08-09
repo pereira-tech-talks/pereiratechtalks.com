@@ -5,6 +5,16 @@ talks and explore how AI is shaping what comes next. Do not miss it.
 
 [We will stream live here.](https://www.youtube.com/watch?v=u-pSII46BJQ)
 
+### Talks
+
+**AI and ChatGPT in the community**
+
+**Speaker:** Sergio Alexander Flórez
+
+**Session at AI Night & ChatGPT: trends and possibilities**
+
+**Speaker:** Mauricio Morales
+
 ---
 
 ### Sources

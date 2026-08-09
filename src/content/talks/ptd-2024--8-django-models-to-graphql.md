@@ -3,7 +3,7 @@ title:
   en: "From 100 Django Models to a Complete GraphQL API in 1 Minute"
   es: "De 100 Modelos Django a una API GraphQL Completa en 1 Minuto"
 abstract:
-  en: "Talk: From 100 Django Models to a Complete GraphQL API in 1 Minute. See the Spanish abstract for the community description."
+  en: "From 100 Django Models to a Complete GraphQL API in 1 Minute"
   es: "De 100 Modelos Django a una API GraphQL Completa en 1 Minuto"
 speakers:
   - juan-jose-cardona

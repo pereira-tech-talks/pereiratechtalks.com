@@ -45,6 +45,16 @@ Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://w
 
 En colaboración con las comunidades del eje cafetero les traemos un meetup cargado de mucho conocimiento tech 💻
 
+### Charlas
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 2**
+
+**Ponente:** Andrés Rodríguez
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 2**
+
+**Ponente:** Stiven Cardona Monsalve
+
 ---
 
 ### Fuentes

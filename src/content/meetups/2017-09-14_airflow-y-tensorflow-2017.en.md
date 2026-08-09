@@ -6,6 +6,16 @@ regional talent.
 
 Our opening night brings two very interesting talks:
 
+### Talks
+
+**Monitoring and controlling workflows with AirFlow**
+
+**Speaker:** Manuel Pineda
+
+**Introduction to artificial intelligence with TensorFlow**
+
+**Speaker:** Sergio Alexander Flórez
+
 ---
 
 ### Sources

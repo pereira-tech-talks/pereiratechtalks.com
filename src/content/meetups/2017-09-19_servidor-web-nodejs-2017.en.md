@@ -8,6 +8,12 @@ Florez.
 
 Slides available at: http://slides.com/rockalabs/creando-un-servidor-web-con-nodejs#/
 
+### Talks
+
+**Building a web server from scratch with Node.js**
+
+**Speaker:** John Darwin Morales, Sergio Alexander Flórez
+
 ---
 
 ### Sources

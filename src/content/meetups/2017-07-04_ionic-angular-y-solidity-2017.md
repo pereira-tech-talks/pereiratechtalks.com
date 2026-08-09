@@ -36,6 +36,12 @@ Una noche muy emocionante en PereiraJs con charlas muy interesantes sobre:
 
 **Desarrollo móvil con Ionic + Angular por [Julian Patiño](https://www.meetup.com/es-ES/PereiraJs_/members/230813066/)**
 
+### Charlas
+
+**Desarrollo móvil con Ionic + Angular**
+
+**Ponente:** Julián Patiño
+
 ---
 
 ### Fuentes

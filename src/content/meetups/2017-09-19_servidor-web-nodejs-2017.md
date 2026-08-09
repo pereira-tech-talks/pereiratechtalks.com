@@ -37,6 +37,12 @@ Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de In
 
 Slides disponibles en: http://slides.com/rockalabs/creando-un-servidor-web-con-nodejs#/
 
+### Charlas
+
+**Creando un servidor web desde cero con NodeJs**
+
+**Ponente:** John Darwin Morales, Sergio Alexander Flórez
+
 ---
 
 ### Fuentes

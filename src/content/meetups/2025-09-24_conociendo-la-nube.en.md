@@ -9,6 +9,14 @@ development for the coming decade.
 We are still filling in speakers and talk titles from the community archive. If
 you have the flyer or the slides from that night, a PR helps.
 
+### Talks
+
+**Getting to know the cloud**
+
+**Speaker:** Steven Mejia, Hector Jimenez, Cindy Jimenez
+
+Cloud-themed meetup panel with Pulsatrix, GoDaddy, and Tecnolab speakers.
+
 ---
 
 ### Sources

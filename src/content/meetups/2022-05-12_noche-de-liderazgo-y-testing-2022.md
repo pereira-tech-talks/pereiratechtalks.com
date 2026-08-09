@@ -40,6 +40,20 @@ Introducción a Load Testing y Observability con K6 y New Relic
 
 Por Sergio Estrella, Web UI Developer en Globant, estudiante en la Universidad Tecnológica de Pereira y Platzi Master, mentor en ProTalento.
 
+### Charlas
+
+**Participación en Noche de liderazgo y testing**
+
+**Ponente:** Sergio Estrella
+
+**Participación en Noche de liderazgo y testing**
+
+**Ponente:** Juan Guillermo Gómez
+
+**Participación en Noche de liderazgo y testing**
+
+**Ponente:** Noe Branagan
+
 ---
 
 ### Fuentes

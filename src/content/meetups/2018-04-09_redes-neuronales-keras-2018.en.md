@@ -8,6 +8,12 @@ machine learning.
 
 **More from the event:**
 
+### Talks
+
+**Introduction to neural networks with Keras + Random Forest**
+
+**Speaker:** Juan Sebastián Vega, Leiver Campeón
+
 ---
 
 ### Sources

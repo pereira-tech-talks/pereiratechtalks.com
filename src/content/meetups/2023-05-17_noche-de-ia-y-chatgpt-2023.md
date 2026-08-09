@@ -39,6 +39,16 @@ draft: false
 
 [Tendremos streaming en vivo aquí.]([https://www.youtube.com/watch?v=u-pSII46BJQ](https://www.youtube.com/watch?v=u-pSII46BJQ))
 
+### Charlas
+
+**IA y ChatGPT en la comunidad**
+
+**Ponente:** Sergio Alexander Flórez
+
+**Participación en Noche de IA & ChatGPT: Tendencias y Posibilidades**
+
+**Ponente:** Mauricio Morales
+
 ---
 
 ### Fuentes

@@ -7,6 +7,12 @@ interesting talks
 
 **Understanding and configuring NGINX web servers by [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
 
+### Talks
+
+**Understanding and configuring NGINX web servers**
+
+**Speaker:** Hector Jimenez
+
 ---
 
 ### Sources

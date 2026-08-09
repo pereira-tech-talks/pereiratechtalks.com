@@ -44,6 +44,20 @@ El 24 de abril de 2025 nos reunimos en **Universidad Tecnológica de Pereira** p
 
 Dos charlas sobre IA generativa — generación procedural en videojuegos (mundos al estilo Minecraft) y LLMs aplicados a la investigación en biotecnología.
 
+### Charlas
+
+**Generación procedural en videojuegos: creando mundos infinitos**
+
+**Ponente:** Cristhian Andrés Grajales Pérez
+
+Descubre cómo juegos como Minecraft, Terraria y otros crean mundos infinitos mediante generación procedural. Exploraremos conceptos clave como ruido, semillas y creación dinámica de contenido, con ejemplos prácticos y explicaciones claras. Ideal para desarrolladores y entusiastas que quieran entender cómo se construyen experiencias únicas a través del código.
+
+**IA y biotecnología: descubriendo medicamentos con modelos de lenguaje**
+
+**Ponente:** Frederick Johan Castañeda Pérez
+
+Explora cómo la inteligencia artificial está revolucionando el descubrimiento de nuevos fármacos. Hablaremos sobre el papel de los modelos de lenguaje de gran escala en la investigación biomédica, el uso de arquitecturas como AlphaFold 2 y AlphaFold 3 para predecir estructuras proteicas, y cómo estas tecnologías permiten simular interacciones entre proteínas y compuestos químicos. Con ejemplos claros y aplicaciones reales, esta charla está dirigida a desarrolladores, investigadores y entusiastas que buscan comprender cómo la IA está acelerando la innovación en la biotecnología y la medicina.
+
 ---
 
 ### Fuentes

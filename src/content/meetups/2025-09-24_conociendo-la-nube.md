@@ -47,6 +47,14 @@ Una jornada de charlas sobre Rust y cloud-native — desarrollo moderno, seguro 
 
 Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
 
+### Charlas
+
+**Conociendo la nube**
+
+**Ponente:** Steven Mejia, Hector Jimenez, Cindy Jimenez
+
+Panel del meetup sobre la nube con ponentes de Pulsatrix, GoDaddy y Tecnolab.
+
 ---
 
 ### Fuentes

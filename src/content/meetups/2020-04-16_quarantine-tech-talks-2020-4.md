@@ -43,6 +43,12 @@ Link Youtube: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.
 
+### Charlas
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 4**
+
+**Ponente:** Yeison Cruz
+
 ---
 
 ### Fuentes

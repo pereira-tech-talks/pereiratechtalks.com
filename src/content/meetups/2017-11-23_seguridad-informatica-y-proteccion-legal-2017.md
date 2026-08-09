@@ -38,6 +38,12 @@ En Pereira Tech Talks tenemos el gusto de invitarlos a nuestro tercer Meetup, 
 
 **Cómo empezar en seguridad informática  por [Santiago Bernal](https://twitter.com/santiaguf)**
 
+### Charlas
+
+**Cómo empezar en seguridad informática**
+
+**Ponente:** Santiago Bernal
+
 ---
 
 ### Fuentes

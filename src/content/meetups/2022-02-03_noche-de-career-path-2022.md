@@ -36,6 +36,12 @@ Tenemos MeetUp y el cuerpo lo sabe. Y tenemos como invitado a Óscar Barajas de 
 
 En esta charla Óscar nos compartirá su experiencia, nos hablará de su career path y nos dará algunos consejos para quienes empiezan en la industria de la tecnología y para aquellos que tienen mayor recorrido.
 
+### Charlas
+
+**Participación en Noche de Career Path con Óscar Barajas de Platzi**
+
+**Ponente:** Óscar Barajas
+
 ---
 
 ### Fuentes

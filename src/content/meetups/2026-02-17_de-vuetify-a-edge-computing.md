@@ -47,6 +47,20 @@ El 17 de febrero de 2026 nos reunimos en **Universidad Católica de Pereira** pa
 
 Meetup de apertura de 2026 — reflexiones sobre el ecosistema Vuetify más una inmersión en edge computing. Charlas, snacks y networking.
 
+### Charlas
+
+**Una tarde con Figma que impactó el ecosistema de Vuetify**
+
+**Ponente:** Juan José Cardona
+
+Qué es Vuetify, cómo está conformado su ecosistema y por qué importa, contado por quien, por pura curiosidad, terminó creando el Official Vuetify UI Kit for Figma y conectando de cerca con el proyecto.
+
+**Sistemas multiagentes para optimizar el consumo energético en dispositivos IoT en el borde**
+
+**Ponente:** David Ricardo Rivera Arbeláez
+
+Proyecto de tesis doctoral en etapa de cierre, enfocado en el uso de agentes de inteligencia artificial como estrategia para optimizar el consumo energético en dispositivos IoT que operan bajo esquemas de computación en el borde. El trabajo explora cómo agentes autónomos y adaptativos pueden gestionar eficientemente los recursos disponibles, reduciendo el gasto energético sin afectar el desempeño del sistema en entornos con capacidad limitada.
+
 ---
 
 ### Fuentes

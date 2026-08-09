@@ -43,6 +43,16 @@ Link de la transmisión: [https://www.youtube.com/watch?v=rRfrq7WZDk8](https://w
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos:
 
+### Charlas
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 3**
+
+**Ponente:** Óscar Barajas
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 3**
+
+**Ponente:** Yury Niño Roa
+
 ---
 
 ### Fuentes

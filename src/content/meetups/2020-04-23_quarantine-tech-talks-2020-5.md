@@ -41,6 +41,12 @@ Detalles
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.
 
+### Charlas
+
+**Participación en Quarantine Tech Talks - Meetup 5**
+
+**Ponente:** Marian Villa
+
 ---
 
 ### Fuentes

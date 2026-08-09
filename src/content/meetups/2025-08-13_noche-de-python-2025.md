@@ -44,3 +44,16 @@ El 13 de agosto de 2025 nos reunimos en **Universidad Tecnológica de Pereira** 
 
 Inmersión en Python — desde ingeniería de datos hasta frameworks web y herramientas de IA. La comunidad Python de Pereira dice presente.
 
+### Charlas
+
+**Explorando ADK**
+
+**Ponente:** Germán Grandas
+
+Germán comparte su experiencia usando Python para construir soluciones de inteligencia artificial enfocadas en resolver problemas complejos del mundo real. Introducimos conceptos de arquitectura y desarrollo de agentes modernos de IA usando LLMs como base, el Agent Development Kit (ADK) de Google como marco de trabajo, un caso práctico y finalmente cómo desplegar, gestionar y escalar la solución en producción usando los servicios de Google Cloud.
+
+**Cuadernos reactivos en Python con Marimo**
+
+**Ponente:** Jorge Martínez Gómez
+
+Los cuadernos han permitido durante décadas compartir información y ejecutar código de manera interactiva, pero su reactividad ha sido frágil: el orden de ejecución de las celdas importa y compartirlos requiere pre-instalar librerías y entornos. Esta charla presenta Marimo, una herramienta para desarrollar cuadernos de forma reactiva. Cubrimos sus internos, las diferencias con Jupyter y ejemplos de compartir cuadernos y aplicaciones vía WebAssembly y GitHub Pages.

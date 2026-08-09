@@ -6,6 +6,12 @@ There is a meetup and the body knows it. Our guest is Óscar Barajas from Platzi
 both for people starting out in the tech industry and for those already further
 along.
 
+### Talks
+
+**Session at Career Path Night with Óscar Barajas from Platzi**
+
+**Speaker:** Óscar Barajas
+
 ---
 
 ### Sources
