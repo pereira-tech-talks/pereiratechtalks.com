@@ -563,7 +563,12 @@ const pereiraTechDays = defineCollection({
 });
 
 const verticals = defineCollection({
-  loader: glob({ base: './src/content/verticals', pattern: '**/*.{yaml,md}' }),
+  loader: glob({
+    base: './src/content/verticals',
+    // `*.en.md` siblings carry only the English body (see `verticalBodiesEn`);
+    // they are not verticals in their own right.
+    pattern: ['**/*.{yaml,md}', '!**/*.en.md'],
+  }),
   schema: z.object({
     title: i18nString,
     shortName: i18nString,
@@ -582,6 +587,23 @@ const verticals = defineCollection({
     status: z.enum(['active', 'paused', 'archived']).default('active'),
     order: z.number().default(0),
   }),
+});
+
+/**
+ * English bodies for verticals, as `{slug}.en.md` siblings.
+ *
+ * Same mechanism as `meetupBodiesEn`: the vertical keeps ONE source of truth
+ * for its structured data (title, mission, leaders, schedule) and only the
+ * prose gets a language dimension.
+ */
+const verticalBodiesEn = defineCollection({
+  loader: glob({
+    base: './src/content/verticals',
+    pattern: '**/*.en.md',
+    generateId: ({ entry }) => entry.replace(/\.en\.md$/i, ''),
+  }),
+  // Body-only: never restate structured data that lives on the vertical itself.
+  schema: z.object({}).loose(),
 });
 
 const speakers = defineCollection({
@@ -880,6 +902,7 @@ export const collections = {
   events,
   pereiraTechDays,
   verticals,
+  verticalBodiesEn,
   speakers,
   talks,
   sponsors,

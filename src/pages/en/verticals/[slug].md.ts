@@ -5,20 +5,28 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getVerticals } from '@/lib/vertical';
+import { getVerticalBodyEntry, getVerticals } from '@/lib/vertical';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const verticals = await getVerticals();
-  return verticals.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  return Promise.all(
+    verticals.map(async (entry) => ({
+      params: { slug: entry.id },
+      props: {
+        entry,
+        // English prose lives in the `{slug}.en.md` sibling; fall back to the
+        // Spanish body only when the translation does not exist yet.
+        body: (await getVerticalBodyEntry(entry, 'en')).entry.body ?? '',
+      },
+    }))
+  );
 };
 
 export const GET: APIRoute = ({ props }) => {
   const lang = 'en';
-  const { entry } = props as {
+  const { entry, body } = props as {
     entry: Awaited<ReturnType<typeof getVerticals>>[number];
+    body: string;
   };
   const title = resolveI18n(entry.data.title, lang);
   const mission = resolveI18n(entry.data.mission, lang);
@@ -54,7 +62,7 @@ export const GET: APIRoute = ({ props }) => {
     lang,
     canonical: `${SITE_URL}/en/verticals/${entry.id}`,
     metadata,
-    body: entry.body,
+    body,
     sections,
   });
 

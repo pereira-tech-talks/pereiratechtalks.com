@@ -22,11 +22,11 @@ status: active
 order: 1
 ---
 
-## Por qué existe / Why it exists
+## Por qué existe
 
 Pereira tiene talento técnico de talla mundial. Lo que falta — y esto es honesto — son escenarios y un sistema que prepare a las personas para subirse a ellos. La Escuela de Speakers nació en 2023 dentro de Pereira Tech Talks para resolver exactamente eso: no solo *invitar* a la gente a hablar, sino *prepararla* para hacerlo bien.
 
-> The bet: if Pereira has world-class engineers (and it does), they deserve world-class stages — and the path from "I should talk about this" to "I can stand up and do it" needs to be teachable.
+> La apuesta: si Pereira tiene ingenieras e ingenieros de talla mundial (y los tiene), merecen escenarios de talla mundial — y el camino de «debería hablar de esto» a «puedo pararme y hacerlo» tiene que poder enseñarse.
 
 ---
 
@@ -71,7 +71,7 @@ La meta no es solo "dar una charla en PerTT". La meta es construir un speaker qu
 
 ---
 
-## Preguntas frecuentes / FAQs
+## Preguntas frecuentes
 
 **¿Tiene costo?** — No. Es completamente gratuita. La sostenemos con tiempo voluntario y aporte de patrocinadores de la comunidad.
 

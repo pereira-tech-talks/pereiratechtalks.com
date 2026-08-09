@@ -15,6 +15,7 @@ import { CONTACT_FORM, SITE_URL } from '@/lib/constances';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupsByVertical } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
+import { getVerticalBodyEntry } from '@/lib/vertical';
 
 interface Props {
   vertical: CollectionEntry<'verticals'>;
@@ -34,7 +35,11 @@ const isSpeakerSchool = vertical.id === 'speaker-school';
 
 const meetups = (await getMeetupsByVertical(vertical.id)).slice(0, 6);
 
-const { Content } = await render(vertical);
+const { entry: bodyEntry, untranslated } = await getVerticalBodyEntry(
+  vertical,
+  lang
+);
+const { Content } = await render(bodyEntry);
 
 const breadcrumbs = [
   {
@@ -120,7 +125,32 @@ const breadcrumbs = [
     <section class="py-12 sm:py-16 bg-ptt-bg-elevated">
       <div class="main-container">
         <div class="prose prose-lg dark:prose-invert max-w-3xl prose-a:text-ptt-primary dark:prose-a:text-ptt-primary-dark">
-          <Content />
+          {
+            untranslated && (
+              <p
+                class="not-prose mb-8 flex items-start gap-2.5 rounded-xl border border-ptt-border bg-ptt-bg px-4 py-3 text-sm text-ptt-secondary"
+                lang="en"
+              >
+                <svg
+                  class="mt-0.5 h-4 w-4 shrink-0 text-ptt-primary dark:text-ptt-primary-dark"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                <span>{t.meetupDetail.untranslatedBody}</span>
+              </p>
+            )
+          }
+          <div lang={untranslated ? 'es' : lang}>
+            <Content />
+          </div>
         </div>
       </div>
     </section>
