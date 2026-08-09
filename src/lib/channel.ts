@@ -7,7 +7,7 @@ const sortByOrder = (a: Channel, b: Channel): number =>
 
 export const getChannels = async (): Promise<Channel[]> => {
   const all = await getCollection('channels');
-  return all.sort(sortByOrder);
+  return [...all].sort(sortByOrder);
 };
 
 export const getPrimaryChannels = async (): Promise<Channel[]> => {

@@ -10,7 +10,7 @@ const sortByDateDesc = (a: Talk, b: Talk): number => {
 
 export const getTalks = async (): Promise<Talk[]> => {
   const all = await getCollection('talks');
-  return all.sort(sortByDateDesc);
+  return [...all].sort(sortByDateDesc);
 };
 
 export const getTalkBySlug = async (

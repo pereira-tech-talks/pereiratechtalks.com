@@ -9,7 +9,7 @@ const sortByOrder = (a: Vertical, b: Vertical): number =>
 
 export const getVerticals = async (): Promise<Vertical[]> => {
   const all = await getCollection('verticals');
-  return all.sort(sortByOrder);
+  return [...all].sort(sortByOrder);
 };
 
 export const getActiveVerticals = async (): Promise<Vertical[]> => {
