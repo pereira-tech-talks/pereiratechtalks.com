@@ -41,9 +41,11 @@ Te invitamos a unirte a nosotros el 25 de Abril a las 18:30 para explorar los ho
 **Charlas:**
 
 **Svelte: La Elegancia del Desarrollo Web Moderno.**
+
 Descubre cómo Svelte, a través de su enfoque en la eficiencia, la elegancia y la simplicidad, permite crear aplicaciones web con menos código y un rendimiento excepcional. Exploraremos sus características, ventajas, la vibrante comunidad que lo respalda y los recursos clave para que continúes aprendiendo.
 
 **Por qué deberías aprender Web3 y por dónde empezar?**
+
 Tal vez pienses que el blockchain es solo para actividades ilegales o una apuesta para hacerse rico rápidamente. ¡Pero hay mucho más! Blockchain es inevitable y las oportunidades laborales en este campo están en aumento. En esta charla, descubrirás por qué deberías involucrarte y cómo puedes empezar a prepararte para el futuro.
 
 > Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357/)

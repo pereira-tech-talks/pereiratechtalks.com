@@ -7,6 +7,8 @@ Franco Gomez, Henry Bravo.
 A meetup on AI engineering, AI as infrastructure, and how to scale AI systems in
 enterprise settings. Talks by Sebastián Franco Gomez and Henry Bravo.
 
+---
+
 ### Sources
 
 - Original event: https://luma.com/8uige1ke

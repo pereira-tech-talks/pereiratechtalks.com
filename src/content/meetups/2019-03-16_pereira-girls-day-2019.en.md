@@ -5,6 +5,8 @@ communities, a great meetup with excellent talks on development and technology.
 
 👉 1. Tips for giving talks and speaking in public, by Natalia Moncada Suárez ([https://twitter.com/natamonkada](https://twitter.com/natamonkada))
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)

@@ -39,6 +39,7 @@ draft: false
 En esta charla se hará una introducción a los conceptos básicos de Tekton, una solución de código abierto para CI/CD en Kubernetes.
 
 *Speaker: Andrés Torres.*
+
 *Software Engineer, **Broadcom***
 
 **Charla 2: Automatizando tu flujo de trabajo: Introducción a GitHub Actions y CI/CD**
@@ -46,6 +47,7 @@ En esta charla se hará una introducción a los conceptos básicos de Tekton, un
 Únete a esta sesión introductoria donde exploraremos cómo GitHub Actions puede revolucionar tu proceso de desarrollo y despliegue continuo (CI/CD). Desde la configuración básica hasta la creación de flujos de trabajo personalizados, aprenderás cómo aprovechar al máximo esta poderosa herramienta.
 
 *Speaker: Hector Fabio Jimenez S*
+
 *Site Reliability Engineer, **GoDaddy.***
 
 > Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744/)

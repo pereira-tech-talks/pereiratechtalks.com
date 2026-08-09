@@ -36,10 +36,13 @@ draft: false
 ## Quarantine Tech Talks 💻 - Meetup 2
 
 ===== LINK DE REGISTRO ========
+
 [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com)
+
 Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wzc7EX9s)
 
 ¡Saludos!
+
 En colaboración con las comunidades del eje cafetero les traemos un meetup cargado de mucho conocimiento tech 💻
 
 ---

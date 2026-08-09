@@ -7,6 +7,8 @@ programme: Sebastián Agudelo Morales, Juan de Jesús Fernández Graciano.
 A meetup on continuous testing — scaling test automation without scaling the
 team, and turning the suite into a real-time observability tool.
 
+---
+
 ### Sources
 
 - Original event: https://www.meetup.com/pereira-tech-talks/events/307796521/

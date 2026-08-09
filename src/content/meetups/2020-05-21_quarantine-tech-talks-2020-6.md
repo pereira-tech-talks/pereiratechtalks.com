@@ -34,7 +34,9 @@ draft: false
 ## Quarantine Tech Talks - Meetup 6
 
 Detalles
+
 ===== LINK DE LA TRANSMISIÓN ========
+
 [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.

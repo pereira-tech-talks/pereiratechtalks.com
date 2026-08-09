@@ -5,6 +5,8 @@ We have a meetup.
 This time Facundo García talks about test-driven development (TDD) — the pros and
 cons of two different schools, Chicago vs London.
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/276757820)

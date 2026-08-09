@@ -35,10 +35,13 @@ draft: false
 ## Software libre y Automatización
 
 ¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀
+
 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir todo su conocimiento en este MeetUp, acompáñanos este miércoles 28 de julio a la charla.
 
 Charla: Software libre para una sociedad libre.
+
 Expositor: Steven Mejía
+
 Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingeniería de sistemas. Su tesis de maestría es un sistema de votaciones basado en blockchain, que actualmente se está utilizando como "termómetro electoral" de los comicios presidenciales de Colombia para el 2022.
 
 ---

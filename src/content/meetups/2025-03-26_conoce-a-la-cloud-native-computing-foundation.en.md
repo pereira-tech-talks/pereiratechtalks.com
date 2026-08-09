@@ -7,6 +7,8 @@ Torres, Daniel David Marcano Hernández.
 An introduction to the CNCF, its flagship projects (Kubernetes, Prometheus), and
 the right moment to move your workloads to Kubernetes.
 
+---
+
 ### Sources
 
 - Original event: https://www.meetup.com/pereira-tech-talks/events/306731274/

@@ -41,6 +41,8 @@ us.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)

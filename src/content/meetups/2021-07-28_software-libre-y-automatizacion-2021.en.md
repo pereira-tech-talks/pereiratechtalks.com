@@ -15,6 +15,8 @@ systems engineering. His master's thesis is a blockchain-based voting system,
 currently being used as an "electoral thermometer" for Colombia's 2022
 presidential elections.
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/279620621)

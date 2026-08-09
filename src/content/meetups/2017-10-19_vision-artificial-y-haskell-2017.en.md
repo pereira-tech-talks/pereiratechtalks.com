@@ -7,6 +7,8 @@ very interesting talks:
 
 **"Image Stitching", an introduction to OpenCV by [Carlos Álvaro](http://caal-15.github.io/#programming)**
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243860589)

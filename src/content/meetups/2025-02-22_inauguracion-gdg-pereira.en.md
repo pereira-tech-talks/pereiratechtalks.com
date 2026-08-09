@@ -10,6 +10,8 @@ Developer Groups chapter.
 We are still filling in speakers and talk titles from the community archive. If
 you have the flyer or the slides from that night, a PR helps.
 
+---
+
 ### Sources
 
 - Original event: https://www.meetup.com/pereira-tech-talks/events/306256947/

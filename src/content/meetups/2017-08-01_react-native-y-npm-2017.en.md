@@ -12,6 +12,8 @@ before anything else — has become the norm.
 1. ****Introduction to React Native** — ** ([profile](https://twitter.com/caal_15))
 2. ****Exposing npm credentials without a single failure** — ** ([profile](https://twitter.com/cronopio2))
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

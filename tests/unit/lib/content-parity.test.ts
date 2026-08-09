@@ -42,6 +42,20 @@ describe('bodyOf', () => {
     expect(body).toContain('### Sources');
     expect(shapeOf(body).rules).toBe(1);
   });
+
+  it('REGRESSION: keeps the blank line after a horizontal rule', () => {
+    // The fence pattern used `\s*`, which matches newlines — so it ate the
+    // blank line after `---` and fused the rule to the heading below it. A
+    // Spanish body with a rule then counted one paragraph fewer than an
+    // identically-shaped English one, and the scanner reported 86 files as
+    // structurally drifted when nothing was wrong with them.
+    const es = bodyOf(
+      '---\ntitle: x\n---\n## A\n\n---\n\n### Fuentes\n\n- a\n'
+    );
+    const en = '## A\n\n---\n\n### Sources\n\n- a\n';
+    expect(es).toContain('---\n\n### Fuentes');
+    expect(shapeOf(es).paragraphs).toBe(shapeOf(en).paragraphs);
+  });
 });
 
 describe('urlsOf', () => {

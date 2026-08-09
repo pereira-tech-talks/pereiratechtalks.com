@@ -9,6 +9,8 @@ Details
 The communities of the Eje Cafetero are joining forces to run events for everyone
 through this quarantine.
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/270217972)

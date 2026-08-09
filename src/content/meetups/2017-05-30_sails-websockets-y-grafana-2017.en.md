@@ -11,6 +11,8 @@ You will see how to build reactive APIs almost automatically using WebSockets wi
 1. ****APIs and WebSockets with SailsJs** — ** ([profile](https://twitter.com/jdmorales092))
 2. ****Monitoring and data visualization with StatsD and Grafana** — ** ([profile](https://twitter.com/pin3da_))
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

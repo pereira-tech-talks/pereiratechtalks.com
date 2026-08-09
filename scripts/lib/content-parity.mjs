@@ -18,10 +18,19 @@
 
 // ── Extraction ────────────────────────────────────────────
 
-/** A content file's body — everything after the frontmatter fence. */
+/**
+ * A content file's body — everything after the frontmatter fence.
+ *
+ * The fence pattern matches only spaces and tabs after the dashes, never `\s`:
+ * `\s` matches newlines too, so `/^---\s*$/m` swallowed the blank line that
+ * follows a horizontal rule inside the body. That fused `---` and the heading
+ * after it into one block, so a Spanish body carrying a rule counted one
+ * paragraph fewer than the identically-shaped English one — the scanner
+ * inventing the drift it was built to find.
+ */
 export function bodyOf(raw) {
   if (!raw.trimStart().startsWith('---')) return raw;
-  const parts = raw.split(/^---\s*$/m);
+  const parts = raw.split(/^---[ \t]*$/m);
   return parts.length >= 3 ? parts.slice(2).join('---') : raw;
 }
 

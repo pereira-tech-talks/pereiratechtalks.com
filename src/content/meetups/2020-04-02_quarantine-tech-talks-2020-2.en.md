@@ -11,6 +11,8 @@ Hello!
 Together with the communities of the Eje Cafetero, a meetup loaded with tech
 knowledge 💻
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)

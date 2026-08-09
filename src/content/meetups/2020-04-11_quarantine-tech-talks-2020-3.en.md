@@ -9,6 +9,8 @@ Stream link: [https://www.youtube.com/watch?v=rRfrq7WZDk8](https://www.youtube.c
 The communities of the Eje Cafetero are joining forces to run events for everyone
 through this quarantine:
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269942102)

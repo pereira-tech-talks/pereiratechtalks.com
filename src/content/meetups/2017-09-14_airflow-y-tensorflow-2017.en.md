@@ -6,6 +6,8 @@ regional talent.
 
 Our opening night brings two very interesting talks:
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)

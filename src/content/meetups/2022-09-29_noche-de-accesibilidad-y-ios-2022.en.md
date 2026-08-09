@@ -15,6 +15,8 @@ much in progress 😁. I would like to reach more communities, especially people
 just starting out who would like to do iOS — there is a lot of demand in that
 area too.
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/288702513)

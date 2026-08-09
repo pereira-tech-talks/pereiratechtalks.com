@@ -41,17 +41,21 @@ El 1 de agosto de 2024 nos reunimos en **Camellando H+W** para **Desarrollo Web 
 **Charla 1:**
 
 **Ponente:** Héctor Julián Cardona
+
 **Rol:** Test automation Engineer SSR at Globant
 
 **Construyendo sitios web ultrarapidos y ultrarápido con Astro y TailwindCSS**
+
 En esta charla introductoria, exploraremos Astro, una herramienta revolucionaria que permite crear sitios web ultrarrápidos y agnósticos al framework. Analizaremos las razones detrás de su velocidad, su enfoque innovador basado en islas y cómo aprovecha las mejores prácticas de rendimiento. Además, descubriremos por qué TailwindCSS es la elección perfecta para combinar con Astro y cómo facilita el desarrollo haciendolo ultrarápido.
 
 **Charla 2:**
 
 **Ponente:** Sergio Alexander Florez Galeano
+
 **Rol:** CTO at DailyBot
 
 **Astro en Acción: Aplicaciones Prácticas y Curiosidades**
+
 > Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376/)
 
 ---

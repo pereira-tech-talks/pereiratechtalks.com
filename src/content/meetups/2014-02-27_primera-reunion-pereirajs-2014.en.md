@@ -7,6 +7,8 @@ PereiraJs community and presented the group's goals and objectives.
 [Manuel Pineda](https://twitter.com/pin3da) then gave a talk titled
 **[JavaScript: history and applications](http://jhonber.github.io/slides)**.
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

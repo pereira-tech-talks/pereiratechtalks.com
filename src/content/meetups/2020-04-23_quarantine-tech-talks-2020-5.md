@@ -34,7 +34,9 @@ draft: false
 ## Quarantine Tech Talks - Meetup 5
 
 Detalles
+
 ===== LINK DE LA TRANSMISIÓN ========
+
 [https://www.youtube.com/watch?v=SNE_MbXAQQU](https://www.youtube.com/watch?v=SNE_MbXAQQU)
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.

@@ -37,6 +37,8 @@ on the cloud alone.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/303545199/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/303545199)

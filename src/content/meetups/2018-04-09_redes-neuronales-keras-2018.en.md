@@ -8,6 +8,8 @@ machine learning.
 
 **More from the event:**
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

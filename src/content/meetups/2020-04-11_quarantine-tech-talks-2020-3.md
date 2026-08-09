@@ -36,7 +36,9 @@ draft: false
 ## Quarantine Tech Talks 💻 - Meetup 3
 
 ===== LINK DE REGISTRO ========
+
 [https://quarantinetechtalks3.eventbrite.com](https://quarantinetechtalks3.eventbrite.com)
+
 Link de la transmisión: [https://www.youtube.com/watch?v=rRfrq7WZDk8](https://www.youtube.com/watch?v=rRfrq7WZDk8)
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos:

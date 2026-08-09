@@ -9,6 +9,8 @@ development for the coming decade.
 We are still filling in speakers and talk titles from the community archive. If
 you have the flyer or the slides from that night, a PR helps.
 
+---
+
 ### Sources
 
 - Original event: https://luma.com/ttd1exr8

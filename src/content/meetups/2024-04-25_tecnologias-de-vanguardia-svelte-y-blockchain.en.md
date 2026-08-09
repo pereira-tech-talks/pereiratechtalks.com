@@ -23,6 +23,8 @@ how to start preparing for what is coming.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)

@@ -34,8 +34,11 @@ draft: false
 ## Quarantine Tech Talks 💻 - Meetup 4
 
 Detalles
+
 ===== LINK DE REGISTRO ========
+
 [https://quarantinetechtalks4.eventbrite.com](https://quarantinetechtalks4.eventbrite.com)
+
 Link Youtube: [https://www.youtube.com/watch?v=9D_PGb03Ov0](https://www.youtube.com/watch?v=9D_PGb03Ov0)
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.

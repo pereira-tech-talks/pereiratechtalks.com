@@ -15,6 +15,8 @@ Contact: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 1. **What Bitcoin is and how it works: origins and history**
 2. **Blockchain: the internet's industrial revolution beyond Bitcoin**
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)

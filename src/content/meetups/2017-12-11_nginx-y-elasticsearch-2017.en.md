@@ -7,6 +7,8 @@ interesting talks
 
 **Understanding and configuring NGINX web servers by [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/245689908)

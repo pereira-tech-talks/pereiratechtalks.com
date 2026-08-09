@@ -11,6 +11,8 @@ real, accessible, and within everyone's reach.
 1. **Virtual reality for the web with A-Frame**
 2. **Point-free JavaScript with RamdaJS** ([profile](https://twitter.com/alsug4))
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

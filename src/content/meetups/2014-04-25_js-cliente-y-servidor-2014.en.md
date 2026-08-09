@@ -9,6 +9,8 @@ PereiraJs's third meetup, with two very interesting talks on:
 2. ****Introduction to server-side JavaScript by [Daniel Aristizabal](https://twitter.com/cronopio2)**
  An introduction to server-side JavaScript using node, covering asynchronous programming and object-oriented programming:** ([profile](https://twitter.com/cronopio2))
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

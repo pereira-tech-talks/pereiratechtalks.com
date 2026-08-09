@@ -35,6 +35,7 @@ draft: false
 ## Noche de Experiencias en la industria del Software
 
 Speaker: Andrés Rodriguez
+
 Charla: Conviértete en desarrollador web, estos son los beneficios.
 
 Esta es una charla más orientada a las personas que tienen curiosidad en la industria del software, aquellos y aquellas estudiantes de carreras afines a la tecnología que tienen incertidumbre sobre cual ruta podría ser la mejor opción para tomar. O incluso para los que ya son desarrolladores o desarrolladoras, y deseen comparar su situación actual con los beneficios que se ofrecen en el mercado. Hablaremos de: Salarios, perks, Rutas de aprendizajes, tendencias de tecnologías, y responder preguntas al respecto.

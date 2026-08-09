@@ -7,6 +7,8 @@ interesting talks:
 
 **How to get started in information security by [Santiago Bernal](https://twitter.com/santiaguf)**
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/244859180)

@@ -41,7 +41,6 @@ Segundo Meetup de PereiraJs en el cual se conto con dos charla muy interesantes 
 
 1. ****JavaScript Historia y aplicaciones por [Manuel Pineda](https://twitter.com/pin3da) y [Jhonber Jimenez](https://twitter.com/jh0nb3r)** 
  Slides disponibles en: [http://jhonber.github.io/slides](http://jhonber.github.io/slides)
- 
 2. **Programación Orientada a Objetos con JavaScript por [Oscar Granada](https://twitter.com/oagranada)** 
  Slides disponibles en:** ([perfil](https://twitter.com/pin3da))
 

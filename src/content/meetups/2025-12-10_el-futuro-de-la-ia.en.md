@@ -7,6 +7,8 @@ Alexander Flórez, Sebastián Mora.
 Our year-end meetup on how AI is reshaping software engineering — agents, LLMs,
 RAG, and AI talking to real hardware.
 
+---
+
 ### Sources
 
 - Original event: https://luma.com/e0qp2vux

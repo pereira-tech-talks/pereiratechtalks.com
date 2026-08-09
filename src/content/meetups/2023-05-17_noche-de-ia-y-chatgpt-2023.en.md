@@ -5,6 +5,8 @@ talks and explore how AI is shaping what comes next. Do not miss it.
 
 [We will stream live here.](https://www.youtube.com/watch?v=u-pSII46BJQ)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/293065563)

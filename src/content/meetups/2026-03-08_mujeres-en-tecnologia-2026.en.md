@@ -7,6 +7,8 @@ Mayra Valentina Velásquez.
 Our meetup for women's month in technology — celebrating the impact of women in
 tech with conversations about creativity, AI, and community.
 
+---
+
 ### Sources
 
 - Original event: https://luma.com/4a8c1ypc

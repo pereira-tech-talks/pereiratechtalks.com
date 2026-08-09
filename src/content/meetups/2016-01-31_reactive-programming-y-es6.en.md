@@ -5,6 +5,8 @@ PereiraJs's fifteenth meetup, on reactive programming and ECMAScript 6, led by
 
 Slides available at: http://jonalvarezz.github.io/presentation-reactive-programming/.
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

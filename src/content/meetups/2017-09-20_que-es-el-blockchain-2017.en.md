@@ -7,6 +7,8 @@ can build applications that consume blockchain-based services from JavaScript.
 
 _Slides no longer available._
 
+---
+
 ### Sources
 
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

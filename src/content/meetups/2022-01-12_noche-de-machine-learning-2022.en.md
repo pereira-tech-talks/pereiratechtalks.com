@@ -6,6 +6,8 @@ We start the year loaded with valuable material, and with two Google heavyweight
 who want to share what they know. Everyone is welcome to the first meetup of the
 year.
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/283129605)
