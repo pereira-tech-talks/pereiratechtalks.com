@@ -6,5 +6,4 @@ A very exciting night at PereiraJs with interesting talks on:
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/241150826)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

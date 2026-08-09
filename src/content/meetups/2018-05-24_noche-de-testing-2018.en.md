@@ -15,5 +15,5 @@ applications: JavaScript on the client, and Python on the server.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/250868156)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/250815878)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

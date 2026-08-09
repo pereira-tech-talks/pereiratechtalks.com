@@ -10,5 +10,4 @@ Slides available at: http://jonalvarezz.github.io/intro-js/** ([profile](https:/
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/229380625)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

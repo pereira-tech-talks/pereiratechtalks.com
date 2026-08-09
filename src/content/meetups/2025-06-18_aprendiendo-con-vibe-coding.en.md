@@ -7,6 +7,3 @@ Felipe Duarte.
 A meetup on vibe coding — pair-programming with AI agents to ship real software
 faster without dropping out of flow.
 
-### Sources
-
-- Original event: https://www.meetup.com/pereira-tech-talks/events/307800000/

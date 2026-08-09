@@ -14,5 +14,5 @@ repetitive work takes as little time as possible.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247259594)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247349603)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

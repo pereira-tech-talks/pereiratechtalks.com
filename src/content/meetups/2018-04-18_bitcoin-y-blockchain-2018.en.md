@@ -17,5 +17,5 @@ Contact: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249657077)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249625568)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

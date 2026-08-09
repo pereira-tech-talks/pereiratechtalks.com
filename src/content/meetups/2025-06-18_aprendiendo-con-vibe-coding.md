@@ -35,7 +35,6 @@ sponsors:
     tier: community
   - slug: ase-utp
     tier: community
-linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/307800000/
 status: completed
 draft: false
 ---
@@ -46,8 +45,3 @@ El 18 de junio de 2025 nos reunimos en **Universidad Tecnológica de Pereira** p
 
 Meetup sobre vibe coding — pair-programming con agentes de IA para entregar software real más rápido sin salir del flow.
 
----
-
-### Fuentes
-
-- Evento original: https://www.meetup.com/pereira-tech-talks/events/307800000/

@@ -16,5 +16,5 @@ everything you can do with it.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/262920907)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

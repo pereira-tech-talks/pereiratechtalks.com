@@ -15,5 +15,5 @@ unit of functionality into containers.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/256948070)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/257037605)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -13,5 +13,4 @@ real, accessible, and within everyone's reach.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247841200)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

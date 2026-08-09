@@ -11,5 +11,4 @@ Slides available at: http://pin3da.github.io/slides** ([profile](https://twitter
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/221194559)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

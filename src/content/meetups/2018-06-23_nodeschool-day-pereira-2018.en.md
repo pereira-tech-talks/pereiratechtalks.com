@@ -18,5 +18,4 @@ workshops, free and open to everyone.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/251841748)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -7,6 +7,3 @@ Gómez.
 A dive into Python — from data engineering to web frameworks and AI tooling.
 Pereira's Python community showed up.
 
-### Sources
-
-- Original event: https://www.meetup.com/pereira-tech-talks/events/308000000/

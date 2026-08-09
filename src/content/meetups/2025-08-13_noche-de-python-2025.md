@@ -34,7 +34,6 @@ sponsors:
     tier: community
   - slug: ase-utp
     tier: community
-linkMeetupCom: https://www.meetup.com/pereira-tech-talks/events/308000000/
 status: completed
 draft: false
 ---
@@ -45,8 +44,3 @@ El 13 de agosto de 2025 nos reunimos en **Universidad Tecnológica de Pereira** 
 
 Inmersión en Python — desde ingeniería de datos hasta frameworks web y herramientas de IA. La comunidad Python de Pereira dice presente.
 
----
-
-### Fuentes
-
-- Evento original: https://www.meetup.com/pereira-tech-talks/events/308000000/

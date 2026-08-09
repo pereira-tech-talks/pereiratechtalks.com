@@ -10,5 +10,4 @@ Slides available at: https://speakerdeck.com/jonalvarezz/javascript-best-practic
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/194513172)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

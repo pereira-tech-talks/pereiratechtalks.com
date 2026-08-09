@@ -15,5 +15,5 @@ others.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259451937)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259446080)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

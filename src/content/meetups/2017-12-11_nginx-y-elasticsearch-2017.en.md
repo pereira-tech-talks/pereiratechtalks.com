@@ -9,5 +9,5 @@ interesting talks
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/245879887)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/245689908)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -7,5 +7,5 @@ communities, a great meetup with excellent talks on development and technology.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259632269)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -15,5 +15,5 @@ model.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260585675)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260589719)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

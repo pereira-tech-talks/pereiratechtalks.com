@@ -11,5 +11,4 @@ PereiraJs's second meetup, with two very interesting talks on:
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/168068472)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

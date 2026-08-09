@@ -16,5 +16,5 @@ the browser), and how Next.js can live with both.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264271745)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264304830)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

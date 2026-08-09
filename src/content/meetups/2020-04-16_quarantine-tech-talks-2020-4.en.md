@@ -13,5 +13,5 @@ through this quarantine.
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/270081031)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

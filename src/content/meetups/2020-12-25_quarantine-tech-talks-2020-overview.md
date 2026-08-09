@@ -42,5 +42,4 @@ las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaro
 
 ### Fuentes
 
-- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269942102)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

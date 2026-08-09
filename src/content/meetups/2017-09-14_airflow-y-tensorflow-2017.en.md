@@ -8,5 +8,5 @@ Our opening night brings two very interesting talks:
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243065069)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/242657174)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

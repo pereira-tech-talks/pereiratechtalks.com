@@ -7,5 +7,4 @@ Slides available at: http://jonalvarezz.github.io/presentation-reactive-programm
 
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/227855969)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
