@@ -39,7 +39,10 @@ const prefix = getUrlPrefix(lang);
 const slug = getMeetupSlug(meetup);
 const title = tr(meetup.data.title, lang);
 const description = tr(meetup.data.description, lang);
-const heroSrc = meetup.data.hero?.src || meetup.data.heroImage;
+const heroSrc =
+  (lang === 'en' && meetup.data.hero?.srcEn) ||
+  meetup.data.hero?.src ||
+  meetup.data.heroImage;
 const heroLayout = meetup.data.hero?.layout ?? (heroSrc ? 'banner' : 'none');
 const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
 const bannerHeroSrc = heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
@@ -316,16 +319,24 @@ if (speakers.length > 0) {
     {
       recordingYoutubeId && (
         <section class="main-container pb-12 sm:pb-16">
-          <h2 class="text-2xl font-bold tracking-tight text-ptt mb-4">
-            {md.recording}
-          </h2>
+          <div class="mb-4 flex flex-wrap items-end justify-between gap-2">
+            <h2 class="text-2xl font-bold tracking-tight text-ptt">
+              {md.recording}
+            </h2>
+            <p class="text-sm font-medium text-ptt-secondary">
+              {md.watchRecording}
+            </p>
+          </div>
           <div
-            class="youtube-facade relative aspect-video w-full overflow-hidden rounded-2xl bg-ptt-bg-dark ring-1 ring-ptt-border"
+            class="youtube-facade group relative aspect-video w-full overflow-hidden rounded-2xl bg-ptt-bg-dark ring-1 ring-ptt-border shadow-sm"
             data-youtube-id={recordingYoutubeId}
             data-title={title}
           >
             <img
-              src={`https://i.ytimg.com/vi/${recordingYoutubeId}/hqdefault.jpg`}
+              src={
+                heroSrc ||
+                `https://i.ytimg.com/vi/${recordingYoutubeId}/hqdefault.jpg`
+              }
               alt=""
               width="1280"
               height="720"
@@ -334,13 +345,26 @@ if (speakers.length > 0) {
             />
             <button
               type="button"
-              class="absolute inset-0 flex items-center justify-center bg-black/35 text-white transition hover:bg-black/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/40 text-white transition hover:bg-black/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF0000]"
               aria-label={md.watchRecording}
             >
-              <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-ptt-primary text-white shadow-lg dark:bg-ptt-primary-dark dark:text-gray-950">
-                <svg aria-hidden="true" class="h-7 w-7 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
+              {/* YouTube-style red play control — reads clearly as a video player. */}
+              <span
+                class="inline-flex h-[4.25rem] w-[6rem] items-center justify-center rounded-[1.15rem] bg-[#FF0000] text-white shadow-[0_8px_28px_rgba(0,0,0,0.45)] transition group-hover:scale-105 group-hover:bg-[#E00000] sm:h-[4.75rem] sm:w-[7.25rem]"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-9 w-9 translate-x-0.5 sm:h-10 sm:w-10"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z"></path>
                 </svg>
+              </span>
+              <span
+                class="rounded-full bg-black/55 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white backdrop-blur-sm sm:text-sm"
+              >
+                YouTube · {md.watchRecording}
               </span>
             </button>
           </div>

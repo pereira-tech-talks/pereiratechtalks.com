@@ -6,10 +6,10 @@ bio:
   en: "Software testing analyst at Evertec. She argues that QA reaches its real value when it moves beyond running tests — getting involved early, anticipating risk, and informing business decisions."
   es: "Analista de testing de software en Evertec. Sostiene que QA alcanza su verdadero valor cuando va más allá de ejecutar pruebas: participando desde etapas tempranas, anticipando riesgos y aportando a las decisiones del negocio."
 photo:
-  src: "/images/speakers/_placeholder.svg"
+  src: "/images/speakers/laura-daniela-santa.webp"
   alt:
-    en: Placeholder portrait for Laura Daniela Santa
-    es: Retrato provisional de Laura Daniela Santa
+    en: Portrait of Laura Daniela Santa
+    es: Retrato de Laura Daniela Santa
 social:
   linkedin: "https://www.linkedin.com/in/laura-daniela-santa-correa-ab9860215/"
 talks: []

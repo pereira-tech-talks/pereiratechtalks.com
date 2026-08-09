@@ -290,6 +290,8 @@ const meetups = defineCollection({
     hero: z
       .object({
         src: z.string(),
+        /** Optional English flyer when it differs from the Spanish `src`. */
+        srcEn: z.string().optional(),
         alt: i18nStringOptional,
         layout: heroLayout,
       })

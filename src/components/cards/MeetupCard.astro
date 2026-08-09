@@ -22,6 +22,7 @@ const prefix = getUrlPrefix(lang);
 const title = tr(meetup.data.title, lang);
 const description = tr(meetup.data.description, lang);
 const heroSrc =
+  (lang === 'en' && meetup.data.hero?.srcEn) ||
   meetup.data.hero?.src ||
   meetup.data.heroImage ||
   '/images/blog/shared/blog-placeholder-1.webp';
