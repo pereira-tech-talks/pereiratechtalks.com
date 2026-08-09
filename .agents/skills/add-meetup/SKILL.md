@@ -123,7 +123,26 @@ draft: false
 ---
 ```
 
-Body content is freeform Markdown (program description, schedule, callouts). Write the body in the community primary language (Spanish). Do **not** append a `Summary in English`, `Resumen en español`, or `> **EN:**` companion block — bilingual coverage for listings/SEO comes from frontmatter `title` / `description` (`en` + `es`).
+Body content is freeform Markdown (program description, schedule, callouts).
+
+**A meetup is two files.** The entry carries the frontmatter and the **Spanish**
+body; a `{slug}.en.md` sibling carries the **English** body and nothing else —
+no frontmatter, no restated structured data. Do **not** append a
+`Summary in English`, `Resumen en español`, or `> **EN:**` companion block
+inside either body: the two languages live in two files.
+
+```
+src/content/meetups/
+├── 2026-06-24_qa-pilar-del-software.md      ← frontmatter + Spanish body
+└── 2026-06-24_qa-pilar-del-software.en.md   ← English body only
+```
+
+Each body speaks one language throughout, section labels included: Spanish
+writes `### Fuentes`, `**Charlas:**`, `**Ponente:**`, `por`; English writes
+`### Sources`, `**Talks:**`, `**Speaker:**`, `by`. Skipping the sibling makes
+`/en/meetups/{slug}` serve the Spanish body behind an "untranslated" notice and
+keeps `pnpm run lang:check` flagging it. See
+[I18N Guide](../../../docs/I18N_GUIDE.md).
 
 ## Steps
 
@@ -144,11 +163,21 @@ ls src/content/sponsors/
 ls src/content/meetups/ | grep "$DATE" || true
 ```
 
-### Step 2: Generate the Bilingual File
+### Step 2: Generate Both Files
 
-Create `src/content/meetups/YYYY-MM-DD_{slug}.md` using the frontmatter template. Translate the title and description into Spanish (informal-professional tuteo). Always include both `en` and `es` keys for `title`, `description`, and `hero.alt`.
+1. Create `src/content/meetups/YYYY-MM-DD_{slug}.md` using the frontmatter
+   template. Always include both `en` and `es` keys for `title`, `description`
+   and `hero.alt`. **`title.en` must be real English** — not the Spanish title
+   with one word swapped ("Web Development Moderno" and
+   "Revolutionizing el Deep Learning" both shipped that way and both failed the
+   reader). Write the body in Spanish (informal-professional tuteo).
+2. Create `src/content/meetups/YYYY-MM-DD_{slug}.en.md` containing **only** the
+   English body — no frontmatter fence, no repeated metadata. It is a
+   translation of the Spanish body, not a summary of it.
 
-**Body** — write a short program description in Spanish (primary). Rely on bilingual `title` / `description` for the English locale; do not embed an English summary section in the shared body.
+If a fact is genuinely unknown for a historical meetup, say so in both bodies.
+Never invent details about a past event
+([Writing Craft Guide](../../../docs/WRITING_CRAFT_GUIDE.md)).
 
 ### Step 3: Image Setup (Optional but Recommended)
 
@@ -200,8 +229,8 @@ content: add meetup "{title.en}"
 
 ### Scope Limits
 
-- **Maximum files:** 4 (1 meetup file + up to 3 supporting assets like a hero image already optimised).
-- **Maximum LOC:** 600 (frontmatter + body combined).
+- **Maximum files:** 5 (meetup entry + `.en.md` body sibling + up to 3 supporting assets like a hero image already optimised).
+- **Maximum LOC:** 600 (frontmatter + both bodies combined).
 - **Allowed directories:** `src/content/meetups/`, `public/images/meetups/`.
 - **Forbidden directories:** `src/content/talks/`, `src/content/speakers/`, `src/content/sponsors/`, `src/content/verticals/`, `src/pages/`, `src/components/`.
 
@@ -211,6 +240,8 @@ content: add meetup "{title.en}"
 - [ ] Slug is English-only (no Spanish slugs).
 - [ ] All `verticals`, `talks`, `speakers`, `sponsors` references resolve.
 - [ ] `title`, `description`, and `hero.alt` have both `en` and `es` keys.
+- [ ] `title.en` reads as English, not a word-swapped Spanish title.
+- [ ] The `{slug}.en.md` sibling exists and contains only the English body.
 - [ ] `description` is 130-160 characters per language.
 - [ ] Spanish has correct diacritical marks (ñ, accents).
 - [ ] `pnpm run build` passes.
@@ -225,13 +256,16 @@ content: add meetup "{title.en}"
 
 ## Definition of Done
 
-- [ ] File created at `src/content/meetups/YYYY-MM-DD_{slug}.md`
-- [ ] Both EN and ES frontmatter populated (`title`, `description`, `hero.alt`); body in Spanish without an embedded English summary
+- [ ] Files created at `src/content/meetups/YYYY-MM-DD_{slug}.md` **and** `…_{slug}.en.md`
+- [ ] Both EN and ES frontmatter populated (`title`, `description`, `hero.alt`)
+- [ ] Spanish body in the entry, English body in the sibling — neither carrying the other language's section labels
 - [ ] All references resolve to existing collection entries
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
 - [ ] `pnpm run build` succeeds
 - [ ] `pnpm run md:check:strict` passes (AEO twin generated automatically)
+- [ ] `pnpm run lang:check` reports 0 flagged pages
+- [ ] `pnpm run seo:check` reports 0 flagged URLs
 - [ ] Spanish orthography verified (no `pequeno`, `codigo`, `tamano`, etc.)
 
 ## Related
@@ -245,5 +279,6 @@ content: add meetup "{title.en}"
 
 | Version | Date       | Changes |
 | ------- | ---------- | ------- |
+| 1.2.0   | 2026-08-09 | Meetups are now two files: the entry keeps the Spanish body, a `{slug}.en.md` sibling carries the English one. Frontmatter-only bilingual coverage left every `/en/meetups/*` page rendering Spanish prose. |
 | 1.1.0   | 2026-08-08 | Drop `Summary in English` / `> **EN:**` body companions; bilingual coverage is frontmatter-only for the shared body. |
 | 1.0.0   | 2026-06-01 | Initial skill: bilingual meetup creation with vertical/talk/speaker/sponsor references and AEO twin auto-generation via build. |

@@ -119,8 +119,41 @@ island renders event text with no build-time source) and
 strings). A page type that cannot reach 0.85 is a serializer gap until it earns
 an entry in that table with a measured reason.
 
-`scripts/check-md-parity.mjs` enforces both checks; `pnpm run md:check:strict`
-exits non-zero for CI.
+### The gate
+
+`scripts/check-md-parity.mjs` enforces this contract on every build, in three
+layers:
+
+| Layer | What it asserts |
+|---|---|
+| **Existence** | every non-excluded, non-redirect page has a `.md` at `{url}.md` |
+| **Completeness** | required sections per page type, no bare-slug rows, a well-formed front block, exactly one Site Navigation block, coverage above the type's floor |
+| **Language** | the body classifies as the language the URL promises, using the same classifier as the sitewide audit |
+
+Failures name the missing section, or list the words present in the HTML and
+absent from the `.md` — a gate that only says "failed" gets disabled.
+
+```bash
+pnpm run md:check            # advisory
+pnpm run md:check:strict     # exits 1 on failure — the CI gate
+pnpm run md:check:existence  # existence layer only, for debugging the walker
+```
+
+Required-section lists and coverage floors live in
+`scripts/lib/md-completeness.mjs`, deliberately separate from the runner so they
+are unit-testable without a build (`tests/unit/lib/md-completeness-gate.test.ts`,
+which includes must-fail fixtures).
+
+**Coverage floors are regression detectors, not the contract.** A page between
+its floor and the 0.85 target is reported as a warning so the gap stays visible
+rather than being quietly accepted.
+
+Two sibling gates run alongside it in CI:
+
+```bash
+pnpm run lang:check:strict    # sitewide language integrity — 0 flagged pages
+pnpm run seo:check:strict     # per-URL SEO and structured data — 0 flagged URLs
+```
 
 ## Response Format
 

@@ -5,7 +5,12 @@ Agent-facing gates before shipping content or closing a content DWP.
 ## Bilingual parity
 
 - [ ] Blog/slides/pages: EN and ES twins exist with the same English slug
-- [ ] Meetups: single file under `src/content/meetups/` with `title`/`description`/`hero.alt` in both `en` and `es`
+- [ ] Meetups and verticals: entry under `src/content/{meetups,verticals}/` with
+      `title`/`description`/`hero.alt` in both `en` and `es`, **plus a
+      `{slug}.en.md` body sibling**
+- [ ] `title.en` is real English, not the Spanish title with a word swapped
+- [ ] Each body speaks one language — a Spanish body writes `### Fuentes` and
+      `por`, an English body `### Sources` and `by`
 - [ ] YAML entities (`speakers`, `sponsors`, …): `en`/`es` fields filled — no Spanish pasted into `en`
 
 ## Orthography
@@ -19,17 +24,43 @@ Agent-facing gates before shipping content or closing a content DWP.
 - [ ] Follow [Writing Voice Guide](../WRITING_VOICE_GUIDE.md)
 - [ ] Meetup EN summaries are real English (or an honest archive note), not Spanish paste
 
+## Language integrity
+
+- [ ] `pnpm run lang:check` reports **0 flagged pages** — Spanish URLs render
+      Spanish, English URLs render English, in HTML *and* in the `.md` twin
+- [ ] A page flagged as a **false positive** is fixed in the classifier, not
+      allowlisted. All three known false positives turned out to be classifier
+      bugs (see `src/lib/language-detect.ts`)
+
+## `.md` completeness
+
+- [ ] `pnpm run md:check` passes — every page has a **complete** twin, not a
+      summary. It asserts required sections per page type, no bare-slug rows, a
+      well-formed front block, one Site Navigation block, and content coverage
+- [ ] Entity references carry a name **and** a link to that entity's own `.md`
+- [ ] Agent MD twins updated under `src/content/pages/{en,es}/` when page copy
+      changes — unless the page is now generated (home, communities, calendar,
+      contact, call-for-speakers, `/pereira-tech-day`), in which case it follows
+      the source automatically
+
 ## SEO / AEO
 
-- [ ] Meta descriptions roughly 130–160 characters where practical
-- [ ] Agent MD twins updated under `src/content/pages/{en,es}/` when page copy changes
-- [ ] `pnpm run md:check` passes
+- [ ] `pnpm run seo:check` reports **0 flagged URLs**
+- [ ] Meta descriptions land in **130–160 characters**. Prefer extending
+      `buildMetaDescription`'s clauses with true facts over rewriting copy —
+      and never pad to hit the count
 
 ## Automated
 
 ```bash
-pnpm run test -- tests/unit/lib/content-date-parity.test.ts
+pnpm run test                 # includes the bilingual-parity and body-selection suites
 pnpm run biome:check
 pnpm run astro:check
-pnpm run md:check
+pnpm run build                # the three gates below read dist/
+pnpm run md:check             # completeness + language of every .md twin
+pnpm run lang:check           # sitewide language integrity
+pnpm run seo:check            # per-URL SEO and structured data
 ```
+
+Each has a `:strict` variant that exits non-zero; all three run in CI after the
+build (`.github/workflows/code_check.yml`).
