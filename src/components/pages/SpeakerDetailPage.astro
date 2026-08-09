@@ -35,9 +35,10 @@ const social = speaker.data.social ?? {};
 
 const relatedEvents = Array.from(
   talks
-    .filter((t) => t.data.event)
-    .reduce((map, t) => {
-      const event = t.data.event!;
+    // `flatMap` narrows `event` for TypeScript; `filter` alone leaves it
+    // optional and forces a non-null assertion.
+    .flatMap((t) => (t.data.event ? [t.data.event] : []))
+    .reduce((map, event) => {
       const key = `${event.collection}:${event.slug}`;
       if (!map.has(key)) {
         map.set(key, {
