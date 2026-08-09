@@ -4,13 +4,24 @@ import { getEditions } from '@/lib/pereiraTechDay';
 
 export async function getStaticPaths() {
   const editions = await getEditions();
+  // `/pereira-tech-day` serves the first (current) edition too. Marking the
+  // year URL as an alias keeps the two from competing as duplicate content.
+  const aliasedYear = editions[0]?.data.year;
   return editions.map((edition) => ({
     params: { year: String(edition.data.year) },
-    props: { edition },
+    props: {
+      edition,
+      canonicalPath:
+        edition.data.year === aliasedYear ? '/pereira-tech-day' : undefined,
+    },
   }));
 }
 
-const { edition } = Astro.props;
+const { edition, canonicalPath } = Astro.props;
 ---
 
-<PereiraTechDayDetailPage edition={edition} lang="es" />
+<PereiraTechDayDetailPage
+  edition={edition}
+  lang="es"
+  canonicalPath={canonicalPath}
+/>
