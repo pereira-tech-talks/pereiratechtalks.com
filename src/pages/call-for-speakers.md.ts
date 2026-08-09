@@ -1,40 +1,44 @@
 import type { APIRoute } from 'astro';
+
 import { SITE_URL } from '@/lib/constances';
-
 import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
+import { getTranslations } from '@/lib/translations';
 
+/**
+ * Sourced from the same translation strings the HTML page renders, so the two
+ * cannot drift. The previous hand-written copy listed different talk formats
+ * from the ones the page actually offers.
+ */
 export const GET: APIRoute = () => {
+  const lang = 'es';
+  const t = getTranslations(lang).cfsPage;
+
   const markdown = serializeGenericToMarkdown({
-    title: 'Convocatoria de ponentes — Pereira Tech Talks',
-    description:
-      'Propón tu charla para un próximo meetup de Pereira Tech Talks, una edición de Pereira Tech Day o una cohorte de la Speaker School. Las charlas pueden ser en español, inglés o mezcla.',
-    lang: 'es',
+    title: `${t.title} — Pereira Tech Talks`,
+    description: t.description,
+    lang,
     canonical: `${SITE_URL}/call-for-speakers`,
+    body: t.intro,
     sections: [
       {
-        heading: 'Qué buscamos',
-        lines: [
-          '- Charlas técnicas y prácticas, ancladas en experiencia real',
-          '- Arquitectura, oficio del software, IA/agentes, devops, mobile, plataformas web, seguridad, ciclo de vida del software',
-          '- Programas de comunidad: La Biblioteca del Mañana, cohortes de Speaker School, sesiones del AI Channel',
-          '- Ponentes primerizos bienvenidos: damos mentoría a través del programa Speaker School',
-        ],
+        heading: t.whatWeLookForTitle,
+        lines: t.whatWeLookFor.map((item) => `- ${item}`),
       },
       {
-        heading: 'Formatos',
-        lines: [
-          '- Lightning talk (5–10 min)',
-          '- Charla estándar (20–30 min)',
-          '- Workshop o sesión hands-on (60–120 min)',
-          '- Panel (varios ponentes, 45–60 min)',
-        ],
+        heading: t.formatsTitle,
+        lines: t.formats.map(
+          (format) => `- **${format.name}** — ${format.description}`
+        ),
       },
       {
-        heading: 'Cómo aplicar',
+        heading: t.processTitle,
+        lines: t.process.map((step, index) => `${index + 1}. ${step}`),
+      },
+      {
+        heading: 'Postula tu charla',
         lines: [
-          `- Envía tu propuesta en la Convocatoria de ponentes: ${SITE_URL}/call-for-speakers/`,
-          '- O escribe a pereiratechtalks@gmail.com con asunto "Convocatoria de ponentes"',
-          '- Incluye: título propuesto, abstract (150–300 palabras), bio, idioma, formato deseado',
+          `- Formulario de postulación: ${SITE_URL}/call-for-speakers/#cfs-form`,
+          '- Correo: pereiratechtalks@gmail.com',
         ],
       },
     ],

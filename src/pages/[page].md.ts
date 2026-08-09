@@ -21,6 +21,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       // `/pereira-tech-day.md` is served by its own endpoint, which mirrors
       // the current edition rather than a hand-written stub.
       .filter((page) => getPageSlug(page.id) !== 'pereira-tech-day')
+      // `/index.md` is served by its own endpoint, which appends the home
+      // page's dynamic blocks (next event, programs, sponsors, latest posts).
+      .filter((page) => getPageSlug(page.id) !== 'index')
       .map((page) => ({
         params: { page: getPageSlug(page.id) },
         props: { page },

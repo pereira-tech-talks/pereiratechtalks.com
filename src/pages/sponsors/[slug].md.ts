@@ -4,6 +4,7 @@ import { SITE_URL } from '@/lib/constances';
 import {
   entityLine,
   imageLine,
+  linkLine,
   mdHref,
   mdLabel,
   resolveI18n,
@@ -85,15 +86,29 @@ export const GET: APIRoute = async ({ props }) => {
   if (activity.editions.length > 0) {
     sections.push({
       heading: 'Ediciones de Pereira Tech Day',
-      lines: activity.editions.map(({ year, tier }) =>
+      lines: activity.editions.map(({ year, tier, edition }) =>
         entityLine(
-          `Pereira Tech Day ${year}`,
+          edition
+            ? `Pereira Tech Day ${year} — ${resolveI18n(edition.data.title, lang)}`
+            : `Pereira Tech Day ${year}`,
           mdHref(lang, `pereira-tech-days/${year}`),
-          SPONSOR_TIER_LABELS[tier].es
+          `${SPONSOR_TIER_LABELS[tier].es} patrocinador`,
+          edition ? resolveI18n(edition.data.tagline, lang) : undefined,
+          edition ? resolveI18n(edition.data.description, lang) : undefined
         )
       ),
     });
   }
+
+  sections.push({
+    heading: '¿Quieres aparecer aquí?',
+    lines: [
+      'Patrocinar Pereira Tech Talks es sostener venue, logística y escenario para la comunidad tech de Risaralda.',
+      '',
+      linkLine('Patrocinar', mdHref(lang, 'sponsor-us')),
+      linkLine('Todos los patrocinadores', mdHref(lang, 'sponsors')),
+    ],
+  });
 
   const markdown = serializeGenericToMarkdown({
     title: `${entry.data.name} \u2014 patrocinador de Pereira Tech Talks`,
