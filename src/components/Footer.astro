@@ -1,6 +1,7 @@
 ---
 import { getTodayInSiteTimezone } from '@/lib/dates';
 import { DEFAULT_LANGUAGE, getUrlPrefix } from '@/lib/i18n';
+import { navHref, navLabel, SITE_NAVIGATION } from '@/lib/site-navigation';
 import type { Language } from '@/lib/translations';
 import { getTranslations } from '@/lib/translations';
 
@@ -19,50 +20,47 @@ const prefix = getUrlPrefix(lang as Language);
 const year = Number.parseInt(getTodayInSiteTimezone().slice(0, 4), 10);
 const isPtdDark = variant === 'ptd-dark';
 
-const explore =
-  lang === 'es'
-    ? [
-        { label: 'Meetups', href: `${prefix}/meetups` },
-        { label: 'Pereira Tech Day', href: `${prefix}/pereira-tech-day` },
-        // Calendar link hidden temporarily — page still at /calendar
-        { label: 'Ponentes', href: `${prefix}/speakers` },
-        { label: 'Blog', href: `${prefix}/blog` },
-        { label: 'Patrocinadores', href: `${prefix}/sponsors` },
-      ]
-    : [
-        { label: 'Meetups', href: `${prefix}/meetups` },
-        { label: 'Pereira Tech Day', href: `${prefix}/pereira-tech-day` },
-        // Calendar link hidden temporarily — page still at /calendar
-        { label: 'Speakers', href: `${prefix}/speakers` },
-        { label: 'Blog', href: `${prefix}/blog` },
-        { label: 'Sponsors', href: `${prefix}/sponsors` },
-      ];
+// Derived from the shared navigation module so the footer, the header, and the
+// agent-Markdown Site Navigation block cannot disagree about what the site
+// exposes. See `src/lib/site-navigation.ts`.
+const EXPLORE_PATHS = [
+  '/meetups',
+  '/pereira-tech-day',
+  '/speakers',
+  '/blog',
+  '/sponsors',
+];
+const COMMUNITY_PATHS = [
+  '/about',
+  '/communities',
+  '/contributing',
+  '/governance',
+  '/conduct',
+  '/channels',
+  '/press',
+];
 
-const utilityLinks =
-  lang === 'es'
-    ? [{ label: 'Contacto', href: `${prefix}/contact`, item: 'contact' }]
-    : [{ label: 'Contact', href: `${prefix}/contact`, item: 'contact' }];
+const pick = (paths: string[]) =>
+  paths.flatMap((path) => {
+    const entry = SITE_NAVIGATION.flatMap((g) => g.entries).find(
+      (e) => e.path === path
+    );
+    return entry
+      ? [{ label: navLabel(entry, lang), href: navHref(entry, lang) }]
+      : [];
+  });
 
-const community =
-  lang === 'es'
-    ? [
-        { label: 'Sobre nosotros', href: `${prefix}/about` },
-        { label: 'Comunidades', href: `${prefix}/communities` },
-        { label: 'Cómo contribuir', href: `${prefix}/contributing` },
-        { label: 'Gobernanza', href: `${prefix}/governance` },
-        { label: 'Código de Conducta', href: `${prefix}/conduct` },
-        { label: 'Canales', href: `${prefix}/channels` },
-        { label: 'Prensa', href: `${prefix}/press` },
-      ]
-    : [
-        { label: 'About', href: `${prefix}/about` },
-        { label: 'Communities', href: `${prefix}/communities` },
-        { label: 'Contributing', href: `${prefix}/contributing` },
-        { label: 'Governance', href: `${prefix}/governance` },
-        { label: 'Code of Conduct', href: `${prefix}/conduct` },
-        { label: 'Channels', href: `${prefix}/channels` },
-        { label: 'Press', href: `${prefix}/press` },
-      ];
+const explore = pick(EXPLORE_PATHS);
+
+const utilityLinks = [
+  {
+    label: lang === 'es' ? 'Contacto' : 'Contact',
+    href: `${prefix}/contact`,
+    item: 'contact',
+  },
+];
+
+const community = pick(COMMUNITY_PATHS);
 
 const iconClass = 'w-5 h-5';
 const tagline =

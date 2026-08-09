@@ -1,132 +1,24 @@
 import type { CollectionEntry } from 'astro:content';
 import { SITE_URL } from '@/lib/constances';
 import { DEFAULT_LANGUAGE, getUrlPrefix, isValidLanguage } from '@/lib/i18n';
+import { navHref, navLabel, SITE_NAVIGATION } from '@/lib/site-navigation';
 
 /**
- * Site navigation structure shared across all agent markdown outputs.
- * Mirrors the navbar + footer links so AI agents can discover all pages
- * from any entry point — just like a browser user sees global navigation.
- */
-interface NavLink {
-  label: Record<string, string>;
-  path: string;
-  external?: boolean;
-}
-
-interface NavSection {
-  title: Record<string, string>;
-  links: NavLink[];
-}
-
-const SITE_NAV_SECTIONS: NavSection[] = [
-  {
-    title: { en: 'Main', es: 'Principal' },
-    links: [
-      { label: { en: 'Home', es: 'Inicio' }, path: '/' },
-      { label: { en: 'About', es: 'Sobre nosotros' }, path: '/about' },
-      { label: { en: 'Contact', es: 'Contacto' }, path: '/contact' },
-      {
-        label: { en: 'Call for Speakers', es: 'Convocatoria de ponentes' },
-        path: '/call-for-speakers',
-      },
-    ],
-  },
-  {
-    title: { en: 'Community', es: 'Comunidad' },
-    links: [
-      {
-        label: { en: 'Pereira Tech Day', es: 'Pereira Tech Day' },
-        path: '/pereira-tech-day',
-      },
-      { label: { en: 'Meetups', es: 'Meetups' }, path: '/meetups' },
-      { label: { en: 'Talks', es: 'Charlas' }, path: '/talks' },
-      {
-        label: { en: 'Programs', es: 'Programas' },
-        path: '/verticals',
-      },
-      { label: { en: 'Speakers', es: 'Ponentes' }, path: '/speakers' },
-      {
-        label: { en: 'Contributors', es: 'Contribuyentes' },
-        path: '/contributors',
-      },
-      { label: { en: 'Sponsors', es: 'Patrocinadores' }, path: '/sponsors' },
-      {
-        label: { en: 'Sponsor us', es: 'Patrocínanos' },
-        path: '/sponsor-us',
-      },
-      { label: { en: 'Channels', es: 'Canales' }, path: '/channels' },
-      { label: { en: 'Press', es: 'Prensa' }, path: '/press' },
-      { label: { en: 'Community', es: 'Comunidad' }, path: '/community' },
-      {
-        label: { en: 'Contributing', es: 'Cómo contribuir' },
-        path: '/contributing',
-      },
-      { label: { en: 'Governance', es: 'Gobernanza' }, path: '/governance' },
-      {
-        label: { en: 'Code of Conduct', es: 'Código de Conducta' },
-        path: '/conduct',
-      },
-    ],
-  },
-  {
-    title: { en: 'Content', es: 'Contenido' },
-    links: [
-      { label: { en: 'Blog', es: 'Blog' }, path: '/blog' },
-      {
-        label: { en: 'Blog Series', es: 'Series del Blog' },
-        path: '/blog/series/',
-      },
-    ],
-  },
-  {
-    title: { en: 'Connect', es: 'Conectar' },
-    links: [
-      {
-        label: { en: 'GitHub', es: 'GitHub' },
-        path: 'https://github.com/pereira-tech-talks',
-        external: true,
-      },
-      {
-        label: { en: 'LinkedIn', es: 'LinkedIn' },
-        path: 'https://www.linkedin.com/company/pereira-tech-talks/',
-        external: true,
-      },
-      {
-        label: { en: 'X/Twitter', es: 'X/Twitter' },
-        path: 'https://x.com/pertechtalks',
-        external: true,
-      },
-      {
-        label: { en: 'Instagram', es: 'Instagram' },
-        path: 'https://www.instagram.com/pertechtalks',
-        external: true,
-      },
-      {
-        label: { en: 'WhatsApp', es: 'WhatsApp' },
-        path: 'https://chat.whatsapp.com/GI5ZismAsqA4a4EPHnJ6RG',
-        external: true,
-      },
-    ],
-  },
-];
-
-/**
- * Generate a site-wide navigation section for agent markdown.
- * Appended to all serialized outputs so AI agents can discover
- * every page from any entry point — mirrors the HTML navbar/footer.
+ * The Site Navigation block every agent-Markdown output ends with.
+ *
+ * Derived from `@/lib/site-navigation` — the same structure the footer renders —
+ * so it cannot drift from the live site. It previously duplicated the structure
+ * here and had gone stale: it linked `/talks` (a 301 to `/meetups/`) and was
+ * missing `/communities`, `/calendar` and `/slides`.
  */
 function generateSiteNavigation(lang: string): string {
-  const prefix = buildUrlPrefix(lang);
   const heading = lang === 'es' ? 'Navegación del Sitio' : 'Site Navigation';
   const lines: string[] = ['', '---', '', `## ${heading}`, ''];
 
-  for (const section of SITE_NAV_SECTIONS) {
-    const sectionTitle = section.title[lang] || section.title.en;
-    lines.push(`**${sectionTitle}:**`);
-    for (const link of section.links) {
-      const label = link.label[lang] || link.label.en;
-      const url = link.external ? link.path : `${prefix}${link.path}`;
-      lines.push(`- [${label}](${url})`);
+  for (const group of SITE_NAVIGATION) {
+    lines.push(`**${group.title[lang] ?? group.title.en}:**`);
+    for (const entry of group.entries) {
+      lines.push(`- [${navLabel(entry, lang)}](${navHref(entry, lang)})`);
     }
     lines.push('');
   }
