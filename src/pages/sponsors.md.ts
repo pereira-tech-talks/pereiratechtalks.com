@@ -12,7 +12,7 @@ import {
 } from '@/lib/sponsor';
 
 export const GET: APIRoute = async () => {
-  const lang = 'en';
+  const lang = 'es';
   const current = await getActiveSponsors();
   const past = await getPastSponsors();
   const activity = await getSponsorActivityMap([...current, ...past]);
@@ -25,35 +25,36 @@ export const GET: APIRoute = async () => {
       const stats = activity.get(s.id);
       const counters = [
         stats?.meetupCount
-          ? `${stats.meetupCount} sponsored meetups`
+          ? `${stats.meetupCount} meetups patrocinados`
           : undefined,
-        stats?.editionCount ? `${stats.editionCount} PTD editions` : undefined,
+        stats?.editionCount ? `${stats.editionCount} ediciones PTD` : undefined,
       ]
         .filter(Boolean)
         .join(', ');
-      const profile = `${SITE_URL}/en/sponsors/${s.id}`;
-      return `- [${s.data.name}](${profile}) — ${description}${counters ? ` (${counters})` : ''} · [website](${s.data.url})`;
+      const profile = `${SITE_URL}/sponsors/${s.id}`;
+      return `- [${s.data.name}](${profile}) — ${description}${counters ? ` (${counters})` : ''} · [sitio web](${s.data.url})`;
     });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Sponsors — Pereira Tech Talks',
+    title: 'Patrocinadores — Pereira Tech Talks',
     description:
-      'Current and past sponsors of Pereira Tech Talks. Per-edition tiers (gold, silver, etc.) live on each Pereira Tech Day page — not on this community directory.',
+      'Patrocinadores actuales y anteriores de Pereira Tech Talks. Las categorías por edición (oro, plata, etc.) viven en cada Pereira Tech Day, no en este directorio comunitario.',
     lang,
-    canonical: `${SITE_URL}/en/sponsors`,
+    canonical: `${SITE_URL}/sponsors`,
     metadata: [
-      ['Current sponsors', String(current.length)],
-      ['Past sponsors', String(past.length)],
+      ['Patrocinadores actuales', String(current.length)],
+      ['Patrocinadores anteriores', String(past.length)],
     ],
     sections: [
-      { heading: 'Current sponsors', lines: toLines(current) },
-      { heading: 'Past sponsors', lines: toLines(past) },
+      { heading: 'Patrocinadores actuales', lines: toLines(current) },
+      { heading: 'Patrocinadores anteriores', lines: toLines(past) },
     ],
   });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

@@ -8,7 +8,7 @@ export const GET: APIRoute = async () => {
   const allPosts = await getCollection('blog');
   const posts = allPosts
     .filter(
-      (post) => post.id.startsWith('en/') && isPostVisibleInProduction(post)
+      (post) => post.id.startsWith('es/') && isPostVisibleInProduction(post)
     )
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -21,15 +21,16 @@ export const GET: APIRoute = async () => {
   }));
 
   const markdown = serializeBlogIndexToMarkdown(entries, {
-    lang: 'en',
-    title: 'Pereira Tech Talks Blog — Articles & Stories',
+    lang: 'es',
+    title: 'Blog de Pereira Tech Talks — Art\u00EDculos e Historias',
     description:
-      'Articles from the Pereira Tech Talks community: technology, AI, building things, and the people behind them.',
+      'Art\u00EDculos de la comunidad Pereira Tech Talks: tecnolog\u00EDa, IA, construcci\u00F3n de productos y las personas detr\u00E1s de ellos.',
   });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

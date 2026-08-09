@@ -8,26 +8,27 @@ import {
 import { getSpeakers } from '@/lib/speaker';
 
 export const GET: APIRoute = async () => {
-  const lang = 'es';
+  const lang = 'en';
   const speakers = await getSpeakers();
   const lines = speakers.map((s) => {
     const role = resolveI18n(s.data.role, lang);
-    return `- [${s.data.name}](/speakers/${s.id}.md) — ${role}`;
+    return `- [${s.data.name}](/en/speakers/${s.id}.md) — ${role}`;
   });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Ponentes — Pereira Tech Talks',
+    title: 'Speakers — Pereira Tech Talks',
     description:
-      'Directorio de ponentes que han compartido conocimiento en los meetups de Pereira Tech Talks y en las ediciones de Pereira Tech Day: voces locales, nacionales e internacionales.',
+      'Directory of speakers who have shared knowledge at Pereira Tech Talks meetups and Pereira Tech Day editions — local, national, and international voices.',
     lang,
-    canonical: `${SITE_URL}/speakers`,
-    metadata: [['Total de ponentes', String(speakers.length)]],
-    sections: [{ heading: 'Todos los ponentes', lines }],
+    canonical: `${SITE_URL}/en/speakers`,
+    metadata: [['Total speakers', String(speakers.length)]],
+    sections: [{ heading: 'All speakers', lines }],
   });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

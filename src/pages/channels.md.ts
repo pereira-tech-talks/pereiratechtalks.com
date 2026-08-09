@@ -39,6 +39,7 @@ export const GET: APIRoute = async () => {
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

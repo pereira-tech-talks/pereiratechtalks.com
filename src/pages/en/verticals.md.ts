@@ -8,27 +8,28 @@ import {
 import { getVerticals } from '@/lib/vertical';
 
 export const GET: APIRoute = async () => {
-  const lang = 'es';
+  const lang = 'en';
   const verticals = await getVerticals();
   const lines = verticals.map((v) => {
     const title = resolveI18n(v.data.title, lang);
     const mission = resolveI18n(v.data.mission, lang);
-    return `- [${title}](/verticals/${v.id}.md) — ${mission}`;
+    return `- [${title}](/en/verticals/${v.id}.md) — ${mission}`;
   });
 
   const markdown = serializeGenericToMarkdown({
-    title: 'Programas — Pereira Tech Talks',
+    title: 'Programs — Pereira Tech Talks',
     description:
-      'Pereira Tech Talks ejecuta cuatro programas comunitarios (verticales): Speaker School, La Biblioteca del Mañana, AI Channel y Monthly Meetups.',
+      'Pereira Tech Talks runs four community programs (verticals): Speaker School, La Biblioteca del Mañana, AI Channel, and Monthly Meetups.',
     lang,
-    canonical: `${SITE_URL}/verticals`,
-    metadata: [['Total de programas', String(verticals.length)]],
-    sections: [{ heading: 'Todos los programas', lines }],
+    canonical: `${SITE_URL}/en/verticals`,
+    metadata: [['Total programs', String(verticals.length)]],
+    sections: [{ heading: 'All programs', lines }],
   });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

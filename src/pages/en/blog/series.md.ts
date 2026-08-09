@@ -10,7 +10,7 @@ export const GET: APIRoute = async () => {
   const entries = (
     await Promise.all(
       allSeries.map(async (series) => {
-        const posts = await getSeriesTimelineIndex(series.id, 'es');
+        const posts = await getSeriesTimelineIndex(series.id, 'en');
         if (posts.length === 0) return null;
         return {
           slug: series.id,
@@ -24,15 +24,16 @@ export const GET: APIRoute = async () => {
   ).filter((e): e is NonNullable<typeof e> => e !== null);
 
   const markdown = serializeSeriesListingToMarkdown(entries, {
-    lang: 'es',
-    title: 'Pereira Tech Talks — Series del Blog',
+    lang: 'en',
+    title: 'Pereira Tech Talks — Blog Series',
     description:
-      'Series multi-parte del blog de Pereira Tech Talks — recorridos sobre IA, agentes, m\u00F3vil, frontend, infraestructura y m\u00E1s.',
+      'Multi-part series on the Pereira Tech Talks blog — journeys across AI, agents, mobile, frontend, infrastructure, and more.',
   });
 
   return new Response(markdown, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
+      'Content-Disposition': 'inline',
       'Cache-Control': 'public, max-age=3600',
     },
   });

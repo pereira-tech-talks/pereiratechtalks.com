@@ -20,9 +20,18 @@
   Content-Type: application/json
   Cache-Control: public, max-age=300, must-revalidate
 
+# Agent-markdown twins. `text/markdown` is deliberate — the WorkOS auth.md /
+# isitagentready scanner expects it — but browsers have no renderer for that
+# type and download the file or show a blank viewport. `Content-Disposition:
+# inline` tells them to display it instead, without changing what agents fetch.
+/*.md
+  Content-Disposition: inline
+  Cache-Control: public, max-age=3600, must-revalidate
+
 # auth.md — WorkOS auth.md / isitagentready scanner expects text/markdown
 /auth.md
   Content-Type: text/markdown; charset=utf-8
+  Content-Disposition: inline
   Cache-Control: public, max-age=300, must-revalidate
 
 /.well-known/mcp/server-card.json
