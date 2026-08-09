@@ -1,7 +1,6 @@
 ## Modern web development: building faster, lighter sites with Astro
 
-On August 1, 2024 we gathered at **Camellando H+W** for **Desarrollo Web
-Moderno: Construyendo sitios web más rápido y ligeros con Astro**.
+On August 1, 2024 we gathered at **Camellando H+W** for **Modern web development: building faster, lighter sites with Astro**.
 
 **Talks:**
 
@@ -28,7 +27,7 @@ well with Astro and how much faster it makes development.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376)
 - Content migrated from the production archive (`main` branch) for date/content parity.

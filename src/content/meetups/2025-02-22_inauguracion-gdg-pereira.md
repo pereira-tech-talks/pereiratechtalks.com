@@ -39,6 +39,6 @@ Estamos completando el detalle de ponentes y títulos a partir del archivo de la
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/306256947/

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Technologies de Vanguardia: Svelte y Blockchain al descubierto."
+  en: "Cutting-edge technologies: Svelte and blockchain uncovered."
   es: "Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
 description:
-  en: "Pereira Tech Talks meetup — Technologies de Vanguardia: Svelte y Blockchain al descubierto.. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Cutting-edge technologies: Svelte and blockchain uncovered.. Community archive page with the night’s program and context."
   es: "Archivo del meetup «Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.»: programa, ponentes y contexto de la noche con Pereira Tech Talks."
 pubDate: 2024-04-25
 date: 2024-04-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg"
   alt:
-    en: "Technologies de Vanguardia: Svelte y Blockchain al descubierto."
+    en: "Cutting-edge technologies: Svelte and blockchain uncovered."
     es: "Tecnologías de Vanguardia: Svelte y Blockchain al descubierto."
   layout: banner
 heroImage: "/images/meetups/tecnologias-de-vanguardia-svelte-y-blockchain/hero.jpeg"
@@ -50,7 +50,7 @@ Tal vez pienses que el blockchain es solo para actividades ilegales o una apuest
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
 - Contenido migrado desde el archivo de producción (rama `main`) para mantener la paridad de fechas y contenido.

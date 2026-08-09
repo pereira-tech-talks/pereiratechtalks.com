@@ -1,7 +1,7 @@
 ## Cutting-edge technologies: Svelte and blockchain uncovered
 
 On April 25, 2024 we gathered at **Sala Magistral 1 (Edificio 13)** for
-**Tecnologías de Vanguardia: Svelte y Blockchain al descubierto.**.
+**Cutting-edge technologies: Svelte and blockchain uncovered.**.
 
 Join us on April 25 at 18:30 to explore the horizons of web development and….
 
@@ -23,7 +23,7 @@ how to start preparing for what is coming.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/300358357)
 - Content migrated from the production archive (`main` branch) for date/content parity.

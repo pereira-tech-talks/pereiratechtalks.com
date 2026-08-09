@@ -47,6 +47,6 @@ El pasado sabado 23 de Junio tuvo lugar el NodeSchool Day Pereira, impulsado por
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

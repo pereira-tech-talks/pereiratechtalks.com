@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Virtual Reality para la web con A-Frame && Point-free Javascript con RamdaJS"
+  en: "Virtual reality for the web with A-Frame && Point-free JavaScript with RamdaJS"
   es: "Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS"
 description:
-  en: "Pereira Tech Talks meetup — Virtual Reality para la web con A-Frame && Point-free Javascript con RamdaJS. Community archive page with the night’s program…"
+  en: "Pereira Tech Talks meetup — Virtual reality for the web with A-Frame && Point-free JavaScript with RamdaJS. Community archive page with the night’s program…"
   es: "Reanudamos actividades con una gran asistencia y dos charlas geniales sobre tecnologías Javascript:"
 pubDate: 2018-02-24
 date: 2018-02-24
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/realidad-virtual-y-ramda-2018/hero.jpg"
   alt:
-    en: "Virtual Reality para la web con A-Frame && Point-free Javascript con RamdaJS"
+    en: "Virtual reality for the web with A-Frame && Point-free JavaScript with RamdaJS"
     es: "Realidad Virtual para la web con A-Frame && Point-free Javascript con RamdaJS"
   layout: banner
 heroImage: "/images/meetups/realidad-virtual-y-ramda-2018/hero.jpg"
@@ -43,6 +43,6 @@ Hoy en día, la web es la plataforma de distribución masiva más importante, es
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

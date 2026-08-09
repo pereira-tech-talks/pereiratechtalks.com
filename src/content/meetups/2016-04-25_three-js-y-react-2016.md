@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Three.js && Introducción a React"
+  en: "Three.js && Introduction to React"
   es: "Three JS && Introducción a React"
 description:
-  en: "Pereira Tech Talks meetup — Three.js && Introducción a React. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Three.js && Introduction to React. Community archive page with the night’s program and context."
   es: "Decimoctavo Meetup de PereiraJs con dos charlas sobre:"
 pubDate: 2016-04-25
 date: 2016-04-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/three-js-y-react-2016/hero.jpg"
   alt:
-    en: "Three.js && Introducción a React"
+    en: "Three.js && Introduction to React"
     es: "Three JS && Introducción a React"
   layout: banner
 heroImage: "/images/meetups/three-js-y-react-2016/hero.jpg"
@@ -39,11 +39,11 @@ Decimoctavo Meetup de PereiraJs con dos charlas sobre:
 ### Charlas
 
 1. ****Three JS** — Gabriel Muñoz**
-2. ****Jonathan Alvarez by [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
+2. ****Jonathan Alvarez por [Daniel Aristizabal](https://twitter.com/jonalvarezz)**
 Slides disponibles en: http://jonalvarezz.github.io/react-talk/** ([perfil](https://twitter.com/jonalvarezz))
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

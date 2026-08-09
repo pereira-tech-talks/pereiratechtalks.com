@@ -7,7 +7,7 @@ can build applications that consume blockchain-based services from JavaScript.
 
 _Slides no longer available._
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/243158901)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

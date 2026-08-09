@@ -1,9 +1,9 @@
 ---
 title:
-  en: "TDD y Microservicios"
+  en: "TDD and microservices"
   es: "TDD y Microservicios"
 description:
-  en: "Pereira Tech Talks meetup — TDD y Microservicios. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — TDD and microservices. Community archive page with the night’s program and context."
   es: "Tenemos Meetup!!!"
 pubDate: 2021-03-13
 date: 2021-03-13
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/tdd-y-microservicios-2021/hero.jpeg"
   alt:
-    en: "TDD y Microservicios"
+    en: "TDD and microservices"
     es: "TDD y Microservicios"
   layout: banner
 heroImage: "/images/meetups/tdd-y-microservicios-2021/hero.jpeg"
@@ -40,7 +40,7 @@ Para esta oportunidad Facundo García nos hablara sobre Test Driven Development 
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/276757820)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/276757820)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

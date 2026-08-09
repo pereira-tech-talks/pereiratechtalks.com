@@ -46,7 +46,7 @@ work is connecting Latin American talent with US employers.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302972719/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302972719)
 - Content migrated from the production archive (`main` branch) for date/content parity.

@@ -1,6 +1,6 @@
 ---
 title:
-  en: "Security Night y  Testing"
+  en: "Security Night and testing"
   es: "Noche de seguridad y  Testing"
 description:
   en: "Pereira Tech Talks meetup — Security Night y Testing. Community archive page with the night’s program and context."
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
   alt:
-    en: "Security Night y  Testing"
+    en: "Security Night and testing"
     es: "Noche de seguridad y  Testing"
   layout: banner
 heroImage: "/images/meetups/noche-de-seguridad-y-testing-2022/hero.jpeg"
@@ -45,7 +45,7 @@ Revisaremos las ventajas, técnicas e importancia del testing para el desarrollo
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/286473532)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/286473532)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

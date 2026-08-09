@@ -52,6 +52,6 @@ Meetup sobre AI Engineering, IA como infraestructura y cómo escalar sistemas de
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://luma.com/8uige1ke

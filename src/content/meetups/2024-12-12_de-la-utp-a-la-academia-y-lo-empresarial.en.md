@@ -1,8 +1,7 @@
 ## From the UTP to Academia and Industry: Stories of Professional Growth
 
 On December 12, 2024 we gathered at **Universidad Tecnológica de Pereira** for
-**De la UTP a la Academia y lo Empresarial: Historias de Crecimiento
-Profesional**.
+**From UTP to academia and business: stories of professional growth**.
 
 Do not miss our last meetup of the year — there will be natilla, buñuelos, and
 plenty of surprises.
@@ -57,7 +56,7 @@ what matters most is never stopping.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)
 - Content migrated from the production archive (`main` branch) for date/content parity.

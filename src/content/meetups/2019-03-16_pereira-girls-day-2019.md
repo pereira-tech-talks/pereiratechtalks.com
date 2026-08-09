@@ -44,7 +44,7 @@ draft: false
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259646321)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

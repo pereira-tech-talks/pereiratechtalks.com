@@ -12,7 +12,7 @@ repetitive work takes as little time as possible.
 1. **Introduction to automation with Ansible** — Manuel Pineda ([profile](https://twitter.com/pin3da_))
 2. **Learning continuous integration (CI) with GitLab and Docker** — Carlos Gónzales ([profile](http://caal-15.github.io/))
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/247259594)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

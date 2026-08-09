@@ -1,7 +1,7 @@
 ## Technology with Purpose: Human Connection and Intelligent Collaboration
 
 On November 28, 2024 we gathered at **Universidad Tecnológica de Pereira** for
-**Tecnología con Propósito: Conexiones Humanas y Colaboración Inteligente**.
+**Technology with purpose: human connections and intelligent collaboration**.
 
 Join us this November 28 for two excellent talks on using technology with purpose
 and collaborating intelligently.
@@ -41,7 +41,7 @@ us.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596503)
 - Content migrated from the production archive (`main` branch) for date/content parity.

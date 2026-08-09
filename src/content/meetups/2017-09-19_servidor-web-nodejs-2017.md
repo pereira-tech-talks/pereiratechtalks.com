@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Building a web server web desde cero con NodeJs"
+  en: "Building a web server from scratch with Node.js"
   es: "Creando un servidor web desde cero con NodeJs"
 description:
-  en: "Pereira Tech Talks meetup — Building a web server web desde cero con NodeJs. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Building a web server from scratch with Node.js. Community archive page with the night’s program and context."
   es: "Fuimos invitados por la U de Caldas para realizar un taller en la Jornadas de Ingeniería Sociedad + Educación, sobre la creación se un servidor web desde…"
 pubDate: 2017-09-19
 date: 2017-09-19
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/servidor-web-nodejs-2017/hero.jpg"
   alt:
-    en: "Building a web server web desde cero con NodeJs"
+    en: "Building a web server from scratch with Node.js"
     es: "Creando un servidor web desde cero con NodeJs"
   layout: banner
 heroImage: "/images/meetups/servidor-web-nodejs-2017/hero.jpg"
@@ -39,6 +39,6 @@ Slides disponibles en: http://slides.com/rockalabs/creando-un-servidor-web-con-n
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

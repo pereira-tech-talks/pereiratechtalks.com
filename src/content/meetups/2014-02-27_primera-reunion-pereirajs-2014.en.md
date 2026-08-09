@@ -7,7 +7,7 @@ PereiraJs community and presented the group's goals and objectives.
 [Manuel Pineda](https://twitter.com/pin3da) then gave a talk titled
 **[JavaScript: history and applications](http://jhonber.github.io/slides)**.
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/165567982)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -49,6 +49,6 @@ Meetup de apertura de 2026 — reflexiones sobre el ecosistema Vuetify más una 
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://luma.com/xjga6v67

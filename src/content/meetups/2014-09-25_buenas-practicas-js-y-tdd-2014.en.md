@@ -8,7 +8,7 @@ PereiraJs's eighth meetup, with two very interesting talks on:
 Slides available at: https://speakerdeck.com/jonalvarezz/javascript-best-practices** ([profile](https://twitter.com/jonalvarezz))
 1. ****TDD && BDD, JavaScript and the good taste of testing** — ** ([profile](https://twitter.com/oagranada))
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/194513172)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

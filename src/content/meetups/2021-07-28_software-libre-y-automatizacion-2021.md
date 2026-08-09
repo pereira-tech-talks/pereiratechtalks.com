@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Open Source y Automatización"
+  en: "Open source and automation"
   es: "Software libre y Automatización"
 description:
-  en: "Pereira Tech Talks meetup — Open Source y Automatización. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Open source and automation. Community archive page with the night’s program and context."
   es: "¡¡Tenemos Meetup!!! 🥳🥳🤖 🚀 Esta vez tendremos un gran meetup con la mejor energía por parte de dos talentosas personas que tienen hambre de compartir…"
 pubDate: 2021-07-28
 date: 2021-07-28
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg"
   alt:
-    en: "Open Source y Automatización"
+    en: "Open source and automation"
     es: "Software libre y Automatización"
   layout: banner
 heroImage: "/images/meetups/software-libre-y-automatizacion-2021/hero.jpeg"
@@ -43,7 +43,7 @@ Bio: Steven, ingeniero de sistemas, economista y candidato a magister en ingenie
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/279620621)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/279620621)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

@@ -44,7 +44,7 @@ En colaboración con las comunidades del eje cafetero les traemos un meetup carg
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

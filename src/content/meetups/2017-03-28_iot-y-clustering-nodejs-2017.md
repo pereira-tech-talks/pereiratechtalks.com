@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduction al IoT && Administración de un pequeño cluster con nodeJS"
+  en: "Introduction to IoT && Managing a small cluster with Node.js"
   es: "Introducción al IoT && Administración de un pequeño cluster con nodeJS"
 description:
-  en: "Pereira Tech Talks meetup — Introduction al IoT && Administración de un pequeño cluster con nodeJS. Community archive page with the night’s program and…"
+  en: "Pereira Tech Talks meetup — Introduction to IoT && Managing a small cluster with Node.js. Community archive page with the night’s program and…"
   es: "En nuestro segundo Meetup del 2017 tuvimos el gusto de contar con dos charlas muy interesantes sobre IoT y clustering con NodeJs:"
 pubDate: 2017-03-28
 date: 2017-03-28
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/iot-y-clustering-nodejs-2017/hero.jpg"
   alt:
-    en: "Introduction al IoT && Administración de un pequeño cluster con nodeJS"
+    en: "Introduction to IoT && Managing a small cluster with Node.js"
     es: "Introducción al IoT && Administración de un pequeño cluster con nodeJS"
   layout: banner
 heroImage: "/images/meetups/iot-y-clustering-nodejs-2017/hero.jpg"
@@ -43,6 +43,6 @@ Aprenderas que es el internet de las cosas (IoT) y porque es considerado como un
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

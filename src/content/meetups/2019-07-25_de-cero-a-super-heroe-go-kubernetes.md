@@ -1,9 +1,9 @@
 ---
 title:
-  en: "From Zero to Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud "
+  en: "From Zero to Superhero: learning Go & Kubernetes & Serverless on Google Cloud"
   es: "De Cero a Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud "
 description:
-  en: "Pereira Tech Talks meetup — From Zero to Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud . Community archive page with the night’s…"
+  en: "Pereira Tech Talks meetup — From Zero to Superhero: learning Go & Kubernetes & Serverless on Google Cloud. Community archive page with the night’s…"
   es: "📣 ¡Un emocionate Julio nos espera! Tendremos unas charlas buenísimas sobre desarrollo en Go y servicios de Google Cloud Platform:"
 pubDate: 2019-07-25
 date: 2019-07-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg"
   alt:
-    en: "From Zero to Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud "
+    en: "From Zero to Superhero: learning Go & Kubernetes & Serverless on Google Cloud"
     es: "De Cero a Super Heroe aprendiendo Go & Kubernetes & Serverless en Google Cloud "
   layout: banner
 heroImage: "/images/meetups/de-cero-a-super-heroe-go-kubernetes/hero.jpeg"
@@ -45,7 +45,7 @@ draft: false
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

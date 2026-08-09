@@ -21,7 +21,7 @@ By Harold Sánchez Ospina, Master Programmer at Gryffin Media
 A look at the advantages, techniques, and importance of testing in professional
 software development, applied to the front-end with worked examples in ReactJS.
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/286473532)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -1,9 +1,9 @@
 ---
 title:
-  en: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
+  en: "JUNE 5: Learning about NoSQL databases and Ruby on Rails"
   es: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
 description:
-  en: "Pereira Tech Talks meetup — 5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails . Community archive page with the night’s program and…"
+  en: "Pereira Tech Talks meetup — JUNE 5: Learning about NoSQL databases and Ruby on Rails. Community archive page with the night’s program and…"
   es: "📣 ¡Un emocionate Junio nos espera! Tendremos unas charlas buenísimas sobre bases de datos no relacionales y el framework de desarrollo ruby on rails:"
 pubDate: 2019-06-05
 date: 2019-06-05
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg"
   alt:
-    en: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
+    en: "JUNE 5: Learning about NoSQL databases and Ruby on Rails"
     es: "5 DE JUNIO: Aprendiendo sobre bases de datos NoSQL y Ruby on Rails "
   layout: banner
 heroImage: "/images/meetups/aprendiendo-bases-de-datos-nosql-y-rails/hero.jpeg"
@@ -45,7 +45,7 @@ draft: false
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261814865)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261814865)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

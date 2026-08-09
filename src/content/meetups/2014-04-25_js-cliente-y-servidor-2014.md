@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduction a Javascript del lado del cliente y del servidor"
+  en: "Introduction to client-side and server-side JavaScript"
   es: "Introducción a Javascript del lado del cliente y del servidor"
 description:
-  en: "Pereira Tech Talks meetup — Introduction a Javascript del lado del cliente y del servidor. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Introduction to client-side and server-side JavaScript. Community archive page with the night’s program and context."
   es: "Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes sobre:"
 pubDate: 2014-04-25
 date: 2014-04-25
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg"
   alt:
-    en: "Introduction a Javascript del lado del cliente y del servidor"
+    en: "Introduction to client-side and server-side JavaScript"
     es: "Introducción a Javascript del lado del cliente y del servidor"
   layout: banner
 heroImage: "/images/meetups/js-cliente-y-servidor-2014/hero.jpeg"
@@ -38,13 +38,13 @@ Tercer Meetup de PereiraJs en el cual se conto con dos charla muy interesantes s
 
 ### Charlas
 
-1. ****Introducción a Javascript del lado del cliente by [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
+1. ****Introducción a Javascript del lado del cliente por [Jhonber Jimenez](https://twitter.com/jh0nb3r)**
  Slides disponibles en:** ([perfil](https://twitter.com/jh0nb3r))
-2. ****Introducción a Javascript del lado del servidor by [Daniel Aristizabal](https://twitter.com/cronopio2)**
+2. ****Introducción a Javascript del lado del servidor por [Daniel Aristizabal](https://twitter.com/cronopio2)**
  Una introducción a Javascript del lado del servidor usando node, explicando programación asíncrona y programación orientada a objetos:** ([perfil](https://twitter.com/cronopio2))
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

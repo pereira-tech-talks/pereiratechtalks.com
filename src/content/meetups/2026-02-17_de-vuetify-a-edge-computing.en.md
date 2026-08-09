@@ -7,6 +7,6 @@ Juan José Cardona, David Ricardo Rivera Arbeláez.
 Our opening meetup of 2026 — reflections on the Vuetify ecosystem plus a dive
 into edge computing. Talks, snacks, and networking.
 
-### Fuentes / Sources
+### Sources
 
 - Original event: https://luma.com/xjga6v67

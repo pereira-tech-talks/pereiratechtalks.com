@@ -10,7 +10,7 @@ It is also for people already working as developers who want to compare where th
 are against what the market offers. We cover salaries, perks, learning paths,
 technology trends, and answer questions along the way.
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/289498758)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

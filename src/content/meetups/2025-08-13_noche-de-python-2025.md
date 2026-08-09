@@ -47,6 +47,6 @@ Inmersión en Python — desde ingeniería de datos hasta frameworks web y herra
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://www.meetup.com/pereira-tech-talks/events/308000000/

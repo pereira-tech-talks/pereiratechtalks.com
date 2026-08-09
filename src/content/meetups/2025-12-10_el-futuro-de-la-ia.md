@@ -41,6 +41,6 @@ Meetup de cierre de año sobre cómo la IA está transformando la ingeniería de
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Evento original: https://luma.com/e0qp2vux

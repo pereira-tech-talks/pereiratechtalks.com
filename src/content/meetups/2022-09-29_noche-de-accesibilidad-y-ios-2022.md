@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Accessibility Night, diseño y desarrollo iOS"
+  en: "Accessibility Night: iOS design and development"
   es: "Noche de Accesibilidad, diseño y desarrollo iOS"
 description:
-  en: "Pereira Tech Talks meetup — Accessibility Night, diseño y desarrollo iOS. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Accessibility Night: iOS design and development. Community archive page with the night’s program and context."
   es: "yo comencé como programadora hace como 3 años comencé con web (html Js CSS React) en un bootcamp de programación llamado Laboratoria en Perú que busca…"
 pubDate: 2022-09-29
 date: 2022-09-29
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg"
   alt:
-    en: "Accessibility Night, diseño y desarrollo iOS"
+    en: "Accessibility Night: iOS design and development"
     es: "Noche de Accesibilidad, diseño y desarrollo iOS"
   layout: banner
 heroImage: "/images/meetups/noche-de-accesibilidad-y-ios-2022/hero.jpeg"
@@ -42,7 +42,7 @@ Luego me interese por el desarrollo especializado en iOS para productos de apple
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/288702513)
+- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/288702513)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

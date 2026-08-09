@@ -1,7 +1,7 @@
 ## Revolutionizing deep learning: getting more out of models with limited data
 
 On May 30, 2024 we gathered at the **Catholic University of Pereira** for
-**Revolucionando el Deep Learning: Potenciando modelos con datos limitados**.
+**Revolutionizing deep learning: powering models with limited data**.
 
 **Talks:**
 
@@ -33,7 +33,7 @@ while dodging its appetite for enormous datasets?
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493/)
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)
 - Content migrated from the production archive (`main` branch) for date/content parity.

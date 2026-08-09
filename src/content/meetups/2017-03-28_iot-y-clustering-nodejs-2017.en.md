@@ -15,7 +15,7 @@ NodeJs.
 1. ****Introduction to the internet of things using JavaScript** — **
 2. ****Managing a small cluster with #nodeJS, applied in the UTP's Sirius lab** — ** ([profile](https://twitter.com/alejoerendon))
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/238504584)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

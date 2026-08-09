@@ -1,9 +1,9 @@
 ---
 title:
-  en: "Introduction a las redes neuronales con Keras + Random Forest"
+  en: "Introduction to neural networks with Keras + Random Forest"
   es: "Introducción a las redes neuronales con Keras + Random Forest"
 description:
-  en: "Pereira Tech Talks meetup — Introduction a las redes neuronales con Keras + Random Forest. Community archive page with the night’s program and context."
+  en: "Pereira Tech Talks meetup — Introduction to neural networks with Keras + Random Forest. Community archive page with the night’s program and context."
   es: "En colaboración con [científicas de datos](https://www.facebook.com/cientificasdedatos/), el pasado 18 de abril tuvimos un gran meetup con [Sebastián…"
 pubDate: 2018-04-09
 date: 2018-04-09
@@ -15,7 +15,7 @@ mode: in-person
 hero:
   src: "/images/meetups/redes-neuronales-keras-2018/hero.jpg"
   alt:
-    en: "Introduction a las redes neuronales con Keras + Random Forest"
+    en: "Introduction to neural networks with Keras + Random Forest"
     es: "Introducción a las redes neuronales con Keras + Random Forest"
   layout: banner
 heroImage: "/images/meetups/redes-neuronales-keras-2018/hero.jpg"
@@ -39,6 +39,6 @@ En colaboración con [científicas de datos](https://www.facebook.com/cientifica
 
 ---
 
-### Fuentes / Sources
+### Fuentes
 
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

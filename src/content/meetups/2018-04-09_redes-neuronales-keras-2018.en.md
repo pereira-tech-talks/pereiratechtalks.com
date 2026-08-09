@@ -8,7 +8,7 @@ machine learning.
 
 **More from the event:**
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/249425748)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

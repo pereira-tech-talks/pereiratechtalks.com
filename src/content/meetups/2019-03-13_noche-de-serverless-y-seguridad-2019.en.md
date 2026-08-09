@@ -13,7 +13,7 @@ others.
 1. **Learning serverless with a focus on IoT** — Sergio Florez
 2. **Information security in Eje Cafetero institutions, and OWASP** — Santiago Bernal ([profile](https://twitter.com/santiaguf))
 
-### Fuentes / Sources
+### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/259451937)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
