@@ -48,7 +48,13 @@ export const getMeetupBySlug = async (
   slug: string
 ): Promise<Meetup | undefined> => {
   const entries = await getMeetups();
-  return entries.find((e) => e.id === slug || e.id.endsWith(`/${slug}`));
+  return entries.find(
+    (e) =>
+      e.id === slug ||
+      e.id.endsWith(`/${slug}`) ||
+      // Ids carry a `YYYY-MM-DD_` prefix; callers hold the URL slug.
+      e.id.replace(/^\d{4}-\d{2}-\d{2}_/, '') === slug
+  );
 };
 
 /** Derive próximamente/pasado from the calendar date (SITE_TIMEZONE), not stale frontmatter. */
