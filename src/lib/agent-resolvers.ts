@@ -17,6 +17,7 @@ import {
   getReadingTimeFromContent,
   getRelatedPosts,
 } from '@/lib/blog';
+import { getContributorsBySlugs } from '@/lib/contributor';
 import type { Language } from '@/lib/i18n';
 import { resolveI18n } from '@/lib/markdown-for-agents';
 import {
@@ -25,7 +26,8 @@ import {
   getMeetups,
   type Meetup,
 } from '@/lib/meetup';
-import { getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
+import { getEditions, type PereiraTechDay } from '@/lib/pereiraTechDay';
+import { getSpeakers, getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent, getTalksBySpeaker, type Talk } from '@/lib/talk';
 import { getVerticals } from '@/lib/vertical';
@@ -396,4 +398,193 @@ export const resolvePostContext = async (
     readingMinutes: getReadingTimeFromContent(post.body ?? ''),
     series,
   };
+};
+
+export interface ResolvedEditionDetail {
+  year: number;
+  title: string;
+  tagline: string;
+  description: string;
+  dateLabel: string;
+  mode: string;
+  status: string;
+  scheduleTentative: boolean;
+  venue: { name: string; city: string; country: string; mapUrl: string };
+  hero: { src: string; alt: string };
+  body: string;
+  expectedAttendance?: string;
+  aboutTopics: string[];
+  schedule: Array<{
+    time: string;
+    title: string;
+    description: string;
+    type: string;
+    speaker?: { slug: string; name: string };
+  }>;
+  keynotes: ResolvedSpeakerRef[];
+  lightningTalks: Array<{
+    title: string;
+    speaker?: { slug: string; name: string };
+  }>;
+  speakers: ResolvedSpeakerRef[];
+  organizers: Array<{ slug: string; name: string; role: string }>;
+  collaborators: Array<{ slug: string; name: string; role: string }>;
+  sponsors: ResolvedSponsorRef[];
+  communities: Array<{ name: string; url?: string }>;
+  pricing: Array<{
+    title: string;
+    subtitle: string;
+    price: string;
+    period: string;
+    benefits: string[];
+    ctaLabel: string;
+    ctaUrl: string;
+  }>;
+  faqs: Array<{ question: string; answer: string; linkUrl?: string }>;
+  gallery: Array<{ src: string; alt: string; caption: string }>;
+  links: Array<{ label: string; url: string }>;
+}
+
+/**
+ * Everything a Pereira Tech Day landing page renders.
+ *
+ * Editions measured 0.26-0.33 and the `/pereira-tech-day` alias 0.056 — the
+ * worst pages in the build — because the `.md` carried only metadata plus a
+ * slug-shaped schedule.
+ */
+export const resolveEditionDetail = async (
+  edition: PereiraTechDay,
+  lang: Language
+): Promise<ResolvedEditionDetail> => {
+  const d = edition.data;
+
+  const scheduleSpeakerSlugs = d.schedule
+    .map((s) => s.speaker)
+    .filter((s): s is string => Boolean(s));
+  const lightningSlugs = d.lightningTalks.map((t) =>
+    typeof t === 'string' ? t : t.speaker
+  );
+  const allSpeakerSlugs = Array.from(
+    new Set([...d.keynotes, ...scheduleSpeakerSlugs, ...lightningSlugs])
+  );
+  const speakerEntries = await getSpeakersBySlugs(allSpeakerSlugs);
+  const speakerBySlug = new Map(speakerEntries.map((s) => [s.id, s]));
+  const nameOf = (slug: string) => speakerBySlug.get(slug)?.data.name ?? slug;
+
+  const organizers = await getContributorsBySlugs(d.organizers);
+  const collaborators = await getContributorsBySlugs(d.collaborators);
+  const editionSponsors = await getEditionSponsors(d.sponsors);
+
+  const dateLabel =
+    d.date instanceof Date
+      ? isoDate(d.date)
+      : `${isoDate(d.date.start)} – ${isoDate(d.date.end)}`;
+
+  const mapQuery = encodeURIComponent(
+    [d.venue.name, d.venue.city, d.venue.country].filter(Boolean).join(', ')
+  );
+
+  const links: Array<{ label: string; url: string }> = [];
+  if (d.linkRecording)
+    links.push({
+      label: lang === 'es' ? 'Grabaciones' : 'Recordings',
+      url: d.linkRecording,
+    });
+  if (d.linkMeetupCom)
+    links.push({
+      label: d.linkMeetupCom.includes('luma.com') ? 'Luma' : 'Meetup.com',
+      url: d.linkMeetupCom,
+    });
+
+  return {
+    year: d.year,
+    title: resolveI18n(d.title, lang),
+    tagline: resolveI18n(d.tagline, lang),
+    description: resolveI18n(d.description, lang),
+    dateLabel,
+    mode: d.mode,
+    status: d.status,
+    scheduleTentative: d.scheduleTentative,
+    venue: {
+      name: d.venue.name,
+      city: d.venue.city,
+      country: d.venue.country,
+      mapUrl: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
+    },
+    hero: {
+      src: d.hero.src,
+      alt: resolveI18n(d.hero.alt, lang) || resolveI18n(d.title, lang),
+    },
+    body: edition.body ?? '',
+    expectedAttendance: resolveI18n(d.expectedAttendance, lang) || undefined,
+    aboutTopics: d.aboutTopics.map((topic) => resolveI18n(topic, lang)),
+    schedule: d.schedule.map((slot) => ({
+      time: slot.endTime ? `${slot.time}–${slot.endTime}` : slot.time,
+      title: resolveI18n(slot.title, lang) || slot.talkSlug || slot.type,
+      description: resolveI18n(slot.description, lang),
+      type: slot.type,
+      speaker: slot.speaker
+        ? { slug: slot.speaker, name: nameOf(slot.speaker) }
+        : undefined,
+    })),
+    keynotes: d.keynotes.map((slug) => ({
+      slug,
+      name: nameOf(slug),
+      role: resolveI18n(speakerBySlug.get(slug)?.data.role, lang),
+    })),
+    lightningTalks: d.lightningTalks.map((talk) =>
+      typeof talk === 'string'
+        ? { title: nameOf(talk), speaker: { slug: talk, name: nameOf(talk) } }
+        : {
+            title: resolveI18n(talk.title, lang),
+            speaker: { slug: talk.speaker, name: nameOf(talk.speaker) },
+          }
+    ),
+    speakers: speakerEntries.map((s) => toResolvedSpeakerRef(s, lang)),
+    organizers: organizers.map((c) => ({
+      slug: c.id,
+      name: c.data.name,
+      role: resolveI18n(c.data.role, lang),
+    })),
+    collaborators: collaborators.map((c) => ({
+      slug: c.id,
+      name: c.data.name,
+      role: resolveI18n(c.data.role, lang),
+    })),
+    sponsors: editionSponsors.map((s) => ({
+      slug: s.sponsor.id,
+      name: resolveI18n(s.sponsor.data.name, lang),
+      tier: s.tier,
+      website: s.sponsor.data.url,
+    })),
+    communities: d.communities.map((c) => ({ name: c.name, url: c.url })),
+    pricing: d.sponsorshipPlans.map((plan) => ({
+      title: resolveI18n(plan.title, lang),
+      subtitle: resolveI18n(plan.subtitle, lang),
+      price: plan.price,
+      period: resolveI18n(plan.period, lang),
+      benefits: plan.benefits.map((b) => resolveI18n(b, lang)),
+      ctaLabel: resolveI18n(plan.ctaLabel, lang),
+      ctaUrl: plan.ctaUrl,
+    })),
+    faqs: d.faqs.map((faq) => ({
+      question: resolveI18n(faq.question, lang),
+      answer: resolveI18n(faq.answer, lang),
+      linkUrl: faq.linkUrl,
+    })),
+    gallery: d.gallery.map((g) => ({
+      src: g.src,
+      alt: resolveI18n(g.alt, lang),
+      caption: resolveI18n(g.caption, lang),
+    })),
+    links,
+  };
+};
+
+/** The edition the `/pereira-tech-day` alias currently points at. */
+export const resolveCurrentEdition = async (): Promise<
+  PereiraTechDay | undefined
+> => {
+  const editions = await getEditions();
+  return editions[0];
 };

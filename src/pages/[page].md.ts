@@ -15,12 +15,17 @@ function getPageLanguage(pageId: string): string {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allPages = await getCollection('pages');
-  return allPages
-    .filter((page) => getPageLanguage(page.id) === 'es')
-    .map((page) => ({
-      params: { page: getPageSlug(page.id) },
-      props: { page },
-    }));
+  return (
+    allPages
+      .filter((page) => getPageLanguage(page.id) === 'es')
+      // `/pereira-tech-day.md` is served by its own endpoint, which mirrors
+      // the current edition rather than a hand-written stub.
+      .filter((page) => getPageSlug(page.id) !== 'pereira-tech-day')
+      .map((page) => ({
+        params: { page: getPageSlug(page.id) },
+        props: { page },
+      }))
+  );
 };
 
 export const GET: APIRoute = ({ props }) => {

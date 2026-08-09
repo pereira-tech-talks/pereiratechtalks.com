@@ -911,6 +911,211 @@ export function serializeSpeakerDetailToMarkdown(
 }
 
 /**
+ * Pereira Tech Day edition — `/pereira-tech-days/{year}.md` and the
+ * `/pereira-tech-day` alias.
+ *
+ * The previous output was metadata plus a slug-shaped schedule, which put
+ * editions at 0.26-0.33 coverage and the alias at 0.056 — the worst pages in
+ * the build.
+ */
+export function serializeEditionToMarkdown(
+  data: import('@/lib/agent-resolvers').ResolvedEditionDetail,
+  lang: string,
+  canonicalPath: string
+): string {
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  const prefix = buildUrlPrefix(lang);
+  const es = lang === 'es';
+
+  const metadata: Array<[string, string]> = [
+    [L('year'), String(data.year)],
+    [es ? 'Lema' : 'Tagline', data.tagline],
+    [L('dates'), data.dateLabel],
+    [L('mode'), data.mode],
+    [
+      L('venue'),
+      [data.venue.name, data.venue.city, data.venue.country]
+        .filter(Boolean)
+        .join(', '),
+    ],
+    [L('status'), data.status],
+  ];
+  if (data.expectedAttendance) {
+    metadata.push([
+      es ? 'Asistencia esperada' : 'Expected attendance',
+      data.expectedAttendance,
+    ]);
+  }
+  if (data.scheduleTentative) {
+    metadata.push([
+      L('schedule'),
+      es
+        ? 'Tentativa — horarios y ponentes pueden cambiar.'
+        : 'Tentative — times and speakers may still change.',
+    ]);
+  }
+  for (const link of data.links) metadata.push([link.label, link.url]);
+
+  const sections: GenericMarkdownSection[] = [
+    { heading: L('hero'), lines: [imageLine(data.hero.alt, data.hero.src)] },
+  ];
+
+  if (data.aboutTopics.length > 0) {
+    sections.push({
+      heading: es ? 'Temas' : 'Topics',
+      lines: data.aboutTopics.map((topic) => `- ${topic}`),
+    });
+  }
+
+  if (data.schedule.length > 0) {
+    sections.push({
+      heading: L('schedule'),
+      lines: data.schedule.flatMap((slot) => {
+        const speaker = slot.speaker
+          ? ` — [${slot.speaker.name}](${mdHref(lang, `speakers/${slot.speaker.slug}`)})`
+          : '';
+        const row = `- **${slot.time}** — ${slot.title} (${slot.type})${speaker}`;
+        return slot.description ? [row, `  ${slot.description}`] : [row];
+      }),
+    });
+  }
+
+  if (data.keynotes.length > 0) {
+    sections.push({
+      heading: L('keynotes'),
+      lines: data.keynotes.map((s) =>
+        entityLine(s.name, mdHref(lang, `speakers/${s.slug}`), s.role)
+      ),
+    });
+  }
+
+  if (data.lightningTalks.length > 0) {
+    sections.push({
+      heading: L('lightningTalks'),
+      lines: data.lightningTalks.map((t) =>
+        t.speaker
+          ? entityLine(
+              t.title,
+              mdHref(lang, `speakers/${t.speaker.slug}`),
+              t.speaker.name
+            )
+          : `- ${t.title}`
+      ),
+    });
+  }
+
+  if (data.speakers.length > 0) {
+    sections.push({
+      heading: L('speakers'),
+      lines: data.speakers.map((s) =>
+        entityLine(s.name, mdHref(lang, `speakers/${s.slug}`), s.role)
+      ),
+    });
+  }
+
+  if (data.organizers.length > 0) {
+    sections.push({
+      heading: L('organizers'),
+      lines: data.organizers.map((o) =>
+        entityLine(o.name, mdHref(lang, 'contributors'), o.role)
+      ),
+    });
+  }
+
+  if (data.collaborators.length > 0) {
+    sections.push({
+      heading: es ? 'Colaboradores' : 'Collaborators',
+      lines: data.collaborators.map((o) =>
+        entityLine(o.name, mdHref(lang, 'contributors'), o.role)
+      ),
+    });
+  }
+
+  if (data.sponsors.length > 0) {
+    sections.push({
+      heading: L('sponsors'),
+      lines: data.sponsors.map((s) =>
+        entityLine(
+          s.name,
+          mdHref(lang, `sponsors/${s.slug}`),
+          s.tier,
+          s.website
+        )
+      ),
+    });
+  }
+
+  if (data.communities.length > 0) {
+    sections.push({
+      heading: es ? 'Comunidades aliadas' : 'Partner communities',
+      lines: data.communities.map((c) =>
+        c.url ? linkLine(c.name, c.url) : `- ${c.name}`
+      ),
+    });
+  }
+
+  if (data.pricing.length > 0) {
+    sections.push({
+      heading: L('pricing'),
+      lines: data.pricing.flatMap((plan) => [
+        `### ${plan.title}`,
+        '',
+        plan.subtitle,
+        `${plan.price}${plan.period ? ` · ${plan.period}` : ''}`,
+        '',
+        ...plan.benefits.map((b) => `- ${b}`),
+        '',
+        linkLine(plan.ctaLabel, plan.ctaUrl),
+        '',
+      ]),
+    });
+  }
+
+  if (data.faqs.length > 0) {
+    sections.push({
+      heading: L('faqs'),
+      lines: data.faqs.flatMap((faq) => [
+        `### ${faq.question}`,
+        '',
+        faq.answer,
+        ...(faq.linkUrl ? ['', faq.linkUrl] : []),
+        '',
+      ]),
+    });
+  }
+
+  if (data.gallery.length > 0) {
+    sections.push({
+      heading: L('gallery'),
+      lines: data.gallery.flatMap((g) =>
+        g.caption
+          ? [imageLine(g.alt, g.src), g.caption, '']
+          : [imageLine(g.alt, g.src)]
+      ),
+    });
+  }
+
+  sections.push({
+    heading: L('venue'),
+    lines: [
+      `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
+      '',
+      linkLine('Google Maps', data.venue.mapUrl),
+    ],
+  });
+
+  return serializeGenericToMarkdown({
+    title: `Pereira Tech Day ${data.year} — ${data.title}`,
+    description: data.description,
+    lang,
+    canonical: `${SITE_URL}${prefix}${canonicalPath}`,
+    metadata,
+    body: data.body || data.description,
+    sections,
+  });
+}
+
+/**
  * Resolve a bilingual field (string | { en, es }) to a plain string in
  * the requested language. Mirrors the runtime `tr()` helper in
  * src/lib/i18n.ts so server-side .md.ts endpoints can serialize content
