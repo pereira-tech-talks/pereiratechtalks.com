@@ -49,8 +49,14 @@ export const getVerticalBodyEntry = async (
 
   const translations = await getCollection('verticalBodiesEn');
   const translated = translations.find((entry) => entry.id === vertical.id);
+  if (translated) {
+    return { entry: translated, untranslated: false };
+  }
 
-  return translated
-    ? { entry: translated, untranslated: false }
-    : { entry: vertical, untranslated: true };
+  // A vertical defined as YAML (`monthly-meetups.yaml`) has no body in either
+  // language. Reporting it as untranslated made the page render "showing the
+  // Spanish original" above nothing at all — a notice for prose that does not
+  // exist. Only a missing *translation* of real prose is untranslated.
+  const hasSpanishBody = Boolean(vertical.body?.trim());
+  return { entry: vertical, untranslated: hasSpanishBody };
 };

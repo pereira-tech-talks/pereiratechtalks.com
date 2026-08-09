@@ -134,4 +134,18 @@ describe('vertical body selection', () => {
     expect(entry).toBe(untranslated);
     expect(flagged).toBe(true);
   });
+
+  it('REGRESSION: a bodyless entry is not "untranslated"', async () => {
+    // `monthly-meetups` is defined as YAML and has no body in either language.
+    // Reporting it as untranslated rendered "showing the Spanish original"
+    // above nothing at all — a notice for prose that does not exist.
+    for (const body of [undefined, '', '   \n  ']) {
+      const bodyless = { id: 'monthly-meetups', body } as never;
+      const { untranslated: flagged } = await getVerticalBodyEntry(
+        bodyless,
+        'en'
+      );
+      expect(flagged, `body=${JSON.stringify(body)}`).toBe(false);
+    }
+  });
 });
