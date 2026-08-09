@@ -69,3 +69,4 @@ Cerca del 90% de los proyectos de IA que se construyen hoy no llegan a producci√
 ### Fuentes
 
 - Evento original: https://luma.com/8uige1ke
+- Grabaci√≥n: https://www.youtube.com/watch?v=IgMkFUMCUVU

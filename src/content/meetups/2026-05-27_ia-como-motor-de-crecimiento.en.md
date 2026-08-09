@@ -26,3 +26,4 @@ Roughly 90% of the AI projects being built today never reach real production. It
 ### Sources
 
 - Original event: https://luma.com/8uige1ke
+- Recording: https://www.youtube.com/watch?v=IgMkFUMCUVU

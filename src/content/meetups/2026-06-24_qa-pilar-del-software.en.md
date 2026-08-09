@@ -42,3 +42,4 @@ By **Laura Daniela Santa**, Software Testing Analyst at Evertec.
 
 Our thanks to DailyBot, Aumentada, ASE-UTP, and Vuetify for making this meetup
 possible.
+- Recording: https://www.youtube.com/watch?v=Ubhgp591yKQ
