@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import { resolvePostContext } from '@/lib/agent-resolvers';
 import { getPostSlug, isPostVisibleInProduction } from '@/lib/blog';
 import { serializePostToAgentMarkdown } from '@/lib/markdown-for-agents';
 
@@ -15,10 +16,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-export const GET: APIRoute = ({ props }) => {
+export const GET: APIRoute = async ({ props }) => {
   const { post } = props;
   const slug = getPostSlug(post.id);
-  const markdown = serializePostToAgentMarkdown(post, { slug, lang: 'es' });
+  const context = await resolvePostContext(post, 'es');
+  const markdown = serializePostToAgentMarkdown(post, {
+    slug,
+    lang: 'es',
+    ...context,
+  });
 
   return new Response(markdown, {
     headers: {

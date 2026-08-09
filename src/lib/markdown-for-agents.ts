@@ -137,6 +137,24 @@ function generateSiteNavigation(lang: string): string {
 interface PostSerializeOptions {
   slug: string;
   lang: string;
+  /** Resolved author — the HTML renders a byline card, so the .md must too. */
+  author?: { slug: string; name: string; role: string; bio: string };
+  /** Resolved related posts, matching the "you might also like" block. */
+  related?: Array<{
+    slug: string;
+    title: string;
+    description: string;
+    date: string;
+  }>;
+  /** Reading time in minutes, as shown in the HTML header. */
+  readingMinutes?: number;
+  /** Series context when the post belongs to one. */
+  series?: {
+    slug: string;
+    title: string;
+    order: number;
+    total: number;
+  };
 }
 
 interface BlogIndexEntry {
@@ -179,11 +197,12 @@ export function serializePostToAgentMarkdown(
   post: CollectionEntry<'blog'>,
   options: PostSerializeOptions
 ): string {
-  const { slug, lang } = options;
+  const { slug, lang, author, related, readingMinutes, series } = options;
   const { title, description, pubDate, updatedDate, tags, heroImage } =
     post.data;
   const prefix = buildUrlPrefix(lang);
   const canonicalUrl = `${SITE_URL}${prefix}/blog/${slug}`;
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
 
   const lines: string[] = [];
 
@@ -203,12 +222,72 @@ export function serializePostToAgentMarkdown(
   if (heroImage) {
     lines.push(`Hero Image: ${SITE_URL}${heroImage}`);
   }
+  if (author) {
+    lines.push(`${lang === 'es' ? 'Autor' : 'Author'}: ${author.name}`);
+  }
+  if (typeof readingMinutes === 'number') {
+    lines.push(
+      `${lang === 'es' ? 'Lectura' : 'Reading time'}: ${readingMinutes} min`
+    );
+  }
   lines.push('');
   lines.push('---');
   lines.push('');
 
   if (post.body) {
     lines.push(post.body.trim());
+    lines.push('');
+  }
+
+  if (heroImage) {
+    lines.push(`## ${L('hero')}`);
+    lines.push('');
+    lines.push(imageLine(title, heroImage));
+    lines.push('');
+  }
+
+  if (series) {
+    lines.push(`## ${lang === 'es' ? 'Serie' : 'Series'}`);
+    lines.push('');
+    lines.push(
+      entityLine(
+        series.title,
+        mdHref(lang, `blog/series/${series.slug}`),
+        `${lang === 'es' ? 'Capítulo' : 'Chapter'} ${series.order} / ${series.total}`
+      )
+    );
+    lines.push('');
+  }
+
+  if (author) {
+    lines.push(`## ${lang === 'es' ? 'Autor' : 'Author'}`);
+    lines.push('');
+    lines.push(
+      entityLine(author.name, mdHref(lang, 'contributors'), author.role)
+    );
+    if (author.bio) {
+      lines.push('');
+      lines.push(author.bio);
+    }
+    lines.push('');
+  }
+
+  if (related && related.length > 0) {
+    lines.push(
+      `## ${lang === 'es' ? 'Artículos relacionados' : 'Related articles'}`
+    );
+    lines.push('');
+    for (const post of related) {
+      lines.push(
+        entityLine(
+          post.title,
+          mdHref(lang, `blog/${post.slug}`),
+          post.description,
+          post.date
+        )
+      );
+    }
+    lines.push('');
   }
 
   lines.push(generateSiteNavigation(lang));
@@ -440,6 +519,395 @@ export function serializeGenericToMarkdown(
 
   lines.push(generateSiteNavigation(lang));
   return `${lines.join('\n')}\n`;
+}
+
+/**
+ * Entity-reference helpers.
+ *
+ * The completeness contract (docs/aeo/MARKDOWN_FOR_AGENTS.md) forbids bare
+ * slugs: every reference to another entity must carry a human-readable label
+ * and link to that entity's own `.md`. These helpers are the single place that
+ * shape is built, so no endpoint can drift into printing a slug.
+ */
+
+/** `/en/speakers/sergio-florez.md` — the `.md` twin of an entity page. */
+export function mdHref(lang: string, path: string): string {
+  const prefix = buildUrlPrefix(lang);
+  return `${prefix}/${path.replace(/^\/+/, '')}.md`;
+}
+
+/**
+ * One list row: `- [Label](/en/speakers/x.md) — detail`.
+ * `detail` segments that are empty are dropped, so a missing role never leaves
+ * a dangling em dash.
+ */
+export function entityLine(
+  label: string,
+  href: string,
+  ...detail: Array<string | null | undefined>
+): string {
+  const extras = detail.filter((d): d is string => Boolean(d?.trim()));
+  const suffix = extras.length > 0 ? ` — ${extras.join(' · ')}` : '';
+  return `- [${label}](${href})${suffix}`;
+}
+
+/** `![alt](src)`. Alt may be empty (decorative), but the image is never dropped. */
+export function imageLine(alt: string, src: string): string {
+  return `![${alt.trim()}](${src})`;
+}
+
+/** A labelled external/internal link row that is not an entity reference. */
+export function linkLine(label: string, url: string): string {
+  return `- [${label}](${url})`;
+}
+
+/**
+ * Section headings and metadata keys, in the page's own language.
+ *
+ * The contract requires one language per page including metadata keys, so a
+ * Spanish page reads `Fecha:` and an English one `Date:`. Keeping the map here
+ * rather than in each endpoint is what stops the two from drifting.
+ */
+const AGENT_MD_LABELS = {
+  en: {
+    speakers: 'Speakers',
+    talks: 'Talks',
+    programs: 'Programs',
+    sponsors: 'Sponsors',
+    organizers: 'Organizers',
+    schedule: 'Schedule',
+    keynotes: 'Keynotes',
+    lightningTalks: 'Lightning talks',
+    gallery: 'Gallery',
+    links: 'Links',
+    relatedMeetups: 'Related meetups',
+    relatedEvents: 'Related events',
+    talkHistory: 'Talk history',
+    socialLinks: 'Social links',
+    photo: 'Photo',
+    hero: 'Hero image',
+    venue: 'Venue',
+    faqs: 'FAQs',
+    pricing: 'Registration',
+    editions: 'Editions',
+    channels: 'Channels',
+    contact: 'Contact',
+    date: 'Date',
+    dates: 'Dates',
+    mode: 'Mode',
+    status: 'Status',
+    role: 'Role',
+    tier: 'Tier',
+    year: 'Year',
+    website: 'Website',
+    recording: 'Recording',
+    photos: 'Photos',
+    slides: 'Slides',
+    duration: 'Duration',
+    type: 'Type',
+    total: 'Total',
+    upcoming: 'Upcoming',
+    past: 'Past',
+    abstract: 'Abstract',
+    mission: 'Mission',
+    leaders: 'Leaders',
+    stats: 'Community stats',
+    latestPosts: 'Latest posts',
+    nextEvent: 'Next event',
+  },
+  es: {
+    speakers: 'Ponentes',
+    talks: 'Charlas',
+    programs: 'Programas',
+    sponsors: 'Patrocinadores',
+    organizers: 'Organizadores',
+    schedule: 'Agenda',
+    keynotes: 'Keynotes',
+    lightningTalks: 'Lightning talks',
+    gallery: 'Galería',
+    links: 'Enlaces',
+    relatedMeetups: 'Meetups relacionados',
+    relatedEvents: 'Eventos relacionados',
+    talkHistory: 'Historial de charlas',
+    socialLinks: 'Redes sociales',
+    photo: 'Foto',
+    hero: 'Imagen destacada',
+    venue: 'Lugar',
+    faqs: 'Preguntas frecuentes',
+    pricing: 'Inscripción',
+    editions: 'Ediciones',
+    channels: 'Canales',
+    contact: 'Contacto',
+    date: 'Fecha',
+    dates: 'Fechas',
+    mode: 'Modalidad',
+    status: 'Estado',
+    role: 'Rol',
+    tier: 'Nivel',
+    year: 'Año',
+    website: 'Sitio web',
+    recording: 'Grabación',
+    photos: 'Fotos',
+    slides: 'Slides',
+    duration: 'Duración',
+    type: 'Tipo',
+    total: 'Total',
+    upcoming: 'Próximos',
+    past: 'Pasados',
+    abstract: 'Resumen',
+    mission: 'Misión',
+    leaders: 'Líderes',
+    stats: 'Estadísticas de la comunidad',
+    latestPosts: 'Últimas publicaciones',
+    nextEvent: 'Próximo evento',
+  },
+} as const;
+
+export type AgentMdLabelKey = keyof (typeof AGENT_MD_LABELS)['en'];
+
+/** Section heading / metadata key in the page's own language. */
+export function mdLabel(lang: string, key: AgentMdLabelKey): string {
+  const table =
+    AGENT_MD_LABELS[lang as 'en' | 'es'] ?? AGENT_MD_LABELS[DEFAULT_LANGUAGE];
+  return table[key];
+}
+
+/**
+ * Meetup detail — `/meetups/{slug}.md`.
+ *
+ * Pure: takes the resolved data from `resolveMeetupDetail` and returns the
+ * string. Everything the HTML page renders appears here, with every entity
+ * reference carrying a name and a link to its own `.md`.
+ */
+export function serializeMeetupDetailToMarkdown(
+  data: import('@/lib/agent-resolvers').ResolvedMeetupDetail,
+  lang: string,
+  untranslatedNotice?: string
+): string {
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  const prefix = buildUrlPrefix(lang);
+
+  const metadata: Array<[string, string]> = [
+    [L('date'), data.date],
+    [L('mode'), data.mode],
+    [
+      L('venue'),
+      [data.venue.name, data.venue.city, data.venue.country]
+        .filter(Boolean)
+        .join(', '),
+    ],
+    [L('status'), data.status],
+  ];
+  for (const link of data.links) metadata.push([link.label, link.url]);
+
+  const sections: GenericMarkdownSection[] = [];
+
+  if (data.hero) {
+    sections.push({
+      heading: L('hero'),
+      lines: [imageLine(data.hero.alt, data.hero.src)],
+    });
+  }
+
+  if (data.talks.length > 0) {
+    const lines: string[] = [];
+    for (const talk of data.talks) {
+      lines.push(`### ${talk.title}`);
+      lines.push('');
+      if (talk.speakers.length > 0) {
+        lines.push(
+          `${L('speakers')}: ${talk.speakers
+            .map((s) => `[${s.name}](${mdHref(lang, `speakers/${s.slug}`)})`)
+            .join(', ')}`
+        );
+      }
+      lines.push(`${L('duration')}: ${talk.durationMinutes} min`);
+      lines.push(`${L('type')}: ${talk.type}`);
+      if (talk.recordingUrl) {
+        lines.push(`${L('recording')}: ${talk.recordingUrl}`);
+      }
+      if (talk.abstract) {
+        lines.push('');
+        lines.push(talk.abstract);
+      }
+      lines.push('');
+    }
+    sections.push({ heading: L('talks'), lines });
+  }
+
+  if (data.speakers.length > 0) {
+    sections.push({
+      heading: L('speakers'),
+      lines: data.speakers.map((s) =>
+        entityLine(s.name, mdHref(lang, `speakers/${s.slug}`), s.role)
+      ),
+    });
+  }
+
+  if (data.programs.length > 0) {
+    sections.push({
+      heading: L('programs'),
+      lines: data.programs.map((p) =>
+        entityLine(p.title, mdHref(lang, `verticals/${p.slug}`), p.mission)
+      ),
+    });
+  }
+
+  if (data.sponsors.length > 0) {
+    sections.push({
+      heading: L('sponsors'),
+      lines: data.sponsors.map((s) =>
+        entityLine(
+          s.name,
+          mdHref(lang, `sponsors/${s.slug}`),
+          s.tier,
+          s.website
+        )
+      ),
+    });
+  }
+
+  if (data.venue.mapUrl) {
+    sections.push({
+      heading: L('venue'),
+      lines: [
+        `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
+        '',
+        linkLine('Google Maps', data.venue.mapUrl),
+      ],
+    });
+  }
+
+  if (data.gallery.length > 0) {
+    sections.push({
+      heading: L('gallery'),
+      lines: data.gallery.flatMap((g) =>
+        g.caption
+          ? [imageLine(g.alt, g.src), g.caption, '']
+          : [imageLine(g.alt, g.src)]
+      ),
+    });
+  }
+
+  if (data.related.length > 0) {
+    sections.push({
+      heading: L('relatedMeetups'),
+      lines: data.related.map((m) =>
+        entityLine(m.title, mdHref(lang, `meetups/${m.slug}`), m.date)
+      ),
+    });
+  }
+
+  const body =
+    data.untranslated && untranslatedNotice
+      ? `> ${untranslatedNotice}\n\n${data.body}`
+      : data.body;
+
+  return serializeGenericToMarkdown({
+    title: data.title,
+    description: data.description,
+    lang,
+    canonical: `${SITE_URL}${prefix}/meetups/${data.slug}`,
+    metadata,
+    body,
+    sections,
+  });
+}
+
+/**
+ * Speaker detail — `/speakers/{slug}.md`.
+ *
+ * The previous output was a metadata card with an empty body (0.203 coverage,
+ * the worst detail type in the build). The bio and the full talk history —
+ * with abstracts — are the substance of the page and are required here.
+ */
+export function serializeSpeakerDetailToMarkdown(
+  data: import('@/lib/agent-resolvers').ResolvedSpeakerDetail,
+  lang: string
+): string {
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  const prefix = buildUrlPrefix(lang);
+
+  const metadata: Array<[string, string]> = [[L('role'), data.role]];
+  if (data.location) metadata.push([mdLabel(lang, 'venue'), data.location]);
+  if (data.pronouns)
+    metadata.push([lang === 'es' ? 'Pronombres' : 'Pronouns', data.pronouns]);
+  if (data.languages.length > 0) {
+    metadata.push([
+      lang === 'es' ? 'Idiomas' : 'Languages',
+      data.languages.join(', '),
+    ]);
+  }
+
+  const sections: GenericMarkdownSection[] = [
+    { heading: L('photo'), lines: [imageLine(data.photo.alt, data.photo.src)] },
+  ];
+
+  if (data.social.length > 0) {
+    sections.push({
+      heading: L('socialLinks'),
+      lines: data.social.map((s) => linkLine(s.label, s.url)),
+    });
+  }
+
+  if (data.talks.length > 0) {
+    const lines: string[] = [];
+    for (const talk of data.talks) {
+      lines.push(`### ${talk.title}`);
+      lines.push('');
+      if (talk.date) lines.push(`${L('date')}: ${talk.date}`);
+      lines.push(`${L('duration')}: ${talk.durationMinutes} min`);
+      lines.push(`${L('type')}: ${talk.type}`);
+      const others = talk.speakers.filter((s) => s.slug !== data.slug);
+      if (others.length > 0) {
+        lines.push(
+          `${L('speakers')}: ${others
+            .map((s) => `[${s.name}](${mdHref(lang, `speakers/${s.slug}`)})`)
+            .join(', ')}`
+        );
+      }
+      if (talk.recordingUrl) {
+        lines.push(`${L('recording')}: ${talk.recordingUrl}`);
+      }
+      if (talk.abstract) {
+        lines.push('');
+        lines.push(talk.abstract);
+      }
+      lines.push('');
+    }
+    sections.push({ heading: L('talkHistory'), lines });
+  }
+
+  if (data.events.length > 0) {
+    sections.push({
+      heading: L('relatedEvents'),
+      lines: data.events.map((e) =>
+        entityLine(
+          e.title,
+          mdHref(
+            lang,
+            e.collection === 'meetups'
+              ? `meetups/${e.slug}`
+              : e.collection === 'pereiraTechDays'
+                ? `pereira-tech-days/${e.slug}`
+                : `events/${e.slug}`
+          )
+        )
+      ),
+    });
+  }
+
+  return serializeGenericToMarkdown({
+    title: data.name,
+    description: data.bio,
+    lang,
+    canonical: `${SITE_URL}${prefix}/speakers/${data.slug}`,
+    metadata,
+    // The bio is the page's prose. It was previously only in the blockquote,
+    // which left the body empty.
+    body: data.bio,
+    sections,
+  });
 }
 
 /**
