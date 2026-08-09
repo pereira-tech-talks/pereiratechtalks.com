@@ -801,8 +801,9 @@ export function serializeSpeakerDetailToMarkdown(
     lang,
     canonical: `${SITE_URL}${prefix}/speakers/${data.slug}`,
     metadata,
-    // The bio is the page's prose. It was previously only in the blockquote,
-    // which left the body empty.
+    // The bio appears twice on purpose: as the front-block description, which an
+    // agent may skip as metadata, and as the body, which was empty before Task 7
+    // of PLAN_sitewide_language_seo_aeo_audit and is the page's actual prose.
     body: data.bio,
     sections,
   });
