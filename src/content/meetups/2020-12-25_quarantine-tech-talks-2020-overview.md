@@ -38,9 +38,18 @@ las Quarantine Tech Talks fueron una serie de eventos virtuales que se realizaro
 
 ### 2 de abril - [Quarantine Tech Talks 💻 - Meetup 2.](https://www.meetup.com/es-ES/pereira-tech-talks/events/269780095/)
 
+### Charlas
+
+**Participación en Quarantine Tech Talks**
+
+**Ponente:** Andrés Rodríguez
+
+**Participación en Quarantine Tech Talks**
+
+**Ponente:** Stiven Cardona Monsalve
+
 ---
 
 ### Fuentes
 
-- Página original del evento: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269942102)
 - Seguimos recuperando fotos, enlaces a slides y grabaciones desde los archivos de la comunidad — los PR son bienvenidos.

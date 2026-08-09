@@ -3,7 +3,7 @@ title:
   en: "The future of Artificial Intelligence — or maybe the non-future"
   es: "El futuro de la Inteligencia Artificial, o tal vez el no-futuro"
 abstract:
-  en: "Talk: The future of Artificial Intelligence — or maybe the non-future. See the Spanish abstract for the community description."
+  en: "The future of Artificial Intelligence — or maybe the non-future"
   es: "El futuro de la Inteligencia Artificial, o tal vez el no-futuro"
 speakers:
   - jose-jaramillo

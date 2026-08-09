@@ -43,6 +43,20 @@ El 21 de mayo de 2025 nos reunimos en **Universidad Tecnológica de Pereira** pa
 
 Meetup sobre continuous testing — escalar la automatización de pruebas sin escalar el equipo y convertir la suite en una herramienta de observabilidad en tiempo real.
 
+### Charlas
+
+**La forma de escalar tus tests de software sin escalar tu nómina**
+
+**Ponente:** Sebastián Agudelo Morales
+
+Veremos cómo implementar ejecución paralela en múltiples navegadores y sistemas operativos, aprovechar contenedores y Selenium Grid, y aumentar la cobertura de pruebas de manera eficiente.
+
+**QA en streaming: Dale vida a tu suite de pruebas automatizadas**
+
+**Ponente:** Juan de Jesús Fernández Graciano
+
+Aprende cómo monitorear pruebas en tiempo real con dashboards en Grafana y reportes detallados con SerenityBDD. Descubre cómo la observabilidad, el monitoreo y el shift left-right testing permiten anticipar y resolver fallos antes de que escalen.
+
 ---
 
 ### Fuentes

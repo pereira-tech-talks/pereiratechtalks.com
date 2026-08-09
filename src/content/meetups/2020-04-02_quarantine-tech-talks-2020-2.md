@@ -4,7 +4,7 @@ title:
   es: "Quarantine Tech Talks 💻 - Meetup 2"
 description:
   en: "Pereira Tech Talks meetup — Quarantine Tech Talks 💻 - Meetup 2. Community archive page with the night’s program and context."
-  es: "===== LINK DE REGISTRO ======== [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com) Link de la transmisión…"
+  es: "Meetup de Pereira Tech Talks — Quarantine Tech Talks 💻 - Meetup 2. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2020-04-02
 date: 2020-04-02
 venue:
@@ -36,11 +36,24 @@ draft: false
 ## Quarantine Tech Talks 💻 - Meetup 2
 
 ===== LINK DE REGISTRO ========
+
 [https://quarantinetechtalks2.eventbrite.com](https://quarantinetechtalks2.eventbrite.com)
+
 Link de la transmisión: [https://www.youtube.com/watch?v=Uc7Wzc7EX9s](https://www.youtube.com/watch?v=Uc7Wzc7EX9s)
 
 ¡Saludos!
+
 En colaboración con las comunidades del eje cafetero les traemos un meetup cargado de mucho conocimiento tech 💻
+
+### Charlas
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 2**
+
+**Ponente:** Andrés Rodríguez
+
+**Participación en Quarantine Tech Talks 💻 - Meetup 2**
+
+**Ponente:** Stiven Cardona Monsalve
 
 ---
 

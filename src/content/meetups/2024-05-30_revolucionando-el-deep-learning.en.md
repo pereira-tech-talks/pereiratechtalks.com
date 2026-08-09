@@ -33,6 +33,8 @@ while dodging its appetite for enormous datasets?
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/301101493)

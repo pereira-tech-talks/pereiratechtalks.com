@@ -8,7 +8,8 @@ PereiraJs's seventeenth meetup, with two talks introducing JavaScript and NodeJs
 Slides available at: http://jonalvarezz.github.io/intro-js/** ([profile](https://twitter.com/jonalvarezz))
 2. ****Introduction to NodeJs** — ** ([profile](https://twitter.com/cronopio2))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/229380625)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

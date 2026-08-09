@@ -9,7 +9,8 @@ Slides available at: http://pin3da.github.io/slides/zeromq_node.html** ([profile
 1. ****WebSockets y Socket.io by [Jhon Jimenez](https://twitter.com/jh0nb3r)**
 Slides available at: http://jhonber.github.io/webSockets-slides/** ([profile](https://twitter.com/jh0nb3r))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/227171363)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

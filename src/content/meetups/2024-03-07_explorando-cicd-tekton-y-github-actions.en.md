@@ -21,6 +21,8 @@ custom workflows, you will learn how to get the most out of this powerful tool.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/299312744)

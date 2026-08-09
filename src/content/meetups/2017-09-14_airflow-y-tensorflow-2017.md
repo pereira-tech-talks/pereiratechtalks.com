@@ -38,6 +38,16 @@ Tenemos el gusto de invitarlos al primer Meetup de Pereira Tech Talks; comunidad
 
 En nuestra apertura presentaremos dos charlas muy interesantes:
 
+### Charlas
+
+**Monitoreo y control de flujos de trabajo con AirFlow**
+
+**Ponente:** Manuel Pineda
+
+**Introducción a la inteligencia artificial con TensorFlow**
+
+**Ponente:** Sergio Alexander Flórez
+
 ---
 
 ### Fuentes

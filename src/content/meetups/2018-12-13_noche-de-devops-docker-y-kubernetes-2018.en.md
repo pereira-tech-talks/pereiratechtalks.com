@@ -13,7 +13,9 @@ unit of functionality into containers.
 1. **Introduction to Docker** — Sergio Florez
 2. **Introduction to Kubernetes** — Héctor F. Jiménez ([profile](https://twitter.com/c1b3rh4ck))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/256948070)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/257037605)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

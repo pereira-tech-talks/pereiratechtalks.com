@@ -5,7 +5,18 @@ quarantine. The events held over that period:
 
 ### April 2 — [Quarantine Tech Talks 💻 - Meetup 2.](https://www.meetup.com/es-ES/pereira-tech-talks/events/269780095/)
 
+### Talks
+
+**Session at Quarantine Tech Talks**
+
+**Speaker:** Andrés Rodríguez
+
+**Session at Quarantine Tech Talks**
+
+**Speaker:** Stiven Cardona Monsalve
+
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

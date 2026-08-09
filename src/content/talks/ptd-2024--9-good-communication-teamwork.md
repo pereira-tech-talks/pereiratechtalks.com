@@ -3,7 +3,7 @@ title:
   en: "Good communication: the key behind successful teamwork"
   es: "Buena comunicación: la clave detrás del éxito en el trabajo en equipo"
 abstract:
-  en: "Talk: Good communication: the key behind successful teamwork. See the Spanish abstract for the community description."
+  en: "Good communication: the key behind successful teamwork"
   es: "Buena comunicación: la clave detrás del éxito en el trabajo en equipo"
 speakers:
   - abdenago-lopez

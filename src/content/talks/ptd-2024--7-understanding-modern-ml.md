@@ -3,7 +3,7 @@ title:
   en: "At what point did we stop understanding what happens inside Machine Learning? An intuition about architectures and styles of modern ML"
   es: "¿En qué momento dejamos de entender qué sucede dentro del Machine Learning? Una intuición sobre arquitecturas y estilos del ML moderno"
 abstract:
-  en: "Talk: At what point did we stop understanding what happens inside Machine Learning? An intuition about architectures and styles of modern ML. See the Spanish abstract for the community description."
+  en: "At what point did we stop understanding what happens inside Machine Learning? An intuition about architectures and styles of modern ML"
   es: "¿En qué momento dejamos de entender qué sucede dentro del Machine Learning? Una intuición sobre arquitecturas y estilos del ML moderno"
 speakers:
   - sebastian-franco

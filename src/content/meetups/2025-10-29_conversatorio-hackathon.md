@@ -47,6 +47,14 @@ Conversatorio sobre la cultura de hackathons, qué esperar y cómo organizar la 
 
 Estamos completando el detalle de ponentes y títulos a partir del archivo de la comunidad. Si tienes el flyer o las slides de esa noche, un PR ayuda.
 
+### Charlas
+
+**¿Qué es una hackathon?**
+
+**Ponente:** Jose Felipe Duarte, Sergio Estrella, Sebastian Franco Gomez
+
+Conversatorio con ganadores de hackathons sobre qué esperar y cómo organizar la primera en Pereira.
+
 ---
 
 ### Fuentes

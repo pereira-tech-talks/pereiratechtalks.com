@@ -13,7 +13,9 @@ applications: JavaScript on the client, and Python on the server.
 1. **Unit tests in JavaScript** — John Darwin Morales ([profile](https://twitter.com/jdmorales092))
 2. **Unit tests in Python** — Carlos Álvaro ([profile](http://caal-15.github.io/#programming))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/250868156)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/250815878)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

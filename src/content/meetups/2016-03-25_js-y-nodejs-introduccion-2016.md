@@ -4,7 +4,7 @@ title:
   es: "Introducción a Javascript && Introducción a NodeJs"
 description:
   en: "Pereira Tech Talks meetup — Introduction to JavaScript && Introduction to Node.js. Community archive page with the night’s program and context."
-  es: "Decimoséptimo Meetup de PereiraJs con dos charlas introductorias a Javascript y NodeJs."
+  es: "Meetup de Pereira Tech Talks — Introducción a Javascript && Introducción a NodeJs. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2016-03-25
 date: 2016-03-25
 venue:

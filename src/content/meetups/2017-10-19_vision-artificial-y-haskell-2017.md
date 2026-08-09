@@ -38,6 +38,12 @@ En **Pereira Tech Talks **tenemos el gusto de invitarlos a nuestro segundo Meet
 
 **"Image Stitching", una introducción a OpenCV  por [Carlos Álvaro](http://caal-15.github.io/#programming) **
 
+### Charlas
+
+**Image Stitching", una introducción a OpenCV**
+
+**Ponente:** Carlos Álvaro
+
 ---
 
 ### Fuentes

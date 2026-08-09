@@ -13,7 +13,9 @@ model.
 1. **IaC: automating our infrastructure** — Luis Uribe ([profile](https://twitter.com/luisuribe))
 2. **Let's talk about Linux** — Harold Sánchez Ospina ([profile](https://twitter.com/sancospi))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260585675)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/260589719)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

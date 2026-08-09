@@ -3,7 +3,7 @@ title:
   en: "Your first talk"
   es: "Tu primera charla"
 abstract:
-  en: "Talk: Your first talk. See the Spanish abstract for the community description."
+  en: "Your first talk"
   es: "Tu primera charla"
 speakers:
   - jonathan-alvarez

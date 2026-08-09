@@ -196,6 +196,63 @@ pnpm run md:check:strict
 
 The build should pick up the new meetup automatically and emit `/meetups/<slug>/` and `/meetups/<slug>.md` (plus `/es/...` twins).
 
+## Body Shape and Bilingual Parity (MANDATORY)
+
+The two bodies are **the same content in two languages** — not a full Spanish
+recap and an English summary of it. Whatever one carries, the other carries.
+
+### Canonical shape
+
+Use this in both files. It is what 94 of 94 existing pairs now follow.
+
+```markdown
+## {title in this body's language}
+
+{intro paragraph — date, venue, who is on the programme}
+
+{one or two paragraphs of context}
+
+### Charlas          ← `### Talks` in the English sibling
+
+**{talk title}**
+
+**Ponente:** {speaker name}       ← `**Speaker:**` in English
+
+{the talk's abstract, in this body's language}
+
+---
+
+### Fuentes          ← `### Sources` in English
+
+- Página original del evento: [Meetup.com]({url})   ← `Original event page:`
+- Grabación: {url}                                  ← `Recording:`
+```
+
+### The rules
+
+1. **Same sources in both.** Every URL in one body exists in the other. This is
+   the one thing `parity:check` fails the build on, and it is never ambiguous.
+2. **Same structure.** Same headings, same list items, same paragraph breaks,
+   and the `---` rule before the Sources block in both. Only the section
+   *labels* differ per language — `Fuentes`/`Sources`, `Ponente`/`Speaker`.
+3. **Real paragraph breaks, never soft line breaks.** Markdown renders a single
+   newline as a space, so `**Ponente:** Ana\n**Rol:** CTO` renders run together
+   on one line. Separate blocks with a blank line in both languages.
+4. **Pull each linked talk's abstract into the body**, in that body's language,
+   taking `abstract.es` for the Spanish file and `abstract.en` for the English
+   one. Do **not** translate one into the other when both exist, and do not
+   paraphrase either.
+5. **Skip a boilerplate abstract.** Many older talks carry a generated line of
+   the form *"Charla de {speaker} en el meetup {title} de Pereira Tech Talks"*.
+   It restates what the body already says — leave it out. Title and speaker
+   alone are still worth adding.
+6. **Verify every URL before writing it.** A link that 404s, or an event ID that
+   resolves to somebody else's event, is worse than no link. Check the page is
+   the event you mean, not merely that it returns 200 — 47 archive links
+   returned 200 and pointed at unrelated public events.
+7. **Never invent facts about a past event.** If the repository holds nothing,
+   the body stays short in both languages. See `docs/WRITING_CRAFT_GUIDE.md`.
+
 ## Output Format
 
 ```
@@ -259,6 +316,10 @@ content: add meetup "{title.en}"
 - [ ] Files created at `src/content/meetups/YYYY-MM-DD_{slug}.md` **and** `…_{slug}.en.md`
 - [ ] Both EN and ES frontmatter populated (`title`, `description`, `hero.alt`)
 - [ ] Spanish body in the entry, English body in the sibling — neither carrying the other language's section labels
+- [ ] Both bodies follow the canonical shape, with the `---` rule before the Sources block
+- [ ] Every URL in one body exists in the other, and each was verified to resolve to the event it claims
+- [ ] Linked talks' abstracts pulled into both bodies in their own language, boilerplate ones skipped
+- [ ] `pnpm run parity:check` reports 0 content-loss and 0 structural findings
 - [ ] All references resolve to existing collection entries
 - [ ] `pnpm run biome:check` passes
 - [ ] `pnpm run astro:check` passes
@@ -279,6 +340,7 @@ content: add meetup "{title.en}"
 
 | Version | Date       | Changes |
 | ------- | ---------- | ------- |
+| 1.3.0   | 2026-08-09 | Add the canonical body shape and the bilingual parity rules — same sources, same structure, talk abstracts in both languages, boilerplate abstracts skipped, every URL verified against the event it claims. `pnpm run parity:check` joins the Definition of Done. |
 | 1.2.0   | 2026-08-09 | Meetups are now two files: the entry keeps the Spanish body, a `{slug}.en.md` sibling carries the English one. Frontmatter-only bilingual coverage left every `/en/meetups/*` page rendering Spanish prose. |
 | 1.1.0   | 2026-08-08 | Drop `Summary in English` / `> **EN:**` body companions; bilingual coverage is frontmatter-only for the shared body. |
 | 1.0.0   | 2026-06-01 | Initial skill: bilingual meetup creation with vertical/talk/speaker/sponsor references and AEO twin auto-generation via build. |

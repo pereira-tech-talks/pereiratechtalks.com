@@ -271,6 +271,41 @@ change, no rebuild of the structured data.
 > not the Spanish title with one word swapped — `tests/unit/lib/bilingual-body-parity.test.ts`
 > fails on the latter.
 
+### Content parity — a different question from language integrity
+
+Two properties look alike and are not:
+
+| Question | Property | Gate |
+|---|---|---|
+| Is this page in the language its URL promises? | **language integrity** | `pnpm run lang:check` |
+| Do the Spanish and English versions carry the **same content**? | **content parity** | `pnpm run parity:check` |
+
+A page can pass the first and fail the second: a Spanish body gains a paragraph,
+a source link, a whole talk, and its English sibling never gets it. Both are
+correct English and correct Spanish. `lang:check`, `md:check` and `seo:check` all
+stay green. That is how 88 of 94 body pairs drifted before this was measured.
+
+`parity:check` compares every ES/EN pair and every `{ en, es }` field in the
+content layer, and splits findings by what a maintainer should do:
+
+| Class | Meaning | Blocks CI |
+|---|---|---|
+| `content-loss` | a URL in one language and not the other | **yes** |
+| `structural` | headings, list items or paragraph counts differ | **yes** |
+| `field-missing` | a bilingual field empty on one side | **yes** |
+| `field-pointer` | a field saying "see the Spanish abstract" instead of translating | **yes** |
+| `thin-both` | short in **both** languages | no — an archive gap, not a parity defect |
+| `field-skew` | one side ≥1.5× the other | no — above that, a faithful translation and a summary look alike |
+
+The two reporting classes never fail the build on purpose. 18 pairs are equally
+short in both languages with nothing in the repository to expand them from, and
+13 of 36 skews were simply Spanish running longer than English. A gate that fails
+on judgement calls gets switched off.
+
+**The rule for authors:** whatever one language carries, the other carries —
+same sources, same structure, same talks. Only section *labels* differ:
+`### Fuentes`/`### Sources`, `**Ponente:**`/`**Speaker:**`.
+
 ### Blog Posts
 
 Blog posts are organized in language-specific folders:

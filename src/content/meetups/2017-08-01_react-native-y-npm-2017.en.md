@@ -12,7 +12,8 @@ before anything else — has become the norm.
 1. ****Introduction to React Native** — ** ([profile](https://twitter.com/caal_15))
 2. ****Exposing npm credentials without a single failure** — ** ([profile](https://twitter.com/cronopio2))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/241866540)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

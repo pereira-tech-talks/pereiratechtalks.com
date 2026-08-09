@@ -39,17 +39,21 @@ El 26 de septiembre de 2024 nos reunimos en **Catholic University of Pereira** p
 **CHARLA #1**
 
 **Introducción al Machine Learning con Unity.**
+
 Introducción al uso del paquete ML-Agents de Unity para Machine Learning (Reinforcement Learning) en escenarios 3D interactivos
 
 **Ponente:** Leonardo Quiñones
+
 **Rol:** Software Engineer en Unity Technologies Semblanza: Ingeniero informático con más de 10 años de experiencia en la construcción de software, especializado en experiencias interactivas y videojuegos. Actualmente cursa una Maestría, enfocándose en la investigación de nuevas tecnologías y su aplicación para mejorar la calidad de vida de pacientes con deficiencias motoras. Apasionado por los videojuegos y la divulgación tecnológica, busca constantemente innovar y compartir conocimientos en el campo de la tecnología. Su objetivo es combinar su experiencia en desarrollo de software con su interés en la salud y el bienestar, creando soluciones tecnológicas que marquen una diferencia significativa en la vida de las personas.
 
 **CHARLA #2**
 
 **Exploraremos MLOps, la clave para automatizar y optimizar el ciclo de vida de tus modelos.**
+
 Aprenderemos cómo la nube, especialmente con herramientas de AWS como SageMaker, Glue y Bedrock, puede facilitar todo el proceso, desde la ingeniería de datos hasta el continual learning. Además, conocerás alternativas accesibles y on-premise como Apache Airflow, MLflow, y Apache Spark, que te permitirán implementar MLOps en infraestructura on-premise para no depender exclusivamente de la nube.
 
 **Ponente:** Nicolás Narváez Olaya
+
 **Rol:** Ingeniero en machine learning
 
 > Publicación original en [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/303545199/)

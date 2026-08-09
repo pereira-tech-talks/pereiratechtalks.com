@@ -11,6 +11,18 @@ Hello!
 Together with the communities of the Eje Cafetero, a meetup loaded with tech
 knowledge 💻
 
+### Talks
+
+**Session at Quarantine Tech Talks 💻 - Meetup 2**
+
+**Speaker:** Andrés Rodríguez
+
+**Session at Quarantine Tech Talks 💻 - Meetup 2**
+
+**Speaker:** Stiven Cardona Monsalve
+
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/269780095)

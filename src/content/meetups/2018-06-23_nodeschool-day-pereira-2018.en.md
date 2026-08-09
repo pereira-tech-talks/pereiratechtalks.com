@@ -16,7 +16,8 @@ workshops, free and open to everyone.
 3. [**Learn You Node (NodeJs workshop)**](https://github.com/jointDeveloper/learnyounode)
 4. [**Building peer-to-peer networks in NodeJs**](https://gitlab.com/pin3da/p2p-talk)
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/251841748)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

@@ -4,7 +4,7 @@ title:
   es: "Quarantine Tech Talks - Meetup 6"
 description:
   en: "Pereira Tech Talks meetup — Quarantine Tech Talks - Meetup 6. Community archive page with the night’s program and context."
-  es: "Detalles ===== LINK DE LA TRANSMISIÓN ======== [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)"
+  es: "Meetup de Pereira Tech Talks — Quarantine Tech Talks - Meetup 6. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2020-05-21
 date: 2020-05-21
 venue:
@@ -34,10 +34,18 @@ draft: false
 ## Quarantine Tech Talks - Meetup 6
 
 Detalles
+
 ===== LINK DE LA TRANSMISIÓN ========
+
 [https://www.youtube.com/watch?v=CtcAT56Rj_o](https://www.youtube.com/watch?v=CtcAT56Rj_o)
 
 Las comunidades del eje cafetero se unen para realizar durante esta cuarentena eventos de interés para todos.
+
+### Charlas
+
+**Participación en Quarantine Tech Talks - Meetup 6**
+
+**Ponente:** Óscar Andrés Granada Baquero
 
 ---
 

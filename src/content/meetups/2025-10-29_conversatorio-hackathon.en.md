@@ -9,6 +9,16 @@ first one.
 We are still filling in speakers and talk titles from the community archive. If
 you have the flyer or the slides from that night, a PR helps.
 
+### Talks
+
+**What is a hackathon?**
+
+**Speaker:** Jose Felipe Duarte, Sergio Estrella, Sebastian Franco Gomez
+
+A conversatorio with hackathon winners on what to expect and how to organize one in Pereira.
+
+---
+
 ### Sources
 
 - Original event: https://luma.com/0xil6wus

@@ -4,7 +4,7 @@ title:
   es: "Three JS && Introducción a React"
 description:
   en: "Pereira Tech Talks meetup — Three.js && Introduction to React. Community archive page with the night’s program and context."
-  es: "Decimoctavo Meetup de PereiraJs con dos charlas sobre:"
+  es: "Meetup de Pereira Tech Talks — Three JS && Introducción a React. Página del archivo de la comunidad con el programa y el contexto de la noche."
 pubDate: 2016-04-25
 date: 2016-04-25
 venue:

@@ -71,3 +71,9 @@ Por **Laura Daniela Santa**, Software Testing Analyst en Evertec.
 - **Entrada libre.** Habrá snacks y sorteos.
 
 Agradecemos a DailyBot, Aumentada, ASE-UTP y Vuetify por hacer posible este encuentro.
+
+---
+
+### Fuentes
+
+- Grabación: https://www.youtube.com/watch?v=Ubhgp591yKQ

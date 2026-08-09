@@ -14,7 +14,9 @@ the browser), and how Next.js can live with both.
 3. **Architecture patterns — Android** — Zorayda Gutiérrez Montes ([profile](https://www.facebook.com/zoraidayadi.gutierrezmontes))
 4. **Serverless development of conversational interfaces on Amazon Alexa and Google Home** — Sergio Alexander Florez Galeano
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264271745)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/264304830)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

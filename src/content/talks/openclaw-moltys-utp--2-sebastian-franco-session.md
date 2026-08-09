@@ -1,10 +1,17 @@
 ---
 title:
-  en: "Session at OpenClaw Moltys at UTP"
-  es: "Participación en OpenClaw Moltys en la UTP"
+  en: "Inside OpenClaw: technical details, field testing, and lessons learned"
+  es: "Dentro de OpenClaw: detalles técnicos, prueba en campo y lecciones"
 abstract:
-  en: "Talk by Sebastian Franco Gomez at the Pereira Tech Talks meetup “OpenClaw Moltys at UTP”."
-  es: "Charla de Sebastian Franco Gomez en el meetup «OpenClaw Moltys en la UTP» de Pereira Tech Talks."
+  en: >-
+    Sebastián goes under the hood: technical details of how OpenClaw hangs
+    together, what showed up when he put it through real tests, and the use cases
+    — and friction points — that only appear once you leave the happy path and
+    run agents against your own stack.
+  es: >-
+    Sebastián baja al detalle: cómo está armado OpenClaw por dentro, qué apareció
+    cuando lo puso a prueba de verdad, y los casos de uso —y fricciones— que solo
+    se ven cuando sales del happy path y corres agentes contra tu propio stack.
 speakers:
   - sebastian-franco
 date: 2026-04-11
@@ -14,10 +21,13 @@ event:
 language: es
 duration: 25
 type: talk
-tags: []
+tags:
+  - ai
+  - agents
+  - openclaw
 status: recorded
 ---
 
-## Participación en OpenClaw Moltys en la UTP
+## Dentro de OpenClaw: detalles técnicos, prueba en campo y lecciones
 
-Charla de Sebastian Franco Gomez en el meetup «OpenClaw Moltys en la UTP» de Pereira Tech Talks.
+Sebastián baja al detalle: cómo está armado OpenClaw por dentro, qué apareció cuando lo puso a prueba de verdad, y los casos de uso —y fricciones— que solo se ven cuando sales del happy path y corres agentes contra tu propio stack.

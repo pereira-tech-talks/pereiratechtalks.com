@@ -25,9 +25,11 @@ verticals:
 talks:
   - openclaw-moltys-utp--1-sergio-florez-session
   - openclaw-moltys-utp--2-sebastian-franco-session
+  - openclaw-moltys-utp--3-alejandro-rendon-session
 speakers:
   - sergio-florez
   - sebastian-franco
+  - alejandro-rendon
 sponsors:
   - slug: cursor
     tier: community
@@ -86,9 +88,11 @@ Un meetup Moltys se reconoce de lejos: el salón se llena de tenazas rojas de la
 
 No era un deck largo frente a una audiencia en silencio. El formato Moltys abre espacio para que la comunidad comparta configuraciones, experimentos y conexiones raras — y útiles — entre agentes, mensajería y herramientas. Se aprende más de diez proyectos reales en la sala que del mejor slide.
 
-### Lo que pusimos sobre la mesa
+### Charlas
 
-Sergio Flórez enmarcó la mañana: de dónde sale OpenClaw, para qué lo usa la gente en la práctica, y cómo se arma por dentro. En el tablero quedó el dibujo que resume gran parte del sistema — agente, OpenClaw, gateway hacia Telegram, WhatsApp y Slack, y el lado de herramientas (APIs, skills, MCP, shells). Sebastián Franco también estuvo entre quienes presentaron; otras personas de la sala seguirán documentándose en este registro a medida que confirmemos nombres y charlas.
+1. **OpenClaw desde cero: historia, cómo funciona y casos de uso** — Sergio Flórez. Qué es OpenClaw, de dónde sale, cómo encaja el modelo agente + gateway + herramientas, y para qué lo usa la gente en la práctica.
+2. **Dentro de OpenClaw: detalles técnicos, prueba en campo y lecciones** — Sebastián Franco. Arquitectura por dentro, lo que aparece al probarlo de verdad, y las fricciones que solo se ven fuera del happy path.
+3. **OpenClaw en lo personal: flujos reales del día a día** — Alejandro E. Rendón. Cómo ha usado OpenClaw a nivel personal: configuraciones que se quedaron y workflows que ya no son demo.
 
 La arquitectura importa, pero el punto del meetup es el salón: preguntas que solo salen de quien ya se pegó con una pared, trucos que no llegan a la documentación, y un ida y vuelta entre quienes están construyendo agentes en su propia máquina.
 

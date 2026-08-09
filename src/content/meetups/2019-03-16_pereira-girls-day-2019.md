@@ -42,6 +42,24 @@ draft: false
 
 👉 1. Tips para dar charlas y presentaciones públicas by Natalia Moncada Suárez ([https://twitter.com/natamonkada](https://twitter.com/natamonkada))
 
+### Charlas
+
+**Participación en Pereira Girls Day**
+
+**Ponente:** Natalia Moncada Suárez
+
+**Participación en Pereira Girls Day**
+
+**Ponente:** Zorayda Gutiérrez
+
+**Participación en Pereira Girls Day**
+
+**Ponente:** Hector Jimenez
+
+**Participación en Pereira Girls Day**
+
+**Ponente:** John Darwin Morales
+
 ---
 
 ### Fuentes

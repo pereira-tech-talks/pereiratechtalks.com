@@ -39,6 +39,14 @@ El 10 de diciembre de 2025 nos reunimos en **Universidad Tecnológica de Pereira
 
 Meetup de cierre de año sobre cómo la IA está transformando la ingeniería de software — agentes, LLMs, RAG y la IA conversando con hardware real.
 
+### Charlas
+
+**El Futuro de la IA — Código, Hardware y Agentes**
+
+**Ponente:** Sergio Alexander Flórez, Sebastián Mora
+
+Panel de cierre de año donde exploramos cómo la inteligencia artificial está transformando por completo la forma de programar: pasamos de solo escribir código a diseñar agentes, orquestar LLMs, conectar RAGs y hablar con hardware en el mundo real. Qué es realmente un AI Engineer, qué herramientas marcan el estado actual (modelos, agentes, MCPs, entornos de desarrollo) y cómo los programadores pueden aprovecharlas para crear nuevos productos y startups.
+
 ---
 
 ### Fuentes

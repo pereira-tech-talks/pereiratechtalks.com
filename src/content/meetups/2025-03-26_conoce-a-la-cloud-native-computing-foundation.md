@@ -43,6 +43,20 @@ El 26 de marzo de 2025 nos reunimos en **Universidad Tecnológica de Pereira** p
 
 Introducción a la CNCF, sus proyectos insignia (Kubernetes, Prometheus) y el momento adecuado para migrar tus cargas de trabajo a Kubernetes.
 
+### Charlas
+
+**Introducción a la Cloud Native Computing Foundation**
+
+**Ponente:** Andrés Torres
+
+¿Qué es la CNCF? Conoce su propósito y quiénes la respaldan. Recorreremos sus proyectos destacados (Kubernetes, Prometheus y más) y los programas y beneficios que ofrece a ingenieros y comunidades alrededor del mundo.
+
+**Cómo saber cuándo migrar a Kubernetes**
+
+**Ponente:** Daniel David Marcano Hernández
+
+Conceptos clave de Kubernetes, las razones y señales que te dicen cuándo es momento de migrar, los aprendizajes de empresas que ya lo usan y los beneficios y desafíos en la adopción de esta tecnología en tu stack.
+
 ---
 
 ### Fuentes

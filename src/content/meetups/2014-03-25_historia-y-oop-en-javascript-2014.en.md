@@ -9,7 +9,8 @@ PereiraJs's second meetup, with two very interesting talks on:
 2. **Object-oriented programming with JavaScript by [Oscar Granada](https://twitter.com/oagranada)**
  Slides available at:** ([profile](https://twitter.com/pin3da))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/168068472)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

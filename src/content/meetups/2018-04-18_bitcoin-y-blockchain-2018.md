@@ -37,7 +37,9 @@ draft: false
 Tenemos el gusto de invitarlos a una gran noche dedicada a hablar sobre Bitcoin y su base tecnológica Blockchain, una de las tecnologías emergentes más populares y revolucionaria de los últimos años, con un invitado muy especial:
 
 Conferencista: Carlos Mesa
+
 Rol: Director general de la fundación Bitcoin Colombia
+
 Contacto: [https://twitter.com/MonoMesa](https://twitter.com/MonoMesa)
 
 ### Charlas

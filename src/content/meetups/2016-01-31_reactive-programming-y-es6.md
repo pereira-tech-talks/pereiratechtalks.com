@@ -36,6 +36,12 @@ Decimoquinto Meetup de PereiraJs hablando sobre programación reactiva y EcmaScr
 
 Slides disponibles en: http://jonalvarezz.github.io/presentation-reactive-programming/.
 
+### Charlas
+
+**Reactive Programming && EcmaScript 6**
+
+**Ponente:** Jonathan Alvarez
+
 ---
 
 ### Fuentes

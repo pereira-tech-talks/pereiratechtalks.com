@@ -14,7 +14,9 @@ think about storing information.
 1. **Introduction to NoSQL databases** — Germán Grandas ([profile](https://twitter.com/germangrandas))
 2. **Build possibilities with Rails** — Jonatan Gutiérrez ([profile](https://twitter.com/jotangutierrez))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261772719)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/261814865)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

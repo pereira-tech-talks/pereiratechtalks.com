@@ -14,7 +14,9 @@ everything you can do with it.
 1. **Introduction to building modern applications in Go** — Sergio Alexander Florez
 2. **Kubernetes && serverless on Google Cloud, from zero to hero** — Mauricio Cuenca ([profile](https://twitter.com/macuenka))
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/262920907)
+- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/263207408)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.

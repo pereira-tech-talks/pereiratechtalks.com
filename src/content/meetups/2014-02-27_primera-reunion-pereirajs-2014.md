@@ -39,6 +39,16 @@ Durante este Meetup [Daniel Aristizabal](https://twitter.com/cronopio2) dio la b
 
 Por otro lado [Jhonber Jimenez](https://twitter.com/jh0nb3r) y [Manuel Pineda](https://twitter.com/pin3da) presentaron una charla titulada **[JavaScript Historia y aplicaciones](http://jhonber.github.io/slides)**.
 
+### Charlas
+
+**Bienvenida a PereiraJS**
+
+**Ponente:** Daniel Aristizábal
+
+**JavaScript Historia y aplicaciones**
+
+**Ponente:** Jhonber Jiménez, Manuel Pineda
+
 ---
 
 ### Fuentes

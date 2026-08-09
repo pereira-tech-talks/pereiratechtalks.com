@@ -38,6 +38,12 @@ Tenemos el gusto de invitarlos a nuestro último Meetup del año con dos charlas
 
 **Entendiendo y configurando servidores web NGINX  por [Héctor F. Jiménez](https://twitter.com/c1b3rh4ck)**
 
+### Charlas
+
+**Entendiendo y configurando servidores web NGINX**
+
+**Ponente:** Hector Jimenez
+
 ---
 
 ### Fuentes

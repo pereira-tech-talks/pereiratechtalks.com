@@ -3,7 +3,7 @@ title:
   en: "Building the future of AI-powered web application development"
   es: "Construyendo el futuro del desarrollo de aplicaciones web impulsado por Inteligencia Artificial"
 abstract:
-  en: "Talk: Building the future of AI-powered web application development. See the Spanish abstract for the community description."
+  en: "Building the future of AI-powered web application development"
   es: "Construyendo el futuro del desarrollo de aplicaciones web impulsado por Inteligencia Artificial"
 speakers:
   - vanessa-aristizabal

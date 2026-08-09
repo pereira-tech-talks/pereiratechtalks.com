@@ -56,6 +56,8 @@ what matters most is never stopping.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/304596568)

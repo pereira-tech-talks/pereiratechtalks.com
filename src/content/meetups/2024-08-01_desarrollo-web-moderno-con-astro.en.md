@@ -27,6 +27,8 @@ well with Astro and how much faster it makes development.
 
 > Original post on [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376/)
 
+---
+
 ### Sources
 
 - Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/302332376)

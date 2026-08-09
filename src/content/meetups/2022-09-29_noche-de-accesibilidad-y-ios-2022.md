@@ -35,9 +35,11 @@ draft: false
 ## Noche de Accesibilidad, diseño y desarrollo iOS
 
 **Cómo comenzar en el desarrollo de iOS**
+
 Yennifer Hurtado Arce.
 
 yo comencé como programadora hace como 3 años comencé con web (html Js CSS React) en un bootcamp de programación llamado Laboratoria en Perú que busca impulsar a mujeres en tecnología.
+
 Luego me interese por el desarrollo especializado en iOS para productos de apple y comencé mi primer empleo en una factory fui aprendiendo varias cosas y luego logré trabajar en Platzi. Actualmente me encuentro desarrollando un emprendimiento en lo que es tecnología pero aún lo estoy realizando 😁 me gustaría llegar a más comunidades y sobre todo para las personas que recién empiezan y les gustaría hacer ios que hay muchísima demanda tb del sector.
 
 ---

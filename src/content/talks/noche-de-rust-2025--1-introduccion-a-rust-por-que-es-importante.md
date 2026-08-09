@@ -3,7 +3,7 @@ title:
   en: "Introduction to Rust: why does it matter?"
   es: "Introducción a Rust ¿Por qué es importante?"
 abstract:
-  en: "Talk: Introducción a Rust ¿Por qué es importante?. See the Spanish abstract for the full description."
+  en: "An introductory guide to understanding Rust from scratch, and why it matters for the future of software development."
   es: "Esta intervención hará las veces de guía introductoria para entender Rust desde cero y su importancia en el desarrollo de software del futuro."
 speakers:
   - hector-pulido

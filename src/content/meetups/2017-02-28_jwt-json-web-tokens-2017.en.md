@@ -9,7 +9,8 @@ Web Tokens in NodeJs — an open standard defining a compact, secure way to
 transmit information between parties as JSON objects, commonly used for
 authentication and for exchanging information over an insecure channel.
 
+---
+
 ### Sources
 
-- Original event page: [Meetup.com](https://www.meetup.com/pereira-tech-talks/events/237946027)
 - Photos, slide links, and recordings are still being recovered from community archives — pull requests welcome.
