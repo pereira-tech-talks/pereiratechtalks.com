@@ -43,6 +43,8 @@
     "lang:check:strict": "node scripts/audit-language-integrity.mjs --strict",
     "seo:check": "node scripts/audit-seo.mjs",
     "seo:check:strict": "node scripts/audit-seo.mjs --strict",
+    "parity:check": "node scripts/audit-content-parity.mjs",
+    "parity:check:strict": "node scripts/audit-content-parity.mjs --strict",
     "lighthouse": "lhci autorun",
     "lighthouse:full": "lhci autorun --config=lighthouserc.full.cjs",
     "responsive:inventory": "node scripts/responsive-audit/build-url-list.mjs",

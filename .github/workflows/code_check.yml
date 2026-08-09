@@ -56,9 +56,11 @@ jobs:
         run: pnpm run lang:check:strict
       - name: Step 9 - 🔍 Audit per-URL SEO and structured data
         run: pnpm run seo:check:strict
-      - name: Step 10 - 🖥️ Install Playwright Chromium for responsive suite
+      - name: Step 10 - ⚖️ Audit bilingual content parity
+        run: pnpm run parity:check:strict
+      - name: Step 11 - 🖥️ Install Playwright Chromium for responsive suite
         run: pnpm exec playwright install --with-deps chromium
-      - name: Step 11 - 📱 Run responsive regression suite
+      - name: Step 12 - 📱 Run responsive regression suite
         run: pnpm run test:responsive
-      - name: Step 12 - 🔦 Run Lighthouse audit
+      - name: Step 13 - 🔦 Run Lighthouse audit
         run: pnpm run lighthouse

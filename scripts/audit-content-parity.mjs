@@ -17,6 +17,24 @@
  *   node scripts/audit-content-parity.mjs --strict         # exit 1 on defects
  *   node scripts/audit-content-parity.mjs --report <dir>   # write reports
  *
+ * WHAT BLOCKS, AND WHY — each class earns its verdict separately, because a gate
+ * that fails on judgement calls gets switched off:
+ *
+ *   content-loss    FAILS. A URL in one language and not the other is never
+ *                   ambiguous: one set of readers loses a real source.
+ *   structural      FAILS. Task 3 brought this to zero with no justified
+ *                   survivors, so any new one is a regression, not a backlog.
+ *   field-missing   FAILS. A bilingual field empty on one side is a blank page
+ *                   for those readers.
+ *   field-pointer   FAILS. A field saying "see the Spanish abstract" is not a
+ *                   translation. 18 talk abstracts shipped this way.
+ *   thin-both       NEVER FAILS. Both languages are equally short — an archive
+ *                   gap, not a parity defect, and 18 pairs have no repo source
+ *                   to fix it from. Reported so the count stays visible.
+ *   field-skew      NEVER FAILS. Above 1.5x a faithful translation and a
+ *                   summary are indistinguishable; 13 of the 36 found were
+ *                   correct Spanish expansion. It nominates, a human decides.
+ *
  * Part of PLAN_bilingual_content_parity Task 1.
  */
 
@@ -33,6 +51,7 @@ import YAML from 'yaml';
 
 import {
   bilingualFields,
+  blockingFindings,
   compareField,
   comparePair,
   FIELD_MIN_WORDS,
@@ -248,15 +267,25 @@ if (REPORT_DIR) {
   console.log(`   Report written to ${REPORT_DIR}\n`);
 }
 
-if (
-  STRICT &&
-  (s.byClass['content-loss'] > 0 ||
-    fieldBy('field-missing').length > 0 ||
-    fieldBy('field-pointer').length > 0)
-) {
-  console.log('💡 Content parity is documented in docs/I18N_GUIDE.md.');
-  console.log('   Every URL in one language must exist in the other.\n');
-  process.exit(1);
+if (STRICT) {
+  const blocking = blockingFindings({
+    'content-loss': s.byClass['content-loss'],
+    structural: s.byClass.structural,
+    'field-missing': fieldBy('field-missing').length,
+    'field-pointer': fieldBy('field-pointer').length,
+  });
+
+  if (blocking.length > 0) {
+    console.log('❌ Content parity gate failed:');
+    for (const [cls, n] of blocking) console.log(`     ${cls}: ${n}`);
+    console.log('');
+    console.log('💡 Content parity is documented in docs/I18N_GUIDE.md.');
+    console.log('   Whatever one language carries, the other carries too.');
+    console.log(
+      `   thin-both (${s.files['thin-both']}) and field-skew (${fieldBy('field-skew').length}) are reported, not blocking.\n`
+    );
+    process.exit(1);
+  }
 }
 
 if (

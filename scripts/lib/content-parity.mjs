@@ -274,3 +274,32 @@ export function compareField({ id, path, en, es }) {
     };
   return null;
 }
+
+// ── Gate policy ───────────────────────────────────────────
+
+/**
+ * Which finding classes fail a build.
+ *
+ * Kept here rather than inline in the runner so the policy is unit-testable and
+ * so there is one place to read it. A gate that fails on judgement calls gets
+ * switched off, so only the unambiguous classes block:
+ *
+ *   blocking     — one language is missing something the other has, with no
+ *                  interpretation required.
+ *   reporting    — real information, but acting on it needs a person.
+ */
+export const BLOCKING_CLASSES = Object.freeze([
+  'content-loss',
+  'structural',
+  'field-missing',
+  'field-pointer',
+]);
+
+export const REPORTING_CLASSES = Object.freeze(['thin-both', 'field-skew']);
+
+/** The classes, with counts, that should fail the build. `[]` means pass. */
+export function blockingFindings(counts) {
+  return BLOCKING_CLASSES.map((cls) => [cls, counts[cls] ?? 0]).filter(
+    ([, n]) => n > 0
+  );
+}

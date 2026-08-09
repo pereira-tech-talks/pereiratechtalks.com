@@ -12,13 +12,16 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  BLOCKING_CLASSES,
   bilingualFields,
+  blockingFindings,
   bodyOf,
   compareField,
   comparePair,
   FIELD_MIN_WORDS,
   FIELD_RATIO,
   isEquivalentLabel,
+  REPORTING_CLASSES,
   shapeOf,
   summarize,
   THIN_WORD_FLOOR,
@@ -293,5 +296,45 @@ describe('compareField', () => {
 
   it('uses the documented ratio', () => {
     expect(FIELD_RATIO).toBe(1.5);
+  });
+});
+
+describe('gate policy', () => {
+  it('blocks only on the classes that need no interpretation', () => {
+    expect([...BLOCKING_CLASSES]).toEqual([
+      'content-loss',
+      'structural',
+      'field-missing',
+      'field-pointer',
+    ]);
+  });
+
+  it('FIXTURE: a lost URL fails the build', () => {
+    expect(blockingFindings({ 'content-loss': 1 })).toEqual([
+      ['content-loss', 1],
+    ]);
+  });
+
+  it('FIXTURE: an archive stub does NOT fail the build', () => {
+    // 18 pairs are short in both languages with no repo source to fix them
+    // from. Failing on that would make the gate unpassable and it would be
+    // switched off within a week.
+    expect(blockingFindings({ 'thin-both': 18, 'field-skew': 13 })).toEqual([]);
+  });
+
+  it('reports the reporting classes rather than blocking on them', () => {
+    expect([...REPORTING_CLASSES]).toEqual(['thin-both', 'field-skew']);
+    for (const cls of REPORTING_CLASSES) {
+      expect(BLOCKING_CLASSES).not.toContain(cls);
+    }
+  });
+
+  it('names every blocking class present, not just the first', () => {
+    expect(blockingFindings({ 'content-loss': 2, 'field-pointer': 5 })).toEqual(
+      [
+        ['content-loss', 2],
+        ['field-pointer', 5],
+      ]
+    );
   });
 });
