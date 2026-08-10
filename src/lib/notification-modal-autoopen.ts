@@ -4,7 +4,7 @@
  * Rules (per notification id **and language**):
  * 1. First `navigate` in a browser tab session for that lang → open once.
  * 2. Later navigations in that lang/session → do not auto-open.
- * 3. Full reloads (per lang) → open every Nth reload (default 3).
+ * 3. Full reloads (per lang) → open every Nth reload (default 5).
  * 4. `back_forward` / `prerender` → never auto-open.
  *
  * Language is part of the storage key so `/` (es) and `/en` each get a
@@ -19,7 +19,7 @@ export type NavigationType =
   | 'back_forward'
   | 'prerender';
 
-export const NOTIFY_AUTO_RELOAD_EVERY = 3;
+export const NOTIFY_AUTO_RELOAD_EVERY = 5;
 
 export const notifyAutoSessionKey = (id: string, lang = 'es'): string =>
   `ptt:notify-auto:${id}:${lang}`;

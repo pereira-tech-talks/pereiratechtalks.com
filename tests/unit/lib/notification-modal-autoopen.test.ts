@@ -146,9 +146,9 @@ describe('consumeNotificationAutoOpen', () => {
     ).toBe(true);
   });
 
-  it('opens on the 3rd reload and persists the counter', () => {
+  it('opens on the 5th reload and persists the counter', () => {
     const session = memoryStorage({ 'ptt:notify-auto:ptd-2026:en': '1' });
-    const local = memoryStorage({ 'ptt:notify-reloads:ptd-2026:en': '2' });
+    const local = memoryStorage({ 'ptt:notify-reloads:ptd-2026:en': '4' });
     expect(
       consumeNotificationAutoOpen({
         id: 'ptd-2026',
@@ -157,7 +157,7 @@ describe('consumeNotificationAutoOpen', () => {
         storage: { session, local },
       })
     ).toBe(true);
-    expect(local.getItem('ptt:notify-reloads:ptd-2026:en')).toBe('3');
+    expect(local.getItem('ptt:notify-reloads:ptd-2026:en')).toBe('5');
   });
 });
 
