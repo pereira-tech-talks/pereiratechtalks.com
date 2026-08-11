@@ -10,7 +10,7 @@
   },
   "type": "module",
   "version": "3.0.11",
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@11.20.0",
   "engines": {
     "node": ">=24.15.0"
   },
@@ -67,32 +67,32 @@
     "@astrojs/svelte": "9.0.1",
     "@fontsource/bebas-neue": "^5.3.0",
     "@noble/ed25519": "^3.1.0",
-    "@noble/hashes": "^2.2.0",
-    "astro": "7.1.6",
+    "@noble/hashes": "^2.3.0",
+    "astro": "7.2.0",
     "fuse.js": "7.5.0",
     "qrcode": "^1.5.4",
     "reveal.js": "^6.0.1",
     "svelte": "5.56.8",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.6",
+    "@biomejs/biome": "2.5.7",
     "@lhci/cli": "0.15.1",
-    "@playwright/test": "^1.62.0",
-    "@sveltejs/vite-plugin-svelte": "7.2.0",
+    "@playwright/test": "^1.62.1",
+    "@sveltejs/vite-plugin-svelte": "7.3.0",
     "@tailwindcss/typography": "0.5.20",
     "@tailwindcss/vite": "4.3.3",
     "@testing-library/jest-dom": "7.0.0",
     "@testing-library/svelte": "5.4.2",
     "@types/qrcode": "^1.5.6",
     "@vitest/coverage-v8": "4.1.10",
-    "happy-dom": "20.11.1",
-    "npm-check-updates": "23.0.0",
+    "happy-dom": "20.11.2",
+    "npm-check-updates": "23.0.2",
     "sharp": "0.35.3",
-    "tsx": "^4.23.1",
+    "tsx": "^4.23.11",
     "vitest": "4.1.10",
-    "yaml": "2.8.3"
+    "yaml": "2.9.0"
   }
 }
