@@ -74,30 +74,56 @@ function closeAllDropdowns() {
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <nav class="main-container flex items-center justify-between">
-    <a
-      href={prefix || '/'}
-      class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-      aria-label="Pereira Tech Talks"
-    >
-      <img
-        class="h-8 w-auto md:h-9 dark:hidden"
-        src="/images/pereira-tech-talks/topbar-logo-primary.webp"
-        alt=""
-        width={120}
-        height={48}
-        loading="eager"
-        decoding="async"
-      />
-      <img
-        class="hidden h-8 w-auto md:h-9 dark:block"
-        src="/images/pereira-tech-talks/topbar-logo.webp"
-        alt=""
-        width={120}
-        height={48}
-        loading="eager"
-        decoding="async"
-      />
-    </a>
+    <div class="flex min-w-0 items-center gap-2.5 sm:gap-3">
+      <a
+        href={prefix || '/'}
+        class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        aria-label="Pereira Tech Talks"
+      >
+        <img
+          class="h-8 w-auto md:h-9 dark:hidden"
+          src="/images/pereira-tech-talks/topbar-logo-primary.webp"
+          alt=""
+          width={120}
+          height={48}
+          loading="eager"
+          decoding="async"
+        />
+        <img
+          class="hidden h-8 w-auto md:h-9 dark:block"
+          src="/images/pereira-tech-talks/topbar-logo.webp"
+          alt=""
+          width={120}
+          height={48}
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+      <span
+        class="inline-flex shrink-0 items-center gap-1.5"
+        role="img"
+        aria-label={t.nav.solidarityMark}
+      >
+        <img
+          src="/images/community/solidarity/flag-colombia.svg"
+          alt=""
+          width="24"
+          height="16"
+          class="h-4 w-6 rounded-[2px] object-cover shadow-sm ring-1 ring-ptt-border/60 dark:ring-white/15"
+          loading="eager"
+          decoding="async"
+        />
+        <img
+          src="/images/community/solidarity/mourning-ribbon.png"
+          alt=""
+          width="20"
+          height="20"
+          class="h-5 w-5 object-contain"
+          loading="eager"
+          decoding="async"
+        />
+      </span>
+    </div>
 
     <div class="hidden lg:flex items-center gap-6">
       <a href="{prefix}/meetups" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups' })}>{t.nav.meetups}</a>

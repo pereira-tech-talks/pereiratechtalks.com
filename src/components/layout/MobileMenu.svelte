@@ -173,27 +173,49 @@ function navClick(item: string) {
   >
     <!-- Top bar: brand + close (single visible X — header burger is covered by this sheet) -->
     <div class="flex shrink-0 items-center justify-between gap-3 border-b border-ptt-border px-4 py-3 dark:border-white/10">
-      <a
-        href={prefix || '/'}
-        class="flex min-w-0 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-        aria-label="Pereira Tech Talks"
-        on:click={() => navClick('home')}
-      >
-        <img
-          class="h-8 w-auto dark:hidden"
-          src="/images/pereira-tech-talks/topbar-logo-primary.webp"
-          alt=""
-          width={120}
-          height={48}
-        />
-        <img
-          class="hidden h-8 w-auto dark:block"
-          src="/images/pereira-tech-talks/topbar-logo.webp"
-          alt=""
-          width={120}
-          height={48}
-        />
-      </a>
+      <div class="flex min-w-0 items-center gap-2.5">
+        <a
+          href={prefix || '/'}
+          class="flex min-w-0 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          aria-label="Pereira Tech Talks"
+          on:click={() => navClick('home')}
+        >
+          <img
+            class="h-8 w-auto dark:hidden"
+            src="/images/pereira-tech-talks/topbar-logo-primary.webp"
+            alt=""
+            width={120}
+            height={48}
+          />
+          <img
+            class="hidden h-8 w-auto dark:block"
+            src="/images/pereira-tech-talks/topbar-logo.webp"
+            alt=""
+            width={120}
+            height={48}
+          />
+        </a>
+        <span
+          class="inline-flex shrink-0 items-center gap-1.5"
+          role="img"
+          aria-label={t.nav.solidarityMark}
+        >
+          <img
+            src="/images/community/solidarity/flag-colombia.svg"
+            alt=""
+            width="24"
+            height="16"
+            class="h-4 w-6 rounded-[2px] object-cover shadow-sm ring-1 ring-ptt-border/60 dark:ring-white/15"
+          />
+          <img
+            src="/images/community/solidarity/mourning-ribbon.png"
+            alt=""
+            width="20"
+            height="20"
+            class="h-5 w-5 object-contain"
+          />
+        </span>
+      </div>
       <button
         bind:this={closeButtonRef}
         class="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg p-2 text-ptt hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-white dark:hover:bg-white/10"

@@ -34,6 +34,8 @@ export const en: SiteTranslations = {
     menu: 'Menu',
     closeMenu: 'Close menu',
     openMenu: 'Open menu',
+    solidarityMark:
+      'Colombia flag and mourning ribbon — solidarity after the earthquake',
   },
 
   // Footer

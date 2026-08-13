@@ -34,6 +34,8 @@ export const es: SiteTranslations = {
     menu: 'Menú',
     closeMenu: 'Cerrar menú',
     openMenu: 'Abrir menú',
+    solidarityMark:
+      'Bandera de Colombia y cinta de luto — solidaridad tras el terremoto',
   },
 
   // Footer
