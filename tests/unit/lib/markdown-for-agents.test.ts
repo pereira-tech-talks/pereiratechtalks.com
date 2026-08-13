@@ -146,6 +146,50 @@ describe('serializePostToAgentMarkdown', () => {
 
     expect(result.endsWith('\n')).toBe(true);
   });
+
+  it('includes share chrome and related-article description from the HTML footer', () => {
+    const result = serializePostToAgentMarkdown(mockPost as any, {
+      slug: 'my-awesome-post',
+      lang: 'en',
+      readingMinutes: 3,
+      related: [
+        {
+          slug: 'other-post',
+          title: 'Other Post',
+          description: 'Another article',
+          date: '2015-05-25',
+        },
+      ],
+    });
+
+    expect(result).toContain('3 min read');
+    expect(result).toContain('Share this post');
+    expect(result).toContain('Copy link');
+    expect(result).toContain('You might also enjoy these posts');
+    expect(result).toMatch(/May/i);
+  });
+
+  it('includes Spanish share and related chrome for short posts', () => {
+    const result = serializePostToAgentMarkdown(mockPostEmptyBody as any, {
+      slug: 'empty-body',
+      lang: 'es',
+      readingMinutes: 1,
+      related: [
+        {
+          slug: 'otro',
+          title: 'Otro',
+          description: 'Otro artículo',
+          date: '2016-11-05',
+        },
+      ],
+    });
+
+    expect(result).toContain('1 min de lectura');
+    expect(result).toContain('Compartir este artículo');
+    expect(result).toContain('Copiar enlace');
+    expect(result).toContain('Estos artículos también podrían interesarte');
+    expect(result).toMatch(/nov/i);
+  });
 });
 
 // ─── serializeBlogIndexToMarkdown ──────────────────────
