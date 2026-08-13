@@ -151,8 +151,6 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       "We're coordinating dates with speakers and venues. Follow us to be the first to know.",
     ctaLuma: 'Follow us on Luma',
     eyebrow: 'Community archive',
-    heroImageAlt:
-      'Pereira Tech Day 2026 artwork stamped postponed indefinitely',
     statMeetups: 'Meetups',
     statTalks: 'Talks',
     statSpeakers: 'Speakers',

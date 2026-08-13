@@ -151,8 +151,6 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       'Estamos coordinando las próximas fechas con speakers y venues. Síguenos en redes para saber primero.',
     ctaLuma: 'Síguenos en Luma',
     eyebrow: 'Archivo de la comunidad',
-    heroImageAlt:
-      'Arte de Pereira Tech Day 2026 con sello de pospuesto indefinidamente',
     statMeetups: 'Meetups',
     statTalks: 'Charlas',
     statSpeakers: 'Ponentes',

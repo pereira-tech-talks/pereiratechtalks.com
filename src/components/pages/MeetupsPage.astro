@@ -58,7 +58,6 @@ const t = {
   description: fillStats(mp.description),
   intro: mp.intro,
   eyebrow: mp.eyebrow,
-  heroImageAlt: mp.heroImageAlt,
   all: mp.allMeetups,
   nextUpLabel: mp.nextUpLabel,
   nextUpCta: mp.nextUpCta,
@@ -92,10 +91,6 @@ const breadcrumbs = [
   },
   { label: tr.nav.meetups },
 ];
-
-/** Square postponement poster — meetups page hero (not the PTD strip art). */
-const POSTPONED_HERO =
-  '/images/pereira-tech-days/2026/postponed-indefinitely.webp';
 ---
 
 <MainLayout
@@ -123,44 +118,27 @@ const POSTPONED_HERO =
       <Breadcrumbs items={breadcrumbs} />
     </div>
     <div class="main-container pt-6 pb-6 sm:pb-8">
-      <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,22rem)] lg:gap-10">
-        <div class="min-w-0">
-          <Eyebrow>{t.eyebrow}</Eyebrow>
-          <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
-            {t.title}
-          </h1>
-          <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
-            {t.intro}
-          </p>
-          <ul class="mt-8 grid max-w-2xl list-none grid-cols-2 gap-3 sm:grid-cols-4">
-            {
-              heroStats.map((stat) => (
-                <li class="rounded-xl bg-ptt-bg-elevated px-3 py-4 text-center ring-1 ring-ptt-border sm:px-4">
-                  <p class="text-2xl font-bold tabular-nums tracking-tight text-ptt-primary sm:text-3xl dark:text-ptt-primary-dark">
-                    {stat.value}
-                  </p>
-                  <p class="mt-1 text-xs font-medium text-ptt-secondary sm:text-sm">
-                    {stat.label}
-                  </p>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <figure class="order-first m-0 mx-auto w-full max-w-sm lg:order-none lg:mx-0 lg:max-w-none">
-          <div class="overflow-hidden rounded-2xl bg-[#fef7f3] ring-1 ring-ptt-border dark:ring-white/10">
-            <img
-              src={POSTPONED_HERO}
-              alt={t.heroImageAlt}
-              width="1024"
-              height="1024"
-              class="block h-auto w-full object-contain"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-        </figure>
-      </div>
+      <Eyebrow>{t.eyebrow}</Eyebrow>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ptt">
+        {t.title}
+      </h1>
+      <p class="mt-4 max-w-3xl text-lg text-ptt-secondary">
+        {t.intro}
+      </p>
+      <ul class="mt-8 grid max-w-2xl list-none grid-cols-2 gap-3 sm:grid-cols-4">
+        {
+          heroStats.map((stat) => (
+            <li class="rounded-xl bg-ptt-bg-elevated px-3 py-4 text-center ring-1 ring-ptt-border sm:px-4">
+              <p class="text-2xl font-bold tabular-nums tracking-tight text-ptt-primary sm:text-3xl dark:text-ptt-primary-dark">
+                {stat.value}
+              </p>
+              <p class="mt-1 text-xs font-medium text-ptt-secondary sm:text-sm">
+                {stat.label}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
     {/*
