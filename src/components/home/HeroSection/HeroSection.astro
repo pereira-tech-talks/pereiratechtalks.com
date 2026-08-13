@@ -8,8 +8,9 @@ export interface Props {
   typewriterWords: string[];
   meetupsLabel: string;
   meetupsHref: string;
-  ptdLabel: string;
-  ptdHref: string;
+  /** Optional — omit while the flagship edition is postponed. */
+  ptdLabel?: string;
+  ptdHref?: string;
   contactLabel: string;
   contactHref: string;
   scrollLabel: string;
@@ -108,12 +109,16 @@ const {
           >
             {meetupsLabel}
           </a>
-          <a
-            href={ptdHref}
-            class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-5 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-ptt-accent-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
-          >
-            {ptdLabel}
-          </a>
+          {
+            ptdLabel && ptdHref && (
+              <a
+                href={ptdHref}
+                class="inline-flex min-h-[44px] items-center rounded-full bg-ptt-accent px-5 py-2.5 text-sm font-semibold text-ptt-bg-dark hover:bg-ptt-accent-dark transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              >
+                {ptdLabel}
+              </a>
+            )
+          }
           <a
             href={contactHref}
             class="inline-flex min-h-[44px] items-center rounded-full border border-white/80 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
