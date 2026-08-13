@@ -18,6 +18,7 @@ import {
   getRelatedPosts,
 } from '@/lib/blog';
 import { getContributorsBySlugs } from '@/lib/contributor';
+import { formatCalendarDate } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { resolveI18n } from '@/lib/markdown-for-agents';
 import {
@@ -26,10 +27,17 @@ import {
   getMeetups,
   type Meetup,
 } from '@/lib/meetup';
-import { getEditions, type PereiraTechDay } from '@/lib/pereiraTechDay';
+import {
+  getEditionRegistrationUrl,
+  getEditions,
+  getPublishedFaqs,
+  isSectionSuppressed,
+  type PereiraTechDay,
+} from '@/lib/pereiraTechDay';
 import { getSpeakers, getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent, getTalksBySpeaker, type Talk } from '@/lib/talk';
+import { getTranslations } from '@/lib/translations';
 import { getVerticals } from '@/lib/vertical';
 
 /** A talk as an agent-Markdown consumer needs it: nothing left as a slug. */
@@ -451,6 +459,14 @@ export interface ResolvedEditionDetail {
     ctaUrl: string;
   }>;
   faqs: Array<{ question: string; answer: string; linkUrl?: string }>;
+  /** Present only while the edition is postponed. */
+  postponement?: {
+    headline: string;
+    body: string;
+    closing?: string;
+    /** Pre-formatted byline, e.g. "Comunicado publicado el 13 de agosto de 2026." */
+    sinceLabel: string;
+  };
   gallery: Array<{ src: string; alt: string; caption: string }>;
   links: Array<{ label: string; url: string }>;
 }
@@ -500,10 +516,13 @@ export const resolveEditionDetail = async (
       label: lang === 'es' ? 'Grabaciones' : 'Recordings',
       url: d.linkRecording,
     });
-  if (d.linkMeetupCom)
+  // Gated the same way as the HTML: a postponed edition must not hand agents a
+  // registration link the site itself no longer offers.
+  const registrationUrl = getEditionRegistrationUrl(edition);
+  if (registrationUrl)
     links.push({
-      label: d.linkMeetupCom.includes('luma.com') ? 'Luma' : 'Meetup.com',
-      url: d.linkMeetupCom,
+      label: registrationUrl.includes('luma.com') ? 'Luma' : 'Meetup.com',
+      url: registrationUrl,
     });
 
   return {
@@ -514,6 +533,18 @@ export const resolveEditionDetail = async (
     dateLabel,
     mode: d.mode,
     status: d.status,
+    postponement:
+      d.status === 'postponed' && d.postponement
+        ? {
+            headline: resolveI18n(d.postponement.headline, lang),
+            body: resolveI18n(d.postponement.body, lang),
+            closing: resolveI18n(d.postponement.closing, lang) || undefined,
+            sinceLabel: getTranslations(lang).ptdPage.postponedSince.replace(
+              '{date}',
+              formatCalendarDate(d.postponement.since, lang)
+            ),
+          }
+        : undefined,
     scheduleTentative: d.scheduleTentative,
     venue: {
       name: d.venue.name,
@@ -528,29 +559,43 @@ export const resolveEditionDetail = async (
     body: edition.body ?? '',
     expectedAttendance: resolveI18n(d.expectedAttendance, lang) || undefined,
     aboutTopics: d.aboutTopics.map((topic) => resolveI18n(topic, lang)),
-    schedule: d.schedule.map((slot) => ({
-      time: slot.endTime ? `${slot.time}–${slot.endTime}` : slot.time,
-      title: resolveI18n(slot.title, lang) || slot.talkSlug || slot.type,
-      description: resolveI18n(slot.description, lang),
-      type: slot.type,
-      speaker: slot.speaker
-        ? { slug: slot.speaker, name: nameOf(slot.speaker) }
-        : undefined,
-    })),
+    /*
+     * Sections suppressed on the page are suppressed here too — the `.md` twin
+     * is a mirror of what the site publishes, not of the raw entry. The data
+     * stays in the YAML either way.
+     */
+    schedule: isSectionSuppressed(edition, 'schedule')
+      ? []
+      : d.schedule.map((slot) => ({
+          time: slot.endTime ? `${slot.time}–${slot.endTime}` : slot.time,
+          title: resolveI18n(slot.title, lang) || slot.talkSlug || slot.type,
+          description: resolveI18n(slot.description, lang),
+          type: slot.type,
+          speaker: slot.speaker
+            ? { slug: slot.speaker, name: nameOf(slot.speaker) }
+            : undefined,
+        })),
     keynotes: d.keynotes.map((slug) => ({
       slug,
       name: nameOf(slug),
       role: resolveI18n(speakerBySlug.get(slug)?.data.role, lang),
     })),
-    lightningTalks: d.lightningTalks.map((talk) =>
-      typeof talk === 'string'
-        ? { title: nameOf(talk), speaker: { slug: talk, name: nameOf(talk) } }
-        : {
-            title: resolveI18n(talk.title, lang),
-            speaker: { slug: talk.speaker, name: nameOf(talk.speaker) },
-          }
-    ),
-    speakers: speakerEntries.map((s) => toResolvedSpeakerRef(s, lang)),
+    lightningTalks: isSectionSuppressed(edition, 'lightning')
+      ? []
+      : d.lightningTalks.map((talk) =>
+          typeof talk === 'string'
+            ? {
+                title: nameOf(talk),
+                speaker: { slug: talk, name: nameOf(talk) },
+              }
+            : {
+                title: resolveI18n(talk.title, lang),
+                speaker: { slug: talk.speaker, name: nameOf(talk.speaker) },
+              }
+        ),
+    speakers: isSectionSuppressed(edition, 'speakers')
+      ? []
+      : speakerEntries.map((s) => toResolvedSpeakerRef(s, lang)),
     organizers: organizers.map((c) => ({
       slug: c.id,
       name: c.data.name,
@@ -593,7 +638,7 @@ export const resolveEditionDetail = async (
       ctaLabel: resolveI18n(group.ctaLabel, lang),
       ctaUrl: group.ctaUrl,
     })),
-    faqs: d.faqs.map((faq) => ({
+    faqs: getPublishedFaqs(edition).map((faq) => ({
       question: resolveI18n(faq.question, lang),
       answer: resolveI18n(faq.answer, lang),
       linkUrl: faq.linkUrl,

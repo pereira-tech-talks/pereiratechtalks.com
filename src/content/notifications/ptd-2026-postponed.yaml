@@ -1,0 +1,46 @@
+# Sitewide notice for the indefinite postponement of Pereira Tech Day 2026.
+#
+# Paired with `ptd-2026.yaml` (the promotional notification), which is set to
+# `active: false` while this one runs. TO RESTORE THE EDITION: set `active:
+# false` here and `active: true` there. Full procedure:
+# docs/features/PEREIRA_TECH_DAYS.md#postponing-an-edition
+#
+# `endsAt` is deliberately far out — the postponement is indefinite, so the
+# notice must not silently expire before there is news to replace it with.
+severity: important
+title:
+  en: Pereira Tech Day is postponed
+  es: Pereira Tech Day se pospone
+summary:
+  en: "Pereira Tech Day is postponed indefinitely. Fuerza, Pereira. ❤️"
+  es: "Pereira Tech Day queda pospuesto indefinidamente. Fuerza, Pereira. ❤️"
+body:
+  en: >-
+    Following the events in our city, Pereira Tech Day is postponed
+    indefinitely. Right now our priority is to accompany, support, and stand
+    with our community. Fuerza, Pereira. ❤️
+  es: >-
+    Debido a los hechos ocurridos en nuestra ciudad, Pereira Tech Day queda
+    pospuesto indefinidamente. Hoy nuestra prioridad es acompañar, apoyar y
+    estar con nuestra comunidad. Fuerza, Pereira. ❤️
+image:
+  # Same 16:9 share card as the edition og:image — the stamp is typeset per language.
+  src:
+    en: /images/pereira-tech-days/2026/postponed-og-en.jpg
+    es: /images/pereira-tech-days/2026/postponed-og.jpg
+  alt:
+    en: >-
+      Pereira Tech Day artwork stamped "Postponed indefinitely" over the howler
+      monkey illustration
+    es: >-
+      Pieza gráfica de Pereira Tech Day con el sello "Se pospone
+      indefinidamente" sobre la ilustración del mono aullador
+ctaLabel:
+  en: Read the announcement
+  es: Leer el comunicado
+ctaHref: /pereira-tech-day/#postponed
+modalEnabled: true
+startsAt: 2026-08-13T00:00:00.000Z
+endsAt: 2027-12-31T23:59:59.000Z
+priority: 200
+active: true

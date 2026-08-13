@@ -1,0 +1,91 @@
+---
+/**
+ * Postponement notice for a Pereira Tech Day edition.
+ *
+ * Rendered directly under the hero while `status: postponed`, and nowhere
+ * else — see `isPostponedEdition` in `@/lib/pereiraTechDay`. Deliberately
+ * quiet: the announcement image carries the message, the copy states the
+ * facts, and there is no CTA. Nothing here promises a new date.
+ *
+ * Uses the edition palette via `--ptt-*` (it lives inside `EditionScope`),
+ * with the notice ground lifted to `--ptt-bg-elevated` so it reads as an
+ * interruption of the page rather than another section of it.
+ */
+
+import { formatCalendarDate } from '@/lib/dates';
+import { type Language, tr } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+  postponement: NonNullable<
+    import('astro:content').CollectionEntry<'pereiraTechDays'>['data']['postponement']
+  >;
+}
+
+const { lang, postponement } = Astro.props;
+const t = getTranslations(lang).ptdPage;
+
+const headline = tr(postponement.headline, lang);
+const body = tr(postponement.body, lang);
+const closing = tr(postponement.closing, lang);
+const image = postponement.image;
+const sinceLabel = formatCalendarDate(postponement.since, lang);
+---
+
+<section
+  id="postponed"
+  class="bg-[var(--ptt-bg)] py-10 sm:py-14"
+  aria-labelledby="ptd-postponed-title"
+>
+  <div class="main-container">
+    <div
+      class="mx-auto flex max-w-4xl flex-col gap-7 rounded-[var(--ptd-card-radius,1rem)] border-2 border-[var(--ptt-accent)] bg-[var(--ptt-bg-elevated)] p-6 shadow-sm sm:p-9 md:flex-row md:items-center md:gap-9"
+    >
+      {
+        image && (
+          <img
+            src={tr(image.src, lang)}
+            alt={tr(image.alt, lang)}
+            width="1200"
+            height="1200"
+            loading="eager"
+            decoding="async"
+            class="mx-auto w-full max-w-xs shrink-0 rounded-[var(--ptd-card-radius,1rem)] md:mx-0 md:w-56 lg:w-64"
+          />
+        )
+      }
+
+      <div class="min-w-0 flex-1">
+        <p
+          class="m-0 mb-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--ptt-accent)] sm:text-sm"
+        >
+          {t.postponedBadge}
+        </p>
+
+        <h2
+          id="ptd-postponed-title"
+          class="m-0 text-2xl font-bold leading-tight text-[var(--ptt-text)] sm:text-3xl"
+        >
+          {headline}
+        </h2>
+
+        <p class="mt-4 text-base leading-relaxed text-[var(--ptt-text)] sm:text-lg">
+          {body}
+        </p>
+
+        {
+          closing && (
+            <p class="mt-4 text-lg font-bold text-[var(--ptt-accent)] sm:text-xl">
+              {closing}
+            </p>
+          )
+        }
+
+        <p class="mt-5 text-sm text-[var(--ptt-text-muted)]">
+          {t.postponedSince.replace('{date}', sinceLabel)}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

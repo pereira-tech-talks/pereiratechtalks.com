@@ -1,3 +1,9 @@
+# Promotional notification for Pereira Tech Day 2026.
+#
+# DISABLED 2026-08-13 — the edition is postponed indefinitely and
+# `ptd-2026-postponed.yaml` carries the notice instead. Kept intact (not
+# deleted) so restoring the edition is a single `active` flip on each file.
+# See docs/features/PEREIRA_TECH_DAYS.md#postponing-an-edition
 severity: important
 title:
   en: Pereira Tech Day 2026
@@ -23,4 +29,4 @@ modalEnabled: true
 startsAt: 2026-01-01T00:00:00.000Z
 endsAt: 2026-08-23T05:59:59.000Z
 priority: 100
-active: true
+active: false

@@ -839,6 +839,9 @@ export function serializeEditionToMarkdown(
     ],
     [L('status'), data.status],
   ];
+  if (data.postponement) {
+    metadata.push([es ? 'Aviso' : 'Notice', data.postponement.headline]);
+  }
   if (data.expectedAttendance) {
     metadata.push([
       es ? 'Asistencia esperada' : 'Expected attendance',
@@ -855,9 +858,30 @@ export function serializeEditionToMarkdown(
   }
   for (const link of data.links) metadata.push([link.label, link.url]);
 
-  const sections: GenericMarkdownSection[] = [
-    { heading: L('hero'), lines: [imageLine(data.hero.alt, data.hero.src)] },
-  ];
+  /*
+   * A postponed edition still lists its announced date, venue, and agenda —
+   * that is the record of what was planned. The notice is therefore the FIRST
+   * section, so an agent reading top-down cannot present those details as a
+   * live event.
+   */
+  const sections: GenericMarkdownSection[] = [];
+  if (data.postponement) {
+    sections.push({
+      heading: es ? 'Aviso' : 'Notice',
+      lines: [
+        `**${data.postponement.headline}**`,
+        '',
+        data.postponement.body,
+        ...(data.postponement.closing ? ['', data.postponement.closing] : []),
+        '',
+        data.postponement.sinceLabel,
+      ],
+    });
+  }
+  sections.push({
+    heading: L('hero'),
+    lines: [imageLine(data.hero.alt, data.hero.src)],
+  });
 
   if (data.aboutTopics.length > 0) {
     sections.push({

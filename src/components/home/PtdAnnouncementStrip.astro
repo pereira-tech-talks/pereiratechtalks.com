@@ -26,6 +26,18 @@ interface Props {
   /** ISO datetime for the countdown (edition start). */
   targetDate?: string;
   endDate?: string;
+  /**
+   * Postponed edition: the strip stops being a promo and becomes a notice.
+   * Date, venue, attendance, and countdown are dropped — announcing a venue
+   * and a headcount for an event that is not happening is the failure mode
+   * this guards against — and `postponedBody` / `postponedClosing` carry the
+   * message instead. Everything returns when the edition status is restored.
+   */
+  postponed?: boolean;
+  postponedBody?: string;
+  postponedClosing?: string;
+  /** Notice art, replacing the promo illustration while postponed. */
+  postponedImage?: { src: string; alt: string };
 }
 
 const {
@@ -39,9 +51,19 @@ const {
   attendanceLabel,
   targetDate,
   endDate,
+  postponed = false,
+  postponedBody,
+  postponedClosing,
+  postponedImage,
 } = Astro.props;
 const prefix = getUrlPrefix(lang);
-const href = `${prefix}/pereira-tech-days/2026/`;
+/**
+ * Canonical landing. While postponed it deep-links to the notice so the CTA
+ * lands on the announcement rather than the top of the edition page.
+ */
+const href = postponed
+  ? `${prefix}/pereira-tech-day/#postponed`
+  : `${prefix}/pereira-tech-days/2026/`;
 
 /** Matches PTD 2026 brandKit / PtdHero2026 (light only). */
 const CREAM = '#fef7f3';
@@ -86,18 +108,50 @@ const logoAlt =
     md+: art owns the right ~50vw of the SECTION (not the padded grid),
     sized to fill that panel without cropping the monkey — only soft edge fade.
   */}
-  <div
-    class="ptd-home-strip__art pointer-events-none absolute inset-0 z-0 hidden md:block"
-    style={`background-image: url('${ILLUSTRATION}');`}
-    aria-hidden="true"
-  ></div>
-  <div
-    class="ptd-home-strip__fade pointer-events-none absolute inset-0 z-0 hidden md:block"
-    aria-hidden="true"
-  ></div>
+  {
+    /* Promo art only — the postponed variant shows the notice card instead. */
+  }
+  {
+    !postponed && (
+      <>
+        <div
+          class="ptd-home-strip__art pointer-events-none absolute inset-0 z-0 hidden md:block"
+          style={`background-image: url('${ILLUSTRATION}');`}
+          aria-hidden="true"
+        />
+        <div
+          class="ptd-home-strip__fade pointer-events-none absolute inset-0 z-0 hidden md:block"
+          aria-hidden="true"
+        />
+      </>
+    )
+  }
 
-  <div class="relative z-10 main-container py-10 sm:py-12 lg:py-14">
-    <div class="flex w-full max-w-xl flex-col justify-center md:max-w-[min(36rem,48%)]">
+  <div
+    class:list={[
+      'relative z-10 main-container py-10 sm:py-12 lg:py-14',
+      postponed && 'flex flex-col items-center gap-8 md:flex-row md:gap-12',
+    ]}
+  >
+    {
+      postponed && postponedImage && (
+        <img
+          src={postponedImage.src}
+          alt={postponedImage.alt}
+          width="1200"
+          height="1200"
+          loading="lazy"
+          decoding="async"
+          class="w-full max-w-xs shrink-0 rounded-2xl md:order-2 md:w-72 lg:w-80"
+        />
+      )
+    }
+    <div
+      class:list={[
+        'flex w-full flex-col justify-center',
+        postponed ? 'min-w-0 flex-1 md:order-1' : 'max-w-xl md:max-w-[min(36rem,48%)]',
+      ]}
+    >
       {
         eyebrow && (
           <p
@@ -143,74 +197,96 @@ const logoAlt =
         <strong class="font-bold text-[color:var(--ptd-strip-coral)]">{taglineEmphasis}</strong>
       </p>
 
-      <ul class="mb-5 flex max-w-full flex-col gap-2 text-base leading-snug text-[color:var(--ptd-strip-muted)] sm:mb-6 sm:gap-2.5 sm:text-lg">
-        <li class="flex min-w-0 items-start gap-2.5">
-          <svg
-            aria-hidden="true"
-            class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"
-            ></path>
-          </svg>
-          <span class="min-w-0 break-words">{dateLabel}</span>
-        </li>
-        <li class="flex min-w-0 items-start gap-2.5">
-          <svg
-            aria-hidden="true"
-            class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 21s7-6.19 7-11.5A7 7 0 105 9.5C5 14.81 12 21 12 21z"
-            ></path>
-            <circle
-              cx="12"
-              cy="9.5"
-              r="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></circle>
-          </svg>
-          <span class="min-w-0 break-words">{venueLabel}</span>
-        </li>
-        {
-          attendanceLabel && (
-            <li class="flex min-w-0 items-center gap-2.5 text-[color:var(--ptd-strip-navy)]">
-              <svg
-                aria-hidden="true"
-                class="h-5 w-5 shrink-0 text-[color:var(--ptd-strip-coral)] sm:h-6 sm:w-6"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9 11a4 4 0 100-8 4 4 0 000 8zM23 20v-1a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
-                ></path>
-              </svg>
-              <span class="font-bold">{attendanceLabel}</span>
-            </li>
-          )
-        }
-      </ul>
+      {
+        postponed && postponedBody && (
+          <p class="mb-4 w-full text-base leading-relaxed text-[color:var(--ptd-strip-navy)] sm:text-lg">
+            {postponedBody}
+          </p>
+        )
+      }
+
+      {
+        postponed && postponedClosing && (
+          <p class="mb-6 text-lg font-bold text-[color:var(--ptd-strip-coral)] sm:text-xl">
+            {postponedClosing}
+          </p>
+        )
+      }
+
+      {
+        !postponed && (
+        <ul
+          class="mb-5 flex max-w-full flex-col gap-2 text-base leading-snug text-[color:var(--ptd-strip-muted)] sm:mb-6 sm:gap-2.5 sm:text-lg"
+        >
+          <li class="flex min-w-0 items-start gap-2.5">
+            <svg
+              aria-hidden="true"
+              class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 2v3M16 2v3M3.5 9h17M4 5h16a1 1 0 011 1v13a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"
+              ></path>
+            </svg>
+            <span class="min-w-0 break-words">{dateLabel}</span>
+          </li>
+          <li class="flex min-w-0 items-start gap-2.5">
+            <svg
+              aria-hidden="true"
+              class="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--ptd-strip-muted)] sm:h-6 sm:w-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 21s7-6.19 7-11.5A7 7 0 105 9.5C5 14.81 12 21 12 21z"
+              ></path>
+              <circle
+                cx="12"
+                cy="9.5"
+                r="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></circle>
+            </svg>
+            <span class="min-w-0 break-words">{venueLabel}</span>
+          </li>
+          {
+            attendanceLabel && (
+              <li class="flex min-w-0 items-center gap-2.5 text-[color:var(--ptd-strip-navy)]">
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5 shrink-0 text-[color:var(--ptd-strip-coral)] sm:h-6 sm:w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9 11a4 4 0 100-8 4 4 0 000 8zM23 20v-1a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"
+                  ></path>
+                </svg>
+                <span class="font-bold">{attendanceLabel}</span>
+              </li>
+            )
+          }
+        </ul>
+        )
+      }
 
       <a
         href={href}
-        class="ptd-home-strip__cta inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-[color:var(--ptd-strip-teal)] px-8 py-3.5 text-base font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ptd-strip-teal)] active:scale-[0.98] sm:w-auto sm:px-10 sm:text-lg"
+        class="ptd-home-strip__cta inline-flex min-h-[48px] w-auto self-start items-center justify-center gap-2 rounded-full bg-[color:var(--ptd-strip-teal)] px-8 py-3.5 text-base font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--ptd-strip-teal)] active:scale-[0.98] sm:px-10 sm:text-lg"
       >
         {ctaLabel}
         <svg
@@ -230,7 +306,7 @@ const logoAlt =
       </a>
 
       {
-        targetDate && (
+        !postponed && targetDate && (
           <div
             class="ptd-home-strip__countdown mt-6 w-full max-w-xl"
             style={`--ptt-primary: ${TEAL}; --ptt-bg-elevated: #ffffff; --ptt-border: ${BORDER}; --ptt-text-muted: ${MUTED};`}
