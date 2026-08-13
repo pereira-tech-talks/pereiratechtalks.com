@@ -111,7 +111,7 @@ describe('localizeNotification', () => {
       summary: { en: 'Help neighbors', es: 'Ayuda a vecinos' },
       body: { en: 'Body EN', es: 'Cuerpo ES' },
       ctaLabel: { en: 'Open aid', es: 'Abrir ayudas' },
-      ctaHref: 'https://conectando-ayudas-colombia.com/',
+      ctaHref: 'https://corag-ayuda-directa.vercel.app',
       modalEnabled: true,
       image: {
         src: '/images/pereira-tech-days/2026/postponed-indefinitely.webp',
@@ -119,7 +119,7 @@ describe('localizeNotification', () => {
       },
     });
     const es = localizeNotification(entry, 'es');
-    expect(es.ctaHref).toBe('https://conectando-ayudas-colombia.com/');
+    expect(es.ctaHref).toBe('https://corag-ayuda-directa.vercel.app');
     expect(es.title).toBe('Pospuesto');
     expect(es.image?.src).toContain('postponed-indefinitely.webp');
     const en = localizeNotification(entry, 'en');

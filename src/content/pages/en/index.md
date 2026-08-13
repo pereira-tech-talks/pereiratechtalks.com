@@ -6,9 +6,9 @@ lastUpdated: 2026-08-07
 
 ## Tech community · Pereira, Risaralda · Since 2014
 
-**Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 90+ monthly meetups since 2014. Pereira Tech Day (2024 archive, 2026 upcoming). An active Speaker School. La Biblioteca del Mañana reading club. A content library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
+**Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 90+ monthly meetups since 2014. Pereira Tech Day (2024 archive; 2026 postponed indefinitely). An active Speaker School. La Biblioteca del Mañana reading club. A content library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
 
-**Next milestone:** Pereira Tech Day 2026 — August 22, 2026 at UTP (Auditorio Jorge Roa Martínez). Slogan: *Where talent, technology, and brands meet*.
+**Pereira Tech Day 2026:** postponed indefinitely after the earthquake of 10 August 2026. The planned venue was UTP (Auditorio Jorge Roa Martínez). Mutual aid: [Corag Ayuda directa](https://corag-ayuda-directa.vercel.app) · [Ayudas Pereira](https://ayudaspereira.com).
 
 ---
 

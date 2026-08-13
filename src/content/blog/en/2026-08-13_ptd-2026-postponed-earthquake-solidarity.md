@@ -1,6 +1,6 @@
 ---
 title: 'Pereira Tech Day 2026 postponed — standing with Pereira'
-description: 'Pereira Tech Day 2026 is postponed indefinitely after the August 10 earthquake. UTP campus access is restricted; help via Conectando Ayudas.'
+description: 'Pereira Tech Day 2026 is postponed indefinitely after the August 10 earthquake. UTP campus access is restricted; help via Corag and Ayudas Pereira.'
 pubDate: '2026-08-13'
 heroImage: '/images/blog/posts/ptd-2026-postponed-earthquake-solidarity/hero.webp'
 heroLayout: 'side-by-side'
@@ -10,14 +10,17 @@ keywords:
     'Pereira Tech Day 2026 postponed',
     'Colombia earthquake August 2026',
     'UTP campus recovery',
-    'Conectando Ayudas Colombia',
+    'Corag Ayuda directa',
+    'Ayudas Pereira',
     'Pereira mutual aid tech',
     'Risaralda earthquake solidarity',
   ]
-author: 'sergio-florez'
+author: 'juan-perez'
 ---
 
 On the morning of 10 August 2026, a strong earthquake shook western Colombia. In Pereira and across Risaralda, the days since have been about people first: safety, search, shelter, and the slow work of figuring out what still stands.
+
+To those who lost their lives, to their families, and to everyone injured or displaced: our respect and our solidarity. No schedule and no conference matters more than that grief. We stand with you.
 
 **Pereira Tech Day 2026 is postponed indefinitely.**
 
@@ -44,9 +47,14 @@ We attribute campus and recovery claims to UTP. If the university updates the co
 
 In a crisis, builders often ask the same question: *what can we actually do?*
 
-One concrete answer right now is **[Conectando Ayudas](https://conectando-ayudas-colombia.com/)** — a live open-source mutual-aid board for earthquake-related requests and offers (transport, volunteers, supplies, lodging, medical attention, debris removal, and more). Take a request. Offer what you can. If you write code, the invitation is also to improve the app that is already in production, together, in the open.
+Local initiatives are already coordinating aid across the Coffee Axis:
 
-That is the kind of tech initiative that matches this week: coordination over spectacle.
+- **[Corag Ayuda directa](https://corag-ayuda-directa.vercel.app)** — a live map of requests, offers, and progress for active emergencies (Coffee Axis priority).
+- **[Ayudas Pereira](https://ayudaspereira.com)** — nearby help coordination in Pereira.
+
+A [WhatsApp group](https://chat.whatsapp.com/LtP2Cb1oS99BWNf1CFEtV5) has been created where people have already talked with the developers of several of these apps to centralize everything in one place — join if you want to help.
+
+Take a request. Offer what you can. That is the kind of response that matches this week: coordination over spectacle.
 
 ---
 
@@ -54,7 +62,7 @@ That is the kind of tech initiative that matches this week: coordination over sp
 
 There is **no new date**. When it is safe and responsible to gather again — and when UTP and partners can host us — organizers will announce it through the usual Pereira Tech Talks channels.
 
-Monthly meetups and programs (Speaker School, La Biblioteca del Mañana, the AI channel) will continue only as community capacity allows. We will communicate changes as they become clear. Do not assume the August 22 schedule still stands.
+From Pereira Tech Talks, **we are pausing all of our activities until further notice**: monthly meetups, Speaker School, La Biblioteca del Mañana, the AI channel, and any other community gatherings. People affected and the city’s recovery come first. We will announce when activity resumes through the usual channels. Do not assume that August 22 — or any other near-term date — still stands.
 
 ---
 
@@ -62,13 +70,14 @@ Monthly meetups and programs (Speaker School, La Biblioteca del Mañana, the AI 
 
 We are grieving with neighbors and colleagues. We are also builders who know how to show up with logistics, care, and open tools.
 
-If you have energy to give, start at [conectando-ayudas-colombia.com](https://conectando-ayudas-colombia.com/). If you need space, take it. The conference can wait. People cannot.
+If you have energy to give, lean on the local aid initiatives. If you need space, take it. The conference can wait. People cannot.
 
 ---
 
 ## Resources
 
-- [UTP — Comunicado a la opinión pública](https://comunicaciones.utp.edu.co/115893/sin-categoria/comunicado-a-la-opinion-publica-8/)
-- [Conectando Ayudas Colombia](https://conectando-ayudas-colombia.com/)
 - [Wikipedia — 2026 Colombia earthquake](https://es.wikipedia.org/wiki/Terremoto_de_Colombia_de_2026)
-- [Pereira Tech Day on this site](/en/pereira-tech-day/)
+- [UTP — Comunicado a la opinión pública](https://comunicaciones.utp.edu.co/115893/sin-categoria/comunicado-a-la-opinion-publica-8/)
+- [Corag Ayuda directa](https://corag-ayuda-directa.vercel.app)
+- [Ayudas Pereira](https://ayudaspereira.com)
+- [WhatsApp — aid apps coordination](https://chat.whatsapp.com/LtP2Cb1oS99BWNf1CFEtV5)
