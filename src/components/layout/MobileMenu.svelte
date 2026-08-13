@@ -15,6 +15,7 @@ import {
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
 import { getTranslations } from '@/lib/translations';
+import SolidarityMark from './SolidarityMark.svelte';
 import ThemeToggle from './ThemeToggle.svelte';
 
 export let lang: string = 'es';
@@ -195,26 +196,7 @@ function navClick(item: string) {
             height={48}
           />
         </a>
-        <span
-          class="inline-flex shrink-0 items-center gap-1.5"
-          role="img"
-          aria-label={t.nav.solidarityMark}
-        >
-          <img
-            src="/images/community/solidarity/flag-colombia.svg"
-            alt=""
-            width="24"
-            height="16"
-            class="h-4 w-6 rounded-[2px] object-cover shadow-sm ring-1 ring-ptt-border/60 dark:ring-white/15"
-          />
-          <img
-            src="/images/community/solidarity/mourning-ribbon.png"
-            alt=""
-            width="20"
-            height="20"
-            class="h-5 w-5 object-contain"
-          />
-        </span>
+        <SolidarityMark label={t.nav.solidarityMark} size="md" />
       </div>
       <button
         bind:this={closeButtonRef}
