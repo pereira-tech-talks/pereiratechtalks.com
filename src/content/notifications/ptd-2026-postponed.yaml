@@ -7,7 +7,7 @@
 #
 # `endsAt` is deliberately far out — the postponement is indefinite, so the
 # notice must not silently expire before there is news to replace it with.
-severity: warning
+severity: important
 title:
   en: Pereira Tech Day is postponed
   es: Pereira Tech Day se pospone

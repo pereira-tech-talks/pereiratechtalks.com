@@ -93,6 +93,13 @@ function closeModal(): void {
 }
 
 /**
+ * Parked: do not auto-open the detail modal. The bar + click-to-open is
+ * enough for now (postponement notice). Flip to `true` to restore the
+ * first-visit / every-Nth-reload policy in `@/lib/notification-modal-autoopen`.
+ */
+const AUTO_OPEN_MODAL = false;
+
+/**
  * Auto-open policy (once per mount on any non-PTD page that renders this bar):
  * first session navigate per lang → open; later navigates quiet; reloads every 5th.
  * Deferred until after LCP settles so the modal hero does not steal LCP.
@@ -100,6 +107,7 @@ function closeModal(): void {
  * MainLayout omits this island on all /pereira-tech-day(s) routes.
  */
 onMount(() => {
+  if (!AUTO_OPEN_MODAL) return;
   const n = notifications[0];
   if (!n || !canOpenDetailModal(n)) return;
   if (isAutomatedLabBrowser()) return;
@@ -266,7 +274,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
         <div class="pointer-events-auto" role="region" aria-label={n.title}>
           {#snippet barInner(label: string | undefined)}
             <div
-              class="mx-auto flex w-full min-w-0 max-w-7xl items-center gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
+              class="mx-auto flex w-full min-w-0 max-w-7xl items-center justify-start gap-2 px-4 py-1.5 text-xs leading-snug overflow-hidden sm:gap-2.5 md:px-6"
             >
               {#if n.severity === 'important'}
                 <span
@@ -275,7 +283,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
                   {importantLabel}
                 </span>
               {/if}
-              <p class="min-w-0 flex-1 truncate overflow-hidden">
+              <p class="min-w-0 flex-1 truncate overflow-hidden text-left">
                 <span class="font-medium">{n.title}</span>
                 <span class="mx-1 opacity-70">—</span>
                 <span class="opacity-95">{n.summary}</span>
@@ -292,7 +300,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           {#if opensModal}
             <button
               type="button"
-              class="group block w-full cursor-pointer border-0 bg-transparent p-0 text-inherit appearance-none transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
+              class="group block w-full cursor-pointer border-0 bg-transparent p-0 text-left text-inherit appearance-none transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
               tabindex={atTop ? 0 : -1}
               onclick={() => openModal(n.id)}
             >
@@ -301,7 +309,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
           {:else if opensCta}
             <a
               href={n.ctaHref}
-              class="group block w-full cursor-pointer text-inherit no-underline transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
+              class="group block w-full cursor-pointer text-left text-inherit no-underline transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
               tabindex={atTop ? 0 : -1}
               onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
             >
