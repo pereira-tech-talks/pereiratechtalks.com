@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import type { Notification } from '@/lib/notifications';
-import { filterActiveNotifications } from '@/lib/notifications';
+import {
+  filterActiveNotifications,
+  localizeNotification,
+} from '@/lib/notifications';
+import type { PereiraTechDay } from '@/lib/pereiraTechDay';
+import { usesUpcomingLandingTemplate } from '@/lib/pereiraTechDay';
 
 const makeEntry = (
   id: string,
@@ -94,5 +99,41 @@ describe('filterActiveNotifications', () => {
       }),
     ];
     expect(filterActiveNotifications(entries, start)).toHaveLength(1);
+  });
+});
+
+describe('localizeNotification', () => {
+  it('preserves absolute https CTA hrefs for aid destinations', () => {
+    const entry = makeEntry('earthquake-aid-2026', {
+      startsAt: new Date('2026-08-10T00:00:00.000Z'),
+      endsAt: new Date('2026-12-31T23:59:59.000Z'),
+      title: { en: 'Postponed', es: 'Pospuesto' },
+      summary: { en: 'Help neighbors', es: 'Ayuda a vecinos' },
+      body: { en: 'Body EN', es: 'Cuerpo ES' },
+      ctaLabel: { en: 'Open aid', es: 'Abrir ayudas' },
+      ctaHref: 'https://conectando-ayudas-colombia.com/',
+      modalEnabled: true,
+      image: {
+        src: '/images/pereira-tech-days/2026/postponed-indefinitely.webp',
+        alt: { en: 'Postponed art', es: 'Arte pospuesto' },
+      },
+    });
+    const es = localizeNotification(entry, 'es');
+    expect(es.ctaHref).toBe('https://conectando-ayudas-colombia.com/');
+    expect(es.title).toBe('Pospuesto');
+    expect(es.image?.src).toContain('postponed-indefinitely.webp');
+    const en = localizeNotification(entry, 'en');
+    expect(en.ctaLabel).toBe('Open aid');
+  });
+});
+
+describe('cancelled edition homepage selection helper', () => {
+  it('treats cancelled editions as featured landing chrome', () => {
+    const cancelled = {
+      id: '2026',
+      collection: 'pereiraTechDays',
+      data: { status: 'cancelled', year: 2026 },
+    } as PereiraTechDay;
+    expect(usesUpcomingLandingTemplate(cancelled)).toBe(true);
   });
 });
