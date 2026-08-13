@@ -147,6 +147,8 @@ export interface SiteTranslations {
     ctaLuma: string;
     /** Hero eyebrow above the H1 (not the numeric stats). */
     eyebrow: string;
+    /** Alt text for the meetups-page postponement hero artwork. */
+    heroImageAlt: string;
     statMeetups: string;
     statTalks: string;
     statSpeakers: string;
