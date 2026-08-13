@@ -106,6 +106,8 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       date: 'Saturday, August 22, 2026',
       venue: 'UTP: Auditorio Jorge Roa Martínez, Pereira',
       attendance: '300+ expected attendees',
+      postponedEyebrow: 'A note from the organizers',
+      postponedCta: 'Read the announcement',
     },
     sponsors: {
       eyebrow: 'Current sponsors',
@@ -1064,6 +1066,10 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     lightningPendingCard: 'Lightning talk',
     lightningPendingCta: 'See sponsorship plans',
     registerCta: 'Register',
+    postponedBadge: 'Event postponed',
+    postponedHeroBadge: 'Postponed indefinitely',
+    postponedSince: 'Announcement published on {date}.',
+    postponedReadCta: 'Read the announcement',
     subscribe: {
       copy: 'Get notified when registration opens for the event. Do not miss it!',
       emailLabel: 'Email',

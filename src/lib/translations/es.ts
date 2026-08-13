@@ -106,6 +106,8 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       date: 'sábado, 22 de agosto de 2026',
       venue: 'UTP: Auditorio Jorge Roa Martínez, Pereira',
       attendance: '300+ asistentes esperados',
+      postponedEyebrow: 'Comunicado de la organización',
+      postponedCta: 'Leer el comunicado',
     },
     sponsors: {
       eyebrow: 'Patrocinadores Actuales',
@@ -1069,6 +1071,10 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     lightningPendingCard: 'Lightning talk',
     lightningPendingCta: 'Ver planes de patrocinio',
     registerCta: 'Inscribirse',
+    postponedBadge: 'Evento pospuesto',
+    postponedHeroBadge: 'Pospuesto indefinidamente',
+    postponedSince: 'Comunicado publicado el {date}.',
+    postponedReadCta: 'Leer el comunicado',
     subscribe: {
       copy: 'Entérate cuando se habiliten las inscripciones para el evento. ¡No te lo pierdas!',
       emailLabel: 'Correo electrónico',

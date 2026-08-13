@@ -99,6 +99,13 @@ export interface SiteTranslations {
       date: string;
       venue: string;
       attendance: string;
+      /**
+       * Used instead of `eyebrow` / `cta` while the edition is postponed; the
+       * headline and body copy come from the edition's `postponement` block,
+       * not from here. Unused in every other status.
+       */
+      postponedEyebrow: string;
+      postponedCta: string;
     };
     sponsors: {
       eyebrow: string;
@@ -711,6 +718,14 @@ export interface SiteTranslations {
     lightningPendingCta: string;
     /** Primary hero CTA when registration is open (e.g. Luma). */
     registerCta: string;
+    /** Shown wherever an edition carries `status: postponed`. */
+    postponedBadge: string;
+    /** Hero pill replacing the countdown while postponed. */
+    postponedHeroBadge: string;
+    /** Notice byline. Contains a `{date}` placeholder. */
+    postponedSince: string;
+    /** CTA pointing at the postponement notice on the edition landing. */
+    postponedReadCta: string;
     subscribe: {
       copy: string;
       emailLabel: string;

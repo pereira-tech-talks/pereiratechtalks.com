@@ -25,11 +25,23 @@ const tagline = tr(edition.data.tagline, lang);
 /**
  * Prefer localized `cardImage` (e.g. PTD 2026 bilingual promo cards).
  * Fall back to hero.src for editions without a dedicated card crop.
+ *
+ * A postponed edition shows the 16:9 share card (`postponement.ogImage`) so
+ * listings match the social preview. Square notice art is for the strip and
+ * the on-page announcement, not these 16:9 frames.
  */
-const heroSrc = edition.data.cardImage
-  ? tr(edition.data.cardImage, lang)
-  : edition.data.hero.src;
-const heroAlt = tr(edition.data.hero.alt, lang) || title;
+const postponed = edition.data.status === 'postponed';
+const postponedArt = postponed ? edition.data.postponement?.image : undefined;
+const postponedOg = postponed ? edition.data.postponement?.ogImage : undefined;
+const heroSrc =
+  (postponedOg ? tr(postponedOg, lang) : undefined) ??
+  (postponedArt ? tr(postponedArt.src, lang) : undefined) ??
+  (edition.data.cardImage
+    ? tr(edition.data.cardImage, lang)
+    : edition.data.hero.src);
+const heroAlt = postponedArt
+  ? tr(postponedArt.alt, lang)
+  : tr(edition.data.hero.alt, lang) || title;
 const url = getEditionHref(edition, lang);
 const accent =
   edition.data.brandKit?.paletteLight?.accent || 'var(--color-ptt-accent)';
@@ -44,13 +56,16 @@ const dateLabel = formatCalendarDate(new Date(date), lang);
 const statusLabels: Record<string, { en: string; es: string }> = {
   announced: { en: 'Upcoming', es: 'Próximamente' },
   'rsvp-open': { en: 'RSVP open', es: 'RSVP abierto' },
+  postponed: { en: 'Postponed', es: 'Pospuesta' },
   completed: { en: 'Past edition', es: 'Edición pasada' },
   cancelled: { en: 'Cancelled', es: 'Cancelada' },
 };
 const statusVariant = (
   status === 'announced' || status === 'rsvp-open'
     ? 'announced'
-    : status === 'cancelled'
+    : // Postponed shares the cancelled treatment (danger tint): both mean
+      // "not happening as announced". Only the label differs.
+      status === 'cancelled' || status === 'postponed'
       ? 'cancelled'
       : 'completed'
 ) as 'announced' | 'cancelled' | 'completed';

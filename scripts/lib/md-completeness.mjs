@@ -118,10 +118,20 @@ export function pageTypeOf(pagePath) {
  * page's own HTML, so "the page shows it, the twin does not" is the failure —
  * not "the section is absent from both".
  */
+/**
+ * Schedule and Speakers are conditional: a past edition renders no agenda, and
+ * an edition may deliberately withhold both (see `postponement.hideSections` in
+ * docs/features/PEREIRA_TECH_DAYS.md). The probes match the section ids emitted
+ * by `PtdScheduleSection` / `PtdSpeakersSection` and the past-edition Ponentes
+ * block, so the gate still fails when the page shows one and the twin does not.
+ */
 const PTD_SECTIONS = [
   { names: ['Hero image', 'Imagen destacada'] },
-  { names: ['Schedule', 'Agenda'] },
-  { names: ['Speakers', 'Ponentes'] },
+  { names: ['Schedule', 'Agenda'], whenHtmlHas: /id="schedule"/ },
+  {
+    names: ['Speakers', 'Ponentes'],
+    whenHtmlHas: /id="speakers"|id="ptd-speakers-title"/,
+  },
   { names: ['Venue', 'Lugar'] },
 ];
 

@@ -51,9 +51,18 @@ const sponsorRef = z.object({
   tier: sponsorTier,
 });
 
+/**
+ * `postponed` is a *reversible* state: the event is not happening on the
+ * announced date, but it is not cancelled either and will be rescheduled.
+ * All registration CTAs, countdowns, and commercial sections are suppressed at
+ * the render layer while it is set — the underlying data (dates, Luma link,
+ * sponsorship plans) stays untouched so restoring the edition is a one-line
+ * status change. See docs/features/PEREIRA_TECH_DAYS.md#postponing-an-edition.
+ */
 const eventStatus = z.enum([
   'announced',
   'rsvp-open',
+  'postponed',
   'completed',
   'cancelled',
 ]);
@@ -502,6 +511,22 @@ const pereiraTechDays = defineCollection({
           answer: i18nString,
           linkUrl: z.string().optional(),
           linkLabel: i18nStringOptional,
+          /**
+           * Overrides applied only while `status: postponed`. The original
+           * `answer`/`linkUrl` are left intact and come back automatically
+           * when the edition is restored.
+           * - `hidden: true` drops the entry entirely.
+           * - `answer` replaces the answer text **and** drops `linkUrl` /
+           *   `linkLabel`, since the link belongs to the original answer.
+           */
+          whilePostponed: z
+            .object({
+              hidden: z.boolean().default(false),
+              // Both languages required — a replacement answer must not
+              // silently degrade bilingual parity (see docs/I18N_GUIDE.md).
+              answer: i18nString.optional(),
+            })
+            .optional(),
         })
       )
       .default([]),
@@ -558,6 +583,50 @@ const pereiraTechDays = defineCollection({
     linkMeetupCom: z.string().optional(),
     linkRecording: z.string().optional(),
     status: eventStatus.default('announced'),
+    /**
+     * Public notice rendered while `status: postponed`. Ignored in every other
+     * status, so it can be left in the file after the edition is restored —
+     * useful history, zero effect. See `PtdPostponedNotice.astro`.
+     */
+    postponement: z
+      .object({
+        /** Date the postponement was announced (ISO, for the notice byline). */
+        since: z.coerce.date(),
+        headline: i18nString,
+        body: i18nString,
+        /** Short closing line, e.g. "Fuerza, Pereira. ❤️". */
+        closing: i18nStringOptional,
+        /**
+         * Square notice art for the homepage strip and the on-page
+         * announcement. `src` follows the `cardImage` convention: a plain
+         * string when one piece serves both languages, or `{ en, es }` when
+         * the artwork itself is localized (e.g. the stamp typeset per language).
+         */
+        image: z.object({ src: i18nString, alt: i18nString }).optional(),
+        /**
+         * 1200×630 share card replacing `ogImage` while postponed. Also used
+         * by 16:9 listing cards (`EditionCard`) in place of `cardImage`.
+         */
+        ogImage: i18nString.optional(),
+        /**
+         * Sections suppressed while postponed. Every one of them comes back
+         * untouched when `status` returns to `announced` / `rsvp-open`.
+         */
+        hideSections: z
+          .array(
+            z.enum([
+              'registration',
+              'countdown',
+              'pricing',
+              'subscribe',
+              'schedule',
+              'speakers',
+              'lightning',
+            ])
+          )
+          .default([]),
+      })
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });

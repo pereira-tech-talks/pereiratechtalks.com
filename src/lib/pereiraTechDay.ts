@@ -36,6 +36,12 @@ export const getLatestEdition = async (): Promise<
   return all[0];
 };
 
+/**
+ * Next edition the community can actually plan around. A postponed edition is
+ * deliberately excluded: it still has a date in the data (the one it was
+ * announced for), but nothing may promote it as upcoming — no countdown, no
+ * "next event" slot. Restoring `status` puts it back here automatically.
+ */
 export const getUpcomingEdition = async (): Promise<
   PereiraTechDay | undefined
 > => {
@@ -45,7 +51,10 @@ export const getUpcomingEdition = async (): Promise<
     const d = e.data.date;
     const t = d instanceof Date ? d.getTime() : d.start.getTime();
     return (
-      t >= now && e.data.status !== 'cancelled' && e.data.status !== 'completed'
+      t >= now &&
+      e.data.status !== 'cancelled' &&
+      e.data.status !== 'completed' &&
+      e.data.status !== 'postponed'
     );
   });
 };
@@ -164,13 +173,76 @@ export const getEditionCountdownTargets = (
   endDate: getEditionEndIso(edition),
 });
 
-/** Whether the edition is the upcoming flagship template (announced / RSVP). */
+/**
+ * Whether the edition renders with the current-edition template (as opposed to
+ * the past-edition template). A postponed edition keeps this template: the page
+ * still tells the story of the edition that was being built, minus every CTA.
+ */
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
-  edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
+  edition.data.status === 'announced' ||
+  edition.data.status === 'rsvp-open' ||
+  edition.data.status === 'postponed';
+
+/** Single source of truth for the postponed state — never compare status inline. */
+export const isPostponedEdition = (edition: PereiraTechDay): boolean =>
+  edition.data.status === 'postponed';
+
+export type PtdHideableSection = NonNullable<
+  PereiraTechDay['data']['postponement']
+>['hideSections'][number];
+
+/**
+ * Whether `section` must be suppressed right now. Only ever true while the
+ * edition is postponed *and* the section is listed in
+ * `postponement.hideSections`, so restoring the status re-enables everything.
+ */
+export const isSectionSuppressed = (
+  edition: PereiraTechDay,
+  section: PtdHideableSection
+): boolean =>
+  isPostponedEdition(edition) &&
+  (edition.data.postponement?.hideSections ?? []).includes(section);
+
+/**
+ * Registration URL to publish, or `undefined` when registration must not be
+ * offered. Gating here (rather than deleting `linkMeetupCom`) keeps the Luma
+ * link in the data for the day the edition is rescheduled, while guaranteeing
+ * it appears in no rendered HTML, `.md` twin, or JSON-LD in the meantime.
+ */
+export const getEditionRegistrationUrl = (
+  edition: PereiraTechDay
+): string | undefined =>
+  isSectionSuppressed(edition, 'registration')
+    ? undefined
+    : edition.data.linkMeetupCom;
+
+/**
+ * FAQs as they should be published, applying any `whilePostponed` overrides.
+ * Outside the postponed state this returns the authored entries verbatim.
+ */
+export const getPublishedFaqs = (
+  edition: PereiraTechDay
+): PereiraTechDay['data']['faqs'] => {
+  if (!isPostponedEdition(edition)) return edition.data.faqs;
+  return edition.data.faqs
+    .filter((faq) => !faq.whilePostponed?.hidden)
+    .map((faq) => {
+      const override = faq.whilePostponed?.answer;
+      if (!override) return faq;
+      // A replaced answer invalidates the link that belonged to the original.
+      return {
+        ...faq,
+        answer: override,
+        linkUrl: undefined,
+        linkLabel: undefined,
+      };
+    });
+};
 
 export type EditionLifecycleStatus =
   | 'announced'
   | 'rsvp-open'
+  | 'postponed'
   | 'completed'
   | 'cancelled';
 
@@ -180,6 +252,9 @@ export const resolveEditionStatus = (
   todayInTz: string = getTodayInSiteTimezone()
 ): EditionLifecycleStatus => {
   if (edition.data.status === 'cancelled') return 'cancelled';
+  // Checked before the date comparison: a postponed edition must not silently
+  // flip to "past edition" once its original date goes by.
+  if (edition.data.status === 'postponed') return 'postponed';
   if (!isCalendarDateOnOrAfterToday(getEditionStartDate(edition), todayInTz)) {
     return 'completed';
   }

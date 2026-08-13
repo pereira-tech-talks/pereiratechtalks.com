@@ -252,8 +252,10 @@ organizers:
   - katherine-lopez
   - luisa-banol
   - sergio-estrella
-collaborators:
-  - melisa-escobar
+  - melisa-escobar # moved up from `collaborators` on 2026-08-13
+# Empty on purpose — the Colaboradores section renders only when this list has
+# entries, so clearing it hides the section without a code change.
+collaborators: []
 communities:
   - name: Python Pereira
     logo: /images/communities/pypereira.png
@@ -448,6 +450,17 @@ faqs:
     linkLabel:
       en: Register on Luma
       es: Inscribirse en Luma
+    whilePostponed:
+      answer:
+        en: >-
+          Registration is closed for now. The event is postponed indefinitely,
+          so there is nothing to sign up for yet. When we have a new date we
+          will reopen registration and announce it on our channels.
+        es: >-
+          Las inscripciones están cerradas por ahora. El evento está pospuesto
+          indefinidamente, así que todavía no hay nada a lo que registrarse.
+          Cuando tengamos nueva fecha reabriremos las inscripciones y lo
+          anunciaremos por nuestros canales.
   - question:
       en: Is the event free?
       es: ¿El evento es gratuito?
@@ -460,6 +473,16 @@ faqs:
     answer:
       en: One day — Saturday, August 22, 2026.
       es: El evento es un solo día, el sábado 22 de agosto de 2026.
+    whilePostponed:
+      answer:
+        en: >-
+          It was planned as a single day, Saturday, August 22, 2026. That date
+          is no longer valid: the event is postponed indefinitely and we have
+          not set a new one yet.
+        es: >-
+          Estaba planeado como un solo día, el sábado 22 de agosto de 2026. Esa
+          fecha ya no aplica: el evento está pospuesto indefinidamente y aún no
+          tenemos una nueva.
   - question:
       en: Can I attend if I am not from UTP?
       es: ¿Si no soy de la UTP puedo asistir?
@@ -472,6 +495,16 @@ faqs:
     answer:
       en: Email pereiratechtalks@gmail.com with your interest. Sponsorship plans are on this page, and we are open to new proposals.
       es: Escríbenos a pereiratechtalks@gmail.com indicando que estás interesado en patrocinarnos. Los planes están en la sección Planes de esta página, pero estamos abiertos a nuevas propuestas.
+    whilePostponed:
+      answer:
+        en: >-
+          While the event is postponed we are not running sponsorship sales. If
+          you would like to support the community anyway, write to
+          pereiratechtalks@gmail.com — we will get back to you.
+        es: >-
+          Mientras el evento esté pospuesto no estamos gestionando patrocinios.
+          Si de todas formas quieres apoyar a la comunidad, escríbenos a
+          pereiratechtalks@gmail.com y te respondemos.
   - question:
       en: What topics will Pereira Tech Day cover?
       es: ¿Qué temas se hablarán en el Pereira Tech Day?
@@ -526,6 +559,60 @@ faqs:
     linkLabel:
       en: Read the Code of Conduct
       es: Leer el Código de Conducta
+# Registration link is intentionally KEPT while the edition is postponed: it is
+# suppressed at the render layer (`getEditionRegistrationUrl`), not deleted, so
+# rescheduling does not mean rebuilding it from memory.
 linkMeetupCom: "https://luma.com/6lo3vt4x"
-status: rsvp-open
+
+# ---------------------------------------------------------------------------
+# POSTPONED — 2026-08-13, after the earthquake in Pereira.
+#
+# TO RESTORE THIS EDITION: change `status` back to `rsvp-open` and set
+# `active: false` on src/content/notifications/ptd-2026-postponed.yaml and
+# `active: true` on src/content/notifications/ptd-2026.yaml. Nothing else.
+# The `postponement` block below is ignored in any other status and can stay
+# as a record of what happened. Full procedure:
+# docs/features/PEREIRA_TECH_DAYS.md#postponing-an-edition
+# ---------------------------------------------------------------------------
+status: postponed
+postponement:
+  since: 2026-08-13
+  headline:
+    es: Pereira Tech Day queda pospuesto indefinidamente
+    en: Pereira Tech Day is postponed indefinitely
+  body:
+    es: >-
+      Debido a los hechos ocurridos en nuestra ciudad, Pereira Tech Day queda
+      pospuesto indefinidamente. Hoy nuestra prioridad es acompañar, apoyar y
+      estar con nuestra comunidad.
+    en: >-
+      Following the events in our city, Pereira Tech Day is postponed
+      indefinitely. Right now our priority is to accompany, support, and stand
+      with our community.
+  closing:
+    es: Fuerza, Pereira. ❤️
+    en: Fuerza, Pereira. ❤️
+  # Localized artwork — the stamp is typeset per language.
+  image:
+    src:
+      es: /images/pereira-tech-days/2026/postponed.webp
+      en: /images/pereira-tech-days/2026/postponed-en.webp
+    alt:
+      es: >-
+        Pieza gráfica de Pereira Tech Day con el sello "Se pospone
+        indefinidamente" sobre la ilustración del mono aullador
+      en: >-
+        Pereira Tech Day artwork stamped "Postponed indefinitely" over the
+        howler monkey illustration
+  ogImage:
+    es: /images/pereira-tech-days/2026/postponed-og.jpg
+    en: /images/pereira-tech-days/2026/postponed-og-en.jpg
+  # Everything listed here returns automatically when `status` is restored.
+  hideSections:
+    - registration # "Inscribirse" CTA + Luma link
+    - countdown # live countdown to the announced date
+    - pricing # sponsorship plans + Vaki
+    - schedule # tentative agenda timeline
+    - speakers # line-up grid
+    - lightning # lightning talks (incl. the "to be announced" ghost cards)
 draft: false

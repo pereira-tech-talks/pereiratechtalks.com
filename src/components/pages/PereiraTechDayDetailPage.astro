@@ -20,6 +20,7 @@ import PtdHero2026 from '@/components/pereira-tech-days/PtdHero2026.astro';
 import PtdJoinSection from '@/components/pereira-tech-days/PtdJoinSection.astro';
 import PtdKeynoteQuoteCard from '@/components/pereira-tech-days/PtdKeynoteQuoteCard.astro';
 import PtdLightningSection from '@/components/pereira-tech-days/PtdLightningSection.astro';
+import PtdPostponedNotice from '@/components/pereira-tech-days/PtdPostponedNotice.astro';
 import PtdPricingSection from '@/components/pereira-tech-days/PtdPricingSection.astro';
 import PtdScheduleSection from '@/components/pereira-tech-days/PtdScheduleSection.svelte';
 import PtdSpeakersSection from '@/components/pereira-tech-days/PtdSpeakersSection.svelte';
@@ -35,10 +36,14 @@ import {
   getEditionEndIso,
   getEditionFontPackages,
   getEditionHref,
+  getEditionRegistrationUrl,
   getEditionStartDate,
   getEditionStartIso,
   getEditions,
+  getPublishedFaqs,
   getUpcomingLandingChrome,
+  isPostponedEdition,
+  isSectionSuppressed,
   isUpcomingEdition,
   normalizeLightningTalks,
 } from '@/lib/pereiraTechDay';
@@ -66,13 +71,37 @@ const title = tr(edition.data.title, lang);
 const tagline = tr(edition.data.tagline, lang);
 const description = tr(edition.data.description, lang);
 const heroSrc = edition.data.hero.src;
-const ogImageSrc = edition.data.ogImage
-  ? tr(edition.data.ogImage, lang)
-  : edition.data.cardImage
-    ? tr(edition.data.cardImage, lang)
-    : heroSrc;
+/**
+ * Share card. While postponed the promotional card would announce an event
+ * that is not happening in every social preview, so the notice art wins.
+ */
+const postponedOgImage =
+  edition.data.status === 'postponed'
+    ? edition.data.postponement?.ogImage
+    : undefined;
+const ogImageSrc =
+  (postponedOgImage ? tr(postponedOgImage, lang) : undefined) ??
+  (edition.data.ogImage
+    ? tr(edition.data.ogImage, lang)
+    : edition.data.cardImage
+      ? tr(edition.data.cardImage, lang)
+      : heroSrc);
 const upcomingTemplate = isUpcomingEdition(edition);
 const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
+
+/**
+ * Postponed state. Every suppression below is derived from these two helpers —
+ * there is no per-year branching, so restoring `status` in the edition YAML
+ * restores the full page with no code change.
+ */
+const postponed = isPostponedEdition(edition);
+const postponement = edition.data.postponement;
+const registrationUrl = getEditionRegistrationUrl(edition);
+const showCountdown = !isSectionSuppressed(edition, 'countdown');
+const showPricing = !isSectionSuppressed(edition, 'pricing');
+const showSchedule = !isSectionSuppressed(edition, 'schedule');
+const showSpeakers = !isSectionSuppressed(edition, 'speakers');
+const showLightning = !isSectionSuppressed(edition, 'lightning');
 
 const startDate = getEditionStartDate(edition);
 const endIso = getEditionEndIso(edition);
@@ -150,9 +179,15 @@ const scheduleSlots = buildScheduleView(edition.data.schedule, {
 });
 const sessionSlots = scheduleSlots.filter((slot) => slot.session);
 
-/** Header anchor — only offered once the edition actually has an agenda. */
+/**
+ * Header anchor — only offered once the edition actually has an agenda, and
+ * never while postponed. It feeds both the edition header nav and the hero's
+ * secondary "ver cronograma" CTA; a postponed edition offers no calls to
+ * action, even navigational ones. The agenda section itself stays on the page
+ * as the record of what was planned — it is simply not advertised.
+ */
 const scheduleAnchors =
-  upcomingTemplate && scheduleSlots.length > 0
+  upcomingTemplate && !postponed && showSchedule && scheduleSlots.length > 0
     ? [{ href: '#schedule', label: t.scheduleAnchor }]
     : [];
 
@@ -170,7 +205,7 @@ const scheduleLabels = {
 
 const metaDescription = (description || tagline).slice(0, 160);
 
-const faqs = edition.data.faqs.map((faq) => ({
+const faqs = getPublishedFaqs(edition).map((faq) => ({
   ...faq,
   linkUrl: faq.linkUrl
     ? faq.linkUrl.startsWith('http')
@@ -189,8 +224,8 @@ const eventJsonLd: Record<string, unknown> = {
   eventStatus:
     status === 'cancelled'
       ? 'https://schema.org/EventCancelled'
-      : status === 'completed'
-        ? 'https://schema.org/EventScheduled'
+      : status === 'postponed'
+        ? 'https://schema.org/EventPostponed'
         : 'https://schema.org/EventScheduled',
   eventAttendanceMode:
     edition.data.mode === 'virtual'
@@ -277,8 +312,10 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           logoSrc="/images/pereira-tech-days/2026/logo.png"
           targetDate={startIso}
           endDate={endIso}
-          registrationUrl={edition.data.linkMeetupCom}
+          registrationUrl={registrationUrl}
           scheduleAnchor={scheduleAnchors[0]?.href}
+          postponed={postponed}
+          showCountdown={showCountdown}
         />
       ) : (
         <PtdHero2024
@@ -296,6 +333,17 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
         />
       )
     }
+
+    {
+      /**
+       * Directly under the hero, above everything else: the postponement is
+       * the first thing a visitor must read. Renders only when the edition
+       * carries both `status: postponed` and a `postponement` block.
+       */
+    }
+    {postponed && postponement && (
+      <PtdPostponedNotice lang={lang} postponement={postponement} />
+    )}
 
     {
       upcomingTemplate && (
@@ -325,7 +373,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
        */
     }
     {
-      upcomingTemplate && scheduleSlots.length > 0 && (
+      upcomingTemplate && showSchedule && scheduleSlots.length > 0 && (
         <PtdScheduleSection
           client:visible
           title={t.schedule}
@@ -338,7 +386,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
-      upcomingTemplate && sessionSlots.length > 0 && (
+      upcomingTemplate && showSpeakers && sessionSlots.length > 0 && (
         <PtdSpeakersSection
           client:visible
           title={t.speakers}
@@ -386,7 +434,8 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
        */
     }
     {
-      (lightningSpeakers.length > 0 || upcomingTemplate) && (
+      showLightning &&
+        (lightningSpeakers.length > 0 || upcomingTemplate) && (
         <PtdLightningSection
           lang={lang}
           title={t.lightningTitle}
@@ -419,7 +468,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
     }
 
     {
-      upcomingTemplate && edition.data.sponsorshipPlans.length > 0 && (
+      upcomingTemplate && showPricing && edition.data.sponsorshipPlans.length > 0 && (
         <PtdPricingSection
           lang={lang}
           title={t.pricing}

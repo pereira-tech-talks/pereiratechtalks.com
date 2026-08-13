@@ -61,12 +61,13 @@ const pereiraTechDays = defineCollection({
     expectedAttendance: i18nStringOptional,
     aboutTopics: z.array(i18nString).default([]),
     aboutMedia: z.object({ src: z.string(), alt: i18nStringOptional }).optional(),
-    faqs: z.array(faqItem).default([]),
+    faqs: z.array(faqItem).default([]),       // faqItem supports `whilePostponed` overrides
     sponsorshipPlans: z.array(sponsorshipPlan).default([]),
     extraPartnerships: z.array(partnership).default([]),
     communities: z.array(z.object({ name: z.string(), logo: z.string(), url: z.string().optional() })).default([]),
     gallery: z.array(z.object({ src: z.string(), alt: i18nStringOptional, caption: i18nStringOptional })).default([]),
-    status: eventStatus.default('announced'), // announced | rsvp-open | completed | cancelled
+    status: eventStatus.default('announced'), // announced | rsvp-open | postponed | completed | cancelled
+    postponement: postponementNotice.optional(), // see § Postponing an edition
     draft: z.boolean().default(false),
   }),
 });
@@ -216,8 +217,14 @@ The former hub used `PtdHubFeaturedStage` + `PtdHubPastRow`; those components we
 
 ```typescript
 export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
-  edition.data.status === 'announced' || edition.data.status === 'rsvp-open';
+  edition.data.status === 'announced' ||
+  edition.data.status === 'rsvp-open' ||
+  edition.data.status === 'postponed';
 ```
+
+A **postponed** edition keeps the upcoming template on purpose — the page still
+tells the story of the edition that was being built, minus every call to action.
+See [Postponing an edition](#postponing-an-edition).
 
 `PereiraTechDayDetailPage.astro` computes `const upcomingTemplate = isUpcomingEdition(edition);` once and threads it through every conditional section. Section order contract (documented inline in the component):
 
@@ -240,6 +247,137 @@ export const isUpcomingEdition = (edition: PereiraTechDay): boolean =>
 `*` — only renders when that edition actually has matching data (e.g. no lightning talks → section omitted entirely). Sponsors, Organiza, and team grids are **shared** between both templates (template-agnostic primitives); what differs is the hero, about-vs-ponentes, pricing-vs-nothing, and the gallery's carousel-vs-marquee mode.
 
 Do not add a third template variant or branch new sections on `edition.data.year` — extend `isUpcomingEdition()`'s status semantics instead if a new lifecycle state is needed.
+
+## Postponing an edition
+
+An edition that is not happening on its announced date — but is not cancelled
+either — uses `status: postponed`. It is designed as a **reversible switch**:
+nothing is deleted, so restoring the edition is a status change, not a rebuild.
+
+### Design rule
+
+> Suppress at the **render layer**, never by deleting data.
+
+The registration URL, the announced date, the countdown targets, the
+sponsorship plans, and the full agenda all stay in the edition YAML. Helpers in
+`src/lib/pereiraTechDay.ts` decide what may be published:
+
+| Helper | Purpose |
+|---|---|
+| `isPostponedEdition(edition)` | Single source of truth for the state — never compare `status` inline |
+| `isSectionSuppressed(edition, section)` | Whether a section listed in `postponement.hideSections` must be withheld right now |
+| `getEditionRegistrationUrl(edition)` | The Luma link, or `undefined` while postponed — the **only** way components may read `linkMeetupCom` |
+| `getPublishedFaqs(edition)` | FAQs with `whilePostponed` overrides applied |
+| `getUpcomingEdition()` | Excludes postponed editions, so nothing promotes one as "next" |
+| `resolveEditionStatus(edition)` | Returns `postponed` **before** the date comparison, so a postponed edition never silently flips to "past edition" once its original date passes |
+
+### Schema
+
+```yaml
+status: postponed
+postponement:
+  since: 2026-08-13            # announcement date, shown in the notice byline
+  headline: { es: …, en: … }   # one-line statement
+  body:     { es: …, en: … }   # the announcement copy
+  closing:  { es: …, en: … }   # optional, e.g. "Fuerza, Pereira. ❤️"
+  image:                       # square notice art (strip + on-page announcement)
+    src: { es: …/postponed.webp, en: …/postponed-en.webp }
+    alt: { es: …, en: … }
+  ogImage: { es: …/postponed-og.jpg, en: …/postponed-og-en.jpg }  # 1200×630; also EditionCard
+  hideSections: [registration, countdown, pricing, schedule, speakers, lightning]
+```
+
+`image.src` and `ogImage` follow the `cardImage` convention — a plain string
+when one piece serves both languages, or `{ en, es }` when the artwork itself is
+localized (the postponement stamp is typeset per language).
+
+`hideSections` accepts:
+
+| Value | Suppresses |
+|---|---|
+| `registration` | The *Inscribirse* CTA and the Luma link, everywhere including the `.md` twin |
+| `countdown` | The live countdown in the hero and the homepage strip |
+| `pricing` | `PtdPricingSection` — sponsorship plans and the Vaki |
+| `subscribe` | The "notify me when registration opens" form |
+| `schedule` | `PtdScheduleSection`, the *ver cronograma* anchor, and the agenda in the `.md` twin |
+| `speakers` | `PtdSpeakersSection` (line-up grid) and the speaker list in the `.md` twin |
+| `lightning` | `PtdLightningSection`, including its "to be announced" ghost cards |
+
+Suppression reaches the `.md` twin as well — it mirrors what the site
+publishes, not the raw entry. `scripts/lib/md-completeness.mjs` therefore treats
+the Schedule and Speakers sections as **conditional** (`whenHtmlHas`), so the
+gate still fails when the page renders one and the twin omits it, but does not
+demand a section neither surface shows.
+
+The `postponement` block is **ignored in every other status**, so it can be left
+in the file after the edition is restored as a record of what happened.
+
+Individual FAQ entries opt into postponed-state copy without losing the
+original:
+
+```yaml
+- question: { es: ¿Cómo puedo registrarme?, en: How can I register? }
+  answer:   { es: Las inscripciones están abiertas…, en: Registration is open… }
+  linkUrl: "https://luma.com/…"
+  whilePostponed:
+    answer: { es: Las inscripciones están cerradas…, en: Registration is closed… }
+    # `hidden: true` drops the entry instead.
+```
+
+A `whilePostponed.answer` replaces the answer **and** drops `linkUrl` /
+`linkLabel`, since the link belonged to the original answer. Both languages are
+required — a postponement must not degrade bilingual parity.
+
+### What the postponed state changes
+
+| Surface | Behaviour |
+|---|---|
+| `PtdHero2026` | Eyebrow becomes the postponed badge; date/venue/attendance withheld; countdown replaced by a status pill; register CTA gone |
+| `scheduleAnchors` | Empty, so the *ver cronograma* CTA disappears from both the edition header nav and the hero. The agenda section stays on the page — it is simply not advertised |
+| `PtdPostponedNotice` | Rendered directly under the hero, above every other section |
+| `PtdAnnouncementStrip` (homepage) | Switches from promo to notice: notice art, announcement copy, no countdown, CTA deep-links to `#postponed` |
+| `EditionCard` | `Pospuesta` / `Postponed` badge in the danger tint; `postponement.ogImage` replaces the promo card |
+| JSON-LD | `eventStatus: https://schema.org/EventPostponed` |
+| `og:image` | `postponement.ogImage`, so social previews stop announcing the event |
+| `.md` twin | Carries an `Aviso` / `Notice` line above the metadata and omits the registration link |
+| Sitewide notification | `ptd-{year}.yaml` set `active: false`; `ptd-{year}-postponed.yaml` set `active: true` |
+
+Everything else — agenda, line-up, sponsors wall, team, communities, FAQ — is
+deliberately preserved as the record of what was being built.
+
+### Postponing an edition (checklist)
+
+1. Set `status: postponed` in `src/content/pereiraTechDays/{year}.yaml`.
+2. Add the `postponement` block, including `hideSections`.
+3. Add `whilePostponed` overrides to any FAQ that promises a date, a
+   registration, or a hidden section.
+4. Stage the notice art:
+   `public/images/pereira-tech-days/{year}/postponed.webp` (square) and
+   `postponed-og.jpg` (1200×630 — letterbox the square on the edition
+   background rather than centre-cropping it, so the stamp survives).
+5. Create `src/content/notifications/ptd-{year}-postponed.yaml` (`active: true`)
+   and set `active: false` on the promotional `ptd-{year}.yaml`. Do **not**
+   delete the promotional file.
+6. Update the page twins `src/content/pages/{en,es}/pereira-tech-day.md`.
+7. Verify: `pnpm run build`, then confirm the registration URL appears in
+   **zero** files under `dist/` and no countdown island is emitted.
+
+### Restoring an edition (checklist)
+
+This is the reverse, and it is intentionally short:
+
+1. Set `status` back to `rsvp-open` (or `announced`) in the edition YAML.
+2. Set `active: false` on `ptd-{year}-postponed.yaml` and `active: true` on
+   `ptd-{year}.yaml`.
+3. Update the date fields if the edition was rescheduled (`date`, `startTime`,
+   `endTime`, and the `homeSections.ptdStrip.*` strings in
+   `src/lib/translations/{en,es}.ts`).
+4. Revert the status note in `src/content/pages/{en,es}/pereira-tech-day.md`.
+
+Steps 1–2 alone bring back the register CTA, the countdown, the sponsorship
+plans, the promo art, the original FAQ answers, the `EventScheduled` JSON-LD,
+and the promotional strip. `postponement`, `whilePostponed`, and the notice
+images can stay in place — they go inert.
 
 ## `EditionScope` + PTT chrome rule
 
@@ -283,6 +421,7 @@ Removed with the hub index. Public entry is now the singular landing + year arch
 | `PtdGalleryCarousel.svelte` | Svelte (`client:visible`) | Both | `mode="carousel"` (upcoming, single-frame + thumbnails) or `mode="marquee"` (past, infinite duplicated CSS track, pauses on hover/focus, static grid fallback under `prefers-reduced-motion`) |
 | `PtdFaqs.svelte` | Svelte (`client:visible`) | Both | `open-grid` (upcoming always-open) or `accordion` (past); optional section background |
 | `PtdJoinSection.astro` | Astro | Upcoming | Illustration + cream fade, split coral title; detail page passes `showCta={false}` |
+| `PtdPostponedNotice.astro` | Astro | Postponed | Announcement card (notice art + headline + body + closing) rendered directly under the hero; renders only when `status: postponed` **and** a `postponement` block is present. See [Postponing an edition](#postponing-an-edition) |
 | `PtdCountdown.svelte` | Svelte (`client:visible`) | `PtdHero2026` (edition), homepage strip | `variant="edition"`: discrete white cards with Bebas numerals; `variant="hub"`: discrete cream cards using `--ptd-hub-*` |
 | `PtdSubscribeForm.svelte` | Svelte (`client:visible`) | `PtdHero2026` | Unboxed italic copy + cyan→teal gradient CTA; honeypot + `EVENTS.PTD_SUBSCRIBE` |
 
@@ -310,7 +449,7 @@ Use the `/add-ptd-edition` skill (mandatory — do not hand-roll a new edition e
 ## Validation checklist
 
 - [ ] Edition entry validates against the `pereiraTechDays` Zod schema (`pnpm run astro:check`)
-- [ ] `status` correctly reflects `isUpcomingEdition()` intent (`announced`/`rsvp-open` → upcoming template; `completed` → past template)
+- [ ] `status` correctly reflects `isUpcomingEdition()` intent (`announced`/`rsvp-open`/`postponed` → upcoming template; `completed` → past template)
 - [ ] `brandKit.paletteLight` (and `paletteDark` if used) clear WCAG AA on body text — see [Accessibility Guide](../ACCESSIBILITY.md)
 - [ ] Chrome (header/footer/lang switcher/theme toggle) stays outside `EditionScope` — verify by inspecting rendered HTML, not just visually
 - [ ] `lightningTalks` speaker slugs resolve against `src/content/speakers/`
