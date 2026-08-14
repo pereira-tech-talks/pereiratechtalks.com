@@ -332,10 +332,10 @@ required — a postponement must not degrade bilingual parity.
 
 | Surface | Behaviour |
 |---|---|
-| `PtdHero2026` | Eyebrow becomes the postponed badge; date/venue/attendance withheld; countdown replaced by a status pill; register CTA gone |
+| `PtdHero2026` | Eyebrow becomes the postponed badge; date/venue/attendance withheld; countdown replaced by a status pill; register CTA replaced by a link to the solidarity blog post |
 | `scheduleAnchors` | Empty, so the *ver cronograma* CTA disappears from both the edition header nav and the hero. The agenda section stays on the page — it is simply not advertised |
-| `PtdPostponedNotice` | Rendered directly under the hero, above every other section |
-| `PtdAnnouncementStrip` (homepage) | Switches from promo to notice: notice art, announcement copy, no countdown, CTA deep-links to `#postponed` |
+| `PtdPostponedNotice` | Rendered directly under the hero, above every other section; CTA to the solidarity blog post |
+| `PtdAnnouncementStrip` (homepage) | Switches from promo to notice: notice art, announcement copy, no countdown, CTA to the solidarity blog post |
 | `EditionCard` | `Pospuesta` / `Postponed` badge in the danger tint; `postponement.ogImage` replaces the promo card |
 | JSON-LD | `eventStatus: https://schema.org/EventPostponed` |
 | `og:image` | `postponement.ogImage`, so social previews stop announcing the event |
@@ -343,7 +343,9 @@ required — a postponement must not degrade bilingual parity.
 | Sitewide notification | `ptd-{year}.yaml` set `active: false`; `ptd-{year}-postponed.yaml` set `active: true` |
 
 Everything else — agenda, line-up, sponsors wall, team, communities, FAQ — is
-deliberately preserved as the record of what was being built.
+deliberately preserved as the record of what was being built. Decorative
+section photo backgrounds are omitted while postponed so they do not contend
+with the hero for bandwidth.
 
 ### Postponing an edition (checklist)
 

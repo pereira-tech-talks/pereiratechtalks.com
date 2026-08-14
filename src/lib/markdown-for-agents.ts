@@ -901,6 +901,8 @@ export function serializeEditionToMarkdown(
         ...(data.postponement.closing ? ['', data.postponement.closing] : []),
         '',
         data.postponement.sinceLabel,
+        '',
+        `[${data.postponement.announcementCta}](${data.postponement.announcementHref})`,
       ],
     });
   }

@@ -11,6 +11,7 @@ import type { Language } from '@/lib/i18n';
 import {
   getEditionStartDate,
   getEditions,
+  isPostponedEdition,
   isUpcomingEdition,
   type PereiraTechDay,
 } from '@/lib/pereiraTechDay';
@@ -75,7 +76,8 @@ const getShowcaseItemDate = (item: MeetupShowcaseItem): Date =>
 
 /**
  * Upcoming meetups plus the flagship Pereira Tech Day when it stands in for
- * the monthly meetup of its calendar month (e.g. August 2026).
+ * the monthly meetup of its calendar month (e.g. August 2026). A postponed
+ * edition is excluded: it is not an upcoming gathering.
  */
 export const buildUpcomingMeetupShowcase = (
   meetups: Meetup[],
@@ -94,6 +96,7 @@ export const buildUpcomingMeetupShowcase = (
   const flagship = editions.find(
     (edition) =>
       isUpcomingEdition(edition) &&
+      !isPostponedEdition(edition) &&
       isCalendarDateOnOrAfterToday(getEditionStartDate(edition), todayInTz)
   );
 

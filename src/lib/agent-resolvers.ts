@@ -30,6 +30,7 @@ import {
 import {
   getEditionRegistrationUrl,
   getEditions,
+  getPostponementAnnouncementHref,
   getPublishedFaqs,
   isSectionSuppressed,
   type PereiraTechDay,
@@ -466,6 +467,8 @@ export interface ResolvedEditionDetail {
     closing?: string;
     /** Pre-formatted byline, e.g. "Comunicado publicado el 13 de agosto de 2026." */
     sinceLabel: string;
+    announcementHref: string;
+    announcementCta: string;
   };
   gallery: Array<{ src: string; alt: string; caption: string }>;
   links: Array<{ label: string; url: string }>;
@@ -543,6 +546,8 @@ export const resolveEditionDetail = async (
               '{date}',
               formatCalendarDate(d.postponement.since, lang)
             ),
+            announcementHref: getPostponementAnnouncementHref(lang),
+            announcementCta: getTranslations(lang).ptdPage.postponedReadCta,
           }
         : undefined,
     scheduleTentative: d.scheduleTentative,

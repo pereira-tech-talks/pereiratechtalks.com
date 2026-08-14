@@ -108,7 +108,7 @@ const CREAM = '#fef7f3';
       <>
         <div
           class="ptd-hero-2026__art pointer-events-none absolute inset-0 z-0 bg-no-repeat"
-          style={`background-image: url('${heroIllustration}');`}
+          style={`--ptd-hero-art: url('${heroIllustration}')`}
           aria-hidden="true"
         />
         <div class="ptd-hero-2026__fade pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
@@ -136,6 +136,7 @@ const CREAM = '#fef7f3';
               height="98"
               class="ptd-hero-2026__logo mt-0.5 h-auto w-auto max-h-[5.25rem] shrink-0 object-contain object-left-top sm:max-h-[7rem] lg:max-h-[140px]"
               loading="eager"
+              fetchpriority="high"
               decoding="async"
             />
           )
@@ -372,7 +373,7 @@ const CREAM = '#fef7f3';
       }
 
       {
-        heroIllustration && (
+        heroIllustration && !postponed && (
           <div class="mt-8 w-full sm:hidden" aria-hidden="true">
             <img
               src="/images/pereira-tech-days/2026/hero-illustration-mobile.webp"
@@ -381,7 +382,8 @@ const CREAM = '#fef7f3';
               height="510"
               class="mx-auto max-h-64 w-auto object-contain"
               loading="eager"
-              decoding="async"
+              fetchpriority="high"
+              decoding="sync"
             />
           </div>
         )
@@ -404,10 +406,13 @@ const CREAM = '#fef7f3';
     }
   }
 
-  /* Illustration — dominant but not overwhelming; mild shrink only at wide desktops. */
-  .ptd-hero-2026__art {
-    background-position: 100% 48%;
-    background-size: auto 90%;
+  /* Desktop illustration — scoped to lg+ so mobile does not download it. */
+  @media (min-width: 1024px) {
+    .ptd-hero-2026__art {
+      background-image: var(--ptd-hero-art);
+      background-position: 100% 48%;
+      background-size: auto 90%;
+    }
   }
 
   .ptd-hero-2026__fade {

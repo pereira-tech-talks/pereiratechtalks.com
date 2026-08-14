@@ -13,9 +13,13 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCommunityStats } from '@/lib/community-stats';
-import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language, tr as loc } from '@/lib/i18n';
 import { getAllMeetupShowcase, groupMeetupShowcaseByYear } from '@/lib/meetup';
-import { getEditionCountdownTargets, getEditions } from '@/lib/pereiraTechDay';
+import {
+  getEditionCountdownTargets,
+  getEditions,
+  isPostponedEdition,
+} from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -38,9 +42,17 @@ const editions = await getEditions();
 const upcomingEdition = editions.find(
   (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
 );
+const postponedEdition = editions.find(isPostponedEdition);
 const ptdCountdown = upcomingEdition
   ? getEditionCountdownTargets(upcomingEdition)
   : null;
+const ptdPostponement = postponedEdition?.data.postponement;
+const ptdPostponedImage = ptdPostponement?.image
+  ? {
+      src: loc(ptdPostponement.image.src, lang),
+      alt: loc(ptdPostponement.image.alt, lang),
+    }
+  : undefined;
 
 const tr = getTranslations(lang);
 const mp = tr.meetupsPage;
@@ -142,13 +154,12 @@ const breadcrumbs = [
     </div>
 
     {/*
-      Bridge into the upcoming strip below — lives in the hero chrome only.
-      Does not modify PtdAnnouncementStrip; points at #main-after-hero.
+      Bridge into the meetup archive — not the postponement strip.
+      Pereira Tech Day is postponed and is no longer the next gathering.
     */}
     <div class="main-container pb-6 sm:pb-8">
       <a
-        href="#main-after-hero"
-        data-scroll-to-after-hero
+        href="#all-meetups"
         class="group mx-auto flex w-fit max-w-full flex-col items-center gap-2 rounded-full px-3 py-2 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
       >
         <span class="flex items-center gap-3 text-ptt-secondary">
@@ -188,18 +199,26 @@ const breadcrumbs = [
   {/* Same PTD strip as the homepage (after-hero). Calendar/upcoming cards hidden temporarily. */}
   <PtdAnnouncementStrip
     lang={lang}
-    eyebrow={hs.ptdStrip.eyebrow}
+    eyebrow={ptdPostponement ? hs.ptdStrip.postponedEyebrow : hs.ptdStrip.eyebrow}
     title={hs.ptdStrip.title}
-    subtitle={hs.ptdStrip.subtitle}
-    ctaLabel={hs.ptdStrip.cta}
+    subtitle={
+      ptdPostponement ? loc(ptdPostponement.headline, lang) : hs.ptdStrip.subtitle
+    }
+    ctaLabel={ptdPostponement ? hs.ptdStrip.postponedCta : hs.ptdStrip.cta}
     dateLabel={hs.ptdStrip.date}
     venueLabel={hs.ptdStrip.venue}
     attendanceLabel={hs.ptdStrip.attendance}
     targetDate={ptdCountdown?.targetDate}
     endDate={ptdCountdown?.endDate}
+    postponed={Boolean(ptdPostponement)}
+    postponedBody={ptdPostponement ? loc(ptdPostponement.body, lang) : undefined}
+    postponedClosing={
+      ptdPostponement ? loc(ptdPostponement.closing, lang) : undefined
+    }
+    postponedImage={ptdPostponedImage}
   />
 
-  <Section title={t.all}>
+  <Section title={t.all} id="all-meetups" class="scroll-mt-28">
     <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">
       {
         years.length > 0 && (

@@ -4,8 +4,9 @@
  *
  * Rendered directly under the hero while `status: postponed`, and nowhere
  * else — see `isPostponedEdition` in `@/lib/pereiraTechDay`. Deliberately
- * quiet: the announcement image carries the message, the copy states the
- * facts, and there is no CTA. Nothing here promises a new date.
+ * quiet: the announcement image carries the message and the copy states the
+ * facts. When `announcementHref` is set, a single CTA points at the
+ * solidarity blog post. Nothing here promises a new date.
  *
  * Uses the edition palette via `--ptt-*` (it lives inside `EditionScope`),
  * with the notice ground lifted to `--ptt-bg-elevated` so it reads as an
@@ -21,9 +22,12 @@ interface Props {
   postponement: NonNullable<
     import('astro:content').CollectionEntry<'pereiraTechDays'>['data']['postponement']
   >;
+  /** Solidarity blog post (or other announcement) for the primary CTA. */
+  announcementHref?: string;
+  announcementCta?: string;
 }
 
-const { lang, postponement } = Astro.props;
+const { lang, postponement, announcementHref, announcementCta } = Astro.props;
 const t = getTranslations(lang).ptdPage;
 
 const headline = tr(postponement.headline, lang);
@@ -49,8 +53,9 @@ const sinceLabel = formatCalendarDate(postponement.since, lang);
             alt={tr(image.alt, lang)}
             width="1200"
             height="1200"
-            loading="eager"
+            loading="lazy"
             decoding="async"
+            fetchpriority="low"
             class="mx-auto w-full max-w-xs shrink-0 rounded-[var(--ptd-card-radius,1rem)] md:mx-0 md:w-56 lg:w-64"
           />
         )
@@ -79,6 +84,31 @@ const sinceLabel = formatCalendarDate(postponement.since, lang);
             <p class="mt-4 text-lg font-bold text-[var(--ptt-accent)] sm:text-xl">
               {closing}
             </p>
+          )
+        }
+
+        {
+          announcementHref && announcementCta && (
+            <a
+              href={announcementHref}
+              class="mt-6 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-[var(--ptt-primary)] px-8 py-3 text-base font-bold tracking-wide text-white transition-[transform,opacity] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:text-lg"
+            >
+              {announcementCta}
+              <svg
+                aria-hidden="true"
+                class="h-5 w-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.25"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M5 12h14M13 6l6 6-6 6"
+                />
+              </svg>
+            </a>
           )
         }
 

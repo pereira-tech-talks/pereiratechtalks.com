@@ -726,7 +726,7 @@ export interface SiteTranslations {
     postponedHeroBadge: string;
     /** Notice byline. Contains a `{date}` placeholder. */
     postponedSince: string;
-    /** CTA pointing at the postponement notice on the edition landing. */
+    /** CTA pointing at the solidarity blog post. */
     postponedReadCta: string;
     subscribe: {
       copy: string;

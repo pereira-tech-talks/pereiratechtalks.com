@@ -16,6 +16,8 @@ There is no new date and registration is closed. We will announce any updates th
 
 Fuerza, Pereira. ❤️
 
+[Read the announcement](/en/blog/ptd-2026-postponed-earthquake-solidarity/)
+
 ## Canonical landing
 
 - [/en/pereira-tech-day](/en/pereira-tech-day) — alias of the current edition (2026). Used by nav, footer, and primary CTAs.

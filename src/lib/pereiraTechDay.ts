@@ -266,6 +266,14 @@ export const resolveEditionStatus = (
 /** Singular public landing slug for the current/upcoming flagship edition. */
 export const PTD_LANDING_SLUG = 'pereira-tech-day';
 
+/** Solidarity announcement for the 2026 postponement. */
+export const PTD_2026_POSTPONEMENT_BLOG_SLUG =
+  'ptd-2026-postponed-earthquake-solidarity';
+
+/** Localized href for the 2026 postponement blog post. */
+export const getPostponementAnnouncementHref = (lang: Language): string =>
+  `${getUrlPrefix(lang)}/blog/${PTD_2026_POSTPONEMENT_BLOG_SLUG}/`;
+
 /** Href for the singular landing (`/pereira-tech-day` or `/en/pereira-tech-day`). */
 export const getPtdLandingHref = (lang: Language): string =>
   `${getUrlPrefix(lang)}/${PTD_LANDING_SLUG}/`;

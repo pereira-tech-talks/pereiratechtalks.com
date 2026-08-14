@@ -8,7 +8,7 @@ lastUpdated: 2026-08-07
 
 **Pereira Tech Talks (PTT)** is the technology community of Pereira (Risaralda, Colombia). 90+ monthly meetups since 2014. Pereira Tech Day (2024 archive; 2026 postponed indefinitely). An active Speaker School. La Biblioteca del Mañana reading club. A content library where Pereira's tech community ships to YC startups, conference stages across Latin America, and global engineering roles.
 
-**Pereira Tech Day 2026:** postponed indefinitely after the earthquake of 10 August 2026. The planned venue was UTP (Auditorio Jorge Roa Martínez). Mutual aid: [Corag Ayuda directa](https://corag-ayuda-directa.vercel.app) · [Ayudas Pereira](https://ayudaspereira.com).
+**Pereira Tech Day 2026:** postponed indefinitely after the earthquake of 10 August 2026. The planned venue was UTP (Auditorio Jorge Roa Martínez). [Read the announcement](/en/blog/ptd-2026-postponed-earthquake-solidarity/). Mutual aid: [Corag Ayuda directa](https://corag-ayuda-directa.vercel.app) · [Ayudas Pereira](https://ayudaspereira.com).
 
 ---
 
@@ -21,7 +21,7 @@ We are an interdisciplinary community that connects local and regional talent �
 ## What we do
 
 - **Monthly Meetups** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of building software.
-- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners. 2024 archived; 2026 next.
+- **Pereira Tech Day** — Our flagship annual conference: a full day of keynotes, workshops, and networking with international speakers and local partners. 2024 archived; [2026 postponed indefinitely](/en/blog/ptd-2026-postponed-earthquake-solidarity/).
 - **Speaker School** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals. Alumni now keynote in Bogotá, Medellín, and Mexico City.
 - **La Biblioteca del Mañana** — A reading club connecting technology with science fiction, philosophy, and the broader human story.
 - **AI & Agents Channel** — A dedicated track on AI, LLMs, agents, and the agentic web — where the community meets the most disruptive technology of the decade.

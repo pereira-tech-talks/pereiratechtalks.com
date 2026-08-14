@@ -11,8 +11,8 @@
 import '@fontsource/bebas-neue';
 
 import PtdCountdown from '@/components/pereira-tech-days/PtdCountdown.svelte';
-import type { Language } from '@/lib/i18n';
-import { getUrlPrefix } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getPostponementAnnouncementHref } from '@/lib/pereiraTechDay';
 
 interface Props {
   lang: Language;
@@ -58,11 +58,10 @@ const {
 } = Astro.props;
 const prefix = getUrlPrefix(lang);
 /**
- * Canonical landing. While postponed it deep-links to the notice so the CTA
- * lands on the announcement rather than the top of the edition page.
+ * Canonical landing. While postponed it points at the solidarity blog post.
  */
 const href = postponed
-  ? `${prefix}/pereira-tech-day/#postponed`
+  ? getPostponementAnnouncementHref(lang)
   : `${prefix}/pereira-tech-days/2026/`;
 
 /** Matches PTD 2026 brandKit / PtdHero2026 (light only). */
