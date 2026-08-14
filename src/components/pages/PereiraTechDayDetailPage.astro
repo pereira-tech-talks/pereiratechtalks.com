@@ -291,8 +291,9 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
        *   -> Organiza -> Organizadores -> Colaboradores -> Talks* -> FAQ*
        * (* only renders when that edition actually has matching data)
        *
-       * Postponed (`cancelled`): hero + blog CTA only. YAML sections stay in
-       * content so the landing can reopen without rewriting data.
+       * Postponed: hero + PtdPostponedNotice, then sections not listed in
+       * `postponement.hideSections`. YAML stays so restoring `status` reopens
+       * the landing without rewriting data.
        */
     }
     {

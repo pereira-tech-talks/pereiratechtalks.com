@@ -1,3 +1,9 @@
+# Mutual-aid notice (Corag / Ayudas Pereira).
+#
+# DISABLED while `ptd-2026-postponed.yaml` owns the sitewide bar (priority 200,
+# CTA → /pereira-tech-day/#postponed). The bar shows one notification; running
+# both would hide this one anyway. Aid links live in the solidarity blog post.
+# Kept intact so it can be flipped back without rewriting copy.
 severity: important
 title:
   en: Pereira Tech Day postponed
@@ -31,4 +37,4 @@ modalEnabled: true
 startsAt: 2026-08-10T00:00:00.000Z
 endsAt: 2026-12-31T23:59:59.000Z
 priority: 100
-active: true
+active: false

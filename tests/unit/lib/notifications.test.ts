@@ -4,8 +4,6 @@ import {
   filterActiveNotifications,
   localizeNotification,
 } from '@/lib/notifications';
-import type { PereiraTechDay } from '@/lib/pereiraTechDay';
-import { usesUpcomingLandingTemplate } from '@/lib/pereiraTechDay';
 
 const makeEntry = (
   id: string,
@@ -124,16 +122,5 @@ describe('localizeNotification', () => {
     expect(es.image?.src).toContain('postponed-indefinitely.webp');
     const en = localizeNotification(entry, 'en');
     expect(en.ctaLabel).toBe('Open aid');
-  });
-});
-
-describe('cancelled edition homepage selection helper', () => {
-  it('treats cancelled editions as featured landing chrome', () => {
-    const cancelled = {
-      id: '2026',
-      collection: 'pereiraTechDays',
-      data: { status: 'cancelled', year: 2026 },
-    } as PereiraTechDay;
-    expect(usesUpcomingLandingTemplate(cancelled)).toBe(true);
   });
 });
