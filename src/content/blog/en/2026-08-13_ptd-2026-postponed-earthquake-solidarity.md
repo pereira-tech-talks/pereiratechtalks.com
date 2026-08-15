@@ -35,8 +35,8 @@ UTP was our planned home for the day: Auditorio Jorge Roa Martínez. The univers
 From that official communication: the priority is the safety and well-being of the university community. Work includes a needs census, structural evaluations, remote academic and administrative continuity, and a progressive return once spaces are certified. **Campus entry is currently restricted.** Follow **official UTP channels only** for campus status — not rumors in group chats.
 
 <figure>
-  <img src="/images/blog/posts/ptd-2026-postponed-earthquake-solidarity/utp-recovery-route.webp" alt="UTP recovery route infographic after the earthquake: needs census, safety evaluation, remote continuity, progressive return, and normalization" width="1024" height="576" loading="lazy" />
-  <figcaption>UTP recovery route summary — verify details on the university’s <a href="https://comunicaciones.utp.edu.co/115893/sin-categoria/comunicado-a-la-opinion-publica-8/">official comunicado</a>.</figcaption>
+  <img src="/images/blog/posts/ptd-2026-postponed-earthquake-solidarity/utp-recovery-route-en.webp" alt="UTP recovery roadmap after the earthquake: needs assessment, safety evaluation, remote continuity, progressive return, and normalization" width="1024" height="576" loading="lazy" />
+  <figcaption>UTP recovery roadmap summary — verify details on the university’s <a href="https://comunicaciones.utp.edu.co/115893/sin-categoria/comunicado-a-la-opinion-publica-8/">official comunicado</a>.</figcaption>
 </figure>
 
 We attribute campus and recovery claims to UTP. If the university updates the comunicado, treat that page as the source of truth.
