@@ -5,9 +5,11 @@ import {
   getLanguageConfig,
   getSupportedLanguages,
   getUrlPrefix,
+  type Language,
   stripLangPrefix,
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
+import { getPostponementAnnouncementHref } from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 import MobileMenu from './MobileMenu.svelte';
 import SolidarityMark from './SolidarityMark.svelte';
@@ -20,6 +22,7 @@ let languageOpen = false;
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
+$: solidarityHref = getPostponementAnnouncementHref(lang as Language);
 $: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
 
 let alternateLanguageUrls: {
@@ -100,7 +103,13 @@ function closeAllDropdowns() {
           decoding="async"
         />
       </a>
-      <SolidarityMark label={t.nav.solidarityMark} size="sm" />
+      <SolidarityMark
+        label={t.nav.solidarityMark}
+        href={solidarityHref}
+        size="sm"
+        onNavigate={() =>
+          trackEvent(EVENTS.NAV_CLICK, { item: 'solidarity_mark' })}
+      />
     </div>
 
     <div class="hidden lg:flex items-center gap-6">

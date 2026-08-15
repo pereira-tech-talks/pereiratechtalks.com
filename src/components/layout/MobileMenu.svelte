@@ -11,9 +11,11 @@ import {
   getLanguageConfig,
   getSupportedLanguages,
   getUrlPrefix,
+  type Language,
   stripLangPrefix,
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
+import { getPostponementAnnouncementHref } from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 import SolidarityMark from './SolidarityMark.svelte';
 import ThemeToggle from './ThemeToggle.svelte';
@@ -86,6 +88,7 @@ function handleKeydown(event: KeyboardEvent) {
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
+$: solidarityHref = getPostponementAnnouncementHref(lang as Language);
 $: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
 
 function lockBodyScroll() {
@@ -196,7 +199,12 @@ function navClick(item: string) {
             height={48}
           />
         </a>
-        <SolidarityMark label={t.nav.solidarityMark} size="md" />
+        <SolidarityMark
+          label={t.nav.solidarityMark}
+          href={solidarityHref}
+          size="md"
+          onNavigate={() => navClick('solidarity_mark')}
+        />
       </div>
       <button
         bind:this={closeButtonRef}

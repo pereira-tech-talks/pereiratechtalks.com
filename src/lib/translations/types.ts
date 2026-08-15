@@ -40,7 +40,7 @@ export interface SiteTranslations {
     menu: string;
     closeMenu: string;
     openMenu: string;
-    /** Accessible name for Colombia flag + mourning ribbon in the header */
+    /** Accessible name + hover tooltip for Colombia flag + mourning ribbon */
     solidarityMark: string;
   };
 
