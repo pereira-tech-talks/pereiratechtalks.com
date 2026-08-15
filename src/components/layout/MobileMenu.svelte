@@ -15,7 +15,7 @@ import {
   stripLangPrefix,
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
-import { getPostponementAnnouncementHref } from '@/lib/pereiraTechDay';
+import { getPostponementAnnouncementHref } from '@/lib/ptd-paths';
 import { getTranslations } from '@/lib/translations';
 import SolidarityMark from './SolidarityMark.svelte';
 import ThemeToggle from './ThemeToggle.svelte';

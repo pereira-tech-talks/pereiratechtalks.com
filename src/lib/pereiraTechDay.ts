@@ -6,8 +6,18 @@ import {
   isCalendarDateOnOrAfterToday,
 } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { PTD_LANDING_SLUG } from '@/lib/ptd-paths';
 
 export type PereiraTechDay = CollectionEntry<'pereiraTechDays'>;
+
+/** Re-export client-safe path helpers for server callers. */
+export {
+  getPostponementAnnouncementHref,
+  getPtdLandingHref,
+  isPereiraTechDayPath,
+  PTD_2026_POSTPONEMENT_BLOG_SLUG,
+  PTD_LANDING_SLUG,
+} from '@/lib/ptd-paths';
 
 const filterDrafts = (entry: PereiraTechDay): boolean => {
   if (import.meta.env.PROD) return entry.data.draft !== true;
@@ -263,21 +273,6 @@ export const resolveEditionStatus = (
   return 'completed';
 };
 
-/** Singular public landing slug for the current/upcoming flagship edition. */
-export const PTD_LANDING_SLUG = 'pereira-tech-day';
-
-/** Solidarity announcement for the 2026 postponement. */
-export const PTD_2026_POSTPONEMENT_BLOG_SLUG =
-  'ptd-2026-postponed-earthquake-solidarity';
-
-/** Localized href for the 2026 postponement blog post. */
-export const getPostponementAnnouncementHref = (lang: Language): string =>
-  `${getUrlPrefix(lang)}/blog/${PTD_2026_POSTPONEMENT_BLOG_SLUG}/`;
-
-/** Href for the singular landing (`/pereira-tech-day` or `/en/pereira-tech-day`). */
-export const getPtdLandingHref = (lang: Language): string =>
-  `${getUrlPrefix(lang)}/${PTD_LANDING_SLUG}/`;
-
 /**
  * Public href for an edition page.
  * Upcoming editions use the singular landing; past editions stay under
@@ -357,25 +352,3 @@ export const getUpcomingLandingChrome = (
         faqLayout: 'accordion',
         portraitStyle: 'circle',
       };
-
-/**
- * True for Pereira Tech Day hub + edition routes (ES root or `/en` prefix).
- * Used to suppress the sitewide PTD announcement bar/modal on those pages —
- * visitors are already in the PTD surface.
- */
-export const isPereiraTechDayPath = (pathname: string): boolean => {
-  const raw = pathname.split('?')[0]?.split('#')[0] ?? '/';
-  const normalized = raw.replace(/\/+$/, '') || '/';
-  const withoutLang =
-    normalized === '/en'
-      ? '/'
-      : normalized.startsWith('/en/')
-        ? normalized.slice(3) || '/'
-        : normalized;
-  return (
-    withoutLang === '/pereira-tech-day' ||
-    withoutLang.startsWith('/pereira-tech-day/') ||
-    withoutLang === '/pereira-tech-days' ||
-    withoutLang.startsWith('/pereira-tech-days/')
-  );
-};
