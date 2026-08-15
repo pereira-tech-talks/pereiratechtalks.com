@@ -8,7 +8,7 @@ lastUpdated: 2026-08-07
 
 **Pereira Tech Talks (PTT)** es la comunidad tecnológica de Pereira (Risaralda, Colombia). 90+ meetups mensuales desde 2014. Pereira Tech Day (archivo 2024; 2026 pospuesto indefinidamente). Una Escuela de Speakers activa. El club de lectura La Biblioteca del Mañana. Una biblioteca de contenidos donde la comunidad tech de Pereira sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.
 
-**Pereira Tech Day 2026:** pospuesto indefinidamente tras el terremoto del 10 de agosto de 2026. La sede prevista era la UTP (Auditorio Jorge Roa Martínez). [Leer el comunicado](/blog/ptd-2026-postponed-earthquake-solidarity/). Ayuda mutua: [Corag Ayuda directa](https://corag-ayuda-directa.vercel.app) · [Ayudas Pereira](https://ayudaspereira.com).
+**Pereira Tech Day 2026:** pospuesto indefinidamente tras el terremoto del 10 de agosto de 2026. La sede prevista era la UTP (Auditorio Jorge Roa Martínez). [Leer el comunicado](/blog/ptd-2026-postponed-earthquake-solidarity/). Ayuda mutua: [Corag](https://corag.app/).
 
 ---
 

@@ -379,18 +379,18 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 
       {#if openEntry.image}
         <div
-          class="relative w-full shrink-0 overflow-hidden bg-[#F6EFE4] aspect-square max-h-[min(42dvh,16rem)] sm:aspect-[4/3] sm:max-h-[min(44dvh,18rem)]"
+          class="relative w-full shrink-0 overflow-hidden bg-[#F6EFE4] aspect-[16/9] max-h-[min(40dvh,14rem)] sm:max-h-[min(42dvh,15.5rem)]"
         >
           <img
             src={openEntry.image.src}
             alt={openEntry.image.alt}
             width="640"
-            height="640"
+            height="360"
             loading="lazy"
             decoding="async"
             fetchpriority="low"
             sizes="(max-width: 448px) 100vw, 448px"
-            class="absolute inset-0 h-full w-full object-contain object-center"
+            class="absolute inset-0 h-full w-full object-cover object-center"
           />
         </div>
       {/if}
