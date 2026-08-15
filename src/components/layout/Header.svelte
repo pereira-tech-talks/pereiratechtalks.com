@@ -5,11 +5,14 @@ import {
   getLanguageConfig,
   getSupportedLanguages,
   getUrlPrefix,
+  type Language,
   stripLangPrefix,
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
+import { getPostponementAnnouncementHref } from '@/lib/ptd-paths';
 import { getTranslations } from '@/lib/translations';
 import MobileMenu from './MobileMenu.svelte';
+import SolidarityMark from './SolidarityMark.svelte';
 import ThemeToggle from './ThemeToggle.svelte';
 
 export let lang: string = 'es';
@@ -19,6 +22,7 @@ let languageOpen = false;
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
+$: solidarityHref = getPostponementAnnouncementHref(lang as Language);
 $: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
 
 let alternateLanguageUrls: {
@@ -74,30 +78,39 @@ function closeAllDropdowns() {
   style="padding-top: env(safe-area-inset-top); padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);"
 >
   <nav class="main-container flex items-center justify-between">
-    <a
-      href={prefix || '/'}
-      class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-      aria-label="Pereira Tech Talks"
-    >
-      <img
-        class="h-8 w-auto md:h-9 dark:hidden"
-        src="/images/pereira-tech-talks/topbar-logo-primary.webp"
-        alt=""
-        width={120}
-        height={48}
-        loading="eager"
-        decoding="async"
+    <div class="flex min-w-0 items-center gap-2.5 sm:gap-3">
+      <a
+        href={prefix || '/'}
+        class="flex items-center select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+        aria-label="Pereira Tech Talks"
+      >
+        <img
+          class="h-8 w-auto md:h-9 dark:hidden"
+          src="/images/pereira-tech-talks/topbar-logo-primary.webp"
+          alt=""
+          width={120}
+          height={48}
+          loading="eager"
+          decoding="async"
+        />
+        <img
+          class="hidden h-8 w-auto md:h-9 dark:block"
+          src="/images/pereira-tech-talks/topbar-logo.webp"
+          alt=""
+          width={120}
+          height={48}
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+      <SolidarityMark
+        label={t.nav.solidarityMark}
+        href={solidarityHref}
+        size="sm"
+        onNavigate={() =>
+          trackEvent(EVENTS.NAV_CLICK, { item: 'solidarity_mark' })}
       />
-      <img
-        class="hidden h-8 w-auto md:h-9 dark:block"
-        src="/images/pereira-tech-talks/topbar-logo.webp"
-        alt=""
-        width={120}
-        height={48}
-        loading="eager"
-        decoding="async"
-      />
-    </a>
+    </div>
 
     <div class="hidden lg:flex items-center gap-6">
       <a href="{prefix}/meetups" class="nav-link" on:click={() => trackEvent(EVENTS.NAV_CLICK, { item: 'meetups' })}>{t.nav.meetups}</a>

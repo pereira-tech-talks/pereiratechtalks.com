@@ -11,10 +11,13 @@ import {
   getLanguageConfig,
   getSupportedLanguages,
   getUrlPrefix,
+  type Language,
   stripLangPrefix,
 } from '@/lib/i18n';
 import { LANGUAGE_STORAGE_KEY } from '@/lib/language-preference';
+import { getPostponementAnnouncementHref } from '@/lib/ptd-paths';
 import { getTranslations } from '@/lib/translations';
+import SolidarityMark from './SolidarityMark.svelte';
 import ThemeToggle from './ThemeToggle.svelte';
 
 export let lang: string = 'es';
@@ -85,6 +88,7 @@ function handleKeydown(event: KeyboardEvent) {
 
 $: t = getTranslations(lang);
 $: prefix = getUrlPrefix(lang);
+$: solidarityHref = getPostponementAnnouncementHref(lang as Language);
 $: otherLanguages = getSupportedLanguages().filter((l) => l !== lang);
 
 function lockBodyScroll() {
@@ -173,27 +177,35 @@ function navClick(item: string) {
   >
     <!-- Top bar: brand + close (single visible X — header burger is covered by this sheet) -->
     <div class="flex shrink-0 items-center justify-between gap-3 border-b border-ptt-border px-4 py-3 dark:border-white/10">
-      <a
-        href={prefix || '/'}
-        class="flex min-w-0 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
-        aria-label="Pereira Tech Talks"
-        on:click={() => navClick('home')}
-      >
-        <img
-          class="h-8 w-auto dark:hidden"
-          src="/images/pereira-tech-talks/topbar-logo-primary.webp"
-          alt=""
-          width={120}
-          height={48}
+      <div class="flex min-w-0 items-center gap-2.5">
+        <a
+          href={prefix || '/'}
+          class="flex min-w-0 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          aria-label="Pereira Tech Talks"
+          on:click={() => navClick('home')}
+        >
+          <img
+            class="h-8 w-auto dark:hidden"
+            src="/images/pereira-tech-talks/topbar-logo-primary.webp"
+            alt=""
+            width={120}
+            height={48}
+          />
+          <img
+            class="hidden h-8 w-auto dark:block"
+            src="/images/pereira-tech-talks/topbar-logo.webp"
+            alt=""
+            width={120}
+            height={48}
+          />
+        </a>
+        <SolidarityMark
+          label={t.nav.solidarityMark}
+          href={solidarityHref}
+          size="md"
+          onNavigate={() => navClick('solidarity_mark')}
         />
-        <img
-          class="hidden h-8 w-auto dark:block"
-          src="/images/pereira-tech-talks/topbar-logo.webp"
-          alt=""
-          width={120}
-          height={48}
-        />
-      </a>
+      </div>
       <button
         bind:this={closeButtonRef}
         class="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg p-2 text-ptt hover:bg-ptt-primary-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-white dark:hover:bg-white/10"

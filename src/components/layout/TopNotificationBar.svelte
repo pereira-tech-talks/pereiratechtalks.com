@@ -40,6 +40,11 @@ function canOpenDetailModal(n: LocalizedNotification): boolean {
   return n.modalEnabled && !!(n.body || n.image);
 }
 
+/** Absolute http(s) CTAs open in a new tab with noopener. */
+function isExternalHref(href: string | undefined): boolean {
+  return !!href && /^https?:\/\//i.test(href);
+}
+
 /**
  * Hysteresis prevents sticky-bar layout feedback:
  * collapsing the bar shrinks sticky chrome → scrollY drops → bar
@@ -311,6 +316,8 @@ function severityClass(severity: LocalizedNotification['severity']): string {
               href={n.ctaHref}
               class="group block w-full cursor-pointer text-left text-inherit no-underline transition-colors duration-200 hover:bg-white/10 active:bg-white/15 motion-reduce:transition-none"
               tabindex={atTop ? 0 : -1}
+              target={isExternalHref(n.ctaHref) ? '_blank' : undefined}
+              rel={isExternalHref(n.ctaHref) ? 'noopener noreferrer' : undefined}
               onclick={() => trackEvent(EVENTS.NOTIFICATION_CTA, { id: n.id })}
             >
               {@render barInner(actionLabel)}
@@ -372,7 +379,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
 
       {#if openEntry.image}
         <div
-          class="relative w-full shrink-0 overflow-hidden bg-[#F6EFE4] aspect-[16/9] max-h-[min(36dvh,12.5rem)] sm:max-h-[min(40dvh,14rem)]"
+          class="relative w-full shrink-0 overflow-hidden bg-[#F6EFE4] aspect-[16/9] max-h-[min(40dvh,14rem)] sm:max-h-[min(42dvh,15.5rem)]"
         >
           <img
             src={openEntry.image.src}
@@ -429,6 +436,10 @@ function severityClass(severity: LocalizedNotification['severity']): string {
             <a
               href={openEntry.ctaHref}
               class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong sm:flex-1 dark:bg-ptt-primary-dark dark:text-ptt-bg dark:hover:opacity-90"
+              target={isExternalHref(openEntry.ctaHref) ? '_blank' : undefined}
+              rel={isExternalHref(openEntry.ctaHref)
+                ? 'noopener noreferrer'
+                : undefined}
               onclick={() =>
                 trackEvent(EVENTS.NOTIFICATION_CTA, { id: openEntry.id })}
             >

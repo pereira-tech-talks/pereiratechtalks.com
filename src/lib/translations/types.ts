@@ -40,6 +40,8 @@ export interface SiteTranslations {
     menu: string;
     closeMenu: string;
     openMenu: string;
+    /** Accessible name + hover tooltip for Colombia flag + mourning ribbon */
+    solidarityMark: string;
   };
 
   // Footer
@@ -724,7 +726,7 @@ export interface SiteTranslations {
     postponedHeroBadge: string;
     /** Notice byline. Contains a `{date}` placeholder. */
     postponedSince: string;
-    /** CTA pointing at the postponement notice on the edition landing. */
+    /** CTA pointing at the solidarity blog post. */
     postponedReadCta: string;
     subscribe: {
       copy: string;

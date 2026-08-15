@@ -9,6 +9,7 @@ import {
   getEditionRegistrationUrl,
   getEditionStartDate,
   getEditionStartIso,
+  getPostponementAnnouncementHref,
   getPtdLandingHref,
   getPublishedFaqs,
   getUpcomingLandingChrome,
@@ -142,6 +143,15 @@ describe('pereiraTechDay helpers', () => {
     expect(PTD_LANDING_SLUG).toBe('pereira-tech-day');
     expect(getPtdLandingHref('es')).toBe('/pereira-tech-day/');
     expect(getPtdLandingHref('en')).toBe('/en/pereira-tech-day/');
+  });
+
+  it('getPostponementAnnouncementHref points at the solidarity blog post', () => {
+    expect(getPostponementAnnouncementHref('es')).toBe(
+      '/blog/ptd-2026-postponed-earthquake-solidarity/'
+    );
+    expect(getPostponementAnnouncementHref('en')).toBe(
+      '/en/blog/ptd-2026-postponed-earthquake-solidarity/'
+    );
   });
 
   it('buildEditionThemeCss scopes variables under edition year', () => {

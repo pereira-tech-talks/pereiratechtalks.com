@@ -1,0 +1,40 @@
+# Mutual-aid notice (Corag — https://corag.app/).
+#
+# DISABLED while `ptd-2026-postponed.yaml` owns the sitewide bar (priority 200,
+# CTA → /pereira-tech-day/#postponed). The bar shows one notification; running
+# both would hide this one anyway. Aid links live in the solidarity blog post.
+# Kept intact so it can be flipped back without rewriting copy.
+severity: important
+title:
+  en: Pereira Tech Day postponed
+  es: Pereira Tech Day pospuesto
+summary:
+  en: "Indefinitely postponed after the August 10 earthquake. Help neighbors via Corag."
+  es: "Pospuesto indefinidamente tras el terremoto del 10 de agosto. Ayuda a vecinos en Corag."
+body:
+  en: |-
+    Pereira Tech Day 2026 is postponed indefinitely. Our community stands with everyone affected in Pereira, Risaralda, and western Colombia.
+
+    The priority now is mutual aid. Corag (corag.app) connects people who want to help with those who need it — with public evidence of every delivery.
+
+    Read the full announcement on our blog: /en/blog/ptd-2026-postponed-earthquake-solidarity/
+  es: |-
+    Pereira Tech Day 2026 queda pospuesto indefinidamente. Nuestra comunidad está con todas las personas afectadas en Pereira, Risaralda y el occidente colombiano.
+
+    La prioridad ahora es la ayuda mutua. Corag (corag.app) conecta a quien quiere ayudar con quien lo necesita — con evidencia pública de cada entrega.
+
+    Lee el anuncio completo en el blog: /blog/ptd-2026-postponed-earthquake-solidarity/
+image:
+  src: /images/pereira-tech-days/2026/postponed-indefinitely.webp
+  alt:
+    en: Pereira Tech Day artwork stamped postponed indefinitely
+    es: Arte de Pereira Tech Day con sello de pospuesto indefinidamente
+ctaLabel:
+  en: Open Corag
+  es: Abrir Corag
+ctaHref: https://corag.app/
+modalEnabled: true
+startsAt: 2026-08-10T00:00:00.000Z
+endsAt: 2026-12-31T23:59:59.000Z
+priority: 100
+active: false

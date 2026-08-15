@@ -40,6 +40,7 @@ import {
   getEditionStartDate,
   getEditionStartIso,
   getEditions,
+  getPostponementAnnouncementHref,
   getPublishedFaqs,
   getUpcomingLandingChrome,
   isPostponedEdition,
@@ -96,6 +97,9 @@ const landingChrome = getUpcomingLandingChrome(upcomingTemplate);
  */
 const postponed = isPostponedEdition(edition);
 const postponement = edition.data.postponement;
+const announcementHref = postponed
+  ? getPostponementAnnouncementHref(lang)
+  : undefined;
 const registrationUrl = getEditionRegistrationUrl(edition);
 const showCountdown = !isSectionSuppressed(edition, 'countdown');
 const showPricing = !isSectionSuppressed(edition, 'pricing');
@@ -261,7 +265,10 @@ if (keynoteSpeakers.length > 0) {
   }));
 }
 
-const sectionBgs = edition.data.sectionBackgrounds ?? {};
+const sectionBackgrounds = edition.data.sectionBackgrounds ?? {};
+/** Decorative photo backgrounds are megabytes of PNG; skip them while postponed
+ *  so the LCP hero is not queued behind off-screen section art. */
+const decorativeBgs = postponed ? {} : sectionBackgrounds;
 ---
 
 <MainLayout
@@ -274,7 +281,15 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
   ptdYear={year}
   ptdEditions={ptdEditionNav}
   ptdChromeVariant={upcomingTemplate ? 'light' : 'dark'}
-  ptdAnchors={scheduleAnchors}
+  ptdAnchors={postponed ? [] : scheduleAnchors}
+  preloadFonts={false}
+  preloadHeaderLogo={false}
+  lcpImageHref={
+    upcomingTemplate && !postponed
+      ? '/images/pereira-tech-days/2026/hero-illustration-mobile.webp'
+      : undefined
+  }
+  lcpImageMedia="(max-width: 639px)"
 >
   <JsonLd data={eventJsonLd} />
   <style is:inline set:html={themeCss}></style>
@@ -290,6 +305,10 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
        * Past (2024): Hero -> Ponentes -> Lightning* -> Memories* -> Sponsors
        *   -> Organiza -> Organizadores -> Colaboradores -> Talks* -> FAQ*
        * (* only renders when that edition actually has matching data)
+       *
+       * Postponed: hero + PtdPostponedNotice, then sections not listed in
+       * `postponement.hideSections`. YAML stays so restoring `status` reopens
+       * the landing without rewriting data.
        */
     }
     {
@@ -316,6 +335,8 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           scheduleAnchor={scheduleAnchors[0]?.href}
           postponed={postponed}
           showCountdown={showCountdown}
+          announcementHref={announcementHref}
+          announcementCta={postponed ? t.postponedReadCta : undefined}
         />
       ) : (
         <PtdHero2024
@@ -342,7 +363,12 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
        */
     }
     {postponed && postponement && (
-      <PtdPostponedNotice lang={lang} postponement={postponement} />
+      <PtdPostponedNotice
+        lang={lang}
+        postponement={postponement}
+        announcementHref={announcementHref}
+        announcementCta={t.postponedReadCta}
+      />
     )}
 
     {
@@ -354,7 +380,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           topics={edition.data.aboutTopics}
           mediaSrc={edition.data.aboutMedia?.src}
           mediaAlt={tr(edition.data.aboutMedia?.alt, lang)}
-          sectionBg={sectionBgs.about}
+          sectionBg={decorativeBgs.about}
           communityLinks={[
             { name: 'PereiraJS', href: 'https://pereira.js.org/' },
             { name: 'Python Pereira', href: 'https://pypereira.co' },
@@ -474,7 +500,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           title={t.pricing}
           plans={edition.data.sponsorshipPlans}
           partnerships={edition.data.extraPartnerships}
-          sectionBg={sectionBgs.pricing}
+          sectionBg={decorativeBgs.pricing}
         />
       )
     }
@@ -493,14 +519,14 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
               : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
           ]}
           style={
-            upcomingTemplate && sectionBgs.sponsors
-              ? `--ptd-sponsors-bg: url('${sectionBgs.sponsors}')`
+            upcomingTemplate && decorativeBgs.sponsors
+              ? `--ptd-sponsors-bg: url('${decorativeBgs.sponsors}')`
               : undefined
           }
           aria-label={t.sponsors}
         >
           {
-            upcomingTemplate && sectionBgs.sponsors && (
+            upcomingTemplate && decorativeBgs.sponsors && (
               <>
                 <div
                   class="ptd-sponsors-section__bg pointer-events-none absolute inset-0 z-0"
@@ -538,14 +564,14 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
               : 'overflow-hidden bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]',
           ]}
           style={
-            upcomingTemplate && sectionBgs.community
-              ? `--ptd-community-bg: url('${sectionBgs.community}')`
+            upcomingTemplate && decorativeBgs.community
+              ? `--ptd-community-bg: url('${decorativeBgs.community}')`
               : undefined
           }
           aria-label={t.communitiesOrganizes}
         >
           {
-            upcomingTemplate && sectionBgs.community && (
+            upcomingTemplate && decorativeBgs.community && (
               <>
                 <div
                   class="ptd-community-section__bg pointer-events-none absolute inset-0 z-0"
@@ -579,14 +605,14 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
             id="team"
             class="relative isolate min-h-[calc(100vw*576/1024)] overflow-hidden bg-[var(--ptt-bg,#fef7f3)] py-[clamp(2.25rem,7vw,4rem)]"
             style={
-              sectionBgs.team
-                ? `--ptd-team-bg: url('${sectionBgs.team}')`
+              decorativeBgs.team
+                ? `--ptd-team-bg: url('${decorativeBgs.team}')`
                 : undefined
             }
             aria-label={t.organizers}
           >
             {
-              sectionBgs.team && (
+              decorativeBgs.team && (
                 <>
                   <div
                     class="ptd-team-section__bg pointer-events-none absolute inset-0 z-0 bg-[var(--ptt-bg,#fef7f3)] bg-[length:100%_auto] bg-[position:center_top] bg-no-repeat"
@@ -698,7 +724,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           title={t.faq}
           subtitle={upcomingTemplate ? t.faqSubtitle : undefined}
           items={faqs}
-          sectionBg={sectionBgs.faqs}
+          sectionBg={decorativeBgs.faqs}
           layout={landingChrome.faqLayout}
         />
       )
@@ -711,7 +737,7 @@ const sectionBgs = edition.data.sectionBackgrounds ?? {};
           title={t.joinTitle}
           subtitle={t.joinSubtitle}
           showCta={false}
-          illustrationSrc={sectionBgs.join}
+          illustrationSrc={decorativeBgs.join}
         />
       )
     }

@@ -21,7 +21,7 @@ import { getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import { getMeetupSlug } from '@/lib/meetup';
 import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
-import { isUpcomingEdition } from '@/lib/pereiraTechDay';
+import { isPostponedEdition, isUpcomingEdition } from '@/lib/pereiraTechDay';
 import {
   getSponsorActivity,
   SPONSOR_TIER_LABELS,
@@ -307,7 +307,9 @@ const organizationJsonLd: Record<string, unknown> = {
                     <Badge variant={tier}>
                       {sd.editionTierLabel(SPONSOR_TIER_LABELS[tier][lang])}
                     </Badge>
-                    {edition && isUpcomingEdition(edition) && (
+                    {edition &&
+                      isUpcomingEdition(edition) &&
+                      !isPostponedEdition(edition) && (
                       <Badge variant="announced">
                         {sd.editionUpcomingLabel}
                       </Badge>

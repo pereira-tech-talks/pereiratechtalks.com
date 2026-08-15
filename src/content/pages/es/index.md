@@ -6,9 +6,9 @@ lastUpdated: 2026-08-07
 
 ## Comunidad tecnológica · Pereira, Risaralda · Desde 2014
 
-**Pereira Tech Talks (PTT)** es la comunidad tecnológica de Pereira (Risaralda, Colombia). 90+ meetups mensuales desde 2014. Pereira Tech Day (archivo 2024, próxima 2026). Una Escuela de Speakers activa. El club de lectura La Biblioteca del Mañana. Una biblioteca de contenidos donde la comunidad tech de Pereira sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.
+**Pereira Tech Talks (PTT)** es la comunidad tecnológica de Pereira (Risaralda, Colombia). 90+ meetups mensuales desde 2014. Pereira Tech Day (archivo 2024; 2026 pospuesto indefinidamente). Una Escuela de Speakers activa. El club de lectura La Biblioteca del Mañana. Una biblioteca de contenidos donde la comunidad tech de Pereira sale a startups YC, escenarios de conferencias en toda Latinoamérica y roles globales de ingeniería.
 
-**Próximo hito:** Pereira Tech Day 2026 — 22 de agosto de 2026 en la UTP (Auditorio Jorge Roa Martínez). Eslogan: *Donde el talento, la tecnología y las marcas se encuentran*.
+**Pereira Tech Day 2026:** pospuesto indefinidamente tras el terremoto del 10 de agosto de 2026. La sede prevista era la UTP (Auditorio Jorge Roa Martínez). [Leer el comunicado](/blog/ptd-2026-postponed-earthquake-solidarity/). Ayuda mutua: [Corag](https://corag.app/).
 
 ---
 
@@ -21,7 +21,7 @@ Somos una comunidad interdisciplinar que conecta el talento local y regional —
 ## Lo que hacemos
 
 - **Meetups mensuales** — Sesiones presenciales e híbridas cada mes sobre IA, plataformas web, devops, móvil, seguridad y el oficio de construir software.
-- **Pereira Tech Day** — Nuestra conferencia anual insignia: un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales. 2024 en archivo; 2026 a continuación.
+- **Pereira Tech Day** — Nuestra conferencia anual insignia: un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales. 2024 en archivo; [2026 pospuesto indefinidamente](/blog/ptd-2026-postponed-earthquake-solidarity/).
 - **Escuela de Speakers** — Un programa para hacer crecer nuevas voces técnicas, desde la idea hasta el escenario, con mentoría y ensayos. Sus egresadas y egresados hoy dan keynotes en Bogotá, Medellín y Ciudad de México.
 - **La Biblioteca del Mañana** — Un club de lectura que conecta la tecnología con la ciencia ficción, la filosofía y la historia humana en sentido amplio.
 - **Canal de IA y Agentes** — Un track dedicado a IA, LLMs, agentes y la web agéntica — donde la comunidad se encuentra con la tecnología más disruptiva de la década.

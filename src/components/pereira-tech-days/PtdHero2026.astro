@@ -12,7 +12,7 @@ interface Props {
   year: number;
   title: string;
   tagline: string;
-  eyebrow: string;
+  eyebrow?: string;
   dateLong: string;
   venueName: string;
   venueMapUrl?: string;
@@ -39,6 +39,14 @@ interface Props {
   postponed?: boolean;
   /** Hides the countdown independently of `postponed` (see `hideSections`). */
   showCountdown?: boolean;
+  /**
+   * When false, hide date / venue / attendance meta (postponed landing).
+   * Default true.
+   */
+  showEventDetails?: boolean;
+  /** Primary CTA for postponed editions (e.g. blog announcement). */
+  announcementHref?: string;
+  announcementCta?: string;
 }
 
 const {
@@ -58,6 +66,9 @@ const {
   scheduleAnchor,
   postponed = false,
   showCountdown = true,
+  showEventDetails = true,
+  announcementHref,
+  announcementCta,
 } = Astro.props;
 
 const t = getTranslations(lang);
@@ -97,7 +108,7 @@ const CREAM = '#fef7f3';
       <>
         <div
           class="ptd-hero-2026__art pointer-events-none absolute inset-0 z-0 bg-no-repeat"
-          style={`background-image: url('${heroIllustration}');`}
+          style={`--ptd-hero-art: url('${heroIllustration}')`}
           aria-hidden="true"
         />
         <div class="ptd-hero-2026__fade pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
@@ -125,6 +136,7 @@ const CREAM = '#fef7f3';
               height="98"
               class="ptd-hero-2026__logo mt-0.5 h-auto w-auto max-h-[5.25rem] shrink-0 object-contain object-left-top sm:max-h-[7rem] lg:max-h-[140px]"
               loading="eager"
+              fetchpriority="high"
               decoding="async"
             />
           )
@@ -252,9 +264,31 @@ const CREAM = '#fef7f3';
       }
 
       {
-        (registrationUrl || scheduleAnchor) && (
+        (announcementHref || registrationUrl || scheduleAnchor) && (
           <div class="mb-6 flex w-full flex-col items-stretch justify-center gap-3 sm:mb-7 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
-            {registrationUrl && (
+            {announcementHref && announcementCta && (
+              <a
+                href={announcementHref}
+                class="ptd-hero-2026__cta inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--ptt-primary)] px-9 py-3.5 text-lg font-bold tracking-wide text-white transition-[transform,opacity,box-shadow] hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:w-auto sm:px-11 sm:py-4 sm:text-xl"
+              >
+                {announcementCta}
+                <svg
+                  aria-hidden="true"
+                  class="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 12h14M13 6l6 6-6 6"
+                  />
+                </svg>
+              </a>
+            )}
+            {!announcementHref && registrationUrl && (
               <a
                 href={registrationUrl}
                 target="_blank"
@@ -278,7 +312,7 @@ const CREAM = '#fef7f3';
                 </svg>
               </a>
             )}
-            {scheduleAnchor && (
+            {!announcementHref && scheduleAnchor && (
               <a
                 href={scheduleAnchor}
                 class="ptd-hero-2026__cta-secondary inline-flex w-full items-center justify-center gap-2 rounded-full border-2 border-[var(--ptt-primary)] px-9 py-3.5 text-lg font-bold tracking-wide text-[color-mix(in_srgb,var(--ptt-primary)_85%,var(--ptt-text))] transition-[transform,background-color,color] hover:bg-[var(--ptt-primary)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ptt-primary)] active:scale-[0.98] sm:w-auto sm:px-9 sm:py-4 sm:text-xl"
@@ -339,7 +373,7 @@ const CREAM = '#fef7f3';
       }
 
       {
-        heroIllustration && (
+        heroIllustration && !postponed && (
           <div class="mt-8 w-full sm:hidden" aria-hidden="true">
             <img
               src="/images/pereira-tech-days/2026/hero-illustration-mobile.webp"
@@ -348,7 +382,8 @@ const CREAM = '#fef7f3';
               height="510"
               class="mx-auto max-h-64 w-auto object-contain"
               loading="eager"
-              decoding="async"
+              fetchpriority="high"
+              decoding="sync"
             />
           </div>
         )
@@ -371,10 +406,13 @@ const CREAM = '#fef7f3';
     }
   }
 
-  /* Illustration — dominant but not overwhelming; mild shrink only at wide desktops. */
-  .ptd-hero-2026__art {
-    background-position: 100% 48%;
-    background-size: auto 90%;
+  /* Desktop illustration — scoped to lg+ so mobile does not download it. */
+  @media (min-width: 1024px) {
+    .ptd-hero-2026__art {
+      background-image: var(--ptd-hero-art);
+      background-position: 100% 48%;
+      background-size: auto 90%;
+    }
   }
 
   .ptd-hero-2026__fade {

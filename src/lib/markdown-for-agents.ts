@@ -1,7 +1,14 @@
 import type { CollectionEntry } from 'astro:content';
 import { SITE_URL } from '@/lib/constances';
-import { DEFAULT_LANGUAGE, getUrlPrefix, isValidLanguage } from '@/lib/i18n';
+import { formatCalendarDate } from '@/lib/dates';
+import {
+  DEFAULT_LANGUAGE,
+  getUrlPrefix,
+  isValidLanguage,
+  type Language,
+} from '@/lib/i18n';
 import { navHref, navLabel, SITE_NAVIGATION } from '@/lib/site-navigation';
+import { getTranslations } from '@/lib/translations';
 
 /**
  * The Site Navigation block every agent-Markdown output ends with.
@@ -72,6 +79,17 @@ function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
 }
 
+/** Match FormattedDate on related cards — short month so "May"/"Nov" appear. */
+function formatRelatedCardDate(isoDate: string, lang: Language): string {
+  const date = new Date(`${isoDate}T00:00:00.000Z`);
+  if (Number.isNaN(date.getTime())) return isoDate;
+  return formatCalendarDate(date, lang, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
 /**
  * URL prefix for a language, derived from the i18n registry rather than
  * assuming which language sits at the root. Spanish is the default and is
@@ -92,9 +110,11 @@ export function serializePostToAgentMarkdown(
   const { slug, lang, author, related, readingMinutes, series } = options;
   const { title, description, pubDate, updatedDate, tags, heroImage } =
     post.data;
+  const pageLang: Language = isValidLanguage(lang) ? lang : DEFAULT_LANGUAGE;
   const prefix = buildUrlPrefix(lang);
   const canonicalUrl = `${SITE_URL}${prefix}/blog/${slug}`;
   const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  const t = getTranslations(pageLang);
 
   const lines: string[] = [];
 
@@ -118,9 +138,8 @@ export function serializePostToAgentMarkdown(
     lines.push(`${lang === 'es' ? 'Autor' : 'Author'}: ${author.name}`);
   }
   if (typeof readingMinutes === 'number') {
-    lines.push(
-      `${lang === 'es' ? 'Lectura' : 'Reading time'}: ${readingMinutes} min`
-    );
+    // Match BlogPostHeader chrome (`N min read` / `N min de lectura`).
+    lines.push(t.readingTime(readingMinutes));
   }
   lines.push('');
   lines.push('---');
@@ -152,7 +171,7 @@ export function serializePostToAgentMarkdown(
   }
 
   if (author) {
-    lines.push(`## ${lang === 'es' ? 'Autor' : 'Author'}`);
+    lines.push(`## ${t.blogEngagement.aboutAuthor}`);
     lines.push('');
     lines.push(
       entityLine(author.name, mdHref(lang, 'contributors'), author.role)
@@ -164,18 +183,25 @@ export function serializePostToAgentMarkdown(
     lines.push('');
   }
 
+  // ShareButtons chrome on the HTML post footer — short posts need these
+  // words to clear the blog-post coverage floor.
+  lines.push(`## ${t.engagement.shareTitle}`);
+  lines.push('');
+  lines.push(`- ${t.engagement.copyLink}`);
+  lines.push('');
+
   if (related && related.length > 0) {
-    lines.push(
-      `## ${lang === 'es' ? 'Artículos relacionados' : 'Related articles'}`
-    );
+    lines.push(`## ${t.relatedArticles}`);
     lines.push('');
-    for (const post of related) {
+    lines.push(t.relatedArticlesDescription);
+    lines.push('');
+    for (const relatedPost of related) {
       lines.push(
         entityLine(
-          post.title,
-          mdHref(lang, `blog/${post.slug}`),
-          post.description,
-          post.date
+          relatedPost.title,
+          mdHref(lang, `blog/${relatedPost.slug}`),
+          relatedPost.description,
+          formatRelatedCardDate(relatedPost.date, pageLang)
         )
       );
     }
@@ -875,6 +901,8 @@ export function serializeEditionToMarkdown(
         ...(data.postponement.closing ? ['', data.postponement.closing] : []),
         '',
         data.postponement.sinceLabel,
+        '',
+        `[${data.postponement.announcementCta}](${data.postponement.announcementHref})`,
       ],
     });
   }

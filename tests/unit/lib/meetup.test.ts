@@ -140,6 +140,18 @@ describe('buildUpcomingMeetupShowcase', () => {
 
     expect(items).toHaveLength(0);
   });
+
+  it('omits a postponed Pereira Tech Day from the upcoming showcase', () => {
+    const items = buildUpcomingMeetupShowcase(
+      [makeMeetup('2026-09-24_qa', '2026-09-24', 'announced')],
+      [makeEdition(2026, '2026-08-22', 'postponed')],
+      TODAY
+    );
+
+    expect(items).toHaveLength(1);
+    expect(items[0]?.type).toBe('meetup');
+    expect(items.some((item) => item.type === 'pereira-tech-day')).toBe(false);
+  });
 });
 
 describe('buildPastMeetupShowcase', () => {

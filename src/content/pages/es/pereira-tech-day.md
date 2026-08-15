@@ -16,6 +16,8 @@ No hay una fecha nueva y las inscripciones están cerradas. Anunciaremos cualqui
 
 Fuerza, Pereira. ❤️
 
+[Leer el comunicado](/blog/ptd-2026-postponed-earthquake-solidarity/)
+
 ## Landing canónica
 
 - [/pereira-tech-day](/pereira-tech-day) — alias de la edición actual (2026). Es la URL del nav, footer y CTAs principales.
