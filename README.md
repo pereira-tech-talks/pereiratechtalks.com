@@ -4,7 +4,7 @@
 
 **Community website (Spanish & English)** · `pereiratechtalks.org` · v3.0.0
 
-[![Astro](https://img.shields.io/badge/Astro-6.x-FF5D01?logo=astro)](https://astro.build)
+[![Astro](https://img.shields.io/badge/Astro-7.x-FF5D01?logo=astro)](https://astro.build)
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-4.x-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
