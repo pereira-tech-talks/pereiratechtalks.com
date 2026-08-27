@@ -1,6 +1,58 @@
 import { defineCollection } from 'astro:content';
+import type { Loader } from 'astro/loaders';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+
+/**
+ * Content filenames carry a `YYYY-MM-DD_` prefix so the directory sorts
+ * chronologically, but the prefix is not part of an entry's identity: the
+ * public slug, cross-collection references and the entry id are all the bare
+ * slug. Strip it in `generateId` so the three stay the same string.
+ */
+const stripDatePrefix = (id: string): string =>
+  id.replace(/(^|\/)\d{4}-\d{2}-\d{2}_/, '$1');
+
+/**
+ * `glob()` bails out early when a collection's directory holds no matching
+ * files: it warns, and — because it never reaches the store — leaves the
+ * collection unregistered, so every later `getCollection()` call warns again.
+ *
+ * An empty collection is not a misconfiguration. `series` has no entries until
+ * the first series is published, and the pages that read it already render an
+ * empty state. This wrapper changes only that case: it drops the "no files
+ * found" warning and registers the collection with zero entries, so
+ * `getCollection()` quietly returns `[]`.
+ */
+const emptyTolerantGlob = (options: Parameters<typeof glob>[0]): Loader => {
+  const inner = glob(options);
+  return {
+    name: inner.name,
+    load: async (context) => {
+      // The logger is a class instance, so inherit from it rather than
+      // spreading it — a spread would only copy own properties and drop every
+      // prototype method. Only `warn` is overridden.
+      const quietLogger: typeof context.logger = Object.assign(
+        Object.create(context.logger),
+        {
+          warn: (message: string) => {
+            if (message.startsWith('No files found matching')) return;
+            context.logger.warn(message);
+          },
+        }
+      );
+
+      await inner.load({ ...context, logger: quietLogger });
+
+      // `set` creates the collection, `delete` drops the key but keeps the now
+      // empty collection in the store — which is what `hasCollection()` checks.
+      if (context.store.keys().length === 0) {
+        const placeholder = '__empty__';
+        context.store.set({ id: placeholder, data: {} });
+        context.store.delete(placeholder);
+      }
+    },
+  };
+};
 
 /**
  * Reusable Zod helpers for v3.0.0 collections.
@@ -184,7 +236,10 @@ const tags = defineCollection({
 });
 
 const series = defineCollection({
-  loader: glob({ base: './src/content/series', pattern: '**/*.md' }),
+  loader: emptyTolerantGlob({
+    base: './src/content/series',
+    pattern: '**/*.md',
+  }),
   schema: z.object({
     name: z.string(),
     title: z.string(),
@@ -288,7 +343,8 @@ const meetups = defineCollection({
     // `*.en.md` siblings carry only the English body (see `meetupBodiesEn`);
     // they are not meetups in their own right.
     pattern: ['**/*.{md,mdx}', '!**/*.en.{md,mdx}'],
-    generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/i, ''),
+    generateId: ({ entry }) =>
+      stripDatePrefix(entry.replace(/\.(md|mdx)$/i, '')),
   }),
   schema: z.object({
     title: i18nString,
@@ -344,7 +400,8 @@ const meetupBodiesEn = defineCollection({
   loader: glob({
     base: './src/content/meetups',
     pattern: '**/*.en.{md,mdx}',
-    generateId: ({ entry }) => entry.replace(/\.en\.(md|mdx)$/i, ''),
+    generateId: ({ entry }) =>
+      stripDatePrefix(entry.replace(/\.en\.(md|mdx)$/i, '')),
   }),
   // Body-only: never restate structured data that lives on the meetup itself.
   schema: z.object({}).loose(),

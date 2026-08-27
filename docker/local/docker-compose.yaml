@@ -16,6 +16,13 @@ services:
       - cursor_data:/home/node/.cursor_data
       - gh_data:/home/node/.gh_data
       - dailybot_data:/home/node/.dailybot_data
+      # pnpm store + registry metadata cache. These MUST stay off the /app bind
+      # mount: Docker Desktop's `fakeowner` layer cannot service the store's
+      # hardlinks and installs fail with ERR_PNPM_EPERM. Named volumes are real
+      # ext4, and keeping them named means a rebuild does not re-download every
+      # package. The path is pinned in entrypoint.sh (setup_nodejs).
+      - pnpm_store:/home/node/.local/share/pnpm/store
+      - pnpm_cache:/home/node/.cache/pnpm
       - ${HOME}/.ssh:/home/node/.ssh_host:ro
       - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
     ports:
@@ -37,3 +44,5 @@ volumes:
   cursor_data: {}        # Cursor CLI session/auth (symlinked to ~/.cursor)
   gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)
   dailybot_data: {}      # Dailybot CLI session/auth (symlinked to ~/.config/dailybot)
+  pnpm_store: {}         # pnpm content-addressable store — never on the bind mount
+  pnpm_cache: {}         # pnpm registry metadata cache

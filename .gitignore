@@ -63,3 +63,6 @@ test-results/
 .release_tag
 git_logs_output.txt
 packages_upgrades_output.txt
+
+# Agent scheduler runtime lock (written by scheduled-task/loop wakeups)
+.agents/scheduled_tasks.lock

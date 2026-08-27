@@ -35,7 +35,7 @@ import {
   isSectionSuppressed,
   type PereiraTechDay,
 } from '@/lib/pereiraTechDay';
-import { getSpeakers, getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
+import { getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent, getTalksBySpeaker, type Talk } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';

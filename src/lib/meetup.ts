@@ -49,13 +49,10 @@ export const getMeetupBySlug = async (
   slug: string
 ): Promise<Meetup | undefined> => {
   const entries = await getMeetups();
-  return entries.find(
-    (e) =>
-      e.id === slug ||
-      e.id.endsWith(`/${slug}`) ||
-      // Ids carry a `YYYY-MM-DD_` prefix; callers hold the URL slug.
-      e.id.replace(/^\d{4}-\d{2}-\d{2}_/, '') === slug
-  );
+  // Ids are the bare slug (the `YYYY-MM-DD_` filename prefix is stripped in
+  // `generateId`), so an exact match is the normal path. The nested form is
+  // kept for meetups filed in a subdirectory.
+  return entries.find((e) => e.id === slug || e.id.endsWith(`/${slug}`));
 };
 
 /** Derive próximamente/pasado from the calendar date (SITE_TIMEZONE), not stale frontmatter. */
@@ -223,10 +220,11 @@ export const getMeetupsByYear = async (year: number): Promise<Meetup[]> => {
 };
 
 /**
- * Get the slug portion of a meetup entry (strips the YYYY-MM-DD_ prefix).
+ * The URL slug of a meetup entry. Ids already are the slug — the
+ * `YYYY-MM-DD_` filename prefix is stripped in `generateId` — but callers go
+ * through this accessor so the id/slug relationship stays in one place.
  */
-export const getMeetupSlug = (entry: Meetup): string =>
-  entry.id.replace(/^\d{4}-\d{2}-\d{2}_/, '');
+export const getMeetupSlug = (entry: Meetup): string => entry.id;
 
 /**
  * Group meetups by year (descending) → array of { year, meetups }.

@@ -352,6 +352,9 @@
   }
 
   body {
+    /* biome-ignore lint/complexity/noImportantStyles: print styles must beat
+       the themed body background, which is set at higher specificity by the
+       runtime theme attribute. */
     background: #fff !important;
   }
 
@@ -363,6 +366,9 @@
   header,
   footer,
   .fixed {
+    /* biome-ignore lint/complexity/noImportantStyles: chrome must be removed
+       from the printed diploma regardless of the display value each component
+       sets for screen. */
     display: none !important;
   }
 
