@@ -70,6 +70,12 @@ export const EVENTS = {
   MEETUP_CARD_CLICK: 'meetup_card_click',
   TALK_CARD_CLICK: 'talk_card_click',
   SPEAKER_APPLICATION_SUBMIT: 'speaker_application_submit',
+  /** A meetup-scoped Call for Speakers proposal was submitted. Props: meetup_slug, format. */
+  MEETUP_CFS_SUBMIT: 'meetup_cfs_submit',
+  /** A link into a meetup's #call-for-speakers was clicked. Props: meetup_slug, source. */
+  CFS_OPEN_CALL_CLICK: 'cfs_open_call_click',
+  /** The global form's optional meetup selector changed. Props: meetup_slug. */
+  CFS_MEETUP_SELECT: 'cfs_meetup_select',
   SPEAKER_SCHOOL_APPLY_SUBMIT: 'speaker_school_apply_submit',
   CALENDAR_INTAKE_SUBMIT: 'calendar_intake_submit',
   CONDUCT_REPORT_SUBMIT: 'conduct_report_submit',

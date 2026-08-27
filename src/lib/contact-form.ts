@@ -106,6 +106,12 @@ export interface CfsFormFields extends ContactFormFields {
   socialUrl: string;
   firstTime: boolean;
   speakerSchool: boolean;
+  /**
+   * The meetup this proposal targets, when the speaker submitted from a meetup
+   * page or picked one on the global page. Optional: a proposal with no target
+   * month is still a good proposal.
+   */
+  meetupSlug?: string;
 }
 
 export interface CfsFormErrors extends ContactFormErrors {
@@ -270,7 +276,19 @@ export function validateContactForm(
 
 export function validateCfsForm(
   fields: CfsFormFields,
-  messages: { requiredField: string; invalidEmail: string }
+  messages: {
+    requiredField: string;
+    invalidEmail: string;
+    /** Shown when a meetup does not accept the chosen format. */
+    formatNotAllowed?: string;
+  },
+  /**
+   * When the proposal targets a meetup, the formats that meetup accepts. This
+   * mirrors the server's `format_not_allowed_for_meetup` rule so the speaker
+   * sees the problem in the form rather than as a 400 after submitting.
+   * Omitted (or all four) on the global page.
+   */
+  allowedFormats?: readonly string[]
 ): { valid: boolean; errors: CfsFormErrors } {
   const base = validateContactForm(
     { ...fields, reason: 'tech-talk' },
@@ -296,6 +314,9 @@ export function validateCfsForm(
     !(CFS_FORMATS as readonly string[]).includes(fields.format)
   ) {
     errors.format = messages.requiredField;
+    valid = false;
+  } else if (allowedFormats && !allowedFormats.includes(fields.format)) {
+    errors.format = messages.formatNotAllowed ?? messages.requiredField;
     valid = false;
   }
   if (!fields.abstract.trim() || fields.abstract.trim().length < 20) {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-
+import type { CfsFormFields } from '@/lib/contact-form';
 import {
   checkRateLimit,
   composeCfsMessage,
@@ -296,5 +296,122 @@ describe('contact-form', () => {
     expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(true);
     expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(true);
     expect(checkRateLimit(store, '1.1.1.1', 2, 60_000).allowed).toBe(false);
+  });
+});
+
+/**
+ * A meetup-scoped Call for Speakers form offers only the formats that meetup
+ * accepts. The client mirrors the server's `format_not_allowed_for_meetup`
+ * rule so a speaker sees the problem in the form rather than as a 400 after
+ * writing an abstract.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 5.
+ */
+describe('validateCfsForm — meetup scoping', () => {
+  const MESSAGES = {
+    requiredField: 'Required',
+    invalidEmail: 'Invalid email',
+    formatNotAllowed: 'This meetup does not take that format.',
+  };
+
+  const validFields = (over: Partial<CfsFormFields> = {}): CfsFormFields => ({
+    name: 'Grace',
+    email: 'grace@example.com',
+    reason: 'tech-talk',
+    subject: 'Call for Speakers submission',
+    // The component sends `message || abstract`, so the base contact
+    // validation always sees a non-empty message.
+    message: 'A short, concrete tour of how we ship a compiler every week.',
+    website: '',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    firstTime: false,
+    speakerSchool: false,
+    ...over,
+  });
+
+  it('accepts a format the meetup takes', () => {
+    const result = validateCfsForm(validFields(), MESSAGES, ['lightning']);
+    expect(result.valid).toBe(true);
+    expect(result.errors.format).toBe('');
+  });
+
+  it('rejects a format the meetup does not take, with its own message', () => {
+    const result = validateCfsForm(
+      validFields({ format: 'workshop' }),
+      MESSAGES,
+      ['lightning']
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.format).toBe(MESSAGES.formatNotAllowed);
+  });
+
+  it('falls back to the required-field message when none was supplied', () => {
+    const { formatNotAllowed, ...withoutMessage } = MESSAGES;
+    void formatNotAllowed;
+    const result = validateCfsForm(
+      validFields({ format: 'workshop' }),
+      withoutMessage,
+      ['lightning']
+    );
+    expect(result.valid).toBe(false);
+    expect(result.errors.format).toBe(MESSAGES.requiredField);
+  });
+
+  it('behaves exactly as before when no allowedFormats is given', () => {
+    // The regression that protects /call-for-speakers.
+    for (const format of ['regular', 'lightning', 'panel', 'workshop']) {
+      const result = validateCfsForm(validFields({ format }), MESSAGES);
+      expect(result.valid).toBe(true);
+    }
+    const bad = validateCfsForm(validFields({ format: 'keynote' }), MESSAGES);
+    expect(bad.valid).toBe(false);
+    expect(bad.errors.format).toBe(MESSAGES.requiredField);
+  });
+
+  it('still reports an unknown format as required, not as not-allowed', () => {
+    // An unknown format is a broken client, not a meetup mismatch — the
+    // distinction matters for what the speaker is told to do next.
+    const result = validateCfsForm(
+      validFields({ format: 'keynote' }),
+      MESSAGES,
+      ['lightning']
+    );
+    expect(result.errors.format).toBe(MESSAGES.requiredField);
+  });
+
+  it('treats meetupSlug as optional', () => {
+    expect(validateCfsForm(validFields(), MESSAGES).valid).toBe(true);
+    expect(
+      validateCfsForm(
+        validFields({ meetupSlug: 'november-meetup-2026' }),
+        MESSAGES
+      ).valid
+    ).toBe(true);
+  });
+
+  it('keeps every pre-existing CFS rule intact', () => {
+    expect(
+      validateCfsForm(validFields({ talkTitle: '' }), MESSAGES).valid
+    ).toBe(false);
+    expect(
+      validateCfsForm(validFields({ abstract: 'too short' }), MESSAGES).valid
+    ).toBe(false);
+    expect(
+      validateCfsForm(validFields({ takeaways: '' }), MESSAGES).valid
+    ).toBe(false);
+    expect(
+      validateCfsForm(validFields({ socialUrl: '' }), MESSAGES).valid
+    ).toBe(false);
+    expect(
+      validateCfsForm(validFields({ email: 'not-an-email' }), MESSAGES).valid
+    ).toBe(false);
+    // Honeypot.
+    expect(
+      validateCfsForm(validFields({ website: 'http://spam' }), MESSAGES).valid
+    ).toBe(false);
   });
 });
