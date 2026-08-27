@@ -816,3 +816,124 @@ describe('CFS profile photo', () => {
     expect(photoValue(fetchMock)).toBe('');
   });
 });
+
+/**
+ * The slides link is the field reviewers most want filled: the deck shows the
+ * narrative. It is optional, may point at an unfinished document, and a
+ * reviewer will click it.
+ */
+describe('CFS slides link', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    lang: 'es',
+    page_path: '/call-for-speakers',
+    website: '',
+    ...over,
+  });
+
+  let slidesIp = 40;
+  const ctx = (body: unknown) => {
+    slidesIp += 1;
+    return {
+      request: new Request('https://pereiratechtalks.org/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: 'https://pereiratechtalks.org',
+          'CF-Connecting-IP': `203.0.114.${slidesIp % 250}`,
+        },
+        body: JSON.stringify(body),
+      }),
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const stubOk = () => {
+    const fetchMock = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      )
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  const slidesValue = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    const init = call?.[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content[CFS_Q.SLIDES];
+  };
+
+  it('carries the deck link through unchanged', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'https://slides.example.com/grace/compilers' }))
+    );
+    expect(res.status).toBe(200);
+    expect(slidesValue(fetchMock)).toBe(
+      'https://slides.example.com/grace/compilers'
+    );
+  });
+
+  it('accepts a link to a deck that does not exist yet', async () => {
+    // The whole point: reviewers want to see the narrative early enough to
+    // suggest changes, so an empty doc is a valid answer.
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx({
+        ...cfsBody(),
+        slidesUrl: 'https://docs.example.com/d/empty-draft',
+      })
+    );
+    expect(slidesValue(fetchMock)).toBe(
+      'https://docs.example.com/d/empty-draft'
+    );
+  });
+
+  it('sends an empty string when the speaker has no slides yet', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    expect(slidesValue(fetchMock)).toBe('');
+  });
+
+  it('drops a javascript: or data: value rather than storing it', async () => {
+    for (const hostile of ['javascript:alert(1)', 'data:text/html,x']) {
+      const fetchMock = stubOk();
+      await onRequestPost(ctx(cfsBody({ slidesUrl: hostile })));
+      expect(slidesValue(fetchMock)).toBe('');
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('caps an over-long value', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ slidesUrl: `https://e.com/${'x'.repeat(500)}` }))
+    );
+    expect(slidesValue(fetchMock).length).toBeLessThanOrEqual(300);
+  });
+
+  it('never blocks a submission over the slides field', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'javascript:alert(1)' }))
+    );
+    expect(res.status).toBe(200);
+    expect(slidesValue(fetchMock)).toBe('');
+  });
+});

@@ -101,6 +101,7 @@ export const GET: APIRoute = async () => {
           `- ${tr.cfsForm.meetup.selectLabel} — ${tr.cfsForm.meetup.selectHelp}`,
           `- ${tr.cfsForm.abstractLabel}`,
           `- ${tr.cfsForm.takeawaysLabel}`,
+          `- ${tr.cfsForm.slidesUrlLabel} — ${tr.cfsForm.slidesUrlHelp}`,
           `- ${tr.cfsForm.socialLabel}`,
           `- ${tr.cfsForm.profilePhotoLabel} — ${tr.cfsForm.profilePhotoHelp}`,
           `- ${tr.cfsForm.firstTimeLabel}`,

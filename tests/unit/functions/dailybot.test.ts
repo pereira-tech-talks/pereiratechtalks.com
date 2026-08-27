@@ -185,6 +185,10 @@ describe('CFS_Q.MEETUP', () => {
     expect(CFS_Q.PROFILE_PHOTO).toMatch(UUID_RE);
   });
 
+  it('SLIDES is a real UUID too', () => {
+    expect(CFS_Q.SLIDES).toMatch(UUID_RE);
+  });
+
   it('does not collide with any other CFS question', () => {
     const uuids = Object.values(CFS_Q);
     expect(new Set(uuids).size).toBe(uuids.length);

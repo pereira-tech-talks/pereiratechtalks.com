@@ -113,6 +113,12 @@ export interface CfsFormFields extends ContactFormFields {
    */
   meetupSlug?: string;
   /**
+   * Link to the deck, or to where it will be published. Optional and never
+   * required: a proposal without slides is still a proposal, but reviewers read
+   * this when it is there.
+   */
+  slidesUrl?: string;
+  /**
    * A photo for the flyer and the speaker page. Deliberately free text: a URL,
    * or a note like "use my LinkedIn photo" — a speaker who already shared a
    * profile link should not have to go and find an image URL.

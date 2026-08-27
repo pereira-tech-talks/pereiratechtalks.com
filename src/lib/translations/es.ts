@@ -509,6 +509,10 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     takeawaysPlaceholder: '¿Con qué se debería ir la audiencia?',
     socialLabel: 'LinkedIn, blog o GitHub',
     socialPlaceholder: 'https://…',
+    slidesUrlLabel: 'Enlace a tus diapositivas',
+    slidesUrlPlaceholder: 'https://…',
+    slidesUrlHelp:
+      'Opcional, pero cuenta. Nos interesa mucho verlas: nos ayudan a evaluar la propuesta y a sugerirte mejoras mientras todavía hay tiempo de hacerlas. Si aún las estás armando, déjanos el enlace donde se van a publicar. Unas diapositivas con buena narrativa suman puntos en la selección.',
     profilePhotoLabel: 'Foto de perfil',
     profilePhotoPlaceholder: 'https://… o «usa mi foto de LinkedIn»',
     profilePhotoHelp:

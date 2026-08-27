@@ -100,6 +100,7 @@ let format = '';
 let abstract = '';
 let takeaways = '';
 let socialUrl = '';
+let slidesUrl = '';
 let profilePhoto = '';
 let firstTime = false;
 let speakerSchool = false;
@@ -153,6 +154,7 @@ async function handleSubmit() {
       firstTime,
       speakerSchool,
       meetupSlug: effectiveMeetupSlug,
+      slidesUrl,
       profilePhoto,
     },
     {
@@ -208,6 +210,7 @@ async function handleSubmit() {
         abstract,
         takeaways,
         socialUrl,
+        slidesUrl,
         profilePhoto,
         firstTime,
         speakerSchool,
@@ -241,6 +244,7 @@ function resetForm() {
   abstract = '';
   takeaways = '';
   socialUrl = '';
+  slidesUrl = '';
   profilePhoto = '';
   firstTime = false;
   speakerSchool = false;
@@ -471,6 +475,22 @@ function resetForm() {
         aria-invalid={errors.takeaways ? 'true' : undefined}
       ></textarea>
       {#if errors.takeaways}<p id="cfs-takeaways-error" class={errorClass} aria-live="polite">{errors.takeaways}</p>{/if}
+    </div>
+
+    <div>
+      <label for="cfs-slides" class={labelClass}>{f.slidesUrlLabel}</label>
+      <input
+        id="cfs-slides"
+        type="url"
+        class={inputClass}
+        placeholder={f.slidesUrlPlaceholder}
+        bind:value={slidesUrl}
+        disabled={formState === 'submitting'}
+        aria-describedby="cfs-slides-help"
+      />
+      <p id="cfs-slides-help" class="mt-1 text-sm text-ptt-secondary">
+        {f.slidesUrlHelp}
+      </p>
     </div>
 
     <div>

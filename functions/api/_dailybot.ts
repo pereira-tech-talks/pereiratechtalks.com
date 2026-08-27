@@ -60,6 +60,12 @@ export const CFS_Q = {
    */
   MEETUP: '00969219-78f1-442f-a12a-2fa890ab9002',
   /**
+   * Optional link to the speaker's deck — often to a doc that is still being
+   * written, which is the point: reviewers want to see the narrative early
+   * enough to suggest changes. Sits next to the talk material in the form.
+   */
+  SLIDES: '1e9d72d9-d8d8-4143-862e-cbe8d14f6cc1',
+  /**
    * Optional. Either a URL to a photo, or a free-text note such as
    * "use my LinkedIn photo" — the field deliberately accepts prose, because a
    * speaker who already shared a profile link above should not have to hunt for

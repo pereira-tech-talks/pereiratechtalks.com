@@ -507,6 +507,10 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     takeawaysPlaceholder: 'What should attendees leave with?',
     socialLabel: 'LinkedIn, blog, or GitHub',
     socialPlaceholder: 'https://…',
+    slidesUrlLabel: 'Link to your slides',
+    slidesUrlPlaceholder: 'https://…',
+    slidesUrlHelp:
+      'Optional, but it counts. We really want to see them: they help us assess the proposal and suggest improvements while there is still time to make them. If they are still in progress, leave the link to where they will be published. Slides with a good narrative score higher in the selection.',
     profilePhotoLabel: 'Profile photo',
     profilePhotoPlaceholder: 'https://… or “use my LinkedIn photo”',
     profilePhotoHelp:

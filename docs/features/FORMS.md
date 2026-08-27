@@ -63,6 +63,8 @@ secrets + optional labeled smokes:
 ```
 
 - `_form`: `contact` \| `cfs` \| `speaker-school` \| `sponsor` \| `calendar` \| `conduct`
+- `slidesUrl` (optional, `cfs` only): link to the deck, or to where it will be
+  published. Capped at 300 chars; a non-`http(s)` URI scheme is dropped
 - `profilePhoto` (optional, `cfs` only): a photo URL **or** a note like "use my
   LinkedIn photo". Capped at 300 chars; a non-`http(s)` URI scheme is dropped
 - `meetupSlug` (optional, `cfs` only): the meetup a proposal targets. Sent by the
@@ -118,6 +120,22 @@ is programmed, and any drift would fail real submissions with
 
 Verified live (2026-08): an optional text question accepts `''` — same shape
 `CFS_Q.NOTES` already ships.
+
+### Call for Speakers — the `Slides` question
+
+`CFS_Q.SLIDES` = `1e9d72d9-d8d8-4143-862e-cbe8d14f6cc1` — an **optional** short
+text at index 7, next to `Abstract` and `Takeaways` because it is talk material,
+not contact detail.
+
+It is the field reviewers most want filled: the deck shows the narrative, which
+is what separates a good short talk from a list of bullet points. Speakers are
+told explicitly that a link to an **unfinished** deck is welcome — the point is
+to see it early enough to suggest changes — and that good narrative scores
+higher in selection.
+
+Same server-side handling as `profilePhoto`: capped at 300 and passed through
+`sanitiseClickableText`, which drops a non-`http(s)` URI scheme. A reviewer
+clicks this link.
 
 ### Call for Speakers — the `Profile photo` question
 

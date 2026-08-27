@@ -328,6 +328,13 @@ export interface SiteTranslations {
     takeawaysPlaceholder: string;
     socialLabel: string;
     socialPlaceholder: string;
+    /**
+     * Optional link to the deck — reviewers read it to assess the talk and to
+     * suggest changes while there is still time to make them.
+     */
+    slidesUrlLabel: string;
+    slidesUrlPlaceholder: string;
+    slidesUrlHelp: string;
     /** Optional photo: accepts a URL *or* a note like "use my LinkedIn photo". */
     profilePhotoLabel: string;
     profilePhotoPlaceholder: string;
