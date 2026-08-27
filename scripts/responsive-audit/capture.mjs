@@ -20,15 +20,14 @@ import { chromium } from '@playwright/test';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..', '..');
 const OUT_DIR = join(ROOT, 'tmp', 'responsive-audit', 'baseline');
+// Plan outputs live under the gitignored `.dwp/`. The previous target,
+// `.agent_commands/agent_deep_work_plans/...`, is a path this repo stopped
+// using; running the script recreated that dead tree as untracked files.
 const SUMMARY_OUT = join(
   ROOT,
-  '.agent_commands',
-  'agent_deep_work_plans',
-  'results',
-  'plans',
-  'PLAN_full_responsive_audit',
-  'analysis_results',
-  '00_baseline',
+  '.dwp',
+  'responsive-audit',
+  'baseline',
   'capture_summary.csv'
 );
 

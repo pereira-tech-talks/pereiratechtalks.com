@@ -53,7 +53,7 @@ function handleClick(): void {
     />
     <span
       role="tooltip"
-      class="pointer-events-none absolute left-0 top-[calc(100%+0.4rem)] z-[60] w-max max-w-[14rem] rounded-md bg-ptt-bg-dark px-2.5 py-1.5 text-left text-[11px] font-medium leading-snug text-white opacity-0 shadow-lg ring-1 ring-white/10 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none dark:bg-ptt-bg-elevated dark:text-ptt dark:ring-ptt-border"
+      class="pointer-events-none absolute left-0 top-[calc(100%+0.4rem)] z-[60] w-max max-w-[9rem] sm:max-w-[14rem] rounded-md bg-ptt-bg-dark px-2.5 py-1.5 text-left text-[11px] font-medium leading-snug text-white opacity-0 shadow-lg ring-1 ring-white/10 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:transition-none dark:bg-ptt-bg-elevated dark:text-ptt dark:ring-ptt-border"
     >
       {label}
     </span>
