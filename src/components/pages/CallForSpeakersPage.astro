@@ -4,12 +4,15 @@
  */
 
 import SpeakersApplicationForm from '@/components/contact/SpeakersApplicationForm.svelte';
+import OpenCallsList from '@/components/meetups/OpenCallsList.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { CONTACT_FORM } from '@/lib/constances';
+import { formatCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getOpenCallsForSpeakers } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -20,6 +23,24 @@ const { lang } = Astro.props;
 const tr = getTranslations(lang);
 const t = tr.cfsPage;
 const prefix = getUrlPrefix(lang);
+
+/**
+ * The month-specific calls. When there are none the page reads exactly as it
+ * did before this section existed — the general call is always open, and this
+ * section must never contradict that promise.
+ */
+const openCalls = await getOpenCallsForSpeakers();
+
+/** The shape the form's optional selector consumes. */
+const formOpenCalls = openCalls.map((call) => ({
+  slug: call.slug,
+  title: call.title[lang] || call.title.es,
+  dateLabel:
+    call.dateConfidence === 'month-only'
+      ? formatCalendarDate(call.date, lang, { year: 'numeric', month: 'long' })
+      : formatCalendarDate(call.date, lang),
+  formats: call.formats,
+}));
 
 const breadcrumbs = [
   {
@@ -41,16 +62,40 @@ const breadcrumbs = [
         {t.title}
       </h1>
       <p class="mt-4 max-w-3xl text-lg text-white/85">{t.intro}</p>
-      <a
-        href="#cfs-form"
-        class="mt-8 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
-      >
-        {tr.cfsForm.submitButton}
-      </a>
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="#cfs-form"
+          class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+        >
+          {tr.cfsForm.submitButton}
+        </a>
+        {
+          openCalls.length > 0 && (
+            <a
+              href="#open-calls"
+              class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {t.openCalls.heroCta}
+            </a>
+          )
+        }
+      </div>
     </div>
   </div>
 
-  <Section eyebrow={t.criteriaEyebrow} title={t.whatWeLookForTitle}>
+  <Section
+    id="open-calls"
+    eyebrow={t.openCalls.eyebrow}
+    title={t.openCalls.title}
+    class="scroll-mt-28"
+  >
+    <p class="-mt-2 max-w-3xl text-ptt-secondary">{t.openCalls.intro}</p>
+    <div class="mt-8">
+      <OpenCallsList calls={openCalls} lang={lang} />
+    </div>
+  </Section>
+
+  <Section eyebrow={t.criteriaEyebrow} title={t.whatWeLookForTitle} surface="alt">
     <ul class="grid gap-4 sm:grid-cols-2 list-none">
       {
         t.whatWeLookFor.map((item) => (
@@ -74,7 +119,7 @@ const breadcrumbs = [
     </ul>
   </Section>
 
-  <Section eyebrow={t.formatsEyebrow} title={t.formatsTitle} surface="alt">
+  <Section eyebrow={t.formatsEyebrow} title={t.formatsTitle}>
     <ul class="grid gap-6 sm:grid-cols-2 list-none">
       {
         t.formats.map((format) => (
@@ -101,6 +146,8 @@ const breadcrumbs = [
         client:visible
         lang={lang}
         apiEndpoint={CONTACT_FORM.apiEndpoint}
+        mode="global"
+        openCalls={formOpenCalls}
       />
     </div>
   </Section>

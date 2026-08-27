@@ -1,0 +1,154 @@
+---
+/**
+ * The meetups accepting proposals right now, on the global Call for Speakers
+ * page.
+ *
+ * The point of this list is the **format chips**: a speaker with a workshop
+ * should be able to see in one glance which month can stage one. Everything
+ * else is supporting detail.
+ */
+
+import { formatCalendarDate } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import type { OpenCall } from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  calls: OpenCall[];
+  lang: Language;
+}
+
+const { calls, lang } = Astro.props;
+
+const tr = getTranslations(lang);
+const t = tr.cfsPage.openCalls;
+const prefix = getUrlPrefix(lang);
+
+const formatLabel = (value: string): string =>
+  tr.cfsForm.formatOptions.find((o) => o.value === value)?.label ?? value;
+
+const dateLabelFor = (call: OpenCall): string =>
+  call.dateConfidence === 'month-only'
+    ? formatCalendarDate(call.date, lang, { year: 'numeric', month: 'long' })
+    : formatCalendarDate(call.date, lang);
+
+const rows = calls.map((call) => ({
+  call,
+  href: `${prefix}/meetups/${call.slug}/#call-for-speakers`,
+  meetupHref: `${prefix}/meetups/${call.slug}/`,
+  title: call.title[lang] || call.title.es,
+  dateLabel: dateLabelFor(call),
+  closesLabel: call.closesAt ? formatCalendarDate(call.closesAt, lang) : '',
+  slotsLabel:
+    typeof call.slots === 'number'
+      ? call.slots === 1
+        ? t.slotsOne
+        : t.slots.replace('{n}', String(call.slots))
+      : '',
+  note: call.note?.[lang] ?? '',
+  tentative: call.dateConfidence === 'tentative',
+}));
+---
+
+{
+  rows.length > 0 ? (
+    <ul class="grid list-none gap-5 sm:grid-cols-2">
+      {rows.map(
+        ({
+          call,
+          href,
+          meetupHref,
+          title,
+          dateLabel,
+          closesLabel,
+          slotsLabel,
+          note,
+          tentative,
+        }) => (
+          <li class="flex h-full min-w-0 flex-col gap-3 rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border">
+            <div class="flex flex-wrap items-center gap-2">
+              <p class="text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
+                {dateLabel}
+              </p>
+              {tentative && (
+                <span class="rounded-full bg-ptt-primary-soft px-2.5 py-0.5 text-xs font-semibold text-ptt-primary">
+                  {tr.meetupDetail.planning.chipTentative}
+                </span>
+              )}
+            </div>
+
+            <h3 class="text-lg font-semibold text-ptt">
+              <a
+                href={meetupHref}
+                class="hover:text-ptt-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+              >
+                {title}
+              </a>
+            </h3>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-sm font-medium text-ptt-secondary">
+                {t.formatsLabel}
+              </span>
+              <ul class="flex list-none flex-wrap gap-1.5">
+                {call.formats.map((value) => (
+                  <li class="rounded-full bg-ptt-primary-soft px-2.5 py-1 text-xs font-semibold text-ptt-primary">
+                    {formatLabel(value)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {(closesLabel || slotsLabel) && (
+              <p class="text-sm text-ptt-secondary">
+                {closesLabel && t.closesOn.replace('{date}', closesLabel)}
+                {closesLabel && slotsLabel && ' · '}
+                {slotsLabel}
+              </p>
+            )}
+
+            {note && <p class="text-sm text-ptt-secondary">{note}</p>}
+
+            <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-2">
+              <a
+                href={href}
+                aria-label={t.rowCtaAria.replace('{date}', dateLabel)}
+                data-umami-event="cfs_open_call_click"
+                data-umami-event-meetup-slug={call.slug}
+                data-umami-event-source="global_list"
+                class="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-ptt-primary transition-colors hover:text-ptt-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-ptt-primary-dark"
+              >
+                {t.rowCta}
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </a>
+              <a
+                href={meetupHref}
+                class="inline-flex min-h-[44px] items-center text-sm font-medium text-ptt-secondary transition-colors hover:text-ptt focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+              >
+                {t.viewMeetup}
+              </a>
+            </div>
+          </li>
+        )
+      )}
+    </ul>
+  ) : (
+    <div class="rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:p-8">
+      <h3 class="text-lg font-semibold text-ptt">{t.emptyTitle}</h3>
+      <p class="mt-2 max-w-2xl text-ptt-secondary">{t.emptyBody}</p>
+    </div>
+  )
+}
