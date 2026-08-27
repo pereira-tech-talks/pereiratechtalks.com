@@ -10,6 +10,7 @@ import {
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
 import {
+  formatMeetupTalkCount,
   formatOpenCallDate,
   getMeetupSlug,
   getMeetups,
@@ -40,7 +41,7 @@ export const GET: APIRoute = async () => {
       mdHref(lang, `meetups/${slug}`),
       date,
       venue,
-      `${m.data.talks.length} charlas`,
+      formatMeetupTalkCount(m.data.talks.length, lang),
       description
     );
   };

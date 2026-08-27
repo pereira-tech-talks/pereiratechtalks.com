@@ -20,12 +20,13 @@ import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
-import { formatCalendarDate } from '@/lib/dates';
+import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
   getCallForSpeakersState,
   getMeetupBodyEntry,
   getMeetupSlug,
+  resolveEventAttendanceMode,
   resolveMeetupDateAttribute,
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
@@ -140,17 +141,27 @@ const eventPlatformLabel = meetupComLink?.includes('luma.com')
   ? 'Luma'
   : 'Meetup.com';
 
+const meetupMode = meetup.data.mode ?? 'in-person';
+
 const eventJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Event',
   name: title,
   description: description || tr(meetup.data.title, lang),
-  startDate: date.toISOString(),
+  // A calendar date, not an instant. `toISOString()` emitted UTC midnight,
+  // which in Colombia (UTC-5) is the evening *before* — so every meetup
+  // advertised the wrong day to a consumer that localises the timestamp. We
+  // do not model a start time, so a date-only value is both correct and
+  // unambiguous; schema.org accepts `Date` for `startDate`.
+  startDate: getCalendarDateString(date),
   eventStatus:
     status === 'cancelled'
       ? 'https://schema.org/EventCancelled'
       : 'https://schema.org/EventScheduled',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  // Derived from `mode`, which the meetup schema has carried since the
+  // programming work. It used to be hardcoded offline, so the four online
+  // months announced themselves as in-person.
+  eventAttendanceMode: resolveEventAttendanceMode(meetupMode),
   url: `${SITE_URL}${prefix}/meetups/${slug}/`,
   organizer: {
     '@type': 'Organization',
@@ -173,6 +184,13 @@ if (venue) {
       addressLocality: venue.city,
       addressCountry: venue.country,
     },
+  };
+} else if (meetupMode !== 'in-person' && meetupComLink) {
+  // An online night's "place" is the link people join at. Only emitted when
+  // there is a real one — the same rule as above: never invent a location.
+  eventJsonLd.location = {
+    '@type': 'VirtualLocation',
+    url: meetupComLink,
   };
 }
 if (speakers.length > 0) {

@@ -6,8 +6,10 @@ import {
   buildOpenCallsForSpeakers,
   buildPastMeetupShowcase,
   buildUpcomingMeetupShowcase,
+  formatMeetupTalkCount,
   getCallForSpeakersState,
   isCallForSpeakersOpen,
+  resolveEventAttendanceMode,
   resolveMeetupDateAttribute,
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
@@ -525,5 +527,72 @@ describe('buildCallsForSpeakersBoard vs buildOpenCallsForSpeakers', () => {
       TODAY
     );
     expect(bare.hero).toBeUndefined();
+  });
+});
+
+/**
+ * The four programmed months run online. `MeetupDetailPage` used to hardcode
+ * `OfflineEventAttendanceMode` in its `Event` JSON-LD, so every one of them
+ * told search engines it was an in-person event in Pereira — a wrong answer to
+ * the single most practical question a reader has about a meetup.
+ *
+ * Found by the SEO/AEO audit (PLAN_branch_audit_and_pr Task 2), not by a gate:
+ * `seo:check` asserts an `Event` block exists, never that it is truthful.
+ */
+describe('schema.org attendance mode', () => {
+  it('sends an online meetup to OnlineEventAttendanceMode', () => {
+    expect(resolveEventAttendanceMode('virtual')).toBe(
+      'https://schema.org/OnlineEventAttendanceMode'
+    );
+  });
+
+  it('sends a hybrid meetup to MixedEventAttendanceMode', () => {
+    expect(resolveEventAttendanceMode('hybrid')).toBe(
+      'https://schema.org/MixedEventAttendanceMode'
+    );
+  });
+
+  it('sends an in-person meetup to OfflineEventAttendanceMode', () => {
+    expect(resolveEventAttendanceMode('in-person')).toBe(
+      'https://schema.org/OfflineEventAttendanceMode'
+    );
+  });
+
+  it('defaults to in-person when mode is absent', () => {
+    // The Zod schema defaults `mode` to in-person, but the archive predates
+    // the field and the page reads it defensively. Both paths agree.
+    expect(resolveEventAttendanceMode(undefined)).toBe(
+      'https://schema.org/OfflineEventAttendanceMode'
+    );
+  });
+});
+
+/**
+ * Page and twin used to disagree on the same row. `MeetupCard` hid the talk
+ * count at zero; `meetups.md.ts` printed "0 charlas" for every programmed
+ * month — an answer engine reads that as a meetup with nothing on, which is
+ * the opposite of what an open call is trying to say.
+ *
+ * Found by the AEO half of PLAN_branch_audit_and_pr Task 2. `md:check`
+ * compares sections, not the fields inside a row, so it saw nothing.
+ */
+describe('meetup talk count', () => {
+  it('says nothing at all when there are no talks', () => {
+    expect(formatMeetupTalkCount(0, 'es')).toBeNull();
+    expect(formatMeetupTalkCount(0, 'en')).toBeNull();
+  });
+
+  it('is singular at one', () => {
+    expect(formatMeetupTalkCount(1, 'es')).toBe('1 charla');
+    expect(formatMeetupTalkCount(1, 'en')).toBe('1 talk');
+  });
+
+  it('is plural above one', () => {
+    expect(formatMeetupTalkCount(3, 'es')).toBe('3 charlas');
+    expect(formatMeetupTalkCount(3, 'en')).toBe('3 talks');
+  });
+
+  it('treats a negative count as nothing rather than rendering it', () => {
+    expect(formatMeetupTalkCount(-1, 'es')).toBeNull();
   });
 });

@@ -510,6 +510,7 @@ const AGENT_MD_LABELS = {
     callCloses: 'Closes',
     callSlots: 'Slots available',
     callState: 'Call status',
+    callFormFields: 'What the form asks',
     openCalls: 'Open calls',
     dateConfidence: 'Date precision',
     lineup: 'Line-up',
@@ -564,6 +565,7 @@ const AGENT_MD_LABELS = {
     callCloses: 'Cierra',
     callSlots: 'Espacios disponibles',
     callState: 'Estado de la convocatoria',
+    callFormFields: 'Qué pide el formulario',
     openCalls: 'Convocatorias abiertas',
     dateConfidence: 'Precisión de la fecha',
     lineup: 'Programación',
@@ -740,6 +742,11 @@ export function serializeMeetupDetailToMarkdown(
     }
     if (call.isOpen) lines.push(linkLine(L('callForSpeakers'), call.url));
     if (call.formFields && call.formFields.length > 0) {
+      // Headed, not bare. An agent reading the meetup twin met an unlabelled
+      // list of thirteen strings straight after a link and had no way to know
+      // it was the form's fields. The global CFS twin already heads its copy.
+      lines.push('');
+      lines.push(`### ${L('callFormFields')}`);
       lines.push('');
       for (const field of call.formFields) lines.push(`- ${field}`);
     }

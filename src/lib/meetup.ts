@@ -571,3 +571,47 @@ export const resolveMeetupVenueLine = (
   if (!venue) return resolveMeetupPlaceFallback(meetup, lang);
   return [venue.name, venue.city].filter(Boolean).join(', ');
 };
+
+/** How a meetup is attended. Mirrors the `mode` enum in `content.config.ts`. */
+export type MeetupMode = 'in-person' | 'virtual' | 'hybrid';
+
+/**
+ * The schema.org attendance mode for a meetup.
+ *
+ * `MeetupDetailPage` used to hardcode `OfflineEventAttendanceMode`, which was
+ * harmless while every meetup was in a room and wrong the moment the community
+ * programmed four online months: all four announced themselves to search
+ * engines as in-person events in Pereira.
+ *
+ * Derived, not authored — the same rule the rest of this module follows.
+ */
+export const resolveEventAttendanceMode = (
+  mode: MeetupMode | undefined
+): string => {
+  switch (mode) {
+    case 'virtual':
+      return 'https://schema.org/OnlineEventAttendanceMode';
+    case 'hybrid':
+      return 'https://schema.org/MixedEventAttendanceMode';
+    default:
+      return 'https://schema.org/OfflineEventAttendanceMode';
+  }
+};
+
+/**
+ * "2 charlas", "1 talk", or nothing at all.
+ *
+ * `null` at zero. A programmed month has no line-up yet, and the agent twin
+ * used to render "0 charlas" for each of them — which reads as a meetup with
+ * nothing on, rather than one whose call is still open. `MeetupCard` already
+ * hid the count at zero; the twin did not, so page and twin disagreed on the
+ * same row. Stated once here so they cannot drift again.
+ */
+export const formatMeetupTalkCount = (
+  count: number,
+  lang: Language
+): string | null => {
+  if (count <= 0) return null;
+  if (lang === 'es') return count === 1 ? '1 charla' : `${count} charlas`;
+  return count === 1 ? '1 talk' : `${count} talks`;
+};

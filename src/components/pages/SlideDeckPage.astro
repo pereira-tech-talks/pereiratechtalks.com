@@ -5,6 +5,7 @@ import ExternalView from '@/components/slides/ExternalView.astro';
 import RevealDeck from '@/components/slides/RevealDeck.svelte';
 import SlideLayout from '@/layouts/SlideLayout.astro';
 import { getPostBySlug } from '@/lib/blog';
+import { getCalendarDateString } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import { getDeckSlug, isDraftDeck } from '@/lib/slides';
@@ -71,7 +72,9 @@ const eventMeta = deck.data.eventName
         '@type': 'Event' as const,
         name: deck.data.eventName,
         ...(deck.data.eventDate && {
-          startDate: deck.data.eventDate.toISOString(),
+          // A calendar date, not an instant: UTC midnight reads as the
+          // previous evening in Colombia. Same fix as MeetupDetailPage.
+          startDate: getCalendarDateString(deck.data.eventDate),
         }),
         ...(deck.data.eventUrl && { url: deck.data.eventUrl }),
       },
