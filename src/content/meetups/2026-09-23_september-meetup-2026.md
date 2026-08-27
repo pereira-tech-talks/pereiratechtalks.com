@@ -27,9 +27,9 @@ draft: false
 
 Septiembre llega y lo queremos lleno de voces. Lo dedicamos entero a charlas relámpago: de tres a cinco minutos por persona, una idea por charla, y una noche donde suben al escenario muchas más personas de lo habitual.
 
-Hay algo del formato corto que cuesta explicar hasta que lo vives: cinco minutos te obligan a quedarte con lo esencial. No hay espacio para la diapositiva de agenda ni para el contexto de relleno. Solo la idea, lo que aprendiste y por qué a alguien más le va a servir.
+Cinco minutos cambian cómo se cuenta algo. No cabe la diapositiva de agenda ni el «primero un poco de contexto»: entras directo a la idea, la sostienes con un ejemplo y sales. Cuesta más prepararlo de lo que parece, y se escucha muchísimo mejor.
 
-Y baja el listón a propósito. No hace falta una investigación de seis meses ni una arquitectura que aguante millones de usuarios: el truco que te ahorró una tarde, el error que no quieres que repita nadie o la librería que resultó ser justo lo que buscabas ya son una charla.
+Y son las charlas que más se comentan después. El truco que te ahorró una tarde, el error que no quieres que repita nadie, la librería que resultó ser justo lo que buscabas: cosas alrededor de las que nunca armarías una charla larga, y que en cinco minutos le sirven a media sala.
 
 La fecha está confirmada y el encuentro es virtual.
 
