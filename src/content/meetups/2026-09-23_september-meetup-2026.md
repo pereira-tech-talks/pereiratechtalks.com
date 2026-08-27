@@ -25,9 +25,11 @@ draft: false
 
 ## Meetup de septiembre
 
-Abrimos el ciclo con lo que mejor funciona para empezar: charlas relámpago. De tres a cinco minutos por persona, una idea por charla, y el resto de la noche para conversar.
+Septiembre llega y lo queremos lleno de voces. Lo dedicamos entero a charlas relámpago: de tres a cinco minutos por persona, una idea por charla, y una noche donde suben al escenario muchas más personas de lo habitual.
 
-El formato corto baja el listón a propósito. No hace falta una investigación de seis meses ni una arquitectura que soporte millones de usuarios: basta con algo que aprendiste y que a la persona de al lado le va a servir.
+Hay algo del formato corto que cuesta explicar hasta que lo vives: cinco minutos te obligan a quedarte con lo esencial. No hay espacio para la diapositiva de agenda ni para el contexto de relleno. Solo la idea, lo que aprendiste y por qué a alguien más le va a servir.
+
+Y baja el listón a propósito. No hace falta una investigación de seis meses ni una arquitectura que aguante millones de usuarios: el truco que te ahorró una tarde, el error que no quieres que repita nadie o la librería que resultó ser justo lo que buscabas ya son una charla.
 
 La fecha está confirmada y el encuentro es virtual.
 
