@@ -229,8 +229,6 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       formatsLabel: 'Formatos que recibimos este mes',
       formatsSingleLabel: 'Formato',
       deadline: 'La convocatoria cierra el {date}',
-      deadlineDays: 'Quedan {n} días',
-      deadlineLastDay: 'Hoy es el último día',
       slots: 'Quedan {n} espacios en el programa',
       slotsOne: 'Queda 1 espacio en el programa',
       titleScheduled: 'La convocatoria aún no abre',

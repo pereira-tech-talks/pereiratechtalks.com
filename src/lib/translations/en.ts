@@ -228,8 +228,6 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       formatsLabel: 'Formats we are taking this month',
       formatsSingleLabel: 'Format',
       deadline: 'The call closes on {date}',
-      deadlineDays: '{n} days left',
-      deadlineLastDay: 'Today is the last day',
       slots: '{n} slots left in the programme',
       slotsOne: '1 slot left in the programme',
       titleScheduled: 'The call is not open yet',

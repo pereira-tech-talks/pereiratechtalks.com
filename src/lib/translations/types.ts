@@ -231,9 +231,6 @@ export interface SiteTranslations {
       /** Placeholder: {date} */
       deadline: string;
       /** Placeholder: {n} */
-      deadlineDays: string;
-      deadlineLastDay: string;
-      /** Placeholder: {n} */
       slots: string;
       slotsOne: string;
       titleScheduled: string;

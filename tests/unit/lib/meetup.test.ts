@@ -5,7 +5,6 @@ import {
   buildOpenCallsForSpeakers,
   buildPastMeetupShowcase,
   buildUpcomingMeetupShowcase,
-  getCallDaysRemaining,
   getCallForSpeakersState,
   isCallForSpeakersOpen,
   resolveMeetupDateAttribute,
@@ -361,53 +360,6 @@ describe('getCallForSpeakersState — the auto-close truth table', () => {
         getCallForSpeakersState(m, TODAY) === 'open'
       );
     }
-  });
-});
-
-describe('getCallDaysRemaining', () => {
-  it('counts whole days to the deadline', () => {
-    expect(
-      getCallDaysRemaining(
-        makeProgrammed('m', {
-          date: '2026-11-18',
-          call: openCall({ closesAt: new Date('2026-08-17T00:00:00.000Z') }),
-        }),
-        TODAY
-      )
-    ).toBe(10);
-  });
-
-  it('is 0 on the last day, never negative', () => {
-    expect(
-      getCallDaysRemaining(
-        makeProgrammed('m', {
-          date: '2026-11-18',
-          call: openCall({ closesAt: new Date(`${TODAY}T00:00:00.000Z`) }),
-        }),
-        TODAY
-      )
-    ).toBe(0);
-  });
-
-  it('is null without a deadline, and null when the call is not open', () => {
-    expect(
-      getCallDaysRemaining(
-        makeProgrammed('m', { date: '2026-11-18', call: openCall() }),
-        TODAY
-      )
-    ).toBeNull();
-    expect(
-      getCallDaysRemaining(
-        makeProgrammed('m', {
-          date: '2026-11-18',
-          call: openCall({
-            status: 'closed',
-            closesAt: new Date('2026-11-01'),
-          }),
-        }),
-        TODAY
-      )
-    ).toBeNull();
   });
 });
 

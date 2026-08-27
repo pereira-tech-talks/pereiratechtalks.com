@@ -19,7 +19,6 @@ import { CONTACT_FORM } from '@/lib/constances';
 import { formatCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
-  getCallDaysRemaining,
   getCallForSpeakersState,
   getMeetupSlug,
   resolveMeetupDateLabel,
@@ -46,10 +45,6 @@ const formats = call?.formats ?? [];
 
 const dateLabel = resolveMeetupDateLabel(meetup, lang);
 
-// Build-time. The value changes once a day, so a client clock would buy
-// nothing but hydration cost. Do not "fix" this into a live countdown.
-const daysRemaining = getCallDaysRemaining(meetup);
-
 const closesLabel = call?.closesAt
   ? formatCalendarDate(call.closesAt, lang)
   : '';
@@ -64,13 +59,6 @@ const slotsLine =
       ? c.slotsOne
       : c.slots.replace('{n}', String(call.slots))
     : '';
-
-const deadlineDaysLine =
-  daysRemaining === null
-    ? ''
-    : daysRemaining === 0
-      ? c.deadlineLastDay
-      : c.deadlineDays.replace('{n}', String(daysRemaining));
 
 const note = call?.note
   ? typeof call.note === 'string'
@@ -125,17 +113,14 @@ const meetupSlug = getMeetupSlug(meetup);
                   <p class="mt-2 text-ptt-secondary">{slides.demos}</p>
                 </div>
 
+                {/*
+                  The absolute date only. A "days left" countdown is computed at
+                  build time on a static site, so it freezes at whatever the last
+                  deploy said — a wrong number is worse than no number.
+                */}
                 {closesLabel && (
-                  <p class="text-ptt-secondary">
-                    <span class="font-medium text-ptt">
-                      {c.deadline.replace('{date}', closesLabel)}
-                    </span>
-                    {deadlineDaysLine && (
-                      <>
-                        {' · '}
-                        {deadlineDaysLine}
-                      </>
-                    )}
+                  <p class="font-medium text-ptt">
+                    {c.deadline.replace('{date}', closesLabel)}
                   </p>
                 )}
 

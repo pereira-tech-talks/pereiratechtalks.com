@@ -390,25 +390,6 @@ export const isCallForSpeakersOpen = (
   todayInTz: string = getTodayInSiteTimezone()
 ): boolean => getCallForSpeakersState(meetup, todayInTz) === 'open';
 
-/**
- * Whole days left before a call closes, or null when it has no deadline or is
- * not open. Computed from calendar dates at build time — the value changes once
- * a day, so a client-side clock would buy nothing but hydration cost.
- */
-export const getCallDaysRemaining = (
-  meetup: Meetup,
-  todayInTz: string = getTodayInSiteTimezone()
-): number | null => {
-  const call = meetup.data.callForSpeakers;
-  if (!call?.closesAt) return null;
-  if (getCallForSpeakersState(meetup, todayInTz) !== 'open') return null;
-  const closes = Date.parse(
-    `${getCalendarDateString(call.closesAt)}T00:00:00Z`
-  );
-  const today = Date.parse(`${todayInTz}T00:00:00Z`);
-  return Math.max(0, Math.round((closes - today) / 86_400_000));
-};
-
 /** Pure builder — takes the meetups so it stays testable without the collection. */
 export const buildOpenCallsForSpeakers = (
   meetups: Meetup[],
