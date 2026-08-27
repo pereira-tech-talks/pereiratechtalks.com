@@ -86,3 +86,38 @@ Each has a `:strict` variant that exits non-zero; all four run in CI after the
 build (`.github/workflows/code_check.yml`). `parity:check` is the exception that
 reads `src/content/` rather than `dist/` — parity is a property of the authored
 files, so it can be caught before a build.
+
+## What the gates do not catch
+
+Both of these cost a real plan real time
+(`PLAN_meetup_programming_and_call_for_speakers`, 2026-08). Neither is
+detectable by any of the four gates.
+
+### An empty state passes every gate
+
+A content feature built while its collection is empty will pass `md:check`,
+`lang:check`, `seo:check` and `parity:check` — because the surface it adds does
+not render, so there is nothing for the gates to compare. Four consecutive tasks
+shipped green that way; the first commit of real content produced **ten**
+`md:check` failures at once (a missing line-up notice, missing panel prose, a
+raw enum where the page showed a localized label, and an unreflected form).
+
+**Therefore:** a feature is not verified until its content exists. Seed at least
+one entry per state the feature can be in, rebuild, and re-run the gates *before*
+calling the UI work done. `pnpm run build` page count is a cheap sanity check
+that the entries actually landed.
+
+### Slug language
+
+No gate checks whether a slug is English. `md`, `lang`, `seo` and `parity` all
+pass happily on `src/content/meetups/2026-09-23_meetup-de-septiembre-2026.md`,
+and the rule lives only in `AGENTS.md` (DON'T #21),
+[MEETUPS.md](./MEETUPS.md) and the `/add-meetup` skill.
+
+**Therefore:** check it by eye, or by diff review, on every new content file. The
+slug is the public URL and the cross-collection reference key, so renaming after
+publication breaks live links.
+
+- [ ] Every new content file's slug is English, in both languages
+- [ ] Every state the feature supports has at least one real entry, and the
+      gates were re-run after it landed
