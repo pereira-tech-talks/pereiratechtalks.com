@@ -9,6 +9,14 @@ pubDate: 2026-10-21
 date: 2026-10-21
 dateConfidence: tentative
 mode: virtual
+hero:
+  src: "/images/meetups/october-meetup-2026/hero.webp"
+  srcEn: "/images/meetups/october-meetup-2026/hero.en.webp"
+  alt:
+    es: "Flyer del meetup de octubre de Pereira Tech Talks: meetup de charlas relámpago, miércoles 21 de octubre de 2026, 6:30 PM hora Colombia, virtual"
+    en: "Pereira Tech Talks October meetup flyer: lightning talk meetup, Wednesday 21 October 2026, 6:30 PM Colombia time, online"
+  layout: banner
+heroImage: "/images/meetups/october-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:

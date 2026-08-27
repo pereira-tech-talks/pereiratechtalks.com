@@ -9,6 +9,14 @@ pubDate: 2026-09-23
 date: 2026-09-23
 dateConfidence: confirmed
 mode: virtual
+hero:
+  src: "/images/meetups/september-meetup-2026/hero.webp"
+  srcEn: "/images/meetups/september-meetup-2026/hero.en.webp"
+  alt:
+    es: "Flyer del meetup de septiembre de Pereira Tech Talks: meetup de charlas relámpago, miércoles 23 de septiembre de 2026, 6:30 PM hora Colombia, virtual"
+    en: "Pereira Tech Talks September meetup flyer: lightning talk meetup, Wednesday 23 September 2026, 6:30 PM Colombia time, online"
+  layout: banner
+heroImage: "/images/meetups/september-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:

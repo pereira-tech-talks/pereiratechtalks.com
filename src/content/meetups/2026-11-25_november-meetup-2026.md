@@ -9,6 +9,14 @@ pubDate: 2026-11-25
 date: 2026-11-25
 dateConfidence: tentative
 mode: virtual
+hero:
+  src: "/images/meetups/november-meetup-2026/hero.webp"
+  srcEn: "/images/meetups/november-meetup-2026/hero.en.webp"
+  alt:
+    es: "Flyer del meetup de noviembre de Pereira Tech Talks: meetup de charlas relámpago, miércoles 25 de noviembre de 2026, 6:30 PM hora Colombia, virtual"
+    en: "Pereira Tech Talks November meetup flyer: lightning talk meetup, Wednesday 25 November 2026, 6:30 PM Colombia time, online"
+  layout: banner
+heroImage: "/images/meetups/november-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:
