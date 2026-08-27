@@ -229,16 +229,15 @@ const ctasLabel =
   lang === 'es' ? 'Propón tu charla para:' : 'Propose your talk for:';
 
 /**
- * One track per action on wider screens, two columns on mobile. Whole class
- * names, not interpolation — Tailwind scans source text, so `sm:grid-cols-${n}`
- * would never be generated. Five and six wrap into two rows of three rather
- * than becoming a cramped single row.
+ * Two columns, whatever the count. Four across one row squeezed the labels to
+ * the pill edges; two roomy rows read better and keep every cell the same size.
+ * A single action gets the full width.
+ *
+ * Whole class names, not interpolation — Tailwind scans source text, so
+ * `sm:grid-cols-${n}` would never be generated.
  */
 function ctaColumnsClass(count: number): string {
-  if (count <= 1) return 'sm:grid-cols-1';
-  if (count === 2) return 'sm:grid-cols-2';
-  if (count === 4) return 'sm:grid-cols-4';
-  return 'sm:grid-cols-3';
+  return count <= 1 ? 'sm:grid-cols-1' : 'sm:grid-cols-2';
 }
 const importantLabel = lang === 'es' ? 'IMPORTANTE' : 'IMPORTANT';
 
@@ -469,7 +468,7 @@ function severityClass(severity: LocalizedNotification['severity']): string {
               {#each openEntry.ctas as cta (cta.href)}
                 <a
                   href={cta.href}
-                  class="inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 rounded-full border border-ptt-primary/40 px-3 py-2.5 text-center text-sm font-semibold text-ptt-primary transition hover:border-ptt-primary hover:bg-ptt-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-ptt-primary-dark/40 dark:text-ptt-primary-dark dark:hover:bg-ptt-primary-dark dark:hover:text-ptt-bg"
+                  class="inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 rounded-full border border-ptt-primary/40 px-5 py-2.5 text-center text-sm font-semibold text-ptt-primary transition hover:border-ptt-primary hover:bg-ptt-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-ptt-primary-dark/40 dark:text-ptt-primary-dark dark:hover:bg-ptt-primary-dark dark:hover:text-ptt-bg"
                   onclick={() =>
                     trackEvent(EVENTS.NOTIFICATION_CTA, {
                       id: openEntry.id,
