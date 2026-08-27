@@ -2,8 +2,13 @@
 /**
  * Crawl `dist/` (after a production build) to enumerate every generated route
  * and classify it by template. Writes:
- *   - analysis_results/00_baseline/route_inventory.md (human-readable)
- *   - analysis_results/00_baseline/route_inventory.json (machine-readable)
+ *   - .dwp/responsive-audit/baseline/route_inventory.md (human-readable)
+ *   - .dwp/responsive-audit/baseline/route_inventory.json (machine-readable)
+ *
+ * This is a *reporting* tool: it tells you which templates exist. The audit
+ * itself reads the hand-curated `urls.json`, so a template that shows up here
+ * and not there is audited at zero viewports. Compare the two when a new page
+ * template ships.
  */
 import { mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -12,16 +17,11 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..', '..');
 const DIST = join(ROOT, 'dist');
-const OUT_DIR = join(
-  ROOT,
-  '.agent_commands',
-  'agent_deep_work_plans',
-  'results',
-  'plans',
-  'PLAN_full_responsive_audit',
-  'analysis_results',
-  '00_baseline'
-);
+// Plan outputs live under the gitignored `.dwp/`. The previous target,
+// `.agent_commands/agent_deep_work_plans/...`, is a path this repo stopped
+// using; running the script recreated that dead tree as untracked files on
+// every invocation.
+const OUT_DIR = join(ROOT, '.dwp', 'responsive-audit', 'baseline');
 
 function walk(dir, base = '') {
   const out = [];

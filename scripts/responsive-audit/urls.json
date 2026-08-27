@@ -1,5 +1,5 @@
 {
-  "$comment": "Representative URL subset for responsive audit. Curated to cover every template × language × content variant. Routes are relative to the base URL. Per project convention, slugs are English-only on both EN and ES routes.",
+  "$comment": "Representative URL subset for responsive audit. Curated to cover every template × language × content variant. When a new page template ships, add it here — nothing fails if you forget, so this list is only as good as the last person to update it. Routes are relative to the base URL. Per project convention, slugs are English-only on both EN and ES routes.",
   "baseUrl": "http://localhost:4321",
   "routes": [
     {
@@ -66,6 +66,11 @@
       "url": "/en/call-for-speakers",
       "template": "form-call-for-speakers",
       "lang": "en"
+    },
+    {
+      "url": "/call-for-speakers",
+      "template": "form-call-for-speakers",
+      "lang": "es"
     },
     {
       "url": "/en/sponsor-us",
@@ -158,6 +163,26 @@
       "lang": "es"
     },
     {
+      "url": "/en/meetups/september-meetup-2026",
+      "template": "meetup-detail-planned",
+      "lang": "en"
+    },
+    {
+      "url": "/meetups/september-meetup-2026",
+      "template": "meetup-detail-planned",
+      "lang": "es"
+    },
+    {
+      "url": "/en/meetups/qa-pilar-del-software",
+      "template": "meetup-detail-archive",
+      "lang": "en"
+    },
+    {
+      "url": "/meetups/qa-pilar-del-software",
+      "template": "meetup-detail-archive",
+      "lang": "es"
+    },
+    {
       "url": "/en/pereira-tech-day",
       "template": "ptd-landing",
       "lang": "en"
@@ -191,11 +216,6 @@
       "url": "/speakers",
       "template": "speakers-list",
       "lang": "es"
-    },
-    {
-      "url": "/en/verticals",
-      "template": "verticals-list",
-      "lang": "en"
     },
     {
       "url": "/verticals",

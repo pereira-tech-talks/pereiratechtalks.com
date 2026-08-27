@@ -47,6 +47,11 @@ const ROUTES_SUBSET = urlsConfig.routes.filter(
     r.template === 'blog-post-banner' ||
     r.template === 'blog-post-embeds' ||
     r.template === 'meetups-list' ||
+    // A meetup detail page renders two ways that share almost no layout: a
+    // programmed month (date tile, open-call panel, no line-up yet) and an
+    // archive meetup (speakers, talks, venue, sponsors). Both are covered.
+    r.template.startsWith('meetup-detail') ||
+    r.template === 'form-call-for-speakers' ||
     r.template === 'ptd-edition' ||
     r.template === 'form-contact' ||
     r.template === 'channels' ||
