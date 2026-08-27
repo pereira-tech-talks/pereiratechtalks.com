@@ -508,6 +508,10 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     takeawaysPlaceholder: 'What should attendees leave with?',
     socialLabel: 'LinkedIn, blog, or GitHub',
     socialPlaceholder: 'https://…',
+    profilePhotoLabel: 'Profile photo',
+    profilePhotoPlaceholder: 'https://… or “use my LinkedIn photo”',
+    profilePhotoHelp:
+      'Optional. Paste a link to a photo of you, or write “use my LinkedIn photo” and we will take it from the profile you shared above. We use it on the flyer and on your speaker page.',
     firstTimeLabel: 'This would be my first talk at Pereira Tech Talks',
     speakerSchoolLabel: 'I am interested in Speaker School mentorship',
     notesLabel: 'Anything else we should know?',

@@ -402,6 +402,9 @@ export const resolveMeetupDetail = async (
                     tr.cfsForm.abstractLabel,
                     tr.cfsForm.takeawaysLabel,
                     tr.cfsForm.socialLabel,
+                    // Carries its help text too: "a URL or a sentence" is the
+                    // whole point of the field, and a label alone hides it.
+                    `${tr.cfsForm.profilePhotoLabel} — ${tr.cfsForm.profilePhotoHelp}`,
                     tr.cfsForm.firstTimeLabel,
                     tr.cfsForm.speakerSchoolLabel,
                     tr.cfsForm.notesLabel,

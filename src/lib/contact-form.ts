@@ -112,6 +112,12 @@ export interface CfsFormFields extends ContactFormFields {
    * month is still a good proposal.
    */
   meetupSlug?: string;
+  /**
+   * A photo for the flyer and the speaker page. Deliberately free text: a URL,
+   * or a note like "use my LinkedIn photo" — a speaker who already shared a
+   * profile link should not have to go and find an image URL.
+   */
+  profilePhoto?: string;
 }
 
 export interface CfsFormErrors extends ContactFormErrors {

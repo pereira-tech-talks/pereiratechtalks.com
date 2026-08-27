@@ -329,6 +329,10 @@ export interface SiteTranslations {
     takeawaysPlaceholder: string;
     socialLabel: string;
     socialPlaceholder: string;
+    /** Optional photo: accepts a URL *or* a note like "use my LinkedIn photo". */
+    profilePhotoLabel: string;
+    profilePhotoPlaceholder: string;
+    profilePhotoHelp: string;
     firstTimeLabel: string;
     speakerSchoolLabel: string;
     notesLabel: string;

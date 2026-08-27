@@ -63,6 +63,7 @@ const MAX_SOCIAL_LENGTH = 300;
 const MAX_COMPANY_LENGTH = 160;
 const MAX_EMAIL_LENGTH = 254;
 const MAX_MEETUP_SLUG_LENGTH = 80;
+const MAX_PROFILE_PHOTO_LENGTH = 300;
 
 const FORM_TYPES = [
   'contact',
@@ -132,6 +133,21 @@ function resolveAllowedOrigin(request: Request, env: Env): string {
 function sanitiseText(value: unknown, maxLength: number): string {
   if (typeof value !== 'string') return '';
   return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLength);
+}
+
+/**
+ * The profile-photo field accepts either a URL or a sentence, so it cannot be
+ * validated as a URL. It is still untrusted text an organiser will read and may
+ * click, so anything that *looks* like a URI must be `http(s)` — a
+ * `javascript:` or `data:` value is dropped rather than stored and echoed into
+ * a Slack report.
+ */
+function sanitiseProfilePhoto(value: unknown): string {
+  const text = sanitiseText(value, MAX_PROFILE_PHOTO_LENGTH);
+  if (!text) return '';
+  const scheme = text.match(/^\s*([a-z][a-z0-9+.-]*):/i)?.[1]?.toLowerCase();
+  if (scheme && scheme !== 'http' && scheme !== 'https') return '';
+  return text;
 }
 
 function asBool(value: unknown): boolean {
@@ -290,6 +306,7 @@ function buildContent(
         // Empty string when the proposal came from the global page. The same
         // shape CFS_Q.NOTES already ships successfully on this form.
         [CFS_Q.MEETUP]: meetupUrlFromSlug(fields.meetupSlug),
+        [CFS_Q.PROFILE_PHOTO]: fields.profilePhoto,
         [CFS_Q.NOTES]: fields.message || fields.notes || '',
         [CFS_Q.LANG]: lang,
         [CFS_Q.PAGE_PATH]: pagePath,
@@ -558,6 +575,7 @@ export async function onRequestPost(
     takeaways: sanitiseText(data.takeaways, MAX_TAKEAWAYS_LENGTH),
     socialUrl: sanitiseText(data.socialUrl, MAX_SOCIAL_LENGTH),
     meetupSlug: sanitiseText(data.meetupSlug, MAX_MEETUP_SLUG_LENGTH),
+    profilePhoto: sanitiseProfilePhoto(data.profilePhoto),
     company: sanitiseText(data.company, MAX_COMPANY_LENGTH),
     contactRole: sanitiseText(data.contactRole, 120),
     tierInterest: sanitiseText(data.tierInterest, 32),

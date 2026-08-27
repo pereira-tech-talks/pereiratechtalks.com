@@ -15,7 +15,8 @@ import { getTranslations } from '@/lib/translations';
  */
 export const GET: APIRoute = async () => {
   const lang = 'es';
-  const t = getTranslations(lang).cfsPage;
+  const tr = getTranslations(lang);
+  const t = tr.cfsPage;
 
   /*
     The month-specific calls, with the formats each one accepts. This is what
@@ -85,6 +86,23 @@ export const GET: APIRoute = async () => {
       {
         heading: t.processTitle,
         lines: t.process.map((step, index) => `${index + 1}. ${step}`),
+      },
+      {
+        heading: 'Qué pide el formulario',
+        lines: [
+          `- ${tr.contactPage.nameLabel}`,
+          `- ${tr.contactPage.emailLabel}`,
+          `- ${tr.cfsForm.talkTitleLabel}`,
+          `- ${tr.cfsForm.formatLabel}`,
+          `- ${tr.cfsForm.meetup.selectLabel} — ${tr.cfsForm.meetup.selectHelp}`,
+          `- ${tr.cfsForm.abstractLabel}`,
+          `- ${tr.cfsForm.takeawaysLabel}`,
+          `- ${tr.cfsForm.socialLabel}`,
+          `- ${tr.cfsForm.profilePhotoLabel} — ${tr.cfsForm.profilePhotoHelp}`,
+          `- ${tr.cfsForm.firstTimeLabel}`,
+          `- ${tr.cfsForm.speakerSchoolLabel}`,
+          `- ${tr.cfsForm.notesLabel}`,
+        ],
       },
       {
         heading: 'Postula tu charla',

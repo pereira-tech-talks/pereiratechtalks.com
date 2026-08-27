@@ -100,6 +100,7 @@ let format = '';
 let abstract = '';
 let takeaways = '';
 let socialUrl = '';
+let profilePhoto = '';
 let firstTime = false;
 let speakerSchool = false;
 let message = '';
@@ -152,6 +153,7 @@ async function handleSubmit() {
       firstTime,
       speakerSchool,
       meetupSlug: effectiveMeetupSlug,
+      profilePhoto,
     },
     {
       requiredField: cp.requiredField,
@@ -206,6 +208,7 @@ async function handleSubmit() {
         abstract,
         takeaways,
         socialUrl,
+        profilePhoto,
         firstTime,
         speakerSchool,
         meetupSlug: effectiveMeetupSlug,
@@ -238,6 +241,7 @@ function resetForm() {
   abstract = '';
   takeaways = '';
   socialUrl = '';
+  profilePhoto = '';
   firstTime = false;
   speakerSchool = false;
   message = '';
@@ -483,6 +487,26 @@ function resetForm() {
         aria-invalid={errors.socialUrl ? 'true' : undefined}
       />
       {#if errors.socialUrl}<p id="cfs-social-error" class={errorClass} aria-live="polite">{errors.socialUrl}</p>{/if}
+    </div>
+
+    <div>
+      <label for="cfs-photo" class={labelClass}>{f.profilePhotoLabel}</label>
+      <!--
+        `type="text"`, not `type="url"`: the field accepts a link OR a sentence
+        like "use my LinkedIn photo", and a url input would reject the sentence.
+      -->
+      <input
+        id="cfs-photo"
+        type="text"
+        class={inputClass}
+        placeholder={f.profilePhotoPlaceholder}
+        bind:value={profilePhoto}
+        disabled={formState === 'submitting'}
+        aria-describedby="cfs-photo-help"
+      />
+      <p id="cfs-photo-help" class="mt-1 text-sm text-ptt-secondary">
+        {f.profilePhotoHelp}
+      </p>
     </div>
 
     <div class="space-y-3">

@@ -63,6 +63,8 @@ secrets + optional labeled smokes:
 ```
 
 - `_form`: `contact` \| `cfs` \| `speaker-school` \| `sponsor` \| `calendar` \| `conduct`
+- `profilePhoto` (optional, `cfs` only): a photo URL **or** a note like "use my
+  LinkedIn photo". Capped at 300 chars; a non-`http(s)` URI scheme is dropped
 - `meetupSlug` (optional, `cfs` only): the meetup a proposal targets. Sent by the
   meetup-scoped form; omitted from the global page. The server maps it to the
   canonical `https://pereiratechtalks.org/meetups/{slug}/` and sends `''` when
@@ -116,6 +118,23 @@ is programmed, and any drift would fail real submissions with
 
 Verified live (2026-08): an optional text question accepts `''` — same shape
 `CFS_Q.NOTES` already ships.
+
+### Call for Speakers — the `Profile photo` question
+
+`CFS_Q.PROFILE_PHOTO` = `34a40932-c9b9-46ab-a189-2bcc39d64e6d` — an **optional**
+short text at index 8, right after `Social / site URL` so the two read together
+in the Slack report.
+
+It deliberately accepts **either a URL or prose** ("use my LinkedIn photo"): a
+speaker who has already shared a profile link should not have to go and find an
+image URL. The client renders it as `type="text"`, not `type="url"`, because a
+url input would reject the sentence.
+
+Server-side it is length-capped at 300 and passed through `sanitiseProfilePhoto`,
+which drops the value when it looks like a URI with a scheme other than
+`http`/`https` — an organiser reads and may click this, so a `javascript:` or
+`data:` value is never stored or echoed. Anything without a scheme is kept
+verbatim as prose.
 
 ### `GET /api/cfs-open.json` — the open-calls manifest
 

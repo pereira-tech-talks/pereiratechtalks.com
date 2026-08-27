@@ -510,6 +510,10 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     takeawaysPlaceholder: '¿Con qué se debería ir la audiencia?',
     socialLabel: 'LinkedIn, blog o GitHub',
     socialPlaceholder: 'https://…',
+    profilePhotoLabel: 'Foto de perfil',
+    profilePhotoPlaceholder: 'https://… o «usa mi foto de LinkedIn»',
+    profilePhotoHelp:
+      'Opcional. Pega el enlace a una foto tuya, o escribe «usa mi foto de LinkedIn» y la tomamos del perfil que compartiste arriba. La usamos en el flyer y en tu perfil de ponente.',
     firstTimeLabel: 'Sería mi primera charla en Pereira Tech Talks',
     speakerSchoolLabel: 'Me interesa la mentoría de Speaker School',
     notesLabel: '¿Algo más que debamos saber?',

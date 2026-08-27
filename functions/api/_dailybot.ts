@@ -59,6 +59,13 @@ export const CFS_Q = {
    * ["response is not valid"]. A URL is stable and actionable in Slack.
    */
   MEETUP: '00969219-78f1-442f-a12a-2fa890ab9002',
+  /**
+   * Optional. Either a URL to a photo, or a free-text note such as
+   * "use my LinkedIn photo" — the field deliberately accepts prose, because a
+   * speaker who already shared a profile link above should not have to hunt for
+   * an image URL. Read by a human in the Slack report, never rendered by us.
+   */
+  PROFILE_PHOTO: '34a40932-c9b9-46ab-a189-2bcc39d64e6d',
   NOTES: '9bf5d1e9-710a-4fc2-956e-a2f7d763fc2b',
   LANG: '2540a2ff-ba71-4682-9c62-c8f2731639e5',
   PAGE_PATH: '97d98089-711b-472f-8364-a639b9319ad5',

@@ -698,3 +698,121 @@ describe('cfs-manifest helpers', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 });
+
+/**
+ * The profile-photo field accepts a URL **or** prose ("use my LinkedIn photo"),
+ * so it cannot be validated as a URL. It is still untrusted text an organiser
+ * will read and may click.
+ */
+describe('CFS profile photo', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    lang: 'es',
+    page_path: '/call-for-speakers',
+    website: '',
+    ...over,
+  });
+
+  let photoIp = 200;
+  const ctx = (body: unknown) => {
+    photoIp += 1;
+    return {
+      request: new Request('https://pereiratechtalks.org/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: 'https://pereiratechtalks.org',
+          'CF-Connecting-IP': `192.0.2.${photoIp % 250}`,
+        },
+        body: JSON.stringify(body),
+      }),
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const stubOk = () => {
+    const fetchMock = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      )
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  const photoValue = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    const init = call?.[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content[CFS_Q.PROFILE_PHOTO];
+  };
+
+  it('carries a photo URL through unchanged', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'https://example.com/grace.jpg' }))
+    );
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('https://example.com/grace.jpg');
+  });
+
+  it('carries prose through unchanged — the field is not a URL field', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'usa mi foto de LinkedIn' }))
+    );
+    expect(photoValue(fetchMock)).toBe('usa mi foto de LinkedIn');
+  });
+
+  it('sends an empty string when the speaker left it blank', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('');
+  });
+
+  it('drops a javascript: or data: value rather than storing it', async () => {
+    // An organiser reads this in Slack and may click it.
+    for (const hostile of [
+      'javascript:alert(1)',
+      'data:text/html;base64,PHNjcmlwdD4=',
+      '  JavaScript:alert(1)',
+    ]) {
+      const fetchMock = stubOk();
+      await onRequestPost(ctx(cfsBody({ profilePhoto: hostile })));
+      expect(photoValue(fetchMock)).toBe('');
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('caps an over-long value', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ profilePhoto: `https://e.com/${'x'.repeat(500)}` }))
+    );
+    expect(photoValue(fetchMock).length).toBeLessThanOrEqual(300);
+  });
+
+  it('never blocks a submission over the photo field', async () => {
+    // It is optional and cosmetic; a bad value must cost nobody their proposal.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'javascript:alert(1)' }))
+    );
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('');
+  });
+});
