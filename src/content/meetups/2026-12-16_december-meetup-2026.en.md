@@ -6,8 +6,8 @@ It is the month for looking back without ceremony. What you built, what you lear
 
 If you did something this year you are proud of, or something you learned far more from than you expected, this is the night to tell it.
 
-The date is confirmed and the meetup is online. The call for speakers opens on 15 October.
+The date is confirmed and the meetup is online.
 
 ### Call for speakers
 
-From 15 October we take lightning talks for this date, until Friday 11 December. In the meantime, the general call stays open all year.
+We are taking lightning talks until Friday 11 December. It is the last one of the year: if you left something untold, this is the night.

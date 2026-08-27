@@ -46,9 +46,7 @@ image:
 # rather than landing on the index and hunting. Authored here rather than
 # derived from the open calls: the notification system stays decoupled from the
 # meetups collection, and this list is short and reviewed by a human anyway.
-#
-# December's call opens 15 Oct — until then its link lands on the panel's
-# "not open yet" state, which is the right answer, not a dead end.
+
 ctas:
   - label: { en: September, es: Septiembre }
     href: /meetups/september-meetup-2026/#call-for-speakers

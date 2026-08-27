@@ -20,14 +20,13 @@ heroImage: "/images/meetups/december-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:
-  status: scheduled
+  status: open
   formats:
     - lightning
-  opensAt: 2026-10-15
   closesAt: 2026-12-11
   note:
-    en: "The call opens on 15 October. The general call takes proposals all year."
-    es: "La convocatoria abre el 15 de octubre. La general recibe propuestas todo el año."
+    en: "The last night of the year. Bring what you built, learned or abandoned."
+    es: "La última noche del año. Trae lo que construiste, aprendiste o abandonaste."
 status: announced
 draft: false
 ---
@@ -40,8 +39,8 @@ Es el mes de mirar atrás sin solemnidad. Lo que construiste, lo que aprendiste 
 
 Si este año hiciste algo de lo que estás orgulloso, o algo de lo que aprendiste mucho más de lo que esperabas, esta es la noche para contarlo.
 
-La fecha está confirmada y el encuentro es virtual. La convocatoria abre el 15 de octubre.
+La fecha está confirmada y el encuentro es virtual.
 
 ### Convocatoria
 
-Desde el 15 de octubre recibimos charlas relámpago para esta fecha, hasta el viernes 11 de diciembre. Mientras tanto, la convocatoria general sigue abierta todo el año.
+Recibimos charlas relámpago hasta el viernes 11 de diciembre. Es la última del año: si dejaste algo sin contar, esta es la noche.

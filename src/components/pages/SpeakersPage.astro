@@ -11,7 +11,7 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getSpeakersSortedByLatestTalk } from '@/lib/speaker';
+import { getSpeakersSortedByLatestTalk, hasTakenTheStage } from '@/lib/speaker';
 
 interface Props {
   lang: Language;
@@ -19,7 +19,18 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const speakers = await getSpeakersSortedByLatestTalk();
+/**
+ * The directory lists people who have **taken the stage** — its own copy says
+ * "N ponentes han subido al escenario desde 2014". A speaker with no talk and
+ * no meetup has not, so listing them overstates the archive.
+ *
+ * Today this hides exactly two: the speakers who exist only in the postponed
+ * Pereira Tech Day schedule. Derived rather than flagged, so they appear the
+ * moment they are linked to a talk or a meetup — nothing to remember to undo.
+ */
+const speakers = (await getSpeakersSortedByLatestTalk()).filter(
+  hasTakenTheStage
+);
 
 const t = {
   title: lang === 'es' ? 'Ponentes' : 'Speakers',
