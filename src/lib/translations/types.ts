@@ -343,6 +343,15 @@ export interface SiteTranslations {
     successTitle: string;
     successMessage: string;
     defaultSubject: string;
+    /**
+     * Guidance on slides for a short talk. Rendered on the global page and in
+     * every meetup's call panel from this one source, so the two cannot drift.
+     */
+    slides: {
+      title: string;
+      count: string;
+      demos: string;
+    };
     /** Meetup-scoped submissions and the optional selector on the global page. */
     meetup: {
       contextLabel: string;

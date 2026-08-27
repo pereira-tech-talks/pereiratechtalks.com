@@ -522,6 +522,13 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     successMessage:
       'Thanks — we will reply within 7 business days to align on date and format.',
     defaultSubject: 'Call for Speakers submission',
+    slides: {
+      title: 'About your slides',
+      count:
+        'We do not cap how many slides you bring, but you have very few minutes. We suggest keeping them few: just enough to land your idea without running over.',
+      demos:
+        'There is no time for a live demo. If you want to show one, put screenshots in your slides and talk through them.',
+    },
     meetup: {
       contextLabel: 'You are submitting to',
       contextAria: 'Proposal form for the {meetup} meetup on {date}',

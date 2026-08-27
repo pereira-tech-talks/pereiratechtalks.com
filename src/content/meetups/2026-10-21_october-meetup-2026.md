@@ -3,8 +3,8 @@ title:
   en: "October meetup"
   es: "Meetup de octubre"
 description:
-  en: "October is an open month: we are taking regular talks, lightning talks and panels. The date can still move, and the call closes on 7 October."
-  es: "Octubre es un mes abierto: recibimos charlas regulares, charlas relámpago y paneles. La fecha todavía puede moverse y la convocatoria cierra el 7 de octubre."
+  en: "October has no theme on purpose: bring the idea you have been meaning to tell for weeks and tell it in five minutes. Lightning talks, no topic filter."
+  es: "Octubre no tiene tema a propósito: trae esa idea que llevas semanas queriendo contar y cuéntala en cinco minutos. Charlas relámpago, sin filtro temático."
 pubDate: 2026-10-21
 date: 2026-10-21
 dateConfidence: tentative
@@ -14,20 +14,23 @@ verticals:
 callForSpeakers:
   status: open
   formats:
-    - regular
     - lightning
-    - panel
   closesAt: 2026-10-07
+  note:
+    en: "No theme this month. If it is technical and it fits in five minutes, it fits here."
+    es: "Este mes no hay tema. Si es técnico y cabe en cinco minutos, cabe aquí."
 status: announced
 draft: false
 ---
 
 ## Meetup de octubre
 
-Octubre es un mes abierto: no fijamos un tema y programamos con lo que llegue de la comunidad.
+Octubre va sin tema, y eso es la propuesta. Las mejores charlas relámpago que hemos tenido no salieron de una convocatoria temática: salieron de alguien que llevaba semanas dándole vueltas a algo y por fin lo contó.
 
-La fecha es tentativa y el encuentro es virtual. La confirmamos cuando cerremos el programa.
+Un truco de tu editor, una librería que resultó no valer la pena, un post-mortem de cinco minutos, una idea a medio cocinar que quieres discutir. Todo cabe.
+
+La fecha es tentativa y el encuentro es virtual.
 
 ### Convocatoria
 
-Recibimos charlas regulares, charlas relámpago y paneles hasta el 7 de octubre. Si propones un panel, cuéntanos a quién más te gustaría invitar.
+Recibimos charlas relámpago hasta el 7 de octubre. Sin tema, sin filtro: solo tráelo en tres a cinco minutos.

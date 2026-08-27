@@ -129,6 +129,8 @@ export interface ResolvedMeetupDetail {
      * needs this; it cannot fill in a form it has never seen.
      */
     formFields?: string[];
+    /** The slide guidance the panel shows, so the twin is not a summary of it. */
+    slidesGuidance?: string[];
   };
   /**
    * What the page says when the programme is not announced yet. Absent for a
@@ -395,6 +397,11 @@ export const resolveMeetupDetail = async (
             ...(callSlotsLine ? { slotsLine: callSlotsLine } : {}),
             ...(callState === 'open'
               ? {
+                  slidesGuidance: [
+                    tr.cfsForm.slides.title,
+                    tr.cfsForm.slides.count,
+                    tr.cfsForm.slides.demos,
+                  ],
                   formFields: [
                     tr.contactPage.nameLabel,
                     tr.contactPage.emailLabel,

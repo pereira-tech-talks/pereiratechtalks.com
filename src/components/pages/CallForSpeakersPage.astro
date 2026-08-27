@@ -132,6 +132,17 @@ const breadcrumbs = [
     </ul>
   </Section>
 
+  <Section
+    eyebrow={tr.cfsForm.formatLabel}
+    title={tr.cfsForm.slides.title}
+    surface="alt"
+  >
+    <div class="max-w-3xl space-y-3">
+      <p class="text-ptt-secondary">{tr.cfsForm.slides.count}</p>
+      <p class="text-ptt-secondary">{tr.cfsForm.slides.demos}</p>
+    </div>
+  </Section>
+
   <Section eyebrow={t.processEyebrow} title={t.processTitle}>
     <ol
       class="space-y-4 list-decimal list-inside text-ptt-secondary marker:text-ptt-primary dark:marker:text-ptt-primary-dark marker:font-semibold"

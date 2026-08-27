@@ -1,9 +1,11 @@
 ## October meetup
 
-October is an open month: we are not setting a theme and will programme it from whatever the community sends.
+October runs without a theme, and that is the point. The best lightning talks we have had did not come out of a themed call: they came from someone who had been turning something over for weeks and finally said it out loud.
 
-The date is tentative and the meetup is online. We confirm it once the programme is settled.
+An editor trick, a library that turned out not to be worth it, a five-minute post-mortem, a half-baked idea you want to argue about. All of it fits.
+
+The date is tentative and the meetup is online.
 
 ### Call for speakers
 
-We are taking regular talks, lightning talks and panels until 7 October. If you propose a panel, tell us who else you would like to invite.
+We are taking lightning talks until 7 October. No theme, no filter: just bring it in three to five minutes.

@@ -266,11 +266,11 @@ A planned meetup has no talks to describe, so its body says what the month is
 for and what the call accepts — **nothing else**. Both languages carry the same
 content; only the section label differs.
 
-`src/content/meetups/2026-11-18_november-meetup-2026.md` — note the **English
+`src/content/meetups/2027-03-24_march-meetup-2027.md` — note the **English
 slug** even though the body is Spanish (`AGENTS.md` DON'T #21):
 
 ```markdown
-## Meetup de noviembre
+## Meetup de marzo
 
 {one or two sentences: what this month is for}
 
@@ -281,7 +281,7 @@ slug** even though the body is Spanish (`AGENTS.md` DON'T #21):
 {one or two sentences: what the call accepts and how to propose}
 ```
 
-`…2026-11-18_november-meetup-2026.en.md` — the same shape, `### Call for
+`…2027-03-24_march-meetup-2027.en.md` — the same shape, `### Call for
 speakers` as the heading, real English throughout.
 
 ### The rules that matter here

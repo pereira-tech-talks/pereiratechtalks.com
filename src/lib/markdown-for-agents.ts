@@ -728,6 +728,16 @@ export function serializeMeetupDetailToMarkdown(
     if (typeof call.slots === 'number') {
       lines.push(`${L('callSlots')}: ${call.slots}`);
     }
+    if (call.slidesGuidance && call.slidesGuidance.length > 0) {
+      const [title, ...rest] = call.slidesGuidance;
+      lines.push('');
+      lines.push(`### ${title}`);
+      lines.push('');
+      for (const paragraph of rest) {
+        lines.push(paragraph);
+        lines.push('');
+      }
+    }
     if (call.isOpen) lines.push(linkLine(L('callForSpeakers'), call.url));
     if (call.formFields && call.formFields.length > 0) {
       lines.push('');

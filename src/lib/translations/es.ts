@@ -524,6 +524,13 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     successMessage:
       'Gracias — te responderemos en máximo 7 días hábiles para alinear fecha y formato.',
     defaultSubject: 'Postulación a Call for Speakers',
+    slides: {
+      title: 'Sobre las diapositivas',
+      count:
+        'No limitamos el número de diapositivas, pero tienes muy pocos minutos. Recomendamos llevar pocas: las justas para que tu idea llegue completa sin pasarte del tiempo.',
+      demos:
+        'No hay tiempo para demos en vivo. Si quieres mostrar una, incluye capturas de pantalla en las diapositivas y cuéntalas.',
+    },
     meetup: {
       contextLabel: 'Postulas a',
       contextAria:

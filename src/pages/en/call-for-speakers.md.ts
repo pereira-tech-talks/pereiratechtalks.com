@@ -88,6 +88,10 @@ export const GET: APIRoute = async () => {
         lines: t.process.map((step, index) => `${index + 1}. ${step}`),
       },
       {
+        heading: tr.cfsForm.slides.title,
+        lines: [tr.cfsForm.slides.count, '', tr.cfsForm.slides.demos],
+      },
+      {
         heading: 'What the form asks',
         lines: [
           `- ${tr.contactPage.nameLabel}`,
