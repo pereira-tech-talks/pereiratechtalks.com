@@ -27,11 +27,9 @@ draft: false
 
 Septiembre llega y lo queremos lleno de voces. Lo dedicamos entero a charlas relámpago: de tres a cinco minutos por persona, una idea por charla, y una noche donde suben al escenario muchas más personas de lo habitual.
 
-Los meetups son el músculo de esta comunidad. Llevamos años juntándonos cada mes, y lo que sostiene eso no son las charlas sueltas: es la gente que vuelve, la que trae a un compañero de trabajo, la que después de escuchar a alguien le escribe para seguir la conversación.
+Los meetups son el músculo de esta comunidad.
 
-Septiembre es una buena noche para llegar por primera vez, sea a escuchar o a presentar. Vas a salir sabiendo quién está construyendo qué en Pereira, y con un par de personas nuevas a las que escribirle la próxima vez que te atasques.
-
-La fecha está confirmada y el encuentro es virtual.
+¡Te esperamos!
 
 ### Convocatoria
 
