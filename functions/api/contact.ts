@@ -42,6 +42,11 @@ import {
   submitFormResponse,
 } from './_dailybot';
 import {
+  fetchCfsOpenManifest,
+  findOpenCall,
+  isWellFormedMeetupSlug,
+} from '../_lib/cfs-manifest';
+import {
   checkRateLimit,
   looksLikeSpamPayload,
   normalizeTopic,
@@ -131,6 +136,49 @@ function sanitiseText(value: unknown, maxLength: number): string {
 
 function asBool(value: unknown): boolean {
   return value === true || value === 'true' || value === '1' || value === 'on';
+}
+
+/**
+ * Resolve a client-supplied meetup slug against the build-time open-calls
+ * manifest, per the failure matrix in docs/features/FORMS.md.
+ *
+ * The asymmetry is deliberate. Availability failures are ours and must never
+ * cost a speaker their proposal, so an unknown slug, a malformed slug or an
+ * unreachable manifest all fall through to "accepted, untagged". A format the
+ * meetup does not accept is different: the real UI constrains that control, so
+ * it can only come from tampering or a bug we want to hear about — that one
+ * is refused.
+ */
+async function resolveMeetupTag(
+  slug: string,
+  format: string,
+  requestUrl: string
+): Promise<{ slug: string; reject: boolean }> {
+  // Checked before the value is used anywhere, logging included.
+  if (!isWellFormedMeetupSlug(slug)) {
+    console.warn('[cfs] meetup slug rejected by pattern');
+    return { slug: '', reject: false };
+  }
+
+  const manifest = await fetchCfsOpenManifest(requestUrl);
+  if (!manifest) {
+    console.warn('[cfs] open-calls manifest unavailable; submitting untagged');
+    return { slug: '', reject: false };
+  }
+
+  const call = findOpenCall(manifest, slug);
+  if (!call) {
+    console.warn(`[cfs] no open call for meetup "${slug}"; submitting untagged`);
+    return { slug: '', reject: false };
+  }
+
+  const requested = format.trim().toLowerCase();
+  if (requested && !call.formats.includes(requested)) {
+    console.warn(`[cfs] format not accepted by meetup "${slug}"`);
+    return { slug: '', reject: true };
+  }
+
+  return { slug, reject: false };
 }
 
 function resolveFormType(data: Record<string, unknown>): FormType {
@@ -539,6 +587,24 @@ export async function onRequestPost(
     speakerSchool: asBool(data.speakerSchool),
     anonymous: asBool(data.anonymous),
   };
+
+  // Only the CFS path carries a meetup. This runs AFTER the honeypot and the
+  // rate limiter, so an unauthenticated flood cannot make the worker fan out.
+  if (formType === 'cfs' && fields.meetupSlug) {
+    const resolved = await resolveMeetupTag(
+      fields.meetupSlug,
+      fields.format,
+      context.request.url
+    );
+    if (resolved.reject) {
+      return jsonResponse(
+        { ok: false, error: 'format_not_allowed_for_meetup' },
+        400,
+        origin
+      );
+    }
+    fields.meetupSlug = resolved.slug;
+  }
 
   const pagePath = normalizePagePath(data.page_path ?? data.pagePath);
   const built = buildContent(formType, fields, flags, pagePath, langRaw);

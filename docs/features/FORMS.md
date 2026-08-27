@@ -116,6 +116,60 @@ is programmed, and any drift would fail real submissions with
 Verified live (2026-08): an optional text question accepts `''` — same shape
 `CFS_Q.NOTES` already ships.
 
+### `GET /api/cfs-open.json` — the open-calls manifest
+
+A build-time JSON endpoint listing the meetups accepting proposals right now,
+derived from `getOpenCallsForSpeakers()` in `src/lib/meetup.ts` (so the
+auto-close rule applies: a call whose meetup date or `closesAt` has passed never
+appears). Public data only; drafts are excluded in production.
+
+```jsonc
+{
+  "version": 1,
+  "generatedAt": "2026-08-27T00:00:00.000Z",
+  "calls": [
+    {
+      "slug": "november-meetup-2026",
+      "url": "https://pereiratechtalks.org/meetups/november-meetup-2026/",
+      "title": { "es": "Meetup de noviembre", "en": "November meetup" },
+      "date": "2026-11-18",
+      "dateConfidence": "confirmed",
+      "formats": ["lightning"],
+      "closesAt": "2026-11-04",
+      "slots": 3
+    }
+  ]
+}
+```
+
+Dates are `YYYY-MM-DD` calendar strings, not ISO instants. `closesAt`, `slots`
+and `note` are omitted when unset, never `null`.
+
+### CFS meetup validation — the failure matrix
+
+`functions/api/contact.ts` resolves a submitted `meetupSlug` against that
+manifest (`functions/_lib/cfs-manifest.ts`) **after** the honeypot and the rate
+limiter, so a bot cannot make the worker fan out.
+
+| Case | Result | Meetup value sent |
+|---|---|---|
+| No `meetupSlug` | proceeds; no manifest fetch | `''` |
+| Slug fails `^[a-z0-9][a-z0-9-]{0,79}$` | proceeds | `''` |
+| Manifest unreachable, timed out or malformed | proceeds | `''` |
+| Slug well-formed but not in the manifest | proceeds | `''` |
+| Slug present, `format` not in that meetup's `formats` | **400 `format_not_allowed_for_meetup`** | — |
+| Slug present, format accepted | proceeds | canonical URL |
+
+**The asymmetry is deliberate.** Availability failures are ours and must never
+cost a speaker their proposal — Dailybot is the system of record and a human
+still sees the submission. A format outside the meetup's allowed set cannot be
+produced by the real UI (the control is constrained client-side), so it is
+tampering or a bug, and it is refused.
+
+The manifest URL is built from `request.url`, never from request-body content,
+so no caller can redirect the fetch. It is `AbortController`-bounded at 3 s and
+cached in an isolate-local variable for 60 s.
+
 ## Anti-spam & privacy
 
 1. Honeypot `website` on every client form

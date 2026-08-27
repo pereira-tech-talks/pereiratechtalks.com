@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CFS_FORMATS } from '@/lib/contact-form';
+import { CFS_FORMATS as INTAKE_CFS_FORMATS } from '../../../functions/_lib/intake-helpers';
 import {
   booleanToDailyBot,
   CFS_FORMAT_VALUES,
@@ -152,6 +153,13 @@ describe('CFS formats stay in lockstep across the three declarations', () => {
 
   it('the client validator declares exactly these four', () => {
     expect([...CFS_FORMATS].sort()).toEqual([...EXPECTED].sort());
+  });
+
+  it('the Functions-side copy declares exactly these four', () => {
+    // functions/_lib/intake-helpers.ts carries a fourth copy. Nothing imports
+    // it today, but it is exported, so it is covered here rather than left to
+    // drift silently until something picks it up.
+    expect([...INTAKE_CFS_FORMATS].sort()).toEqual([...EXPECTED].sort());
   });
 
   it('the Dailybot lookup resolves every one of them to a canonical label', () => {
