@@ -145,6 +145,61 @@ Svelte 5 components require `resolve.conditions: ['browser']` in the Vitest conf
 - Write flaky tests that depend on timing
 - Skip running tests before committing
 
+## Prove a new test can fail
+
+A test that cannot fail is not coverage, and it is indistinguishable from one
+that can until you check.
+
+Two cases from `PLAN_branch_audit_and_pr` (2026-08), a day apart:
+
+- The new modal spec asserts all four month CTAs render at the same width — the
+  exact defect that had shipped once already. Restoring the original
+  `flex-wrap` layout was run deliberately: two tests failed, seven passed. Only
+  then was it coverage.
+- A secret scan over some committed binaries reported **zero matches** and was
+  briefly believed. `strings` is not installed in this environment, so it had
+  returned clean *vacuously*. Redone with `grep -a`.
+
+**Therefore:** after writing an assertion that guards a specific regression,
+break the thing it guards, watch it fail, and revert. It costs a minute.
+
+## e2e against Astro islands
+
+Two things reliably make Playwright suites flaky here, and neither is timing
+noise you should paper over with a `waitForTimeout`:
+
+**Hydration.** A `client:visible` island's server-rendered markup looks
+interactive before Svelte takes over, and Playwright's actionability checks know
+nothing about hydration — an early `fill()` is silently discarded. Wait for
+Astro to drop the `ssr` attribute:
+
+```ts
+await page.waitForFunction(() => {
+  const island = document.querySelector('#some-field')?.closest('astro-island');
+  return !!island && !island.hasAttribute('ssr');
+});
+```
+
+**The notification modal.** It auto-opens on a first visit and intercepts every
+click. Its lab-browser guard only matches Lighthouse user agents, so Playwright
+gets it — correctly, since a real visitor does too. Dismissing it at test start
+is not enough: the open is deferred past LCP, so it can appear several actions
+in. Pre-set the session flag the component itself checks
+(`ptt:notify-auto:<id>:<lang>`) via `page.addInitScript`, which puts the browser
+in the state a reader is in on their second navigation rather than disabling the
+feature.
+
+## The preview server
+
+`playwright.config.ts` starts `scripts/preview-server.mjs`, **not**
+`astro preview`. In Astro 7.2.x the CLI starts a background daemon and the
+foreground process exits 0 immediately, which Playwright reports as
+`Process from config.webServer exited early` before running a single test.
+Locally that hides behind `reuseExistingServer`: the first attempt "fails",
+leaves a daemon listening, and every later attempt reuses it — so the failure
+reads as a fluke. The script wraps Astro's programmatic `preview()` and holds it
+open. Same routing, no daemon.
+
 ## Resources
 
 - [Vitest Documentation](https://vitest.dev/)

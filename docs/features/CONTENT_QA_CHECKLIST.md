@@ -118,6 +118,47 @@ and the rule lives only in `AGENTS.md` (DON'T #21),
 slug is the public URL and the cross-collection reference key, so renaming after
 publication breaks live links.
 
+### A green gate is not a correct page
+
+The four gates assert **structure**: a twin exists, a canonical is present, an
+`Event` block is emitted, the two languages carry the same sections. None of
+them reads the page for **truth**.
+
+`PLAN_branch_audit_and_pr` (2026-08) found four real defects behind four green
+gates, on pages `seo:check` had passed 492/492:
+
+- `eventAttendanceMode` was a hardcoded constant, so four **online** meetups
+  announced themselves to search engines as in-person events in Pereira;
+- `startDate` was emitted as UTC midnight, which in UTC−5 renders as the evening
+  **before** — every meetup on the site advertised the wrong day;
+- the agent twins printed "0 charlas" for programmed months while the HTML card
+  hid the count at zero, so page and twin disagreed on the same row.
+
+**Therefore:** on any change that emits structured data or a twin row, read the
+**built output** — parse the JSON-LD out of `dist/`, diff a twin row against the
+card that renders the same data. `seo:check` asks whether an `Event` block
+exists; only you can ask whether it is true.
+
+### A hand-curated audit list rots, and nothing tells you
+
+`scripts/responsive-audit/urls.json` is maintained by hand. Nothing fails when a
+template is missing from it, so its coverage is only as good as the last person
+to remember. When the same plan looked, it held 46 routes and **no
+`meetup-detail` template at all** — the build produces **190** such routes, every
+one audited at zero viewports. Two more of its routes pointed at a post since
+marked `draft: true`: they returned **404**, the capture logged them `ok`, and CI
+passed on them, because **a missing page has no overflow**.
+
+**Therefore:** when a page template ships, add it to `urls.json` *and* to the
+template allowlist inside `tests/e2e/responsive/overflow.spec.ts` — the list is
+only the gate's input, and the allowlist downstream silently drops what it does
+not name. Compare `urls.json` against `pnpm run responsive:inventory` output
+after any routing change.
+
 - [ ] Every new content file's slug is English, in both languages
 - [ ] Every state the feature supports has at least one real entry, and the
       gates were re-run after it landed
+- [ ] Structured data and twin rows verified against the **built output**, not
+      the template
+- [ ] New page templates added to `urls.json` **and** the `overflow.spec.ts`
+      allowlist

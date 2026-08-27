@@ -149,6 +149,12 @@ Enforced on the **server** as well as in the form. A client-side-only
 requirement is not a requirement: a direct POST skips it. The server returns
 `400 slides_url_invalid`.
 
+After changing this field — or any field — run the
+[`verify-form-intake`](../../.agents/skills/verify-form-intake/SKILL.md) skill:
+a real browser, a real Pages Function, and every answer read back by question
+UUID. A 200 proves the request was accepted, not that the answers landed where
+they were meant to.
+
 **The remote question stays optional in Dailybot.** Required-flag drift on the
 remote form makes whole submissions fail with `["response is not valid"]` (see
 `all_responses_are_required` below), and our own validation layer is the safer
