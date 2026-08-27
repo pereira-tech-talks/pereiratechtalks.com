@@ -505,6 +505,14 @@ const AGENT_MD_LABELS = {
     gallery: 'Gallery',
     links: 'Links',
     relatedMeetups: 'Related meetups',
+    callForSpeakers: 'Call for speakers',
+    callFormats: 'Accepted formats',
+    callCloses: 'Closes',
+    callSlots: 'Slots available',
+    callState: 'Call status',
+    openCalls: 'Open calls',
+    dateConfidence: 'Date precision',
+    lineup: 'Line-up',
     relatedEvents: 'Related events',
     talkHistory: 'Talk history',
     socialLinks: 'Social links',
@@ -551,6 +559,14 @@ const AGENT_MD_LABELS = {
     gallery: 'Galería',
     links: 'Enlaces',
     relatedMeetups: 'Meetups relacionados',
+    callForSpeakers: 'Convocatoria',
+    callFormats: 'Formatos aceptados',
+    callCloses: 'Cierra',
+    callSlots: 'Espacios disponibles',
+    callState: 'Estado de la convocatoria',
+    openCalls: 'Convocatorias abiertas',
+    dateConfidence: 'Precisión de la fecha',
+    lineup: 'Programación',
     relatedEvents: 'Eventos relacionados',
     talkHistory: 'Historial de charlas',
     socialLinks: 'Redes sociales',
@@ -597,6 +613,42 @@ export function mdLabel(lang: string, key: AgentMdLabelKey): string {
 }
 
 /**
+ * The open-calls block, shared by `/meetups.md` and `/call-for-speakers.md` in
+ * both languages.
+ *
+ * This is the single most valuable thing these twins can carry: an assistant
+ * asked *"which Pereira Tech Talks meetups are accepting talk proposals, and
+ * what formats?"* answers it from one fetch, without crawling every meetup page.
+ */
+export function buildOpenCallsSection(
+  calls: Array<{
+    slug: string;
+    title: string;
+    dateLabel: string;
+    formats: string[];
+    closesAt?: string;
+    slots?: number;
+  }>,
+  lang: string
+): GenericMarkdownSection | null {
+  if (calls.length === 0) return null;
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  return {
+    heading: L('openCalls'),
+    lines: calls.map((call) =>
+      entityLine(
+        call.title,
+        mdHref(lang, `meetups/${call.slug}`),
+        call.dateLabel,
+        `${L('callFormats')}: ${call.formats.join(', ')}`,
+        call.closesAt ? `${L('callCloses')}: ${call.closesAt}` : '',
+        typeof call.slots === 'number' ? `${L('callSlots')}: ${call.slots}` : ''
+      )
+    ),
+  };
+}
+
+/**
  * Meetup detail — `/meetups/{slug}.md`.
  *
  * Pure: takes the resolved data from `resolveMeetupDetail` and returns the
@@ -612,14 +664,22 @@ export function serializeMeetupDetailToMarkdown(
   const prefix = buildUrlPrefix(lang);
 
   const metadata: Array<[string, string]> = [
+    // `date` stays machine-readable, at the precision the community actually
+    // has: `YYYY-MM` for a month-only meetup, so the twin never claims a day
+    // the community has not fixed. The prose label lives on the page.
     [L('date'), data.date],
+    [L('dateConfidence'), data.dateConfidenceLabel],
     [L('mode'), data.mode],
     // `venueLabel` is localized by the resolver and always present — it carries
     // the "venue to be confirmed" text for a meetup programmed before a room is
     // booked, so the twin never emits an empty value.
     [L('venue'), data.venueLabel],
     [L('status'), data.status],
+    [L('lineup'), data.lineupLabel],
   ];
+  if (data.callForSpeakers) {
+    metadata.push([L('callState'), data.callForSpeakers.stateLabel]);
+  }
   for (const link of data.links) metadata.push([link.label, link.url]);
 
   const sections: GenericMarkdownSection[] = [];
@@ -629,6 +689,29 @@ export function serializeMeetupDetailToMarkdown(
       heading: L('hero'),
       lines: [imageLine(data.hero.alt, data.hero.src)],
     });
+  }
+
+  /*
+    An agent asked "which Pereira meetups accept lightning talks, and until
+    when?" must be able to answer from this twin alone. Emitted for a closed
+    call too — silence would read as "no call ever existed".
+  */
+  if (data.callForSpeakers) {
+    const call = data.callForSpeakers;
+    const lines: string[] = [`${L('callState')}: ${call.stateLabel}`];
+    if (call.formats.length > 0) {
+      lines.push(`${L('callFormats')}: ${call.formats.join(', ')}`);
+    }
+    if (call.closesAt) lines.push(`${L('callCloses')}: ${call.closesAt}`);
+    if (typeof call.slots === 'number') {
+      lines.push(`${L('callSlots')}: ${call.slots}`);
+    }
+    if (call.isOpen) lines.push(linkLine(L('callForSpeakers'), call.url));
+    if (call.note) {
+      lines.push('');
+      lines.push(call.note);
+    }
+    sections.push({ heading: L('callForSpeakers'), lines });
   }
 
   if (data.talks.length > 0) {

@@ -17,15 +17,20 @@ import {
   getReadingTimeFromContent,
   getRelatedPosts,
 } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { formatCalendarDate } from '@/lib/dates';
-import type { Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { resolveI18n } from '@/lib/markdown-for-agents';
 import {
+  getCallForSpeakersState,
   getMeetupBodyMarkdown,
   getMeetupSlug,
   getMeetups,
   type Meetup,
+  resolveMeetupDateConfidence,
+  resolveMeetupDateLabel,
+  resolveMeetupLineup,
 } from '@/lib/meetup';
 import {
   getEditionRegistrationUrl,
@@ -90,6 +95,28 @@ export interface ResolvedMeetupDetail {
   venue?: { name: string; city: string; country: string; mapUrl?: string };
   /** Always present, always localized: the address, or "venue to be confirmed". */
   venueLabel: string;
+  /**
+   * How firm the date is, and how far along the programme is — both localized
+   * here, because the twin contract is one language per page, metadata keys and
+   * values included.
+   */
+  dateLabel: string;
+  dateConfidenceLabel: string;
+  lineupLabel: string;
+  /**
+   * The meetup's own call for speakers, when it has one. Present even when
+   * closed: an agent asked "can I still submit to this meetup?" needs the
+   * answer, not silence.
+   */
+  callForSpeakers?: {
+    stateLabel: string;
+    isOpen: boolean;
+    formats: string[];
+    closesAt?: string;
+    slots?: number;
+    note?: string;
+    url: string;
+  };
   hero?: { src: string; alt: string };
   body: string;
   untranslated: boolean;
@@ -177,6 +204,42 @@ export const resolveMeetupDetail = async (
 
   // Labels are localized here, not in the serializer: the contract requires
   // one language per page, metadata keys included.
+  // Localized here, not in the serializer: the contract requires one language
+  // per page, metadata values included.
+  const tr = getTranslations(lang);
+  const es = lang === 'es';
+  const dateConfidence = resolveMeetupDateConfidence(meetup);
+  const dateConfidenceLabel = es
+    ? {
+        confirmed: 'confirmada',
+        tentative: 'tentativa',
+        'month-only': 'solo el mes',
+      }[dateConfidence]
+    : {
+        confirmed: 'confirmed',
+        tentative: 'tentative',
+        'month-only': 'month only',
+      }[dateConfidence];
+  const lineup = resolveMeetupLineup(meetup);
+  const lineupLabel = es
+    ? { open: 'abierta', partial: 'parcial', confirmed: 'confirmada' }[lineup]
+    : { open: 'open', partial: 'partial', confirmed: 'confirmed' }[lineup];
+
+  const callState = getCallForSpeakersState(meetup);
+  const call = meetup.data.callForSpeakers;
+  const callStateLabel = es
+    ? {
+        open: 'abierta',
+        scheduled: 'próximamente',
+        closed: 'cerrada',
+        none: '',
+      }[callState]
+    : { open: 'open', scheduled: 'opening soon', closed: 'closed', none: '' }[
+        callState
+      ];
+  const formatLabelOf = (value: string): string =>
+    tr.cfsForm.formatOptions.find((o) => o.value === value)?.label ?? value;
+
   const links: Array<{ label: string; url: string }> = [];
   if (meetup.data.linkRecording)
     links.push({
@@ -216,7 +279,12 @@ export const resolveMeetupDetail = async (
     slug,
     title: resolveI18n(meetup.data.title, lang),
     description: resolveI18n(meetup.data.description, lang),
-    date: isoDate(meetup.data.date),
+    // `YYYY-MM` when only the month is fixed, so no consumer of the twin reads
+    // a day the community has not committed to.
+    date:
+      dateConfidence === 'month-only'
+        ? isoDate(meetup.data.date).slice(0, 7)
+        : isoDate(meetup.data.date),
     mode: meetup.data.mode,
     status: meetup.data.status,
     venue: venue
@@ -228,6 +296,23 @@ export const resolveMeetupDetail = async (
         }
       : undefined,
     venueLabel,
+    dateLabel: resolveMeetupDateLabel(meetup, lang),
+    dateConfidenceLabel,
+    lineupLabel,
+    callForSpeakers:
+      callState === 'none' || !call
+        ? undefined
+        : {
+            stateLabel: callStateLabel,
+            isOpen: callState === 'open',
+            formats: call.formats.map(formatLabelOf),
+            ...(call.closesAt ? { closesAt: isoDate(call.closesAt) } : {}),
+            ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+            ...(call.note
+              ? { note: resolveI18n(call.note, lang) || undefined }
+              : {}),
+            url: `${SITE_URL}${getUrlPrefix(lang)}/meetups/${slug}/#call-for-speakers`,
+          },
     hero: heroSrc
       ? {
           src: heroSrc,

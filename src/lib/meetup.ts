@@ -463,6 +463,21 @@ export const resolveMeetupDateLabel = (
     : formatCalendarDate(meetup.data.date, lang);
 
 /**
+ * The date label for an `OpenCall`, at the confidence that call carries.
+ *
+ * `resolveMeetupDateLabel` needs the entry; this one works from the manifest
+ * shape alone, so a consumer holding only the open-calls payload does not have
+ * to look the meetup back up.
+ */
+export const formatOpenCallDate = (
+  call: Pick<OpenCall, 'date' | 'dateConfidence'>,
+  lang: Language
+): string =>
+  call.dateConfidence === 'month-only'
+    ? formatCalendarMonth(call.date, lang)
+    : formatCalendarDate(call.date, lang);
+
+/**
  * The value for a `<time datetime>` attribute — `YYYY-MM` when only the month
  * is known, so the markup never claims a day the content does not have.
  */

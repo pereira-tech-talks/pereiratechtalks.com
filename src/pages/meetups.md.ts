@@ -1,15 +1,19 @@
 import type { APIRoute } from 'astro';
 import { getCommunityStats } from '@/lib/community-stats';
 import { SITE_URL } from '@/lib/constances';
+import { isCalendarDateOnOrAfterToday } from '@/lib/dates';
 import {
+  buildOpenCallsSection,
   entityLine,
   mdHref,
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
 import {
+  formatOpenCallDate,
   getMeetupSlug,
   getMeetups,
+  getOpenCallsForSpeakers,
   groupMeetupsByYear,
   resolveMeetupVenueLine,
 } from '@/lib/meetup';
@@ -40,10 +44,30 @@ export const GET: APIRoute = async () => {
     );
   };
 
-  const now = new Date();
-  const upcomingMeetups = meetups.filter((m) => m.data.date >= now);
+  // Use the site-timezone helper, not a raw Date comparison: the HTML page
+  // derives "upcoming" through `isCalendarDateOnOrAfterToday`, and a twin that
+  // disagrees with its page is exactly what md:check exists to catch.
+  const upcomingMeetups = meetups
+    .filter((m) => isCalendarDateOnOrAfterToday(m.data.date))
+    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+  const openCalls = await getOpenCallsForSpeakers();
+  const openCallsSection = buildOpenCallsSection(
+    openCalls.map((call) => ({
+      slug: call.slug,
+      title: call.title[lang],
+      dateLabel: formatOpenCallDate(call, lang),
+      formats: [...call.formats],
+      ...(call.closesAt
+        ? { closesAt: call.closesAt.toISOString().split('T')[0] }
+        : {}),
+      ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+    })),
+    lang
+  );
 
   const sections = [];
+  if (openCallsSection) sections.push(openCallsSection);
   if (upcomingMeetups.length > 0) {
     sections.push({
       heading: 'Próximos',

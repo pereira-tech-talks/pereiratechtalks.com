@@ -1,7 +1,11 @@
 import type { APIRoute } from 'astro';
 
 import { SITE_URL } from '@/lib/constances';
-import { serializeGenericToMarkdown } from '@/lib/markdown-for-agents';
+import {
+  buildOpenCallsSection,
+  serializeGenericToMarkdown,
+} from '@/lib/markdown-for-agents';
+import { formatOpenCallDate, getOpenCallsForSpeakers } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
 /**
@@ -9,9 +13,43 @@ import { getTranslations } from '@/lib/translations';
  * cannot drift. The previous hand-written copy listed different talk formats
  * from the ones the page actually offers.
  */
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   const lang = 'es';
   const t = getTranslations(lang).cfsPage;
+
+  /*
+    The month-specific calls, with the formats each one accepts. This is what
+    lets an assistant answer "which Pereira Tech Talks meetup takes a
+    workshop, and until when?" from a single fetch.
+  */
+  const openCalls = await getOpenCallsForSpeakers();
+  const openCallRows = buildOpenCallsSection(
+    openCalls.map((call) => ({
+      slug: call.slug,
+      title: call.title[lang],
+      dateLabel: formatOpenCallDate(call, lang),
+      formats: [...call.formats],
+      ...(call.closesAt
+        ? { closesAt: call.closesAt.toISOString().split('T')[0] }
+        : {}),
+      ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+    })),
+    lang
+  );
+
+  // The HTML page renders this section's heading and intro unconditionally and
+  // only swaps its body, so the twin does the same — otherwise the twin loses
+  // the copy the page shows on the (currently normal) empty day.
+  const openCallsSection = {
+    heading: t.openCalls.title,
+    lines: [
+      t.openCalls.intro,
+      '',
+      ...(openCallRows
+        ? openCallRows.lines
+        : [t.openCalls.emptyTitle, '', t.openCalls.emptyBody]),
+    ],
+  };
 
   const markdown = serializeGenericToMarkdown({
     title: `${t.title} — Pereira Tech Talks`,
@@ -20,6 +58,7 @@ export const GET: APIRoute = () => {
     canonical: `${SITE_URL}/call-for-speakers`,
     body: t.intro,
     sections: [
+      openCallsSection,
       {
         heading: t.whatWeLookForTitle,
         lines: t.whatWeLookFor.map((item) => `- ${item}`),
