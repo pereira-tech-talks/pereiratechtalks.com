@@ -51,6 +51,7 @@
     "responsive:capture": "node scripts/responsive-audit/capture.mjs",
     "responsive:capture:quick": "node scripts/responsive-audit/capture.mjs --quick",
     "test:responsive": "playwright test tests/e2e/responsive/",
+    "test:forms": "playwright test tests/e2e/forms/",
     "test:responsive:update": "playwright test tests/e2e/responsive/ --update-snapshots",
     "release": "bash .github/scripts/prepare_release.sh",
     "certs:import": "tsx scripts/certificates/import-csv.ts",

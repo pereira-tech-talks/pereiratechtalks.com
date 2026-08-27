@@ -63,8 +63,9 @@ secrets + optional labeled smokes:
 ```
 
 - `_form`: `contact` \| `cfs` \| `speaker-school` \| `sponsor` \| `calendar` \| `conduct`
-- `slidesUrl` (optional, `cfs` only): link to the deck, or to where it will be
-  published. Capped at 300 chars; a non-`http(s)` URI scheme is dropped
+- `slidesUrl` (**required**, `cfs` only): link to the deck, or to where it will
+  be published. Capped at 300 chars; must be an `http(s)` URL — a non-`http(s)`
+  scheme is dropped by `sanitiseClickableText` and then rejected as empty
 - `profilePhoto` (optional, `cfs` only): a photo URL **or** a note like "use my
   LinkedIn photo". Capped at 300 chars; a non-`http(s)` URI scheme is dropped
 - `meetupSlug` (optional, `cfs` only): the meetup a proposal targets. Sent by the
@@ -123,19 +124,36 @@ Verified live (2026-08): an optional text question accepts `''` — same shape
 
 ### Call for Speakers — the `Slides` question
 
-`CFS_Q.SLIDES` = `1e9d72d9-d8d8-4143-862e-cbe8d14f6cc1` — an **optional** short
-text at index 7, next to `Abstract` and `Takeaways` because it is talk material,
-not contact detail.
+`CFS_Q.SLIDES` = `1e9d72d9-d8d8-4143-862e-cbe8d14f6cc1` — a short text at index
+7, next to `Abstract` and `Takeaways` because it is talk material, not contact
+detail.
 
-It is the field reviewers most want filled: the deck shows the narrative, which
-is what separates a good short talk from a list of bullet points. Speakers are
-told explicitly that a link to an **unfinished** deck is welcome — the point is
-to see it early enough to suggest changes — and that good narrative scores
-higher in selection.
+**Required since 2026-08** (`PLAN_branch_audit_and_pr` Task 4). It is the field
+reviewers most want filled: the deck shows the narrative, which is what
+separates a good short talk from a list of bullet points.
 
-Same server-side handling as `profilePhoto`: capped at 300 and passed through
-`sanitiseClickableText`, which drops a non-`http(s)` URI scheme. A reviewer
-clicks this link.
+Requiring it asks for something many speakers do not have yet — the talk is an
+idea, the deck comes later — so **the copy carries the weight, not the schema**.
+The help text says plainly that a draft, an outline, or even a previous deck all
+count, and so does the link to where it *will* be published. Keep it that way:
+tightening this field into "a finished deck" would cost proposals.
+
+**Validated as an `http(s)` URL, not merely non-empty.** `new URL()` accepts
+`javascript:alert(1)`, so the scheme check is the point rather than a formality.
+The rule is stated twice — `isHttpUrl` in `src/lib/contact-form.ts` and again in
+`functions/api/contact.ts`, because the Functions bundle cannot resolve `@/` —
+and a lockstep test in `tests/unit/functions/dailybot.test.ts` pins both to one
+table of cases.
+
+Enforced on the **server** as well as in the form. A client-side-only
+requirement is not a requirement: a direct POST skips it. The server returns
+`400 slides_url_invalid`.
+
+**The remote question stays optional in Dailybot.** Required-flag drift on the
+remote form makes whole submissions fail with `["response is not valid"]` (see
+`all_responses_are_required` below), and our own validation layer is the safer
+place to enforce this. Still capped at 300 and passed through
+`sanitiseClickableText` — a reviewer clicks this link.
 
 ### Call for Speakers — the `Profile photo` question
 

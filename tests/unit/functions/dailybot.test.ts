@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { CFS_FORMATS } from '@/lib/contact-form';
+import { CFS_FORMATS, isHttpUrl as clientIsHttpUrl } from '@/lib/contact-form';
 import { CFS_FORMATS as INTAKE_CFS_FORMATS } from '../../../functions/_lib/intake-helpers';
 import {
   booleanToDailyBot,
@@ -16,6 +16,7 @@ import {
   slugify,
   submitFormResponse,
 } from '../../../functions/api/_dailybot';
+import { isHttpUrl as serverIsHttpUrl } from '../../../functions/api/contact';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -200,4 +201,38 @@ describe('CFS_Q.MEETUP', () => {
     );
     expect(meetupUrlFromSlug('')).toBe('');
   });
+});
+
+/**
+ * `isHttpUrl` is declared twice for the same reason `CFS_FORMATS` is declared
+ * four times: the Pages Functions bundle is built separately and cannot import
+ * from `src/`. Drift here would be quiet and expensive — the form would accept
+ * a link the server rejects, or the reverse — so the two are pinned to one
+ * table of cases rather than to each other's source.
+ *
+ * PLAN_branch_audit_and_pr, Task 4.
+ */
+describe('isHttpUrl stays in lockstep across both declarations', () => {
+  const CASES: ReadonlyArray<readonly [string, boolean]> = [
+    ['https://slides.example.com/deck', true],
+    ['http://old.example.com/deck', true],
+    ['  https://a.example  ', true],
+    ['https://a.example/deck?x=1#p2', true],
+    ['', false],
+    ['   ', false],
+    ['a.example', false],
+    ['todavía no las tengo', false],
+    ['javascript:alert(1)', false],
+    ['data:text/html,<script>x</script>', false],
+    ['file:///etc/passwd', false],
+    ['ftp://example.com/deck.pdf', false],
+    ['mailto:someone@example.com', false],
+  ];
+
+  for (const [value, expected] of CASES) {
+    it(`agrees on ${JSON.stringify(value)}`, () => {
+      expect(clientIsHttpUrl(value), 'client').toBe(expected);
+      expect(serverIsHttpUrl(value), 'server').toBe(expected);
+    });
+  }
 });

@@ -161,6 +161,25 @@ function sanitiseClickableText(value: unknown, maxLength: number): string {
   return text;
 }
 
+/**
+ * An `http(s)` URL, and nothing else.
+ *
+ * Mirrors `isHttpUrl` in `src/lib/contact-form.ts`. Declared twice on purpose:
+ * the Functions bundle is built separately and cannot resolve the `@/` alias,
+ * so the two copies are kept in lockstep by a test rather than by an import.
+ * See the same arrangement around `CFS_FORMATS`.
+ */
+export function isHttpUrl(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  try {
+    const { protocol } = new URL(trimmed);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function asBool(value: unknown): boolean {
   return value === true || value === 'true' || value === '1' || value === 'on';
 }
@@ -293,10 +312,20 @@ function buildContent(
       'abstract',
       'takeaways',
       'socialUrl',
+      // Required since the branch audit. Enforced here as well as in the form:
+      // a client-side-only requirement is not a requirement, because a direct
+      // POST skips it entirely.
+      'slidesUrl',
     ]);
     if (missing) return missing;
     if (fields.abstract.trim().length < 20) {
       return { ok: false, error: 'abstract_too_short' };
+    }
+    // `sanitiseClickableText` empties any non-http(s) scheme, so a
+    // `javascript:` value arrives here as '' and is caught by requireNonEmpty
+    // above. This checks the shape of what survived.
+    if (!isHttpUrl(fields.slidesUrl)) {
+      return { ok: false, error: 'slides_url_invalid' };
     }
     const format = lookupChoice(fields.format, CFS_FORMAT_VALUES);
     if (format === null) return { ok: false, error: 'format_invalid' };

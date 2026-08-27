@@ -117,6 +117,7 @@ let errors = {
   abstract: '',
   takeaways: '',
   socialUrl: '',
+  slidesUrl: '',
 };
 let submitError = '';
 let successRef;
@@ -161,6 +162,7 @@ async function handleSubmit() {
       requiredField: cp.requiredField,
       invalidEmail: cp.invalidEmail,
       formatNotAllowed: fm.formatNotAllowed,
+      slidesUrlInvalid: f.slidesUrlInvalid,
     },
     activeFormats ?? undefined
   );
@@ -179,6 +181,7 @@ async function handleSubmit() {
         { key: 'format', id: 'cfs-format' },
         { key: 'abstract', id: 'cfs-abstract' },
         { key: 'takeaways', id: 'cfs-takeaways' },
+        { key: 'slidesUrl', id: 'cfs-slides' },
         { key: 'socialUrl', id: 'cfs-social' },
       ],
       errors
@@ -264,6 +267,7 @@ function resetForm() {
     abstract: '',
     takeaways: '',
     socialUrl: '',
+    slidesUrl: '',
   };
   submitError = '';
   formState = 'idle';
@@ -479,15 +483,26 @@ function resetForm() {
 
     <div>
       <label for="cfs-slides" class={labelClass}>{f.slidesUrlLabel}</label>
+      <!--
+        Required, but with no `required` attribute: native constraint validation
+        runs before the submit handler and would replace this form's localized
+        inline errors with a browser bubble, and skip `focusFirstInvalidField`.
+        Every other required field here works the same way.
+      -->
       <input
         id="cfs-slides"
         type="url"
         class={inputClass}
+        class:border-red-500={errors.slidesUrl}
         placeholder={f.slidesUrlPlaceholder}
         bind:value={slidesUrl}
         disabled={formState === 'submitting'}
-        aria-describedby="cfs-slides-help"
+        aria-describedby={errors.slidesUrl
+          ? 'cfs-slides-error cfs-slides-help'
+          : 'cfs-slides-help'}
+        aria-invalid={errors.slidesUrl ? 'true' : undefined}
       />
+      {#if errors.slidesUrl}<p id="cfs-slides-error" class={errorClass} aria-live="polite">{errors.slidesUrl}</p>{/if}
       <p id="cfs-slides-help" class="mt-1 text-sm text-ptt-secondary">
         {f.slidesUrlHelp}
       </p>

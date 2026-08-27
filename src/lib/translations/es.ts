@@ -512,7 +512,9 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     slidesUrlLabel: 'Enlace a tus diapositivas',
     slidesUrlPlaceholder: 'https://…',
     slidesUrlHelp:
-      'Opcional, pero cuenta. Nos interesa mucho verlas: nos ayudan a evaluar la propuesta y a sugerirte mejoras mientras todavía hay tiempo de hacerlas. Si aún las estás armando, déjanos el enlace donde se van a publicar. Unas diapositivas con buena narrativa suman puntos en la selección.',
+      'No necesitas tenerlas listas: un borrador, un esquema o incluso el enlace donde se van a publicar cuentan igual. Nos ayudan a evaluar la propuesta y a sugerirte mejoras mientras todavía hay tiempo de hacerlas. Si reutilizas una charla anterior, pega ese enlace.',
+    slidesUrlInvalid:
+      'Añade el enlace a tus diapositivas (debe empezar por http:// o https://)',
     profilePhotoLabel: 'Foto de perfil',
     profilePhotoPlaceholder: 'https://… o «usa mi foto de LinkedIn»',
     profilePhotoHelp:

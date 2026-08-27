@@ -125,6 +125,7 @@ describe('POST /api/contact → Dailybot', () => {
         abstract: 'A long enough abstract about Astro islands and DX.',
         takeaways: 'Learn islands',
         socialUrl: 'https://example.com',
+        slidesUrl: 'https://slides.example.com/astro-islands',
         firstTime: true,
         speakerSchool: false,
         lang: 'es',
@@ -339,6 +340,8 @@ describe('CFS submissions carry the meetup they target', () => {
     abstract: 'A short, concrete tour of how we ship a compiler every week.',
     takeaways: 'How to stage a risky release',
     socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
     lang: 'es',
     page_path: '/meetups/november',
     website: '',
@@ -494,6 +497,8 @@ describe('CFS meetup validation against the open-calls manifest', () => {
     abstract: 'A short, concrete tour of how we ship a compiler every week.',
     takeaways: 'How to stage a risky release',
     socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
     lang: 'es',
     page_path: '/meetups/november-meetup-2026',
     website: '',
@@ -714,6 +719,8 @@ describe('CFS profile photo', () => {
     abstract: 'A short, concrete tour of how we ship a compiler every week.',
     takeaways: 'How to stage a risky release',
     socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
     lang: 'es',
     page_path: '/call-for-speakers',
     website: '',
@@ -832,6 +839,8 @@ describe('CFS slides link', () => {
     abstract: 'A short, concrete tour of how we ship a compiler every week.',
     takeaways: 'How to stage a risky release',
     socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
     lang: 'es',
     page_path: '/call-for-speakers',
     website: '',
@@ -904,20 +913,38 @@ describe('CFS slides link', () => {
     );
   });
 
-  it('sends an empty string when the speaker has no slides yet', async () => {
+  it('refuses a proposal with no slides link', async () => {
+    // The field became required in the branch audit. Enforced on the server as
+    // well as in the form, because a direct POST never runs the form.
     const fetchMock = stubOk();
-    const res = await onRequestPost(ctx(cfsBody()));
-    expect(res.status).toBe(200);
-    expect(slidesValue(fetchMock)).toBe('');
+    const res = await onRequestPost(ctx({ ...cfsBody(), slidesUrl: '' }));
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ ok: false });
+    // Nothing reached Dailybot.
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it('drops a javascript: or data: value rather than storing it', async () => {
+  it('refuses a javascript: or data: value rather than storing it', async () => {
+    // `sanitiseClickableText` empties any non-http(s) scheme, and an empty
+    // required field is a rejection. The hostile value never reaches Dailybot
+    // and the speaker is told, instead of the link vanishing in silence.
     for (const hostile of ['javascript:alert(1)', 'data:text/html,x']) {
       const fetchMock = stubOk();
-      await onRequestPost(ctx(cfsBody({ slidesUrl: hostile })));
-      expect(slidesValue(fetchMock)).toBe('');
+      const res = await onRequestPost(ctx(cfsBody({ slidesUrl: hostile })));
+      expect(res.status).toBe(400);
+      expect(fetchMock).not.toHaveBeenCalled();
       vi.unstubAllGlobals();
     }
+  });
+
+  it('refuses a value that is not a URL at all', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'todavía no las tengo' }))
+    );
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ error: 'slides_url_invalid' });
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('caps an over-long value', async () => {
@@ -928,12 +955,14 @@ describe('CFS slides link', () => {
     expect(slidesValue(fetchMock).length).toBeLessThanOrEqual(300);
   });
 
-  it('never blocks a submission over the slides field', async () => {
+  it('accepts http as well as https', async () => {
+    // An old deck on a plain-http host is still a deck. The rule is the
+    // scheme, not the certificate.
     const fetchMock = stubOk();
     const res = await onRequestPost(
-      ctx(cfsBody({ slidesUrl: 'javascript:alert(1)' }))
+      ctx(cfsBody({ slidesUrl: 'http://slides.example.com/old-deck' }))
     );
     expect(res.status).toBe(200);
-    expect(slidesValue(fetchMock)).toBe('');
+    expect(slidesValue(fetchMock)).toBe('http://slides.example.com/old-deck');
   });
 });

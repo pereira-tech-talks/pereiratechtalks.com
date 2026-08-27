@@ -510,7 +510,9 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     slidesUrlLabel: 'Link to your slides',
     slidesUrlPlaceholder: 'https://…',
     slidesUrlHelp:
-      'Optional, but it counts. We really want to see them: they help us assess the proposal and suggest improvements while there is still time to make them. If they are still in progress, leave the link to where they will be published. Slides with a good narrative score higher in the selection.',
+      'They do not have to be finished: a draft, an outline, or even the link to where they will be published all count. They help us assess the proposal and suggest improvements while there is still time to make them. Reusing a previous deck? Paste that link.',
+    slidesUrlInvalid:
+      'Add the link to your slides (it must start with http:// or https://)',
     profilePhotoLabel: 'Profile photo',
     profilePhotoPlaceholder: 'https://… or “use my LinkedIn photo”',
     profilePhotoHelp:

@@ -335,6 +335,8 @@ export interface SiteTranslations {
     slidesUrlLabel: string;
     slidesUrlPlaceholder: string;
     slidesUrlHelp: string;
+    /** Shown when the slides link is missing or is not an http(s) URL. */
+    slidesUrlInvalid: string;
     /** Optional photo: accepts a URL *or* a note like "use my LinkedIn photo". */
     profilePhotoLabel: string;
     profilePhotoPlaceholder: string;

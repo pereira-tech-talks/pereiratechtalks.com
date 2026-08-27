@@ -113,9 +113,14 @@ export interface CfsFormFields extends ContactFormFields {
    */
   meetupSlug?: string;
   /**
-   * Link to the deck, or to where it will be published. Optional and never
-   * required: a proposal without slides is still a proposal, but reviewers read
-   * this when it is there.
+   * Link to the deck, or to where it will be published.
+   *
+   * **Required.** Reviewers read it to assess the proposal and to suggest
+   * changes while there is still time to make them, so the ask is deliberate —
+   * and the copy is written so a draft, an outline or a previous deck all
+   * satisfy it. Validated as an `http(s)` URL, not merely non-empty: a
+   * `javascript:` value would be dropped by the server anyway, and silently
+   * losing the field is worse than saying so in the form.
    */
   slidesUrl?: string;
   /**
@@ -132,6 +137,25 @@ export interface CfsFormErrors extends ContactFormErrors {
   abstract: string;
   takeaways: string;
   socialUrl: string;
+  slidesUrl: string;
+}
+
+/**
+ * An `http(s)` URL, and nothing else.
+ *
+ * `new URL()` accepts `javascript:alert(1)` and `data:text/html,…` as perfectly
+ * valid URLs, so the protocol check is the point of this function rather than
+ * an extra on top of it.
+ */
+export function isHttpUrl(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  try {
+    const { protocol } = new URL(trimmed);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 
 export interface SponsorFormFields extends ContactFormFields {
@@ -293,6 +317,8 @@ export function validateCfsForm(
     invalidEmail: string;
     /** Shown when a meetup does not accept the chosen format. */
     formatNotAllowed?: string;
+    /** Shown when the slides link is missing or is not an http(s) URL. */
+    slidesUrlInvalid?: string;
   },
   /**
    * When the proposal targets a meetup, the formats that meetup accepts. This
@@ -314,6 +340,7 @@ export function validateCfsForm(
     abstract: '',
     takeaways: '',
     socialUrl: '',
+    slidesUrl: '',
   };
   let valid = base.valid;
 
@@ -341,6 +368,13 @@ export function validateCfsForm(
   }
   if (!fields.socialUrl.trim()) {
     errors.socialUrl = messages.requiredField;
+    valid = false;
+  }
+  // Required, and checked as an http(s) URL rather than merely non-empty. The
+  // server drops any other scheme, so accepting one here would lose the field
+  // silently instead of telling the speaker while they can still fix it.
+  if (!isHttpUrl(fields.slidesUrl ?? '')) {
+    errors.slidesUrl = messages.slidesUrlInvalid ?? messages.requiredField;
     valid = false;
   }
   if (fields.website?.trim()) {
