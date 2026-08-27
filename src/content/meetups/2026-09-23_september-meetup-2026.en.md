@@ -2,9 +2,9 @@
 
 September is coming and we want it full of voices. We are giving the whole month over to lightning talks: three to five minutes each, one idea per talk, and an evening with far more people on stage than usual.
 
-Five minutes changes how you tell something. There is no room for an agenda slide or for “a bit of context first”: you go straight to the idea, hold it up with one example, and stop. It is harder to prepare than it looks, and far better to listen to.
+Meetups are the muscle of this community. We have been getting together every month for years, and what holds that up is not the individual talks: it is the people who come back, who bring a colleague, who message a speaker afterwards to keep the conversation going.
 
-And these are the talks people keep talking about afterwards. The trick that saved you an afternoon, the mistake you do not want anyone repeating, the library that turned out to be exactly what you needed — things you would never build a long talk around, and that in five minutes are useful to half the room.
+September is a good night to show up for the first time, whether to listen or to present. You will leave knowing who is building what in Pereira, and with a couple of new people to message the next time you get stuck.
 
 The date is confirmed and the meetup is online.
 

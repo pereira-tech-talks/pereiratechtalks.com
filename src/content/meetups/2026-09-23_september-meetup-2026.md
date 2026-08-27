@@ -27,9 +27,9 @@ draft: false
 
 Septiembre llega y lo queremos lleno de voces. Lo dedicamos entero a charlas relámpago: de tres a cinco minutos por persona, una idea por charla, y una noche donde suben al escenario muchas más personas de lo habitual.
 
-Cinco minutos cambian cómo se cuenta algo. No cabe la diapositiva de agenda ni el «primero un poco de contexto»: entras directo a la idea, la sostienes con un ejemplo y sales. Cuesta más prepararlo de lo que parece, y se escucha muchísimo mejor.
+Los meetups son el músculo de esta comunidad. Llevamos años juntándonos cada mes, y lo que sostiene eso no son las charlas sueltas: es la gente que vuelve, la que trae a un compañero de trabajo, la que después de escuchar a alguien le escribe para seguir la conversación.
 
-Y son las charlas que más se comentan después. El truco que te ahorró una tarde, el error que no quieres que repita nadie, la librería que resultó ser justo lo que buscabas: cosas alrededor de las que nunca armarías una charla larga, y que en cinco minutos le sirven a media sala.
+Septiembre es una buena noche para llegar por primera vez, sea a escuchar o a presentar. Vas a salir sabiendo quién está construyendo qué en Pereira, y con un par de personas nuevas a las que escribirle la próxima vez que te atasques.
 
 La fecha está confirmada y el encuentro es virtual.
 
