@@ -67,6 +67,12 @@ $: singleFormatLabel = singleFormat
     singleFormat)
   : '';
 
+/** Fires only for a real choice — "no preference" is the default, not a signal. */
+function onMeetupSelected() {
+  if (!selectedMeetup) return;
+  trackEvent(EVENTS.CFS_MEETUP_SELECT, { meetup_slug: selectedMeetup });
+}
+
 const listSeparator = (parts) => {
   if (parts.length <= 1) return parts.join('');
   const last = parts[parts.length - 1];
@@ -376,6 +382,7 @@ function resetForm() {
           id="cfs-meetup"
           class={inputClass}
           bind:value={selectedMeetup}
+          on:change={onMeetupSelected}
           disabled={formState === 'submitting'}
           aria-describedby="cfs-meetup-help"
         >

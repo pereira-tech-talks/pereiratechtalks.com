@@ -358,7 +358,10 @@ Custom events may include stable dimensions via `trackEventWithContext()` or `ge
 | `timeline_click` | Timeline card title click | `{ page, slug }` | PortfolioTimeline, DailyBotTimeline, EntrepreneurTimeline, TechTalksTimeline, TradingTimeline |
 | `ptd_subscribe` | PTD edition email signup | `{ year, lang?, section? }` | PtdSubscribeForm.svelte |
 | `ptd_cta_click` | PTD hero/section CTA | `{ cta, year? }` | PTD pages (P1 wiring) |
-| `speaker_application_submit` | Call for speakers form | — | SpeakersApplicationForm.svelte |
+| `speaker_application_submit` | Call for speakers form (any mode) | — | SpeakersApplicationForm.svelte |
+| `meetup_cfs_submit` | A proposal targeting a specific meetup succeeded | `{ meetup_slug, format }` | SpeakersApplicationForm.svelte |
+| `cfs_open_call_click` | A link into a meetup's `#call-for-speakers` | `{ meetup_slug, source }` — `rail` \| `global_list` \| `detail_hero` \| `detail_lineup` | UpcomingMeetupCard, OpenCallsList, MeetupDetailPage |
+| `cfs_meetup_select` | The global form's optional meetup selector changed to a meetup | `{ meetup_slug }` | SpeakersApplicationForm.svelte |
 | `speaker_school_apply_submit` | Speaker School application form | — | SpeakerSchoolForm.svelte |
 | `calendar_intake_submit` | Community calendar proposal form | — | CalendarIntakeForm.svelte |
 | `conduct_report_submit` | Code of Conduct report form | `{ anonymous }` only — never incident text | ConductReportForm.svelte |
@@ -433,6 +436,14 @@ Custom events may include stable dimensions via `trackEventWithContext()` or `ge
 | Are all pages indexed by search engines? | Google Search Console + Bing Webmaster Tools |
 | Is SEO metadata correct? | Lighthouse CI (SEO audit) |
 | Are AI bots visiting the site? Which pages? | AI Bot Middleware (Umami events + CF console logs) |
+| Which surface actually converts a speaker? | `cfs_open_call_click` by `source` (rail / global_list / detail_hero / detail_lineup) → `meetup_cfs_submit` |
+| Which meetups attract proposals, and in which formats? | `meetup_cfs_submit` `{ meetup_slug, format }` |
+| Does the optional meetup selector get used at all? | `cfs_meetup_select` vs `speaker_application_submit` |
+
+> **Privacy:** the Call for Speakers funnel events carry only a meetup slug, a
+> format and a source. No name, email, talk title, abstract or takeaway ever
+> enters an event payload — the same standard `conduct_report_submit` follows,
+> enforced by `sanitizeEventData()` and `tests/unit/lib/analytics-privacy.test.ts`.
 
 ## Why NOT Google Analytics 4
 

@@ -292,6 +292,9 @@ const metaDescription = buildMetaDescription({
             <p class="mt-8">
               <a
                 href="#call-for-speakers"
+                data-umami-event="cfs_open_call_click"
+                data-umami-event-meetup-slug={slug}
+                data-umami-event-source="detail_hero"
                 class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
               >
                 {planning.heroCta}
@@ -549,6 +552,9 @@ const metaDescription = buildMetaDescription({
             {callState === 'open' && (
               <a
                 href="#call-for-speakers"
+                data-umami-event="cfs_open_call_click"
+                data-umami-event-meetup-slug={slug}
+                data-umami-event-source="detail_lineup"
                 class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
               >
                 {planning.heroCta}
