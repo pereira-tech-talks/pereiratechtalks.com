@@ -11,7 +11,11 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getMeetupSlug, getUpcomingMeetups } from '@/lib/meetup';
+import {
+  getMeetupSlug,
+  getUpcomingMeetups,
+  resolveMeetupVenueLine,
+} from '@/lib/meetup';
 import { getUpcomingEdition } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
@@ -83,7 +87,7 @@ export const GET: APIRoute = async () => {
           resolveI18n(m.data.title, lang),
           mdHref(lang, `meetups/${getMeetupSlug(m)}`),
           m.data.date.toISOString().split('T')[0],
-          [m.data.venue.name, m.data.venue.city].filter(Boolean).join(', '),
+          resolveMeetupVenueLine(m, lang),
           resolveI18n(m.data.description, lang)
         )
       ),

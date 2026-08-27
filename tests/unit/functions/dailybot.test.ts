@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-
+import { CFS_FORMATS } from '@/lib/contact-form';
 import {
   booleanToDailyBot,
+  CFS_FORMAT_VALUES,
   CONTACT_FORM_UUID,
   CONTACT_TOPIC_VALUES,
   EXPERIENCE_LEVEL_VALUES,
@@ -130,5 +131,34 @@ describe('submitFormResponse', () => {
       error: 'INVALID_CHOICE',
       status: 400,
     });
+  });
+});
+
+/**
+ * The four Call for Speakers formats are declared three times — the content
+ * schema (`cfsFormat` in src/content.config.ts), the client validator
+ * (`CFS_FORMATS` in src/lib/contact-form.ts) and the Dailybot choice lookup
+ * (`CFS_FORMAT_VALUES` here). They cannot share one declaration: the
+ * Cloudflare Pages Functions bundle is built separately and cannot import from
+ * `src/`. This test is what keeps the three from drifting — drift would mean
+ * the UI offering a format Dailybot rejects as an invalid choice.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 2.
+ */
+describe('CFS formats stay in lockstep across the three declarations', () => {
+  const EXPECTED = ['regular', 'lightning', 'panel', 'workshop'] as const;
+
+  it('the client validator declares exactly these four', () => {
+    expect([...CFS_FORMATS].sort()).toEqual([...EXPECTED].sort());
+  });
+
+  it('the Dailybot lookup resolves every one of them to a canonical label', () => {
+    for (const format of EXPECTED) {
+      expect(lookupChoice(format, CFS_FORMAT_VALUES)).toBeTruthy();
+    }
+  });
+
+  it('the Dailybot lookup rejects a format none of the three declares', () => {
+    expect(lookupChoice('keynote', CFS_FORMAT_VALUES)).toBeNull();
   });
 });

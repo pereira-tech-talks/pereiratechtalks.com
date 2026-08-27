@@ -614,12 +614,10 @@ export function serializeMeetupDetailToMarkdown(
   const metadata: Array<[string, string]> = [
     [L('date'), data.date],
     [L('mode'), data.mode],
-    [
-      L('venue'),
-      [data.venue.name, data.venue.city, data.venue.country]
-        .filter(Boolean)
-        .join(', '),
-    ],
+    // `venueLabel` is localized by the resolver and always present — it carries
+    // the "venue to be confirmed" text for a meetup programmed before a room is
+    // booked, so the twin never emits an empty value.
+    [L('venue'), data.venueLabel],
     [L('status'), data.status],
   ];
   for (const link of data.links) metadata.push([link.label, link.url]);
@@ -691,16 +689,20 @@ export function serializeMeetupDetailToMarkdown(
     });
   }
 
-  if (data.venue.mapUrl) {
-    sections.push({
-      heading: L('venue'),
-      lines: [
-        `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
-        '',
-        linkLine('Google Maps', data.venue.mapUrl),
-      ],
-    });
-  }
+  // Emitted unconditionally: `scripts/lib/md-completeness.mjs` requires a Venue
+  // section on every `meetup-detail` twin (unlike Talks, which is probed). A
+  // meetup with no venue yet says so rather than dropping the section, which
+  // would leave a reader unable to tell "not decided" from "the twin forgot".
+  sections.push({
+    heading: L('venue'),
+    lines: data.venue?.mapUrl
+      ? [
+          `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
+          '',
+          linkLine('Google Maps', data.venue.mapUrl),
+        ]
+      : [data.venueLabel],
+  });
 
   if (data.gallery.length > 0) {
     sections.push({

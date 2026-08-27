@@ -81,7 +81,15 @@ export interface ResolvedMeetupDetail {
   date: string;
   mode: string;
   status: string;
-  venue: { name: string; city: string; country: string; mapUrl?: string };
+  /**
+   * Absent when the meetup is programmed but no room is booked yet. Readers
+   * must print `venueLabel` instead of composing their own line — the twin
+   * always emits a Venue section (`md:check` requires it), so the label carries
+   * the localized "to be confirmed" text when this is undefined.
+   */
+  venue?: { name: string; city: string; country: string; mapUrl?: string };
+  /** Always present, always localized: the address, or "venue to be confirmed". */
+  venueLabel: string;
   hero?: { src: string; alt: string };
   body: string;
   untranslated: boolean;
@@ -158,9 +166,14 @@ export const resolveMeetupDetail = async (
     meetup.data.heroImage;
 
   const venue = meetup.data.venue;
-  const mapQuery = encodeURIComponent(
-    [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
-  );
+  const venueLabel = venue
+    ? [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
+    : getTranslations(lang).meetupDetail.planning.venueTbc;
+  const mapQuery = venue
+    ? encodeURIComponent(
+        [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
+      )
+    : null;
 
   // Labels are localized here, not in the serializer: the contract requires
   // one language per page, metadata keys included.
@@ -206,12 +219,15 @@ export const resolveMeetupDetail = async (
     date: isoDate(meetup.data.date),
     mode: meetup.data.mode,
     status: meetup.data.status,
-    venue: {
-      name: venue.name,
-      city: venue.city,
-      country: venue.country,
-      mapUrl: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
-    },
+    venue: venue
+      ? {
+          name: venue.name,
+          city: venue.city,
+          country: venue.country,
+          mapUrl: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
+        }
+      : undefined,
+    venueLabel,
     hero: heroSrc
       ? {
           src: heroSrc,

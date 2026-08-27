@@ -119,6 +119,59 @@ const eventStatus = z.enum([
   'cancelled',
 ]);
 
+/**
+ * How firm a meetup's date is.
+ *
+ * Authored, not derived: nothing else in the entry can say whether a date is a
+ * commitment or a proposal. `date` stays required and real in all three cases —
+ * sorting, year grouping, the archive rail and the Event JSON-LD all read it.
+ * For `month-only` the author sets that month's usual cadence day and the UI
+ * renders the month alone, so no surface claims a precision the community does
+ * not have. See `resolveMeetupDateLabel()` in src/lib/meetup.ts.
+ */
+const dateConfidence = z
+  .enum(['confirmed', 'tentative', 'month-only'])
+  .default('confirmed');
+
+/**
+ * Talk formats a call for speakers accepts.
+ *
+ * Kept in lockstep with `CFS_FORMATS` in src/lib/contact-form.ts (client
+ * validation) and `CFS_FORMAT_VALUES` in functions/api/_dailybot.ts (the
+ * Dailybot choice lookup). The three cannot share one declaration: the
+ * Cloudflare Pages Functions bundle is built separately and cannot import from
+ * `src/`. A value added here MUST be added to both others, or the UI will offer
+ * a format Dailybot rejects as an invalid choice.
+ * `tests/unit/functions/dailybot.test.ts` asserts the three agree.
+ */
+const cfsFormat = z.enum(['regular', 'lightning', 'panel', 'workshop']);
+
+/**
+ * A meetup's own call for speakers.
+ *
+ * Authored, not derived: an empty lineup means the meetup still needs talks,
+ * but only a human decides whether we are asking for them publicly and which
+ * formats we can actually stage that month.
+ *
+ * `status` is a statement of intent, never the final answer — a call auto-closes
+ * once the meetup date or `closesAt` has passed, so a stale `open` can never
+ * invite a proposal to an event that already happened. Read it through
+ * `getCallForSpeakersState()` in src/lib/meetup.ts; never compare it inline.
+ */
+const callForSpeakers = z.object({
+  status: z.enum(['open', 'scheduled', 'closed']).default('closed'),
+  /** At least one — a call that accepts nothing is a closed call. */
+  formats: z.array(cfsFormat).min(1),
+  /** Before this calendar date the call renders as `scheduled`. */
+  opensAt: z.coerce.date().optional(),
+  /** After this calendar date the call is closed, whatever `status` says. */
+  closesAt: z.coerce.date().optional(),
+  /** Remaining speaking slots, when the programme has a fixed size. */
+  slots: z.number().int().min(0).optional(),
+  /** One bilingual line of context, e.g. "Solo charlas relámpago este mes". */
+  note: i18nStringOptional,
+});
+
 const hex = z
   .string()
   .regex(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i, 'Must be a 3- or 6-digit HEX value');
@@ -352,8 +405,17 @@ const meetups = defineCollection({
     pubDate: z.coerce.date(),
     date: z.coerce.date(),
     endDate: z.coerce.date().optional(),
-    venue: venue,
-    mode: z.enum(['in-person', 'virtual', 'hybrid']),
+    /**
+     * Optional: a meetup can be programmed months before a room is booked.
+     * Every reader must handle its absence — `src/lib/meetup.ts` and the agent
+     * twins render a "venue to be confirmed" line rather than an empty value,
+     * because `md:check` requires a Venue section on every meetup twin.
+     */
+    venue: venue.optional(),
+    /** Defaults to the community's norm so a programmed meetup need not state it. */
+    mode: z.enum(['in-person', 'virtual', 'hybrid']).default('in-person'),
+    dateConfidence,
+    callForSpeakers: callForSpeakers.optional(),
     hero: z
       .object({
         src: z.string(),

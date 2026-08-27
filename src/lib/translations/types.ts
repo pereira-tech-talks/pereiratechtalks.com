@@ -159,6 +159,31 @@ export interface SiteTranslations {
     calendarEyebrow: string;
     archiveEyebrow: string;
     breadcrumbHome: string;
+    /** The forward-looking programming section above the archive. */
+    programming: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      emptyTitle: string;
+      emptyBody: string;
+      emptyCta: string;
+      /** `aria-label` for the programming rail. */
+      railLabel: string;
+      card: {
+        chipTentative: string;
+        chipCallOpen: string;
+        chipLineupOpen: string;
+        venueTbc: string;
+        cta: string;
+        /** Accessible name for the CTA — placeholder: {meetup} */
+        ctaAria: string;
+        /** Placeholder: {n} */
+        slots: string;
+        slotsOne: string;
+        /** Placeholder: {date} */
+        closesOn: string;
+      };
+    };
   };
 
   meetupDetail: {
@@ -180,6 +205,42 @@ export interface SiteTranslations {
     statusCancelled: string;
     breadcrumbHome: string;
     breadcrumbMeetups: string;
+    /** States a meetup can be in before its programme is decided. */
+    planning: {
+      chipTentative: string;
+      chipTentativeAria: string;
+      chipMonthOnly: string;
+      chipMonthOnlyAria: string;
+      venueTbc: string;
+      lineupOpenTitle: string;
+      lineupOpenBody: string;
+      lineupPartialBody: string;
+      heroCta: string;
+      /** Accessible name for the date tile — placeholder: {date} */
+      dateTileAria: string;
+    };
+    /** The per-meetup call for speakers panel. */
+    cfs: {
+      eyebrow: string;
+      titleOpen: string;
+      introOpen: string;
+      formatsLabel: string;
+      formatsSingleLabel: string;
+      /** Placeholder: {date} */
+      deadline: string;
+      /** Placeholder: {n} */
+      deadlineDays: string;
+      deadlineLastDay: string;
+      /** Placeholder: {n} */
+      slots: string;
+      slotsOne: string;
+      titleScheduled: string;
+      /** Placeholder: {date} */
+      bodyScheduled: string;
+      titleClosed: string;
+      bodyClosed: string;
+      globalCta: string;
+    };
   };
 
   speakerDetail: {
@@ -276,6 +337,23 @@ export interface SiteTranslations {
     successTitle: string;
     successMessage: string;
     defaultSubject: string;
+    /** Meetup-scoped submissions and the optional selector on the global page. */
+    meetup: {
+      contextLabel: string;
+      /** Placeholders: {meetup}, {date} */
+      contextAria: string;
+      selectLabel: string;
+      selectHelp: string;
+      selectNone: string;
+      /** Placeholders: {date}, {meetup} */
+      selectOption: string;
+      /** Placeholder: {formats} */
+      formatsNarrowed: string;
+      formatCleared: string;
+      formatNotAllowed: string;
+      /** Placeholder: {format} */
+      singleFormatNote: string;
+    };
   };
 
   sponsorForm: {
@@ -335,6 +413,25 @@ export interface SiteTranslations {
     formatsEyebrow: string;
     processEyebrow: string;
     formEyebrow: string;
+    /** Meetups accepting proposals right now. */
+    openCalls: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      formatsLabel: string;
+      /** Placeholder: {date} */
+      closesOn: string;
+      /** Placeholder: {n} */
+      slots: string;
+      slotsOne: string;
+      rowCta: string;
+      /** Accessible name — placeholder: {date} */
+      rowCtaAria: string;
+      viewMeetup: string;
+      emptyTitle: string;
+      emptyBody: string;
+      heroCta: string;
+    };
   };
 
   sponsorUsPage: {

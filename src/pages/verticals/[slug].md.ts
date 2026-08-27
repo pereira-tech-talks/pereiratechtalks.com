@@ -9,7 +9,11 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getMeetupSlug, getMeetupsByVertical } from '@/lib/meetup';
+import {
+  getMeetupSlug,
+  getMeetupsByVertical,
+  resolveMeetupVenueLine,
+} from '@/lib/meetup';
 import { getSpeakers } from '@/lib/speaker';
 import { getVerticalBodyEntry, getVerticals } from '@/lib/vertical';
 
@@ -105,7 +109,7 @@ export const GET: APIRoute = ({ props }) => {
           resolveI18n(m.data.title, lang),
           mdHref(lang, `meetups/${getMeetupSlug(m)}`),
           m.data.date.toISOString().split('T')[0],
-          [m.data.venue.name, m.data.venue.city].filter(Boolean).join(', '),
+          resolveMeetupVenueLine(m, lang),
           resolveI18n(m.data.description, lang)
         )
       ),

@@ -7,7 +7,12 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getMeetupSlug, getMeetups, groupMeetupsByYear } from '@/lib/meetup';
+import {
+  getMeetupSlug,
+  getMeetups,
+  groupMeetupsByYear,
+  resolveMeetupVenueLine,
+} from '@/lib/meetup';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -23,9 +28,7 @@ export const GET: APIRoute = async () => {
     const slug = getMeetupSlug(m);
     const title = resolveI18n(m.data.title, lang);
     const date = m.data.date.toISOString().split('T')[0];
-    const venue = [m.data.venue.name, m.data.venue.city]
-      .filter(Boolean)
-      .join(', ');
+    const venue = resolveMeetupVenueLine(m, lang);
     const description = resolveI18n(m.data.description, lang);
     return entityLine(
       title,

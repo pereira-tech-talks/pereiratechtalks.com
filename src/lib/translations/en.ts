@@ -162,6 +162,28 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     calendarEyebrow: 'Calendar',
     archiveEyebrow: 'Archive',
     breadcrumbHome: 'Home',
+    programming: {
+      eyebrow: 'Programme',
+      title: 'Upcoming meetups',
+      intro:
+        'We plan ahead so you have time to propose a talk. Some dates can still move — we say so when they can.',
+      emptyTitle: 'No meetups programmed yet',
+      emptyBody:
+        'We are locking in the next dates. In the meantime, the general call stays open all year.',
+      emptyCta: 'Submit your talk',
+      railLabel: 'Programmed meetups',
+      card: {
+        chipTentative: 'Tentative date',
+        chipCallOpen: 'Call for speakers open',
+        chipLineupOpen: 'Line-up in progress',
+        venueTbc: 'Venue to be confirmed',
+        cta: 'Propose a talk',
+        ctaAria: 'Propose a talk for {meetup}',
+        slots: '{n} slots left',
+        slotsOne: '1 slot left',
+        closesOn: 'Closes {date}',
+      },
+    },
   },
 
   meetupDetail: {
@@ -183,6 +205,40 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     statusCancelled: 'Cancelled',
     breadcrumbHome: 'Home',
     breadcrumbMeetups: 'Meetups',
+    planning: {
+      chipTentative: 'Tentative date',
+      chipTentativeAria: "This meetup's date can still change",
+      chipMonthOnly: 'Date to be set',
+      chipMonthOnlyAria: 'Only the month is set; the day is announced later',
+      venueTbc: 'Venue to be confirmed',
+      lineupOpenTitle: 'Line-up in progress',
+      lineupOpenBody:
+        "We have not announced this meetup's talks yet. If you want to present, the call for speakers is the way in.",
+      lineupPartialBody:
+        'We have confirmed speakers and are still building the programme.',
+      heroCta: 'Propose a talk',
+      dateTileAria: '{date} meetup',
+    },
+    cfs: {
+      eyebrow: 'Call for speakers',
+      titleOpen: 'Propose a talk for this meetup',
+      introOpen:
+        'We are taking proposals for this meetup. Tell us what you want to present and we will reply within 7 business days.',
+      formatsLabel: 'Formats we are taking this month',
+      formatsSingleLabel: 'Format',
+      deadline: 'The call closes on {date}',
+      deadlineDays: '{n} days left',
+      deadlineLastDay: 'Today is the last day',
+      slots: '{n} slots left in the programme',
+      slotsOne: '1 slot left in the programme',
+      titleScheduled: 'The call is not open yet',
+      bodyScheduled:
+        'We open proposals for this meetup on {date}. If you would rather not wait, the general call takes proposals all year.',
+      titleClosed: "This meetup's call has closed",
+      bodyClosed:
+        'We are no longer taking proposals for this date. The general call stays open all year.',
+      globalCta: 'Go to the general call',
+    },
   },
 
   speakerDetail: {
@@ -461,6 +517,20 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     successMessage:
       'Thanks — we will reply within 7 business days to align on date and format.',
     defaultSubject: 'Call for Speakers submission',
+    meetup: {
+      contextLabel: 'You are submitting to',
+      contextAria: 'Proposal form for the {meetup} meetup on {date}',
+      selectLabel: 'Which meetup?',
+      selectHelp:
+        'Optional. If you do not pick one, we will consider your proposal for the next date that fits.',
+      selectNone: 'No preference',
+      selectOption: '{date} — {meetup}',
+      formatsNarrowed: 'This meetup only takes: {formats}',
+      formatCleared:
+        'That format does not apply to the meetup you picked. Choose one of the available options.',
+      formatNotAllowed: 'This meetup does not take that format.',
+      singleFormatNote: 'This meetup only takes {format}.',
+    },
   },
   sponsorForm: {
     formTitle: 'Sponsorship inquiry',
@@ -570,6 +640,23 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     formatsEyebrow: 'Formats',
     processEyebrow: 'Process',
     formEyebrow: 'Application',
+    openCalls: {
+      eyebrow: 'Calls by meetup',
+      title: 'Open calls',
+      intro:
+        'These meetups are taking proposals right now, each with the formats it can stage that month.',
+      formatsLabel: 'Taking',
+      closesOn: 'Closes {date}',
+      slots: '{n} slots',
+      slotsOne: '1 slot',
+      rowCta: 'Submit to this meetup',
+      rowCtaAria: 'Submit your talk to the {date} meetup',
+      viewMeetup: 'View the meetup',
+      emptyTitle: 'No meetup-specific calls right now',
+      emptyBody:
+        'When we programme a meetup and open its slots, it shows up here. The general call below takes proposals all year.',
+      heroCta: 'See open calls',
+    },
   },
   sponsorUsPage: {
     title: 'Sponsor us',
