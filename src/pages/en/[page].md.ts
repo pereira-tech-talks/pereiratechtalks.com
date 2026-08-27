@@ -33,6 +33,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       // `/contact.md` is served by its own endpoint so the form's topic
       // options come from the same strings the HTML renders.
       .filter((page) => getPageSlug(page.id) !== 'contact')
+      // `/press.md` is served by its own endpoint, which carries the press
+      // kit's key facts, boilerplate and brand downloads.
+      .filter((page) => getPageSlug(page.id) !== 'press')
       .map((page) => ({
         params: { page: getPageSlug(page.id) },
         props: { page },

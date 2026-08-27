@@ -35,11 +35,8 @@ export const getTalksByEvent = async (
   return all.filter((t) => {
     if (t.data.event?.collection !== collection) return false;
     const eventSlug = t.data.event.slug;
-    // Match either exact id, or slug stripped of date prefix.
-    return (
-      eventSlug === slug ||
-      slug.endsWith(`/${eventSlug}`) ||
-      slug.replace(/^\d{4}-\d{2}-\d{2}_/, '') === eventSlug
-    );
+    // Ids are the bare slug on both sides, so an exact match is the normal
+    // path; the nested form covers entries filed in a subdirectory.
+    return eventSlug === slug || slug.endsWith(`/${eventSlug}`);
   });
 };

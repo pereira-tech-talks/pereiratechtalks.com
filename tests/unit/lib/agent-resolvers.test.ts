@@ -17,7 +17,7 @@ const day = (iso: string) => new Date(`${iso}T00:00:00.000Z`);
 
 const MEETUPS = [
   {
-    id: '2026-06-24_qa-pilar-del-software',
+    id: 'qa-pilar-del-software',
     body: 'Cuerpo en español.',
     data: {
       title: { en: 'QA: the pillar of software', es: 'QA: Pilar del software' },
@@ -50,7 +50,7 @@ const MEETUPS = [
     },
   },
   {
-    id: '2025-07-23_noche-de-rust-2025',
+    id: 'noche-de-rust-2025',
     body: 'Otro cuerpo.',
     data: {
       title: { en: 'Rust Night 2025', es: 'Noche de Rust 2025' },

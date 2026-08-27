@@ -39,11 +39,6 @@ interface Props {
   postponed?: boolean;
   /** Hides the countdown independently of `postponed` (see `hideSections`). */
   showCountdown?: boolean;
-  /**
-   * When false, hide date / venue / attendance meta (postponed landing).
-   * Default true.
-   */
-  showEventDetails?: boolean;
   /** Primary CTA for postponed editions (e.g. blog announcement). */
   announcementHref?: string;
   announcementCta?: string;
@@ -66,7 +61,6 @@ const {
   scheduleAnchor,
   postponed = false,
   showCountdown = true,
-  showEventDetails = true,
   announcementHref,
   announcementCta,
 } = Astro.props;

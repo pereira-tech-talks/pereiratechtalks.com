@@ -6,6 +6,37 @@ Developer and Cloudflare Pages environment variables for Pereira Tech Talks v3.
 
 Copy `docker/local/pertechtalks/.env.example` → `.env` inside the same directory (or your compose env file). Never commit real secrets.
 
+### pnpm store location (do not move it back into `/app`)
+
+`/app` is a bind mount served by Docker Desktop's `fakeowner` layer. pnpm's content-addressable store hardlinks every package into the virtual store — store files routinely carry 40+ links — and that layer cannot service those metadata operations. With the store inside `/app`, `pnpm install` dies with:
+
+```
+ERR_PNPM_EPERM  EPERM: operation not permitted, stat '/app/.pnpm-store/v11/files/...'
+```
+
+Left to itself pnpm places the store on the project's own drive, which is exactly the broken case, so `entrypoint.sh` (`setup_nodejs`) pins it:
+
+```yaml
+# /home/node/.config/pnpm/config.yaml — regenerated on every container start
+storeDir: /home/node/.local/share/pnpm/store
+cacheDir: /home/node/.cache/pnpm
+```
+
+Both paths are backed by the `pnpm_store` / `pnpm_cache` named volumes (real ext4), so a container rebuild does not re-download the dependency tree.
+
+Two constraints worth knowing before changing any of this:
+
+- **pnpm 11 reads `storeDir` only from `~/.config/pnpm/config.yaml`.** `store-dir` in `.npmrc` and the `NPM_CONFIG_STORE_DIR` / `npm_config_store_dir` env vars are silently ignored. The file lives outside the repo on purpose, so CI and host installs keep their own defaults.
+- **`node_modules` is deliberately not a named volume.** Mounting one there would make it a mount point and `rm -rf node_modules` inside the container would fail with "device or resource busy". It stays on the bind mount, which is fine now that the store does not.
+
+Since the store and `node_modules` sit on different filesystems, pnpm copies instead of hardlinking (`Packages are copied from the content-addressable store to the virtual store`). That is expected — a full clean reinstall takes roughly a minute.
+
+Wiping and reinstalling from inside the container is supported at any time:
+
+```bash
+rm -rf node_modules && pnpm install
+```
+
 ## Community intake forms (Dailybot)
 
 | Variable | Required | Notes |
