@@ -20,37 +20,47 @@ title:
 summary:
   en: "Lightning talks, every month until December. Propose yours in 3–5 minutes."
   es: "Charlas relámpago, todos los meses hasta diciembre. Propón la tuya en 3–5 minutos."
+# One line only. The image above it already carries the format, the duration,
+# the period and that it is online — repeating that here made the modal read
+# like a form. What the image cannot say is the invitation.
 body:
-  en: |-
-    Every monthly meetup from September to December 2026 is a lightning talk night, and the call for speakers is open on all of them.
-
-    Three to five minutes, one idea per talk, online. You do not need a finished deck to propose — send us the link to where it will be published and we will help you shape the narrative.
-
-    First-time speakers are exactly who we built this format for.
-  es: |-
-    Cada meetup mensual de septiembre a diciembre de 2026 es una noche de charlas relámpago, y la convocatoria está abierta en todos.
-
-    De tres a cinco minutos, una idea por charla, virtual. No necesitas tener las diapositivas terminadas para postular — mándanos el enlace a donde se van a publicar y te ayudamos a armar la narrativa.
-
-    Si nunca has presentado, este es justo el formato que hicimos para eso.
-# TODO — modal art. Uncomment once the asset exists at the path below;
-# a referenced-but-missing image renders broken in a sitewide modal, so this
-# stays commented rather than pointing at nothing. Prompt to generate it:
-# tmp/flyer-05-call-for-speakers.md
+  en: "If you have never presented, this is your moment. See you there!"
+  es: "Si nunca has presentado, este es tu momento. ¡Te esperamos!"
+# Two pieces, one per language — the headline is translated, so `src` takes the
+# `{ en, es }` form. Sources in tmp/meetups/{es,en}.png; prompt in
+# tmp/flyer-05-call-for-speakers.md.
+image:
+  src:
+    en: /images/call-for-speakers/2026.en.webp
+    es: /images/call-for-speakers/2026.webp
+  alt:
+    en: >-
+      Pereira Tech Talks call for speakers: lightning talks of 3 to 5 minutes,
+      online, every month from September to December 2026. Your first talk can
+      start here.
+    es: >-
+      Convocatoria de ponentes de Pereira Tech Talks: charlas relámpago de 3 a 5
+      minutos, virtual, todos los meses de septiembre a diciembre de 2026. Tu
+      primera charla cabe aquí.
+# One link per month, so a reader can go straight to the meetup they want
+# rather than landing on the index and hunting. Authored here rather than
+# derived from the open calls: the notification system stays decoupled from the
+# meetups collection, and this list is short and reviewed by a human anyway.
 #
-# image:
-#   src: /images/brand/call-for-speakers-2026.webp
-#   alt:
-#     en: >-
-#       Pereira Tech Talks call for speakers: lightning talks of 3 to 5 minutes,
-#       online, every month from September to December 2026
-#     es: >-
-#       Convocatoria de ponentes de Pereira Tech Talks: charlas relámpago de 3 a 5
-#       minutos, virtual, todos los meses de septiembre a diciembre de 2026
-ctaLabel:
-  en: Propose your talk
-  es: Propón tu charla
-ctaHref: /call-for-speakers
+# December's call opens 15 Oct — until then its link lands on the panel's
+# "not open yet" state, which is the right answer, not a dead end.
+ctas:
+  - label: { en: September, es: Septiembre }
+    href: /meetups/september-meetup-2026/#call-for-speakers
+  - label: { en: October, es: Octubre }
+    href: /meetups/october-meetup-2026/#call-for-speakers
+  - label: { en: November, es: Noviembre }
+    href: /meetups/november-meetup-2026/#call-for-speakers
+  - label: { en: December, es: Diciembre }
+    href: /meetups/december-meetup-2026/#call-for-speakers
+# No primary CTA on purpose: the four month links below ARE the action, and a
+# generic "Propón tu charla" button competed with them. `ctaHref` stays out
+# entirely — the bar only falls back to it when `modalEnabled` is false.
 modalEnabled: true
 startsAt: 2026-08-27T00:00:00.000Z
 endsAt: 2026-12-11T23:59:59.000Z

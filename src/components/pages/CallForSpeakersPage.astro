@@ -12,7 +12,10 @@ import MainLayout from '@/layouts/MainLayout.astro';
 import { CONTACT_FORM } from '@/lib/constances';
 import { formatCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { getOpenCallsForSpeakers } from '@/lib/meetup';
+import {
+  getCallsForSpeakersBoard,
+  getOpenCallsForSpeakers,
+} from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -29,6 +32,13 @@ const prefix = getUrlPrefix(lang);
  * did before this section existed — the general call is always open, and this
  * section must never contradict that promise.
  */
+/**
+ * Two lists on purpose. The board is what a reader sees — open calls **and**
+ * the ones with a date to come back for. The form's selector only offers calls
+ * that actually accept a submission today, so a speaker can never pick a month
+ * the server would refuse.
+ */
+const boardCalls = await getCallsForSpeakersBoard();
 const openCalls = await getOpenCallsForSpeakers();
 
 /** The shape the form's optional selector consumes. */
@@ -70,7 +80,7 @@ const breadcrumbs = [
           {tr.cfsForm.submitButton}
         </a>
         {
-          openCalls.length > 0 && (
+          boardCalls.length > 0 && (
             <a
               href="#open-calls"
               class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -91,7 +101,7 @@ const breadcrumbs = [
   >
     <p class="-mt-2 max-w-3xl text-ptt-secondary">{t.openCalls.intro}</p>
     <div class="mt-8">
-      <OpenCallsList calls={openCalls} lang={lang} />
+      <OpenCallsList calls={boardCalls} lang={lang} />
     </div>
   </Section>
 

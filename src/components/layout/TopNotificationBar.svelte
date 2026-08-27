@@ -98,11 +98,16 @@ function closeModal(): void {
 }
 
 /**
- * Parked: do not auto-open the detail modal. The bar + click-to-open is
- * enough for now (postponement notice). Flip to `true` to restore the
- * first-visit / every-Nth-reload policy in `@/lib/notification-modal-autoopen`.
+ * Auto-open the detail modal, per the policy in
+ * `@/lib/notification-modal-autoopen`: first navigate of a tab session (per
+ * language) opens it once, later navigations stay quiet, and a full reload
+ * reopens it every 5th time.
+ *
+ * Was parked at `false` while the postponement notice ran — a bar alone said
+ * enough for that. Restored for the call for speakers, which asks the reader to
+ * do something rather than just informing them.
  */
-const AUTO_OPEN_MODAL = false;
+const AUTO_OPEN_MODAL = true;
 
 /**
  * Auto-open policy (once per mount on any non-PTD page that renders this bar):
@@ -220,6 +225,21 @@ const openEntry = $derived(
 
 const moreLabel = lang === 'es' ? 'Ver más' : 'Learn more';
 const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
+const ctasLabel =
+  lang === 'es' ? 'Propón tu charla para:' : 'Propose your talk for:';
+
+/**
+ * One track per action on wider screens, two columns on mobile. Whole class
+ * names, not interpolation — Tailwind scans source text, so `sm:grid-cols-${n}`
+ * would never be generated. Five and six wrap into two rows of three rather
+ * than becoming a cramped single row.
+ */
+function ctaColumnsClass(count: number): string {
+  if (count <= 1) return 'sm:grid-cols-1';
+  if (count === 2) return 'sm:grid-cols-2';
+  if (count === 4) return 'sm:grid-cols-4';
+  return 'sm:grid-cols-3';
+}
 const importantLabel = lang === 'es' ? 'IMPORTANTE' : 'IMPORTANT';
 
 function severityClass(severity: LocalizedNotification['severity']): string {
@@ -431,11 +451,51 @@ function severityClass(severity: LocalizedNotification['severity']): string {
       <div
         class="shrink-0 border-t border-ptt-border/70 bg-ptt-bg-elevated px-4 py-3 sm:px-6 sm:py-4"
       >
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div class="flex flex-col gap-3">
+          {#if openEntry.ctas.length > 0}
+            <!--
+              Secondary actions as a wrapped row of links, not buttons: four
+              equal-weight buttons would compete with the primary CTA and read
+              as a menu. Each still clears the 44px touch target.
+            -->
+            <p class="text-sm font-medium text-ptt-secondary">{ctasLabel}</p>
+            <!--
+              Grid, not flex-wrap: with flex the last item on a short row
+              stretched to full width, so four months rendered as three equal
+              pills plus one twice their size. A grid gives every cell the same
+              track no matter how many there are or how long the labels run.
+            -->
+            <div class="grid grid-cols-2 gap-2 {ctaColumnsClass(openEntry.ctas.length)}">
+              {#each openEntry.ctas as cta (cta.href)}
+                <a
+                  href={cta.href}
+                  class="inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 rounded-full border border-ptt-primary/40 px-3 py-2.5 text-center text-sm font-semibold text-ptt-primary transition hover:border-ptt-primary hover:bg-ptt-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:border-ptt-primary-dark/40 dark:text-ptt-primary-dark dark:hover:bg-ptt-primary-dark dark:hover:text-ptt-bg"
+                  onclick={() =>
+                    trackEvent(EVENTS.NOTIFICATION_CTA, {
+                      id: openEntry.id,
+                      target: cta.href,
+                    })}
+                >
+                  {cta.label}
+                  <svg
+                    aria-hidden="true"
+                    class="h-3.5 w-3.5 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              {/each}
+            </div>
+          {/if}
+
           {#if openEntry.ctaHref && openEntry.ctaLabel}
             <a
               href={openEntry.ctaHref}
-              class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong sm:flex-1 dark:bg-ptt-primary-dark dark:text-ptt-bg dark:hover:opacity-90"
+              class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full bg-ptt-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ptt-primary-strong dark:bg-ptt-primary-dark dark:text-ptt-bg dark:hover:opacity-90"
               target={isExternalHref(openEntry.ctaHref) ? '_blank' : undefined}
               rel={isExternalHref(openEntry.ctaHref)
                 ? 'noopener noreferrer'
@@ -446,13 +506,6 @@ function severityClass(severity: LocalizedNotification['severity']): string {
               {openEntry.ctaLabel}
             </a>
           {/if}
-          <button
-            type="button"
-            class="inline-flex min-h-[44px] w-full cursor-pointer items-center justify-center rounded-full border border-ptt-border px-5 py-2.5 text-sm font-semibold text-ptt-secondary transition hover:border-ptt-primary hover:text-ptt sm:w-auto"
-            onclick={closeModal}
-          >
-            {closeLabel}
-          </button>
         </div>
       </div>
     </div>

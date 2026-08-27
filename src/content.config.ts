@@ -1068,6 +1068,20 @@ const notifications = defineCollection({
       .optional(),
     ctaLabel: z.object({ en: z.string(), es: z.string() }).optional(),
     ctaHref: notificationSafeHref.optional(),
+    /**
+     * Extra actions shown as a row of links under the primary CTA — e.g. one
+     * per open call for speakers. Capped at 6: past that the modal stops being
+     * a notice and becomes a menu.
+     */
+    ctas: z
+      .array(
+        z.object({
+          label: z.object({ en: z.string(), es: z.string() }),
+          href: notificationSafeHref,
+        })
+      )
+      .max(6)
+      .optional(),
     modalEnabled: z.boolean().default(false),
     startsAt: z.coerce.date(),
     endsAt: z.coerce.date(),

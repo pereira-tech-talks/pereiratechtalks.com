@@ -2,6 +2,7 @@ import type { CollectionEntry } from 'astro:content';
 import { describe, expect, it } from 'vitest';
 
 import {
+  buildCallsForSpeakersBoard,
   buildOpenCallsForSpeakers,
   buildPastMeetupShowcase,
   buildUpcomingMeetupShowcase,
@@ -206,6 +207,7 @@ type Programmed = {
   talks?: string[];
   speakers?: string[];
   venue?: Meetup['data']['venue'];
+  hero?: Meetup['data']['hero'];
 };
 
 function makeProgrammed(id: string, opts: Programmed): Meetup {
@@ -219,6 +221,7 @@ function makeProgrammed(id: string, opts: Programmed): Meetup {
       talks: opts.talks ?? [],
       speakers: opts.speakers ?? [],
       venue: 'venue' in opts ? opts.venue : base.data.venue,
+      hero: opts.hero,
     },
   } as Meetup;
 }
@@ -448,5 +451,79 @@ describe('a meetup with no venue', () => {
     expect(upcoming).toHaveLength(1);
     const past = buildPastMeetupShowcase([noVenue], [], new Set(), TODAY);
     expect(past).toHaveLength(0);
+  });
+});
+
+/**
+ * Two lists, deliberately different. The board is what a reader sees; the open
+ * list feeds `/api/cfs-open.json`, which the intake function validates
+ * submissions against. If a scheduled call ever leaked into the open list, the
+ * server would accept a proposal for a call that has not opened.
+ */
+describe('buildCallsForSpeakersBoard vs buildOpenCallsForSpeakers', () => {
+  const meetups = () => [
+    makeProgrammed('september', { date: '2026-09-23', call: openCall() }),
+    makeProgrammed('december', {
+      date: '2026-12-16',
+      call: openCall({
+        status: 'scheduled',
+        opensAt: new Date('2026-10-15T00:00:00.000Z'),
+      }),
+    }),
+    makeProgrammed('no-call', { date: '2026-11-18' }),
+    makeProgrammed('past', { date: '2020-03-10', call: openCall() }),
+  ];
+
+  it('the board carries open AND scheduled calls, nearest first', () => {
+    const board = buildCallsForSpeakersBoard(meetups(), TODAY);
+    expect(board.map((c) => c.slug)).toEqual(['september', 'december']);
+    expect(board.map((c) => c.state)).toEqual(['open', 'scheduled']);
+  });
+
+  it('the open list carries ONLY open calls — the server validates against it', () => {
+    const open = buildOpenCallsForSpeakers(meetups(), TODAY);
+    expect(open.map((c) => c.slug)).toEqual(['september']);
+    expect(open.every((c) => c.state === 'open')).toBe(true);
+  });
+
+  it('neither list carries a meetup with no call, or one whose date has passed', () => {
+    for (const list of [
+      buildCallsForSpeakersBoard(meetups(), TODAY),
+      buildOpenCallsForSpeakers(meetups(), TODAY),
+    ]) {
+      expect(list.map((c) => c.slug)).not.toContain('no-call');
+      expect(list.map((c) => c.slug)).not.toContain('past');
+    }
+  });
+
+  it('carries opensAt only on a scheduled call', () => {
+    const board = buildCallsForSpeakersBoard(meetups(), TODAY);
+    const [sept, dec] = board;
+    expect(sept.opensAt).toBeUndefined();
+    expect(dec.opensAt).toEqual(new Date('2026-10-15T00:00:00.000Z'));
+  });
+
+  it('carries the meetup flyer when it has one, and omits it when it does not', () => {
+    const withHero = makeProgrammed('with-flyer', {
+      date: '2026-09-23',
+      call: openCall(),
+      hero: {
+        src: '/images/meetups/x/hero.webp',
+        srcEn: '/images/meetups/x/hero.en.webp',
+        alt: { es: 'Afiche', en: 'Flyer' },
+      },
+    });
+    const [row] = buildCallsForSpeakersBoard([withHero], TODAY);
+    expect(row.hero).toEqual({
+      src: '/images/meetups/x/hero.webp',
+      srcEn: '/images/meetups/x/hero.en.webp',
+      alt: { es: 'Afiche', en: 'Flyer' },
+    });
+
+    const [bare] = buildCallsForSpeakersBoard(
+      [makeProgrammed('bare', { date: '2026-09-23', call: openCall() })],
+      TODAY
+    );
+    expect(bare.hero).toBeUndefined();
   });
 });

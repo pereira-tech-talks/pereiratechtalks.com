@@ -443,7 +443,11 @@ export interface SiteTranslations {
       /** Placeholder: {n} */
       slots: string;
       slotsOne: string;
+      /** Badge on a call that has not opened yet — placeholder: {date} */
+      opensOn: string;
       rowCta: string;
+      /** Row CTA for a call that is not open yet. */
+      rowCtaScheduled: string;
       /** Accessible name — placeholder: {date} */
       rowCtaAria: string;
       viewMeetup: string;

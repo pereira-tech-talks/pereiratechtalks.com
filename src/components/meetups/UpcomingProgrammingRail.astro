@@ -21,14 +21,25 @@ interface Props {
   lang: Language;
   /** Accessible name for the list. */
   label: string;
+  /**
+   * Widest grid the rail may reach. `/meetups` gives the board the full page,
+   * so three fit; the homepage runs it as one section among many, where two
+   * larger cards read better than three cramped ones.
+   */
+  columns?: 2 | 3;
 }
 
-const { items, lang, label } = Astro.props;
+const { items, lang, label, columns = 3 } = Astro.props;
+
+// Written out rather than interpolated — Tailwind scans source for whole class
+// names, so `lg:grid-cols-${columns}` would never be generated.
+const columnsClass =
+  columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3';
 ---
 
 <ul
   aria-label={label}
-  class="-mx-4 flex snap-x snap-mandatory list-none gap-5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+  class={`-mx-4 flex snap-x snap-mandatory list-none gap-5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 ${columnsClass}`}
 >
   {
     items.map((item, index) => (

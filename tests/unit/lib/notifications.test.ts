@@ -3,6 +3,7 @@ import type { Notification } from '@/lib/notifications';
 import {
   filterActiveNotifications,
   localizeNotification,
+  localizeNotificationHref,
 } from '@/lib/notifications';
 
 const makeEntry = (
@@ -122,5 +123,113 @@ describe('localizeNotification', () => {
     expect(es.image?.src).toContain('postponed-indefinitely.webp');
     const en = localizeNotification(entry, 'en');
     expect(en.ctaLabel).toBe('Open aid');
+  });
+});
+
+/**
+ * Notification hrefs are authored once, unprefixed, and shown on both language
+ * trees. Without localization an English visitor clicking the CTA landed on the
+ * Spanish page — a real defect that predates the `ctas` array and got worse with
+ * four links instead of one.
+ */
+describe('localizeNotificationHref', () => {
+  it('leaves Spanish paths untouched — Spanish is served unprefixed', () => {
+    expect(localizeNotificationHref('/call-for-speakers', 'es')).toBe(
+      '/call-for-speakers'
+    );
+  });
+
+  it('prefixes an internal path for English', () => {
+    expect(localizeNotificationHref('/call-for-speakers', 'en')).toBe(
+      '/en/call-for-speakers'
+    );
+  });
+
+  it('keeps the fragment on a deep link', () => {
+    expect(
+      localizeNotificationHref(
+        '/meetups/september-meetup-2026/#call-for-speakers',
+        'en'
+      )
+    ).toBe('/en/meetups/september-meetup-2026/#call-for-speakers');
+  });
+
+  it('does not double-prefix a path that already carries /en', () => {
+    expect(localizeNotificationHref('/en/blog/post/', 'en')).toBe(
+      '/en/blog/post/'
+    );
+  });
+
+  it('leaves external URLs alone', () => {
+    for (const url of [
+      'https://corag.app/',
+      'http://example.com/x',
+      'https://luma.com/pertechtalks',
+    ]) {
+      expect(localizeNotificationHref(url, 'en')).toBe(url);
+      expect(localizeNotificationHref(url, 'es')).toBe(url);
+    }
+  });
+});
+
+describe('localizeNotification — ctas', () => {
+  const entry = {
+    id: 'cfs-open-2026',
+    data: {
+      severity: 'important' as const,
+      title: { en: 'Speakers', es: 'Ponentes' },
+      summary: { en: 'Summary', es: 'Resumen' },
+      modalEnabled: true,
+      ctaHref: '/call-for-speakers',
+      ctaLabel: { en: 'Propose', es: 'Propón' },
+      ctas: [
+        {
+          label: { en: 'September', es: 'Septiembre' },
+          href: '/meetups/september-meetup-2026/#call-for-speakers',
+        },
+        {
+          label: { en: 'October', es: 'Octubre' },
+          href: '/meetups/october-meetup-2026/#call-for-speakers',
+        },
+      ],
+    },
+  } as unknown as Parameters<typeof localizeNotification>[0];
+
+  it('localizes every cta label and href together', () => {
+    const en = localizeNotification(entry, 'en');
+    expect(en.ctas).toEqual([
+      {
+        label: 'September',
+        href: '/en/meetups/september-meetup-2026/#call-for-speakers',
+      },
+      {
+        label: 'October',
+        href: '/en/meetups/october-meetup-2026/#call-for-speakers',
+      },
+    ]);
+    expect(en.ctaHref).toBe('/en/call-for-speakers');
+  });
+
+  it('keeps Spanish unprefixed', () => {
+    const es = localizeNotification(entry, 'es');
+    expect(es.ctas[0]).toEqual({
+      label: 'Septiembre',
+      href: '/meetups/september-meetup-2026/#call-for-speakers',
+    });
+    expect(es.ctaHref).toBe('/call-for-speakers');
+  });
+
+  it('returns an empty array, never undefined, when there are no ctas', () => {
+    // The component iterates this directly; undefined would throw.
+    const bare = {
+      id: 'x',
+      data: {
+        severity: 'info' as const,
+        title: { en: 'a', es: 'a' },
+        summary: { en: 'b', es: 'b' },
+        modalEnabled: false,
+      },
+    } as unknown as Parameters<typeof localizeNotification>[0];
+    expect(localizeNotification(bare, 'es').ctas).toEqual([]);
   });
 });

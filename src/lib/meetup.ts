@@ -331,6 +331,17 @@ export interface OpenCall {
   closesAt?: Date;
   slots?: number;
   note?: { en?: string; es?: string };
+  /**
+   * `open` accepts submissions now; `scheduled` opens on `opensAt`. Only `open`
+   * may reach `/api/cfs-open.json` — the server validates submissions against
+   * that file, so listing a scheduled call there would accept proposals for a
+   * call that has not opened.
+   */
+  state: 'open' | 'scheduled';
+  /** When the call opens. Present only for `scheduled`. */
+  opensAt?: Date;
+  /** The meetup's flyer, when it has one. */
+  hero?: { src: string; srcEn?: string; alt?: { en?: string; es?: string } };
 }
 
 /**
@@ -390,6 +401,56 @@ export const isCallForSpeakersOpen = (
   todayInTz: string = getTodayInSiteTimezone()
 ): boolean => getCallForSpeakersState(meetup, todayInTz) === 'open';
 
+const toOpenCall = (meetup: Meetup, state: 'open' | 'scheduled'): OpenCall => {
+  const call = meetup.data.callForSpeakers;
+  const slug = getMeetupSlug(meetup);
+  const hero = meetup.data.hero;
+  return {
+    slug,
+    url: `${SITE_URL}/meetups/${slug}/`,
+    title: {
+      en: tr(meetup.data.title, 'en'),
+      es: tr(meetup.data.title, 'es'),
+    },
+    date: meetup.data.date,
+    dateConfidence: resolveMeetupDateConfidence(meetup),
+    formats: (call?.formats ?? []) as readonly CfsFormat[],
+    state,
+    ...(call?.closesAt ? { closesAt: call.closesAt } : {}),
+    ...(state === 'scheduled' && call?.opensAt
+      ? { opensAt: call.opensAt }
+      : {}),
+    ...(typeof call?.slots === 'number' ? { slots: call.slots } : {}),
+    ...(call?.note
+      ? {
+          note: {
+            en: tr(call.note, 'en') || undefined,
+            es: tr(call.note, 'es') || undefined,
+          },
+        }
+      : {}),
+    ...(hero
+      ? {
+          hero: {
+            src: hero.src,
+            ...(hero.srcEn ? { srcEn: hero.srcEn } : {}),
+            ...(hero.alt
+              ? {
+                  alt: {
+                    en: tr(hero.alt, 'en') || undefined,
+                    es: tr(hero.alt, 'es') || undefined,
+                  },
+                }
+              : {}),
+          },
+        }
+      : {}),
+  };
+};
+
+const byDateAscending = (a: Meetup, b: Meetup): number =>
+  a.data.date.getTime() - b.data.date.getTime();
+
 /** Pure builder — takes the meetups so it stays testable without the collection. */
 export const buildOpenCallsForSpeakers = (
   meetups: Meetup[],
@@ -397,37 +458,43 @@ export const buildOpenCallsForSpeakers = (
 ): OpenCall[] =>
   meetups
     .filter((meetup) => isCallForSpeakersOpen(meetup, todayInTz))
-    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
-    .map((meetup) => {
-      const call = meetup.data.callForSpeakers;
-      const slug = getMeetupSlug(meetup);
-      return {
-        slug,
-        url: `${SITE_URL}/meetups/${slug}/`,
-        title: {
-          en: tr(meetup.data.title, 'en'),
-          es: tr(meetup.data.title, 'es'),
-        },
-        date: meetup.data.date,
-        dateConfidence: resolveMeetupDateConfidence(meetup),
-        formats: (call?.formats ?? []) as readonly CfsFormat[],
-        ...(call?.closesAt ? { closesAt: call.closesAt } : {}),
-        ...(typeof call?.slots === 'number' ? { slots: call.slots } : {}),
-        ...(call?.note
-          ? {
-              note: {
-                en: tr(call.note, 'en') || undefined,
-                es: tr(call.note, 'es') || undefined,
-              },
-            }
-          : {}),
-      };
-    });
+    .sort(byDateAscending)
+    .map((meetup) => toOpenCall(meetup, 'open'));
+
+/**
+ * Every call worth showing a speaker: the ones accepting now **and** the ones
+ * with a date to come back for.
+ *
+ * Deliberately NOT the same list as `buildOpenCallsForSpeakers`. That one feeds
+ * `/api/cfs-open.json`, which the intake function validates submissions
+ * against — a scheduled call there would let the server accept a proposal for a
+ * call that has not opened. This one is display only.
+ */
+export const buildCallsForSpeakersBoard = (
+  meetups: Meetup[],
+  todayInTz: string = getTodayInSiteTimezone()
+): OpenCall[] =>
+  meetups
+    .map((meetup) => ({
+      meetup,
+      state: getCallForSpeakersState(meetup, todayInTz),
+    }))
+    .filter(
+      (row): row is { meetup: Meetup; state: 'open' | 'scheduled' } =>
+        row.state === 'open' || row.state === 'scheduled'
+    )
+    .sort((a, b) => byDateAscending(a.meetup, b.meetup))
+    .map(({ meetup, state }) => toOpenCall(meetup, state));
 
 export const getOpenCallsForSpeakers = async (
   todayInTz: string = getTodayInSiteTimezone()
 ): Promise<OpenCall[]> =>
   buildOpenCallsForSpeakers(await getMeetups(), todayInTz);
+
+export const getCallsForSpeakersBoard = async (
+  todayInTz: string = getTodayInSiteTimezone()
+): Promise<OpenCall[]> =>
+  buildCallsForSpeakersBoard(await getMeetups(), todayInTz);
 
 /**
  * The date a meetup page should print, at the precision the community actually
