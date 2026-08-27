@@ -21,6 +21,10 @@ const {
   class: className = '',
   loading = 'lazy',
 } = Astro.props;
+
+// An eager hero decodes synchronously so it paints with the rest of the
+// above-the-fold content; a lazy one has nothing to block, so async.
+const decoding = loading === 'eager' ? 'sync' : 'async';
 ---
 
 <img
@@ -30,4 +34,5 @@ const {
   height={height}
   class={className}
   loading={loading}
+  decoding={decoding}
 />
