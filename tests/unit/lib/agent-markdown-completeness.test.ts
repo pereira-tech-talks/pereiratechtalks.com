@@ -484,7 +484,7 @@ describe('meetup detail serializer — programming and the call for speakers', (
 
 describe('buildOpenCallsSection', () => {
   const call = {
-    slug: 'meetup-de-noviembre-2026',
+    slug: 'november-meetup-2026',
     title: 'November meetup',
     dateLabel: 'November 18, 2026',
     formats: ['Lightning (5–10 min)'],
@@ -500,7 +500,7 @@ describe('buildOpenCallsSection', () => {
     const section = buildOpenCallsSection([call], 'en');
     expect(section?.heading).toBe('Open calls');
     expect(section?.lines[0]).toContain(
-      '[November meetup](/en/meetups/meetup-de-noviembre-2026.md)'
+      '[November meetup](/en/meetups/november-meetup-2026.md)'
     );
     expect(section?.lines[0]).toContain(
       'Accepted formats: Lightning (5–10 min)'
@@ -513,7 +513,7 @@ describe('buildOpenCallsSection', () => {
     const section = buildOpenCallsSection([call], 'es');
     expect(section?.heading).toBe('Convocatorias abiertas');
     expect(section?.lines[0]).toContain('Formatos aceptados');
-    expect(section?.lines[0]).toContain('/meetups/meetup-de-noviembre-2026.md');
+    expect(section?.lines[0]).toContain('/meetups/november-meetup-2026.md');
   });
 
   it('drops empty detail segments rather than leaving a dangling dash', () => {

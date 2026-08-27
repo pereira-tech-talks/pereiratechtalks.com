@@ -92,12 +92,12 @@ describe('Call for Speakers funnel events', () => {
   it('carry only a slug, a format and a source through the sanitizer', () => {
     expect(
       sanitizeEventData({
-        meetup_slug: 'meetup-de-septiembre-2026',
+        meetup_slug: 'september-meetup-2026',
         format: 'lightning',
         source: 'rail',
       })
     ).toEqual({
-      meetup_slug: 'meetup-de-septiembre-2026',
+      meetup_slug: 'september-meetup-2026',
       format: 'lightning',
       source: 'rail',
     });
@@ -105,11 +105,11 @@ describe('Call for Speakers funnel events', () => {
 
   it('would strip a speaker identity if one were ever added by mistake', () => {
     const sanitized = sanitizeEventData({
-      meetup_slug: 'meetup-de-septiembre-2026',
+      meetup_slug: 'september-meetup-2026',
       name: 'Grace Hopper',
       email: 'grace@example.com',
       message: 'my abstract',
     });
-    expect(sanitized).toEqual({ meetup_slug: 'meetup-de-septiembre-2026' });
+    expect(sanitized).toEqual({ meetup_slug: 'september-meetup-2026' });
   });
 });

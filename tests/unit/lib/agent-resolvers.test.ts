@@ -288,7 +288,7 @@ describe('resolveSpeakerDetail', () => {
 describe('resolveMeetupDetail — programmed meetups', () => {
   const programmed = (over: Record<string, unknown> = {}) =>
     ({
-      id: 'meetup-de-noviembre-2026',
+      id: 'november-meetup-2026',
       body: 'Cuerpo.',
       data: {
         title: { en: 'November meetup', es: 'Meetup de noviembre' },
