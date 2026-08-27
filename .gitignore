@@ -66,3 +66,11 @@ packages_upgrades_output.txt
 
 # Agent scheduler runtime lock (written by scheduled-task/loop wakeups)
 .agents/scheduled_tasks.lock
+
+# Wrangler / Miniflare local state. `wrangler pages dev` writes a multi-megabyte
+# SQLite trace store here; it is machine-local runtime state, never source.
+.wrangler/
+
+# Dead plan-output tree. Plans live in `.dwp/` now; some older scripts still
+# recreated this path, and one run of them got committed by a `git add -A`.
+.agent_commands/
