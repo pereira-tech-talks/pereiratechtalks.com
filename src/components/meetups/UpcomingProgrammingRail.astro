@@ -1,0 +1,52 @@
+---
+/**
+ * The forward-looking half of `/meetups`.
+ *
+ * A grid from `sm` up. On narrow screens a scroll-snap rail, because a tall
+ * stack of near-identical programmed cards is harder to scan than a swipe —
+ * and because CSS scroll-snap does this natively, so no JavaScript ships for
+ * it.
+ *
+ * Pereira Tech Day editions keep their own card: an edition is a meetup with a
+ * bigger stage, and `MeetupShowcaseItem` already carries both shapes.
+ */
+
+import EditionCard from '@/components/cards/EditionCard.astro';
+import UpcomingMeetupCard from '@/components/cards/UpcomingMeetupCard.astro';
+import type { Language } from '@/lib/i18n';
+import type { MeetupShowcaseItem } from '@/lib/meetup';
+
+interface Props {
+  items: MeetupShowcaseItem[];
+  lang: Language;
+  /** Accessible name for the list. */
+  label: string;
+}
+
+const { items, lang, label } = Astro.props;
+---
+
+<ul
+  aria-label={label}
+  class="-mx-4 flex snap-x snap-mandatory list-none gap-5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+>
+  {
+    items.map((item, index) => (
+      <li class="w-[85vw] min-w-0 shrink-0 snap-start sm:w-auto sm:shrink">
+        {item.type === 'meetup' ? (
+          <UpcomingMeetupCard
+            meetup={item.data}
+            lang={lang}
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+        ) : (
+          <EditionCard
+            edition={item.data}
+            lang={lang}
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+        )}
+      </li>
+    ))
+  }
+</ul>
