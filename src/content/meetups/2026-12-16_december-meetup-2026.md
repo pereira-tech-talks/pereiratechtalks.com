@@ -9,6 +9,14 @@ pubDate: 2026-12-16
 date: 2026-12-16
 dateConfidence: tentative
 mode: virtual
+hero:
+  src: "/images/meetups/december-meetup-2026/hero.webp"
+  srcEn: "/images/meetups/december-meetup-2026/hero.en.webp"
+  alt:
+    es: "Flyer del meetup de diciembre de Pereira Tech Talks: meetup de charlas relámpago, 16 de diciembre de 2026, 6:30 PM hora Colombia, virtual"
+    en: "Pereira Tech Talks December meetup flyer: lightning talk meetup, 16 December 2026, 6:30 PM Colombia time, online"
+  layout: banner
+heroImage: "/images/meetups/december-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:
