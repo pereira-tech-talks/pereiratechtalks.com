@@ -19,7 +19,7 @@ import {
 } from '@/lib/blog';
 import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
-import { formatCalendarDate } from '@/lib/dates';
+import { formatCalendarDate, isCalendarDateBeforeToday } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { resolveI18n } from '@/lib/markdown-for-agents';
 import {
@@ -31,6 +31,7 @@ import {
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
   resolveMeetupLineup,
+  resolveMeetupStatus,
 } from '@/lib/meetup';
 import {
   getEditionRegistrationUrl,
@@ -116,7 +117,23 @@ export interface ResolvedMeetupDetail {
     slots?: number;
     note?: string;
     url: string;
+    /** The same prose the page renders, so the twin is not a summary of it. */
+    heading: string;
+    body: string;
+    formatsLabel: string;
+    deadlineLine?: string;
+    slotsLine?: string;
+    /**
+     * What the on-page form asks for. An agent helping someone propose a talk
+     * needs this; it cannot fill in a form it has never seen.
+     */
+    formFields?: string[];
   };
+  /**
+   * What the page says when the programme is not announced yet. Absent for a
+   * meetup whose talks are published, and for the archive.
+   */
+  lineupNotice?: { heading: string; body: string };
   hero?: { src: string; alt: string };
   body: string;
   untranslated: boolean;
@@ -240,6 +257,60 @@ export const resolveMeetupDetail = async (
   const formatLabelOf = (value: string): string =>
     tr.cfsForm.formatOptions.find((o) => o.value === value)?.label ?? value;
 
+  const md = tr.meetupDetail;
+  const lifecycle = resolveMeetupStatus(meetup);
+  const statusLabel = {
+    announced: md.statusAnnounced,
+    'rsvp-open': md.statusRsvpOpen,
+    completed: md.statusCompleted,
+    cancelled: md.statusCancelled,
+  }[lifecycle];
+
+  const planning = tr.meetupDetail.planning;
+  const cfsCopy = tr.meetupDetail.cfs;
+  const isUpcoming = !isCalendarDateBeforeToday(meetup.data.date);
+  // Mirrors the page's own condition, so the twin carries the notice exactly
+  // when the page shows it — and never invents one for the archive.
+  const lineupNotice =
+    talks.length === 0 && isUpcoming
+      ? {
+          heading: planning.lineupOpenTitle,
+          body:
+            lineup === 'partial'
+              ? planning.lineupPartialBody
+              : planning.lineupOpenBody,
+        }
+      : undefined;
+
+  const callDeadlineLine =
+    call?.closesAt && callState === 'open'
+      ? cfsCopy.deadline.replace(
+          '{date}',
+          formatCalendarDate(call.closesAt, lang)
+        )
+      : undefined;
+  const callSlotsLine =
+    typeof call?.slots === 'number' && callState === 'open'
+      ? call.slots === 1
+        ? cfsCopy.slotsOne
+        : cfsCopy.slots.replace('{n}', String(call.slots))
+      : undefined;
+  const callHeading =
+    callState === 'open'
+      ? cfsCopy.titleOpen
+      : callState === 'scheduled'
+        ? cfsCopy.titleScheduled
+        : cfsCopy.titleClosed;
+  const callBody =
+    callState === 'open'
+      ? cfsCopy.introOpen
+      : callState === 'scheduled'
+        ? cfsCopy.bodyScheduled.replace(
+            '{date}',
+            call?.opensAt ? formatCalendarDate(call.opensAt, lang) : ''
+          )
+        : cfsCopy.bodyClosed;
+
   const links: Array<{ label: string; url: string }> = [];
   if (meetup.data.linkRecording)
     links.push({
@@ -286,7 +357,8 @@ export const resolveMeetupDetail = async (
         ? isoDate(meetup.data.date).slice(0, 7)
         : isoDate(meetup.data.date),
     mode: meetup.data.mode,
-    status: meetup.data.status,
+    // The label the page shows, not the raw enum: a twin is what the page says.
+    status: statusLabel,
     venue: venue
       ? {
           name: venue.name,
@@ -312,7 +384,32 @@ export const resolveMeetupDetail = async (
               ? { note: resolveI18n(call.note, lang) || undefined }
               : {}),
             url: `${SITE_URL}${getUrlPrefix(lang)}/meetups/${slug}/#call-for-speakers`,
+            heading: callHeading,
+            body: callBody,
+            formatsLabel:
+              call.formats.length === 1
+                ? cfsCopy.formatsSingleLabel
+                : cfsCopy.formatsLabel,
+            ...(callDeadlineLine ? { deadlineLine: callDeadlineLine } : {}),
+            ...(callSlotsLine ? { slotsLine: callSlotsLine } : {}),
+            ...(callState === 'open'
+              ? {
+                  formFields: [
+                    tr.contactPage.nameLabel,
+                    tr.contactPage.emailLabel,
+                    tr.cfsForm.talkTitleLabel,
+                    tr.cfsForm.formatLabel,
+                    tr.cfsForm.abstractLabel,
+                    tr.cfsForm.takeawaysLabel,
+                    tr.cfsForm.socialLabel,
+                    tr.cfsForm.firstTimeLabel,
+                    tr.cfsForm.speakerSchoolLabel,
+                    tr.cfsForm.notesLabel,
+                  ],
+                }
+              : {}),
           },
+    lineupNotice,
     hero: heroSrc
       ? {
           src: heroSrc,

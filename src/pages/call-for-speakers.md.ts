@@ -22,17 +22,30 @@ export const GET: APIRoute = async () => {
     lets an assistant answer "which Pereira Tech Talks meetup takes a
     workshop, and until when?" from a single fetch.
   */
+  const formatOptions = getTranslations(lang).cfsForm.formatOptions;
+  const formatLabelOf = (value: string): string =>
+    formatOptions.find((o) => o.value === value)?.label ?? value;
+
   const openCalls = await getOpenCallsForSpeakers();
   const openCallRows = buildOpenCallsSection(
     openCalls.map((call) => ({
       slug: call.slug,
       title: call.title[lang],
       dateLabel: formatOpenCallDate(call, lang),
-      formats: [...call.formats],
+      // The human labels the page shows, not the raw slugs: a twin says what
+      // its page says, and "Lightning (5–10 min)" carries the duration too.
+      formats: call.formats.map(formatLabelOf),
       ...(call.closesAt
         ? { closesAt: call.closesAt.toISOString().split('T')[0] }
         : {}),
       ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+      ...(call.note?.[lang] ? { note: call.note[lang] } : {}),
+      ...(call.dateConfidence === 'tentative'
+        ? {
+            tentativeLabel:
+              getTranslations(lang).meetupDetail.planning.chipTentative,
+          }
+        : {}),
     })),
     lang
   );

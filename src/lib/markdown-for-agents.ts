@@ -628,24 +628,33 @@ export function buildOpenCallsSection(
     formats: string[];
     closesAt?: string;
     slots?: number;
+    /** The call's own bilingual note, already resolved for this language. */
+    note?: string;
+    /** Localized "tentative date" marker, when the call's date can still move. */
+    tentativeLabel?: string;
   }>,
   lang: string
 ): GenericMarkdownSection | null {
   if (calls.length === 0) return null;
   const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
-  return {
-    heading: L('openCalls'),
-    lines: calls.map((call) =>
+  const lines: string[] = [];
+  for (const call of calls) {
+    lines.push(
       entityLine(
         call.title,
         mdHref(lang, `meetups/${call.slug}`),
         call.dateLabel,
+        call.tentativeLabel ?? '',
         `${L('callFormats')}: ${call.formats.join(', ')}`,
         call.closesAt ? `${L('callCloses')}: ${call.closesAt}` : '',
         typeof call.slots === 'number' ? `${L('callSlots')}: ${call.slots}` : ''
       )
-    ),
-  };
+    );
+    // The note is the organiser's own sentence about the month — it says things
+    // the structured fields cannot, so it must not be dropped.
+    if (call.note) lines.push(`  ${call.note}`);
+  }
+  return { heading: L('openCalls'), lines };
 }
 
 /**
@@ -696,17 +705,34 @@ export function serializeMeetupDetailToMarkdown(
     when?" must be able to answer from this twin alone. Emitted for a closed
     call too — silence would read as "no call ever existed".
   */
+  // The page tells a reader the programme is not announced yet and points at
+  // the call. A twin that omitted that would be a summary of its page.
+  if (data.lineupNotice) {
+    sections.push({
+      heading: data.lineupNotice.heading,
+      lines: [data.lineupNotice.body],
+    });
+  }
+
   if (data.callForSpeakers) {
     const call = data.callForSpeakers;
-    const lines: string[] = [`${L('callState')}: ${call.stateLabel}`];
+    const lines: string[] = [call.heading, '', call.body, ''];
+    lines.push(`${L('callState')}: ${call.stateLabel}`);
     if (call.formats.length > 0) {
+      lines.push(`${call.formatsLabel}: ${call.formats.join(', ')}`);
       lines.push(`${L('callFormats')}: ${call.formats.join(', ')}`);
     }
+    if (call.deadlineLine) lines.push(call.deadlineLine);
     if (call.closesAt) lines.push(`${L('callCloses')}: ${call.closesAt}`);
+    if (call.slotsLine) lines.push(call.slotsLine);
     if (typeof call.slots === 'number') {
       lines.push(`${L('callSlots')}: ${call.slots}`);
     }
     if (call.isOpen) lines.push(linkLine(L('callForSpeakers'), call.url));
+    if (call.formFields && call.formFields.length > 0) {
+      lines.push('');
+      for (const field of call.formFields) lines.push(`- ${field}`);
+    }
     if (call.note) {
       lines.push('');
       lines.push(call.note);

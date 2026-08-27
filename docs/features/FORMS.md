@@ -18,7 +18,8 @@ Canonical UUIDs and choice lookups live in `functions/api/_dailybot.ts`.
 | Form | UI | Route | `_form` | Dailybot form |
 |------|----|-------|---------|---------------|
 | Contact | `ContactForm.svelte` | `/contact`, `/en/contact` | `contact` | PTT Contact |
-| Call for Speakers | `SpeakersApplicationForm.svelte` | `/call-for-speakers`, `/meetups/{slug}#call-for-speakers` | `cfs` | PTT Call for Speakers |
+| Call for Speakers (global) | `SpeakersApplicationForm.svelte` (`mode="global"`) | `/call-for-speakers` | `cfs` | PTT Call for Speakers |
+| Call for Speakers (per meetup) | `SpeakersApplicationForm.svelte` (`mode="meetup"`) | `/meetups/{slug}#call-for-speakers` | `cfs` | PTT Call for Speakers |
 | Speaker School | `SpeakerSchoolForm.svelte` | `/verticals/speaker-school` | `speaker-school` | PTT Speaker School |
 | Sponsors | `SponsorInquiryForm.svelte` | `/sponsor-us` | `sponsor` | PTT Sponsors |
 | Community calendar | `CalendarIntakeForm.svelte` | `/calendar#calendar-intake` | `calendar` | PTT Community Calendar |

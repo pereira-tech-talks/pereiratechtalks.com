@@ -17,6 +17,7 @@ import {
   groupMeetupsByYear,
   resolveMeetupVenueLine,
 } from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -51,17 +52,30 @@ export const GET: APIRoute = async () => {
     .filter((m) => isCalendarDateOnOrAfterToday(m.data.date))
     .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
 
+  const formatOptions = getTranslations(lang).cfsForm.formatOptions;
+  const formatLabelOf = (value: string): string =>
+    formatOptions.find((o) => o.value === value)?.label ?? value;
+
   const openCalls = await getOpenCallsForSpeakers();
   const openCallsSection = buildOpenCallsSection(
     openCalls.map((call) => ({
       slug: call.slug,
       title: call.title[lang],
       dateLabel: formatOpenCallDate(call, lang),
-      formats: [...call.formats],
+      // The human labels the page shows, not the raw slugs: a twin says what
+      // its page says, and "Lightning (5–10 min)" carries the duration too.
+      formats: call.formats.map(formatLabelOf),
       ...(call.closesAt
         ? { closesAt: call.closesAt.toISOString().split('T')[0] }
         : {}),
       ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+      ...(call.note?.[lang] ? { note: call.note[lang] } : {}),
+      ...(call.dateConfidence === 'tentative'
+        ? {
+            tentativeLabel:
+              getTranslations(lang).meetupDetail.planning.chipTentative,
+          }
+        : {}),
     })),
     lang
   );

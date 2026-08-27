@@ -42,6 +42,9 @@ const ENGLISH_ONLY = [
   'Photos, slide links, and recordings are still being recovered',
   '### Sources',
   '**Talks:**',
+  // Added with the programming feature: a planned meetup's body carries a call
+  // section, and its label must not cross languages either.
+  '### Call for speakers',
 ];
 const SPANISH_ONLY = [
   'Contenido migrado desde el archivo de producción',
@@ -49,6 +52,7 @@ const SPANISH_ONLY = [
   '### Fuentes',
   '**Charlas:**',
   '**Ponente:**',
+  '### Convocatoria',
 ];
 
 describe.each([
