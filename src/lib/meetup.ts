@@ -1,13 +1,17 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
+import { SITE_URL } from '@/lib/constances';
 import {
+  formatCalendarDate,
+  formatCalendarMonth,
+  getCalendarDateString,
   getCalendarYear,
   getCalendarYearMonth,
   getTodayInSiteTimezone,
   isCalendarDateBeforeToday,
   isCalendarDateOnOrAfterToday,
 } from '@/lib/dates';
-import type { Language } from '@/lib/i18n';
+import { type Language, tr } from '@/lib/i18n';
 import {
   getEditionStartDate,
   getEditions,
@@ -15,6 +19,7 @@ import {
   isUpcomingEdition,
   type PereiraTechDay,
 } from '@/lib/pereiraTechDay';
+import { getTranslations } from '@/lib/translations';
 
 export type Meetup = CollectionEntry<'meetups'>;
 
@@ -299,4 +304,314 @@ export const getMeetupBodyMarkdown = async (
 ): Promise<{ body: string; untranslated: boolean }> => {
   const { entry, untranslated } = await getMeetupBodyEntry(meetup, lang);
   return { body: entry.body ?? '', untranslated };
+};
+
+// ────────────────────────────────────────────────────────────────────────────
+// Programming: date confidence, lineup, and the call for speakers
+//
+// Everything here is DERIVED from the entry. The only authored inputs are
+// `dateConfidence` and `callForSpeakers` — nothing else in a meetup can express
+// whether a date is a commitment or whether we are publicly asking for talks.
+// ────────────────────────────────────────────────────────────────────────────
+
+export type MeetupLineup = 'open' | 'partial' | 'confirmed';
+export type CallForSpeakersState = 'open' | 'scheduled' | 'closed' | 'none';
+export type MeetupDateConfidence = 'confirmed' | 'tentative' | 'month-only';
+export type CfsFormat = 'regular' | 'lightning' | 'panel' | 'workshop';
+
+/** One meetup that is accepting proposals right now. */
+export interface OpenCall {
+  slug: string;
+  /** Canonical absolute URL of the meetup page (Spanish, unprefixed). */
+  url: string;
+  title: { en: string; es: string };
+  date: Date;
+  dateConfidence: MeetupDateConfidence;
+  formats: readonly CfsFormat[];
+  closesAt?: Date;
+  slots?: number;
+  note?: { en?: string; es?: string };
+  /**
+   * `open` accepts submissions now; `scheduled` opens on `opensAt`. Only `open`
+   * may reach `/api/cfs-open.json` — the server validates submissions against
+   * that file, so listing a scheduled call there would accept proposals for a
+   * call that has not opened.
+   */
+  state: 'open' | 'scheduled';
+  /** When the call opens. Present only for `scheduled`. */
+  opensAt?: Date;
+  /** The meetup's flyer, when it has one. */
+  hero?: { src: string; srcEn?: string; alt?: { en?: string; es?: string } };
+}
+
+/**
+ * How far along a meetup's programme is.
+ *
+ * Derived, never authored: `talks: []` with `speakers: []` already says the
+ * lineup is open, and asking an author to say it twice is how the two drift.
+ * `partial` is the real intermediate state — speakers get confirmed before
+ * their talk entries exist, because a talk needs a title, an abstract and a
+ * duration. One authored talk means the programme is published, so it counts
+ * as `confirmed`.
+ */
+export const resolveMeetupLineup = (meetup: Meetup): MeetupLineup => {
+  const talks = meetup.data.talks ?? [];
+  const speakers = meetup.data.speakers ?? [];
+  if (talks.length > 0) return 'confirmed';
+  if (speakers.length > 0) return 'partial';
+  return 'open';
+};
+
+export const resolveMeetupDateConfidence = (
+  meetup: Meetup
+): MeetupDateConfidence => meetup.data.dateConfidence ?? 'confirmed';
+
+/**
+ * The state of a meetup's call for speakers.
+ *
+ * The date checks run BEFORE the authored `status`, so a call auto-closes once
+ * the meetup has happened or `closesAt` has passed. A stale `status: open` must
+ * never invite a proposal to an event that already took place — that is an
+ * integrity rule, not a convenience, and it mirrors `resolveMeetupStatus`,
+ * which also lets the calendar overrule the frontmatter.
+ *
+ * `closesAt` is inclusive of its own day: a call closing on the 20th accepts
+ * proposals through the 20th.
+ */
+export const getCallForSpeakersState = (
+  meetup: Meetup,
+  todayInTz: string = getTodayInSiteTimezone()
+): CallForSpeakersState => {
+  const call = meetup.data.callForSpeakers;
+  if (!call) return 'none';
+  if (isCalendarDateBeforeToday(meetup.data.date, todayInTz)) return 'closed';
+  if (call.closesAt && isCalendarDateBeforeToday(call.closesAt, todayInTz)) {
+    return 'closed';
+  }
+  if (call.status === 'closed') return 'closed';
+  if (call.opensAt && getCalendarDateString(call.opensAt) > todayInTz) {
+    return 'scheduled';
+  }
+  if (call.status === 'scheduled') return 'scheduled';
+  return 'open';
+};
+
+export const isCallForSpeakersOpen = (
+  meetup: Meetup,
+  todayInTz: string = getTodayInSiteTimezone()
+): boolean => getCallForSpeakersState(meetup, todayInTz) === 'open';
+
+const toOpenCall = (meetup: Meetup, state: 'open' | 'scheduled'): OpenCall => {
+  const call = meetup.data.callForSpeakers;
+  const slug = getMeetupSlug(meetup);
+  const hero = meetup.data.hero;
+  return {
+    slug,
+    url: `${SITE_URL}/meetups/${slug}/`,
+    title: {
+      en: tr(meetup.data.title, 'en'),
+      es: tr(meetup.data.title, 'es'),
+    },
+    date: meetup.data.date,
+    dateConfidence: resolveMeetupDateConfidence(meetup),
+    formats: (call?.formats ?? []) as readonly CfsFormat[],
+    state,
+    ...(call?.closesAt ? { closesAt: call.closesAt } : {}),
+    ...(state === 'scheduled' && call?.opensAt
+      ? { opensAt: call.opensAt }
+      : {}),
+    ...(typeof call?.slots === 'number' ? { slots: call.slots } : {}),
+    ...(call?.note
+      ? {
+          note: {
+            en: tr(call.note, 'en') || undefined,
+            es: tr(call.note, 'es') || undefined,
+          },
+        }
+      : {}),
+    ...(hero
+      ? {
+          hero: {
+            src: hero.src,
+            ...(hero.srcEn ? { srcEn: hero.srcEn } : {}),
+            ...(hero.alt
+              ? {
+                  alt: {
+                    en: tr(hero.alt, 'en') || undefined,
+                    es: tr(hero.alt, 'es') || undefined,
+                  },
+                }
+              : {}),
+          },
+        }
+      : {}),
+  };
+};
+
+const byDateAscending = (a: Meetup, b: Meetup): number =>
+  a.data.date.getTime() - b.data.date.getTime();
+
+/** Pure builder — takes the meetups so it stays testable without the collection. */
+export const buildOpenCallsForSpeakers = (
+  meetups: Meetup[],
+  todayInTz: string = getTodayInSiteTimezone()
+): OpenCall[] =>
+  meetups
+    .filter((meetup) => isCallForSpeakersOpen(meetup, todayInTz))
+    .sort(byDateAscending)
+    .map((meetup) => toOpenCall(meetup, 'open'));
+
+/**
+ * Every call worth showing a speaker: the ones accepting now **and** the ones
+ * with a date to come back for.
+ *
+ * Deliberately NOT the same list as `buildOpenCallsForSpeakers`. That one feeds
+ * `/api/cfs-open.json`, which the intake function validates submissions
+ * against — a scheduled call there would let the server accept a proposal for a
+ * call that has not opened. This one is display only.
+ */
+export const buildCallsForSpeakersBoard = (
+  meetups: Meetup[],
+  todayInTz: string = getTodayInSiteTimezone()
+): OpenCall[] =>
+  meetups
+    .map((meetup) => ({
+      meetup,
+      state: getCallForSpeakersState(meetup, todayInTz),
+    }))
+    .filter(
+      (row): row is { meetup: Meetup; state: 'open' | 'scheduled' } =>
+        row.state === 'open' || row.state === 'scheduled'
+    )
+    .sort((a, b) => byDateAscending(a.meetup, b.meetup))
+    .map(({ meetup, state }) => toOpenCall(meetup, state));
+
+export const getOpenCallsForSpeakers = async (
+  todayInTz: string = getTodayInSiteTimezone()
+): Promise<OpenCall[]> =>
+  buildOpenCallsForSpeakers(await getMeetups(), todayInTz);
+
+export const getCallsForSpeakersBoard = async (
+  todayInTz: string = getTodayInSiteTimezone()
+): Promise<OpenCall[]> =>
+  buildCallsForSpeakersBoard(await getMeetups(), todayInTz);
+
+/**
+ * The date a meetup page should print, at the precision the community actually
+ * has. A `tentative` date still prints its day — the caveat belongs to a chip
+ * beside it, not baked into the string, so the same label works in a `<time>`
+ * element, a card, an agent twin and an `aria-label`.
+ */
+export const resolveMeetupDateLabel = (
+  meetup: Meetup,
+  lang: Language
+): string =>
+  resolveMeetupDateConfidence(meetup) === 'month-only'
+    ? formatCalendarMonth(meetup.data.date, lang)
+    : formatCalendarDate(meetup.data.date, lang);
+
+/**
+ * The date label for an `OpenCall`, at the confidence that call carries.
+ *
+ * `resolveMeetupDateLabel` needs the entry; this one works from the manifest
+ * shape alone, so a consumer holding only the open-calls payload does not have
+ * to look the meetup back up.
+ */
+export const formatOpenCallDate = (
+  call: Pick<OpenCall, 'date' | 'dateConfidence'>,
+  lang: Language
+): string =>
+  call.dateConfidence === 'month-only'
+    ? formatCalendarMonth(call.date, lang)
+    : formatCalendarDate(call.date, lang);
+
+/**
+ * The value for a `<time datetime>` attribute — `YYYY-MM` when only the month
+ * is known, so the markup never claims a day the content does not have.
+ */
+export const resolveMeetupDateAttribute = (meetup: Meetup): string =>
+  resolveMeetupDateConfidence(meetup) === 'month-only'
+    ? getCalendarYearMonth(meetup.data.date)
+    : getCalendarDateString(meetup.data.date);
+
+/**
+ * The short "venue, city" line used in listings and agent twins.
+ *
+ * A meetup can be programmed months before a room is booked, so this returns
+ * the localized "venue to be confirmed" text rather than an empty string —
+ * an empty value would render as a stray comma in a card and would fail
+ * `md:check`, which requires a Venue section on every meetup twin.
+ */
+/**
+ * What to print where a venue would go, when the meetup has none.
+ *
+ * A virtual meetup is not missing a venue — it does not have one, and saying
+ * "sede por confirmar" would promise a room that will never be booked. A hybrid
+ * meetup *does* still need a physical venue, so it keeps the "to be confirmed"
+ * line until one exists.
+ *
+ * Single source for the five places that render this: the two cards, the detail
+ * hero and sidebar, and the agent twin.
+ */
+export const resolveMeetupPlaceFallback = (
+  meetup: Meetup,
+  lang: Language
+): string => {
+  const planning = getTranslations(lang).meetupDetail.planning;
+  return meetup.data.mode === 'virtual'
+    ? planning.modeVirtual
+    : planning.venueTbc;
+};
+
+export const resolveMeetupVenueLine = (
+  meetup: Meetup,
+  lang: Language
+): string => {
+  const venue = meetup.data.venue;
+  if (!venue) return resolveMeetupPlaceFallback(meetup, lang);
+  return [venue.name, venue.city].filter(Boolean).join(', ');
+};
+
+/** How a meetup is attended. Mirrors the `mode` enum in `content.config.ts`. */
+export type MeetupMode = 'in-person' | 'virtual' | 'hybrid';
+
+/**
+ * The schema.org attendance mode for a meetup.
+ *
+ * `MeetupDetailPage` used to hardcode `OfflineEventAttendanceMode`, which was
+ * harmless while every meetup was in a room and wrong the moment the community
+ * programmed four online months: all four announced themselves to search
+ * engines as in-person events in Pereira.
+ *
+ * Derived, not authored — the same rule the rest of this module follows.
+ */
+export const resolveEventAttendanceMode = (
+  mode: MeetupMode | undefined
+): string => {
+  switch (mode) {
+    case 'virtual':
+      return 'https://schema.org/OnlineEventAttendanceMode';
+    case 'hybrid':
+      return 'https://schema.org/MixedEventAttendanceMode';
+    default:
+      return 'https://schema.org/OfflineEventAttendanceMode';
+  }
+};
+
+/**
+ * "2 charlas", "1 talk", or nothing at all.
+ *
+ * `null` at zero. A programmed month has no line-up yet, and the agent twin
+ * used to render "0 charlas" for each of them — which reads as a meetup with
+ * nothing on, rather than one whose call is still open. `MeetupCard` already
+ * hid the count at zero; the twin did not, so page and twin disagreed on the
+ * same row. Stated once here so they cannot drift again.
+ */
+export const formatMeetupTalkCount = (
+  count: number,
+  lang: Language
+): string | null => {
+  if (count <= 0) return null;
+  if (lang === 'es') return count === 1 ? '1 charla' : `${count} charlas`;
+  return count === 1 ? '1 talk' : `${count} talks`;
 };

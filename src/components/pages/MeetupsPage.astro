@@ -6,20 +6,19 @@
  */
 
 import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
-import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.svelte';
+import UpcomingProgrammingRail from '@/components/meetups/UpcomingProgrammingRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCommunityStats } from '@/lib/community-stats';
-import { getUrlPrefix, type Language, tr as loc } from '@/lib/i18n';
-import { getAllMeetupShowcase, groupMeetupShowcaseByYear } from '@/lib/meetup';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
-  getEditionCountdownTargets,
-  getEditions,
-  isPostponedEdition,
-} from '@/lib/pereiraTechDay';
+  getAllMeetupShowcase,
+  getUpcomingMeetupShowcase,
+  groupMeetupShowcaseByYear,
+} from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -34,29 +33,17 @@ const { lang } = Astro.props;
  * "Próximamente" badge that `MeetupCard` / `EditionCard` already render.
  */
 const allShowcase = await getAllMeetupShowcase();
+// The programming section is an additional entry point into that one list, not
+// a second source of truth — upcoming entries still appear in their year group
+// below. See docs/features/MEETUPS.md.
+const upcomingShowcase = await getUpcomingMeetupShowcase();
 const groups = groupMeetupShowcaseByYear(allShowcase);
 const years = groups.map((g) => g.year);
 const communityStats = await getCommunityStats();
 
-const editions = await getEditions();
-const upcomingEdition = editions.find(
-  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
-);
-const postponedEdition = editions.find(isPostponedEdition);
-const ptdCountdown = upcomingEdition
-  ? getEditionCountdownTargets(upcomingEdition)
-  : null;
-const ptdPostponement = postponedEdition?.data.postponement;
-const ptdPostponedImage = ptdPostponement?.image
-  ? {
-      src: loc(ptdPostponement.image.src, lang),
-      alt: loc(ptdPostponement.image.alt, lang),
-    }
-  : undefined;
-
 const tr = getTranslations(lang);
 const mp = tr.meetupsPage;
-const hs = tr.homeSections;
+const prog = mp.programming;
 
 const fillStats = (template: string): string =>
   template
@@ -159,7 +146,7 @@ const breadcrumbs = [
     */}
     <div class="main-container pb-6 sm:pb-8">
       <a
-        href="#all-meetups"
+        href={upcomingShowcase.length > 0 ? '#upcoming-meetups' : '#all-meetups'}
         class="group mx-auto flex w-fit max-w-full flex-col items-center gap-2 rounded-full px-3 py-2 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
       >
         <span class="flex items-center gap-3 text-ptt-secondary">
@@ -196,27 +183,36 @@ const breadcrumbs = [
     </div>
   </div>
 
-  {/* Same PTD strip as the homepage (after-hero). Calendar/upcoming cards hidden temporarily. */}
-  <PtdAnnouncementStrip
-    lang={lang}
-    eyebrow={ptdPostponement ? hs.ptdStrip.postponedEyebrow : hs.ptdStrip.eyebrow}
-    title={hs.ptdStrip.title}
-    subtitle={
-      ptdPostponement ? loc(ptdPostponement.headline, lang) : hs.ptdStrip.subtitle
+  <Section
+    eyebrow={prog.eyebrow}
+    title={prog.title}
+    id="upcoming-meetups"
+    class="scroll-mt-28"
+  >
+    <p class="-mt-2 max-w-3xl text-ptt-secondary">{prog.intro}</p>
+    {
+      upcomingShowcase.length > 0 ? (
+        <div class="mt-8">
+          <UpcomingProgrammingRail
+            items={upcomingShowcase}
+            lang={lang}
+            label={prog.railLabel}
+          />
+        </div>
+      ) : (
+        <div class="mt-8 rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:p-8">
+          <h3 class="text-lg font-semibold text-ptt">{prog.emptyTitle}</h3>
+          <p class="mt-2 max-w-2xl text-ptt-secondary">{prog.emptyBody}</p>
+          <a
+            href={`${getUrlPrefix(lang)}/call-for-speakers/`}
+            class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          >
+            {prog.emptyCta}
+          </a>
+        </div>
+      )
     }
-    ctaLabel={ptdPostponement ? hs.ptdStrip.postponedCta : hs.ptdStrip.cta}
-    dateLabel={hs.ptdStrip.date}
-    venueLabel={hs.ptdStrip.venue}
-    attendanceLabel={hs.ptdStrip.attendance}
-    targetDate={ptdCountdown?.targetDate}
-    endDate={ptdCountdown?.endDate}
-    postponed={Boolean(ptdPostponement)}
-    postponedBody={ptdPostponement ? loc(ptdPostponement.body, lang) : undefined}
-    postponedClosing={
-      ptdPostponement ? loc(ptdPostponement.closing, lang) : undefined
-    }
-    postponedImage={ptdPostponedImage}
-  />
+  </Section>
 
   <Section title={t.all} id="all-meetups" class="scroll-mt-28">
     <div class="grid min-w-0 gap-10 lg:grid-cols-[7rem_1fr]">

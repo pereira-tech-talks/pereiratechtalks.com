@@ -8,7 +8,11 @@ import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
 import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
-import { getMeetupSlug, resolveMeetupStatus } from '@/lib/meetup';
+import {
+  formatMeetupTalkCount,
+  getMeetupSlug,
+  resolveMeetupStatus,
+} from '@/lib/meetup';
 
 interface Props {
   meetup: CollectionEntry<'meetups'>;
@@ -56,14 +60,8 @@ const statusVariant = (
 ) as 'announced' | 'cancelled' | 'completed';
 const statusLabel = statusLabels[status]?.[lang] ?? status;
 
-const talksLabel =
-  talksCount === 1
-    ? lang === 'es'
-      ? '1 charla'
-      : '1 talk'
-    : lang === 'es'
-      ? `${talksCount} charlas`
-      : `${talksCount} talks`;
+// `null` at zero, which is why the count is rendered conditionally below.
+const talksLabel = formatMeetupTalkCount(talksCount, lang);
 ---
 
 <a
@@ -95,7 +93,7 @@ const talksLabel =
     <div class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
       <time class="min-w-0 break-words" datetime={getCalendarDateString(date)}>{dateLabel}</time>
       {talksCount > 0 && <span aria-hidden="true">·</span>}
-      {talksCount > 0 && <span class="shrink-0">{talksLabel}</span>}
+      {talksLabel && <span class="shrink-0">{talksLabel}</span>}
     </div>
     <h3 class="text-lg font-semibold text-ptt group-hover:text-ptt-primary line-clamp-2 break-words">
       {title}

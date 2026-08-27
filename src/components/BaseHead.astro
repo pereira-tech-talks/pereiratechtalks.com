@@ -103,6 +103,16 @@ const rssHref = new URL(`${langPrefix}/rss.xml`.replace(/^\//, ''), Astro.site);
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+<!--
+  ARD capability manifest. The spec allows robots.txt, a Link header and an
+  HTML link as discovery pointers; all three are cheap and an agent that finds
+  any one of them finds the rest of what this origin offers.
+-->
+<link
+	rel="ai-catalog"
+	type="application/json"
+	href="/.well-known/ai-catalog.json"
+/>
 <link
 	rel="alternate"
 	type="application/rss+xml"

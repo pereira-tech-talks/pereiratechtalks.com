@@ -47,6 +47,11 @@ const ROUTES_SUBSET = urlsConfig.routes.filter(
     r.template === 'blog-post-banner' ||
     r.template === 'blog-post-embeds' ||
     r.template === 'meetups-list' ||
+    // A meetup detail page renders two ways that share almost no layout: a
+    // programmed month (date tile, open-call panel, no line-up yet) and an
+    // archive meetup (speakers, talks, venue, sponsors). Both are covered.
+    r.template.startsWith('meetup-detail') ||
+    r.template === 'form-call-for-speakers' ||
     r.template === 'ptd-edition' ||
     r.template === 'form-contact' ||
     r.template === 'channels' ||
@@ -66,17 +71,24 @@ const VIEWPORT_SUBSET = viewports.filter((v) =>
 );
 
 /**
- * Tolerance accounts for sub-pixel rounding at DPR ≥ 2 plus a small
- * margin for rendering noise. At the extreme narrow Galaxy Z Fold
- * folded viewport (280px), Spanish content can have residual ~50px
- * overflow from individual long Spanish words that the `:where(.prose)
- * overflow-wrap: anywhere` rule covers but residual paint edge cases
- * still produce. Anything above the per-viewport budget signals a
- * real regression.
+ * Tolerance accounts for sub-pixel rounding at DPR ≥ 2 plus a small margin for
+ * rendering noise.
+ *
+ * It used to be 60px at `foldable-folded` and 16px elsewhere, attributed to
+ * long Spanish words in prose. That diagnosis was wrong: the branch audit
+ * (PLAN_branch_audit_and_pr Task 3) traced the overflow to a single hover
+ * tooltip in the site header — `SolidarityMark`, absolutely positioned with
+ * `left-0 w-max max-w-[14rem]`, which ran past the viewport on every page that
+ * renders the chrome. 45 of 50 audited routes overflowed at 280px and 44 at
+ * 320px for that one reason.
+ *
+ * With the tooltip clamped, measured overflow across all 50 routes × 15
+ * viewports is **zero**. The budget is now tight enough that the next
+ * regression fails instead of hiding under an allowance sized to the bug.
  */
 function tolerance(viewportName: string): number {
-  if (viewportName === 'foldable-folded') return 60;
-  return 16;
+  // Sub-pixel rounding only.
+  return viewportName === 'foldable-folded' ? 4 : 2;
 }
 
 for (const vp of VIEWPORT_SUBSET) {
@@ -90,10 +102,18 @@ for (const vp of VIEWPORT_SUBSET) {
           hasTouch: vp.isMobile,
         });
         const page = await context.newPage();
-        await page.goto(route.url, {
+        const response = await page.goto(route.url, {
           waitUntil: 'domcontentloaded',
           timeout: 20_000,
         });
+        // A missing page has no overflow, so a rotted entry in `urls.json`
+        // passes this suite forever while auditing nothing. Two routes were
+        // doing exactly that — they pointed at a post that had since been
+        // marked `draft: true`, and the audit was measuring the 404 page.
+        expect(
+          response?.status(),
+          `${route.url} did not return 200 — the audit list is stale`
+        ).toBe(200);
         const overflow = await page.evaluate(() => {
           return (
             document.documentElement.scrollWidth -

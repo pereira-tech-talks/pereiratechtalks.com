@@ -7,9 +7,90 @@ import { getTranslations } from '@/lib/translations';
 export let lang = 'es';
 export let apiEndpoint = '/api/contact';
 
+/**
+ * `global` — the always-open call at /call-for-speakers. Offers an optional
+ *   meetup selector built from `openCalls`; with an empty list it renders
+ *   exactly as it did before this prop existed.
+ * `meetup` — mounted on a meetup page. The meetup is fixed and stated up
+ *   front, and only that meetup's formats are offered.
+ */
+export let mode = 'global';
+export let meetupSlug = '';
+export let meetupTitle = '';
+export let meetupDateLabel = '';
+/**
+ * The formats this context accepts. `null` means all four.
+ * @type {readonly string[] | null}
+ */
+export let allowedFormats = null;
+/**
+ * For the global selector.
+ * @type {Array<{ slug: string; title: string; dateLabel: string; formats: readonly string[] }>}
+ */
+export let openCalls = [];
+
 $: t = getTranslations(lang);
 $: f = t.cfsForm;
 $: cp = t.contactPage;
+$: fm = t.cfsForm.meetup;
+
+/** The meetup a submission is tagged with — fixed in `meetup` mode, chosen in `global`. */
+let selectedMeetup = '';
+$: effectiveMeetupSlug = mode === 'meetup' ? meetupSlug : selectedMeetup;
+
+$: selectedCall = openCalls.find((c) => c.slug === selectedMeetup) ?? null;
+
+/**
+ * Which formats the current context accepts. In `meetup` mode that is the
+ * meetup's own list; in `global` mode it narrows only once a meetup is picked.
+ */
+$: activeFormats =
+  mode === 'meetup'
+    ? (allowedFormats ?? null)
+    : (selectedCall?.formats ?? null);
+
+/** `formatOptions` filtered to the active list. The empty "select…" option stays. */
+$: formatChoices = activeFormats
+  ? f.formatOptions.filter(
+      (opt) => opt.value === '' || activeFormats.includes(opt.value)
+    )
+  : f.formatOptions;
+
+/**
+ * A select with one real option is a worse experience than a sentence, so a
+ * single accepted format is stated rather than offered.
+ */
+$: singleFormat =
+  activeFormats && activeFormats.length === 1 ? activeFormats[0] : null;
+$: singleFormatLabel = singleFormat
+  ? (f.formatOptions.find((o) => o.value === singleFormat)?.label ??
+    singleFormat)
+  : '';
+
+/** Fires only for a real choice — "no preference" is the default, not a signal. */
+function onMeetupSelected() {
+  if (!selectedMeetup) return;
+  trackEvent(EVENTS.CFS_MEETUP_SELECT, { meetup_slug: selectedMeetup });
+}
+
+const listSeparator = (parts) => {
+  if (parts.length <= 1) return parts.join('');
+  const last = parts[parts.length - 1];
+  const head = parts.slice(0, -1).join(', ');
+  return `${head} ${lang === 'es' ? 'y' : 'and'} ${last}`;
+};
+
+$: narrowedNotice =
+  mode === 'global' && activeFormats && activeFormats.length > 1
+    ? fm.formatsNarrowed.replace(
+        '{formats}',
+        listSeparator(
+          activeFormats.map(
+            (v) => f.formatOptions.find((o) => o.value === v)?.label ?? v
+          )
+        )
+      )
+    : '';
 
 let formState = 'idle';
 let name = '';
@@ -19,6 +100,8 @@ let format = '';
 let abstract = '';
 let takeaways = '';
 let socialUrl = '';
+let slidesUrl = '';
+let profilePhoto = '';
 let firstTime = false;
 let speakerSchool = false;
 let message = '';
@@ -34,9 +117,19 @@ let errors = {
   abstract: '',
   takeaways: '',
   socialUrl: '',
+  slidesUrl: '',
 };
 let submitError = '';
 let successRef;
+
+// Declared after the form state it writes to. Locks the format when only one
+// is possible, and clears a choice the newly selected meetup cannot stage
+// rather than letting the server reject it after the abstract is written.
+$: if (singleFormat) {
+  format = singleFormat;
+} else if (activeFormats && format && !activeFormats.includes(format)) {
+  format = '';
+}
 
 const inputClass =
   'w-full min-h-[44px] text-base p-3 rounded-lg border border-ptt-border bg-ptt-bg-elevated text-ptt focus:outline-none focus:ring-2 focus:ring-ptt-primary/30 focus:border-ptt-primary transition-colors';
@@ -61,11 +154,17 @@ async function handleSubmit() {
       socialUrl,
       firstTime,
       speakerSchool,
+      meetupSlug: effectiveMeetupSlug,
+      slidesUrl,
+      profilePhoto,
     },
     {
       requiredField: cp.requiredField,
       invalidEmail: cp.invalidEmail,
-    }
+      formatNotAllowed: fm.formatNotAllowed,
+      slidesUrlInvalid: f.slidesUrlInvalid,
+    },
+    activeFormats ?? undefined
   );
   errors = result.errors;
   if (!result.valid) {
@@ -82,6 +181,7 @@ async function handleSubmit() {
         { key: 'format', id: 'cfs-format' },
         { key: 'abstract', id: 'cfs-abstract' },
         { key: 'takeaways', id: 'cfs-takeaways' },
+        { key: 'slidesUrl', id: 'cfs-slides' },
         { key: 'socialUrl', id: 'cfs-social' },
       ],
       errors
@@ -113,8 +213,11 @@ async function handleSubmit() {
         abstract,
         takeaways,
         socialUrl,
+        slidesUrl,
+        profilePhoto,
         firstTime,
         speakerSchool,
+        meetupSlug: effectiveMeetupSlug,
         page_path:
           typeof window !== 'undefined' ? window.location.pathname : '/',
       }),
@@ -122,6 +225,12 @@ async function handleSubmit() {
     if (!response.ok) throw new Error('fail');
     formState = 'success';
     trackEvent(EVENTS.SPEAKER_APPLICATION_SUBMIT);
+    if (effectiveMeetupSlug) {
+      trackEvent(EVENTS.MEETUP_CFS_SUBMIT, {
+        meetup_slug: effectiveMeetupSlug,
+        format,
+      });
+    }
     setTimeout(() => successRef?.focus(), 100);
   } catch {
     submitError = cp.submitError;
@@ -138,10 +247,15 @@ function resetForm() {
   abstract = '';
   takeaways = '';
   socialUrl = '';
+  slidesUrl = '';
+  profilePhoto = '';
   firstTime = false;
   speakerSchool = false;
   message = '';
   website = '';
+  // The meetup context is a property of where the form is mounted, not of the
+  // submission, so `mode="meetup"` keeps it across a submit-another.
+  if (mode === 'global') selectedMeetup = '';
   errors = {
     name: '',
     email: '',
@@ -153,6 +267,7 @@ function resetForm() {
     abstract: '',
     takeaways: '',
     socialUrl: '',
+    slidesUrl: '',
   };
   submitError = '';
   formState = 'idle';
@@ -179,7 +294,29 @@ function resetForm() {
     </button>
   </div>
 {:else}
-  <form class="space-y-6" on:submit|preventDefault={handleSubmit} novalidate>
+  <form
+    class="space-y-6"
+    on:submit|preventDefault={handleSubmit}
+    novalidate
+    aria-describedby={mode === 'meetup' && meetupTitle
+      ? 'cfs-meetup-context'
+      : undefined}
+  >
+    {#if mode === 'meetup' && meetupTitle}
+      <div
+        id="cfs-meetup-context"
+        class="rounded-xl bg-ptt-primary-soft/60 dark:bg-ptt-bg-elevated ring-1 ring-ptt-border p-4"
+      >
+        <p class="text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark">
+          {fm.contextLabel}
+        </p>
+        <p class="mt-1 font-semibold text-ptt">{meetupTitle}</p>
+        {#if meetupDateLabel}
+          <p class="text-sm text-ptt-secondary">{meetupDateLabel}</p>
+        {/if}
+      </div>
+    {/if}
+
     {#if submitError}
       <div
         class="rounded-lg border border-red-300 bg-red-50 text-red-800 dark:border-red-700 dark:bg-red-950 dark:text-red-200 p-4"
@@ -250,23 +387,67 @@ function resetForm() {
       {#if errors.talkTitle}<p id="cfs-title-error" class={errorClass} aria-live="polite">{errors.talkTitle}</p>{/if}
     </div>
 
-    <div>
-      <label for="cfs-format" class={labelClass}>{f.formatLabel}</label>
-      <select
-        id="cfs-format"
-        class={inputClass}
-        class:border-red-500={errors.format}
-        bind:value={format}
-        disabled={formState === 'submitting'}
-        aria-describedby={errors.format ? 'cfs-format-error' : undefined}
-        aria-invalid={errors.format ? 'true' : undefined}
-      >
-        {#each f.formatOptions as opt}
-          <option value={opt.value}>{opt.label}</option>
-        {/each}
-      </select>
-      {#if errors.format}<p id="cfs-format-error" class={errorClass} aria-live="polite">{errors.format}</p>{/if}
-    </div>
+    {#if mode === 'global' && openCalls.length > 0}
+      <div>
+        <label for="cfs-meetup" class={labelClass}>{fm.selectLabel}</label>
+        <select
+          id="cfs-meetup"
+          class={inputClass}
+          bind:value={selectedMeetup}
+          on:change={onMeetupSelected}
+          disabled={formState === 'submitting'}
+          aria-describedby="cfs-meetup-help"
+        >
+          <option value="">{fm.selectNone}</option>
+          {#each openCalls as call}
+            <option value={call.slug}>
+              {fm.selectOption
+                .replace('{date}', call.dateLabel)
+                .replace('{meetup}', call.title)}
+            </option>
+          {/each}
+        </select>
+        <p id="cfs-meetup-help" class="mt-1 text-sm text-ptt-secondary">
+          {fm.selectHelp}
+        </p>
+      </div>
+    {/if}
+
+    {#if singleFormat}
+      <div>
+        <p class={labelClass}>{f.formatLabel}</p>
+        <p class="text-ptt">
+          {fm.singleFormatNote.replace('{format}', singleFormatLabel)}
+        </p>
+      </div>
+    {:else}
+      <div>
+        <label for="cfs-format" class={labelClass}>{f.formatLabel}</label>
+        <select
+          id="cfs-format"
+          class={inputClass}
+          class:border-red-500={errors.format}
+          bind:value={format}
+          disabled={formState === 'submitting'}
+          aria-describedby={errors.format
+            ? 'cfs-format-error'
+            : narrowedNotice
+              ? 'cfs-format-narrowed'
+              : undefined}
+          aria-invalid={errors.format ? 'true' : undefined}
+        >
+          {#each formatChoices as opt}
+            <option value={opt.value}>{opt.label}</option>
+          {/each}
+        </select>
+        {#if narrowedNotice}
+          <p id="cfs-format-narrowed" class="mt-1 text-sm text-ptt-secondary">
+            {narrowedNotice}
+          </p>
+        {/if}
+        {#if errors.format}<p id="cfs-format-error" class={errorClass} aria-live="polite">{errors.format}</p>{/if}
+      </div>
+    {/if}
 
     <div>
       <label for="cfs-abstract" class={labelClass}>{f.abstractLabel}</label>
@@ -301,6 +482,33 @@ function resetForm() {
     </div>
 
     <div>
+      <label for="cfs-slides" class={labelClass}>{f.slidesUrlLabel}</label>
+      <!--
+        Required, but with no `required` attribute: native constraint validation
+        runs before the submit handler and would replace this form's localized
+        inline errors with a browser bubble, and skip `focusFirstInvalidField`.
+        Every other required field here works the same way.
+      -->
+      <input
+        id="cfs-slides"
+        type="url"
+        class={inputClass}
+        class:border-red-500={errors.slidesUrl}
+        placeholder={f.slidesUrlPlaceholder}
+        bind:value={slidesUrl}
+        disabled={formState === 'submitting'}
+        aria-describedby={errors.slidesUrl
+          ? 'cfs-slides-error cfs-slides-help'
+          : 'cfs-slides-help'}
+        aria-invalid={errors.slidesUrl ? 'true' : undefined}
+      />
+      {#if errors.slidesUrl}<p id="cfs-slides-error" class={errorClass} aria-live="polite">{errors.slidesUrl}</p>{/if}
+      <p id="cfs-slides-help" class="mt-1 text-sm text-ptt-secondary">
+        {f.slidesUrlHelp}
+      </p>
+    </div>
+
+    <div>
       <label for="cfs-social" class={labelClass}>{f.socialLabel}</label>
       <input
         id="cfs-social"
@@ -314,6 +522,26 @@ function resetForm() {
         aria-invalid={errors.socialUrl ? 'true' : undefined}
       />
       {#if errors.socialUrl}<p id="cfs-social-error" class={errorClass} aria-live="polite">{errors.socialUrl}</p>{/if}
+    </div>
+
+    <div>
+      <label for="cfs-photo" class={labelClass}>{f.profilePhotoLabel}</label>
+      <!--
+        `type="text"`, not `type="url"`: the field accepts a link OR a sentence
+        like "use my LinkedIn photo", and a url input would reject the sentence.
+      -->
+      <input
+        id="cfs-photo"
+        type="text"
+        class={inputClass}
+        placeholder={f.profilePhotoPlaceholder}
+        bind:value={profilePhoto}
+        disabled={formState === 'submitting'}
+        aria-describedby="cfs-photo-help"
+      />
+      <p id="cfs-photo-help" class="mt-1 text-sm text-ptt-secondary">
+        {f.profilePhotoHelp}
+      </p>
     </div>
 
     <div class="space-y-3">

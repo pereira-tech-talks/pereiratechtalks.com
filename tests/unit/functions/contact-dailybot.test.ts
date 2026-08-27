@@ -1,8 +1,13 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
-
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  fetchCfsOpenManifest,
+  isWellFormedMeetupSlug,
+  resetCfsManifestCache,
+} from '../../../functions/_lib/cfs-manifest';
 import {
   CALENDAR_FORM_UUID,
   CALENDAR_Q,
+  CFS_Q,
   CONDUCT_FORM_UUID,
   CONDUCT_Q,
   CONTACT_FORM_UUID,
@@ -17,6 +22,12 @@ import { onRequestPost } from '../../../functions/api/contact';
 afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
+});
+
+// The open-calls manifest is cached in an isolate-local variable, so a value
+// cached by one test could make a later one pass for the wrong reason.
+beforeEach(() => {
+  resetCfsManifestCache();
 });
 
 function createContext(
@@ -114,6 +125,7 @@ describe('POST /api/contact → Dailybot', () => {
         abstract: 'A long enough abstract about Astro islands and DX.',
         takeaways: 'Learn islands',
         socialUrl: 'https://example.com',
+        slidesUrl: 'https://slides.example.com/astro-islands',
         firstTime: true,
         speakerSchool: false,
         lang: 'es',
@@ -308,5 +320,649 @@ describe('POST /api/contact → Dailybot', () => {
     expect(res.status).toBeGreaterThanOrEqual(400);
     const json = (await res.json()) as { ok: boolean };
     expect(json.ok).toBe(false);
+  });
+});
+
+/**
+ * A Call for Speakers proposal can name the meetup it targets. The value is a
+ * canonical URL, so an organizer reading the Slack report can click straight
+ * through, and no remote form edit is needed when a meetup is programmed.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 3.
+ */
+describe('CFS submissions carry the meetup they target', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
+    lang: 'es',
+    page_path: '/meetups/november',
+    website: '',
+    ...over,
+  });
+
+  /**
+   * Since Task 4 the handler resolves a supplied slug against the open-calls
+   * manifest before submitting, so the stub has to serve both calls and the
+   * assertions have to pick the Dailybot one.
+   */
+  const OPEN_MANIFEST = {
+    version: 1,
+    generatedAt: '2026-08-27T00:00:00.000Z',
+    calls: [
+      {
+        slug: 'november-meetup-2026',
+        url: 'https://pereiratechtalks.org/meetups/november-meetup-2026/',
+        title: { en: 'November meetup', es: 'Meetup de noviembre' },
+        date: '2026-11-18',
+        dateConfidence: 'confirmed',
+        formats: ['lightning'],
+      },
+    ],
+  };
+
+  const stubOk = () => {
+    const fetchMock = vi.fn((url: string | URL) =>
+      Promise.resolve(
+        String(url).includes('/api/cfs-open.json')
+          ? new Response(JSON.stringify(OPEN_MANIFEST), { status: 200 })
+          : new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      )
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  /**
+   * The rate limiter keys on CF-Connecting-IP and its store is module-level, so
+   * every test in this file shares one bucket. Give each case its own IP so
+   * these tests exercise the mapping rather than the 8-per-window limit.
+   */
+  let ipCounter = 0;
+  const ctx = (body: unknown) => {
+    ipCounter += 1;
+    const request = new Request('https://pereiratechtalks.org/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: 'https://pereiratechtalks.org',
+        'CF-Connecting-IP': `203.0.113.${ipCounter}`,
+      },
+      body: JSON.stringify(body),
+    });
+    return {
+      request,
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const contentOf = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    const init = call?.[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content;
+  };
+
+  it('sends the canonical meetup URL when a slug is supplied', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'november-meetup-2026' }))
+    );
+    expect(res.status).toBe(200);
+    expect(contentOf(fetchMock)[CFS_Q.MEETUP]).toBe(
+      'https://pereiratechtalks.org/meetups/november-meetup-2026/'
+    );
+  });
+
+  it('sends an empty string when the proposal came from the global page', async () => {
+    // The same shape CFS_Q.NOTES already ships successfully on this form: an
+    // optional Dailybot text question accepts the empty string.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    expect(contentOf(fetchMock)[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('submits untagged when the slug is malformed or over-long', async () => {
+    // Since Task 4 a slug that fails the pattern (a space here) is dropped
+    // rather than carried, and the proposal still reaches Dailybot.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: `nov ember-${'x'.repeat(200)}` }))
+    );
+    expect(res.status).toBe(200);
+    expect(contentOf(fetchMock)[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('leaves the other twelve CFS answers untouched', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(ctx(cfsBody({ meetupSlug: 'november-meetup-2026' })));
+    const content = contentOf(fetchMock);
+    expect(content[CFS_Q.NAME]).toBe('Grace');
+    expect(content[CFS_Q.EMAIL]).toBe('grace@example.com');
+    expect(content[CFS_Q.TALK_TITLE]).toBe('Compilers in production');
+    expect(content[CFS_Q.FORMAT]).toBe('Lightning');
+    expect(content[CFS_Q.LANG]).toBe('Spanish');
+    expect(content[CFS_Q.PAGE_PATH]).toBe('/meetups/november');
+  });
+});
+
+/**
+ * The server does not trust the client's meetup slug. It resolves it against
+ * the build-time open-calls manifest and applies a deliberately asymmetric
+ * failure policy: availability problems are ours and never cost a speaker
+ * their proposal; a format the meetup does not accept is refused, because the
+ * real UI cannot produce it.
+ *
+ * One test per row of the matrix in docs/features/FORMS.md.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 4.
+ */
+describe('CFS meetup validation against the open-calls manifest', () => {
+  const MANIFEST = {
+    version: 1,
+    generatedAt: '2026-08-27T00:00:00.000Z',
+    calls: [
+      {
+        slug: 'november-meetup-2026',
+        url: 'https://pereiratechtalks.org/meetups/november-meetup-2026/',
+        title: { en: 'November meetup', es: 'Meetup de noviembre' },
+        date: '2026-11-18',
+        dateConfidence: 'confirmed',
+        formats: ['lightning'],
+        closesAt: '2026-11-04',
+      },
+    ],
+  };
+
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
+    lang: 'es',
+    page_path: '/meetups/november-meetup-2026',
+    website: '',
+    ...over,
+  });
+
+  let ip = 100;
+  const ctx = (body: unknown) => {
+    ip += 1;
+    return {
+      request: new Request('https://pereiratechtalks.org/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: 'https://pereiratechtalks.org',
+          'CF-Connecting-IP': `198.51.100.${ip % 250}`,
+        },
+        body: JSON.stringify(body),
+      }),
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  /**
+   * One mock serves both calls the handler makes: the same-origin manifest GET
+   * and the Dailybot POST. `manifest: null` simulates an unreachable manifest.
+   */
+  const stub = (manifest: unknown | null) => {
+    const fetchMock = vi.fn((url: string | URL, init?: RequestInit) => {
+      const href = String(url);
+      if (href.includes('/api/cfs-open.json')) {
+        return Promise.resolve(
+          manifest === null
+            ? new Response('nope', { status: 500 })
+            : new Response(JSON.stringify(manifest), { status: 200 })
+        );
+      }
+      void init;
+      return Promise.resolve(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      );
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  const dailybotContent = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    if (!call) return null;
+    const init = call[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content;
+  };
+
+  it('tags the submission when the slug is open and the format is accepted', async () => {
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'november-meetup-2026' }))
+    );
+    expect(res.status).toBe(200);
+    expect(dailybotContent(fetchMock)?.[CFS_Q.MEETUP]).toBe(
+      'https://pereiratechtalks.org/meetups/november-meetup-2026/'
+    );
+  });
+
+  it('accepts untagged when the slug is not in the manifest', async () => {
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'a-meetup-that-closed' }))
+    );
+    // The proposal is never lost to our bookkeeping.
+    expect(res.status).toBe(200);
+    expect(dailybotContent(fetchMock)?.[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('accepts untagged when the slug is malformed', async () => {
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: '../../etc/passwd' }))
+    );
+    expect(res.status).toBe(200);
+    expect(dailybotContent(fetchMock)?.[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('accepts untagged when the manifest is unreachable', async () => {
+    const fetchMock = stub(null);
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'november-meetup-2026' }))
+    );
+    // Availability of a JSON file must not gate a human.
+    expect(res.status).toBe(200);
+    expect(dailybotContent(fetchMock)?.[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('REFUSES a format the meetup does not accept', async () => {
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'november-meetup-2026', format: 'workshop' }))
+    );
+    expect(res.status).toBe(400);
+    const json = (await res.json()) as { error: string };
+    expect(json.error).toBe('format_not_allowed_for_meetup');
+    // Nothing reached Dailybot.
+    expect(dailybotContent(fetchMock)).toBeNull();
+  });
+
+  it('never fetches the manifest when no slug was sent', async () => {
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    const manifestCalls = fetchMock.mock.calls.filter((c) =>
+      String(c[0]).includes('/api/cfs-open.json')
+    );
+    expect(manifestCalls).toHaveLength(0);
+  });
+
+  it('never fetches the manifest for a honeypot submission', async () => {
+    // A bot must not be able to make the worker fan out.
+    const fetchMock = stub(MANIFEST);
+    const res = await onRequestPost(
+      ctx(
+        cfsBody({ meetupSlug: 'november-meetup-2026', website: 'http://spam' })
+      )
+    );
+    expect(res.status).toBe(200);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('derives the manifest URL from the request, not from the body', async () => {
+    const fetchMock = stub(MANIFEST);
+    await onRequestPost(
+      ctx(
+        cfsBody({
+          meetupSlug: 'november-meetup-2026',
+          // Every one of these is an attempt to redirect the fetch.
+          url: 'https://attacker.example/api/cfs-open.json',
+          origin: 'https://attacker.example',
+          manifestUrl: 'https://attacker.example/api/cfs-open.json',
+        })
+      )
+    );
+    const manifestCall = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('/api/cfs-open.json')
+    );
+    expect(String(manifestCall?.[0])).toBe(
+      'https://pereiratechtalks.org/api/cfs-open.json'
+    );
+    for (const call of fetchMock.mock.calls) {
+      expect(String(call[0])).not.toContain('attacker.example');
+    }
+  });
+});
+
+describe('cfs-manifest helpers', () => {
+  it('accepts real slugs and rejects traversal, spaces and over-long input', () => {
+    expect(isWellFormedMeetupSlug('november-meetup-2026')).toBe(true);
+    expect(isWellFormedMeetupSlug('a')).toBe(true);
+    expect(isWellFormedMeetupSlug('../etc/passwd')).toBe(false);
+    expect(isWellFormedMeetupSlug('has space')).toBe(false);
+    expect(isWellFormedMeetupSlug('-leading-hyphen')).toBe(false);
+    expect(isWellFormedMeetupSlug('Uppercase')).toBe(false);
+    expect(isWellFormedMeetupSlug('')).toBe(false);
+    expect(isWellFormedMeetupSlug(`x${'y'.repeat(200)}`)).toBe(false);
+  });
+
+  it('returns null rather than throwing on a malformed payload', async () => {
+    resetCfsManifestCache();
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() =>
+        Promise.resolve(
+          new Response(JSON.stringify({ nope: true }), { status: 200 })
+        )
+      )
+    );
+    await expect(
+      fetchCfsOpenManifest('https://pereiratechtalks.org/api/contact')
+    ).resolves.toBeNull();
+  });
+
+  it('caches within its TTL so a burst of submissions makes one fetch', async () => {
+    resetCfsManifestCache();
+    const payload = { version: 1, generatedAt: 'x', calls: [] };
+    const fetchMock = vi.fn(() =>
+      Promise.resolve(new Response(JSON.stringify(payload), { status: 200 }))
+    );
+    vi.stubGlobal('fetch', fetchMock);
+
+    const url = 'https://pereiratechtalks.org/api/contact';
+    await fetchCfsOpenManifest(url, 1_000);
+    await fetchCfsOpenManifest(url, 2_000);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+
+    // Past the TTL it refetches.
+    await fetchCfsOpenManifest(url, 1_000 + 120_000);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+});
+
+/**
+ * The profile-photo field accepts a URL **or** prose ("use my LinkedIn photo"),
+ * so it cannot be validated as a URL. It is still untrusted text an organiser
+ * will read and may click.
+ */
+describe('CFS profile photo', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
+    lang: 'es',
+    page_path: '/call-for-speakers',
+    website: '',
+    ...over,
+  });
+
+  let photoIp = 200;
+  const ctx = (body: unknown) => {
+    photoIp += 1;
+    return {
+      request: new Request('https://pereiratechtalks.org/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: 'https://pereiratechtalks.org',
+          'CF-Connecting-IP': `192.0.2.${photoIp % 250}`,
+        },
+        body: JSON.stringify(body),
+      }),
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const stubOk = () => {
+    const fetchMock = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      )
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  const photoValue = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    const init = call?.[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content[CFS_Q.PROFILE_PHOTO];
+  };
+
+  it('carries a photo URL through unchanged', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'https://example.com/grace.jpg' }))
+    );
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('https://example.com/grace.jpg');
+  });
+
+  it('carries prose through unchanged — the field is not a URL field', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'usa mi foto de LinkedIn' }))
+    );
+    expect(photoValue(fetchMock)).toBe('usa mi foto de LinkedIn');
+  });
+
+  it('sends an empty string when the speaker left it blank', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('');
+  });
+
+  it('drops a javascript: or data: value rather than storing it', async () => {
+    // An organiser reads this in Slack and may click it.
+    for (const hostile of [
+      'javascript:alert(1)',
+      'data:text/html;base64,PHNjcmlwdD4=',
+      '  JavaScript:alert(1)',
+    ]) {
+      const fetchMock = stubOk();
+      await onRequestPost(ctx(cfsBody({ profilePhoto: hostile })));
+      expect(photoValue(fetchMock)).toBe('');
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('caps an over-long value', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ profilePhoto: `https://e.com/${'x'.repeat(500)}` }))
+    );
+    expect(photoValue(fetchMock).length).toBeLessThanOrEqual(300);
+  });
+
+  it('never blocks a submission over the photo field', async () => {
+    // It is optional and cosmetic; a bad value must cost nobody their proposal.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ profilePhoto: 'javascript:alert(1)' }))
+    );
+    expect(res.status).toBe(200);
+    expect(photoValue(fetchMock)).toBe('');
+  });
+});
+
+/**
+ * The slides link is the field reviewers most want filled: the deck shows the
+ * narrative. It is optional, may point at an unfinished document, and a
+ * reviewer will click it.
+ */
+describe('CFS slides link', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    // Required since the branch audit made the deck link mandatory.
+    slidesUrl: 'https://slides.example.com/grace/compilers',
+    lang: 'es',
+    page_path: '/call-for-speakers',
+    website: '',
+    ...over,
+  });
+
+  let slidesIp = 40;
+  const ctx = (body: unknown) => {
+    slidesIp += 1;
+    return {
+      request: new Request('https://pereiratechtalks.org/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Origin: 'https://pereiratechtalks.org',
+          'CF-Connecting-IP': `203.0.114.${slidesIp % 250}`,
+        },
+        body: JSON.stringify(body),
+      }),
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const stubOk = () => {
+    const fetchMock = vi.fn(() =>
+      Promise.resolve(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      )
+    );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  const slidesValue = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const call = fetchMock.mock.calls.find((c) =>
+      String(c[0]).includes('api.dailybot.com')
+    );
+    const init = call?.[1] as RequestInit;
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content[CFS_Q.SLIDES];
+  };
+
+  it('carries the deck link through unchanged', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'https://slides.example.com/grace/compilers' }))
+    );
+    expect(res.status).toBe(200);
+    expect(slidesValue(fetchMock)).toBe(
+      'https://slides.example.com/grace/compilers'
+    );
+  });
+
+  it('accepts a link to a deck that does not exist yet', async () => {
+    // The whole point: reviewers want to see the narrative early enough to
+    // suggest changes, so an empty doc is a valid answer.
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx({
+        ...cfsBody(),
+        slidesUrl: 'https://docs.example.com/d/empty-draft',
+      })
+    );
+    expect(slidesValue(fetchMock)).toBe(
+      'https://docs.example.com/d/empty-draft'
+    );
+  });
+
+  it('refuses a proposal with no slides link', async () => {
+    // The field became required in the branch audit. Enforced on the server as
+    // well as in the form, because a direct POST never runs the form.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx({ ...cfsBody(), slidesUrl: '' }));
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ ok: false });
+    // Nothing reached Dailybot.
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('refuses a javascript: or data: value rather than storing it', async () => {
+    // `sanitiseClickableText` empties any non-http(s) scheme, and an empty
+    // required field is a rejection. The hostile value never reaches Dailybot
+    // and the speaker is told, instead of the link vanishing in silence.
+    for (const hostile of ['javascript:alert(1)', 'data:text/html,x']) {
+      const fetchMock = stubOk();
+      const res = await onRequestPost(ctx(cfsBody({ slidesUrl: hostile })));
+      expect(res.status).toBe(400);
+      expect(fetchMock).not.toHaveBeenCalled();
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('refuses a value that is not a URL at all', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'todavía no las tengo' }))
+    );
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ error: 'slides_url_invalid' });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('caps an over-long value', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ slidesUrl: `https://e.com/${'x'.repeat(500)}` }))
+    );
+    expect(slidesValue(fetchMock).length).toBeLessThanOrEqual(300);
+  });
+
+  it('accepts http as well as https', async () => {
+    // An old deck on a plain-http host is still a deck. The rule is the
+    // scheme, not the certificate.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ slidesUrl: 'http://slides.example.com/old-deck' }))
+    );
+    expect(res.status).toBe(200);
+    expect(slidesValue(fetchMock)).toBe('http://slides.example.com/old-deck');
   });
 });

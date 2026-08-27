@@ -6,7 +6,10 @@
     "description": "Read-only JSON endpoints exposed by pereiratechtalks.org for agent discovery. Pereira Tech Talks v3.0.0 is a static community website; the API surface covers blog posts, series, meetups, events, Pereira Tech Days, speakers, talks, sponsors, contributors, and channels metadata, plus the language-sharded search index."
   },
   "servers": [
-    { "url": "https://pereiratechtalks.org", "description": "Production" }
+    {
+      "url": "https://pereiratechtalks.org",
+      "description": "Production"
+    }
   ],
   "paths": {
     "/api/posts.json": {
@@ -23,13 +26,36 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "slug": { "type": "string" },
-                      "title": { "type": "string" },
-                      "description": { "type": "string" },
-                      "pubDate": { "type": "string", "format": "date-time" },
-                      "url": { "type": "string", "format": "uri" },
-                      "lang": { "type": "string", "enum": ["en", "es"] },
-                      "tags": { "type": "array", "items": { "type": "string" } }
+                      "slug": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "pubDate": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "url": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "lang": {
+                        "type": "string",
+                        "enum": [
+                          "en",
+                          "es"
+                        ]
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -44,7 +70,19 @@
         "summary": "English blog post index",
         "description": "Returns only English blog posts for on-site search clients that filter by language.",
         "responses": {
-          "200": { "description": "English posts", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+          "200": {
+            "description": "English posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -53,7 +91,19 @@
         "summary": "Spanish blog post index",
         "description": "Returns only Spanish blog posts for on-site search clients that filter by language.",
         "responses": {
-          "200": { "description": "Spanish posts", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+          "200": {
+            "description": "Spanish posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -61,10 +111,33 @@
       "get": {
         "summary": "Blog series listing",
         "parameters": [
-          { "name": "lang", "in": "path", "required": true, "schema": { "type": "string", "enum": ["en", "es"] } }
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es"
+              ]
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Series list", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+          "200": {
+            "description": "Series list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -72,10 +145,122 @@
       "get": {
         "summary": "Blog post timeline",
         "parameters": [
-          { "name": "lang", "in": "path", "required": true, "schema": { "type": "string", "enum": ["en", "es"] } }
+          {
+            "name": "lang",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "en",
+                "es"
+              ]
+            }
+          }
         ],
         "responses": {
-          "200": { "description": "Timeline entries", "content": { "application/json": { "schema": { "type": "array", "items": { "type": "object" } } } } }
+          "200": {
+            "description": "Timeline entries",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cfs-open.json": {
+      "get": {
+        "summary": "Open Call for Speakers manifest",
+        "description": "The meetups currently accepting talk proposals. Regenerated on every build and containing open calls only — a call that is merely scheduled never appears here, because the intake function validates submissions against this file.",
+        "responses": {
+          "200": {
+            "description": "Open calls",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "version",
+                    "generatedAt",
+                    "calls"
+                  ],
+                  "properties": {
+                    "version": {
+                      "type": "integer"
+                    },
+                    "generatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "calls": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "slug",
+                          "url",
+                          "title",
+                          "date",
+                          "formats"
+                        ],
+                        "properties": {
+                          "slug": {
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "title": {
+                            "type": "object"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "dateConfidence": {
+                            "type": "string",
+                            "enum": [
+                              "confirmed",
+                              "tentative",
+                              "month-only"
+                            ]
+                          },
+                          "formats": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "opensAt": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "closesAt": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "slots": {
+                            "type": "integer"
+                          },
+                          "note": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

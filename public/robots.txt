@@ -5,6 +5,9 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+# Declared as a capability in /.well-known/ai-catalog.json, so it has to be
+# fetchable. Disallowing it while advertising it would be a contradiction.
+Allow: /api/cfs-open.json
 Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
 # Sitemap location
@@ -13,6 +16,9 @@ Sitemap: https://pereiratechtalks.org/sitemap-index.xml
 # LLM guidance files
 # https://pereiratechtalks.org/llms.txt
 # https://pereiratechtalks.org/llms-full.txt
+
+# ARD capability manifest — what this origin offers agents
+# https://pereiratechtalks.org/.well-known/ai-catalog.json
 
 # AI/LLM Crawlers - Explicitly allowed
 User-agent: GPTBot

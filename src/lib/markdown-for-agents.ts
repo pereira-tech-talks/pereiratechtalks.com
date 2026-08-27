@@ -505,6 +505,15 @@ const AGENT_MD_LABELS = {
     gallery: 'Gallery',
     links: 'Links',
     relatedMeetups: 'Related meetups',
+    callForSpeakers: 'Call for speakers',
+    callFormats: 'Accepted formats',
+    callCloses: 'Closes',
+    callSlots: 'Slots available',
+    callState: 'Call status',
+    callFormFields: 'What the form asks',
+    openCalls: 'Open calls',
+    dateConfidence: 'Date precision',
+    lineup: 'Line-up',
     relatedEvents: 'Related events',
     talkHistory: 'Talk history',
     socialLinks: 'Social links',
@@ -551,6 +560,15 @@ const AGENT_MD_LABELS = {
     gallery: 'Galería',
     links: 'Enlaces',
     relatedMeetups: 'Meetups relacionados',
+    callForSpeakers: 'Convocatoria',
+    callFormats: 'Formatos aceptados',
+    callCloses: 'Cierra',
+    callSlots: 'Espacios disponibles',
+    callState: 'Estado de la convocatoria',
+    callFormFields: 'Qué pide el formulario',
+    openCalls: 'Convocatorias abiertas',
+    dateConfidence: 'Precisión de la fecha',
+    lineup: 'Programación',
     relatedEvents: 'Eventos relacionados',
     talkHistory: 'Historial de charlas',
     socialLinks: 'Redes sociales',
@@ -597,6 +615,51 @@ export function mdLabel(lang: string, key: AgentMdLabelKey): string {
 }
 
 /**
+ * The open-calls block, shared by `/meetups.md` and `/call-for-speakers.md` in
+ * both languages.
+ *
+ * This is the single most valuable thing these twins can carry: an assistant
+ * asked *"which Pereira Tech Talks meetups are accepting talk proposals, and
+ * what formats?"* answers it from one fetch, without crawling every meetup page.
+ */
+export function buildOpenCallsSection(
+  calls: Array<{
+    slug: string;
+    title: string;
+    dateLabel: string;
+    formats: string[];
+    closesAt?: string;
+    slots?: number;
+    /** The call's own bilingual note, already resolved for this language. */
+    note?: string;
+    /** Localized "tentative date" marker, when the call's date can still move. */
+    tentativeLabel?: string;
+  }>,
+  lang: string
+): GenericMarkdownSection | null {
+  if (calls.length === 0) return null;
+  const L = (key: AgentMdLabelKey) => mdLabel(lang, key);
+  const lines: string[] = [];
+  for (const call of calls) {
+    lines.push(
+      entityLine(
+        call.title,
+        mdHref(lang, `meetups/${call.slug}`),
+        call.dateLabel,
+        call.tentativeLabel ?? '',
+        `${L('callFormats')}: ${call.formats.join(', ')}`,
+        call.closesAt ? `${L('callCloses')}: ${call.closesAt}` : '',
+        typeof call.slots === 'number' ? `${L('callSlots')}: ${call.slots}` : ''
+      )
+    );
+    // The note is the organiser's own sentence about the month — it says things
+    // the structured fields cannot, so it must not be dropped.
+    if (call.note) lines.push(`  ${call.note}`);
+  }
+  return { heading: L('openCalls'), lines };
+}
+
+/**
  * Meetup detail — `/meetups/{slug}.md`.
  *
  * Pure: takes the resolved data from `resolveMeetupDetail` and returns the
@@ -612,16 +675,22 @@ export function serializeMeetupDetailToMarkdown(
   const prefix = buildUrlPrefix(lang);
 
   const metadata: Array<[string, string]> = [
+    // `date` stays machine-readable, at the precision the community actually
+    // has: `YYYY-MM` for a month-only meetup, so the twin never claims a day
+    // the community has not fixed. The prose label lives on the page.
     [L('date'), data.date],
+    [L('dateConfidence'), data.dateConfidenceLabel],
     [L('mode'), data.mode],
-    [
-      L('venue'),
-      [data.venue.name, data.venue.city, data.venue.country]
-        .filter(Boolean)
-        .join(', '),
-    ],
+    // `venueLabel` is localized by the resolver and always present — it carries
+    // the "venue to be confirmed" text for a meetup programmed before a room is
+    // booked, so the twin never emits an empty value.
+    [L('venue'), data.venueLabel],
     [L('status'), data.status],
+    [L('lineup'), data.lineupLabel],
   ];
+  if (data.callForSpeakers) {
+    metadata.push([L('callState'), data.callForSpeakers.stateLabel]);
+  }
   for (const link of data.links) metadata.push([link.label, link.url]);
 
   const sections: GenericMarkdownSection[] = [];
@@ -631,6 +700,61 @@ export function serializeMeetupDetailToMarkdown(
       heading: L('hero'),
       lines: [imageLine(data.hero.alt, data.hero.src)],
     });
+  }
+
+  /*
+    An agent asked "which Pereira meetups accept lightning talks, and until
+    when?" must be able to answer from this twin alone. Emitted for a closed
+    call too — silence would read as "no call ever existed".
+  */
+  // The page tells a reader the programme is not announced yet and points at
+  // the call. A twin that omitted that would be a summary of its page.
+  if (data.lineupNotice) {
+    sections.push({
+      heading: data.lineupNotice.heading,
+      lines: [data.lineupNotice.body],
+    });
+  }
+
+  if (data.callForSpeakers) {
+    const call = data.callForSpeakers;
+    const lines: string[] = [call.heading, '', call.body, ''];
+    lines.push(`${L('callState')}: ${call.stateLabel}`);
+    if (call.formats.length > 0) {
+      lines.push(`${call.formatsLabel}: ${call.formats.join(', ')}`);
+      lines.push(`${L('callFormats')}: ${call.formats.join(', ')}`);
+    }
+    if (call.deadlineLine) lines.push(call.deadlineLine);
+    if (call.closesAt) lines.push(`${L('callCloses')}: ${call.closesAt}`);
+    if (call.slotsLine) lines.push(call.slotsLine);
+    if (typeof call.slots === 'number') {
+      lines.push(`${L('callSlots')}: ${call.slots}`);
+    }
+    if (call.slidesGuidance && call.slidesGuidance.length > 0) {
+      const [title, ...rest] = call.slidesGuidance;
+      lines.push('');
+      lines.push(`### ${title}`);
+      lines.push('');
+      for (const paragraph of rest) {
+        lines.push(paragraph);
+        lines.push('');
+      }
+    }
+    if (call.isOpen) lines.push(linkLine(L('callForSpeakers'), call.url));
+    if (call.formFields && call.formFields.length > 0) {
+      // Headed, not bare. An agent reading the meetup twin met an unlabelled
+      // list of thirteen strings straight after a link and had no way to know
+      // it was the form's fields. The global CFS twin already heads its copy.
+      lines.push('');
+      lines.push(`### ${L('callFormFields')}`);
+      lines.push('');
+      for (const field of call.formFields) lines.push(`- ${field}`);
+    }
+    if (call.note) {
+      lines.push('');
+      lines.push(call.note);
+    }
+    sections.push({ heading: L('callForSpeakers'), lines });
   }
 
   if (data.talks.length > 0) {
@@ -691,16 +815,20 @@ export function serializeMeetupDetailToMarkdown(
     });
   }
 
-  if (data.venue.mapUrl) {
-    sections.push({
-      heading: L('venue'),
-      lines: [
-        `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
-        '',
-        linkLine('Google Maps', data.venue.mapUrl),
-      ],
-    });
-  }
+  // Emitted unconditionally: `scripts/lib/md-completeness.mjs` requires a Venue
+  // section on every `meetup-detail` twin (unlike Talks, which is probed). A
+  // meetup with no venue yet says so rather than dropping the section, which
+  // would leave a reader unable to tell "not decided" from "the twin forgot".
+  sections.push({
+    heading: L('venue'),
+    lines: data.venue?.mapUrl
+      ? [
+          `${data.venue.name}, ${data.venue.city}, ${data.venue.country}`,
+          '',
+          linkLine('Google Maps', data.venue.mapUrl),
+        ]
+      : [data.venueLabel],
+  });
 
   if (data.gallery.length > 0) {
     sections.push({

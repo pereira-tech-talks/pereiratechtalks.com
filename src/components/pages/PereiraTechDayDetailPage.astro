@@ -696,9 +696,15 @@ const decorativeBgs = postponed ? {} : sectionBackgrounds;
         <section class="bg-[var(--ptt-bg)] py-[var(--ptd-section-pad)]">
           <div class="main-container">
             <h2 class="text-3xl font-bold tracking-tight text-[var(--ptt-text)]">{t.talks}</h2>
+            {/*
+              `min-w-0` on the cell: a grid item defaults to `min-width: auto`,
+              so an unbreakable token inside the card -- a long talk title, a
+              URL -- widens the whole track and pushes the page sideways. This
+              grid was overflowing by 56px at 280px and 16px at 320px.
+            */}
             <ul class="mt-8 grid gap-6 sm:grid-cols-2">
               {talks.map((talk) => (
-                <li>
+                <li class="min-w-0">
                   <TalkCard
                     talk={talk}
                     lang={lang}

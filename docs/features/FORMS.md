@@ -18,7 +18,8 @@ Canonical UUIDs and choice lookups live in `functions/api/_dailybot.ts`.
 | Form | UI | Route | `_form` | Dailybot form |
 |------|----|-------|---------|---------------|
 | Contact | `ContactForm.svelte` | `/contact`, `/en/contact` | `contact` | PTT Contact |
-| Call for Speakers | `SpeakersApplicationForm.svelte` | `/call-for-speakers` | `cfs` | PTT Call for Speakers |
+| Call for Speakers (global) | `SpeakersApplicationForm.svelte` (`mode="global"`) | `/call-for-speakers` | `cfs` | PTT Call for Speakers |
+| Call for Speakers (per meetup) | `SpeakersApplicationForm.svelte` (`mode="meetup"`) | `/meetups/{slug}#call-for-speakers` | `cfs` | PTT Call for Speakers |
 | Speaker School | `SpeakerSchoolForm.svelte` | `/verticals/speaker-school` | `speaker-school` | PTT Speaker School |
 | Sponsors | `SponsorInquiryForm.svelte` | `/sponsor-us` | `sponsor` | PTT Sponsors |
 | Community calendar | `CalendarIntakeForm.svelte` | `/calendar#calendar-intake` | `calendar` | PTT Community Calendar |
@@ -62,6 +63,15 @@ secrets + optional labeled smokes:
 ```
 
 - `_form`: `contact` \| `cfs` \| `speaker-school` \| `sponsor` \| `calendar` \| `conduct`
+- `slidesUrl` (**required**, `cfs` only): link to the deck, or to where it will
+  be published. Capped at 300 chars; must be an `http(s)` URL — a non-`http(s)`
+  scheme is dropped by `sanitiseClickableText` and then rejected as empty
+- `profilePhoto` (optional, `cfs` only): a photo URL **or** a note like "use my
+  LinkedIn photo". Capped at 300 chars; a non-`http(s)` URI scheme is dropped
+- `meetupSlug` (optional, `cfs` only): the meetup a proposal targets. Sent by the
+  meetup-scoped form; omitted from the global page. The server maps it to the
+  canonical `https://pereiratechtalks.org/meetups/{slug}/` and sends `''` when
+  absent
 - Legacy without `_form`: `reason`/`topic` maps `tech-talk`→`cfs`, `sponsorship`→`sponsor`, `conduct`→`conduct`, else→`contact`
 - Honeypot `website` must be empty (fake `200` if filled; never forwarded)
 - Dailybot POST: `https://api.dailybot.com/v1/forms/{uuid}/responses/` with `{ content, automation: true }`
@@ -96,6 +106,131 @@ Full constants: `CONTACT_Q`, `CFS_Q`, `SPEAKER_SCHOOL_Q`, `SPONSORS_Q`,
 
 Every form includes `lang` (Spanish / English) and `page_path` (normalized
 pathname metadata).
+
+### Call for Speakers — the `Meetup (URL)` question
+
+`CFS_Q.MEETUP` = `00969219-78f1-442f-a12a-2fa890ab9002` — an **optional** short
+text at index 4 (right after `Format`, so the Slack report reads "which meetup /
+which format" together). It carries the canonical meetup URL, or `''` for a
+proposal submitted from the global `/call-for-speakers` page.
+
+Deliberately **not** a multiple choice. This org's MC values equal their labels,
+so a per-meetup choice list would need the remote form edited every time a meetup
+is programmed, and any drift would fail real submissions with
+`["response is not valid"]`. A URL is stable and clickable in Slack.
+
+Verified live (2026-08): an optional text question accepts `''` — same shape
+`CFS_Q.NOTES` already ships.
+
+### Call for Speakers — the `Slides` question
+
+`CFS_Q.SLIDES` = `1e9d72d9-d8d8-4143-862e-cbe8d14f6cc1` — a short text at index
+7, next to `Abstract` and `Takeaways` because it is talk material, not contact
+detail.
+
+**Required since 2026-08** (`PLAN_branch_audit_and_pr` Task 4). It is the field
+reviewers most want filled: the deck shows the narrative, which is what
+separates a good short talk from a list of bullet points.
+
+Requiring it asks for something many speakers do not have yet — the talk is an
+idea, the deck comes later — so **the copy carries the weight, not the schema**.
+The help text says plainly that a draft, an outline, or even a previous deck all
+count, and so does the link to where it *will* be published. Keep it that way:
+tightening this field into "a finished deck" would cost proposals.
+
+**Validated as an `http(s)` URL, not merely non-empty.** `new URL()` accepts
+`javascript:alert(1)`, so the scheme check is the point rather than a formality.
+The rule is stated twice — `isHttpUrl` in `src/lib/contact-form.ts` and again in
+`functions/api/contact.ts`, because the Functions bundle cannot resolve `@/` —
+and a lockstep test in `tests/unit/functions/dailybot.test.ts` pins both to one
+table of cases.
+
+Enforced on the **server** as well as in the form. A client-side-only
+requirement is not a requirement: a direct POST skips it. The server returns
+`400 slides_url_invalid`.
+
+After changing this field — or any field — run the
+[`verify-form-intake`](../../.agents/skills/verify-form-intake/SKILL.md) skill:
+a real browser, a real Pages Function, and every answer read back by question
+UUID. A 200 proves the request was accepted, not that the answers landed where
+they were meant to.
+
+**The remote question stays optional in Dailybot.** Required-flag drift on the
+remote form makes whole submissions fail with `["response is not valid"]` (see
+`all_responses_are_required` below), and our own validation layer is the safer
+place to enforce this. Still capped at 300 and passed through
+`sanitiseClickableText` — a reviewer clicks this link.
+
+### Call for Speakers — the `Profile photo` question
+
+`CFS_Q.PROFILE_PHOTO` = `34a40932-c9b9-46ab-a189-2bcc39d64e6d` — an **optional**
+short text at index 8, right after `Social / site URL` so the two read together
+in the Slack report.
+
+It deliberately accepts **either a URL or prose** ("use my LinkedIn photo"): a
+speaker who has already shared a profile link should not have to go and find an
+image URL. The client renders it as `type="text"`, not `type="url"`, because a
+url input would reject the sentence.
+
+Server-side it is length-capped at 300 and passed through `sanitiseProfilePhoto`,
+which drops the value when it looks like a URI with a scheme other than
+`http`/`https` — an organiser reads and may click this, so a `javascript:` or
+`data:` value is never stored or echoed. Anything without a scheme is kept
+verbatim as prose.
+
+### `GET /api/cfs-open.json` — the open-calls manifest
+
+A build-time JSON endpoint listing the meetups accepting proposals right now,
+derived from `getOpenCallsForSpeakers()` in `src/lib/meetup.ts` (so the
+auto-close rule applies: a call whose meetup date or `closesAt` has passed never
+appears). Public data only; drafts are excluded in production.
+
+```jsonc
+{
+  "version": 1,
+  "generatedAt": "2026-08-27T00:00:00.000Z",
+  "calls": [
+    {
+      "slug": "november-meetup-2026",
+      "url": "https://pereiratechtalks.org/meetups/november-meetup-2026/",
+      "title": { "es": "Meetup de noviembre", "en": "November meetup" },
+      "date": "2026-11-18",
+      "dateConfidence": "confirmed",
+      "formats": ["lightning"],
+      "closesAt": "2026-11-04",
+      "slots": 3
+    }
+  ]
+}
+```
+
+Dates are `YYYY-MM-DD` calendar strings, not ISO instants. `closesAt`, `slots`
+and `note` are omitted when unset, never `null`.
+
+### CFS meetup validation — the failure matrix
+
+`functions/api/contact.ts` resolves a submitted `meetupSlug` against that
+manifest (`functions/_lib/cfs-manifest.ts`) **after** the honeypot and the rate
+limiter, so a bot cannot make the worker fan out.
+
+| Case | Result | Meetup value sent |
+|---|---|---|
+| No `meetupSlug` | proceeds; no manifest fetch | `''` |
+| Slug fails `^[a-z0-9][a-z0-9-]{0,79}$` | proceeds | `''` |
+| Manifest unreachable, timed out or malformed | proceeds | `''` |
+| Slug well-formed but not in the manifest | proceeds | `''` |
+| Slug present, `format` not in that meetup's `formats` | **400 `format_not_allowed_for_meetup`** | — |
+| Slug present, format accepted | proceeds | canonical URL |
+
+**The asymmetry is deliberate.** Availability failures are ours and must never
+cost a speaker their proposal — Dailybot is the system of record and a human
+still sees the submission. A format outside the meetup's allowed set cannot be
+produced by the real UI (the control is constrained client-side), so it is
+tampering or a bug, and it is refused.
+
+The manifest URL is built from `request.url`, never from request-body content,
+so no caller can redirect the fetch. It is `AbortController`-bounded at 3 s and
+cached in an isolate-local variable for 60 s.
 
 ## Anti-spam & privacy
 

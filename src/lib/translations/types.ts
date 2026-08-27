@@ -159,6 +159,31 @@ export interface SiteTranslations {
     calendarEyebrow: string;
     archiveEyebrow: string;
     breadcrumbHome: string;
+    /** The forward-looking programming section above the archive. */
+    programming: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      emptyTitle: string;
+      emptyBody: string;
+      emptyCta: string;
+      /** `aria-label` for the programming rail. */
+      railLabel: string;
+      card: {
+        chipTentative: string;
+        chipCallOpen: string;
+        chipLineupOpen: string;
+        venueTbc: string;
+        cta: string;
+        /** Accessible name for the CTA — placeholder: {meetup} */
+        ctaAria: string;
+        /** Placeholder: {n} */
+        slots: string;
+        slotsOne: string;
+        /** Placeholder: {date} */
+        closesOn: string;
+      };
+    };
   };
 
   meetupDetail: {
@@ -180,6 +205,41 @@ export interface SiteTranslations {
     statusCancelled: string;
     breadcrumbHome: string;
     breadcrumbMeetups: string;
+    /** States a meetup can be in before its programme is decided. */
+    planning: {
+      chipTentative: string;
+      chipTentativeAria: string;
+      chipMonthOnly: string;
+      chipMonthOnlyAria: string;
+      venueTbc: string;
+      /** Shown in place of a venue when the meetup happens online. */
+      modeVirtual: string;
+      lineupOpenTitle: string;
+      lineupOpenBody: string;
+      lineupPartialBody: string;
+      heroCta: string;
+      /** Accessible name for the date tile — placeholder: {date} */
+      dateTileAria: string;
+    };
+    /** The per-meetup call for speakers panel. */
+    cfs: {
+      eyebrow: string;
+      titleOpen: string;
+      introOpen: string;
+      formatsLabel: string;
+      formatsSingleLabel: string;
+      /** Placeholder: {date} */
+      deadline: string;
+      /** Placeholder: {n} */
+      slots: string;
+      slotsOne: string;
+      titleScheduled: string;
+      /** Placeholder: {date} */
+      bodyScheduled: string;
+      titleClosed: string;
+      bodyClosed: string;
+      globalCta: string;
+    };
   };
 
   speakerDetail: {
@@ -268,6 +328,19 @@ export interface SiteTranslations {
     takeawaysPlaceholder: string;
     socialLabel: string;
     socialPlaceholder: string;
+    /**
+     * Optional link to the deck — reviewers read it to assess the talk and to
+     * suggest changes while there is still time to make them.
+     */
+    slidesUrlLabel: string;
+    slidesUrlPlaceholder: string;
+    slidesUrlHelp: string;
+    /** Shown when the slides link is missing or is not an http(s) URL. */
+    slidesUrlInvalid: string;
+    /** Optional photo: accepts a URL *or* a note like "use my LinkedIn photo". */
+    profilePhotoLabel: string;
+    profilePhotoPlaceholder: string;
+    profilePhotoHelp: string;
     firstTimeLabel: string;
     speakerSchoolLabel: string;
     notesLabel: string;
@@ -276,6 +349,32 @@ export interface SiteTranslations {
     successTitle: string;
     successMessage: string;
     defaultSubject: string;
+    /**
+     * Guidance on slides for a short talk. Rendered on the global page and in
+     * every meetup's call panel from this one source, so the two cannot drift.
+     */
+    slides: {
+      title: string;
+      count: string;
+      demos: string;
+    };
+    /** Meetup-scoped submissions and the optional selector on the global page. */
+    meetup: {
+      contextLabel: string;
+      /** Placeholders: {meetup}, {date} */
+      contextAria: string;
+      selectLabel: string;
+      selectHelp: string;
+      selectNone: string;
+      /** Placeholders: {date}, {meetup} */
+      selectOption: string;
+      /** Placeholder: {formats} */
+      formatsNarrowed: string;
+      formatCleared: string;
+      formatNotAllowed: string;
+      /** Placeholder: {format} */
+      singleFormatNote: string;
+    };
   };
 
   sponsorForm: {
@@ -335,6 +434,29 @@ export interface SiteTranslations {
     formatsEyebrow: string;
     processEyebrow: string;
     formEyebrow: string;
+    /** Meetups accepting proposals right now. */
+    openCalls: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      formatsLabel: string;
+      /** Placeholder: {date} */
+      closesOn: string;
+      /** Placeholder: {n} */
+      slots: string;
+      slotsOne: string;
+      /** Badge on a call that has not opened yet — placeholder: {date} */
+      opensOn: string;
+      rowCta: string;
+      /** Row CTA for a call that is not open yet. */
+      rowCtaScheduled: string;
+      /** Accessible name — placeholder: {date} */
+      rowCtaAria: string;
+      viewMeetup: string;
+      emptyTitle: string;
+      emptyBody: string;
+      heroCta: string;
+    };
   };
 
   sponsorUsPage: {

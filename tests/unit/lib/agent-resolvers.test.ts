@@ -278,3 +278,112 @@ describe('resolveSpeakerDetail', () => {
     expect(data.photo.alt).toBe('Portrait of Ana Lopez');
   });
 });
+
+/**
+ * A programmed meetup — no venue, no talks, a call for speakers — has to reach
+ * the twin as completely as an archive one, and in one language.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 9.
+ */
+describe('resolveMeetupDetail — programmed meetups', () => {
+  const programmed = (over: Record<string, unknown> = {}) =>
+    ({
+      id: 'november-meetup-2026',
+      body: 'Cuerpo.',
+      data: {
+        title: { en: 'November meetup', es: 'Meetup de noviembre' },
+        description: { en: 'A month.', es: 'Un mes.' },
+        date: day('2099-11-18'),
+        mode: 'in-person',
+        status: 'announced',
+        dateConfidence: 'confirmed',
+        verticals: [],
+        talks: [],
+        speakers: [],
+        sponsors: [],
+        gallery: [],
+        ...over,
+      },
+    }) as never;
+
+  it('labels a missing venue instead of leaving it empty', async () => {
+    const es = await resolveMeetupDetail(programmed(), 'es');
+    const en = await resolveMeetupDetail(programmed(), 'en');
+    expect(es.venue).toBeUndefined();
+    expect(es.venueLabel).toBe('Sede por confirmar');
+    expect(en.venueLabel).toBe('Venue to be confirmed');
+  });
+
+  it('carries the venue as before when one exists', async () => {
+    const data = await resolveMeetupDetail(
+      programmed({
+        venue: { name: 'UTP', city: 'Pereira', country: 'Colombia' },
+      }),
+      'en'
+    );
+    expect(data.venue?.mapUrl).toContain('UTP');
+    expect(data.venueLabel).toBe('UTP, Pereira, Colombia');
+  });
+
+  it('never prints a day for a month-only meetup', async () => {
+    const data = await resolveMeetupDetail(
+      programmed({ dateConfidence: 'month-only' }),
+      'en'
+    );
+    expect(data.dateLabel).toBe('November 2099');
+    expect(data.dateLabel).not.toContain('18');
+    expect(data.dateConfidenceLabel).toBe('month only');
+  });
+
+  it('localizes the date-confidence and line-up values, not just the keys', async () => {
+    const es = await resolveMeetupDetail(
+      programmed({ dateConfidence: 'tentative' }),
+      'es'
+    );
+    expect(es.dateConfidenceLabel).toBe('tentativa');
+    expect(es.lineupLabel).toBe('abierta');
+  });
+
+  it('omits the call block entirely when the meetup has none', async () => {
+    const data = await resolveMeetupDetail(programmed(), 'en');
+    expect(data.callForSpeakers).toBeUndefined();
+  });
+
+  it('resolves an open call with human format labels and an anchor URL', async () => {
+    const data = await resolveMeetupDetail(
+      programmed({
+        callForSpeakers: {
+          status: 'open',
+          formats: ['lightning', 'workshop'],
+          closesAt: day('2099-11-04'),
+          slots: 3,
+        },
+      }),
+      'en'
+    );
+    expect(data.callForSpeakers?.isOpen).toBe(true);
+    expect(data.callForSpeakers?.stateLabel).toBe('open');
+    expect(data.callForSpeakers?.formats).toEqual([
+      'Lightning (3–5 min)',
+      'Workshop (90 min)',
+    ]);
+    expect(data.callForSpeakers?.closesAt).toBe('2099-11-04');
+    expect(data.callForSpeakers?.slots).toBe(3);
+    expect(data.callForSpeakers?.url).toContain('/meetups/');
+    expect(data.callForSpeakers?.url).toContain('#call-for-speakers');
+  });
+
+  it('reports a stale open call on a past meetup as closed', async () => {
+    // The auto-close rule, observed through the twin: the frontmatter still
+    // says open and the twin must not invite a proposal to a past event.
+    const data = await resolveMeetupDetail(
+      programmed({
+        date: day('2020-01-10'),
+        callForSpeakers: { status: 'open', formats: ['lightning'] },
+      }),
+      'en'
+    );
+    expect(data.callForSpeakers?.isOpen).toBe(false);
+    expect(data.callForSpeakers?.stateLabel).toBe('closed');
+  });
+});

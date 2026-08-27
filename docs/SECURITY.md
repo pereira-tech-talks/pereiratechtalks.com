@@ -245,7 +245,43 @@ The site has minimal API routes:
 | `/api/posts-en.json` | Blog search index (EN shard) | Public, cached |
 | `/api/posts-es.json` | Blog search index (ES shard) | Public, cached |
 | `/api/posts.json` | Blog search index (compatibility) | Public, cached |
+| `/api/cfs-open.json` | Meetups accepting talk proposals | Public, cached — see below |
 | `/rss.xml` | RSS feed | Public |
+
+### `/api/cfs-open.json` and the CFS meetup tag
+
+`/api/cfs-open.json` is a **build-time** artifact listing the meetups whose call
+for speakers is open: slug, canonical URL, bilingual title, date, accepted
+formats, deadline and remaining slots. Every field is already public on the
+meetup's own page. It carries **no** organizer contacts, no internal notes and
+no draft entries (`getMeetups()` filters drafts in production).
+
+The Call for Speakers form may send an optional `meetupSlug`. It is
+client-supplied, so `functions/api/contact.ts` treats it as untrusted:
+
+1. `sanitiseText` strips control characters and caps it at 80 characters.
+2. It must match `^[a-z0-9][a-z0-9-]{0,79}$` before **any** use, logging
+   included.
+3. It is resolved against the manifest, which is fetched **same-origin from
+   `request.url`** — never from anything in the request body, so no caller can
+   redirect the fetch — with a 3-second `AbortController` timeout and a
+   60-second isolate-local cache.
+4. The resolution runs **after** the honeypot and the rate limiter, so an
+   unauthenticated flood cannot make the worker fan out.
+
+**The failure policy is deliberately asymmetric** (full matrix in
+[Forms](./features/FORMS.md)):
+
+- **Fail open on availability.** An unknown slug, a malformed slug, or an
+  unreachable manifest all submit the proposal *without* the meetup tag. A
+  speaker who wrote an abstract must never lose it to our bookkeeping, and
+  Dailybot remains the system of record.
+- **Fail closed on integrity.** A `format` outside the meetup's accepted set
+  returns `400 format_not_allowed_for_meetup`. The real UI constrains that
+  control, so the value can only come from tampering or a bug.
+
+Warnings logged on this path carry at most a pattern-validated slug — never an
+email, name, talk title or abstract.
 
 ### API Route Best Practices
 

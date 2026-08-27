@@ -31,6 +31,18 @@ export function formatCalendarDate(
   }).format(date);
 }
 
+/**
+ * Month-level label, for a meetup whose day is not fixed yet.
+ *
+ * A one-line wrapper on purpose: it inherits `formatCalendarDate`'s
+ * `timeZone: 'UTC'` guarantee instead of restating it, and it gives the call
+ * sites a name instead of an option object they could each drift from.
+ * See `dateConfidence` in src/content.config.ts.
+ */
+export function formatCalendarMonth(date: Date, lang: Language): string {
+  return formatCalendarDate(date, lang, { year: 'numeric', month: 'long' });
+}
+
 /** `formatToParts` variant for templates that need uppercase month, etc. */
 export function formatCalendarDateParts(
   date: Date,

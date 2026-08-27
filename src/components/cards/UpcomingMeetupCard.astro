@@ -1,0 +1,179 @@
+---
+/**
+ * A meetup that is still being assembled.
+ *
+ * The archive card is built around a flyer, a talk count and a venue. A
+ * programmed meetup has none of those yet, so in that grid it renders as a
+ * stock blog placeholder with an empty body — which reads as broken rather than
+ * as "not designed yet". This card is built around the one thing a programmed
+ * meetup always has: the date.
+ *
+ * When a real flyer exists it is used, and the card converges on the archive
+ * card's look.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+
+import MeetupDateTile from '@/components/meetups/MeetupDateTile.astro';
+import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import {
+  getCallForSpeakersState,
+  getMeetupSlug,
+  resolveMeetupDateAttribute,
+  resolveMeetupDateConfidence,
+  resolveMeetupDateLabel,
+  resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
+} from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  meetup: CollectionEntry<'meetups'>;
+  lang: Language;
+  loading?: 'lazy' | 'eager';
+}
+
+const { meetup, lang, loading = 'lazy' } = Astro.props;
+
+const t = getTranslations(lang).meetupsPage.programming.card;
+const prefix = getUrlPrefix(lang);
+const slug = getMeetupSlug(meetup);
+const url = `${prefix}/meetups/${slug}/`;
+
+const title = tr(meetup.data.title, lang);
+const description = tr(meetup.data.description, lang);
+
+const dateConfidence = resolveMeetupDateConfidence(meetup);
+const dateLabel = resolveMeetupDateLabel(meetup, lang);
+const dateAttribute = resolveMeetupDateAttribute(meetup);
+
+const lineup = resolveMeetupLineup(meetup);
+const callState = getCallForSpeakersState(meetup);
+const call = meetup.data.callForSpeakers;
+
+// No stock placeholder here, ever. A missing flyer gets the date tile.
+const heroSrc =
+  (lang === 'en' && meetup.data.hero?.srcEn) ||
+  meetup.data.hero?.src ||
+  meetup.data.heroImage;
+const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
+
+const venueLine = meetup.data.venue
+  ? [meetup.data.venue.name, meetup.data.venue.city].filter(Boolean).join(' · ')
+  : resolveMeetupPlaceFallback(meetup, lang);
+
+const chips = [
+  dateConfidence === 'tentative' ? t.chipTentative : null,
+  callState === 'open' ? t.chipCallOpen : null,
+  lineup === 'open' ? t.chipLineupOpen : null,
+].filter((chip): chip is string => Boolean(chip));
+
+const slotsLine =
+  typeof call?.slots === 'number' && callState === 'open'
+    ? call.slots === 1
+      ? t.slotsOne
+      : t.slots.replace('{n}', String(call.slots))
+    : '';
+---
+
+<article
+  class="group flex h-full min-w-0 w-full flex-col overflow-hidden rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border transition hover:shadow-lg hover:ring-ptt-primary/30"
+>
+  <a
+    href={url}
+    class="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+    data-umami-event="meetup_card_click"
+    data-umami-event-slug={slug}
+    data-umami-event-status="upcoming"
+  >
+    {
+      heroSrc ? (
+        <div class="relative aspect-[16/9] overflow-hidden bg-ptt-primary-soft">
+          <img
+            decoding="async"
+            src={heroSrc}
+            alt={heroAlt}
+            width="640"
+            height="360"
+            loading={loading}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+      ) : (
+        <MeetupDateTile
+          date={meetup.data.date}
+          dateConfidence={dateConfidence}
+          lang={lang}
+          label={dateLabel}
+        />
+      )
+    }
+  </a>
+
+  <div class="flex min-w-0 flex-1 flex-col gap-3 p-5">
+    {
+      chips.length > 0 && (
+        <ul class="flex list-none flex-wrap gap-1.5">
+          {chips.map((chip) => (
+            <li class="rounded-full bg-ptt-primary-soft px-2.5 py-1 text-xs font-semibold text-ptt-primary">
+              {chip}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <time
+      datetime={dateAttribute}
+      class="min-w-0 break-words text-xs font-semibold uppercase tracking-wider text-ptt-primary dark:text-ptt-primary-dark"
+    >
+      {dateLabel}
+    </time>
+
+    <h3 class="text-lg font-semibold text-ptt line-clamp-2 break-words">
+      <a
+        href={url}
+        class="hover:text-ptt-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+      >
+        {title}
+      </a>
+    </h3>
+
+    {
+      description && (
+        <p class="text-sm text-ptt-secondary line-clamp-3 break-words">
+          {description}
+        </p>
+      )
+    }
+
+    <p class="text-xs text-ptt-secondary">{venueLine}</p>
+    {slotsLine && <p class="text-xs text-ptt-secondary">{slotsLine}</p>}
+
+    {
+      callState === 'open' && (
+        <a
+          href={`${url}#call-for-speakers`}
+          aria-label={t.ctaAria.replace('{meetup}', title)}
+          data-umami-event="cfs_open_call_click"
+          data-umami-event-meetup-slug={slug}
+          data-umami-event-source="rail"
+          class="mt-auto inline-flex min-h-[44px] w-fit items-center gap-1.5 pt-2 text-sm font-semibold text-ptt-primary transition-colors hover:text-ptt-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-ptt-primary-dark"
+        >
+          {t.cta}
+          <svg
+            aria-hidden="true"
+            class="h-4 w-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      )
+    }
+  </div>
+</article>

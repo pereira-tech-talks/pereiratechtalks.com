@@ -6,7 +6,7 @@ This document serves as the central reference for all available Skills and Agent
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 13             | 10                 | 1              | 24    |
+| Skills | 13             | 11                 | 1              | 25    |
 | Agents | 0              | 5                  | 1              | 6     |
 | **Total** | **13**      | **15**             | **2**          | **30** |
 
@@ -44,7 +44,7 @@ Everyday development work.
 |---------------|----------|------------------|--------|--------------------------------------------------------------------------|
 | add-blog-post | create   | `/add-blog-post` | sonnet | **Mandatory for new blog posts** — topic mode (writes content) or content mode (scaffolding). |
 | add-slide-deck | create  | `/add-slide-deck` | sonnet | **Mandatory for new slide decks** — internal Reveal.js, external-embed, or external-link. |
-| add-meetup    | create   | `/add-meetup`    | sonnet | **Mandatory for new meetups** — bilingual entries in the `meetups` collection with optional talk/speaker/sponsor references. |
+| add-meetup    | create   | `/add-meetup`    | sonnet | **Mandatory for new meetups** — bilingual entries in the `meetups` collection with optional talk/speaker/sponsor references. Includes **planned mode**: programming a meetup from a date alone (`dateConfidence`, `callForSpeakers`, no venue/hero/line-up). |
 | add-talk      | create   | `/add-talk`      | sonnet | **Mandatory for new talks** — bilingual talk files linked to speakers + meetup/PTD event. |
 | add-event     | create   | `/add-event`     | sonnet | **Mandatory for new events** — workshops, hackathons, conferences, webinars in the `events` collection. |
 | audit-post    | review   | `/audit-post`    | sonnet | Pre-publication audit for blog posts — SEO, AEO, accessibility, images, content quality, i18n parity, and project conventions. |
@@ -53,6 +53,7 @@ Everyday development work.
 | audit-analytics | review | `#audit-analytics` | sonnet | Audit Umami event coverage, first-party proxy wiring, and privacy-safe payloads against `src/lib/analytics.ts` + `docs/ANALYTICS.md`. |
 | audit-language-integrity | review | `/audit-language-integrity` | sonnet | Audit sitewide language integrity — Spanish URLs render Spanish, English URLs English, in HTML **and** in the `.md` twin. Triages the scanner's two confidence tiers and orders the fixes. See [I18N Guide](../../docs/I18N_GUIDE.md). |
 | audit-content-parity | review | `/audit-content-parity` | sonnet | Audit whether the two languages of an entry carry the **same content** — same sources, same structure, same `{en,es}` fields. The sibling question to language integrity: a page can be correct English and still be missing what the Spanish says. Triages six classes and orders the fixes. See [I18N Guide § Content parity](../../docs/I18N_GUIDE.md). |
+| verify-form-intake | verify | `/verify-form-intake` | sonnet | Prove an intake form reaches Dailybot end to end — real browser, real Pages Function (`wrangler pages dev`), every answer read back **by question UUID**, then the test data deleted. Closes the gap between the unit tests (which call the Function directly) and the e2e suites (which intercept the endpoint). Run whenever a form field is added, made required, or remapped. See [Forms](../../docs/features/FORMS.md). |
 | promote-post  | create   | `/promote-post`  | sonnet | Generate social media content for any blog post (Twitter/X, LinkedIn, HN, dev.to, Reddit, Facebook) |
 | write-tests   | tests    | `/write-tests`   | sonnet | Add or expand tests (*.test.ts) - Vitest/Playwright when configured      |
 | refactor-safe | execute  | `/refactor-safe` | sonnet | Safe refactor in bounded scope (1-10 files, no behavior change)          |

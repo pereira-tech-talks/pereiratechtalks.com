@@ -21,11 +21,37 @@ We give priority to:
 - **Speakers from outside the dominant Pereira tech bubble.** Different stacks, industries, regions, identities.
 - **Talks paired with a working repo, demo, or recap post.** Practice + theory > theory alone.
 
+## Per-meetup calls
+
+The call above is **always open** and always will be. On top of it, an
+individual meetup can run its **own** call with a restricted format set — some
+months we can only stage lightning talks, some months a single workshop fills
+the evening.
+
+When a meetup has an open call:
+
+- It appears under **Convocatorias abiertas / Open calls** on
+  [`/call-for-speakers`](https://pereiratechtalks.org/call-for-speakers), with
+  the formats that meetup accepts, its deadline and any remaining slots.
+- Its own page carries the form at
+  `/meetups/{slug}#call-for-speakers`, offering only those formats.
+- The proposal reaches the organisers **tagged with that meetup**.
+
+A per-meetup call **auto-closes** once the meetup date or its deadline passes,
+so a page never invites a proposal to an event that has already happened.
+
+The optional "which meetup?" selector on the global form means you never have
+to choose: a proposal with no target month is still a good proposal, and we will
+consider it for the next date that fits.
+
+Machine-readable list of what is open right now:
+[`/api/cfs-open.json`](https://pereiratechtalks.org/api/cfs-open.json).
+
 ## Formats
 
 | Format | Length | Audience prep | Notes |
 |---|---|---|---|
-| Lightning talk | 5–10 min | None — drop in, drop out | Great for first timers. Often paired in groups of 3. |
+| Lightning talk | 3–5 min | None — drop in, drop out | Great for first timers. Often paired in groups of 3. |
 | Regular talk | 20–30 min + Q&A | A spec sheet sent 7 days prior | Default format. Most monthly meetups have 1–2 of these. |
 | Workshop | 60–90 min | Hands-on prerequisites communicated 7 days prior | Limited seats. Higher coordination cost — we plan workshops 6+ weeks in advance. |
 | Panel | 45 min | Internal prep call | We curate 3–4 panelists. Submit yourself or nominate someone. |

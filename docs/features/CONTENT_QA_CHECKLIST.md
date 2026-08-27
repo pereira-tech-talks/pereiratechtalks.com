@@ -86,3 +86,79 @@ Each has a `:strict` variant that exits non-zero; all four run in CI after the
 build (`.github/workflows/code_check.yml`). `parity:check` is the exception that
 reads `src/content/` rather than `dist/` — parity is a property of the authored
 files, so it can be caught before a build.
+
+## What the gates do not catch
+
+Both of these cost a real plan real time
+(`PLAN_meetup_programming_and_call_for_speakers`, 2026-08). Neither is
+detectable by any of the four gates.
+
+### An empty state passes every gate
+
+A content feature built while its collection is empty will pass `md:check`,
+`lang:check`, `seo:check` and `parity:check` — because the surface it adds does
+not render, so there is nothing for the gates to compare. Four consecutive tasks
+shipped green that way; the first commit of real content produced **ten**
+`md:check` failures at once (a missing line-up notice, missing panel prose, a
+raw enum where the page showed a localized label, and an unreflected form).
+
+**Therefore:** a feature is not verified until its content exists. Seed at least
+one entry per state the feature can be in, rebuild, and re-run the gates *before*
+calling the UI work done. `pnpm run build` page count is a cheap sanity check
+that the entries actually landed.
+
+### Slug language
+
+No gate checks whether a slug is English. `md`, `lang`, `seo` and `parity` all
+pass happily on `src/content/meetups/2026-09-23_meetup-de-septiembre-2026.md`,
+and the rule lives only in `AGENTS.md` (DON'T #21),
+[MEETUPS.md](./MEETUPS.md) and the `/add-meetup` skill.
+
+**Therefore:** check it by eye, or by diff review, on every new content file. The
+slug is the public URL and the cross-collection reference key, so renaming after
+publication breaks live links.
+
+### A green gate is not a correct page
+
+The four gates assert **structure**: a twin exists, a canonical is present, an
+`Event` block is emitted, the two languages carry the same sections. None of
+them reads the page for **truth**.
+
+`PLAN_branch_audit_and_pr` (2026-08) found four real defects behind four green
+gates, on pages `seo:check` had passed 492/492:
+
+- `eventAttendanceMode` was a hardcoded constant, so four **online** meetups
+  announced themselves to search engines as in-person events in Pereira;
+- `startDate` was emitted as UTC midnight, which in UTC−5 renders as the evening
+  **before** — every meetup on the site advertised the wrong day;
+- the agent twins printed "0 charlas" for programmed months while the HTML card
+  hid the count at zero, so page and twin disagreed on the same row.
+
+**Therefore:** on any change that emits structured data or a twin row, read the
+**built output** — parse the JSON-LD out of `dist/`, diff a twin row against the
+card that renders the same data. `seo:check` asks whether an `Event` block
+exists; only you can ask whether it is true.
+
+### A hand-curated audit list rots, and nothing tells you
+
+`scripts/responsive-audit/urls.json` is maintained by hand. Nothing fails when a
+template is missing from it, so its coverage is only as good as the last person
+to remember. When the same plan looked, it held 46 routes and **no
+`meetup-detail` template at all** — the build produces **190** such routes, every
+one audited at zero viewports. Two more of its routes pointed at a post since
+marked `draft: true`: they returned **404**, the capture logged them `ok`, and CI
+passed on them, because **a missing page has no overflow**.
+
+**Therefore:** when a page template ships, add it to `urls.json` *and* to the
+template allowlist inside `tests/e2e/responsive/overflow.spec.ts` — the list is
+only the gate's input, and the allowlist downstream silently drops what it does
+not name. Compare `urls.json` against `pnpm run responsive:inventory` output
+after any routing change.
+
+- [ ] Every new content file's slug is English, in both languages
+- [ ] Every state the feature supports has at least one real entry, and the
+      gates were re-run after it landed
+- [ ] Structured data and twin rows verified against the **built output**, not
+      the template
+- [ ] New page templates added to `urls.json` **and** the `overflow.spec.ts`
+      allowlist

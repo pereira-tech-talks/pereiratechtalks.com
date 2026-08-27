@@ -1,7 +1,11 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 import { getMeetups } from '@/lib/meetup';
-import { getEditionStartDate, getEditions } from '@/lib/pereiraTechDay';
+import {
+  getEditionStartDate,
+  getEditions,
+  isPostponedEdition,
+} from '@/lib/pereiraTechDay';
 import { isSessionSlot } from '@/lib/ptdSchedule';
 import { getTalks } from '@/lib/talk';
 
@@ -42,6 +46,19 @@ export const getSpeakersBySlugs = async (
     .map((slug) => all.find((s) => s.id === slug))
     .filter((s): s is Speaker => Boolean(s));
 };
+
+/**
+ * Whether a speaker belongs in the public directory.
+ *
+ * The page says "N ponentes han subido al escenario desde 2014", so someone
+ * with no talk and no date has not. Today this excludes exactly the two people
+ * who exist only in the postponed Pereira Tech Day schedule.
+ *
+ * Derived, never flagged: linking them to a talk or a meetup — or restoring the
+ * edition — brings them back with nothing to remember to undo.
+ */
+export const hasTakenTheStage = (entry: SpeakerWithTalkStats): boolean =>
+  entry.talkCount > 0 || entry.latestTalkDate !== null;
 
 /**
  * Pure sort for directory ordering:
@@ -129,6 +146,13 @@ export const getSpeakersSortedByLatestTalk = async (): Promise<
   }
 
   for (const edition of editions) {
+    // A postponed edition's sessions have not happened. Counting them put three
+    // people at the top of the directory — ahead of everyone who has actually
+    // spoken — on the strength of a date in the future for an event that was
+    // called off. Skipping it is self-correcting: restoring the edition brings
+    // them back automatically, with no flag to remember to remove.
+    if (isPostponedEdition(edition)) continue;
+
     const editionDate = getEditionStartDate(edition);
 
     const touch = (slug: string, countsAsTalk: boolean): void => {

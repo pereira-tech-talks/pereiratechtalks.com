@@ -18,6 +18,7 @@ import type {
   ResolvedSpeakerDetail,
 } from '@/lib/agent-resolvers';
 import {
+  buildOpenCallsSection,
   entityLine,
   imageLine,
   mdHref,
@@ -362,5 +363,165 @@ describe('Pereira Tech Day edition serializer', () => {
 
   it('emits no bare slug rows', () => {
     expect(md).not.toMatch(BARE_SLUG_ROW);
+  });
+});
+
+/**
+ * The twin has to answer "can I still submit a talk to this meetup, and in
+ * what format?" — silence would read as "no call ever existed".
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 9.
+ */
+describe('meetup detail serializer — programming and the call for speakers', () => {
+  const programmed = (over: Record<string, unknown> = {}) => ({
+    ...meetup,
+    talks: [],
+    speakers: [],
+    sponsors: [],
+    gallery: [],
+    hero: undefined,
+    venue: undefined,
+    venueLabel: 'Venue to be confirmed',
+    dateLabel: 'Wednesday, November 18, 2026',
+    dateConfidenceLabel: 'confirmed',
+    lineupLabel: 'open',
+    date: '2026-11-18',
+    ...over,
+  });
+
+  it('always emits the Venue section, with the TBC line when there is none', () => {
+    // md-completeness.mjs requires a Venue section on every meetup twin, and a
+    // reader must be able to tell "not decided" from "the twin forgot".
+    const md = serializeMeetupDetailToMarkdown(programmed(), 'en');
+    expect(md).toContain('## Venue');
+    expect(md).toContain('Venue to be confirmed');
+  });
+
+  it('reports the line-up and date precision as metadata', () => {
+    const md = serializeMeetupDetailToMarkdown(programmed(), 'en');
+    expect(md).toContain('Line-up: open');
+    expect(md).toContain('Date precision: confirmed');
+  });
+
+  it('never emits a day for a month-only meetup', () => {
+    const md = serializeMeetupDetailToMarkdown(
+      programmed({ date: '2026-11', dateConfidenceLabel: 'month only' }),
+      'en'
+    );
+    expect(md).toContain('Date: 2026-11');
+    expect(md).not.toContain('2026-11-18');
+  });
+
+  it('emits no call section at all when the meetup has none', () => {
+    const md = serializeMeetupDetailToMarkdown(programmed(), 'en');
+    expect(md).not.toContain('## Call for speakers');
+    expect(md).not.toContain('Call status');
+  });
+
+  it('emits an open call with its formats, deadline, slots and a link', () => {
+    const md = serializeMeetupDetailToMarkdown(
+      programmed({
+        callForSpeakers: {
+          stateLabel: 'open',
+          isOpen: true,
+          formats: ['Lightning (3–5 min)', 'Workshop (90 min)'],
+          closesAt: '2026-11-04',
+          slots: 3,
+          url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
+        },
+      }),
+      'en'
+    );
+    expect(md).toContain('## Call for speakers');
+    expect(md).toContain('Call status: open');
+    expect(md).toContain(
+      'Accepted formats: Lightning (3–5 min), Workshop (90 min)'
+    );
+    expect(md).toContain('Closes: 2026-11-04');
+    expect(md).toContain('Slots available: 3');
+    expect(md).toContain('#call-for-speakers');
+  });
+
+  it('still reports a closed call, without offering a submission link', () => {
+    const md = serializeMeetupDetailToMarkdown(
+      programmed({
+        callForSpeakers: {
+          stateLabel: 'closed',
+          isOpen: false,
+          formats: ['Lightning (3–5 min)'],
+          url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
+        },
+      }),
+      'en'
+    );
+    expect(md).toContain('Call status: closed');
+    expect(md).not.toContain('#call-for-speakers');
+  });
+
+  it('uses Spanish keys and values on a Spanish page', () => {
+    const md = serializeMeetupDetailToMarkdown(
+      programmed({
+        dateConfidenceLabel: 'tentativa',
+        lineupLabel: 'abierta',
+        venueLabel: 'Sede por confirmar',
+        callForSpeakers: {
+          stateLabel: 'abierta',
+          isOpen: true,
+          formats: ['Lightning (3–5 min)'],
+          url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
+        },
+      }),
+      'es'
+    );
+    expect(md).toContain('## Convocatoria');
+    expect(md).toContain('Estado de la convocatoria: abierta');
+    expect(md).toContain('Precisión de la fecha: tentativa');
+    expect(md).toContain('Programación: abierta');
+    expect(md).toContain('Sede por confirmar');
+    expect(md).not.toContain('Call status');
+  });
+});
+
+describe('buildOpenCallsSection', () => {
+  const call = {
+    slug: 'november-meetup-2026',
+    title: 'November meetup',
+    dateLabel: 'November 18, 2026',
+    formats: ['Lightning (3–5 min)'],
+    closesAt: '2026-11-04',
+    slots: 3,
+  };
+
+  it('is null when nothing is open, so no empty heading is emitted', () => {
+    expect(buildOpenCallsSection([], 'en')).toBeNull();
+  });
+
+  it('renders one row per call, linking to the meetup twin', () => {
+    const section = buildOpenCallsSection([call], 'en');
+    expect(section?.heading).toBe('Open calls');
+    expect(section?.lines[0]).toContain(
+      '[November meetup](/en/meetups/november-meetup-2026.md)'
+    );
+    expect(section?.lines[0]).toContain(
+      'Accepted formats: Lightning (3–5 min)'
+    );
+    expect(section?.lines[0]).toContain('Closes: 2026-11-04');
+    expect(section?.lines[0]).toContain('Slots available: 3');
+  });
+
+  it('localizes its heading and keys', () => {
+    const section = buildOpenCallsSection([call], 'es');
+    expect(section?.heading).toBe('Convocatorias abiertas');
+    expect(section?.lines[0]).toContain('Formatos aceptados');
+    expect(section?.lines[0]).toContain('/meetups/november-meetup-2026.md');
+  });
+
+  it('drops empty detail segments rather than leaving a dangling dash', () => {
+    const section = buildOpenCallsSection(
+      [{ slug: 'x', title: 'X', dateLabel: 'May 2026', formats: ['Panel'] }],
+      'en'
+    );
+    expect(section?.lines[0]).not.toMatch(/—\s*$/);
+    expect(section?.lines[0]).not.toContain('Closes:');
   });
 });

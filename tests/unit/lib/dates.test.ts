@@ -5,6 +5,7 @@ import {
   combineCalendarDateAndTime,
   formatCalendarDate,
   formatCalendarDateLocale,
+  formatCalendarMonth,
   formatInstantInSiteTimezone,
   getCalendarDateString,
   getCalendarYear,
@@ -100,5 +101,28 @@ describe('site timezone scheduling gates', () => {
     const today = '2026-08-07';
     expect(isCalendarDateBeforeToday('2026-08-06', today)).toBe(true);
     expect(isCalendarDateBeforeToday('2026-08-07', today)).toBe(false);
+  });
+});
+
+describe('formatCalendarMonth', () => {
+  it('names the month and year in both languages, never the day', () => {
+    const date = new Date('2026-11-18T00:00:00.000Z');
+    expect(formatCalendarMonth(date, 'en')).toBe('November 2026');
+    expect(formatCalendarMonth(date, 'es').toLowerCase()).toContain(
+      'noviembre'
+    );
+    expect(formatCalendarMonth(date, 'en')).not.toContain('18');
+    expect(formatCalendarMonth(date, 'es')).not.toContain('18');
+  });
+
+  it('inherits the UTC pinning, so a month boundary does not shift', () => {
+    // Stored as midnight UTC; SITE_TIMEZONE is GMT-5. Without the pin this
+    // would report October.
+    expect(
+      formatCalendarMonth(new Date('2026-11-01T00:00:00.000Z'), 'en')
+    ).toBe('November 2026');
+    expect(
+      formatCalendarMonth(new Date('2026-12-31T00:00:00.000Z'), 'en')
+    ).toBe('December 2026');
   });
 });

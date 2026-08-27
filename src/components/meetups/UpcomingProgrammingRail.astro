@@ -1,0 +1,73 @@
+---
+/**
+ * The forward-looking half of `/meetups`.
+ *
+ * A grid from `sm` up. On narrow screens a scroll-snap rail, because a tall
+ * stack of near-identical programmed cards is harder to scan than a swipe —
+ * and because CSS scroll-snap does this natively, so no JavaScript ships for
+ * it.
+ *
+ * Pereira Tech Day editions keep their own card: an edition is a meetup with a
+ * bigger stage, and `MeetupShowcaseItem` already carries both shapes.
+ */
+
+import EditionCard from '@/components/cards/EditionCard.astro';
+import UpcomingMeetupCard from '@/components/cards/UpcomingMeetupCard.astro';
+import type { Language } from '@/lib/i18n';
+import type { MeetupShowcaseItem } from '@/lib/meetup';
+
+interface Props {
+  items: MeetupShowcaseItem[];
+  lang: Language;
+  /** Accessible name for the list. */
+  label: string;
+  /**
+   * Widest grid the rail may reach. `/meetups` gives the board the full page,
+   * so three fit; the homepage runs it as one section among many, where two
+   * larger cards read better than three cramped ones.
+   */
+  columns?: 2 | 3;
+  /**
+   * Load the first flyer eagerly. **Only true when the rail is genuinely above
+   * the fold**, which on this site it never is.
+   *
+   * It used to be unconditional, and it cost the homepage 0.6s of LCP and four
+   * Lighthouse points: a ~95KB flyer several screens down was competing for
+   * bandwidth with the preloaded hero photo that *is* the LCP element. Measured
+   * against `main` in PLAN_branch_audit_and_pr Task 6.
+   */
+  eagerFirst?: boolean;
+}
+
+const { items, lang, label, columns = 3, eagerFirst = false } = Astro.props;
+
+// Written out rather than interpolated — Tailwind scans source for whole class
+// names, so `lg:grid-cols-${columns}` would never be generated.
+const columnsClass =
+  columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3';
+---
+
+<ul
+  aria-label={label}
+  class={`-mx-4 flex snap-x snap-mandatory list-none gap-5 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0 ${columnsClass}`}
+>
+  {
+    items.map((item, index) => (
+      <li class="w-[85vw] min-w-0 shrink-0 snap-start sm:w-auto sm:shrink">
+        {item.type === 'meetup' ? (
+          <UpcomingMeetupCard
+            meetup={item.data}
+            lang={lang}
+            loading={eagerFirst && index === 0 ? 'eager' : 'lazy'}
+          />
+        ) : (
+          <EditionCard
+            edition={item.data}
+            lang={lang}
+            loading={eagerFirst && index === 0 ? 'eager' : 'lazy'}
+          />
+        )}
+      </li>
+    ))
+  }
+</ul>

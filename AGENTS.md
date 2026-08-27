@@ -32,6 +32,7 @@
 | SEO | [SEO](docs/SEO.md) | Meta tags, Organization/Event/Person JSON-LD, hreflang, AEO |
 | Security | [Security](docs/SECURITY.md) | Static site + community-form threat model |
 | Documentation | [Documentation Guide](docs/DOCUMENTATION_GUIDE.md) | When and how to update docs |
+| AEO | [ARD Manifest](docs/aeo/ARD_MANIFEST.md) | `/.well-known/ai-catalog.json` — what this origin offers agents |
 | Analytics | [Analytics](docs/ANALYTICS.md) | Tracking, GSC, verification |
 | Community | [Code of Conduct](docs/CODE_OF_CONDUCT.md) · [Contributing](docs/CONTRIBUTING.md) · [Governance](docs/GOVERNANCE.md) · [Community Guidelines](docs/COMMUNITY_GUIDELINES.md) | Operational community rules |
 | Channels & Forms | [Communication Channels](docs/COMMUNICATION_CHANNELS.md) · [Call for Speakers](docs/CALL_FOR_SPEAKERS.md) · [Sponsorship](docs/SPONSORSHIP.md) | Public-facing community processes |
@@ -433,9 +434,22 @@ visible notice. Same mechanism for `verticals` (`verticalBodiesEn`). See
 
 **Frontmatter:** `title`, `description`, `date`, `vertical` (Speaker School / La Biblioteca del Mañana / AI Channel / general), `format` (online / in-person / hybrid), `venue` (optional), `speakers` (array of slugs), `talks` (array of slugs, optional), `recordingUrl` (optional), `slidesUrl` (optional), `coverImage`.
 
-**URL surface:** `/meetups` (timeline) + `/meetups/{slug}` (detail). English: `/en/meetups`, `/en/meetups/{slug}`. Spanish is unprefixed at `/`.
+**Programming fields (a meetup announced before its line-up exists):**
+`dateConfidence` (`confirmed` | `tentative` | `month-only`, default `confirmed`)
+and `callForSpeakers` (`status`, `formats`, `opensAt`, `closesAt`, `slots`,
+`note`). `venue` is **optional** and `mode` defaults to `in-person` — you cannot
+book a room five months out. The line-up state is **derived** from `talks` /
+`speakers`; never state it in frontmatter. A call **auto-closes** once the
+meetup date or `closesAt` passes — read it through `getCallForSpeakersState()`
+in `src/lib/meetup.ts`, never by comparing `status` inline.
 
-**New meetup workflow:** Use `/add-meetup` skill.
+**URL surface:** `/meetups` (timeline) + `/meetups/{slug}` (detail), with the
+per-meetup call at `/meetups/{slug}#call-for-speakers`. English: `/en/meetups`,
+`/en/meetups/{slug}`. Spanish is unprefixed at `/`. Open calls are also
+published as JSON at `/api/cfs-open.json`.
+
+**New meetup workflow:** Use `/add-meetup` skill — it has a **planned mode** for
+programming a meetup from a date alone.
 
 ## Events & Pereira Tech Days Conventions
 
@@ -513,6 +527,9 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 24. **Import Reveal CSS outside `SlideLayout`** — Reveal styles must not leak to non-deck routes
 25. **Add a new top-level page without updating `src/middleware.ts`** — the middleware has a hardcoded allowlist (`KNOWN_ROOT_PATHS` / `KNOWN_EN_PATHS`). New top-level routes return 404 until added to the allowlist. See [Architecture → Middleware Allowlist](docs/ARCHITECTURE.md#middleware-allowlist-critical).
 26. Use `--ptt-accent` for body text — it fails WCAG AA on `--ptt-bg`. Reserve for icons, large text, pills with `--ptt-bg-elevated`.
+27. **Compare `callForSpeakers.status` inline** — a call auto-closes once the meetup date or `closesAt` passes, so only `getCallForSpeakersState()` gives the real answer. A stale `open` must never invite a proposal to an event that already happened.
+28. **State a meetup's line-up in frontmatter** — it is derived from `talks` / `speakers`. Two sources of the same fact drift.
+29. **Print a day for a `month-only` meetup** — render the month, and use `YYYY-MM` in `<time datetime>` and in the agent twin.
 
 ### DO:
 

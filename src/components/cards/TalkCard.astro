@@ -54,7 +54,12 @@ const hasRecording = Boolean(talk.data.recording?.url);
   data-umami-event-slug={talk.id}
   class="group flex h-full flex-col gap-3 rounded-2xl bg-ptt-bg-elevated shadow-sm ring-1 ring-ptt-border p-5 transition hover:shadow-lg hover:ring-ptt-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
 >
-  <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-secondary">
+  <!--
+    Wraps. Three badges plus a date do not fit on one line at 280px, and
+    flex items refuse to shrink below their content, so the row ran past
+    the card and took the page with it.
+  -->
+  <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ptt-secondary">
     <Badge variant="neutral">{typeLabel}</Badge>
     <Badge variant="neutral">{langLabel}</Badge>
     {hasRecording && (

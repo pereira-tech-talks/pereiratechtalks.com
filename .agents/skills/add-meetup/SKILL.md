@@ -47,16 +47,21 @@ This skill is the mandatory workflow for creating new meetup entries in this rep
 
 - `$TITLE`: Meetup title (will be stored bilingually). The skill will translate it.
 - `$DATE`: ISO date `YYYY-MM-DD` of the event.
-- `$VENUE`: Venue object — `{ name, city, country }`. Default city/country to `Pereira`/`Colombia` if not provided.
-- `$MODE`: `in-person` | `virtual` | `hybrid` (default: `in-person`)
 - `$VERTICAL`: One or more slugs from `src/content/verticals/` (default: `["monthly-meetups"]`)
+
+### Required for a meetup that is already organised — omitted in **planned mode**
+
+- `$VENUE`: Venue object — `{ name, city, country }`. Default city/country to `Pereira`/`Colombia` if not provided. **Optional** since the programming feature: you cannot book a room five months out.
+- `$MODE`: `in-person` | `virtual` | `hybrid` (defaults to `in-person`)
 
 ### Optional
 
 - `$SLUG`: Custom slug (default: kebab-case of title, **English-only**).
 - `$DESCRIPTION`: 130-160 char description. If omitted, the skill drafts one from the title and date.
 - `$HERO_IMAGE`: Path under `public/images/meetups/<slug>/hero.{ext}`.
-- `$STATUS`: `announced` | `rsvp-open` | `completed` | `cancelled` (default: `announced`). These are the only values the `eventStatus` enum in `src/content.config.ts` accepts — `scheduled` is **not** valid and fails the build.
+- `$STATUS`: `announced` | `rsvp-open` | `postponed` | `completed` | `cancelled` (default: `announced`). These are the only values the `eventStatus` enum in `src/content.config.ts` accepts — `scheduled` is **not** valid there and fails the build. (`scheduled` *is* valid inside `callForSpeakers.status` — a different field, see **Planned mode** below.)
+- `$DATE_CONFIDENCE`: `confirmed` | `tentative` | `month-only` (default: `confirmed`). See **Planned mode**.
+- `$CALL_FOR_SPEAKERS`: the meetup's own call — see **Planned mode**.
 - `$TALKS`: Array of talk slugs (must exist in `src/content/talks/`).
 - `$SPEAKERS`: Array of speaker slugs (must exist in `src/content/speakers/`).
 - `$SPONSORS`: Array of sponsor refs.
@@ -195,6 +200,116 @@ pnpm run md:check:strict
 ```
 
 The build should pick up the new meetup automatically and emit `/meetups/<slug>/` and `/meetups/<slug>.md` (plus `/es/...` twins).
+
+## Planned Mode — programming a meetup before its line-up exists
+
+The community programmes months ahead, often before a single speaker is
+confirmed. Planned mode creates that meetup from a **date alone**.
+
+### What planned mode needs, and what it deliberately does not
+
+| Field | Planned mode |
+|---|---|
+| `title`, `description`, `date`, `pubDate`, `verticals` | **Required**, as always |
+| `dateConfidence` | **Required decision** — see below |
+| `callForSpeakers` | Optional, but the reason planned mode exists |
+| `venue` | **Omit.** You have not booked a room. |
+| `mode` | **Omit.** Defaults to `in-person`. |
+| `hero` / `heroImage` | **Omit.** The card renders a typographic date tile instead of a stock placeholder. |
+| `speakers`, `talks`, `sponsors` | **Omit.** The line-up is *derived* from these being empty; never state it twice. |
+| `status` | `announced` |
+
+### `dateConfidence` — pick one, honestly
+
+```yaml
+dateConfidence: confirmed    # default. The day is a commitment.
+dateConfidence: tentative    # the day is a proposal and may move.
+dateConfidence: month-only   # only the month is fixed.
+```
+
+`date` stays **required and real** in all three cases — sorting, year grouping
+and the `Event` structured data all read it. For `month-only`, set the month's
+usual cadence day; every surface then renders the month alone
+("Noviembre de 2026") and the `<time datetime>` attribute carries `YYYY-MM`, so
+nothing claims a day the community has not fixed.
+
+Do **not** reach for `tentative` out of caution. A `confirmed` date that later
+moves is a normal edit; a page permanently hedging is worse for the reader than
+a date that changed once.
+
+### `callForSpeakers`
+
+```yaml
+callForSpeakers:
+  status: open              # open | scheduled | closed
+  formats: [lightning]      # subset of regular | lightning | panel | workshop
+  opensAt: 2026-09-15       # optional — before this it renders as "scheduled"
+  closesAt: 2026-11-04      # optional — after this the call is closed
+  slots: 3                  # optional — "quedan 3 espacios"
+  note:                     # optional bilingual line
+    es: "Solo charlas relámpago este mes."
+    en: "Lightning talks only this month."
+```
+
+`formats` is the whole point: it is what lets the site tell a speaker with a
+workshop which month can actually stage one. Pick only what you can host.
+
+**A call auto-closes.** Once the meetup date or `closesAt` has passed, every
+surface reports the call closed regardless of `status` — a stale `open` must
+never invite a proposal to an event that already happened. Read the state
+through `getCallForSpeakersState()` in `src/lib/meetup.ts`; never compare
+`status` inline.
+
+### Body shape for a planned meetup
+
+A planned meetup has no talks to describe, so its body says what the month is
+for and what the call accepts — **nothing else**. Both languages carry the same
+content; only the section label differs.
+
+`src/content/meetups/2027-03-24_march-meetup-2027.md` — note the **English
+slug** even though the body is Spanish (`AGENTS.md` DON'T #21):
+
+```markdown
+## Meetup de marzo
+
+{one or two sentences: what this month is for}
+
+{one sentence: what is and is not decided yet}
+
+### Convocatoria
+
+{one or two sentences: what the call accepts and how to propose}
+```
+
+`…2027-03-24_march-meetup-2027.en.md` — the same shape, `### Call for
+speakers` as the heading, real English throughout.
+
+### The rules that matter here
+
+1. **Invent nothing.** No speaker, no topic, no venue, no "expect deep dives
+   into…". If it is not decided, the body does not claim it. This is the same
+   rule `docs/WRITING_CRAFT_GUIDE.md` applies to past events, and it binds
+   harder for future ones.
+2. **Same structure both sides.** Identical heading, list, link, image and
+   paragraph counts, and identical URL sets. That is the class of finding
+   `parity:check` fails the build on.
+3. **Short is correct.** A planned meetup with a three-sentence body in both
+   languages is *right*. Padding it to look substantial is the failure mode.
+   `parity:check` reports such a pair as `thin-both` and does **not** fail —
+   thinness is expected here.
+4. **Real English on the English side**, real Spanish with correct diacritics on
+   the Spanish side. `title.en` must be genuine English, not the Spanish title
+   with one word swapped — `tests/unit/lib/bilingual-body-parity.test.ts` fails
+   on that.
+5. **English slug**, `YYYY-MM-DD_slug.md` naming, and an `.en.md` sibling — the
+   same rules as any meetup.
+
+### Filling a planned meetup in later
+
+When speakers are confirmed, edit the same entry: add `speakers` / `talks`, add
+the venue and hero, set `dateConfidence: confirmed`, and set
+`callForSpeakers.status: closed` (or delete the block). The line-up state
+follows automatically from the arrays — there is nothing else to update.
 
 ## Body Shape and Bilingual Parity (MANDATORY)
 

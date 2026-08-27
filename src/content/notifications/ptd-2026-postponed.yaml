@@ -1,3 +1,11 @@
+# RETIRED 2026-08-27 — replaced by `cfs-open-2026.yaml` in the sitewide bar.
+#
+# The postponement notice ran from 2026-08-13. The announcement itself stays
+# published (the blog post and /pereira-tech-day both carry it); what changed is
+# that the bar is a scarce, sitewide slot and the open call for speakers is now
+# the thing the community most needs to see. Re-activating this is a one-line
+# `active: false` — nothing else in it went stale.
+#
 # Sitewide notice for the indefinite postponement of Pereira Tech Day 2026.
 #
 # Paired with `ptd-2026.yaml` (the promotional notification), which is set to
@@ -43,4 +51,4 @@ modalEnabled: true
 startsAt: 2026-08-13T00:00:00.000Z
 endsAt: 2027-12-31T23:59:59.000Z
 priority: 200
-active: true
+active: false

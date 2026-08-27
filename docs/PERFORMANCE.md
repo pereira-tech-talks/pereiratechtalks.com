@@ -316,6 +316,38 @@ pnpm exec lighthouse https://pereiratechtalks.org --view
 - [ ] Monitor page weight
 - [ ] Review JavaScript bundle size
 
+## Benchmark against `main`, not against the threshold
+
+Lighthouse gates Performance at ≥ 0.90. Passing it is not the same as not
+regressing, and only the comparison tells you which one happened.
+
+`PLAN_branch_audit_and_pr` (2026-08) measured the branch against a build of
+`origin/main` and found the homepage had gone **0.95 → 0.91**, LCP **2.7 s →
+3.3 s**. It cleared the gate, with a low run of exactly 0.90, and would have
+shipped — leaving the next small regression to fail CI for reasons nobody could
+trace back.
+
+The cause was **one image**. A rail component loaded its first card eagerly,
+which is right when the rail is near the top of a page and wrong when it sits
+several screens down: a ~95 KB flyer was competing for throttled bandwidth with
+the **preloaded hero that is the actual LCP element**. Diffing the eager images
+between the two builds named it in one line:
+
+```bash
+grep -o '<img[^>]*loading="eager"[^>]*>' dist/index.html
+```
+
+**Therefore:**
+
+- On any change that touches an above-the-fold surface, build `origin/main` in a
+  worktree and run `pnpm run lighthouse` on both. Compare the categories **and**
+  LCP, TBT and CLS.
+- Treat `loading="eager"` as a property of **where a component is mounted**, not
+  of its own markup. Make it a prop, default it to `false`, and opt in only when
+  the component is genuinely above the fold.
+- Check the LCP *element* in the report, not just the score — that is how you
+  learn what is actually competing.
+
 ## Quick Wins
 
 1. **Lazy load images** below the fold

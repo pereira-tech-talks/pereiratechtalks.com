@@ -1,17 +1,22 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-
+import { CFS_FORMATS, isHttpUrl as clientIsHttpUrl } from '@/lib/contact-form';
+import { CFS_FORMATS as INTAKE_CFS_FORMATS } from '../../../functions/_lib/intake-helpers';
 import {
   booleanToDailyBot,
+  CFS_FORMAT_VALUES,
+  CFS_Q,
   CONTACT_FORM_UUID,
   CONTACT_TOPIC_VALUES,
   EXPERIENCE_LEVEL_VALUES,
   LANG_VALUES,
   lookupChoice,
+  meetupUrlFromSlug,
   normalizePagePath,
   SPONSOR_TIER_VALUES,
   slugify,
   submitFormResponse,
 } from '../../../functions/api/_dailybot';
+import { isHttpUrl as serverIsHttpUrl } from '../../../functions/api/contact';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -131,4 +136,103 @@ describe('submitFormResponse', () => {
       status: 400,
     });
   });
+});
+
+/**
+ * The four Call for Speakers formats are declared three times — the content
+ * schema (`cfsFormat` in src/content.config.ts), the client validator
+ * (`CFS_FORMATS` in src/lib/contact-form.ts) and the Dailybot choice lookup
+ * (`CFS_FORMAT_VALUES` here). They cannot share one declaration: the
+ * Cloudflare Pages Functions bundle is built separately and cannot import from
+ * `src/`. This test is what keeps the three from drifting — drift would mean
+ * the UI offering a format Dailybot rejects as an invalid choice.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 2.
+ */
+describe('CFS formats stay in lockstep across the three declarations', () => {
+  const EXPECTED = ['regular', 'lightning', 'panel', 'workshop'] as const;
+
+  it('the client validator declares exactly these four', () => {
+    expect([...CFS_FORMATS].sort()).toEqual([...EXPECTED].sort());
+  });
+
+  it('the Functions-side copy declares exactly these four', () => {
+    // functions/_lib/intake-helpers.ts carries a fourth copy. Nothing imports
+    // it today, but it is exported, so it is covered here rather than left to
+    // drift silently until something picks it up.
+    expect([...INTAKE_CFS_FORMATS].sort()).toEqual([...EXPECTED].sort());
+  });
+
+  it('the Dailybot lookup resolves every one of them to a canonical label', () => {
+    for (const format of EXPECTED) {
+      expect(lookupChoice(format, CFS_FORMAT_VALUES)).toBeTruthy();
+    }
+  });
+
+  it('the Dailybot lookup rejects a format none of the three declares', () => {
+    expect(lookupChoice('keynote', CFS_FORMAT_VALUES)).toBeNull();
+  });
+});
+
+describe('CFS_Q.MEETUP', () => {
+  const UUID_RE =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
+  it('is a real UUID, not a placeholder', () => {
+    expect(CFS_Q.MEETUP).toMatch(UUID_RE);
+  });
+
+  it('PROFILE_PHOTO is a real UUID too', () => {
+    expect(CFS_Q.PROFILE_PHOTO).toMatch(UUID_RE);
+  });
+
+  it('SLIDES is a real UUID too', () => {
+    expect(CFS_Q.SLIDES).toMatch(UUID_RE);
+  });
+
+  it('does not collide with any other CFS question', () => {
+    const uuids = Object.values(CFS_Q);
+    expect(new Set(uuids).size).toBe(uuids.length);
+  });
+
+  it('meetupUrlFromSlug builds the canonical URL, and empty for no meetup', () => {
+    expect(meetupUrlFromSlug('november-meetup-2026')).toBe(
+      'https://pereiratechtalks.org/meetups/november-meetup-2026/'
+    );
+    expect(meetupUrlFromSlug('')).toBe('');
+  });
+});
+
+/**
+ * `isHttpUrl` is declared twice for the same reason `CFS_FORMATS` is declared
+ * four times: the Pages Functions bundle is built separately and cannot import
+ * from `src/`. Drift here would be quiet and expensive — the form would accept
+ * a link the server rejects, or the reverse — so the two are pinned to one
+ * table of cases rather than to each other's source.
+ *
+ * PLAN_branch_audit_and_pr, Task 4.
+ */
+describe('isHttpUrl stays in lockstep across both declarations', () => {
+  const CASES: ReadonlyArray<readonly [string, boolean]> = [
+    ['https://slides.example.com/deck', true],
+    ['http://old.example.com/deck', true],
+    ['  https://a.example  ', true],
+    ['https://a.example/deck?x=1#p2', true],
+    ['', false],
+    ['   ', false],
+    ['a.example', false],
+    ['todavía no las tengo', false],
+    ['javascript:alert(1)', false],
+    ['data:text/html,<script>x</script>', false],
+    ['file:///etc/passwd', false],
+    ['ftp://example.com/deck.pdf', false],
+    ['mailto:someone@example.com', false],
+  ];
+
+  for (const [value, expected] of CASES) {
+    it(`agrees on ${JSON.stringify(value)}`, () => {
+      expect(clientIsHttpUrl(value), 'client').toBe(expected);
+      expect(serverIsHttpUrl(value), 'server').toBe(expected);
+    });
+  }
 });

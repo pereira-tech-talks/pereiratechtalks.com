@@ -17,15 +17,22 @@ import {
   getReadingTimeFromContent,
   getRelatedPosts,
 } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
-import { formatCalendarDate } from '@/lib/dates';
-import type { Language } from '@/lib/i18n';
+import { formatCalendarDate, isCalendarDateBeforeToday } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import { resolveI18n } from '@/lib/markdown-for-agents';
 import {
+  getCallForSpeakersState,
   getMeetupBodyMarkdown,
   getMeetupSlug,
   getMeetups,
   type Meetup,
+  resolveMeetupDateConfidence,
+  resolveMeetupDateLabel,
+  resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
+  resolveMeetupStatus,
 } from '@/lib/meetup';
 import {
   getEditionRegistrationUrl,
@@ -81,7 +88,55 @@ export interface ResolvedMeetupDetail {
   date: string;
   mode: string;
   status: string;
-  venue: { name: string; city: string; country: string; mapUrl?: string };
+  /**
+   * Absent when the meetup is programmed but no room is booked yet. Readers
+   * must print `venueLabel` instead of composing their own line — the twin
+   * always emits a Venue section (`md:check` requires it), so the label carries
+   * the localized "to be confirmed" text when this is undefined.
+   */
+  venue?: { name: string; city: string; country: string; mapUrl?: string };
+  /** Always present, always localized: the address, or "venue to be confirmed". */
+  venueLabel: string;
+  /**
+   * How firm the date is, and how far along the programme is — both localized
+   * here, because the twin contract is one language per page, metadata keys and
+   * values included.
+   */
+  dateLabel: string;
+  dateConfidenceLabel: string;
+  lineupLabel: string;
+  /**
+   * The meetup's own call for speakers, when it has one. Present even when
+   * closed: an agent asked "can I still submit to this meetup?" needs the
+   * answer, not silence.
+   */
+  callForSpeakers?: {
+    stateLabel: string;
+    isOpen: boolean;
+    formats: string[];
+    closesAt?: string;
+    slots?: number;
+    note?: string;
+    url: string;
+    /** The same prose the page renders, so the twin is not a summary of it. */
+    heading: string;
+    body: string;
+    formatsLabel: string;
+    deadlineLine?: string;
+    slotsLine?: string;
+    /**
+     * What the on-page form asks for. An agent helping someone propose a talk
+     * needs this; it cannot fill in a form it has never seen.
+     */
+    formFields?: string[];
+    /** The slide guidance the panel shows, so the twin is not a summary of it. */
+    slidesGuidance?: string[];
+  };
+  /**
+   * What the page says when the programme is not announced yet. Absent for a
+   * meetup whose talks are published, and for the archive.
+   */
+  lineupNotice?: { heading: string; body: string };
   hero?: { src: string; alt: string };
   body: string;
   untranslated: boolean;
@@ -158,12 +213,107 @@ export const resolveMeetupDetail = async (
     meetup.data.heroImage;
 
   const venue = meetup.data.venue;
-  const mapQuery = encodeURIComponent(
-    [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
-  );
+  const venueLabel = venue
+    ? [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
+    : resolveMeetupPlaceFallback(meetup, lang);
+  const mapQuery = venue
+    ? encodeURIComponent(
+        [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
+      )
+    : null;
 
   // Labels are localized here, not in the serializer: the contract requires
   // one language per page, metadata keys included.
+  // Localized here, not in the serializer: the contract requires one language
+  // per page, metadata values included.
+  const tr = getTranslations(lang);
+  const es = lang === 'es';
+  const dateConfidence = resolveMeetupDateConfidence(meetup);
+  const dateConfidenceLabel = es
+    ? {
+        confirmed: 'confirmada',
+        tentative: 'tentativa',
+        'month-only': 'solo el mes',
+      }[dateConfidence]
+    : {
+        confirmed: 'confirmed',
+        tentative: 'tentative',
+        'month-only': 'month only',
+      }[dateConfidence];
+  const lineup = resolveMeetupLineup(meetup);
+  const lineupLabel = es
+    ? { open: 'abierta', partial: 'parcial', confirmed: 'confirmada' }[lineup]
+    : { open: 'open', partial: 'partial', confirmed: 'confirmed' }[lineup];
+
+  const callState = getCallForSpeakersState(meetup);
+  const call = meetup.data.callForSpeakers;
+  const callStateLabel = es
+    ? {
+        open: 'abierta',
+        scheduled: 'próximamente',
+        closed: 'cerrada',
+        none: '',
+      }[callState]
+    : { open: 'open', scheduled: 'opening soon', closed: 'closed', none: '' }[
+        callState
+      ];
+  const formatLabelOf = (value: string): string =>
+    tr.cfsForm.formatOptions.find((o) => o.value === value)?.label ?? value;
+
+  const md = tr.meetupDetail;
+  const lifecycle = resolveMeetupStatus(meetup);
+  const statusLabel = {
+    announced: md.statusAnnounced,
+    'rsvp-open': md.statusRsvpOpen,
+    completed: md.statusCompleted,
+    cancelled: md.statusCancelled,
+  }[lifecycle];
+
+  const planning = tr.meetupDetail.planning;
+  const cfsCopy = tr.meetupDetail.cfs;
+  const isUpcoming = !isCalendarDateBeforeToday(meetup.data.date);
+  // Mirrors the page's own condition, so the twin carries the notice exactly
+  // when the page shows it — and never invents one for the archive.
+  const lineupNotice =
+    talks.length === 0 && isUpcoming
+      ? {
+          heading: planning.lineupOpenTitle,
+          body:
+            lineup === 'partial'
+              ? planning.lineupPartialBody
+              : planning.lineupOpenBody,
+        }
+      : undefined;
+
+  const callDeadlineLine =
+    call?.closesAt && callState === 'open'
+      ? cfsCopy.deadline.replace(
+          '{date}',
+          formatCalendarDate(call.closesAt, lang)
+        )
+      : undefined;
+  const callSlotsLine =
+    typeof call?.slots === 'number' && callState === 'open'
+      ? call.slots === 1
+        ? cfsCopy.slotsOne
+        : cfsCopy.slots.replace('{n}', String(call.slots))
+      : undefined;
+  const callHeading =
+    callState === 'open'
+      ? cfsCopy.titleOpen
+      : callState === 'scheduled'
+        ? cfsCopy.titleScheduled
+        : cfsCopy.titleClosed;
+  const callBody =
+    callState === 'open'
+      ? cfsCopy.introOpen
+      : callState === 'scheduled'
+        ? cfsCopy.bodyScheduled.replace(
+            '{date}',
+            call?.opensAt ? formatCalendarDate(call.opensAt, lang) : ''
+          )
+        : cfsCopy.bodyClosed;
+
   const links: Array<{ label: string; url: string }> = [];
   if (meetup.data.linkRecording)
     links.push({
@@ -203,15 +353,75 @@ export const resolveMeetupDetail = async (
     slug,
     title: resolveI18n(meetup.data.title, lang),
     description: resolveI18n(meetup.data.description, lang),
-    date: isoDate(meetup.data.date),
+    // `YYYY-MM` when only the month is fixed, so no consumer of the twin reads
+    // a day the community has not committed to.
+    date:
+      dateConfidence === 'month-only'
+        ? isoDate(meetup.data.date).slice(0, 7)
+        : isoDate(meetup.data.date),
     mode: meetup.data.mode,
-    status: meetup.data.status,
-    venue: {
-      name: venue.name,
-      city: venue.city,
-      country: venue.country,
-      mapUrl: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
-    },
+    // The label the page shows, not the raw enum: a twin is what the page says.
+    status: statusLabel,
+    venue: venue
+      ? {
+          name: venue.name,
+          city: venue.city,
+          country: venue.country,
+          mapUrl: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
+        }
+      : undefined,
+    venueLabel,
+    dateLabel: resolveMeetupDateLabel(meetup, lang),
+    dateConfidenceLabel,
+    lineupLabel,
+    callForSpeakers:
+      callState === 'none' || !call
+        ? undefined
+        : {
+            stateLabel: callStateLabel,
+            isOpen: callState === 'open',
+            formats: call.formats.map(formatLabelOf),
+            ...(call.closesAt ? { closesAt: isoDate(call.closesAt) } : {}),
+            ...(typeof call.slots === 'number' ? { slots: call.slots } : {}),
+            ...(call.note
+              ? { note: resolveI18n(call.note, lang) || undefined }
+              : {}),
+            url: `${SITE_URL}${getUrlPrefix(lang)}/meetups/${slug}/#call-for-speakers`,
+            heading: callHeading,
+            body: callBody,
+            formatsLabel:
+              call.formats.length === 1
+                ? cfsCopy.formatsSingleLabel
+                : cfsCopy.formatsLabel,
+            ...(callDeadlineLine ? { deadlineLine: callDeadlineLine } : {}),
+            ...(callSlotsLine ? { slotsLine: callSlotsLine } : {}),
+            ...(callState === 'open'
+              ? {
+                  slidesGuidance: [
+                    tr.cfsForm.slides.title,
+                    tr.cfsForm.slides.count,
+                    tr.cfsForm.slides.demos,
+                  ],
+                  formFields: [
+                    tr.contactPage.nameLabel,
+                    tr.contactPage.emailLabel,
+                    tr.cfsForm.talkTitleLabel,
+                    tr.cfsForm.formatLabel,
+                    tr.cfsForm.abstractLabel,
+                    tr.cfsForm.takeawaysLabel,
+                    `${tr.cfsForm.slidesUrlLabel} — ${tr.cfsForm.slidesUrlHelp}`,
+                    tr.cfsForm.socialLabel,
+                    // Carries its help text too: "a URL or a sentence" is the
+                    // whole point of the field, and a label alone hides it.
+                    `${tr.cfsForm.profilePhotoLabel} — ${tr.cfsForm.profilePhotoHelp}`,
+                    tr.cfsForm.firstTimeLabel,
+                    tr.cfsForm.speakerSchoolLabel,
+                    tr.cfsForm.notesLabel,
+                  ],
+                }
+              : {}),
+          },
+    lineupNotice,
     hero: heroSrc
       ? {
           src: heroSrc,

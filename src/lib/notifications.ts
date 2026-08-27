@@ -1,6 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import type { Language } from '@/lib/i18n';
-import { tr } from '@/lib/i18n';
+import { getUrlPrefix, tr } from '@/lib/i18n';
 
 export type Notification = CollectionEntry<'notifications'>;
 
@@ -41,7 +41,28 @@ export type LocalizedNotification = {
   image?: { src: string; alt: string };
   ctaLabel?: string;
   ctaHref?: string;
+  /** Extra actions, already localized (label + language-correct href). */
+  ctas: Array<{ label: string; href: string }>;
   modalEnabled: boolean;
+};
+
+/**
+ * Prefix an internal path for the requested language.
+ *
+ * Notification hrefs are authored once, unprefixed (`/call-for-speakers`), so
+ * without this an English visitor clicking the CTA landed on the Spanish page.
+ * External URLs and paths that already carry the prefix are left alone.
+ */
+export const localizeNotificationHref = (
+  href: string,
+  lang: Language
+): string => {
+  if (/^https?:\/\//i.test(href)) return href;
+  const prefix = getUrlPrefix(lang);
+  if (!prefix) return href;
+  return href === prefix || href.startsWith(`${prefix}/`)
+    ? href
+    : `${prefix}${href}`;
 };
 
 export const localizeNotification = (
@@ -59,7 +80,13 @@ export const localizeNotification = (
       ? { src: tr(data.image.src, lang), alt: data.image.alt[lang] }
       : undefined,
     ctaLabel: data.ctaLabel?.[lang],
-    ctaHref: data.ctaHref,
+    ctaHref: data.ctaHref
+      ? localizeNotificationHref(data.ctaHref, lang)
+      : undefined,
+    ctas: (data.ctas ?? []).map((cta) => ({
+      label: cta.label[lang],
+      href: localizeNotificationHref(cta.href, lang),
+    })),
     modalEnabled: data.modalEnabled,
   };
 };

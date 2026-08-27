@@ -21,16 +21,10 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..', '..');
 const DIST = join(ROOT, 'dist');
-const OUT_DIR = join(
-  ROOT,
-  '.agent_commands',
-  'agent_deep_work_plans',
-  'results',
-  'plans',
-  'PLAN_full_responsive_audit',
-  'analysis_results',
-  '18_performance'
-);
+// Plan outputs live under the gitignored `.dwp/`. The previous target,
+// `.agent_commands/agent_deep_work_plans/...`, is a path this repo stopped
+// using; running the script recreated that dead tree as untracked files.
+const OUT_DIR = join(ROOT, '.dwp', 'responsive-audit', 'images');
 
 function walk(dir, base = '') {
   const out = [];

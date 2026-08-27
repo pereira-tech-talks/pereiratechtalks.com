@@ -22,6 +22,7 @@ import {
   CFS_FORM_UUID,
   CFS_FORMAT_VALUES,
   CFS_Q,
+  meetupUrlFromSlug,
   CONDUCT_FORM_UUID,
   CONDUCT_Q,
   CONTACT_FORM_UUID,
@@ -41,6 +42,11 @@ import {
   submitFormResponse,
 } from './_dailybot';
 import {
+  fetchCfsOpenManifest,
+  findOpenCall,
+  isWellFormedMeetupSlug,
+} from '../_lib/cfs-manifest';
+import {
   checkRateLimit,
   looksLikeSpamPayload,
   normalizeTopic,
@@ -56,6 +62,9 @@ const MAX_TAKEAWAYS_LENGTH = 800;
 const MAX_SOCIAL_LENGTH = 300;
 const MAX_COMPANY_LENGTH = 160;
 const MAX_EMAIL_LENGTH = 254;
+const MAX_MEETUP_SLUG_LENGTH = 80;
+const MAX_PROFILE_PHOTO_LENGTH = 300;
+const MAX_SLIDES_URL_LENGTH = 300;
 
 const FORM_TYPES = [
   'contact',
@@ -127,8 +136,95 @@ function sanitiseText(value: unknown, maxLength: number): string {
   return value.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, maxLength);
 }
 
+/**
+ * The profile-photo field accepts either a URL or a sentence, so it cannot be
+ * validated as a URL. It is still untrusted text an organiser will read and may
+ * click, so anything that *looks* like a URI must be `http(s)` — a
+ * `javascript:` or `data:` value is dropped rather than stored and echoed into
+ * a Slack report.
+ */
+function sanitiseProfilePhoto(value: unknown): string {
+  return sanitiseClickableText(value, MAX_PROFILE_PHOTO_LENGTH);
+}
+
+/**
+ * Free text an organiser will read and may click. Anything that *looks* like a
+ * URI must be `http(s)` — a `javascript:` or `data:` value is dropped rather
+ * than stored and echoed into a Slack report. Text with no scheme is kept
+ * verbatim, because these fields deliberately accept prose too.
+ */
+function sanitiseClickableText(value: unknown, maxLength: number): string {
+  const text = sanitiseText(value, maxLength);
+  if (!text) return '';
+  const scheme = text.match(/^\s*([a-z][a-z0-9+.-]*):/i)?.[1]?.toLowerCase();
+  if (scheme && scheme !== 'http' && scheme !== 'https') return '';
+  return text;
+}
+
+/**
+ * An `http(s)` URL, and nothing else.
+ *
+ * Mirrors `isHttpUrl` in `src/lib/contact-form.ts`. Declared twice on purpose:
+ * the Functions bundle is built separately and cannot resolve the `@/` alias,
+ * so the two copies are kept in lockstep by a test rather than by an import.
+ * See the same arrangement around `CFS_FORMATS`.
+ */
+export function isHttpUrl(value: string): boolean {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  try {
+    const { protocol } = new URL(trimmed);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function asBool(value: unknown): boolean {
   return value === true || value === 'true' || value === '1' || value === 'on';
+}
+
+/**
+ * Resolve a client-supplied meetup slug against the build-time open-calls
+ * manifest, per the failure matrix in docs/features/FORMS.md.
+ *
+ * The asymmetry is deliberate. Availability failures are ours and must never
+ * cost a speaker their proposal, so an unknown slug, a malformed slug or an
+ * unreachable manifest all fall through to "accepted, untagged". A format the
+ * meetup does not accept is different: the real UI constrains that control, so
+ * it can only come from tampering or a bug we want to hear about — that one
+ * is refused.
+ */
+async function resolveMeetupTag(
+  slug: string,
+  format: string,
+  requestUrl: string
+): Promise<{ slug: string; reject: boolean }> {
+  // Checked before the value is used anywhere, logging included.
+  if (!isWellFormedMeetupSlug(slug)) {
+    console.warn('[cfs] meetup slug rejected by pattern');
+    return { slug: '', reject: false };
+  }
+
+  const manifest = await fetchCfsOpenManifest(requestUrl);
+  if (!manifest) {
+    console.warn('[cfs] open-calls manifest unavailable; submitting untagged');
+    return { slug: '', reject: false };
+  }
+
+  const call = findOpenCall(manifest, slug);
+  if (!call) {
+    console.warn(`[cfs] no open call for meetup "${slug}"; submitting untagged`);
+    return { slug: '', reject: false };
+  }
+
+  const requested = format.trim().toLowerCase();
+  if (requested && !call.formats.includes(requested)) {
+    console.warn(`[cfs] format not accepted by meetup "${slug}"`);
+    return { slug: '', reject: true };
+  }
+
+  return { slug, reject: false };
 }
 
 function resolveFormType(data: Record<string, unknown>): FormType {
@@ -216,10 +312,20 @@ function buildContent(
       'abstract',
       'takeaways',
       'socialUrl',
+      // Required since the branch audit. Enforced here as well as in the form:
+      // a client-side-only requirement is not a requirement, because a direct
+      // POST skips it entirely.
+      'slidesUrl',
     ]);
     if (missing) return missing;
     if (fields.abstract.trim().length < 20) {
       return { ok: false, error: 'abstract_too_short' };
+    }
+    // `sanitiseClickableText` empties any non-http(s) scheme, so a
+    // `javascript:` value arrives here as '' and is caught by requireNonEmpty
+    // above. This checks the shape of what survived.
+    if (!isHttpUrl(fields.slidesUrl)) {
+      return { ok: false, error: 'slides_url_invalid' };
     }
     const format = lookupChoice(fields.format, CFS_FORMAT_VALUES);
     if (format === null) return { ok: false, error: 'format_invalid' };
@@ -237,6 +343,11 @@ function buildContent(
         [CFS_Q.SOCIAL_URL]: fields.socialUrl,
         [CFS_Q.FIRST_TIME]: booleanToDailyBot(flags.firstTime),
         [CFS_Q.SPEAKER_SCHOOL]: booleanToDailyBot(flags.speakerSchool),
+        // Empty string when the proposal came from the global page. The same
+        // shape CFS_Q.NOTES already ships successfully on this form.
+        [CFS_Q.MEETUP]: meetupUrlFromSlug(fields.meetupSlug),
+        [CFS_Q.SLIDES]: fields.slidesUrl,
+        [CFS_Q.PROFILE_PHOTO]: fields.profilePhoto,
         [CFS_Q.NOTES]: fields.message || fields.notes || '',
         [CFS_Q.LANG]: lang,
         [CFS_Q.PAGE_PATH]: pagePath,
@@ -504,6 +615,9 @@ export async function onRequestPost(
     abstract: sanitiseText(data.abstract, MAX_ABSTRACT_LENGTH),
     takeaways: sanitiseText(data.takeaways, MAX_TAKEAWAYS_LENGTH),
     socialUrl: sanitiseText(data.socialUrl, MAX_SOCIAL_LENGTH),
+    meetupSlug: sanitiseText(data.meetupSlug, MAX_MEETUP_SLUG_LENGTH),
+    profilePhoto: sanitiseProfilePhoto(data.profilePhoto),
+    slidesUrl: sanitiseClickableText(data.slidesUrl, MAX_SLIDES_URL_LENGTH),
     company: sanitiseText(data.company, MAX_COMPANY_LENGTH),
     contactRole: sanitiseText(data.contactRole, 120),
     tierInterest: sanitiseText(data.tierInterest, 32),
@@ -533,6 +647,24 @@ export async function onRequestPost(
     speakerSchool: asBool(data.speakerSchool),
     anonymous: asBool(data.anonymous),
   };
+
+  // Only the CFS path carries a meetup. This runs AFTER the honeypot and the
+  // rate limiter, so an unauthenticated flood cannot make the worker fan out.
+  if (formType === 'cfs' && fields.meetupSlug) {
+    const resolved = await resolveMeetupTag(
+      fields.meetupSlug,
+      fields.format,
+      context.request.url
+    );
+    if (resolved.reject) {
+      return jsonResponse(
+        { ok: false, error: 'format_not_allowed_for_meetup' },
+        400,
+        origin
+      );
+    }
+    fields.meetupSlug = resolved.slug;
+  }
 
   const pagePath = normalizePagePath(data.page_path ?? data.pagePath);
   const built = buildContent(formType, fields, flags, pagePath, langRaw);

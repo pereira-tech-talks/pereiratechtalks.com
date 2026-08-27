@@ -62,5 +62,7 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
       - name: Step 12 - 📱 Run responsive regression suite
         run: pnpm run test:responsive
-      - name: Step 13 - 🔦 Run Lighthouse audit
+      - name: Step 13 - 📝 Run intake form suite
+        run: pnpm run test:forms
+      - name: Step 14 - 🔦 Run Lighthouse audit
         run: pnpm run lighthouse

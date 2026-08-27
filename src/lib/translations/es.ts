@@ -162,6 +162,28 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     calendarEyebrow: 'Calendario',
     archiveEyebrow: 'Archivo',
     breadcrumbHome: 'Inicio',
+    programming: {
+      eyebrow: 'Programación',
+      title: 'Próximos meetups',
+      intro:
+        'Programamos con anticipación para que puedas proponer tu charla a tiempo. Algunas fechas todavía se pueden mover — lo decimos cuando es así.',
+      emptyTitle: 'Todavía no hay meetups programados',
+      emptyBody:
+        'Estamos cerrando las próximas fechas. Mientras tanto, la convocatoria general sigue abierta todo el año.',
+      emptyCta: 'Postula tu charla',
+      railLabel: 'Meetups programados',
+      card: {
+        chipTentative: 'Fecha tentativa',
+        chipCallOpen: 'Convocatoria abierta',
+        chipLineupOpen: 'Programación en construcción',
+        venueTbc: 'Sede por confirmar',
+        cta: 'Propón tu charla',
+        ctaAria: 'Propón tu charla para {meetup}',
+        slots: 'Quedan {n} espacios',
+        slotsOne: 'Queda 1 espacio',
+        closesOn: 'Cierra el {date}',
+      },
+    },
   },
 
   meetupDetail: {
@@ -183,6 +205,40 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     statusCancelled: 'Cancelado',
     breadcrumbHome: 'Inicio',
     breadcrumbMeetups: 'Meetups',
+    planning: {
+      chipTentative: 'Fecha tentativa',
+      chipTentativeAria: 'La fecha de este meetup todavía puede cambiar',
+      chipMonthOnly: 'Fecha por definir',
+      chipMonthOnlyAria:
+        'Solo el mes está definido; el día se anuncia más adelante',
+      venueTbc: 'Sede por confirmar',
+      modeVirtual: 'Virtual',
+      lineupOpenTitle: 'Programación en construcción',
+      lineupOpenBody:
+        'Todavía no anunciamos las charlas de este meetup. Si quieres presentar, la convocatoria es el camino.',
+      lineupPartialBody:
+        'Ya tenemos ponentes confirmados y seguimos armando el programa.',
+      heroCta: 'Propón tu charla',
+      dateTileAria: 'Meetup de {date}',
+    },
+    cfs: {
+      eyebrow: 'Convocatoria',
+      titleOpen: 'Propón tu charla para este meetup',
+      introOpen:
+        'Estamos recibiendo propuestas para este encuentro. Cuéntanos qué quieres presentar y te respondemos en máximo 7 días hábiles.',
+      formatsLabel: 'Formatos que recibimos este mes',
+      formatsSingleLabel: 'Formato',
+      deadline: 'La convocatoria cierra el {date}',
+      slots: 'Quedan {n} espacios en el programa',
+      slotsOne: 'Queda 1 espacio en el programa',
+      titleScheduled: 'La convocatoria aún no abre',
+      bodyScheduled:
+        'Abrimos propuestas para este meetup el {date}. Si no quieres esperar, la convocatoria general recibe propuestas todo el año.',
+      titleClosed: 'La convocatoria de este meetup ya cerró',
+      bodyClosed:
+        'Ya no recibimos propuestas para esta fecha. La convocatoria general sigue abierta todo el año.',
+      globalCta: 'Ir a la convocatoria general',
+    },
   },
 
   speakerDetail: {
@@ -443,7 +499,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     formatOptions: [
       { value: '', label: '— Selecciona un formato —' },
       { value: 'regular', label: 'Charla regular (25 min)' },
-      { value: 'lightning', label: 'Lightning (5–10 min)' },
+      { value: 'lightning', label: 'Lightning (3–5 min)' },
       { value: 'panel', label: 'Panel (40 min)' },
       { value: 'workshop', label: 'Workshop (90 min)' },
     ],
@@ -453,6 +509,16 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     takeawaysPlaceholder: '¿Con qué se debería ir la audiencia?',
     socialLabel: 'LinkedIn, blog o GitHub',
     socialPlaceholder: 'https://…',
+    slidesUrlLabel: 'Enlace a tus diapositivas',
+    slidesUrlPlaceholder: 'https://…',
+    slidesUrlHelp:
+      'No necesitas tenerlas listas: un borrador, un esquema o incluso el enlace donde se van a publicar cuentan igual. Nos ayudan a evaluar la propuesta y a sugerirte mejoras mientras todavía hay tiempo de hacerlas. Si reutilizas una charla anterior, pega ese enlace.',
+    slidesUrlInvalid:
+      'Añade el enlace a tus diapositivas (debe empezar por http:// o https://)',
+    profilePhotoLabel: 'Foto de perfil',
+    profilePhotoPlaceholder: 'https://… o «usa mi foto de LinkedIn»',
+    profilePhotoHelp:
+      'Opcional. Pega el enlace a una foto tuya, o escribe «usa mi foto de LinkedIn» y la tomamos del perfil que compartiste arriba. La usamos en el flyer y en tu perfil de ponente.',
     firstTimeLabel: 'Sería mi primera charla en Pereira Tech Talks',
     speakerSchoolLabel: 'Me interesa la mentoría de Speaker School',
     notesLabel: '¿Algo más que debamos saber?',
@@ -462,6 +528,28 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     successMessage:
       'Gracias — te responderemos en máximo 7 días hábiles para alinear fecha y formato.',
     defaultSubject: 'Postulación a Call for Speakers',
+    slides: {
+      title: 'Sobre las diapositivas',
+      count:
+        'No limitamos el número de diapositivas, pero tienes muy pocos minutos. Recomendamos llevar pocas: las justas para que tu idea llegue completa sin pasarte del tiempo.',
+      demos:
+        'No hay tiempo para demos en vivo. Si quieres mostrar una, incluye capturas de pantalla en las diapositivas y cuéntalas.',
+    },
+    meetup: {
+      contextLabel: 'Postulas a',
+      contextAria:
+        'Formulario de postulación para el meetup {meetup} del {date}',
+      selectLabel: '¿Para cuál meetup?',
+      selectHelp:
+        'Opcional. Si no eliges ninguno, revisamos tu propuesta para la próxima fecha que encaje.',
+      selectNone: 'Sin preferencia',
+      selectOption: '{date} — {meetup}',
+      formatsNarrowed: 'Este meetup solo recibe: {formats}',
+      formatCleared:
+        'Ese formato no aplica para el meetup que elegiste. Selecciona uno de los disponibles.',
+      formatNotAllowed: 'Este meetup no recibe ese formato.',
+      singleFormatNote: 'Este meetup solo recibe {format}.',
+    },
   },
   sponsorForm: {
     formTitle: 'Consulta de patrocinio',
@@ -546,7 +634,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
           'El formato estándar de meetup. Tema técnico con espacio para preguntas.',
       },
       {
-        name: 'Lightning (5–10 min)',
+        name: 'Lightning (3–5 min)',
         description:
           'Idea precisa, ejemplo, demo o reflexión. Ideal para primera charla.',
       },
@@ -571,6 +659,25 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     formatsEyebrow: 'Formatos',
     processEyebrow: 'Proceso',
     formEyebrow: 'Postulación',
+    openCalls: {
+      eyebrow: 'Convocatorias por meetup',
+      title: 'Convocatorias abiertas',
+      intro:
+        'Estos meetups están recibiendo propuestas ahora mismo, cada uno con los formatos que puede montar ese mes.',
+      formatsLabel: 'Recibe',
+      closesOn: 'Cierra el {date}',
+      slots: '{n} espacios',
+      slotsOne: '1 espacio',
+      opensOn: 'Abre el {date}',
+      rowCta: 'Postula a este meetup',
+      rowCtaScheduled: 'Ver el meetup',
+      rowCtaAria: 'Postula tu charla al meetup de {date}',
+      viewMeetup: 'Ver el meetup',
+      emptyTitle: 'No hay convocatorias por meetup en este momento',
+      emptyBody:
+        'Cuando programamos un meetup y abrimos sus cupos, aparece aquí. La convocatoria general de abajo recibe propuestas todo el año.',
+      heroCta: 'Ver convocatorias abiertas',
+    },
   },
   sponsorUsPage: {
     title: 'Patrocínanos',

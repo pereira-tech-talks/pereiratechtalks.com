@@ -1,0 +1,94 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Pereira Tech Talks",
+    "identifier": "did:web:pereiratechtalks.org"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:pereiratechtalks.org:mcp:site",
+      "displayName": "Pereira Tech Talks site MCP server",
+      "description": "Read-only MCP surface over the community's own data: search posts, list meetups, events, Pereira Tech Day editions, speakers, talks, sponsors, contributors, channels and series. Exposed via WebMCP in the browser.",
+      "type": "application/mcp-server-card+json",
+      "url": "https://pereiratechtalks.org/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "what tools does pereiratechtalks.org expose to agents",
+        "list the speakers who have presented at Pereira Tech Talks",
+        "buscar charlas sobre inteligencia artificial en Pereira Tech Talks",
+        "which Pereira Tech Day editions have taken place"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:feed:open-calls",
+      "displayName": "Open Call for Speakers",
+      "description": "The meetups currently accepting talk proposals, each with the formats it can stage and the date its call closes. Regenerated on every build; contains open calls only.",
+      "type": "application/json",
+      "url": "https://pereiratechtalks.org/api/cfs-open.json",
+      "representativeQueries": [
+        "which Pereira Tech Talks meetups have an open call for speakers",
+        "cuándo cierra la convocatoria del próximo meetup de Pereira Tech Talks",
+        "can I submit a lightning talk to Pereira Tech Talks this month",
+        "qué formatos de charla acepta el meetup de octubre"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:schema:openapi",
+      "displayName": "Public HTTP API schema",
+      "description": "OpenAPI description of the read-only JSON endpoints: posts, series, timeline and the open Call for Speakers manifest.",
+      "type": "application/vnd.oai.openapi+json",
+      "url": "https://pereiratechtalks.org/openapi.json",
+      "representativeQueries": [
+        "what JSON endpoints does pereiratechtalks.org publish",
+        "how do I fetch Pereira Tech Talks blog posts programmatically",
+        "cuál es la API pública de Pereira Tech Talks"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:catalog:agent-skills",
+      "displayName": "Agent Skills index",
+      "description": "The Agent Skills this origin declares, per the agent-skills 0.2.0 discovery schema.",
+      "type": "application/json",
+      "url": "https://pereiratechtalks.org/.well-known/agent-skills/index.json",
+      "representativeQueries": [
+        "which agent skills does pereiratechtalks.org declare",
+        "does Pereira Tech Talks publish agent skills"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:corpus:markdown",
+      "displayName": "Markdown twin corpus",
+      "description": "Every page on the site has a complete Markdown twin at the same path with a .md suffix, in the page's own language. This entry points at the site index twin, which links onward to the rest.",
+      "type": "text/markdown",
+      "url": "https://pereiratechtalks.org/index.md",
+      "representativeQueries": [
+        "what is Pereira Tech Talks",
+        "qué es Pereira Tech Talks y desde cuándo existe",
+        "read the Pereira Tech Talks site as markdown",
+        "cómo participo en la comunidad de Pereira Tech Talks"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:index:llms",
+      "displayName": "llms.txt site guide",
+      "description": "A short, curated map of the site for language models, with llms-full.txt carrying the expanded corpus.",
+      "type": "text/plain",
+      "url": "https://pereiratechtalks.org/llms.txt",
+      "representativeQueries": [
+        "give me an overview of pereiratechtalks.org",
+        "resumen de las secciones del sitio de Pereira Tech Talks"
+      ]
+    },
+    {
+      "identifier": "urn:air:pereiratechtalks.org:feed:posts",
+      "displayName": "Blog post index",
+      "description": "Every published blog post in both languages, with title, description, date, tags, series and author.",
+      "type": "application/json",
+      "url": "https://pereiratechtalks.org/api/posts.json",
+      "representativeQueries": [
+        "list the blog posts published by Pereira Tech Talks",
+        "qué ha escrito la comunidad de Pereira Tech Talks sobre IA",
+        "find Pereira Tech Talks articles about public speaking"
+      ]
+    }
+  ]
+}
