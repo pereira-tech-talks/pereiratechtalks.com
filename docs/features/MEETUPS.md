@@ -250,7 +250,7 @@ La fecha está confirmada y el encuentro es virtual.
 
 ### Convocatoria
 
-Recibimos propuestas de charlas relámpago hasta el 9 de septiembre.
+Recibimos propuestas de charlas relámpago hasta el viernes 18 de septiembre.
 ```
 
 The `.en.md` sibling carries the same shape with `### Call for speakers`.

@@ -15,7 +15,7 @@ callForSpeakers:
   status: open
   formats:
     - lightning
-  closesAt: 2026-10-07
+  closesAt: 2026-10-16
   note:
     en: "No theme this month. If it is technical and it fits in five minutes, it fits here."
     es: "Este mes no hay tema. Si es técnico y cabe en cinco minutos, cabe aquí."
@@ -25,12 +25,14 @@ draft: false
 
 ## Meetup de octubre
 
-Octubre va sin tema, y eso es la propuesta. Las mejores charlas relámpago que hemos tenido no salieron de una convocatoria temática: salieron de alguien que llevaba semanas dándole vueltas a algo y por fin lo contó.
+Octubre llega sin tema, y esa es justamente la invitación. Todo el mes es de charlas relámpago: de tres a cinco minutos, la idea que tú quieras, sin que nadie te diga sobre qué hablar.
 
-Un truco de tu editor, una librería que resultó no valer la pena, un post-mortem de cinco minutos, una idea a medio cocinar que quieres discutir. Todo cabe.
+Las mejores charlas relámpago que hemos tenido no salieron de una convocatoria temática. Salieron de alguien que llevaba semanas dándole vueltas a algo, que pensaba que no era tan importante, y que al final lo contó en cinco minutos y dejó a media sala tomando notas.
+
+Eso es lo que buscamos: un truco de tu editor, una librería que resultó no valer la pena, un post-mortem corto, una idea a medio cocinar que quieres discutir en voz alta. Si es técnico y te importa, cabe.
 
 La fecha es tentativa y el encuentro es virtual.
 
 ### Convocatoria
 
-Recibimos charlas relámpago hasta el 7 de octubre. Sin tema, sin filtro: solo tráelo en tres a cinco minutos.
+Recibimos charlas relámpago hasta el viernes 16 de octubre. Sin tema y sin filtro: solo tráelo en tres a cinco minutos.

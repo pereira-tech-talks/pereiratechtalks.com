@@ -10,4 +10,4 @@ The date is confirmed and the meetup is online.
 
 ### Call for speakers
 
-We are taking lightning talk proposals until 9 September. If you have never presented in the community, this is the format we suggest starting with, and the month where we will help you most.
+We are taking lightning talk proposals until Friday 18 September. If you have never presented in the community, this is the format we suggest starting with, and the month where we will help you most.

@@ -15,7 +15,7 @@ callForSpeakers:
   status: open
   formats:
     - lightning
-  closesAt: 2026-10-28
+  closesAt: 2026-11-20
   note:
     en: "Nothing leaves this room badly. We are here for the lesson, not the blame."
     es: "De aquí nadie sale mal parado. Venimos por la lección, no por el culpable."
@@ -25,12 +25,14 @@ draft: false
 
 ## Meetup de noviembre
 
-Noviembre lo dedicamos a lo que salió mal. Un bug que se comió una semana, un despliegue que se cayó en viernes, una decisión de arquitectura que hoy pagas en intereses.
+Noviembre lo dedicamos a lo que salió mal, y lo decimos con entusiasmo de verdad: es la noche que más ganas tenemos de organizar. Charlas relámpago sobre el bug que se comió una semana, el despliegue que se cayó un viernes, la decisión de arquitectura que hoy pagas en intereses.
 
-Casi todo lo que se cuenta en público son los éxitos, y así es difícil aprender. Cinco minutos contando cómo lo rompiste y qué harías distinto valen más que media hora de arquitectura ideal.
+Casi todo lo que se cuenta en público son éxitos, y así no aprende nadie. Los errores se quedan en el chat privado del equipo, se olvidan, y seis meses después alguien más los repite exactamente igual.
 
-La fecha es tentativa y el encuentro es virtual. La confirmamos cuando cerremos el programa.
+Cinco minutos contando cómo lo rompiste y qué harías distinto valen más que media hora de arquitectura ideal. Y de aquí nadie sale mal parado: venimos por la lección, no por el culpable.
+
+La fecha es tentativa y el encuentro es virtual.
 
 ### Convocatoria
 
-Recibimos charlas relámpago hasta el 28 de octubre. Trae tu error favorito: de aquí nadie sale mal parado, venimos por la lección.
+Recibimos charlas relámpago hasta el viernes 20 de noviembre. Trae tu error favorito: el que más te dolió o el que más te enseñó.

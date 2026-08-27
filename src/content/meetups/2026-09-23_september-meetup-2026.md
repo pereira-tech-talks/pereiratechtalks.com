@@ -15,7 +15,7 @@ callForSpeakers:
   status: open
   formats:
     - lightning
-  closesAt: 2026-09-09
+  closesAt: 2026-09-18
   note:
     en: "Your first talk ever? This is the month we built for it."
     es: "¿Tu primera charla? Este es el mes que hicimos para eso."
@@ -35,4 +35,4 @@ La fecha está confirmada y el encuentro es virtual.
 
 ### Convocatoria
 
-Recibimos propuestas de charlas relámpago hasta el 9 de septiembre. Si nunca has presentado en la comunidad, este es el formato con el que recomendamos empezar y el mes en que más te vamos a acompañar.
+Recibimos propuestas de charlas relámpago hasta el viernes 18 de septiembre. Si nunca has presentado en la comunidad, este es el formato con el que recomendamos empezar y el mes en que más te vamos a acompañar.
