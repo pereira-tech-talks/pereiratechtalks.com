@@ -6,7 +6,6 @@
  */
 
 import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
-import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
 import MeetupYearRail from '@/components/meetups/MeetupYearRail.svelte';
 import UpcomingProgrammingRail from '@/components/meetups/UpcomingProgrammingRail.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
@@ -14,17 +13,12 @@ import Eyebrow from '@/components/ui/Eyebrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCommunityStats } from '@/lib/community-stats';
-import { getUrlPrefix, type Language, tr as loc } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getAllMeetupShowcase,
   getUpcomingMeetupShowcase,
   groupMeetupShowcaseByYear,
 } from '@/lib/meetup';
-import {
-  getEditionCountdownTargets,
-  getEditions,
-  isPostponedEdition,
-} from '@/lib/pereiraTechDay';
 import { getTranslations } from '@/lib/translations';
 
 interface Props {
@@ -47,26 +41,9 @@ const groups = groupMeetupShowcaseByYear(allShowcase);
 const years = groups.map((g) => g.year);
 const communityStats = await getCommunityStats();
 
-const editions = await getEditions();
-const upcomingEdition = editions.find(
-  (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
-);
-const postponedEdition = editions.find(isPostponedEdition);
-const ptdCountdown = upcomingEdition
-  ? getEditionCountdownTargets(upcomingEdition)
-  : null;
-const ptdPostponement = postponedEdition?.data.postponement;
-const ptdPostponedImage = ptdPostponement?.image
-  ? {
-      src: loc(ptdPostponement.image.src, lang),
-      alt: loc(ptdPostponement.image.alt, lang),
-    }
-  : undefined;
-
 const tr = getTranslations(lang);
 const mp = tr.meetupsPage;
 const prog = mp.programming;
-const hs = tr.homeSections;
 
 const fillStats = (template: string): string =>
   template
@@ -205,28 +182,6 @@ const breadcrumbs = [
       </a>
     </div>
   </div>
-
-  {/* Same PTD strip as the homepage (after-hero). Calendar/upcoming cards hidden temporarily. */}
-  <PtdAnnouncementStrip
-    lang={lang}
-    eyebrow={ptdPostponement ? hs.ptdStrip.postponedEyebrow : hs.ptdStrip.eyebrow}
-    title={hs.ptdStrip.title}
-    subtitle={
-      ptdPostponement ? loc(ptdPostponement.headline, lang) : hs.ptdStrip.subtitle
-    }
-    ctaLabel={ptdPostponement ? hs.ptdStrip.postponedCta : hs.ptdStrip.cta}
-    dateLabel={hs.ptdStrip.date}
-    venueLabel={hs.ptdStrip.venue}
-    attendanceLabel={hs.ptdStrip.attendance}
-    targetDate={ptdCountdown?.targetDate}
-    endDate={ptdCountdown?.endDate}
-    postponed={Boolean(ptdPostponement)}
-    postponedBody={ptdPostponement ? loc(ptdPostponement.body, lang) : undefined}
-    postponedClosing={
-      ptdPostponement ? loc(ptdPostponement.closing, lang) : undefined
-    }
-    postponedImage={ptdPostponedImage}
-  />
 
   <Section
     eyebrow={prog.eyebrow}

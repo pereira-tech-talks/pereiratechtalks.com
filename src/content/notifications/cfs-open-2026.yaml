@@ -1,0 +1,58 @@
+# Sitewide notice: the call for speakers is open on the programmed meetups.
+#
+# Took over the bar from `ptd-2026-postponed.yaml` on 2026-08-27. The bar is a
+# scarce, sitewide slot and only one notification shows at a time, so whatever
+# sits here should be the thing the community can most act on today.
+#
+# `endsAt` is the last deadline in the cycle (December's call closes 11 Dec), so
+# the notice retires itself rather than outliving the calls it advertises. When
+# the next cycle is programmed, extend it or seed a new entry — do NOT leave a
+# bar up that points at closed calls.
+#
+# Priority 200 keeps it above `monthly-meetups.yaml` (50).
+# `important` drives BOTH the teal bar (#1f6f73 with white text) and the
+# IMPORTANTE / IMPORTANT badge — see severityClass() in TopNotificationBar.svelte.
+# `info` renders a plain elevated-surface bar with no badge.
+severity: important
+title:
+  en: We are looking for speakers
+  es: Estamos buscando ponentes
+summary:
+  en: "Lightning talks, every month until December. Propose yours in 3–5 minutes."
+  es: "Charlas relámpago, todos los meses hasta diciembre. Propón la tuya en 3–5 minutos."
+body:
+  en: |-
+    Every monthly meetup from September to December 2026 is a lightning talk night, and the call for speakers is open on all of them.
+
+    Three to five minutes, one idea per talk, online. You do not need a finished deck to propose — send us the link to where it will be published and we will help you shape the narrative.
+
+    First-time speakers are exactly who we built this format for.
+  es: |-
+    Cada meetup mensual de septiembre a diciembre de 2026 es una noche de charlas relámpago, y la convocatoria está abierta en todos.
+
+    De tres a cinco minutos, una idea por charla, virtual. No necesitas tener las diapositivas terminadas para postular — mándanos el enlace a donde se van a publicar y te ayudamos a armar la narrativa.
+
+    Si nunca has presentado, este es justo el formato que hicimos para eso.
+# TODO — modal art. Uncomment once the asset exists at the path below;
+# a referenced-but-missing image renders broken in a sitewide modal, so this
+# stays commented rather than pointing at nothing. Prompt to generate it:
+# tmp/flyer-05-call-for-speakers.md
+#
+# image:
+#   src: /images/brand/call-for-speakers-2026.webp
+#   alt:
+#     en: >-
+#       Pereira Tech Talks call for speakers: lightning talks of 3 to 5 minutes,
+#       online, every month from September to December 2026
+#     es: >-
+#       Convocatoria de ponentes de Pereira Tech Talks: charlas relámpago de 3 a 5
+#       minutos, virtual, todos los meses de septiembre a diciembre de 2026
+ctaLabel:
+  en: Propose your talk
+  es: Propón tu charla
+ctaHref: /call-for-speakers
+modalEnabled: true
+startsAt: 2026-08-27T00:00:00.000Z
+endsAt: 2026-12-11T23:59:59.000Z
+priority: 200
+active: true

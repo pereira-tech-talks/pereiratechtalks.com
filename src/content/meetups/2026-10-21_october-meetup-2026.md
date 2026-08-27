@@ -7,7 +7,7 @@ description:
   es: "Octubre no tiene tema a propósito: trae esa idea que llevas semanas queriendo contar y cuéntala en cinco minutos. Charlas relámpago, sin filtro temático."
 pubDate: 2026-10-21
 date: 2026-10-21
-dateConfidence: tentative
+dateConfidence: confirmed
 mode: virtual
 hero:
   src: "/images/meetups/october-meetup-2026/hero.webp"
@@ -39,7 +39,7 @@ Las mejores charlas relámpago que hemos tenido no salieron de una convocatoria 
 
 Eso es lo que buscamos: un truco de tu editor, una librería que resultó no valer la pena, un post-mortem corto, una idea a medio cocinar que quieres discutir en voz alta. Si es técnico y te importa, cabe.
 
-La fecha es tentativa y el encuentro es virtual.
+La fecha está confirmada y el encuentro es virtual.
 
 ### Convocatoria
 

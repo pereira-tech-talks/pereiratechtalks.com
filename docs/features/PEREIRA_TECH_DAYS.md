@@ -335,7 +335,7 @@ required — a postponement must not degrade bilingual parity.
 | `PtdHero2026` | Eyebrow becomes the postponed badge; date/venue/attendance withheld; countdown replaced by a status pill; register CTA replaced by a link to the solidarity blog post |
 | `scheduleAnchors` | Empty, so the *ver cronograma* CTA disappears from both the edition header nav and the hero. The agenda section stays on the page — it is simply not advertised |
 | `PtdPostponedNotice` | Rendered directly under the hero, above every other section; CTA to the solidarity blog post |
-| `PtdAnnouncementStrip` (homepage) | Switches from promo to notice: notice art, announcement copy, no countdown, CTA to the solidarity blog post |
+| `PtdAnnouncementStrip` (homepage) | **Currently unmounted** — see note below. When mounted, switches from promo to notice: notice art, announcement copy, no countdown, CTA to the solidarity blog post |
 | `EditionCard` | `Pospuesta` / `Postponed` badge in the danger tint; `postponement.ogImage` replaces the promo card |
 | JSON-LD | `eventStatus: https://schema.org/EventPostponed` |
 | `og:image` | `postponement.ogImage`, so social previews stop announcing the event |
@@ -380,6 +380,12 @@ Steps 1–2 alone bring back the register CTA, the countdown, the sponsorship
 plans, the promo art, the original FAQ answers, the `EventScheduled` JSON-LD,
 and the promotional strip. `postponement`, `whilePostponed`, and the notice
 images can stay in place — they go inert.
+
+> **The strip is not on any page right now.** Both mounts (homepage and
+> `/meetups`) were removed once the postponement notice had run its course; the
+> monthly-meetup programming board took that slot on both pages. The component
+> is kept intact so restoring an edition means remounting it in
+> `HomePage.astro`, not rewriting it.
 
 ## `EditionScope` + PTT chrome rule
 

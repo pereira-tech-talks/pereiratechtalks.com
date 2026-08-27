@@ -7,7 +7,7 @@ description:
   es: "Noviembre es para lo que salió mal: un bug que se comió una semana, un despliegue caído, una decisión que costó. Charlas relámpago sobre lo que aprendimos rompiendo cosas."
 pubDate: 2026-11-25
 date: 2026-11-25
-dateConfidence: tentative
+dateConfidence: confirmed
 mode: virtual
 hero:
   src: "/images/meetups/november-meetup-2026/hero.webp"
@@ -39,7 +39,7 @@ Casi todo lo que se cuenta en público son éxitos, y así no aprende nadie. Los
 
 Cinco minutos contando cómo lo rompiste y qué harías distinto valen más que media hora de arquitectura ideal. Y de aquí nadie sale mal parado: venimos por la lección, no por el culpable.
 
-La fecha es tentativa y el encuentro es virtual.
+La fecha está confirmada y el encuentro es virtual.
 
 ### Convocatoria
 

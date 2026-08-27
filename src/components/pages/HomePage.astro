@@ -1,26 +1,20 @@
 ---
 import EditionCard from '@/components/cards/EditionCard.astro';
-import MeetupShowcaseCard from '@/components/cards/MeetupShowcaseCard.astro';
 import VerticalCard from '@/components/cards/VerticalCard.astro';
 import BlogPreviewSection from '@/components/home/BlogPreviewSection.astro';
 import ContactSection from '@/components/home/ContactSection.astro';
 import HeroSection from '@/components/home/HeroSection/HeroSection.astro';
 import { HomeSectionContentAlignmentEType } from '@/components/home/HomeSection/enum';
 import HomeSection from '@/components/home/HomeSection/HomeSection.astro';
-import PtdAnnouncementStrip from '@/components/home/PtdAnnouncementStrip.astro';
+import UpcomingProgrammingRail from '@/components/meetups/UpcomingProgrammingRail.astro';
 import LinkArrow from '@/components/ui/LinkArrow.astro';
 import Section from '@/components/ui/Section.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getDefaultOgImage } from '@/lib/constances';
 import type { Language } from '@/lib/i18n';
-import { getUrlPrefix, tr } from '@/lib/i18n';
-import type { MeetupShowcaseItem } from '@/lib/meetup';
-import { getMeetups, getUpcomingMeetupShowcase } from '@/lib/meetup';
-import {
-  getEditionCountdownTargets,
-  getEditions,
-  isPostponedEdition,
-} from '@/lib/pereiraTechDay';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getUpcomingMeetupShowcase } from '@/lib/meetup';
+import { getEditions, isPostponedEdition } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
 import { getActiveVerticals } from '@/lib/vertical';
@@ -33,9 +27,9 @@ const { lang } = Astro.props;
 const t = getTranslations(lang);
 const prefix = getUrlPrefix(lang);
 const hs = t.homeSections;
+const prog = t.meetupsPage.programming;
 
 const upcomingShowcase = await getUpcomingMeetupShowcase();
-const latestMeetups = (await getMeetups()).slice(0, 3);
 const editions = await getEditions();
 const upcomingEdition = editions.find(
   (e) => e.data.status === 'announced' || e.data.status === 'rsvp-open'
@@ -51,27 +45,8 @@ const stripEdition = upcomingEdition ?? postponedEdition;
 const lastEdition =
   stripEdition ?? editions.find((e) => e.data.status === 'completed');
 // Only ever counts down to an edition that is actually going ahead.
-const ptdCountdown = upcomingEdition
-  ? getEditionCountdownTargets(upcomingEdition)
-  : null;
-const ptdPostponement = postponedEdition?.data.postponement;
-const ptdPostponedImage = ptdPostponement?.image
-  ? {
-      src: tr(ptdPostponement.image.src, lang),
-      alt: tr(ptdPostponement.image.alt, lang),
-    }
-  : undefined;
 const verticals = await getActiveVerticals();
 const sponsors = (await getActiveSponsors()).slice(0, 12);
-
-const meetupsToShow: MeetupShowcaseItem[] =
-  upcomingShowcase.length > 0
-    ? upcomingShowcase.slice(0, 3)
-    : latestMeetups.map((meetup) => ({ type: 'meetup', data: meetup }));
-const meetupsHeading =
-  upcomingShowcase.length > 0
-    ? hs.meetups.upcomingTitle
-    : hs.meetups.latestTitle;
 ---
 
 <MainLayout
@@ -118,26 +93,40 @@ const meetupsHeading =
   />
 
   <div class="home-below-fold">
-  <PtdAnnouncementStrip
-    lang={lang}
-    eyebrow={ptdPostponement ? hs.ptdStrip.postponedEyebrow : hs.ptdStrip.eyebrow}
-    title={hs.ptdStrip.title}
-    subtitle={
-      ptdPostponement ? tr(ptdPostponement.headline, lang) : hs.ptdStrip.subtitle
+  {/*
+    The programming board, same component and same copy as /meetups — one
+    source, so the two cannot drift into saying different things.
+  */}
+  <Section eyebrow={prog.eyebrow} title={prog.title} surface="alt">
+    <p class="-mt-2 max-w-3xl text-ptt-secondary">{prog.intro}</p>
+    {
+      upcomingShowcase.length > 0 ? (
+        <>
+          <div class="mt-8">
+            <UpcomingProgrammingRail
+              items={upcomingShowcase}
+              lang={lang}
+              label={prog.railLabel}
+            />
+          </div>
+          <div class="mt-10">
+            <LinkArrow href={`${prefix}/meetups/`}>{hs.meetups.cta}</LinkArrow>
+          </div>
+        </>
+      ) : (
+        <div class="mt-8 rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:p-8">
+          <h3 class="text-lg font-semibold text-ptt">{prog.emptyTitle}</h3>
+          <p class="mt-2 max-w-2xl text-ptt-secondary">{prog.emptyBody}</p>
+          <a
+            href={`${prefix}/call-for-speakers/`}
+            class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+          >
+            {prog.emptyCta}
+          </a>
+        </div>
+      )
     }
-    ctaLabel={ptdPostponement ? hs.ptdStrip.postponedCta : hs.ptdStrip.cta}
-    dateLabel={hs.ptdStrip.date}
-    venueLabel={hs.ptdStrip.venue}
-    attendanceLabel={hs.ptdStrip.attendance}
-    targetDate={ptdCountdown?.targetDate}
-    endDate={ptdCountdown?.endDate}
-    postponed={Boolean(ptdPostponement)}
-    postponedBody={ptdPostponement ? tr(ptdPostponement.body, lang) : undefined}
-    postponedClosing={
-      ptdPostponement ? tr(ptdPostponement.closing, lang) : undefined
-    }
-    postponedImage={ptdPostponedImage}
-  />
+  </Section>
 
   <HomeSection
     title={hs.about.title}
@@ -213,24 +202,6 @@ const meetupsHeading =
         <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
           <LinkArrow href={`${prefix}/sponsors/`}>{hs.sponsors.cta}</LinkArrow>
           <LinkArrow href={`${prefix}/sponsor-us/`}>{hs.sponsors.ctaJoin}</LinkArrow>
-        </div>
-      </Section>
-    )
-  }
-
-  {/* Calendar / upcoming meetups — hidden temporarily (restore: drop `false &&`). */}
-  {
-    false && meetupsToShow.length > 0 && (
-      <Section eyebrow={hs.meetups.eyebrow} title={meetupsHeading} surface="alt">
-        <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {meetupsToShow.map((item) => (
-            <li>
-              <MeetupShowcaseCard item={item} lang={lang} />
-            </li>
-          ))}
-        </ul>
-        <div class="mt-10">
-          <LinkArrow href={`${prefix}/meetups/`}>{hs.meetups.cta}</LinkArrow>
         </div>
       </Section>
     )

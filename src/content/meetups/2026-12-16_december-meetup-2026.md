@@ -7,7 +7,7 @@ description:
   es: "Diciembre cierra el año con charlas relámpago y sobremesa larga: lo que construiste, lo que aprendiste y lo que te llevas a 2027, en cinco minutos."
 pubDate: 2026-12-16
 date: 2026-12-16
-dateConfidence: tentative
+dateConfidence: confirmed
 mode: virtual
 hero:
   src: "/images/meetups/december-meetup-2026/hero.webp"
@@ -40,7 +40,7 @@ Es el mes de mirar atrás sin solemnidad. Lo que construiste, lo que aprendiste 
 
 Si este año hiciste algo de lo que estás orgulloso, o algo de lo que aprendiste mucho más de lo que esperabas, esta es la noche para contarlo.
 
-La fecha es tentativa y el encuentro es virtual. La convocatoria abre el 15 de octubre.
+La fecha está confirmada y el encuentro es virtual. La convocatoria abre el 15 de octubre.
 
 ### Convocatoria
 

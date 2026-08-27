@@ -6,7 +6,7 @@ Almost everything told in public is a success story, and nobody learns anything 
 
 Five minutes on how you broke it and what you would do differently is worth more than half an hour of ideal architecture. And nothing leaves this room badly: we are here for the lesson, not for the culprit.
 
-The date is tentative and the meetup is online.
+The date is confirmed and the meetup is online.
 
 ### Call for speakers
 

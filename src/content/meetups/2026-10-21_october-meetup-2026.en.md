@@ -6,7 +6,7 @@ The best lightning talks we have had did not come out of a themed call. They cam
 
 That is what we are after: an editor trick, a library that turned out not to be worth it, a short post-mortem, a half-baked idea you want to argue out loud. If it is technical and you care about it, it fits.
 
-The date is tentative and the meetup is online.
+The date is confirmed and the meetup is online.
 
 ### Call for speakers
 
