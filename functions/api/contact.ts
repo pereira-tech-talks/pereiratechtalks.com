@@ -22,6 +22,7 @@ import {
   CFS_FORM_UUID,
   CFS_FORMAT_VALUES,
   CFS_Q,
+  meetupUrlFromSlug,
   CONDUCT_FORM_UUID,
   CONDUCT_Q,
   CONTACT_FORM_UUID,
@@ -56,6 +57,7 @@ const MAX_TAKEAWAYS_LENGTH = 800;
 const MAX_SOCIAL_LENGTH = 300;
 const MAX_COMPANY_LENGTH = 160;
 const MAX_EMAIL_LENGTH = 254;
+const MAX_MEETUP_SLUG_LENGTH = 80;
 
 const FORM_TYPES = [
   'contact',
@@ -237,6 +239,9 @@ function buildContent(
         [CFS_Q.SOCIAL_URL]: fields.socialUrl,
         [CFS_Q.FIRST_TIME]: booleanToDailyBot(flags.firstTime),
         [CFS_Q.SPEAKER_SCHOOL]: booleanToDailyBot(flags.speakerSchool),
+        // Empty string when the proposal came from the global page. The same
+        // shape CFS_Q.NOTES already ships successfully on this form.
+        [CFS_Q.MEETUP]: meetupUrlFromSlug(fields.meetupSlug),
         [CFS_Q.NOTES]: fields.message || fields.notes || '',
         [CFS_Q.LANG]: lang,
         [CFS_Q.PAGE_PATH]: pagePath,
@@ -504,6 +509,7 @@ export async function onRequestPost(
     abstract: sanitiseText(data.abstract, MAX_ABSTRACT_LENGTH),
     takeaways: sanitiseText(data.takeaways, MAX_TAKEAWAYS_LENGTH),
     socialUrl: sanitiseText(data.socialUrl, MAX_SOCIAL_LENGTH),
+    meetupSlug: sanitiseText(data.meetupSlug, MAX_MEETUP_SLUG_LENGTH),
     company: sanitiseText(data.company, MAX_COMPANY_LENGTH),
     contactRole: sanitiseText(data.contactRole, 120),
     tierInterest: sanitiseText(data.tierInterest, 32),

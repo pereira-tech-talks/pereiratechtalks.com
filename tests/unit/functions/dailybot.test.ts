@@ -3,11 +3,13 @@ import { CFS_FORMATS } from '@/lib/contact-form';
 import {
   booleanToDailyBot,
   CFS_FORMAT_VALUES,
+  CFS_Q,
   CONTACT_FORM_UUID,
   CONTACT_TOPIC_VALUES,
   EXPERIENCE_LEVEL_VALUES,
   LANG_VALUES,
   lookupChoice,
+  meetupUrlFromSlug,
   normalizePagePath,
   SPONSOR_TIER_VALUES,
   slugify,
@@ -160,5 +162,26 @@ describe('CFS formats stay in lockstep across the three declarations', () => {
 
   it('the Dailybot lookup rejects a format none of the three declares', () => {
     expect(lookupChoice('keynote', CFS_FORMAT_VALUES)).toBeNull();
+  });
+});
+
+describe('CFS_Q.MEETUP', () => {
+  const UUID_RE =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+
+  it('is a real UUID, not a placeholder', () => {
+    expect(CFS_Q.MEETUP).toMatch(UUID_RE);
+  });
+
+  it('does not collide with any other CFS question', () => {
+    const uuids = Object.values(CFS_Q);
+    expect(new Set(uuids).size).toBe(uuids.length);
+  });
+
+  it('meetupUrlFromSlug builds the canonical URL, and empty for no meetup', () => {
+    expect(meetupUrlFromSlug('november-meetup-2026')).toBe(
+      'https://pereiratechtalks.org/meetups/november-meetup-2026/'
+    );
+    expect(meetupUrlFromSlug('')).toBe('');
   });
 });

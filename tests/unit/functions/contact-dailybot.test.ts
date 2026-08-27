@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   CALENDAR_FORM_UUID,
   CALENDAR_Q,
+  CFS_Q,
   CONDUCT_FORM_UUID,
   CONDUCT_Q,
   CONTACT_FORM_UUID,
@@ -308,5 +309,116 @@ describe('POST /api/contact → Dailybot', () => {
     expect(res.status).toBeGreaterThanOrEqual(400);
     const json = (await res.json()) as { ok: boolean };
     expect(json.ok).toBe(false);
+  });
+});
+
+/**
+ * A Call for Speakers proposal can name the meetup it targets. The value is a
+ * canonical URL, so an organizer reading the Slack report can click straight
+ * through, and no remote form edit is needed when a meetup is programmed.
+ *
+ * PLAN_meetup_programming_and_call_for_speakers, Task 3.
+ */
+describe('CFS submissions carry the meetup they target', () => {
+  const cfsBody = (over: Record<string, unknown> = {}) => ({
+    _form: 'cfs',
+    name: 'Grace',
+    email: 'grace@example.com',
+    talkTitle: 'Compilers in production',
+    format: 'lightning',
+    abstract: 'A short, concrete tour of how we ship a compiler every week.',
+    takeaways: 'How to stage a risky release',
+    socialUrl: 'https://example.com/grace',
+    lang: 'es',
+    page_path: '/meetups/november',
+    website: '',
+    ...over,
+  });
+
+  const stubOk = () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(
+        new Response(JSON.stringify({ uuid: 'resp-cfs' }), { status: 201 })
+      );
+    vi.stubGlobal('fetch', fetchMock);
+    return fetchMock;
+  };
+
+  /**
+   * The rate limiter keys on CF-Connecting-IP and its store is module-level, so
+   * every test in this file shares one bucket. Give each case its own IP so
+   * these tests exercise the mapping rather than the 8-per-window limit.
+   */
+  let ipCounter = 0;
+  const ctx = (body: unknown) => {
+    ipCounter += 1;
+    const request = new Request('https://pereiratechtalks.org/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Origin: 'https://pereiratechtalks.org',
+        'CF-Connecting-IP': `203.0.113.${ipCounter}`,
+      },
+      body: JSON.stringify(body),
+    });
+    return {
+      request,
+      env: { DAILYBOT_API_KEY: 'test-key' },
+      waitUntil: vi.fn((p: Promise<unknown>) => {
+        p.catch(() => {});
+      }),
+    };
+  };
+
+  const contentOf = (fetchMock: ReturnType<typeof vi.fn>) => {
+    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    return (
+      JSON.parse(init.body as string) as { content: Record<string, string> }
+    ).content;
+  };
+
+  it('sends the canonical meetup URL when a slug is supplied', async () => {
+    const fetchMock = stubOk();
+    const res = await onRequestPost(
+      ctx(cfsBody({ meetupSlug: 'november-meetup-2026' }))
+    );
+    expect(res.status).toBe(200);
+    expect(contentOf(fetchMock)[CFS_Q.MEETUP]).toBe(
+      'https://pereiratechtalks.org/meetups/november-meetup-2026/'
+    );
+  });
+
+  it('sends an empty string when the proposal came from the global page', async () => {
+    // The same shape CFS_Q.NOTES already ships successfully on this form: an
+    // optional Dailybot text question accepts the empty string.
+    const fetchMock = stubOk();
+    const res = await onRequestPost(ctx(cfsBody()));
+    expect(res.status).toBe(200);
+    expect(contentOf(fetchMock)[CFS_Q.MEETUP]).toBe('');
+  });
+
+  it('strips control characters and caps an over-long slug', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(
+      ctx(cfsBody({ meetupSlug: `nov ember-${'x'.repeat(200)}` }))
+    );
+    const value = contentOf(fetchMock)[CFS_Q.MEETUP];
+    // 80-char cap on the slug, plus the origin and the /meetups/ wrapper.
+    expect(value.length).toBeLessThanOrEqual(
+      'https://pereiratechtalks.org/meetups//'.length + 80
+    );
+  });
+
+  it('leaves the other twelve CFS answers untouched', async () => {
+    const fetchMock = stubOk();
+    await onRequestPost(ctx(cfsBody({ meetupSlug: 'november-meetup-2026' })));
+    const content = contentOf(fetchMock);
+    expect(content[CFS_Q.NAME]).toBe('Grace');
+    expect(content[CFS_Q.EMAIL]).toBe('grace@example.com');
+    expect(content[CFS_Q.TALK_TITLE]).toBe('Compilers in production');
+    expect(content[CFS_Q.FORMAT]).toBe('Lightning');
+    expect(content[CFS_Q.LANG]).toBe('Spanish');
+    expect(content[CFS_Q.PAGE_PATH]).toBe('/meetups/november');
   });
 });

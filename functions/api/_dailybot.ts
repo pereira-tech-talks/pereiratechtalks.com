@@ -48,6 +48,17 @@ export const CFS_Q = {
   SOCIAL_URL: '13779547-771a-4cf6-a859-d7e0073c95a1',
   FIRST_TIME: 'dd83b3af-7b7b-4748-ba6a-316fae3f825d',
   SPEAKER_SCHOOL: '8e518d0c-2757-4e00-ae97-eca425c476f8',
+  /**
+   * Optional short text carrying the canonical URL of the meetup a proposal
+   * targets (`https://pereiratechtalks.org/meetups/{slug}/`), or `''` when the
+   * proposal came from the global /call-for-speakers page.
+   *
+   * Deliberately NOT a multiple choice: this org's MC values equal their labels,
+   * so a per-meetup choice list would need the remote form edited every time a
+   * meetup is programmed, and any drift fails real submissions with
+   * ["response is not valid"]. A URL is stable and actionable in Slack.
+   */
+  MEETUP: '00969219-78f1-442f-a12a-2fa890ab9002',
   NOTES: '9bf5d1e9-710a-4fc2-956e-a2f7d763fc2b',
   LANG: '2540a2ff-ba71-4682-9c62-c8f2731639e5',
   PAGE_PATH: '97d98089-711b-472f-8364-a639b9319ad5',
@@ -102,6 +113,20 @@ export const CONDUCT_Q = {
   LANG: '154e1e16-507d-410f-b225-d21e467a1373',
   PAGE_PATH: '2d4b21f2-f8ce-4149-a6be-87b5ebe7feab',
 } as const;
+
+/**
+ * Public site origin, for building the canonical URLs Dailybot stores.
+ *
+ * Declared here rather than imported: the Cloudflare Pages Functions bundle is
+ * built separately and cannot resolve the `@/` alias, so it cannot read
+ * `SITE_URL` from src/lib/constances.ts. Keep the two in sync.
+ */
+export const SITE_ORIGIN = 'https://pereiratechtalks.org';
+
+/** Canonical meetup URL for a validated slug, or `''` when there is no meetup. */
+export function meetupUrlFromSlug(slug: string): string {
+  return slug ? `${SITE_ORIGIN}/meetups/${slug}/` : '';
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 // Page path normalization

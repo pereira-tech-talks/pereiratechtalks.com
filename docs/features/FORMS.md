@@ -18,7 +18,7 @@ Canonical UUIDs and choice lookups live in `functions/api/_dailybot.ts`.
 | Form | UI | Route | `_form` | Dailybot form |
 |------|----|-------|---------|---------------|
 | Contact | `ContactForm.svelte` | `/contact`, `/en/contact` | `contact` | PTT Contact |
-| Call for Speakers | `SpeakersApplicationForm.svelte` | `/call-for-speakers` | `cfs` | PTT Call for Speakers |
+| Call for Speakers | `SpeakersApplicationForm.svelte` | `/call-for-speakers`, `/meetups/{slug}#call-for-speakers` | `cfs` | PTT Call for Speakers |
 | Speaker School | `SpeakerSchoolForm.svelte` | `/verticals/speaker-school` | `speaker-school` | PTT Speaker School |
 | Sponsors | `SponsorInquiryForm.svelte` | `/sponsor-us` | `sponsor` | PTT Sponsors |
 | Community calendar | `CalendarIntakeForm.svelte` | `/calendar#calendar-intake` | `calendar` | PTT Community Calendar |
@@ -62,6 +62,10 @@ secrets + optional labeled smokes:
 ```
 
 - `_form`: `contact` \| `cfs` \| `speaker-school` \| `sponsor` \| `calendar` \| `conduct`
+- `meetupSlug` (optional, `cfs` only): the meetup a proposal targets. Sent by the
+  meetup-scoped form; omitted from the global page. The server maps it to the
+  canonical `https://pereiratechtalks.org/meetups/{slug}/` and sends `''` when
+  absent
 - Legacy without `_form`: `reason`/`topic` maps `tech-talk`→`cfs`, `sponsorship`→`sponsor`, `conduct`→`conduct`, else→`contact`
 - Honeypot `website` must be empty (fake `200` if filled; never forwarded)
 - Dailybot POST: `https://api.dailybot.com/v1/forms/{uuid}/responses/` with `{ content, automation: true }`
@@ -96,6 +100,21 @@ Full constants: `CONTACT_Q`, `CFS_Q`, `SPEAKER_SCHOOL_Q`, `SPONSORS_Q`,
 
 Every form includes `lang` (Spanish / English) and `page_path` (normalized
 pathname metadata).
+
+### Call for Speakers — the `Meetup (URL)` question
+
+`CFS_Q.MEETUP` = `00969219-78f1-442f-a12a-2fa890ab9002` — an **optional** short
+text at index 4 (right after `Format`, so the Slack report reads "which meetup /
+which format" together). It carries the canonical meetup URL, or `''` for a
+proposal submitted from the global `/call-for-speakers` page.
+
+Deliberately **not** a multiple choice. This org's MC values equal their labels,
+so a per-meetup choice list would need the remote form edited every time a meetup
+is programmed, and any drift would fail real submissions with
+`["response is not valid"]`. A URL is stable and clickable in Slack.
+
+Verified live (2026-08): an optional text question accepts `''` — same shape
+`CFS_Q.NOTES` already ships.
 
 ## Anti-spam & privacy
 
