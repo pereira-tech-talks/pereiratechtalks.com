@@ -32,6 +32,7 @@
 | SEO | [SEO](docs/SEO.md) | Meta tags, Organization/Event/Person JSON-LD, hreflang, AEO |
 | Security | [Security](docs/SECURITY.md) | Static site + community-form threat model |
 | Documentation | [Documentation Guide](docs/DOCUMENTATION_GUIDE.md) | When and how to update docs |
+| AEO | [ARD Manifest](docs/aeo/ARD_MANIFEST.md) | `/.well-known/ai-catalog.json` — what this origin offers agents |
 | Analytics | [Analytics](docs/ANALYTICS.md) | Tracking, GSC, verification |
 | Community | [Code of Conduct](docs/CODE_OF_CONDUCT.md) · [Contributing](docs/CONTRIBUTING.md) · [Governance](docs/GOVERNANCE.md) · [Community Guidelines](docs/COMMUNITY_GUIDELINES.md) | Operational community rules |
 | Channels & Forms | [Communication Channels](docs/COMMUNICATION_CHANNELS.md) · [Call for Speakers](docs/CALL_FOR_SPEAKERS.md) · [Sponsorship](docs/SPONSORSHIP.md) | Public-facing community processes |
