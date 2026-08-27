@@ -27,9 +27,19 @@ interface Props {
    * larger cards read better than three cramped ones.
    */
   columns?: 2 | 3;
+  /**
+   * Load the first flyer eagerly. **Only true when the rail is genuinely above
+   * the fold**, which on this site it never is.
+   *
+   * It used to be unconditional, and it cost the homepage 0.6s of LCP and four
+   * Lighthouse points: a ~95KB flyer several screens down was competing for
+   * bandwidth with the preloaded hero photo that *is* the LCP element. Measured
+   * against `main` in PLAN_branch_audit_and_pr Task 6.
+   */
+  eagerFirst?: boolean;
 }
 
-const { items, lang, label, columns = 3 } = Astro.props;
+const { items, lang, label, columns = 3, eagerFirst = false } = Astro.props;
 
 // Written out rather than interpolated — Tailwind scans source for whole class
 // names, so `lg:grid-cols-${columns}` would never be generated.
@@ -48,13 +58,13 @@ const columnsClass =
           <UpcomingMeetupCard
             meetup={item.data}
             lang={lang}
-            loading={index === 0 ? 'eager' : 'lazy'}
+            loading={eagerFirst && index === 0 ? 'eager' : 'lazy'}
           />
         ) : (
           <EditionCard
             edition={item.data}
             lang={lang}
-            loading={index === 0 ? 'eager' : 'lazy'}
+            loading={eagerFirst && index === 0 ? 'eager' : 'lazy'}
           />
         )}
       </li>

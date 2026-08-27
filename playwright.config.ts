@@ -17,9 +17,12 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   webServer: {
-    // Use `exec astro preview` (not `run astro:preview --port`) so the port
-    // flag reaches Astro reliably under pnpm.
-    command: `${pnpm} exec astro preview --port 4321`,
+    // Not `astro preview`: in Astro 7.2.x the CLI starts a background daemon and
+    // the foreground process exits 0 immediately, which Playwright reports as
+    // "Process from config.webServer exited early" before running a single
+    // test. `scripts/preview-server.mjs` uses Astro's programmatic `preview()`
+    // and holds it open — same routing, no daemon.
+    command: `${pnpm} exec node scripts/preview-server.mjs --port 4321`,
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
