@@ -2,7 +2,7 @@
 
 September is for lightning talks: five to ten minutes each, one idea per talk.
 
-The date is confirmed. The venue and the running order are announced once the call closes.
+The date is confirmed and the meetup is online. The running order is announced once the call closes.
 
 ### Call for speakers
 

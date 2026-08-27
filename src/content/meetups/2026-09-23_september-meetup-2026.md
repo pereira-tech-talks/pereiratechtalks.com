@@ -8,6 +8,7 @@ description:
 pubDate: 2026-09-23
 date: 2026-09-23
 dateConfidence: confirmed
+mode: virtual
 verticals:
   - monthly-meetups
 callForSpeakers:
@@ -27,7 +28,7 @@ draft: false
 
 Septiembre lo dedicamos a las charlas relámpago: cinco a diez minutos por persona, una idea por charla.
 
-La fecha está confirmada. La sede y el orden del día se anuncian cuando cerremos la convocatoria.
+La fecha está confirmada y el encuentro es virtual. El orden del día se anuncia cuando cerremos la convocatoria.
 
 ### Convocatoria
 

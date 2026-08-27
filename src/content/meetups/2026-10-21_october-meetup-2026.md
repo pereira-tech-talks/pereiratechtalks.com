@@ -8,6 +8,7 @@ description:
 pubDate: 2026-10-21
 date: 2026-10-21
 dateConfidence: tentative
+mode: virtual
 verticals:
   - monthly-meetups
 callForSpeakers:
@@ -25,7 +26,7 @@ draft: false
 
 Octubre es un mes abierto: no fijamos un tema y programamos con lo que llegue de la comunidad.
 
-La fecha es tentativa. La confirmamos cuando cerremos la sede.
+La fecha es tentativa y el encuentro es virtual. La confirmamos cuando cerremos el programa.
 
 ### Convocatoria
 

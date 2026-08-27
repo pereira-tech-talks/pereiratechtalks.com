@@ -30,6 +30,7 @@ import {
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
   resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
   resolveMeetupStatus,
 } from '@/lib/meetup';
 import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
@@ -80,6 +81,8 @@ const status = resolveMeetupStatus(meetup);
 const lineup = resolveMeetupLineup(meetup);
 const callState = getCallForSpeakersState(meetup);
 const planning = md.planning;
+// "Virtual" for an online meetup; "Sede por confirmar" when a room is still pending.
+const placeFallback = resolveMeetupPlaceFallback(meetup, lang);
 
 const talks = await getTalksByEvent('meetups', slug);
 const speakerSlugs = [
@@ -283,7 +286,7 @@ const metaDescription = buildMetaDescription({
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
-              <span>{planning.venueTbc}</span>
+              <span>{placeFallback}</span>
             </p>
           )
         }
@@ -434,7 +437,7 @@ const metaDescription = buildMetaDescription({
                 </p>
               </>
             ) : (
-              <p class="text-sm text-ptt-secondary">{planning.venueTbc}</p>
+              <p class="text-sm text-ptt-secondary">{placeFallback}</p>
             )
           }
         </div>

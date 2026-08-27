@@ -8,6 +8,7 @@ description:
 pubDate: 2026-11-18
 date: 2026-11-18
 dateConfidence: month-only
+mode: virtual
 verticals:
   - monthly-meetups
 callForSpeakers:
@@ -27,7 +28,7 @@ draft: false
 
 En noviembre cambiamos el formato: en lugar de varias charlas hacemos un taller largo, con la gente escribiendo código.
 
-Todavía no fijamos el día. Anunciamos la fecha exacta y la sede cuando elijamos el taller.
+Todavía no fijamos el día y el taller es virtual. Anunciamos la fecha exacta cuando elijamos el taller.
 
 ### Convocatoria
 

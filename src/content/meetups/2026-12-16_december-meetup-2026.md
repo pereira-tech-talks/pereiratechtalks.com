@@ -8,6 +8,7 @@ description:
 pubDate: 2026-12-16
 date: 2026-12-16
 dateConfidence: month-only
+mode: virtual
 verticals:
   - monthly-meetups
 callForSpeakers:

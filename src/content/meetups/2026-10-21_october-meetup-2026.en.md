@@ -2,7 +2,7 @@
 
 October is an open month: we are not setting a theme and will programme it from whatever the community sends.
 
-The date is tentative. We confirm it once the venue is settled.
+The date is tentative and the meetup is online. We confirm it once the programme is settled.
 
 ### Call for speakers
 

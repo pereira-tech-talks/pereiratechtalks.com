@@ -212,6 +212,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       chipMonthOnlyAria:
         'Solo el mes está definido; el día se anuncia más adelante',
       venueTbc: 'Sede por confirmar',
+      modeVirtual: 'Virtual',
       lineupOpenTitle: 'Programación en construcción',
       lineupOpenBody:
         'Todavía no anunciamos las charlas de este meetup. Si quieres presentar, la convocatoria es el camino.',

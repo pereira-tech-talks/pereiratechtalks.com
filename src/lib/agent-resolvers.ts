@@ -31,6 +31,7 @@ import {
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
   resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
   resolveMeetupStatus,
 } from '@/lib/meetup';
 import {
@@ -212,7 +213,7 @@ export const resolveMeetupDetail = async (
   const venue = meetup.data.venue;
   const venueLabel = venue
     ? [venue.name, venue.city, venue.country].filter(Boolean).join(', ')
-    : getTranslations(lang).meetupDetail.planning.venueTbc;
+    : resolveMeetupPlaceFallback(meetup, lang);
   const mapQuery = venue
     ? encodeURIComponent(
         [venue.name, venue.city, venue.country].filter(Boolean).join(', ')

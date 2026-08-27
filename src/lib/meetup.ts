@@ -494,11 +494,32 @@ export const resolveMeetupDateAttribute = (meetup: Meetup): string =>
  * an empty value would render as a stray comma in a card and would fail
  * `md:check`, which requires a Venue section on every meetup twin.
  */
+/**
+ * What to print where a venue would go, when the meetup has none.
+ *
+ * A virtual meetup is not missing a venue — it does not have one, and saying
+ * "sede por confirmar" would promise a room that will never be booked. A hybrid
+ * meetup *does* still need a physical venue, so it keeps the "to be confirmed"
+ * line until one exists.
+ *
+ * Single source for the five places that render this: the two cards, the detail
+ * hero and sidebar, and the agent twin.
+ */
+export const resolveMeetupPlaceFallback = (
+  meetup: Meetup,
+  lang: Language
+): string => {
+  const planning = getTranslations(lang).meetupDetail.planning;
+  return meetup.data.mode === 'virtual'
+    ? planning.modeVirtual
+    : planning.venueTbc;
+};
+
 export const resolveMeetupVenueLine = (
   meetup: Meetup,
   lang: Language
 ): string => {
   const venue = meetup.data.venue;
-  if (!venue) return getTranslations(lang).meetupDetail.planning.venueTbc;
+  if (!venue) return resolveMeetupPlaceFallback(meetup, lang);
   return [venue.name, venue.city].filter(Boolean).join(', ');
 };

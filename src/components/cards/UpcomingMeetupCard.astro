@@ -23,6 +23,7 @@ import {
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
   resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
 } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
@@ -59,7 +60,7 @@ const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
 
 const venueLine = meetup.data.venue
   ? [meetup.data.venue.name, meetup.data.venue.city].filter(Boolean).join(' · ')
-  : t.venueTbc;
+  : resolveMeetupPlaceFallback(meetup, lang);
 
 const chips = [
   dateConfidence === 'tentative' ? t.chipTentative : null,

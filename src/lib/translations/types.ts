@@ -212,6 +212,8 @@ export interface SiteTranslations {
       chipMonthOnly: string;
       chipMonthOnlyAria: string;
       venueTbc: string;
+      /** Shown in place of a venue when the meetup happens online. */
+      modeVirtual: string;
       lineupOpenTitle: string;
       lineupOpenBody: string;
       lineupPartialBody: string;
