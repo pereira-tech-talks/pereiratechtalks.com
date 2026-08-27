@@ -1,0 +1,93 @@
+---
+/**
+ * A typographic date tile, used where a meetup has no flyer yet.
+ *
+ * A programmed meetup is announced months before its artwork exists. The
+ * archive card's fallback is a stock blog placeholder, which reads as broken
+ * rather than as "not designed yet" — so a programmed meetup gets a deliberate
+ * treatment built from the one fact it does have: the date.
+ *
+ * Fixed aspect ratio, so swapping it for a real flyer later causes no layout
+ * shift.
+ */
+
+import { formatCalendarDate } from '@/lib/dates';
+import type { Language } from '@/lib/i18n';
+import type { MeetupDateConfidence } from '@/lib/meetup';
+
+interface Props {
+  date: Date;
+  dateConfidence: MeetupDateConfidence;
+  lang: Language;
+  /** Accessible name — the tile is decorative once this is announced. */
+  label: string;
+  /** `16/9` for cards, `21/9` for a page hero. */
+  ratio?: '16/9' | '21/9';
+  class?: string;
+}
+
+const {
+  date,
+  dateConfidence,
+  lang,
+  label,
+  ratio = '16/9',
+  class: className = '',
+} = Astro.props;
+
+const monthLabel = formatCalendarDate(date, lang, { month: 'short' })
+  .replace(/\.$/, '')
+  .toUpperCase();
+const dayLabel = formatCalendarDate(date, lang, { day: 'numeric' });
+const yearLabel = formatCalendarDate(date, lang, { year: 'numeric' });
+const weekdayLabel = formatCalendarDate(date, lang, { weekday: 'short' })
+  .replace(/\.$/, '')
+  .toUpperCase();
+
+// Only the month is fixed: printing a day would claim a precision the
+// community does not have.
+const showDay = dateConfidence !== 'month-only';
+
+const ratioClass = ratio === '21/9' ? 'aspect-[21/9]' : 'aspect-[16/9]';
+---
+
+<div
+  class={`relative flex ${ratioClass} w-full items-center justify-center overflow-hidden bg-gradient-to-br from-ptt-bg-dark to-ptt-bg-dark/85 ${className}`}
+  role="img"
+  aria-label={label}
+>
+  {/* Decorative grid motif — PTT brand texture, never a semantic element. */}
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 opacity-[0.07]"
+    style="background-image: radial-gradient(currentColor 1px, transparent 1px); background-size: 18px 18px; color: white;"
+  >
+  </div>
+
+  <div class="relative flex flex-col items-center text-center text-white">
+    {
+      showDay ? (
+        <>
+          <span class="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-white/70 sm:text-xs">
+            {weekdayLabel}
+          </span>
+          <span class="mt-1 text-5xl font-bold leading-none tabular-nums tracking-tight sm:text-6xl">
+            {dayLabel}
+          </span>
+          <span class="mt-1.5 text-sm font-semibold uppercase tracking-[0.22em] text-white/85 sm:text-base">
+            {monthLabel} {yearLabel}
+          </span>
+        </>
+      ) : (
+        <>
+          <span class="text-3xl font-bold uppercase leading-none tracking-tight sm:text-4xl">
+            {monthLabel}
+          </span>
+          <span class="mt-2 text-2xl font-semibold tabular-nums tracking-[0.18em] text-white/85 sm:text-3xl">
+            {yearLabel}
+          </span>
+        </>
+      )
+    }
+  </div>
+</div>

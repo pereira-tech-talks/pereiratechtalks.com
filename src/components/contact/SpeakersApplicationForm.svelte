@@ -18,9 +18,15 @@ export let mode = 'global';
 export let meetupSlug = '';
 export let meetupTitle = '';
 export let meetupDateLabel = '';
-/** The formats this context accepts. Defaults to all four. */
+/**
+ * The formats this context accepts. `null` means all four.
+ * @type {readonly string[] | null}
+ */
 export let allowedFormats = null;
-/** For the global selector: [{ slug, title, dateLabel, formats }]. */
+/**
+ * For the global selector.
+ * @type {Array<{ slug: string; title: string; dateLabel: string; formats: readonly string[] }>}
+ */
 export let openCalls = [];
 
 $: t = getTranslations(lang);

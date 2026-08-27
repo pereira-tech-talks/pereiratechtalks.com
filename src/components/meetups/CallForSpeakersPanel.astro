@@ -1,0 +1,183 @@
+---
+/**
+ * A meetup's own Call for Speakers.
+ *
+ * Four states, all driven by `getCallForSpeakersState()` — never by comparing
+ * `callForSpeakers.status` inline, because a call auto-closes once the meetup
+ * date or `closesAt` has passed and a stale `open` must never invite a proposal
+ * to an event that already happened.
+ *
+ * `none` renders nothing at all: an empty section with a heading is worse than
+ * no section.
+ */
+
+import type { CollectionEntry } from 'astro:content';
+
+import SpeakersApplicationForm from '@/components/contact/SpeakersApplicationForm.svelte';
+import Eyebrow from '@/components/ui/Eyebrow.astro';
+import { CONTACT_FORM } from '@/lib/constances';
+import { formatCalendarDate } from '@/lib/dates';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
+import {
+  getCallDaysRemaining,
+  getCallForSpeakersState,
+  getMeetupSlug,
+  resolveMeetupDateLabel,
+} from '@/lib/meetup';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  meetup: CollectionEntry<'meetups'>;
+  lang: Language;
+  /** The meetup title, already localized by the caller. */
+  title: string;
+}
+
+const { meetup, lang, title } = Astro.props;
+
+const tr = getTranslations(lang);
+const c = tr.meetupDetail.cfs;
+const prefix = getUrlPrefix(lang);
+
+const state = getCallForSpeakersState(meetup);
+const call = meetup.data.callForSpeakers;
+const formats = call?.formats ?? [];
+
+const dateLabel = resolveMeetupDateLabel(meetup, lang);
+
+// Build-time. The value changes once a day, so a client clock would buy
+// nothing but hydration cost. Do not "fix" this into a live countdown.
+const daysRemaining = getCallDaysRemaining(meetup);
+
+const closesLabel = call?.closesAt
+  ? formatCalendarDate(call.closesAt, lang)
+  : '';
+const opensLabel = call?.opensAt ? formatCalendarDate(call.opensAt, lang) : '';
+
+const formatLabel = (value: string): string =>
+  tr.cfsForm.formatOptions.find((o) => o.value === value)?.label ?? value;
+
+const slotsLine =
+  typeof call?.slots === 'number'
+    ? call.slots === 1
+      ? c.slotsOne
+      : c.slots.replace('{n}', String(call.slots))
+    : '';
+
+const deadlineDaysLine =
+  daysRemaining === null
+    ? ''
+    : daysRemaining === 0
+      ? c.deadlineLastDay
+      : c.deadlineDays.replace('{n}', String(daysRemaining));
+
+const note = call?.note
+  ? typeof call.note === 'string'
+    ? call.note
+    : (call.note[lang] ?? '')
+  : '';
+
+const globalCfsHref = `${prefix}/call-for-speakers/`;
+const meetupSlug = getMeetupSlug(meetup);
+---
+
+{
+  state !== 'none' && (
+    <section
+      id="call-for-speakers"
+      class="scroll-mt-28 bg-ptt-primary-soft/40 py-16 sm:py-20 dark:bg-ptt-bg-elevated"
+    >
+      <div class="main-container">
+        <Eyebrow>{c.eyebrow}</Eyebrow>
+
+        {state === 'open' && (
+          <>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-ptt">
+              {c.titleOpen}
+            </h2>
+            <p class="mt-3 max-w-2xl text-ptt-secondary">{c.introOpen}</p>
+
+            <div class="mt-8 grid gap-10 lg:grid-cols-[1fr_minmax(0,34rem)]">
+              <div class="space-y-6">
+                <div>
+                  <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
+                    {formats.length === 1 ? c.formatsSingleLabel : c.formatsLabel}
+                  </h3>
+                  <ul class="mt-3 flex list-none flex-wrap gap-2">
+                    {formats.map((value) => (
+                      <li class="rounded-full bg-ptt-bg-elevated px-3 py-1.5 text-sm font-medium text-ptt ring-1 ring-ptt-border">
+                        {formatLabel(value)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {closesLabel && (
+                  <p class="text-ptt-secondary">
+                    <span class="font-medium text-ptt">
+                      {c.deadline.replace('{date}', closesLabel)}
+                    </span>
+                    {deadlineDaysLine && (
+                      <>
+                        {' · '}
+                        {deadlineDaysLine}
+                      </>
+                    )}
+                  </p>
+                )}
+
+                {slotsLine && <p class="text-ptt-secondary">{slotsLine}</p>}
+                {note && <p class="text-ptt-secondary">{note}</p>}
+              </div>
+
+              <div class="min-w-0">
+                <SpeakersApplicationForm
+                  client:visible
+                  lang={lang}
+                  apiEndpoint={CONTACT_FORM.apiEndpoint}
+                  mode="meetup"
+                  meetupSlug={meetupSlug}
+                  meetupTitle={title}
+                  meetupDateLabel={dateLabel}
+                  allowedFormats={formats}
+                />
+              </div>
+            </div>
+          </>
+        )}
+
+        {state === 'scheduled' && (
+          <>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-ptt">
+              {c.titleScheduled}
+            </h2>
+            <p class="mt-3 max-w-2xl text-ptt-secondary">
+              {c.bodyScheduled.replace('{date}', opensLabel || dateLabel)}
+            </p>
+            <a
+              href={globalCfsHref}
+              class="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+            >
+              {c.globalCta}
+            </a>
+          </>
+        )}
+
+        {state === 'closed' && (
+          <>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-ptt">
+              {c.titleClosed}
+            </h2>
+            <p class="mt-3 max-w-2xl text-ptt-secondary">{c.bodyClosed}</p>
+            <a
+              href={globalCfsHref}
+              class="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-ptt-primary px-6 py-3 text-base font-semibold text-ptt-primary transition-colors hover:bg-ptt-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary dark:text-ptt-primary-dark"
+            >
+              {c.globalCta}
+            </a>
+          </>
+        )}
+      </div>
+    </section>
+  )
+}

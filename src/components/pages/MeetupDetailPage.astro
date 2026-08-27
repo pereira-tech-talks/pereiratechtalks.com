@@ -13,16 +13,23 @@ import SpeakerCard from '@/components/cards/SpeakerCard.astro';
 import SponsorCard from '@/components/cards/SponsorCard.astro';
 import TalkCard from '@/components/cards/TalkCard.astro';
 import JsonLd from '@/components/JsonLd.astro';
+import CallForSpeakersPanel from '@/components/meetups/CallForSpeakersPanel.astro';
+import MeetupDateTile from '@/components/meetups/MeetupDateTile.astro';
 import PtdGalleryCarousel from '@/components/pereira-tech-days/PtdGalleryCarousel.svelte';
 import Badge from '@/components/ui/Badge.astro';
 import Breadcrumbs from '@/components/ui/Breadcrumbs.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { SITE_URL } from '@/lib/constances';
-import { formatCalendarDate, getCalendarDateString } from '@/lib/dates';
+import { formatCalendarDate } from '@/lib/dates';
 import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
+  getCallForSpeakersState,
   getMeetupBodyEntry,
   getMeetupSlug,
+  resolveMeetupDateAttribute,
+  resolveMeetupDateConfidence,
+  resolveMeetupDateLabel,
+  resolveMeetupLineup,
   resolveMeetupStatus,
 } from '@/lib/meetup';
 import { buildMetaDescription, metaPhrases } from '@/lib/meta-description';
@@ -53,15 +60,26 @@ const heroAlt = tr(meetup.data.hero?.alt, lang) || title;
 const bannerHeroSrc = heroSrc && heroLayout === 'banner' ? heroSrc : undefined;
 
 const date = new Date(meetup.data.date);
-const dateLabel = formatCalendarDate(date, lang, {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const dateConfidence = resolveMeetupDateConfidence(meetup);
+// A month-only meetup prints its month; a tentative one prints its day and
+// carries the caveat in a chip beside it, so the same label works in a
+// `<time>` element, a card and an aria-label.
+const dateLabel =
+  dateConfidence === 'month-only'
+    ? resolveMeetupDateLabel(meetup, lang)
+    : formatCalendarDate(date, lang, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+const dateAttribute = resolveMeetupDateAttribute(meetup);
 
 const venue = meetup.data.venue;
 const status = resolveMeetupStatus(meetup);
+const lineup = resolveMeetupLineup(meetup);
+const callState = getCallForSpeakersState(meetup);
+const planning = md.planning;
 
 const talks = await getTalksByEvent('meetups', slug);
 const speakerSlugs = [
@@ -138,6 +156,11 @@ const eventJsonLd: Record<string, unknown> = {
   },
 };
 if (heroSrc) eventJsonLd.image = `${SITE_URL}${heroSrc}`;
+// Never invent a place. A programmed meetup with no room booked emits no
+// `location` at all rather than an empty Place. The Event itself is always
+// emitted — scripts/audit-seo.mjs requires it on every meetups/* URL, and a
+// month-only meetup publishes the month's cadence date, corrected on the next
+// build once the day is confirmed. See DESIGN_DECISIONS.md D9.
 if (venue) {
   eventJsonLd.location = {
     '@type': 'Place',
@@ -203,14 +226,34 @@ const metaDescription = buildMetaDescription({
       }
       <div class="relative main-container py-16 sm:py-20 text-white">
         <Breadcrumbs items={breadcrumbs} baseUrl={SITE_URL} onDark />
-        <div class="mt-6 flex items-center gap-3">
+        <div class="mt-6 flex flex-wrap items-center gap-3">
           <Badge variant={statusVariant}>{statusLabels[status]}</Badge>
           <time
-            datetime={getCalendarDateString(date)}
+            datetime={dateAttribute}
             class="text-sm font-semibold uppercase tracking-widest text-ptt-accent dark:text-ptt-accent-dark"
           >
             {dateLabel}
           </time>
+          {
+            dateConfidence === 'tentative' && (
+              <span
+                class="inline-flex items-center rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold text-white ring-1 ring-white/25"
+                title={planning.chipTentativeAria}
+              >
+                {planning.chipTentative}
+              </span>
+            )
+          }
+          {
+            dateConfidence === 'month-only' && (
+              <span
+                class="inline-flex items-center rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold text-white ring-1 ring-white/25"
+                title={planning.chipMonthOnlyAria}
+              >
+                {planning.chipMonthOnly}
+              </span>
+            )
+          }
         </div>
         <h1 class="mt-3 text-3xl sm:text-5xl font-bold tracking-tight">
           {title}
@@ -218,6 +261,44 @@ const metaDescription = buildMetaDescription({
         {description && (
           <p class="mt-4 max-w-3xl text-lg text-white/85">{description}</p>
         )}
+        {
+          !venue && (
+            <p class="mt-6 inline-flex items-center gap-2 text-sm text-white/85">
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              <span>{planning.venueTbc}</span>
+            </p>
+          )
+        }
+        {
+          callState === 'open' && (
+            <p class="mt-8">
+              <a
+                href="#call-for-speakers"
+                class="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-accent px-6 py-3 text-base font-semibold text-ptt-bg-dark shadow-sm transition-colors hover:bg-ptt-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-accent"
+              >
+                {planning.heroCta}
+              </a>
+            </p>
+          )
+        }
         {
           venue && (
             <p class="mt-6 inline-flex items-center gap-2 text-sm text-white/85">
@@ -250,6 +331,22 @@ const metaDescription = buildMetaDescription({
         }
       </div>
     </header>
+
+    {
+      !heroSrc && (
+        <div class="main-container py-8 sm:py-10">
+          <div class="overflow-hidden rounded-2xl ring-1 ring-ptt-border">
+            <MeetupDateTile
+              date={date}
+              dateConfidence={dateConfidence}
+              lang={lang}
+              label={planning.dateTileAria.replace('{date}', dateLabel)}
+              ratio="21/9"
+            />
+          </div>
+        </div>
+      )
+    }
 
     {
       bannerHeroSrc && (
@@ -321,21 +418,23 @@ const metaDescription = buildMetaDescription({
             </div>
           )
         }
-        {
-          venue && (
-            <div>
-              <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
-                {md.venue}
-              </h3>
-              <p class="text-sm text-ptt-secondary font-medium">
-                {venue.name}
-              </p>
-              <p class="text-sm text-ptt-secondary">
-                {venue.city}, {venue.country}
-              </p>
-            </div>
-          )
-        }
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark mb-2">
+            {md.venue}
+          </h3>
+          {
+            venue ? (
+              <>
+                <p class="text-sm text-ptt-secondary font-medium">{venue.name}</p>
+                <p class="text-sm text-ptt-secondary">
+                  {venue.city}, {venue.country}
+                </p>
+              </>
+            ) : (
+              <p class="text-sm text-ptt-secondary">{planning.venueTbc}</p>
+            )
+          }
+        </div>
         {
           recordingUrl && !recordingYoutubeId && (
             <div>
@@ -430,6 +529,37 @@ const metaDescription = buildMetaDescription({
     }
 
     {
+      /*
+        A meetup whose programme is not announced yet says so, rather than
+        rendering an empty "Charlas" heading. `partial` means speakers are
+        confirmed but their talk entries are not authored — the Speakers
+        section below still renders.
+      */
+      talks.length === 0 && status !== 'completed' && (
+        <section class="main-container pb-12 sm:pb-16">
+          <div class="rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:p-8">
+            <h2 class="text-xl font-bold tracking-tight text-ptt">
+              {planning.lineupOpenTitle}
+            </h2>
+            <p class="mt-2 max-w-2xl text-ptt-secondary">
+              {lineup === 'partial'
+                ? planning.lineupPartialBody
+                : planning.lineupOpenBody}
+            </p>
+            {callState === 'open' && (
+              <a
+                href="#call-for-speakers"
+                class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-ptt-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-ptt-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ptt-primary"
+              >
+                {planning.heroCta}
+              </a>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    {
       talks.length > 0 && (
         <section class="bg-ptt-primary-soft/40 dark:bg-ptt-bg-elevated py-16 sm:py-20">
           <div class="main-container">
@@ -513,6 +643,7 @@ const metaDescription = buildMetaDescription({
         </section>
       )
     }
+    <CallForSpeakersPanel meetup={meetup} lang={lang} title={title} />
   </article>
 </MainLayout>
 
