@@ -63,7 +63,7 @@ export const GET: APIRoute = async () => {
       title: call.title[lang],
       dateLabel: formatOpenCallDate(call, lang),
       // The human labels the page shows, not the raw slugs: a twin says what
-      // its page says, and "Lightning (5–10 min)" carries the duration too.
+      // its page says, and "Lightning (3–5 min)" carries the duration too.
       formats: call.formats.map(formatLabelOf),
       ...(call.closesAt
         ? { closesAt: call.closesAt.toISOString().split('T')[0] }

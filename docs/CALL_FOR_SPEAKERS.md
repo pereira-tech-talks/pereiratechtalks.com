@@ -51,7 +51,7 @@ Machine-readable list of what is open right now:
 
 | Format | Length | Audience prep | Notes |
 |---|---|---|---|
-| Lightning talk | 5–10 min | None — drop in, drop out | Great for first timers. Often paired in groups of 3. |
+| Lightning talk | 3–5 min | None — drop in, drop out | Great for first timers. Often paired in groups of 3. |
 | Regular talk | 20–30 min + Q&A | A spec sheet sent 7 days prior | Default format. Most monthly meetups have 1–2 of these. |
 | Workshop | 60–90 min | Hands-on prerequisites communicated 7 days prior | Limited seats. Higher coordination cost — we plan workshops 6+ weeks in advance. |
 | Panel | 45 min | Internal prep call | We curate 3–4 panelists. Submit yourself or nominate someone. |

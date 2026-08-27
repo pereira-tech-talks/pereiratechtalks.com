@@ -364,7 +364,7 @@ describe('resolveMeetupDetail — programmed meetups', () => {
     expect(data.callForSpeakers?.isOpen).toBe(true);
     expect(data.callForSpeakers?.stateLabel).toBe('open');
     expect(data.callForSpeakers?.formats).toEqual([
-      'Lightning (5–10 min)',
+      'Lightning (3–5 min)',
       'Workshop (90 min)',
     ]);
     expect(data.callForSpeakers?.closesAt).toBe('2099-11-04');

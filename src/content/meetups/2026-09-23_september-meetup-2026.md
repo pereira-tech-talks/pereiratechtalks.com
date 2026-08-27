@@ -26,7 +26,7 @@ draft: false
 
 ## Meetup de septiembre
 
-Septiembre lo dedicamos a las charlas relámpago: cinco a diez minutos por persona, una idea por charla.
+Septiembre lo dedicamos a las charlas relámpago: de tres a cinco minutos por persona, una idea por charla.
 
 La fecha está confirmada y el encuentro es virtual. El orden del día se anuncia cuando cerremos la convocatoria.
 

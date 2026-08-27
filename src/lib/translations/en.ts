@@ -499,7 +499,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     formatOptions: [
       { value: '', label: '— Select a format —' },
       { value: 'regular', label: 'Regular talk (25 min)' },
-      { value: 'lightning', label: 'Lightning (5–10 min)' },
+      { value: 'lightning', label: 'Lightning (3–5 min)' },
       { value: 'panel', label: 'Panel (40 min)' },
       { value: 'workshop', label: 'Workshop (90 min)' },
     ],
@@ -620,7 +620,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
           'The standard meetup format. Technical topic with space for questions.',
       },
       {
-        name: 'Lightning (5–10 min)',
+        name: 'Lightning (3–5 min)',
         description:
           'Sharp idea, example, demo or reflection. Ideal for a first talk.',
       },
@@ -1012,7 +1012,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     workshop:
       'Hands-on workshops — practical, multi-hour sessions with code, exercises, and step-by-step guidance.',
     'lightning-talk':
-      'Lightning talks — short 5–10 minute presentations that pack a single sharp idea.',
+      'Lightning talks — short 3–5 minute presentations that pack a single sharp idea.',
     // Secondary tags (topics)
     'web-development':
       'Frameworks, frontend, fullstack — Astro, Svelte, Vue, Meteor, CSS, Webpack.',

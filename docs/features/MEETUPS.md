@@ -243,7 +243,7 @@ accepts — nothing else.
 ```markdown
 ## Meetup de septiembre
 
-Septiembre lo dedicamos a las charlas relámpago: cinco a diez minutos por
+Septiembre lo dedicamos a las charlas relámpago: de tres a cinco minutos por
 persona, una idea por charla.
 
 La fecha está confirmada. La sede y el orden del día se anuncian cuando

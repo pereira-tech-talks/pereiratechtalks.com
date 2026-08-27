@@ -17,7 +17,7 @@ The community is fueled by people sharing what they have learned. We accept talk
 - Open-source projects, side-projects, internships
 - The future of work, ethics, sustainability of tech
 
-**Formats:** lightning talk (5–10 min), regular talk (20–30 min), workshop (60–90 min), panel (45 min).
+**Formats:** lightning talk (3–5 min), regular talk (20–30 min), workshop (60–90 min), panel (45 min).
 
 Apply through the **Call for Speakers**: [`/cfs`](https://pereiratechtalks.org/cfs) or read [docs/CALL_FOR_SPEAKERS.md](./CALL_FOR_SPEAKERS.md).
 

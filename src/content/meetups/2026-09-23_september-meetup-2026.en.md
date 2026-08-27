@@ -1,6 +1,6 @@
 ## September meetup
 
-September is for lightning talks: five to ten minutes each, one idea per talk.
+September is for lightning talks: three to five minutes each, one idea per talk.
 
 The date is confirmed and the meetup is online. The running order is announced once the call closes.
 

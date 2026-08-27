@@ -501,7 +501,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     formatOptions: [
       { value: '', label: '— Selecciona un formato —' },
       { value: 'regular', label: 'Charla regular (25 min)' },
-      { value: 'lightning', label: 'Lightning (5–10 min)' },
+      { value: 'lightning', label: 'Lightning (3–5 min)' },
       { value: 'panel', label: 'Panel (40 min)' },
       { value: 'workshop', label: 'Workshop (90 min)' },
     ],
@@ -623,7 +623,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
           'El formato estándar de meetup. Tema técnico con espacio para preguntas.',
       },
       {
-        name: 'Lightning (5–10 min)',
+        name: 'Lightning (3–5 min)',
         description:
           'Idea precisa, ejemplo, demo o reflexión. Ideal para primera charla.',
       },

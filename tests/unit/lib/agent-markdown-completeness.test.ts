@@ -424,7 +424,7 @@ describe('meetup detail serializer — programming and the call for speakers', (
         callForSpeakers: {
           stateLabel: 'open',
           isOpen: true,
-          formats: ['Lightning (5–10 min)', 'Workshop (90 min)'],
+          formats: ['Lightning (3–5 min)', 'Workshop (90 min)'],
           closesAt: '2026-11-04',
           slots: 3,
           url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
@@ -435,7 +435,7 @@ describe('meetup detail serializer — programming and the call for speakers', (
     expect(md).toContain('## Call for speakers');
     expect(md).toContain('Call status: open');
     expect(md).toContain(
-      'Accepted formats: Lightning (5–10 min), Workshop (90 min)'
+      'Accepted formats: Lightning (3–5 min), Workshop (90 min)'
     );
     expect(md).toContain('Closes: 2026-11-04');
     expect(md).toContain('Slots available: 3');
@@ -448,7 +448,7 @@ describe('meetup detail serializer — programming and the call for speakers', (
         callForSpeakers: {
           stateLabel: 'closed',
           isOpen: false,
-          formats: ['Lightning (5–10 min)'],
+          formats: ['Lightning (3–5 min)'],
           url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
         },
       }),
@@ -467,7 +467,7 @@ describe('meetup detail serializer — programming and the call for speakers', (
         callForSpeakers: {
           stateLabel: 'abierta',
           isOpen: true,
-          formats: ['Lightning (5–10 min)'],
+          formats: ['Lightning (3–5 min)'],
           url: 'https://pereiratechtalks.org/meetups/november/#call-for-speakers',
         },
       }),
@@ -487,7 +487,7 @@ describe('buildOpenCallsSection', () => {
     slug: 'november-meetup-2026',
     title: 'November meetup',
     dateLabel: 'November 18, 2026',
-    formats: ['Lightning (5–10 min)'],
+    formats: ['Lightning (3–5 min)'],
     closesAt: '2026-11-04',
     slots: 3,
   };
@@ -503,7 +503,7 @@ describe('buildOpenCallsSection', () => {
       '[November meetup](/en/meetups/november-meetup-2026.md)'
     );
     expect(section?.lines[0]).toContain(
-      'Accepted formats: Lightning (5–10 min)'
+      'Accepted formats: Lightning (3–5 min)'
     );
     expect(section?.lines[0]).toContain('Closes: 2026-11-04');
     expect(section?.lines[0]).toContain('Slots available: 3');
