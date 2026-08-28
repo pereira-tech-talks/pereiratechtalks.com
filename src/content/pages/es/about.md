@@ -22,7 +22,7 @@ El trabajo se sostiene gracias a patrocinadores (Veritran, GitHub, ASE-UTP, Dail
 
 ## Lo que hacemos
 
-- **[Meetups mensuales](/verticals/monthly-meetups)** — Sesiones presenciales e híbridas cada mes sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.
+- **[Meetups mensuales](/meetups)** — Sesiones presenciales e híbridas cada mes sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.
 - **[Pereira Tech Day](/pereira-tech-day)** — Nuestra conferencia anual insignia: 2024 en archivo; [2026 pospuesto indefinidamente](/blog/ptd-2026-postponed-earthquake-solidarity/). Un día completo de keynotes, talleres y networking con ponentes internacionales y aliados locales.
 - **[Escuela de Speakers](/verticals/speaker-school)** — Un programa para hacer crecer nuevas voces técnicas, desde la idea hasta el escenario, con mentoría y ensayos.
 - **[La Biblioteca del Mañana](/verticals/library-of-tomorrow)** — Un club de lectura que conecta ciencia ficción, filosofía y tecnología — explorando el futuro a través de los libros que lo moldean.

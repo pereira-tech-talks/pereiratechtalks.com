@@ -76,6 +76,10 @@ const meetup: ResolvedMeetupDetail = {
       slug: 'monthly-meetups',
       title: 'Monthly meetups',
       mission: 'Consistent monthly meetups in Pereira.',
+      // Not `/en/verticals/monthly-meetups.md`: this program's home is
+      // `/meetups`, and the serializer must link where the resolver points
+      // rather than composing a path from the slug.
+      href: '/en/meetups.md',
     },
   ],
   gallery: [{ src: '/images/g1.webp', alt: 'Audience', caption: 'Full room' }],
@@ -260,7 +264,7 @@ describe('meetup detail serializer', () => {
   it('resolves every entity to a name plus its own `.md`', () => {
     expect(md).toContain('[Juan Alejandro Pérez](/en/speakers/juan-perez.md)');
     expect(md).toContain('[DailyBot](/en/sponsors/dailybot.md)');
-    expect(md).toContain('[Monthly meetups](/en/verticals/monthly-meetups.md)');
+    expect(md).toContain('[Monthly meetups](/en/meetups.md)');
     expect(md).not.toMatch(BARE_SLUG_ROW);
   });
 

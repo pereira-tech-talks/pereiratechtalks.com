@@ -15,10 +15,10 @@ import {
   resolveMeetupVenueLine,
 } from '@/lib/meetup';
 import { getSpeakers } from '@/lib/speaker';
-import { getVerticalBodyEntry, getVerticals } from '@/lib/vertical';
+import { getVerticalBodyEntry, getVerticalsWithPages } from '@/lib/vertical';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const verticals = await getVerticals();
+  const verticals = await getVerticalsWithPages();
   return Promise.all(
     verticals.map(async (entry) => ({
       params: { slug: entry.id },
@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const GET: APIRoute = ({ props }) => {
   const lang = 'es';
   const { entry, body, meetups, speakers, channels } = props as {
-    entry: Awaited<ReturnType<typeof getVerticals>>[number];
+    entry: Awaited<ReturnType<typeof getVerticalsWithPages>>[number];
     body: string;
     meetups: Awaited<ReturnType<typeof getMeetupsByVertical>>;
     speakers: Awaited<ReturnType<typeof getSpeakers>>;

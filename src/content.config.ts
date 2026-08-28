@@ -782,6 +782,23 @@ const verticals = defineCollection({
     schedule: i18nStringOptional,
     status: z.enum(['active', 'paused', 'archived']).default('active'),
     order: z.number().default(0),
+    /**
+     * Where this vertical's home page lives, when it is **not**
+     * `/verticals/{slug}`.
+     *
+     * A vertical is two things at once: a taxonomy term that meetups, events
+     * and talks point at, and a page that describes the programme. Usually one
+     * entry serves both. `monthly-meetups` is the exception — `/meetups` is a
+     * fuller page than any generated vertical page could be, so it owns the
+     * description and the vertical keeps only the taxonomy.
+     *
+     * Language-agnostic and root-relative (`/meetups`); the language prefix is
+     * added by `resolveVerticalHref`. Setting it **suppresses** the generated
+     * detail page and its `.md` twin — two pages for one subject is exactly
+     * what this avoids — so add a redirect in `public/_redirects` at the same
+     * time, or the old URL 404s.
+     */
+    href: z.string().startsWith('/').optional(),
   }),
 });
 
