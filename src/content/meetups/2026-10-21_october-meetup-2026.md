@@ -24,9 +24,6 @@ callForSpeakers:
     - lightning
     - regular
   closesAt: 2026-10-16
-  note:
-    en: "Five minutes or twenty-five — you choose. If it is technical and you care about it, it fits here."
-    es: "Cinco minutos o veinticinco: tú eliges. Si es técnico y te importa, cabe aquí."
 status: announced
 draft: false
 ---

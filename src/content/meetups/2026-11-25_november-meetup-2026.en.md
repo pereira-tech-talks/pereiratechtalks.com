@@ -1,12 +1,14 @@
 ## November meetup
 
-November is here and the call is open for the night we most look forward to running: the one we dedicate to what went wrong. Send us your talk and come tell us how you broke it.
+November is here, we are heading into the last stretch of the year, and the call for talks is open. We want a night with many voices on stage, and for that we need yours: send us your talk and come tell us what you have been up to.
 
-The bug that ate a week. The deploy that fell over on a Friday. The migration you had to roll back at midnight. The architecture decision you are still paying interest on. Almost everything told in public is a success story, and nobody learns anything that way: mistakes stay in a team's private chat, and six months later somebody else repeats them exactly.
+By this point in the year you have solved something you did not know how to solve when it started. It might be the tool you ended up adopting, the performance problem you finally understood, the part of the system you had to learn the hard way, or something you tried out of curiosity that turned out better than expected. That is exactly what we want to hear.
 
-Not here. Tell it as a **lightning talk of 3 to 5 minutes** if the lesson fits in a sentence, or as a **full talk of 25 minutes** if the disaster ran long and has layers. You pick the format.
+And if you think your topic is too small for a talk, it almost never is: what already feels obvious to you is usually the very thing someone else in the room has been hunting for.
 
-And to be clear: nothing leaves this room badly. We are here for the lesson, not for the culprit.
+You pick how long it needs: a **lightning talk of 3 to 5 minutes** to get straight to the point, or a **full talk of 25 minutes** if you want to develop it properly.
+
+If you have never presented before, this is a good moment to start: we will help you shape the talk and rehearse it beforehand.
 
 The date is confirmed. We are still deciding whether we meet in a room or online, and we will announce it here as soon as we know.
 
@@ -14,4 +16,4 @@ See you there!
 
 ### Call for speakers
 
-We are taking proposals until Friday 20 November, as a lightning talk or in the full format. Bring your favourite mistake: the one that hurt most, or the one that taught you most.
+We are taking proposals until Friday 20 November, as a lightning talk or in the full format. Pick whichever length serves your idea and send it in.

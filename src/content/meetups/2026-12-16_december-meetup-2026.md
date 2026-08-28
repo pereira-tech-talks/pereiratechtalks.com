@@ -24,9 +24,6 @@ callForSpeakers:
     - lightning
     - regular
   closesAt: 2026-12-11
-  note:
-    en: "The last night of the year. Bring what you built, learned or abandoned — in 5 minutes or in 25."
-    es: "La última noche del año. Trae lo que construiste, aprendiste o abandonaste, en 5 minutos o en 25."
 status: announced
 draft: false
 ---

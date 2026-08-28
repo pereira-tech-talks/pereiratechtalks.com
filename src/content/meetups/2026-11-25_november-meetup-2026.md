@@ -3,8 +3,8 @@ title:
   en: "November meetup"
   es: "Meetup de noviembre"
 description:
-  en: "The call is open for November, the night we dedicate to what went wrong. Tell us what breaking things taught you, in 3 to 5 minutes or in 25."
-  es: "Convocatoria abierta para noviembre, la noche que dedicamos a lo que salió mal. Cuéntanos qué aprendiste rompiendo cosas, en 3 a 5 minutos o en 25."
+  en: "The call for talks is open for our November meetup. Bring what you have been working on this year — as a lightning talk of 3 to 5 minutes or a full one of 25."
+  es: "La convocatoria de charlas está abierta para el meetup de noviembre. Trae eso en lo que has trabajado este año, en charla relámpago de 3 a 5 minutos o completa de 25."
 pubDate: 2026-11-25
 date: 2026-11-25
 dateConfidence: confirmed
@@ -24,22 +24,21 @@ callForSpeakers:
     - lightning
     - regular
   closesAt: 2026-11-20
-  note:
-    en: "Nothing leaves this room badly. Five minutes or twenty-five — we are here for the lesson, not the blame."
-    es: "De aquí nadie sale mal parado. Cinco minutos o veinticinco: venimos por la lección, no por el culpable."
 status: announced
 draft: false
 ---
 
 ## Meetup de noviembre
 
-Llega noviembre y abrimos la convocatoria para la noche que más ganas tenemos de organizar: la que dedicamos a lo que salió mal. Postula tu charla y ven a contarnos cómo lo rompiste.
+Llega noviembre, entramos en la recta final del año y abrimos la convocatoria. Queremos una noche con muchas voces en el escenario, y para eso necesitamos la tuya: postula tu charla y ven a contarnos en qué has andado.
 
-El bug que se comió una semana. El despliegue que se cayó un viernes. La migración que tocó revertir a medianoche. La decisión de arquitectura que hoy pagas en intereses. Casi todo lo que se cuenta en público son éxitos, y así no aprende nadie: los errores se quedan en el chat privado del equipo y seis meses después alguien más los repite exactamente igual.
+A estas alturas del año ya resolviste algo que al principio no sabías cómo resolver. Puede ser la herramienta que terminaste adoptando, el problema de rendimiento que por fin entendiste, la parte del sistema que te tocó aprender a la fuerza, o algo que probaste por curiosidad y resultó mejor de lo que esperabas. Eso es exactamente lo que queremos escuchar.
 
-Aquí no. Cuéntalo en **charla relámpago de 3 a 5 minutos** si la lección cabe en una frase, o en **charla completa de 25 minutos** si el desastre fue largo y tiene capas. Tú eliges el formato.
+Y si crees que tu tema es demasiado pequeño para una charla, casi siempre no lo es: lo que a ti ya te parece obvio suele ser justo lo que otra persona en la sala lleva semanas buscando.
 
-Y que quede claro: de aquí nadie sale mal parado. Venimos por la lección, no por el culpable.
+Tú eliges cuánto tiempo necesita: **charla relámpago de 3 a 5 minutos** para ir al grano, o **charla completa de 25 minutos** si quieres desarrollarla con calma.
+
+Si nunca has presentado, este es un buen momento para estrenarte: te acompañamos a armar la charla y a ensayarla antes.
 
 La fecha está confirmada. Todavía estamos definiendo si nos vemos en una sala o en línea, y lo anunciamos aquí en cuanto lo sepamos.
 
@@ -47,4 +46,4 @@ La fecha está confirmada. Todavía estamos definiendo si nos vemos en una sala 
 
 ### Convocatoria
 
-Recibimos propuestas hasta el viernes 20 de noviembre, en charla relámpago o en formato completo. Trae tu error favorito: el que más te dolió o el que más te enseñó.
+Recibimos propuestas hasta el viernes 20 de noviembre, en charla relámpago o en formato completo. Elige el formato que le sirva a tu idea y postúlala.
