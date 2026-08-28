@@ -14,8 +14,10 @@ import {
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
   resolveMeetupLineup,
+  resolveMeetupPlaceFallback,
   resolveMeetupStatus,
   resolveMeetupVenueLine,
+  resolveSlidesGuidance,
 } from '@/lib/meetup';
 import { resolveEditionStatus } from '@/lib/pereiraTechDay';
 
@@ -558,12 +560,12 @@ describe('schema.org attendance mode', () => {
     );
   });
 
-  it('defaults to in-person when mode is absent', () => {
-    // The Zod schema defaults `mode` to in-person, but the archive predates
-    // the field and the page reads it defensively. Both paths agree.
-    expect(resolveEventAttendanceMode(undefined)).toBe(
-      'https://schema.org/OfflineEventAttendanceMode'
-    );
+  it('says nothing at all when the mode is undecided', () => {
+    // `mode` is optional: a month can be programmed long before anyone decides
+    // between a room and a stream. schema.org has no way to express "we do not
+    // know", so the page omits the property rather than guessing — guessing is
+    // exactly the bug this function was written to fix.
+    expect(resolveEventAttendanceMode(undefined)).toBeNull();
   });
 });
 
@@ -594,5 +596,119 @@ describe('meetup talk count', () => {
 
   it('treats a negative count as nothing rather than rendering it', () => {
     expect(formatMeetupTalkCount(-1, 'es')).toBeNull();
+  });
+});
+
+/**
+ * A month gets a date long before anyone decides whether it runs in a room or
+ * on a stream. `mode` is therefore **optional**, the same way `venue` is, and
+ * absent means "not decided yet" rather than "in person".
+ *
+ * Three absences that read alike and mean different things:
+ *
+ * - online — there will never be a venue;
+ * - undecided — nobody has chosen between a room and a stream;
+ * - in person / hybrid — a venue is coming, it just is not booked.
+ *
+ * Added when October–December 2026 lost their `mode`
+ * (`feat/meetups-open-formats-and-mode-tbd`).
+ */
+describe('what to print where a venue would go', () => {
+  const withMode = (mode: 'in-person' | 'virtual' | 'hybrid' | undefined) =>
+    ({
+      data: { ...(mode ? { mode } : {}) },
+    }) as unknown as Parameters<typeof resolveMeetupPlaceFallback>[0];
+
+  it('says Virtual for an online meetup, not "venue to be confirmed"', () => {
+    expect(resolveMeetupPlaceFallback(withMode('virtual'), 'es')).toBe(
+      'Virtual'
+    );
+    expect(resolveMeetupPlaceFallback(withMode('virtual'), 'en')).toBe(
+      'Online'
+    );
+  });
+
+  it('says the mode is unconfirmed when nobody has decided', () => {
+    // Not "Sede por confirmar" — that promises a room, and there may not be
+    // one. Not "Virtual" either. The honest third answer.
+    expect(resolveMeetupPlaceFallback(withMode(undefined), 'es')).toBe(
+      'Modalidad por confirmar'
+    );
+    expect(resolveMeetupPlaceFallback(withMode(undefined), 'en')).toBe(
+      'Mode to be confirmed'
+    );
+  });
+
+  it('still promises a venue for in-person and hybrid', () => {
+    // A hybrid meetup does need a room, so it keeps the venue line.
+    for (const mode of ['in-person', 'hybrid'] as const) {
+      expect(resolveMeetupPlaceFallback(withMode(mode), 'es')).toBe(
+        'Sede por confirmar'
+      );
+    }
+  });
+
+  it('gives the three absences three different sentences', () => {
+    const seen = new Set(
+      [undefined, 'virtual', 'in-person'].map((m) =>
+        resolveMeetupPlaceFallback(
+          withMode(m as 'virtual' | 'in-person' | undefined),
+          'es'
+        )
+      )
+    );
+    expect(seen.size).toBe(3);
+  });
+});
+
+/**
+ * "You have very few minutes, no time for a live demo" is good advice for a
+ * lightning-only night and plainly wrong for one that also takes 25-minute
+ * talks — it told speakers to cut material the format has room for.
+ *
+ * October–December 2026 opened to full talks and kept showing the short-talk
+ * advice, on the meetup panel, the global page and the agent twin, because all
+ * three read one fixed paragraph. They now read this.
+ */
+describe('slides guidance follows the accepted formats', () => {
+  it('gives the short-talk advice when only lightning is accepted', () => {
+    const { paragraphs } = resolveSlidesGuidance(['lightning'], 'es');
+    expect(paragraphs[0]).toContain('muy pocos minutos');
+    expect(paragraphs[1]).toContain('No hay tiempo para demos en vivo');
+  });
+
+  it('switches advice as soon as a long format is accepted', () => {
+    const { paragraphs } = resolveSlidesGuidance(
+      ['lightning', 'regular'],
+      'es'
+    );
+    expect(paragraphs[0]).not.toContain('muy pocos minutos');
+    expect(paragraphs[0]).toContain('charla completa');
+    // The live-demo rule stops being absolute: it applies to lightning only.
+    expect(paragraphs[1]).toContain('En formato completo sí caben');
+  });
+
+  it('treats an empty list as the global page, which takes every format', () => {
+    const global = resolveSlidesGuidance([], 'en');
+    const mixed = resolveSlidesGuidance(['regular'], 'en');
+    expect(global.paragraphs).toEqual(mixed.paragraphs);
+  });
+
+  it('carries the same title either way, and two paragraphs', () => {
+    for (const formats of [['lightning'], ['lightning', 'regular'], []]) {
+      const g = resolveSlidesGuidance(formats, 'en');
+      expect(g.title).toBe('About your slides');
+      expect(g.paragraphs).toHaveLength(2);
+      for (const p of g.paragraphs) expect(p.trim().length).toBeGreaterThan(40);
+    }
+  });
+
+  it('answers in the reader’s language', () => {
+    expect(resolveSlidesGuidance(['workshop'], 'es').title).toBe(
+      'Sobre las diapositivas'
+    );
+    expect(resolveSlidesGuidance(['workshop'], 'en').title).toBe(
+      'About your slides'
+    );
   });
 });

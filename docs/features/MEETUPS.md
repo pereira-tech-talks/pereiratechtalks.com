@@ -223,12 +223,33 @@ always go through `getCallForSpeakersState()`.
 `closesAt` is **inclusive of its own day**: a call closing on the 20th accepts
 proposals through the 20th.
 
-### `venue` is optional; `mode` defaults
+### `venue` and `mode` are both optional
 
-You cannot book a room five months out, so `venue` is optional and `mode`
-defaults to `in-person`. Every reader must handle the absence: the card, the
-detail page and the agent twin all render a localized *Sede por confirmar* /
-*Venue to be confirmed* rather than an empty line.
+You cannot book a room five months out, and often you have not even decided
+whether the month runs in a room at all — so **both** `venue` and `mode` are
+optional, and absent means *not decided yet* rather than a default.
+
+`mode` used to default to `in-person`. It no longer does: defaulting stated a
+fact nobody had chosen, and that same class of guess is what made four online
+meetups announce themselves to search engines as in-person events.
+
+Three absences, three different sentences — all from
+`resolveMeetupPlaceFallback`, never inline:
+
+| State | Rendered where a venue would go |
+|---|---|
+| `mode: virtual` | *Virtual* / *Online* — there will never be a room |
+| `mode` absent | *Modalidad por confirmar* / *Mode to be confirmed* |
+| `mode: in-person` or `hybrid`, no venue | *Sede por confirmar* / *Venue to be confirmed* |
+
+In the `Event` JSON-LD, an undecided mode emits **no** `eventAttendanceMode` at
+all. schema.org cannot express "we do not know", and guessing is the bug this
+replaced — the same rule `location` already follows for a venue-less meetup.
+
+The agent twin still prints a `Modalidad` / `Mode` row for an undecided meetup,
+with the literal value `undecided`. Dropping the row would make the twin's shape
+depend on how much is known, and a consumer could not tell "absent because
+undecided" from "absent because the field went away".
 
 The twin **always** emits its `Lugar` / `Venue` section, even with no venue —
 `scripts/lib/md-completeness.mjs` requires that section on every meetup twin

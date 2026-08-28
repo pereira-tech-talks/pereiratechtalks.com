@@ -141,7 +141,7 @@ const eventPlatformLabel = meetupComLink?.includes('luma.com')
   ? 'Luma'
   : 'Meetup.com';
 
-const meetupMode = meetup.data.mode ?? 'in-person';
+const meetupMode = meetup.data.mode;
 
 const eventJsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
@@ -158,10 +158,7 @@ const eventJsonLd: Record<string, unknown> = {
     status === 'cancelled'
       ? 'https://schema.org/EventCancelled'
       : 'https://schema.org/EventScheduled',
-  // Derived from `mode`, which the meetup schema has carried since the
-  // programming work. It used to be hardcoded offline, so the four online
-  // months announced themselves as in-person.
-  eventAttendanceMode: resolveEventAttendanceMode(meetupMode),
+  // `eventAttendanceMode` is attached below, and only when it is known.
   url: `${SITE_URL}${prefix}/meetups/${slug}/`,
   organizer: {
     '@type': 'Organization',
@@ -169,6 +166,13 @@ const eventJsonLd: Record<string, unknown> = {
     url: SITE_URL,
   },
 };
+// Derived from `mode`, which the meetup schema has carried since the
+// programming work. It used to be hardcoded offline, so the online months
+// announced themselves as in-person. Omitted entirely when the mode is still
+// undecided: schema.org cannot express "we do not know", and guessing is the
+// bug this replaced.
+const attendanceMode = resolveEventAttendanceMode(meetupMode);
+if (attendanceMode) eventJsonLd.eventAttendanceMode = attendanceMode;
 if (heroSrc) eventJsonLd.image = `${SITE_URL}${heroSrc}`;
 // Never invent a place. A programmed meetup with no room booked emits no
 // `location` at all rather than an empty Place. The Event itself is always
@@ -185,7 +189,10 @@ if (venue) {
       addressCountry: venue.country,
     },
   };
-} else if (meetupMode !== 'in-person' && meetupComLink) {
+} else if (
+  (meetupMode === 'virtual' || meetupMode === 'hybrid') &&
+  meetupComLink
+) {
   // An online night's "place" is the link people join at. Only emitted when
   // there is a real one — the same rule as above: never invent a location.
   eventJsonLd.location = {

@@ -214,6 +214,12 @@ export interface SiteTranslations {
       venueTbc: string;
       /** Shown in place of a venue when the meetup happens online. */
       modeVirtual: string;
+      /**
+       * Shown in place of a venue when nobody has decided yet whether the
+       * meetup runs in a room or online. Distinct from `venueTbc`, which
+       * promises a room that is merely unbooked.
+       */
+      modeTbc: string;
       lineupOpenTitle: string;
       lineupOpenBody: string;
       lineupPartialBody: string;
@@ -350,13 +356,20 @@ export interface SiteTranslations {
     successMessage: string;
     defaultSubject: string;
     /**
-     * Guidance on slides for a short talk. Rendered on the global page and in
+     * Guidance on slides, in two variants. Rendered on the global page and in
      * every meetup's call panel from this one source, so the two cannot drift.
+     *
+     * Which variant applies depends on what the call accepts, so read it
+     * through `resolveSlidesGuidance` rather than reaching in directly: advice
+     * built around "you have very few minutes" is wrong for a month that also
+     * takes 25-minute talks.
      */
     slides: {
       title: string;
-      count: string;
-      demos: string;
+      /** Every accepted format is a short one. */
+      lightning: { count: string; demos: string };
+      /** The call also takes a full-length format. */
+      mixed: { count: string; demos: string };
     };
     /** Meetup-scoped submissions and the optional selector on the global page. */
     meetup: {

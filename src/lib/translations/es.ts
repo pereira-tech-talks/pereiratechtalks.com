@@ -213,6 +213,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
         'Solo el mes está definido; el día se anuncia más adelante',
       venueTbc: 'Sede por confirmar',
       modeVirtual: 'Virtual',
+      modeTbc: 'Modalidad por confirmar',
       lineupOpenTitle: 'Programación en construcción',
       lineupOpenBody:
         'Todavía no anunciamos las charlas de este meetup. Si quieres presentar, la convocatoria es el camino.',
@@ -530,10 +531,18 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
     defaultSubject: 'Postulación a Call for Speakers',
     slides: {
       title: 'Sobre las diapositivas',
-      count:
-        'No limitamos el número de diapositivas, pero tienes muy pocos minutos. Recomendamos llevar pocas: las justas para que tu idea llegue completa sin pasarte del tiempo.',
-      demos:
-        'No hay tiempo para demos en vivo. Si quieres mostrar una, incluye capturas de pantalla en las diapositivas y cuéntalas.',
+      lightning: {
+        count:
+          'No limitamos el número de diapositivas, pero tienes muy pocos minutos. Recomendamos llevar pocas: las justas para que tu idea llegue completa sin pasarte del tiempo.',
+        demos:
+          'No hay tiempo para demos en vivo. Si quieres mostrar una, incluye capturas de pantalla en las diapositivas y cuéntalas.',
+      },
+      mixed: {
+        count:
+          'Depende del formato que elijas. Si traes una charla relámpago, lleva pocas diapositivas: las justas para que tu idea llegue completa en cinco minutos. Si traes una charla completa, tienes espacio para desarrollarla con calma — solo cuida que cada diapositiva tenga algo que decir.',
+        demos:
+          'En relámpago no hay tiempo para demos en vivo: lleva capturas de pantalla y cuéntalas. En formato completo sí caben, pero ten a la mano una grabación o unas capturas por si la red no acompaña.',
+      },
     },
     meetup: {
       contextLabel: 'Postulas a',

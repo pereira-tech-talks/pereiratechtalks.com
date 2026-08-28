@@ -15,6 +15,7 @@ import { getUrlPrefix, type Language } from '@/lib/i18n';
 import {
   getCallsForSpeakersBoard,
   getOpenCallsForSpeakers,
+  resolveSlidesGuidance,
 } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
@@ -24,6 +25,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const tr = getTranslations(lang);
+// The global page accepts every format, so it gets the mixed-format advice.
+const slidesGuidance = resolveSlidesGuidance([], lang);
 const t = tr.cfsPage;
 const prefix = getUrlPrefix(lang);
 
@@ -144,12 +147,13 @@ const breadcrumbs = [
 
   <Section
     eyebrow={tr.cfsForm.formatLabel}
-    title={tr.cfsForm.slides.title}
+    title={slidesGuidance.title}
     surface="alt"
   >
     <div class="max-w-3xl space-y-3">
-      <p class="text-ptt-secondary">{tr.cfsForm.slides.count}</p>
-      <p class="text-ptt-secondary">{tr.cfsForm.slides.demos}</p>
+      {slidesGuidance.paragraphs.map((paragraph) => (
+        <p class="text-ptt-secondary">{paragraph}</p>
+      ))}
     </div>
   </Section>
 

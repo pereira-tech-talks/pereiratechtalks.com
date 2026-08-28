@@ -545,10 +545,13 @@ export const resolveMeetupDateAttribute = (meetup: Meetup): string =>
 /**
  * What to print where a venue would go, when the meetup has none.
  *
- * A virtual meetup is not missing a venue — it does not have one, and saying
- * "sede por confirmar" would promise a room that will never be booked. A hybrid
- * meetup *does* still need a physical venue, so it keeps the "to be confirmed"
- * line until one exists.
+ * Three different absences, three different sentences:
+ *
+ * - **Online** — not missing a venue, it does not have one. "Sede por
+ *   confirmar" would promise a room that will never be booked.
+ * - **Undecided** (`mode` absent) — nobody has chosen yet between a room and a
+ *   stream, so neither "Virtual" nor "Sede por confirmar" is true. Say so.
+ * - **In person or hybrid** — a physical venue is coming, it just is not booked.
  *
  * Single source for the five places that render this: the two cards, the detail
  * hero and sidebar, and the agent twin.
@@ -558,9 +561,10 @@ export const resolveMeetupPlaceFallback = (
   lang: Language
 ): string => {
   const planning = getTranslations(lang).meetupDetail.planning;
-  return meetup.data.mode === 'virtual'
-    ? planning.modeVirtual
-    : planning.venueTbc;
+  const mode = meetup.data.mode;
+  if (mode === 'virtual') return planning.modeVirtual;
+  if (mode === undefined) return planning.modeTbc;
+  return planning.venueTbc;
 };
 
 export const resolveMeetupVenueLine = (
@@ -576,25 +580,34 @@ export const resolveMeetupVenueLine = (
 export type MeetupMode = 'in-person' | 'virtual' | 'hybrid';
 
 /**
- * The schema.org attendance mode for a meetup.
+ * The schema.org attendance mode for a meetup, or `null` when nobody has
+ * decided yet.
  *
  * `MeetupDetailPage` used to hardcode `OfflineEventAttendanceMode`, which was
  * harmless while every meetup was in a room and wrong the moment the community
- * programmed four online months: all four announced themselves to search
- * engines as in-person events in Pereira.
+ * programmed online months: they announced themselves to search engines as
+ * in-person events in Pereira.
+ *
+ * `null` for an undecided meetup, and the page then **omits the property**.
+ * Structured data has no way to say "we do not know", so the honest move is to
+ * say nothing — the same rule `location` already follows for a venue-less
+ * meetup. Guessing would put us straight back into the bug this function was
+ * written to fix.
  *
  * Derived, not authored — the same rule the rest of this module follows.
  */
 export const resolveEventAttendanceMode = (
   mode: MeetupMode | undefined
-): string => {
+): string | null => {
   switch (mode) {
     case 'virtual':
       return 'https://schema.org/OnlineEventAttendanceMode';
     case 'hybrid':
       return 'https://schema.org/MixedEventAttendanceMode';
-    default:
+    case 'in-person':
       return 'https://schema.org/OfflineEventAttendanceMode';
+    default:
+      return null;
   }
 };
 
@@ -614,4 +627,29 @@ export const formatMeetupTalkCount = (
   if (count <= 0) return null;
   if (lang === 'es') return count === 1 ? '1 charla' : `${count} charlas`;
   return count === 1 ? '1 talk' : `${count} talks`;
+};
+
+/**
+ * Which slides advice a call should show, given the formats it accepts.
+ *
+ * "You have very few minutes, no time for a live demo" is good advice for a
+ * lightning-only night and plainly wrong for one that also takes 25-minute
+ * talks — it told speakers to cut material the format has room for. So the
+ * guidance follows the formats rather than being one fixed paragraph.
+ *
+ * An empty list means the global Call for Speakers page, which accepts every
+ * format, so it gets the mixed variant too.
+ *
+ * Returns the title plus its paragraphs, ready to render: the panel, the global
+ * page and the agent twin all read it from here and cannot drift.
+ */
+export const resolveSlidesGuidance = (
+  formats: readonly string[],
+  lang: Language
+): { title: string; paragraphs: string[] } => {
+  const slides = getTranslations(lang).cfsForm.slides;
+  const takesLongForm =
+    formats.length === 0 || formats.some((format) => format !== 'lightning');
+  const variant = takesLongForm ? slides.mixed : slides.lightning;
+  return { title: slides.title, paragraphs: [variant.count, variant.demos] };
 };

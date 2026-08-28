@@ -1,13 +1,19 @@
 ## November meetup
 
-November is for what went wrong, and we mean that with real enthusiasm: it is the night we most look forward to running. Lightning talks about the bug that ate a week, the deploy that fell over on a Friday, the architecture decision you are still paying interest on.
+November is here, we are heading into the last stretch of the year, and the call for talks is open. We want a night with many voices on stage, and for that we need yours: send us your talk and come tell us what you have been up to.
 
-Almost everything told in public is a success story, and nobody learns anything that way. Mistakes stay in a team's private chat, get forgotten, and six months later somebody else repeats them exactly.
+By this point in the year you have solved something you did not know how to solve when it started. It might be the tool you ended up adopting, the performance problem you finally understood, the part of the system you had to learn the hard way, or something you tried out of curiosity that turned out better than expected. That is exactly what we want to hear.
 
-Five minutes on how you broke it and what you would do differently is worth more than half an hour of ideal architecture. And nothing leaves this room badly: we are here for the lesson, not for the culprit.
+And if you think your topic is too small for a talk, it almost never is: what already feels obvious to you is usually the very thing someone else in the room has been hunting for.
 
-The date is confirmed and the meetup is online.
+You pick how long it needs: a **lightning talk of 3 to 5 minutes** to get straight to the point, or a **full talk of 25 minutes** if you want to develop it properly.
+
+If you have never presented before, this is a good moment to start: we will help you shape the talk and rehearse it beforehand.
+
+The date is confirmed. We are still deciding whether we meet in a room or online, and we will announce it here as soon as we know.
+
+See you there!
 
 ### Call for speakers
 
-We are taking lightning talks until Friday 20 November. Bring your favourite mistake: the one that hurt most, or the one that taught you most.
+We are taking proposals until Friday 20 November, as a lightning talk or in the full format. Pick whichever length serves your idea and send it in.
