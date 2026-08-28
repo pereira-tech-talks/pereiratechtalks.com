@@ -1,6 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
-import type { Language } from '@/lib/i18n';
+import { getUrlPrefix, type Language } from '@/lib/i18n';
 
 export type Vertical = CollectionEntry<'verticals'>;
 
@@ -15,6 +15,59 @@ export const getVerticals = async (): Promise<Vertical[]> => {
 export const getActiveVerticals = async (): Promise<Vertical[]> => {
   const all = await getVerticals();
   return all.filter((v) => v.data.status === 'active');
+};
+
+/**
+ * Does this vertical own a generated page at `/verticals/{slug}`?
+ *
+ * False when the entry declares its own `href` — its home lives elsewhere, and
+ * generating a second page for the same subject is what the field exists to
+ * avoid. `getStaticPaths` filters on this, so the route simply does not exist.
+ */
+export const hasGeneratedVerticalPage = (vertical: Vertical): boolean =>
+  !vertical.data.href;
+
+/** The verticals that still get a generated detail page and `.md` twin. */
+export const getVerticalsWithPages = async (): Promise<Vertical[]> => {
+  const all = await getVerticals();
+  return all.filter(hasGeneratedVerticalPage);
+};
+
+/**
+ * Where to link a vertical, in the reader's language.
+ *
+ * `/verticals/{slug}` unless the entry points somewhere else — `monthly-meetups`
+ * sends readers to `/meetups`, which is a fuller page than a generated one
+ * could be. Single source for the card, the home rail, the verticals index and
+ * the agent twins, so a link cannot survive in one place after the page it
+ * pointed at stopped being generated.
+ */
+export const resolveVerticalHref = (
+  vertical: Vertical,
+  lang: Language
+): string => {
+  const prefix = getUrlPrefix(lang);
+  return vertical.data.href
+    ? `${prefix}${vertical.data.href}/`
+    : `${prefix}/verticals/${vertical.id}/`;
+};
+
+/**
+ * The Markdown twin a vertical should link to, in the reader's language.
+ *
+ * The page and its twin move together: a vertical whose home is `/meetups` has
+ * its twin at `/meetups.md`, not at `/verticals/monthly-meetups.md`, which is
+ * no longer generated. `md:check` compares the two surfaces, so a twin link
+ * that outlives its page fails the build rather than rotting quietly.
+ */
+export const resolveVerticalTwinHref = (
+  vertical: Vertical,
+  lang: Language
+): string => {
+  const prefix = getUrlPrefix(lang);
+  return vertical.data.href
+    ? `${prefix}${vertical.data.href}.md`
+    : `${prefix}/verticals/${vertical.id}.md`;
 };
 
 export const getVerticalBySlug = async (

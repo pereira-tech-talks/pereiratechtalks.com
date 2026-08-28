@@ -269,7 +269,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
         description:
           'In-person and hybrid sessions every month — talks, workshops, and lightning rounds on AI, web platforms, devops, mobile, security, and the craft of shipping software.',
         icon: '\u{1F465}',
-        link: '/en/verticals/monthly-meetups',
+        link: '/en/meetups',
       },
       {
         title: 'Pereira Tech Day',

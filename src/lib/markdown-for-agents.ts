@@ -795,9 +795,9 @@ export function serializeMeetupDetailToMarkdown(
   if (data.programs.length > 0) {
     sections.push({
       heading: L('programs'),
-      lines: data.programs.map((p) =>
-        entityLine(p.title, mdHref(lang, `verticals/${p.slug}`), p.mission)
-      ),
+      // `p.href`, not a path composed from the slug: a program whose home page
+      // lives elsewhere carries its own twin URL. See `resolveVerticalTwinHref`.
+      lines: data.programs.map((p) => entityLine(p.title, p.href, p.mission)),
     });
   }
 

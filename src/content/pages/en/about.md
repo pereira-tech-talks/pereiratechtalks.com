@@ -22,7 +22,7 @@ The work is sponsor-supported (Veritran, GitHub, ASE-UTP, DailyBot, Aumentada, a
 
 ## What we do
 
-- **[Monthly Meetups](/en/verticals/monthly-meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
+- **[Monthly Meetups](/en/meetups)** — In-person and hybrid sessions every month covering AI, web platforms, devops, mobile, security, and the craft of shipping software.
 - **[Pereira Tech Day](/en/pereira-tech-day)** — Our flagship annual conference: 2024 archived; [2026 postponed indefinitely](/en/blog/ptd-2026-postponed-earthquake-solidarity/). A full day of keynotes, workshops, and networking with international speakers and local partners.
 - **[Speaker School](/en/verticals/speaker-school)** — A program to grow new technical speakers, from idea to stage, with mentorship, practice runs, and rehearsals.
 - **[La Biblioteca del Mañana](/en/verticals/library-of-tomorrow)** — A reading club connecting science fiction, philosophy, and technology — exploring the future through the books that shape it.

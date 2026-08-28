@@ -19,7 +19,7 @@ import {
 import { getUpcomingEdition } from '@/lib/pereiraTechDay';
 import { getActiveSponsors } from '@/lib/sponsor';
 import { getTranslations } from '@/lib/translations';
-import { getActiveVerticals } from '@/lib/vertical';
+import { getActiveVerticals, resolveVerticalTwinHref } from '@/lib/vertical';
 
 /**
  * `/index.md` — the home page.
@@ -108,7 +108,9 @@ export const GET: APIRoute = async () => {
     lines: programs.map((v) =>
       entityLine(
         resolveI18n(v.data.title, lang),
-        mdHref(lang, `verticals/${v.id}`),
+        // Not composed from the slug: a program whose home lives elsewhere
+        // links its own twin. See `resolveVerticalTwinHref`.
+        resolveVerticalTwinHref(v, lang),
         resolveI18n(v.data.mission, lang)
       )
     ),

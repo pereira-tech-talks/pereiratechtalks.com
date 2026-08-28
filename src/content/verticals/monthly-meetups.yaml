@@ -20,3 +20,9 @@ schedule:
   es: "Tercera semana de cada mes, 6:30 PM hora Pereira."
 status: active
 order: 4
+# The programme's home is /meetups, not a generated vertical page: that page
+# carries the full archive, the programming board and the open calls, and a
+# second page describing the same thing was redundant. The entry stays because
+# 95 meetups and several events point at this slug as a taxonomy term.
+# `public/_redirects` sends the old URL here.
+href: /meetups

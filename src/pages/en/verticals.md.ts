@@ -5,7 +5,7 @@ import {
   resolveI18n,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { getVerticals } from '@/lib/vertical';
+import { getVerticals, resolveVerticalTwinHref } from '@/lib/vertical';
 
 export const GET: APIRoute = async () => {
   const lang = 'en';
@@ -13,7 +13,9 @@ export const GET: APIRoute = async () => {
   const lines = verticals.map((v) => {
     const title = resolveI18n(v.data.title, lang);
     const mission = resolveI18n(v.data.mission, lang);
-    return `- [${title}](/en/verticals/${v.id}.md) — ${mission}`;
+    // Not always `/verticals/{slug}.md` — a vertical whose home lives
+    // elsewhere links its own twin. See `resolveVerticalTwinHref`.
+    return `- [${title}](${resolveVerticalTwinHref(v, lang)}) — ${mission}`;
   });
 
   const markdown = serializeGenericToMarkdown({

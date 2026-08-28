@@ -270,7 +270,7 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
         description:
           'Sesiones presenciales e híbridas cada mes — charlas, talleres y rondas lightning sobre IA, plataformas web, devops, móvil, seguridad y el oficio de publicar software.',
         icon: '\u{1F465}',
-        link: '/verticals/monthly-meetups',
+        link: '/meetups',
       },
       {
         title: 'Pereira Tech Day',

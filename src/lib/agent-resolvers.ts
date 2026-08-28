@@ -21,7 +21,7 @@ import { SITE_URL } from '@/lib/constances';
 import { getContributorsBySlugs } from '@/lib/contributor';
 import { formatCalendarDate, isCalendarDateBeforeToday } from '@/lib/dates';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
-import { resolveI18n } from '@/lib/markdown-for-agents';
+import { mdHref, resolveI18n } from '@/lib/markdown-for-agents';
 import {
   getCallForSpeakersState,
   getMeetupBodyMarkdown,
@@ -47,7 +47,7 @@ import { getSpeakersBySlugs, type Speaker } from '@/lib/speaker';
 import { getEditionSponsors } from '@/lib/sponsor';
 import { getTalksByEvent, getTalksBySpeaker, type Talk } from '@/lib/talk';
 import { getTranslations } from '@/lib/translations';
-import { getVerticals } from '@/lib/vertical';
+import { getVerticals, resolveVerticalTwinHref } from '@/lib/vertical';
 
 /** A talk as an agent-Markdown consumer needs it: nothing left as a slug. */
 export interface ResolvedTalk {
@@ -80,6 +80,14 @@ export interface ResolvedProgramRef {
   slug: string;
   title: string;
   mission: string;
+  /**
+   * Where the program's Markdown twin lives, already language-prefixed.
+   *
+   * Resolved rather than composed from the slug: `monthly-meetups` has no
+   * `/verticals/monthly-meetups.md` — its home is `/meetups.md`. Composing the
+   * path here meant 95 meetup twins linking a page that is no longer generated.
+   */
+  href: string;
 }
 
 export interface ResolvedMeetupDetail {
@@ -454,6 +462,9 @@ export const resolveMeetupDetail = async (
         slug: v,
         title: entry ? resolveI18n(entry.data.title, lang) : v,
         mission: entry ? resolveI18n(entry.data.mission, lang) : '',
+        href: entry
+          ? resolveVerticalTwinHref(entry, lang)
+          : mdHref(lang, `verticals/${v}`),
       };
     }),
     gallery: (meetup.data.gallery ?? []).map((g) => ({

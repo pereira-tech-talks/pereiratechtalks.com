@@ -45,6 +45,28 @@
 /en/pereira-tech-days.md      /en/pereira-tech-day.md       301
 
 # ---------------------------------------------------------------------------
+# Retired vertical page: monthly meetups now live at /meetups
+# ---------------------------------------------------------------------------
+# `/verticals/monthly-meetups` described the programme; `/meetups` carries the
+# full archive, the programming board and the open calls. Two pages for one
+# subject, and the thinner one ranked. The vertical entry survives as a
+# taxonomy term — 95 meetups and several events point at that slug — but its
+# page is no longer generated (`href: /meetups` in the entry).
+#
+# Must sit BEFORE the `/es/*` catch-all below, and point straight at the final
+# URL: Cloudflare does not chain redirects.
+
+/verticals/monthly-meetups        /meetups/                                       301
+/verticals/monthly-meetups/       /meetups/                                       301
+/verticals/monthly-meetups.md     /meetups.md                                     301
+/en/verticals/monthly-meetups     /en/meetups/                                    301
+/en/verticals/monthly-meetups/    /en/meetups/                                    301
+/en/verticals/monthly-meetups.md  /en/meetups.md                                  301
+/es/verticals/monthly-meetups     /meetups/                                       301
+/es/verticals/monthly-meetups/    /meetups/                                       301
+/es/verticals/monthly-meetups.md  /meetups.md                                     301
+
+# ---------------------------------------------------------------------------
 # Language swap: Spanish moved from /es to the site root
 # ---------------------------------------------------------------------------
 # Spanish is the community's primary language and is now served at `/`, with
