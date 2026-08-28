@@ -212,6 +212,7 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       chipMonthOnlyAria: 'Only the month is set; the day is announced later',
       venueTbc: 'Venue to be confirmed',
       modeVirtual: 'Online',
+      modeTbc: 'Mode to be confirmed',
       lineupOpenTitle: 'Line-up in progress',
       lineupOpenBody:
         "We have not announced this meetup's talks yet. If you want to present, the call for speakers is the way in.",

@@ -214,7 +214,7 @@ confirmed. Planned mode creates that meetup from a **date alone**.
 | `dateConfidence` | **Required decision** — see below |
 | `callForSpeakers` | Optional, but the reason planned mode exists |
 | `venue` | **Omit.** You have not booked a room. |
-| `mode` | **Omit.** Defaults to `in-person`. |
+| `mode` | **Omit** unless the community has actually decided. Absent means *not decided yet*, and the page says so — it does **not** fall back to `in-person`. |
 | `hero` / `heroImage` | **Omit.** The card renders a typographic date tile instead of a stock placeholder. |
 | `speakers`, `talks`, `sponsors` | **Omit.** The line-up is *derived* from these being empty; never state it twice. |
 | `status` | `announced` |

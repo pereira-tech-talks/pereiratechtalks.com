@@ -413,7 +413,15 @@ const meetups = defineCollection({
      */
     venue: venue.optional(),
     /** Defaults to the community's norm so a programmed meetup need not state it. */
-    mode: z.enum(['in-person', 'virtual', 'hybrid']).default('in-person'),
+    /**
+     * How the meetup is attended. **Optional on purpose**: absent means "not
+     * decided yet", the same way an absent `venue` means "no room booked yet".
+     * A programmed month often has a date long before anyone knows whether it
+     * runs in a room or online, and defaulting to `in-person` would state a
+     * fact nobody has decided. Read it through `resolveMeetupPlaceFallback`,
+     * never inline.
+     */
+    mode: z.enum(['in-person', 'virtual', 'hybrid']).optional(),
     dateConfidence,
     callForSpeakers: callForSpeakers.optional(),
     hero: z

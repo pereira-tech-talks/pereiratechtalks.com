@@ -214,6 +214,12 @@ export interface SiteTranslations {
       venueTbc: string;
       /** Shown in place of a venue when the meetup happens online. */
       modeVirtual: string;
+      /**
+       * Shown in place of a venue when nobody has decided yet whether the
+       * meetup runs in a room or online. Distinct from `venueTbc`, which
+       * promises a room that is merely unbooked.
+       */
+      modeTbc: string;
       lineupOpenTitle: string;
       lineupOpenBody: string;
       lineupPartialBody: string;

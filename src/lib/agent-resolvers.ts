@@ -359,7 +359,12 @@ export const resolveMeetupDetail = async (
       dateConfidence === 'month-only'
         ? isoDate(meetup.data.date).slice(0, 7)
         : isoDate(meetup.data.date),
-    mode: meetup.data.mode,
+    // The raw enum, as this row has always carried it, plus an explicit
+    // `undecided` for a meetup programmed before anyone chose between a room
+    // and a stream. Dropping the row instead would make the twin's shape
+    // depend on how much is known, and a consumer cannot tell "absent because
+    // undecided" from "absent because the field went away".
+    mode: meetup.data.mode ?? 'undecided',
     // The label the page shows, not the raw enum: a twin is what the page says.
     status: statusLabel,
     venue: venue

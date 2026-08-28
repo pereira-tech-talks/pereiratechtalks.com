@@ -18,8 +18,8 @@ title:
   en: We are looking for speakers
   es: Estamos buscando ponentes
 summary:
-  en: "Lightning talks, every month until December. Propose yours in 3–5 minutes."
-  es: "Charlas relámpago, todos los meses hasta diciembre. Propón la tuya en 3–5 minutos."
+  en: "Every month until December. Lightning talk or full talk — you pick."
+  es: "Todos los meses hasta diciembre. Charla relámpago o charla larga: tú eliges."
 # One line only. The image above it already carries the format, the duration,
 # the period and that it is online — repeating that here made the modal read
 # like a form. What the image cannot say is the invitation.
@@ -35,13 +35,13 @@ image:
     es: /images/call-for-speakers/2026.webp
   alt:
     en: >-
-      Pereira Tech Talks call for speakers: lightning talks of 3 to 5 minutes,
-      online, every month from September to December 2026. Your first talk can
-      start here.
+      Pereira Tech Talks call for speakers: lightning talks of 3 to 5 minutes or
+      full talks of 25, every month from September to December 2026. Your first
+      talk can start here.
     es: >-
       Convocatoria de ponentes de Pereira Tech Talks: charlas relámpago de 3 a 5
-      minutos, virtual, todos los meses de septiembre a diciembre de 2026. Tu
-      primera charla cabe aquí.
+      minutos o charlas largas de 25, todos los meses de septiembre a diciembre
+      de 2026. Tu primera charla cabe aquí.
 # One link per month, so a reader can go straight to the meetup they want
 # rather than landing on the index and hunting. Authored here rather than
 # derived from the open calls: the notification system stays decoupled from the

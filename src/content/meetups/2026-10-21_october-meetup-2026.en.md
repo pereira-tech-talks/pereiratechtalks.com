@@ -1,13 +1,13 @@
 ## October meetup
 
-October arrives with no theme, and that is exactly the invitation. The whole month is lightning talks: three to five minutes, whatever idea you bring, with nobody telling you what to talk about.
+October arrives with no theme, and that is exactly the invitation. Bring whatever idea you like, with nobody telling you what to talk about, in whichever format suits it: a lightning talk of three to five minutes, or a full talk of twenty-five.
 
-The best lightning talks we have had did not come out of a themed call. They came from someone who had been turning something over for weeks, who thought it was not that important, and who finally said it in five minutes and left half the room taking notes.
+The best talks we have had did not come out of a themed call. They came from someone who had been turning something over for weeks, who thought it was not that important, and who finally said it out loud and left half the room taking notes.
 
-That is what we are after: an editor trick, a library that turned out not to be worth it, a short post-mortem, a half-baked idea you want to argue out loud. If it is technical and you care about it, it fits.
+That is what we are after: an editor trick, a library that turned out not to be worth it, a post-mortem, an architecture you want to walk through properly, a half-baked idea you want to argue out loud. If it is technical and you care about it, it fits. You pick how long it needs.
 
-The date is confirmed and the meetup is online.
+The date is confirmed. We are still deciding whether we meet in a room or online, and we will announce it here as soon as we know.
 
 ### Call for speakers
 
-We are taking lightning talks until Friday 16 October. No theme and no filter: just bring it in three to five minutes.
+We are taking proposals until Friday 16 October, as a lightning talk or in the longer format. No theme and no filter: pick whichever length serves your idea.
