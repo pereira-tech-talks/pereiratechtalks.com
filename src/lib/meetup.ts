@@ -628,3 +628,28 @@ export const formatMeetupTalkCount = (
   if (lang === 'es') return count === 1 ? '1 charla' : `${count} charlas`;
   return count === 1 ? '1 talk' : `${count} talks`;
 };
+
+/**
+ * Which slides advice a call should show, given the formats it accepts.
+ *
+ * "You have very few minutes, no time for a live demo" is good advice for a
+ * lightning-only night and plainly wrong for one that also takes 25-minute
+ * talks — it told speakers to cut material the format has room for. So the
+ * guidance follows the formats rather than being one fixed paragraph.
+ *
+ * An empty list means the global Call for Speakers page, which accepts every
+ * format, so it gets the mixed variant too.
+ *
+ * Returns the title plus its paragraphs, ready to render: the panel, the global
+ * page and the agent twin all read it from here and cannot drift.
+ */
+export const resolveSlidesGuidance = (
+  formats: readonly string[],
+  lang: Language
+): { title: string; paragraphs: string[] } => {
+  const slides = getTranslations(lang).cfsForm.slides;
+  const takesLongForm =
+    formats.length === 0 || formats.some((format) => format !== 'lightning');
+  const variant = takesLongForm ? slides.mixed : slides.lightning;
+  return { title: slides.title, paragraphs: [variant.count, variant.demos] };
+};

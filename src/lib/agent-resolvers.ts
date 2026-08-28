@@ -33,6 +33,7 @@ import {
   resolveMeetupLineup,
   resolveMeetupPlaceFallback,
   resolveMeetupStatus,
+  resolveSlidesGuidance,
 } from '@/lib/meetup';
 import {
   getEditionRegistrationUrl,
@@ -271,6 +272,9 @@ export const resolveMeetupDetail = async (
 
   const planning = tr.meetupDetail.planning;
   const cfsCopy = tr.meetupDetail.cfs;
+  // Follows the formats this call accepts — a lightning-only night and one that
+  // also takes 25-minute talks need different advice.
+  const slidesGuidance = resolveSlidesGuidance(call?.formats ?? [], lang);
   const isUpcoming = !isCalendarDateBeforeToday(meetup.data.date);
   // Mirrors the page's own condition, so the twin carries the notice exactly
   // when the page shows it — and never invents one for the archive.
@@ -403,9 +407,8 @@ export const resolveMeetupDetail = async (
             ...(callState === 'open'
               ? {
                   slidesGuidance: [
-                    tr.cfsForm.slides.title,
-                    tr.cfsForm.slides.count,
-                    tr.cfsForm.slides.demos,
+                    slidesGuidance.title,
+                    ...slidesGuidance.paragraphs,
                   ],
                   formFields: [
                     tr.contactPage.nameLabel,

@@ -5,7 +5,11 @@ import {
   buildOpenCallsSection,
   serializeGenericToMarkdown,
 } from '@/lib/markdown-for-agents';
-import { formatOpenCallDate, getOpenCallsForSpeakers } from '@/lib/meetup';
+import {
+  formatOpenCallDate,
+  getOpenCallsForSpeakers,
+  resolveSlidesGuidance,
+} from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
 /**
@@ -16,6 +20,7 @@ import { getTranslations } from '@/lib/translations';
 export const GET: APIRoute = async () => {
   const lang = 'en';
   const tr = getTranslations(lang);
+  const slidesGuidance = resolveSlidesGuidance([], lang);
   const t = tr.cfsPage;
 
   /*
@@ -88,8 +93,12 @@ export const GET: APIRoute = async () => {
         lines: t.process.map((step, index) => `${index + 1}. ${step}`),
       },
       {
-        heading: tr.cfsForm.slides.title,
-        lines: [tr.cfsForm.slides.count, '', tr.cfsForm.slides.demos],
+        heading: slidesGuidance.title,
+        // The global page accepts every format, so it gets the mixed-format
+        // advice — see `resolveSlidesGuidance`.
+        lines: slidesGuidance.paragraphs.flatMap((paragraph, index) =>
+          index === 0 ? [paragraph] : ['', paragraph]
+        ),
       },
       {
         heading: 'What the form asks',

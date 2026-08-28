@@ -529,10 +529,18 @@ If you are looking for people to grow with, a stage for your first talk, or a co
     defaultSubject: 'Call for Speakers submission',
     slides: {
       title: 'About your slides',
-      count:
-        'We do not cap how many slides you bring, but you have very few minutes. We suggest keeping them few: just enough to land your idea without running over.',
-      demos:
-        'There is no time for a live demo. If you want to show one, put screenshots in your slides and talk through them.',
+      lightning: {
+        count:
+          'We do not cap how many slides you bring, but you have very few minutes. We suggest keeping them few: just enough to land your idea without running over.',
+        demos:
+          'There is no time for a live demo. If you want to show one, put screenshots in your slides and talk through them.',
+      },
+      mixed: {
+        count:
+          'It depends on the format you pick. If you bring a lightning talk, keep the slides few: just enough to land your idea in five minutes. If you bring a full talk, you have room to develop it properly — just make sure every slide earns its place.',
+        demos:
+          'A lightning talk leaves no room for a live demo: bring screenshots and talk through them. A full talk can fit one, but keep a recording or screenshots to hand in case the network lets you down.',
+      },
     },
     meetup: {
       contextLabel: 'You are submitting to',

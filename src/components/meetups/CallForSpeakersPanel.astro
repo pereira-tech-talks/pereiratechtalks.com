@@ -22,6 +22,7 @@ import {
   getCallForSpeakersState,
   getMeetupSlug,
   resolveMeetupDateLabel,
+  resolveSlidesGuidance,
 } from '@/lib/meetup';
 import { getTranslations } from '@/lib/translations';
 
@@ -36,7 +37,11 @@ const { meetup, lang, title } = Astro.props;
 
 const tr = getTranslations(lang);
 const c = tr.meetupDetail.cfs;
-const slides = tr.cfsForm.slides;
+// Depends on what this meetup accepts — see `resolveSlidesGuidance`.
+const slides = resolveSlidesGuidance(
+  meetup.data.callForSpeakers?.formats ?? [],
+  lang
+);
 const prefix = getUrlPrefix(lang);
 
 const state = getCallForSpeakersState(meetup);
@@ -109,8 +114,9 @@ const meetupSlug = getMeetupSlug(meetup);
                   <h3 class="text-sm font-semibold uppercase tracking-widest text-ptt-primary dark:text-ptt-primary-dark">
                     {slides.title}
                   </h3>
-                  <p class="mt-2 text-ptt-secondary">{slides.count}</p>
-                  <p class="mt-2 text-ptt-secondary">{slides.demos}</p>
+                  {slides.paragraphs.map((paragraph) => (
+                    <p class="mt-2 text-ptt-secondary">{paragraph}</p>
+                  ))}
                 </div>
 
                 {/*

@@ -17,6 +17,7 @@ import {
   resolveMeetupPlaceFallback,
   resolveMeetupStatus,
   resolveMeetupVenueLine,
+  resolveSlidesGuidance,
 } from '@/lib/meetup';
 import { resolveEditionStatus } from '@/lib/pereiraTechDay';
 
@@ -657,5 +658,57 @@ describe('what to print where a venue would go', () => {
       )
     );
     expect(seen.size).toBe(3);
+  });
+});
+
+/**
+ * "You have very few minutes, no time for a live demo" is good advice for a
+ * lightning-only night and plainly wrong for one that also takes 25-minute
+ * talks — it told speakers to cut material the format has room for.
+ *
+ * October–December 2026 opened to full talks and kept showing the short-talk
+ * advice, on the meetup panel, the global page and the agent twin, because all
+ * three read one fixed paragraph. They now read this.
+ */
+describe('slides guidance follows the accepted formats', () => {
+  it('gives the short-talk advice when only lightning is accepted', () => {
+    const { paragraphs } = resolveSlidesGuidance(['lightning'], 'es');
+    expect(paragraphs[0]).toContain('muy pocos minutos');
+    expect(paragraphs[1]).toContain('No hay tiempo para demos en vivo');
+  });
+
+  it('switches advice as soon as a long format is accepted', () => {
+    const { paragraphs } = resolveSlidesGuidance(
+      ['lightning', 'regular'],
+      'es'
+    );
+    expect(paragraphs[0]).not.toContain('muy pocos minutos');
+    expect(paragraphs[0]).toContain('charla completa');
+    // The live-demo rule stops being absolute: it applies to lightning only.
+    expect(paragraphs[1]).toContain('En formato completo sí caben');
+  });
+
+  it('treats an empty list as the global page, which takes every format', () => {
+    const global = resolveSlidesGuidance([], 'en');
+    const mixed = resolveSlidesGuidance(['regular'], 'en');
+    expect(global.paragraphs).toEqual(mixed.paragraphs);
+  });
+
+  it('carries the same title either way, and two paragraphs', () => {
+    for (const formats of [['lightning'], ['lightning', 'regular'], []]) {
+      const g = resolveSlidesGuidance(formats, 'en');
+      expect(g.title).toBe('About your slides');
+      expect(g.paragraphs).toHaveLength(2);
+      for (const p of g.paragraphs) expect(p.trim().length).toBeGreaterThan(40);
+    }
+  });
+
+  it('answers in the reader’s language', () => {
+    expect(resolveSlidesGuidance(['workshop'], 'es').title).toBe(
+      'Sobre las diapositivas'
+    );
+    expect(resolveSlidesGuidance(['workshop'], 'en').title).toBe(
+      'About your slides'
+    );
   });
 });
