@@ -237,6 +237,99 @@ setup_dailybot_persistence_for_user() {
 setup_dailybot_persistence_for_user "/home/node"
 chown -R node:node /home/node/.dailybot_data /home/node/.config/dailybot 2>/dev/null || true
 
+# Setup Z.AI Coding Tool Helper persistence (@z_ai/coding-helper → ~/.chelper)
+setup_chelper_persistence_for_user() {
+    USER_HOME="$1"
+    CHELPER_DATA_DIR="${USER_HOME}/.chelper_data"
+    CHELPER_DIR="${USER_HOME}/.chelper"
+
+    mkdir -p "${CHELPER_DATA_DIR}"
+
+    if [ ! -L "${CHELPER_DIR}" ]; then
+        if [ -d "${CHELPER_DIR}" ]; then
+            if [ ! -d "${CHELPER_DATA_DIR}/chelper_dir" ] || [ -z "$(ls -A "${CHELPER_DATA_DIR}/chelper_dir" 2>/dev/null)" ]; then
+                cp -r "${CHELPER_DIR}" "${CHELPER_DATA_DIR}/chelper_dir"
+            fi
+            rm -rf "${CHELPER_DIR}"
+        else
+            mkdir -p "${CHELPER_DATA_DIR}/chelper_dir"
+        fi
+        ln -sf "${CHELPER_DATA_DIR}/chelper_dir" "${CHELPER_DIR}"
+    fi
+}
+
+setup_chelper_persistence_for_user "/home/node"
+chown -R node:node /home/node/.chelper_data /home/node/.chelper 2>/dev/null || true
+
+# OpenCode: ~/.config/opencode + ~/.local/share/opencode
+setup_opencode_persistence_for_user() {
+    USER_HOME="$1"
+    OPENCODE_DATA_DIR="${USER_HOME}/.opencode_data"
+    OPENCODE_CONFIG_DIR="${USER_HOME}/.config/opencode"
+    OPENCODE_SHARE_DIR="${USER_HOME}/.local/share/opencode"
+
+    mkdir -p "${OPENCODE_DATA_DIR}"
+    mkdir -p "${USER_HOME}/.config"
+    mkdir -p "${USER_HOME}/.local/share"
+
+    if [ ! -L "${OPENCODE_CONFIG_DIR}" ]; then
+        if [ -d "${OPENCODE_CONFIG_DIR}" ]; then
+            if [ ! -d "${OPENCODE_DATA_DIR}/config_opencode" ] || [ -z "$(ls -A "${OPENCODE_DATA_DIR}/config_opencode" 2>/dev/null)" ]; then
+                cp -r "${OPENCODE_CONFIG_DIR}" "${OPENCODE_DATA_DIR}/config_opencode"
+            fi
+            rm -rf "${OPENCODE_CONFIG_DIR}"
+        else
+            mkdir -p "${OPENCODE_DATA_DIR}/config_opencode"
+        fi
+        ln -sf "${OPENCODE_DATA_DIR}/config_opencode" "${OPENCODE_CONFIG_DIR}"
+    fi
+
+    if [ ! -L "${OPENCODE_SHARE_DIR}" ]; then
+        if [ -d "${OPENCODE_SHARE_DIR}" ]; then
+            if [ ! -d "${OPENCODE_DATA_DIR}/share_opencode" ] || [ -z "$(ls -A "${OPENCODE_DATA_DIR}/share_opencode" 2>/dev/null)" ]; then
+                cp -r "${OPENCODE_SHARE_DIR}" "${OPENCODE_DATA_DIR}/share_opencode"
+            fi
+            rm -rf "${OPENCODE_SHARE_DIR}"
+        else
+            mkdir -p "${OPENCODE_DATA_DIR}/share_opencode"
+        fi
+        ln -sf "${OPENCODE_DATA_DIR}/share_opencode" "${OPENCODE_SHARE_DIR}"
+    fi
+}
+
+setup_opencode_persistence_for_user "/home/node"
+chown -R node:node /home/node/.opencode_data /home/node/.config/opencode /home/node/.local/share/opencode 2>/dev/null || true
+
+# Persist Pi, Cline, Herdr and Grok sessions/configuration across container
+# rebuilds. Each CLI keeps its state under a single user-home directory, so one
+# generic helper covers all of them.
+setup_agent_directory_persistence_for_user() {
+    USER_HOME="$1"
+    DATA_DIR="$2"
+    TARGET_DIR="$3"
+
+    mkdir -p "${DATA_DIR}"
+    mkdir -p "$(dirname "${TARGET_DIR}")"
+    if [ ! -L "${TARGET_DIR}" ]; then
+        if [ -d "${TARGET_DIR}" ]; then
+            if [ ! -d "${DATA_DIR}/content" ] || [ -z "$(ls -A "${DATA_DIR}/content" 2>/dev/null)" ]; then
+                cp -r "${TARGET_DIR}" "${DATA_DIR}/content"
+            fi
+            rm -rf "${TARGET_DIR}"
+        else
+            mkdir -p "${DATA_DIR}/content"
+        fi
+        ln -sf "${DATA_DIR}/content" "${TARGET_DIR}"
+    fi
+}
+
+setup_agent_directory_persistence_for_user "/home/node" "/home/node/.pi_data" "/home/node/.pi"
+setup_agent_directory_persistence_for_user "/home/node" "/home/node/.cline_data" "/home/node/.cline"
+setup_agent_directory_persistence_for_user "/home/node" "/home/node/.herdr_data" "/home/node/.config/herdr"
+setup_agent_directory_persistence_for_user "/home/node" "/home/node/.grok_data" "/home/node/.grok"
+chown -R node:node /home/node/.pi_data /home/node/.pi /home/node/.cline_data /home/node/.cline 2>/dev/null || true
+chown -R node:node /home/node/.herdr_data /home/node/.config/herdr /home/node/.grok_data /home/node/.grok 2>/dev/null || true
+
 # Setup SSH keys from host with correct permissions for a given user
 # This allows git operations with GitHub/GitLab
 setup_ssh_keys_for_user() {
@@ -368,6 +461,205 @@ upgrade_dailybot_cli() {
     echo "Dailybot CLI: $version"
 }
 
+# Snapshot the container environment for SSH sessions.
+# `docker compose` hands env_file/environment variables to PID 1 only. A shell
+# started by sshd is a fresh login session and would otherwise see none of them
+# — no ZAI_CODING_API_KEY, no XAI_API_KEY, not even the image's PATH — so every
+# provider wrapper in docker/custom_commands.sh would report a missing key.
+# Writing the snapshot into /etc/profile.d gives an `ssh` session exactly what
+# `docker compose exec` sees. Regenerated on every container start.
+CONTAINER_ENV_PROFILE=/etc/profile.d/01-container-env.sh
+
+write_container_env_profile() {
+    local out="${CONTAINER_ENV_PROFILE}"
+
+    if ! command -v python3 >/dev/null 2>&1; then
+        echo "env snapshot: python3 unavailable — ssh sessions will not inherit compose env"
+        return 0
+    fi
+
+    python3 - "${out}" <<'PY' || return 0
+import os
+import shlex
+import sys
+
+out = sys.argv[1]
+# Per-session values that must never be frozen into a login shell.
+deny = {
+    "HOME", "PWD", "OLDPWD", "SHLVL", "_", "USER", "LOGNAME", "MAIL", "SHELL",
+    "TERM", "HOSTNAME", "LS_COLORS", "SSH_CLIENT", "SSH_CONNECTION", "SSH_TTY",
+}
+lines = [
+    "# Generated by entrypoint.sh on container start - edit it there, not here.",
+    "# Mirrors the environment docker compose gives PID 1 into login shells (ssh).",
+]
+for key in sorted(os.environ):
+    if key in deny or not key.replace("_", "").isalnum():
+        continue
+    lines.append("export %s=%s" % (key, shlex.quote(os.environ[key])))
+with open(out, "w", encoding="utf-8") as handle:
+    handle.write("\n".join(lines) + "\n")
+PY
+
+    # The snapshot carries API keys, so keep it off world-readable mode while
+    # still letting the node user's login shell read it.
+    chown root:node "${out}" 2>/dev/null || true
+    chmod 0640 "${out}" 2>/dev/null || true
+    echo "env snapshot: ${out} (compose env available to ssh sessions)"
+}
+
+# ================================
+# OpenSSH server — reach this container from another machine (or a phone)
+# ================================
+# Published on the host as 22030 (see docker-compose.yaml). Handy for driving
+# Herdr and the coding agents remotely: `ssh -p 22030 node@<host>`.
+#
+# Defaults: key-based auth only, user `node` only, root login refused. Password
+# auth is opt-in through SSH_NODE_PASSWORD. Trusted keys come from the host's
+# mounted ~/.ssh (its *.pub files and authorized_keys) plus SSH_AUTHORIZED_KEYS.
+# Host keys live in the sshd_data named volume, so the container keeps the same
+# identity across rebuilds and clients never hit a host-key mismatch warning.
+setup_sshd() {
+    local enabled="${SSH_SERVER_ENABLED:-true}"
+    case "${enabled}" in
+        true|1|yes) : ;;
+        *) echo "sshd: disabled (SSH_SERVER_ENABLED=${enabled})"; return 0 ;;
+    esac
+
+    if [ ! -x /usr/sbin/sshd ]; then
+        echo "sshd: openssh-server is not installed — skipping"
+        return 0
+    fi
+
+    # Keep this in sync with the published port in docker-compose.yaml.
+    local port="${SSH_SERVER_PORT:-22030}"
+    local key_dir=/etc/ssh/sshd_keys
+    local ssh_dir=/home/node/.ssh
+    local host_ssh_dir=/home/node/.ssh_host
+
+    mkdir -p /run/sshd "${key_dir}" /etc/ssh/sshd_config.d "${ssh_dir}"
+
+    # Persistent host keys (named volume) instead of the ones the package
+    # generated into the image layer, which would differ on every rebuild.
+    local key_type
+    for key_type in ed25519 rsa; do
+        if [ ! -f "${key_dir}/ssh_host_${key_type}_key" ]; then
+            ssh-keygen -q -t "${key_type}" -f "${key_dir}/ssh_host_${key_type}_key" -N '' -C "pertechtalks-devcontainer" \
+                && echo "  → Generated ${key_type} host key"
+        fi
+        chmod 600 "${key_dir}/ssh_host_${key_type}_key" 2>/dev/null || true
+    done
+
+    # Rebuild authorized_keys from the sources we control, so a key removed at
+    # the source stops working here too.
+    local tmp_keys
+    tmp_keys="$(mktemp)"
+    {
+        # Whatever the host already trusts for this user.
+        [ -f "${host_ssh_dir}/authorized_keys" ] && cat "${host_ssh_dir}/authorized_keys"
+        # The host's own public keys: their private half is the key already used
+        # for git, so `ssh -p ${port} node@localhost` works with no extra setup.
+        local pub
+        for pub in "${host_ssh_dir}"/*.pub; do
+            [ -f "${pub}" ] && cat "${pub}"
+        done
+        # Extra keys pasted into the env file (separate several with ';').
+        if [ -n "${SSH_AUTHORIZED_KEYS:-}" ]; then
+            printf '%s\n' "${SSH_AUTHORIZED_KEYS}" | tr ';' '\n'
+        fi
+    } 2>/dev/null | grep -E '^(ssh-|ecdsa-|sk-)' | sort -u > "${tmp_keys}"
+
+    if [ -s "${tmp_keys}" ]; then
+        install -m 600 -o node -g node "${tmp_keys}" "${ssh_dir}/authorized_keys"
+        echo "sshd: $(wc -l < "${ssh_dir}/authorized_keys") authorized key(s) for user node"
+    elif [ -f "${ssh_dir}/authorized_keys" ]; then
+        echo "sshd: no key source found — keeping the existing authorized_keys"
+    else
+        echo "sshd: no authorized keys found (mount ~/.ssh, or set SSH_AUTHORIZED_KEYS / SSH_NODE_PASSWORD)"
+    fi
+    rm -f "${tmp_keys}"
+    chmod 700 "${ssh_dir}" 2>/dev/null || true
+    chown -R node:node "${ssh_dir}" 2>/dev/null || true
+
+    # `ssh host "cmd"` runs a NON-login shell, which reads neither ~/.bashrc nor
+    # /etc/profile.d — so the snapshot above would miss it. ~/.ssh/environment
+    # covers those sessions. PermitUserEnvironment below restricts it to
+    # provider variables; LD_* deliberately stays out of that list.
+    python3 - "${ssh_dir}/environment" <<'PYENV' || true
+import os
+import sys
+
+out = sys.argv[1]
+prefixes = ("ZAI_", "XAI_", "AZURE_", "ANTHROPIC_", "DAILYBOT_", "PUBLIC_", "ASTRO_")
+names = ("DOCKER_DEV_ENV", "CHROME_PATH", "CLINE_DATA_DIR", "PNPM_HOME", "EDITOR", "VISUAL", "GIT_EDITOR")
+lines = []
+for key in sorted(os.environ):
+    value = os.environ[key]
+    if "\n" in value:
+        continue
+    if key.startswith(prefixes) or key in names:
+        lines.append("%s=%s" % (key, value))
+with open(out, "w", encoding="utf-8") as handle:
+    handle.write("\n".join(lines) + ("\n" if lines else ""))
+PYENV
+    # PATH is the one variable sshd always overwrites with its own default, so
+    # it cannot be handed over directly. BASH_ENV can: bash sources it in every
+    # non-interactive shell, and the snapshot it points at exports the image
+    # PATH along with everything else. That is what makes
+    # `ssh -p 22030 node@host "codexx -p ..."` resolve the agent CLIs.
+    if [ -f "${CONTAINER_ENV_PROFILE}" ]; then
+        printf 'BASH_ENV=%s\n' "${CONTAINER_ENV_PROFILE}" >> "${ssh_dir}/environment"
+    fi
+    chown node:node "${ssh_dir}/environment" 2>/dev/null || true
+    chmod 600 "${ssh_dir}/environment" 2>/dev/null || true
+
+    # Password login is opt-in: only when SSH_NODE_PASSWORD carries a value.
+    local password_auth=no
+    if [ -n "${SSH_NODE_PASSWORD:-}" ]; then
+        echo "node:${SSH_NODE_PASSWORD}" | chpasswd
+        password_auth=yes
+        echo "sshd: password authentication enabled for user node"
+    fi
+
+    cat > /etc/ssh/sshd_config.d/10-devcontainer.conf <<EOF
+# Generated by entrypoint.sh on container start — edit it there, not here.
+Port ${port}
+AddressFamily any
+ListenAddress 0.0.0.0
+HostKey ${key_dir}/ssh_host_ed25519_key
+HostKey ${key_dir}/ssh_host_rsa_key
+PermitRootLogin no
+AllowUsers node
+PubkeyAuthentication yes
+PasswordAuthentication ${password_auth}
+PermitUserEnvironment BASH_ENV,ZAI_*,XAI_*,AZURE_*,ANTHROPIC_*,DAILYBOT_*,PUBLIC_*,ASTRO_*,DOCKER_DEV_ENV,CHROME_PATH,CLINE_DATA_DIR,PNPM_HOME,EDITOR,VISUAL,GIT_EDITOR
+KbdInteractiveAuthentication no
+PermitEmptyPasswords no
+X11Forwarding no
+PrintMotd no
+AcceptEnv LANG LC_*
+ClientAliveInterval 30
+ClientAliveCountMax 6
+EOF
+
+    # Debian ships `Include /etc/ssh/sshd_config.d/*.conf` at the top of
+    # sshd_config; add it if a future base image ever drops it.
+    if ! grep -qE '^[[:space:]]*Include[[:space:]]+/etc/ssh/sshd_config\.d/\*\.conf' /etc/ssh/sshd_config 2>/dev/null; then
+        printf 'Include /etc/ssh/sshd_config.d/*.conf\n' | cat - /etc/ssh/sshd_config > /etc/ssh/sshd_config.new \
+            && mv /etc/ssh/sshd_config.new /etc/ssh/sshd_config
+    fi
+
+    # A daemon left over from a previous start would hold the port.
+    pkill -x sshd 2>/dev/null || true
+
+    if /usr/sbin/sshd -t; then
+        /usr/sbin/sshd
+        echo "sshd: listening on ${port} — ssh -p ${port} node@<docker-host>"
+    else
+        echo "sshd: configuration test failed — not starting"
+    fi
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -375,6 +667,8 @@ main() {
     # Run all setup functions
     setup_nodejs
     setup_git
+    write_container_env_profile
+    setup_sshd
     upgrade_dailybot_cli
 
     echo "Container setup completed"

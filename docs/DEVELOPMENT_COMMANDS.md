@@ -297,6 +297,18 @@ pnpm run dev -- --port 3000
 
 When using the devcontainer, the host port is mapped to **8888** (not 8888) to avoid conflict with macOS AirPlay Receiver. Access the dev server at `http://localhost:8888`.
 
+The container also ships the coding-agent suite (Claude Code, Codex, OpenCode,
+Pi, Cline, Grok, Cursor, Herdr, Z.AI helper, Dailybot CLI) and an SSH server on
+host port **22030**, so you can drive it from another machine:
+
+```bash
+ssh -p 22030 node@localhost   # `sshinfo` inside the container prints the details
+```
+
+Provider keys live in `docker/local/pertechtalks/.env`. Run `help` inside the
+container for the full command list. Full reference:
+**[Local Docker development stack](../docker/local/README.md)**.
+
 ## Scripts Reference
 
 Full `package.json` scripts:

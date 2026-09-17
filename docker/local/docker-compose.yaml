@@ -16,6 +16,15 @@ services:
       - cursor_data:/home/node/.cursor_data
       - gh_data:/home/node/.gh_data
       - dailybot_data:/home/node/.dailybot_data
+      - chelper_data:/home/node/.chelper_data
+      - opencode_data:/home/node/.opencode_data
+      - pi_data:/home/node/.pi_data
+      - cline_data:/home/node/.cline_data
+      - herdr_data:/home/node/.herdr_data
+      - grok_data:/home/node/.grok_data
+      # sshd host keys — keeping them out of the image means the container's SSH
+      # identity survives a rebuild and clients never see a host-key mismatch.
+      - sshd_data:/etc/ssh/sshd_keys
       # pnpm store + registry metadata cache. These MUST stay off the /app bind
       # mount: Docker Desktop's `fakeowner` layer cannot service the store's
       # hardlinks and installs fail with ERR_PNPM_EPERM. Named volumes are real
@@ -28,6 +37,12 @@ services:
     ports:
       # Use 8888 on host to avoid conflict with macOS AirPlay Receiver (port 8888)
       - '8888:8888'
+      # SSH into the dev container: `ssh -p 22030 node@<docker-host>`. Both
+      # sides are pinned to 22030; if you change it, change SSH_SERVER_PORT in
+      # pertechtalks/.env to match (entrypoint.sh reads it). Published on every
+      # interface so a phone on the LAN can reach it — use
+      # '127.0.0.1:22030:22030' to keep it on this machine only.
+      - '22030:22030'
     env_file:
       - pertechtalks/.env
     environment:
@@ -44,5 +59,12 @@ volumes:
   cursor_data: {}        # Cursor CLI session/auth (symlinked to ~/.cursor)
   gh_data: {}            # GitHub CLI session/auth (symlinked to ~/.config/gh)
   dailybot_data: {}      # Dailybot CLI session/auth (symlinked to ~/.config/dailybot)
+  chelper_data: {}       # Z.AI Coding Tool Helper config (symlinked to ~/.chelper)
+  opencode_data: {}      # OpenCode config + share (symlinked to ~/.config/opencode, ~/.local/share/opencode)
+  pi_data: {}            # Pi sessions/config (symlinked to ~/.pi)
+  cline_data: {}         # Cline sessions/config (symlinked to ~/.cline)
+  herdr_data: {}         # Herdr config/logs (symlinked to ~/.config/herdr)
+  grok_data: {}          # Grok CLI sessions/config (symlinked to ~/.grok)
+  sshd_data: {}          # sshd host keys — stable container identity across rebuilds
   pnpm_store: {}         # pnpm content-addressable store — never on the bind mount
   pnpm_cache: {}         # pnpm registry metadata cache

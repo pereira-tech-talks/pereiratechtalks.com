@@ -4,6 +4,10 @@ LABEL maintainer="pereiratechtalks@gmail.com"
 # System packages (apt requires root)
 RUN apt-get update -y && \
     apt-get install -y less git curl gnupg ca-certificates openssh-client sudo nano \
+    # OpenSSH server so the container can be reached from another machine (or a
+    # phone) on the port published in docker-compose.yaml — see entrypoint.sh
+    # (setup_sshd). Useful for driving Herdr and the coding agents remotely.
+    openssh-server \
     # Chromium for Lighthouse CI local audits
     chromium && \
     # Install GitHub CLI (binary is system-wide; per-user config lives in ~/.config/gh)
@@ -41,8 +45,14 @@ ENV PNPM_HOME=/usr/local/share/pnpm
 RUN mkdir -p "${PNPM_HOME}/bin" \
     && chown -R node:node "${PNPM_HOME}"
 
-# Make node user's CLI install dirs available on PATH (pnpm globals, Claude, Cursor agent)
-ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:$PATH
+# Make node user's CLI install dirs available on PATH:
+#   ${PNPM_HOME}/bin        pnpm globals (codex, cline, chelper, pi)
+#   ~/.local/bin            Claude Code native installer, Herdr
+#   ~/.cursor/bin           Cursor CLI (`agent`)
+#   ~/.opencode/bin         OpenCode
+#   ~/.grok/bin             xAI Grok CLI
+ENV PATH=${PNPM_HOME}/bin:${PNPM_HOME}:/home/node/.local/bin:/home/node/.cursor/bin:/home/node/.opencode/bin:/home/node/.grok/bin:$PATH
+ENV CLINE_DATA_DIR=/home/node/.cline/data
 
 # Ensure the container's image-installed Node (/usr/local/bin) precedes any
 # IDE-bundled Node that gets prepended to PATH at shell startup — Cursor Server
@@ -76,18 +86,37 @@ RUN rm -f /usr/local/bin/npm && \
 RUN echo 'source /app/docker/custom_commands.sh' >> /home/node/.bashrc \
     && chown node:node /home/node/.bashrc
 
+# An SSH session starts a LOGIN shell, and bash login shells read
+# ~/.bash_profile (or ~/.profile) — never ~/.bashrc on their own. Without this
+# file an `ssh` session would land in /home/node with none of the project
+# helpers. It also lands the session in the repo, like `docker compose exec`.
+RUN printf '%s\n' \
+    '# Login shells (ssh) must pick up the interactive config too.' \
+    '[ -f "${HOME}/.bashrc" ] && . "${HOME}/.bashrc"' \
+    '# Start in the project, mirroring `docker compose exec` (working_dir: /app).' \
+    'cd /app 2>/dev/null || true' \
+    > /home/node/.bash_profile \
+    && chown node:node /home/node/.bash_profile
+
+# sshd refuses to start without its privilege-separation directory.
+RUN mkdir -p /run/sshd
+
 # Install Dailybot CLI system-wide (must run as root — apt + pipx --global).
 # Python 3.13+ on Debian Trixie enforces PEP 668 (externally-managed-environment),
 # blocking bare `pip install`. pipx --global puts `dailybot` on PATH for all users
 # (incl. node). Separate layer so CLI bumps don't invalidate the Chromium layer.
+# python3 also backs the OpenCode/Pi/Cline provider-config helpers in
+# docker/custom_commands.sh.
 RUN apt-get update -y && apt-get install -y pipx \
     && pipx install --global "dailybot-cli>=3.8.0" \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Pre-create persistent data dirs so the named volumes inherit node ownership on first mount.
 # ~/.dailybot_data backs ~/.config/dailybot (CLI credentials/config) across rebuilds —
-# same pattern as Claude/Codex/Cursor/gh named volumes.
-RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data /home/node/.dailybot_data /home/node/.ssh \
+# same pattern as the Claude/Codex/Cursor/gh/agent named volumes.
+RUN mkdir -p /home/node/.claude_data /home/node/.codex_data /home/node/.cursor_data /home/node/.gh_data \
+    /home/node/.dailybot_data /home/node/.chelper_data /home/node/.opencode_data /home/node/.pi_data \
+    /home/node/.cline_data /home/node/.herdr_data /home/node/.grok_data /home/node/.ssh \
     && chown -R node:node /home/node
 
 # Install AI CLIs and configure git as node user
@@ -101,8 +130,21 @@ RUN curl -fsSL https://claude.ai/install.sh | bash \
 # Install Cursor CLI (provides the 'agent' command in ~/.cursor/bin)
 RUN curl -fsSL https://cursor.com/install | bash
 
-# Install Codex CLI globally via pnpm (resolves under ${PNPM_HOME})
-RUN corepack pnpm add -g @openai/codex
+# Install OpenCode with its official installer.
+RUN curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path \
+    && opencode --version
+
+# Install Codex, Cline, Pi, and Z.AI Coding Tool Helper globally via pnpm.
+# Pi needs --ignore-scripts per upstream docs.
+RUN corepack pnpm add -g @openai/codex cline @z_ai/coding-helper \
+    && corepack pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent
+
+# Install the official xAI Grok CLI and Herdr terminal runtime.
+RUN curl -fsSL https://x.ai/cli/install.sh | bash \
+    && curl -fsSL https://herdr.dev/install.sh | bash \
+    && pi --version \
+    && cline --version \
+    && herdr --version
 
 # Configure Git for node user (can be overridden by mounted .gitconfig)
 RUN git config --global init.defaultBranch main \
