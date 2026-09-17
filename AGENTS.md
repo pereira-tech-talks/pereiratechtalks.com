@@ -2,6 +2,8 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
+DWP standard: 5.0.0 (onboarded 2026-08-08; upgraded 2026-09-17; skill 5.5.1)
+
 ## Detailed Documentation
 
 | Category | Guide | Purpose |
@@ -13,7 +15,6 @@
 | Product | [Product Spec](docs/PRODUCT_SPEC.md) | Vision, audiences, verticals, success metrics |
 | Blog | [Blog Posts](docs/features/BLOG_POSTS.md) | Tags, series, hero layouts, images, content lifecycle |
 | Blog Lifecycle | [Blog Content Lifecycle](docs/features/BLOG_CONTENT_LIFECYCLE.md) | End-to-end blog workflow |
-| Forms | [Forms](docs/features/FORMS.md) | Dailybot intakes — Contact, CFS, Speaker School, Sponsors, Calendar, CoC |
 | Forms | [Forms](docs/features/FORMS.md) | Dailybot intakes — Contact, CFS, Speaker School, Sponsors, Calendar, CoC |
 | Certificates | [Certificates](docs/features/CERTIFICATES.md) | Individual diploma pages, print/PDF, verify UX, fixtures |
 | Authors | [Authors](docs/features/AUTHORS.md) | Multi-author support, YAML schema, AuthorCard, JSON-LD |
@@ -135,6 +136,43 @@ The `.agents/` directory is the **canonical, cross-agent home** for everything t
 
 **Backward compatibility — `.claude/` symlink:** Claude Code historically reads from `.claude/`. To keep that working without duplicating files, **`.claude` is a symlink to `.agents`**. Use `.agents/...` as the canonical path in **all new documentation, prompts, and skill/command files**. Do not edit files via the `.claude/` symlink.
 
+## Working principles
+
+Work with autonomy, ownership, and sound judgment. Pursue excellence through
+correctness, clarity, simplicity, and verified completion. These are defaults
+within the current request — they never override host permissions, a narrower
+scope, a plan's gates, a read-only request, or the approval rules below.
+
+- **Own the outcome.** Carry authorized work through investigation, execution
+  and validation, until the requested outcome is complete or a concrete blocker
+  stops you.
+- **Be resourceful before asking.** The answer is usually in this repo: the
+  `docs/` guides, the content collections, the git history, the skills in
+  `.agents/`. Investigate before handing the question back.
+- **Make routine decisions independently.** Choose sensible approaches inside
+  the authorized scope and state consequential assumptions. Do not ask
+  permission for steps already authorized.
+- **Ask when judgment or authorization is missing.** Consult the user when a
+  material decision cannot be inferred, or an action needs approval you do not
+  have — and bring the investigation, the options and a recommendation.
+  Creating or renaming a tag, and publishing content, always belong here.
+- **Make approvals concrete.** Finish the preparation first, then present a
+  reviewable result and name the single action that needs approval.
+- **Work through obstacles.** Investigate failures and attempt recovery within
+  scope; continue independent work while a decision is pending. Escalate when
+  progress needs the user or an external change.
+- **Respect intent and scope.** An audit stays an audit. Propose broader
+  improvements separately. Preserve existing content, translations and
+  decisions — this is a living community site, not a greenfield.
+- **Apply proportionate rigor.** Fix causes, not symptoms. Match validation and
+  polish to impact: a typo in one post is not a sitewide audit.
+- **Communicate directly.** Lead with the result. Distinguish what you verified
+  from what you assumed. Spanish is the community's language; code, comments
+  and docs stay in English.
+- **Verify before declaring completion.** Run the gates that apply (§6 and the
+  Pre-Commit Checklist), report what you actually ran, and never claim a check
+  or an outcome that did not happen.
+
 ## CRITICAL: Mandatory Requirements
 
 ### 1. Language Standards
@@ -191,12 +229,29 @@ pnpm run biome:fix:unsafe   # Fix with unsafe transformations
 ### 6. Testing
 
 ```bash
-pnpm run test           # Run all tests (single run)
+pnpm run test           # Full suite — 961 tests in ~11s, the default gate
 pnpm run test:watch     # Watch mode
 pnpm run test:coverage  # With coverage report
 ```
 
-Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on `src/lib/`. See **[Testing Guide](docs/TESTING_GUIDE.md)**.
+Scoped variants, for iterating — not for replacing the gate:
+
+```bash
+pnpm exec vitest run tests/unit/lib/blog.test.ts   # by file
+pnpm exec vitest run tests/unit/lib/               # by directory
+pnpm exec vitest run -t "certificate"              # by test name
+pnpm exec vitest run --changed origin/main         # by what the branch touched
+pnpm exec biome check src/lib/                     # lint, scoped by path
+```
+
+`astro check` has **no** path scoping — a type check is always project-wide.
+Vitest 4 has **no** `--related`; use `--changed`.
+
+Tests use `*.test.ts` naming in `tests/unit/`. Coverage target: 80%+ on
+`src/lib/`. **Which gate a given change needs** — the source-to-test mapping,
+the dependent-consumer policy, the known blind spots, the escalation rules and
+the fallback — is in **[Testing Guide → Validation gates](docs/TESTING_GUIDE.md#validation-gates--choosing-what-to-run)**.
+A plan selects its validation gate from there, never by guessing.
 
 ### 7. Multilingual Content Synchronization (MANDATORY)
 
@@ -617,6 +672,38 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 4. **DO NOT** improvise or skip steps — the procedure file IS the spec
 
 > **If a user prompt starts with `#`** (e.g., `#add-blog-post`, `#quick-fix`), treat it as a command invocation — look up the command name (without `#`) in the [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) and execute its procedure.
+
+## Deep Work Plan flows
+
+Structured multi-task work runs through the vendored **DeepWorkPlan** skill
+(`.agents/skills/deepworkplan/`, standard 5.0.0). Route by intent:
+
+| Intent | Command |
+|--------|---------|
+| Turn a goal into an executable plan | `/dwp-create <goal>` |
+| Execute a plan task by task, gate by gate | `/dwp-execute` |
+| Report progress without changing anything | `/dwp-status` |
+| Add, remove or reorder tasks | `/dwp-refine` |
+| Continue an interrupted plan | `/dwp-resume` |
+| Objective pass/fail conformance report | `/dwp-verify` |
+| Check for a newer skill release | `/dwp-upgrade` |
+| Author a repo skill or agent | `/skill-create`, `/agent-create` |
+
+Plans live in the git-ignored `.dwp/plans/`. A plan is **Lite** (task records
+inline in its README, for bounded work) or **Full** (one file per task, for
+long-horizon work); both carry stable task ids, a Touched Surface, acceptance
+criteria, a validation gate selected from the **[Testing Guide](docs/TESTING_GUIDE.md#validation-gates--choosing-what-to-run)**,
+completion evidence, and one closing **Final Review**.
+
+That Final Review runs the security pass over the plan's accumulated change set,
+**including the local AI Diff Reviewer review** (`.agents/skills/ai-diff-reviewer/`
++ `.review/extension.md`). A `critical` finding blocks completion until it is
+fixed or explicitly accepted; `warning` and `info` are reported. A review that
+never produced findings is an *incomplete* review — record it as such; it is
+never evidence that the diff is clean.
+
+**Ordinary edits are not plans.** A bug fix, a rename, a doc tweak is done
+directly. A Deep Work Plan starts only when asked for.
 
 ## Conventional Commits
 

@@ -92,6 +92,13 @@ pnpm run biome:fix:unsafe
 
 Biome handles both linting and formatting. It replaces ESLint and Prettier.
 
+**Scoped to a path** (verified 2026-09-17, Biome 2.5.10):
+
+```bash
+pnpm exec biome check src/lib/blog.ts   # → Checked 1 file
+pnpm exec biome check src/lib/          # → Checked 55 files
+```
+
 ### TypeScript Checking
 
 ```bash
@@ -101,6 +108,27 @@ pnpm run astro:check
 - Runs Astro's TypeScript checker
 - Validates `.astro`, `.ts`, `.tsx` files
 - Reports type errors
+- **No path scoping.** `astro check` exposes only `--root`, `--tsconfig` and
+  `--minimumSeverity` — a type check is always project-wide. Run it whole or
+  not at all.
+
+### Scoped Test Runs
+
+The full suite is 961 tests in ~11s, so `pnpm run test` is the normal gate.
+These are for tight iteration (verified 2026-09-17, Vitest 4.1.11):
+
+```bash
+pnpm exec vitest run tests/unit/lib/blog.test.ts   # by file
+pnpm exec vitest run tests/unit/lib/               # by directory — 44 files, 811 tests
+pnpm exec vitest run -t "certificate"              # by test name — 3 files run, 57 skipped
+pnpm exec vitest run --changed origin/main         # by what the branch touched
+```
+
+`--related` does **not** exist in Vitest 4 (it fails with
+`CACError: Unknown option --related`); `--changed` is the change-driven
+selector. Which gate a given change actually needs — mapping, consumers, blind
+spots, escalation and fallback — is in
+**[Testing Guide → Validation gates](TESTING_GUIDE.md#validation-gates--choosing-what-to-run)**.
 
 ### Markdown-for-Agents Parity Check
 
