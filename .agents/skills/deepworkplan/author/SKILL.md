@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-author
 description: Author or update reusable skills, agents, and commands in the current repo — reason about the repo's .agents/ layout, follow the Open Agent Skills frontmatter contract, and keep the .agents/docs/ catalog in sync. Use when a developer wants to create or evolve the repo's agent kit (skills, agents, commands), or runs /skill-create or /agent-create.
-version: "2.17.0"
+version: "5.5.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -11,9 +11,15 @@ allowed-tools: Bash, Read, Grep, Glob, Edit, Write
 
 Author and maintain the current repository's **agent kit**: reusable **skills**, **agents**, and
 **commands**. Reason about the repo — never copy a generic kit. This sub-skill is also the executor of
-the mandatory "Skills & Agents Discovery" plan task.
+the **skills reconciliation** the Final Review performs (DWP spec 2.3.0 §6.1) — and, in a plan created
+under an earlier lifecycle, of that plan's separate "Skills & Agents Discovery" task.
 
 ---
+
+## Read scope
+
+- **Guide (essential — read for this flow):** [`../guide/skills-integration.md`](../guide/skills-integration.md) §11 — how skills and agents are referenced from plans and tasks.
+- **Guide (conditional — read only when the trigger fires):** none. [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index.
 
 ## Concepts
 
@@ -30,6 +36,27 @@ the mandatory "Skills & Agents Discovery" plan task.
 | A repeatable procedure run in-session | Skill |
 | A persistent role with its own model tier / tools | Agent |
 | A shortcut to invoke a skill or agent | Command |
+
+## Frontmatter fields (cross-agent)
+
+The tool-agnostic core every harness reads: **`name`** (kebab-case, English, unique) and
+**`description`** (one line, starts with a verb — harnesses use it for relevance scoring).
+Everything else is a **per-harness opt-in**: keep only the keys the host repo's neighboring
+files already use, and never require a key the repo does not use.
+
+| Field | Applies to | Meaning |
+|-------|-----------|---------|
+| `name` | skill / agent | kebab-case identifier; the registry/harness address |
+| `description` | skill / agent | one line, starts with a verb; used for relevance scoring |
+| `version` | skill | quoted SemVer (`"1.0.0"`) — quote it so YAML keeps it a string |
+| `documentation_url` | skill | canonical docs URL; replaces the legacy `homepage` (some harnesses treat `homepage` as a re-fetch source — never use it) |
+| `user-invocable` | skill | `true` makes `/<name>` a slash command where the harness supports it |
+| `allowed-tools` | skill | tool allowlist (e.g. `Bash, Read, Grep, Glob, Edit, Write`) where the harness enforces one |
+| `model` | agent | abstract tier (`light` / `standard` / `heavy`) — never a vendor model ID (see "Model tiers") |
+| `tools` | agent | the agent's tool list; keep it as narrow as the role allows |
+
+Do not invent harness features: if a field is not already used in this repo (or documented by the
+target harness), leave it out rather than guessing a key name.
 
 ---
 
@@ -52,6 +79,21 @@ ls AGENTS.md CLAUDE.md 2>/dev/null
 
 If the repo has no `.agents/` layout yet, route the developer to the **onboard** sub-skill first
 (`onboard/SKILL.md`) — onboarding scaffolds the directories this sub-skill writes into.
+
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
+
+**Writes:** new or updated files **only** under the repo's `.agents/` kit —
+`skills/*/SKILL.md`, `agents/*.md`, `commands/*.md`, `docs/` catalogs — plus the
+catalog index entries that keep them discoverable. Broad additions (a new skill
+family, restructuring the kit) are proposed to the developer before creation.
+
+**It MUST NOT:** edit files outside `.agents/` (a skill's *content* may
+document anything; this sub-skill writes only kit files), weaken the frontmatter
+conventions (`name`, quoted `version:`, `documentation_url`, `user-invocable`,
+`allowed-tools`, kebab-case), delete an existing skill/agent/command without
+explicit approval, or commit/push.
 
 ---
 
@@ -86,8 +128,9 @@ Pick the flow that matches the developer's intent.
 ### C. Create a command (thin delegator)
 
 1. Confirm the target skill or agent exists.
-2. Add `<commands-dir>/<cmd>.md` as a ~20-line delegator: read the target skill/agent fresh and follow
-   it, passing along args. Do NOT embed logic — logic lives in the skill/agent so updates propagate.
+2. Scaffold from `templates/COMMAND_TEMPLATE.md` into `<commands-dir>/<cmd>.md` — a ~20-line
+   delegator: read the target skill/agent fresh and follow it, passing along args. Do NOT embed
+   logic — logic lives in the skill/agent so updates propagate.
 3. Reference the new command in the catalog / commands reference.
 
 ### D. Update an existing skill / agent / command
@@ -97,9 +140,11 @@ Pick the flow that matches the developer's intent.
 3. Keep delegators thin; keep skills single-procedure.
 4. Update the catalog if name, description, or surface changed.
 
-### E. Evaluate the catalog (Skills & Agents Discovery)
+### E. Evaluate the catalog (skills reconciliation)
 
-This is the flow invoked by the mandatory plan task.
+This is the flow the **Final Review** invokes for its skills-reconciliation pass. A plan
+created under the pre-2.3.0 lifecycle invokes the same flow from its separate
+"Skills & Agents Discovery" task; the procedure is identical either way.
 
 1. Enumerate every skill (`<skills-dir>/*/SKILL.md`) and agent (`<agents-dir>/*.md`).
 2. For each, capture name, one-line description, and model tier (if any).
@@ -154,9 +199,11 @@ always match what is on disk.
 
 - `templates/SKILL_TEMPLATE.md` — skill scaffold.
 - `templates/AGENT_TEMPLATE.md` — agent scaffold.
+- `templates/COMMAND_TEMPLATE.md` — thin-delegator command scaffold.
 
 Reference them by these relative paths. Adapt the frontmatter to the host repo's local convention
-(some repos add `version`, `documentation_url`, or `user-invocable`; match what neighboring files use).
+(keep only the per-harness opt-in keys neighboring files already use — `version`,
+`documentation_url`, `user-invocable`, `allowed-tools`; see "Frontmatter fields").
 
 ---
 

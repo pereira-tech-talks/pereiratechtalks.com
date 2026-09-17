@@ -12,7 +12,7 @@ progress-report step** is wired into DWP execution, the **never-block** rule, th
 **reconcile-don't-clobber** behavior, and the **vendor-neutral guardrail**.
 
 The addon is governed by [`../README.md`](../README.md) and
-[`methodology-spec/ADDONS.md`](../../spec/ADDONS.md): it is **never** required for
+[`../../spec/ADDONS.md`](../../spec/ADDONS.md): it is **never** required for
 baseline AI-first conformance.
 
 ## Status of This Document
@@ -21,7 +21,7 @@ baseline AI-first conformance.
 |-------|-------|
 | **Version** | 2.3.0 |
 | **Status** | Stable |
-| **Companions** | `SKILL.md`, `templates/INTEGRATION.md`, `../README.md`, `methodology-spec/ADDONS.md`, `../../spec/PLAN_STATE.md` |
+| **Companions** | `SKILL.md`, `templates/INTEGRATION.md`, `../README.md`, `../../spec/ADDONS.md`, `../../spec/PLAN_STATE.md` |
 | **License** | MIT |
 
 > **Additive in 2.2.0.** Reporting grows from a single completion hook into a
@@ -73,9 +73,14 @@ with explicit acceptance, and each reconciled if already present (§7):
 - The addon **SHOULD** offer the **Dailybot agent skill** as the primary path,
   because it brings its own install/consent/auth flow and the `report`
   sub-skill. Supported install methods (the addon **MUST** offer, not force):
-  - `npx skills add DailybotHQ/agent-skill` (cross-agent, recommended), **or**
-  - OpenClaw native: `openclaw skills install dailybot`, **or**
-  - `git clone https://github.com/DailybotHQ/agent-skill.git` + run its `setup.sh`.
+  - `npx --yes skills add DailybotHQ/agent-skill@v3.10.3 --skill dailybot -y`
+    (cross-agent, recommended — **pinned to a published tag**; the `skills` CLI
+    records source + content hash in `skills-lock.json`), **or**
+  - OpenClaw native: `openclaw skills install dailybot` (registry-managed pin).
+- The addon **MUST NOT** offer unpinned clone-and-run variants of a skill repo
+  (fetching whatever the remote default branch currently holds and executing
+  it). That is an unverifiable external dependency — no version, no checksum,
+  no rollback — and the exact shape Snyk W012 / Socket audits flag.
 
 ### 3.2 The Dailybot CLI (the underlying bridge)
 
@@ -297,4 +302,4 @@ A repo is **conformant to this addon** when **all** hold (after acceptance):
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.3.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

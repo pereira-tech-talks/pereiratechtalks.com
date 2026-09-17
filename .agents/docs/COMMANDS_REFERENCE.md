@@ -39,6 +39,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/dwp-resume` | `.agents/commands/dwp-resume.md` | Resume an interrupted deep work plan from the first open task |
 | `/dwp-status` | `.agents/commands/dwp-status.md` | Check status of deep work plans without executing |
 | `/dwp-verify` | `.agents/commands/dwp-verify.md` | Objective pass/fail conformance report for the repo and its plans |
+| `/dwp-upgrade` | `.agents/commands/dwp-upgrade.md` | Check for a newer DeepWorkPlan skill release and upgrade it safely |
 
 ## Git & Version Control
 

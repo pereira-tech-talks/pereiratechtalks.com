@@ -3,7 +3,9 @@
 ## Abstract
 
 This document is the **normative specification** of the DeepWorkPlan
-**dependency-upgrade addon**: an opt-in capability that **safely upgrades a
+**dependency-upgrade addon**: a **near-default** capability — offered for every
+repo with declared dependencies, its delegator installed under the onboarding
+consent unless explicitly declined — that **safely upgrades a
 repository's dependencies** with a **batched, validated, revertible** workflow.
 It defines **package-manager detection** (RFC-2119), **semver classification**,
 the **batched-upgrade** rule, the **validate-after-each-batch** gate, the
@@ -13,7 +15,7 @@ the **batched-upgrade** rule, the **validate-after-each-batch** gate, the
 The addon is **package-manager agnostic**: it reasons about the repo's **actual**
 manager (npm/pnpm/yarn, pip/poetry/uv/pipenv, cargo, go mod, bundler, composer,
 and more) rather than assuming npm. It is governed by `../README.md` and
-`methodology-spec/ADDONS.md`: it is **never** required for baseline AI-first
+`../../spec/ADDONS.md`: it is **never** required for baseline AI-first
 conformance.
 
 ## Status of This Document
@@ -22,7 +24,7 @@ conformance.
 |-------|-------|
 | **Version** | 2.1.0 |
 | **Status** | Stable |
-| **Companions** | `SKILL.md`, `templates/ecosystems.md`, `templates/upgrade-report.md`, `templates/lib-upgrade-command.md`, `../README.md`, `methodology-spec/ADDONS.md` |
+| **Companions** | `SKILL.md`, `templates/ecosystems.md`, `templates/upgrade-report.md`, `templates/lib-upgrade-command.md`, `../README.md`, `../../spec/ADDONS.md` |
 | **License** | MIT |
 
 ## 1. Conventions
@@ -87,9 +89,13 @@ set (lint + typecheck + build + test, as applicable).
   impossible to isolate or revert cleanly).
 - A reasonable order is: **patch** batch → **minor** batch → each approved
   **major** on its own.
-- Each batch **MUST** update the manifest and regenerate the lockfile **via the
-  detected manager's install/update command**. The addon **MUST NOT** hand-edit
-  a lockfile.
+- Each batch **MUST** use the detected manager for approved package versions
+  only and keep manifest and lockfile consistent. Lockfile-only updates within
+  existing constraints are valid. The addon **MUST NOT** hand-edit a lockfile.
+- Before each batch, the addon **MUST** capture a recoverable snapshot of owned
+  files (including absence) and the environment. Dependency scripts/build hooks
+  require explicit authorization; suppress them with supported manager controls
+  or stop before executing them. A general upgrade request does not waive this.
 
 ---
 
@@ -109,8 +115,11 @@ set (lint + typecheck + build + test, as applicable).
 ## 6. Revert on Failure
 
 - If a batch's gate fails, the addon **MUST** revert **just that batch**:
-  restore the manifest **and** lockfile (e.g. `git checkout -- <manifest>
-  <lockfile>`), re-run install to resync, and confirm the gate passes again.
+  restore the exact pre-batch snapshot, preserving earlier successful batches
+  and pre-existing changes; re-sync the environment without advancing resolution
+  or enabling unapproved scripts, and confirm the previous gate again. Restore
+  from `HEAD` is valid only when proven identical to that snapshot. Failed
+  restoration or validation **MUST** block further batches.
 - The addon **MUST** record the reverted batch as skipped/failed with the failing
   gate and reason. It **MAY** retry the batch one package at a time to isolate the
   culprit.
@@ -133,12 +142,16 @@ set (lint + typecheck + build + test, as applicable).
 
 ## 8. Onboarding Hook + `/lib-upgrade` Delegator
 
-- The addon's onboarding hook (`SKILL.md`) is offered by `onboard` Phase 7b as an
-  **opt-in** step and **MUST NOT** be applied without acceptance.
-- **Only when accepted**, the addon **MUST** install a `/lib-upgrade` delegator
-  command into the target repo's `.agents/commands/` (template:
-  `templates/lib-upgrade-command.md`) that delegates to this addon. A declined
-  addon installs **no** command and leaves a baseline-conformant repo.
+- The addon's onboarding hook (`SKILL.md`) is offered by `onboard` Phase 7b for
+  **every repo with declared dependencies** (a manifest or lockfile). Under the
+  onboarding consent the delegator below installs **unless the developer
+  explicitly declines**; a prior explicit acceptance is never re-asked, and a
+  decline leaves a baseline-conformant repo with no command.
+- The addon **MUST NOT** run any upgrade at install time. Installing the
+  delegator only adds the `/lib-upgrade` command into the target repo's
+  `.agents/commands/` (template: `templates/lib-upgrade-command.md`) delegating
+  to this addon; an upgrade itself is always explicit, gated work (a plan task
+  with validation gates, or a direct invocation).
 
 ---
 
@@ -166,10 +179,10 @@ The addon is correctly applied when **all** hold:
 
 - [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 - `SKILL.md` (the onboarding hook + flow), `templates/*` (reasoning aids)
-- `../README.md` (addon mechanism), `methodology-spec/ADDONS.md` (concept + pointer)
+- `../README.md` (addon mechanism), `../../spec/ADDONS.md` (concept + pointer)
 - [Semantic Versioning](https://semver.org/)
 - [npm-check-updates](https://github.com/raineorshine/npm-check-updates)
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.1.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

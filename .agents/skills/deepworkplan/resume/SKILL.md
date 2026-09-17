@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-resume
-description: Resume an interrupted Deep Work Plan from its recorded progress state. Use when the developer wants to continue a plan in .dwp/plans/ that was paused or interrupted mid-execution.
-version: "2.17.0"
+description: Resume interrupted Lite or Full Deep Work Plans from durable Markdown and state, including safe recovery of promotions without duplicating completed work or gates.
+version: "5.5.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -10,32 +10,111 @@ allowed-tools: Bash, Read, Grep, Glob, Edit, Write
 # DeepWorkPlan — Resume
 
 Safely continue an interrupted plan from where it stopped — no duplicated work,
-strict order, continuing from the first `[ ]` task.
+strict order, continuing from the first `[ ]` task — from **durable workspace
+artifacts alone** (the plan folder on disk, gitignored `.dwp/` included): a
+different session, agent, model or harness must be able to pick the plan up
+without the previous conversation. A fresh clone without `.dwp/` has nothing
+to resume — see *Persistence* below.
 
-## Shared resources (read these)
+## Shared resources (read at their moment, not upfront)
 
-- [`../shared/context.sh`](../shared/context.sh) — resolve repo root, branch, and
-  `dwp_dir`.
-- [`../shared/dwp-paths.md`](../shared/dwp-paths.md) — plans at
-  `.dwp/plans/PLAN_{name}/`.
-- [`../shared/adaptation.md`](../shared/adaptation.md) — the two repository
-  archetypes (relevant for orchestrator/child-DWP awareness).
-- [`../execute/SKILL.md`](../execute/SKILL.md) — the execution rules this flow
-  resumes into (team-agents, orchestrator task types, Dailybot golden rule).
+The compulsory set for this flow is the router SKILL plus this file: every
+rule the resumption assessment runs on is stated inline in Step 2 below. A
+default resumption reads **no** guide, spec, shared companion, or execution
+contract before assessment; each loads when its moment arrives. (This
+ordering is deliberate: reading companions "to be safe" is the failure mode
+this tiering removed.)
+
+- **Essential now (before the first task):**
+  [`../shared/context.sh`](../shared/context.sh) — **run** it
+  (`bash ../shared/context.sh`) to resolve repo root, branch, agent tool and
+  `dwp_dir`; its source is not part of this flow's reads. That is the whole
+  t0 set — the resume protocol (Step 2) and the handoff rules are inline
+  below.
+- **Conditional — read only when the trigger fires:**
+  - [`../execute/SKILL.md`](../execute/SKILL.md) — read only when Step 5
+    resumes into the execution loop: the contract every resumed task runs
+    under (gate selection from the actual surface, repair/stop, task-local
+    closure, the Final Review, the Dailybot golden rule; team-agents and
+    orchestrator branches on demand). Assessment — Steps 1–4 — never needs
+    it: the closure order and interruption-boundary rules are inline above,
+    and once loaded, that file's own conditional tier governs its
+    execution-time companions.
+  - [`../spec/PLAN_STATE.md`](../spec/PLAN_STATE.md) §5–§6 — read only when
+    the plan carries `state.json` and a desync, a takeover, or a standard
+    question needs the normative rule; the everyday needs (markdown wins,
+    regenerate from the README, the checkpoint shape) are inline in Step 2.
+  - [`../guide/prompts.md`](../guide/prompts.md) §9 — read only when the
+    interruption is unusual enough that the Step 2.5 boundary table does not
+    classify it (resume rules and scenarios).
+  - [`../shared/dwp-paths.md`](../shared/dwp-paths.md) — read only when a
+    plan folder cannot be located or the `DWP_DIR` override is in play
+    (Steps 0–1 already inline `.dwp/plans/PLAN_{name}/`).
+  - [`../shared/troubleshooting.md`](../shared/troubleshooting.md) — read
+    only when something is already wrong (discovery failure, stale
+    installation, missing test command, unsupported host capability,
+    inconsistent plan state).
+  - [`../guide/GUIDE.md`](../guide/GUIDE.md) — the routing index; consult
+    only when a need is not covered by a section named above.
+- **Never by default:** no other guide, spec, preset or addon file is read
+  for this flow — not defensively, not "to be safe". `../shared/adaptation.md`
+  and `../guide/execution.md` in particular are not resume reads: adaptation
+  moments belong to the tasks being resumed (execute's conditional tier
+  names them) and execution.md's moments are owned by execute/SKILL.md's
+  tier once Step 5 loads it. Name the moment, then read.
 
 ## Parameter Support
+
 - `/dwp-resume {plan_name}` — resume directly (skip the menu).
 - `/dwp-resume latest` — resume the most recently modified plan.
+- `/dwp-resume {plan_name} trust` (or `auto`, or "run to the end") — resume
+  unattended: no questions between tasks (`../execute/SKILL.md` *Autonomous mode*).
 - No parameter → interactive selection (Step 1).
 
 Normalize the `PLAN_` prefix; validate `.dwp/plans/PLAN_{name}/` and its
-`README.md`. If not found, show available plans and ask the user to choose.
+`README.md`. If not found, show available plans and ask the user to choose. A
+folder without `README.md`, or whose README says `Plan Status: materializing`,
+is a partial materialization (its `manifest.json` records the intended shape) —
+point to `refine`; never execute it.
+
+## Lite and promotion recovery
+
+For v2 Lite plans, read the README's canonical task index, inline anchor record,
+state locator and checkpoint before reading older history. A README checkbox wins
+over state on desync. Do not treat missing task files as partial when the format
+is Lite. Conversely, a `promotion` marker or `materialization: promoting` is a
+hard recovery boundary: inspect its phase, preserve existing files and route to
+`/dwp-refine promote` to complete the missing transaction step. Never execute
+product work in a mixed representation.
+
+An explicit execute/resume request can approve a ready plan's current scope
+(Lite or Full). If a new requirement changes scope, criteria or gate, record
+the checkpoint and use refine; do not promote or alter approvals implicitly.
+
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
+
+**Writes:** identical scope to `execute` (task outputs, `.dwp/` working state,
+per-task commits after gates pass) — resuming does not widen the boundary.
+
+**It MUST NOT:** re-run or "fix up" a completed `[x]` task — under the **DWP
+Resume Protocol** (`../spec/DWP_SPECIFICATION.md` §5.3) those are trusted as
+recorded, and only three things reopen one: the developer asks, `refine` left a
+`(re-validate: …)` marker, or the smoke test fails in a way that implicates it;
+skip that post-interruption smoke test, which validates the **world** (the
+cheapest standing check) before anything is built on it; repeat a commit, gate,
+skill authoring, report or other external action the evidence shows already
+happened; migrate a legacy plan (that is `refine migrate`, on explicit request
+only); push without instruction; or write outside the repo checkout and
+`.dwp/`.
 
 ## Workflow
 
 ### Step 0 — Check for Parameters
 If a parameter was given, resolve the plan (or `latest`), validate folder +
-README under `.dwp/plans/`, and skip to Step 2. Otherwise go to Step 1.
+README under `.dwp/plans/`, note `trust`/`auto`, and skip to Step 2. Otherwise
+go to Step 1.
 
 ### Step 1 — Identify Plan
 List `PLAN_*` folders in `.dwp/plans/`; mark the most recently modified as
@@ -45,71 +124,175 @@ choice.
 ### Step 2 — Assess Current State (CRITICAL)
 
 This step implements the **DWP Resume Protocol**
-(`../spec/DWP_SPECIFICATION.md` §5.3) — the named six-step ritual any resuming
-session performs:
+(`../spec/DWP_SPECIFICATION.md` §5.3) — the named ritual any resuming session
+performs. It reads the **compact index first** and retrieves history **by
+pointer**, never by replaying everything.
 
-1. Read the plan README fully (objective; which tasks are `[x]` vs `[ ]`).
-2. Run `git status`, `git log --oneline -10`, and `git diff` (if uncommitted
-   changes exist). In a workspace without git, read `state.json`'s `checkpoint`
-   instead (`../spec/PLAN_STATE.md` §4.4).
-3. **Reconcile the state layer (when present):** compare `state.json` against
-   the README checkboxes. On any desync the **markdown wins** — regenerate
-   `state.json` from the README (and git log), note the reconciliation in
-   `PROGRESS.md`, then continue (`../spec/PLAN_STATE.md` §5). If
-   `state.json.blocked` is set, surface it: that is why the plan stopped.
-4. Find the resumption point — the **first unchecked `[ ]` task**.
-5. Check for partial work: if `git status` shows uncommitted changes, review them
-   against the current `[ ]` task; read that task's Completion & Log for notes.
-6. **Smoke-test before building:** run the repo's cheapest standing check (from
+1. **Load the compact working index.** Read the plan README's task list (the
+   small `[x]`/`[ ]` index, the `Plan Status` count, the `**Standard:**` line and
+   the pre-approval note), the **Active context** block of `PROGRESS.md` (goal
+   and invariants, active task and next action, unresolved blockers, current
+   contracts and decisions in force, direct pointers to durable records), and —
+   when present — `state.json`'s `status`, `checkpoint`, `blocked`, and the
+   entries of the **active task and its named dependencies only** (not every
+   gate of every task). Do **not** read every task file or the whole history by
+   default; retrieve older records later, by pointer, when a step needs them.
+2. **Gather actual evidence.** Run `git status`, `git log --oneline -10`, and
+   `git diff` (if uncommitted changes exist). In a workspace without git, read
+   `state.json`'s `checkpoint` instead (`../spec/PLAN_STATE.md` §4.4). Note the
+   current revision.
+3. **Reconcile Markdown, JSON and the workspace — before any work.** The
+   markdown wins every disagreement (`../spec/PLAN_STATE.md` §5):
+   - Where `state.json` exists, gather machine evidence first: run
+     `python3 ../verify/plan_contract.py <plan-dir>` (read-only) and surface
+     every finding — failed gates, `invalidated by refine` reliance, evidence
+     admitting non-execution, dangling `log=` pointers — in `PROGRESS.md`.
+     Markdown wins a **status** disagreement; it never lets a summary override
+     a failed gate, admitted non-execution, invalidated evidence or an
+     implementation the tree does not show.
+   - `state.json` vs README checkboxes disagree → regenerate `state.json` from the
+     README (and git log), note the reconciliation in `PROGRESS.md`, continue.
+   - `state.json.blocked` is set → surface it: that is why the plan stopped.
+   - A `[x]` task with no matching commit where the plan commits, a checkpoint
+     that names work the tree does not show, a summary that contradicts the
+     files, or instructions in the working index that contradict the task file
+     → **do not trust the summary or the flag alone**: inspect the files and the
+     log, record the finding in `PROGRESS.md`, and treat the task as the
+     evidence says (in doubt, as not completed). Never repeat a committed action.
+   - A README `[ ]` marked `(re-validate: …)` → its implementation exists; only
+     its gates are rerun (`../refine/SKILL.md` 3.7).
+   - The plan declares a standard newer than this skill → report and stop.
+4. **Find the resumption point** — the **first unchecked `[ ]` task** (a task
+   `in_progress` in `state.json` with a checkpoint is the active one).
+5. **Classify partial work at its interruption boundary.** Using the evidence
+   from steps 2–3 and the active task's Completion & Log, decide **which single
+   step is missing** and do only that (`../spec/PLAN_STATE.md` §5.1):
+
+   | Interrupted… | Evidence to check | Then |
+   |---|---|---|
+   | at a clean task boundary (the commonest case) | the last task's whole closure order present and consistent, checkpoint pointing at un-started work | **no repair step is owed** — take over (2.6), smoke-test (2.7), start the next task. Do not hunt for a missing step |
+   | before the gate ran | uncommitted changes; no gate record | finish the implementation if incomplete; run the gate **once** |
+   | after the gate, before the commit | gate record present, `passes: true`, and the recorded `fp=` still matches the world — same revision (`git rev-parse HEAD`), same dirty/generated files (`git status --porcelain`), same environment; any difference invalidates reuse | rerun the gate, record the fresh result, then commit **once** |
+   | after the commit, before the README/log update | commit exists in `git log`; README still `[ ]` | complete log → README → PROGRESS → `state.json`; do **not** re-commit |
+   | between Markdown and `state.json` updates | README `[x]`, state stale | regenerate `state.json`; nothing else |
+   | after an external action (report, push, PR, message) | the action's own evidence (report id, remote branch, PR URL in the log) | do **not** repeat it; record that it already happened — a missing receipt is investigated against the service's actual state, never guessed or re-sent |
+   | mid-implementation with no checkpoint note | dirty tree only | review the diff against the task; incorporate valid partial progress, finish the rest |
+
+   Changed inputs since a recorded gate (a later edit, a `refine`, a new
+   revision) invalidate that gate → rerun it. Where the table resumes the
+   tail of the update order, the `state.json` step may use the shipped
+   updater (`../shared/update-state.py`) as a targeted, atomic mutation;
+   only the reconcile-from-markdown row regenerates the whole file. Retain
+   the original review baseline: when the interruption landed mid-review, the
+   diff and criteria under review at the halt are the baseline resumed —
+   rebuild nothing the checkpoint already records. An interrupted completion
+   publication leaves a `.finalizing.json` marker in the plan folder: inspect
+   it and recover via `python3 ../shared/finalize_plan.py <plan-dir>
+   --candidate <candidate.json> --recover` before any other plan action.
+6. **Takeover from another agent or model.** If the checkpoint, log or
+   `PROGRESS.md` was written by a different agent/model (`state.json.updated_by`,
+   the log's wording) or the session is a fresh context: read the checkpoint
+   **pointer** (`task`, `step`, `note`) and verify it against the files it names;
+   detect contradictory instructions, stale state (revision changed), dirty work
+   and missing evidence **before** continuing; record a one-line "takeover"
+   entry in `PROGRESS.md` (who/what, revision, what was verified). Only then
+   continue. The handoff artifact is the plan itself — nothing required may live
+   only in a prior conversation, a proprietary task API, or a hook.
+7. **Smoke-test before building:** run the repo's cheapest standing check (from
    `AGENTS.md` Quick Commands) to confirm the world still works before adding to
    it. A failing smoke test is investigated first.
 
 ### Step 3 — Report Resumption Status
-Report: completed `[x]` tasks; pending `[ ]` tasks; the task to resume from; git
-state (uncommitted changes, recent commits, last commit); the current task file
-and any completion-log notes; partial-work findings; and the plan to finish the
-task. Location: `.dwp/plans/PLAN_{name}/`.
+Report, compactly: the plan's standard and pre-approval; completed `[x]` /
+pending `[ ]` counts; the task to resume from and its interruption boundary
+(Step 2.5) with the single next action; git state (uncommitted changes, recent
+commits, last commit); reconciliation or takeover findings; any blocker. Location:
+`.dwp/plans/PLAN_{name}/`.
 
 ### Step 4 — Handle Partial Work
-If uncommitted changes exist, classify them: valid partial progress (incorporate
-and complete), incomplete (finish remaining work), or unclear/unrelated (ask the
-user before proceeding). If none, proceed directly.
+Apply the Step 2.5 decision. Interactive: if the partial work is unclear or
+unrelated, ask the user before proceeding. **Unattended:** unclear or unrelated
+changes are a `../spec/AGENT_PROTOCOL.md` §7.3 boundary (reality diverged) —
+record `state.json.blocked` with what was found and halt; do not guess and do
+not discard work.
 
 ### Step 5 — Resume Execution
-1. **NEVER redo `[x]` tasks** — trust the README, cross-check git commits.
+1. **NEVER redo `[x]` tasks** — trust the README, cross-check git commits (and
+   the `(re-validate…)` exception above).
 2. **NEVER skip `[ ]` tasks** — strict order; complete each fully.
 3. **Continue from the first `[ ]` task** — open its file, read fully, address any
    logged blocker first.
-4. **Complete the current task** — follow its Execution Checklist; run all
-   validations; on failure, log in Completion & Log, leave `[ ]`, report and wait;
-   on pass, update the log, mark `[x]`, and commit.
-5. **Continue** to the next `[ ]` task until done or paused.
+4. **Complete the current task** under the standard **Execute** rules
+   (`../execute/SKILL.md` Step 5): gate selected from the actual surface; repair
+   in scope or stop; task-local closure (skills decision → log → README →
+   PROGRESS → commit → `state.json`).
+5. **Keep the working context bounded while executing.** On a stable run retain
+   the already-loaded, unchanged context; re-read after a revision change, a
+   handoff, a context compaction, or uncertainty. Retrieve older records
+   **only** when a task's `Read Before Starting` names them, a decision cannot
+   be found in the active-context block, or a pointer is stale or missing — and
+   then verify what was retrieved rather than guess. Never drop an unresolved
+   constraint or an active contract to save space.
+6. **Continue** to the next `[ ]` task until done or paused — without asking
+   whether to continue inside the plan's authorization.
 
 > From here, the standard **Execute** rules apply
 > (`../execute/SKILL.md`): the per-task significance Dailybot report, the
-> plan-completion **milestone** golden rule, and — for orchestrator plans —
-> orchestrator task types (`create_child_dwp` / `integration_checkpoint` /
+> plan-completion **milestone** golden rule, the Final Review (a)–(e) with the
+> one-time Executive Report offer, and — for orchestrator plans — orchestrator
+> task types (`create_child_dwp` / `integration_checkpoint` /
 > `execute_child_dwp`), manifest checks, and team-agents parallel groups (real
-> team agents, not subagents) with sequential fallback. Resume from the first
-> `[ ]` task using those same rules, including hub-vs-individual-repo navigation
-> per `../shared/adaptation.md`.
+> team agents, not subagents) with sequential fallback, each on demand. A
+> **legacy** plan (three final tasks) resumes under its own shape — resume never
+> migrates it.
 
 ### Step 6 — Handle Blockers
-If a task log shows a blocker, read it, fix the issue, re-run validations; on
-pass: mark `[x]`, commit, continue; on fail: log again, stop, request help.
+If a task log or `state.json.blocked` shows a blocker, read it, fix the issue
+within the task's authorized scope, re-run only the affected validations; on
+pass: clear `blocked`, mark `[x]`, commit, continue; on fail: log again, stop,
+request help (unattended: halt with `blocked` updated).
 
 ### Step 7 — Progress Reporting
-After resuming and completing a task: `✓ Resumed and completed: Task N` with
-files changed, validation result, commit, and the next task. On blocker: `✗ Task
-N blocked` with the blocker, action taken, status, and next step.
+After resuming and completing a task, show the compact result of
+`../execute/SKILL.md` Step 6 (`✓ Resumed and completed: Task N` …). On blocker:
+`✗ Task N blocked` with the blocker, action taken, status, and next step.
+
+## The handoff artifact (what every session leaves behind)
+
+Before yielding — at the end of a task, at a checkpoint before a planned
+interruption, or when halting — the executing session **writes** (never only
+says): the task's Completion & Log (or its partial notes), the README
+checkboxes, the `PROGRESS.md` **Active context** block with the exact next
+action and the evidence pointers, and `state.json` (`checkpoint` `{task, step,
+at, note}` or `blocked`). That is the whole handoff: a fresh agent, another
+model, or another harness resumes from these files with Step 2.
+
+## Persistence: same workspace, new machine, or nothing to resume
+
+- **Same workspace:** the handoff artifacts above are already on disk; Step 2
+  is the whole recovery.
+- **New machine / fresh clone:** `.dwp/` is gitignored by design, so a fresh
+  `git clone` carries **no** plan data — report that honestly, never
+  fabricate progress from commits. Transfer is explicit and manual
+  (`../shared/dwp-paths.md`, "Workspace persistence and transfer"): copy the
+  **whole plan folder** — README, task files, `PROGRESS.md`, `manifest.json`,
+  `state.json`, and `analysis_results/` with every cited gate log — check out
+  the recorded repository revision, and re-create the dirty work the
+  checkpoint names. The minimum handoff manifest: the complete plan folder,
+  evidence pointers, repository revision(s), and required dirty work.
+- **Missing artifacts** (no plan folder, absent state, dangling `log=` pointer):
+  report what is missing and stop at that boundary; never reconstruct history
+  from memory. No daemon, auto-upload, or automatic unignoring of `.dwp/`
+  exists — persistence is a deliberate copy.
 
 ## Important Notes
-- Trust the task list (`[x]` done / `[ ]` pending); verify with git; read
-  completion logs; never duplicate work; never skip; assess partial work
-  carefully; stop on blockers.
+- **Legacy plans:** execute as recorded; no automatic lifecycle migration.
 
 ## Error Handling
-- Invalid plan structure → report; ask to fix or proceed with caution.
-- Missing task file → report; ask whether to skip or create.
-- Unclear git state → report findings; ask before proceeding.
+- Invalid plan structure → report; ask to fix (`refine`) or proceed with caution.
+- Missing task file → report; ask whether to skip or create (unattended: blocker).
+- Unclear git state → report findings; ask before proceeding (unattended: §7.3
+  boundary).
+- Contradictory checkpoint / summary vs files → trust the files; record; continue
+  from the evidence.
 - Unresolvable blocker → log in Completion & Log; report; wait for guidance.

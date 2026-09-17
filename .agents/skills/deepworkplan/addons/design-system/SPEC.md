@@ -19,8 +19,8 @@ The addon is **stack-aware**: it reasons about the repo's **actual** design
 source (CSS custom properties, a Tailwind config, design-token files, component
 styles — or a CLI rendering layer, or message-composition conventions) rather
 than copying a third-party brand file. It is governed by `../README.md` and
-`methodology-spec/ADDONS.md`: it is **never** required for baseline AI-first
-conformance — a repo with zero addons is fully conformant.
+`../../spec/ADDONS.md`: it is **never** required for baseline AI-first
+conformance — a repo with zero optional addons is fully conformant.
 
 ## Status of This Document
 
@@ -28,7 +28,7 @@ conformance — a repo with zero addons is fully conformant.
 |-------|-------|
 | **Version** | 2.2.0 |
 | **Status** | Stable |
-| **Companions** | `SKILL.md`, `templates/DESIGN.md.md`, `templates/presets.md`, `templates/agent_prompt_guide.md`, `../README.md`, `methodology-spec/ADDONS.md` |
+| **Companions** | `SKILL.md`, `templates/DESIGN.md.md`, `templates/presets.md`, `templates/agent_prompt_guide.md`, `../README.md`, `../../spec/ADDONS.md` |
 | **License** | MIT |
 
 > **Divergence from 2.1.0.** Version 2.1.0 was **frontend/UI-scoped** and had a
@@ -149,29 +149,31 @@ message-composition helpers and their docs).
 
 ### 3.5 Recommendation Strength — per profile
 
-This addon is **never** part of the zero-addon baseline (a repo with no addons
+This addon is **never** part of the baseline (a repo with no optional addons
 is fully conformant — `ADDONS.md` §2). When a profile's signal **is** detected,
 its recommendation strength differs:
 
-- **`visual-ui` — default-on when detected** (unchanged from 2.1.0):
-  - In **trust mode**, the `onboard` flow **SHOULD apply** the profile
-    automatically (generate `DESIGN.md`), the same way it applies other
-    detected-and-applicable setup — the developer **MAY** still decline.
-  - In **guided mode**, the flow **MUST** present it as a **strong
-    recommendation** and ask before applying.
-- **`cli-output` and `conversational` — recommend when detected**:
-  - In **both** modes, the flow **MUST** present the detected profile as a
-    recommendation and **MUST ask** before applying — it **MUST NOT** be
-    auto-applied, even in trust mode. These profiles document conventions that
-    are less universal than visual design tokens; the developer confirms the
-    repo's rendering/voice layer is worth capturing.
+- **Detection makes the offer mandatory; it never makes the install
+  automatic.** When any interface-surface signal is detected — even an
+  ambiguous one — the `onboard` flow **MUST** evaluate it, present the addon,
+  and record the detection rationale with the offer; skipping the evaluation
+  or the offer (for example because the run is in trust mode) is a defect.
+  The offer carries a clear recommendation: **`visual-ui` — strongly
+  recommend when detected**; **`cli-output` and `conversational` — recommend
+  when detected**; an ambiguous signal still gets the offer, with the
+  ambiguity named.
+- **Installation is acceptance-gated in both guided and trust modes.** Every
+  profile **MUST** have explicit developer acceptance before application; no
+  profile is auto-applied. A prior request naming the addon or profiles
+  counts, and the flow **MUST NOT** ask again for an already accepted action;
+  an explicit decline is respected for that run. Trust mode alone does not
+  accept any optional addon.
 - When a profile's signal is **not** detected, the flow **MUST NOT** offer that
   profile; when **no** profile is detected, the flow **MUST NOT** offer the
   addon at all (§3.4).
 - Declining — any profile, or all of them — **MUST** always remain possible,
   and a declined addon **MUST** leave a fully baseline-conformant repo.
-  "Default-on when detected" raises the *default* for the visual profile; it
-  does **not** make the addon mandatory.
+  Detection changes the recommendation, never the authorization.
 
 This keeps `design-system` in the **strongest conditional tier** among the
 addons for visual repos — because a repo that *has* a design system almost
@@ -388,11 +390,11 @@ The addon is correctly applied when **all** hold:
 
 - [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119)
 - `SKILL.md` (the onboarding hook + flow), `templates/*` (reasoning aids)
-- `../README.md` (addon mechanism), `methodology-spec/ADDONS.md` (concept + pointer)
+- `../README.md` (addon mechanism), `../../spec/ADDONS.md` (concept + pointer)
 - `AGENT_PROTOCOL.md` (approval gates), `ARCHETYPES.md` (archetypes)
 - [W3C Design Tokens](https://www.w3.org/community/design-tokens/) (optional token schema)
 - [NO_COLOR](https://no-color.org/) (CLI color-suppression convention)
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.1.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

@@ -17,7 +17,7 @@ paths, stack-specific skills, example plans). This document specifies the common
 onboarding agent MUST **reason about per repo**, never copy verbatim.
 
 The standard applies to **both archetypes** defined in `ARCHETYPES.md`: the
-**individual repo** (the 99% case) and the **orchestrator hub**. Archetype-specific
+**individual repo** (the common case) and the **orchestrator hub**. Archetype-specific
 requirements are called out inline.
 
 ---
@@ -26,11 +26,20 @@ requirements are called out inline.
 
 | Field | Value |
 |-------|-------|
-| **Version** | 2.1.0 |
+| **Version** | 5.0.0 |
 | **Status** | Stable |
-| **Supersedes** | `PLAN_build_deepworkplan_brand/.../deepworkplan/spec/DOCUMENTATION_STANDARD.md` (v1.0.0) |
+| **Supersedes** | `DOCUMENTATION_STANDARD.md` 2.3.0, 2.1.0; `PLAN_build_deepworkplan_brand/.../deepworkplan/spec/DOCUMENTATION_STANDARD.md` (v1.0.0) |
 | **Companions** | `DWP_SPECIFICATION.md`, `AGENT_PROTOCOL.md`, `ARCHETYPES.md`, `ADDONS.md` |
 | **License** | MIT |
+
+> **Divergence from 2.3.0 (overview).** 5.0.0 aligns this document's version
+> with the DWP standard it accompanies (the same alignment move
+> `DWP_SPECIFICATION.md` 4.0.0 and 5.0.0 made — no existing requirement
+> changes) **plus** this generation's additive rules: the lean-index **budget
+> is enforced** (§2.1.1 — harness-generated AGENTS.md stays in the 150–500
+> line budget by moving detail into `docs/` and linking) and the **feature
+> tier** (§4.1 — major capability areas carry their own internal `docs/`,
+> with testable triggers for when it applies).
 
 > **Divergence from v1 (overview).** v1 framed the standard as a "3-tier hierarchy"
 > with Bronze/Silver/Gold/Platinum conformance badges and used `.agent_commands/`
@@ -77,6 +86,28 @@ interpreted as described in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 `AGENTS.md` **MUST** serve three roles: an **index**, a set of **mandatory rules**, and a **quick commands** reference.
 
+### 2.1.1. Budget enforcement — the lean index is a guarantee, not a hope
+
+The budget above is enforced on what the harness produces:
+
+- The `AGENTS.md` that onboarding — or any later harness-maintained update —
+  generates **MUST** stay within the budget. When the reasoned content would
+  exceed it, the agent **MUST** move the detail into the focused `docs/` guide
+  (or the module/feature doc, §4) that owns it and link it from the index.
+  The index **MUST** link every doc that received displaced content: nothing
+  silently disappears, and the file stays a lean index by construction (§2.4.1).
+- An existing handwritten `AGENTS.md` over the budget is **never silently
+  rewritten**: onboarding and upgrade report the overweight with a concrete
+  migration proposal — what moves where, which links get added — and apply it
+  only with consent (`AGENT_PROTOCOL.md` §6; §3.5's non-destructive
+  reconciliation). The proposal, not a forced edit, is the deliverable.
+- The two limits of §2.4.1 bind here too: no constraint an agent needs to act
+  safely is dropped to fit the budget, and the ceiling is never an excuse to
+  hide required context — detail moves, it is not deleted.
+- A conformance checker treats an over-budget `AGENTS.md` as an advisory
+  (SHOULD): the line count is objective, authorship is not, and the **MUST**
+  above binds the harness, not a checker's guess about who wrote the file.
+
 ### 2.2. Role 1 — Index (navigation)
 
 `AGENTS.md` **MUST** contain a documentation index: a table linking every
@@ -101,7 +132,7 @@ At minimum it **MUST** cover:
 |------|-------------|
 | **Language** | All code, comments, and documentation **MUST** be in English. |
 | **Conventional commits** | Commits **MUST** follow `type(scope): description`. |
-| **Testing** | The repo's test pattern and coverage expectation **MUST** be stated. |
+| **Testing** | The repo's test pattern and coverage expectation **MUST** be stated, together with the validation rule an agent applies: gates are selected from the change's touched surface using the mapping documented in `TESTING_GUIDE.md` (§3.4), with the documented fallback to the full suite (`DWP_SPECIFICATION.md` §5.1). |
 | **Error handling / logging** | The repo's consistent error and logging patterns **MUST** be stated. |
 | **Repository boundaries** | Where the agent **MAY** and **MUST NOT** commit (load-bearing for the orchestrator hub, which **MUST** state that sub-project code is committed from inside each sub-repo, never from the hub root). |
 | **Progress reporting** | The expectation that agents report progress after significant work, and the "never block work on reporting" rule (see `AGENT_PROTOCOL.md`). |
@@ -109,14 +140,49 @@ At minimum it **MUST** cover:
 The test pattern, commit scopes, and validation commands themselves are part of
 the **repo-specific 10%** (§7) and **MUST** be reasoned about per repo, not copied.
 
+### 2.3.1. Working principles
+
+`AGENTS.md` **SHOULD** carry compact working principles for autonomous,
+precise, verified work. Onboarding and an authorized harness upgrade **MUST**
+reconcile these principles using
+[`../shared/working-principles.md`](../shared/working-principles.md): retain
+equivalent instructions, add missing behaviors inline, and preserve explicit
+repository preferences and authority boundaries. The ten behaviors are
+ownership, resourcefulness, independent routine decisions, informed
+escalation, concrete approval requests, recovery, scope discipline,
+proportionate rigor, direct communication, and evidence-backed completion.
+
+The principles apply to ordinary tasks and plans. They **MUST NOT** expand
+authorization, override host permissions or plan gates, or convert analysis
+into execution. Wording and headings **MAY** vary; semantic coverage is a judgment
+check, not a keyword gate. Missing principles in an existing repository are
+an advisory upgrade finding, not a new failure against its declared standard.
+This addition leaves the umbrella standard and plan schemas unchanged.
+
 ### 2.4. Role 3 — Quick Commands
 
 `AGENTS.md` **MUST** contain a quick-commands reference table for the most common
 agent actions: install, test, lint, type-check, build, validate. Every command
 **MUST** be runnable in the repo's development environment; commands that run only
 in CI or only inside a container **MUST** be marked as such (observed: the Core
-Hub flags `codecheck -f` as "must run INSIDE the Docker container"). The exact
-commands are repo-specific (§7).
+Hub flags `codecheck -f` as "must run INSIDE the Docker container"). Where the
+repository supports it, the table **SHOULD** show the **scoped** variant next to
+the full one (for example `pnpm test` / `pnpm test -- tests/unit/<module>`), each
+clearly labeled, so an agent can tell which is which without opening the testing
+guide. The exact commands are repo-specific (§7).
+
+### 2.4.1. `AGENTS.md` as a compact entry point
+
+`AGENTS.md` is the file every agent reads on every session, so its size is a
+cost paid on every task. It **SHOULD** be a concise entry point: the mandatory
+constraints (§2.3), the quick commands (§2.4), and **direct links** to the
+focused guide that holds each detail (§3), rather than the details themselves.
+Detailed, optional, or rarely needed guidance **SHOULD** live in the focused
+`docs/` guide or per-module doc it belongs to, one link away. Two limits apply in
+both directions: the file **MUST NOT** omit an invariant an agent needs in order
+to act safely merely to be shorter, and this standard imposes **no** word cap
+that would hide required context — brevity is achieved by linking, never by
+dropping constraints.
 
 ### 2.5. CLAUDE.md → AGENTS.md
 
@@ -150,8 +216,8 @@ standard:
 | 0 | `PRODUCT_SPEC.md` | **MUST** | The product spec: the problem the repo solves, who it is for, its key capabilities/features, success criteria, and explicit non-goals — the **why** and **for whom**, not the **how**. Deliberately **non-technical**, high-value context. **Every repository is a product** — even a library, CLI, or internal tool: its consumers and their use cases are its product, and they deserve a non-technical spec. A library that omits this hides the very thing a new agent (or human) most needs to understand first. |
 | 1 | `ARCHITECTURE.md` | **MUST** | System design, components, data flow, key decisions. |
 | 2 | `STANDARDS.md` | **MUST** | Coding conventions, naming, import order, error/logging patterns, forbidden anti-patterns. |
-| 3 | `TESTING_GUIDE.md` | **MUST** | Test framework, file-naming pattern, how to run/scope tests, coverage expectation. **Where the repo has no test setup, this doc MUST instead specify the *proposed* setup reasoned from the stack** (see §3.3). |
-| 4 | `DEVELOPMENT_COMMANDS.md` | **MUST** | Authoritative command reference (install/test/lint/type-check/build/run), expanding §2.4. |
+| 3 | `TESTING_GUIDE.md` | **MUST** | Test framework, file-naming pattern, coverage expectation, the **full** and **verified scoped** commands, the source-to-test mapping and its blind spots, and the testing posture — the required content is specified in §3.4. **Where the repo has no test setup, this doc MUST instead specify the *proposed* setup reasoned from the stack** (see §3.3), clearly marked as proposed. |
+| 4 | `DEVELOPMENT_COMMANDS.md` | **MUST** | Authoritative command reference (install/test/lint/type-check/build/run), expanding §2.4, including the scoped variants of test/lint/type-check where the toolchain supports them, each marked full or scoped. |
 | 5 | `SECURITY.md` | **MUST** | Secrets handling, auth model, sensitive-data boundaries, what agents MUST NOT write to docs. |
 | 6 | `PERFORMANCE.md` | **SHOULD** | Performance-critical paths, budgets, profiling guidance. |
 | 7 | `AI_AGENT_ONBOARDING.md` | **MUST** | First-session checklist for an agent new to the repo. |
@@ -161,7 +227,7 @@ standard:
 
 - The **MUST** categories (`PRODUCT_SPEC`, `ARCHITECTURE`, `STANDARDS`, `TESTING_GUIDE`, `DEVELOPMENT_COMMANDS`, `SECURITY`) plus `AI_AGENT_ONBOARDING` and `AI_AGENT_COLLAB` constitute the conformance floor for an AI-first repo.
 - `PRODUCT_SPEC.md` is **non-technical by design** and **MUST NOT** be skipped on the grounds that "this repo is just a library/tool." If the repo genuinely has no end users, frame the product as its API/consumers: what it offers, to whom, and why they would choose it. Reason the content from the real repo (README, package description, public API, issues/roadmap) — never a generic stub.
-- `SECURITY.md` **MUST NOT** be skipped on the grounds that "this repo has no secrets." Every repository has a security posture: how credentials and config are handled (even when the answer is "none — and none may be added"), what agents MUST NOT write into code or docs, input-handling expectations, and the sensitive-data boundaries of its domain. Reason it from the real repo (env handling, CI secrets, auth code, data models) — never a generic stub. The Security Review mandatory final task (`DWP_SPECIFICATION.md` §6.1) keeps this file current: every completed plan verifies it still reflects reality.
+- `SECURITY.md` **MUST NOT** be skipped on the grounds that "this repo has no secrets." Every repository has a security posture: how credentials and config are handled (even when the answer is "none — and none may be added"), what agents MUST NOT write into code or docs, input-handling expectations, and the sensitive-data boundaries of its domain. Reason it from the real repo (env handling, CI secrets, auth code, data models) — never a generic stub. The Final Review (`DWP_SPECIFICATION.md` §6.1) keeps this file current: every completed plan verifies it still reflects reality.
 - A repository **MAY** add domain-specific guides beyond these 11 (e.g. `API_REFERENCE.md`, `DATABASE_SCHEMA.md`, `LOGGING_BEST_PRACTICES.md`, `REDIS_CACHING_BEST_PRACTICES.md`) when the stack warrants. Whether a given domain guide is warranted is part of the **repo-specific 10%** (§7). (All four examples observed live in `api-services/docs/`.)
 - A guide that would fall below ~30 lines **SHOULD** be merged into a sibling; a guide above ~700 lines **SHOULD** be split into a subfolder.
 
@@ -219,7 +285,139 @@ A repository whose `TESTING_GUIDE.md` neither describes a real setup nor specifi
 a concrete proposed one is **not** AI-first conformant: agents would have no
 objective validation gate to run.
 
+When the toolchain exists and is runnable, the onboarding agent **MUST** execute
+at least one **real scoped invocation** against an actual path of the repository
+and record the evidence (the command, its working directory, and the selected or
+executed test count) in `TESTING_GUIDE.md` per §3.4. When the toolchain is absent
+or cannot run in the onboarding environment, the guide **MUST** say so and
+present the commands as **proposed** — never as verified, and never fabricated.
+
+### 3.4. `TESTING_GUIDE.md` — Required Content
+
+`TESTING_GUIDE.md` is the document a Deep Work Plan reads to turn a task's
+Touched Surface (`DWP_SPECIFICATION.md` §5.0.2) into a validation gate
+(`DWP_SPECIFICATION.md` §5.1). It **MUST** therefore contain the following,
+each reasoned from the real repository (§7):
+
+#### 3.4.1. Commands
+
+- The **full-suite** command(s) for tests, and the full commands for lint, format,
+  and type-check.
+- The **scoped invocation pattern(s)** — by file, by module or directory, by
+  package (in a monorepo), and by marker or name filter where the runner supports
+  it — each with **at least one concrete example from this repository**, the
+  **working directory** it runs from, the **tool version** where flag behavior
+  depends on it, and the **expected evidence** a correct run produces (for
+  example "selects 12 tests", "reports the file under `collected`"). A pattern
+  copied from documentation without a repository example is not sufficient.
+- Scoped **lint / format / type-check** commands **only where the toolchain
+  genuinely supports scoping**; where it does not, or where a project-wide check
+  is the cheaper option, the guide **MUST** say so plainly rather than describe a
+  scoped form that does not exist.
+- Where a cheap complete command is the real trade-off (a suite that finishes in
+  seconds), the guide **SHOULD** recommend it over elaborate selection.
+
+#### 3.4.2. Mapping, consumers, and blind spots
+
+- The **source-to-test mapping rule**: how a changed path maps to the tests that
+  cover it (co-located files, a mirrored tree, a naming convention, markers, or
+  a package boundary).
+- The **dependent-consumer policy**: how an agent finds the tests of modules that
+  depend on a changed module — an affected-tests tool (`--changed`,
+  `--findRelatedTests`, `testmon`, a monorepo task graph), an import graph, or
+  a documented list of consumers — and what to do when none is available.
+- The **known blind spots** of that mapping and tooling: dynamic loading,
+  templates, fixtures, generated inputs, configuration, migrations, and any
+  repository-specific case where a change is invisible to static analysis.
+- The **escalation paths**: which paths or packages are treated as shared or core
+  (a change there widens validation to consumers or to the full suite), and which
+  configuration, schema, dependency, or build/test-toolchain changes always
+  trigger the full run.
+- An **explicit fallback statement** for cases scoping cannot cover: "run
+  `<full command>`". An agent that cannot derive a sound scoped gate falls back
+  to this by rule (`DWP_SPECIFICATION.md` §5.1.b), never by guesswork.
+
+#### 3.4.3. Testing posture
+
+- **Where each layer lives**: the directories or naming that distinguish unit,
+  integration, and end-to-end tests, and how each layer is run.
+- **Unit-first behavioral coverage** as the base: fast, deterministic tests of
+  observable behavior and meaningful boundaries, covering errors, edge cases and
+  regressions, with mocks at useful boundaries and without asserting internal
+  call sequences (`DWP_SPECIFICATION.md` §5.1.1).
+- **Real-seam integration**: which seams (contracts, persistence, routing,
+  serialization, auth, framework wiring) carry integration or contract tests,
+  and the expectation that a task changing such a seam adds them.
+- **Useful end-to-end** coverage: few, high-value flows, and how they run.
+- **Deterministic fixtures** and **meaningful assertions** as expectations.
+- A clear line between the repository's **current capabilities** and any
+  **proposed** setup (§3.3): the two **MUST NOT** be blended so that a reader
+  mistakes a proposal for a verified command.
+
+The posture is a default strategy, not a fixed ratio or a speed target; the guide
+**MUST NOT** impose test-count quotas or percentages the repository does not
+actually enforce.
+
+### 3.5. Adoption — Install, Onboard, Upgrade
+
+Three different actions are easily conflated; a repository's documentation and
+the onboarding flow **MUST** keep them distinct:
+
+| Action | What it provides | What it does **not** provide |
+|---|---|---|
+| **Installing the skill** | The methodology's instructions, on the machine or in the repository. | Any knowledge of *this* repository: no verified test mapping, no context, no permissions. |
+| **Onboarding the repository** | The context (§2–§5), the verified commands and mapping (§3.3–§3.4), and the harness a plan needs. | — |
+| **Upgrading an existing setup** | A **targeted, non-destructive, idempotent reconciliation** that adds what a newer standard requires (for example §3.4 content) to a repository onboarded under an earlier one. | A rewrite: handwritten rules, custom skills, existing commands and in-flight plans are preserved. |
+
+- **Adoption acceptance check.** After any of the three, a lightweight check
+  **SHOULD** confirm: the installed skill is locatable (its router `SKILL.md` and
+  version); its essential local links resolve; the repository has a **real** test
+  command or an honest, documented absence (§3.3); and the next useful action is
+  stated (onboard, upgrade, or create a plan).
+- **Non-destructive reconciliation.** Re-running onboarding on a repository that
+  already has `AGENTS.md`, `docs/`, or `.agents/` **MUST** reconcile rather than
+  overwrite: add missing sections, update stale generated content, and leave
+  handwritten content, custom skills, and unrelated files intact; ask before
+  replacing anything (`AGENT_PROTOCOL.md` §6). Repeating the reconciliation
+  **MUST** produce no further change (idempotent). This includes working
+  principles (§2.3.1), even when the declared standard is already current;
+  equivalent handwritten rules satisfy the requirement without rewriting.
+  The reconciliation **MUST**
+  report, per file, what it added or changed.
+- **Recorded provenance.** A repository that adopts this standard **SHOULD**
+  record it — a line such as
+  `DWP standard: 5.0.0 (onboarded YYYY-MM-DD; upgraded YYYY-MM-DD; skill x.y.z)`
+  in `AGENTS.md` or `docs/README.md` — so a checker and a future agent can tell
+  which standard the repository declares.
+
+  The version in that line is the **umbrella DWP standard** — the `Version` of
+  `DWP_SPECIFICATION.md` — not the version of this document or of any other
+  single spec document. Each spec document carries its own version and they
+  advance independently, so recording one of those would compare unrelated
+  scales: a conformance checker reads this line against the DWP standard it
+  implements and rejects a repository declaring one it does not support. The
+  standard's series are 2.x and 4.x (historical) and 5.x (current — there is
+  no 3.x); the skill package `version:` and the `/v2.json` and `/v5.json`
+  schema URLs are two further, separate series, never compared against this
+  line.
+- **Legacy versus declared.** A conformance checker **MUST** distinguish a
+  repository onboarded under an earlier version (no §3.4 content, no declaration)
+  from a repository that declares this version and lacks a **MUST**: the former
+  receives a **finding** that names the upgrade path; the latter **fails**. A
+  declared requirement is never silently waived. Judgments about the *quality* of
+  a mapping (is the consumer policy sound?) are disclosed as manual review items,
+  not encoded as automatic passes.
+
 ---
+
+> **Divergence from 2.1.0.** 2.3.0 makes the testing guide's content normative
+> (§3.4: full and verified scoped commands, mapping, consumers, blind spots,
+> escalation, fallback, posture), requires one real scoped invocation at
+> onboarding (§3.3), states `AGENTS.md`'s compact-entry-point role (§2.4.1),
+> distinguishes install / onboard / upgrade with non-destructive, idempotent
+> reconciliation and recorded provenance (§3.5), and separates legacy findings
+> from declared-standard failures. Repositories onboarded under 2.1.0 remain
+> conformant and receive an upgrade finding.
 
 ## 4. Per-Module Nested Docs
 
@@ -245,6 +443,37 @@ audited repos (e.g. `api-services/app/integrations/docs/` with `README.md`,
 
 Which modules qualify as "major" or "complex" is part of the **repo-specific 10%**
 (§7) and **MUST** be reasoned about per repo.
+
+### 4.1. The feature tier — per-feature `docs/` for major capability areas
+
+Above the per-module tier sits a **feature tier**: a **major feature or
+capability area** — bigger than one module — gets its own `docs/` folder next
+to its code, entered via its own `README.md`, holding the area's architecture
+decisions, contracts, and runbooks.
+
+- An area qualifies when **any** of these triggers fires (heuristics, not
+  bureaucracy — the judgment stays with the per-repo reasoning, §7):
+  - it **spans 2+ major modules** — a capability several modules cooperate to
+    provide (e.g. a domain model shared across services);
+  - it **owns a sub-app or subsystem directory** — a self-contained
+    application or subsystem folder inside the repo (observed shape:
+    `app/{domain}/`, or a top-level sub-app such as `mailtron/`);
+  - it **carries its own contracts** — an API surface, event or schema
+    contracts, protocol definitions — that multiple consumers depend on.
+- Once an area is recorded as major, its feature `docs/` **SHOULD** exist; the
+  most significant entries **SHOULD** be linked from the READMEs of the
+  modules the area spans and surfaced in the root `AGENTS.md` index, exactly
+  like per-module docs. An area deliberately left undocumented carries a
+  recorded reason — a decision, not an oversight.
+- The feature tier complements the per-module tier, never replaces it: a
+  module inside a feature area still carries its own `README.md` (§4).
+
+> **Observed input, adapted by reasoning.** This tier generalizes the audited
+> `api-services` shape — a flat root `docs/` hub plus nested per-area `docs/`
+> (e.g. `app/domain/docs/`, `app/mcp/docs/`, and the sub-app `mailtron/docs/`,
+> each entered via a `README.md`). Reason the structure from the target
+> repo's real feature areas (§7); never copy another repo's folder layout
+> verbatim.
 
 > **Divergence from v1.** v1 shipped only a per-module *`AGENTS.md`* template and
 > treated nested docs as an optional "Tier 3 / Platinum" extra. v2 makes a per-major-module
@@ -291,10 +520,10 @@ different purposes. Both **MUST** be gitignored (tracking only an index
 
 | Directory | Requirement | Purpose |
 |-----------|-------------|---------|
-| `.dwp/` | **MUST** (once the DWP skill is installed) | **Structured** Deep Work Plan output — `.dwp/plans/` and `.dwp/drafts/`. Owned by the DWP flows. See `DWP_SPECIFICATION.md`. |
-| `tmp/` | **SHOULD** | **Unstructured** repo-root scratch space for ephemeral agent/developer work: exploratory output, data exports, inter-agent prompt handoffs, throwaway experiments. Agents **SHOULD** write temporary/throwaway artifacts here rather than polluting the source tree, `docs/`, or `.dwp/`. |
+| `.dwp/` | **MUST** (once the DWP skill is installed) | **Structured** Deep Work Plan output — `.dwp/plans/`. Owned by the DWP flows. See `DWP_SPECIFICATION.md`. |
+| `tmp/` | **SHOULD** | **Unstructured** repo-root scratch space for ephemeral agent/developer work: exploratory output, data exports, inter-agent prompt handoffs, throwaway experiments. Agents **SHOULD** write *non-plan* temporary/throwaway artifacts here rather than polluting the source tree, `docs/`, or `.dwp/`. Output produced **about a plan** is the exception and goes in that plan's own `analysis_results/` (`DWP_SPECIFICATION.md` §5), never in `tmp/` and never at the repository root. |
 
-The distinction matters: `.dwp/` is the methodology's **structured** output (plans an agent can resume), while `tmp/` is **freeform** scratch that can be deleted at any time. Common `tmp/` sub-uses observed across the audited repos: `tmp/scratch/`, `tmp/exports/`, `tmp/{tool}_prompts/`. An onboarding agent **SHOULD** create `tmp/` (with a `.gitkeep`) and add it to `.gitignore`, and **SHOULD** note the convention in `AGENTS.md`.
+The distinction matters: `.dwp/` is the methodology's **structured** output (plans an agent can resume), while `tmp/` is **freeform** scratch that can be deleted at any time. The test is *ownership, not lifetime*: a gate log, an audit report or a scratch measurement produced **while executing a plan** is that plan's evidence — a later session retrieves it by pointer — so it belongs in `.dwp/plans/PLAN_{name}/analysis_results/` even though it is temporary. `tmp/` is for work no plan will ever read back. Common `tmp/` sub-uses observed across the audited repos: `tmp/scratch/`, `tmp/exports/`, `tmp/{tool}_prompts/`. An onboarding agent **SHOULD** create `tmp/` (with a `.gitkeep`) and add it to `.gitignore`, and **SHOULD** note the convention in `AGENTS.md`.
 
 ---
 
@@ -339,6 +568,7 @@ this standard or from another repo. An onboarding agent (`AGENT_PROTOCOL.md`)
 | Repo-specific value | How the agent reasons about it |
 |---------------------|--------------------------------|
 | **Validation commands** | Derive `test`/`lint`/`type-check`/`build`/`validate` from package manager, lockfiles, CI config (e.g. `codecheck -f` in Docker for Django; `eslint:check && test` for Node; `astro:check` for Astro). **If the repo has no test/lint commands, propose stack-appropriate ones (§3.3) rather than recording their absence.** |
+| **Scoped invocation and mapping** | Derive the scoped test/lint/type-check patterns from the runner's real capabilities and the repository's layout; verify at least one against a real path (§3.3); document the source-to-test mapping, consumer policy, blind spots, escalation paths, and fallback (§3.4). Never present an example from another repository or from tool documentation as a verified command. |
 | **File paths & structure** | Derive module layout from the actual source tree (`app/` vs `src/` vs `pages/`). |
 | **Test file naming** | Derive from existing tests (`*_test.py`, `*.spec.ts`, `*.test.ts`). |
 | **Stack-specific skills** | Decide which `.agents/skills/` to install based on the stack and the repo's needs. |
@@ -352,7 +582,7 @@ resolved values for the target repo — never the placeholder or another repo's 
 
 ## 8. Archetype Notes (cross-reference)
 
-Both archetypes from `ARCHETYPES.md` follow §§2–7. The **individual repo** (99%
+Both archetypes from `ARCHETYPES.md` follow §§2–7. The **individual repo** (common
 case) is the default; an onboarding agent **MUST** assume it unless the repo is
 clearly a hub. The **orchestrator hub** **MUST** additionally provide: the
 sub-project navigation index (§2.2), `ECOSYSTEM_CONTEXT.md` and a cross-project
@@ -366,7 +596,10 @@ the classification heuristic and the full onboarding-difference matrix.
 
 The v1 Bronze/Silver/Gold/Platinum badge ladder is retained as an **informative**
 self-assessment aid, not a normative requirement. A repository is **AI-first
-conformant** when it satisfies every **MUST** in §§2–7. The optional ladder maps,
+conformant** when it satisfies every **MUST** in §§2–7. For a repository that declares 2.3.0 or later, the floor includes the
+`TESTING_GUIDE.md` content of §3.4; a repository onboarded under an earlier
+version that lacks it receives an upgrade finding (§3.5), not a failure. The
+optional ladder maps,
 roughly: Bronze = §2 only; Silver = §2 + the six MUST `docs/` categories
 (`PRODUCT_SPEC`, `ARCHITECTURE`, `STANDARDS`, `TESTING_GUIDE`,
 `DEVELOPMENT_COMMANDS`, `SECURITY`); Gold =
@@ -385,4 +618,4 @@ for all complex modules (§4).
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.1.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

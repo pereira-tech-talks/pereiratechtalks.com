@@ -26,6 +26,7 @@
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
+| Dev container | [Local Docker stack](docker/local/README.md) | Coding-agent suite (Claude, Codex, OpenCode, Pi, Cline, Grok, Herdr), provider keys, SSH on 22030, persistence volumes |
 | i18n | [I18N Guide](docs/I18N_GUIDE.md) | Spanish primary + English first-class international |
 | Performance | [Performance](docs/PERFORMANCE.md) | Astro SSG optimization, image handling, caching, per-edition perf |
 | Accessibility | [Accessibility](docs/ACCESSIBILITY.md) | WCAG AA, contrast ratios, ARIA, per-edition palette verification |
@@ -453,7 +454,9 @@ programming a meetup from a date alone.
 
 ## Events & Pereira Tech Days Conventions
 
-> Full reference: **[Events Guide](docs/features/EVENTS.md)** (created in Task 4 onwards)
+> Full reference: **[Pereira Tech Days](docs/features/PEREIRA_TECH_DAYS.md)** for the annual
+> conference. The `events` collection is documented inline below and in the
+> [`/add-event`](.agents/skills/add-event/SKILL.md) skill.
 
 **Events** are calendar items (workshops, hackathons, ad-hoc gatherings). Listed at `/events`.
 
