@@ -649,15 +649,17 @@ EOF
             && mv /etc/ssh/sshd_config.new /etc/ssh/sshd_config
     fi
 
+    # Validate before touching the running daemon: killing it first would leave
+    # the container with no sshd at all if the generated config is rejected.
+    if ! /usr/sbin/sshd -t; then
+        echo "sshd: configuration test failed — leaving any running daemon untouched"
+        return 0
+    fi
+
     # A daemon left over from a previous start would hold the port.
     pkill -x sshd 2>/dev/null || true
-
-    if /usr/sbin/sshd -t; then
-        /usr/sbin/sshd
-        echo "sshd: listening on ${port} — ssh -p ${port} node@<docker-host>"
-    else
-        echo "sshd: configuration test failed — not starting"
-    fi
+    /usr/sbin/sshd
+    echo "sshd: listening on ${port} — ssh -p ${port} node@<docker-host>"
 }
 
 # Main setup function

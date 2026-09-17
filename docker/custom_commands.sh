@@ -453,6 +453,9 @@ for model_id in list(models):
 
 data["model"] = f"{provider_id}/{default_model}"
 config_path.write_text(json.dumps(data, indent=2) + "\n")
+# The file holds a live provider API key; the default 0644 would leave it
+# readable by every account and process in the container, ssh sessions included.
+config_path.chmod(0o600)
 PY
 }
 
