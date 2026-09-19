@@ -16,6 +16,8 @@
  *
  * Part of PLAN_branch_audit_and_pr Task 4 (gap G4).
  */
+import { readFileSync } from 'node:fs';
+
 import { expect, type Locator, type Page, test } from '@playwright/test';
 
 /**
@@ -71,6 +73,55 @@ async function openForm(page: Page, path: string): Promise<void> {
   await expect(page.getByRole('dialog')).toHaveCount(0);
 }
 
+/**
+ * The calls that are open *today*, read from the build the preview server is
+ * about to serve.
+ *
+ * Naming a meetup here instead is a time bomb with a printed fuse: a call
+ * auto-closes once its `closesAt` or the meetup date passes, so a suite pinned
+ * to `september-meetup-2026` passes every day until 18 September 2026 and then
+ * fails every day after, on a branch that changed nothing. That is exactly what
+ * happened. `/api/cfs-open.json` is the same source the form itself renders
+ * from, so deriving from it keeps the test and the page describing one world.
+ */
+type OpenCall = {
+  slug: string;
+  formats: string[];
+  title: { en: string; es: string };
+};
+
+function readOpenCalls(): OpenCall[] {
+  const at = new URL('../../../dist/api/cfs-open.json', import.meta.url);
+  let raw: string;
+  try {
+    raw = readFileSync(at, 'utf8');
+  } catch {
+    throw new Error(
+      `Cannot read ${at.pathname}. This suite runs against the built site — run \`pnpm run build\` first.`
+    );
+  }
+  const calls = (JSON.parse(raw) as { calls?: OpenCall[] }).calls ?? [];
+  if (calls.length === 0) {
+    throw new Error(
+      'No call for speakers is open, so the form has nothing to offer. Open one in src/content/meetups/, or retire this suite.'
+    );
+  }
+  return calls;
+}
+
+const OPEN = readOpenCalls();
+
+/** The call the meetup-scoped route is exercised against. */
+const SCOPED = OPEN[0];
+
+/**
+ * A call that accepts exactly one format, for the branch that states the format
+ * as a sentence instead of rendering a one-option select. Content decides
+ * whether such a call is open, so the test that needs it skips when none is —
+ * an honest skip beats a green assertion about a page nobody can reach.
+ */
+const SINGLE_FORMAT = OPEN.find((c) => c.formats.length === 1);
+
 /** A proposal that should pass every rule. */
 const GOOD = {
   name: '[TEST] Ada Lovelace',
@@ -118,8 +169,18 @@ async function fillAll(page: Page, over: Partial<typeof GOOD> = {}) {
   await page.fill('#cfs-social', v.social);
   // The format select is absent when the meetup accepts exactly one format —
   // it is stated as a sentence instead, which is the point of that branch.
+  // When it is present, take whatever it actually offers: which formats a
+  // meetup accepts is content, and hardcoding one here is the same time bomb
+  // as hardcoding a slug.
   const select = page.locator('#cfs-format');
-  if (await select.count()) await select.selectOption('lightning');
+  if (await select.count()) {
+    const first = await select
+      .locator('option')
+      .evaluateAll((os) =>
+        os.map((o) => (o as HTMLOptionElement).value).find((v) => v !== '')
+      );
+    if (first) await select.selectOption(first);
+  }
 }
 
 /** Ids of every control the form marks invalid. */
@@ -131,7 +192,7 @@ async function invalidIds(page: Page): Promise<string[]> {
 
 for (const [label, path] of [
   ['global', '/call-for-speakers'],
-  ['meetup-scoped', '/meetups/september-meetup-2026'],
+  ['meetup-scoped', `/meetups/${SCOPED.slug}`],
   ['global (en)', '/en/call-for-speakers'],
 ] as const) {
   test.describe(`Call for Speakers — ${label}`, () => {
@@ -268,22 +329,25 @@ test.describe('meetup-scoped mode', () => {
     page,
   }) => {
     const sent = await stubIntake(page);
-    await openForm(page, '/meetups/september-meetup-2026');
+    await openForm(page, `/meetups/${SCOPED.slug}`);
 
     await fillAll(page);
     await submit(page).click();
     await expect(page.getByRole('status')).toBeVisible({ timeout: 10_000 });
 
     // The whole reason the field exists.
-    expect(sent[0]).toMatchObject({ meetupSlug: 'september-meetup-2026' });
+    expect(sent[0]).toMatchObject({ meetupSlug: SCOPED.slug });
   });
 
   test('a single-format meetup states the format instead of offering a select', async ({
     page,
   }) => {
-    await openForm(page, '/meetups/september-meetup-2026');
-    // September takes lightning talks only. A select with one real option is a
-    // worse experience than a sentence.
+    test.skip(
+      !SINGLE_FORMAT,
+      'no open call accepts exactly one format right now'
+    );
+    await openForm(page, `/meetups/${SINGLE_FORMAT?.slug}`);
+    // A select with one real option is a worse experience than a sentence.
     await expect(page.locator('#cfs-format')).toHaveCount(0);
   });
 });
@@ -300,14 +364,18 @@ test.describe('global mode', () => {
     const values = await selector
       .locator('option')
       .evaluateAll((os) => os.map((o) => (o as HTMLOptionElement).value));
-    expect(values).toContain('september-meetup-2026');
-    expect(values).toContain('december-meetup-2026');
+    // Every call the site publishes as open must be offered here, and nothing
+    // else: a select that has drifted from /api/cfs-open.json either hides a
+    // call speakers can still answer, or invites a proposal to one that closed.
+    expect(values.filter((v) => v !== '').sort()).toEqual(
+      OPEN.map((c) => c.slug).sort()
+    );
 
-    await selector.selectOption('september-meetup-2026');
+    await selector.selectOption(SCOPED.slug);
     await fillAll(page);
     await submit(page).click();
     await expect(page.getByRole('status')).toBeVisible({ timeout: 10_000 });
-    expect(sent[0]).toMatchObject({ meetupSlug: 'september-meetup-2026' });
+    expect(sent[0]).toMatchObject({ meetupSlug: SCOPED.slug });
   });
 
   test('still accepts a proposal with no meetup chosen', async ({ page }) => {

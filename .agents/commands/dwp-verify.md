@@ -1,5 +1,5 @@
 ---
-description: Objectively verify repository and plan DWP conformance (pass/fail) (provided by the installed `deepworkplan` skill)
+description: Verify repo/plan conformance against the DWP spec (read-only) (provided by the installed `deepworkplan` skill)
 ---
 
 # /dwp-verify — provided by the `deepworkplan` skill
@@ -10,11 +10,9 @@ description: Objectively verify repository and plan DWP conformance (pass/fail) 
 ## What to do
 
 Route this invocation to the **verify** sub-skill of the installed `deepworkplan`
-skill and follow it: read `.agents/skills/deepworkplan/verify/SKILL.md` and
-execute its flow. It produces an objective pass/fail conformance report against
-the DWP specification's Conformance criteria — repository artifacts
-(`AGENTS.md`, `docs/`, `.agents/`, `.dwp/`, the `.claude → .agents` symlink) and,
-when a plan is named, that plan's well-formedness. It makes **no changes**.
+skill and follow it: read `.agents/skills/deepworkplan/verify/SKILL.md` and execute
+its flow. This is a **read-only** conformance check (repo onboarding state or a
+plan against the spec) — it reports findings and never mutates files.
 
 > Other agents: invoke the skill's `deepworkplan-verify` sub-skill directly
 > (`/deepworkplan-verify` in Claude Code, `#deepworkplan-verify` elsewhere). This

@@ -42,7 +42,7 @@ interpreted as in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 
 ---
 
-## 2. The Individual Repo (99% case)
+## 2. The Individual Repo (the common case)
 
 - An **individual repo** is a single codebase with one primary stack, its own
   validation commands, and per-module documentation. It is the **default**
@@ -100,7 +100,7 @@ interpreted as in [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119).
 | `AGENTS.md` (rules, quick commands) | The workspace's standing context (e.g. `AGENTS.md` itself, or the platform's standing-orders file) |
 | `docs/` (durable knowledge) | Workspace knowledge files / memory documents |
 | `.agents/` (skills, agents, commands) | The platform's skill directory — OpenClaw natively scans `<workspace>/.agents/skills/` |
-| `.dwp/` (plans, drafts) | `.dwp/` in the workspace root — unchanged |
+| `.dwp/` (plans) | `.dwp/` in the workspace root — unchanged |
 | git log (state, resumability) | `state.json` per plan (`PLAN_STATE.md`), REQUIRED here |
 
 - An agent workspace **MUST** provide `AGENTS.md`, `.agents/`, and `.dwp/` at the
@@ -192,4 +192,4 @@ majority of the following signals hold; otherwise it **MUST** classify it as an
 
 ---
 
-*Part of the DeepWorkPlan methodology v2.2.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*Part of the DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

@@ -33,12 +33,13 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 | Command | Procedure File | Description |
 |---------|---------------|-------------|
-| `/dwp-create` | `.agents/commands/dwp-create.md` | Create a deep work plan (unified flow: info, draft, refine, final) |
-| `/dwp-execute` | `.agents/commands/dwp-execute.md` | Execute an existing deep work plan task by task |
-| `/dwp-refine` | `.agents/commands/dwp-refine.md` | Refine a draft or modify an existing final plan |
+| `/dwp-create` | `.agents/commands/dwp-create.md` | Create a deep work plan for short or long work — materializes an executable Lite plan, promoted to Full task files only when needed |
+| `/dwp-execute` | `.agents/commands/dwp-execute.md` | Execute an existing deep work plan task-by-task |
+| `/dwp-refine` | `.agents/commands/dwp-refine.md` | Modify an existing plan — edit scope, add or split tasks, promote a Lite plan to Full, or migrate a legacy plan |
 | `/dwp-resume` | `.agents/commands/dwp-resume.md` | Resume an interrupted deep work plan from the first open task |
-| `/dwp-status` | `.agents/commands/dwp-status.md` | Check status of deep work plans without executing |
-| `/dwp-verify` | `.agents/commands/dwp-verify.md` | Objective pass/fail conformance report for the repo and its plans |
+| `/dwp-status` | `.agents/commands/dwp-status.md` | Report status of a deep work plan without executing |
+| `/dwp-verify` | `.agents/commands/dwp-verify.md` | Verify repo/plan conformance against the DWP spec (read-only) |
+| `/dwp-upgrade` | `.agents/commands/dwp-upgrade.md` | Check for a newer DeepWorkPlan skill and upgrade only with explicit consent |
 
 ## Git & Version Control
 

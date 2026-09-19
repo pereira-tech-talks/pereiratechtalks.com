@@ -1,14 +1,19 @@
-# DeepWorkPlan Methodology Specification — v2.2.0
+# DeepWorkPlan Methodology Specification — v5.0.0
 
 > The canonical normative standard for an **AI-first autopilot repository** and the
-> **Deep Work Plan (DWP)** workflow. Version **2.2.0**. This v2 spec **supersedes**
-> the v1 baseline specs in `PLAN_build_deepworkplan_brand/.../deepworkplan/spec/`
-> (and the upstream `repo-ready/` and `opensource` drafts). Reconciled from that
+> **Deep Work Plan (DWP)** workflow. Version **5.0.0** (the series are 2.x and 4.x
+> historical and 5.x current — see `DWP_SPECIFICATION.md` "Status"; the v5 schema
+> URLs are generation snapshots of the v2 shape, published at
+> `https://deepworkplan.com/schema/`). This v5 spec **supersedes** the v2 spec
+> (4.0.0, 2.4.0, 2.2.0), which superseded the v1 baseline specs in
+> `PLAN_build_deepworkplan_brand/.../deepworkplan/spec/` (and the upstream
+> `repo-ready/` and `opensource` drafts). Reconciled from that
 > baseline plus the 6 (+1) new ideas per `../RECONCILIATION.md`.
 
 All documents use RFC-2119 normative language (MUST / SHOULD / MAY / MUST NOT) and
-are grounded in an audit of 6 Dailybot repositories (~90% common structure, ~10%
-reason-per-repo). All three archetypes — individual repo (the default case),
+are grounded in an audit of 6 Dailybot repositories, in which most of the
+AI-first structure was common and a small remainder was reason-per-repo (a
+finding about those six repositories, not a measured constant). All three archetypes — individual repo (the default case),
 orchestrator hub, and agent workspace — are addressed throughout.
 
 ## Documents
@@ -16,17 +21,20 @@ orchestrator hub, and agent workspace — are addressed throughout.
 | Document | Defines |
 |----------|---------|
 | [`DOCUMENTATION_STANDARD.md`](DOCUMENTATION_STANDARD.md) | Repo structure: `AGENTS.md` (index + mandatory rules + quick commands), `CLAUDE.md → AGENTS.md`, the 10 `docs/` categories, per-module nested docs, `.agents/` layout, `.claude → .agents` and `.cursor → .agents` symlinks, and the reason-per-repo 10%. |
-| [`DWP_SPECIFICATION.md`](DWP_SPECIFICATION.md) | The DWP workflow: single-step refined-draft create flow, `.dwp/` output, the 9-section task anatomy (+ optional Delta section), validation/completion, the DWP Resume Protocol, proportional rigor tiers, the three mandatory final tasks, orchestrator + team-agents support. |
+| [`DWP_SPECIFICATION.md`](DWP_SPECIFICATION.md) | The DWP workflow: the Lite-first create flow (guided review / direct trust), `.dwp/` output, the 10-section task anatomy (Touched Surface + optional Delta section), gate selection by affected surface and final-state validation, the DWP Resume Protocol, proportional rigor tiers, the single mandatory Final Review with task-local skills decisions and an optional Executive Report, compatibility rules, orchestrator + team-agents support. |
 | [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) | Cross-agent behavior: the supported agents (interactive + autonomous platforms), the `/` vs `#` command mapping, shared `.agents/` reading, progress reporting, and the interactive vs **unattended** execution profiles. |
 | [`ARCHETYPES.md`](ARCHETYPES.md) | The three archetypes (individual repo, orchestrator hub, agent workspace), the classification heuristic, and how onboarding differs. |
 | [`PLAN_STATE.md`](PLAN_STATE.md) | The machine-readable plan state layer: `manifest.json` + `state.json`, gate records, outcome records, checkpoint/blocked state, reconciliation rules, and the published [JSON Schemas](schema/). |
-| [`ADDONS.md`](ADDONS.md) | The opt-in addon mechanism + contract (reconcile-don't-clobber); devcontainer as the first addon (pointer to Task 6). |
+| [`LITE_PLANS.md`](LITE_PLANS.md) | Lite and Full representations, creation grammar, promotion and v2 schema contracts. |
+| [`ADDONS.md`](ADDONS.md) | The addon mechanism + contract (reconcile-don't-clobber); four opt-in addons plus the AI Diff Reviewer local review, required in the baseline since 2.3.0 (§6.5). |
 
 ## Key v2 Divergences from v1 (see `../RECONCILIATION.md`)
 
 1. Distribution: WebFetch framework repo → **installed skill pack** (idea #2).
 2. Output path: `.agent_commands/.../results/` → gitignored **`.dwp/`** (idea #3).
 3. Create flow: two-step draft → **single refined draft** (idea #4).
+   *(Superseded in 2.4.0: the draft is gone entirely — `create` materializes an
+   executable Lite plan, see [`LITE_PLANS.md`](LITE_PLANS.md).)*
 4. **`.claude → .agents`** and **`.cursor → .agents`** directory symlinks + canonical `.agents/` (idea #1).
 5. **Two archetypes** made first-class (idea #5).
 6. **Per-module `README.md` + `docs/`** formalized as normative (idea #6).
@@ -70,4 +78,4 @@ orchestrator hub, and agent workspace — are addressed throughout.
 
 ---
 
-*DeepWorkPlan methodology v2.2.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*
+*DeepWorkPlan methodology v5.0.0, MIT License, by [Dailybot](https://dailybot.com) / dailybotops.*

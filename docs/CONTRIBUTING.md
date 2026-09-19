@@ -81,7 +81,7 @@ Email <pereiratechtalks@gmail.com> with the role you'd like to help with.
 ```bash
 git clone https://github.com/pereira-tech-talks/pereiratechtalks.org.git
 cd pereiratechtalks.org
-pnpm install                 # requires Node 24.15.0+ and pnpm 11.x
+pnpm install                 # requires Node 24.21.0+ and pnpm 11.x
 pnpm run dev                 # http://localhost:8888
 ```
 

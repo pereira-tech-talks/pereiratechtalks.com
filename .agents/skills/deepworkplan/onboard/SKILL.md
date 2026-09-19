@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-onboard
-description: Make a repository AI-first by reasoning about its stack and archetype, then generating adapted AGENTS.md, docs/, per-module docs, .agents/, and the .claude/.cursor to .agents symlinks. Offers opt-in addons. Use when the developer wants to onboard or AI-enable a repo.
-version: "2.17.0"
+description: Make any repository AI-first — reason (never template) an adapted AGENTS.md, docs/, per-module docs and .agents/ kit from the real repo, discover and verify its full and scoped validation commands and source-to-test mapping, install the DeepWorkPlan skill, and, for a repository onboarded under an earlier version, perform a targeted, non-destructive, idempotent harness upgrade. Use when the developer wants to onboard or upgrade a repository for AI agents.
+version: "5.5.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -21,10 +21,12 @@ work reliably without per-session human hand-holding.
 > value is that you **inspect the actual target repo** — its real languages,
 > frameworks, package manager, build/test/lint commands, folder layout, test
 > convention, deployment shape — and then **generate artifacts adapted to that
-> repo**. The *shape* of the output is fixed (the ~90%: `AGENTS.md`, the `docs/`
+> repo**. The *shape* of the output is fixed (`AGENTS.md`, the `docs/`
 > categories, per-module docs, `.agents/`, the symlinks, `.dwp/`); the *content*
-> is reasoned per repo (the ~10%: validation commands, paths, stack-specific
-> skills, example plans).
+> is reasoned per repo (validation commands, paths, stack-specific skills,
+> example plans). Most of a generated artifact is the fixed shape and the
+> remainder is reasoned — a direction, not a ratio to quote
+> (`../shared/adaptation.md`).
 >
 > **An empty doc, a generic stub, a placeholder command, or a doc copied
 > verbatim from this skill or another repo is a FAILURE.** Never write
@@ -51,15 +53,20 @@ work reliably without per-session human hand-holding.
   fallback and the orchestrator-hub note. See `presets/README.md` for the full
   index. Read the matching preset in Phase 1 and use it in Phases 3–6.
   **Presets are reasoning aids, not templates.**
-- [`../guide/GUIDE.md`](../guide/GUIDE.md) — the DWP methodology you reference
-  when wiring the skill and (for hubs) the orchestrator/child-DWP capability.
+- **Guide (conditional — read only when the trigger fires):** [`../guide/structure.md`](../guide/structure.md) §1–§2, §10 when Phase 7 scaffolds `.dwp/` beyond the paths `../shared/dwp-paths.md` names or Phase 3b authors the first plan; [`../guide/large-repo-onboarding.md`](../guide/large-repo-onboarding.md) §15 when the repo is large enough for the plan-driven path (Phase 2b); [`../guide/orchestrator.md`](../guide/orchestrator.md) §13 for an orchestrator hub (child-DWP capability); [`../guide/authoring.md`](../guide/authoring.md) §4–§5 when emitting an onboarding plan's task files. Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
+- **Spec (conditional — read the named sections when the trigger fires):** [`../spec/DOCUMENTATION_STANDARD.md`](../spec/DOCUMENTATION_STANDARD.md) §3.4 (the required content of `TESTING_GUIDE.md`) when writing or reconciling the testing guide, and §3.5 (install / onboard / upgrade, provenance, legacy-vs-declared) when the repository was onboarded before. The Phase 4 and Phase 0 text below is self-sufficient for the common case.
+- [`addons.md`](addons.md) (this directory) — **read in Phase 7a and Phase 7b**: Phase 7a installs the required AI Diff Reviewer local review; Phase 7b offers the four optional addons (dependency upgrade is near-default for repos with declared dependencies; the rest are signal-gated opt-ins). No optional addon is required for a repository to use DWP.
+- **Working principles (conditional):** read
+  [`../shared/working-principles.md`](../shared/working-principles.md) when
+  Phase 0 assesses an existing harness or Phase 3 writes its agent rules;
+  use it again in Phase 8 to check semantic coverage and reconciliation.
 - [`templates/onboarding-plan.md`](templates/onboarding-plan.md) — the
   **reasoning aid** for the plan-driven path (Phase 2b): the shape of a "finish
   onboarding myself" Deep Work Plan a **large** repo emits instead of generating
   everything inline. A template to reason from, **never** to copy verbatim.
 
 > **Ship purity:** every path this flow references is relative inside
-> `skills/deepworkplan/` (`../shared/*`, `presets/*`, `../guide/GUIDE.md`,
+> `skills/deepworkplan/` (`../shared/*`, `presets/*`, `../guide/*.md`,
 > `../addons/*`). Never reference any absolute host path or any
 > `.agent_commands/...` path. The output you write lives in the **target repo**,
 > at paths relative to its root.
@@ -70,7 +77,8 @@ work reliably without per-session human hand-holding.
 
 When this flow finishes, the target repo contains:
 
-1. **`AGENTS.md`** — index + mandatory rules + a Quick Commands block with the
+1. **`AGENTS.md`** — index + mandatory rules + compact working principles for
+   autonomous, precise, verified work + a Quick Commands block with the
    repo's **real, runnable** commands; plus `CLAUDE.md → AGENTS.md`.
 2. **`docs/`** — the standard categories, each filled with **real**
    repo-specific content (real commands, real module names, real test pattern):
@@ -87,9 +95,25 @@ When this flow finishes, the target repo contains:
    the `.claude → .agents` and `.cursor → .agents` symlinks. Skills/agents/commands are
    **stack-appropriate**, not generic boilerplate.
 5. **DeepWorkPlan skill installed** + a gitignored **`.dwp/`** scaffold
-   (`.dwp/plans/`, `.dwp/drafts/`, with READMEs and a `.gitignore` rule).
+   (`.dwp/plans/`, with a README and a `.gitignore` rule).
+6. **A verified testing map** in `docs/TESTING_GUIDE.md` — the full and scoped
+   validation commands (one scoped selection actually run where the toolchain
+   is runnable), the source-to-test mapping, consumer policy, blind spots,
+   escalation paths and fallback, plus the unit-first posture — so every future
+   plan can select its gates instead of guessing (`../spec/DOCUMENTATION_STANDARD.md` §3.4).
+7. **A recorded standard and a first usable outcome** — the provenance line
+   `DWP standard: 5.0.0 (onboarded YYYY-MM-DD; skill x.y.z)` in `AGENTS.md`, and
+   a `.dwp/onboard/REPORT.md` that names the verified command and mapping, the
+   installed skill identity and version, the active capability limits (what
+   could not be verified and why), and the exact post-onboarding next command
+   (see Phase 8 item 10).
 
-Plus, opt-in (Phase 7b): any accepted **addons** (the first is devcontainer).
+Plus the required **AI Diff Reviewer local review** (Phase 7a: vendored skill +
+`.review/extension.md`) and, from Phase 7b, the **optional addons** the
+developer accepted or did not decline (the near-default dependency-upgrade
+delegator installs under the onboarding consent unless explicitly declined;
+the signal-gated opt-ins install only when accepted — the first is
+devcontainer).
 
 ---
 
@@ -106,6 +130,34 @@ the onboarding task-by-task** with per-artifact gates and full resumability (the
 recommended path at scale). The phase descriptions below are written for the
 inline path; on the plan-driven path the **same work** runs as plan tasks.
 
+## Trust boundary (write scope)
+
+`allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`. Onboarding
+mutates the target repository — non-destructively and by explicit design:
+
+**Writes (Phase 0 consent covers the onboarding offer; per-file rules below):**
+
+- `AGENTS.md` (+ the `CLAUDE.md` symlink), the reasoned `docs/` tree, per-module
+  docs, and `.agents/` (skills/commands/agents/catalog) — **reconciled** with
+  anything that already exists; replacing or deleting existing content requires
+  asking the developer first.
+- A `.dwp/` directory and a one-time **append** to `.gitignore` (never a
+  rewrite).
+- On the plan-driven path, plan artifacts under `.dwp/` as `create` defines.
+
+**Writes include:** with Phase 0 consent, Phase 7a may run the tag-pinned
+`npx --yes skills add DailybotHQ/ai-diff-reviewer@v2.3.1 --skill ai-diff-reviewer -y`
+install into `.agents/skills/ai-diff-reviewer/` and bootstrap the repo-tailored
+`.review/extension.md`; decline or offline failure is recorded as a declared
+exception.
+
+**It MUST NOT:** overwrite or delete existing files without explicit approval,
+commit or push (commits happen only when the developer asks or a plan task's
+gate defines them), touch files outside the repo, read or commit secrets, or
+enable any optional addon without the developer's explicit acceptance of that
+addon's offer (the required local reviewer of Phase 7a is covered by the
+Phase 0 consent; a decline is recorded as a declared exception).
+
 ## Phase 0 — Preconditions & consent
 
 1. **Resolve context.** Run `bash ../shared/context.sh` to get `repo_root`,
@@ -117,6 +169,42 @@ inline path; on the plan-driven path the **same work** runs as plan tasks.
      reasoning from whatever signals exist — e.g. a single `package.json`).
    - **Existing** — real source code and/or any of the above already present.
      You must be **idempotent and non-destructive** (see below).
+   - **Existing and previously onboarded → harness upgrade.** `AGENTS.md`
+     and/or `.agents/` already exist **and** the repository's guidance predates
+     the installed skill's requirements: no `DWP standard:` provenance line, a
+     provenance line from a non-current series (older than the 5.x this skill
+     implements — 2.x and 4.x are historical series,
+     `../spec/DWP_SPECIFICATION.md` §6.5), or a
+     `docs/TESTING_GUIDE.md` without the scoped-invocation / mapping / posture
+     content of `../spec/DOCUMENTATION_STANDARD.md` §3.4, or missing working
+     principles (§2.3.1; assess equivalent rules by meaning, not headings).
+     In this case run the
+     **targeted upgrade** (§3.5) instead of a full re-onboarding: recon only what
+     the upgrade needs (testing discovery for testing gaps; existing agent
+     rules for a principles-only gap), then reconcile **only** the
+     missing or outdated pieces — the §3.4 sections of `TESTING_GUIDE.md`, the
+     testing rule and labeled scoped variants in `AGENTS.md` (Phase 3), the
+     DWP flow routing block in `AGENTS.md` (Phase 3, role 5 — added when
+     missing, reconciled when present), the working principles (Phase 3,
+     role 6 — preserve equivalent rules and add only missing behavior), the scoped variants in
+     `DEVELOPMENT_COMMANDS.md`, the `.agents/commands/dwp-*`
+     delegators and `skill-create`/`agent-create` (Phase 6, refreshed from
+     `command-templates/`), the required AI Diff Reviewer local review (Phase 7a —
+     vendored skill + extension file, when missing), the catalog pointers, and
+     the provenance line —
+     leaving every handwritten section, custom skill, existing command and
+     in-flight plan intact (in-flight plans keep their recorded shape; they are
+     never migrated here — that is `refine migrate`, on explicit request). Report
+     a **per-file summary** of what was added or changed, **and name what the
+     upgrade deliberately did not create**: a repository that was never fully
+     onboarded can still be missing baseline harness pieces (`.agents/agents/`,
+     `.agents/docs/`, `CLAUDE.md`, `docs/SECURITY.md`) that a targeted upgrade
+     is not entitled to invent. Say which ones remain and that a full onboarding
+     is the way to close them — never imply the upgrade made the repository
+     conformant when a conformance run would still report findings. Running the
+     upgrade a second time **MUST** change nothing. `upgrade` / "upgrade the harness"
+     forces this path; the flow selects it automatically when the signals above
+     are present.
 3. **Non-destructive rule (existing repos).** You **MUST NOT** clobber a
    hand-written `AGENTS.md`, `CLAUDE.md`, `docs/`, `.agents/`, or `.gitignore`.
    For each artifact that already exists: prefer to **merge/augment**; if a
@@ -157,7 +245,29 @@ Detect, by reading actual files (not by habit):
   `codecheck -f` *inside Docker*, `poetry run pytest`, `ruff check`,
   `npm run biome:check`, `astro check`). Note any command that runs **only in
   CI** or **only inside a container** — flag it as such (this matters for the
-  Quick Commands block and the Phase 8 smoke test). **If the repo has no test
+  Quick Commands block and the Phase 8 smoke test).
+  **Testing discovery (the part every future gate depends on).** Establish, by
+  reading configuration and running `--version` where cheap: the package
+  manager(s) and workspace boundaries (monorepo packages, their own scripts);
+  the installed test/lint/type-check tools and their **versions** where flag
+  behavior depends on them; the **test layers** present (unit / integration /
+  e2e — where each lives and how each is run); the **source-to-test
+  relationship** (co-located, mirrored tree, naming convention, markers,
+  package boundary); whether the runner supports **scoped invocation** by
+  file, directory, package, marker or name filter; any **affected-tests
+  tooling** (`--changed`, `--findRelatedTests`, `testmon`, a task graph) and
+  its blind spots (dynamic loading, templates, fixtures, generated inputs,
+  configuration); the **working directory** each command runs from; and which
+  paths/packages are shared or core (a change there widens validation) and
+  which configuration/schema/dependency/toolchain files always trigger the full
+  run. Then **verify one genuine scoped selection where the toolchain is
+  runnable**: run the scoped command against a real path of this repo and
+  confirm it selects a **non-empty, relevant** set (record the selected /
+  executed count and the exit status). A command that exits 0 having selected
+  nothing is **not** verified — fix the selector or record the pattern as
+  unverified. Where the toolchain cannot run here (Docker-only, CI-only, missing
+  tool), record the pattern as **proposed / unverified** with the reason and a
+  real fallback — never as verified. **If the repo has no test
   and/or no lint/type-check command at all, do not just record the absence** —
   flag it as a gap to be closed in Phase 4 by *proposing* a stack-appropriate
   toolchain (per `../spec/DOCUMENTATION_STANDARD.md` §3.3). Validation gates are
@@ -168,6 +278,14 @@ Detect, by reading actual files (not by habit):
 - **Folder layout & modules.** Find the source roots (`src/`, `app/`, `lib/`,
   `pkg/`, `cmd/`, `pages/`, `components/`) and the major sub-modules within them.
   These become the per-module docs in Phase 5.
+- **Feature areas (the feature tier).** Detect candidate **major feature or
+  capability areas** — bigger than one module — using the triggers of
+  `../spec/DOCUMENTATION_STANDARD.md` §4.1: a capability spanning 2+ major
+  modules; a sub-app or self-contained subsystem directory (e.g.
+  `app/{domain}/`, or a top-level sub-app); an area carrying its own contracts
+  (an API surface, events, schemas, protocols) that multiple consumers depend
+  on. Heuristics, not bureaucracy — judge per repo and record the trigger with
+  each candidate. These become the per-feature `docs/` of Phase 5.
 - **Test convention.** File naming (`*_test.py`, `*.spec.ts`, `*.test.ts`),
   framework (pytest / jest / vitest / playwright / go test), and where tests
   live (co-located vs `tests/`). If **no tests exist**, note that — Phase 4 will
@@ -189,9 +307,20 @@ assumption against what you actually found — **detected reality wins over pres
 assumptions**.
 
 Write `.dwp/onboard/RECON.md` with: detected stack, package manager, exact
-validation commands (flagged CI/Docker-only where relevant), source roots +
-major modules, test convention, deployment shape, carried-forward conventions,
-and which preset you used.
+validation commands (flagged CI/Docker-only where relevant) with their working
+directory, the **testing map** (layers, mapping rule, scoped patterns and the
+verified-run evidence or the unverified/proposed marking, affected-test tooling
+and blind spots, shared/core paths and full-run triggers, fallback), source
+roots + major modules + feature areas (each candidate with its trigger),
+test convention, deployment shape, carried-forward conventions, and which
+preset you used.
+
+**Also record a machine-readable docs registry** at the end of RECON.md — one
+line per documented area (`module: <path>`, `feature-area: <path> (trigger: …)`)
+— so Phase 5 and the conformance checker (`../verify/conformance.sh`) read the
+same recorded judgment instead of re-guessing it. A feature area deliberately
+left without its `docs/` is recorded on the same line
+(`(no docs — <reason>)`) — a decision, not an oversight.
 
 **Also record a scale count** (the evidence the Phase 2b decision reads, so the
 inline-vs-plan choice is mechanical, not guessed):
@@ -218,7 +347,7 @@ Classify the repo using `../spec/ARCHETYPES.md` signals (summarized in
 | Cross-project standards, a repo navigation index, or orchestrator manifests | moderate |
 | Root `AGENTS.md` indexes *other repos'* `AGENTS.md` | moderate |
 
-- **Default to `individual repo`** (the 99% case) unless a clear majority of
+- **Default to `individual repo`** (the common case) unless a clear majority of
   signals say hub.
 - A monorepo with **one** build/stack is an **individual repo with modules**
   (handled by per-module docs), **not** a hub.
@@ -272,8 +401,8 @@ developer break the tie.
    it.
 2. Generate **`AGENTS.md` + `CLAUDE.md` (Phase 3) up front** (or as task 1) so
    the plan's tasks have the index and mandatory rules to anchor to.
-3. Instead of generating the rest inline, **emit a Deep Work Plan draft** under
-   `.dwp/drafts/` whose atomic tasks are reasoned from recon — see
+3. Instead of generating the rest inline, **materialize a Deep Work Plan** under
+   `.dwp/plans/` whose atomic tasks are reasoned from recon — see
    [`templates/onboarding-plan.md`](templates/onboarding-plan.md) for the shape
    (a **reasoning aid**, not a copy-paste). Typical decomposition:
    - one task **per `docs/` category** (Phase 4), each gated on "no placeholders
@@ -283,13 +412,14 @@ developer break the tie.
    - one task for the **`.agents/` kit** (agents + skills + commands + catalogs,
      Phase 6), gated on "catalog matches disk";
    - one task to **install the skill + scaffold `.dwp/` and `tmp/`** (Phase 7);
-   - the **Phase 8 self-check as the mandatory final task**, alongside the spec's
-     three mandatory final tasks (Security Review, Skills & Agents Discovery,
-     Executive Report).
+   - the **Phase 8 self-check folded into the plan's single mandatory Final
+     Review** (security pass, final-state validation, skills reconciliation,
+     documentation reconciliation — `../spec/DWP_SPECIFICATION.md` §6.1);
+     skills decisions are task-local and the Executive Report is optional.
 
    Each task carries explicit **Acceptance Criteria** and a runnable
    **validation gate** (the repo's real lint / `md`-check / test).
-4. Hand off to the normal loop: refine the draft with `/dwp-refine`, finalize,
+4. Hand off to the normal loop: adjust the plan with `/dwp-refine` if needed,
    then `/dwp-execute` it task-by-task. It is resumable with `/dwp-resume` and
    inspectable with `/dwp-status`.
 
@@ -305,8 +435,12 @@ Record the chosen strategy (inline vs plan-driven) and its evidence in
 
 Reason the content from Phase 1; do not template it.
 
-**`AGENTS.md` (plain UTF-8 markdown, NO frontmatter, ~150–500 lines)** MUST serve
-three roles:
+**`AGENTS.md` (plain UTF-8 markdown, NO frontmatter)** is a **compact entry
+point** (`../spec/DOCUMENTATION_STANDARD.md` §2.4.1): the mandatory constraints
+and quick commands inline, everything else one direct link away in the focused
+`docs/` guide or module doc that owns it. Brevity comes from linking, never from
+dropping an invariant an agent needs to act safely; no word cap hides required
+context. It MUST cover these six responsibilities:
 
 1. **Index** — a documentation index table linking every `docs/` file you will
    create (Phase 4), each with a one-line description; plus an annotated
@@ -314,18 +448,73 @@ three roles:
    Link only files that will exist.
 2. **Mandatory rules** — English-only; conventional commits
    (`type(scope): description`) with the repo's **real** scopes derived from its
-   domains; the repo's **real** test pattern + coverage expectation; its error/
+   domains; the repo's **real** test pattern + coverage expectation **and the
+   validation rule** (gates are selected from a change's touched surface using
+   `docs/TESTING_GUIDE.md`'s mapping, with the documented fallback to the full
+   suite); its error/
    logging conventions; repository-boundary rules (where the agent may/may not
    commit); and a progress-reporting + "never block work on reporting" note.
 3. **Quick Commands** — a table of the **detected** install / test / lint /
-   type-check / build / validate commands, verbatim. **Mark** any command that
+   type-check / build / validate commands, verbatim, with the **scoped variant
+   next to the full one where the toolchain supports it**, each labeled
+   (`full` / `scoped`). **Mark** any command that
    runs only in CI or only inside a container (e.g. "must run **inside** the
-   Docker container").
+   Docker container"), and any scoped pattern that is proposed/unverified.
+4. **Provenance** — one line, `DWP standard: 5.0.0 (onboarded YYYY-MM-DD;
+   skill x.y.z)` (on upgrade: `…; upgraded YYYY-MM-DD; skill x.y.z`), so a
+   checker and a future agent can tell which standard the repository declares
+   (`../spec/DOCUMENTATION_STANDARD.md` §3.5).
+5. **DWP flow routing** — a concise intent-to-flow block so any agent that
+   reads `AGENTS.md` knows how structured work is invoked **in this repo**,
+   without a network or a prior session. Keep it small (it lives inside the
+   lean-index budget); reconcile it with any routing/preferences text the
+   repository already has — merge, never replace, and never widen it into an
+   interception policy. The block MUST state, in this structure:
+
+   ```markdown
+   ## Deep Work Plans — invocation
+
+   Structured work runs through the local DWP flows (`.agents/commands/dwp-*`
+   delegators; the flows live in `.agents/skills/deepworkplan/` — discovery is
+   local, no network service is consulted):
+
+   | Intent | Route |
+   |---|---|
+   | "plan this work", "create a plan" | `/dwp-create` |
+   | "execute / run the plan" | `/dwp-execute` |
+   | "continue / resume the interrupted plan" | `/dwp-resume` |
+   | "plan status", "what's left" | `/dwp-status` (read-only) |
+   | "verify the repo / the plan" | `/dwp-verify` (read-only) |
+   | ordinary direct edit ("fix this", "rename that") | done directly — never silently becomes a plan |
+
+   Hosts without slash commands invoke the same flows by name
+   (`#deepworkplan-create` or plain text). `trust`/`auto` authorizes
+   unattended continuation within the requested flow; it is not a flow
+   selector, and read-only routes stay read-only.
+   ```
+
+   Reason the wording to the repo (an existing command kit with different
+   names keeps its names, with the DWP routes listed alongside), but every
+   property in the block must survive: explicit planning requests create;
+   execute/resume requests invoke those flows; status/verify remain
+   read-only; ordinary direct edits do not secretly become plans; trust is
+   not a flow selector; discovery is local.
+
+6. **Working principles** — apply
+   [`../shared/working-principles.md`](../shared/working-principles.md) inline.
+   Reason from the existing rules: keep equivalent wording, add missing
+   behaviors, and preserve explicit preferences and approval boundaries.
+   Cover ownership, resourcefulness, routine decisions, informed escalation,
+   concrete approvals, recovery, scope, proportionate rigor, direct
+   communication, and evidence-backed completion. These defaults apply to
+   ordinary work as well as plans; they never authorize execution of an
+   analysis request or override plan gates. Keep the block compact and merge
+   equivalent sections instead of appending duplicates.
 
 **Orchestrator-hub additions** (only if Phase 2 said hub): add the sub-project
 navigation index link (e.g. `repositories/README.md`) and each sub-project's
 `AGENTS.md`; the **multi-project commit workflow** (commit inside each sub-repo,
-never from the hub root); and **child-DWP** language per `../guide/GUIDE.md`
+never from the hub root); and **child-DWP** language per `../guide/orchestrator.md`
 (orchestrator §).
 
 **`CLAUDE.md`.** Create the symlink `ln -s AGENTS.md CLAUDE.md`. If the target
@@ -336,6 +525,18 @@ Never duplicate `AGENTS.md` content into `CLAUDE.md`.
 > **Existing-repo note:** if `AGENTS.md` already exists and is hand-written,
 > merge your index/commands/rules into it rather than overwriting; back up +
 > ask before any destructive change (Phase 0).
+
+**Budget — the lean index is enforced, not hoped for (§2.1.1).** The
+`AGENTS.md` you generate MUST stay within the 150–500-line budget. When the
+reasoned content would exceed it, move the detail into the focused `docs/`
+guide (or module/feature doc) that owns it and link it from the index — and
+the index MUST link every doc that received displaced content, so nothing
+silently disappears. Never drop an invariant an agent needs in order to act
+safely just to fit the budget; detail moves, it is not deleted. An existing
+handwritten `AGENTS.md` already over the budget is **never silently
+rewritten**: report the overweight with a concrete migration proposal (what
+moves where, which links get added) and apply it only with the developer's
+consent (Phase 0's non-destructive rule).
 
 ## Phase 4 — Generate `docs/`
 
@@ -364,19 +565,55 @@ Each doc must contain **real** content:
 - `STANDARDS.md` — the repo's real coding conventions, naming, import order,
   error/logging patterns, and forbidden anti-patterns (carry forward existing
   linter config).
-- `TESTING_GUIDE.md` — the **real** test framework + file-naming pattern + how
-  to run/scope tests + coverage expectation. **If the repo has no test/lint
-  setup, do NOT write "no tests" or leave it empty** — *propose* a
+- `TESTING_GUIDE.md` — the **real** test framework + file-naming pattern +
+  coverage expectation, and the required content of
+  `../spec/DOCUMENTATION_STANDARD.md` §3.4, all from Phase 1's testing map:
+  **(commands)** the full-suite command(s) and the full lint/format/type-check
+  commands; the **scoped invocation pattern(s)** (by file, directory, package,
+  marker/name filter) each with **one concrete example from this repository**,
+  its working directory, the tool version where flags depend on it, and the
+  expected evidence of a correct run (the verified selected/executed count) —
+  a pattern copied from tool docs without a repository example is not enough;
+  scoped lint/format/type-check **only where genuinely supported** (say plainly
+  when a project-wide check is the real option or the cheaper one); when the
+  full suite is cheap, recommend it over elaborate selection. **(mapping)** the
+  source-to-test mapping rule; the dependent-consumer policy (the affected-tests
+  tool or documented consumer list, and what to do when none exists); the known
+  blind spots (dynamic loading, templates, fixtures, generated inputs,
+  configuration, migrations); the escalation paths (which paths/packages are
+  shared or core; which config/schema/dependency/toolchain changes always trigger
+  the full run); and an explicit **fallback statement** ("run `<full command>`")
+  for whatever scoping cannot cover. **(posture)** where each test layer lives
+  and how it runs; **unit-first behavioral coverage** as the base — fast,
+  deterministic tests of observable behavior and meaningful boundaries, covering
+  errors, edge cases and regressions, with mocks at useful boundaries and
+  **no** assertions on internal call sequences; **real-seam integration** (which
+  contracts, persistence, routing, serialization, auth or wiring seams carry
+  integration/contract tests, and that a change to such a seam adds them);
+  **useful end-to-end** coverage (few, high-value flows); deterministic
+  fixtures and meaningful assertions. Teach this as a default cost/risk
+  strategy — **no** ratio quotas, no test-count targets, no universal
+  millisecond promise, no fake isolation, and no blanket rewrite of the existing
+  suite. Keep **current capabilities** and any **proposed** setup in clearly
+  separate sections so nobody mistakes a proposal for a verified command.
+  **If the repo has no test/lint setup, do NOT write "no tests" or leave it
+  empty** — *propose* a
   stack-appropriate setup (recommended framework + runner, test file convention,
   where tests live, a sensible initial coverage target, and the lint /
-  type-check / format tooling), document it as the **target**, and surface it to
-  the developer. When non-destructive and the developer consents, scaffold a
+  type-check / format tooling — **including the scoped invocation pattern the
+  proposed runner supports**, so the repo is efficient by construction), sized
+  proportionately to the repo's conventions and maturity, document it as the
+  **target** (marked proposed, never verified), and surface it to the
+  developer. Do not install tools silently and do not invent a runnable gate;
+  obey the repo's dependency policy and the Phase 0 consent. When non-destructive and the developer consents, scaffold a
   minimal runnable baseline (the test/lint scripts + at least one real smoke
   test). See `../spec/DOCUMENTATION_STANDARD.md` §3.3. This is essential, not
   cosmetic: it is what gives every future Deep Work Plan a real validation gate.
 - `DEVELOPMENT_COMMANDS.md` — the authoritative, **verbatim** command reference
   (install/test/lint/type-check/build/run), expanding the AGENTS.md Quick
-  Commands; flag CI/Docker-only commands.
+  Commands, with the **scoped variants** of test/lint/type-check listed next to
+  the full ones and each labeled full or scoped (and proposed/unverified where
+  applicable); flag CI/Docker-only commands.
 - `SECURITY.md` — the real secrets-handling location/convention, auth model,
   sensitive-data boundaries, and what agents MUST NOT write into docs.
 - `PERFORMANCE.md` — performance-critical paths/budgets relevant to the runtime
@@ -406,6 +643,16 @@ its own `README.md`; surface the most significant ones in the root `AGENTS.md`
 index. (Reference `../spec/DOCUMENTATION_STANDARD.md` §4 for the per-module rule; which
 modules count as "major"/"complex" is reasoned per repo.)
 
+**Feature tier (§4.1).** For each feature area the RECON registry recorded as
+major, create its own `docs/` folder next to the area's code — architecture
+decisions, contracts, runbooks — entered via the area's `README.md`. Link the
+most significant entries from the READMEs of the modules the area spans and
+surface them in the root `AGENTS.md` index, exactly like per-module docs. An
+area recorded as major but deliberately left undocumented carries the recorded
+reason from RECON. The feature tier sits above, never instead of, the
+per-module tier: a module inside a feature area still gets its own
+`README.md`.
+
 ## Phase 6 — Generate `.agents/` + agent directory symlinks
 
 Create the canonical cross-agent config directory. **All content must be
@@ -417,8 +664,9 @@ and **stack-appropriate**, not generic boilerplate.
   `security-auditor`, plus any **stack-specific** role the preset suggests
   (e.g. a Django `migration-author`, a Vue `component-author`). Each persona
   must be described well enough that a non-Claude agent can read it.
-- **`.agents/commands/`** — the six short DWP commands (`dwp-create`,
-  `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`) plus stack-relevant
+- **`.agents/commands/`** — the seven short DWP commands (`dwp-create`,
+  `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`,
+  `dwp-upgrade`) plus stack-relevant
   ones (`code-review`, `pr`, `commit`, `branch`). **The `dwp-*` commands MUST be
   thin delegators, NOT copies of the flow.** Each is a short file (frontmatter
   `description:` + a body) that routes the invocation to the matching sub-skill
@@ -442,6 +690,10 @@ and **stack-appropriate**, not generic boilerplate.
   (Phase 7).
 - **`.agents/docs/`** — `skills_agents_catalog.md` and `COMMANDS_REFERENCE.md`,
   generated to **match what you actually created** (no phantom entries).
+  `COMMANDS_REFERENCE.md` opens by stating the three invocation forms — `/`
+  in Claude Code, `#<name>` in agents that intercept slash syntax, and plain
+  text ("run `<name>`") on hosts without slash commands — so flow discovery
+  stays local and host-portable from the index alone.
 - **`.agents/settings.json`** — a sane harness-config baseline (sensible
   permissions; no secrets). `.agents/README.md` — a short entry point.
 - **`.claude → .agents` and `.cursor → .agents` symlinks** — `ln -s .agents .claude` and
@@ -450,17 +702,41 @@ and **stack-appropriate**, not generic boilerplate.
 > **Existing-repo note:** if `.agents/` (or per-tool `.claude/` / `.cursor/`)
 > config already exists, reconcile into `.agents/` and add the `.claude` and
 > `.cursor` symlinks only if absent; never delete existing personas/commands without asking.
+> A tool-created `.claude/` / `.cursor/` directory whose only content is symlinks
+> into `.agents/` may be converted to the canonical root symlink outright — that
+> is a zero-loss reconciliation, not a deletion.
+> On a **harness upgrade** (Phase 0), refresh the `dwp-*`, `skill-create` and
+> `agent-create` delegators from `command-templates/` (they are thin and owned
+> by the skill), leave every other command, agent and skill as-is, and update
+> only the catalog entries that point at refreshed files.
 
 ## Phase 7 — Install the DeepWorkPlan skill + scaffold `.dwp/`
 
 1. **Make the DeepWorkPlan skill available** to the target repo via one of (offer
    the developer the choice; recommend the first):
-   - `npx skills add DailybotHQ/deepworkplan-skill`
-   - OpenClaw: `openclaw skills install deepworkplan`
-   - `git clone` the skill repo + run its `setup.sh`
+   - `npx --yes skills add DailybotHQ/deepworkplan-skill@<tag> --skill deepworkplan -y`
+     — **pin the latest published tag** from the repo's Releases (check it;
+     never write a tag you did not verify; both `--yes` and `-y` are required
+     in non-TTY)
+   - OpenClaw: `openclaw skills install deepworkplan` (registry-managed pin)
    - or symlink the local skill pack into `.agents/skills/deepworkplan/`.
+
+   Do not offer unpinned clone-and-run variants or moving refs (`@main`,
+   `@latest`) — executing whatever a remote ref currently holds is an
+   unverifiable dependency (no version, no checksum, no rollback; the shape
+   Snyk W012 flags).
+
+   **Verify every skills-CLI install — mandatory.** Two CLI defects are
+   known from round-1 benchmark evidence: an `@tag` pin can be display-only,
+   and a parallel-mkdir race can report success while placing no content.
+   **Pre-create the target** `.agents/skills/deepworkplan/` before the call
+   (documented race workaround), then follow the install-verification
+   contract around every `skills add` call
+   (`../shared/install-verification.md`): verify what landed, retry once,
+   fall back to the byte-exact `git archive` install — never proceed
+   silently on a mismatched or empty install.
 2. **Scaffold the gitignored output area** (per `../shared/dwp-paths.md`):
-   create `.dwp/plans/` and `.dwp/drafts/`, each with a `README.md` placeholder,
+   create `.dwp/plans/` with a `README.md` placeholder,
    and add `.dwp/` to the repo's `.gitignore` (append the rule
    non-destructively — do not rewrite the file). `.dwp/` is the only DWP output
    location; it **replaces** any pre-v2 DWP output tree (see
@@ -474,146 +750,37 @@ and **stack-appropriate**, not generic boilerplate.
    distinct from the **structured** `.dwp/` plan output. If `tmp/` already
    exists, leave it as-is.
 
-## Phase 7b — Offer optional addons (opt-in)
+## Phase 7a — Install the AI Diff Reviewer local review (required)
 
-After the core AI-first scaffolding, **enumerate** the available addons under
-`../addons/` and offer each as an **explicit opt-in** step. Addons are **never
-required** — a repo is fully conformant with zero addons. In **trust mode**, you
-MAY recommend the obviously-applicable ones, but still surface them.
+The local review is part of the baseline since standard 2.3.0
+(`../spec/ADDONS.md` §6.5). When the core flow is done (Phases 3–7), read
+[`addons.md`](addons.md) (this directory) Phase 7a and run the
+[`../addons/ai-diff-reviewer/SKILL.md`](../addons/ai-diff-reviewer/SKILL.md)
+flow: pinned install of the vendored skill into `.agents/skills/ai-diff-reviewer/`,
+extension bootstrap at `.review/extension.md` (upstream `generate-extension`),
+Flow A as the baseline and Flow B offered as an explicit opt-in. Reconcile what
+already exists. When the install cannot run here (sandbox, offline) or the
+developer declines, record the gap in the report and, for a decline, as a
+declared exception in `AGENTS.md` — never silently. A **harness upgrade**
+(Phase 0) reconciles the same two pieces when missing.
 
-Five addons ship today; enumerate **all** and offer each independently:
+The Phase 7 install-verification contract applies verbatim to the reviewer's
+pinned `skills add` call (`.agents/skills/ai-diff-reviewer/`): pre-create,
+verify the installed `version:` equals the pinned tag, retry once, byte-exact
+fallback.
 
-| Addon | Folder | Recommend in trust mode when… |
-|-------|--------|-------------------------------|
-| **Devcontainer support** | [`../addons/devcontainer/`](../addons/devcontainer/SKILL.md) | the repo benefits from a reproducible isolated dev container (most repos with Docker/services). |
-| **Dailybot integration** | [`../addons/dailybot/`](../addons/dailybot/SKILL.md) | the developer/team **already uses Dailybot** or asks for team progress reporting — **do NOT auto-install for everyone**. |
-| **Dependency upgrade** | [`../addons/dependency-upgrade/`](../addons/dependency-upgrade/SKILL.md) | the repo has a lockfile + a dependency-heavy stack and wants safe, batched, validated upgrades — recommend only when a lockfile is present; **never auto-install for everyone**. |
-| **Design system** | [`../addons/design-system/`](../addons/design-system/SKILL.md) | the repo has a **user-facing interface surface**, detected per profile: **visual-ui** (stylesheet with CSS custom properties, Tailwind config or `@theme` block, UI components, brand/style guide) is **default-on when detected** — in trust mode **apply** it (generate `DESIGN.md`), in guided mode **strongly recommend** and ask; **cli-output** (a CLI rendering library + a deliberate display layer) and **conversational** (a chat SDK or message-composition layer) are **recommended when detected, always asked, never auto-applied**. **Never offer for a repo with no interface surface** (pure library, headless service, infra-only). |
-| **AI Diff Reviewer** | [`../addons/ai-diff-reviewer/`](../addons/ai-diff-reviewer/SKILL.md) | the developer/team wants structured local code review on DWP Security Review and/or a CI PR merge gate — **do NOT auto-install for everyone**; always ask Flow A (local-only) vs Flow B (dual-surface), never default. |
+## Phase 7b — Offer optional addons (trigger only)
 
-The first addon is **devcontainer support**
-([`../addons/devcontainer/SKILL.md`](../addons/devcontainer/SKILL.md) +
-[`SPEC.md`](../addons/devcontainer/SPEC.md)). If the developer accepts: read that
-addon's `SKILL.md` and run its flow — match a preset in
-`../addons/devcontainer/templates/presets.md` to the stack you detected in
-Phase 1, then **reason out** a devcontainer adapted to that stack (base image,
-user, `workspaceFolder`, supporting services from the app's real dependencies,
-ports, public-vs-private secrets handling) while preserving the common skeleton
-(AI-CLI persistence volumes for claude/codex/cursor/gh/dailybot + read-only
-ssh/gitconfig mounts, `dailybot-project-network`, `DOCKER_DEV_ENV=vscode` →
-`sleep infinity`, the `codecheck`/`check`/`fix`/`test` validation aliases, and
-project-identity precedence per the addon SPEC §4). An **existing devcontainer
-MUST be reconciled, not clobbered** — preserve working ports/network/identity and
-only add missing skeleton pieces; back up and ask before any destructive change.
-For a **public** repo, the addon also adds a secret-excluding `.dockerignore` and
-keeps `.env.example` secret-free. After applying, run the addon's validation step
-(SPEC §6). If declined, skip it and continue — the repo stays
-baseline-conformant.
-
-The second addon is **Dailybot integration**
-([`../addons/dailybot/SKILL.md`](../addons/dailybot/SKILL.md) +
-[`SPEC.md`](../addons/dailybot/SPEC.md)). Offer it **only when relevant** — the
-developer or team already uses Dailybot, or explicitly wants team progress
-reporting; in trust mode, recommend it **only** on that signal and **never
-auto-install it for everyone**. If accepted: read that addon's `SKILL.md` and run
-its flow — detect whether the Dailybot skill/CLI is already present
-(reconcile-don't-clobber), offer the **opt-in** install paths (Dailybot agent
-skill via `npx skills add DailybotHQ/agent-skill` / `npx skills update dailybot`
-/ OpenClaw / git clone + `setup.sh`, or the Dailybot CLI **>= 3.7.0**), **defer
-all authentication** to the Dailybot skill's own consent flow (`shared/auth.md`
-— `dailybot login` or `DAILYBOT_API_KEY`; never reinvent or store credentials),
-wire the **four lifecycle events** (kickoff, significant task, blocked,
-completion) as optional progress reports via the dailybot `report` sub-skill,
-and **MAY** offer deterministic hook enforcement (`dailybot hook`, CLI >=
-3.7.0). The paired Dailybot skill (**3.10.3**) exposes 14 capabilities (chat,
-check-ins, forms authoring, ask AI, per-repo API keys, and more); this addon wires only **report**
-into DWP execution. Every report is strictly **best-effort and never blocks**
-the work if Dailybot is absent, unauthenticated, or unreachable. The core
-DeepWorkPlan methodology has **zero Dailybot dependency** — this addon is purely
-optional team visibility.
-After applying, run the addon's validation step (SPEC §8). If declined, skip it
-and continue — the repo stays baseline-conformant.
-
-The third addon is **dependency upgrade**
-([`../addons/dependency-upgrade/SKILL.md`](../addons/dependency-upgrade/SKILL.md) +
-[`SPEC.md`](../addons/dependency-upgrade/SPEC.md)). It is **package-manager
-agnostic** — offer it when the repo has a lockfile and a dependency-heavy stack;
-in trust mode recommend it **only** when a lockfile is present, and **never**
-auto-install it for everyone. If accepted: read that addon's `SKILL.md` and run
-its flow — detect the repo's real package manager (npm/pnpm/yarn + ncu,
-pip/poetry/uv, cargo, go mod, bundler, composer…), classify upgrades by semver,
-upgrade in safe batches, run the repo's **real** validation gate after each
-batch, revert a failing batch, and summarize. **Only when accepted**, the addon
-installs a `/lib-upgrade` delegator into the repo's `.agents/commands/`. After
-applying, run the addon's validation step (SPEC §9). If declined, skip it — the
-repo stays baseline-conformant and no command is installed.
-
-The fourth addon is **design system**
-([`../addons/design-system/SKILL.md`](../addons/design-system/SKILL.md) +
-[`SPEC.md`](../addons/design-system/SPEC.md)). It is **interface-surface-scoped**
-with per-profile strength (addon SPEC §3, §3.5) — during Phase 1 detection, check
-each profile independently from **real files**: **visual-ui** (a stylesheet with
-CSS custom properties, a Tailwind config or a Tailwind v4 `@theme {}` block, UI
-components (`.tsx`/`.vue`/`.svelte`/`.astro`), a design-token file, or a
-brand/style guide); **cli-output** (a CLI/TUI rendering library — rich, chalk,
-ink, lipgloss, ratatui — **plus** a deliberate rendering layer such as a
-`display.*`/`ui.*` helper module with semantic print helpers; a bare argument
-parser with raw prints does NOT qualify); and **conversational** (a chat-platform
-SDK — Slack, Discord, Teams, … — a message-composition layer, or documented
-outbound-message voice rules). When **visual-ui** is detected, do not merely list
-the addon: in **trust mode apply it automatically** (generate `DESIGN.md`,
-developer may still decline), and in **guided mode present it as a strong
-recommendation** and ask. When **cli-output** or **conversational** is detected,
-**recommend it and ask in both modes — never auto-apply** those profiles. When
-**no** profile is detected, **do not offer the addon** (a repo with no interface
-surface must never get a `DESIGN.md`). Declining always leaves a
-baseline-conformant repo. If accepted (or auto-applied): read that addon's
-`SKILL.md` and run its flow — locate the repo's **real** design source per
-accepted profile, **reason out** that profile's canonical sections of `DESIGN.md`
-(visual-ui: colors & roles incl. dark mode, typography, layout & spacing,
-elevation, shapes, components, responsive behavior; cli-output: output voice,
-semantic colors & styles, output components, layout conventions, degradation &
-environment; conversational: voice & register, message anatomy, platform
-rendering — each plus do's & don'ts, with one shared Overview and one agent
-prompt guide), and write it at **`docs/DESIGN.md`** (alongside the other specs
-you generated in Phase 4 — root only if the repo has no `docs/` tree; multiple
-accepted profiles stack as sections in the **same single file**, never sibling
-files) — **never** copying a third-party brand file. Then **add a `DESIGN.md`
-reference to the `AGENTS.md` documentation index** (and `CLAUDE.md`) so agents
-discover it like the rest of `docs/`. An **existing `DESIGN.md`/token source MUST
-be reconciled, not clobbered** — adding a new profile to an existing file is
-additive. After applying, run the addon's validation step (SPEC §11: file at
-`docs/DESIGN.md` or root with all sections per accepted profile, AGENTS.md
-references it, values traceable to the real source, per-profile integrity —
-WCAG AA contrast / degradation rules / plain-text fallbacks — token references
-resolve, new profiles were asked about). If declined, skip it — the repo stays
-baseline-conformant.
-
-The fifth addon is **AI Diff Reviewer**
-([`../addons/ai-diff-reviewer/SKILL.md`](../addons/ai-diff-reviewer/SKILL.md) +
-[`SPEC.md`](../addons/ai-diff-reviewer/SPEC.md)). Offer it **only when relevant** —
-the developer or team wants structured code-review quality on DWP work, a local
-pre-push review, and/or a CI PR merge gate; in trust mode recommend it **only**
-on that signal and **never auto-install it for everyone**. If accepted: read
-that addon's `SKILL.md` and run its flow — **ask Flow A (local-only) vs Flow B
-(dual-surface) explicitly and NEVER default** (matches the upstream skill's
-ambiguity tie-break); detect whether the vendored skill / extension file /
-`pr-review.yml` already exist (reconcile-don't-clobber); offer the **opt-in**
-vendored-skill install via
-`npx --yes skills add DailybotHQ/ai-diff-reviewer --skill ai-diff-reviewer -y`
-(both `--yes` and `-y` required); in Flow B hand off CI-workflow authoring to
-the upstream `setup` sub-skill (never invent credentials — `CURSOR_API_KEY` /
-provider secrets are the consumer's responsibility); wire the mandatory DWP
-**Security Review** to run the upstream parent default flow as an additive
-local-review pass; and (Flow B only) surface `apply-review` as an optional
-developer-invoked companion during `execute`. Every **local** augmentation is
-strictly **best-effort and never blocks** the work if the skill or extension is
-absent or the local review invocation errors — an unset CI provider secret does
-**not** skip the local Security Review pass (Flow B CI/gate only). The core
-DeepWorkPlan methodology has **zero AI Diff Reviewer dependency** — this addon
-is purely optional review quality. After applying,
-run the addon's validation step (SPEC §9). If declined, skip it and continue —
-the repo stays baseline-conformant.
+The remaining addons are optional; **no optional addon is required for a
+repository to use DWP**. After Phase 7a, read [`addons.md`](addons.md) (this
+directory) Phase 7b and make the offer it describes: three addons are
+signal-gated opt-ins that install only on explicit acceptance; the fourth —
+dependency upgrade — is **near-default** for every repo with declared
+dependencies: its **inert** `/lib-upgrade` delegator installs under the
+Phase 0 onboarding consent **unless explicitly declined**, and no upgrade ever
+runs from an install. On a **harness
+upgrade** (Phase 0) do not re-offer addons the repository already declined or
+already has; mention only new ones, briefly.
 
 ## Phase 8 — Self-check / validation (mandatory)
 
@@ -631,7 +798,20 @@ done.
 
 1. **`AGENTS.md` exists** and contains a Quick Commands block whose commands are
    **real and runnable** (not placeholders). Spot-check that referenced commands
-   exist in the manifest/Makefile/scripts.
+   exist in the manifest/Makefile/scripts. It is a **lean index within the
+   150–500-line budget** (`../spec/DOCUMENTATION_STANDARD.md` §2.1.1) — if it
+   ran past the budget, move the detail into the owning doc and link it, never
+   drop an invariant — and **every relative `.md` link in its index resolves**
+   to a file that exists (§2.2 links no file that does not exist); fix any
+   that do not. It carries the **DWP flow routing block** (Phase 3, role 5)
+   with every property intact: explicit planning requests create;
+   execute/resume requests invoke those flows; status/verify stay read-only;
+   ordinary direct edits never silently become plans; trust is not a flow
+   selector; discovery is local. Review the **working principles** by meaning
+   (Phase 3, role 6; `../shared/working-principles.md`): all ten behaviors must
+   be present without weakening existing scope, approval rules, or gates.
+   Reassess the reconciled file and confirm a second pass needs no edits.
+   Report instruction coverage separately from observed agent behavior.
 2. **`CLAUDE.md` resolves to `AGENTS.md`** — the symlink points at `AGENTS.md`,
    or `CLAUDE.md` contains exactly `@AGENTS.md`.
 3. **`docs/` has the standard categories**, each non-empty and repo-specific
@@ -639,19 +819,31 @@ done.
    `docs/README.md`). Grep for leftover
    placeholder markers (`<...>`, "TODO", "your command here") and fix any.
    **`TESTING_GUIDE.md` MUST describe either a real test/lint setup or a concrete
-   *proposed* one (§3.3)** — never empty, never "no tests".
+   *proposed* one (§3.3)** — never empty, never "no tests" — **and MUST carry
+   the §3.4 content**: full and scoped commands with a repository example and
+   the verified-run evidence (or an honest proposed/unverified marking with a
+   fallback), the mapping rule, consumer policy, blind spots, escalation paths,
+   the fallback statement, and the unit-first posture with current and proposed
+   kept apart. `AGENTS.md` carries the `DWP standard:` provenance line and
+   labeled scoped variants in Quick Commands.
 4. **Every major source module has a `README.md`** (and complex modules have a
-   `docs/`).
+   `docs/`) — and **every feature area the RECON registry recorded as major has
+   its feature `docs/` entered via a `README.md`**, or its recorded no-docs
+   reason on the registry line (§4.1).
 5. **`.agents/`** has `agents/`, `commands/`, `skills/`, `docs/`, `settings.json`
    and `.claude → .agents` + `.cursor → .agents` symlinks (or documented fallback);
    `skills_agents_catalog.md` and `COMMANDS_REFERENCE.md` **match** what was
-   actually created (no phantom entries). **The six `dwp-*` commands exist** in
+   actually created (no phantom entries). **The seven `dwp-*` commands exist** in
    `.agents/commands/` (`dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`,
-   `dwp-status`, `dwp-verify`) and are thin delegators (no leftover `<skill-path>`
+   `dwp-status`, `dwp-verify`, `dwp-upgrade`) and are thin delegators (no leftover `<skill-path>`
    placeholder, no copied flow body).
 6. **DeepWorkPlan skill is discoverable** and `.dwp/` exists, is gitignored
-   (`git check-ignore .dwp` confirms), and has `plans/` + `drafts/`. **`tmp/`
-   exists and is gitignored** (`git check-ignore tmp` confirms).
+   (`git check-ignore .dwp` confirms), and has `plans/`. **`tmp/`
+   exists and is gitignored** (`git check-ignore tmp` confirms). **The AI Diff
+   Reviewer local review is installed**: `.agents/skills/ai-diff-reviewer/SKILL.md`
+   exists and an extension file is present at a recognized path
+   (`.review/extension.md` preferred) — or the report and `AGENTS.md` record
+   the declared exception / the reason the install could not run here.
 7. **Smoke test — run the repo's OWN detected validation command once** to
    confirm recon was accurate (e.g. the lint or test command). If it cannot run
    (e.g. Docker required and unavailable, network-gated CI command), **note why**
@@ -673,9 +865,20 @@ done.
 10. **Write the onboarding report** to `.dwp/onboard/REPORT.md` summarizing: the
    archetype chosen + evidence, the detected stack + package manager, the exact
    validation commands captured, the full list of files/folders generated or
-   modified, addons accepted/declined, the smoke-test result, any symlink
+   modified (on an upgrade: the **per-file summary** of what was added or
+   changed), addons accepted/declined, the smoke-test result, any symlink
    fallback used, and **any items deferred to the developer** (e.g. ambiguous
-   modules, a command that couldn't be smoke-tested).
+   modules, a command that couldn't be smoke-tested) — plus the **first usable
+   outcome**: the verified scoped command and mapping (or the honest gap), the
+   installed skill identity and version, the active capability limits, and
+   the **exact post-onboarding next command** — `/dwp-create "<one-line
+   goal>"` on hosts with slash commands, `#deepworkplan-create "<one-line
+   goal>"` or plain text ("run deepworkplan-create …") where slash syntax is
+   unavailable — or, when something must be fixed first, that fix stated as
+   the next command instead of a vague pointer.
+11. **Upgrade idempotency (harness upgrade only):** run the upgrade reconciliation
+   a second time; it MUST report no changes. If it does not, fix the cause
+   before reporting done.
 
 Report a concise summary to the developer: archetype, stack, what was generated,
 the smoke-test result, and any deferred items — pointing them at
@@ -692,6 +895,11 @@ the smoke-test result, and any deferred items — pointing them at
   writes** (Phase 0.5).
 - `trust` / `auto` — proceed without per-step confirmations, but still get the
   one consent gate in Phase 0 before the first write and still surface addons.
+- `upgrade` / "upgrade the harness" / "bring this repo to the current DWP
+  standard" — force the **targeted harness upgrade** (Phase 0): reconcile only
+  what the newer standard requires, preserve everything handwritten, report
+  per file, idempotent. Selected automatically when a previously onboarded repo
+  predates the installed standard.
 - `plan` / "onboard this as a deep work plan" — force the **plan-driven path**
   (Phase 2b) regardless of size: do recon + `AGENTS.md`, then emit an onboarding
   Deep Work Plan and hand off to `/dwp-execute`. The flow **auto-selects** this
@@ -708,4 +916,13 @@ the smoke-test result, and any deferred items — pointing them at
 - **No stack mismatch.** If the preset and the real repo disagree, the **real
   repo wins** — re-derive from recon.
 - **Idempotent.** Re-running on an onboarded repo only fills gaps; it does not
-  duplicate or churn working files.
+  duplicate or churn working files. A harness upgrade run twice changes nothing
+  the second time.
+- **No invented scoped commands.** A scoped pattern is either verified against
+  a real path of this repository (non-empty selection recorded) or marked
+  proposed/unverified with a real fallback. Never label a supported feature
+  unavailable to avoid checking, and never label an unchecked pattern verified.
+- **No required optional addons.** The core outcome (Phases 3–8) never depends
+  on an optional addon; those are offered, not assumed. The one required
+  component beyond the core scaffolding is the AI Diff Reviewer local review
+  (Phase 7a), installed pinned and recorded honestly when it cannot be.

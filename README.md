@@ -40,7 +40,7 @@ This repository hosts the v3.0.0 community website: a fully bilingual (Spanish p
 ## Quick Start
 
 ```bash
-# Use Node 24.15.0+ (defined in .nvmrc) and pnpm 11.x
+# Use Node 24.21.0+ (defined in .nvmrc) and pnpm 11.x
 pnpm install
 
 # Dev server
@@ -52,6 +52,17 @@ pnpm run build
 # Preview production build
 pnpm run astro:preview
 ```
+
+Prefer a container? Open the project in Cursor / VS Code with the Dev Containers
+plugin, or start the same stack from a plain terminal:
+
+```bash
+bash dev.sh setup && bash dev.sh build && bash dev.sh up && bash dev.sh shell
+```
+
+Both paths produce the same containers and can be used interchangeably.
+`bash dev.sh ssh` reaches the container from the host the way Herdr does. See
+[Development Commands](./docs/DEVELOPMENT_COMMANDS.md#dev-containers-without-an-editor-devsh).
 
 ### Quality gates
 

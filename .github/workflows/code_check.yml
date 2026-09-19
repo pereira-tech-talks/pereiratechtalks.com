@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24.15.0'
+          node-version: '24.21.0'
       - name: Step 0 - ⚙️ Enable Corepack (pnpm on PATH for Playwright webServer)
         run: corepack enable
       - name: Step 0b - 📁 Get pnpm store path
