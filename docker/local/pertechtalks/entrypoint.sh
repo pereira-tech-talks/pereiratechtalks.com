@@ -662,6 +662,212 @@ EOF
     echo "sshd: listening on ${port} — ssh -p ${port} node@<docker-host>"
 }
 
+# ================================
+# Custom-command PATH shims
+# ================================
+# grokx, claudex, pix and friends are bash FUNCTIONS defined in
+# docker/custom_commands.sh, not executables. An interactive shell sources that
+# file through ~/.bashrc and sees them; the caller that matters most for remote
+# work does not:
+#   ssh node@host 'grokx -p "..."'   → a non-login, non-interactive bash, which
+#                                      returns at Debian's `case $- in *i*)`
+#                                      guard before reaching the source line
+# No environment variable can carry a bash function across that boundary, but a
+# file on PATH crosses it. Each shim re-sources custom_commands.sh and calls the
+# function of its own name.
+setup_custom_command_shims() {
+    local shim=/usr/local/bin/custom-command-shim
+
+    cat > "${shim}" << 'SHIM'
+#!/bin/bash
+# Non-login shells inherit neither the image ENV PATH nor /etc/profile.d, so put
+# the agent CLIs back on PATH before the wrappers try to resolve them.
+for dir in \
+    /usr/local/share/pnpm/bin \
+    /usr/local/share/pnpm \
+    /home/node/.local/bin \
+    /home/node/.cursor/bin \
+    /home/node/.opencode/bin \
+    /home/node/.grok/bin \
+    /usr/local/bin
+do
+    case ":${PATH}:" in
+        *":${dir}:"*) : ;;
+        *) PATH="${dir}:${PATH}" ;;
+    esac
+done
+export PATH
+
+CUSTOM_COMMANDS="${CUSTOM_COMMANDS_FILE:-/app/docker/custom_commands.sh}"
+if [ ! -f "${CUSTOM_COMMANDS}" ]; then
+    echo "custom_commands.sh not found at ${CUSTOM_COMMANDS}" >&2
+    exit 127
+fi
+# shellcheck disable=SC1090
+source "${CUSTOM_COMMANDS}"
+cmd="$(basename "$0")"
+if ! declare -F "${cmd}" >/dev/null 2>&1; then
+    echo "${cmd}: custom command is not defined" >&2
+    exit 127
+fi
+"${cmd}" "$@"
+SHIM
+    chmod 0755 "${shim}"
+
+    # Only names that exist solely as wrappers. `claude`, `codex`, `opencode`,
+    # `pi`, `cline`, `herdr`, `agent` and `chelper` are REAL binaries that
+    # custom_commands.sh shadows with a same-named function; a shim for those
+    # would sit in /usr/local/bin and shadow the binary for every shell,
+    # including the wrapper's own call to it.
+    local cmd
+    local created=0
+    for cmd in \
+        grokx claudex claudex-glm claude-glm claude-xai \
+        codexx codex-azure codex-glm codex-xai cursorx \
+        opencodex opencode-azure opencode-glm opencode-xai \
+        pix pi-xai pi-azure pi-glm \
+        clinex clinex-azure clinex-glm cline-xai cline-azure cline-glm \
+        check fix codecheck lighthouse check_devcontainer sshinfo
+    do
+        # Never overwrite something real that already lives in /usr/local/bin —
+        # `npm` is a script the Dockerfile puts there on purpose. Only an
+        # absent name, or a symlink we wrote ourselves, may be (re)created.
+        local target="/usr/local/bin/${cmd}"
+        if [ -e "${target}" ] && [ "$(readlink "${target}" 2>/dev/null)" != "${shim}" ]; then
+            continue
+        fi
+
+        # Belt and braces for the list above: if a real executable of this name
+        # appears anywhere ELSE on PATH, leave the name alone rather than
+        # shadowing it from /usr/local/bin. /usr/local/bin itself is excluded
+        # from the probe, or the shim written on the previous start would count
+        # as that real executable and every restart would skip its own work.
+        if PATH="$(printf '%s' "${PATH}" | tr ':' '\n' | grep -vx '/usr/local/bin' | paste -sd: -)" \
+           command -v "${cmd}" >/dev/null 2>&1; then
+            continue
+        fi
+        ln -sfn "${shim}" "${target}" && created=$((created + 1))
+    done
+
+    echo "custom commands: ${created} PATH shim(s) for non-interactive ssh/herdr sessions"
+}
+
+# ================================
+# ~/.bashrc preamble for sshd-spawned shells
+# ================================
+# `ssh node@host '<command>'` runs a non-interactive, non-login bash. Two
+# mechanisms could feed it the container environment, and only one of them
+# actually fires:
+#
+#   BASH_ENV (set in ~/.ssh/environment)  — bash reads BASH_ENV for ordinary
+#       non-interactive shells, but NOT for one it detects was started by sshd:
+#       in that case it reads ~/.bashrc instead. Measured, not assumed — over
+#       ssh, $BASH_ENV is set and PATH is still sshd's default.
+#   ~/.bashrc                             — read, but Debian's copy returns at
+#       `case $- in *i*) ;; *) return;; esac` on line 5, so everything the image
+#       appended below that line is dead code for exactly this caller.
+#
+# So the environment has to go ABOVE that guard. Only PATH and the compose
+# snapshot go here: custom_commands.sh stays below, because it is a large file
+# of bash functions and the /usr/local/bin shims already cover non-interactive
+# callers. BASH_ENV stays in ~/.ssh/environment for the non-sshd cases.
+BASHRC_MARKER="container-env-preamble"
+
+setup_bashrc_preamble() {
+    local bashrc=/home/node/.bashrc
+
+    touch "${bashrc}"
+    if grep -q "${BASHRC_MARKER}" "${bashrc}" 2>/dev/null; then
+        return 0
+    fi
+
+    local tmp
+    tmp="$(mktemp)"
+    {
+        printf '%s\n' \
+            "# ${BASHRC_MARKER} (entrypoint.sh) — must stay ABOVE the" \
+            '# non-interactive guard below, or a shell started by sshd sees none of it.' \
+            "if [ -r '${CONTAINER_ENV_PROFILE}' ]; then" \
+            "  . '${CONTAINER_ENV_PROFILE}'" \
+            'fi' \
+            'for _d in /usr/local/share/pnpm/bin /usr/local/share/pnpm "$HOME/.local/bin" "$HOME/.cursor/bin" "$HOME/.opencode/bin" "$HOME/.grok/bin"; do' \
+            '  [ -d "$_d" ] || continue' \
+            '  case ":${PATH}:" in' \
+            '    *":${_d}:"*) ;;' \
+            '    *) PATH="${PATH}:${_d}" ;;' \
+            '  esac' \
+            'done' \
+            'unset _d' \
+            'export PATH' \
+            ''
+        cat "${bashrc}"
+    } > "${tmp}"
+    cat "${tmp}" > "${bashrc}"
+    rm -f "${tmp}"
+    chown node:node "${bashrc}" 2>/dev/null || true
+    echo "bashrc: environment preamble installed above the non-interactive guard"
+}
+
+# ================================
+# Herdr runtime configuration
+# ================================
+# Herdr is driven from another machine over SSH (`herdr machine add`, then
+# `herdr --machine <label>`), so its config has to be right in the container,
+# not on the laptop. Written into ~/.config/herdr, which the herdr_data volume
+# backs, so it survives rebuilds.
+#
+# Validate with `herdr config check`, never with grep: herdr does not partially
+# apply an invalid config.toml, it discards the file wholesale and runs on
+# defaults. A grep that finds the line proves the line is in the file, not that
+# herdr ever read it.
+setup_herdr_config() {
+    local config_dir=/home/node/.config/herdr
+    local toml="${config_dir}/config.toml"
+
+    mkdir -p "${config_dir}"
+    touch "${toml}"
+
+    # Nested herdr: the laptop's herdr attaches to the container's herdr.
+    if ! grep -qE '^[[:space:]]*allow_nested[[:space:]]*=' "${toml}" 2>/dev/null; then
+        printf '\n%s\n' '[experimental]' 'allow_nested = true' >> "${toml}"
+    fi
+
+    # An empty default_shell falls back to ${SHELL}, then to /bin/sh. A /bin/sh
+    # pane cannot see the bash functions in custom_commands.sh, so every wrapper
+    # reports "not found". shell_mode = "login" is what makes the pane read
+    # /etc/profile.d — where the entrypoint puts the compose environment.
+    if ! grep -qE '^[[:space:]]*default_shell[[:space:]]*=' "${toml}" 2>/dev/null; then
+        printf '\n[terminal]\ndefault_shell = "/bin/bash"\nshell_mode = "login"\n' >> "${toml}"
+    fi
+
+    # New terminals open in the workspace instead of /home/node. The key is
+    # `new_cwd`; `working_directory` reads like the obvious name and is silently
+    # rejected as an unknown key.
+    if ! grep -qE '^[[:space:]]*new_cwd[[:space:]]*=' "${toml}" 2>/dev/null; then
+        if grep -qE '^\[terminal\]' "${toml}" 2>/dev/null; then
+            awk '/^\[terminal\]/ { print; print "new_cwd = \"/app\""; next } { print }' \
+                "${toml}" > "${toml}.tmp" && mv "${toml}.tmp" "${toml}"
+        else
+            printf '\n[terminal]\nnew_cwd = "/app"\n' >> "${toml}"
+        fi
+    fi
+
+    chown -R node:node "${config_dir}" 2>/dev/null || true
+    chown -R node:node /home/node/.herdr_data 2>/dev/null || true
+
+    local check
+    if command -v runuser >/dev/null 2>&1; then
+        check="$(runuser -u node -- bash -lc 'herdr config check' 2>&1 || true)"
+    else
+        check="$(su node -c 'bash -lc "herdr config check"' 2>&1 || true)"
+    fi
+    case "${check}" in
+        *"config: ok"*) echo "herdr: config.toml validated (new terminals open in /app)" ;;
+        *) echo "herdr: WARNING — config.toml was rejected, herdr will run on defaults:"
+           printf '%s\n' "${check}" | head -5 ;;
+    esac
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -670,7 +876,10 @@ main() {
     setup_nodejs
     setup_git
     write_container_env_profile
+    setup_bashrc_preamble
+    setup_custom_command_shims
     setup_sshd
+    setup_herdr_config
     upgrade_dailybot_cli
 
     echo "Container setup completed"

@@ -27,7 +27,7 @@ DWP standard: 5.0.0 (onboarded 2026-08-08; upgraded 2026-09-17; skill 5.5.1)
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
-| Dev container | [Local Docker stack](docker/local/README.md) | Coding-agent suite (Claude, Codex, OpenCode, Pi, Cline, Grok, Herdr), provider keys, SSH on 22030, persistence volumes |
+| Dev container | [Local Docker stack](docker/local/README.md) | Coding-agent suite (Claude, Codex, OpenCode, Pi, Cline, Grok, Herdr), provider keys, SSH on 22030, persistence volumes, `dev.sh` launcher |
 | i18n | [I18N Guide](docs/I18N_GUIDE.md) | Spanish primary + English first-class international |
 | Performance | [Performance](docs/PERFORMANCE.md) | Astro SSG optimization, image handling, caching, per-edition perf |
 | Accessibility | [Accessibility](docs/ACCESSIBILITY.md) | WCAG AA, contrast ratios, ARIA, per-edition palette verification |
@@ -344,6 +344,10 @@ The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer
 
 ```bash
 pnpm run dev                # Dev server (http://localhost:8888)
+bash dev.sh up              # Same dev containers the IDE plugin starts, no IDE needed
+bash dev.sh shell           # Login shell as `node` in /app
+bash dev.sh ssh             # SSH in the way Herdr does (port 22030)
+bash dev.sh doctor          # Read-only diagnosis of the container environment
 pnpm run build              # Production build (astro check && astro build)
 pnpm run astro:preview      # Preview production build
 pnpm run biome:check        # Lint and format check

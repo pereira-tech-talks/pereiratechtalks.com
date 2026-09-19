@@ -1,5 +1,15 @@
-FROM node:24.18.1-trixie-slim
+FROM node:24.21.0-trixie-slim
 LABEL maintainer="pereiratechtalks@gmail.com"
+
+# Debian's default CDN (deb.debian.org) resolves to an edge that serves some
+# networks at ~55 KB/s, which turns the Chromium install below into a 50-minute
+# step; cdn-aws serves the identical archives at 12-18 MB/s. Both the main and
+# the debian-security URIs are rewritten — chromium ships from security, and a
+# mirror that only carries main leaves the two largest packages on the slow
+# path. Override per build when a different mirror is closer:
+#   docker compose build --build-arg APT_MIRROR=deb.debian.org
+ARG APT_MIRROR=cdn-aws.deb.debian.org
+RUN sed -i "s|deb.debian.org|${APT_MIRROR}|g" /etc/apt/sources.list.d/debian.sources
 
 # System packages (apt requires root)
 RUN apt-get update -y && \
@@ -20,6 +30,11 @@ RUN apt-get update -y && \
     apt-get clean -y && \
     rm -rf /var/cache/apk/* && \
     rm -rf /var/lib/apt/lists/*
+
+# Herdr, sshd and the agent CLIs spawn ${SHELL}, falling back to /bin/sh when it
+# is unset. Every wrapper in docker/custom_commands.sh is a bash function, so a
+# /bin/sh pane reports `grokx: not found` for commands that plainly exist.
+ENV SHELL=/bin/bash
 
 # Default terminal editor inside container (used by Git for merge/commit messages)
 ENV EDITOR=nano
@@ -140,8 +155,17 @@ RUN corepack pnpm add -g @openai/codex cline @z_ai/coding-helper \
     && corepack pnpm add -g --ignore-scripts @earendil-works/pi-coding-agent
 
 # Install the official xAI Grok CLI and Herdr terminal runtime.
+#
+# Herdr's installer caps its binary download at `--max-time 120`, with no
+# environment variable to override it. When GitHub serves this network at
+# ~50 KB/s the 24 MB binary needs about eight minutes, so all four of the
+# installer's retries die at two and the build fails outright — not slowly,
+# permanently. The sed lifts only that one cap (the manifest fetch keeps its
+# own 20s timeout) and leaves the SHA-256 verification and install logic
+# untouched. If upstream ever rewords that line the sed becomes a no-op and
+# the original timeout returns, which fails loudly here rather than silently.
 RUN curl -fsSL https://x.ai/cli/install.sh | bash \
-    && curl -fsSL https://herdr.dev/install.sh | bash \
+    && curl -fsSL https://herdr.dev/install.sh | sed 's/--max-time 120/--max-time 1800/' | bash \
     && pi --version \
     && cline --version \
     && herdr --version
@@ -152,6 +176,42 @@ RUN git config --global init.defaultBranch main \
     && git config --global safe.directory '*'
 
 USER root
+
+# Restore the tool directories that a LOGIN shell loses.
+#
+# Debian's /etc/profile overwrites PATH wholesale for non-root users
+# (PATH="/usr/local/bin:/usr/bin:/bin:..."), discarding the ENV PATH set above.
+# `docker exec` keeps that ENV and sees every CLI; a login shell — the editor
+# terminal, `dev.sh shell`, an ssh session, anything run as `bash -l` — silently
+# loses opencode, grok and all four pnpm globals (codex, cline, pi, chelper),
+# while node and claude keep working, which is what makes the breakage so
+# confusing to diagnose.
+#
+# entrypoint.sh already writes /etc/profile.d/01-container-env.sh with PID 1's
+# full environment, PATH included, and that covers the normal case. This file is
+# the fallback for when it cannot: no python3, a failed snapshot, a container
+# whose entrypoint was overridden. Numbered 02 so it runs after that snapshot.
+#
+# The tool dirs are APPENDED, never prepended: 00-container-node-first.sh has
+# already put /usr/local/bin at the front so the image's own node wins over an
+# IDE-bundled one, and prepending here would undo exactly that.
+RUN printf '%s\n' \
+    '# Re-add the tool dirs that Debian'"'"'s /etc/profile drops from PATH.' \
+    '# Appended, never prepended, so /usr/local/bin (set by' \
+    '# 00-container-node-first.sh) stays first and the image node keeps winning.' \
+    'export SHELL="${SHELL:-/bin/bash}"' \
+    'export PNPM_HOME="${PNPM_HOME:-/usr/local/share/pnpm}"' \
+    'for _d in "${PNPM_HOME}/bin" "${PNPM_HOME}" "$HOME/.local/bin" "$HOME/.cursor/bin" "$HOME/.opencode/bin" "$HOME/.grok/bin"; do' \
+    '  [ -d "$_d" ] || continue' \
+    '  case ":${PATH}:" in' \
+    '    *":${_d}:"*) ;;' \
+    '    *) PATH="${PATH}:${_d}" ;;' \
+    '  esac' \
+    'done' \
+    'unset _d' \
+    'export PATH' \
+    > /etc/profile.d/02-container-tool-paths.sh \
+    && chmod 0644 /etc/profile.d/02-container-tool-paths.sh
 
 # Copy and setup entrypoint script
 COPY pertechtalks/entrypoint.sh /usr/local/bin/entrypoint.sh

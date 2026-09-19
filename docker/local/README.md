@@ -7,16 +7,33 @@ another machine.
 
 ## Quick start
 
+From the repository root, `dev.sh` starts the same containers the Dev Containers
+plugin starts — no editor required:
+
+```bash
+bash dev.sh setup     # env files, networks, .devcontainer/
+bash dev.sh build
+bash dev.sh up
+bash dev.sh shell     # login shell as `node` in /app
+```
+
+Or open the project in Cursor / VS Code and let the Dev Containers plugin do it.
+Both paths produce the same containers and can be used interchangeably. See
+[Development Commands → Dev Containers Without an Editor](../../docs/DEVELOPMENT_COMMANDS.md#dev-containers-without-an-editor-devsh).
+
+Run `help` inside the container for the full command list.
+
+Raw compose still works, but you have to name the project yourself — the
+launcher and the plugin both use `pertechtalkslocal`, and letting compose
+default to the directory name creates a second, conflicting stack that fights
+the real one over ports 8888 and 22030:
+
 ```bash
 cd docker/local
 bash setup.sh
-docker compose build
-docker compose up -d
+docker compose -p pertechtalkslocal build
+docker compose -p pertechtalkslocal up -d pertechtalksvscode
 ```
-
-Attach to the dev container (VS Code Dev Containers, or
-`docker compose exec pertechtalksvscode bash`). Run `help` inside for the full
-command list.
 
 ## Coding agents
 
@@ -112,8 +129,69 @@ trusted keys.
   case work. To keep it on the machine itself instead, change the mapping to
   `'127.0.0.1:22030:22030'`.
 
-This is what makes [Herdr](https://herdr.dev) usable from a phone: SSH into the
-container and run `herdr`.
+From the repository root, `bash dev.sh ssh` does the same thing without you
+having to remember the port, and `bash dev.sh doctor` reports whether `sshd` is
+answering.
+
+## Herdr as a remote machine
+
+[Herdr](https://herdr.dev) on the host can drive this container as a *machine*,
+which is what makes it usable from a laptop pane or a phone. Add an entry to the
+host's `~/.ssh/config`:
+
+```
+Host pereiratechtalks-com
+  HostName 127.0.0.1
+  Port 22030
+  User node
+  StrictHostKeyChecking accept-new
+```
+
+Then register and open it:
+
+```bash
+herdr machine add --label "pereiratechtalks.com" pereiratechtalks-com
+herdr machine list                                    # id, label, ssh target, state
+herdr --machine "pereiratechtalks.com" workspace list
+```
+
+`--machine` takes the **label** or the id, never the SSH target, and only runs
+API-backed machine commands — for a shell on the remote use `dev.sh ssh`.
+
+`entrypoint.sh` writes the container's `~/.config/herdr/config.toml` on every
+start (persisted in the `herdr_data` volume) with:
+
+| Key | Value | Why |
+|-----|-------|-----|
+| `terminal.default_shell` | `/bin/bash` | An empty value falls back to `/bin/sh`, which cannot see the bash functions in `custom_commands.sh` — every wrapper reports "not found" |
+| `terminal.shell_mode` | `login` | A login shell reads `/etc/profile.d`, where the entrypoint puts the compose environment |
+| `terminal.new_cwd` | `/app` | New terminals open in the workspace instead of `/home/node` |
+| `experimental.allow_nested` | `true` | The host's herdr attaches to the container's herdr |
+
+The key is `new_cwd`. `working_directory` reads like the obvious name and is
+silently rejected as an unknown key. Check this file with `herdr config check`,
+never with `grep`: an invalid `config.toml` is not partially applied, herdr
+discards it wholesale and runs on defaults — so a grep that finds the line
+proves the line is in the file, not that herdr ever read it. The entrypoint runs
+that check on every start and warns if the file was rejected.
+
+Workspaces created *before* the setting keep their original cwd; only new ones
+pick it up.
+
+A command run over SSH is neither a login shell nor an interactive one. Bash
+reads `BASH_ENV` for ordinary non-interactive shells, but for one started by
+`sshd` it reads `~/.bashrc` *instead* — and Debian's copy returns at
+`case $- in *i*) ;; *) return;; esac` on line 5, so everything the image appended
+below is dead code for this caller. The entrypoint therefore **prepends** the
+PATH and environment preamble above that guard.
+
+That restores the environment, but not the wrappers: `grokx` and friends are
+bash *functions*, which no variable can carry. So the entrypoint also installs
+**PATH shims** in `/usr/local/bin` for the wrapper-only commands (`grokx`, `claudex`, `pix`, `codexx`, `check`, `sshinfo`, …). Each shim
+re-sources `custom_commands.sh` and calls the function of its own name. Names
+that are real binaries (`claude`, `codex`, `opencode`, `pi`, `cline`, `herdr`,
+`agent`, `chelper`) are deliberately **not** shimmed — a shim there would shadow
+the binary for every shell, including the wrapper's own call to it.
 
 ## Persistence
 
