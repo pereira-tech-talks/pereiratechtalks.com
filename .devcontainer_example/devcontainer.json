@@ -7,7 +7,9 @@
   "remoteUser": "node",
   "customizations": {
     "settings": {
-      "terminal.integrated.shell.linux": "/bin/bash"
+      "terminal.integrated.shell.linux": "/bin/bash",
+      "terminal.integrated.defaultProfile.linux": "bash",
+      "editor.defaultFormatter": "biomejs.biome"
     },
     "vscode": {
       "extensions": [

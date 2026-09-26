@@ -1,7 +1,7 @@
 ---
 name: dailybot-report
 description: Report work progress to Dailybot. Activate after completing a discrete task or subtask, or after any batch of edits that modifies 3 or more files. Compose a standup-style update describing what changed and why.
-version: "3.11.0"
+version: "3.16.1"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"📡","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -123,9 +123,9 @@ trigger in a previous session.
 
 #### Check whether hooks apply, and whether they are already installed
 
-1. **CLI version.** Run `dailybot --version`. If it reports below `3.8.0`
+1. **CLI version.** Run `dailybot --version`. If it reports below `3.9.0`
    (or the CLI is absent), skip Step 0b silently and continue to Step 1 —
-   the pack baseline is `dailybot-cli >= 3.8.0`, and the Step 0a trigger
+   the pack baseline is `dailybot-cli >= 3.9.0`, and the Step 0a trigger
    alone still works on older installs.
 2. **Harness support.** If the current harness has no lifecycle-hook system
    (e.g. Cline today), skip Step 0b silently — Step 0a covers it.

@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 5.0.0 (onboarded 2026-08-08; upgraded 2026-09-17; skill 5.5.1)
+DWP standard: 5.0.0 (onboarded 2026-08-08; upgraded 2026-09-26; skill 5.5.4)
 
 ## Detailed Documentation
 
@@ -27,7 +27,7 @@ DWP standard: 5.0.0 (onboarded 2026-08-08; upgraded 2026-09-17; skill 5.5.1)
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
-| Dev container | [Local Docker stack](docker/local/README.md) | Coding-agent suite (Claude, Codex, OpenCode, Pi, Cline, Grok, Herdr), provider keys, SSH on 22030, persistence volumes, `dev.sh` launcher |
+| Dev container | [Local Docker stack](docker/local/README.md) | Herdr mesh + mu-vim/nvim, selective coding CLIs, SSH on 22030, persistence volumes, `dev.sh` launcher |
 | i18n | [I18N Guide](docs/I18N_GUIDE.md) | Spanish primary + English first-class international |
 | Performance | [Performance](docs/PERFORMANCE.md) | Astro SSG optimization, image handling, caching, per-edition perf |
 | Accessibility | [Accessibility](docs/ACCESSIBILITY.md) | WCAG AA, contrast ratios, ARIA, per-edition palette verification |
@@ -340,6 +340,41 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer/SKILL.md) is installed in **Flow A (local-only)**: vendored skill at `.agents/skills/ai-diff-reviewer/` + a repo-tailored `.review/extension.md`. The mandatory DWP **Security Review** task gains an additional local-review step — invoke *"Review my current branch"*, then append the verdict + findings table under `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`. A `critical` finding follows the Security Review contract (blocks until fixed or explicitly accepted); `warning`/`info` are reported but do not block. Best-effort and **never-block** — skipped (with one warning) if the skill or extension is absent. **No CI workflow** is installed (Flow B deferred); Flow A needs **no** provider secret.
 
+## Local dev stack (Herdr mesh + mu-vim)
+
+The public open-source local stack lives under `docker/local/pertechtalks/`. Default image: **herdr + Neovim 0.12.5 + mu-vim v0.7.0**. Coding agent CLIs are **opt-in** build args (default `false`).
+
+| Concern | Detail |
+|---------|--------|
+| SSH host port | **22030** (`ssh -p 22030 node@localhost`) — avoids Cursor's macOS `2222` |
+| Editor | `EDITOR=nvim` via mu-vim (`DailybotHQ/mu-vim` @ `v0.7.0`) |
+| Mesh stamp | `[herdr-mesh]` on every first-hop ask (reply grant) |
+| Peer includes | `~/.ssh_host/config.d/herdr-peers` (host kits may still publish `dailybot-peers` as a fallback) |
+| Catalog mount | optional `~/.local/state/herdr/client` → `~/.herdr_client_host` (read-only) |
+
+```bash
+bash dev.sh setup && bash dev.sh build && bash dev.sh up
+bash dev.sh shell                 # login as node in /app
+bash dev.sh ssh                   # same path Herdr uses (port 22030)
+bash dev.sh agents                # list live machines/agents (prepare mesh first)
+bash dev.sh ask 1 "Prompt..."     # send prompt + [herdr-mesh] reply grant
+bash dev.sh ask <machine-id> <pane> "Prompt..."
+```
+
+- `#` is only valid for the list you just printed; **PANE** (`w5:p2`) + machine **ID** are the stable address.
+- Replies keep the `[herdr-mesh]` stamp so the next hop is marked as a reply and is not answered again.
+- Selective CLIs (rebuild when you need them):
+
+```bash
+docker compose -f docker/local/docker-compose.yaml build \
+  --build-arg INSTALL_CLAUDE_CLI=true \
+  --build-arg INSTALL_CODEX_CLI=true
+# Also: INSTALL_CURSOR_CLI, INSTALL_PI_CLI, INSTALL_OPENCODE_CLI,
+#       INSTALL_CLINE_CLI, INSTALL_GROK_CLI
+```
+
+Full stack notes: [docker/local/README.md](docker/local/README.md).
+
 ## Quick Commands
 
 ```bash
@@ -347,6 +382,8 @@ pnpm run dev                # Dev server (http://localhost:8888)
 bash dev.sh up              # Same dev containers the IDE plugin starts, no IDE needed
 bash dev.sh shell           # Login shell as `node` in /app
 bash dev.sh ssh             # SSH in the way Herdr does (port 22030)
+bash dev.sh agents          # Live Herdr machines and agents
+bash dev.sh ask <#> "..."   # Prompt another agent with a [herdr-mesh] reply grant
 bash dev.sh doctor          # Read-only diagnosis of the container environment
 pnpm run build              # Production build (astro check && astro build)
 pnpm run astro:preview      # Preview production build

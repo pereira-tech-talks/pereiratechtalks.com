@@ -1,7 +1,7 @@
 ---
 name: dailybot-env
-description: Manage per-repo API key overrides in `.dailybot/env.json` — an opt-in, gitignored file that carries API keys + optional URLs for one or more environments (live, local, staging). One profile is active at a time; when set, it overrides `DAILYBOT_API_KEY`, `config.json`, and the login Bearer session for the enclosing repo. Use when the developer wants to be "logged into different orgs in different repos" simultaneously, needs a local dev key just for this project, or wants to toggle between staging and prod without touching global config or env vars. Requires CLI >= 3.8.0 (pack baseline; `env` shipped in 3.7.0).
-version: "3.11.0"
+description: Manage per-repo API key overrides in `.dailybot/env.json` — an opt-in, gitignored file that carries API keys + optional URLs for one or more environments (live, local, staging). One profile is active at a time; when set, it overrides `DAILYBOT_API_KEY`, `config.json`, and the login Bearer session for the enclosing repo. Use when the developer wants to be "logged into different orgs in different repos" simultaneously, needs a local dev key just for this project, or wants to toggle between staging and prod without touching global config or env vars. Requires CLI >= 3.9.0 (pack baseline; `env` shipped in 3.7.0).
+version: "3.16.1"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"🔑","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,10 +10,10 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot per-repo API key override (`env.json`)
 
-> **Requires `dailybot-cli >= 3.8.0`** (the skill-pack baseline). The
+> **Requires `dailybot-cli >= 3.9.0`** (the skill-pack baseline). The
 > `dailybot env` command group and `.dailybot/env.json` loader shipped in
 > 3.7.0 and are included in this floor. If `dailybot --version` reports
-> below 3.8.0, ask the developer to run `dailybot upgrade` before continuing.
+> below 3.9.0, ask the developer to run `dailybot upgrade` before continuing.
 > See [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version).
 
 This sub-skill lets an agent configure and manage `<repo>/.dailybot/env.json` — an **opt-in, gitignored** file that pins API keys + URL overrides per environment (live, local, staging) for the enclosing repo. When a profile is *active*, it overrides `DAILYBOT_API_KEY`, `config.json`, and the login Bearer session **only for that repo**.
@@ -38,11 +38,11 @@ Route here when the developer says any of:
 
 ## Pre-flight — before writing anything
 
-1. **Confirm the CLI meets the pack baseline** (>= 3.8.0):
+1. **Confirm the CLI meets the pack baseline** (>= 3.9.0):
 
     ```bash
     dailybot env --help >/dev/null 2>&1 || {
-      echo "This feature requires dailybot-cli >= 3.8.0. Run: dailybot upgrade" >&2
+      echo "This feature requires dailybot-cli >= 3.9.0. Run: dailybot upgrade" >&2
       exit 1
     }
     ```

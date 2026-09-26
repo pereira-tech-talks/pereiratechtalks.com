@@ -345,9 +345,11 @@ VS Code keeps working exactly as before — the two paths coexist.
 
 ```bash
 bash dev.sh setup     # one-time: env files, networks, .devcontainer/
-bash dev.sh build     # build the image
+bash dev.sh build     # build the image (coding CLIs opt-in via INSTALL_*_CLI)
 bash dev.sh up        # start the runServices, detached
 bash dev.sh shell     # login shell as `node` in /app
+bash dev.sh agents    # list live Herdr machines/agents (mesh + [herdr-mesh])
+bash dev.sh ask 1 "…" # prompt another agent with a reply grant
 ```
 
 `.devcontainer/devcontainer.json` is the single source of truth. `runServices`

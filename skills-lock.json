@@ -5,19 +5,19 @@
       "source": "DailybotHQ/ai-diff-reviewer",
       "sourceType": "github",
       "skillPath": "skills/ai-diff-reviewer/SKILL.md",
-      "computedHash": "d9a9d2f6dbcd10b90bdabd9a4e26eb9791b36e903d6649a6a2c10affad24eab5"
+      "computedHash": "8dbc7f760190b1d071caa6093dec2c7c0ca69b5253993dddbb5691a72e878408"
     },
     "dailybot": {
       "source": "DailybotHQ/agent-skill",
       "sourceType": "github",
       "skillPath": "skills/dailybot/SKILL.md",
-      "computedHash": "2f9f0a6e70944fc65e79f402a3d8ff59adea6aeb784d9c281bcbd847e794951a"
+      "computedHash": "65c028254604fe4971f45439feed8db9c3d82bc37f4e552cb97e5c060609140d"
     },
     "deepworkplan": {
       "source": "DailybotHQ/deepworkplan-skill",
       "sourceType": "github",
       "skillPath": "skills/deepworkplan/SKILL.md",
-      "computedHash": "f38b4f5c5d0729f629af4931ae4ac2e49cdaea4dfb22340f61b631f797145d4d"
+      "computedHash": "d8f42042e529b34c24fbe3bd03c7e59fc0784e7073cb4687a3e63f9d0baad6c1"
     }
   }
 }
