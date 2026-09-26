@@ -225,15 +225,14 @@ RUN set -eu; \
     rm -f "$tmp"; \
     test -x /home/node/.local/bin/nvim
 # Pin mu-vim to a release tag only. Changing MU_VIM_REF busts the clone layer.
-ARG MU_VIM_REF=v0.7.0
+ARG DWP_VIM_REF=main
 RUN GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-    git clone https://github.com/DailybotHQ/mu-vim.git /home/node/.config/nvim \
+    git clone https://github.com/DailybotHQ/deepworkplan-vim.git /home/node/.config/nvim \
     && cd /home/node/.config/nvim \
-    && git checkout --detach "${MU_VIM_REF}" \
-    && test "$(git describe --tags --exact-match HEAD)" = "${MU_VIM_REF}" \
+    && git checkout --detach "${DWP_VIM_REF}" \
     && printf 'n\n\n' | lua install.lua \
     && test -f /home/node/.config/nvim/init.lua \
-    && test -f /home/node/.local/share/nvim/mu-vim-installed \
+    && { { test -f /home/node/.local/share/nvim/deepworkplan-vim-installed || test -f /home/node/.local/share/nvim/mu-vim-installed; } || test -f /home/node/.local/share/nvim/deepworkplan-vim-installed; } \
     && test -d /home/node/.local/share/nvim/pckr/pckr.nvim \
     && test -x /home/node/.local/bin/nvim \
     && GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \

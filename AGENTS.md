@@ -347,7 +347,7 @@ The public open-source local stack lives under `docker/local/pertechtalks/`. Def
 | Concern | Detail |
 |---------|--------|
 | SSH host port | **22030** (`ssh -p 22030 node@localhost`) — avoids Cursor's macOS `2222` |
-| Editor | `EDITOR=nvim` via mu-vim (`DailybotHQ/mu-vim` @ `v0.7.0`) |
+| Editor | `EDITOR=nvim` via mu-vim (`DailybotHQ/deepworkplan-vim` @ `v0.7.0`) |
 | Mesh stamp | `[herdr-mesh]` on every first-hop ask (reply grant) |
 | Peer includes | `~/.ssh_host/config.d/herdr-peers` (host kits may still publish `dailybot-peers` as a fallback) |
 | Catalog mount | optional `~/.local/state/herdr/client` → `~/.herdr_client_host` (read-only) |

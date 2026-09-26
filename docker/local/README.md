@@ -45,7 +45,7 @@ Always installed:
 |------|-------|
 | `herdr` | Mesh runtime (`allow_nested`); catalog refresh + ED25519 peer trust on start |
 | `nvim` | Neovim **0.12.5** tarball in `~/.local` (`EDITOR=nvim`) |
-| mu-vim | `DailybotHQ/mu-vim` @ **v0.7.0** under `~/.config/nvim` |
+| mu-vim | `DailybotHQ/deepworkplan-vim` @ **v0.7.0** under `~/.config/nvim` |
 | `gh`, `dailybot`, `chelper` | GitHub CLI, Dailybot CLI, Z.AI helper |
 
 Opt-in (rebuild with build-args; only the string `true` installs):

@@ -38,7 +38,7 @@ while [ -L "$_self" ]; do
 done
 REPO_ROOT="$(cd -P "$(dirname "$_self")" && pwd)"
 
-VERBS=" setup up down stop start restart ps logs shell exec ssh build config doctor agents ask help "
+VERBS=" setup up down stop start restart ps logs shell exec ssh build rebuild config doctor agents ask help "
 
 # --------------------------------------------------------------------------
 # Argument parsing
@@ -46,6 +46,7 @@ VERBS=" setup up down stop start restart ps logs shell exec ssh build config doc
 
 VERB=""
 RECREATE=0
+NO_CACHE=0
 PROJECT_OVERRIDE=""
 ARGS=()
 
@@ -63,6 +64,7 @@ while [ $# -gt 0 ]; do
   fi
   case "$1" in
     --recreate) RECREATE=1; shift ;;
+    --no-cache) NO_CACHE=1; shift ;;
     --project) [ $# -ge 2 ] || die "--project needs a name"; PROJECT_OVERRIDE="$2"; shift 2 ;;
     -h|--help) VERB="help"; shift ;;
     --) shift; while [ $# -gt 0 ]; do ARGS+=("$1"); shift; done ;;
@@ -815,7 +817,33 @@ cmd_build() {
   fast_check
   write_overlay
   selected_services
-  dc build "${SERVICES[@]}"
+  local build_args=()
+  if [ "$NO_CACHE" -eq 1 ]; then
+    build_args=(--no-cache --pull)
+    note "building ${SERVICES[*]} (project $PROJECT, --no-cache --pull)"
+  fi
+  dc build ${build_args[@]+"${build_args[@]}"} "${SERVICES[@]}"
+}
+
+cmd_rebuild() {
+  # Same intent as the Dev Containers plugin "Rebuild and Reopen Container":
+  # stop this repository's services, rebuild their images, and start them
+  # again. Default uses Docker layer cache. Pass --no-cache for a full wipe.
+  fast_check
+  write_overlay
+  selected_services
+  local build_args=()
+  if [ "$NO_CACHE" -eq 1 ]; then
+    build_args=(--no-cache --pull)
+    note "rebuilding ${SERVICES[*]} (project $PROJECT, --no-cache --pull)"
+  else
+    note "rebuilding ${SERVICES[*]} (project $PROJECT, with build cache)"
+  fi
+  note "stopping and removing current containers"
+  dc rm -sf "${SERVICES[@]}" || true
+  dc build ${build_args[@]+"${build_args[@]}"} "${SERVICES[@]}"
+  note "starting rebuilt containers"
+  dc up -d --force-recreate "${SERVICES[@]}"
 }
 
 cmd_config() {
@@ -1465,6 +1493,7 @@ Verbs
   shell [service]       login shell as remoteUser, in workspaceFolder
   exec <service> <cmd>  run one command in a service
   ssh [cmd...]          ssh in as remoteUser (what Herdr sees), or run one command
+  rebuild [service...]  rebuild images and recreate containers
   build [service...]    build images
   config                resolved configuration; writes nothing, starts nothing
   doctor                environment diagnosis; writes nothing, starts nothing
@@ -1476,6 +1505,7 @@ Verbs
 Flags
   --project <name>      override the compose project name
   --recreate            with up, recreate containers to apply compose changes
+  --no-cache            with rebuild (or build), ignore Docker layer cache and pull base images
 
 Flags go BEFORE the verb: everything after `ssh`, `ask`, and after
 `exec <service>` is passed through verbatim.
@@ -1530,6 +1560,7 @@ case "$VERB" in
   exec)    cmd_exec ;;
   ssh)     cmd_ssh ;;
   build)   cmd_build ;;
+  rebuild) cmd_rebuild ;;
   config)  cmd_config ;;
   doctor)  cmd_doctor ;;
   agents)  cmd_herdr_agents ;;
