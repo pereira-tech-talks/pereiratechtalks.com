@@ -501,23 +501,49 @@ host_binds() {
   done | sort -u
 }
 
-# Detect only. Never creates. Runs before the verbs that start containers.
+# Copy each docker/local/**/.env*.example to the matching .env when missing.
+# Created at 0600 so a later paste of API keys is not world-readable.
+ensure_env_from_examples() {
+  local f target
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    target="${f%.example}"
+    if [ ! -f "$target" ]; then
+      if ! (umask 077 && : > "$target"); then
+        die "could not create $target"
+      fi
+      cat "$f" > "$target"
+      note "created ${target#"$REPO_ROOT"/} from ${f#"$REPO_ROOT"/} (0600)"
+    fi
+  done < <(env_examples)
+}
+
+ensure_external_networks() {
+  local net
+  while IFS= read -r net; do
+    [ -n "$net" ] || continue
+    if docker network inspect "$net" >/dev/null 2>&1; then
+      continue
+    fi
+    docker network create "$net" >/dev/null
+    note "created docker network $net"
+  done < <(external_networks)
+}
+
+# Missing .env files are created from .env.example. Missing compose external
+# networks are created. Remaining gaps still fail with a clear path.
 fast_check() {
   local missing="" f target net
+  ensure_env_from_examples
   while IFS= read -r f; do
     [ -n "$f" ] || continue
     target="${f%.example}"
     [ -f "$target" ] || missing="${missing}${missing:+, }${target#"$REPO_ROOT"/}"
   done < <(env_examples)
   if [ -n "$missing" ]; then
-    die "local environment not ready (missing $missing) — run: bash dev.sh setup"
+    die "local environment not ready (missing $missing and no matching .env.example)"
   fi
-  while IFS= read -r net; do
-    [ -n "$net" ] || continue
-    if ! docker network inspect "$net" >/dev/null 2>&1; then
-      die "docker network '$net' is missing — run: bash dev.sh setup"
-    fi
-  done < <(external_networks)
+  ensure_external_networks
   local b
   while IFS= read -r b; do
     [ -n "$b" ] || continue
@@ -545,20 +571,12 @@ selected_services() {
 cmd_setup() {
   local created=0 f target net
 
+  ensure_env_from_examples
   while IFS= read -r f; do
     [ -n "$f" ] || continue
     target="${f%.example}"
     if [ ! -f "$target" ]; then
-      # Created empty at 0600 and only then filled. `cp` would leave the file at
-      # the umask default -- typically 0644, readable by every account on the
-      # machine -- and this is the file the developer then pastes API keys into.
-      # Narrowing it afterwards is too late: the secret was already exposed.
-      if ! (umask 077 && : > "$target"); then
-        die "could not create $target"
-      fi
-      cat "$f" > "$target"
-      note "created ${target#"$REPO_ROOT"/} (0600)"
-      created=$((created + 1))
+      continue
     elif group_or_other_readable "$target"; then
       # An existing file that group or other can reach. Narrowing it now cannot
       # un-expose a secret that has already been sitting there readable, but
