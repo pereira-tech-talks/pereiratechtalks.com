@@ -14,7 +14,7 @@ not per-run output.
 ```text
 .dwp/                                          ← gitignored output root
 └─ plans/                                        ← generated, per-plan folders
-   └─ PLAN_{plan_title}/
+   └─ PLAN_<id>_{plan_title}/
       ├─ README.md                         ← plan overview, task index
       ├─ PROMPTS.md                        ← ready-to-use prompts for this plan
       ├─ PROGRESS.md                       ← running progress summary (updated each task)
@@ -92,7 +92,7 @@ neither reads nor writes it, and the developer may delete it.
 Each plan folder must be named:
 
 ```text
-PLAN_{plan_title}
+PLAN_<id>_{plan_title}
 ```
 
 Where:
@@ -104,10 +104,15 @@ Where:
 
 **Examples:**
 
-- `PLAN_ui_showcase_expansion`
-- `PLAN_refactor_checkin_engine`
-- `PLAN_docs_reorganization`
-- `PLAN_ai_dev_kit_cleanups`
+- `PLAN_001_ui_showcase_expansion`
+- `PLAN_002_refactor_checkin_engine`
+- `PLAN_003_docs_reorganization`
+- `PLAN_004_ai_dev_kit_cleanups`
+
+`<id>` is allocated once by `shared/plan_paths.py` and padded to at least
+three digits. The current v6 flow uses 2–5 slug words; the retained v5
+flow uses 2–4 to fit its frozen schemas. Existing unnumbered folders keep
+their names and locations.
 
 ### 2.2. Task files
 

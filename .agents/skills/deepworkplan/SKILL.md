@@ -1,7 +1,7 @@
 ---
 name: deepworkplan
 description: DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, upgrade, and repo-onboarding sub-skills based on intent. Use when the developer wants to plan, execute, manage, or verify structured multi-task work, or make a repository AI-agent-ready.
-version: "5.5.4"
+version: "6.0.2"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -33,8 +33,8 @@ is the same — and it lives here, so no network is required.
 the developer's request was vague ("set this up", "make this repo AI-first", or a
 plain install). Before routing anywhere else:
 
-1. **Read the standard locally.** Read [`spec/`](spec/README.md) (five RFC-2119
-   documents) and [`shared/adaptation.md`](shared/adaptation.md). The overriding
+1. **Read the standard locally.** Read [`spec/`](spec/README.md) (v5 base and
+   v6 extensions) and [`shared/adaptation.md`](shared/adaptation.md). The overriding
    rule is **REASON, do not copy-paste**: this skill is the reusable engine; what
    you produce must be adapted to *this* repository, never templated.
 2. **Run onboarding.** Read [`onboard/SKILL.md`](onboard/SKILL.md) and execute it.
@@ -52,9 +52,8 @@ plain install). Before routing anywhere else:
 
 **If the repository is already AI-first but its harness predates this skill** —
 `AGENTS.md` / `.agents/` exist, yet there is no `DWP standard:` provenance line,
-the provenance line is from a non-current series (older than the 5.x this skill
-implements — 2.x and 4.x are historical series, `spec/DWP_SPECIFICATION.md`
-§6.5), or
+the provenance line is from an earlier series (2.x, 4.x, or 5.x; see
+`spec/V6_LIFECYCLE.md`), or
 `docs/TESTING_GUIDE.md` lacks the scoped-invocation and mapping content the
 standard requires, or its agent rules lack the working principles described
 in `spec/DOCUMENTATION_STANDARD.md` §2.3.1 (equivalent wording counts) —
@@ -159,6 +158,13 @@ developer which they mean before routing.
   plan.
 - **Status and verify stay read-only.** They report; they never execute tasks
   or mutate files — regardless of how they are invoked.
+- **Plan generation is detected, never assumed.** A plan folder carrying a
+  `manifest.json` contract pointer, a `contract.json`, or a `contracts/`
+  revision chain is **v6** — create and execute route it through their
+  `v6.md` loops (contract, journal, scheduler, verified closure). Anything
+  else keeps the recorded v5 lifecycle, is never migrated silently, and a
+  v5-only runner that meets a v6 plan reports it as unsupported rather
+  than approximating it. Both generations can coexist in one `.dwp/`.
 - **Hosts without slash commands use the same flows by name.** Invoke the
   sub-skill as `#deepworkplan-create` or in plain text ("run
   deepworkplan-create"); the flows themselves are plain file reads, edits and
@@ -168,9 +174,8 @@ developer which they mean before routing.
 
 ### Normative specification (ships with the skill)
 
-The methodology's authoritative standard lives at [`spec/`](spec/README.md) —
-five RFC-2119 documents (`DOCUMENTATION_STANDARD`, `DWP_SPECIFICATION`,
-`AGENT_PROTOCOL`, `ARCHETYPES`, `ADDONS`). It ships inside the skill so an agent
+The authoritative standard lives at [`spec/`](spec/README.md): retained v5
+base documents plus the four current v6 extensions. It ships inside the skill so an agent
 reads the standard **locally** — no network needed. The `onboard` flow and
 `shared/adaptation.md` reference it as the standard to produce. The public,
 rendered version lives at https://deepworkplan.com/spec.

@@ -247,9 +247,9 @@ If conflicts arise:
 
 ## DeepWorkPlan Addons (optional, non-blocking)
 
-The vendored `deepworkplan` skill (v2.17.0) ships five opt-in addons; this repo wires in **three** — `ai-diff-reviewer` (Flow A, local-only), `dependency-upgrade`, and `design-system`. All are **best-effort and never block** DWP `create`/`execute`. The core methodology has **zero** dependency on any of them — declining or uninstalling any addon still leaves a fully AI-first repo.
+The vendored `deepworkplan` skill (v6.0.2) ships opt-in addons (devcontainer, dailybot, dependency-upgrade, design-system, plus a proposed, unwired `herdr`); this repo wires in **three** — `ai-diff-reviewer` (Flow A, local-only), `dependency-upgrade`, and `design-system`. All are **best-effort and never block** DWP `create`/`execute`. The core methodology has **zero** dependency on any of them — declining or uninstalling any addon still leaves a fully AI-first repo.
 
-> The `dailybot` and `devcontainer` addons ship inside the skill pack but are **not installed** here. DailyBot still appears across the site as a community **sponsor** (`src/content/sponsors/dailybot.yaml`) and in the branch/PR naming conventions — that content is unrelated to the DWP addon.
+> The `devcontainer` addon ships inside the skill pack but is **not installed** here (the repo uses its own `docker/local/` stack). The Dailybot agent skill is vendored at `.agents/skills/dailybot/` (v3.23.2, tracked in `skills-lock.json`), but its DWP lifecycle-reporting addon is **not wired** into the flows. DailyBot still appears across the site as a community **sponsor** (`src/content/sponsors/dailybot.yaml`) and in the branch/PR naming conventions — that content is unrelated to the DWP addon.
 
 ### AI Diff Reviewer — Security Review augmentation (Flow A, local-only)
 

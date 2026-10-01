@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-refine
 description: Refine a Deep Work Plan — safely edit scope, add, split or reorder tasks, promote a Lite plan to Full task files, recover a partial promotion, or explicitly migrate a legacy plan, always preserving completed evidence.
-version: "5.5.4"
+version: "6.0.2"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -11,7 +11,7 @@ allowed-tools: Bash, Read, Grep, Glob, Edit, Write
 
 Modify an **existing plan** (add / edit /
 split / reorder tasks, update the README, promote a Lite plan to Full, or — only
-on explicit request — migrate a legacy plan to the current standard).
+on explicit request — migrate a legacy ending or a v5 plan to v6).
 
 > **No drafts (2.4.0):** `create` materializes an executable Lite plan directly,
 > so there is nothing to "refine into a plan" any more. `refine` operates on a
@@ -21,7 +21,7 @@ on explicit request — migrate a legacy plan to the current standard).
 ## Shared resources (read these)
 
 - [`../shared/dwp-paths.md`](../shared/dwp-paths.md) — plans at `.dwp/plans/`,
-  plans at `.dwp/plans/PLAN_{name}/`.
+  plans at `.dwp/plans/<plan>/`.
 - [`../shared/context.sh`](../shared/context.sh) — resolve `dwp_dir`.
 - **Guide (essential — read for this flow):** [`../guide/authoring.md`](../guide/authoring.md) (plan README §4, task-file anatomy §5 incl. the Touched Surface, mandatory elements) and [`../guide/structure.md`](../guide/structure.md) (§1–§2 naming and folders).
 - **Guide (conditional — read only when the trigger fires):** [`../guide/orchestrator.md`](../guide/orchestrator.md) / [`../guide/team-agents.md`](../guide/team-agents.md) only for plans that use them; [`../guide/execution.md`](../guide/execution.md) §6.1 when editing the Final Review (or a legacy plan's final tasks). Do not read other guide files for this flow; [`../guide/GUIDE.md`](../guide/GUIDE.md) is the routing index, consulted only when a section is not named above.
@@ -35,7 +35,7 @@ on explicit request — migrate a legacy plan to the current standard).
 | (none) | Interactive — choose a plan | `/dwp-refine` |
 | `plan {plan_name}` | Modify an existing final plan | `/dwp-refine plan auth_refactor` |
 | `plan latest` | Modify the most recent plan | `/dwp-refine plan latest` |
-| `migrate {plan_name}` | **Explicit** migration of a legacy plan (three final tasks) to the current standard — the only way a plan changes standard | `/dwp-refine migrate auth_refactor` |
+| `migrate {plan_name}` | **Explicit** migration: a legacy three-task ending to the v5 Final Review shape, or a v5 plan to v6; never automatic | `/dwp-refine migrate auth_refactor` |
 | `promote {plan_name}` | Promote a ready Lite plan to Full task files without changing scope | `/dwp-refine promote small_fix` |
 
 ## Trust boundary (write scope)
@@ -43,7 +43,7 @@ on explicit request — migrate a legacy plan to the current standard).
 `allowed-tools` includes write-capable `Edit`, `Write`, and `Bash`.
 
 **Writes:** edits confined to the target plan's files under
-`.dwp/plans/PLAN_{name}/` — task content, ordering, the README's task list and
+`.dwp/plans/<plan>/` — task content, ordering, the README's task list and
 counts, `PROGRESS.md`, and the **regenerated** `state.json` — kept mutually
 consistent. Deleting a completed task, dropping the Final Review (or a legacy
 plan's final tasks), or invalidating completed evidence requires explicit
@@ -76,11 +76,38 @@ selected plan is legacy.
 
 ### Step 3 — Select and Modify a Final Plan
 
-**3.1 Select.** If not specified, list `PLAN_*` folders in `.dwp/plans/`; pick by
-number, name, or `latest`. Normalize the `PLAN_` prefix.
+**3.1 Select.** If not specified, list plans with `../shared/plan_paths.py
+--plans-dir <dwp_dir>/plans list`. Resolve a full name, numeric ID, unique slug,
+or `latest` with the same helper's `resolve` command. `latest` is the highest
+numbered plan when one exists, or the most recently modified legacy plan.
 
 **3.2 Read and classify.** Read the plan README, the task files, `PROGRESS.md`,
 and — when present — `manifest.json` and `state.json`. Establish:
+- **The plan's generation.** A folder carrying `manifest.json` with a
+  contract pointer, `contract.json`, or a `contracts/` chain is a **v6
+  plan**: scope, acceptance, permissions or envelope changes are
+  **contract amendments** — author the revised contract, then follow the
+  v6 amendment sequence in [`../execute/v6.md`](../execute/v6.md) and
+  [`../spec/V6_LIFECYCLE.md`](../spec/V6_LIFECYCLE.md) §5 (revision
+  chain under `contracts/`, fresh approval citing the new contract id,
+  evidence invalidation for affected criteria). The markdown task edits
+  below still apply to the plan's human layer; the contract never moves
+  through them. A v5 plan is never migrated to v6 *implicitly*; the one
+  explicit path is the migration surface below (3.2a).
+- **3.2a — v5 → v6 migration (explicit request only).** When the developer
+  asks to migrate a v5 plan to v6, route to
+  [`../shared/migrate_v6.py`](../shared/migrate_v6.py) — never rewrite
+  records by hand: `preview` (integrity check + task mapping + the
+  re-evidence list — criteria whose v5 evidence cannot carry become
+  **blocked by default** until their gates re-run under v6), then
+  `migrate --authority WHO` (backup → contract synthesis → manifest swap →
+  journal import → projection; resumable at every phase), and `rollback`
+  for the explicit reverse (restores the v5 bytes from the verified
+  backup; refuses when post-migration v6 work exists unless `--force`).
+  Imported gate evidence is labeled `imported` with the v5 source digest —
+  never `observed`. The normative flow is
+  [`../spec/V6_LIFECYCLE.md`](../spec/V6_LIFECYCLE.md) §8. The reverse
+  direction (v6 → v5) does not exist.
 - **The plan's standard** (`../spec/PLAN_STATE.md` §6.1): a declared
   `**Standard:**` line in the README wins; otherwise `manifest.spec_version`;
   otherwise (no manifest) the shape of its files. **New shape** = a single
@@ -99,7 +126,7 @@ and — when present — `manifest.json` and `state.json`. Establish:
   in-progress checkpoint.
 
 **3.3 Show current state** — objective, standard (new / legacy), the task list
-with status, and the location `.dwp/plans/PLAN_{name}/`.
+with status, and the location `.dwp/plans/<plan>/`.
 
 **3.4 Choose modification:** Add task(s) / Edit task / Split task / Reorganize /
 Update README / View task details / Done.
@@ -230,7 +257,17 @@ Migration is the **only** way a plan changes standard, and it happens **only**
 when the developer asks for it explicitly (`../spec/DWP_SPECIFICATION.md` §6.5,
 `../spec/PLAN_STATE.md` §6.1). Never suggest it as a side effect of another edit.
 
-1. **Classify** (Step 3.2). If the plan is already at the current standard, say
+**Route by recorded generation before Step 4.1.** For a v5 plan, use the v5 →
+v6 migration path in Step 3.2a and `../spec/V6_LIFECYCLE.md` §8: run
+`python3 ../shared/migrate_v6.py --plan <dir> preview`, inspect the re-evidence
+list and blockers, then run `python3 ../shared/migrate_v6.py --plan <dir>
+--authority <who> migrate` on the explicit request. Report the migrated
+contract, journal, projection, and criteria requiring new evidence. Do not
+apply Steps 4.1–4.6 below to a v5 plan. Those steps only migrate a pre-v5
+three-task ending to the retained v5 Final Review shape. A v6 plan already
+uses the current generation and has no migration step.
+
+1. **Classify** (Step 3.2). If the plan already has the v5 Final Review shape, say
    so and stop.
 2. **Preserve completed work.** Any `[x]` task — including a legacy final task
    that has already run — is left exactly as it is. Only **unstarted** tasks may
@@ -313,4 +350,4 @@ a marked plan. Full-to-Lite downgrade is not automatic.
 - Plan has work in progress (a checkpoint or an `in_progress` task) → warn about
   impact; suggest finishing the current task first; never edit the in-progress
   task's evidence.
-- `migrate` on a plan already at the current standard → report and stop.
+- `migrate` on a plan already in the requested generation and shape → report and stop.

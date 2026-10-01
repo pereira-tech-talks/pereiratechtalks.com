@@ -29,11 +29,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "shared"))
 sys.dont_write_bytecode = True
 from state_contract import gate_findings, shape_errors, derive_status
 
-# The newest DWP spec this checker implements; keep in sync with conformance.sh
-# SUPPORTED_SPEC and DWP_SPECIFICATION.md "Version".
+# This checker validates the retained v5 plan shape. v6 plans use the
+# contract/journal inspection path and must never be accepted here.
 SUPPORTED_SPEC = '5.0.0'
 # The standard's released series: 2.x and 4.x are historical (plans authored
-# before each jump stay valid, §6.5), 5.x is current. There is no 3.x standard
+# before each jump stay valid, §6.5), 5.x is this checker's ceiling. There is no 3.x standard
 # — the v3 launch was a product release, not a standard bump.
 SPEC_SERIES = (2, 4, 5)
 STATE_V2 = 'https://deepworkplan.com/schema/plan-state/v2.json'
@@ -205,7 +205,20 @@ def check(plan, is_git=True, state_override=None, allow_finalizing=False):
         url = doc.get('schema')
         known = [f'https://deepworkplan.com/schema/plan-{label}/v{v}.json' for v in (1, 2, 5)]
         if url is not None and url not in known:
-            report.bad(f'unknown {label} schema URL {url!r} — upgrade the installed skill')
+            # D2-10: a v6 plan under the v5 runner is unsupported, and the
+            # error names the contract pointer instead of a generic
+            # "unknown URL" — the caller is sent to the v6 flow, never to
+            # an upgrade that would silently change generations.
+            if url == 'https://deepworkplan.com/schema/plan-manifest/v6.json':
+                report.bad(f'this plan is v6 (manifest points at contract.json {doc.get("contract", {}).get("id", "?")!r}) — '
+                           'the v5 runner does not execute v6 plans; open it with the v6 flow (execute Step 2.0). '
+                           'v6 plans are never migrated back; a v5 plan is migrated forward only through shared/migrate_v6.py')
+            elif (plan / 'contract.json').exists():
+                report.bad(f'{label}.json is {url!r} but the folder carries a v6 contract.json — '
+                           'a torn pair this checker refuses to guess about; resolve the folder by hand '
+                           '(shared/migrate_v6.py rollback if a migration was interrupted)')
+            else:
+                report.bad(f'unknown {label} schema URL {url!r} — upgrade the installed skill')
     if report.failed:
         return report
     if state_override is not None:
@@ -268,7 +281,7 @@ def current(plan, state, manifest, report):
                    f'({SUPPORTED_SPEC}) — upgrade the installed skill before executing it')
     elif version(standard)[0] not in SPEC_SERIES:
         report.bad(f'plan declares DWP spec {standard}, which is not a DWP standard (the series '
-                   f'are 2.x and 4.x historical and 5.x current; there is no 3.x) — correct the '
+                   f'are 2.x and 4.x historical and 5.x supported here; there is no 3.x) — correct the '
                    f'Standard line (PLAN_STATE.md §6.1)')
     else:
         report.ok(f'plan standard: DWP spec {standard}'
@@ -474,7 +487,7 @@ def legacy(plan, state, manifest, is_git, report):
                    f'({SUPPORTED_SPEC}) — upgrade the installed skill before executing it')
     elif version(standard)[0] not in SPEC_SERIES:
         report.bad(f'plan declares DWP spec {standard}, which is not a DWP standard (the series '
-                   f'are 2.x and 4.x historical and 5.x current; there is no 3.x) — correct the '
+                   f'are 2.x and 4.x historical and 5.x supported here; there is no 3.x) — correct the '
                    f'Standard line (PLAN_STATE.md §6.1)')
     else:
         report.ok(f'plan standard: DWP spec {standard}'
