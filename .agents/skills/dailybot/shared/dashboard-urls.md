@@ -1,6 +1,6 @@
 # Shared reference — Dailybot dashboard URLs
 
-> **Requires `dailybot-cli >= 3.8.0`** (the skill-pack baseline). The
+> **Requires `dailybot-cli >= 3.9.0`** (the skill-pack baseline). The
 > `--app-url` flag and `DAILYBOT_APP_URL` env var for configuring the dashboard
 > base URL are available at this floor, as is the per-profile `app_url` in
 > [`env-json.md`](env-json.md).
@@ -96,6 +96,26 @@ standalone page (no sidebar navigation).
 | Co-author detail | `/agents/co-author/{coauthor_uuid}` |
 
 ---
+
+### Plan
+
+The web app lives under `/plan`. A task payload
+carries no `url` field, so build these from ids you already hold; never invent other shapes.
+
+| Page | Path |
+|------|------|
+| Inbox | `/plan/inbox` |
+| A task by key | `/plan/{KEY}` (for example `/plan/ENG-142`) |
+| A task by uuid | `/plan/id/{uuid}` |
+| Board | `/plan/boards/{uuid}` |
+| Project (tab optional, e.g. `?tab=milestones`) | `/plan/projects/{uuid}` |
+| Goal | `/plan/goals/{uuid}` |
+| Notification settings (one kind, or the briefing) | `/plan/settings/notifications#kind-<key>` · `#briefing` |
+| Channels used by routes (optionally one board) | `/plan/settings/channels` · `?board=<uuid>` |
+| Scheduled reports | `/plan/settings/reports` |
+
+If the API ever returns a `url`, prefer it. A path outside this table is unpublished: hand the
+developer the **API self-link** the CLI prints (`/v1/plan/tasks/<uuid>/`) instead of guessing.
 
 ## 3. Building full URLs
 

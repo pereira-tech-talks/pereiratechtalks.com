@@ -1,7 +1,7 @@
 ---
 name: dailybot-workflow
 description: List, inspect, and trigger Dailybot workflows — enumerate the workflows configured for the organization, read one workflow's configuration, and fire API-triggerable workflows on demand. Use when the developer asks "list my workflows", "show workflows", "what's in the release workflow?", "trigger the deploy workflow", or "fire automation X". Creating/editing workflows is done in the Dailybot web app. Plan-gated feature.
-version: "3.11.0"
+version: "3.23.2"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"🔀","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,10 +10,10 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Workflows
 
-> **Requires `dailybot-cli >= 3.8.0`** (the skill-pack baseline). The
+> **Requires `dailybot-cli >= 3.9.0`** (the skill-pack baseline). The
 > `dailybot workflow list` / `get` / `trigger` command group — including
 > `--filter api_trigger` and `--payload` — is available at this floor. If
-> `dailybot --version` reports below 3.8.0, ask the developer to run
+> `dailybot --version` reports below 3.9.0, ask the developer to run
 > `dailybot upgrade`. See [`../SKILL.md` § Required Dailybot CLI
 > version](../SKILL.md#required-dailybot-cli-version) for install commands and
 > version-check tooling.
@@ -65,6 +65,10 @@ operation. And do not confuse it with **form workflow states** (the
 `draft → review → released` states inside a single form) — those are managed in
 [`../forms/SKILL.md`](../forms/SKILL.md). This skill is the org-level
 **workflow** object.
+
+To **tag** an existing workflow with organization Labels after you have its
+UUID from `workflow list`, use [`../labels/SKILL.md`](../labels/SKILL.md)
+(`dailybot label assign <uuid> --type workflows` — `automations` is an alias).
 
 ---
 

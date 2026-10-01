@@ -1,5 +1,9 @@
 # DOCUMENTATION_STANDARD.md — DeepWorkPlan Repository Documentation Standard
 
+> **Version scope:** This is a retained v5.0.0 base document. The current
+> v6 standard also requires the applicable `V6_*.md` extensions indexed in
+> [README.md](README.md). Existing v5 plans keep this document’s recorded rules.
+
 ## Abstract
 
 This document specifies the normative repository-structure standard that makes a
@@ -386,18 +390,17 @@ the onboarding flow **MUST** keep them distinct:
   report, per file, what it added or changed.
 - **Recorded provenance.** A repository that adopts this standard **SHOULD**
   record it — a line such as
-  `DWP standard: 5.0.0 (onboarded YYYY-MM-DD; upgraded YYYY-MM-DD; skill x.y.z)`
+  `DWP standard: 6.0.0 (onboarded YYYY-MM-DD; upgraded YYYY-MM-DD; skill x.y.z)`
   in `AGENTS.md` or `docs/README.md` — so a checker and a future agent can tell
   which standard the repository declares.
 
-  The version in that line is the **umbrella DWP standard** — the `Version` of
-  `DWP_SPECIFICATION.md` — not the version of this document or of any other
-  single spec document. Each spec document carries its own version and they
-  advance independently, so recording one of those would compare unrelated
-  scales: a conformance checker reads this line against the DWP standard it
-  implements and rejects a repository declaring one it does not support. The
-  standard's series are 2.x and 4.x (historical) and 5.x (current — there is
-  no 3.x); the skill package `version:` and the `/v2.json` and `/v5.json`
+  The version in that line is the **umbrella DWP standard** implemented by the
+  installed pack, not the version of this retained v5 base document. The v6
+  extension documents in this directory define the current plan lifecycle.
+  A conformance checker reads the declaration against the standard it
+  implements and rejects a newer one. The standard's series are 2.x, 4.x,
+  and 5.x (historical) and 6.x (current — there is no 3.x); the skill package
+  `version:` and the `/v2.json` and `/v5.json`
   schema URLs are two further, separate series, never compared against this
   line.
 - **Legacy versus declared.** A conformance checker **MUST** distinguish a
@@ -523,7 +526,7 @@ different purposes. Both **MUST** be gitignored (tracking only an index
 | `.dwp/` | **MUST** (once the DWP skill is installed) | **Structured** Deep Work Plan output — `.dwp/plans/`. Owned by the DWP flows. See `DWP_SPECIFICATION.md`. |
 | `tmp/` | **SHOULD** | **Unstructured** repo-root scratch space for ephemeral agent/developer work: exploratory output, data exports, inter-agent prompt handoffs, throwaway experiments. Agents **SHOULD** write *non-plan* temporary/throwaway artifacts here rather than polluting the source tree, `docs/`, or `.dwp/`. Output produced **about a plan** is the exception and goes in that plan's own `analysis_results/` (`DWP_SPECIFICATION.md` §5), never in `tmp/` and never at the repository root. |
 
-The distinction matters: `.dwp/` is the methodology's **structured** output (plans an agent can resume), while `tmp/` is **freeform** scratch that can be deleted at any time. The test is *ownership, not lifetime*: a gate log, an audit report or a scratch measurement produced **while executing a plan** is that plan's evidence — a later session retrieves it by pointer — so it belongs in `.dwp/plans/PLAN_{name}/analysis_results/` even though it is temporary. `tmp/` is for work no plan will ever read back. Common `tmp/` sub-uses observed across the audited repos: `tmp/scratch/`, `tmp/exports/`, `tmp/{tool}_prompts/`. An onboarding agent **SHOULD** create `tmp/` (with a `.gitkeep`) and add it to `.gitignore`, and **SHOULD** note the convention in `AGENTS.md`.
+The distinction matters: `.dwp/` is the methodology's **structured** output (plans an agent can resume), while `tmp/` is **freeform** scratch that can be deleted at any time. The test is *ownership, not lifetime*: a gate log, an audit report or a scratch measurement produced **while executing a plan** is that plan's evidence — a later session retrieves it by pointer — so it belongs in `.dwp/plans/<plan>/analysis_results/` even though it is temporary. `tmp/` is for work no plan will ever read back. Common `tmp/` sub-uses observed across the audited repos: `tmp/scratch/`, `tmp/exports/`, `tmp/{tool}_prompts/`. An onboarding agent **SHOULD** create `tmp/` (with a `.gitkeep`) and add it to `.gitignore`, and **SHOULD** note the convention in `AGENTS.md`.
 
 ---
 

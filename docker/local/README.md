@@ -1,9 +1,9 @@
 # Local Docker development stack
 
-Dev container for pereiratechtalks.org: Node 24, pnpm, the Dailybot CLI, and a
-shared suite of Claude, Codex, OpenCode, Pi, Cline, Grok, Cursor, Herdr and
-Z.AI coding-agent commands — plus an SSH server so you can reach all of it from
-another machine.
+Dev container for pereiratechtalks.org: Node 24, pnpm, the Dailybot CLI, **Herdr**
+(mesh runtime), **Neovim 0.12.5 + mu-vim v0.7.0**, and an SSH server on host port
+**22030**. Coding-agent CLIs (Claude, Codex, Cursor, OpenCode, Pi, Cline, Grok)
+are **opt-in** via `INSTALL_*_CLI=true` build args — the default image stays lean.
 
 ## Quick start
 
@@ -15,6 +15,8 @@ bash dev.sh setup     # env files, networks, .devcontainer/
 bash dev.sh build
 bash dev.sh up
 bash dev.sh shell     # login shell as `node` in /app
+bash dev.sh agents    # list live Herdr machines/agents (inside container)
+bash dev.sh ask 1 "…" # prompt another agent with a [herdr-mesh] reply grant
 ```
 
 Or open the project in Cursor / VS Code and let the Dev Containers plugin do it.
@@ -35,11 +37,45 @@ docker compose -p pertechtalkslocal build
 docker compose -p pertechtalkslocal up -d pertechtalksvscode
 ```
 
+## Default image vs selective coding CLIs
+
+Always installed:
+
+| Tool | Notes |
+|------|-------|
+| `herdr` | Mesh runtime (`allow_nested`); catalog refresh + ED25519 peer trust on start |
+| `nvim` | Neovim **0.12.5** tarball in `~/.local` (`EDITOR=nvim`) |
+| mu-vim | `DailybotHQ/deepworkplan-vim` @ **v0.7.0** under `~/.config/nvim` |
+| `gh`, `dailybot`, `chelper` | GitHub CLI, Dailybot CLI, Z.AI helper |
+
+Opt-in (rebuild with build-args; only the string `true` installs):
+
+```bash
+docker compose -p pertechtalkslocal -f docker/local/docker-compose.yaml build \
+  --build-arg INSTALL_CLAUDE_CLI=true \
+  --build-arg INSTALL_CURSOR_CLI=true \
+  --build-arg INSTALL_CODEX_CLI=true \
+  --build-arg INSTALL_PI_CLI=true \
+  --build-arg INSTALL_OPENCODE_CLI=true \
+  --build-arg INSTALL_CLINE_CLI=true \
+  --build-arg INSTALL_GROK_CLI=true
+```
+
+Or export the same names before `bash dev.sh build` (compose forwards them).
+
+## Herdr mesh
+
+- Peer SSH include: `~/.ssh_host/config.d/herdr-peers` (fallback: `dailybot-peers` if a host kit still uses that name).
+- Optional catalog: host `~/.local/state/herdr/client` mounted read-only; `herdr-refresh-catalog` copies it for Herdr to read.
+- List / ask: `bash dev.sh agents` and `bash dev.sh ask …` append a public `[herdr-mesh]` reply grant on first hop.
+- SSH: host port **22030** → container sshd (key-based; see `.env.example`).
+
 ## Coding agents
 
-Every provider alias runs with full permissions and accepts `-c` / `--continue`.
-Base commands (`claude`, `codex`, `opencode`, `pi`, `cline`, `agent`, `herdr`)
-keep whatever provider and authentication you configured yourself.
+When a CLI is installed, every provider alias runs with full permissions and
+accepts `-c` / `--continue`. Base commands (`claude`, `codex`, `opencode`, `pi`,
+`cline`, `agent`, `herdr`) keep whatever provider and authentication you
+configured yourself.
 
 | Group | Commands |
 |-------|----------|

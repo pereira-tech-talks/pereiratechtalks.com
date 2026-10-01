@@ -7,6 +7,16 @@ services:
     build:
       context: .
       dockerfile: ./pertechtalks/Dockerfile
+      args:
+        # Coding CLIs default off. Flip per rebuild, e.g.:
+        #   docker compose build --build-arg INSTALL_CLAUDE_CLI=true --build-arg INSTALL_CODEX_CLI=true
+        INSTALL_CLAUDE_CLI: ${INSTALL_CLAUDE_CLI:-false}
+        INSTALL_CURSOR_CLI: ${INSTALL_CURSOR_CLI:-false}
+        INSTALL_CODEX_CLI: ${INSTALL_CODEX_CLI:-false}
+        INSTALL_PI_CLI: ${INSTALL_PI_CLI:-false}
+        INSTALL_OPENCODE_CLI: ${INSTALL_OPENCODE_CLI:-false}
+        INSTALL_CLINE_CLI: ${INSTALL_CLINE_CLI:-false}
+        INSTALL_GROK_CLI: ${INSTALL_GROK_CLI:-false}
     working_dir: /app
     volumes:
       - ../..:/app
@@ -33,15 +43,18 @@ services:
       - pnpm_store:/home/node/.local/share/pnpm/store
       - pnpm_cache:/home/node/.cache/pnpm
       - ${HOME}/.ssh:/home/node/.ssh_host:ro
+      # Optional Herdr catalog from the host (read-only). Missing is fine.
+      - ${HOME}/.local/state/herdr/client:/home/node/.herdr_client_host:ro
       - ${HOME}/.gitconfig:/home/node/.gitconfig:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      # Use 8888 on host to avoid conflict with macOS AirPlay Receiver (port 8888)
+      # Use 8888 on host to avoid conflict with macOS AirPlay Receiver on 5000-ish ports
       - '8888:8888'
-      # SSH into the dev container: `ssh -p 22030 node@<docker-host>`. Both
-      # sides are pinned to 22030; if you change it, change SSH_SERVER_PORT in
-      # pertechtalks/.env to match (entrypoint.sh reads it). Published on every
-      # interface so a phone on the LAN can reach it — use
-      # '127.0.0.1:22030:22030' to keep it on this machine only.
+      # SSH into the dev container: `ssh -p 22030 node@<docker-host>`.
+      # Picked 22030 (22xxx style) to avoid Cursor's localhost:2222 on macOS.
+      # If you change it, change SSH_SERVER_PORT in pertechtalks/.env to match
+      # (entrypoint.sh reads it). Use '127.0.0.1:22030:22030' to bind loopback only.
       - '22030:22030'
     env_file:
       - pertechtalks/.env

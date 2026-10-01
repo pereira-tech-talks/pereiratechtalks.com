@@ -1,7 +1,7 @@
 ---
 name: dailybot-chat
 description: Send and edit Dailybot bot messages on the team's connected chat platform (Slack, Microsoft Teams, Discord, Google Chat) — to user DMs, channels, or whole teams. Supports report-style threads (one headline + replies, in one call), interactive buttons (approval flows, workflow triggers, modals, callbacks), and editing the parent or any reply afterward. Use when the developer says "send a message to my Slack channel", "ping the team in chat", "post the deploy report to #releases", "send an approval request with buttons", or wants to update a previously sent bot message. Works headless for agents.
-version: "3.11.0"
+version: "3.23.2"
 documentation_url: https://www.dailybot.com/skill.md
 user-invocable: true
 metadata: {"openclaw":{"emoji":"💬","homepage":"https://dailybot.com","requires":{"anyBins":["dailybot","curl"]},"primaryEnv":"DAILYBOT_API_KEY","install":[{"id":"cli-install-script","kind":"download","url":"https://cli.dailybot.com/install.sh","label":"Install Dailybot CLI (official script — preferred on Linux/macOS)"},{"id":"pip","kind":"pip","package":"dailybot-cli","bins":["dailybot"],"label":"Install Dailybot CLI via pip (fallback if binary fails)"}]}}
@@ -10,13 +10,13 @@ allowed-tools: Bash, Read, Grep, Glob
 
 # Dailybot Chat
 
-> **Requires `dailybot-cli >= 3.8.0`** (the skill-pack baseline). The
+> **Requires `dailybot-cli >= 3.9.0`** (the skill-pack baseline). The
 > `dailybot chat send` / `chat update` command group — including
 > `--thread-message`, login-Bearer auth on `/v1/send-message/`,
 > `--send-as-user` / `--send-as-me`, and the full interactive-button
 > surface (`--buttons`, approval / workflow-button flags, modals,
 > callbacks) — is available at this floor. If `dailybot --version` is
-> below 3.8.0, ask the developer to run `dailybot upgrade`. See
+> below 3.9.0, ask the developer to run `dailybot upgrade`. See
 > [`../SKILL.md` § Required Dailybot CLI version](../SKILL.md#required-dailybot-cli-version)
 > for install commands and version-check tooling.
 
@@ -367,7 +367,7 @@ The 72-hour edit window applies.
 
 > Interactive-button flags (`--buttons`, `--approve-button` /
 > `--reject-button`, `--callback-url`, `--callback-bearer`,
-> `--workflow-button`) require **`dailybot-cli >= 3.8.0`** (this pack's
+> `--workflow-button`) require **`dailybot-cli >= 3.9.0`** (this pack's
 > baseline). `--link-button` and `--button` are also available at that floor.
 
 ### Headless / agent use — capture the ids in JSON

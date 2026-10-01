@@ -868,6 +868,172 @@ setup_herdr_config() {
     esac
 }
 
+# Ensure allow_nested=true on volume-backed configs that predate the flag.
+ensure_herdr_allow_nested() {
+    local cfg="/home/node/.config/herdr/config.toml"
+    mkdir -p "$(dirname "${cfg}")"
+    python3 - "${cfg}" <<'PY'
+import re
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+text = path.read_text() if path.exists() else ""
+if re.search(r"(?m)^allow_nested\s*=\s*true\s*$", text):
+    sys.exit(0)
+if re.search(r"(?m)^allow_nested\s*=", text):
+    text = re.sub(r"(?m)^allow_nested\s*=\s*\S+", "allow_nested = true", text, count=1)
+elif re.search(r"(?m)^\[experimental\]\s*$", text):
+    text = re.sub(
+        r"(?m)^\[experimental\]\s*$",
+        "[experimental]\nallow_nested = true",
+        text,
+        count=1,
+    )
+else:
+    if text and not text.endswith("\n"):
+        text += "\n"
+    text += "\n[experimental]\nallow_nested = true\n"
+path.write_text(text)
+PY
+    chown node:node "${cfg}" 2>/dev/null || true
+}
+
+# Public herdr mesh: catalog refresh helper, peer Include, ED25519 trust.
+# Peer filenames are generic (herdr-peers). Host kits that still publish
+# dailybot-peers are accepted as a fallback source.
+install_herdr_peer_mesh() {
+    local home="$1"
+    local user="$2"
+    local ssh_config="${home}/.ssh/config"
+    local peers_file=""
+    local include_line=""
+    local src="${home}/.herdr_client_host/endpoints.json"
+    local dest_dir="${home}/.local/state/herdr/client"
+    local dest="${dest_dir}/endpoints.json"
+
+    if [ -f "${home}/.ssh_host/config.d/herdr-peers" ]; then
+        peers_file="${home}/.ssh_host/config.d/herdr-peers"
+        include_line='Include ~/.ssh_host/config.d/herdr-peers'
+    elif [ -f "${home}/.ssh_host/config.d/dailybot-peers" ]; then
+        peers_file="${home}/.ssh_host/config.d/dailybot-peers"
+        include_line='Include ~/.ssh_host/config.d/dailybot-peers'
+    fi
+
+    if [ -z "${peers_file}" ]; then
+        echo "herdr peers: no herdr-peers (or dailybot-peers) on host mount; skip include"
+    elif [ -f "${ssh_config}" ]; then
+        if ! grep -qxF "${include_line}" "${ssh_config}"; then
+            local tmp
+            tmp="$(mktemp)"
+            printf '%s\n' "${include_line}" | cat - "${ssh_config}" > "${tmp}"
+            mv "${tmp}" "${ssh_config}"
+            chown "${user}:${user}" "${ssh_config}" 2>/dev/null || true
+            chmod 600 "${ssh_config}" 2>/dev/null || true
+        fi
+    else
+        mkdir -p "${home}/.ssh"
+        printf '%s\n' "${include_line}" > "${ssh_config}"
+        chown -R "${user}:${user}" "${home}/.ssh" 2>/dev/null || true
+        chmod 700 "${home}/.ssh" 2>/dev/null || true
+        chmod 600 "${ssh_config}" 2>/dev/null || true
+    fi
+
+    # Optional workspace peers Include (generic name first).
+    local ws_include=""
+    if [ -f "${home}/.ssh_host/config.d/herdr-workspaces" ]; then
+        ws_include='Include ~/.ssh_host/config.d/herdr-workspaces'
+    elif [ -f "${home}/.ssh_host/config.d/dailybot-workspaces" ]; then
+        ws_include='Include ~/.ssh_host/config.d/dailybot-workspaces'
+    fi
+    if [ -n "${ws_include}" ]; then
+        touch "${ssh_config}"
+        if ! grep -qxF "${ws_include}" "${ssh_config}" 2>/dev/null; then
+            local tmp
+            tmp="$(mktemp)"
+            printf '%s\n' "${ws_include}" | cat - "${ssh_config}" > "${tmp}"
+            mv "${tmp}" "${ssh_config}"
+            chown "${user}:${user}" "${ssh_config}" 2>/dev/null || true
+            chmod 600 "${ssh_config}" 2>/dev/null || true
+        fi
+    fi
+
+    # Herdr writes endpoints.json, so the Mac catalog stays on a read-only mount
+    # and this copy is what Herdr reads. Refresh before every agent listing.
+    mkdir -p "${home}/.local/bin"
+    cat > "${home}/.local/bin/herdr-refresh-catalog" <<'EOF'
+#!/bin/sh
+src="${HOME}/.herdr_client_host/endpoints.json"
+dest="${HOME}/.local/state/herdr/client/endpoints.json"
+if [ ! -f "$src" ]; then
+  echo "herdr peers: catalog missing at $src" >&2
+  exit 1
+fi
+mkdir -p "$(dirname "$dest")"
+if [ -f "$dest" ] && cmp -s "$src" "$dest"; then
+  exit 0
+fi
+if [ -f "$dest" ]; then
+  cp -p "$dest" "${dest}.bak"
+fi
+cp -p "$src" "$dest"
+chmod 600 "$dest" 2>/dev/null || true
+EOF
+    chown "${user}:${user}" "${home}/.local/bin/herdr-refresh-catalog"
+    chmod 755 "${home}/.local/bin/herdr-refresh-catalog"
+    if [ ! -f "${src}" ]; then
+        echo "herdr peers: catalog missing at ${src}; skip copy"
+    else
+        mkdir -p "${dest_dir}"
+        if [ -f "${dest}" ]; then
+            cp -p "${dest}" "${dest}.bak"
+        fi
+        cp -p "${src}" "${dest}"
+        chown -R "${user}:${user}" "${dest_dir}" 2>/dev/null || true
+        chmod 600 "${dest}" 2>/dev/null || true
+        echo "herdr peers: catalog refreshed from host mount"
+    fi
+
+    # Trust ED25519 host keys for peer ports. Herdr requires ED25519; an older
+    # RSA-only known_hosts line must not hide a missing ED25519 key. keyscan
+    # writes the plaintext ED25519 line; accept-new often stores RSA first.
+    local known="${home}/.ssh/known_hosts"
+    local sources=()
+    [ -n "${peers_file}" ] && [ -f "${peers_file}" ] && sources+=("${peers_file}")
+    [ -f "${home}/.ssh/config.d/herdr-workspace-peers" ] && sources+=("${home}/.ssh/config.d/herdr-workspace-peers")
+    if [ "${#sources[@]}" -gt 0 ]; then
+        mkdir -p "${home}/.ssh"
+        touch "${known}"
+        chown "${user}:${user}" "${known}" 2>/dev/null || true
+        awk '
+          /^Host / { host=$2; port="" }
+          /^[[:space:]]*Port / && host != "" { port=$2 }
+          host != "" && port != "" {
+            printf "%s %s\n", host, port
+            host=""; port=""
+          }
+        ' "${sources[@]}" | while read -r peer_host peer_port; do
+            case "${peer_port}" in
+                ''|*[!0-9]*) continue ;;
+                220[0-9][0-9]|22[4-9][0-9][0-9]) ;;
+                *) continue ;;
+            esac
+            if ssh-keygen -F "[host.docker.internal]:${peer_port}" -f "${known}" 2>/dev/null \
+                | grep -q 'ssh-ed25519'; then
+                continue
+            fi
+            if ! ssh-keyscan -T 4 -t ed25519 -p "${peer_port}" host.docker.internal 2>/dev/null \
+                | grep -v '^#' >>"${known}"; then
+                su -s /bin/bash "${user}" -c \
+                    "ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o HostKeyAlgorithms=ssh-ed25519 -o ConnectTimeout=4 -o PreferredAuthentications=publickey -p ${peer_port} host.docker.internal true" \
+                    >/dev/null 2>&1 || true
+            fi
+        done
+        chown "${user}:${user}" "${known}" 2>/dev/null || true
+        chmod 600 "${known}" 2>/dev/null || true
+    fi
+}
+
 # Main setup function
 main() {
     echo "Starting container setup..."
@@ -880,6 +1046,8 @@ main() {
     setup_custom_command_shims
     setup_sshd
     setup_herdr_config
+    ensure_herdr_allow_nested
+    install_herdr_peer_mesh "/home/node" "node"
     upgrade_dailybot_cli
 
     echo "Container setup completed"
