@@ -9,7 +9,7 @@
     "url": "https://github.com/pereira-tech-talks/pereiratechtalks.org"
   },
   "type": "module",
-  "version": "3.0.19",
+  "version": "3.0.20",
   "packageManager": "pnpm@11.23.0",
   "engines": {
     "node": ">=24.21.0"
