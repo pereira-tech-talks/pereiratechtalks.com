@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09; skill 7.0.0)
+DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09; skill 7.0.1)
 
 ## Detailed Documentation
 
@@ -758,7 +758,7 @@ never migrated implicitly.
 ## Deep Work Plan flows
 
 Structured multi-task work runs through the vendored **DeepWorkPlan** skill
-(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.0). Route by intent:
+(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.1). Route by intent:
 
 | Intent | Command |
 |--------|---------|
