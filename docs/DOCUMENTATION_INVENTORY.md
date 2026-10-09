@@ -54,7 +54,7 @@ Tracking documentation coverage for Pereira Tech Talks v3.0.0.
 | [src/components/home/README.md](../src/components/home/README.md) | ✅ Current | Home page sections |
 | [src/components/layout/README.md](../src/components/layout/README.md) | ✅ Current | Layout components |
 | [src/lib/README.md](../src/lib/README.md) | ✅ Current | Utility functions |
-| [src/pages/README.md](../src/pages/README.md) | ✅ Current | Routing and pages |
+| [docs/PAGES_README.md](PAGES_README.md) | ✅ Current | Routing and pages |
 | [src/layouts/README.md](../src/layouts/README.md) | ✅ Current | Page layouts |
 | [src/content/README.md](../src/content/README.md) | ✅ Current | Content Collections |
 | [src/styles/README.md](../src/styles/README.md) | ✅ Current | Styling guide |

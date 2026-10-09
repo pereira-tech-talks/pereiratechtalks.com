@@ -258,5 +258,5 @@ Already implemented in `BlogPagination.svelte`:
 
 - [Blog Components](../../src/components/blog/README.md)
 - [Blog Search](./BLOG_SEARCH.md)
-- [Pages & Routing](../../src/pages/README.md)
+- [Pages & Routing](../PAGES_README.md)
 - [Library Functions](../../src/lib/README.md)
