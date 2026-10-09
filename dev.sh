@@ -1543,7 +1543,7 @@ Herdr mesh (inside the container, or wherever herdr is on PATH):
   bash dev.sh agents
   bash dev.sh ask 1 "What branch are you on?"
 
-Selective coding CLIs (default image has herdr + mu-vim + nvim only):
+Selective coding CLIs (default image has herdr + DeepWorkPlan Vim + nvim only):
   docker compose -f docker/local/docker-compose.yaml build \
     --build-arg INSTALL_CLAUDE_CLI=true --build-arg INSTALL_CODEX_CLI=true
 USAGE
