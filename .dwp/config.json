@@ -1,0 +1,32 @@
+{
+  "addons": {
+    "agentkit": {
+      "enabled": true,
+      "note": "accepted; machine-level install deferred (installs into $HOME)",
+      "version": "v0.1.1"
+    },
+    "ai-diff-reviewer": {
+      "enabled": true,
+      "version": "v3.3.0"
+    },
+    "dependency-upgrade": {
+      "enabled": true
+    },
+    "design-system": {
+      "enabled": true
+    },
+    "herdr": {
+      "enabled": true,
+      "note": "accepted; machine-level install deferred (installs into $HOME)",
+      "version": "v0.1.0"
+    },
+    "vim": {
+      "enabled": true,
+      "note": "accepted; machine-level install deferred (installs into $HOME)",
+      "version": "v0.4.2"
+    }
+  },
+  "host": {
+    "subagents": true
+  }
+}

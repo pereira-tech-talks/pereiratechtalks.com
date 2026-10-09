@@ -36,10 +36,26 @@ original locations; no lifecycle flow renames them.
   plan as unsupported and stop (D2-10b) — approximating the contract with
   v5 bookkeeping is the failure this rule exists to prevent.
 
+**Contract generations of the record layer (7.0.0 line).** A plan detected
+as v6 above carries one of two contract generations, named by the
+contract's `schema` URL and mirrored by its manifest and every journal
+event:
+
+| Generation | Contract | Journal events | Manifest | Adds |
+|---|---|---|---|---|
+| v6 | `plan-contract/v6` | `journal-event/v6` | `plan-manifest/v6` | — |
+| v7 | `plan-contract/v7` | `journal-event/v7` | `plan-manifest/v7` | `tasks[].parallel_safe`, the `delegation` event ([`V7_CONTRACT.md`](V7_CONTRACT.md)) |
+
+Both generations run through the same loops and helpers and project into
+the same `plan-snapshot/v6` shape. A plan never changes generation: a v6
+plan keeps v6 forever, and a journal mixing generations is refused.
+
 ## 2. Activation (normative)
 
-With the current 6.x pack, new plans use v6 by default. A developer's
-explicit v6 request also selects this flow when an older pack provides it.
+With the current 7.x pack, new plans use the v7 contract generation by
+default (§1 table); an explicit `v6` request materializes a v6 contract. A
+developer's explicit v6 request also selects this flow when an older pack
+provides it.
 A 5.x pack without that request follows its recorded v5 flow. Existing
 plans are selected by their artifacts (§1), regardless of installed pack
 version; no existing plan changes generation during selection.
@@ -85,6 +101,13 @@ in flow prose:
   were evaluated only before the current task start.
 - `observed` gate evidence is minted ONLY by `shared/ledger.py gate`; an
   appended `gate_run` without a runner binding is refused.
+- **Every declared invariant is plan-scoped** (F-03): it holds across the
+  whole plan and is evaluated at each boundary — an observation
+  `INV-<id>: pass` or `INV-<id>: fail: <reason>`. `complete` refuses (and
+  records the refusal) while any invariant's latest evaluation is
+  missing, older than the task's start, or a failure. A property that
+  only some tasks must hold is an acceptance criterion of those tasks,
+  never an invariant.
 - Task completion is DERIVED (every `gate_intent` criterion satisfied
   in-window — the same zero-test predicate the scheduler selects by),
   never declared: `complete` refuses (and records the refusal) while any
@@ -100,7 +123,23 @@ rules in `V6_CONTRACT.md` §1), obtain a fresh approval citing the new
 contract id, and invalidate the evidence of affected criteria (re-run,
 never trust prior results). The manifest's pointer is provenance and is
 never edited; the live contract is the highest revision under
-`contracts/`. Task-level markdown edits (wording, notes, task splits
+`contracts/`.
+
+`python3 shared/ledger.py --plan <dir> amend --contract <draft> --authority
+<who> --note <reason> --human-note <file>` is that sequence as one guarded,
+resumable verb (F-12). The draft is the revised contract (a copy of the
+live one, edited; the next `revision` and `parent_contract_id` are
+derived); it MUST keep the plan and its generation and pass the draft
+checks (`V6_CONTRACT.md` §2). The order is normative: the revision is
+staged as `contracts/.contract.rN.json.pending` (invisible to the
+loader); the `amendment` event lists the revised criteria in
+`evidence_invalidated` — once the amendment is approved, their earlier
+gate runs and control pairs never satisfy them again (an amendment that
+never reaches approval invalidates nothing); a fresh `approval` cites the new contract id (human actor, with
+the authority marker of `V6_CONTRACT.md` §3); only then does an atomic
+rename switch the live contract. Re-running the same amendment after an
+interruption resumes at the first missing step without duplicate events;
+a different draft is refused while one is pending. Task-level markdown edits (wording, notes, task splits
 inside granted authority) go through the recorded refine flow unchanged.
 
 ## 6. Read-only surfaces (normative)
@@ -169,8 +208,9 @@ any point recovers by running the command again:
 backup and removes the v6 artifacts. It MUST refuse — until `--force` —
 when the journal carries more events than the migration minted:
 post-migration v6 work is real history, not debris. The reverse migration
-(v6 → v5) does not exist; a v6 plan under the v5 runner is refused by
-`verify/plan_contract.py` naming the contract pointer (D2-10).
+(v6 → v5) does not exist; a v6 plan under the v5 runner (the v5
+finalization in `verify/plan_contract.py`) is refused naming the contract
+pointer (D2-10), while the read-only verifier judges it by its v6 records.
 
 ## 9. Cross-agent and cold resume (normative)
 

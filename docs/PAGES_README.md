@@ -188,7 +188,7 @@ export const GET: APIRoute = async () => {
 |----------|--------|-------------|
 | `/api/posts.json` | GET | Blog posts search index |
 
-See [API Reference](../../docs/API_REFERENCE.md) for details.
+See [API Reference](./API_REFERENCE.md) for details.
 
 ## RSS Feed
 
@@ -221,7 +221,7 @@ Currently using folder-based i18n:
 - English: `/` (root)
 - Spanish: `/es/`
 
-See [i18n Guide](../../docs/I18N_GUIDE.md) for details.
+See [i18n Guide](./I18N_GUIDE.md) for details.
 
 ## Creating a New Page
 
@@ -309,8 +309,8 @@ See [i18n Guide](../../docs/I18N_GUIDE.md) for details.
 
 ## Related Documentation
 
-- [Layouts](../layouts/README.md)
-- [Content Collections](../content/README.md)
-- [API Reference](../../docs/API_REFERENCE.md)
-- [i18n Guide](../../docs/I18N_GUIDE.md)
-- [Architecture](../../docs/ARCHITECTURE.md)
+- [Layouts](../src/layouts/README.md)
+- [Content Collections](../src/content/README.md)
+- [API Reference](./API_REFERENCE.md)
+- [i18n Guide](./I18N_GUIDE.md)
+- [Architecture](./ARCHITECTURE.md)

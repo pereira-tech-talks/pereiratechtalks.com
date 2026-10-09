@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "6.0.2"
+version: "7.0.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -120,6 +120,16 @@ test -f .agents/skills/ai-diff-reviewer/SKILL.md && echo "ai-diff-reviewer skill
 { test -f .review/extension.md || test -f .github/ai-diff-reviewer/extension.md || test -f .github/ai-pr-reviewer/extension.md; } && echo "review extension: ok" || echo "review extension: MISSING"
 ```
 
+**Enabled addons only (7.0.0+).** `python3 {skill_dir}/shared/config.py
+enabled` lists what the repository's `.dwp/config.json` enables; with
+nothing enabled there is nothing to check — an addon is never a conformance
+requirement (`../spec/CONFIG.md`). For each enabled key, `config.py
+descriptors` must report its descriptor `OK`, and `python3
+{skill_dir}/shared/resources.py --plan <any plan> abilities` shows whether
+it is detected; an enabled-but-absent addon or a `version` that differs
+from the installed product is a **warning** (informative in 7.0.0), never a
+failure. Fail-closed config warnings are reported verbatim.
+
 Then, by reading rather than grepping:
 
 - **Working principles.** Review `AGENTS.md` against
@@ -143,21 +153,16 @@ legacy: resolve an optional selector with `../shared/plan_paths.py --plans-dir
 <dwp_dir>/plans resolve <selector>` before passing the full basename to
 `conformance.sh --plan`. Use `list` for all plans; never rename an old folder.
 
-- **v6 generation check (run first).** A folder carrying `manifest.json`
-  with a contract pointer, `contract.json`, or a `contracts/` chain is a
-  **v6 plan** and is verified against its own records, all read-only:
-  `python3 ../shared/contract_v6.py validate-contract <dir>/contract.json`
-  (or the highest revision under `contracts/`), `python3
-  ../shared/contract_v6.py validate-journal <dir>/journal.ndjson
-  --contract <dir>/contract.json`, and `python3 ../shared/ledger.py --plan
-  <dir> inspect` (an `approval` citing the live contract id must exist;
-  a torn tail is a finding). Verify the projection agrees with the
-  journal (`state.json` is generated for v6; a disagreement is a
-  finding — regenerate via `project`, never hand-edit). The v5 lifecycle
-  checks below (final-task shape, checkbox correspondence) apply to the
-  plan's human markdown as written; a v6 plan does not fail for not
-  having a v5 `state.json` hand-shape. Both generations can coexist;
-  neither is migrated by this flow.
+- **v6/v7 generation check (automated).** A folder with a v6/v7
+  `manifest.json` (or a contract without one) is judged by
+  `conformance.sh --plan <name|path>` against its own records, read-only:
+  every contract revision validates, the manifest pairs with the contract's
+  generation and points into its chain, the journal is untorn and valid, an
+  `approval` cites the live contract id, and `state.json` agrees with the
+  projection (stale = advisory; regenerate via `ledger.py project`, never
+  hand-edit). Completion is derived from gate evidence. The v5 lifecycle
+  checks below apply to v5-and-older plans only; the v5 finalization
+  refuses a v6/v7 plan (D2-10). Generations coexist; none is migrated here.
 
 - Every task file declares an explicit scope, **acceptance criteria**, and at least one **validation gate** (a runnable command or check).
 - **Test discipline.** Tasks that add new core functionality or change product behavior require automated test coverage in their Acceptance Criteria and run the repo's tests + lint/type-check in their Validation (`DWP_SPECIFICATION.md` §5.1.1). A behavior-changing plan with zero test work is a finding, not a pass.
@@ -199,7 +204,7 @@ End with one of: **CONFORMANT** (all MUST criteria pass) or **NOT CONFORMANT —
 > **Unsupported newer plan.** If a plan (or `AGENTS.md`) declares a DWP
 > standard newer than this skill implements, the checker fails with an upgrade
 > message. Do not execute such a plan as if it were legacy: upgrade the installed
-> skill (`npx --yes skills add DailybotHQ/deepworkplan-skill@<newer tag> --skill deepworkplan -y`), then
+> skill (`npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/<newer-tag> --skill deepworkplan -y`), then
 > re-run `verify`.
 
 > **Large repo / in-progress onboarding.** A big repo may be mid-onboarding via
