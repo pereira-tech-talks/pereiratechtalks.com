@@ -16,14 +16,30 @@ the pinned official skill).
 ## 2. The two skills (host)
 
 ```
-npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g
-npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g
+npx --yes skills add herdrdev/herdr@v0.9.3 --skill herdr -g -y
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -g -y
 ```
 
+Both `-y` flags are required in an agent's non-interactive shell (`npx
+--yes` skips the download prompt; `skills add … -y` skips the target picker).
 The first is Herdr's official skill (the authority for every `herdr`
 command; `herdr --skill` prints the copy matching the installed binary).
 The second installs the herdr-peers skill and its helper script. Verify:
 `herdr-peers --version` → `herdr-peers 0.1.0 (protocol 1)`.
+
+For a scoped trial in one repository without touching `$HOME` (F-10),
+install the helper skill repo-locally — drop `-g`:
+
+```
+npx --yes skills add DailybotHQ/herdr-peers@v0.1.0 --skill herdr-peers -y
+```
+
+It lands under the repository's agent skills directory (e.g.
+`.agents/skills/herdr-peers/`); call its helper by that path instead of
+`herdr-peers` on `PATH`, and keep the registry entry as
+`{"enabled": true, "note": "repo-local trial"}` until the machine-level
+install exists. Herdr itself, coding-agents-kit, devcontainer-kit and the
+editor stay machine-level.
 
 ## 3. Containers
 

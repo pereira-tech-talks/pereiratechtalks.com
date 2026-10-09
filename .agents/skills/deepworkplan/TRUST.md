@@ -13,7 +13,7 @@ Source of truth: <https://deepworkplan.com> · License: MIT.
 A **Markdown-first** agent skill: the "code" is the `SKILL.md` prompt files an
 agent reads at runtime, plus a small set of local helpers. Two Bash: `setup.sh`
 (symlinking, at the repository root, not inside the pack) and, inside the pack,
-`shared/context.sh` for repo/branch/`.dwp/` detection. Fourteen Python (stdlib
+`shared/context.sh` for repo/branch/`.dwp/` detection. Sixteen Python (stdlib
 only, Python 3.9+), all inside the pack: `verify/conformance.sh` and its
 `verify/plan_contract.py` for the read-only conformance check,
 `shared/plan_paths.py` for monotonic plan IDs and plan selection,
@@ -88,10 +88,14 @@ contents, paths or secrets. Reruns preserve curated entries byte-for-byte.
 `shared/config.py` is the one reader of `.dwp/config.json` /
 `~/.dwp/config.json` (benchmark switch and addon registry): reading is
 fail-closed and never aborts a flow, it lists the `addons/` directory names
-without opening any addon file, and its only writer (`enable` / `disable`,
-run by onboarding after you accept an addon) reconciles the repository file
-atomically and refuses rather than overwrites a file it cannot parse. It
-makes no network call and stores no secret.
+without opening any addon file (only `descriptors` and `backfill`, on
+request, read the descriptors and run their read-only detection), and its
+writers (`enable` / `disable` / `host`, run by onboarding after you accept,
+and `backfill --write`, run by an accepted upgrade) reconcile the repository
+file atomically and refuse rather than overwrite a file they cannot parse. It
+makes no network call and stores no secret. `shared/delegators.py` compares
+the repository's command delegators with the pack's templates and prints a
+drift report; it never writes.
 They
 read and write only your repository and its `.dwp/`
 directory — with one honest exception that is CPython's behavior rather than
@@ -100,8 +104,11 @@ beside it inside the installed pack. The shipped flows set
 `sys.dont_write_bytecode` to avoid it, but a direct `python3 -c 'import …'`
 against a helper (a diagnosis step, say) will still create one. It is a cache
 of our own files, contains nothing of yours, and is safe to delete. The **core
-methodology makes no CLI calls, no HTTP API calls, no authentication flow, and no
-network calls**, and emits **no telemetry** of any kind.
+methodology makes no HTTP API calls, no authentication flow, and no network
+calls**, and emits **no telemetry** of any kind. Its only external process
+calls are `git` and — from 7.0.0, and only for an addon **you enabled** — that
+addon's declared read-only detect command (for example `ak doctor --json`),
+run without a shell under a timeout (see `shared/resources.py` above).
 
 > **One honest caveat — addons.** The shipped tree includes eight addons
 > (`addons/dailybot`, `addons/devcontainer`, `addons/dependency-upgrade`,

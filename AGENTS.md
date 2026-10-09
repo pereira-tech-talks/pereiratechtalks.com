@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-08; skill 7.0.0-beta.1)
+DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09; skill 7.0.0)
 
 ## Detailed Documentation
 
@@ -107,7 +107,7 @@ scripts/                        # Build utilities (image optimization, agent ski
 docs/                           # Project documentation
 .agents/                        # Cross-agent skills, commands, agents, settings (canonical)
 .claude → .agents               # Backward-compat symlink for Claude Code
-.dwp/                           # Deep Work Plan outputs — plans/ + drafts/ (git-ignored)
+.dwp/                           # Deep Work Plan outputs — plans/ + drafts/ (git-ignored; config.json tracked)
 tmp/                            # Temporary workspace (git-ignored)
 ```
 
@@ -729,14 +729,18 @@ never migrated implicitly.
   `stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`,
   `cancel_children`, `model_routing`, `telemetry` — is `false`. Resource limits a
   plan sets are therefore **advisory, not enforced**; `telemetry` stays off.
+  The same declaration is recorded machine-readably under `host` in
+  `.dwp/config.json`.
 - **Addon abilities (v7).** Effective abilities = the host declaration ∪ what
   each **enabled and detected** addon provides (`spec/V7_ABILITIES.md`). The
-  per-machine registry is `.dwp/config.json` (git-ignored; absent = nothing
-  enabled; `python3 .agents/skills/deepworkplan/shared/config.py show`). It
-  enables `ai-diff-reviewer`, `dependency-upgrade`, `design-system`, `herdr`,
+  registry is `.dwp/config.json`, **tracked** so teammates and CI read the same
+  decisions (the rest of `.dwp/` stays ignored; a `~/.dwp/config.json` entry
+  overrides it per machine; `python3 .agents/skills/deepworkplan/shared/config.py show`).
+  It enables `ai-diff-reviewer`, `dependency-upgrade`, `design-system`, `herdr`,
   `agentkit` and `vim`. The last three are machine-level products that are not
-  installed by the repo, so until `herdr-peers` / `ak` are installed they add
-  **no** ability, and a plan cannot delegate. Delegation also needs the plan's
+  installed by the repo; their entries carry a "deferred" note, and until
+  `herdr-peers` / `ak` are installed they add **no** ability, and a plan cannot
+  delegate. Delegation also needs the plan's
   own `agent_delegation` grant. Check with
   `python3 .agents/skills/deepworkplan/shared/resources.py --plan <plan> abilities`.
   The methodology works the same with every addon disabled.
@@ -754,7 +758,7 @@ never migrated implicitly.
 ## Deep Work Plan flows
 
 Structured multi-task work runs through the vendored **DeepWorkPlan** skill
-(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.0-beta.1). Route by intent:
+(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.0). Route by intent:
 
 | Intent | Command |
 |--------|---------|

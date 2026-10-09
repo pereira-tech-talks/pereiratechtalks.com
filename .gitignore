@@ -38,8 +38,10 @@ coverage/
 # devcontainer (local dev setup)
 .devcontainer/
 
-# Deep Work Plan outputs (plans + drafts are working artifacts, not tracked source)
-.dwp/
+# Deep Work Plan outputs (plans + drafts are working artifacts, not tracked source).
+# The addon registry is shared with teammates and CI (DWP 7.0.0, spec/CONFIG.md).
+.dwp/*
+!.dwp/config.json
 
 # Temporary workspace (agent outputs, scratch files, ephemeral content)
 tmp/*
