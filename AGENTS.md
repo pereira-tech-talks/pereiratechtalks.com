@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 6.0.0 (onboarded 2026-08-08; upgraded 2026-10-01; skill 6.0.2)
+DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-08; skill 7.0.0-beta.1)
 
 ## Detailed Documentation
 
@@ -714,12 +714,14 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 
 > **If a user prompt starts with `#`** (e.g., `#add-blog-post`, `#quick-fix`), treat it as a command invocation — look up the command name (without `#`) in the [Commands Reference](.agents/docs/COMMANDS_REFERENCE.md) and execute its procedure.
 
-## Bounded autonomy (DWP v6)
+## Bounded autonomy (DWP v7)
 
-New plans follow the v6 lifecycle (numbered `PLAN_001_<slug>` folders, identity
-manifest → contract → approval event → append-only journal). Existing v1/v2/v5
-plans under `.dwp/plans/` keep their recorded shape and are never migrated
-implicitly.
+New plans follow the v6 record layer under the **v7 contract generation**
+(numbered `PLAN_001_<slug>` folders, identity manifest → contract → approval
+event → append-only journal; v7 adds the optional `parallel_safe` task marker
+and journaled delegation — `.agents/skills/deepworkplan/spec/V7_CONTRACT.md`).
+Existing v1/v2/v5/v6 plans under `.dwp/plans/` keep their recorded shape and are
+never migrated implicitly.
 
 - **Host capabilities.** Declared abilities of this repo's runtime host (closed
   set from `.agents/skills/deepworkplan/spec/V6_RESOURCES.md`): `subagents: true`
@@ -727,6 +729,17 @@ implicitly.
   `stop_agent`, `meter_spend`, `meter_tokens`, `meter_wall_clock`,
   `cancel_children`, `model_routing`, `telemetry` — is `false`. Resource limits a
   plan sets are therefore **advisory, not enforced**; `telemetry` stays off.
+- **Addon abilities (v7).** Effective abilities = the host declaration ∪ what
+  each **enabled and detected** addon provides (`spec/V7_ABILITIES.md`). The
+  per-machine registry is `.dwp/config.json` (git-ignored; absent = nothing
+  enabled; `python3 .agents/skills/deepworkplan/shared/config.py show`). It
+  enables `ai-diff-reviewer`, `dependency-upgrade`, `design-system`, `herdr`,
+  `agentkit` and `vim`. The last three are machine-level products that are not
+  installed by the repo, so until `herdr-peers` / `ak` are installed they add
+  **no** ability, and a plan cannot delegate. Delegation also needs the plan's
+  own `agent_delegation` grant. Check with
+  `python3 .agents/skills/deepworkplan/shared/resources.py --plan <plan> abilities`.
+  The methodology works the same with every addon disabled.
 - **Authority.** A plan is authored by an agent and approved by the maintainer
   (`plan_authorship`). An unattended run stops before: `git push`, opening a PR,
   publishing content, creating or renaming a blog tag, touching secrets or
@@ -741,7 +754,7 @@ implicitly.
 ## Deep Work Plan flows
 
 Structured multi-task work runs through the vendored **DeepWorkPlan** skill
-(`.agents/skills/deepworkplan/`, standard 6.0.0, skill 6.0.2). Route by intent:
+(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.0-beta.1). Route by intent:
 
 | Intent | Command |
 |--------|---------|

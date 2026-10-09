@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "6.0.2"
+version: "7.0.0-beta.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -119,6 +119,16 @@ git check-ignore tmp >/dev/null 2>&1 && echo "tmp gitignored: ok" || echo "tmp g
 test -f .agents/skills/ai-diff-reviewer/SKILL.md && echo "ai-diff-reviewer skill: ok" || echo "ai-diff-reviewer skill: MISSING"
 { test -f .review/extension.md || test -f .github/ai-diff-reviewer/extension.md || test -f .github/ai-pr-reviewer/extension.md; } && echo "review extension: ok" || echo "review extension: MISSING"
 ```
+
+**Enabled addons only (7.0.0+).** `python3 {skill_dir}/shared/config.py
+enabled` lists what the repository's `.dwp/config.json` enables; with
+nothing enabled there is nothing to check — an addon is never a conformance
+requirement (`../spec/CONFIG.md`). For each enabled key, `config.py
+descriptors` must report its descriptor `OK`, and `python3
+{skill_dir}/shared/resources.py --plan <any plan> abilities` shows whether
+it is detected; an enabled-but-absent addon or a `version` that differs
+from the installed product is a **warning** (informative in 7.0.0), never a
+failure. Fail-closed config warnings are reported verbatim.
 
 Then, by reading rather than grepping:
 
