@@ -19,15 +19,18 @@ ARG APT_MIRROR=cdn-aws.deb.debian.org
 RUN sed -i "s|deb.debian.org|${APT_MIRROR}|g" /etc/apt/sources.list.d/debian.sources
 
 # One Dockerfile RUN owns apt-get update, the image packages, and the clean.
-# lua5.4, ripgrep, and fd-find are here so mu-vim's installer finds them.
+# lua5.4, ripgrep, fd-find, unzip, python3-venv and the C toolchain (gcc,
+# make, libc6-dev) plus fontconfig are what DeepWorkPlan Vim's plugins build
+# with; its installer runs with --skip-packages, so the image must provide them.
 # Host keys are NOT generated here (PRIVATE key must not land in an image
-# layer). Do not apt-install neovim as the primary editor — nvim is the
-# 0.12.5 tarball under /home/node/.local.
+# layer). Do not apt-install neovim as the primary editor — the DeepWorkPlan
+# Vim installer puts the pinned release under /home/node/.local.
 RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
       less git curl gnupg ca-certificates openssh-client openssh-server \
       sudo nano python3 python3-pip pipx \
-      lua5.4 ripgrep fd-find python3-neovim luarocks \
+      lua5.4 ripgrep fd-find python3-neovim python3-venv luarocks unzip \
+      gcc make libc6-dev fontconfig \
       # Chromium for Lighthouse CI local audits
       chromium && \
     mkdir -p /var/run/sshd /etc/ssh/sshd_config.d && \
@@ -51,7 +54,7 @@ RUN apt-get update -y && \
 # /bin/sh pane reports commands as missing.
 ENV SHELL=/bin/bash
 
-# mu-vim is the terminal editor. ~/.local/bin stays first on PATH below.
+# DeepWorkPlan Vim is the terminal editor. ~/.local/bin stays first on PATH below.
 ENV EDITOR=nvim
 ENV VISUAL=nvim
 ENV GIT_EDITOR=nvim
@@ -83,7 +86,7 @@ RUN mkdir -p "${PNPM_HOME}/bin" \
     && chown -R node:node "${PNPM_HOME}"
 
 # PATH order:
-#   ~/.local/bin first so the Neovim 0.12.5 tarball wins
+#   ~/.local/bin first so the installer's pinned Neovim wins
 #   pnpm globals next
 #   other agent CLI homes
 #   then the image default
@@ -93,7 +96,7 @@ ENV CLINE_DATA_DIR=/home/node/.cline/data
 # Ensure the container's image-installed Node (/usr/local/bin) precedes any
 # IDE-bundled Node, while ~/.local/bin stays first for nvim.
 RUN printf '%s\n' \
-    '# Container Node wins over IDE-bundled Node, but ~/.local/bin stays first (nvim tarball).' \
+    '# Container Node wins over IDE-bundled Node, but ~/.local/bin stays first (pinned nvim).' \
     'if [ -x /usr/local/bin/node ]; then' \
     '  case ":${PATH}:" in' \
     '    ":/usr/local/bin:"*) : ;;' \
@@ -206,42 +209,18 @@ RUN mkdir -p /home/node/.config/herdr && \
         > /home/node/.config/herdr/config.toml; \
     fi
 
-# Full DailybotHQ mu-vim for node. Neovim 0.12.5 lives in ~/.local so it wins
-# over any apt nvim the installer may still place on PATH. Prompts: custom
-# directory No, extras blank. Drive those answers on stdin.
+# DeepWorkPlan Vim for node, through the hosted installer in container mode:
+# --nvim installs the pinned Neovim release (sha256-verified) into
+# ~/.local/opt and links it as ~/.local/bin/nvim; --skip-packages relies on the
+# apt layer above; --strict fails the build when the headless plugin install
+# fails or leaves a required plugin (alpha-nvim, nvim-cmp, mason.nvim) empty.
+# Bumping either ARG rebuilds only this layer. pipefail: a failed download must
+# fail the build, not feed bash an empty script that exits 0.
 USER node
+ARG DWP_VIM_VERSION=0.5.0
 ARG NVIM_VERSION=0.12.5
-RUN set -eu; \
-    arch="$(dpkg --print-architecture)"; \
-    case "$arch" in \
-      amd64) nvim_arch=linux-x86_64 ;; \
-      arm64) nvim_arch=linux-arm64 ;; \
-      *) echo "unsupported arch for neovim tarball: $arch" >&2; exit 1 ;; \
-    esac; \
-    tmp="$(mktemp)"; \
-    curl -fsSL "https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-${nvim_arch}.tar.gz" -o "$tmp"; \
-    mkdir -p /home/node/.local; \
-    tar -xzf "$tmp" -C /home/node/.local --strip-components=1; \
-    rm -f "$tmp"; \
-    test -x /home/node/.local/bin/nvim
-# Pin mu-vim to a release tag only. Changing MU_VIM_REF busts the clone layer.
-ARG DWP_VIM_REF=main
-RUN GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-    git clone https://github.com/DailybotHQ/deepworkplan-vim.git /home/node/.config/nvim \
-    && cd /home/node/.config/nvim \
-    && git checkout --detach "${DWP_VIM_REF}" \
-    && printf 'n\n\n' | lua install.lua \
-    && test -f /home/node/.config/nvim/init.lua \
-    && { { test -f /home/node/.local/share/nvim/deepworkplan-vim-installed || test -f /home/node/.local/share/nvim/mu-vim-installed; } || test -f /home/node/.local/share/nvim/deepworkplan-vim-installed; } \
-    && test -d /home/node/.local/share/nvim/pckr/pckr.nvim \
-    && test -x /home/node/.local/bin/nvim \
-    && GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null \
-       /home/node/.local/bin/nvim --headless "+lua require('pckr.actions').sync()" "+sleep 120" "+qa!" \
-    && python3 -c 'import os,sys; pack=os.path.expanduser("~/.local/share/nvim/site/pack/pckr/opt"); required=("alpha-nvim","nvim-cmp","mason.nvim"); missing=[]; \
-assert os.path.isdir(pack), "pckr opt dir missing: "+pack; \
-[(missing.append(name) if not [e for e in os.listdir(os.path.join(pack,name)) if e!=".git"] else None) for name in sorted(os.listdir(pack)) if os.path.isdir(os.path.join(pack,name))]; \
-[missing.append(name+" (absent)") for name in required if not os.path.isdir(os.path.join(pack,name))]; \
-sys.exit("plugin sync left empty clones: "+", ".join(missing)) if missing else print("plugin sync complete")'
+RUN bash -o pipefail -c 'curl -fsSL https://vim.deepworkplan.com/install.sh \
+    | bash -s -- --version "${DWP_VIM_VERSION}" --nvim "${NVIM_VERSION}" --skip-packages --strict'
 USER root
 
 # Dailybot CLI system-wide (pipx already in the single apt layer above).

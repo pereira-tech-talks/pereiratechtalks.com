@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 Dev container for pereiratechtalks.org: Node 24, pnpm, the Dailybot CLI, **Herdr**
-(mesh runtime), **Neovim 0.12.5 + mu-vim v0.7.0**, and an SSH server on host port
+(mesh runtime), **Neovim 0.12.5 + DeepWorkPlan Vim v0.5.0**, and an SSH server on host port
 **22030**. Coding-agent CLIs (Claude, Codex, Cursor, OpenCode, Pi, Cline, Grok)
 are **opt-in** via `INSTALL_*_CLI=true` build args — the default image stays lean.
 
@@ -44,8 +44,8 @@ Always installed:
 | Tool | Notes |
 |------|-------|
 | `herdr` | Mesh runtime (`allow_nested`); catalog refresh + ED25519 peer trust on start |
-| `nvim` | Neovim **0.12.5** tarball in `~/.local` (`EDITOR=nvim`) |
-| mu-vim | `DailybotHQ/deepworkplan-vim` @ **v0.7.0** under `~/.config/nvim` |
+| `nvim` | Neovim **0.12.5** in `~/.local/opt/nvim-v0.12.5`, linked as `~/.local/bin/nvim` (`EDITOR=nvim`) |
+| DeepWorkPlan Vim | `DailybotHQ/deepworkplan-vim` @ **v0.5.0** under `~/.config/nvim`, installed at build by `https://vim.deepworkplan.com/install.sh --version "$DWP_VIM_VERSION" --nvim "$NVIM_VERSION" --skip-packages --strict` (sha256-verified Neovim; the build fails if a required plugin is missing). Bump with `--build-arg DWP_VIM_VERSION=… NVIM_VERSION=…` |
 | `gh`, `dailybot`, `chelper` | GitHub CLI, Dailybot CLI, Z.AI helper |
 
 Opt-in (rebuild with build-args; only the string `true` installs):

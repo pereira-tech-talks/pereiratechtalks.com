@@ -27,7 +27,7 @@ DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09; skill 7.0.1)
 | Writing Craft | [Writing Craft Guide](docs/WRITING_CRAFT_GUIDE.md) | Narrative structure, fact verification, quote handling, refinement |
 | Testing | [Testing](docs/TESTING_GUIDE.md) | Vitest setup, conventions, writing tests |
 | Commands | [Development Commands](docs/DEVELOPMENT_COMMANDS.md) | npm scripts, Astro CLI, build workflows |
-| Dev container | [Local Docker stack](docker/local/README.md) | Herdr mesh + mu-vim/nvim, selective coding CLIs, SSH on 22030, persistence volumes, `dev.sh` launcher |
+| Dev container | [Local Docker stack](docker/local/README.md) | Herdr mesh + DeepWorkPlan Vim/nvim, selective coding CLIs, SSH on 22030, persistence volumes, `dev.sh` launcher |
 | i18n | [I18N Guide](docs/I18N_GUIDE.md) | Spanish primary + English first-class international |
 | Performance | [Performance](docs/PERFORMANCE.md) | Astro SSG optimization, image handling, caching, per-edition perf |
 | Accessibility | [Accessibility](docs/ACCESSIBILITY.md) | WCAG AA, contrast ratios, ARIA, per-edition palette verification |
@@ -340,14 +340,14 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer/SKILL.md) is installed in **Flow A (local-only)**: vendored skill at `.agents/skills/ai-diff-reviewer/` + a repo-tailored `.review/extension.md`. The mandatory DWP **Security Review** task gains an additional local-review step — invoke *"Review my current branch"*, then append the verdict + findings table under `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`. A `critical` finding follows the Security Review contract (blocks until fixed or explicitly accepted); `warning`/`info` are reported but do not block. Best-effort and **never-block** — skipped (with one warning) if the skill or extension is absent. **No CI workflow** is installed (Flow B deferred); Flow A needs **no** provider secret.
 
-## Local dev stack (Herdr mesh + mu-vim)
+## Local dev stack (Herdr mesh + DeepWorkPlan Vim)
 
-The public open-source local stack lives under `docker/local/pertechtalks/`. Default image: **herdr + Neovim 0.12.5 + mu-vim v0.7.0**. Coding agent CLIs are **opt-in** build args (default `false`).
+The public open-source local stack lives under `docker/local/pertechtalks/`. Default image: **herdr + Neovim 0.12.5 + DeepWorkPlan Vim v0.5.0**, installed by the hosted installer (`https://vim.deepworkplan.com/install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict`; bump `DWP_VIM_VERSION` / `NVIM_VERSION` in the Dockerfile). Coding agent CLIs are **opt-in** build args (default `false`).
 
 | Concern | Detail |
 |---------|--------|
 | SSH host port | **22030** (`ssh -p 22030 node@localhost`) — avoids Cursor's macOS `2222` |
-| Editor | `EDITOR=nvim` via mu-vim (`DailybotHQ/deepworkplan-vim` @ `v0.7.0`) |
+| Editor | `EDITOR=nvim` via DeepWorkPlan Vim (`DailybotHQ/deepworkplan-vim` @ `v0.5.0`, hosted installer, `--strict` plugin check at build) |
 | Mesh stamp | `[herdr-mesh]` on every first-hop ask (reply grant) |
 | Peer includes | `~/.ssh_host/config.d/herdr-peers` (host kits may still publish `dailybot-peers` as a fallback) |
 | Catalog mount | optional `~/.local/state/herdr/client` → `~/.herdr_client_host` (read-only) |
