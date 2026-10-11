@@ -57,7 +57,7 @@ Prefer a container? Open the project in Cursor / VS Code with the Dev Containers
 plugin, or start the same stack from a plain terminal:
 
 ```bash
-bash dev.sh setup && bash dev.sh build && bash dev.sh up && bash dev.sh shell
+bash dev.sh up && bash dev.sh shell
 ```
 
 Both paths produce the same containers and can be used interchangeably.

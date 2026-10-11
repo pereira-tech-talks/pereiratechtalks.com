@@ -69,7 +69,7 @@
       "type": "skill-md",
       "description": "Expose site tools to in-browser AI agents via the WebMCP navigator.modelContext.registerTool() API.",
       "url": "https://isitagentready.com/.well-known/agent-skills/webmcp/SKILL.md",
-      "digest": "sha256:7084ef104e2cdac6a92a29622170c3c894628fbf6406597f86bf4349fa87732b"
+      "digest": "sha256:1f260b3bab0459d31d130db0b137c984686025bd47b5056b6ae602119368b69d"
     }
   ]
 }

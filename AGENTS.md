@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09; skill 7.0.1)
+DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09 and 2026-10-11; skill 7.3.0)
 
 ## Detailed Documentation
 
@@ -340,37 +340,24 @@ Multiple AI agents collaborate on this codebase. When updating agent guidance, m
 
 The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer/SKILL.md) is installed in **Flow A (local-only)**: vendored skill at `.agents/skills/ai-diff-reviewer/` + a repo-tailored `.review/extension.md`. The mandatory DWP **Security Review** task gains an additional local-review step — invoke *"Review my current branch"*, then append the verdict + findings table under `## AI Diff Reviewer local review` in `analysis_results/SECURITY_REVIEW.md`. A `critical` finding follows the Security Review contract (blocks until fixed or explicitly accepted); `warning`/`info` are reported but do not block. Best-effort and **never-block** — skipped (with one warning) if the skill or extension is absent. **No CI workflow** is installed (Flow B deferred); Flow A needs **no** provider secret.
 
-## Local dev stack (Herdr mesh + DeepWorkPlan Vim)
+## Local dev stack (devcontainer-kit + agents kit + Herdr mesh)
 
-The public open-source local stack lives under `docker/local/pertechtalks/`. Default image: **herdr + Neovim 0.12.5 + DeepWorkPlan Vim v0.5.0**, installed by the hosted installer (`https://vim.deepworkplan.com/install.sh --version 0.5.0 --nvim 0.12.5 --skip-packages --strict`; bump `DWP_VIM_VERSION` / `NVIM_VERSION` in the Dockerfile). Coding agent CLIs are **opt-in** build args (default `false`).
+The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` v0.2.5) from `.devcontainer/dck.toml` (service `pertechtalks`, user `node`, `/app`): official `node-24` image pinned by digest, coding-agents-kit (`ak`, seven CLIs, autonomy by default — opt-out `AGENTKIT_PERMISSIONS=ask`), DeepWorkPlan Vim v0.6.0, the Dailybot CLI, Herdr and herdr-peers. Blocks between `>>> dck:` markers belong to dck (`dck init` reconciles them); the site's own section (chromium, the npm → pnpm shim, the helpers) sits below them.
 
 | Concern | Detail |
 |---------|--------|
-| SSH host port | **22030** (`ssh -p 22030 node@localhost`) — avoids Cursor's macOS `2222` |
-| Editor | `EDITOR=nvim` via DeepWorkPlan Vim (`DailybotHQ/deepworkplan-vim` @ `v0.5.0`, hosted installer, `--strict` plugin check at build) |
-| Mesh stamp | `[herdr-mesh]` on every first-hop ask (reply grant) |
-| Peer includes | `~/.ssh_host/config.d/herdr-peers` (host kits may still publish `dailybot-peers` as a fallback) |
-| Catalog mount | optional `~/.local/state/herdr/client` → `~/.herdr_client_host` (read-only) |
+| Dev server | `127.0.0.1:8888` |
+| SSH / Herdr | `127.0.0.1:22030`, dck key only; Herdr machine "pereiratechtalks.com" (alias `dck-pereiratechtalks-com`) |
+| Mesh | `dck up` pushes the host, the other dck containers and the host's other loopback containers (pinned host keys); agents ask each other with `herdr-peers` |
+| Persistence | named volumes: `state` (ssh, gh, Herdr config + catalog, Dailybot), `agentkit`, one per CLI |
+| Start hook | `docker/local/dev-setup-hook.sh` pins pnpm's store off the bind mount |
 
 ```bash
-bash dev.sh setup && bash dev.sh build && bash dev.sh up
+bash dev.sh up                    # build if needed, start, attach to Herdr
 bash dev.sh shell                 # login as node in /app
-bash dev.sh ssh                   # same path Herdr uses (port 22030)
-bash dev.sh agents                # list live machines/agents (prepare mesh first)
-bash dev.sh ask 1 "Prompt..."     # send prompt + [herdr-mesh] reply grant
-bash dev.sh ask <machine-id> <pane> "Prompt..."
-```
-
-- `#` is only valid for the list you just printed; **PANE** (`w5:p2`) + machine **ID** are the stable address.
-- Replies keep the `[herdr-mesh]` stamp so the next hop is marked as a reply and is not answered again.
-- Selective CLIs (rebuild when you need them):
-
-```bash
-docker compose -f docker/local/docker-compose.yaml build \
-  --build-arg INSTALL_CLAUDE_CLI=true \
-  --build-arg INSTALL_CODEX_CLI=true
-# Also: INSTALL_CURSOR_CLI, INSTALL_PI_CLI, INSTALL_OPENCODE_CLI,
-#       INSTALL_CLINE_CLI, INSTALL_GROK_CLI
+bash dev.sh ssh                   # same path Herdr uses
+bash dev.sh agents                # live agents on every Herdr machine
+bash dev.sh ask <machine>:<pane> "Prompt..."   # herdr-peers ask with the reply grant
 ```
 
 Full stack notes: [docker/local/README.md](docker/local/README.md).
@@ -381,9 +368,9 @@ Full stack notes: [docker/local/README.md](docker/local/README.md).
 pnpm run dev                # Dev server (http://localhost:8888)
 bash dev.sh up              # Same dev containers the IDE plugin starts, no IDE needed
 bash dev.sh shell           # Login shell as `node` in /app
-bash dev.sh ssh             # SSH in the way Herdr does (port 22030)
+bash dev.sh ssh             # SSH in the way Herdr does (127.0.0.1:22030)
 bash dev.sh agents          # Live Herdr machines and agents
-bash dev.sh ask <#> "..."   # Prompt another agent with a [herdr-mesh] reply grant
+bash dev.sh ask <machine>:<pane> "..."   # herdr-peers ask, with the reply grant
 bash dev.sh doctor          # Read-only diagnosis of the container environment
 pnpm run build              # Production build (astro check && astro build)
 pnpm run astro:preview      # Preview production build
@@ -758,7 +745,7 @@ never migrated implicitly.
 ## Deep Work Plan flows
 
 Structured multi-task work runs through the vendored **DeepWorkPlan** skill
-(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.0.1). Route by intent:
+(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.3.0). Route by intent:
 
 | Intent | Command |
 |--------|---------|

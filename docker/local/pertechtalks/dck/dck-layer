@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# dck-layer <layer> [args...] — run an opt-in layer installer baked into the
+# base image (/usr/local/lib/dck/layers/<layer>.sh). Used by the repository's
+# Dockerfile that `dck init` renders; see docs/layers.md.
+set -euo pipefail
+case "${1:-}" in
+  ''|*[!a-z0-9_-]*) echo "usage: dck-layer <layer> [args...]" >&2; exit 2 ;;
+esac
+layer="$1"; shift
+script="/usr/local/lib/dck/layers/$layer.sh"
+[ -f "$script" ] || { echo "dck-layer: unknown layer '$layer'" >&2; exit 2; }
+exec bash "$script" "$@"

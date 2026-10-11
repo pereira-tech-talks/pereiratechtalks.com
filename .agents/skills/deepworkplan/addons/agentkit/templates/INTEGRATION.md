@@ -13,7 +13,9 @@ git worktree add ../<repo>-<delegation_id> -b dwp/<plan>/<delegation_id>
 ```
 
 A read-only delegate gets no worktree: `--cwd` is the repository and the
-prompt says "do not modify files"; record `"worktree": null`.
+prompt says "do not modify files"; record `"worktree": null`, and always
+launch it with `--ask` (read-only intent means ask: autonomy in the
+repository itself would approve writes to the developer's checkout).
 
 ## 2. Compose the prompt (data the delegate reads)
 
@@ -32,12 +34,25 @@ python3 <pack>/shared/ledger.py --plan <dir> delegate launch --task <T-id> \
            "kind": "<kind>", "profile": "<@profile or omit>", "target": "<worktree>",
            "worktree": "<worktree>", "prompt_digest": "sha256:<hex>"}'
 mkdir -p <dir>/analysis_results/delegations/<id>
-ak run <kind> [@profile] --cwd <worktree> --timeout <seconds> --output-format json \
+ak run <kind> [@profile] --cwd <worktree> --timeout <seconds> --output-format json [--ask] \
   -- "<prompt>" > <dir>/analysis_results/delegations/<id>/result.json &
 ```
 
-No `--auto` unless the developer's per-plan autonomy opt-in is recorded
-and the worktree (or container) is isolated.
+A **read-only** delegate always gets `--ask`, with `--cwd` the repository
+and `"worktree": null` (and `"target"` the repository) in the launch
+record — read-only intent means ask:
+
+```bash
+ak run <kind> [@profile] --cwd <repo> --timeout <seconds> --output-format json --ask \
+  -- "<prompt>" > <dir>/analysis_results/delegations/<id>/result.json &
+```
+
+A writing delegate launches in the kit's autonomy by default, inside its
+worktree. Add `--ask` when the plan records the developer's opt-out; an
+inherited `AGENTKIT_PERMISSIONS=ask` already wins without it, so never
+unset it.
+Never add `--auto` or spell a CLI autonomy flag; `--ask` is the only flag
+the pack passes.
 
 ## 4. Observe
 

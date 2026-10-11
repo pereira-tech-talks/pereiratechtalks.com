@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# devcontainer-kit default entrypoint: the standard start sequence from the
+# entrypoint library, then the container command (default: sleep infinity).
+# Docs: docs/entrypoint.md. A failing step is logged and never stops the
+# container from starting.
+# shellcheck source=lib/entrypoint.sh
+. /usr/local/lib/dck/entrypoint.sh
+dck_start
+exec "$@"

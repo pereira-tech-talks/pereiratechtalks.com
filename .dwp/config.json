@@ -2,28 +2,35 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "accepted; machine-level install deferred (installs into $HOME)",
-      "version": "v0.1.1"
+      "version": "v0.3.0"
     },
     "ai-diff-reviewer": {
       "enabled": true,
-      "version": "v3.3.0"
+      "version": "v3.3.1"
+    },
+    "dailybot": {
+      "enabled": true,
+      "version": "v3.23.4"
     },
     "dependency-upgrade": {
-      "enabled": true
+      "enabled": true,
+      "version": "v7.3.0"
     },
     "design-system": {
-      "enabled": true
+      "enabled": true,
+      "version": "v7.3.0"
+    },
+    "devcontainer": {
+      "enabled": true,
+      "version": "v0.2.5"
     },
     "herdr": {
       "enabled": true,
-      "note": "accepted; machine-level install deferred (installs into $HOME)",
       "version": "v0.1.0"
     },
     "vim": {
       "enabled": true,
-      "note": "accepted; machine-level install deferred (installs into $HOME)",
-      "version": "v0.4.2"
+      "version": "v0.6.0"
     }
   },
   "host": {
