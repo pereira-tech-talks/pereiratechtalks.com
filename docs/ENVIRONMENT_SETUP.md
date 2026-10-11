@@ -14,7 +14,7 @@ Copy `docker/local/pertechtalks/.env.example` → `.env` inside the same directo
 ERR_PNPM_EPERM  EPERM: operation not permitted, stat '/app/.pnpm-store/v11/files/...'
 ```
 
-Left to itself pnpm places the store on the project's own drive, which is exactly the broken case, so `entrypoint.sh` (`setup_nodejs`) pins it:
+Left to itself pnpm places the store on the project's own drive, which is exactly the broken case, so the container's start hook (`docker/local/dev-setup-hook.sh`, run by devcontainer-kit at every start) pins it:
 
 ```yaml
 # /home/node/.config/pnpm/config.yaml — regenerated on every container start
@@ -22,7 +22,7 @@ storeDir: /home/node/.local/share/pnpm/store
 cacheDir: /home/node/.cache/pnpm
 ```
 
-Both paths are backed by the `pnpm_store` / `pnpm_cache` named volumes (real ext4), so a container rebuild does not re-download the dependency tree.
+Both paths sit on the container's own filesystem (real ext4). A `bash dev.sh rebuild` starts with an empty store, so the next `pnpm install` downloads the tree again.
 
 Two constraints worth knowing before changing any of this:
 

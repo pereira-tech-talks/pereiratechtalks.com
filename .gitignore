@@ -35,8 +35,8 @@ coverage/
 # VSCode (local editor settings)
 .vscode/
 
-# devcontainer (local dev setup)
-.devcontainer/
+# devcontainer-kit renders .devcontainer/ (tracked); dck backups are local only
+*.dck-bak-*
 
 # Deep Work Plan outputs (plans + drafts are working artifacts, not tracked source).
 # The addon registry is shared with teammates and CI (DWP 7.0.0, spec/CONFIG.md).
@@ -76,3 +76,14 @@ packages_upgrades_output.txt
 # Dead plan-output tree. Plans live in `.dwp/` now; some older scripts still
 # recreated this path, and one run of them got committed by a `git add -A`.
 .agent_commands/
+
+# Dailybot per-repo reporting opt-out (local kill-switch; profile.json IS tracked)
+.dailybot/disabled
+
+# >>> dck:gitignore >>>
+# devcontainer-kit: runtime env files hold secrets; backups from `dck init`.
+docker/local/**/.env
+docker/local/**/.env.*
+!docker/local/**/.env.example
+*.dck-bak-*
+# <<< dck:gitignore <<<

@@ -1,0 +1,11 @@
+# Seeded by devcontainer-kit. The entrypoint keeps these keys present and
+# leaves every other setting (and any value you change) alone.
+onboarding = false
+
+[terminal]
+default_shell = "/bin/bash"
+shell_mode = "login"
+new_cwd = "/workspace"
+
+[experimental]
+allow_nested = true

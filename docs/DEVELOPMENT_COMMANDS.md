@@ -323,217 +323,26 @@ pnpm run dev -- --port 3000
 
 ### Devcontainer (Cursor / VS Code)
 
-When using the devcontainer, the host port is mapped to **8888** (not Astro's default 4321) to avoid conflict with macOS AirPlay Receiver. Access the dev server at `http://localhost:8888`.
-
-The container also ships the coding-agent suite (Claude Code, Codex, OpenCode,
-Pi, Cline, Grok, Cursor, Herdr, Z.AI helper, Dailybot CLI) and an SSH server on
-host port **22030**, so you can drive it from another machine:
-
-```bash
-ssh -p 22030 node@localhost   # `sshinfo` inside the container prints the details
-```
-
-Provider keys live in `docker/local/pertechtalks/.env`. Run `help` inside the
-container for the full command list. Full reference:
-**[Local Docker development stack](../docker/local/README.md)**.
+The dev server is published on **127.0.0.1:8888** (not Astro's default 4321). VS Code / Cursor "Reopen in Container" and `bash dev.sh` open the same container.
 
 ## Dev Containers Without an Editor (`dev.sh`)
 
-`dev.sh` at the repository root starts the same containers the Dev Containers
-plugin starts, detached, from a plain terminal. Opening the project in Cursor or
-VS Code keeps working exactly as before — the two paths coexist.
+The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, v0.2.5) from `.devcontainer/dck.toml`; `dev.sh` is its launcher. Docker is the only host requirement: without dck, the container verbs (`up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`) run on plain `docker compose`, and `bash dev.sh install-dck` installs dck pinned and verified.
 
 ```bash
-bash dev.sh setup     # one-time: env files, networks, .devcontainer/
-bash dev.sh build     # build the image (coding CLIs opt-in via INSTALL_*_CLI)
-bash dev.sh up        # start the runServices, detached
-bash dev.sh shell     # login shell as `node` in /app
-bash dev.sh agents    # list live Herdr machines/agents (mesh + [herdr-mesh])
-bash dev.sh ask 1 "…" # prompt another agent with a reply grant
+bash dev.sh up        # build if needed, start, register the Herdr machine (first run: .env files, dck SSH key)
+bash dev.sh shell     # login shell as node in /app
+bash dev.sh rebuild   # new image, every named volume kept
+bash dev.sh ssh       # the SSH path Herdr uses (127.0.0.1:22030, dck key only)
+bash dev.sh agents    # live agents on every Herdr machine
+bash dev.sh ask <machine>:<pane> "..."   # herdr-peers ask, with the reply grant
+bash dev.sh doctor    # read-only diagnosis
+bash dev.sh help      # every verb
 ```
 
-`.devcontainer/devcontainer.json` is the single source of truth. `runServices`
-decides what starts — add a service there and `dev.sh up` starts it with no
-other edit. `remoteUser`, `workspaceFolder`, `mounts` and `containerEnv` are
-read from the same file. `.devcontainer/` is git-ignored here, so `setup`
-creates it from the tracked `.devcontainer_example/`.
+Inside: coding-agents-kit (`ak`) with seven CLIs (`claudex`, `codexx`, … through ak; autonomy by default, opt-out `AGENTKIT_PERMISSIONS=ask`), DeepWorkPlan Vim as the editor, the Dailybot CLI, Herdr and herdr-peers. The site helpers (`check`, `fix`, `run_tests`, `lighthouse`, `codecheck`, `install`) come from `docker/custom_commands.sh`. Logins, `gh`, Herdr's config and machine catalog survive `rebuild`. Git over SSH uses the host's SSH agent; no key enters the container.
 
-| Verb | Description |
-| :--- | :---------- |
-| `setup` | Create `.env` files (mode `0600`), external networks, `.devcontainer/` from `.devcontainer_example/`, and set `"shutdownAction": "none"` |
-| `up [service...]` | Start the `runServices`, detached. A second `up` is a no-op |
-| `down [service...]` | Stop and remove this repository's services (named volumes are kept) |
-| `stop` / `start` / `restart` | Lifecycle for the same set |
-| `ps` | What is running |
-| `logs [service...]` | Follow logs |
-| `shell [service]` | Login shell as `remoteUser`, in `workspaceFolder` |
-| `exec <service> <cmd>` | Run one command in a service |
-| `ssh [cmd...]` | SSH in as `remoteUser` — the environment Herdr actually gets |
-| `build [service...]` | Build images |
-| `config` | Resolved configuration — writes nothing, starts nothing |
-| `doctor` | Environment diagnosis — writes nothing, starts nothing |
-
-Flags: `--recreate` (with `up`, to apply compose changes to existing containers)
-and `--project <name>` (override the compose project). Flags go **before** the
-verb: everything after `ssh`, and after `exec <service>`, is passed to the
-container verbatim.
-
-**`setup` sets `"shutdownAction": "none"`.** The plugin's default is to stop the
-containers when the editor window closes, which is the opposite of what a
-terminal user wants. The key is additive, so the plugin path is unaffected — it
-just stops tearing the stack down. Use `dev.sh down` to stop it deliberately.
-
-**`config` and `doctor` are read-only.** They are what you run when something is
-wrong, so they never create a file, a network, or a container.
-
-`doctor` also reports whether `docker/local/pertechtalks/.env` is readable by
-other accounts on the machine (it holds API keys), which compose files the
-running container was created from — the fastest way to see whether the terminal
-path and the editor path agree — and whether `sshd` is answering on the
-published port.
-
-### SSH access and Herdr
-
-The container runs `sshd` on **22030**, published on the same port on the host,
-so Herdr can drive it as a machine. `dev.sh ssh` connects without you having to
-remember any of that; for Herdr itself, add the alias to the host's
-`~/.ssh/config`:
-
-```
-Host pereiratechtalks-com
-  HostName 127.0.0.1
-  Port 22030
-  User node
-  StrictHostKeyChecking accept-new
-```
-
-```bash
-herdr machine add --label "pereiratechtalks.com" pereiratechtalks-com
-herdr machine list                                   # id, label, ssh target, state
-herdr --machine "pereiratechtalks.com" workspace list
-```
-
-`--machine` resolves the **label** or the id, not the SSH target, so
-`--machine pereiratechtalks-com` reports `unknown machine` while
-`--machine "pereiratechtalks.com"` works. It also only runs API-backed machine
-commands — it is not a way to run an arbitrary shell command on the remote; use
-`dev.sh ssh` or `ssh pereiratechtalks-com` for that.
-
-`authorized_keys` is rebuilt at container start from the host keys mounted
-read-only at `~/.ssh_host`, so no key material is ever baked into the image.
-Host keys live in the `sshd_data` volume and are generated once, so the
-container's identity survives a rebuild and clients never hit a host-key
-mismatch. Verify with `ssh-keyscan -p 22030 127.0.0.1` before and after
-`dev.sh up --recreate`: the fingerprint must not change.
-
-**Verify over SSH, not with `docker exec`.** `docker exec` hands the session
-PID 1's environment, so a container whose SSH wiring is broken still looks
-perfectly healthy through it. `sshd` starts every session clean — which is
-exactly what Herdr gets:
-
-```bash
-bash dev.sh ssh 'command -v opencode; echo "${ZAI_CODING_API_KEY:0:4}"'
-bash dev.sh ssh 'bash -lc "command -v codex"'
-bash dev.sh ssh 'grokx --help >/dev/null && echo wrappers-ok'
-```
-
-Three separate mechanisms make those work, because login and non-login shells
-need separate wiring:
-
-- **Login shells** (`dev.sh ssh` with no command, Herdr panes — its `config.toml`
-  pins `shell_mode = "login"`) read `/etc/profile.d`. `entrypoint.sh` writes the
-  compose environment there as `01-container-env.sh`, mode `0640 root:node`
-  because it holds `ZAI_CODING_API_KEY`, `XAI_API_KEY` and
-  `AZURE_OPENAI_API_KEY`.
-- **Non-interactive bash** (`ssh host <command>`, `dev.sh ssh '<command>'`)
-  reads no profile at all. `BASH_ENV` alone is **not** enough here,
-  and this is worth knowing because it looks like it should be: bash reads
-  `BASH_ENV` for ordinary non-interactive shells, but for one it detects was
-  started by `sshd` it reads `~/.bashrc` *instead*. Debian's `~/.bashrc` then
-  returns at `case $- in *i*) ;; *) return;; esac` on line 5, so everything the
-  image appended below that line is dead code for exactly this caller. The
-  entrypoint therefore **prepends** its PATH and environment preamble above that
-  guard. `~/.ssh/environment` still carries the provider variables and
-  `BASH_ENV` for the non-`sshd` cases.
-- **The wrappers themselves** are bash *functions*, which no environment
-  variable can carry. The entrypoint installs PATH shims in `/usr/local/bin`
-  for the wrapper-only names (`grokx`, `claudex`, `pix`, `codexx`, `check`,
-  `sshinfo`, …); each re-sources `custom_commands.sh` and calls the function of
-  its own name. Names that are real binaries (`claude`, `codex`, `opencode`,
-  `pi`, `cline`, `herdr`, `agent`, `chelper`) are deliberately not shimmed — a
-  shim there would shadow the binary for every shell, including the wrapper's
-  own call to it.
-
-#### Herdr terminals open in `/app`
-
-`[terminal] new_cwd = "/app"` in the container's `~/.config/herdr/config.toml`,
-written by `entrypoint.sh` and persisted in the `herdr_data` volume, alongside
-`default_shell = "/bin/bash"`, `shell_mode = "login"` and
-`experimental.allow_nested = true`.
-
-The key is **`new_cwd`**. `working_directory` reads like the obvious name and is
-silently ignored — `herdr config check` reports it as an unknown key.
-
-**Validate that file with `herdr config check`, never with `grep`.** An invalid
-`config.toml` is not partially applied — herdr discards it wholesale and runs on
-defaults. A grep that finds the line proves the line is in the file, not that
-herdr ever read it. The entrypoint runs that check on every start and prints a
-warning if the file was rejected. Workspaces created *before* the setting keep
-their original cwd; only new ones pick it up.
-
-### Build troubleshooting (hard-won)
-
-Three things make this image slow or impossible to build on some networks. All
-three are fixed in `docker/local/pertechtalks/Dockerfile`; this records why, so
-nobody reverts them.
-
-**The apt mirror.** `deb.debian.org` resolves to an edge that serves some
-networks at ~55 KB/s, which turns the Chromium install into a 50-minute step
-that looks frozen (BuildKit shows one line per `RUN`, so a ~250-package download
-appears as a single stalled row). `cdn-aws.deb.debian.org` serves the identical
-archives at 12-18 MB/s. `ARG APT_MIRROR` rewrites **both** the main and the
-`debian-security` URIs; Chromium ships from security, so a mirror carrying only
-main leaves the two largest packages on the slow path. Override per build:
-`docker compose build --build-arg APT_MIRROR=deb.debian.org`.
-
-**Herdr's installer timeout.** It caps its binary download at `--max-time 120`,
-with no environment variable to override it. At ~50 KB/s the 24 MB binary needs
-about eight minutes, so all four retries die at two and the build **fails
-outright** — retrying never helps. The Dockerfile pipes the installer through
-`sed 's/--max-time 120/--max-time 1800/'`, which lifts only that cap and leaves
-the SHA-256 verification intact.
-
-**`/etc/profile` overwrites `PATH`.** Debian sets
-`PATH="/usr/local/bin:/usr/bin:/bin:..."` for non-root users, discarding the
-image's `ENV PATH`. `docker exec` keeps the ENV and sees every CLI; a **login
-shell** silently loses `opencode`, `grok`, `codex`, `cline`, `pi` and `chelper`,
-while `node` and `claude` keep working, which is what makes it so confusing to
-diagnose. The entrypoint's `01-container-env.sh` snapshot restores it, and
-`/etc/profile.d/02-container-tool-paths.sh` is the fallback for when it cannot
-(no `python3`, an overridden entrypoint). It **appends** those directories,
-never prepends: `00-container-node-first.sh` has already put `/usr/local/bin` in
-front so the image's own node beats an IDE-bundled one.
-
-Diagnosing a slow build: `docker builder du` does **not** show progress during a
-`RUN` step — the download goes to the layer under construction, not the cache,
-so the total sits still while everything is fine.
-
-### Things `dev.sh` deliberately does not do
-
-- **It never passes `--remove-orphans`.** The flag deletes every container in
-  the project that the *current* compose file does not declare — including one
-  an older branch's compose file started and someone is still using, and any
-  on-demand service added later but left out of `runServices`. Compose prints a
-  warning recommending it; here that warning is an instruction to destroy
-  containers you asked for.
-- **It never lets compose default the project name to the directory.** The
-  project is resolved from `--project`, then `COMPOSE_PROJECT_NAME`, then
-  `docker/local/.env`, then the top-level `name:` in the compose file
-  (`pertechtalkslocal`), and it refuses to run if none of those answer. Falling
-  back to the directory name would build a second, parallel set of containers
-  next to the real ones and fight them over ports 8888 and 22030.
-- **It never uses `docker compose down`,** which acts on the whole project.
-  `dev.sh down` removes only the services this repository declares.
+Full workflow, persistence and troubleshooting: [docker/local/README.md](../docker/local/README.md).
 
 ## Scripts Reference
 

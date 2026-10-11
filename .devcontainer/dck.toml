@@ -1,0 +1,51 @@
+# devcontainer-kit config for this repository (interface 2).
+# Reference: https://github.com/DailybotHQ/devcontainer-kit/blob/v0.2.5/docs/config.md
+# Edit this file, then run `dck init` to reconcile the generated files.
+interface = 2
+
+# Compose service the tools attach to, its user and workspace folder.
+service = "pertechtalks"
+user = "node"
+workspace = "/app"
+
+# Runtime: python-3.13 | node-24 | debian. The Dockerfile starts FROM that
+# runtime's official image, pinned by digest in docker/local/<service>/dck/versions.env.
+flavour = "node-24"
+# Optional: a different official image for the runtime, pinned by digest, e.g.
+# base_image = "node:22.20.0-trixie-slim@sha256:<64 hex>"
+
+# Share the host's SSH agent with the container (git over SSH; keys never enter it).
+ssh_agent = true
+# Your host SSH config aliases for git hosts inside (github.com-work, …): `dck up`
+# copies the Host blocks and PUBLIC keys only (never a key file or a mount), and
+# offers to ssh-add a missing key. Other hosts: [ssh] host_extra in your host profile.
+ssh_host_config = true
+
+# Loopback-only host port for the container's sshd (Herdr, `dck ssh`); 0 = no sshd.
+ssh_port = 22030
+
+# Named ports, each published as 127.0.0.1:<port>:<port>, e.g. { web = 4321 }.
+ports = { web = 8888 }
+
+[layers]
+# true → installs coding-agents-kit (ak) at its pinned tag; see [agents].
+agents = true
+# true only when the dailybot addon asks for it.
+dailybot = true
+# nvim + deepworkplan-vim as the default editor.
+editor = true
+
+[agents]
+# Kinds passed to `ak install` when layers.agents is true.
+clis = ["claude", "codex", "cursor", "opencode", "pi", "cline", "grok"]
+
+[herdr]
+# Register the container as a Herdr machine on `dck up` (needs ssh_port).
+machine = true
+label = "pereiratechtalks.com"
+# The sidebar `dck up` creates inside the container: "standard" (Home · Editor ·
+# Development · Agents) or "none".
+layout = "standard"
+# `dck up` makes the other dck containers (and the host, with host_machine)
+# reachable from inside (Docker Desktop only; see docs/SECURITY.md).
+mesh = true
