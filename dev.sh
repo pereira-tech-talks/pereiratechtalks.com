@@ -12,7 +12,7 @@
 #   bash dev.sh help      every command
 # >>> dck:devsh >>>
 set -euo pipefail
-DCK_RENDERED_WITH="v0.2.8"
+DCK_RENDERED_WITH="v0.2.9"
 # sha256 of that release's SHA256SUMS, when the rendering dck knew it (else empty).
 DCK_SUMS_SHA256=""
 # The compose project dck uses, so plain compose never acts on another checkout.
@@ -30,7 +30,7 @@ usage: bash dev.sh <command> [args]
   logs | ps | doctor    container logs | status | a full diagnosis
   ssh [cmd...]          ssh into the container with agent forwarding
   herdr [add|status|repair|remove|mesh]   the container as a Herdr machine (default: add)
-  herdr-layout [--keep|--reset]   the standard sidebar inside: Home · Editor · Development · Agents
+  herdr-layout [--keep|--reset]   the standard sidebar inside: App · Editor · Development · Agents
   agents                the live coding agents on every Herdr machine
   ask <machine>:<pane> "<prompt>"   ask one of them, with the reply grant
   install-dck           install devcontainer-kit (dck) on this host, pinned and verified

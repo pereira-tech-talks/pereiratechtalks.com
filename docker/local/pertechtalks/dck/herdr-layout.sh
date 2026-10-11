@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
 #
 # dck-herdr-layout [--keep | --reset] — the standard Herdr sidebar inside the
-# container: Home · Editor · Development (server | tests) · Agents (Agent 1..4).
+# container: App · Editor · Development (server | tests) · Agents (Agent 1..4),
+# every pane in the app path (the workspace directory: dck.toml `workspace`).
 #
 # Runs as the container user against the container's own Herdr server (the one
 # the host Herdr talks to when it attaches this machine). `dck herdr layout`
 # docker-execs it; `dck up` runs it with --keep after `dck herdr add`.
 #
-#   --keep    keep what exists and create only what is missing. Development is
+#   --keep    keep what exists and create only what is missing (a "Home" from an
+#             earlier version is renamed App). Development is
 #             split only when it has exactly one pane: two or more panes (a
 #             layout arranged by hand) or an unreadable count are left alone.
 #             A tab whose presence cannot be read is skipped, never duplicated.
-#   --reset   close the four standard workspaces (and the legacy "Home (~)")
-#             and recreate them; no other workspace is touched; aborts if any
-#             of them cannot be closed.
+#   --reset   close the four standard workspaces (and the legacy "Home" and
+#             "Home (~)") and recreate them; no other workspace is touched;
+#             aborts if any of them cannot be closed.
+#   Both modes then close Herdr's auto-created "~" workspace (the one its server
+#   opens in the home directory before this runs) while it is still just that:
+#   one pane and no agent.
 #   (none)    with a TTY, ask [y/N] whether to reset (default: keep); without a
 #             TTY, keep.
 #
 # Every pane is a plain shell in the workspace directory: the layout starts no
-# program. Everything is created with --no-focus; Home gets the focus at the end.
+# program. Everything is created with --no-focus; App gets the focus at the end.
 set -euo pipefail
 
 say() { printf 'herdr-layout: %s\n' "$*"; }
@@ -29,7 +34,7 @@ for arg in "$@"; do
   case "$arg" in
     --keep) [ "$mode" = reset ] && die "use either --keep or --reset" 2; mode=keep ;;
     --reset) [ "$mode" = keep ] && die "use either --keep or --reset" 2; mode=reset ;;
-    -h|--help) sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    -h|--help) sed -n '2,25p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) die "unknown flag '$arg' (use --keep or --reset)" 2 ;;
   esac
 done
@@ -38,7 +43,7 @@ command -v python3 >/dev/null 2>&1 || die "python3 is required" 4
 if [ -z "$mode" ]; then
   mode=keep
   if [ -t 0 ]; then
-    printf 'Reset the existing Home / Editor / Development / Agents workspaces? [y/N] '
+    printf 'Reset the existing App / Editor / Development / Agents workspaces? [y/N] '
     read -r ans || true
     case "${ans:-}" in y|Y|yes|YES) mode=reset ;; esac
   fi
@@ -110,9 +115,9 @@ close_label() {  # close_label <label> — 0 when gone (or never there)
 }
 
 if [ "$mode" = reset ]; then
-  say "resetting Home · Editor · Development · Agents"
+  say "resetting App · Editor · Development · Agents"
   failed=0
-  for label in Home "Home (~)" Editor Development Agents; do
+  for label in App Home "Home (~)" Editor Development Agents; do
     close_label "$label" || failed=1
   done
   [ "$failed" -eq 0 ] || die "--reset could not close every standard workspace; nothing was recreated"
@@ -131,7 +136,12 @@ simple() {
   printf '%s' "$id"
 }
 
-home_ws="$(simple Home home)"
+# An earlier version named the first workspace Home: keep it, as App.
+if [ -z "$(ws_id App)" ]; then
+  old="$(ws_id Home)"
+  if [ -n "$old" ] && herdr workspace rename "$old" App >/dev/null 2>&1; then say "renamed Home to App"; fi
+fi
+home_ws="$(simple App app)"
 simple Editor editor >/dev/null
 
 dev_ws="$(ws_id Development)"
@@ -179,5 +189,11 @@ else
   done
 fi
 
+# Herdr's server opens its first workspace in the home directory ("~") before
+# this layout exists. Close it while it is still only that: one pane, no agent.
+for wid in $(herdr workspace list 2>/dev/null | json "' '.join(w.get('workspace_id') or '' for w in (r.get('workspaces') or []) if (w.get('label') or '') == '~' and w.get('pane_count', 1) == 1 and (w.get('agent_status') or 'unknown') in ('unknown', 'none'))"); do
+  if herdr workspace close "$wid" >/dev/null 2>&1; then say "closed Herdr's default ~ workspace"; fi
+done
+
 [ -z "$home_ws" ] || herdr workspace focus "$home_ws" >/dev/null 2>&1 || true
-say "ready — Home · Editor · Development · Agents"
+say "ready — App · Editor · Development · Agents"
