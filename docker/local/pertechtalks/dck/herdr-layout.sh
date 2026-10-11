@@ -16,8 +16,8 @@
 #   --reset   close the four standard workspaces (and the legacy "Home" and
 #             "Home (~)") and recreate them; no other workspace is touched;
 #             aborts if any of them cannot be closed.
-#   Both modes then close Herdr's auto-created "~" workspace (the one its server
-#   opens in the home directory before this runs) while it is still just that:
+#   Both modes then close the workspace Herdr's server opens before this runs
+#   (named "~", or after the app path, e.g. "app") while it is still just that:
 #   one pane and no agent.
 #   (none)    with a TTY, ask [y/N] whether to reset (default: keep); without a
 #             TTY, keep.
@@ -189,10 +189,13 @@ else
   done
 fi
 
-# Herdr's server opens its first workspace in the home directory ("~") before
-# this layout exists. Close it while it is still only that: one pane, no agent.
-for wid in $(herdr workspace list 2>/dev/null | json "' '.join(w.get('workspace_id') or '' for w in (r.get('workspaces') or []) if (w.get('label') or '') == '~' and w.get('pane_count', 1) == 1 and (w.get('agent_status') or 'unknown') in ('unknown', 'none'))"); do
-  if herdr workspace close "$wid" >/dev/null 2>&1; then say "closed Herdr's default ~ workspace"; fi
+# Herdr's server opens a first workspace before this layout exists, named after
+# its directory: "~" in the home directory, or the app path's last component
+# ("app" for /app) once new_cwd points there. Close it while it is still only
+# that: one pane, no agent. The standard labels are never touched.
+default_label="$(basename "$cwd")"
+for wid in $(herdr workspace list 2>/dev/null | json "' '.join(w.get('workspace_id') or '' for w in (r.get('workspaces') or []) if (w.get('label') or '') in ('~', $(printf '%s' "$default_label" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')) and (w.get('label') or '') not in ('App', 'Editor', 'Development', 'Agents') and w.get('pane_count', 1) == 1 and (w.get('agent_status') or 'unknown') in ('unknown', 'none'))"); do
+  if herdr workspace close "$wid" >/dev/null 2>&1; then say "closed Herdr's default workspace ($wid)"; fi
 done
 
 [ -z "$home_ws" ] || herdr workspace focus "$home_ws" >/dev/null 2>&1 || true
