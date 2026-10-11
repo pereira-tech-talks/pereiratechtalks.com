@@ -1,7 +1,7 @@
 ---
 name: deepworkplan
 description: DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, upgrade, and repo-onboarding sub-skills based on intent. Use when the developer wants to plan, execute, manage, or verify structured multi-task work, or make a repository AI-agent-ready.
-version: "7.5.1"
+version: "7.6.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -196,9 +196,10 @@ rendered version lives at https://deepworkplan.com/spec.
 
 ### Addons — one required local review, seven opt-in
 
-The [`addons/`](addons/README.md) area holds the capabilities the `onboard`
-flow layers onto a repo. The **AI Diff Reviewer local review** is part of the
-baseline since standard 2.3.0 (installed by `onboard` Phase 7a, run by every
-Final Review; its CI surface stays optional). The other seven addons are
-**opt-in** and never part of the AI-first baseline — a repo is fully conformant
-with zero optional addons. The first optional addon is devcontainer support.
+The [`addons/`](addons/README.md) area holds what `onboard` layers onto a
+repo. Every repo gets the pack and the **AI Diff Reviewer local review**
+(baseline since 2.3.0: installed in Phase 7a, run by every Final Review).
+The other seven are **opt-in** — a repo is fully conformant with zero
+optional addons. Asked to set up or update them, or on a harness upgrade,
+onboarding detects every addon, upgrades the ones in use and offers the ones
+that fit.

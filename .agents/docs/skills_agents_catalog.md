@@ -396,3 +396,7 @@ All skills and agents are adapted for this Astro repository:
 - [Agent Template](../skills/deepworkplan/author/templates/AGENT_TEMPLATE.md)
 - [AGENTS.md](../../AGENTS.md) - Main AI agent guidance
 - [docs/STANDARDS.md](../../docs/STANDARDS.md) - Coding standards
+
+### Harness refresh — 2026-10-11
+
+DeepWorkPlan v7.6.0, AI Diff Reviewer v3.3.9 and Dailybot skill v3.23.12 are vendored at their verified tags. All eight existing addons still fit; the pack’s all-addons upgrade planner drives their reconciliation. The devcontainer is re-rendered with dck v0.3.0 (ak v0.5.0, herdr-peers v0.2.1, Vim v0.7.0), keeping the repository’s own hook and Dockerfile sections. Existing command delegators, review extension, design system and historical plans remain. Exact refs and content hashes are in `skills-lock.json`.
