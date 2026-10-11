@@ -22,6 +22,7 @@
 #   dck_layer_persist                        per-CLI volumes of the agents layer
 #   dck_git_identity                         global git [user] settings from DCK_GIT_* (no host file)
 #   dck_skills_link                          herdr-peers and Herdr skills into each agent's skills dir
+#   dck_agent_trust                          the workspace trusted by Claude and Codex (autonomy on)
 #   dck_ssh_agent_access                     the mounted host SSH agent socket usable by the user
 #   dck_mesh_apply                           peers pushed by `dck` (stdin): ssh config, pinned host
 #                                            keys and Herdr machines; no private key involved
@@ -31,6 +32,8 @@
 #   DCK_USER (dev)  DCK_HOME (that user's home)  DCK_WORKSPACE (/workspace)
 #   DCK_SSH (1|0)   DCK_AUTHORIZED_KEYS          DCK_AGENTS ("claude codex ...")
 #   DCK_PERSIST_ROOT ($DCK_HOME/.dck/volumes)    DCK_REPO_HOOK
+#   DCK_HOST_PROFILES ("claude codex": ak profiles shared from the host)
+#   DCK_HOST_CODEX (the host's Codex home, mounted)   AGENTKIT_PERMISSIONS
 # For tests: DCK_ROOT prefixes every system path (/etc, /run) and
 # DCK_SSHD_BIN replaces /usr/sbin/sshd.
 #
@@ -447,9 +450,15 @@ dck_layer_persist() {
     dck_persist agentkit "$DCK_HOME/.config/agentkit" dir || true
     mkdir -p "$DCK_PERSIST_ROOT/agentkit/profiles"
     _dck_chown "$DCK_USER:$(_dck_group)" "$DCK_PERSIST_ROOT/agentkit/profiles"
+    dck_host_homes
     for kind in $DCK_AGENTS; do
       if ! dck_agent_homes "$kind" >/dev/null; then
         dck_log "agents: unknown kind '$kind' skipped"
+        continue
+      fi
+      # [agents] host_profiles: ~/.codex is the host's Codex home, never a volume.
+      if [ "$kind" = codex ] && _dck_host_codex; then
+        dck_link_host_codex || true
         continue
       fi
       while read -r rel k; do
@@ -462,6 +471,220 @@ HOMES
   if [ "${DCK_DAILYBOT:-0}" = "1" ]; then
     dck_persist state "$DCK_HOME/.config/dailybot" dir || true
   fi
+}
+
+# --------------------------------------------------------------------------
+# Host accounts ([agents] host_profiles, docs/layers.md)
+# --------------------------------------------------------------------------
+# `dck up` binds the host's ak profiles under $DCK_HOME/.dck/host/agentkit/
+# profiles/<cli>, the host's Codex home at $DCK_HOME/.dck/host/codex
+# (DCK_HOST_CODEX) and an allow-listed env file read-only at
+# $DCK_HOME/.dck/host/agentkit/env. Docker creates the parents of those mount
+# points as root; they are given to the user (never recursively: the mounts
+# are the host's files and are never chowned).
+
+_dck_host_codex() {
+  case "${DCK_HOST_CODEX:-}" in "$DCK_HOME"/.dck/host/*) [ -d "$DCK_HOST_CODEX" ] ;; *) return 1 ;; esac
+}
+
+dck_host_homes() {
+  local d
+  # The per-CLI directories hold one bind mount per profile: docker creates
+  # them, the profiles inside are the host's (never chowned).
+  for d in "$DCK_HOME/.dck/host" "$DCK_HOME/.dck/host/agentkit" "$DCK_HOME/.dck/host/agentkit/profiles" \
+           "$DCK_HOME"/.dck/host/agentkit/profiles/*; do
+    [ -d "$d" ] && [ ! -L "$d" ] && _dck_chown "$DCK_USER:$(_dck_group)" "$d"
+  done
+  return 0
+}
+
+# ~/.codex -> the mounted host Codex home. The image's copy (or the link to the
+# codex volume) is replaced; the volume keeps its contents for when the option
+# is turned off again (dck_persist then links the volume back).
+dck_link_host_codex() {
+  local target="$DCK_HOME/.codex"
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$DCK_HOST_CODEX" ]; then return 0; fi
+  if [ -L "$target" ] || [ -f "$target" ]; then
+    rm -f "$target"
+  elif [ -d "$target" ]; then
+    rm -rf "$target"
+  fi
+  ln -s "$DCK_HOST_CODEX" "$target"
+  _dck_chown -h "$DCK_USER:$(_dck_group)" "$target"
+  dck_log "agents: ~/.codex is the host's Codex home (host_profiles)"
+}
+
+# Autonomy is off when AGENTKIT_PERMISSIONS=ask is in the environment or in
+# the env file ak reads.
+_dck_autonomy_off() {
+  local f
+  case "$(printf '%s' "${AGENTKIT_PERMISSIONS:-}" | tr 'A-Z' 'a-z')" in ask) return 0 ;; esac
+  for f in "${AGENTKIT_ENV:-}" "$DCK_HOME/.config/agentkit/env"; do
+    [ -n "$f" ] && [ -f "$f" ] || continue
+    grep -Eqi "^[[:space:]]*(export[[:space:]]+)?AGENTKIT_PERMISSIONS=[\"']?ask[\"']?[[:space:]]*(#.*)?$" "$f" 2>/dev/null && return 0
+  done
+  return 1
+}
+
+# --------------------------------------------------------------------------
+# dck_agent_trust — unattended agent launches
+# --------------------------------------------------------------------------
+# With autonomy on (the default; AGENTKIT_PERMISSIONS=ask turns it off) a new
+# agent must not stop at a first-run screen. For the CLIs in DCK_AGENTS:
+#   * folder trust for the workspace (the app path) — in the container's own
+#     CLI homes AND in the shared host profiles (an entry for a container path
+#     such as /app is inert on the host): Claude's
+#     projects[<path>].hasTrustDialogAccepted, Codex's
+#     [projects."<path>"] trust_level = "trusted";
+#   * Claude's bypass-permissions acknowledgement (and its onboarding) — ONLY
+#     in the container's own homes, NEVER in a shared host profile: those also
+#     drive the user's Claude on the host, where a human acknowledges it once
+#     per profile.
+# With AGENTKIT_PERMISSIONS=ask neither is written. Each file is read, changed
+# only when something is missing and replaced atomically; an unreadable or
+# invalid file is left alone.
+dck_agent_trust() {
+  _dck_env
+  [ -n "${DCK_AGENTS:-}" ] || return 0
+  if _dck_autonomy_off; then
+    dck_log "agent trust: AGENTKIT_PERMISSIONS=ask; no folder trust or acknowledgement written"
+    return 0
+  fi
+  local profiles="${AGENTKIT_PROFILES_DIR:-$DCK_PERSIST_ROOT/agentkit/profiles}" kind dir own specs=""
+  for kind in $DCK_AGENTS; do
+    case " ${DCK_HOST_PROFILES:-} " in *" $kind "*) own=host ;; *) own=own ;; esac
+    case "$kind" in
+      claude)
+        specs="$specs
+claude-default	own	$DCK_HOME"
+        for dir in "$profiles"/claude/*; do
+          [ -d "$dir" ] && [ ! -L "$dir" ] && specs="$specs
+claude	$own	$dir"
+        done ;;
+      codex)
+        if _dck_host_codex; then
+          specs="$specs
+codex	host	$DCK_HOST_CODEX"
+        else
+          specs="$specs
+codex	own	$DCK_HOME/.codex"
+        fi
+        for dir in "$profiles"/codex/*; do
+          [ -d "$dir" ] && [ ! -L "$dir" ] && specs="$specs
+codex	$own	$dir"
+        done ;;
+    esac
+  done
+  [ -n "$specs" ] || return 0
+  printf '%s\n' "$specs" | _dck_as_user python3 -I -c '
+import json, os, re, sys
+ws = sys.argv[1]
+changed = 0
+
+def replace(path, text, mode):
+    tmp = "%s.dck-%d" % (path, os.getpid())
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
+    with os.fdopen(fd, "w") as fh:
+        fh.write(text)
+    os.replace(tmp, path)
+
+def edit_json(path, fn):
+    global changed
+    if os.path.islink(path):
+        return
+    mode = 0o600
+    data = {}
+    if os.path.exists(path):
+        mode = os.stat(path).st_mode & 0o777
+        try:
+            with open(path) as fh:
+                raw = fh.read()
+            data = json.loads(raw) if raw.strip() else {}
+        except (OSError, ValueError):
+            sys.stderr.write("dck-entrypoint: agent trust: %s is not valid JSON; left alone\n" % path)
+            return
+        if not isinstance(data, dict):
+            return
+    if fn(data):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        replace(path, json.dumps(data, indent=2) + "\n", mode)
+        changed += 1
+
+def claude_trust(d):
+    proj = d.setdefault("projects", {})
+    if not isinstance(proj, dict):
+        return False
+    entry = proj.setdefault(ws, {})
+    if not isinstance(entry, dict) or entry.get("hasTrustDialogAccepted") is True:
+        return False
+    entry["hasTrustDialogAccepted"] = True
+    return True
+
+def claude_own(d):
+    new = claude_trust(d)
+    for k in ("hasCompletedOnboarding", "bypassPermissionsModeAccepted"):
+        if d.get(k) is not True:
+            d[k] = True
+            new = True
+    return new
+
+def settings_own(d):
+    if d.get("skipDangerousModePermissionPrompt") is True:
+        return False
+    d["skipDangerousModePermissionPrompt"] = True
+    return True
+
+def codex(path):
+    global changed
+    if os.path.islink(path):
+        return
+    mode, lines = 0o600, []
+    if os.path.exists(path):
+        mode = os.stat(path).st_mode & 0o777
+        try:
+            with open(path) as fh:
+                lines = fh.read().splitlines()
+        except OSError:
+            return
+    headers = ("[projects.\"%s\"]" % ws, "[projects.'%s']" % ws)
+    start = next((i for i, l in enumerate(lines) if l.strip() in headers), None)
+    if start is None:
+        if lines and lines[-1].strip():
+            lines.append("")
+        lines += [headers[0], "trust_level = \"trusted\""]
+    else:
+        end = next((i for i in range(start + 1, len(lines)) if lines[i].lstrip().startswith("[")), len(lines))
+        at = next((i for i in range(start + 1, end) if re.match(r"^\s*trust_level\s*=", lines[i])), None)
+        if at is not None and re.match(r"^\s*trust_level\s*=\s*\"trusted\"\s*$", lines[at]):
+            return
+        if at is None:
+            lines.insert(start + 1, "trust_level = \"trusted\"")
+        else:
+            lines[at] = "trust_level = \"trusted\""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    replace(path, "\n".join(lines) + "\n", mode)
+    changed += 1
+
+for line in sys.stdin.read().splitlines():
+    if line.count("\t") != 2:
+        continue
+    kind, owner, d = line.split("\t")
+    if kind == "claude-default":
+        edit_json(os.path.join(d, ".claude.json"), claude_own)
+        edit_json(os.path.join(d, ".claude", "settings.json"), settings_own)
+    elif kind == "claude":
+        edit_json(os.path.join(d, ".claude.json"), claude_own if owner == "own" else claude_trust)
+        if owner == "own":
+            edit_json(os.path.join(d, "settings.json"), settings_own)
+    elif kind == "codex":
+        if os.path.isdir(d):
+            codex(os.path.join(d, "config.toml"))
+print(changed)
+' "$DCK_WORKSPACE" | {
+    read -r n
+    dck_log "agent trust: workspace $DCK_WORKSPACE trusted for ${DCK_AGENTS} (${n:-0} file(s) updated)"
+  }
+  return 0
 }
 
 # --------------------------------------------------------------------------
@@ -518,6 +741,8 @@ dck_skills_link() {
   done
   for dir in "$DCK_HOME/.agents/skills" "$DCK_HOME/.claude/skills" "$DCK_HOME/.codex/skills" \
              "$DCK_HOME/.cursor/skills" "$DCK_HOME/.config/opencode/skill"; do
+    # The host's Codex home (host_profiles): container paths must not land in it.
+    if [ "$dir" = "$DCK_HOME/.codex/skills" ] && _dck_host_codex; then continue; fi
     case "$dir" in
       "$DCK_HOME/.agents/skills"|"$DCK_HOME/.claude/skills") _dck_as_user mkdir -p "$dir" || continue ;;
       *) [ -d "$(dirname "$dir")" ] || continue; _dck_as_user mkdir -p "$dir" || continue ;;
@@ -842,6 +1067,7 @@ dck_start() {
   dck_git_identity || true
   dck_ssh_agent_access || true
   dck_skills_link || true
+  dck_agent_trust || true
   dck_herdr_config || true
   dck_herdr_agent_link || true
   dck_env_profile || true
