@@ -15,10 +15,10 @@
     },
     "deepworkplan": {
       "source": "DailybotHQ/deepworkplan-skill",
-      "ref": "v7.4.0",
+      "ref": "v7.5.0",
       "sourceType": "github",
       "skillPath": "skills/deepworkplan/SKILL.md",
-      "computedHash": "0c75f16a0eafb7254addcb6f2943689ce77ae9ba4f78542214b9c197833e8adf"
+      "computedHash": "7168e72c7462537d4415c0736a5b8a171f5aa57a367987e21a449c3489f63def"
     }
   }
 }
