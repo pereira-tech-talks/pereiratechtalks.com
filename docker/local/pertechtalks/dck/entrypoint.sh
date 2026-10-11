@@ -539,7 +539,7 @@ dck_skills_link() {
 #   hostkey <port> <keytype> <base64-key>
 #   disabled <alias>      (a peer disabled in the host's Herdr: registered disabled here)
 #   catalog <id> <0|1> <session> <alias> <label...>   (the host's Herdr catalog entry)
-# With catalog lines (dck v0.2.7+), the container's Herdr catalog becomes a copy
+# With catalog lines (dck v0.2.8+), the container's Herdr catalog becomes a copy
 # of those entries — the host's own ids — so a herdr-peers reply address
 # (<machine id>:<pane>) means the same machine on both sides. Without them (an
 # older dck on the host) each peer is registered with `herdr machine add`.
@@ -804,6 +804,20 @@ dck_ssh_agent_access() {
     || dck_log "ssh agent: could not give $DCK_USER access to the host agent socket"
 }
 
+# dck_herdr_agent_link — Herdr's forwarded-agent link (~/.config/herdr/herdr.sock.agent)
+# dangles when the attaching client forwarded no agent. Point a dangling one at the
+# host agent dck mounts, so panes Herdr opens later get a working agent; the login
+# profile does the same per shell. No-op without the mounted socket.
+dck_herdr_agent_link() {
+  _dck_env
+  local sock="${DCK_SSH_AGENT_SOCK:-/run/dck/ssh-agent.sock}" link="$DCK_HOME/.config/herdr/herdr.sock.agent"
+  [ -S "$sock" ] || return 0
+  if [ -L "$link" ] && [ ! -S "$link" ]; then
+    ln -sfn "$sock" "$link" && _dck_chown -h "$DCK_USER:$(_dck_group)" "$link"
+    dck_log "herdr: the forwarded-agent link was dangling; it now points at the mounted host agent"
+  fi
+}
+
 dck_start() {
   _dck_env
   dck_log "starting for user $DCK_USER (workspace $DCK_WORKSPACE)"
@@ -826,6 +840,7 @@ dck_start() {
   dck_ssh_agent_access || true
   dck_skills_link || true
   dck_herdr_config || true
+  dck_herdr_agent_link || true
   dck_env_profile || true
   dck_sshd || true
   dck_repo_hook

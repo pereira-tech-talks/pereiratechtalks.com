@@ -14,15 +14,15 @@
     },
     "dependency-upgrade": {
       "enabled": true,
-      "version": "v7.3.2"
+      "version": "v7.3.3"
     },
     "design-system": {
       "enabled": true,
-      "version": "v7.3.2"
+      "version": "v7.3.3"
     },
     "devcontainer": {
       "enabled": true,
-      "version": "v0.2.7"
+      "version": "v0.2.8"
     },
     "herdr": {
       "enabled": true,
