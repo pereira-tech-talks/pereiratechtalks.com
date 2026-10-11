@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.8 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.9 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
@@ -90,7 +90,7 @@ mounted.
 
 `bash dev.sh up` registers the container as a [Herdr](https://herdr.dev) machine. Its sshd
 listens on `127.0.0.1:22030` and accepts only the dck key. The machine opens with the standard
-sidebar: Home · Editor · Development (server | tests) · Agents (Agent 1..4).
+sidebar: App · Editor · Development (server | tests) · Agents (Agent 1..4).
 `bash dev.sh herdr-layout --keep` recreates whatever is missing, and `--reset` rebuilds it.
 
 Agents inside reach Herdr agents on the host and in other dck containers through

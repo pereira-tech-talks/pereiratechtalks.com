@@ -362,7 +362,10 @@ def ensure(t, k, v, force=False, repair=None):
 ensure("", "onboarding", "false")
 ensure("terminal", "default_shell", '"/bin/bash"')
 ensure("terminal", "shell_mode", '"login"', repair='"non_login"')
-ensure("terminal", "new_cwd", '"%s"' % workspace)
+# The image seeds new_cwd = "/workspace" (the template default); a repository whose
+# workspace is elsewhere (/app) would open every new pane in ~. Repair that seed
+# value; any other value is the user's and stays.
+ensure("terminal", "new_cwd", '"%s"' % workspace, repair='"/workspace"')
 ensure("experimental", "allow_nested", "true", force=True)
 
 out = []
@@ -539,7 +542,7 @@ dck_skills_link() {
 #   hostkey <port> <keytype> <base64-key>
 #   disabled <alias>      (a peer disabled in the host's Herdr: registered disabled here)
 #   catalog <id> <0|1> <session> <alias> <label...>   (the host's Herdr catalog entry)
-# With catalog lines (dck v0.2.8+), the container's Herdr catalog becomes a copy
+# With catalog lines (dck v0.2.9+), the container's Herdr catalog becomes a copy
 # of those entries — the host's own ids — so a herdr-peers reply address
 # (<machine id>:<pane>) means the same machine on both sides. Without them (an
 # older dck on the host) each peer is registered with `herdr machine add`.
