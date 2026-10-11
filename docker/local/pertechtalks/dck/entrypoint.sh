@@ -80,6 +80,16 @@ _dck_persist_key() {
   printf '%s' "$rel" | tr '/' '_'
 }
 
+# _dck_new_file <store> — create a missing (or repair an empty) persisted file. A
+# JSON file gets "{}" so its program can parse it on first run: an empty
+# ~/.claude.json, for one, is reported as corrupt and stops Claude Code.
+_dck_new_file() {
+  case "$1" in
+    *.json) if [ ! -s "$1" ]; then printf '{}\n' > "$1"; fi ;;
+    *) [ -e "$1" ] || : > "$1" ;;
+  esac
+}
+
 dck_persist() {
   _dck_env
   local name="${1:-}" target="${2:-}" kind="${3:-}"
@@ -108,7 +118,7 @@ dck_persist() {
 
   if [ -L "$target" ]; then
     if [ "$(readlink "$target")" = "$store" ]; then
-      if [ "$kind" = dir ]; then mkdir -p "$store"; elif [ ! -e "$store" ]; then : > "$store"; fi
+      if [ "$kind" = dir ]; then mkdir -p "$store"; else _dck_new_file "$store"; fi
       _dck_chown -h "$DCK_USER:$(_dck_group)" "$target"
       return 0
     fi
@@ -134,7 +144,7 @@ dck_persist() {
     rm -rf "$target"
   fi
 
-  if [ "$kind" = dir ]; then mkdir -p "$store"; elif [ ! -e "$store" ]; then : > "$store"; fi
+  if [ "$kind" = dir ]; then mkdir -p "$store"; else _dck_new_file "$store"; fi
   mkdir -p "$(dirname "$target")"
   ln -s "$store" "$target"
   _dck_chown "$DCK_USER:$(_dck_group)" "$vol"
@@ -529,7 +539,7 @@ dck_skills_link() {
 #   hostkey <port> <keytype> <base64-key>
 #   disabled <alias>      (a peer disabled in the host's Herdr: registered disabled here)
 #   catalog <id> <0|1> <session> <alias> <label...>   (the host's Herdr catalog entry)
-# With catalog lines (dck v0.2.6+), the container's Herdr catalog becomes a copy
+# With catalog lines (dck v0.2.7+), the container's Herdr catalog becomes a copy
 # of those entries — the host's own ids — so a herdr-peers reply address
 # (<machine id>:<pane>) means the same machine on both sides. Without them (an
 # older dck on the host) each peer is registered with `herdr machine add`.
