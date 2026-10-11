@@ -2,7 +2,7 @@
 
 **Purpose:** Single source of truth for all AI coding assistants (Claude Code, Cursor AI, OpenAI Codex, Google Gemini, GitHub Copilot, and others) operating on the Pereira Tech Talks v3.0.0 codebase.
 
-DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09 and 2026-10-11; skill 7.3.1)
+DWP standard: 7.0.0 (onboarded 2026-08-08; upgraded 2026-10-09 and 2026-10-11; skill 7.3.2)
 
 ## Detailed Documentation
 
@@ -342,7 +342,7 @@ The [AI Diff Reviewer addon](.agents/skills/deepworkplan/addons/ai-diff-reviewer
 
 ## Local dev stack (devcontainer-kit + agents kit + Herdr mesh)
 
-The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` v0.2.6) from `.devcontainer/dck.toml` (service `pertechtalks`, user `node`, `/app`): official `node-24` image pinned by digest, coding-agents-kit (`ak`, seven CLIs, autonomy by default — opt-out `AGENTKIT_PERMISSIONS=ask`), DeepWorkPlan Vim v0.6.0, the Dailybot CLI, Herdr and herdr-peers. Blocks between `>>> dck:` markers belong to dck (`dck init` reconciles them); the site's own section (chromium, the npm → pnpm shim, the helpers) sits below them.
+The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` v0.2.7) from `.devcontainer/dck.toml` (service `pertechtalks`, user `node`, `/app`): official `node-24` image pinned by digest, coding-agents-kit (`ak`, seven CLIs, autonomy by default — opt-out `AGENTKIT_PERMISSIONS=ask`), DeepWorkPlan Vim v0.6.0, the Dailybot CLI, Herdr and herdr-peers. Blocks between `>>> dck:` markers belong to dck (`dck init` reconciles them); the site's own section (chromium, the npm → pnpm shim, the helpers) sits below them.
 
 | Concern | Detail |
 |---------|--------|
@@ -745,7 +745,7 @@ never migrated implicitly.
 ## Deep Work Plan flows
 
 Structured multi-task work runs through the vendored **DeepWorkPlan** skill
-(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.3.1). Route by intent:
+(`.agents/skills/deepworkplan/`, standard 7.0.0, skill 7.3.2). Route by intent:
 
 | Intent | Command |
 |--------|---------|
