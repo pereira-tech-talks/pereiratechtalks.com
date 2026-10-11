@@ -61,7 +61,9 @@ layer_log "installed coding-agents-kit ${AGENTKIT_TAG} (verified)"
 #    ~/.local/bin is on the login PATH (/etc/profile.d/00-dck.sh).
 as_user bash -c 'grep -qs "^prefix=" "$HOME/.npmrc" || printf "prefix=%s\n" "$HOME/.local" >> "$HOME/.npmrc"'
 
-ak_bin="$(as_user bash -lc 'command -v ak || echo "$HOME/.local/share/agentkit/bin/ak"')"
+# The ak this layer just installed, never another one that happens to be first on
+# PATH (an older copy in the image, or the host's in a test environment).
+ak_bin="$(as_user bash -lc 'p="$HOME/.local/share/agentkit/bin/ak"; if [ -x "$p" ]; then echo "$p"; else command -v ak; fi')"
 
 # 4. The CLIs the repository asked for: ak installs each pinned and verified.
 if [ "$#" -gt 0 ]; then

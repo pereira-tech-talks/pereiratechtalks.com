@@ -542,7 +542,7 @@ dck_skills_link() {
 #   hostkey <port> <keytype> <base64-key>
 #   disabled <alias>      (a peer disabled in the host's Herdr: registered disabled here)
 #   catalog <id> <0|1> <session> <alias> <label...>   (the host's Herdr catalog entry)
-# With catalog lines (dck v0.2.9+), the container's Herdr catalog becomes a copy
+# With catalog lines (dck v0.2.10+), the container's Herdr catalog becomes a copy
 # of those entries — the host's own ids — so a herdr-peers reply address
 # (<machine id>:<pane>) means the same machine on both sides. Without them (an
 # older dck on the host) each peer is registered with `herdr machine add`.

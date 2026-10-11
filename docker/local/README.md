@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.9 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.10 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.10 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
@@ -56,7 +56,7 @@ Values are never printed. `dck doctor --json` reports key names only.
 ## Coding agents (coding-agents-kit)
 
 The agents layer installs [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)
-v0.3.0 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
+v0.4.0 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
 grok. Each is installed at a pinned version and verified. Every CLI home lives on its own named
 volume, so logins survive `bash dev.sh rebuild`.
 

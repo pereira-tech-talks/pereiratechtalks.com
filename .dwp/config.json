@@ -2,7 +2,7 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "version": "v0.3.0"
+      "version": "v0.4.0"
     },
     "ai-diff-reviewer": {
       "enabled": true,
@@ -14,15 +14,15 @@
     },
     "dependency-upgrade": {
       "enabled": true,
-      "version": "v7.4.0"
+      "version": "v7.5.0"
     },
     "design-system": {
       "enabled": true,
-      "version": "v7.4.0"
+      "version": "v7.5.0"
     },
     "devcontainer": {
       "enabled": true,
-      "version": "v0.2.9"
+      "version": "v0.2.10"
     },
     "herdr": {
       "enabled": true,
