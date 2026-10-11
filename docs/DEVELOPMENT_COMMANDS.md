@@ -327,7 +327,7 @@ The dev server is published on **127.0.0.1:8888** (not Astro's default 4321). VS
 
 ## Dev Containers Without an Editor (`dev.sh`)
 
-The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, v0.2.7) from `.devcontainer/dck.toml`; `dev.sh` is its launcher. Docker is the only host requirement: without dck, the container verbs (`up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`) run on plain `docker compose`, and `bash dev.sh install-dck` installs dck pinned and verified.
+The container is rendered by [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, v0.2.8) from `.devcontainer/dck.toml`; `dev.sh` is its launcher. Docker is the only host requirement: without dck, the container verbs (`up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`) run on plain `docker compose`, and `bash dev.sh install-dck` installs dck pinned and verified.
 
 ```bash
 bash dev.sh up        # build if needed, start, register the Herdr machine (first run: .env files, dck SSH key)

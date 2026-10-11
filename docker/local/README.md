@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.7 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.8 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-git clone --branch v0.2.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
