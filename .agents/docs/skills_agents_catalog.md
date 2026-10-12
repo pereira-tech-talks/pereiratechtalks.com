@@ -400,3 +400,7 @@ All skills and agents are adapted for this Astro repository:
 ### Harness refresh — 2026-10-11
 
 DeepWorkPlan v7.6.0, AI Diff Reviewer v3.3.9 and Dailybot skill v3.23.12 are vendored at their verified tags. All eight existing addons still fit; the pack’s all-addons upgrade planner drives their reconciliation. The devcontainer is re-rendered with dck v0.3.0 (ak v0.5.0, herdr-peers v0.2.1, Vim v0.7.0), keeping the repository’s own hook and Dockerfile sections. Existing command delegators, review extension, design system and historical plans remain. Exact refs and content hashes are in `skills-lock.json`.
+
+### Final orchestra refresh — 2026-10-11
+
+DeepWorkPlan v7.6.1 is installed byte-for-byte from its verified tagged release. The fitting addon set is preserved; dck v0.3.1 reconciles the container and brings herdr-peers v0.2.2, retaining the site hook and unmanaged Dockerfile sections. This final round verifies that a second `dck up` preserves shared token presence and that Codex peers route asks and replies using the explicit `--pane` caller address. Reviewer v3.3.9, Dailybot skill v3.23.12, ak v0.5.0 and Vim v0.7.0 remain at their pins. Historical plans and the host editor are unchanged.

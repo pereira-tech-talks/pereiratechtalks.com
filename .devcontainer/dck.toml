@@ -1,5 +1,5 @@
 # devcontainer-kit config for this repository (interface 2).
-# Reference: https://github.com/DailybotHQ/devcontainer-kit/blob/v0.3.0/docs/config.md
+# Reference: https://github.com/DailybotHQ/devcontainer-kit/blob/v0.3.1/docs/config.md
 # Edit this file, then run `dck init` to reconcile the generated files.
 interface = 2
 
