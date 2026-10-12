@@ -842,6 +842,6 @@ dist/                    # Build output (Cloudflare Pages)
 
 ## Agent harness release provenance
 
-The repository vendors DeepWorkPlan v7.6.1 (DWP standard 7.0.0), AI Diff Reviewer v3.3.9 and Dailybot skill v3.23.12, verified from their release tags on 2026-10-11. `skills-lock.json` records the refs and content hashes. The existing review extension, lifecycle hooks, design system and plans are preserved.
+The repository vendors DeepWorkPlan v7.6.3 (DWP standard 7.0.0), AI Diff Reviewer v3.3.11 and Dailybot skill v3.23.14, verified from their release tags on 2026-10-12. `skills-lock.json` records the refs and content hashes. The existing review extension, lifecycle hooks, design system and plans are preserved.
 
-The development container is reconciled with devcontainer-kit v0.3.1 and pins coding-agents-kit v0.5.0, herdr-peers v0.2.2 and DeepWorkPlan Vim v0.7.0. Its own start hook remains outside the generated blocks. Host accounts are an opt-in in the developer’s dck host profile (`[agents] host_profiles`); tokens are allow-listed and mounted read-only, never committed or baked into the image. Shared Codex accounts require one active writer per account.
+The development container is reconciled with devcontainer-kit v0.3.5 and pins coding-agents-kit v0.5.3, herdr-peers v0.2.3 and DeepWorkPlan Vim v0.7.0. Its own start hook remains outside the generated blocks. Host accounts are an opt-in in the developer’s dck host profile (`[agents] host_profiles`); tokens are allow-listed and mounted read-only, never committed or baked into the image. Shared Codex accounts require one active writer per account.

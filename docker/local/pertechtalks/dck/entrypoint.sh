@@ -21,9 +21,13 @@
 #   dck_repo_hook                            docker/local/dev-setup-hook.sh, if present
 #   dck_layer_persist                        per-CLI volumes of the agents layer
 #   dck_git_identity                         global git [user] settings from DCK_GIT_* (no host file)
+#   dck_git_identity_host                    the host's git identity pushed by `dck up` (stdin; DCK_GIT_* wins)
 #   dck_skills_link                          herdr-peers and Herdr skills into each agent's skills dir
 #   dck_agent_trust                          the workspace trusted by Claude and Codex (autonomy on)
+#   dck_codex_config                         Codex's startup update check off, in the container's own configs
 #   dck_ssh_agent_access                     the mounted host SSH agent socket usable by the user
+#   dck_ssh_copy_keys                        [ssh] copy_keys: the host's ~/.ssh/id_* keys into ~/.ssh
+#   dck_herdr_self <id|->                    this container's host-catalog machine id (HERDR_PEERS_SELF)
 #   dck_mesh_apply                           peers pushed by `dck` (stdin): ssh config, pinned host
 #                                            keys and Herdr machines; no private key involved
 #   dck_start                                the standard sequence of the above
@@ -34,6 +38,7 @@
 #   DCK_PERSIST_ROOT ($DCK_HOME/.dck/volumes)    DCK_REPO_HOOK
 #   DCK_HOST_PROFILES ("claude codex": ak profiles shared from the host)
 #   DCK_HOST_CODEX (the host's Codex home, mounted)   AGENTKIT_PERMISSIONS
+#   DCK_SSH_COPY_KEYS (1: copy ~/.ssh_host/id_* into ~/.ssh; [ssh] copy_keys)
 # For tests: DCK_ROOT prefixes every system path (/etc, /run) and
 # DCK_SSHD_BIN replaces /usr/sbin/sshd.
 #
@@ -478,9 +483,6 @@ $(dck_agent_homes "$kind")
 HOMES
     done
   fi
-  if [ "${DCK_DAILYBOT:-0}" = "1" ]; then
-    dck_persist state "$DCK_HOME/.config/dailybot" dir || true
-  fi
 }
 
 # --------------------------------------------------------------------------
@@ -698,6 +700,83 @@ print(changed)
 }
 
 # --------------------------------------------------------------------------
+# dck_codex_config — Codex inside a container never checks for an update at
+# startup (check_for_update_on_startup = false): dck pins every CLI version, and
+# an update offered there would be lost on the next rebuild. Nor does it start
+# an app-server daemon by itself ([features] daemon_auto_start = false): a plain
+# `codex` that Herdr's session restore relaunches then runs in-process. Written in the
+# container's OWN Codex configs only — ~/.codex on its volume and the ak codex
+# profiles on the container's volume — never in the host's Codex home or a
+# host-shared profile (host_profiles). A value the developer set is kept.
+# Codex's hooks are not touched: trusting them is a consent the developer gives.
+# --------------------------------------------------------------------------
+dck_codex_config() {
+  _dck_env
+  case " ${DCK_AGENTS:-} " in *" codex "*) ;; *) return 0 ;; esac
+  local profiles="${AGENTKIT_PROFILES_DIR:-$DCK_PERSIST_ROOT/agentkit/profiles}" dirs="" dir
+  if ! _dck_host_codex; then
+    dirs="$DCK_HOME/.codex"
+  fi
+  case " ${DCK_HOST_PROFILES:-} " in
+    *" codex "*) ;;
+    *) for dir in "$profiles"/codex/*; do [ -d "$dir" ] && [ ! -L "$dir" ] && dirs="$dirs
+$dir"; done ;;
+  esac
+  [ -n "$dirs" ] || return 0
+  local n
+  n="$(printf '%s\n' "$dirs" | _dck_as_user python3 -I -c '
+import os, re, sys
+n = 0
+own = os.path.realpath(sys.argv[1]) + os.sep
+for d in sys.stdin.read().splitlines():
+    d = d.strip()
+    if not d or not os.path.isdir(d):
+        continue
+    # ~/.codex is a link onto the own volume of the container; any other link is skipped.
+    if os.path.islink(d) and not os.path.realpath(d).startswith(own):
+        continue
+    path = os.path.join(d, "config.toml")
+    if os.path.islink(path):
+        continue
+    lines, mode = [], 0o600
+    if os.path.exists(path):
+        mode = os.stat(path).st_mode & 0o777
+        try:
+            lines = open(path).read().splitlines()
+        except OSError:
+            continue
+    before = list(lines)
+    first_table = next((i for i, l in enumerate(lines) if l.lstrip().startswith("[")), len(lines))
+    if not any(re.match(r"^\s*check_for_update_on_startup\s*=", l) for l in lines[:first_table]):
+        lines.insert(first_table, "check_for_update_on_startup = false")
+        if first_table < len(lines) - 1 and lines[first_table + 1].strip():
+            lines.insert(first_table + 1, "")
+    # [features] daemon_auto_start = false: a plain `codex` (a pane Herdr restores
+    # without ak) runs in-process instead of waiting on an app-server daemon.
+    feat = next((i for i, l in enumerate(lines) if l.strip() == "[features]"), None)
+    if feat is None:
+        if lines and lines[-1].strip():
+            lines.append("")
+        lines += ["[features]", "daemon_auto_start = false"]
+    else:
+        end = next((i for i in range(feat + 1, len(lines)) if lines[i].lstrip().startswith("[")), len(lines))
+        if not any(re.match(r"^\s*daemon_auto_start\s*=", lines[i]) for i in range(feat + 1, end)):
+            lines.insert(feat + 1, "daemon_auto_start = false")
+    if lines == before:
+        continue  # the developer chose both; keep them
+    tmp = "%s.dck-tmp-%d" % (path, os.getpid())
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, mode)
+    with os.fdopen(fd, "w") as fh:
+        fh.write("\n".join(lines) + "\n")
+    os.replace(tmp, path)
+    n += 1
+print(n)
+' "$DCK_PERSIST_ROOT" 2>/dev/null)" || { dck_log "codex: could not write the update-check setting"; return 0; }
+  [ "${n:-0}" = "0" ] || dck_log "codex: startup update check and daemon auto-start off in ${n} config(s) (dck pins the CLI version)"
+  return 0
+}
+
+# --------------------------------------------------------------------------
 # dck_start — the standard sequence (what /usr/local/bin/dck-entrypoint runs)
 # --------------------------------------------------------------------------
 
@@ -732,6 +811,53 @@ dck_git_identity() {
     set=$((set + 1))
   done
   [ "$set" -eq 0 ] || dck_log "git identity: $set setting(s) written from DCK_GIT_*"
+  if [ "$set" -gt 0 ] && [ -d "$DCK_PERSIST_ROOT/state" ]; then
+    printf 'env\n' > "$DCK_PERSIST_ROOT/state/git-identity-source" 2>/dev/null || true
+  fi
+}
+
+# dck_git_identity_host — the host's git identity, pushed by `dck up` (stdin,
+# "key=value" lines: user.name, user.email, and SSH signing — gpg.format=ssh with
+# a key:: public key, commit.gpgsign — when the host signs that way). No host
+# file is mounted and the repository's .env is not needed. A DCK_GIT_* value in
+# the container's environment (the service .env) wins for its key. The source
+# is recorded for `dck doctor` on the state volume. Root or the user.
+dck_git_identity_host() {
+  _dck_env
+  local line key value var set=0 kept=0
+  while IFS= read -r line; do
+    key="${line%%=*}"; value="${line#*=}"
+    case "$key" in
+      user.name) var=DCK_GIT_NAME ;;
+      user.email) var=DCK_GIT_EMAIL ;;
+      user.signingkey) var=DCK_GIT_SIGNINGKEY; case "$value" in key::*) ;; *) continue ;; esac ;;
+      gpg.format) var=DCK_GIT_GPG_FORMAT; [ "$value" = ssh ] || continue ;;
+      commit.gpgsign) var=DCK_GIT_COMMIT_GPGSIGN; case "$value" in true|false) ;; *) continue ;; esac ;;
+      *) continue ;;
+    esac
+    [ -n "$value" ] && [ "${#value}" -le 1024 ] || continue
+    if [ -n "${!var:-}" ]; then kept=$((kept + 1)); continue; fi
+    if _dck_is_root && [ "$DCK_USER" != "root" ]; then
+      runuser -u "$DCK_USER" -- env HOME="$DCK_HOME" git config --global "$key" "$value" || return 1
+    else
+      HOME="$DCK_HOME" git config --global "$key" "$value" || return 1
+    fi
+    set=$((set + 1))
+  done
+  mkdir -p "$DCK_PERSIST_ROOT/state" 2>/dev/null || true
+  if [ "$set" -gt 0 ] && [ "$kept" -gt 0 ]; then
+    printf 'host+env\n' > "$DCK_PERSIST_ROOT/state/git-identity-source"
+  elif [ "$set" -gt 0 ]; then
+    printf 'host\n' > "$DCK_PERSIST_ROOT/state/git-identity-source"
+  elif [ "$kept" -gt 0 ]; then
+    printf 'env\n' > "$DCK_PERSIST_ROOT/state/git-identity-source"
+  fi
+  _dck_chown "$DCK_USER:$(_dck_group)" "$DCK_PERSIST_ROOT/state/git-identity-source"
+  if [ "$kept" -gt 0 ]; then
+    dck_log "git identity: $set setting(s) from the host's git config, $kept kept from DCK_GIT_*"
+  else
+    dck_log "git identity: $set setting(s) from the host's git config"
+  fi
 }
 
 # dck_skills_link — link the image's shared skills (/usr/local/share/dck/skills:
@@ -1056,6 +1182,110 @@ dck_herdr_agent_link() {
   fi
 }
 
+# dck_ssh_copy_keys — [ssh] copy_keys (host profile, opt-in): copy the host's
+# ~/.ssh/id_* keys (mounted read-only at ~/.ssh_host by `dck up`'s runtime
+# overlay, which also sets DCK_SSH_COPY_KEYS=1) into the user's ~/.ssh, the
+# state volume: private keys 0600, .pub 0644, ~/.ssh 0700. Tools that only offer
+# key files (gh auth login) then use the same keys as the host; the forwarded
+# agent is unchanged. Runs at every start, so a key changed on the host is
+# refreshed and one removed from the host is removed here. Only id_* names are
+# written: dck's own config, config.d/, authorized_keys and known_hosts.dck-host
+# are never touched, and a key the container made itself under the same name
+# is kept. The copied names are listed in ~/.ssh/.dck-copied-keys; with
+# copy_keys off, the next start removes exactly those files. Names only are
+# logged, never a key's contents.
+# dck_herdr_self <id|-> — this container's machine id in the HOST's Herdr catalog,
+# pushed by `dck up` / `dck herdr add|mesh` (as root, through docker exec). The
+# login profile exports it as HERDR_PEERS_SELF: herdr-peers' reply route, which a
+# Codex pane cannot discover by itself. Kept on the state volume, so restarts and
+# rebuilds keep it; "-" removes it (`dck herdr remove`). Public data, 0644.
+dck_herdr_self() {
+  _dck_env
+  local id="${1:-}" f="$DCK_PERSIST_ROOT/state/herdr-self" tmp
+  if [ "$id" = "-" ]; then
+    rm -f "$f"
+    dck_log "herdr: this container's machine id was cleared"
+    return 0
+  fi
+  case "$id" in
+    *[!0-9a-f]*|"") dck_log "herdr: refusing a machine id that is not 32 hex characters"; return 1 ;;
+  esac
+  [ "${#id}" -eq 32 ] || { dck_log "herdr: refusing a machine id that is not 32 hex characters"; return 1; }
+  mkdir -p "$DCK_PERSIST_ROOT/state" || return 1
+  [ -L "$f" ] && rm -f "$f"
+  tmp="$(mktemp "$DCK_PERSIST_ROOT/state/.herdr-self.XXXXXX")" || return 1
+  printf '%s\n' "$id" > "$tmp" && chmod 0644 "$tmp" && mv -f "$tmp" "$f" || { rm -f "$tmp"; return 1; }
+  _dck_chown "$DCK_USER:$(_dck_group)" "$f"
+  dck_log "herdr: this container is machine $id in the host's catalog (HERDR_PEERS_SELF)"
+}
+
+_dck_key_listed() { case " $2 " in *" $1 "*) return 0 ;; esac; return 1; }
+
+dck_ssh_copy_keys() {
+  _dck_env
+  local src="${DCK_SSH_HOST_DIR:-$DCK_HOME/.ssh_host}" dst="$DCK_HOME/.ssh"
+  local manifest old="" new="" kept="" f name dest mode tmp n
+  manifest="$dst/.dck-copied-keys"
+  if [ -f "$manifest" ] && [ ! -L "$manifest" ]; then
+    while IFS= read -r name; do
+      case "$name" in id_*) case "$name" in *[!A-Za-z0-9._-]*) ;; *) old="$old $name" ;; esac ;; esac
+    done < "$manifest"
+  fi
+  if [ "${DCK_SSH_COPY_KEYS:-0}" != "1" ]; then
+    [ -e "$manifest" ] || [ -L "$manifest" ] || return 0
+    n=0
+    for name in $old; do
+      if [ -f "$dst/$name" ] && [ ! -L "$dst/$name" ]; then rm -f "$dst/$name" && n=$((n + 1)); fi
+    done
+    rm -f "$manifest"
+    dck_log "ssh keys: copy_keys is off; removed $n copied key file(s)"
+    return 0
+  fi
+  if [ ! -d "$src" ]; then
+    dck_log "ssh keys: copy_keys is on but the host's ~/.ssh is not mounted at $src; nothing copied"
+    return 0
+  fi
+  if [ -L "$dst" ] && [ ! -d "$dst" ]; then
+    dck_log "ssh keys: $dst is a dangling link; nothing copied"
+    return 0
+  fi
+  mkdir -p "$dst" && chmod 0700 "$dst/." || return 1
+  for f in "$src"/id_*; do
+    [ -f "$f" ] && [ ! -L "$f" ] || continue
+    name="${f##*/}"
+    case "$name" in *[!A-Za-z0-9._-]*) dck_log "ssh keys: refusing a key name"; continue ;; esac
+    case "$name" in *.pub) mode=0644 ;; *) mode=0600 ;; esac
+    dest="$dst/$name"
+    if [ -L "$dest" ] || { [ -e "$dest" ] && [ ! -f "$dest" ]; }; then
+      kept="$kept $name"; continue
+    fi
+    if [ -f "$dest" ] && ! _dck_key_listed "$name" "$old" && ! cmp -s "$f" "$dest"; then
+      kept="$kept $name"; continue  # the container's own key: never overwritten
+    fi
+    if [ ! -f "$dest" ] || ! cmp -s "$f" "$dest"; then
+      tmp="$(mktemp "$dst/.dck-key.XXXXXX")" || return 1
+      if ! cat "$f" > "$tmp"; then rm -f "$tmp"; dck_log "ssh keys: could not read $name"; continue; fi
+      chmod "$mode" "$tmp" && mv -f "$tmp" "$dest" || { rm -f "$tmp"; continue; }
+    fi
+    chmod "$mode" "$dest"
+    _dck_chown "$DCK_USER:$(_dck_group)" "$dest"
+    new="$new $name"
+  done
+  # A key removed from (or renamed on) the host is removed here too.
+  for name in $old; do
+    _dck_key_listed "$name" "$new" && continue
+    if [ -f "$dst/$name" ] && [ ! -L "$dst/$name" ]; then rm -f "$dst/$name"; fi
+  done
+  tmp="$(mktemp "$dst/.dck-key.XXXXXX")" || return 1
+  for name in $new; do printf '%s\n' "$name"; done > "$tmp"
+  chmod 0600 "$tmp" && mv -f "$tmp" "$manifest"
+  _dck_chown "$DCK_USER:$(_dck_group)" "$dst/." "$manifest"
+  [ -n "$new" ] || new=" none (no id_* key in the mounted ~/.ssh)"
+  dck_log "ssh keys copied:$new"
+  [ -z "$kept" ] || dck_log "ssh keys: kept the container's own:$kept"
+  return 0
+}
+
 dck_start() {
   _dck_env
   dck_log "starting for user $DCK_USER (workspace $DCK_WORKSPACE)"
@@ -1065,6 +1295,8 @@ dck_start() {
   _dck_chown "$DCK_USER:$(_dck_group)" "$DCK_PERSIST_ROOT/state/ssh"
   chmod 0700 "$DCK_PERSIST_ROOT/state/ssh" 2>/dev/null || true
   dck_persist state "$DCK_HOME/.config/gh" dir || true
+  # The Dailybot CLI login, whether the dailybot layer or the repository installed it.
+  dck_persist state "$DCK_HOME/.config/dailybot" dir || true
   dck_persist state "$DCK_HOME/.config/herdr" dir || true
   # Herdr's saved SSH machines (the host, the other containers) live in its
   # client state, not its config: keep them too, or every rebuild drops them.
@@ -1076,8 +1308,10 @@ dck_start() {
   dck_layer_persist || true
   dck_git_identity || true
   dck_ssh_agent_access || true
+  dck_ssh_copy_keys || true
   dck_skills_link || true
   dck_agent_trust || true
+  dck_codex_config || true
   dck_herdr_config || true
   dck_herdr_agent_link || true
   dck_env_profile || true

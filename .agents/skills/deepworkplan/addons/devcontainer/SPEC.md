@@ -16,8 +16,8 @@ the kit's options, the registry record and the validation.
 | Field | Value |
 |-------|-------|
 | **Version** | 3.0.0 |
-| **Status** | Stable — per-repository Dockerfile, no shared base image (devcontainer-kit `v0.3.1`, interface 2); supersedes 2.x (base-image flavours, interface 1) |
-| **Product pin** | `DailybotHQ/devcontainer-kit` `v0.3.1`, interface `2`; skill `dck-dockerfile` at the same tag |
+| **Status** | Stable — per-repository Dockerfile, no shared base image (devcontainer-kit `v0.3.5`, interface 2); supersedes 2.x (base-image flavours, interface 1) |
+| **Product pin** | `DailybotHQ/devcontainer-kit` `v0.3.5`, interface `2`; skill `dck-dockerfile` at the same tag |
 | **Companions** | `SKILL.md`, `addon.json`, `templates/INTEGRATION.md`, `../README.md`, `../../spec/ADDONS.md` |
 
 ## 1. Conventions
@@ -59,11 +59,11 @@ volume, CLI or profile file.
 
 - Explicit opt-in (`onboard` Phase 7b); a decline writes nothing.
 - Install the kit:
-  `git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit` then
+  `git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit` then
   `./devcontainer-kit/install.sh`. A fetch-and-execute pipeline **MUST NOT**
   appear in this pack's text.
 - The addon **SHOULD** offer the skill with
-  `npx --yes skills add https://github.com/DailybotHQ/devcontainer-kit/tree/v0.3.1 --skill dck-dockerfile -y`
+  `npx --yes skills add https://github.com/DailybotHQ/devcontainer-kit/tree/v0.3.5 --skill dck-dockerfile -y`
   (repo-local, recorded in `skills-lock.json`); the install **MUST** name
   the exact tag in that tree-URL form.
 - **The layout.** The render produces exactly
@@ -88,16 +88,21 @@ volume, CLI or profile file.
   its checksum-verified release and the CLIs through `ak install`; agents in
   the container launch in the kit's autonomy by default, and the compose
   carries the commented `AGENTKIT_PERMISSIONS=ask` opt-out. The addon adds
-  no autonomy flag.
+  no autonomy flag. Since `v0.3.2` the image also carries coding-agents-kit's
+  three skills (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`) from the
+  same verified release tarball, linked into every agent's skills directory
+  at each start, so a recreate keeps them; the addon installs no second copy.
 - On acceptance: `addons.devcontainer` = `{"enabled": true, "version":
-  "v0.3.1"}` via `shared/config.py enable`.
+  "v0.3.5"}` via `shared/config.py enable`.
 
 ## 6. Security Defaults (inherited, never weakened)
 
 Ports bind `127.0.0.1` unless the repository's config says otherwise; no
 `privileged`, `cap_add`, host namespaces, Docker socket or host bind mounts
 beyond the workspace and the SSH agent socket in what this addon proposes —
-in particular no host `~/.ssh`, `~/.gitconfig` or `${HOME}` mount; SSH and git inside the container use the host's
+in particular no host `~/.ssh`, `~/.gitconfig` or `${HOME}` mount (the kit's
+read-only `~/.ssh_host` bind under the developer's own `[ssh] copy_keys`,
+§6.2, is never proposed by the addon); SSH and git inside the container use the host's
 **agent** (forwarding, or the agent socket the kit picks by Docker
 provider — Docker Desktop and OrbStack share the host agent, a native
 Linux engine mounts `$SSH_AUTH_SOCK`, other runtimes get none in exec
@@ -108,7 +113,9 @@ whose key the host agent holds, so git over SSH with their own aliases
 works inside; the addon **MUST NOT** answer the kit's `ssh-add` offer or
 write `[ssh] host_extra` (a host-profile key that widens the copy beyond git
 hosting services) on the developer's behalf — private keys are
-never copied into an image or container; the container's sshd is
+never copied into an image, and into a container only through the
+developer's own `[ssh] copy_keys` opt-in (§6.2), which this addon never
+proposes or sets; the container's sshd is
 pubkey-only with host keys generated at runtime, never baked in; every
 download in the image is verified; `.env` files are `0600` and gitignored;
 no secret value is written by the addon.
@@ -138,6 +145,78 @@ no secret value is written by the addon.
   through the read-write mounts, and that a shared Codex `auth.json` allows
   one active writer per account.
 
+## 6.2. Host SSH Keys (`[ssh] copy_keys`, opt-in, `v0.3.2`)
+
+- `[ssh] copy_keys` (bool, default `false`) belongs to the developer's
+  **host** profile; a repository's `dck.toml` cannot set it, and `dck setup`
+  asks once (default no). The addon **MUST NOT** set it or answer that
+  question, and **MUST NOT** propose it in a repository's files.
+- When on, `dck up` binds the host's whole `~/.ssh` **read-only** at
+  `~/.ssh_host` through a runtime compose overlay, and every container start
+  copies its `id_*` keys into the container's `~/.ssh` on the state volume
+  (private `0600`, `.pub` `0644`; refreshed or removed when they change or
+  disappear on the host). dck's own `config`, `config.d/`, `authorized_keys`
+  and `known_hosts.dck-host` are untouched; agent forwarding is unchanged.
+  Turning it off removes the copies at the next start.
+- It exists for tools that read only key files (for example
+  `gh auth login`). If the developer raises it, the addon **MUST** state the
+  trade-off: while it is on, every file of the host `~/.ssh` is readable
+  inside the container, and private keys rest in the state volume (removing
+  that volume wipes them). `dck doctor` reports the opt-in and key file
+  names only.
+
+## 6.3. State Volume (`[compose] state_volume`, `v0.3.2`)
+
+The service's state volume (sshd host key, `~/.ssh`, `gh` auth, Herdr client
+state, history) defaults to `state`. When several services share one compose
+project (one `COMPOSE_PROJECT_NAME`), each **MUST** get its own name through
+`[compose] state_volume` in `dck.toml` (or `dck init --state-volume NAME`);
+otherwise they all mount one `<project>_state` volume. The addon reasons
+this from the repository's compose setup and passes the name to the render;
+`dck doctor` flags a shared state volume. The mount point inside does not
+change, and an existing install keeps its `state` volume.
+
+## 6.4. Shared Compose Stacks (`v0.3.3`, additive)
+
+- When the repository is one service of a compose project shared across
+  repositories, the addon **SHOULD** reason `[compose] project`,
+  `state_volume` (one per service), `[compose] networks` / `volumes`,
+  `[build] context` / `dockerfile` and `dev_sh = false` from the real stack
+  (the kit's `docs/shared-stack.md`), and pass them to the render.
+- Repository additions to the dck service **MUST** go in the user block
+  (`# >>> user:<svc> >>>` … `# <<< user:<svc> <<<`; `x-dck-merge:` for keys
+  dck renders) and the top-level `user:volumes` / `user:networks`
+  sub-blocks — never inside dck's own markers. The kit refuses partial or
+  unbalanced markers; the addon **MUST NOT** work around that refusal.
+- Port strings (`ssh_port`, `ports`) **MAY** be compose expressions; they
+  bind loopback unless the string names a host IP, which only the
+  repository's own config may set (§6).
+- `[agents] node_first` (default `false`) **MAY** be set only when the
+  repository's tooling needs the agents' Node first on PATH.
+- `[agents] default_profile` is a **host** profile key (exported as
+  `AGENTKIT_DEFAULT_PROFILE_<CLI>` when that profile is shared;
+  coding-agents-kit `v0.5.2` and later); the addon **MUST NOT** set it.
+  Since `v0.3.4`, when it is set and shared, login shells also export
+  `CLAUDE_CONFIG_DIR` / `CODEX_HOME` for that profile, so panes Herdr
+  restores without ak open on that account.
+- Since `v0.3.4` the kit writes `check_for_update_on_startup = false` and
+  `[features] daemon_auto_start = false` into the container's own Codex
+  configs only — never the host's Codex home or a host-shared profile — and
+  keeps a value the developer set. The addon **MUST NOT** pre-trust Codex
+  hooks; that consent is the developer's.
+- A repository that sets none of these keys renders byte-identically to
+  `v0.3.2`.
+- **Workspace satellites (`v0.3.5`).** A second instance of a dev service
+  in its own compose project **MUST** be started and stopped through
+  `dck --project <P> --compose-file <F>… --service <S> up|down`, never plain
+  `docker compose`, so it gets the main service's host steps (dck key,
+  `copy_keys`, host-profile accounts, git identity, `HERDR_PEERS_SELF`, its
+  own Herdr machine). In an overlay file, `extends` **MUST** name the file
+  (`{file: …, service: …}`); the satellite **MUST NOT** mount the main
+  service's state volume. `up --seed-state-from VOLUME` copies only login
+  state, once, into an empty satellite state volume; `down` removes only
+  that service, its Herdr machine and its SSH alias.
+
 ## 7. Herdr Container Profile
 
 When the repository wants its container as a Herdr machine (the herdr
@@ -145,7 +224,7 @@ addon's container profile): enable the kit's Herdr machine option; `dck up`
 (or `bash dev.sh up`) registers it. `dck herdr add` writes the user's
 `~/.ssh/config` include and **MUST** be run only with its own explicit
 approval. Peers then run the pinned herdr-peers skill inside the container
-(`../herdr/install.md` §3); every `v0.3.1` image carries herdr-peers. The
+(`../herdr/install.md` §3); every `v0.3.5` image carries herdr-peers. The
 kit's `[herdr] layout` key (`"standard"`: App · Editor · Development ·
 Agents, created by `dck up`; `"none"` skips it) is the kit's choice, and the
 addon passes the person's preference without adding its own. The optional
@@ -159,12 +238,24 @@ container's Herdr catalog across rebuilds, and installs a verified
 herdr-peers on the host. The listener lets code in a running container open
 a shell on the host as the developer — the offer **MUST** say so; its
 opt-outs are `dck host listener disable` and `[host] machine = false`.
+Since `v0.3.2`, `dck rebuild`, `dck start` and `dck restart` run the same
+post-start steps as `dck up`: the Herdr machine is registered again (re-added
+when it was removed, its host key re-pinned), the mesh and the host-catalog
+mirror are pushed and the layout is created, so a container built from
+scratch reaches the host and its peers without a hand `dck herdr mesh`.
+Since `v0.3.3` the kit records the container's machine id as the host's
+Herdr catalog saves it and exports `HERDR_PEERS_SELF` in login shells, so a
+Codex pane inside (whose commands run from a per-profile server, where the
+self probe cannot find it) reaches other machines with no hand step; the
+addon **MUST NOT** override it, and `dck doctor` flags a mismatch. With a
+kit older than `v0.3.3`, the lead's brief names the value and a Codex pane
+**MUST** set it.
 
 ## 8. Validation Checklist
 
 1. `SKILL.md`, `SPEC.md`, `addon.json`, `templates/INTEGRATION.md` exist; no
    layout, Dockerfile, compose, entrypoint, `dev.sh` or image copy ships in
-   this folder; `addon.json` pins `DailybotHQ/devcontainer-kit` `v0.3.1`,
+   this folder; `addon.json` pins `DailybotHQ/devcontainer-kit` `v0.3.5`,
    interface 2.
 2. `dck doctor --json`: interface 2; repo config valid; drift reported.
 3. Existing files changed only through accepted render diffs with

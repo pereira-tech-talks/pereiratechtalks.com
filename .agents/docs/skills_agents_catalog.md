@@ -404,3 +404,7 @@ DeepWorkPlan v7.6.0, AI Diff Reviewer v3.3.9 and Dailybot skill v3.23.12 are ven
 ### Final orchestra refresh — 2026-10-11
 
 DeepWorkPlan v7.6.1 is installed byte-for-byte from its verified tagged release. The fitting addon set is preserved; dck v0.3.1 reconciles the container and brings herdr-peers v0.2.2, retaining the site hook and unmanaged Dockerfile sections. This final round verifies that a second `dck up` preserves shared token presence and that Codex peers route asks and replies using the explicit `--pane` caller address. Reviewer v3.3.9, Dailybot skill v3.23.12, ak v0.5.0 and Vim v0.7.0 remain at their pins. Historical plans and the host editor are unchanged.
+
+## Dogfood reconciliation — 2026-10-12
+
+DeepWorkPlan v7.6.3, AI Diff Reviewer v3.3.11 and Dailybot skill v3.23.14 are pinned in `skills-lock.json`. The existing addon set still fits. The container is rendered with dck v0.3.5, coding-agents-kit v0.5.3 and herdr-peers v0.2.3; DeepWorkPlan Vim v0.7.0 remains a container editor layer. Repository hooks, review rules, design documentation and historical plans are preserved.
