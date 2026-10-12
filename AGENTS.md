@@ -616,7 +616,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 27. **Compare `callForSpeakers.status` inline** — a call auto-closes once the meetup date or `closesAt` passes, so only `getCallForSpeakersState()` gives the real answer. A stale `open` must never invite a proposal to an event that already happened.
 28. **State a meetup's line-up in frontmatter** — it is derived from `talks` / `speakers`. Two sources of the same fact drift.
 29. **Print a day for a `month-only` meetup** — render the month, and use `YYYY-MM` in `<time datetime>` and in the agent twin.
-30. **Commit a second lockfile** — `pnpm-lock.yaml` is the only lockfile; never add `bun.lock`, `bun.lockb`, `yarn.lock` or `package-lock.json`. Cloudflare Pages picks the package manager from the lockfiles it finds, and a stale `bun.lock` made it run `bun install --frozen-lockfile` and fail every build for two weeks (2026-10). `tests/unit/lockfile-hygiene.test.ts` fails the unit suite if one comes back; `.gitignore` blocks the common ones.
+30. **Commit a second lockfile** — `pnpm-lock.yaml` is the only lockfile; never add `bun.lock`, `bun.lockb`, `yarn.lock` or `package-lock.json`. Cloudflare Pages picks the package manager from the lockfiles it finds, and a stale `bun.lock` made it run `bun install --frozen-lockfile` and fail every build from 2026-10-01 until it was removed. `tests/unit/lockfile-hygiene.test.ts` fails the unit suite if one comes back; `.gitignore` blocks the common ones.
 
 ### DO:
 

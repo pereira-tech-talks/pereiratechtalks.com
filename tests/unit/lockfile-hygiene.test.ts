@@ -51,12 +51,7 @@ describe('lockfile hygiene (Cloudflare Pages package-manager detection)', () => 
     const ignored = readFileSync(join(ROOT, '.gitignore'), 'utf8')
       .split('\n')
       .map((line) => line.trim());
-    for (const name of [
-      'bun.lock',
-      'bun.lockb',
-      'yarn.lock',
-      'package-lock.json',
-    ]) {
+    for (const name of FOREIGN_LOCKFILES) {
       expect(ignored, `.gitignore must list ${name}`).toContain(name);
     }
   });
