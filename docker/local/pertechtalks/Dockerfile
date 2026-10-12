@@ -4,7 +4,7 @@
 # base block copies live next to this file in dck/ (vendored by `dck init`,
 # devcontainer-kit v0.3.1); no shared base image is involved.
 # >>> dck:base >>>
-# dck:managed v0.3.1 base
+# dck:managed v0.3.5 base
 # Both ARGs come before any FROM, so they are global (an ARG after a FROM is
 # scoped to that stage).
 ARG BASE_IMAGE=node:24.21.0-trixie-slim@sha256:173f125896c3b47ddf056734c7ea789d04595a6a08769a8f78e0df642781fb66
@@ -49,17 +49,19 @@ ENV LANG=en_US.UTF-8 \
     VISUAL=nvim \
     GIT_EDITOR=nvim \
     DCK_IMAGE_FLAVOUR=node-24 \
-    DCK_IMAGE_VERSION=0.3.1
-WORKDIR /app
-ENTRYPOINT ["/usr/local/bin/dck-entrypoint"]
-CMD ["sleep", "infinity"]
+    DCK_IMAGE_VERSION=0.3.5
 
-# dck.toml asks for user "node": rename the uid-1000 user.
+# dck.toml asks for user "node": rename the uid-1000 user. Before WORKDIR: a
+# workspace under /home/node would otherwise create that home first, and
+# `usermod -m` refuses to move into an existing directory (exit 12).
 RUN usermod -l node -d /home/node -m dev \
     && groupmod -n node dev \
     && printf '%s ALL=(root) NOPASSWD:ALL\n' node > /etc/sudoers.d/node \
     && chmod 0440 /etc/sudoers.d/node \
     && rm -f /etc/sudoers.d/dev
+WORKDIR /app
+ENTRYPOINT ["/usr/local/bin/dck-entrypoint"]
+CMD ["sleep", "infinity"]
 # <<< dck:base <<<
 # >>> dck:layers >>>
 # Agents layer (layers.agents = true): coding-agents-kit (ak) from its verified

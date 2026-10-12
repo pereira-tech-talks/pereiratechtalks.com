@@ -12,7 +12,7 @@
 #   bash dev.sh help      every command
 # >>> dck:devsh >>>
 set -euo pipefail
-DCK_RENDERED_WITH="v0.3.1"
+DCK_RENDERED_WITH="v0.3.5"
 # sha256 of that release's SHA256SUMS, when the rendering dck knew it (else empty).
 DCK_SUMS_SHA256=""
 # The compose project dck uses, so plain compose never acts on another checkout.
@@ -214,9 +214,22 @@ case "$("$dck_bin" --version 2>/dev/null)" in
   *) echo "dev.sh: note: this repository was rendered with devcontainer-kit ${DCK_RENDERED_WITH}; run \`dck init\` to reconcile it with $("$dck_bin" --version 2>/dev/null)" >&2 ;;
 esac
 
+# run_checked <verb> [args...] — dck's refusals (exit 5: a container configuration
+# that reaches the host and needs --trust, or markers to fix) are printed on
+# stderr; say so on stdout too, so a caller that discards stderr still sees why.
+run_checked() {
+  local rc=0
+  "$dck_bin" "$@" || rc=$?
+  if [ "$rc" -eq 5 ]; then
+    echo "dev.sh: dck refused to $1 (exit 5): the repository's container configuration reaches the host (it needs --trust) or dck's markers need a fix. Run \`bash dev.sh $1\` with stderr visible to see what; once reviewed, \`DCK_TRUST=1 bash dev.sh $1\`."
+  fi
+  exit "$rc"
+}
+
 case "$verb" in
-  up) "$dck_bin" setup && exec "$dck_bin" up "$@" ;;
-  down|shell|exec|build|rebuild|logs|ps|doctor|ssh|agents|ask|setup) exec "$dck_bin" "$verb" "$@" ;;
+  up) "$dck_bin" setup && run_checked up "$@" ;;
+  build|rebuild) run_checked "$verb" "$@" ;;
+  down|shell|exec|logs|ps|doctor|ssh|agents|ask|setup) exec "$dck_bin" "$verb" "$@" ;;
   herdr) if [ $# -eq 0 ]; then exec "$dck_bin" herdr add; else exec "$dck_bin" herdr "$@"; fi ;;
   herdr-layout) exec "$dck_bin" herdr layout "$@" ;;
   *) echo "dev.sh: unknown command '$verb'" >&2; usage >&2; exit 2 ;;
