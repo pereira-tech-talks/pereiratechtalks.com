@@ -87,3 +87,11 @@ docker/local/**/.env.*
 !docker/local/**/.env.example
 *.dck-bak-*
 # <<< dck:gitignore <<<
+
+# foreign lockfiles — pnpm-lock.yaml is the only lockfile. Cloudflare Pages
+# selects the package manager from the lockfiles present; a stale bun.lock
+# made it run `bun install --frozen-lockfile` and fail every build (2026-10).
+bun.lock
+bun.lockb
+yarn.lock
+package-lock.json
