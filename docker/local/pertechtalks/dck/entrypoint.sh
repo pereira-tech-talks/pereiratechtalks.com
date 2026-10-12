@@ -271,6 +271,16 @@ PY
 # part: the HostKey and `AllowUsers <user>`. The host publishes the port on
 # 127.0.0.1 only.
 
+# dck_host_key_pub — print the persistent host key's public half (nothing when
+# it does not exist yet). `dck ssh` and `dck herdr add` read it through
+# `docker exec` to pin the key from the container itself, never from the network.
+dck_host_key_pub() {
+  _dck_env
+  local f="${DCK_SSH_HOST_KEY_DIR:-$DCK_PERSIST_ROOT/state/ssh_host_keys}/ssh_host_ed25519_key.pub"
+  [ -f "$f" ] && [ ! -L "$f" ] && head -n 1 "$f"
+  return 0
+}
+
 dck_sshd() {
   _dck_env
   if [ "${DCK_SSH:-0}" != "1" ]; then
