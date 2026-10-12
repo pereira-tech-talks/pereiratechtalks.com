@@ -14,11 +14,11 @@
     },
     "dependency-upgrade": {
       "enabled": true,
-      "version": "v7.6.3"
+      "version": "v7.7.0"
     },
     "design-system": {
       "enabled": true,
-      "version": "v7.6.3"
+      "version": "v7.7.0"
     },
     "devcontainer": {
       "enabled": true,
