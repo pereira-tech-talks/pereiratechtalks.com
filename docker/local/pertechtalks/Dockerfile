@@ -4,7 +4,7 @@
 # base block copies live next to this file in dck/ (vendored by `dck init`,
 # devcontainer-kit v0.3.1); no shared base image is involved.
 # >>> dck:base >>>
-# dck:managed v0.3.5 base
+# dck:managed v0.3.7 base
 # Both ARGs come before any FROM, so they are global (an ARG after a FROM is
 # scoped to that stage).
 ARG BASE_IMAGE=node:24.21.0-trixie-slim@sha256:173f125896c3b47ddf056734c7ea789d04595a6a08769a8f78e0df642781fb66
@@ -49,7 +49,7 @@ ENV LANG=en_US.UTF-8 \
     VISUAL=nvim \
     GIT_EDITOR=nvim \
     DCK_IMAGE_FLAVOUR=node-24 \
-    DCK_IMAGE_VERSION=0.3.5
+    DCK_IMAGE_VERSION=0.3.7
 
 # dck.toml asks for user "node": rename the uid-1000 user. Before WORKDIR: a
 # workspace under /home/node would otherwise create that home first, and
@@ -67,8 +67,17 @@ CMD ["sleep", "infinity"]
 # Agents layer (layers.agents = true): coding-agents-kit (ak) from its verified
 # release, the pinned Node when the flavour lacks a current one, `ak install`
 # (pinned, verified) and the classic + providers presets. Autonomy is ak's default.
+# The CLIs installed: DCK_AGENT_CLIS plus each INSTALL_<CLI>_CLI=true (compose
+# passes both from the developer's environment or docker/local/.env).
 ARG DCK_AGENT_CLIS="claude codex cursor opencode pi cline grok"
-RUN DCK_USER=node dck-layer agents ${DCK_AGENT_CLIS}
+ARG INSTALL_CLAUDE_CLI=false
+ARG INSTALL_CODEX_CLI=false
+ARG INSTALL_CURSOR_CLI=false
+ARG INSTALL_OPENCODE_CLI=false
+ARG INSTALL_PI_CLI=false
+ARG INSTALL_CLINE_CLI=false
+ARG INSTALL_GROK_CLI=false
+RUN DCK_USER=node DCK_AGENT_SUPPORTED="claude codex cursor opencode pi cline grok" dck-layer agents ${DCK_AGENT_CLIS}
 # Dailybot layer (layers.dailybot = true): requested by the dailybot addon.
 RUN DCK_USER=node dck-layer dailybot
 # <<< dck:layers <<<
