@@ -58,8 +58,40 @@ if ! command -v pnpm >/dev/null 2>&1; then
   chmod 0755 /tmp/dck-editor/bin/pnpm
 fi
 
+# install_with_retry <attempts> <command...> — run the installer; when --strict reports
+# a plugin problem (the headless install failed or timed out, a plugin is missing or
+# empty, or away from its lockfile commit: a plugin clone that lost a race with the
+# network), run it again after a growing pause (DCK_EDITOR_RETRY_DELAY seconds × the
+# attempt), up to <attempts> runs. A rerun is safe: the installer updates its own
+# config in place and re-syncs only what is missing. Any other failure (a checksum,
+# a refusal) fails at once; the last plugin failure fails the build, loudly.
+install_with_retry() {
+  local max="$1" n=1 rc err
+  shift
+  err="$(mktemp "${TMPDIR:-/tmp}/dck-editor-err.XXXXXX")"
+  while :; do
+    rc=0
+    "$@" 2>"$err" || rc=$?
+    cat "$err" >&2
+    [ "$rc" -eq 0 ] && { rm -f "$err"; return 0; }
+    if ! grep -qE -- '--strict: (the headless plugin install failed|plugins incomplete|plugins differ)' "$err"; then
+      rm -f "$err"
+      echo "deepworkplan-vim ${DWP_VIM_TAG}: the installer failed (rc=$rc); not a plugin install problem, not retried" >&2
+      return "$rc"
+    fi
+    if [ "$n" -ge "$max" ]; then
+      rm -f "$err"
+      echo "deepworkplan-vim ${DWP_VIM_TAG}: the plugin install still failed after $max attempts (rc=$rc) — failing the build" >&2
+      return "$rc"
+    fi
+    echo "deepworkplan-vim ${DWP_VIM_TAG}: plugin install attempt $n/$max failed; retrying in $((${DCK_EDITOR_RETRY_DELAY:-15} * n))s" >&2
+    sleep "$((${DCK_EDITOR_RETRY_DELAY:-15} * n))"
+    n=$((n + 1))
+  done
+}
+
 # As the dev user, with a clean environment (no build-time variable leaks in).
-runuser -u "$DEV_USER" -- env -i \
+install_with_retry 3 runuser -u "$DEV_USER" -- env -i \
   HOME="$home" USER="$DEV_USER" LOGNAME="$DEV_USER" SHELL=/bin/bash LANG=en_US.UTF-8 \
   PATH=/usr/local/bin:/usr/bin:/bin:/tmp/dck-editor/bin TMPDIR=/tmp/dck-editor/tmp \
   bash "$installer" --version "${DWP_VIM_TAG#v}" --skip-packages --strict
