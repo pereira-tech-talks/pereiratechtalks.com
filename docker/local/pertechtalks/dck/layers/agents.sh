@@ -16,11 +16,32 @@
 # shellcheck source=lib/layers/common.sh
 . "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
-KINDS="claude codex cursor opencode pi cline grok"
+KINDS="claude codex cursor opencode pi cline grok antigravity"
+# The CLIs to install: the arguments (DCK_AGENT_CLIS, which may come from a
+# developer's .env as "grok,opencode": commas count as separators) plus every kind
+# whose INSTALL_<CLI>_CLI build arg is exactly "true". A kind is installed once.
+kinds=""
+add_kind() { case " $kinds " in *" $1 "*) ;; *) kinds="${kinds:+$kinds }$1" ;; esac; }
+set -f
+for k in $(printf '%s' "$*" | tr ',' ' '); do add_kind "$k"; done
+set +f
+for k in $KINDS; do
+  v="INSTALL_$(printf '%s' "$k" | tr '[:lower:]' '[:upper:]')_CLI"
+  [ "${!v:-}" = "true" ] && add_kind "$k"
+done
+# shellcheck disable=SC2086  # the kinds are single words, checked below
+set -- $kinds
+# DCK_AGENT_SUPPORTED (rendered from dck.toml [agents] supported): the kinds this
+# repository's images are wired for; a CLI outside it is refused with the list.
+supported="${DCK_AGENT_SUPPORTED:-$KINDS}"
 for k in "$@"; do
   case " $KINDS " in
     *" $k "*) ;;
     *) layer_log "unknown kind '$k' (one of: $KINDS)"; exit 2 ;;
+  esac
+  case " $supported " in
+    *" $k "*) ;;
+    *) layer_log "'$k' is not supported by this repository ([agents] supported: $supported)"; exit 2 ;;
   esac
 done
 
@@ -89,11 +110,17 @@ as_user bash -c 'grep -qs "^prefix=" "$HOME/.npmrc" || printf "prefix=%s\n" "$HO
 # PATH (an older copy in the image, or the host's in a test environment).
 ak_bin="$(as_user bash -lc 'p="$HOME/.local/share/agentkit/bin/ak"; if [ -x "$p" ]; then echo "$p"; else command -v ak; fi')"
 
-# 4. The CLIs the repository asked for: ak installs each pinned and verified.
+# 4. The CLIs this image installs: ak installs each pinned and verified.
 if [ "$#" -gt 0 ]; then
   as_user env PATH="$agent_path" bash -c 'NPM_CONFIG_PREFIX="$HOME/.local" exec "$@"' _ "$ak_bin" install "$@"
   layer_log "ak install $*"
 fi
+
+# 4a. The record of what this image installed: `dck up` and `dck doctor` compare it
+#     with the developer's list (DCK_AGENT_CLIS) and say when a rebuild is needed.
+mkdir -p "${DCK_LAYER_PREFIX:-/opt/dck}"
+printf '%s\n' "$*" > "${DCK_LAYER_PREFIX:-/opt/dck}/agent-clis"
+chmod 0644 "${DCK_LAYER_PREFIX:-/opt/dck}/agent-clis"
 
 # 4b. With the agents' own Node: each npm-installed CLI whose entry point is a node
 #     script (~/.local/bin/<cli> -> ../lib/node_modules/...) gets a launcher that

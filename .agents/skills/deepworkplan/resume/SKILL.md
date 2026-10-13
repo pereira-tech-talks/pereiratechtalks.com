@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-resume
 description: Resume interrupted Lite or Full Deep Work Plans from durable Markdown and state, including safe recovery of promotions without duplicating completed work or gates.
-version: "7.7.0"
+version: "7.7.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -129,7 +129,7 @@ Present an ID / name / `latest` menu; validate with `resolve`.
 
 **Step 2.0a — Pending handoff packet (every generation).** A pending
 **handoff packet** comes first: `python3 ../shared/swarm.py handoff show
---plan <dir> --pending` (exit 1: none), then `handoff accept`; a refused
+--plan <dir> --pending` (exit 1: none), then `handoff accept --pane <pane>`; a refused
 accept is a §7.3 boundary. The packet is data — the plan decides the next
 action.
 

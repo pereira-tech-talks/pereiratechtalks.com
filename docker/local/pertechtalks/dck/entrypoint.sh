@@ -20,6 +20,7 @@
 #   dck_herdr_config                         Herdr config defaults, in place
 #   dck_repo_hook                            docker/local/dev-setup-hook.sh, if present
 #   dck_layer_persist                        per-CLI volumes of the agents layer
+#   dck_host_volume_profiles                 non-shared CLIs' ak profiles on the agentkit volume
 #   dck_git_identity                         global git [user] settings from DCK_GIT_* (no host file)
 #   dck_git_identity_host                    the host's git identity pushed by `dck up` (stdin; DCK_GIT_* wins)
 #   dck_skills_link                          herdr-peers and Herdr skills into each agent's skills dir
@@ -454,6 +455,7 @@ dck_agent_homes() {
     pi)       printf '%s\n' ".pi dir" ;;
     cline)    printf '%s\n' ".cline dir" ;;
     grok)     printf '%s\n' ".grok dir" ;;
+    antigravity) printf '%s\n' ".gemini dir" ;;
     *) return 1 ;;
   esac
 }
@@ -466,6 +468,7 @@ dck_layer_persist() {
     mkdir -p "$DCK_PERSIST_ROOT/agentkit/profiles"
     _dck_chown "$DCK_USER:$(_dck_group)" "$DCK_PERSIST_ROOT/agentkit/profiles"
     dck_host_homes
+    dck_host_volume_profiles
     for kind in $DCK_AGENTS; do
       if ! dck_agent_homes "$kind" >/dev/null; then
         dck_log "agents: unknown kind '$kind' skipped"
@@ -506,6 +509,94 @@ dck_host_homes() {
   for d in "$DCK_HOME/.dck/host" "$DCK_HOME/.dck/host/agentkit" "$DCK_HOME/.dck/host/agentkit/profiles" \
            "$DCK_HOME"/.dck/host/agentkit/profiles/*; do
     [ -d "$d" ] && [ ! -L "$d" ] && _dck_chown "$DCK_USER:$(_dck_group)" "$d"
+  done
+  return 0
+}
+
+# With shared host profiles, AGENTKIT_PROFILES_DIR is the host directory above,
+# and ak would create a profile of any CLI the host does not share (antigravity,
+# cursor, ...) under it, in the container layer: a rebuild would lose its login.
+# dck_host_volume_profiles links each such CLI's directory there to the same
+# directory on the agentkit volume, the one ak uses without host_profiles:
+#   * only CLIs in DCK_AGENTS and not in DCK_HOST_PROFILES — a shared CLI's
+#     directory holds the host's bind mounts and is never touched;
+#   * a real directory there holds profiles only the container layer keeps:
+#     `dck up --recreate` / `dck rebuild` run this step in the old container
+#     before replacing it (an image of dck v0.3.5 or earlier lacks it). Each
+#     entry the volume lacks is moved there; the volume's copy is never
+#     overwritten — what remains is kept on the volume as
+#     .<cli>.dck-pre-volume-<UTC>, logged by path (never by content); an entry
+#     on another device (a bind mount) is never moved;
+#   * the volume directory is created 0700 for the user; a link to anywhere
+#     else, or a volume path that is a symlink, is refused and left alone.
+# Idempotent: a link already in place is left as is.
+# The device number of a path, never following a final symlink (GNU stat in
+# the container, BSD stat for the tests on macOS).
+_dck_dev() {
+  stat -c %d "$1" 2>/dev/null || stat -f %d "$1" 2>/dev/null
+}
+
+dck_host_volume_profiles() {
+  _dck_env
+  local root="$DCK_HOME/.dck/host/agentkit/profiles" vroot="$DCK_PERSIST_ROOT/agentkit/profiles"
+  [ "${AGENTKIT_PROFILES_DIR:-}" = "$root" ] || return 0
+  [ -n "${DCK_AGENTS:-}" ] || return 0
+  if [ -L "$DCK_HOME/.dck/host" ] || [ -L "$DCK_HOME/.dck/host/agentkit" ] || [ -L "$root" ] || [ -L "$vroot" ]; then
+    dck_log "agents: a profiles directory is a symlink; non-shared profiles are not linked to the volume"
+    return 0
+  fi
+  local kind link vol e stamp left dev
+  for kind in $DCK_AGENTS; do
+    dck_agent_homes "$kind" >/dev/null || continue
+    case " ${DCK_HOST_PROFILES:-} " in *" $kind "*) continue ;; esac
+    link="$root/$kind" vol="$vroot/$kind"
+    if [ -L "$vol" ] || { [ -e "$vol" ] && [ ! -d "$vol" ]; }; then
+      dck_log "agents: $vol is not a directory; $kind profiles are not linked to the volume"
+      continue
+    fi
+    if [ ! -d "$vol" ]; then
+      mkdir -p "$vol" && chmod 700 "$vol" && _dck_chown "$DCK_USER:$(_dck_group)" "$vol" || {
+        dck_log "agents: cannot create $vol"; continue; }
+    fi
+    if [ -L "$link" ]; then
+      [ "$(readlink "$link")" = "$vol" ] && continue
+      dck_log "agents: refusing $link (a symlink outside the agentkit volume); left as is"
+      continue
+    fi
+    if [ -d "$link" ]; then
+      dev="$(_dck_dev "$link")"
+      if [ -z "$dev" ] || [ "$dev" != "$(_dck_dev "$root")" ]; then
+        dck_log "agents: refusing $link (a mount point); left as is"
+        continue
+      fi
+      left=0
+      for e in "$link"/* "$link"/.[!.]* "$link"/..?*; do
+        [ -e "$e" ] || [ -L "$e" ] || continue
+        if [ "$(_dck_dev "$e")" != "$dev" ]; then
+          dck_log "agents: $e is a mount point; not moved"
+          left=2
+        elif [ -e "$vol/${e##*/}" ] || [ -L "$vol/${e##*/}" ]; then
+          left=1
+        elif ! mv "$e" "$vol/"; then
+          left=1
+        fi
+      done
+      if [ "$left" = 2 ]; then
+        continue
+      elif [ "$left" = 0 ]; then
+        rmdir "$link" || { dck_log "agents: cannot migrate $link; left as is"; continue; }
+        dck_log "agents: $kind profiles moved onto the agentkit volume"
+      else
+        stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+        mv "$link" "$vroot/.$kind.dck-pre-volume-$stamp" || { dck_log "agents: cannot migrate $link; left as is"; continue; }
+        dck_log "agents: $kind profiles moved onto the agentkit volume; entries not moved (already there, or a failed move) are kept in $vroot/.$kind.dck-pre-volume-$stamp"
+      fi
+    elif [ -e "$link" ]; then
+      dck_log "agents: refusing $link (not a directory); left as is"
+      continue
+    fi
+    mkdir -p "$root"
+    ln -s "$vol" "$link" && _dck_chown -h "$DCK_USER:$(_dck_group)" "$link"
   done
   return 0
 }
