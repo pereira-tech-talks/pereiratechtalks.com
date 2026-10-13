@@ -280,6 +280,11 @@ Tests live in `tests/unit/`, in two shapes:
   (`analytics-privacy`, `agent-markdown-completeness`, `ard-manifest`).
 - `tests/unit/<feature>.test.ts` — feature-level suites cutting across modules
   (`certificates`, `community-stats`, `speaker-meetup-linkage`).
+- `tests/unit/lockfile-hygiene.test.ts` — a repository-hygiene suite with no
+  source module: it asserts `pnpm-lock.yaml` is the only lockfile and that
+  `packageManager` is pnpm, because the Cloudflare Pages build image selects
+  the package manager from the lockfiles it finds (a stale `bun.lock` broke
+  every deploy in 2026-10). It runs in the full suite and in CI.
 
 **Do not infer the gate from the filename.** Twelve `src/lib` modules have no
 same-name test (`talk`, `vertical`, `channel`, `ptd-paths`, `satteri-plugins`,
