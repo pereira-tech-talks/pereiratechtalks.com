@@ -1,0 +1,21 @@
+name: Carolina Gómez Trejos
+pronouns: she/her
+role:
+  en: Former Pereira Tech Day lead organizer
+  es: Organizadora anterior de Pereira Tech Day
+bio:
+  en: Carolina co-led Pereira Tech Day production end to end. At the October 2026 meetup she told how Django Girls Colombia automated the invisible work behind more than 4,700 participants in 12 cities.
+  es: Carolina lideró la producción de Pereira Tech Day de punta a punta. En el meetup de octubre de 2026 contó cómo Django Girls Colombia automatizó el trabajo invisible detrás de más de 4.700 participantes en 12 ciudades.
+photo:
+  src: /images/speakers/carolina-gomez-trejos.webp
+  alt:
+    en: Portrait of Carolina Gómez Trejos
+    es: Retrato de Carolina Gómez Trejos
+social:
+  linkedin: "https://www.linkedin.com/in/carolinagomezt/"
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

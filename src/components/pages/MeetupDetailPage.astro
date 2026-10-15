@@ -26,6 +26,7 @@ import {
   getCallForSpeakersState,
   getMeetupBodyEntry,
   getMeetupSlug,
+  meetupAwaitsProgramme,
   resolveEventAttendanceMode,
   resolveMeetupDateAttribute,
   resolveMeetupDateConfidence,
@@ -564,9 +565,12 @@ const metaDescription = buildMetaDescription({
         A meetup whose programme is not announced yet says so, rather than
         rendering an empty "Charlas" heading. `partial` means speakers are
         confirmed but their talk entries are not authored — the Speakers
-        section below still renders.
+        section below still renders. A gathering with no speakers and no call
+        (Open Cowork) does not get this box.
       */
-      talks.length === 0 && status !== 'completed' && (
+      talks.length === 0 &&
+      status !== 'completed' &&
+      meetupAwaitsProgramme(meetup) && (
         <section class="main-container pb-12 sm:pb-16">
           <div class="rounded-2xl bg-ptt-bg-elevated p-6 ring-1 ring-ptt-border sm:p-8">
             <h2 class="text-xl font-bold tracking-tight text-ptt">
@@ -575,7 +579,9 @@ const metaDescription = buildMetaDescription({
             <p class="mt-2 max-w-2xl text-ptt-secondary">
               {lineup === 'partial'
                 ? planning.lineupPartialBody
-                : planning.lineupOpenBody}
+                : callState === 'closed'
+                  ? planning.lineupClosedBody
+                  : planning.lineupOpenBody}
             </p>
             {callState === 'open' && (
               <a

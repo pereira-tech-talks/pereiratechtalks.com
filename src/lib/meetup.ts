@@ -362,6 +362,25 @@ export const resolveMeetupLineup = (meetup: Meetup): MeetupLineup => {
   return 'open';
 };
 
+/**
+ * Whether the UI should say the programme is still being built.
+ *
+ * `resolveMeetupLineup() === 'open'` is true for any gathering with no talks
+ * and no speakers — including Open Cowork, which never has a programme. A
+ * notice only belongs when we are actually waiting on talks: confirmed
+ * speakers, or a call for speakers.
+ */
+export const meetupAwaitsProgramme = (
+  meetup: Meetup,
+  todayInTz?: string
+): boolean => {
+  if ((meetup.data.talks ?? []).length > 0) return false;
+  const speakers = meetup.data.speakers ?? [];
+  return (
+    speakers.length > 0 || getCallForSpeakersState(meetup, todayInTz) !== 'none'
+  );
+};
+
 export const resolveMeetupDateConfidence = (
   meetup: Meetup
 ): MeetupDateConfidence => meetup.data.dateConfidence ?? 'confirmed';

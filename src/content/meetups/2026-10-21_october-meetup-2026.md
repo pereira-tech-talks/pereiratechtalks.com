@@ -3,45 +3,68 @@ title:
   en: "October meetup"
   es: "Meetup de octubre"
 description:
-  en: "The call for talks is open for our October meetup. Bring the idea you have been meaning to tell — as a lightning talk of 3 to 5 minutes or a full one of 25."
-  es: "La convocatoria de charlas está abierta para el meetup de octubre. Trae esa idea que llevas semanas queriendo contar, en charla relámpago de 3 a 5 minutos o completa de 25."
+  en: "Virtual meetup on 21 October at 6:30 p.m. with Carolina Gómez Trejos, Nicolás Táutiva and Maria Ximena Caldas on Django Girls, careers and WhatsApp."
+  es: "Meetup virtual el 21 de octubre a las 6:30 p. m. con Carolina Gómez Trejos, Nicolás Táutiva y Maria Ximena Caldas: Django Girls, carrera y WhatsApp."
 pubDate: 2026-10-21
 date: 2026-10-21
 dateConfidence: confirmed
+mode: virtual
 hero:
   src: "/images/meetups/october-meetup-2026/hero.webp"
-  srcEn: "/images/meetups/october-meetup-2026/hero.en.webp"
   alt:
-    es: "Flyer del meetup de octubre de Pereira Tech Talks: convocatoria de charlas abierta, miércoles 21 de octubre de 2026, 6:30 PM hora Colombia, lugar por confirmar, charla relámpago de 3 a 5 minutos o completa de 25"
-    en: "Pereira Tech Talks October meetup flyer: call for talks is open, Wednesday 21 October 2026, 6:30 PM Colombia time, venue to be confirmed, lightning talk of 3 to 5 minutes or full talk of 25"
+    es: "Flyer del meetup de octubre de Pereira Tech Talks: charlas relámpago el miércoles 21 de octubre de 2026, 6:30 p. m. hora Colombia, con Carolina Gómez, Nicolás Táutiva y Maria Ximena Caldas"
+    en: "Pereira Tech Talks October meetup flyer: talks on Wednesday 21 October 2026, 6:30 p.m. Colombia time, with Carolina Gómez, Nicolás Táutiva and Maria Ximena Caldas"
   layout: banner
 heroImage: "/images/meetups/october-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:
-  status: open
+  status: closed
   formats:
     - lightning
     - regular
   closesAt: 2026-10-16
-status: announced
+talks:
+  - october-meetup-2026--1-code-with-impact-django-girls
+  - october-meetup-2026--2-skills-plan-b-and-finances
+  - october-meetup-2026--3-whatsapp-pricing-october
+speakers:
+  - carolina-gomez-trejos
+  - nicolas-tautiva
+  - maria-ximena-caldas
+linkMeetupCom: https://luma.com/mevk14m1
+status: rsvp-open
 draft: false
 ---
 
 ## Meetup de octubre
 
-Llega octubre y abrimos la convocatoria. Queremos una noche llena de voces de la comunidad, y para eso necesitamos la tuya: propón tu charla y ven a contarnos eso en lo que has estado metido.
+El miércoles 21 de octubre de 2026 nos vemos en línea, a las 6:30 p. m. hora Colombia. La convocatoria ya cerró. En el programa: Carolina Gómez Trejos, Nicolás Táutiva y Maria Ximena Caldas.
 
-No hace falta que sea un tema grande ni una investigación de meses. Un truco de tu editor, una librería que resultó no valer la pena, un post-mortem, una arquitectura que quieres explicar con calma, una idea a medio cocinar que quieres discutir en voz alta. Si es técnico y te importa, nos interesa escucharlo.
+Tres perspectivas sobre crecer de forma sostenible: automatizar el trabajo invisible de una comunidad, las decisiones que la universidad no enseña, y cómo no encarecer un bot de WhatsApp cuando Meta cobra por mensaje.
 
-Y tú eliges cuánto tiempo necesita: **charla relámpago de 3 a 5 minutos** si quieres ir directo al grano, o **charla completa de 25 minutos** si la idea da para más. Las dos caben esa noche.
+### Charlas
 
-Si nunca has presentado, este es un buen mes para empezar: te acompañamos a armar la charla y a ensayarla antes.
+**Código con impacto: cómo escalamos Django Girls Colombia automatizando lo invisible**
 
-La fecha está confirmada. Todavía estamos definiendo si nos vemos en una sala o en línea, y lo anunciamos aquí en cuanto lo sepamos.
+**Ponente:** Carolina Gómez Trejos
 
-¡Te esperamos!
+Organizar un evento para 30 personas es un reto; hacerlo para más de 4.700 a lo largo de 8 años en 12 ciudades distintas requiere dejar de ser organizadores para convertirnos en arquitectos de nuestra propia infraestructura y logística. Carolina cuenta la evolución de Django Girls Colombia: desde cronogramas a mano hasta un ecosistema de herramientas en Python que automatiza el envío de correos, la generación de certificados y la coordinación logística, para que las personas voluntarias se enfoquen en lo que importa: las relaciones humanas, la escucha y la enseñanza.
 
-### Convocatoria
+**Habilidades, plan B y finanzas: lo que nadie te cuenta en la universidad**
 
-Recibimos propuestas hasta el viernes 16 de octubre, en charla relámpago o en formato completo. Elige el formato que le sirva a tu idea y postúlala.
+**Ponente:** Nicolás Táutiva
+
+La universidad enseña a programar, pero no habla de las decisiones que llevan a una vida sostenible. Nicolás comparte las 5 lecciones que le ayudaron a construir una carrera y una vida más estable: habilidades, un plan B y otras cosas más. Esta no es una charla motivacional; es una charla sobre decisiones que importan en la vida.
+
+**De la ventana gratis al cobro por mensaje: cómo preparar tus bots e integraciones de WhatsApp para octubre**
+
+**Ponente:** Maria Ximena Caldas
+
+El 1 de octubre, Meta cambió el modelo de cobro en WhatsApp Business API: las respuestas dentro de la ventana de 24 horas y las plantillas de utilidad pasan a cobrarse por mensaje. Un chatbot o agente de IA que responde en 6 burbujas lo que podría resolver en 2 va a encarecer la operación. En esta charla relámpago vemos cómo auditar arquitecturas conversacionales, reducir el pimpongueo de mensajes y diseñar flujos costo-eficientes en CRM y soluciones conversacionales.
+
+---
+
+### Fuentes
+
+- Evento original: https://luma.com/mevk14m1

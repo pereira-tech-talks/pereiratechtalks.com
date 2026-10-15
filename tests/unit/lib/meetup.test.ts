@@ -9,6 +9,7 @@ import {
   formatMeetupTalkCount,
   getCallForSpeakersState,
   isCallForSpeakersOpen,
+  meetupAwaitsProgramme,
   resolveEventAttendanceMode,
   resolveMeetupDateAttribute,
   resolveMeetupDateConfidence,
@@ -262,6 +263,35 @@ describe('resolveMeetupLineup', () => {
         makeProgrammed('m', { date: '2026-11-18', talks: ['t1'] })
       )
     ).toBe('confirmed');
+  });
+});
+
+describe('meetupAwaitsProgramme', () => {
+  it('is false for a gathering with no talks, speakers or call', () => {
+    expect(
+      meetupAwaitsProgramme(makeProgrammed('cowork', { date: '2026-10-15' }))
+    ).toBe(false);
+  });
+
+  it('is true while a call for speakers is open and the lineup is empty', () => {
+    expect(
+      meetupAwaitsProgramme(
+        makeProgrammed('m', {
+          date: '2026-11-18',
+          call: openCall(),
+        }),
+        TODAY
+      )
+    ).toBe(true);
+  });
+
+  it('is true when speakers are confirmed but talks are not authored yet', () => {
+    expect(
+      meetupAwaitsProgramme(
+        makeProgrammed('m', { date: '2026-11-18', speakers: ['ana'] }),
+        TODAY
+      )
+    ).toBe(true);
   });
 });
 

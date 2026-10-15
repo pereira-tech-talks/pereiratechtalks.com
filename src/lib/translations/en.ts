@@ -216,6 +216,8 @@ If you are looking for people to grow with, a stage for your first talk, or a co
       lineupOpenTitle: 'Line-up in progress',
       lineupOpenBody:
         "We have not announced this meetup's talks yet. If you want to present, the call for speakers is the way in.",
+      lineupClosedBody:
+        'This date is no longer taking proposals. We publish the talks here once we announce them.',
       lineupPartialBody:
         'We have confirmed speakers and are still building the programme.',
       heroCta: 'Propose a talk',

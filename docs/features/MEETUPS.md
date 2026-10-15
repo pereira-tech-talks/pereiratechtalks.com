@@ -223,6 +223,11 @@ always go through `getCallForSpeakersState()`.
 `closesAt` is **inclusive of its own day**: a call closing on the 20th accepts
 proposals through the 20th.
 
+A confirmed programme closes the call early: set `status: closed`. The calendar
+checks only ever close a call; they never keep one open past that flag. The
+notification month buttons, the meetup form and `/api/cfs-open.json` all follow
+`getCallForSpeakersState()`.
+
 ### `venue` and `mode` are both optional
 
 You cannot book a room five months out, and often you have not even decided

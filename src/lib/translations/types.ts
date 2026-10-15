@@ -222,6 +222,8 @@ export interface SiteTranslations {
       modeTbc: string;
       lineupOpenTitle: string;
       lineupOpenBody: string;
+      /** Shown when the call has closed and the talks are not published yet. */
+      lineupClosedBody: string;
       lineupPartialBody: string;
       heroCta: string;
       /** Accessible name for the date tile — placeholder: {date} */

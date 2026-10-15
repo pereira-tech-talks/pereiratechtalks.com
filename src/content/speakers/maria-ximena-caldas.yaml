@@ -1,0 +1,18 @@
+name: Maria Ximena Caldas
+role:
+  en: Community speaker
+  es: Ponente de la comunidad
+bio:
+  en: Maria Ximena Caldas spoke at the October 2026 meetup on preparing WhatsApp bots and integrations for Meta's per-message pricing change.
+  es: Maria Ximena Caldas habló en el meetup de octubre de 2026 sobre cómo preparar bots e integraciones de WhatsApp para el cobro por mensaje de Meta.
+photo:
+  src: /images/speakers/maria-ximena-caldas.webp
+  alt:
+    en: Portrait of Maria Ximena Caldas
+    es: Retrato de Maria Ximena Caldas
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

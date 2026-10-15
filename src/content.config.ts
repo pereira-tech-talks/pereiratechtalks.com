@@ -1107,6 +1107,13 @@ const notifications = defineCollection({
       )
       .max(6)
       .optional(),
+    /**
+     * Keep a meetup CTA only while that meetup's call for speakers is open.
+     * Labels stay authored; `src/lib/notifications.ts` drops the rest at build
+     * time. Non-meetup hrefs in `ctas` are left as written, and the bar still
+     * shows when every month button has dropped off.
+     */
+    ctasFollowOpenCalls: z.boolean().default(false),
     modalEnabled: z.boolean().default(false),
     startsAt: z.coerce.date(),
     endsAt: z.coerce.date(),

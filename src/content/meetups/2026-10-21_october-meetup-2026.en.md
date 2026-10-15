@@ -1,17 +1,31 @@
 ## October meetup
 
-October is here and the call for talks is open. We want a night full of voices from the community, and for that we need yours: propose your talk and come tell us what you have been buried in.
+On Wednesday 21 October 2026 we meet online, at 6:30 p.m. Colombia time. The call for talks has closed. On the programme: Carolina Gómez Trejos, Nicolás Táutiva and Maria Ximena Caldas.
 
-It does not have to be a big topic or months of research. An editor trick, a library that turned out not to be worth it, a post-mortem, an architecture you want to walk through properly, a half-baked idea you want to argue out loud. If it is technical and you care about it, we want to hear it.
+Three takes on growing in a way that lasts: automating the invisible work of a community, the decisions university does not teach, and how not to make a WhatsApp bot more expensive when Meta charges per message.
 
-And you pick how long it needs: a **lightning talk of 3 to 5 minutes** if you want to get straight to the point, or a **full talk of 25 minutes** if the idea deserves more room. Both fit that night.
+### Talks
 
-If you have never presented before, this is a good month to start: we will help you shape the talk and rehearse it beforehand.
+**Code with impact: how we scaled Django Girls Colombia by automating the invisible**
 
-The date is confirmed. We are still deciding whether we meet in a room or online, and we will announce it here as soon as we know.
+**Speaker:** Carolina Gómez Trejos
 
-See you there!
+Organising an event for 30 people is hard; doing it for more than 4,700 people over eight years in 12 cities means stopping being organisers and becoming architects of your own logistics. Carolina traces Django Girls Colombia from hand-built schedules to a Python toolchain that sends mail, issues certificates and coordinates logistics, so volunteers can spend their time on the human part: listening and teaching.
 
-### Call for speakers
+**Skills, a plan B and finances: what nobody tells you at university**
 
-We are taking proposals until Friday 16 October, as a lightning talk or in the full format. Pick whichever length serves your idea and send it in.
+**Speaker:** Nicolás Táutiva
+
+University teaches you to program, but not the decisions that lead to a sustainable life. Nicolás shares five lessons that helped him build a more stable career and life: skills, a plan B, and the rest of what nobody puts on the syllabus. This is not a motivational talk. It is a talk about decisions that matter.
+
+**From the free window to paying per message: how to prepare your WhatsApp bots and integrations for October**
+
+**Speaker:** Maria Ximena Caldas
+
+On 1 October, Meta changed WhatsApp Business API billing: replies inside the 24-hour window and utility templates are charged per message. A chatbot that answers in six bubbles what could be two will make the operation much more expensive. This lightning talk looks at how to audit conversational architectures, cut the ping-pong of messages and design cost-efficient flows in CRM and conversational products.
+
+---
+
+### Sources
+
+- Original event: https://luma.com/mevk14m1
