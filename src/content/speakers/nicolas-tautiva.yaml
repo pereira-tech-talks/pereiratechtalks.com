@@ -1,0 +1,18 @@
+name: "Nicolás Táutiva"
+role:
+  en: Community speaker
+  es: Ponente de la comunidad
+bio:
+  en: "Nicolás Táutiva spoke at the October 2026 meetup on skills, a plan B and finances: the decisions university rarely names and a career still has to make."
+  es: "Nicolás Táutiva habló en el meetup de octubre de 2026 sobre habilidades, un plan B y finanzas: las decisiones que la universidad casi no nombra y que una carrera igual tiene que tomar."
+photo:
+  src: /images/speakers/nicolas-tautiva.webp
+  alt:
+    en: Portrait of Nicolás Táutiva
+    es: Retrato de Nicolás Táutiva
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es
