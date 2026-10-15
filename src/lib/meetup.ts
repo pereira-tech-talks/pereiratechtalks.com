@@ -377,8 +377,7 @@ export const meetupAwaitsProgramme = (
   if ((meetup.data.talks ?? []).length > 0) return false;
   const speakers = meetup.data.speakers ?? [];
   return (
-    speakers.length > 0 ||
-    getCallForSpeakersState(meetup, todayInTz) !== 'none'
+    speakers.length > 0 || getCallForSpeakersState(meetup, todayInTz) !== 'none'
   );
 };
 
