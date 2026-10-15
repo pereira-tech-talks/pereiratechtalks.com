@@ -575,7 +575,9 @@ const metaDescription = buildMetaDescription({
             <p class="mt-2 max-w-2xl text-ptt-secondary">
               {lineup === 'partial'
                 ? planning.lineupPartialBody
-                : planning.lineupOpenBody}
+                : callState === 'closed'
+                  ? planning.lineupClosedBody
+                  : planning.lineupOpenBody}
             </p>
             {callState === 'open' && (
               <a

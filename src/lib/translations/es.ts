@@ -217,6 +217,8 @@ Si buscas gente con quien crecer, un escenario para tu primera charla o una comu
       lineupOpenTitle: 'Programación en construcción',
       lineupOpenBody:
         'Todavía no anunciamos las charlas de este meetup. Si quieres presentar, la convocatoria es el camino.',
+      lineupClosedBody:
+        'Esta fecha ya no recibe propuestas. Publicamos las charlas aquí en cuanto las anunciemos.',
       lineupPartialBody:
         'Ya tenemos ponentes confirmados y seguimos armando el programa.',
       heroCta: 'Propón tu charla',
