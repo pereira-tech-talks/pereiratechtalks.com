@@ -19,6 +19,7 @@ import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
 import {
   getCallForSpeakersState,
   getMeetupSlug,
+  meetupAwaitsProgramme,
   resolveMeetupDateAttribute,
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
@@ -65,7 +66,7 @@ const venueLine = meetup.data.venue
 const chips = [
   dateConfidence === 'tentative' ? t.chipTentative : null,
   callState === 'open' ? t.chipCallOpen : null,
-  lineup === 'open' ? t.chipLineupOpen : null,
+  lineup === 'open' && meetupAwaitsProgramme(meetup) ? t.chipLineupOpen : null,
 ].filter((chip): chip is string => Boolean(chip));
 
 const slotsLine =

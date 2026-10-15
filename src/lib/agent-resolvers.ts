@@ -27,6 +27,7 @@ import {
   getMeetupBodyMarkdown,
   getMeetupSlug,
   getMeetups,
+  meetupAwaitsProgramme,
   type Meetup,
   resolveMeetupDateConfidence,
   resolveMeetupDateLabel,
@@ -287,7 +288,7 @@ export const resolveMeetupDetail = async (
   // Mirrors the page's own condition, so the twin carries the notice exactly
   // when the page shows it — and never invents one for the archive.
   const lineupNotice =
-    talks.length === 0 && isUpcoming
+    talks.length === 0 && isUpcoming && meetupAwaitsProgramme(meetup)
       ? {
           heading: planning.lineupOpenTitle,
           body:
