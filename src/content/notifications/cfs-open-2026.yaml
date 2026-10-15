@@ -45,10 +45,12 @@ image:
       relámpago o completas, todos los meses de septiembre a diciembre de 2026.
       Tu primera charla cabe aquí.
 # One link per month, so a reader can go straight to the meetup they want
-# rather than landing on the index and hunting. Authored here rather than
-# derived from the open calls: the notification system stays decoupled from the
-# meetups collection, and this list is short and reviewed by a human anyway.
+# rather than landing on the index and hunting. Labels stay authored. With
+# `ctasFollowOpenCalls`, a month button drops on the next build once that
+# meetup's call is no longer open (date passed, or `closesAt` passed). The
+# bar, the body and the flyer stay; only the buttons change.
 
+ctasFollowOpenCalls: true
 ctas:
   - label: { en: September, es: Septiembre }
     href: /meetups/september-meetup-2026/#call-for-speakers

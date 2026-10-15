@@ -65,11 +65,54 @@ export const localizeNotificationHref = (
     : `${prefix}${href}`;
 };
 
+/**
+ * Slug of a meetup CTA, or null when the href is not a meetup path.
+ *
+ * Accepts the authored form (`/meetups/{slug}/#call-for-speakers`) and the
+ * English form after `localizeNotificationHref`. External URLs and other
+ * internal paths stay null so a mixed CTA list can drop months without
+ * touching the rest.
+ */
+const MEETUP_HREF = /^(?:\/en)?\/meetups\/([^/?#]+)\/?(?:[?#].*)?$/;
+
+export const meetupSlugFromNotificationHref = (href: string): string | null =>
+  MEETUP_HREF.exec(href)?.[1] ?? null;
+
+/**
+ * Drop meetup buttons whose call is not in `openCallSlugs`.
+ *
+ * Non-meetup hrefs pass through. The set comes from
+ * `getOpenCallsForSpeakers()` — closed and scheduled calls are absent, so a
+ * month leaves the modal on the build after its meetup date or `closesAt`.
+ */
+export const filterCtasToOpenCalls = <T extends { href: string }>(
+  ctas: readonly T[],
+  openCallSlugs: ReadonlySet<string>
+): T[] =>
+  ctas.filter((cta) => {
+    const slug = meetupSlugFromNotificationHref(cta.href);
+    return slug === null || openCallSlugs.has(slug);
+  });
+
+export interface LocalizeNotificationOptions {
+  /**
+   * Slugs with an open call for speakers. Honored only when the entry sets
+   * `ctasFollowOpenCalls`. Omit it and every authored CTA is kept.
+   */
+  openCallSlugs?: ReadonlySet<string>;
+}
+
 export const localizeNotification = (
   entry: Notification,
-  lang: Language
+  lang: Language,
+  options?: LocalizeNotificationOptions
 ): LocalizedNotification => {
   const { data } = entry;
+  const ctas = (data.ctas ?? []).map((cta) => ({
+    label: cta.label[lang],
+    href: localizeNotificationHref(cta.href, lang),
+  }));
+  const openCallSlugs = options?.openCallSlugs;
   return {
     id: entry.id,
     severity: data.severity,
@@ -83,10 +126,10 @@ export const localizeNotification = (
     ctaHref: data.ctaHref
       ? localizeNotificationHref(data.ctaHref, lang)
       : undefined,
-    ctas: (data.ctas ?? []).map((cta) => ({
-      label: cta.label[lang],
-      href: localizeNotificationHref(cta.href, lang),
-    })),
+    ctas:
+      data.ctasFollowOpenCalls && openCallSlugs
+        ? filterCtasToOpenCalls(ctas, openCallSlugs)
+        : ctas,
     modalEnabled: data.modalEnabled,
   };
 };

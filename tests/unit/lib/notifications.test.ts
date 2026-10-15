@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import type { Notification } from '@/lib/notifications';
 import {
   filterActiveNotifications,
+  filterCtasToOpenCalls,
   localizeNotification,
   localizeNotificationHref,
+  meetupSlugFromNotificationHref,
 } from '@/lib/notifications';
 
 const makeEntry = (
@@ -231,5 +233,111 @@ describe('localizeNotification — ctas', () => {
       },
     } as unknown as Parameters<typeof localizeNotification>[0];
     expect(localizeNotification(bare, 'es').ctas).toEqual([]);
+  });
+});
+
+describe('meetupSlugFromNotificationHref', () => {
+  it('reads the slug from an authored meetup CTA', () => {
+    expect(
+      meetupSlugFromNotificationHref(
+        '/meetups/october-meetup-2026/#call-for-speakers'
+      )
+    ).toBe('october-meetup-2026');
+  });
+
+  it('reads the slug after the English prefix', () => {
+    expect(
+      meetupSlugFromNotificationHref(
+        '/en/meetups/october-meetup-2026/#call-for-speakers'
+      )
+    ).toBe('october-meetup-2026');
+  });
+
+  it('returns null for a non-meetup href', () => {
+    expect(meetupSlugFromNotificationHref('/call-for-speakers')).toBeNull();
+    expect(meetupSlugFromNotificationHref('https://corag.app/')).toBeNull();
+  });
+});
+
+describe('filterCtasToOpenCalls', () => {
+  const ctas = [
+    {
+      label: 'Septiembre',
+      href: '/meetups/september-meetup-2026/#call-for-speakers',
+    },
+    {
+      label: 'Octubre',
+      href: '/meetups/october-meetup-2026/#call-for-speakers',
+    },
+    { label: 'Índice', href: '/call-for-speakers' },
+  ];
+
+  it('drops meetup buttons whose call is not open and keeps the rest', () => {
+    expect(
+      filterCtasToOpenCalls(ctas, new Set(['october-meetup-2026']))
+    ).toEqual([ctas[1], ctas[2]]);
+  });
+});
+
+describe('localizeNotification — ctasFollowOpenCalls', () => {
+  const entry = {
+    id: 'cfs-open-2026',
+    data: {
+      severity: 'important' as const,
+      title: { en: 'Speakers', es: 'Ponentes' },
+      summary: { en: 'Summary', es: 'Resumen' },
+      modalEnabled: true,
+      ctasFollowOpenCalls: true,
+      ctas: [
+        {
+          label: { en: 'September', es: 'Septiembre' },
+          href: '/meetups/september-meetup-2026/#call-for-speakers',
+        },
+        {
+          label: { en: 'October', es: 'Octubre' },
+          href: '/meetups/october-meetup-2026/#call-for-speakers',
+        },
+      ],
+    },
+  } as unknown as Parameters<typeof localizeNotification>[0];
+
+  it('keeps only the months whose call is open', () => {
+    const es = localizeNotification(entry, 'es', {
+      openCallSlugs: new Set(['october-meetup-2026']),
+    });
+    expect(es.ctas).toEqual([
+      {
+        label: 'Octubre',
+        href: '/meetups/october-meetup-2026/#call-for-speakers',
+      },
+    ]);
+  });
+
+  it('filters the English hrefs after the prefix is applied', () => {
+    const en = localizeNotification(entry, 'en', {
+      openCallSlugs: new Set(['october-meetup-2026']),
+    });
+    expect(en.ctas).toEqual([
+      {
+        label: 'October',
+        href: '/en/meetups/october-meetup-2026/#call-for-speakers',
+      },
+    ]);
+  });
+
+  it('keeps every authored button when the open-call set is omitted', () => {
+    expect(localizeNotification(entry, 'es').ctas).toHaveLength(2);
+  });
+
+  it('ignores the open-call set when the flag is off', () => {
+    const unfiltered = {
+      ...entry,
+      data: { ...entry.data, ctasFollowOpenCalls: false },
+    } as unknown as Parameters<typeof localizeNotification>[0];
+    expect(
+      localizeNotification(unfiltered, 'es', {
+        openCallSlugs: new Set(['october-meetup-2026']),
+      }).ctas
+    ).toHaveLength(2);
   });
 });

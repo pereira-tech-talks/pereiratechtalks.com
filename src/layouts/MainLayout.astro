@@ -8,6 +8,7 @@ import Header from '@/components/layout/Header.svelte';
 import TopNotificationBar from '@/components/layout/TopNotificationBar.svelte';
 import PtdEditionHeader from '@/components/pereira-tech-days/PtdEditionHeader.svelte';
 import { getUrlPrefix, type Language } from '@/lib/i18n';
+import { getOpenCallsForSpeakers } from '@/lib/meetup';
 import { DESCRIPTION_MAX, truncateToBand } from '@/lib/meta-description';
 import {
   getActiveNotifications,
@@ -85,21 +86,27 @@ const prefix = getUrlPrefix(language);
 /** No announcement chrome on any PTD URL (hub, editions, certificates). */
 const suppressTopNotifications =
   isPtdEditionChrome || isPereiraTechDayPath(Astro.url.pathname);
-const activeNotifications = suppressTopNotifications
+const notificationEntries = suppressTopNotifications
   ? []
-  : (await getActiveNotifications()).map((entry) => {
-      const localized = localizeNotification(entry, language);
-      const href = localized.ctaHref;
-      if (
-        href?.startsWith('/') &&
-        !href.startsWith('//') &&
-        prefix &&
-        !href.startsWith(`${prefix}/`)
-      ) {
-        return { ...localized, ctaHref: `${prefix}${href}` };
-      }
-      return localized;
-    });
+  : await getActiveNotifications();
+const openCallSlugs = notificationEntries.some(
+  (entry) => entry.data.ctasFollowOpenCalls
+)
+  ? new Set((await getOpenCallsForSpeakers()).map((call) => call.slug))
+  : undefined;
+const activeNotifications = notificationEntries.map((entry) => {
+  const localized = localizeNotification(entry, language, { openCallSlugs });
+  const href = localized.ctaHref;
+  if (
+    href?.startsWith('/') &&
+    !href.startsWith('//') &&
+    prefix &&
+    !href.startsWith(`${prefix}/`)
+  ) {
+    return { ...localized, ctaHref: `${prefix}${href}` };
+  }
+  return localized;
+});
 
 /**
  * Last line of defence for the 130-160 band `CLAUDE.md` requires: no page may
