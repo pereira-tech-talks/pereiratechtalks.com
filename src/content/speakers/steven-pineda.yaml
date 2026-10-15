@@ -1,12 +1,12 @@
 name: "Steven Pineda"
 role:
-  en: "Lead EVM Developer at RMRK"
-  es: "Lead EVM Developer en RMRK"
+  en: "Solidity Developer"
+  es: "Solidity Developer"
 bio:
-  en: "Steven Pineda spoke at Pereira Tech Talks. Lead EVM Developer at RMRK."
-  es: "Steven Pineda participó como ponente en Pereira Tech Talks. Lead EVM Developer en RMRK."
+  en: "Steven Pineda is a Solidity developer. At the September 2026 lightning-talk meetup he spoke on The Coming Wave — AI, biotechnology, and whether we will control that wave or it will control us."
+  es: "Steven Pineda es Solidity Developer. En el meetup de charlas relámpago de septiembre de 2026 habló de The Coming Wave: IA, biotecnología, y si vamos a controlar esa ola o la ola nos va a controlar a nosotros."
 photo:
-  src: /images/speakers/_placeholder.svg
+  src: /images/speakers/steven-pineda.webp
   alt:
     en: Portrait of Steven Pineda
     es: Retrato de Steven Pineda

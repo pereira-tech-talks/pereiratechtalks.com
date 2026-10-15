@@ -1,0 +1,18 @@
+name: Camilo Buitrago
+role:
+  en: CTO at Bay
+  es: CTO en Bay
+bio:
+  en: Camilo Buitrago is CTO at Bay. At the September 2026 lightning-talk meetup he showed how MCP can drive a real phone the way Playwright MCP already drives a browser.
+  es: Camilo Buitrago es CTO en Bay. En el meetup de charlas relámpago de septiembre de 2026 mostró cómo MCP puede controlar un teléfono real del mismo modo que Playwright MCP ya controla un navegador.
+photo:
+  src: /images/speakers/camilo-buitrago.webp
+  alt:
+    en: Portrait of Camilo Buitrago
+    es: Retrato de Camilo Buitrago
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es

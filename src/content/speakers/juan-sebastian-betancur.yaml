@@ -1,0 +1,18 @@
+name: Juan Sebastian Betancur
+role:
+  en: AI Engineer
+  es: AI Engineer
+bio:
+  en: Juan Sebastian Betancur is an AI engineer. At the September 2026 lightning-talk meetup he spoke about building a career in tech without a degree, and what that implies for people who do have one.
+  es: Juan Sebastian Betancur es AI Engineer. En el meetup de charlas relámpago de septiembre de 2026 habló de construir una carrera en tech sin título, y de lo que eso implica para quienes sí lo tienen.
+photo:
+  src: /images/speakers/juan-sebastian-betancur.webp
+  alt:
+    en: Portrait of Juan Sebastian Betancur
+    es: Retrato de Juan Sebastian Betancur
+talks: []
+location:
+  city: Pereira
+  country: Colombia
+languages:
+  - es
