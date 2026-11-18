@@ -71,6 +71,17 @@ src/content/slides/es/2026-04-25_my-deck-slug.md
 
 **Slugs must be English-only** on both language versions.
 
+### Meetup opening kit
+
+The reusable host deck for monthly meetups lives at:
+
+- Spanish (primary): [`src/content/slides/es/2026-11-17_meetup-opening.md`](../../src/content/slides/es/2026-11-17_meetup-opening.md) → `/slides/meetup-opening`
+- English: [`src/content/slides/en/2026-11-17_meetup-opening.md`](../../src/content/slides/en/2026-11-17_meetup-opening.md) → `/en/slides/meetup-opening`
+
+It follows the June 2026 host PDF (welcome → who we are → numbers → team → Pereira Tech Day → networking → sponsors → allied communities → CFS → house rules → raffles → feedback), with current community facts. Month-specific flyers and a live Pereira Tech Day volunteer call are **not** baked in: name tonight's speakers in speaker notes, and add a flyer background only when you have that month's hero.
+
+Deck-local assets live in `public/images/slides/meetup-opening/`, named `{slideNumber}-{role}.{ext}` (for example `13-qr-cfs.png`, `10-sponsor-github.png`). QR and photo copies for this kit stay in that folder so the deck is self-contained; update sponsor or community logos there when the on-site roster changes, not only under `public/images/sponsors/` or `public/images/communities/`.
+
 ### Slide Separators
 
 - `---` (three dashes on its own line) — horizontal slide separator
@@ -175,12 +186,13 @@ For text over arbitrary images/videos, drop the helper overlay class:
 
 ## Layouts Catalog
 
-19 reusable layout primitives ship as Markdown snippets in `src/content/slides/_layouts/`. Each snippet is a copy-paste reference with a header describing when to use it. The `_layouts/` directory is excluded from the `slides` content collection glob, so snippets never appear as deck pages.
+20 reusable layout primitives ship as Markdown snippets in `src/content/slides/_layouts/`. Each snippet is a copy-paste reference with a header describing when to use it. The `_layouts/` directory is excluded from the `slides` content collection glob, so snippets never appear as deck pages.
 
-The kitchen-sink reference deck is `/slides/demo-revealjs-features` (and `/es/slides/demo-revealjs-features`).
+The kitchen-sink reference deck is `/slides/demo-revealjs-features` (and `/en/slides/demo-revealjs-features`). The monthly meetup **host opening kit** is `/slides/meetup-opening` (and `/en/slides/meetup-opening`) — duplicate those files each month rather than pasting the layout stub.
 
 | Primitive | When to use | Source |
 |---|---|---|
+| `meetup-opening` | Full host opening kit for the monthly meetup (sequence + live URLs; do not paste) | [`meetup-opening.md`](../../src/content/slides/_layouts/meetup-opening.md) |
 | `title-hero` | Opening cover with title, subtitle, author, event | [`title-hero.md`](../../src/content/slides/_layouts/title-hero.md) |
 | `section-divider` | Announce a new chapter / section | [`section-divider.md`](../../src/content/slides/_layouts/section-divider.md) |
 | `two-column-split` | Compare two ideas, before/after, problem/solution | [`two-column-split.md`](../../src/content/slides/_layouts/two-column-split.md) |
