@@ -103,6 +103,14 @@ export default defineConfig({
     optimizeDeps: {
       force: false,
       holdUntilCrawlEnd: false,
+      // RevealDeck lazy-imports these on slide routes; prebundle so dev does not
+      // hit 504 Outdated Optimize Dep after HMR or a cold content reload.
+      include: [
+        'reveal.js',
+        'reveal.js/plugin/markdown',
+        'reveal.js/plugin/notes',
+        'reveal.js/plugin/highlight',
+      ],
     },
     server: {
       hmr: {

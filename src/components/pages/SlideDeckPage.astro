@@ -5,6 +5,10 @@ import ExternalView from '@/components/slides/ExternalView.astro';
 import RevealDeck from '@/components/slides/RevealDeck.svelte';
 import SlideLayout from '@/layouts/SlideLayout.astro';
 import { getPostBySlug } from '@/lib/blog';
+import {
+  getCommunityStats,
+  interpolateCommunityStats,
+} from '@/lib/community-stats';
 import { getCalendarDateString } from '@/lib/dates';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
@@ -81,6 +85,14 @@ const eventMeta = deck.data.eventName
     }
   : {};
 
+let bodyMarkdown = deck.body || '';
+if (type === 'native' && bodyMarkdown.includes('{stats.')) {
+  bodyMarkdown = interpolateCommunityStats(
+    bodyMarkdown,
+    await getCommunityStats()
+  );
+}
+
 const jsonLd =
   type === 'external'
     ? {
@@ -118,7 +130,7 @@ const jsonLd =
       transition={deck.data.transition}
       syntaxHighlight={deck.data.syntaxHighlight}
       math={deck.data.math}
-      bodyMarkdown={deck.body || ''}
+      bodyMarkdown={bodyMarkdown}
     />
   </SlideLayout>
 )}
