@@ -115,6 +115,13 @@ body.reveal-theme-dark {
   padding: 40px 48px;
 }
 
+/* Tailwind preflight sets `img { display: block }`, which left-aligns standalone
+ * images inside Reveal's `text-align: center` slides unless centered explicitly. */
+:where(.reveal .slides section > img, .reveal .slides section > p > img) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .reveal p {
   margin: 0.6em 0;
 }
@@ -282,6 +289,22 @@ body.reveal-theme-dark {
 .reveal .slides section.slide-bg-overlay--dark blockquote,
 .reveal .slides section.slide-bg-overlay--dark cite {
   color: #ffffff;
+}
+
+/* Keep links and muted captions readable when an explicit dark background
+ * is placed on a slide while the host page is in light mode. */
+.reveal .slides section.has-dark-background a:not(.slide-cta),
+.reveal .slides section[data-background-gradient] a:not(.slide-cta),
+.reveal .slides section[data-background-image] a:not(.slide-cta),
+.reveal .slides section.slide-bg-overlay--dark a:not(.slide-cta) {
+  color: var(--color-ptt-primary-dark, #3fa8ad);
+}
+
+.reveal .slides section.has-dark-background small,
+.reveal .slides section[data-background-gradient] small,
+.reveal .slides section[data-background-image] small,
+.reveal .slides section.slide-bg-overlay--dark small {
+  color: rgba(232, 240, 239, 0.78);
 }
 
 /* Light background helper — drop on a section to ensure dark text */
@@ -769,9 +792,164 @@ body.reveal-theme-dark {
 .slide-media-contained {
   display: block;
   margin: 0 auto;
-  max-width: 75%;
-  max-height: 55vh;
+  width: auto;
+  max-width: 85%;
+  max-height: 430px;
+  object-fit: contain;
   border-radius: 0.75rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.slide-text-left {
+  text-align: left;
+}
+
+.slide-text-left ul {
+  margin-left: 1.2em;
+}
+
+.slide-grid-2--compact {
+  gap: 1rem;
+}
+
+.slide-grid-2--compact .slide-card {
+  padding: 0.9rem 1.15rem;
+  text-align: left;
+}
+
+.slide-grid-2--compact .slide-card__icon {
+  font-size: 1.6em;
+  margin-bottom: 0.25rem;
+}
+
+.slide-grid-2--compact .slide-card h3 {
+  font-size: 1.05em;
+  margin-bottom: 0.2rem;
+}
+
+.slide-grid-2--compact .slide-card p {
+  font-size: 0.78em;
+  margin: 0;
+}
+
+.slide-qr-frame {
+  display: inline-block;
+  padding: 14px;
+  background: #ffffff;
+  border-radius: 0.85rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.slide-qr-frame img {
+  display: block;
+  margin: 0;
+  width: 240px;
+  height: 240px;
+}
+
+.slide-logo-wall {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  max-width: 960px;
+  margin: 1rem auto;
+}
+
+.slide-logo-tile {
+  flex: 0 1 275px;
+  min-height: 118px;
+  padding: 0.9rem 1.4rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--slide-border);
+  background: var(--slide-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.slide-logo-tile img {
+  display: block;
+  margin: 0;
+  max-height: 64px;
+  max-width: 210px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.slide-logo-tile__label {
+  font-size: 0.52em;
+  font-weight: 600;
+  color: var(--slide-text-muted);
+}
+
+.slide-logo-tile--community {
+  flex: 0 1 260px;
+  min-height: 132px;
+  padding: 0.85rem 1.1rem;
+}
+
+.slide-logo-tile--community img {
+  max-height: 70px;
+  max-width: 195px;
+  border-radius: 0.35rem;
+}
+
+.slide-stat-compact .slide-stat__number {
+  font-size: 3.1em;
+}
+
+.slide-stat-compact .slide-stat__label {
+  font-size: 0.85em;
+}
+
+@media (max-width: 768px) {
+  .slide-logo-tile {
+    flex: 1 1 140px;
+    min-height: 92px;
+  }
+
+  .slide-qr-frame img {
+    width: 190px;
+    height: 190px;
+  }
+}
+
+/* Dark-background overrides placed after base primitives to preserve ascending specificity */
+.reveal .slides section.has-dark-background .slide-card,
+.reveal .slides section[data-background-gradient] .slide-card,
+.reveal .slides section[data-background-image] .slide-card,
+.reveal .slides section.slide-bg-overlay--dark .slide-card,
+.reveal .slides section.has-dark-background .slide-logo-tile,
+.reveal .slides section[data-background-gradient] .slide-logo-tile,
+.reveal .slides section[data-background-image] .slide-logo-tile,
+.reveal .slides section.slide-bg-overlay--dark .slide-logo-tile {
+  background: rgba(15, 42, 44, 0.78);
+  border-color: rgba(63, 168, 173, 0.28);
+}
+
+.reveal .slides section.has-dark-background .slide-logo-tile__label,
+.reveal .slides section[data-background-gradient] .slide-logo-tile__label,
+.reveal .slides section[data-background-image] .slide-logo-tile__label,
+.reveal .slides section.slide-bg-overlay--dark .slide-logo-tile__label {
+  color: rgba(232, 240, 239, 0.88);
+}
+
+.reveal .slides section.has-dark-background .slide-steps li::before,
+.reveal .slides section[data-background-gradient] .slide-steps li::before,
+.reveal .slides section.has-dark-background .slide-stat__number,
+.reveal .slides section[data-background-gradient] .slide-stat__number,
+.reveal .slides section.has-dark-background .slide-card__icon,
+.reveal .slides section[data-background-gradient] .slide-card__icon {
+  color: var(--color-ptt-primary-dark, #3fa8ad);
+}
+
+.reveal .slides section.has-dark-background .slide-stat__label,
+.reveal .slides section[data-background-gradient] .slide-stat__label {
+  color: rgba(232, 240, 239, 0.85);
 }
 
 .slide-caption-overlay {
