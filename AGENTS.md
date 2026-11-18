@@ -539,7 +539,7 @@ programming a meetup from a date alone.
 
 > Full reference: **[Pereira Tech Days](docs/features/PEREIRA_TECH_DAYS.md)** for the annual
 > conference. The `events` collection is documented inline below and in the
-> [`/add-event`](.agents/skills/add-event/SKILL.md) skill.
+> [`/add-event`](.agents/skills/add-event/SKILL.md) skill. Updates to an existing entry go through [`/update-event`](.agents/skills/update-event/SKILL.md).
 
 **Events** are calendar items (workshops, hackathons, ad-hoc gatherings). Listed at `/events`.
 
@@ -661,7 +661,7 @@ Update docs after: adding components/pages, changing schemas, updating config, a
 
 ## Skills & Agents
 
-- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-talk`, `add-slide-deck`, `add-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`, `audit-language-integrity`, `audit-content-parity`
+- **Skills** — Reusable procedures via slash commands: `quick-fix`, `doc-edit`, `pr-review-lite`, `fix-lint`, `write-tests`, `type-fix`, `refactor-safe`, `security-check`, `git-commit-push`, `translate-sync`, `add-blog-post`, `add-meetup`, `add-talk`, `add-slide-deck`, `add-event`, `update-event`, `add-ptd-edition`, `issue-certificates`, `promote-post`, `optimize-image`, `audit-post`, `audit-series`, `audit-taxonomy`, `audit-analytics`, `audit-language-integrity`, `audit-content-parity`
 - **Agents** — Specialized workers: `reviewer`, `executor`, `architect`, `security-auditor`, `i18n-guardian`, `content-writer`
 - **Critical policy:** New blog posts MUST use `/add-blog-post`; new meetups MUST use `/add-meetup`; new talks MUST use `/add-talk`; new slide decks MUST use `/add-slide-deck`; new PTD editions MUST use `/add-ptd-edition`
 - **Management:** `/skill-list`, `/agent-list`, `/skill-create`, `/agent-create`

@@ -70,6 +70,7 @@ When a command is invoked (via `/`, `#`, or by name), the agent MUST:
 | `/add-slide-deck` | `.agents/skills/add-slide-deck/SKILL.md` | Create slide decks — internal Reveal.js, external-embed, or external-link |
 | `/add-meetup` | `.agents/skills/add-meetup/SKILL.md` | Create a Pereira Tech Talks monthly meetup entry (bilingual frontmatter, optional talk/speaker/sponsor refs) |
 | `/add-event` | `.agents/skills/add-event/SKILL.md` | Create a non-meetup event entry (workshop, hackathon, conference, webinar) in the `events` collection |
+| `/update-event` | `.agents/skills/update-event/SKILL.md` | Update an existing event (date, venue, status, bilingual copy, sponsors, related links) |
 | `/add-ptd-edition` | `.agents/skills/add-ptd-edition/SKILL.md` | Create a Pereira Tech Day annual edition (schedule, keynotes, brand kit, organizers, gallery) |
 | `/issue-certificates` | `.agents/skills/issue-certificates/SKILL.md` | Batch-issue signed attendance certificates from CSV (import → sign → verify → build) |
 | `/audit-analytics` | `.agents/skills/audit-analytics/SKILL.md` | Audit Umami event coverage, first-party proxy, and privacy-safe payloads |

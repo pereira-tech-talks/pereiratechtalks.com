@@ -214,6 +214,7 @@ content: add event "{title.en}"
 
 ## Related
 
+- [`update-event`](../update-event/SKILL.md) — Edit an existing event (date, venue, status, copy).
 - [`add-meetup`](../add-meetup/SKILL.md) — Monthly community meetups.
 - [`add-ptd-edition`](../add-ptd-edition/SKILL.md) — Pereira Tech Day annual editions.
 - [`optimize-image`](../optimize-image/SKILL.md) — Hero image optimisation.
