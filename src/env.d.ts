@@ -1,4 +1,9 @@
+/// <reference types="astro/astro-jsx" />
 /// <reference types="astro/client" />
+
+declare namespace JSX {
+  interface IntrinsicElements extends astroHTML.JSX.IntrinsicElements {}
+}
 
 interface ImportMetaEnv {
   readonly BASE_URL: string;
