@@ -121,7 +121,7 @@ Note: Déjala en pantalla mientras entra la gente. Luego saluda, presenta al equ
 
 ## Equipo organizador
 
-<img src="/images/slides/meetup-opening/06-equipo-organizador.png" alt="Equipo de voluntarios recibiendo a la comunidad en el registro" width="640" height="425" class="slide-media-contained" />
+<img src="/images/slides/meetup-opening/06-equipo-organizador.png" alt="Equipo organizador de la comunidad en un encuentro nocturno" width="640" height="434" class="slide-media-contained" />
 
 <small>Voluntariado. Si quieres ayudar, al final te decimos cómo.</small>
 
@@ -143,7 +143,7 @@ Note: La edición 2026 está pospuesta. No anuncies convocatoria de volunteers n
 
 ## Networking
 
-<img src="/images/slides/meetup-opening/08-networking-previa.png" alt="Público conversando antes de una charla" width="640" height="425" class="slide-media-contained" />
+<img src="/images/slides/meetup-opening/08-networking-collage.png" alt="Stickers, refrigerio y conversación entre charlas en un meetup" width="640" height="290" class="slide-media-contained" />
 
 <small>Quédate. El valor de la noche también está entre charlas.</small>
 
@@ -153,7 +153,7 @@ Note: La edición 2026 está pospuesta. No anuncies convocatoria de volunteers n
 
 ## Post-networking
 
-<img src="/images/slides/meetup-opening/09-post-networking.png" alt="Grupo de la comunidad reunido al cierre de un evento" width="640" height="425" class="slide-media-contained" />
+<img src="/images/slides/meetup-opening/09-post-networking.png" alt="Comunidad reunida después del meetup" width="640" height="310" class="slide-media-contained" />
 
 <small>Quien pueda, seguimos afuera — sin obligación, con ganas.</small>
 
@@ -171,7 +171,7 @@ Note: La edición 2026 está pospuesta. No anuncies convocatoria de volunteers n
     <img src="/images/slides/meetup-opening/10-sponsor-github.png" alt="GitHub" width="800" height="215" />
   </div>
   <div class="slide-logo-tile">
-    <img src="/images/slides/meetup-opening/logo-UCP_I.png" alt="Universidad Católica de Pereira" width="868" height="314" />
+    <img src="/images/slides/meetup-opening/10-venue-ucp.png" alt="Universidad Católica de Pereira" width="868" height="314" />
   </div>
   <div class="slide-logo-tile">
     <img src="/images/slides/meetup-opening/10-sponsor-ase-utp.png" alt="ASE-UTP" width="563" height="283" />
@@ -230,7 +230,7 @@ Note: La edición 2026 está pospuesta. No anuncies convocatoria de volunteers n
     <p><strong>Escríbenos</strong> — <a href="https://pereiratechtalks.org/contact">pereiratechtalks.org/contact</a></p>
   </div>
   <div>
-    <img src="/images/slides/meetup-opening/12-colaboradores.png" alt="Una charla en el escenario de Pereira Tech Day" width="640" height="425" class="slide-image-full" />
+    <img src="/images/slides/meetup-opening/12-se-busca-staff.png" alt="Ponentes en escena y equipo de la comunidad en un meetup" width="640" height="551" class="slide-image-full" />
   </div>
 </div>
 
