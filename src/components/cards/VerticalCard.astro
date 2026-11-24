@@ -5,7 +5,7 @@
 
 import type { CollectionEntry } from 'astro:content';
 import Badge from '@/components/ui/Badge.astro';
-import { getUrlPrefix, type Language, tr } from '@/lib/i18n';
+import { type Language, tr } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
 import { resolveVerticalHref } from '@/lib/vertical';
 
@@ -17,7 +17,6 @@ interface Props {
 const { vertical, lang } = Astro.props;
 const t = getTranslations(lang);
 
-const prefix = getUrlPrefix(lang);
 const title = tr(vertical.data.title, lang);
 const mission = tr(vertical.data.mission, lang);
 // Not always `/verticals/{slug}`: a vertical whose home lives elsewhere —

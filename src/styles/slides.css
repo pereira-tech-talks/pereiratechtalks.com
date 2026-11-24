@@ -1110,7 +1110,9 @@ body.reveal-theme-dark {
   font-size: 19px;
 }
 
-.slide-converge-diagram--wide .slide-converge-diagram__core + .slide-converge-diagram__emoji {
+.slide-converge-diagram--wide
+  .slide-converge-diagram__core
+  + .slide-converge-diagram__emoji {
   font-size: 20px;
 }
 
