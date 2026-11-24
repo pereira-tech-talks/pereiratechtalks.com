@@ -1,6 +1,6 @@
 ## November meetup
 
-On Wednesday 25 November 2026 we meet in person, at 6:30 p.m., at **Universidad Católica de Pereira**, Sala de Estudiantes (Avenida Sur, Las Américas, Cra. 21 #49-95).
+On Wednesday 25 November 2026 we meet in person, at 6:30 p.m., at **Universidad Católica de Pereira**, Room 114, Dabar Building (Avenida Sur, Las Américas, Cra. 21 #49-95).
 
 The night is called "Sharper judgment, better results": smart decisions and building with AI.
 

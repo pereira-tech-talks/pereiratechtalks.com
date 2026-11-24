@@ -10,15 +10,15 @@ date: 2026-11-25
 dateConfidence: confirmed
 venue:
   name: "Universidad Católica de Pereira"
-  addressLine: "Sala de Estudiantes, Avenida Sur, Las Américas, Cra. 21 #49-95"
+  addressLine: "Salón 114, Bloque Dabar, Avenida Sur, Las Américas, Cra. 21 #49-95"
   city: Pereira
   country: Colombia
 mode: in-person
 hero:
   src: "/images/meetups/november-meetup-2026/hero.webp"
   alt:
-    es: "Flyer del meetup de noviembre de Pereira Tech Talks: miércoles 25 de noviembre de 2026, 6:30 p. m., Universidad Católica de Pereira, Sala de Estudiantes, con Catalina Fajardo Mejía en Decide diferente y Steven Pineda en Desarrollando rápido y preciso con IA"
-    en: "Pereira Tech Talks November meetup flyer: Wednesday 25 November 2026, 6:30 p.m., Universidad Católica de Pereira, Sala de Estudiantes, with Catalina Fajardo Mejía on Decide differently and Steven Pineda on Building fast and accurately with AI"
+    es: "Flyer del meetup de noviembre de Pereira Tech Talks: miércoles 25 de noviembre de 2026, 6:30 p. m., Universidad Católica de Pereira, Salón 114, Bloque Dabar, con Catalina Fajardo Mejía en Decide diferente y Steven Pineda en Desarrollando rápido y preciso con IA"
+    en: "Pereira Tech Talks November meetup flyer: Wednesday 25 November 2026, 6:30 p.m., Universidad Católica de Pereira, Room 114, Dabar Building, with Catalina Fajardo Mejía on Decide differently and Steven Pineda on Building fast and accurately with AI"
   layout: banner
 heroImage: "/images/meetups/november-meetup-2026/hero.webp"
 verticals:
@@ -42,7 +42,7 @@ draft: false
 
 ## Meetup de noviembre
 
-El miércoles 25 de noviembre de 2026 nos vemos en persona, a las 6:30 p. m., en la **Universidad Católica de Pereira**, Sala de Estudiantes (Avenida Sur, Las Américas, Cra. 21 #49-95).
+El miércoles 25 de noviembre de 2026 nos vemos en persona, a las 6:30 p. m., en la **Universidad Católica de Pereira**, Salón 114, Bloque Dabar (Avenida Sur, Las Américas, Cra. 21 #49-95).
 
 La noche se llama «Más criterio, mejores resultados»: decisiones inteligentes y desarrollo con IA.
 

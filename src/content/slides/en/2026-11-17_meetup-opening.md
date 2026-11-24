@@ -3,7 +3,7 @@ type: native
 title: "Monthly meetup opening"
 description: "Host opening deck for the Pereira Tech Talks monthly meetup: who we are, community numbers, the team, sponsors, house rules, and how to join tonight."
 pubDate: 2026-11-17
-heroImage: "/images/slides/meetup-opening/00-catalog-hero.png"
+heroImage: "/images/slides/meetup-opening/07-ptd-fondo.png"
 draft: false
 theme: dark
 transition: slide
@@ -14,15 +14,19 @@ eventName: "Pereira Tech Talks monthly meetup"
 
 <!--
 Meetup opening kit — copy this deck each month.
-1. Optional flyer slide: data-background-image="/images/meetups/{slug}/hero.webp"
-2. Name tonight's speakers in speaker notes on "Tonight" (press S).
+1. Flyer slide first: data-background-image="/images/meetups/{slug}/hero.webp"
+2. Name tonight's speakers in speaker notes on the flyer slide (press S).
 3. Keep the sponsor logos aligned with src/content/sponsors/ status: active.
-4. Show the raffles slide only if dynamics.pereiratechtalks.org is live.
+4. Optional slides (raffles, feedback) live outside this 16-slide spine — add only when needed.
 -->
 
-<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
+<!-- .slide: data-background-image="/images/meetups/november-meetup-2026/hero.webp" data-background-size="contain" data-background-position="center" data-background-color="#08191A" -->
 
-<img src="/images/slides/meetup-opening/01-bienvenida-logo.webp" alt="Pereira Tech Talks logo" width="130" height="212" />
+Note: November meetup — Catalina Fajardo Mejía, Decide differently. Steven Pineda, Building fast and accurately with AI. Universidad Católica de Pereira, Room 114.
+
+---
+
+<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
 # Pereira Tech Talks
 
@@ -30,49 +34,54 @@ Meetup opening kit — copy this deck each month.
 
 <small>Monthly meetup · Pereira, Risaralda</small>
 
-Note: Leave this up while people walk in. Greet the room, name the organizers present, then go to Tonight.
+Note: Leave this up while people walk in. Greet the room, name the organizers present, then go to What is Pereira Tech Talks.
 
 ---
 
 <!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
-## Tonight
+## What Pereira Tech Talks is
 
-<ol class="slide-steps">
-  <li><strong>Welcome</strong><br/>who we are and how the room works.</li>
-  <li><strong>Talks</strong><br/>introduce today's speakers, in order.</li>
-  <li><strong>Networking</strong><br/>coffee, stickers, and conversation in the venue.</li>
-  <li><strong>Post-networking</strong><br/>whoever can, we continue outside.</li>
-</ol>
-
-Note: Name each speaker and talk title here. This slide is the arc of the night, not the talk abstract.
+<p>A community of students, professionals, and founders. We share a passion for learning software and technological innovation — and giving it back to Pereira.</p>
 
 ---
 
 <!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
-<div class="slide-grid-2 slide-grid--align-center">
-  <div class="slide-text-left">
-    <h2>What Pereira Tech Talks is</h2>
-    <p>A community of students, professionals, and founders. We share a passion for learning software and technological innovation — and giving it back to Pereira.</p>
-  </div>
-  <div>
-    <img src="/images/slides/meetup-opening/03-que-es-ptt.jpg" alt="Attendees at a Pereira Tech Talks monthly meetup" width="640" height="427" class="slide-image-full" />
-  </div>
-</div>
+## Interdisciplinary knowledge
 
----
+<p>The PTT pillar: different disciplines converge on technology.</p>
 
-<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
-
-<div class="slide-grid-2 slide-grid--align-center">
-  <div class="slide-text-left">
-    <h2>Interdisciplinary knowledge</h2>
-    <p>The PTT pillar. Software, data, design, product, hardware, and craft — in the same room.</p>
-  </div>
-  <div>
-    <img src="/images/slides/meetup-opening/04-conocimiento-interdisciplinar.png" alt="Speaker wearing the community shirt presenting on stage" width="640" height="425" class="slide-image-full" />
-  </div>
+<div class="slide-converge-diagram" role="img" aria-label="Design, data, product, hardware, career, and community converge on technology">
+  <svg class="slide-converge-diagram__svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="150" y2="88" />
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="490" y2="88" />
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="560" y2="188" />
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="490" y2="288" />
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="150" y2="288" />
+    <line class="slide-converge-diagram__line" x1="320" y1="178" x2="80" y2="188" />
+    <circle class="slide-converge-diagram__orbit" cx="150" cy="88" r="52" />
+    <text class="slide-converge-diagram__emoji" x="150" y="80">🎨</text>
+    <text class="slide-converge-diagram__label" x="150" y="102">Design</text>
+    <circle class="slide-converge-diagram__orbit" cx="490" cy="88" r="52" />
+    <text class="slide-converge-diagram__emoji" x="490" y="80">📊</text>
+    <text class="slide-converge-diagram__label" x="490" y="102">Data</text>
+    <circle class="slide-converge-diagram__orbit" cx="560" cy="188" r="52" />
+    <text class="slide-converge-diagram__emoji" x="560" y="180">📦</text>
+    <text class="slide-converge-diagram__label" x="560" y="202">Product</text>
+    <circle class="slide-converge-diagram__orbit" cx="490" cy="288" r="52" />
+    <text class="slide-converge-diagram__emoji" x="490" y="280">🔧</text>
+    <text class="slide-converge-diagram__label" x="490" y="302">Hardware</text>
+    <circle class="slide-converge-diagram__orbit" cx="150" cy="288" r="52" />
+    <text class="slide-converge-diagram__emoji" x="150" y="280">🚀</text>
+    <text class="slide-converge-diagram__label" x="150" y="302">Career</text>
+    <circle class="slide-converge-diagram__orbit" cx="80" cy="188" r="52" />
+    <text class="slide-converge-diagram__emoji" x="80" y="180">🤝</text>
+    <text class="slide-converge-diagram__label" x="80" y="202">Community</text>
+    <circle class="slide-converge-diagram__core" cx="320" cy="178" r="58" />
+    <text class="slide-converge-diagram__emoji" x="320" y="168">💻</text>
+    <text class="slide-converge-diagram__core-label" x="320" y="192">Technology</text>
+  </svg>
 </div>
 
 ---
@@ -126,11 +135,7 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
 
 ## Networking
 
-<div class="slide-grid-3">
-  <img src="/images/slides/meetup-opening/08-networking-stickers.png" alt="Pereira Tech Talks stickers on a table" width="640" height="425" class="slide-image-full" />
-  <img src="/images/slides/meetup-opening/08-networking-previa.png" alt="Audience talking before a session" width="640" height="425" class="slide-image-full" />
-  <img src="/images/slides/meetup-opening/08-networking-break.png" alt="Coffee break and conversation at the venue" width="640" height="425" class="slide-image-full" />
-</div>
+<img src="/images/slides/meetup-opening/08-networking-previa.png" alt="Audience talking before a session" width="640" height="425" class="slide-media-contained" />
 
 <small>Stay. A lot of the night happens between talks.</small>
 
@@ -156,6 +161,9 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
   </div>
   <div class="slide-logo-tile">
     <img src="/images/slides/meetup-opening/10-sponsor-github.png" alt="GitHub" width="800" height="215" />
+  </div>
+  <div class="slide-logo-tile">
+    <img src="/images/slides/meetup-opening/logo-UCP_I.png" alt="Universidad Católica de Pereira" width="868" height="314" />
   </div>
   <div class="slide-logo-tile">
     <img src="/images/slides/meetup-opening/10-sponsor-ase-utp.png" alt="ASE-UTP" width="563" height="283" />
@@ -205,7 +213,7 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
 
 <div class="slide-grid-2 slide-grid--align-center">
   <div class="slide-text-left">
-    <h2>We need collaborators</h2>
+    <h2>We need staff</h2>
     <ul>
       <li>Speakers</li>
       <li>Sponsors</li>
@@ -222,16 +230,10 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
 
 <!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
-<div class="slide-grid-2 slide-grid--align-center">
-  <div class="slide-text-left">
-    <h2>Got something to share?</h2>
-    <p>Propose a talk. Lightning or regular. First times welcome.</p>
-    <a href="https://pereiratechtalks.org/en/call-for-speakers/" class="slide-cta">Call for speakers →</a>
-  </div>
-  <div>
-    <div class="slide-qr-frame">
-      <img src="/images/slides/meetup-opening/13-qr-cfs.png" alt="QR code to the call for speakers" width="240" height="240" />
-    </div>
+<div class="slide-qr-slide">
+  <h2>Propose a talk</h2>
+  <div class="slide-qr-frame">
+    <img src="/images/slides/meetup-opening/13-qr-cfs.png" alt="QR code to the call for speakers" width="240" height="240" />
   </div>
 </div>
 
@@ -239,30 +241,10 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
 
 <!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
-## Join the community
-
-<p>One link for channels, the calendar, and what is next.</p>
-
-<div class="slide-qr-frame">
-  <img src="/images/slides/meetup-opening/14-qr-comunidad.png" alt="QR code to linktr.ee/pertechtalks" width="240" height="240" />
-</div>
-
-<p><a href="https://linktr.ee/pertechtalks">linktr.ee/pertechtalks</a></p>
-
----
-
-<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
-
-<div class="slide-grid-2 slide-grid--align-center">
-  <div class="slide-text-left">
-    <h2>Speaker School</h2>
-    <p>Mentorship to get on stage. Small cohorts. Free.</p>
-    <p><a href="https://pereiratechtalks.org/en/verticals/speaker-school/">pereiratechtalks.org/en/verticals/speaker-school</a></p>
-  </div>
-  <div>
-    <div class="slide-qr-frame">
-      <img src="/images/slides/meetup-opening/15-qr-speakers-school.png" alt="QR code to Speaker School" width="240" height="240" />
-    </div>
+<div class="slide-qr-slide">
+  <h2>Linktree</h2>
+  <div class="slide-qr-frame">
+    <img src="/images/slides/meetup-opening/14-qr-comunidad.png" alt="QR code to linktr.ee/pertechtalks" width="240" height="240" />
   </div>
 </div>
 
@@ -301,35 +283,7 @@ Note: The 2026 edition is postponed. Do not announce a volunteer call or a date.
 
 <!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
 
-## Raffles and more
-
-<div class="slide-qr-frame">
-  <img src="/images/slides/meetup-opening/17-qr-sorteos.png" alt="QR code to dynamics.pereiratechtalks.org" width="240" height="240" />
-</div>
-
-<p><a href="https://dynamics.pereiratechtalks.org/">dynamics.pereiratechtalks.org</a></p>
-
-Note: Skip this slide if there is no raffle tonight.
-
----
-
-<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
-
-## Any feedback?
-
-<div class="slide-qr-frame">
-  <img src="/images/slides/meetup-opening/18-qr-feedback.png" alt="QR code to the meetup feedback form" width="240" height="240" />
-</div>
-
-<p><a href="https://bit.ly/4xNXhhk">bit.ly/4xNXhhk</a></p>
-
-<small>Ideas, complaints, thanks — it all lands.</small>
-
----
-
-<!-- .slide: data-background-gradient="linear-gradient(135deg, #08191A 0%, #0F2A2C 100%)" -->
-
-<img src="/images/slides/meetup-opening/19-cierre-logo.webp" alt="Pereira Tech Talks logo" width="130" height="212" />
+<img src="/images/slides/meetup-opening/19-cierre-logo.webp" alt="" width="130" height="212" />
 
 ## Thank you
 
