@@ -14,11 +14,11 @@ function frontmatter(text: string): string {
 }
 
 function listBlock(fm: string, key: string): string[] {
-  const re = new RegExp(`^${key}:\\n((?:  - .+\\n)*)`, 'm');
+  const re = new RegExp(`^${key}:\\r?\\n((?:  - .+\\r?\\n)*)`, 'm');
   const match = fm.match(re);
   if (!match?.[1]?.trim()) return [];
   return match[1]
-    .split('\n')
+    .split(/\r?\n/)
     .map((line) => line.match(/^\s+- (.+)/)?.[1]?.trim())
     .filter((v): v is string => Boolean(v));
 }

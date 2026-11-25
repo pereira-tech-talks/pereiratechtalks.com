@@ -3,47 +3,65 @@ title:
   en: "November meetup"
   es: "Meetup de noviembre"
 description:
-  en: "The call for talks is open for our November meetup. Bring what you have been working on this year — as a lightning talk of 3 to 5 minutes or a full one of 25."
-  es: "La convocatoria de charlas está abierta para el meetup de noviembre. Trae eso en lo que has trabajado este año, en charla relámpago de 3 a 5 minutos o completa de 25."
+  en: "In-person meetup on Wednesday 25 November at 6:30 p.m., Universidad Católica de Pereira, with Catalina Fajardo Mejía and Steven Pineda."
+  es: "Meetup presencial el miércoles 25 de noviembre a las 6:30 p. m. en la Universidad Católica de Pereira con Catalina Fajardo Mejía y Steven Pineda."
 pubDate: 2026-11-25
 date: 2026-11-25
 dateConfidence: confirmed
+venue:
+  name: "Universidad Católica de Pereira"
+  addressLine: "Salón 114, Bloque Dabar, Avenida Sur, Las Américas, Cra. 21 #49-95"
+  city: Pereira
+  country: Colombia
+mode: in-person
 hero:
   src: "/images/meetups/november-meetup-2026/hero.webp"
-  srcEn: "/images/meetups/november-meetup-2026/hero.en.webp"
   alt:
-    es: "Flyer del meetup de noviembre de Pereira Tech Talks: convocatoria de charlas abierta, miércoles 25 de noviembre de 2026, 6:30 PM hora Colombia, lugar por confirmar, charla relámpago de 3 a 5 minutos o completa de 25"
-    en: "Pereira Tech Talks November meetup flyer: call for talks is open, Wednesday 25 November 2026, 6:30 PM Colombia time, venue to be confirmed, lightning talk of 3 to 5 minutes or full talk of 25"
+    es: "Flyer del meetup de noviembre de Pereira Tech Talks: miércoles 25 de noviembre de 2026, 6:30 p. m., Universidad Católica de Pereira, Salón 114, Bloque Dabar, con Catalina Fajardo Mejía en Decide diferente y Steven Pineda en Desarrollando rápido y preciso con IA"
+    en: "Pereira Tech Talks November meetup flyer: Wednesday 25 November 2026, 6:30 p.m., Universidad Católica de Pereira, Room 114, Dabar Building, with Catalina Fajardo Mejía on Decide differently and Steven Pineda on Building fast and accurately with AI"
   layout: banner
 heroImage: "/images/meetups/november-meetup-2026/hero.webp"
 verticals:
   - monthly-meetups
 callForSpeakers:
-  status: open
+  status: closed
   formats:
     - lightning
     - regular
   closesAt: 2026-11-20
-status: announced
+talks:
+  - november-meetup-2026--1-decide-differently
+  - november-meetup-2026--2-building-fast-and-accurately-with-ai
+speakers:
+  - catalina-fajardo-mejia
+  - steven-pineda
+linkMeetupCom: https://luma.com/zi3yrnjz
+status: rsvp-open
 draft: false
 ---
 
 ## Meetup de noviembre
 
-Llega noviembre, entramos en la recta final del año y abrimos la convocatoria. Queremos una noche con muchas voces en el escenario, y para eso necesitamos la tuya: postula tu charla y ven a contarnos en qué has andado.
+El miércoles 25 de noviembre de 2026 nos vemos en persona, a las 6:30 p. m., en la **Universidad Católica de Pereira**, Salón 114, Bloque Dabar (Avenida Sur, Las Américas, Cra. 21 #49-95).
 
-A estas alturas del año ya resolviste algo que al principio no sabías cómo resolver. Puede ser la herramienta que terminaste adoptando, el problema de rendimiento que por fin entendiste, la parte del sistema que te tocó aprender a la fuerza, o algo que probaste por curiosidad y resultó mejor de lo que esperabas. Eso es exactamente lo que queremos escuchar.
+La noche se llama «Más criterio, mejores resultados»: decisiones inteligentes y desarrollo con IA.
 
-Y si crees que tu tema es demasiado pequeño para una charla, casi siempre no lo es: lo que a ti ya te parece obvio suele ser justo lo que otra persona en la sala lleva semanas buscando.
+### Charlas
 
-Tú eliges cuánto tiempo necesita: **charla relámpago de 3 a 5 minutos** para ir al grano, o **charla completa de 25 minutos** si quieres desarrollarla con calma.
+**Decide diferente**
 
-Si nunca has presentado, este es un buen momento para estrenarte: te acompañamos a armar la charla y a ensayarla antes.
+**Ponente:** Catalina Fajardo Mejía
 
-La fecha está confirmada. Todavía estamos definiendo si nos vemos en una sala o en línea, y lo anunciamos aquí en cuanto lo sepamos.
+Esta charla propone una mirada práctica y dinámica a la Matriz de Eisenhower aplicada a la gerencia de proyectos, integrando conceptos de psicología como los anclajes y los sesgos que influyen en nuestra forma de priorizar y tomar decisiones. A través de situaciones reales, exploraremos cómo la Inteligencia Artificial puede convertirse en un copiloto para analizar prioridades, identificar riesgos y dependencias, automatizar tareas y facilitar conversaciones basadas en criterios objetivos. El objetivo es pasar de una gestión reactiva a una más estratégica y preventiva, utilizando la tecnología para liberar tiempo y enfocar la atención en las actividades que realmente generan valor. Bajo la premisa «El éxito nace de la capacidad de lograr algo diferente», la charla invita a pensar, priorizar y decidir de manera diferente.
 
-¡Te esperamos!
+**Desarrollando rápido y preciso con IA**
 
-### Convocatoria
+**Ponente:** Steven Pineda
 
-Recibimos propuestas hasta el viernes 20 de noviembre, en charla relámpago o en formato completo. Elige el formato que le sirva a tu idea y postúlala.
+La IA es rápida cuando el contexto está escrito. Es imprecisa cuando el contexto vive en la cabeza o en un chat. El cuello de botella no es generar código. Es entender el negocio del cliente y no romper lo que ya existe. En esta charla les comparto mi estrategia sencilla para lograrlo.
+
+---
+
+### Fuentes
+
+- Evento original: https://luma.com/zi3yrnjz

@@ -6,9 +6,9 @@ This document serves as the central reference for all available Skills and Agent
 
 | Type   | Tier 1 (Light) | Tier 2 (Standard) | Tier 3 (Heavy) | Total |
 |--------|:--------------:|:------------------:|:--------------:|:-----:|
-| Skills | 13             | 11                 | 1              | 25    |
+| Skills | 13             | 16                 | 2              | 31    |
 | Agents | 0              | 5                  | 1              | 6     |
-| **Total** | **13**      | **15**             | **2**          | **30** |
+| **Total** | **13**      | **21**             | **3**          | **37** |
 
 ---
 
@@ -47,6 +47,7 @@ Everyday development work.
 | add-meetup    | create   | `/add-meetup`    | sonnet | **Mandatory for new meetups** — bilingual entries in the `meetups` collection with optional talk/speaker/sponsor references. Includes **planned mode**: programming a meetup from a date alone (`dateConfidence`, `callForSpeakers`, no venue/hero/line-up). |
 | add-talk      | create   | `/add-talk`      | sonnet | **Mandatory for new talks** — bilingual talk files linked to speakers + meetup/PTD event. |
 | add-event     | create   | `/add-event`     | sonnet | **Mandatory for new events** — workshops, hackathons, conferences, webinars in the `events` collection. |
+| update-event  | update   | `/update-event`  | sonnet | **Mandatory for editing events** — date, venue, status, bilingual copy, hero, sponsors, and related links on an existing `events` entry. |
 | audit-post    | review   | `/audit-post`    | sonnet | Pre-publication audit for blog posts — SEO, AEO, accessibility, images, content quality, i18n parity, and project conventions. |
 | audit-series  | review   | `/audit-series`  | sonnet | Pre-publication audit for blog series — series definition, post ordering, cross-post consistency, navigation, and individual post summary checks. |
 | audit-taxonomy | review  | `/audit-taxonomy` | sonnet | Read-only audit of the blog tag taxonomy — frequency, orphans, hierarchy, and proposals for new subtopic tags. Writes report to `tmp/audit-taxonomy/`. See [Blog Posts → Tags](../../docs/features/BLOG_POSTS.md). |

@@ -45,7 +45,10 @@ vi.mock('@/lib/sponsor', () => ({
   getActiveSponsors: vi.fn(async () => [{}, {}]),
 }));
 
-import { getCommunityStats } from '@/lib/community-stats';
+import {
+  getCommunityStats,
+  interpolateCommunityStats,
+} from '@/lib/community-stats';
 
 describe('getCommunityStats', () => {
   it('counts non-draft meetups and hybrid talk slots', async () => {
@@ -62,5 +65,15 @@ describe('getCommunityStats', () => {
     expect(stats.display.talks).toBe('7');
     expect(stats.display.speakers).toBe('2');
     expect(stats.display.attendees).toMatch(/6\.5K\+|6500|—/);
+  });
+
+  it('interpolates {stats.*} placeholders for slide decks', async () => {
+    const stats = await getCommunityStats();
+    const out = interpolateCommunityStats(
+      '{stats.meetups} / {stats.talks} / {stats.speakers} / {stats.sinceYear} / {stats.attendees}',
+      stats
+    );
+    expect(out).toBe(`2 / 7 / 2 / 2014 / ${stats.display.attendees}`);
+    expect(interpolateCommunityStats('plain text', stats)).toBe('plain text');
   });
 });

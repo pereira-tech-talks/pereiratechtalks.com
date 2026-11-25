@@ -98,7 +98,12 @@ test.describe('notification modal', () => {
       // The month links, not the primary CTA below them: they share one grid.
       const ctas = dialog(page).locator('div.grid a');
       const count = await ctas.count();
-      expect(count).toBeGreaterThan(1);
+      // `ctasFollowOpenCalls` drops months once their call closes — late in the
+      // cycle only December may remain. The stretch regression needs ≥2 cells.
+      test.skip(
+        count < 2,
+        'Need at least two month CTAs in the built notification modal'
+      );
 
       const widths: number[] = [];
       for (let i = 0; i < count; i++) {

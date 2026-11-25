@@ -1,0 +1,17 @@
+name: Catalina Fajardo Mejía
+role:
+  en: Community speaker
+  es: Ponente de la comunidad
+bio:
+  en: "Catalina Fajardo Mejía speaks at the November 2026 Pereira Tech Talks meetup. Her talk, Decide differently, uses the Eisenhower matrix and the biases that shape priorities, with AI as a copilot for project decisions."
+  es: "Catalina Fajardo Mejía habla en el meetup de noviembre de 2026 de Pereira Tech Talks. Su charla, Decide diferente, usa la Matriz de Eisenhower y los sesgos que marcan las prioridades, con la IA como copiloto para decidir en proyectos."
+photo:
+  src: /images/speakers/_placeholder.svg
+  alt:
+    en: Portrait of Catalina Fajardo Mejía
+    es: Retrato de Catalina Fajardo Mejía
+social:
+  linkedin: "https://www.linkedin.com/in/catalina-fajardo-3aa82531b/"
+talks: []
+languages:
+  - es

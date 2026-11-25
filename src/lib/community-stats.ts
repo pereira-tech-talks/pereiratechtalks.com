@@ -117,3 +117,21 @@ export async function getCommunityStats(): Promise<CommunityStats> {
     },
   };
 }
+
+/**
+ * Replace `{stats.*}` placeholders inside slide decks or agent markdown with
+ * the live build-time counters from `getCommunityStats()` so numbers stay
+ * aligned with `/meetups` without manual edits.
+ */
+export function interpolateCommunityStats(
+  text: string,
+  stats: CommunityStats
+): string {
+  if (!text.includes('{stats.')) return text;
+  return text
+    .replaceAll('{stats.meetups}', stats.display.meetups)
+    .replaceAll('{stats.talks}', stats.display.talks)
+    .replaceAll('{stats.speakers}', stats.display.speakers)
+    .replaceAll('{stats.attendees}', stats.display.attendees)
+    .replaceAll('{stats.sinceYear}', stats.display.sinceYear);
+}

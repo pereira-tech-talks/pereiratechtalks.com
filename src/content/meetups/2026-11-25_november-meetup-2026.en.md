@@ -1,19 +1,25 @@
 ## November meetup
 
-November is here, we are heading into the last stretch of the year, and the call for talks is open. We want a night with many voices on stage, and for that we need yours: send us your talk and come tell us what you have been up to.
+On Wednesday 25 November 2026 we meet in person, at 6:30 p.m., at **Universidad Católica de Pereira**, Room 114, Dabar Building (Avenida Sur, Las Américas, Cra. 21 #49-95).
 
-By this point in the year you have solved something you did not know how to solve when it started. It might be the tool you ended up adopting, the performance problem you finally understood, the part of the system you had to learn the hard way, or something you tried out of curiosity that turned out better than expected. That is exactly what we want to hear.
+The night is called "Sharper judgment, better results": smart decisions and building with AI.
 
-And if you think your topic is too small for a talk, it almost never is: what already feels obvious to you is usually the very thing someone else in the room has been hunting for.
+### Talks
 
-You pick how long it needs: a **lightning talk of 3 to 5 minutes** to get straight to the point, or a **full talk of 25 minutes** if you want to develop it properly.
+**Decide differently**
 
-If you have never presented before, this is a good moment to start: we will help you shape the talk and rehearse it beforehand.
+**Speaker:** Catalina Fajardo Mejía
 
-The date is confirmed. We are still deciding whether we meet in a room or online, and we will announce it here as soon as we know.
+This talk looks at the Eisenhower matrix applied to project management, together with psychology concepts such as anchors and the biases that shape how we prioritize and decide. Through real situations, it explores how artificial intelligence can become a copilot for analyzing priorities, spotting risks and dependencies, automating tasks, and holding conversations on objective criteria. The aim is to move from reactive management to a more strategic, preventive one, using technology to free up time and put attention on the work that actually creates value. Under the premise "Success comes from the ability to achieve something different," the talk invites us to think, prioritize, and decide differently.
 
-See you there!
+**Building fast and accurately with AI**
 
-### Call for speakers
+**Speaker:** Steven Pineda
 
-We are taking proposals until Friday 20 November, as a lightning talk or in the full format. Pick whichever length serves your idea and send it in.
+AI is fast when the context is written down. It is inaccurate when the context lives in someone's head or in a chat. The bottleneck is not generating code. It is understanding the client's business and not breaking what already works. In this talk I share a simple strategy for doing that.
+
+---
+
+### Sources
+
+- Original event: https://luma.com/zi3yrnjz

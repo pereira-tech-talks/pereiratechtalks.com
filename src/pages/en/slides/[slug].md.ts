@@ -1,5 +1,9 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 
+import {
+  getCommunityStats,
+  interpolateCommunityStats,
+} from '@/lib/community-stats';
 import { SITE_URL } from '@/lib/constances';
 import {
   linkLine,
@@ -26,7 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-export const GET: APIRoute = ({ props }) => {
+export const GET: APIRoute = async ({ props }) => {
   const lang = 'en';
   const { deck } = props as {
     deck: Awaited<ReturnType<typeof getSlideDecks>>[number];
@@ -71,6 +75,11 @@ export const GET: APIRoute = ({ props }) => {
     });
   }
 
+  const rawBody = deck.body ?? '';
+  const body = rawBody.includes('{stats.')
+    ? interpolateCommunityStats(rawBody, await getCommunityStats())
+    : rawBody;
+
   const markdown = serializeGenericToMarkdown({
     title: data.title,
     description: data.description,
@@ -79,7 +88,7 @@ export const GET: APIRoute = ({ props }) => {
     metadata,
     // The full deck source for internal decks; the supplementary copy for
     // external ones. Either way it is the page's substance.
-    body: deck.body ?? '',
+    body,
     sections,
   });
 
